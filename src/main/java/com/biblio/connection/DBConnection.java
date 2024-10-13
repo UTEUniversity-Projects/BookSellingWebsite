@@ -1,5 +1,6 @@
 package com.biblio.connection;
 
+import com.biblio.constants.Constant;
 import com.zaxxer.hikari.HikariDataSource;
 
 import javax.persistence.SharedCacheMode;
@@ -33,9 +34,9 @@ public class DBConnection implements PersistenceUnitInfo {
     public DataSource getJtaDataSource() {
         HikariDataSource dataSource = new HikariDataSource();
 
-        dataSource.setJdbcUrl("jdbc:mysql://localhost:3306/jpa");
-        dataSource.setUsername("root");
-        dataSource.setPassword("123456");
+        dataSource.setJdbcUrl(Constant.DB_URL);
+        dataSource.setUsername(Constant.USERNAME);
+        dataSource.setPassword(Constant.PASSWORD);
 
         return dataSource;
     }
