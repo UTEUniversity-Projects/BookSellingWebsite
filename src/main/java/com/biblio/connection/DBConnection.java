@@ -1,4 +1,4 @@
-package com.mebook.connection;
+package com.biblio.connection;
 
 import com.zaxxer.hikari.HikariDataSource;
 

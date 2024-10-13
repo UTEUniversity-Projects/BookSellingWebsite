@@ -1,4 +1,4 @@
-package com.mebook.controller.owner;
+package com.biblio.controller.owner;
 import java.io.IOException;
 import java.io.Serial;
 import javax.servlet.ServletException;

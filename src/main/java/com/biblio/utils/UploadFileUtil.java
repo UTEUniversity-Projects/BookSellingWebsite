@@ -1,4 +1,4 @@
-package com.mebook.utils;
+package com.biblio.utils;
 
 public class UploadFileUtil {
 }

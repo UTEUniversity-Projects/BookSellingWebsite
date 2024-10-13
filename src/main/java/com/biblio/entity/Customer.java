@@ -1,4 +1,4 @@
-package com.mebook.entity;
+package com.biblio.entity;
 
 import javax.persistence.*;
 import java.io.Serializable;

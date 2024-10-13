@@ -1,10 +1,10 @@
-package com.mebook.listener;
+package com.biblio.listener;
 
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
 import javax.servlet.annotation.WebListener;
 
-import com.mebook.jpaconfig.JpaConfig;
+import com.biblio.jpaconfig.JpaConfig;
 
 @WebListener
 public class AppContextListener implements ServletContextListener {

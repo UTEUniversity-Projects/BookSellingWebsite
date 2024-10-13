@@ -1,4 +1,4 @@
-package com.mebook.controller.customer;
+package com.biblio.controller;
 
 import java.io.IOException;
 import java.io.Serial;
@@ -9,17 +9,17 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * Servlet implementation class HomeController
+ * Servlet implementation class WaitingController
  */
-@WebServlet("/home")
-public class HomeController extends HttpServlet {
+@WebServlet("/waiting")
+public class WaitingController extends HttpServlet {
     @Serial
     private static final long serialVersionUID = 1L;
 
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public HomeController() {
+    public WaitingController() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -29,7 +29,7 @@ public class HomeController extends HttpServlet {
      */
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         // TODO Auto-generated method stub
-        request.getRequestDispatcher("/views/customer/home.jsp").forward(request, response);
+        response.getWriter().append("Served at: ").append(request.getContextPath());
     }
 
     /**

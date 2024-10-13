@@ -1,4 +1,4 @@
-package com.mebook.dao;
+package com.biblio.dao;
 
 public interface IUserDAO {
 }

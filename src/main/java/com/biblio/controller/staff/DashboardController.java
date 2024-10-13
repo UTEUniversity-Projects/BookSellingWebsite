@@ -1,4 +1,4 @@
-package com.mebook.controller;
+package com.biblio.controller.staff;
 
 import java.io.IOException;
 import java.io.Serial;
@@ -9,17 +9,17 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * Servlet implementation class WaitingController
+ * Servlet implementation class HomeController
  */
-@WebServlet("/waiting")
-public class WaitingController extends HttpServlet {
+@WebServlet("/staff/dashboard")
+public class DashboardController extends HttpServlet {
     @Serial
     private static final long serialVersionUID = 1L;
 
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public WaitingController() {
+    public DashboardController() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -29,7 +29,7 @@ public class WaitingController extends HttpServlet {
      */
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         // TODO Auto-generated method stub
-        response.getWriter().append("Served at: ").append(request.getContextPath());
+        request.getRequestDispatcher("/views/staff/dashboard.jsp").forward(request, response);
     }
 
     /**

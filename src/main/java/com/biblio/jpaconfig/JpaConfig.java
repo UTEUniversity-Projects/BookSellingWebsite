@@ -1,6 +1,6 @@
-package com.mebook.jpaconfig;
+package com.biblio.jpaconfig;
 
-import com.mebook.connection.DBConnection;
+import com.biblio.connection.DBConnection;
 import org.hibernate.jpa.HibernatePersistenceProvider;
 
 import javax.persistence.EntityManager;
