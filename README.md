@@ -1,1 +1,5 @@
-### This is a repository for setting up base of BookSelling Website Project.
+# Web-app Development
+
+> created by Java Servlet, MySQL, JPA
+
+🌻 **code, code and code**
