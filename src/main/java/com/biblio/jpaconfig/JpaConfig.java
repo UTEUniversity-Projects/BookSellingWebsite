@@ -1,6 +1,7 @@
 package com.biblio.jpaconfig;
 
 import com.biblio.connection.DBConnection;
+import com.biblio.constants.Constant;
 import org.hibernate.jpa.HibernatePersistenceProvider;
 
 import javax.persistence.EntityManager;
@@ -19,10 +20,10 @@ public class JpaConfig {
     private static Map<String, Object> config() {
         Map<String, Object> map = new HashMap<>();
 
-        map.put(JPA_JDBC_DRIVER, "com.mysql.cj.jdbc.Driver");
-        map.put(JPA_JDBC_URL, "jdbc:mysql://localhost:3306/jpa");
-        map.put(JPA_JDBC_USER, "root");
-        map.put(JPA_JDBC_PASSWORD, "123456");
+        map.put(JPA_JDBC_DRIVER, Constant.DB_DRIVER);
+        map.put(JPA_JDBC_URL, Constant.DB_URL);
+        map.put(JPA_JDBC_USER, Constant.USERNAME);
+        map.put(JPA_JDBC_PASSWORD, Constant.PASSWORD);
         map.put(DIALECT, org.hibernate.dialect.MySQL8Dialect.class);
         map.put(HBM2DDL_AUTO, "update");
         map.put(SHOW_SQL, "true");
@@ -36,8 +37,8 @@ public class JpaConfig {
         map.put(STATEMENT_BATCH_SIZE, "20");
         map.put(AUTOCOMMIT, "false");
 
-        map.put("hibernate.hikari.minimumIdle", "5");
-        map.put("hibernate.hikari.maximumPoolSize", "15");
+        map.put("hibernate.hikari.minimumIdle", Constant.DB_MIN_CONNECTIONS);
+        map.put("hibernate.hikari.maximumPoolSize", Constant.DB_MAX_CONNECTIONS);
         map.put("hibernate.hikari.idleTimeout", "30000");
 
         return map;
@@ -52,4 +53,5 @@ public class JpaConfig {
             enma.close();
         }
     }
+
 }
