@@ -1,6 +1,12 @@
 package com.biblio.entity;
 
-import java.io.Serializable;
+import com.biblio.enumeration.EGender;
 
-public class Staff implements Serializable {
+import java.io.Serializable;
+import java.util.Date;
+
+public class Staff extends User implements Serializable {
+    public Staff(String id, String userName, String fullName, String password, String emailAddress, String dateOfBirth, EGender gender, String phoneNumber, MediaFile avatar, Date joinAt) {
+        super(id, userName, fullName, password, emailAddress, dateOfBirth, gender, phoneNumber, avatar, joinAt);
+    }
 }
