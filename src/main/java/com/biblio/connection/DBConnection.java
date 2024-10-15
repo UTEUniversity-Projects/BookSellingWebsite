@@ -2,7 +2,9 @@ package com.biblio.connection;
 
 import com.biblio.constants.Constant;
 import com.zaxxer.hikari.HikariDataSource;
+import org.reflections.Reflections;
 
+import javax.persistence.Entity;
 import javax.persistence.SharedCacheMode;
 import javax.persistence.ValidationMode;
 import javax.persistence.spi.ClassTransformer;
@@ -12,6 +14,7 @@ import javax.sql.DataSource;
 import java.net.URL;
 import java.util.List;
 import java.util.Properties;
+import java.util.Set;
 
 public class DBConnection implements PersistenceUnitInfo {
 
@@ -67,7 +70,13 @@ public class DBConnection implements PersistenceUnitInfo {
 
     @Override
     public List<String> getManagedClassNames() {
-        return List.of("com.mebook.entity.Customer");
+        Reflections reflections = new Reflections("com.biblio.entity"); // Specify your package here
+        Set<Class<?>> entities = reflections.getTypesAnnotatedWith(Entity.class);
+
+        System.out.println(entities);
+        return entities.stream()
+                .map(Class::getName)
+                .toList();
     }
 
     @Override

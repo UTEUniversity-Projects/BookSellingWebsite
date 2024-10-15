@@ -4,16 +4,15 @@ import java.io.Serializable;
 
 public class Address implements Serializable {
 
-    //region Attributes
     private String id;
     private String nation;
     private String province;
     private String district;
     private String village;
     private String detail;
-    //endregion
 
-    //region Constructors
+    public Address() {
+    }
 
     public Address(String id, String nation, String province, String district, String village, String detail) {
         this.id = id;
@@ -75,7 +74,5 @@ public class Address implements Serializable {
     public void setDetail(String detail) {
         this.detail = detail;
     }
-
-    //endregion
 
 }
