@@ -15,12 +15,13 @@ public class Support implements Serializable {
     private String feedbackContent;
     private int rate;
     private ESupportStatus status;
-    private Date createdAt;
+    private Date requestAt;
+    private Date responseAt;
     //endregion
 
     //region Contructors
 
-    public Support(String id, Customer customer, String title, String requestContent, Staff staff, String feedbackContent, int rate, ESupportStatus status, Date createdAt) {
+    public Support(String id, Customer customer, String title, String requestContent, Staff staff, String feedbackContent, int rate, ESupportStatus status, Date requestAt, Date responseAt) {
         this.id = id;
         this.customer = customer;
         this.title = title;
@@ -29,7 +30,8 @@ public class Support implements Serializable {
         this.feedbackContent = feedbackContent;
         this.rate = rate;
         this.status = status;
-        this.createdAt = createdAt;
+        this.requestAt = requestAt;
+        this.responseAt = responseAt;
     }
 
     //endregion
@@ -100,13 +102,20 @@ public class Support implements Serializable {
         this.status = status;
     }
 
-    public Date getCreatedAt() {
-        return createdAt;
+    public Date getRequestAt() {
+        return requestAt;
     }
 
-    public void setCreatedAt(Date createdAt) {
-        this.createdAt = createdAt;
+    public void setRequestAt(Date requestAt) {
+        this.requestAt = requestAt;
     }
 
-    //endregion
+    public Date getResponseAt() {
+        return responseAt;
+    }
+
+    public void setResponseAt(Date responseAt) {
+        this.responseAt = responseAt;
+    }
+//endregion
 }
