@@ -3,6 +3,7 @@ package com.biblio.entity;
 import java.io.Serializable;
 
 public class Address implements Serializable {
+
     //region Attributes
     private String id;
     private String nation;
@@ -76,4 +77,5 @@ public class Address implements Serializable {
     }
 
     //endregion
+
 }

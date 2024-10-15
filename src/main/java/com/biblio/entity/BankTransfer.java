@@ -3,6 +3,7 @@ package com.biblio.entity;
 import java.io.Serializable;
 
 public class BankTransfer implements Serializable {
+
     //region Attributes
     private String bankAccountNumber;
     private String bankName;
@@ -46,4 +47,5 @@ public class BankTransfer implements Serializable {
     }
 
     //endregion
+
 }
