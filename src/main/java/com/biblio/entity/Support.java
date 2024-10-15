@@ -7,6 +7,7 @@ import java.util.Date;
 
 public class Support implements Serializable {
     //region Attributes
+
     private String id;
     private Customer customer;
     private String title;
@@ -15,13 +16,14 @@ public class Support implements Serializable {
     private String feedbackContent;
     private int rate;
     private ESupportStatus status;
-    private Date requestAt;
-    private Date responseAt;
+    private Date createdAt;
+
     //endregion
 
-    //region Contructors
+    //region Constructors
 
-    public Support(String id, Customer customer, String title, String requestContent, Staff staff, String feedbackContent, int rate, ESupportStatus status, Date requestAt, Date responseAt) {
+
+    public Support(String id, Customer customer, String title, String requestContent, Staff staff, String feedbackContent, int rate, ESupportStatus status, Date createdAt) {
         this.id = id;
         this.customer = customer;
         this.title = title;
@@ -30,8 +32,7 @@ public class Support implements Serializable {
         this.feedbackContent = feedbackContent;
         this.rate = rate;
         this.status = status;
-        this.requestAt = requestAt;
-        this.responseAt = responseAt;
+        this.createdAt = createdAt;
     }
 
     //endregion
@@ -102,20 +103,14 @@ public class Support implements Serializable {
         this.status = status;
     }
 
-    public Date getRequestAt() {
-        return requestAt;
+    public Date getCreatedAt() {
+        return createdAt;
     }
 
-    public void setRequestAt(Date requestAt) {
-        this.requestAt = requestAt;
+    public void setCreatedAt(Date createdAt) {
+        this.createdAt = createdAt;
     }
 
-    public Date getResponseAt() {
-        return responseAt;
-    }
+    //endregion
 
-    public void setResponseAt(Date responseAt) {
-        this.responseAt = responseAt;
-    }
-//endregion
 }

@@ -1,6 +1,7 @@
 package com.biblio.entity;
 
 import java.io.Serializable;
+import java.util.Date;
 
 public abstract class ContributorProfile implements Serializable {
     private String id;

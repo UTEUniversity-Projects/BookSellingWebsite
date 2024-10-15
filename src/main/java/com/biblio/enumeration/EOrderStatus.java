@@ -11,7 +11,7 @@ public enum EOrderStatus {
     REQUEST_REFUND("Yêu cầu hoàn tiền"),
     REFUNDED("Đã hoàn tiền");
 
-    private String description;
+    private final String description;
 
     // Constructor
     EOrderStatus(String description) {

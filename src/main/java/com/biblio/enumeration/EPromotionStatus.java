@@ -6,7 +6,7 @@ public enum EPromotionStatus {
     USED_OUT("Promotion has been used out"),
     EXPIRED("Promotion has expired");
 
-    private String description;
+    private final String description;
 
     // Constructor
     EPromotionStatus(String description) {
