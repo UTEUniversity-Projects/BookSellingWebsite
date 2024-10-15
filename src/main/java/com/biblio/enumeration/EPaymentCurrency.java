@@ -1,6 +1,16 @@
 package com.biblio.enumeration;
 
-import java.io.Serializable;
-
 public enum EPaymentCurrency {
+    VND("VNĐ"),
+    DOLLAR("$");
+
+    private final String displayName;
+
+    EPaymentCurrency(String displayName) {
+        this.displayName = displayName;
+    }
+
+    public String getDisplayName() {
+        return displayName;
+    }
 }
