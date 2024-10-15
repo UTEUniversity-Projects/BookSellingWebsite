@@ -7,6 +7,7 @@ import java.util.Date;
 
 public class Support implements Serializable {
     //region Attributes
+
     private String id;
     private Customer customer;
     private String title;
@@ -16,9 +17,11 @@ public class Support implements Serializable {
     private int rate;
     private ESupportStatus status;
     private Date createdAt;
+
     //endregion
 
-    //region Contructors
+    //region Constructors
+
 
     public Support(String id, Customer customer, String title, String requestContent, Staff staff, String feedbackContent, int rate, ESupportStatus status, Date createdAt) {
         this.id = id;
@@ -109,4 +112,5 @@ public class Support implements Serializable {
     }
 
     //endregion
+
 }

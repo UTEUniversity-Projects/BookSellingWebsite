@@ -1,28 +1,22 @@
 package com.biblio.enumeration;
 
 public enum EPromotionTargetType {
-    public enum EPromotionType {
-        DISCOUNT("Percentage or fixed amount discount"),
-        COUPON("A coupon with a specific code"),
-        VOUCHER("A voucher applicable to orders"),
-        FREESHIP("Free shipping promotion");
+    BOOK("Sách"),
 
-        private String description;
+    CATEGORY("Danh mục"),
 
-        // Constructor
-        EPromotionType(String description) {
-            this.description = description;
-        }
+    SUBCATEGORY("Danh mục con"),
 
-        // Getter for description
-        public String getDescription() {
-            return description;
-        }
+    WHOLE("Toàn bộ");
 
-        @Override
-        public String toString() {
-            return name() + " (" + description + ")";
-        }
+    private final String promotionTargetType;
+
+    EPromotionTargetType(String promotionTargetType) {
+        this.promotionTargetType = promotionTargetType;
     }
 
-}
+    public String getPromotionTargetType() {
+        return promotionTargetType;
+    }
+
+    }
