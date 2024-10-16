@@ -7,7 +7,7 @@ public class Tag extends Classification implements Serializable {
         super();
     }
 
-    public Tag(String id, String code, String name) {
+    public Tag(Long id, String code, String name) {
         super(id, code, name);
     }
 }

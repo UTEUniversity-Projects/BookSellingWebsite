@@ -7,7 +7,7 @@ public class Category extends Classification implements Serializable {
         super();
     }
 
-    public Category(String id, String code, String name) {
+    public Category(Long id, String code, String name) {
         super(id, code, name);
     }
 }

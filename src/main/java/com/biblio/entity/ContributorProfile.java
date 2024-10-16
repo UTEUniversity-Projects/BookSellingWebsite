@@ -4,7 +4,7 @@ import java.io.Serializable;
 import java.util.Date;
 
 public abstract class ContributorProfile implements Serializable {
-    private String id;
+    private Long id;
     private String name;
     private MediaFile avatar;
     private String introduction;
@@ -13,7 +13,7 @@ public abstract class ContributorProfile implements Serializable {
     public ContributorProfile() {
     }
 
-    public ContributorProfile(String id, String name, MediaFile avatar, Date joinAt, String introduction) {
+    public ContributorProfile(Long id, String name, MediaFile avatar, Date joinAt, String introduction) {
         this.id = id;
         this.name = name;
         this.avatar = avatar;
@@ -21,11 +21,11 @@ public abstract class ContributorProfile implements Serializable {
         this.introduction = introduction;
     }
 
-    public String getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

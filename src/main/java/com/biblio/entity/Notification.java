@@ -9,7 +9,7 @@ import java.util.List;
 
 public class Notification implements Serializable {
     //region Attributes
-    private String id;
+    private Long id;
     private Date createdAt;
     private Date sentTime;
     private List<User> receiver;
@@ -21,7 +21,7 @@ public class Notification implements Serializable {
     //endregion
 
     //region Contructors
-    public Notification(String id, Date createdAt, Date sentTime, List<User> receiver, String title, String content, String hyperlink, ENotificationType type, ENotificationStatus status) {
+    public Notification(Long id, Date createdAt, Date sentTime, List<User> receiver, String title, String content, String hyperlink, ENotificationType type, ENotificationStatus status) {
         this.id = id;
         this.createdAt = createdAt;
         this.sentTime = sentTime;
@@ -35,11 +35,12 @@ public class Notification implements Serializable {
     //endregion
 
     //region Getters & Setters
-    public String getId() {
+
+    public Long getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -106,5 +107,6 @@ public class Notification implements Serializable {
     public void setStatus(ENotificationStatus status) {
         this.status = status;
     }
+
     //endregion
 }

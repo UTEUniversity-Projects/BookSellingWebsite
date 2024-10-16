@@ -6,14 +6,14 @@ import java.io.Serializable;
 
 public class EWallet implements Serializable {
     //region Attributes
-    private String walletId;
+    private Long walletId;
     private EWalletProvider provider;
     private String transactionId;
     //endregion
 
     //region Constructors
 
-    public EWallet(String walletId, EWalletProvider provider, String transactionId) {
+    public EWallet(Long walletId, EWalletProvider provider, String transactionId) {
         this.walletId = walletId;
         this.provider = provider;
         this.transactionId = transactionId;
@@ -23,11 +23,11 @@ public class EWallet implements Serializable {
 
     //region Getters & Setters
 
-    public String getWalletId() {
+    public Long getWalletId() {
         return walletId;
     }
 
-    public void setWalletId(String walletId) {
+    public void setWalletId(Long walletId) {
         this.walletId = walletId;
     }
 
@@ -46,6 +46,7 @@ public class EWallet implements Serializable {
     public void setTransactionId(String transactionId) {
         this.transactionId = transactionId;
     }
+
 
     //endregion
 }

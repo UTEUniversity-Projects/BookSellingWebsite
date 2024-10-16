@@ -8,7 +8,7 @@ import java.util.Date;
 public class Support implements Serializable {
     //region Attributes
 
-    private String id;
+    private Long id;
     private Customer customer;
     private String title;
     private String requestContent;
@@ -23,7 +23,7 @@ public class Support implements Serializable {
     //region Constructors
 
 
-    public Support(String id, Customer customer, String title, String requestContent, Staff staff, String feedbackContent, int rate, ESupportStatus status, Date createdAt) {
+    public Support(Long id, Customer customer, String title, String requestContent, Staff staff, String feedbackContent, int rate, ESupportStatus status, Date createdAt) {
         this.id = id;
         this.customer = customer;
         this.title = title;
@@ -39,11 +39,11 @@ public class Support implements Serializable {
 
     //region Getters & Setters
 
-    public String getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
