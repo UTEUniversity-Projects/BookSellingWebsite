@@ -1,10 +1,13 @@
 package com.biblio.entity;
 
+import com.biblio.enumeration.EPaymentCurrency;
+import com.biblio.enumeration.EPaymentStatus;
 import com.biblio.enumeration.EWalletProvider;
 
 import java.io.Serializable;
+import java.util.Date;
 
-public class EWallet implements Serializable {
+public class EWallet extends Payment implements Serializable {
     //region Attributes
     private Long walletId;
     private EWalletProvider provider;
@@ -13,7 +16,17 @@ public class EWallet implements Serializable {
 
     //region Constructors
 
+   public EWallet() {
+        super();
+    }
     public EWallet(Long walletId, EWalletProvider provider, String transactionId) {
+        this.walletId = walletId;
+        this.provider = provider;
+        this.transactionId = transactionId;
+    }
+
+    public EWallet(String id, Date createdAt, EPaymentStatus status, double amount, EPaymentCurrency currency, String walletId, EWalletProvider provider, String transactionId) {
+        super(id, createdAt, status, amount, currency);
         this.walletId = walletId;
         this.provider = provider;
         this.transactionId = transactionId;
@@ -49,4 +62,11 @@ public class EWallet implements Serializable {
 
 
     //endregion
+
+    // region Methods
+    @Override
+    public void processPayment() {
+
+    }
+    // endregion
 }

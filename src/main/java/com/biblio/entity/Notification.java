@@ -21,6 +21,7 @@ public class Notification implements Serializable {
     //endregion
 
     //region Contructors
+  public Notification() {}
     public Notification(Long id, Date createdAt, Date sentTime, List<User> receiver, String title, String content, String hyperlink, ENotificationType type, ENotificationStatus status) {
         this.id = id;
         this.createdAt = createdAt;
