@@ -24,8 +24,8 @@ public class BankTransfer extends Payment implements Serializable {
         this.transactionId = transactionId;
     }
 
-    public BankTransfer(String id, Date createdAt, EPaymentStatus status, double amount, EPaymentCurrency currency, String bankAccountNumber, String bankName, String transactionId) {
-        super(id, createdAt, status, amount, currency);
+    public BankTransfer(Long id, Date createdAt, double amount, EPaymentStatus status, EPaymentCurrency currency, String bankAccountNumber, String bankName, String transactionId) {
+        super(id, createdAt, amount, status, currency);
         this.bankAccountNumber = bankAccountNumber;
         this.bankName = bankName;
         this.transactionId = transactionId;
@@ -66,5 +66,5 @@ public class BankTransfer extends Payment implements Serializable {
     public void processPayment() {
 
     }
-    // endregion
+    // endregion Methods
 }

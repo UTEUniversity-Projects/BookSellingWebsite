@@ -8,7 +8,8 @@ public class Publisher extends ContributorProfile implements Serializable {
         super();
     }
 
-    public Publisher(String id, String name, MediaFile avatar, Date joinAt, String introduction) {
+    public Publisher(Long id, String name, MediaFile avatar, Date joinAt, String introduction) {
         super(id, name, avatar, joinAt, introduction);
     }
+
 }

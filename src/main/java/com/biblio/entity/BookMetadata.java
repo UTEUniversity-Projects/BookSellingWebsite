@@ -7,6 +7,9 @@ import java.time.DateTimeException;
 import java.util.List;
 
 public class BookMetadata implements Serializable {
+
+    // region Attributes
+
     private Long id;
     private DateTimeException createdAt;
     private DateTimeException openingDay;
@@ -15,6 +18,9 @@ public class BookMetadata implements Serializable {
     private List<MediaFile> illustration;
     private List<Tag> tags;
 
+    // endregion Attributes
+
+    // region Constructors
     public BookMetadata() {}
 
     public BookMetadata(Long id, DateTimeException createdAt, DateTimeException openingDay, double importPrice,
@@ -27,7 +33,9 @@ public class BookMetadata implements Serializable {
         this.illustration = illustration;
         this.tags = tags;
     }
+    // endregion Constructors
 
+    // region Getters & Setters
     public Long getId() {
         return id;
     }
@@ -83,4 +91,5 @@ public class BookMetadata implements Serializable {
     public void setTags(List<Tag> tags) {
         this.tags = tags;
     }
+    // endregion Getters & Setters
 }
