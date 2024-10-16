@@ -1,8 +1,12 @@
 package com.biblio.entity;
 
-import java.io.Serializable;
+import com.biblio.enumeration.EPaymentCurrency;
+import com.biblio.enumeration.EPaymentStatus;
 
-public class CreditCard implements Serializable {
+import java.io.Serializable;
+import java.util.Date;
+
+public class CreditCard extends Payment implements Serializable {
     //region Attributes
     private String cardNumber;
     private String cardHolderName;
@@ -13,7 +17,20 @@ public class CreditCard implements Serializable {
 
     //region Constructors
 
+    public CreditCard() {
+        super();
+    }
+
     public CreditCard(String cardNumber, String cardHolderName, String expiryDate, String cvv, String billingAddress) {
+        this.cardNumber = cardNumber;
+        this.cardHolderName = cardHolderName;
+        this.expiryDate = expiryDate;
+        this.cvv = cvv;
+        this.billingAddress = billingAddress;
+    }
+
+    public CreditCard(String id, Date createdAt, EPaymentStatus status, double amount, EPaymentCurrency currency, String cardNumber, String cardHolderName, String expiryDate, String cvv, String billingAddress) {
+        super(id, createdAt, status, amount, currency);
         this.cardNumber = cardNumber;
         this.cardHolderName = cardHolderName;
         this.expiryDate = expiryDate;
@@ -66,4 +83,11 @@ public class CreditCard implements Serializable {
     }
 
     //endregion
+
+    // region Methods
+    @Override
+    public void processPayment() {
+
+    }
+    // endregion
 }

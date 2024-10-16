@@ -22,7 +22,6 @@ public class Support implements Serializable {
 
     //region Constructors
 
-
     public Support(String id, Customer customer, String title, String requestContent, Staff staff, String feedbackContent, int rate, ESupportStatus status, Date createdAt) {
         this.id = id;
         this.customer = customer;
