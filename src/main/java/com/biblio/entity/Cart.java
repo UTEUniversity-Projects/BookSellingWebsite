@@ -3,10 +3,14 @@ package com.biblio.entity;
 import java.io.Serializable;
 
 public class Cart implements Serializable {
+
+    //region Attributes
     private Long id;
     private Customer customer;
     private OrderItem[] books;
+    //endregion
 
+    //region Constructors
     public Cart() {
     }
 
@@ -15,7 +19,9 @@ public class Cart implements Serializable {
         this.customer = customer;
         this.books = books;
     }
+    //endregion
 
+    //region Getters & Setters
     public Long getId() {
         return id;
     }
@@ -39,4 +45,5 @@ public class Cart implements Serializable {
     public void setBooks(OrderItem[] books) {
         this.books = books;
     }
+    //endregion
 }

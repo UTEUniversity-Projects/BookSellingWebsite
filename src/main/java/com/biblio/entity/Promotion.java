@@ -7,6 +7,7 @@ import java.io.Serializable;
 import java.sql.Date;
 
 public class Promotion implements Serializable {
+    //region Attributes
     private Long id;
     private Date createdAt; // Using LocalDateTime for date and time
     private String code;
@@ -20,7 +21,9 @@ public class Promotion implements Serializable {
     private EPromotionType type; // Enum for promotion type
     private PromotionTarget[] targets; // Array of PromotionTarget
     private EPromotionStatus status;
+    //endregion
 
+    //region Constructors
     public Promotion() {
     }
 
@@ -39,7 +42,9 @@ public class Promotion implements Serializable {
         this.targets = targets;
         this.status = status;
     }
+    //endregion
 
+    //region Getters & Setters
     public Long getId() {
         return id;
     }
@@ -143,4 +148,5 @@ public class Promotion implements Serializable {
     public void setStatus(EPromotionStatus status) {
         this.status = status;
     }
+    //endregion
 }

@@ -3,6 +3,7 @@ package com.biblio.entity;
 import java.sql.Date;
 
 public class Review {
+    //region Attributes
     private Long id;
     private int rate;
     private String content;
@@ -10,7 +11,9 @@ public class Review {
     private Book book;
     private Customer createdBy;
     private Date createdAt;
+    //endregion
 
+    //region Constructors
     public Review() {
     }
 
@@ -23,7 +26,9 @@ public class Review {
         this.createdBy = createdBy;
         this.createdAt = createdAt;
     }
+    //endregion
 
+    //region Getters & Setters
     public Long getId() {
         return id;
     }
@@ -79,4 +84,5 @@ public class Review {
     public void setCreatedAt(Date createdAt) {
         this.createdAt = createdAt;
     }
+    //endregion
 }

@@ -8,9 +8,13 @@ import java.io.Serializable;
 import java.util.Date;
 
 public class Customer extends User implements Serializable {
+
+    //region Attributes
     private Address address;
     private EMembership membership;
+    //endregion
 
+    //region Constructors
       public Customer() {
         super();
     }
@@ -20,7 +24,9 @@ public class Customer extends User implements Serializable {
         this.address = address;
         this.membership = membership;
     }
+    //endregion
 
+    //region Getters & Setters
     public Address getAddress() {
         return address;
     }
@@ -36,4 +42,5 @@ public class Customer extends User implements Serializable {
     public void setMembership(EMembership membership) {
         this.membership = membership;
     }
+    //endregion
 }

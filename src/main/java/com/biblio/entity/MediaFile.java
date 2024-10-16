@@ -3,10 +3,13 @@ package com.biblio.entity;
 import java.io.Serializable;
 
 public class MediaFile implements Serializable {
+    //region Attributes
     private Long id;
     private String fileName;
     private String storedCode;
+    //endregion
 
+    //region Constructors
     public MediaFile() {
     }
 
@@ -15,7 +18,9 @@ public class MediaFile implements Serializable {
         this.fileName = fileName;
         this.storedCode = storedCode;
     }
+    //endregion
 
+    //region Getters & Setters
     public Long getId() {
         return id;
     }
@@ -39,4 +44,5 @@ public class MediaFile implements Serializable {
     public void setStoredCode(String storedCode) {
         this.storedCode = storedCode;
     }
+    //endregion
 }
