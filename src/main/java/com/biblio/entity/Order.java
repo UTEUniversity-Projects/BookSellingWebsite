@@ -10,18 +10,20 @@ public class Order implements Serializable {
     private Customer customer;
     private Address shippingAddress;
     private Promotion[] promotions;
+    private Payment payment;
     private String note;
     private EOrderStatus status;
 
     public Order() {
     }
 
-    public Order(String id, OrderItem[] books, Customer customer, Address shippingAddress, Promotion[] promotions, String note, EOrderStatus status) {
+    public Order(String id, OrderItem[] books, Customer customer, Address shippingAddress, Promotion[] promotions, Payment payment, String note, EOrderStatus status) {
         this.id = id;
         this.books = books;
         this.customer = customer;
         this.shippingAddress = shippingAddress;
         this.promotions = promotions;
+        this.payment = payment;
         this.note = note;
         this.status = status;
     }
@@ -64,6 +66,14 @@ public class Order implements Serializable {
 
     public void setPromotions(Promotion[] promotions) {
         this.promotions = promotions;
+    }
+
+    public Payment getPayment() {
+        return payment;
+    }
+
+    public void setPayment(Payment payment) {
+        this.payment = payment;
     }
 
     public String getNote() {

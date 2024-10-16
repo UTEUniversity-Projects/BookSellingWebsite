@@ -6,10 +6,9 @@ import com.biblio.enumeration.EPaymentStatus;
 import java.io.Serializable;
 import java.util.Date;
 
-public class Payment implements Serializable {
+public abstract class Payment implements Serializable {
     //region Attributes
     private String id;
-    private Order order;
     private Date createdAt;
     private double amount;
     private EPaymentStatus status;
@@ -18,12 +17,13 @@ public class Payment implements Serializable {
 
     //region Constructors
 
-    public Payment(String id, Order order, Date createdAt, double amount, EPaymentStatus status, EPaymentCurrency currency) {
+    public Payment() {}
+
+    public Payment(String id, Date createdAt, EPaymentStatus status, double amount, EPaymentCurrency currency) {
         this.id = id;
-        this.order = order;
         this.createdAt = createdAt;
-        this.amount = amount;
         this.status = status;
+        this.amount = amount;
         this.currency = currency;
     }
 
@@ -37,14 +37,6 @@ public class Payment implements Serializable {
 
     public void setId(String id) {
         this.id = id;
-    }
-
-    public Order getOrder() {
-        return order;
-    }
-
-    public void setOrder(Order order) {
-        this.order = order;
     }
 
     public Date getCreatedAt() {
@@ -79,5 +71,9 @@ public class Payment implements Serializable {
         this.currency = currency;
     }
 
+    //endregion
+
+    //region Abstract Methods
+    public abstract void processPayment();
     //endregion
 }
