@@ -120,5 +120,5 @@ public class User implements Serializable {
         this.joinAt = joinAt;
     }
 
-    //endregion
+    // endregion
 }
