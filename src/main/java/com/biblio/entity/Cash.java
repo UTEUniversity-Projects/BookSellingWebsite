@@ -21,8 +21,8 @@ public class Cash extends Payment implements Serializable {
         this.change = change;
     }
 
-    public Cash(String id, Date createdAt, EPaymentStatus status, double amount, EPaymentCurrency currency, double cashReceived, double change) {
-        super(id, createdAt, status, amount, currency);
+    public Cash(Long id, Date createdAt, double amount, EPaymentStatus status, EPaymentCurrency currency, double cashReceived, double change) {
+        super(id, createdAt, amount, status, currency);
         this.cashReceived = cashReceived;
         this.change = change;
     }

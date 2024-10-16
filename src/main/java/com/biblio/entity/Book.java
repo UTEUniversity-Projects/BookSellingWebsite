@@ -10,6 +10,9 @@ import java.time.DateTimeException;
 import java.util.List;
 
 public class Book implements Serializable {
+
+    // region Attributes
+
     private Long id;
     private String title;
     private List<Author> authors;
@@ -34,6 +37,9 @@ public class Book implements Serializable {
     private EBookAgeRecommend recommendedAge;
     private BookMetadata metadata;
 
+    // endregion Attributes
+
+    // region Constructors
     public Book() {}
 
     public Book(Long id, String title, List<Author> authors, List<Translator> translators,
@@ -69,6 +75,9 @@ public class Book implements Serializable {
         this.metadata = metadata;
     }
 
+    // endregion Constructors
+
+    // region Getters & Setters
     public Long getId() {
         return id;
     }
@@ -252,4 +261,6 @@ public class Book implements Serializable {
     public void setMetadata(BookMetadata metadata) {
         this.metadata = metadata;
     }
+
+    // endregion Getters & Setters
 }

@@ -2,10 +2,6 @@ package com.biblio.entity;
 
 import com.biblio.enumeration.EGender;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
 import java.io.Serializable;
 import java.util.Date;
 
@@ -23,7 +19,7 @@ public class User implements Serializable {
     private Date joinAt;
     //endregion
 
-    //region Contructors
+    //region Constructors
 
     public User() {}
 
