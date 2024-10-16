@@ -2,7 +2,6 @@ package com.biblio.jpaconfig;
 
 import com.biblio.connection.DBConnection;
 import com.biblio.constants.Constant;
-import com.biblio.dao.impl.GenericDAOImpl;
 import org.hibernate.jpa.HibernatePersistenceProvider;
 
 import javax.persistence.EntityManager;
@@ -55,7 +54,4 @@ public class JpaConfig {
         }
     }
 
-    public static void main(String[] args) {
-        System.out.println(JpaConfig.getEntityManager());
-    }
 }
