@@ -7,7 +7,7 @@ import java.io.Serializable;
 import java.sql.Date;
 
 public class Promotion implements Serializable {
-    private String id;
+    private Long id;
     private Date createdAt; // Using LocalDateTime for date and time
     private String code;
     private Date effectiveDate; // Effective date of promotion
@@ -24,7 +24,7 @@ public class Promotion implements Serializable {
     public Promotion() {
     }
 
-    public Promotion(String id, Date createdAt, String code, Date effectiveDate, Date expirationDate, String title, String description, double percentDiscount, double minValueToBeApplied, double discountLimit, EPromotionType type, PromotionTarget[] targets, EPromotionStatus status) {
+    public Promotion(Long id, Date createdAt, String code, Date effectiveDate, Date expirationDate, String title, String description, double percentDiscount, double minValueToBeApplied, double discountLimit, EPromotionType type, PromotionTarget[] targets, EPromotionStatus status) {
         this.id = id;
         this.createdAt = createdAt;
         this.code = code;
@@ -40,20 +40,12 @@ public class Promotion implements Serializable {
         this.status = status;
     }
 
-    public String getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(Long id) {
         this.id = id;
-    }
-
-    public String getCode() {
-        return code;
-    }
-
-    public void setCode(String code) {
-        this.code = code;
     }
 
     public Date getCreatedAt() {
@@ -64,12 +56,12 @@ public class Promotion implements Serializable {
         this.createdAt = createdAt;
     }
 
-    public Date getExpirationDate() {
-        return expirationDate;
+    public String getCode() {
+        return code;
     }
 
-    public void setExpirationDate(Date expirationDate) {
-        this.expirationDate = expirationDate;
+    public void setCode(String code) {
+        this.code = code;
     }
 
     public Date getEffectiveDate() {
@@ -78,6 +70,14 @@ public class Promotion implements Serializable {
 
     public void setEffectiveDate(Date effectiveDate) {
         this.effectiveDate = effectiveDate;
+    }
+
+    public Date getExpirationDate() {
+        return expirationDate;
+    }
+
+    public void setExpirationDate(Date expirationDate) {
+        this.expirationDate = expirationDate;
     }
 
     public String getTitle() {
@@ -104,20 +104,20 @@ public class Promotion implements Serializable {
         this.percentDiscount = percentDiscount;
     }
 
-    public double getMinValueToBeApplied() {
-        return minValueToBeApplied;
-    }
-
-    public void setMinValueToBeApplied(double minValueToBeApplied) {
-        this.minValueToBeApplied = minValueToBeApplied;
-    }
-
     public double getDiscountLimit() {
         return discountLimit;
     }
 
     public void setDiscountLimit(double discountLimit) {
         this.discountLimit = discountLimit;
+    }
+
+    public double getMinValueToBeApplied() {
+        return minValueToBeApplied;
+    }
+
+    public void setMinValueToBeApplied(double minValueToBeApplied) {
+        this.minValueToBeApplied = minValueToBeApplied;
     }
 
     public EPromotionType getType() {

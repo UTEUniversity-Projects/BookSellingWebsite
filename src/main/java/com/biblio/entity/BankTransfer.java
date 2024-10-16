@@ -1,8 +1,12 @@
 package com.biblio.entity;
 
-import java.io.Serializable;
+import com.biblio.enumeration.EPaymentCurrency;
+import com.biblio.enumeration.EPaymentStatus;
 
-public class BankTransfer implements Serializable {
+import java.io.Serializable;
+import java.util.Date;
+
+public class BankTransfer extends Payment implements Serializable {
 
     //region Attributes
     private String bankAccountNumber;
@@ -12,7 +16,16 @@ public class BankTransfer implements Serializable {
 
     //region Constructors
 
+    public BankTransfer() {}
+
     public BankTransfer(String bankAccountNumber, String bankName, String transactionId) {
+        this.bankAccountNumber = bankAccountNumber;
+        this.bankName = bankName;
+        this.transactionId = transactionId;
+    }
+
+    public BankTransfer(String id, Date createdAt, EPaymentStatus status, double amount, EPaymentCurrency currency, String bankAccountNumber, String bankName, String transactionId) {
+        super(id, createdAt, status, amount, currency);
         this.bankAccountNumber = bankAccountNumber;
         this.bankName = bankName;
         this.transactionId = transactionId;
@@ -48,4 +61,10 @@ public class BankTransfer implements Serializable {
 
     //endregion
 
+    // region Methods
+    @Override
+    public void processPayment() {
+
+    }
+    // endregion
 }

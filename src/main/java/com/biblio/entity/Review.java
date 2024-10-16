@@ -3,7 +3,7 @@ package com.biblio.entity;
 import java.sql.Date;
 
 public class Review {
-    private String id;
+    private Long id;
     private int rate;
     private String content;
     private boolean readyToIntroduce;
@@ -14,7 +14,7 @@ public class Review {
     public Review() {
     }
 
-    public Review(String id, int rate, String content, boolean readyToIntroduce, Book book, Customer createdBy, Date createdAt) {
+    public Review(Long id, int rate, String content, boolean readyToIntroduce, Book book, Customer createdBy, Date createdAt) {
         this.id = id;
         this.rate = rate;
         this.content = content;
@@ -24,11 +24,11 @@ public class Review {
         this.createdAt = createdAt;
     }
 
-    public String getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

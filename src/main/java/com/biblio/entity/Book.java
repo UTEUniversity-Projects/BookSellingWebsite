@@ -10,7 +10,7 @@ import java.time.DateTimeException;
 import java.util.List;
 
 public class Book implements Serializable {
-    private String id;
+    private Long id;
     private String title;
     private List<Author> authors;
     private List<Translator> translators;
@@ -36,7 +36,7 @@ public class Book implements Serializable {
 
     public Book() {}
 
-    public Book(String id, String title, List<Author> authors, List<Translator> translators,
+    public Book(Long id, String title, List<Author> authors, List<Translator> translators,
                 Category category, SubCategory subCategory, String description,
                 double sellingPrice, Publisher publisher, DateTimeException publicationDate,
                 int edition, String codeISBN10, String codeISBN13,
@@ -69,11 +69,11 @@ public class Book implements Serializable {
         this.metadata = metadata;
     }
 
-    public String getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

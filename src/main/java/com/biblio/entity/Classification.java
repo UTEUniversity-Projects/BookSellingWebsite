@@ -3,23 +3,23 @@ package com.biblio.entity;
 import java.io.Serializable;
 
 public abstract class Classification implements Serializable {
-    private String id;
+    private Long id;
     private String code;
     private String name;
 
     public Classification() {}
 
-    public Classification(String id, String code, String name) {
+    public Classification(Long id, String code, String name) {
         this.id = id;
         this.code = code;
         this.name = name;
     }
 
-    public String getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

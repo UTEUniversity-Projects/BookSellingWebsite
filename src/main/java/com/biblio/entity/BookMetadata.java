@@ -7,7 +7,7 @@ import java.time.DateTimeException;
 import java.util.List;
 
 public class BookMetadata implements Serializable {
-    private String id;
+    private Long id;
     private DateTimeException createdAt;
     private DateTimeException openingDay;
     private double importPrice;
@@ -17,7 +17,7 @@ public class BookMetadata implements Serializable {
 
     public BookMetadata() {}
 
-    public BookMetadata(String id, DateTimeException createdAt, DateTimeException openingDay, double importPrice,
+    public BookMetadata(Long id, DateTimeException createdAt, DateTimeException openingDay, double importPrice,
                         EBookStatus status, List<MediaFile> illustration, List<Tag> tags) {
         this.id = id;
         this.createdAt = createdAt;
@@ -28,11 +28,11 @@ public class BookMetadata implements Serializable {
         this.tags = tags;
     }
 
-    public String getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

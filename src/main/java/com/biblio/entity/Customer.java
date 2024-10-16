@@ -11,7 +11,11 @@ public class Customer extends User implements Serializable {
     private Address address;
     private EMembership membership;
 
-    public Customer(String id, String userName, String fullName, String password, String emailAddress, String dateOfBirth, EGender gender, String phoneNumber, MediaFile avatar, Date joinAt, Address address, EMembership membership) {
+      public Customer() {
+        super();
+    }
+  
+    public Customer(Long id, String userName, String fullName, String password, String emailAddress, String dateOfBirth, EGender gender, String phoneNumber, MediaFile avatar, Date joinAt, Address address, EMembership membership) {
         super(id, userName, fullName, password, emailAddress, dateOfBirth, gender, phoneNumber, avatar, joinAt);
         this.address = address;
         this.membership = membership;

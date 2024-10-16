@@ -3,24 +3,24 @@ package com.biblio.entity;
 import java.io.Serializable;
 
 public class Cart implements Serializable {
-    private String id;
+    private Long id;
     private Customer customer;
     private OrderItem[] books;
 
     public Cart() {
     }
 
-    public Cart(String id, Customer customer, OrderItem[] books) {
+    public Cart(Long id, Customer customer, OrderItem[] books) {
         this.id = id;
         this.customer = customer;
         this.books = books;
     }
 
-    public String getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

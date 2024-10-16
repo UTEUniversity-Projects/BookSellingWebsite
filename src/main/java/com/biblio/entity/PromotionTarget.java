@@ -5,23 +5,23 @@ import com.biblio.enumeration.EPromotionTargetType;
 import java.io.Serializable;
 
 public class PromotionTarget implements Serializable {
-    private String id;
+    private Long id;
     private String applicableObjectId;
     private EPromotionTargetType type;
 
     public PromotionTarget() {}
 
-    public PromotionTarget(String id, String applicableObjectId, EPromotionTargetType type) {
+    public PromotionTarget(Long id, String applicableObjectId, EPromotionTargetType type) {
         this.id = id;
         this.applicableObjectId = applicableObjectId;
         this.type = type;
     }
 
-    public String getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
