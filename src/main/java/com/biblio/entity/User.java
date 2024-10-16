@@ -11,7 +11,7 @@ import java.util.Date;
 
 public class User implements Serializable {
     //region Attributes
-    private String id;
+    private Long id;
     private String userName;
     private String fullName;
     private String password;
@@ -27,7 +27,7 @@ public class User implements Serializable {
 
     public User() {}
 
-    public User(String id, String userName, String fullName, String password, String emailAddress, String dateOfBirth, EGender gender, String phoneNumber, MediaFile avatar, Date joinAt) {
+    public User(Long id, String userName, String fullName, String password, String emailAddress, String dateOfBirth, EGender gender, String phoneNumber, MediaFile avatar, Date joinAt) {
         this.id = id;
         this.userName = userName;
         this.fullName = fullName;
@@ -44,11 +44,11 @@ public class User implements Serializable {
 
     //region Getters & Setters
 
-    public String getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -60,20 +60,20 @@ public class User implements Serializable {
         this.userName = userName;
     }
 
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
     public String getFullName() {
         return fullName;
     }
 
     public void setFullName(String fullName) {
         this.fullName = fullName;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 
     public String getEmailAddress() {

@@ -8,7 +8,7 @@ import java.util.Date;
 
 public abstract class Payment implements Serializable {
     //region Attributes
-    private String id;
+    private Long id;
     private Date createdAt;
     private double amount;
     private EPaymentStatus status;
@@ -18,8 +18,8 @@ public abstract class Payment implements Serializable {
     //region Constructors
 
     public Payment() {}
-
-    public Payment(String id, Date createdAt, EPaymentStatus status, double amount, EPaymentCurrency currency) {
+  
+    public Payment(Long id, Date createdAt, double amount, EPaymentStatus status, EPaymentCurrency currency) {
         this.id = id;
         this.createdAt = createdAt;
         this.status = status;
@@ -31,11 +31,11 @@ public abstract class Payment implements Serializable {
 
     //region Getters & Setters
 
-    public String getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

@@ -4,7 +4,7 @@ import java.io.Serializable;
 
 public class Address implements Serializable {
 
-    private String id;
+    private Long id;
     private String nation;
     private String province;
     private String district;
@@ -14,7 +14,7 @@ public class Address implements Serializable {
     public Address() {
     }
 
-    public Address(String id, String nation, String province, String district, String village, String detail) {
+    public Address(Long id, String nation, String province, String district, String village, String detail) {
         this.id = id;
         this.nation = nation;
         this.province = province;
@@ -27,11 +27,12 @@ public class Address implements Serializable {
 
     //region Getters & Setters
 
-    public String getId() {
+
+    public Long getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

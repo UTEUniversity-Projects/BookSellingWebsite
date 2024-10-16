@@ -9,7 +9,7 @@ public class SubCategory extends Classification implements Serializable {
         super();
     }
 
-    public SubCategory(String id, String code, String name, Category category) {
+    public SubCategory(Long id, String code, String name, Category category) {
         super(id, code, name);
         this.category = category;
     }
