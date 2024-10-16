@@ -5,6 +5,8 @@ import com.biblio.enumeration.EOrderStatus;
 import java.io.Serializable;
 
 public class Order implements Serializable {
+
+    //region Attributes
     private Long id;
     private OrderItem[] books;
     private Customer customer;
@@ -13,11 +15,13 @@ public class Order implements Serializable {
     private Payment payment;
     private String note;
     private EOrderStatus status;
+    //endregion
 
+    //region Constructors
     public Order() {
     }
   
-    public Order(Long id, OrderItem[] books, Customer customer, Address shippingAddress, Promotion[] promotions, String note, EOrderStatus status) {
+    public Order(Long id, OrderItem[] books, Customer customer, Address shippingAddress, Promotion[] promotions, Payment payment, String note, EOrderStatus status) {
 
         this.id = id;
         this.books = books;
@@ -28,7 +32,9 @@ public class Order implements Serializable {
         this.note = note;
         this.status = status;
     }
+    //endregion
 
+    //region Getters & Setters
     public Long getId() {
         return id;
     }
@@ -92,4 +98,5 @@ public class Order implements Serializable {
     public void setStatus(EOrderStatus status) {
         this.status = status;
     }
+    //endregion
 }

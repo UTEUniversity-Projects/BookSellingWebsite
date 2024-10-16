@@ -4,12 +4,16 @@ import java.io.Serializable;
 import java.util.Date;
 
 public abstract class ContributorProfile implements Serializable {
+
+    //region Attributes
     private Long id;
     private String name;
     private MediaFile avatar;
     private String introduction;
     private Date joinAt;
+    //endregion
 
+    //region Constructors
     public ContributorProfile() {
     }
 
@@ -20,7 +24,9 @@ public abstract class ContributorProfile implements Serializable {
         this.joinAt = joinAt;
         this.introduction = introduction;
     }
+    //endregion
 
+    //region Getters & Setters
     public Long getId() {
         return id;
     }
@@ -60,4 +66,5 @@ public abstract class ContributorProfile implements Serializable {
     public void setJoinAt(Date joinAt) {
         this.joinAt = joinAt;
     }
+    //endregion
 }

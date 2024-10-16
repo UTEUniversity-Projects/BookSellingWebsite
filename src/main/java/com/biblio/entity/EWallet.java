@@ -16,17 +16,18 @@ public class EWallet extends Payment implements Serializable {
 
     //region Constructors
 
-   public EWallet() {
+    public EWallet() {
         super();
     }
+
     public EWallet(Long walletId, EWalletProvider provider, String transactionId) {
         this.walletId = walletId;
         this.provider = provider;
         this.transactionId = transactionId;
     }
 
-    public EWallet(String id, Date createdAt, EPaymentStatus status, double amount, EPaymentCurrency currency, String walletId, EWalletProvider provider, String transactionId) {
-        super(id, createdAt, status, amount, currency);
+    public EWallet(Long id, Date createdAt, double amount, EPaymentStatus status, EPaymentCurrency currency, Long walletId, EWalletProvider provider, String transactionId) {
+        super(id, createdAt, amount, status, currency);
         this.walletId = walletId;
         this.provider = provider;
         this.transactionId = transactionId;

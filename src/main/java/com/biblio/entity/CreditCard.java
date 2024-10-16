@@ -21,16 +21,8 @@ public class CreditCard extends Payment implements Serializable {
         super();
     }
 
-    public CreditCard(String cardNumber, String cardHolderName, String expiryDate, String cvv, String billingAddress) {
-        this.cardNumber = cardNumber;
-        this.cardHolderName = cardHolderName;
-        this.expiryDate = expiryDate;
-        this.cvv = cvv;
-        this.billingAddress = billingAddress;
-    }
-
-    public CreditCard(String id, Date createdAt, EPaymentStatus status, double amount, EPaymentCurrency currency, String cardNumber, String cardHolderName, String expiryDate, String cvv, String billingAddress) {
-        super(id, createdAt, status, amount, currency);
+    public CreditCard(Long id, Date createdAt, double amount, EPaymentStatus status, EPaymentCurrency currency, String cardNumber, String cardHolderName, String expiryDate, String cvv, String billingAddress) {
+        super(id, createdAt, amount, status, currency);
         this.cardNumber = cardNumber;
         this.cardHolderName = cardHolderName;
         this.expiryDate = expiryDate;
