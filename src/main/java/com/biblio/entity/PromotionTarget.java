@@ -5,10 +5,13 @@ import com.biblio.enumeration.EPromotionTargetType;
 import java.io.Serializable;
 
 public class PromotionTarget implements Serializable {
+    //region Attributes
     private Long id;
     private String applicableObjectId;
     private EPromotionTargetType type;
+    //endregion
 
+    //region Constructors
     public PromotionTarget() {}
 
     public PromotionTarget(Long id, String applicableObjectId, EPromotionTargetType type) {
@@ -16,7 +19,9 @@ public class PromotionTarget implements Serializable {
         this.applicableObjectId = applicableObjectId;
         this.type = type;
     }
+    //endregion
 
+    //region Getters & Setters
     public Long getId() {
         return id;
     }
@@ -40,4 +45,5 @@ public class PromotionTarget implements Serializable {
     public void setType(EPromotionTargetType type) {
         this.type = type;
     }
+    //endregion
 }

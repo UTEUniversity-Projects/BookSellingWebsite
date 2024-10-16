@@ -3,8 +3,11 @@ package com.biblio.entity;
 import java.io.Serializable;
 
 public class SubCategory extends Classification implements Serializable {
+    //region Attributes
     private Category category;
+    //endregion
 
+    //region Constructors
     public SubCategory() {
         super();
     }
@@ -13,7 +16,9 @@ public class SubCategory extends Classification implements Serializable {
         super(id, code, name);
         this.category = category;
     }
+    //endregion
 
+    //region Getters & Setters
     public Category getCategory() {
         return category;
     }
@@ -21,4 +26,5 @@ public class SubCategory extends Classification implements Serializable {
     public void setCategory(Category category) {
         this.category = category;
     }
+    //endregion
 }

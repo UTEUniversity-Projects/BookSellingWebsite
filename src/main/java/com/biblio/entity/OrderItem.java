@@ -4,10 +4,13 @@ import java.io.Serializable;
 
 public class OrderItem implements Serializable {
 
+    //region Attributes
     private int id;
     private Customer customer;
     private int quantity;
+    //endregion
 
+    //region Constructors
     public OrderItem() {
     }
 
@@ -16,7 +19,9 @@ public class OrderItem implements Serializable {
         this.customer = customer;
         this.quantity = quantity;
     }
+    //endregion
 
+    //region Getters & Setters
     public int getId() {
         return id;
     }
@@ -40,4 +45,5 @@ public class OrderItem implements Serializable {
     public void setQuantity(int quantity) {
         this.quantity = quantity;
     }
+    //endregion
 }
