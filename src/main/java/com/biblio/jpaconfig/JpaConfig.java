@@ -55,4 +55,7 @@ public class JpaConfig {
         }
     }
 
+    public static void main(String[] args) {
+        System.out.println(JpaConfig.getEntityManager());
+    }
 }

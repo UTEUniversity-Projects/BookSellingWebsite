@@ -1,19 +1,45 @@
 package com.biblio.entity;
 
+import javax.persistence.*;
 import java.io.Serializable;
 
+@Entity
+@Table(name = "address")
 public class Address implements Serializable {
+
+    private static final long serialVersionUID = 1L;
 
     // region Attributes
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
     private Long id;
+
+    @Column(name = "nation", nullable = false, columnDefinition = "nvarchar(255)")
     private String nation;
+
+    @Column(name = "province", nullable = false, columnDefinition = "nvarchar(255)")
     private String province;
+
+    @Column(name = "district", nullable = false, columnDefinition = "nvarchar(255)")
     private String district;
+
+    @Column(name = "village", nullable = false, columnDefinition = "nvarchar(255)")
     private String village;
+
+    @Column(name = "detail", nullable = false, columnDefinition = "nvarchar(255)")
     private String detail;
 
     // endregion Attributes
+
+    // region Relationships
+
+    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JoinColumn(name = "customer_id", nullable = false, referencedColumnName = "id")
+    private Customer customer;
+
+    // endregion
 
     // region Constructors
     public Address() {

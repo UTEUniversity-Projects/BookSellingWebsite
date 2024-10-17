@@ -1,30 +1,30 @@
 package com.biblio.entity;
 
+import javax.persistence.Entity;
+import javax.persistence.Table;
 import java.io.Serializable;
 
+@Entity
+@Table(name = "sub_category")
 public class SubCategory extends Classification implements Serializable {
+
     //region Attributes
-    private Category category;
+
     //endregion
 
     //region Constructors
+
     public SubCategory() {
         super();
     }
 
-    public SubCategory(Long id, String code, String name, Category category) {
+    public SubCategory(Long id, String code, String name) {
         super(id, code, name);
-        this.category = category;
     }
+
     //endregion
 
     //region Getters & Setters
-    public Category getCategory() {
-        return category;
-    }
 
-    public void setCategory(Category category) {
-        this.category = category;
-    }
     //endregion
 }
