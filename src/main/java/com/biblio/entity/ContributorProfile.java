@@ -19,7 +19,7 @@ public abstract class ContributorProfile implements Serializable {
     @Column(name = "introduction", nullable = false, columnDefinition = "nvarchar(255)")
     private String introduction;
 
-    @Column(name = "joinAt", nullable = false, columnDefinition = "datetime")
+    @Column(name = "join_at", nullable = false, columnDefinition = "datetime")
     private Timestamp joinAt;
     // endregion
 

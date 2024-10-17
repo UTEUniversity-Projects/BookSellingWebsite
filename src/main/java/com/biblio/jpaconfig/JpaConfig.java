@@ -31,7 +31,7 @@ public class JpaConfig {
         map.put(FORMAT_SQL, "true");
         map.put(QUERY_STARTUP_CHECKING, "false");
         map.put(GENERATE_STATISTICS, "false");
-        map.put(USE_REFLECTION_OPTIMIZER, "false");
+        map.put(USE_REFLECTION_OPTIMIZER, "true");
         map.put(USE_SECOND_LEVEL_CACHE, "false");
         map.put(USE_QUERY_CACHE, "false");
         map.put(USE_STRUCTURED_CACHE, "false");

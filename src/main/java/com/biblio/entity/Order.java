@@ -4,7 +4,7 @@ import javax.persistence.*;
 import java.io.Serializable;
 
 @Entity
-@Table(name = "order")
+@Table(name = "[order]")
 public class Order implements Serializable {
 
     // region Attributes
@@ -14,8 +14,10 @@ public class Order implements Serializable {
     @Column(name = "id")
     private Long id;
 
+    @Column(name = "note", nullable = false, columnDefinition = "nvarchar(255)")
     private String note;
 
+    @Column(name =  "status", nullable = false, columnDefinition = "nvarchar(255)")
     private String status;
 
     // endregion

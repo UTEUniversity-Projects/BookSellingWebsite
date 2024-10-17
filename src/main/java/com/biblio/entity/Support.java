@@ -23,7 +23,7 @@ public class Support implements Serializable {
     @Column(name = "feed_back_content", nullable = false, columnDefinition = "nvarchar(255)")
     private String feedbackContent;
 
-    @Column(name = "rate", nullable = false, columnDefinition = "int")
+    @Column(name = "rate", nullable = false)
     private int rate;
 
     @Column(name = "status", nullable = false, columnDefinition = "nvarchar(255)")

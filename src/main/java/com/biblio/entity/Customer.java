@@ -1,8 +1,5 @@
 package com.biblio.entity;
 
-
-import com.biblio.enumeration.EGender;
-
 import javax.persistence.*;
 import java.io.Serializable;
 import java.sql.Timestamp;

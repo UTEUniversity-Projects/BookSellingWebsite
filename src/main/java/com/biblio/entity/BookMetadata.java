@@ -5,7 +5,7 @@ import java.io.Serializable;
 import java.sql.Timestamp;
 
 @Entity
-@Table(name = "book_meta")
+@Table(name = "book_metadata")
 public class BookMetadata implements Serializable {
 
     // region Attributes

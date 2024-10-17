@@ -9,7 +9,7 @@ import java.sql.Timestamp;
 import java.util.Date;
 
 @Entity
-@Table(name = "customer")
+@Table(name = "owner")
 public class Owner extends User implements Serializable {
 
     //region Constructors

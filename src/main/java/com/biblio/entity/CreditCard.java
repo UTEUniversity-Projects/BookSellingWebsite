@@ -13,7 +13,8 @@ import java.util.Date;
 @Entity
 @Table(name = "credit_card")
 public class CreditCard extends Payment implements Serializable {
-    //region Attributes
+
+    // region Attributes
     @Column(name = "card_number", nullable = false, columnDefinition = "nvarchar(255)")
     private String cardNumber;
 
@@ -29,9 +30,9 @@ public class CreditCard extends Payment implements Serializable {
     @Column(name = "billing_address", nullable = false, columnDefinition = "nvarchar(255)")
     private String billingAddress;
 
-    //endregion
+    // endregion
 
-    //region Constructors
+    // region Constructors
 
     public CreditCard() {
         super();
@@ -54,11 +55,11 @@ public class CreditCard extends Payment implements Serializable {
         this.billingAddress = billingAddress;
     }
 
-    //endregion
+    // endregion
 
-    //region Getters & Setters
+    // region Getters & Setters
 
-    //endregion
+    // endregion
 
     // region Methods
     @Override

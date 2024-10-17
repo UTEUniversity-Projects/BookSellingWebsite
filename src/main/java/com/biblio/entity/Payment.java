@@ -3,7 +3,6 @@ package com.biblio.entity;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.sql.Timestamp;
-import java.util.Date;
 
 @MappedSuperclass
 public abstract class Payment implements Serializable {

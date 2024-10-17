@@ -15,7 +15,7 @@ public class Cash extends Payment implements Serializable {
     @Column(name = "cash_received", nullable = false)
     private double cashReceived;
 
-    @Column(name = "change", nullable = false)
+    @Column(name = "[change]", nullable = false)
     private double change;
 
     // endregion

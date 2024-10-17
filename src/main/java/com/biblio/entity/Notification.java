@@ -13,7 +13,7 @@ import java.util.List;
 @Table(name = "notification")
 public class Notification implements Serializable {
 
-    //region Attributes
+    // region Attributes
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -42,7 +42,7 @@ public class Notification implements Serializable {
 
     //endregion
 
-    //region Constructors
+    // region Constructors
 
     public Notification() {
     }
@@ -58,9 +58,9 @@ public class Notification implements Serializable {
         this.status = status;
     }
 
-    //endregion
+    // endregion
 
-    //region Getters & Setters
+    // region Getters & Setters
 
     public Long getId() {
         return id;
@@ -126,5 +126,5 @@ public class Notification implements Serializable {
         this.status = status;
     }
 
-    //endregion
+    // endregion
 }

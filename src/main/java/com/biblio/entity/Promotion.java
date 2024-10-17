@@ -32,13 +32,13 @@ public class Promotion implements Serializable {
     @Column(name = "description", nullable = false, columnDefinition = "nvarchar(255)")
     private String description;
 
-    @Column(name = "percent_discount", nullable = false, columnDefinition = "double")
+    @Column(name = "percent_discount", nullable = false)
     private double percentDiscount;
 
-    @Column(name = "discount_limit", nullable = false, columnDefinition = "double")
+    @Column(name = "discount_limit", nullable = false)
     private double discountLimit;
 
-    @Column(name = "min_value_to_be_applied", nullable = false, columnDefinition = "double")
+    @Column(name = "min_value_to_be_applied", nullable = false)
     private double minValueToBeApplied;
 
     @Column(name = "type", nullable = false, columnDefinition = "nvarchar(255)")

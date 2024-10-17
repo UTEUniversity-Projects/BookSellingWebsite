@@ -1,5 +1,6 @@
 package com.biblio.entity;
 
+
 import javax.persistence.*;
 import java.io.Serializable;
 import java.sql.Timestamp;
@@ -20,13 +21,13 @@ public class Book implements Serializable {
     @Column(name = "description", nullable = false, columnDefinition = "nvarchar(255)")
     private String description;
 
-    @Column(name = "selling_price", nullable = false, columnDefinition = "double")
+    @Column(name = "selling_price", nullable = false)
     private double sellingPrice;
 
     @Column(name = "publication_date", nullable = false, columnDefinition = "datetime")
     private Timestamp publicationDate;
 
-    @Column(name = "edition", nullable = false, columnDefinition = "int")
+    @Column(name = "edition", nullable = false)
     private int edition;
 
     @Column(name = "code_ISBN10", nullable = false, columnDefinition = "nvarchar(255)")
@@ -38,22 +39,22 @@ public class Book implements Serializable {
     @Column(name = "format", nullable = false, columnDefinition = "nvarchar(255)")
     private String format;
 
-    @Column(name = "hand_cover", nullable = false, columnDefinition = "int")
+    @Column(name = "hand_cover", nullable = false)
     private int handcover;
 
-    @Column(name = "length", nullable = false, columnDefinition = "double")
+    @Column(name = "length", nullable = false)
     private double length;
 
-    @Column(name = "width", nullable = false, columnDefinition = "double")
+    @Column(name = "width", nullable = false)
     private double width;
 
-    @Column(name = "height", nullable = false, columnDefinition = "double")
+    @Column(name = "height", nullable = false)
     private double height;
 
-    @Column(name = "weight", nullable = false, columnDefinition = "double")
+    @Column(name = "weight", nullable = false)
     private double weight;
 
-    @Column(name = "condition", nullable = false, columnDefinition = "nvarchar(255)")
+    @Column(name = "[condition]", nullable = false, columnDefinition = "nvarchar(255)")
     private String condition;
 
     @Column(name = "recommended_age", nullable = false, columnDefinition = "nvarchar(255)")

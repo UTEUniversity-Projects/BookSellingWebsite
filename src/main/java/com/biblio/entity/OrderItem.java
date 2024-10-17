@@ -13,7 +13,7 @@ public class OrderItem implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    @Column(name = "quantity", nullable = false, columnDefinition = "int")
+    @Column(name = "quantity", nullable = false)
     private int quantity;
 
     // endregion
