@@ -1,44 +1,66 @@
 package com.biblio.entity;
 
-import com.biblio.enumeration.EGender;
-
+import javax.persistence.*;
 import java.io.Serializable;
-import java.util.Date;
+import java.sql.Timestamp;
+import java.util.Set;
 
+@MappedSuperclass
 public class User implements Serializable {
+
     //region Attributes
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
     private Long id;
-    private String userName;
+
+    @Column(name = "username", nullable = false, columnDefinition = "nvarchar(255)")
+    private String username;
+
+    @Column(name = "full_name", nullable = false, columnDefinition = "nvarchar(255)")
     private String fullName;
+
+    @Column(name = "password", nullable = false, columnDefinition = "nvarchar(255)")
     private String password;
+
+    @Column(name = "email_address", nullable = false, columnDefinition = "nvarchar(255)")
     private String emailAddress;
+
+    @Column(name = "date_of_birth", nullable = false, columnDefinition = "nvarchar(255)")
     private String dateOfBirth;
-    private EGender gender;
+
+    @Column(name = "gender", nullable = false, columnDefinition = "nvarchar(255)")
+    private String gender;
+
+    @Column(name = "phone_number", nullable = false, columnDefinition = "nvarchar(255)")
     private String phoneNumber;
-    private MediaFile avatar;
-    private Date joinAt;
+
+    @Column(name = "join_at", nullable = false, columnDefinition = "datetime")
+    private Timestamp joinAt;
+
     //endregion
 
     //region Constructors
 
-    public User() {}
+    public User() {
+    }
 
-    public User(Long id, String userName, String fullName, String password, String emailAddress, String dateOfBirth, EGender gender, String phoneNumber, MediaFile avatar, Date joinAt) {
+    public User(Long id, String username, String fullName, String password, String emailAddress, String dateOfBirth, String gender, String phoneNumber, Timestamp joinAt) {
         this.id = id;
-        this.userName = userName;
+        this.username = username;
         this.fullName = fullName;
         this.password = password;
         this.emailAddress = emailAddress;
         this.dateOfBirth = dateOfBirth;
         this.gender = gender;
         this.phoneNumber = phoneNumber;
-        this.avatar = avatar;
         this.joinAt = joinAt;
     }
 
-    //endregion
+    // endregion
 
-    //region Getters & Setters
+    // region Getters & Setters
 
     public Long getId() {
         return id;
@@ -48,12 +70,12 @@ public class User implements Serializable {
         this.id = id;
     }
 
-    public String getUserName() {
-        return userName;
+    public String getUsername() {
+        return username;
     }
 
-    public void setUserName(String userName) {
-        this.userName = userName;
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     public String getFullName() {
@@ -88,11 +110,11 @@ public class User implements Serializable {
         this.dateOfBirth = dateOfBirth;
     }
 
-    public EGender getGender() {
+    public String getGender() {
         return gender;
     }
 
-    public void setGender(EGender gender) {
+    public void setGender(String gender) {
         this.gender = gender;
     }
 
@@ -104,19 +126,11 @@ public class User implements Serializable {
         this.phoneNumber = phoneNumber;
     }
 
-    public MediaFile getAvatar() {
-        return avatar;
-    }
-
-    public void setAvatar(MediaFile avatar) {
-        this.avatar = avatar;
-    }
-
-    public Date getJoinAt() {
+    public Timestamp getJoinAt() {
         return joinAt;
     }
 
-    public void setJoinAt(Date joinAt) {
+    public void setJoinAt(Timestamp joinAt) {
         this.joinAt = joinAt;
     }
 

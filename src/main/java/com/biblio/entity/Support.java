@@ -1,45 +1,69 @@
 package com.biblio.entity;
 
-import com.biblio.enumeration.ESupportStatus;
-
+import javax.persistence.*;
 import java.io.Serializable;
-import java.util.Date;
+import java.sql.Timestamp;
 
+@Entity
+@Table(name = "support")
 public class Support implements Serializable {
-    //region Attributes
 
+    // region Attributes
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private Customer customer;
+
+    @Column(name = "title", nullable = false, columnDefinition = "nvarchar(255)")
     private String title;
+
+    @Column(name = "request_content", nullable = false, columnDefinition = "nvarchar(255)")
     private String requestContent;
-    private Staff staff;
+
+    @Column(name = "feed_back_content", nullable = false, columnDefinition = "nvarchar(255)")
     private String feedbackContent;
+
+    @Column(name = "rate", nullable = false)
     private int rate;
-    private ESupportStatus status;
-    private Date createdAt;
 
-    //endregion
+    @Column(name = "status", nullable = false, columnDefinition = "nvarchar(255)")
+    private String status;
 
-    //region Constructors
+    @Column(name = "created_at", nullable = false, columnDefinition = "datetime")
+    private Timestamp createdAt;
+
+    // endregion
+
+    // region Relationships
+
+    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JoinColumn(name = "staff_id", nullable = false, referencedColumnName = "id")
+    private Staff staff;
+
+    @ManyToOne(cascade = CascadeType.ALL, fetch =  FetchType.LAZY)
+    @JoinColumn(name = "customer_id", nullable = false, referencedColumnName = "id")
+    private Customer customer;
+
+    // endregion
+
+    // region Constructors
 
     public Support() {
     }
 
-    public Support(Long id, Customer customer, String title, String requestContent, Staff staff, String feedbackContent, int rate, ESupportStatus status, Date createdAt) {
+    public Support(Long id, String title, String requestContent, String feedbackContent, int rate, String status, Timestamp createdAt) {
         this.id = id;
-        this.customer = customer;
         this.title = title;
         this.requestContent = requestContent;
-        this.staff = staff;
         this.feedbackContent = feedbackContent;
         this.rate = rate;
         this.status = status;
         this.createdAt = createdAt;
     }
 
-    //endregion
+    // endregion
 
-    //region Getters & Setters
+    // region Getters & Setters
 
     public Long getId() {
         return id;
@@ -47,14 +71,6 @@ public class Support implements Serializable {
 
     public void setId(Long id) {
         this.id = id;
-    }
-
-    public Customer getCustomer() {
-        return customer;
-    }
-
-    public void setCustomer(Customer customer) {
-        this.customer = customer;
     }
 
     public String getTitle() {
@@ -73,14 +89,6 @@ public class Support implements Serializable {
         this.requestContent = requestContent;
     }
 
-    public Staff getStaff() {
-        return staff;
-    }
-
-    public void setStaff(Staff staff) {
-        this.staff = staff;
-    }
-
     public String getFeedbackContent() {
         return feedbackContent;
     }
@@ -97,22 +105,21 @@ public class Support implements Serializable {
         this.rate = rate;
     }
 
-    public ESupportStatus getStatus() {
+    public String getStatus() {
         return status;
     }
 
-    public void setStatus(ESupportStatus status) {
+    public void setStatus(String status) {
         this.status = status;
     }
 
-    public Date getCreatedAt() {
+    public Timestamp getCreatedAt() {
         return createdAt;
     }
 
-    public void setCreatedAt(Date createdAt) {
+    public void setCreatedAt(Timestamp createdAt) {
         this.createdAt = createdAt;
     }
 
-    //endregion
-
+    // endregion
 }

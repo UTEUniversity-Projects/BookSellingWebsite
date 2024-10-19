@@ -1,37 +1,58 @@
 package com.biblio.entity;
 
+import javax.persistence.*;
 import java.io.Serializable;
 
+@Entity
+@Table(name = "address")
 public class Address implements Serializable {
 
+    private static final long serialVersionUID = 1L;
+
     // region Attributes
-
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
     private Long id;
-    private String nation;
-    private String province;
-    private String district;
-    private String village;
-    private String detail;
 
-    // endregion Attributes
+    @Column(name = "nation", nullable = false, columnDefinition = "nvarchar(255)")
+    private String nation;
+
+    @Column(name = "province", nullable = false, columnDefinition = "nvarchar(255)")
+    private String province;
+
+    @Column(name = "district", nullable = false, columnDefinition = "nvarchar(255)")
+    private String district;
+
+    @Column(name = "village", nullable = false, columnDefinition = "nvarchar(255)")
+    private String village;
+
+    @Column(name = "detail", nullable = false, columnDefinition = "nvarchar(255)")
+    private String detail;
+    // endregion
+
+    // region Relationships
+    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JoinColumn(name = "customer_id", nullable = false, referencedColumnName = "id")
+    private Customer customer;
+
+    @OneToOne(mappedBy = "address")
+    private Order order;
+    // endregion
 
     // region Constructors
-    public Address() {
-    }
+    public Address() {}
 
-    public Address(Long id, String nation, String province, String district, String village, String detail) {
-        this.id = id;
+    public Address(String nation, String province, String district, String village, String detail) {
         this.nation = nation;
         this.province = province;
         this.district = district;
         this.village = village;
         this.detail = detail;
     }
-
     // endregion
 
     // region Getters & Setters
-
     public Long getId() {
         return id;
     }
@@ -80,5 +101,12 @@ public class Address implements Serializable {
         this.detail = detail;
     }
 
-    // endregion Getters & Setters
+    public Order getOrder() {
+        return order;
+    }
+
+    public void setOrder(Order order) {
+        this.order = order;
+    }
+    // endregion
 }

@@ -1,13 +1,52 @@
 package com.biblio.entity;
 
+import javax.persistence.*;
 import java.io.Serializable;
 
+@Entity
+@Table(name = "media_file")
 public class MediaFile implements Serializable {
+
     //region Attributes
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    @Column(name = "file_name", nullable = false, columnDefinition = "nvarchar(255)")
     private String fileName;
+
+    @Column(name = "stored_code", nullable = false, columnDefinition = "nvarchar(255)")
     private String storedCode;
     //endregion
+
+    //endregion
+
+    // region Relationships
+
+    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JoinColumn(name = "book_metadata_id")
+    private BookMetadata bookMetadata;
+
+    @OneToOne(mappedBy = "avatar")
+    private Publisher publisher;
+
+    @OneToOne(mappedBy = "avatar")
+    private Author author;
+
+    @OneToOne(mappedBy = "avatar")
+    private Translator translator;
+
+    @OneToOne(mappedBy = "avatar")
+    private Customer customer;
+
+    @OneToOne(mappedBy = "avatar")
+    private Staff staff;
+
+    @OneToOne(mappedBy = "avatar")
+    private Owner owner;
+
+    // endregion
 
     //region Constructors
     public MediaFile() {
@@ -19,6 +58,8 @@ public class MediaFile implements Serializable {
         this.storedCode = storedCode;
     }
     //endregion
+
+    //region Getters & Setters
 
     //region Getters & Setters
     public Long getId() {
@@ -44,5 +85,6 @@ public class MediaFile implements Serializable {
     public void setStoredCode(String storedCode) {
         this.storedCode = storedCode;
     }
+
     //endregion
 }
