@@ -42,6 +42,7 @@ public class Review implements Serializable {
 
     //region Constructors
 
+    //region Constructors
     public Review() {
     }
 
@@ -57,6 +58,7 @@ public class Review implements Serializable {
 
     // region Getters & Setters
 
+    //region Getters & Setters
     public Long getId() {
         return id;
     }

@@ -21,6 +21,7 @@ public class SubCategory extends Classification implements Serializable {
 
     // region Constructors
 
+    //region Constructors
     public SubCategory() {
         super();
     }
@@ -28,6 +29,7 @@ public class SubCategory extends Classification implements Serializable {
     public SubCategory(Long id, String code, String name) {
         super(id, code, name);
     }
+    //endregion
 
     // endregion
 

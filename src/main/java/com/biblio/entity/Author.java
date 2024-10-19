@@ -9,6 +9,8 @@ import java.util.Set;
 @Table(name = "author")
 public class Author extends ContributorProfile implements Serializable {
 
+    // region Constructors
+
     // region Relationships
 
     @OneToMany(mappedBy = "author")
@@ -29,6 +31,8 @@ public class Author extends ContributorProfile implements Serializable {
     public Author(Long id, String name, String introduction, Timestamp joinAt) {
         super(id, name, introduction, joinAt);
     }
+
+    // endregion Constructors
 
     // endregion Constructors
 }

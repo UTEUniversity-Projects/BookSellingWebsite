@@ -55,6 +55,7 @@ public class Order implements Serializable {
 
     // region Constructors
 
+    //region Constructors
     public Order() {
     }
 
@@ -68,6 +69,7 @@ public class Order implements Serializable {
 
     // region Getters & Setters
 
+    //region Getters & Setters
     public Long getId() {
         return id;
     }

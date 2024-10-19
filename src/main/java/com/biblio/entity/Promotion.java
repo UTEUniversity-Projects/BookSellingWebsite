@@ -63,6 +63,7 @@ public class Promotion implements Serializable {
 
     // region Constructors
 
+    //region Constructors
     public Promotion() {
     }
 
@@ -85,6 +86,7 @@ public class Promotion implements Serializable {
 
     // region Getters & Setters
 
+    //region Getters & Setters
     public Long getId() {
         return id;
     }

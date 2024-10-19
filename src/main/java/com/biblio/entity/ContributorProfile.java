@@ -39,6 +39,7 @@ public abstract class ContributorProfile implements Serializable {
 
     // region Getters & Setters
 
+    //region Getters & Setters
     public Long getId() {
         return id;
     }

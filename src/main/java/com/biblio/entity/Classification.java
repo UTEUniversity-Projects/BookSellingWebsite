@@ -17,6 +17,7 @@ public abstract class Classification implements Serializable {
 
     @Column(name = "name", nullable = false, columnDefinition = "nvarchar(255)")
     private String name;
+    //endregion
 
     //endregion
 
@@ -32,6 +33,7 @@ public abstract class Classification implements Serializable {
 
     //region Getters & Setters
 
+    //region Getters & Setters
     public Long getId() {
         return id;
     }

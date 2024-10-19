@@ -51,6 +51,7 @@ public class Customer extends User implements Serializable {
     public Customer(String membership) {
         this.membership = membership;
     }
+    //endregion
 
     public Customer(Long id, String username, String fullName, String password, String emailAddress, String dateOfBirth, String gender, String phoneNumber, Timestamp joinAt, String membership) {
         super(id, username, fullName, password, emailAddress, dateOfBirth, gender, phoneNumber, joinAt);

@@ -29,4 +29,5 @@ public class Category extends Classification implements Serializable {
         super(id, code, name);
     }
     //endregion
+    //endregion
 }

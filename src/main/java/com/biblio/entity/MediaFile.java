@@ -18,6 +18,7 @@ public class MediaFile implements Serializable {
 
     @Column(name = "stored_code", nullable = false, columnDefinition = "nvarchar(255)")
     private String storedCode;
+    //endregion
 
     //endregion
 
@@ -60,6 +61,7 @@ public class MediaFile implements Serializable {
 
     //region Getters & Setters
 
+    //region Getters & Setters
     public Long getId() {
         return id;
     }

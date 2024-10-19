@@ -64,6 +64,7 @@ public class BookMetadata implements Serializable {
 
     // region Getters & Setters
 
+    // region Getters & Setters
     public Long getId() {
         return id;
     }

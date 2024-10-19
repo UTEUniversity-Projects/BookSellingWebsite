@@ -27,6 +27,7 @@ public class Cart implements Serializable {
     // endregion
 
     //region Constructors
+    //region Constructors
     public Cart() {
     }
 
@@ -38,6 +39,7 @@ public class Cart implements Serializable {
 
     //region Getters & Setters
 
+    //region Getters & Setters
     public Long getId() {
         return id;
     }
