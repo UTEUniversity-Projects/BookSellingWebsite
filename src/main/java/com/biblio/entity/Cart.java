@@ -3,6 +3,7 @@ package com.biblio.entity;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 @Table(name = "cart")
@@ -13,6 +14,17 @@ public class Cart implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     //endregion
+
+    // region Relationships
+
+    @OneToMany(mappedBy = "cart")
+    private Set<OrderItem> orderItems;
+
+    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JoinColumn(name = "customer_id")
+    private Customer customer;
+
+    // endregion
 
     //region Constructors
     public Cart() {

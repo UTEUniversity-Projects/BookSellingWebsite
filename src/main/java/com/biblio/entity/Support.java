@@ -8,7 +8,7 @@ import java.sql.Timestamp;
 @Table(name = "support")
 public class Support implements Serializable {
 
-    //region Attributes
+    // region Attributes
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -34,6 +34,18 @@ public class Support implements Serializable {
 
     // endregion
 
+    // region Relationships
+
+    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JoinColumn(name = "staff_id", nullable = false, referencedColumnName = "id")
+    private Staff staff;
+
+    @ManyToOne(cascade = CascadeType.ALL, fetch =  FetchType.LAZY)
+    @JoinColumn(name = "customer_id", nullable = false, referencedColumnName = "id")
+    private Customer customer;
+
+    // endregion
+
     // region Constructors
 
     public Support() {
@@ -48,6 +60,8 @@ public class Support implements Serializable {
         this.status = status;
         this.createdAt = createdAt;
     }
+
+    // endregion
 
     // region Getters & Setters
 

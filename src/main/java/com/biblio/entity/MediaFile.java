@@ -21,6 +21,32 @@ public class MediaFile implements Serializable {
 
     //endregion
 
+    // region Relationships
+
+    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JoinColumn(name = "book_metadata_id")
+    private BookMetadata bookMetadata;
+
+    @OneToOne(mappedBy = "avatar")
+    private Publisher publisher;
+
+    @OneToOne(mappedBy = "avatar")
+    private Author author;
+
+    @OneToOne(mappedBy = "avatar")
+    private Translator translator;
+
+    @OneToOne(mappedBy = "avatar")
+    private Customer customer;
+
+    @OneToOne(mappedBy = "avatar")
+    private Staff staff;
+
+    @OneToOne(mappedBy = "avatar")
+    private Owner owner;
+
+    // endregion
+
     //region Constructors
     public MediaFile() {
     }

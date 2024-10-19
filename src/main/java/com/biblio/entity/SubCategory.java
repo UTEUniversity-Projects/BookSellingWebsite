@@ -1,18 +1,25 @@
 package com.biblio.entity;
 
-import javax.persistence.Entity;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.io.Serializable;
+import java.util.Set;
 
 @Entity
 @Table(name = "sub_category")
 public class SubCategory extends Classification implements Serializable {
 
-    //region Attributes
+    // region Relationships
 
-    //endregion
+    @OneToMany(mappedBy = "subCategory")
+    private Set<Book> books;
 
-    //region Constructors
+    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JoinColumn(name = "category_id", nullable = false, referencedColumnName = "id")
+    private Category category;
+
+    // endregion
+
+    // region Constructors
 
     public SubCategory() {
         super();
@@ -22,9 +29,6 @@ public class SubCategory extends Classification implements Serializable {
         super(id, code, name);
     }
 
-    //endregion
+    // endregion
 
-    //region Getters & Setters
-
-    //endregion
 }

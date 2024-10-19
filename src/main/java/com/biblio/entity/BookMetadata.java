@@ -3,6 +3,7 @@ package com.biblio.entity;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.sql.Timestamp;
+import java.util.Set;
 
 @Entity
 @Table(name = "book_metadata")
@@ -14,7 +15,7 @@ public class BookMetadata implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "code_ISBN10", nullable = false, columnDefinition = "datetime")
+    @Column(name = "created_at", nullable = false, columnDefinition = "datetime")
     private Timestamp createdAt;
 
     @Column(name = "opening_date", nullable = false, columnDefinition = "datetime")
@@ -27,6 +28,24 @@ public class BookMetadata implements Serializable {
     private String status;
 
     // endregion Attributes
+
+    // region Relationships
+
+    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JoinTable(
+            name = "book_metadata_tag",
+            joinColumns = @JoinColumn(name = "book_metadata_id", referencedColumnName = "id", nullable = false),
+            inverseJoinColumns = @JoinColumn(name = "tag_id", referencedColumnName = "id", nullable = false)
+    )
+    private Set<Tag> tags;
+
+    @OneToOne(mappedBy = "metadata")
+    private Book book;
+
+    @OneToMany(mappedBy = "bookMetadata")
+    private Set<MediaFile> mediaFiles;
+
+    // endregion
 
     // region Constructors
 
@@ -83,6 +102,14 @@ public class BookMetadata implements Serializable {
 
     public void setStatus(String status) {
         this.status = status;
+    }
+
+    public Set<Tag> getTags() {
+        return tags;
+    }
+
+    public void setTags(Set<Tag> tags) {
+        this.tags = tags;
     }
 
     // endregion Getters & Setters

@@ -28,6 +28,18 @@ public class Review implements Serializable {
 
     // endregion
 
+    // region Relationships
+
+    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JoinColumn(name = "book_id", nullable = false, referencedColumnName = "id")
+    private Book book;
+
+    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JoinColumn(name = "customer_id", nullable = false, referencedColumnName = "id")
+    private Customer customer;
+
+    // endregion
+
     //region Constructors
 
     public Review() {

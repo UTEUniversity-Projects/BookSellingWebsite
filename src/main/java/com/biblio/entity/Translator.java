@@ -1,14 +1,24 @@
 package com.biblio.entity;
 
-import javax.persistence.Entity;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.io.Serializable;
 import java.sql.Timestamp;
-import java.util.Date;
+import java.util.Set;
 
 @Entity
 @Table(name = "translator")
 public class Translator extends ContributorProfile implements Serializable {
+
+    // region Relationships
+
+    @OneToMany(mappedBy = "translator")
+    private Set<Book> books;
+
+    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JoinColumn(name = "avatar_id", nullable = false, referencedColumnName = "id")
+    private MediaFile avatar;
+
+    // endregion
 
     // region Constructors
 

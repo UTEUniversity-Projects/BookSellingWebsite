@@ -4,6 +4,7 @@ package com.biblio.entity;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.sql.Timestamp;
+import java.util.Set;
 
 @Entity
 @Table(name = "book")
@@ -61,6 +62,40 @@ public class Book implements Serializable {
     private String recommendedAge;
 
     // endregion Attributes
+
+    // region Relationships
+
+    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JoinColumn
+    private BookMetadata metadata;
+
+    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JoinColumn(name = "category_id", nullable = false, referencedColumnName = "id")
+    private Category category;
+
+    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JoinColumn(name = "sub_category_id", nullable = false, referencedColumnName = "id")
+    private SubCategory subCategory;
+
+    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JoinColumn(name = "publisher_id", nullable = false, referencedColumnName = "id")
+    private Publisher publisher;
+
+    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JoinColumn(name = "author_id", nullable = false, referencedColumnName = "id")
+    private Author author;
+
+    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JoinColumn(name = "translator_id", nullable = false, referencedColumnName = "id")
+    private Translator translator;
+
+    @OneToMany(mappedBy = "book")
+    private Set<Review> reviews;
+
+    @OneToMany(mappedBy = "book")
+    private Set<OrderItem> orderItems;
+
+    // endregion
 
     // region Constructors
 

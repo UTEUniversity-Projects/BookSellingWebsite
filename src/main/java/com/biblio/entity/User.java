@@ -3,6 +3,7 @@ package com.biblio.entity;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.sql.Timestamp;
+import java.util.Set;
 
 @MappedSuperclass
 public class User implements Serializable {

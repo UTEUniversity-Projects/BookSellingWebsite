@@ -26,12 +26,12 @@ public class JpaConfig {
         map.put(JPA_JDBC_USER, Constant.USERNAME);
         map.put(JPA_JDBC_PASSWORD, Constant.PASSWORD);
         map.put(DIALECT, org.hibernate.dialect.MySQL8Dialect.class);
-        map.put(HBM2DDL_AUTO, "update");
+        map.put(HBM2DDL_AUTO, "create");
         map.put(SHOW_SQL, "true");
         map.put(FORMAT_SQL, "true");
         map.put(QUERY_STARTUP_CHECKING, "false");
         map.put(GENERATE_STATISTICS, "false");
-        map.put(USE_REFLECTION_OPTIMIZER, "true");
+        map.put(USE_REFLECTION_OPTIMIZER, "false");
         map.put(USE_SECOND_LEVEL_CACHE, "false");
         map.put(USE_QUERY_CACHE, "false");
         map.put(USE_STRUCTURED_CACHE, "false");

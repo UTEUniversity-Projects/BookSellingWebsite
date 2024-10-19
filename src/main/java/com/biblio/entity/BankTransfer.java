@@ -1,8 +1,6 @@
 package com.biblio.entity;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.io.Serializable;
 import java.sql.Timestamp;
 
@@ -22,6 +20,10 @@ public class BankTransfer extends Payment implements Serializable {
     private String transactionId;
 
     //endregion
+
+    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JoinColumn(name = "order_id", nullable = false, referencedColumnName = "id")
+    private Order order;
 
     //region Constructors
 

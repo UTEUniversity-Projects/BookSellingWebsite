@@ -3,9 +3,7 @@ package com.biblio.entity;
 import com.biblio.enumeration.EPaymentCurrency;
 import com.biblio.enumeration.EPaymentStatus;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.io.Serializable;
 import java.sql.Timestamp;
 import java.util.Date;
@@ -57,7 +55,55 @@ public class CreditCard extends Payment implements Serializable {
 
     // endregion
 
+    // region Relationships
+
+    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JoinColumn(name = "order_id", nullable = false, referencedColumnName = "id")
+    private Order order;
+
+    // endregion
+
     // region Getters & Setters
+
+    public String getCardNumber() {
+        return cardNumber;
+    }
+
+    public void setCardNumber(String cardNumber) {
+        this.cardNumber = cardNumber;
+    }
+
+    public String getCardHolderName() {
+        return cardHolderName;
+    }
+
+    public void setCardHolderName(String cardHolderName) {
+        this.cardHolderName = cardHolderName;
+    }
+
+    public Timestamp getExpirationDate() {
+        return expirationDate;
+    }
+
+    public void setExpirationDate(Timestamp expirationDate) {
+        this.expirationDate = expirationDate;
+    }
+
+    public String getCvv() {
+        return cvv;
+    }
+
+    public void setCvv(String cvv) {
+        this.cvv = cvv;
+    }
+
+    public String getBillingAddress() {
+        return billingAddress;
+    }
+
+    public void setBillingAddress(String billingAddress) {
+        this.billingAddress = billingAddress;
+    }
 
     // endregion
 

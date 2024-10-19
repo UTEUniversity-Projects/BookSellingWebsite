@@ -3,7 +3,7 @@ package com.biblio.entity;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.sql.Timestamp;
-import java.util.List;
+import java.util.Set;
 
 @Entity
 @Table(name = "customer")
@@ -19,7 +19,26 @@ public class Customer extends User implements Serializable {
     // region Relationships
 
     @OneToMany(mappedBy = "customer")
-    private List<Address> addresses;
+    private Set<Address> addresses;
+
+    @OneToMany(mappedBy = "customer")
+    private Set<Order> orders;
+
+    @OneToOne(mappedBy = "customer")
+    private Cart cart;
+
+    @OneToMany(mappedBy = "customer")
+    private Set<Support> supports;
+
+    @ManyToMany(mappedBy = "customers")
+    private Set<Notification> notifications;
+
+    @OneToMany(mappedBy = "customer")
+    private Set<Review> reviews;
+
+    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JoinColumn(name = "media_file_id")
+    private MediaFile avatar;
 
     // endregion
 
@@ -50,11 +69,11 @@ public class Customer extends User implements Serializable {
         this.membership = membership;
     }
 
-    public List<Address> getAddresses() {
+    public Set<Address> getAddresses() {
         return addresses;
     }
 
-    public void setAddresses(List<Address> addresses) {
+    public void setAddresses(Set<Address> addresses) {
         this.addresses = addresses;
     }
 

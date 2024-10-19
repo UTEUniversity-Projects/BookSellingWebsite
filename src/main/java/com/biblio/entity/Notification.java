@@ -1,13 +1,9 @@
 package com.biblio.entity;
 
-import com.biblio.enumeration.ENotificationStatus;
-import com.biblio.enumeration.ENotificationType;
-
 import javax.persistence.*;
 import java.io.Serializable;
 import java.sql.Timestamp;
-import java.util.Date;
-import java.util.List;
+import java.util.Set;
 
 @Entity
 @Table(name = "notification")
@@ -35,19 +31,38 @@ public class Notification implements Serializable {
     private String hyperlink;
 
     @Column(name = "type", nullable = false, columnDefinition = "nvarchar(255)")
-    private ENotificationType type;
+    private String type;
 
     @Column(name = "status", nullable = false, columnDefinition = "nvarchar(255)")
     private String status;
 
     //endregion
 
+    // region Relationships
+
+    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JoinTable(name = "notification_owner", joinColumns = @JoinColumn(name = "notification_id", nullable = false, referencedColumnName = "id"),
+    inverseJoinColumns = @JoinColumn(name = "owner_id", nullable = false, referencedColumnName = "id"))
+    private Set<Owner> owners;
+
+    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JoinTable(name = "notification_staff", joinColumns = @JoinColumn(name = "notification_id", nullable = false, referencedColumnName = "id"),
+            inverseJoinColumns = @JoinColumn(name = "staff_id", nullable = false, referencedColumnName = "id"))
+    private Set<Staff> staffs;
+
+    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JoinTable(name = "notification_customer", joinColumns = @JoinColumn(name = "notification_id", nullable = false, referencedColumnName = "id"),
+            inverseJoinColumns = @JoinColumn(name = "customer_id", nullable = false, referencedColumnName = "id"))
+    private Set<Customer> customers;
+
+    // endregion
+
     // region Constructors
 
     public Notification() {
     }
 
-    public Notification(Long id, Timestamp createdAt, Timestamp sentTime, String title, String content, String hyperlink, ENotificationType type, String status) {
+    public Notification(Long id, Timestamp createdAt, Timestamp sentTime, String title, String content, String hyperlink, String type, String status) {
         this.id = id;
         this.createdAt = createdAt;
         this.sentTime = sentTime;
@@ -110,11 +125,11 @@ public class Notification implements Serializable {
         this.hyperlink = hyperlink;
     }
 
-    public ENotificationType getType() {
+    public String getType() {
         return type;
     }
 
-    public void setType(ENotificationType type) {
+    public void setType(String type) {
         this.type = type;
     }
 

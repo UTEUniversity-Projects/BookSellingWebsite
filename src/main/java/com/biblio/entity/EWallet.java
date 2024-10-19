@@ -4,9 +4,7 @@ import com.biblio.enumeration.EPaymentCurrency;
 import com.biblio.enumeration.EPaymentStatus;
 import com.biblio.enumeration.EWalletProvider;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.io.Serializable;
 import java.sql.Timestamp;
 import java.util.Date;
@@ -14,6 +12,7 @@ import java.util.Date;
 @Entity
 @Table(name = "ewallet")
 public class EWallet extends Payment implements Serializable {
+
     //region Attributes
 
     @Column(name = "wallet_id", nullable = false, columnDefinition = "nvarchar(255)")
@@ -47,7 +46,39 @@ public class EWallet extends Payment implements Serializable {
 
     //endregion
 
+    // region Relationships
+
+    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JoinColumn(name = "order_id", nullable = false, referencedColumnName = "id")
+    private Order order;
+
+    // endregion
+
     //region Getters & Setters
+
+    public String getWalletId() {
+        return walletId;
+    }
+
+    public void setWalletId(String walletId) {
+        this.walletId = walletId;
+    }
+
+    public String getProvider() {
+        return provider;
+    }
+
+    public void setProvider(String provider) {
+        this.provider = provider;
+    }
+
+    public String getTransactionId() {
+        return transactionId;
+    }
+
+    public void setTransactionId(String transactionId) {
+        this.transactionId = transactionId;
+    }
 
     //endregion
 

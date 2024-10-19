@@ -18,6 +18,22 @@ public class OrderItem implements Serializable {
 
     // endregion
 
+    // region Relationships
+
+    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JoinColumn(name = "book_id", nullable = false, referencedColumnName = "id")
+    private Book book;
+
+    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JoinColumn(name = "order_id", nullable = false, referencedColumnName = "id")
+    private Order order;
+
+    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JoinColumn(name = "cart_id", nullable = false, referencedColumnName = "id")
+    private Cart cart;
+
+    // region
+
     // region Constructors
 
     public OrderItem() {

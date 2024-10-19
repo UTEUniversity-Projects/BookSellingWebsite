@@ -1,5 +1,7 @@
 package com.biblio.entity;
 
+import org.hibernate.annotations.Fetch;
+
 import javax.persistence.*;
 import java.io.Serializable;
 
@@ -18,6 +20,14 @@ public class PromotionTarget implements Serializable {
 
     @Column(name = "type", nullable = false, columnDefinition = "nvarchar(255)")
     private String type;
+
+    // endregion
+
+    // region Relationships
+
+    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JoinColumn(name = "promotion_id", nullable = false, referencedColumnName = "id")
+    private Promotion promotion;
 
     // endregion
 

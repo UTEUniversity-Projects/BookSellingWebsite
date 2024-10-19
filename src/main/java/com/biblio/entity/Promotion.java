@@ -3,6 +3,7 @@ package com.biblio.entity;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.sql.Timestamp;
+import java.util.Set;
 
 @Entity
 @Table(name = "promotion")
@@ -49,6 +50,17 @@ public class Promotion implements Serializable {
 
     // endregion
 
+    // region Relationships
+
+    @OneToMany(mappedBy = "promotion")
+    private Set<PromotionTarget> promotionTargets;
+
+    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JoinColumn(name = "order_id", nullable = false, referencedColumnName = "id")
+    private Order order;
+
+    // endregion
+
     // region Constructors
 
     public Promotion() {
@@ -68,6 +80,8 @@ public class Promotion implements Serializable {
         this.type = type;
         this.status = status;
     }
+
+    // endregion
 
     // region Getters & Setters
 

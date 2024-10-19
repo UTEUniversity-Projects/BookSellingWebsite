@@ -6,6 +6,7 @@ import java.sql.Timestamp;
 import java.util.Date;
 
 @MappedSuperclass
+@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
 public abstract class ContributorProfile implements Serializable {
 
     // region Attributes
