@@ -100,4 +100,33 @@ public class GenericDAOImpl<T, ID> implements IGenericDAO<T, ID> {
             em.close();
         }
     }
+
+    @Override
+    public List<T> findAllPaginated(int pageNumber, int pageSize) {
+        EntityManager em = JpaConfig.getEntityManager();
+        CriteriaQuery<T> criteriaQuery = em.getCriteriaBuilder().createQuery(entityClass);
+        criteriaQuery.select(criteriaQuery.from(entityClass));
+        TypedQuery<T> query = em.createQuery(criteriaQuery);
+        query.setFirstResult((pageNumber - 1) * pageSize);
+        query.setMaxResults(pageSize);
+        List<T> results = query.getResultList();
+        em.close();
+        return results;
+    }
+
+    @Override
+    public List<T> findByJPQLPaginated(String jpql, int pageNumber, int pageSize, Object... params) {
+        EntityManager em = JpaConfig.getEntityManager();
+        try {
+            TypedQuery<T> query = em.createQuery(jpql, entityClass);
+            for (int i = 0; i < params.length; i++) {
+                query.setParameter(i + 1, params[i]);
+            }
+            query.setFirstResult((pageNumber - 1) * pageSize);
+            query.setMaxResults(pageSize);
+            return query.getResultList();
+        } finally {
+            em.close();
+        }
+    }
 }

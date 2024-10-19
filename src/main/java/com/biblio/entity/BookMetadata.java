@@ -1,41 +1,69 @@
 package com.biblio.entity;
 
-import com.biblio.enumeration.EBookStatus;
-
+import javax.persistence.*;
 import java.io.Serializable;
-import java.time.DateTimeException;
-import java.util.List;
+import java.sql.Timestamp;
+import java.util.Set;
 
+@Entity
+@Table(name = "book_metadata")
 public class BookMetadata implements Serializable {
 
     // region Attributes
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private DateTimeException createdAt;
-    private DateTimeException openingDay;
+
+    @Column(name = "created_at", nullable = false, columnDefinition = "datetime")
+    private Timestamp createdAt;
+
+    @Column(name = "opening_date", nullable = false, columnDefinition = "datetime")
+    private Timestamp openingDate;
+
+    @Column(name = "import_price", nullable = false, columnDefinition = "double")
     private double importPrice;
-    private EBookStatus status;
-    private List<MediaFile> illustration;
-    private List<Tag> tags;
+
+    @Column(name = "status", nullable = false, columnDefinition = "nvarchar(255)")
+    private String status;
 
     // endregion Attributes
 
-    // region Constructors
-    public BookMetadata() {}
+    // region Relationships
 
-    public BookMetadata(Long id, DateTimeException createdAt, DateTimeException openingDay, double importPrice,
-                        EBookStatus status, List<MediaFile> illustration, List<Tag> tags) {
+    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JoinTable(
+            name = "book_metadata_tag",
+            joinColumns = @JoinColumn(name = "book_metadata_id", referencedColumnName = "id", nullable = false),
+            inverseJoinColumns = @JoinColumn(name = "tag_id", referencedColumnName = "id", nullable = false)
+    )
+    private Set<Tag> tags;
+
+    @OneToOne(mappedBy = "metadata")
+    private Book book;
+
+    @OneToMany(mappedBy = "bookMetadata")
+    private Set<MediaFile> mediaFiles;
+
+    // endregion
+
+    // region Constructors
+
+    public BookMetadata() {
+    }
+
+    public BookMetadata(Long id, Timestamp createdAt, Timestamp openingDate, double importPrice, String status) {
         this.id = id;
         this.createdAt = createdAt;
-        this.openingDay = openingDay;
+        this.openingDate = openingDate;
         this.importPrice = importPrice;
         this.status = status;
-        this.illustration = illustration;
-        this.tags = tags;
     }
+
     // endregion Constructors
 
     // region Getters & Setters
+
     public Long getId() {
         return id;
     }
@@ -44,20 +72,20 @@ public class BookMetadata implements Serializable {
         this.id = id;
     }
 
-    public DateTimeException getCreatedAt() {
+    public Timestamp getCreatedAt() {
         return createdAt;
     }
 
-    public void setCreatedAt(DateTimeException createdAt) {
+    public void setCreatedAt(Timestamp createdAt) {
         this.createdAt = createdAt;
     }
 
-    public DateTimeException getOpeningDay() {
-        return openingDay;
+    public Timestamp getOpeningDate() {
+        return openingDate;
     }
 
-    public void setOpeningDay(DateTimeException openingDay) {
-        this.openingDay = openingDay;
+    public void setOpeningDate(Timestamp openingDate) {
+        this.openingDate = openingDate;
     }
 
     public double getImportPrice() {
@@ -68,28 +96,21 @@ public class BookMetadata implements Serializable {
         this.importPrice = importPrice;
     }
 
-    public EBookStatus getStatus() {
+    public String getStatus() {
         return status;
     }
 
-    public void setStatus(EBookStatus status) {
+    public void setStatus(String status) {
         this.status = status;
     }
 
-    public List<MediaFile> getIllustration() {
-        return illustration;
-    }
-
-    public void setIllustration(List<MediaFile> illustration) {
-        this.illustration = illustration;
-    }
-
-    public List<Tag> getTags() {
+    public Set<Tag> getTags() {
         return tags;
     }
 
-    public void setTags(List<Tag> tags) {
+    public void setTags(Set<Tag> tags) {
         this.tags = tags;
     }
+
     // endregion Getters & Setters
 }

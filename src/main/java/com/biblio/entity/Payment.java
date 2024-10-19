@@ -1,35 +1,48 @@
 package com.biblio.entity;
 
-import com.biblio.enumeration.EPaymentCurrency;
-import com.biblio.enumeration.EPaymentStatus;
-
+import javax.persistence.*;
 import java.io.Serializable;
-import java.util.Date;
+import java.sql.Timestamp;
 
+@MappedSuperclass
 public abstract class Payment implements Serializable {
-    //region Attributes
+
+    // region Attributes
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private Date createdAt;
+
+    @Column(name = "created_at", nullable = false, columnDefinition = "datetime")
+    private Timestamp createdAt;
+
+    @Column(name = "amount", nullable = false)
     private double amount;
-    private EPaymentStatus status;
-    private EPaymentCurrency currency;
-    //endregion
 
-    //region Constructors
+    @Column(name = "status", nullable = false, columnDefinition = "nvarchar(255)")
+    private String status;
 
-    public Payment() {}
-  
-    public Payment(Long id, Date createdAt, double amount, EPaymentStatus status, EPaymentCurrency currency) {
+    @Column(name = "currency", nullable = false, columnDefinition = "nvarchar(255)")
+    private String currency;
+
+    // endregion
+
+    // region Constructors
+
+    public Payment() {
+    }
+
+    public Payment(Long id, Timestamp createdAt, double amount, String status, String currency) {
         this.id = id;
         this.createdAt = createdAt;
-        this.status = status;
         this.amount = amount;
+        this.status = status;
         this.currency = currency;
     }
 
-    //endregion
+    // endregion
 
-    //region Getters & Setters
+    // region Getters & Setters
 
     public Long getId() {
         return id;
@@ -39,11 +52,11 @@ public abstract class Payment implements Serializable {
         this.id = id;
     }
 
-    public Date getCreatedAt() {
+    public Timestamp getCreatedAt() {
         return createdAt;
     }
 
-    public void setCreatedAt(Date createdAt) {
+    public void setCreatedAt(Timestamp createdAt) {
         this.createdAt = createdAt;
     }
 
@@ -55,25 +68,27 @@ public abstract class Payment implements Serializable {
         this.amount = amount;
     }
 
-    public EPaymentStatus getStatus() {
+    public String getStatus() {
         return status;
     }
 
-    public void setStatus(EPaymentStatus status) {
+    public void setStatus(String status) {
         this.status = status;
     }
 
-    public EPaymentCurrency getCurrency() {
+    public String getCurrency() {
         return currency;
     }
 
-    public void setCurrency(EPaymentCurrency currency) {
+    public void setCurrency(String currency) {
         this.currency = currency;
     }
 
-    //endregion
+    // endregion
 
-    //region Abstract Methods
+    // region Abstract Methods
+
     public abstract void processPayment();
-    //endregion
+
+    // endregion
 }

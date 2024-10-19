@@ -1,32 +1,44 @@
 package com.biblio.entity;
 
+import javax.persistence.*;
 import java.io.Serializable;
+import java.sql.Timestamp;
 import java.util.Date;
 
+@MappedSuperclass
+@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
 public abstract class ContributorProfile implements Serializable {
 
-    //region Attributes
+    // region Attributes
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    @Column(name = "name", nullable = false, columnDefinition = "nvarchar(255)")
     private String name;
-    private MediaFile avatar;
+
+    @Column(name = "introduction", nullable = false, columnDefinition = "nvarchar(255)")
     private String introduction;
-    private Date joinAt;
-    //endregion
 
-    //region Constructors
-    public ContributorProfile() {
-    }
+    @Column(name = "join_at", nullable = false, columnDefinition = "datetime")
+    private Timestamp joinAt;
+    // endregion
 
-    public ContributorProfile(Long id, String name, MediaFile avatar, Date joinAt, String introduction) {
+    // region Constructors
+
+    public ContributorProfile() {}
+
+    public ContributorProfile(Long id, String name, String introduction, Timestamp joinAt) {
         this.id = id;
         this.name = name;
-        this.avatar = avatar;
-        this.joinAt = joinAt;
         this.introduction = introduction;
+        this.joinAt = joinAt;
     }
-    //endregion
 
-    //region Getters & Setters
+    // endregion
+
+    // region Getters & Setters
+
     public Long getId() {
         return id;
     }
@@ -43,14 +55,6 @@ public abstract class ContributorProfile implements Serializable {
         this.name = name;
     }
 
-    public MediaFile getAvatar() {
-        return avatar;
-    }
-
-    public void setAvatar(MediaFile avatar) {
-        this.avatar = avatar;
-    }
-
     public String getIntroduction() {
         return introduction;
     }
@@ -59,12 +63,13 @@ public abstract class ContributorProfile implements Serializable {
         this.introduction = introduction;
     }
 
-    public Date getJoinAt() {
+    public Timestamp getJoinAt() {
         return joinAt;
     }
 
-    public void setJoinAt(Date joinAt) {
+    public void setJoinAt(Timestamp joinAt) {
         this.joinAt = joinAt;
     }
-    //endregion
+
+    // endregion
 }

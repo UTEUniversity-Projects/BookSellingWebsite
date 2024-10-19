@@ -1,13 +1,23 @@
 package com.biblio.entity;
 
+import javax.persistence.*;
 import java.io.Serializable;
 
+@MappedSuperclass
 public abstract class Classification implements Serializable {
 
     //region Attributes
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    @Column(name = "code", nullable = false, columnDefinition = "nvarchar(255)")
     private String code;
+
+    @Column(name = "name", nullable = false, columnDefinition = "nvarchar(255)")
     private String name;
+
     //endregion
 
     //region Constructors
@@ -21,6 +31,7 @@ public abstract class Classification implements Serializable {
     //endregion
 
     //region Getters & Setters
+
     public Long getId() {
         return id;
     }
@@ -44,5 +55,6 @@ public abstract class Classification implements Serializable {
     public void setName(String name) {
         this.name = name;
     }
+
     //endregion
 }

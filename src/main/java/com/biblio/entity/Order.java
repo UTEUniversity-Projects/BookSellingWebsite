@@ -1,86 +1,79 @@
 package com.biblio.entity;
 
-import com.biblio.enumeration.EOrderStatus;
-
+import javax.persistence.*;
 import java.io.Serializable;
+import java.util.Set;
 
+@Entity
+@Table(name = "[order]")
 public class Order implements Serializable {
 
-    //region Attributes
-    private Long id;
-    private OrderItem[] books;
-    private Customer customer;
-    private Address shippingAddress;
-    private Promotion[] promotions;
-    private Payment payment;
-    private String note;
-    private EOrderStatus status;
-    //endregion
+    // region Attributes
 
-    //region Constructors
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
+    private Long id;
+
+    @Column(name = "note", nullable = false, columnDefinition = "nvarchar(255)")
+    private String note;
+
+    @Column(name = "status", nullable = false, columnDefinition = "nvarchar(255)")
+    private String status;
+
+    // endregion
+
+    // region Relationships
+
+    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JoinColumn(name = "address_id", nullable = false, referencedColumnName = "id")
+    private Address address;
+
+    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JoinColumn(name = "customer_id", nullable = false, referencedColumnName = "id")
+    private Customer customer;
+
+    @OneToOne(mappedBy = "order")
+    private BankTransfer bankTransfer;
+
+    @OneToOne(mappedBy = "order")
+    private Cash cash;
+
+    @OneToOne(mappedBy = "order")
+    private CreditCard creditCard;
+
+    @OneToOne(mappedBy = "order")
+    private EWallet ewallet;
+
+    @OneToMany(mappedBy = "order")
+    private Set<OrderItem> orderItems;
+
+    @OneToMany(mappedBy = "order")
+    private Set<Promotion> promotions;
+
+    // endregion
+
+    // region Constructors
+
     public Order() {
     }
-  
-    public Order(Long id, OrderItem[] books, Customer customer, Address shippingAddress, Promotion[] promotions, Payment payment, String note, EOrderStatus status) {
 
+    public Order(Long id, String note, String status) {
         this.id = id;
-        this.books = books;
-        this.customer = customer;
-        this.shippingAddress = shippingAddress;
-        this.promotions = promotions;
-        this.payment = payment;
         this.note = note;
         this.status = status;
     }
-    //endregion
 
-    //region Getters & Setters
+    // endregion
+
+    // region Getters & Setters
+
     public Long getId() {
         return id;
     }
 
     public void setId(Long id) {
         this.id = id;
-    }
-
-    public OrderItem[] getBooks() {
-        return books;
-    }
-
-    public void setBooks(OrderItem[] books) {
-        this.books = books;
-    }
-
-    public Customer getCustomer() {
-        return customer;
-    }
-
-    public void setCustomer(Customer customer) {
-        this.customer = customer;
-    }
-
-    public Address getShippingAddress() {
-        return shippingAddress;
-    }
-
-    public void setShippingAddress(Address shippingAddress) {
-        this.shippingAddress = shippingAddress;
-    }
-
-    public Promotion[] getPromotions() {
-        return promotions;
-    }
-
-    public void setPromotions(Promotion[] promotions) {
-        this.promotions = promotions;
-    }
-
-    public Payment getPayment() {
-        return payment;
-    }
-
-    public void setPayment(Payment payment) {
-        this.payment = payment;
     }
 
     public String getNote() {
@@ -91,12 +84,13 @@ public class Order implements Serializable {
         this.note = note;
     }
 
-    public EOrderStatus getStatus() {
+    public String getStatus() {
         return status;
     }
 
-    public void setStatus(EOrderStatus status) {
+    public void setStatus(String status) {
         this.status = status;
     }
-    //endregion
+
+    // endregion
 }

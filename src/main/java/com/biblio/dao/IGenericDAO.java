@@ -18,4 +18,7 @@ public interface IGenericDAO<T, ID> {
 
     T findById(Object id);
 
+    List<T> findAllPaginated(int pageNumber, int pageSize);
+
+    List<T> findByJPQLPaginated(String jpql, int pageNumber, int pageSize, Object... params);
 }

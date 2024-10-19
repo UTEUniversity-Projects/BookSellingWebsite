@@ -1,35 +1,51 @@
 package com.biblio.entity;
 
-import com.biblio.enumeration.EPaymentCurrency;
-import com.biblio.enumeration.EPaymentStatus;
-
+import javax.persistence.*;
 import java.io.Serializable;
-import java.util.Date;
+import java.sql.Timestamp;
 
+@Entity
+@Table(name = "cash")
 public class Cash extends Payment implements Serializable {
-    //region Attributes
+
+    // region Attributes
+
+    @Column(name = "cash_received", nullable = false)
     private double cashReceived;
+
+    @Column(name = "[change]", nullable = false)
     private double change;
-    //endregion
 
-    //region Constructors
+    // endregion
 
-    public Cash() {}
+    // region Constructors
+
+    public Cash() {
+        super();
+    }
 
     public Cash(double cashReceived, double change) {
         this.cashReceived = cashReceived;
         this.change = change;
     }
 
-    public Cash(Long id, Date createdAt, double amount, EPaymentStatus status, EPaymentCurrency currency, double cashReceived, double change) {
+    public Cash(Long id, Timestamp createdAt, double amount, String status, String currency, double cashReceived, double change) {
         super(id, createdAt, amount, status, currency);
         this.cashReceived = cashReceived;
         this.change = change;
     }
 
-    //endregion
+    // endregion
 
-    //region Getters & Setters
+    // region Relationships
+
+    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JoinColumn(name = "order_id", nullable = false, referencedColumnName = "id")
+    private Order order;
+
+    // endregion
+
+    // region Getters & Setters
 
     public double getCashReceived() {
         return cashReceived;
@@ -47,9 +63,9 @@ public class Cash extends Payment implements Serializable {
         this.change = change;
     }
 
-    //endregion
+    // endregion
 
-    // region Methods
+    //  region Methods
     @Override
     public void processPayment() {
 

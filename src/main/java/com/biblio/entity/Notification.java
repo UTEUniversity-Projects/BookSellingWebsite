@@ -1,41 +1,81 @@
 package com.biblio.entity;
 
-import com.biblio.enumeration.ENotificationStatus;
-import com.biblio.enumeration.ENotificationType;
-
+import javax.persistence.*;
 import java.io.Serializable;
-import java.util.Date;
-import java.util.List;
+import java.sql.Timestamp;
+import java.util.Set;
 
+@Entity
+@Table(name = "notification")
 public class Notification implements Serializable {
-    //region Attributes
+
+    // region Attributes
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private Date createdAt;
-    private Date sentTime;
-    private List<User> receiver;
+
+    @Column(name = "created_at", nullable = false, columnDefinition = "datetime")
+    private Timestamp createdAt;
+
+    @Column(name = "sent_time", nullable = false, columnDefinition = "datetime")
+    private Timestamp sentTime;
+
+    @Column(name = "title", nullable = false, columnDefinition = "nvarchar(255)")
     private String title;
+
+    @Column(name = "content", nullable = false, columnDefinition = "nvarchar(255)")
     private String content;
+
+    @Column(name = "hyper_link", nullable = false, columnDefinition = "nvarchar(255)")
     private String hyperlink;
-    private ENotificationType type;
-    private ENotificationStatus status;
+
+    @Column(name = "type", nullable = false, columnDefinition = "nvarchar(255)")
+    private String type;
+
+    @Column(name = "status", nullable = false, columnDefinition = "nvarchar(255)")
+    private String status;
+
     //endregion
 
-    //region Constructors
-  public Notification() {}
-    public Notification(Long id, Date createdAt, Date sentTime, List<User> receiver, String title, String content, String hyperlink, ENotificationType type, ENotificationStatus status) {
+    // region Relationships
+
+    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JoinTable(name = "notification_owner", joinColumns = @JoinColumn(name = "notification_id", nullable = false, referencedColumnName = "id"),
+    inverseJoinColumns = @JoinColumn(name = "owner_id", nullable = false, referencedColumnName = "id"))
+    private Set<Owner> owners;
+
+    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JoinTable(name = "notification_staff", joinColumns = @JoinColumn(name = "notification_id", nullable = false, referencedColumnName = "id"),
+            inverseJoinColumns = @JoinColumn(name = "staff_id", nullable = false, referencedColumnName = "id"))
+    private Set<Staff> staffs;
+
+    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JoinTable(name = "notification_customer", joinColumns = @JoinColumn(name = "notification_id", nullable = false, referencedColumnName = "id"),
+            inverseJoinColumns = @JoinColumn(name = "customer_id", nullable = false, referencedColumnName = "id"))
+    private Set<Customer> customers;
+
+    // endregion
+
+    // region Constructors
+
+    public Notification() {
+    }
+
+    public Notification(Long id, Timestamp createdAt, Timestamp sentTime, String title, String content, String hyperlink, String type, String status) {
         this.id = id;
         this.createdAt = createdAt;
         this.sentTime = sentTime;
-        this.receiver = receiver;
         this.title = title;
         this.content = content;
         this.hyperlink = hyperlink;
         this.type = type;
         this.status = status;
     }
-    //endregion
 
-    //region Getters & Setters
+    // endregion
+
+    // region Getters & Setters
 
     public Long getId() {
         return id;
@@ -45,28 +85,20 @@ public class Notification implements Serializable {
         this.id = id;
     }
 
-    public Date getCreatedAt() {
+    public Timestamp getCreatedAt() {
         return createdAt;
     }
 
-    public void setCreatedAt(Date createdAt) {
+    public void setCreatedAt(Timestamp createdAt) {
         this.createdAt = createdAt;
     }
 
-    public Date getSentTime() {
+    public Timestamp getSentTime() {
         return sentTime;
     }
 
-    public void setSentTime(Date sentTime) {
+    public void setSentTime(Timestamp sentTime) {
         this.sentTime = sentTime;
-    }
-
-    public List<User> getReceiver() {
-        return receiver;
-    }
-
-    public void setReceiver(List<User> receiver) {
-        this.receiver = receiver;
     }
 
     public String getTitle() {
@@ -93,21 +125,21 @@ public class Notification implements Serializable {
         this.hyperlink = hyperlink;
     }
 
-    public ENotificationType getType() {
+    public String getType() {
         return type;
     }
 
-    public void setType(ENotificationType type) {
+    public void setType(String type) {
         this.type = type;
     }
 
-    public ENotificationStatus getStatus() {
+    public String getStatus() {
         return status;
     }
 
-    public void setStatus(ENotificationStatus status) {
+    public void setStatus(String status) {
         this.status = status;
     }
 
-    //endregion
+    // endregion
 }

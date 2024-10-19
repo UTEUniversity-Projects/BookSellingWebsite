@@ -4,13 +4,24 @@ import com.biblio.enumeration.EPaymentCurrency;
 import com.biblio.enumeration.EPaymentStatus;
 import com.biblio.enumeration.EWalletProvider;
 
+import javax.persistence.*;
 import java.io.Serializable;
+import java.sql.Timestamp;
 import java.util.Date;
 
+@Entity
+@Table(name = "ewallet")
 public class EWallet extends Payment implements Serializable {
+
     //region Attributes
-    private Long walletId;
-    private EWalletProvider provider;
+
+    @Column(name = "wallet_id", nullable = false, columnDefinition = "nvarchar(255)")
+    private String walletId;
+
+    @Column(name = "provider", nullable = false, columnDefinition = "nvarchar(255)")
+    private String provider;
+
+    @Column(name = "transaction_id", nullable = false, columnDefinition = "nvarchar(255)")
     private String transactionId;
     //endregion
 
@@ -20,13 +31,13 @@ public class EWallet extends Payment implements Serializable {
         super();
     }
 
-    public EWallet(Long walletId, EWalletProvider provider, String transactionId) {
+    public EWallet(String walletId, String provider, String transactionId) {
         this.walletId = walletId;
         this.provider = provider;
         this.transactionId = transactionId;
     }
 
-    public EWallet(Long id, Date createdAt, double amount, EPaymentStatus status, EPaymentCurrency currency, Long walletId, EWalletProvider provider, String transactionId) {
+    public EWallet(Long id, Timestamp createdAt, double amount, String status, String currency, String walletId, String provider, String transactionId) {
         super(id, createdAt, amount, status, currency);
         this.walletId = walletId;
         this.provider = provider;
@@ -35,21 +46,29 @@ public class EWallet extends Payment implements Serializable {
 
     //endregion
 
+    // region Relationships
+
+    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JoinColumn(name = "order_id", nullable = false, referencedColumnName = "id")
+    private Order order;
+
+    // endregion
+
     //region Getters & Setters
 
-    public Long getWalletId() {
+    public String getWalletId() {
         return walletId;
     }
 
-    public void setWalletId(Long walletId) {
+    public void setWalletId(String walletId) {
         this.walletId = walletId;
     }
 
-    public EWalletProvider getProvider() {
+    public String getProvider() {
         return provider;
     }
 
-    public void setProvider(EWalletProvider provider) {
+    public void setProvider(String provider) {
         this.provider = provider;
     }
 
@@ -60,7 +79,6 @@ public class EWallet extends Payment implements Serializable {
     public void setTransactionId(String transactionId) {
         this.transactionId = transactionId;
     }
-
 
     //endregion
 
