@@ -7,40 +7,42 @@ import java.io.Serializable;
 @Table(name = "address")
 public class Address implements Serializable {
 
-    private static final long serialVersionUID = 1L;
-
     // region Attributes
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private Long id;
 
-    @Column(name = "nation", nullable = false, columnDefinition = "nvarchar(255)")
+    @Column(name = "nation", nullable = false)
     private String nation;
 
-    @Column(name = "province", nullable = false, columnDefinition = "nvarchar(255)")
+    @Column(name = "province", nullable = false)
     private String province;
 
-    @Column(name = "district", nullable = false, columnDefinition = "nvarchar(255)")
+    @Column(name = "district", nullable = false)
     private String district;
 
-    @Column(name = "village", nullable = false, columnDefinition = "nvarchar(255)")
+    @Column(name = "village", nullable = false)
     private String village;
 
-    @Column(name = "detail", nullable = false, columnDefinition = "nvarchar(255)")
+    @Column(name = "detail", nullable = false)
     private String detail;
+
     // endregion
 
     // region Relationships
-    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    @JoinColumn(name = "customer_id", nullable = false, referencedColumnName = "id")
+
+    @OneToOne(mappedBy = "address")
     private Customer customer;
 
     @OneToOne(mappedBy = "address")
     private Order order;
+
     // endregion
 
     // region Constructors
+
     public Address() {}
 
     public Address(String nation, String province, String district, String village, String detail) {
@@ -50,9 +52,11 @@ public class Address implements Serializable {
         this.village = village;
         this.detail = detail;
     }
+
     // endregion
 
     // region Getters & Setters
+
     public Long getId() {
         return id;
     }
@@ -101,6 +105,14 @@ public class Address implements Serializable {
         this.detail = detail;
     }
 
+    public Customer getCustomer() {
+        return customer;
+    }
+
+    public void setCustomer(Customer customer) {
+        this.customer = customer;
+    }
+
     public Order getOrder() {
         return order;
     }
@@ -108,5 +120,6 @@ public class Address implements Serializable {
     public void setOrder(Order order) {
         this.order = order;
     }
+
     // endregion
 }

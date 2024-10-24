@@ -3,6 +3,7 @@ package com.biblio.entity;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.sql.Timestamp;
+import java.time.LocalDateTime;
 import java.util.Date;
 
 @MappedSuperclass
@@ -10,25 +11,28 @@ import java.util.Date;
 public abstract class ContributorProfile implements Serializable {
 
     // region Attributes
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "name", nullable = false, columnDefinition = "nvarchar(255)")
+    @Column(name = "name", nullable = false)
     private String name;
 
-    @Column(name = "introduction", nullable = false, columnDefinition = "nvarchar(255)")
+    @Column(name = "introduction", nullable = false)
     private String introduction;
 
-    @Column(name = "join_at", nullable = false, columnDefinition = "datetime")
-    private Timestamp joinAt;
+    @Column(name = "join_at", nullable = false)
+    private LocalDateTime joinAt;
+
     // endregion
 
     // region Constructors
 
-    public ContributorProfile() {}
+    public ContributorProfile() {
+    }
 
-    public ContributorProfile(Long id, String name, String introduction, Timestamp joinAt) {
+    public ContributorProfile(Long id, String name, String introduction, LocalDateTime joinAt) {
         this.id = id;
         this.name = name;
         this.introduction = introduction;
@@ -39,7 +43,6 @@ public abstract class ContributorProfile implements Serializable {
 
     // region Getters & Setters
 
-    //region Getters & Setters
     public Long getId() {
         return id;
     }
@@ -64,11 +67,11 @@ public abstract class ContributorProfile implements Serializable {
         this.introduction = introduction;
     }
 
-    public Timestamp getJoinAt() {
+    public LocalDateTime getJoinAt() {
         return joinAt;
     }
 
-    public void setJoinAt(Timestamp joinAt) {
+    public void setJoinAt(LocalDateTime joinAt) {
         this.joinAt = joinAt;
     }
 

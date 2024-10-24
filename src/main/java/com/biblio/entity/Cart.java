@@ -2,7 +2,6 @@ package com.biblio.entity;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -10,9 +9,11 @@ import java.util.Set;
 public class Cart implements Serializable {
 
     //region Attributes
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
     //endregion
 
     // region Relationships
@@ -26,8 +27,8 @@ public class Cart implements Serializable {
 
     // endregion
 
-    //region Constructors
-    //region Constructors
+    // region Constructors
+
     public Cart() {
     }
 
@@ -35,11 +36,10 @@ public class Cart implements Serializable {
         this.id = id;
     }
 
-    //endregion
+    // endregion
 
-    //region Getters & Setters
+    // region Getters & Setters
 
-    //region Getters & Setters
     public Long getId() {
         return id;
     }
@@ -48,5 +48,21 @@ public class Cart implements Serializable {
         this.id = id;
     }
 
-    //endregion
+    public Set<OrderItem> getOrderItems() {
+        return orderItems;
+    }
+
+    public void setOrderItems(Set<OrderItem> orderItems) {
+        this.orderItems = orderItems;
+    }
+
+    public Customer getCustomer() {
+        return customer;
+    }
+
+    public void setCustomer(Customer customer) {
+        this.customer = customer;
+    }
+
+    // endregion
 }

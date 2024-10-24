@@ -1,8 +1,11 @@
 package com.biblio.entity;
 
+import com.biblio.enumeration.EPromotionStatus;
+import com.biblio.enumeration.EPromotionType;
+
 import javax.persistence.*;
 import java.io.Serializable;
-import java.sql.Timestamp;
+import java.time.LocalDateTime;
 import java.util.Set;
 
 @Entity
@@ -15,22 +18,22 @@ public class Promotion implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "created_at", nullable = false, columnDefinition = "datetime")
-    private Timestamp createdAt;
+    @Column(name = "created_at", nullable = false)
+    private LocalDateTime createdAt;
 
-    @Column(name = "code", nullable = false, columnDefinition = "nvarchar(255)")
+    @Column(name = "code", nullable = false)
     private String code;
 
-    @Column(name = "effective_date", nullable = false, columnDefinition = "datetime")
-    private Timestamp effectiveDate;
+    @Column(name = "effective_date", nullable = false)
+    private LocalDateTime effectiveDate;
 
-    @Column(name = "expiration_date", nullable = false, columnDefinition = "datetime")
-    private Timestamp expirationDate;
+    @Column(name = "expiration_date", nullable = false)
+    private LocalDateTime expirationDate;
 
-    @Column(name = "title", nullable = false, columnDefinition = "nvarchar(255)")
+    @Column(name = "title", nullable = false)
     private String title;
 
-    @Column(name = "description", nullable = false, columnDefinition = "nvarchar(255)")
+    @Column(name = "description", nullable = false)
     private String description;
 
     @Column(name = "percent_discount", nullable = false)
@@ -42,11 +45,13 @@ public class Promotion implements Serializable {
     @Column(name = "min_value_to_be_applied", nullable = false)
     private double minValueToBeApplied;
 
-    @Column(name = "type", nullable = false, columnDefinition = "nvarchar(255)")
-    private String type;
+    @Enumerated(EnumType.STRING)
+    @Column(name = "type", nullable = false)
+    private EPromotionType type;
 
-    @Column(name = "status", nullable = false, columnDefinition = "nvarchar(255)")
-    private String status;
+    @Enumerated(EnumType.STRING)
+    @Column(name = "status", nullable = false)
+    private EPromotionStatus status;
 
     // endregion
 
@@ -56,18 +61,17 @@ public class Promotion implements Serializable {
     private Set<PromotionTarget> promotionTargets;
 
     @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    @JoinColumn(name = "order_id", nullable = false, referencedColumnName = "id")
+    @JoinColumn(name = "order_id", nullable = false)
     private Order order;
 
     // endregion
 
     // region Constructors
 
-    //region Constructors
     public Promotion() {
     }
 
-    public Promotion(Long id, Timestamp createdAt, String code, Timestamp effectiveDate, Timestamp expirationDate, String title, String description, double percentDiscount, double discountLimit, double minValueToBeApplied, String type, String status) {
+    public Promotion(Long id, LocalDateTime createdAt, String code, LocalDateTime effectiveDate, LocalDateTime expirationDate, String title, String description, double percentDiscount, double discountLimit, double minValueToBeApplied, EPromotionType type, EPromotionStatus status) {
         this.id = id;
         this.createdAt = createdAt;
         this.code = code;
@@ -82,11 +86,8 @@ public class Promotion implements Serializable {
         this.status = status;
     }
 
-    // endregion
-
     // region Getters & Setters
 
-    //region Getters & Setters
     public Long getId() {
         return id;
     }
@@ -95,11 +96,11 @@ public class Promotion implements Serializable {
         this.id = id;
     }
 
-    public Timestamp getCreatedAt() {
+    public LocalDateTime getCreatedAt() {
         return createdAt;
     }
 
-    public void setCreatedAt(Timestamp createdAt) {
+    public void setCreatedAt(LocalDateTime createdAt) {
         this.createdAt = createdAt;
     }
 
@@ -111,19 +112,19 @@ public class Promotion implements Serializable {
         this.code = code;
     }
 
-    public Timestamp getEffectiveDate() {
+    public LocalDateTime getEffectiveDate() {
         return effectiveDate;
     }
 
-    public void setEffectiveDate(Timestamp effectiveDate) {
+    public void setEffectiveDate(LocalDateTime effectiveDate) {
         this.effectiveDate = effectiveDate;
     }
 
-    public Timestamp getExpirationDate() {
+    public LocalDateTime getExpirationDate() {
         return expirationDate;
     }
 
-    public void setExpirationDate(Timestamp expirationDate) {
+    public void setExpirationDate(LocalDateTime expirationDate) {
         this.expirationDate = expirationDate;
     }
 
@@ -167,20 +168,36 @@ public class Promotion implements Serializable {
         this.minValueToBeApplied = minValueToBeApplied;
     }
 
-    public String getType() {
+    public EPromotionType getType() {
         return type;
     }
 
-    public void setType(String type) {
+    public void setType(EPromotionType type) {
         this.type = type;
     }
 
-    public String getStatus() {
+    public EPromotionStatus getStatus() {
         return status;
     }
 
-    public void setStatus(String status) {
+    public void setStatus(EPromotionStatus status) {
         this.status = status;
+    }
+
+    public Set<PromotionTarget> getPromotionTargets() {
+        return promotionTargets;
+    }
+
+    public void setPromotionTargets(Set<PromotionTarget> promotionTargets) {
+        this.promotionTargets = promotionTargets;
+    }
+
+    public Order getOrder() {
+        return order;
+    }
+
+    public void setOrder(Order order) {
+        this.order = order;
     }
 
     // endregion

@@ -13,18 +13,17 @@ public class MediaFile implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "file_name", nullable = false, columnDefinition = "nvarchar(255)")
+    @Column(name = "file_name", nullable = false)
     private String fileName;
 
-    @Column(name = "stored_code", nullable = false, columnDefinition = "nvarchar(255)")
+    @Column(name = "stored_code", nullable = false)
     private String storedCode;
-    //endregion
 
-    //endregion
+    // endregion
 
     // region Relationships
 
-    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @ManyToOne
     @JoinColumn(name = "book_metadata_id")
     private BookMetadata bookMetadata;
 
@@ -61,7 +60,6 @@ public class MediaFile implements Serializable {
 
     //region Getters & Setters
 
-    //region Getters & Setters
     public Long getId() {
         return id;
     }
@@ -84,6 +82,62 @@ public class MediaFile implements Serializable {
 
     public void setStoredCode(String storedCode) {
         this.storedCode = storedCode;
+    }
+
+    public BookMetadata getBookMetadata() {
+        return bookMetadata;
+    }
+
+    public void setBookMetadata(BookMetadata bookMetadata) {
+        this.bookMetadata = bookMetadata;
+    }
+
+    public Publisher getPublisher() {
+        return publisher;
+    }
+
+    public void setPublisher(Publisher publisher) {
+        this.publisher = publisher;
+    }
+
+    public Author getAuthor() {
+        return author;
+    }
+
+    public void setAuthor(Author author) {
+        this.author = author;
+    }
+
+    public Translator getTranslator() {
+        return translator;
+    }
+
+    public void setTranslator(Translator translator) {
+        this.translator = translator;
+    }
+
+    public Customer getCustomer() {
+        return customer;
+    }
+
+    public void setCustomer(Customer customer) {
+        this.customer = customer;
+    }
+
+    public Staff getStaff() {
+        return staff;
+    }
+
+    public void setStaff(Staff staff) {
+        this.staff = staff;
+    }
+
+    public Owner getOwner() {
+        return owner;
+    }
+
+    public void setOwner(Owner owner) {
+        this.owner = owner;
     }
 
     //endregion

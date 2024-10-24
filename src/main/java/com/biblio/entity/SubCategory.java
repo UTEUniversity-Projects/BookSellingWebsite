@@ -14,14 +14,13 @@ public class SubCategory extends Classification implements Serializable {
     private Set<Book> books;
 
     @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    @JoinColumn(name = "category_id", nullable = false, referencedColumnName = "id")
+    @JoinColumn(name = "category_id", nullable = false)
     private Category category;
 
     // endregion
 
     // region Constructors
 
-    //region Constructors
     public SubCategory() {
         super();
     }
@@ -29,7 +28,27 @@ public class SubCategory extends Classification implements Serializable {
     public SubCategory(Long id, String code, String name) {
         super(id, code, name);
     }
-    //endregion
+
+    // endregion
+
+    // region Getters & Setters
+
+    public Set<Book> getBooks() {
+        return books;
+    }
+
+    public void setBooks(Set<Book> books) {
+        this.books = books;
+    }
+
+    public Category getCategory() {
+        return category;
+    }
+
+    public void setCategory(Category category) {
+        this.category = category;
+    }
+
 
     // endregion
 

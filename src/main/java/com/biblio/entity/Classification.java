@@ -12,16 +12,16 @@ public abstract class Classification implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "code", nullable = false, columnDefinition = "nvarchar(255)")
+    @Column(name = "code", nullable = false)
     private String code;
 
-    @Column(name = "name", nullable = false, columnDefinition = "nvarchar(255)")
+    @Column(name = "name", nullable = false)
     private String name;
-    //endregion
 
-    //endregion
+    // endregion
 
-    //region Constructors
+    // region Constructors
+
     public Classification() {}
 
     public Classification(Long id, String code, String name) {
@@ -29,11 +29,12 @@ public abstract class Classification implements Serializable {
         this.code = code;
         this.name = name;
     }
-    //endregion
 
-    //region Getters & Setters
+    // endregion
 
-    //region Getters & Setters
+
+    // region Getters & Setters
+
     public Long getId() {
         return id;
     }
@@ -58,5 +59,5 @@ public abstract class Classification implements Serializable {
         this.name = name;
     }
 
-    //endregion
+    // endregion
 }

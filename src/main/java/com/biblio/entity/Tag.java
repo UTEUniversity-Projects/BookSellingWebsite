@@ -39,5 +39,5 @@ public class Tag extends Classification implements Serializable {
         this.metadatas = metadatas;
     }
 
-    // endregion Getters & Setters
+    // endregion
 }

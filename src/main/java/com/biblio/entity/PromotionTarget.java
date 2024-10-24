@@ -1,6 +1,6 @@
 package com.biblio.entity;
 
-import org.hibernate.annotations.Fetch;
+import com.biblio.enumeration.EPromotionTargetType;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -15,18 +15,19 @@ public class PromotionTarget implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "applicable_object_id", nullable = false, columnDefinition = "nvarchar(255)")
+    @Column(name = "applicable_object_id", nullable = false)
     private String applicableObjectId;
 
-    @Column(name = "type", nullable = false, columnDefinition = "nvarchar(255)")
-    private String type;
+    @Enumerated(EnumType.STRING)
+    @Column(name = "type", nullable = false)
+    private EPromotionTargetType type;
 
     // endregion
 
     // region Relationships
 
     @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    @JoinColumn(name = "promotion_id", nullable = false, referencedColumnName = "id")
+    @JoinColumn(name = "promotion_id", nullable = false)
     private Promotion promotion;
 
     // endregion
@@ -36,7 +37,7 @@ public class PromotionTarget implements Serializable {
     public PromotionTarget() {
     }
 
-    public PromotionTarget(Long id, String applicableObjectId, String type) {
+    public PromotionTarget(Long id, String applicableObjectId, EPromotionTargetType type) {
         this.id = id;
         this.applicableObjectId = applicableObjectId;
         this.type = type;
@@ -46,7 +47,6 @@ public class PromotionTarget implements Serializable {
 
     // region Getters & Setters
 
-    //region Getters & Setters
     public Long getId() {
         return id;
     }
@@ -63,12 +63,20 @@ public class PromotionTarget implements Serializable {
         this.applicableObjectId = applicableObjectId;
     }
 
-    public String getType() {
+    public EPromotionTargetType getType() {
         return type;
     }
 
-    public void setType(String type) {
+    public void setType(EPromotionTargetType type) {
         this.type = type;
+    }
+
+    public Promotion getPromotion() {
+        return promotion;
+    }
+
+    public void setPromotion(Promotion promotion) {
+        this.promotion = promotion;
     }
 
     // endregion

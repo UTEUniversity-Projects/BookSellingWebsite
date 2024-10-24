@@ -1,8 +1,10 @@
 package com.biblio.entity;
 
+import com.biblio.enumeration.EBookStatus;
+
 import javax.persistence.*;
 import java.io.Serializable;
-import java.sql.Timestamp;
+import java.time.LocalDateTime;
 import java.util.Set;
 
 @Entity
@@ -15,17 +17,18 @@ public class BookMetadata implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "created_at", nullable = false, columnDefinition = "datetime")
-    private Timestamp createdAt;
+    @Column(name = "created_at", nullable = false)
+    private LocalDateTime createdAt;
 
-    @Column(name = "opening_date", nullable = false, columnDefinition = "datetime")
-    private Timestamp openingDate;
+    @Column(name = "opening_date", nullable = false)
+    private LocalDateTime openingDate;
 
-    @Column(name = "import_price", nullable = false, columnDefinition = "double")
+    @Column(name = "import_price", nullable = false)
     private double importPrice;
 
-    @Column(name = "status", nullable = false, columnDefinition = "nvarchar(255)")
-    private String status;
+    @Enumerated(EnumType.STRING)
+    @Column(name = "status", nullable = false)
+    private EBookStatus status;
 
     // endregion Attributes
 
@@ -34,15 +37,15 @@ public class BookMetadata implements Serializable {
     @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JoinTable(
             name = "book_metadata_tag",
-            joinColumns = @JoinColumn(name = "book_metadata_id", referencedColumnName = "id", nullable = false),
-            inverseJoinColumns = @JoinColumn(name = "tag_id", referencedColumnName = "id", nullable = false)
+            joinColumns = @JoinColumn(name = "book_metadata_id", nullable = false),
+            inverseJoinColumns = @JoinColumn(name = "tag_id", nullable = false)
     )
     private Set<Tag> tags;
 
     @OneToOne(mappedBy = "metadata")
     private Book book;
 
-    @OneToMany(mappedBy = "bookMetadata")
+    @OneToMany(mappedBy = "bookMetadata", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private Set<MediaFile> mediaFiles;
 
     // endregion
@@ -52,7 +55,7 @@ public class BookMetadata implements Serializable {
     public BookMetadata() {
     }
 
-    public BookMetadata(Long id, Timestamp createdAt, Timestamp openingDate, double importPrice, String status) {
+    public BookMetadata(Long id, LocalDateTime createdAt, LocalDateTime openingDate, double importPrice, EBookStatus status) {
         this.id = id;
         this.createdAt = createdAt;
         this.openingDate = openingDate;
@@ -64,7 +67,6 @@ public class BookMetadata implements Serializable {
 
     // region Getters & Setters
 
-    // region Getters & Setters
     public Long getId() {
         return id;
     }
@@ -73,19 +75,19 @@ public class BookMetadata implements Serializable {
         this.id = id;
     }
 
-    public Timestamp getCreatedAt() {
+    public LocalDateTime getCreatedAt() {
         return createdAt;
     }
 
-    public void setCreatedAt(Timestamp createdAt) {
+    public void setCreatedAt(LocalDateTime createdAt) {
         this.createdAt = createdAt;
     }
 
-    public Timestamp getOpeningDate() {
+    public LocalDateTime getOpeningDate() {
         return openingDate;
     }
 
-    public void setOpeningDate(Timestamp openingDate) {
+    public void setOpeningDate(LocalDateTime openingDate) {
         this.openingDate = openingDate;
     }
 
@@ -97,11 +99,11 @@ public class BookMetadata implements Serializable {
         this.importPrice = importPrice;
     }
 
-    public String getStatus() {
+    public EBookStatus getStatus() {
         return status;
     }
 
-    public void setStatus(String status) {
+    public void setStatus(EBookStatus status) {
         this.status = status;
     }
 
@@ -111,6 +113,22 @@ public class BookMetadata implements Serializable {
 
     public void setTags(Set<Tag> tags) {
         this.tags = tags;
+    }
+
+    public Book getBook() {
+        return book;
+    }
+
+    public void setBook(Book book) {
+        this.book = book;
+    }
+
+    public Set<MediaFile> getMediaFiles() {
+        return mediaFiles;
+    }
+
+    public void setMediaFiles(Set<MediaFile> mediaFiles) {
+        this.mediaFiles = mediaFiles;
     }
 
     // endregion Getters & Setters
