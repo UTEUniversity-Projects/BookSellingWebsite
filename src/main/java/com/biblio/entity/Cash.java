@@ -1,8 +1,12 @@
 package com.biblio.entity;
 
+import com.biblio.enumeration.EPaymentCurrency;
+import com.biblio.enumeration.EPaymentStatus;
+
 import javax.persistence.*;
 import java.io.Serializable;
 import java.sql.Timestamp;
+import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "cash")
@@ -18,6 +22,10 @@ public class Cash extends Payment implements Serializable {
 
     // endregion
 
+    // region Relationships
+
+    // endregion
+
     // region Constructors
 
     public Cash() {
@@ -29,19 +37,11 @@ public class Cash extends Payment implements Serializable {
         this.change = change;
     }
 
-    public Cash(Long id, Timestamp createdAt, double amount, String status, String currency, double cashReceived, double change) {
+    public Cash(Long id, LocalDateTime createdAt, double amount, EPaymentStatus status, EPaymentCurrency currency, double cashReceived, double change) {
         super(id, createdAt, amount, status, currency);
         this.cashReceived = cashReceived;
         this.change = change;
     }
-
-    // endregion
-
-    // region Relationships
-
-    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    @JoinColumn(name = "order_id", nullable = false, referencedColumnName = "id")
-    private Order order;
 
     // endregion
 
@@ -66,9 +66,11 @@ public class Cash extends Payment implements Serializable {
     // endregion
 
     //  region Methods
+
     @Override
     public void processPayment() {
 
     }
+
     // endregion
 }

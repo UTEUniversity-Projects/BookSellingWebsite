@@ -7,59 +7,48 @@ import com.biblio.enumeration.EWalletProvider;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.sql.Timestamp;
+import java.time.LocalDateTime;
 import java.util.Date;
 
 @Entity
 @Table(name = "ewallet")
 public class EWallet extends Payment implements Serializable {
 
-    //region Attributes
+    // region Attributes
 
-    @Column(name = "wallet_id", nullable = false, columnDefinition = "nvarchar(255)")
+    @Column(name = "wallet_id", nullable = false)
     private String walletId;
 
-    @Column(name = "provider", nullable = false, columnDefinition = "nvarchar(255)")
-    private String provider;
+    @Enumerated(EnumType.STRING)
+    @Column(name = "provider", nullable = false)
+    private EWalletProvider provider;
 
-    @Column(name = "transaction_id", nullable = false, columnDefinition = "nvarchar(255)")
+    @Column(name = "transaction_id", nullable = false)
     private String transactionId;
-    //endregion
 
-    //region Constructors
+    // endregion
 
-    public EWallet() {
+    // region Relationships
+
+    // endregion
+
+    // region Constructors
+
     public EWallet() {
         super();
     }
 
-    public EWallet(String walletId, String provider, String transactionId) {
-
-    public EWallet(Long walletId, EWalletProvider provider, String transactionId) {
-        this.walletId = walletId;
-        this.provider = provider;
-        this.transactionId = transactionId;
-    }
-
-    public EWallet(Long id, Timestamp createdAt, double amount, String status, String currency, String walletId, String provider, String transactionId) {
-        super(id, createdAt, amount, status, currency);
-    public EWallet(Long id, Date createdAt, double amount, EPaymentStatus status, EPaymentCurrency currency, Long walletId, EWalletProvider provider, String transactionId) {
+    public EWallet(Long id, LocalDateTime createdAt, double amount, EPaymentStatus status, EPaymentCurrency currency, String walletId, EWalletProvider provider, String transactionId) {
         super(id, createdAt, amount, status, currency);
         this.walletId = walletId;
         this.provider = provider;
         this.transactionId = transactionId;
     }
 
-    //endregion
-
-    // region Relationships
-
-    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    @JoinColumn(name = "order_id", nullable = false, referencedColumnName = "id")
-    private Order order;
 
     // endregion
 
-    //region Getters & Setters
+    // region Getters & Setters
 
     public String getWalletId() {
         return walletId;
@@ -69,11 +58,11 @@ public class EWallet extends Payment implements Serializable {
         this.walletId = walletId;
     }
 
-    public String getProvider() {
+    public EWalletProvider getProvider() {
         return provider;
     }
 
-    public void setProvider(String provider) {
+    public void setProvider(EWalletProvider provider) {
         this.provider = provider;
     }
 
@@ -85,12 +74,14 @@ public class EWallet extends Payment implements Serializable {
         this.transactionId = transactionId;
     }
 
-    //endregion
+    // endregion
 
     // region Methods
+
     @Override
     public void processPayment() {
 
     }
+
     // endregion
 }

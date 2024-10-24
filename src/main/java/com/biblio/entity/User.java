@@ -1,52 +1,54 @@
 package com.biblio.entity;
 
+import com.biblio.enumeration.EGender;
+
 import javax.persistence.*;
 import java.io.Serializable;
-import java.sql.Timestamp;
-import java.util.Set;
+import java.time.LocalDateTime;
 
 @MappedSuperclass
 public class User implements Serializable {
 
-    //region Attributes
+    // region Attributes
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private Long id;
 
-    @Column(name = "username", nullable = false, columnDefinition = "nvarchar(255)")
+    @Column(name = "username", nullable = false)
     private String username;
 
-    @Column(name = "full_name", nullable = false, columnDefinition = "nvarchar(255)")
+    @Column(name = "full_name", nullable = false)
     private String fullName;
 
-    @Column(name = "password", nullable = false, columnDefinition = "nvarchar(255)")
+    @Column(name = "password", nullable = false)
     private String password;
 
-    @Column(name = "email_address", nullable = false, columnDefinition = "nvarchar(255)")
+    @Column(name = "email_address", nullable = false)
     private String emailAddress;
 
-    @Column(name = "date_of_birth", nullable = false, columnDefinition = "nvarchar(255)")
+    @Column(name = "date_of_birth", nullable = false)
     private String dateOfBirth;
 
-    @Column(name = "gender", nullable = false, columnDefinition = "nvarchar(255)")
-    private String gender;
+    @Enumerated(EnumType.STRING)
+    @Column(name = "gender", nullable = false)
+    private EGender gender;
 
-    @Column(name = "phone_number", nullable = false, columnDefinition = "nvarchar(255)")
+    @Column(name = "phone_number", nullable = false)
     private String phoneNumber;
 
-    @Column(name = "join_at", nullable = false, columnDefinition = "datetime")
-    private Timestamp joinAt;
+    @Column(name = "join_at", nullable = false)
+    private LocalDateTime joinAt;
 
-    //endregion
+    // endregion
 
-    //region Constructors
+    // region Constructors
 
     public User() {
     }
 
-    public User(Long id, String username, String fullName, String password, String emailAddress, String dateOfBirth, String gender, String phoneNumber, Timestamp joinAt) {
+    public User(Long id, String username, String fullName, String password, String emailAddress, String dateOfBirth, EGender gender, String phoneNumber, LocalDateTime joinAt) {
         this.id = id;
         this.username = username;
         this.fullName = fullName;
@@ -110,11 +112,11 @@ public class User implements Serializable {
         this.dateOfBirth = dateOfBirth;
     }
 
-    public String getGender() {
+    public EGender getGender() {
         return gender;
     }
 
-    public void setGender(String gender) {
+    public void setGender(EGender gender) {
         this.gender = gender;
     }
 
@@ -126,11 +128,11 @@ public class User implements Serializable {
         this.phoneNumber = phoneNumber;
     }
 
-    public Timestamp getJoinAt() {
+    public LocalDateTime getJoinAt() {
         return joinAt;
     }
 
-    public void setJoinAt(Timestamp joinAt) {
+    public void setJoinAt(LocalDateTime joinAt) {
         this.joinAt = joinAt;
     }
 

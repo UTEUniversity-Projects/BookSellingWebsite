@@ -6,6 +6,7 @@ import com.biblio.enumeration.EPaymentStatus;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.sql.Timestamp;
+import java.time.LocalDateTime;
 import java.util.Date;
 
 @Entity
@@ -13,20 +14,25 @@ import java.util.Date;
 public class CreditCard extends Payment implements Serializable {
 
     // region Attributes
-    @Column(name = "card_number", nullable = false, columnDefinition = "nvarchar(255)")
+
+    @Column(name = "card_number", nullable = false)
     private String cardNumber;
 
-    @Column(name = "card_holder_name", nullable = false, columnDefinition = "nvarchar(255)")
+    @Column(name = "card_holder_name", nullable = false)
     private String cardHolderName;
 
-    @Column(name = "expiration_date", nullable = false, columnDefinition = "datetime")
-    private Timestamp expirationDate;
+    @Column(name = "expiration_date", nullable = false)
+    private LocalDateTime expirationDate;
 
-    @Column(name = "cvv", nullable = false, columnDefinition = "nvarchar(255)")
+    @Column(name = "cvv", nullable = false)
     private String cvv;
 
-    @Column(name = "billing_address", nullable = false, columnDefinition = "nvarchar(255)")
+    @Column(name = "billing_address", nullable = false)
     private String billingAddress;
+
+    // endregion
+
+    // region Relationships
 
     // endregion
 
@@ -36,7 +42,7 @@ public class CreditCard extends Payment implements Serializable {
         super();
     }
 
-    public CreditCard(String cardNumber, String cardHolderName, Timestamp expirationDate, String cvv, String billingAddress) {
+    public CreditCard(String cardNumber, String cardHolderName, LocalDateTime expirationDate, String cvv, String billingAddress) {
         this.cardNumber = cardNumber;
         this.cardHolderName = cardHolderName;
         this.expirationDate = expirationDate;
@@ -44,7 +50,7 @@ public class CreditCard extends Payment implements Serializable {
         this.billingAddress = billingAddress;
     }
 
-    public CreditCard(Long id, Timestamp createdAt, double amount, String status, String currency, String cardNumber, String cardHolderName, Timestamp expirationDate, String cvv, String billingAddress) {
+    public CreditCard(Long id, LocalDateTime createdAt, double amount, EPaymentStatus status, EPaymentCurrency currency, String cardNumber, String cardHolderName, LocalDateTime expirationDate, String cvv, String billingAddress) {
         super(id, createdAt, amount, status, currency);
         this.cardNumber = cardNumber;
         this.cardHolderName = cardHolderName;
@@ -52,14 +58,6 @@ public class CreditCard extends Payment implements Serializable {
         this.cvv = cvv;
         this.billingAddress = billingAddress;
     }
-
-    // endregion
-
-    // region Relationships
-
-    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    @JoinColumn(name = "order_id", nullable = false, referencedColumnName = "id")
-    private Order order;
 
     // endregion
 
@@ -81,11 +79,11 @@ public class CreditCard extends Payment implements Serializable {
         this.cardHolderName = cardHolderName;
     }
 
-    public Timestamp getExpirationDate() {
+    public LocalDateTime getExpirationDate() {
         return expirationDate;
     }
 
-    public void setExpirationDate(Timestamp expirationDate) {
+    public void setExpirationDate(LocalDateTime expirationDate) {
         this.expirationDate = expirationDate;
     }
 
@@ -108,9 +106,11 @@ public class CreditCard extends Payment implements Serializable {
     // endregion
 
     // region Methods
+
     @Override
     public void processPayment() {
 
     }
+
     // endregion
 }

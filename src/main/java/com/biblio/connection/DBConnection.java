@@ -77,7 +77,7 @@ public class DBConnection implements PersistenceUnitInfo {
         return entities.stream()
                 .map(Class::getName)
                 .toList();
-//        return List.of("com.biblio.entity.Cash");
+//        return List.of("com.biblio.entity.Book");
     }
 
     @Override
