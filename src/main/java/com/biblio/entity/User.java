@@ -43,6 +43,14 @@ public class User implements Serializable {
 
     // endregion
 
+    // region Relationships
+
+    @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
+    @JoinColumn(name = "address_id", nullable = false)
+    private Address address;
+
+    // endregion
+
     // region Constructors
 
     public User() {

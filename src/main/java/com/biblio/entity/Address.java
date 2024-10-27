@@ -33,8 +33,9 @@ public class Address implements Serializable {
 
     // region Relationships
 
-    @OneToOne(mappedBy = "address")
-    private Customer customer;
+//    @OneToOne
+//    @JoinColumn(name = "user_id")
+//    private User user;
 
     @OneToOne(mappedBy = "address")
     private Order order;
@@ -103,14 +104,6 @@ public class Address implements Serializable {
 
     public void setDetail(String detail) {
         this.detail = detail;
-    }
-
-    public Customer getCustomer() {
-        return customer;
-    }
-
-    public void setCustomer(Customer customer) {
-        this.customer = customer;
     }
 
     public Order getOrder() {

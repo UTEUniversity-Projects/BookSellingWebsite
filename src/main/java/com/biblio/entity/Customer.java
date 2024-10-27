@@ -5,7 +5,6 @@ import com.biblio.enumeration.EMembership;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.sql.Timestamp;
 import java.time.LocalDateTime;
 import java.util.Set;
 
@@ -22,10 +21,6 @@ public class Customer extends User implements Serializable {
     // endregion
 
     // region Relationships
-
-    @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
-    @JoinColumn(name = "address_id", nullable = false)
-    private Address address;
 
     @OneToMany(mappedBy = "customer", cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<Order> orders;
@@ -73,14 +68,6 @@ public class Customer extends User implements Serializable {
 
     public void setMembership(EMembership membership) {
         this.membership = membership;
-    }
-
-    public Address getAddress() {
-        return address;
-    }
-
-    public void setAddress(Address address) {
-        this.address = address;
     }
 
     public Set<Order> getOrders() {
