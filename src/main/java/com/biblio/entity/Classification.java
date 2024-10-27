@@ -1,22 +1,31 @@
 package com.biblio.entity;
 
+import com.biblio.enumeration.EClassificationStatus;
+
 import javax.persistence.*;
 import java.io.Serializable;
 
 @MappedSuperclass
 public abstract class Classification implements Serializable {
 
-    //region Attributes
+    // region Attributes
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "code", nullable = false)
-    private String code;
-
     @Column(name = "name", nullable = false)
     private String name;
+
+    @Column(name = "short_script", nullable = false)
+    private String shortScript;
+
+    @Column(name = "full_script", nullable = false)
+    private String fullScript;
+
+    @Enumerated(EnumType.STRING)
+    @Column(name = "status", nullable = false)
+    private EClassificationStatus status;
 
     // endregion
 
@@ -24,14 +33,15 @@ public abstract class Classification implements Serializable {
 
     public Classification() {}
 
-    public Classification(Long id, String code, String name) {
+    public Classification(Long id, String name, String shortScript, String fullScript, EClassificationStatus status) {
         this.id = id;
-        this.code = code;
         this.name = name;
+        this.shortScript = shortScript;
+        this.fullScript = fullScript;
+        this.status = status;
     }
 
     // endregion
-
 
     // region Getters & Setters
 
@@ -43,20 +53,36 @@ public abstract class Classification implements Serializable {
         this.id = id;
     }
 
-    public String getCode() {
-        return code;
-    }
-
-    public void setCode(String code) {
-        this.code = code;
-    }
-
     public String getName() {
         return name;
     }
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public String getShortScript() {
+        return shortScript;
+    }
+
+    public void setShortScript(String shortScript) {
+        this.shortScript = shortScript;
+    }
+
+    public String getFullScript() {
+        return fullScript;
+    }
+
+    public void setFullScript(String fullScript) {
+        this.fullScript = fullScript;
+    }
+
+    public EClassificationStatus getStatus() {
+        return status;
+    }
+
+    public void setStatus(EClassificationStatus status) {
+        this.status = status;
     }
 
     // endregion

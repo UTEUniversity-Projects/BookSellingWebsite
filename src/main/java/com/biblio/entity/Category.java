@@ -1,5 +1,7 @@
 package com.biblio.entity;
 
+import com.biblio.enumeration.EClassificationStatus;
+
 import javax.persistence.Entity;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
@@ -28,9 +30,12 @@ public class Category extends Classification implements Serializable {
         super();
     }
 
-    public Category(Long id, String code, String name) {
-        super(id, code, name);
+
+    public Category(Long id, String name, String shortScript, String fullScript, EClassificationStatus status) {
+        super(id, name, shortScript, fullScript, status);
     }
+
+    // region Getters & Setters
 
     public Set<Book> getBooks() {
         return books;

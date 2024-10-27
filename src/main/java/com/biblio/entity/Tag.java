@@ -1,5 +1,7 @@
 package com.biblio.entity;
 
+import com.biblio.enumeration.EClassificationStatus;
+
 import javax.persistence.Entity;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
@@ -23,8 +25,8 @@ public class Tag extends Classification implements Serializable {
         super();
     }
 
-    public Tag(Long id, String code, String name) {
-        super(id, code, name);
+    public Tag(Long id, String name, String shortScript, String fullScript, EClassificationStatus status) {
+        super(id, name, shortScript, fullScript, status);
     }
 
     // endregion Constructors

@@ -1,5 +1,7 @@
 package com.biblio.entity;
 
+import com.biblio.enumeration.EClassificationStatus;
+
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Set;
@@ -25,8 +27,8 @@ public class SubCategory extends Classification implements Serializable {
         super();
     }
 
-    public SubCategory(Long id, String code, String name) {
-        super(id, code, name);
+    public SubCategory(Long id, String name, String shortScript, String fullScript, EClassificationStatus status) {
+        super(id, name, shortScript, fullScript, status);
     }
 
     // endregion
@@ -48,7 +50,6 @@ public class SubCategory extends Classification implements Serializable {
     public void setCategory(Category category) {
         this.category = category;
     }
-
 
     // endregion
 
