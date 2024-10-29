@@ -1,4 +1,3 @@
-@charset "UTF-8";
 /*-----------------------------------------------------------------------------------
 
     Item Name: Carrot - Multipurpose eCommerce HTML Template.
@@ -499,6 +498,7 @@ a {
   transition: all 0.3s ease-in-out;
   padding: 8px 22px;
   font-size: 14px;
+  font-family: "Poppins", sans-serif;
   font-family: "Be Vietnam Pro", sans-serif;
   font-weight: bold;
   text-transform: capitalize;
@@ -686,6 +686,7 @@ a {
 }
 .cr-breadcrumb-image .cr-breadcrumb-title h2 {
   margin-bottom: 0;
+  font-family: "Poppins", sans-serif;
   font-family: "Be Vietnam Pro", sans-serif;
   font-size: 19px;
   line-height: 1;
@@ -4826,7 +4827,6 @@ ul.navbar-nav .dropdown:hover .dropdown-menu {
 }
 /* pages */
 /* Products-page */
-
 p {
   margin-bottom: 0px;
   font-size: 14px;
@@ -4872,7 +4872,6 @@ p {
 
 .section-related-products {
   padding: 0 0 70px;
-
 }
 
 .cr-product-card {
