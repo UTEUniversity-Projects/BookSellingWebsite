@@ -10,15 +10,15 @@ import javax.servlet.http.HttpServletResponse;
 /**
  * Servlet implementation class HomeController
  */
-@WebServlet("/owner/dashboard")
-public class DashboardController extends HttpServlet {
+@WebServlet("/owner/ecommerce")
+public class EcommerceController extends HttpServlet {
     @Serial
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public DashboardController() {
+    public EcommerceController() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -28,7 +28,7 @@ public class DashboardController extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		request.getRequestDispatcher("/views/owner/dashboard.jsp").forward(request, response);
+		request.getRequestDispatcher("/views/owner/ecommerce.jsp").forward(request, response);
 	}
 
 	/**
@@ -38,5 +38,4 @@ public class DashboardController extends HttpServlet {
 		// TODO Auto-generated method stub
 		doGet(request, response);
 	}
-
 }
