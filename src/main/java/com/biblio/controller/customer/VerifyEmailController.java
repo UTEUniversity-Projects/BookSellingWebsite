@@ -1,4 +1,4 @@
-package com.biblio.controller;
+package com.biblio.controller.customer;
 
 import java.io.IOException;
 import java.io.Serial;
@@ -9,17 +9,17 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * Servlet implementation class WaitingController
+ * Servlet implementation class VerifyEmailController
  */
-@WebServlet("/waiting")
-public class WaitingController extends HttpServlet {
+@WebServlet("/verify-email")
+public class VerifyEmailController extends HttpServlet {
     @Serial
     private static final long serialVersionUID = 1L;
 
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public WaitingController() {
+    public VerifyEmailController() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -29,7 +29,8 @@ public class WaitingController extends HttpServlet {
      */
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         // TODO Auto-generated method stub
-        request.getRequestDispatcher("home").forward(request, response);
+        request.setAttribute("breadcumb", "Xác thực email");
+        request.getRequestDispatcher("/views/customer/verify-email.jsp").forward(request, response);
     }
 
     /**
