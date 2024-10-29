@@ -1,13 +1,13 @@
 .verify-email::before {
   content: '';
   position: absolute;
-  left: -15px;
-  top: calc(50% - 8px);
-  transform: translateY(calc(-50% + 8px));
+  left: 50%;
+  top: -15px;
+  transform: translateX(-50%);
   width: 0;
   height: 0;
-  border-top: 15px solid transparent;
-  border-bottom: 15px solid transparent;
-
-  border-right: 15px solid rgb(254 202 202 / 0.5);
+  border-left: 15px solid transparent;
+  
+  border-right: 15px solid transparent;
+  border-bottom: 15px solid rgb(254 202 202 / 0.5);
 }

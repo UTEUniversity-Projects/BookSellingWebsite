@@ -11,6 +11,5 @@ public class Constant {
     public static final String DB_DRIVER = "com.mysql.cj.jdbc.Driver";
     public static final String DB_MIN_CONNECTIONS = "2";
     public static final String DB_MAX_CONNECTIONS = "10";
-    public static final String CONNECTION_URL = "jdbc:mysql://" + HOST_NAME + ":" + PORT + "/" + DB_NAME;
 
 }
