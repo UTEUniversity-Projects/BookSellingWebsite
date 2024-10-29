@@ -1,21 +1,52 @@
 package com.biblio.entity;
 
+import javax.persistence.*;
 import java.io.Serializable;
 
+@Entity
+@Table(name = "address")
 public class Address implements Serializable {
 
-    private String id;
+    // region Attributes
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
+    private Long id;
+
+    @Column(name = "nation", nullable = false)
     private String nation;
+
+    @Column(name = "province", nullable = false)
     private String province;
+
+    @Column(name = "district", nullable = false)
     private String district;
+
+    @Column(name = "village", nullable = false)
     private String village;
+
+    @Column(name = "detail", nullable = false)
     private String detail;
 
-    public Address() {
-    }
+    // endregion
 
-    public Address(String id, String nation, String province, String district, String village, String detail) {
-        this.id = id;
+    // region Relationships
+
+//    @OneToOne
+//    @JoinColumn(name = "user_id")
+//    private User user;
+
+    @OneToOne(mappedBy = "address")
+    private Order order;
+
+    // endregion
+
+    // region Constructors
+
+    public Address() {}
+
+    public Address(String nation, String province, String district, String village, String detail) {
         this.nation = nation;
         this.province = province;
         this.district = district;
@@ -23,15 +54,15 @@ public class Address implements Serializable {
         this.detail = detail;
     }
 
-    //endregion
+    // endregion
 
-    //region Getters & Setters
+    // region Getters & Setters
 
-    public String getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -75,4 +106,13 @@ public class Address implements Serializable {
         this.detail = detail;
     }
 
+    public Order getOrder() {
+        return order;
+    }
+
+    public void setOrder(Order order) {
+        this.order = order;
+    }
+
+    // endregion
 }

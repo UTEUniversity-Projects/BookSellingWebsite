@@ -650,55 +650,55 @@
   $('.c2').on('click', function () {
     $('#add_class').remove();
     $('head').append(
-      '<link rel="stylesheet" href="assets/css/color-1.css" id="add_class">'
+      '<link rel="stylesheet" href="customer/css/color-1.css" id="add_class">'
     );
   });
   $('.c3').on('click', function () {
     $('#add_class').remove();
     $('head').append(
-      '<link rel="stylesheet" href="assets/css/color-2.css" id="add_class">'
+      '<link rel="stylesheet" href="customer/css/color-2.css" id="add_class">'
     );
   });
   $('.c4').on('click', function () {
     $('#add_class').remove();
     $('head').append(
-      '<link rel="stylesheet" href="assets/css/color-3.css" id="add_class">'
+      '<link rel="stylesheet" href="customer/css/color-3.css" id="add_class">'
     );
   });
   $('.c5').on('click', function () {
     $('#add_class').remove();
     $('head').append(
-      '<link rel="stylesheet" href="assets/css/color-4.css" id="add_class">'
+      '<link rel="stylesheet" href="customer/css/color-4.css" id="add_class">'
     );
   });
   $('.c6').on('click', function () {
     $('#add_class').remove();
     $('head').append(
-      '<link rel="stylesheet" href="assets/css/color-5.css" id="add_class">'
+      '<link rel="stylesheet" href="customer/css/color-5.css" id="add_class">'
     );
   });
   $('.c7').on('click', function () {
     $('#add_class').remove();
     $('head').append(
-      '<link rel="stylesheet" href="assets/css/color-6.css" id="add_class">'
+      '<link rel="stylesheet" href="customer/css/color-6.css" id="add_class">'
     );
   });
   $('.c8').on('click', function () {
     $('#add_class').remove();
     $('head').append(
-      '<link rel="stylesheet" href="assets/css/color-7.css" id="add_class">'
+      '<link rel="stylesheet" href="customer/css/color-7.css" id="add_class">'
     );
   });
   $('.c9').on('click', function () {
     $('#add_class').remove();
     $('head').append(
-      '<link rel="stylesheet" href="assets/css/color-8.css" id="add_class">'
+      '<link rel="stylesheet" href="customer/css/color-8.css" id="add_class">'
     );
   });
   $('.c10').on('click', function () {
     $('#add_class').remove();
     $('head').append(
-      '<link rel="stylesheet" href="assets/css/color-9.css" id="add_class">'
+      '<link rel="stylesheet" href="customer/css/color-9.css" id="add_class">'
     );
   });
 
@@ -711,7 +711,7 @@
   $('.dark').on('click', function () {
     $('#add_dark_mode').remove();
     $('head').append(
-      '<link rel="stylesheet" class="dark-link-mode" href="assets/css/dark.css" id="add_dark_mode">'
+      '<link rel="stylesheet" class="dark-link-mode" href="customer/css/dark.css" id="add_dark_mode">'
     );
   });
   $('.white').on('click', function () {
@@ -728,7 +728,7 @@
     $('#add_bg').remove();
     $('body').addClass('body-bg-1').removeClass();
     $('head').append(
-      '<link rel="stylesheet" class="bg" href="assets/css/bg-1.css" id="add_bg">'
+      '<link rel="stylesheet" class="bg" href="customer/css/bg-1.css" id="add_bg">'
     );
     $('body').addClass('body-bg-1');
   });
@@ -737,7 +737,7 @@
     $('#add_bg').remove();
     $('body').addClass('body-bg-2').removeClass();
     $('head').append(
-      '<link rel="stylesheet" class="bg" href="assets/css/bg-2.css" id="add_bg">'
+      '<link rel="stylesheet" class="bg" href="customer/css/bg-2.css" id="add_bg">'
     );
     $('body').addClass('body-bg-2');
   });
@@ -746,7 +746,7 @@
     $('#add_bg').remove();
     $('body').addClass('body-bg-3').removeClass();
     $('head').append(
-      '<link rel="stylesheet" class="bg" href="assets/css/bg-3.css" id="add_bg">'
+      '<link rel="stylesheet" class="bg" href="customer/css/bg-3.css" id="add_bg">'
     );
     $('body').addClass('body-bg-3');
   });
@@ -755,7 +755,7 @@
     $('#add_bg').remove();
     $('body').addClass('body-bg-4').removeClass();
     $('head').append(
-      '<link rel="stylesheet" class="bg" href="assets/css/bg-4.css" id="add_bg">'
+      '<link rel="stylesheet" class="bg" href="customer/css/bg-4.css" id="add_bg">'
     );
     $('body').addClass('body-bg-4');
   });
@@ -764,7 +764,7 @@
     $('#add_bg').remove();
     $('body').addClass('body-bg-5').removeClass();
     $('head').append(
-      '<link rel="stylesheet" class="bg" href="assets/css/bg-5.css" id="add_bg">'
+      '<link rel="stylesheet" class="bg" href="customer/css/bg-5.css" id="add_bg">'
     );
     $('body').addClass('body-bg-5');
   });

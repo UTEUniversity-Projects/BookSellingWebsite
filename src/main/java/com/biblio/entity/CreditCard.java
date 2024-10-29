@@ -1,29 +1,67 @@
 package com.biblio.entity;
 
+import com.biblio.enumeration.EPaymentCurrency;
+import com.biblio.enumeration.EPaymentStatus;
+
+import javax.persistence.*;
 import java.io.Serializable;
+import java.sql.Timestamp;
+import java.time.LocalDateTime;
+import java.util.Date;
 
-public class CreditCard implements Serializable {
-    //region Attributes
+@Entity
+@Table(name = "credit_card")
+public class CreditCard extends Payment implements Serializable {
+
+    // region Attributes
+
+    @Column(name = "card_number", nullable = false)
     private String cardNumber;
+
+    @Column(name = "card_holder_name", nullable = false)
     private String cardHolderName;
-    private String expiryDate;
+
+    @Column(name = "expiration_date", nullable = false)
+    private LocalDateTime expirationDate;
+
+    @Column(name = "cvv", nullable = false)
     private String cvv;
+
+    @Column(name = "billing_address", nullable = false)
     private String billingAddress;
-    //endregion
 
-    //region Constructors
+    // endregion
 
-    public CreditCard(String cardNumber, String cardHolderName, String expiryDate, String cvv, String billingAddress) {
+    // region Relationships
+
+    // endregion
+
+    // region Constructors
+
+    public CreditCard() {
+        super();
+    }
+
+    public CreditCard(String cardNumber, String cardHolderName, LocalDateTime expirationDate, String cvv, String billingAddress) {
         this.cardNumber = cardNumber;
         this.cardHolderName = cardHolderName;
-        this.expiryDate = expiryDate;
+        this.expirationDate = expirationDate;
         this.cvv = cvv;
         this.billingAddress = billingAddress;
     }
 
-    //endregion
+    public CreditCard(Long id, LocalDateTime createdAt, double amount, EPaymentStatus status, EPaymentCurrency currency, String cardNumber, String cardHolderName, LocalDateTime expirationDate, String cvv, String billingAddress) {
+        super(id, createdAt, amount, status, currency);
+        this.cardNumber = cardNumber;
+        this.cardHolderName = cardHolderName;
+        this.expirationDate = expirationDate;
+        this.cvv = cvv;
+        this.billingAddress = billingAddress;
+    }
 
-    //region Getters & Setters
+    // endregion
+
+    // region Getters & Setters
 
     public String getCardNumber() {
         return cardNumber;
@@ -41,12 +79,12 @@ public class CreditCard implements Serializable {
         this.cardHolderName = cardHolderName;
     }
 
-    public String getExpiryDate() {
-        return expiryDate;
+    public LocalDateTime getExpirationDate() {
+        return expirationDate;
     }
 
-    public void setExpiryDate(String expiryDate) {
-        this.expiryDate = expiryDate;
+    public void setExpirationDate(LocalDateTime expirationDate) {
+        this.expirationDate = expirationDate;
     }
 
     public String getCvv() {
@@ -65,5 +103,14 @@ public class CreditCard implements Serializable {
         this.billingAddress = billingAddress;
     }
 
-    //endregion
+    // endregion
+
+    // region Methods
+
+    @Override
+    public void processPayment() {
+
+    }
+
+    // endregion
 }

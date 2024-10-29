@@ -1,58 +1,125 @@
 package com.biblio.entity;
 
+
 import com.biblio.enumeration.EBookAgeRecommend;
 import com.biblio.enumeration.EBookCondition;
 import com.biblio.enumeration.EBookFormat;
 import com.biblio.enumeration.EBookLanguage;
 
+import javax.persistence.*;
 import java.io.Serializable;
-import java.time.DateTimeException;
+import java.time.LocalDateTime;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
+@Entity
+@Table(name = "book")
 public class Book implements Serializable {
-    private String id;
+
+    // region Attributes
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    @Column(name = "title", nullable = false)
     private String title;
-    private List<Author> authors;
-    private List<Translator> translators;
-    private Category category;
-    private SubCategory subCategory;
+
+    @Column(name = "description", nullable = false)
     private String description;
+
+    @Column(name = "selling_price", nullable = false)
     private double sellingPrice;
-    private Publisher publisher;
-    private DateTimeException publicationDate;
+
+    @Column(name = "publication_date", nullable = false)
+    private LocalDateTime publicationDate;
+
+    @Column(name = "edition", nullable = false)
     private int edition;
+
+    @Column(name = "code_ISBN10", nullable = false)
     private String codeISBN10;
+
+    @Column(name = "code_ISBN13", nullable = false)
     private String codeISBN13;
+
+    @Enumerated(EnumType.STRING)
+    @Column(name = "format", nullable = false)
     private EBookFormat format;
+
+    @Column(name = "hand_cover", nullable = false)
     private int handcover;
+
+    @Column(name = "length", nullable = false)
     private double length;
+
+    @Column(name = "width", nullable = false)
     private double width;
+
+    @Column(name = "height", nullable = false)
     private double height;
-    private List<EBookLanguage> language;
+
+    @ElementCollection
+    @CollectionTable(name = "book_languages", joinColumns = @JoinColumn(name = "book_id"))
+    @Column(name = "language", nullable = false)
+    private Set<EBookLanguage> languages = new HashSet<>();
+
+    @Column(name = "weight", nullable = false)
     private double weight;
+
+    @Enumerated(EnumType.STRING)
+    @Column(name = "[condition]")
     private EBookCondition condition;
+
+    @Enumerated(EnumType.STRING)
+    @Column(name = "recommended_age", nullable = false)
     private EBookAgeRecommend recommendedAge;
+
+    // endregion Attributes
+
+    // region Relationships
+
+    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JoinColumn(name = "book_metadata_id", nullable = false)
     private BookMetadata metadata;
 
-    public Book() {}
+    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JoinColumn(name = "category_id", nullable = false)
+    private Category category;
 
-    public Book(String id, String title, List<Author> authors, List<Translator> translators,
-                Category category, SubCategory subCategory, String description,
-                double sellingPrice, Publisher publisher, DateTimeException publicationDate,
-                int edition, String codeISBN10, String codeISBN13,
-                EBookFormat format, int handcover, double length,
-                double width, double height, List<EBookLanguage> language,
-                double weight, EBookCondition condition,
-                EBookAgeRecommend recommendedAge, BookMetadata metadata) {
+    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JoinColumn(name = "sub_category_id", nullable = false)
+    private SubCategory subCategory;
+
+    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JoinColumn(name = "publisher_id", nullable = false)
+    private Publisher publisher;
+
+    @ManyToMany(mappedBy = "books")
+    private Set<Author> authors = new HashSet<>();
+
+    @ManyToMany(mappedBy = "books")
+    private Set<Translator> translators = new HashSet<>();
+
+    @OneToMany(mappedBy = "book")
+    private Set<Review> reviews = new HashSet<>();
+
+    @OneToMany(mappedBy = "book")
+    private Set<OrderItem> orderItems = new HashSet<>();
+
+    // endregion
+
+    // region Constructors
+
+    public Book() {
+    }
+
+    public Book(Long id, String title, String description, double sellingPrice, LocalDateTime publicationDate, int edition, String codeISBN10, String codeISBN13, EBookFormat format, int handcover, double length, double width, double height, Set<EBookLanguage> languages, double weight, EBookCondition condition, EBookAgeRecommend recommendedAge) {
         this.id = id;
         this.title = title;
-        this.authors = authors;
-        this.translators = translators;
-        this.category = category;
-        this.subCategory = subCategory;
         this.description = description;
         this.sellingPrice = sellingPrice;
-        this.publisher = publisher;
         this.publicationDate = publicationDate;
         this.edition = edition;
         this.codeISBN10 = codeISBN10;
@@ -62,18 +129,21 @@ public class Book implements Serializable {
         this.length = length;
         this.width = width;
         this.height = height;
-        this.language = language;
+        this.languages = languages;
         this.weight = weight;
         this.condition = condition;
         this.recommendedAge = recommendedAge;
-        this.metadata = metadata;
     }
 
-    public String getId() {
+    // endregion
+
+    // region Getters & Setters
+
+    public Long getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -83,38 +153,6 @@ public class Book implements Serializable {
 
     public void setTitle(String title) {
         this.title = title;
-    }
-
-    public List<Author> getAuthors() {
-        return authors;
-    }
-
-    public void setAuthors(List<Author> authors) {
-        this.authors = authors;
-    }
-
-    public List<Translator> getTranslators() {
-        return translators;
-    }
-
-    public void setTranslators(List<Translator> translators) {
-        this.translators = translators;
-    }
-
-    public Category getCategory() {
-        return category;
-    }
-
-    public void setCategory(Category category) {
-        this.category = category;
-    }
-
-    public SubCategory getSubCategory() {
-        return subCategory;
-    }
-
-    public void setSubCategory(SubCategory subCategory) {
-        this.subCategory = subCategory;
     }
 
     public String getDescription() {
@@ -133,19 +171,11 @@ public class Book implements Serializable {
         this.sellingPrice = sellingPrice;
     }
 
-    public Publisher getPublisher() {
-        return publisher;
-    }
-
-    public void setPublisher(Publisher publisher) {
-        this.publisher = publisher;
-    }
-
-    public DateTimeException getPublicationDate() {
+    public LocalDateTime getPublicationDate() {
         return publicationDate;
     }
 
-    public void setPublicationDate(DateTimeException publicationDate) {
+    public void setPublicationDate(LocalDateTime publicationDate) {
         this.publicationDate = publicationDate;
     }
 
@@ -213,12 +243,12 @@ public class Book implements Serializable {
         this.height = height;
     }
 
-    public List<EBookLanguage> getLanguage() {
-        return language;
+    public Set<EBookLanguage> getLanguages() {
+        return languages;
     }
 
-    public void setLanguage(List<EBookLanguage> language) {
-        this.language = language;
+    public void setLanguages(Set<EBookLanguage> languages) {
+        this.languages = languages;
     }
 
     public double getWeight() {
@@ -252,4 +282,63 @@ public class Book implements Serializable {
     public void setMetadata(BookMetadata metadata) {
         this.metadata = metadata;
     }
+
+    public Category getCategory() {
+        return category;
+    }
+
+    public void setCategory(Category category) {
+        this.category = category;
+    }
+
+    public SubCategory getSubCategory() {
+        return subCategory;
+    }
+
+    public void setSubCategory(SubCategory subCategory) {
+        this.subCategory = subCategory;
+    }
+
+    public Publisher getPublisher() {
+        return publisher;
+    }
+
+    public void setPublisher(Publisher publisher) {
+        this.publisher = publisher;
+    }
+
+    public Set<Author> getAuthors() {
+        return authors;
+    }
+
+    public void setAuthors(Set<Author> authors) {
+        this.authors = authors;
+    }
+
+    public Set<Translator> getTranslators() {
+        return translators;
+    }
+
+    public void setTranslators(Set<Translator> translators) {
+        this.translators = translators;
+    }
+
+    public Set<Review> getReviews() {
+        return reviews;
+    }
+
+    public void setReviews(Set<Review> reviews) {
+        this.reviews = reviews;
+    }
+
+    public Set<OrderItem> getOrderItems() {
+        return orderItems;
+    }
+
+    public void setOrderItems(Set<OrderItem> orderItems) {
+        this.orderItems = orderItems;
+    }
+
+
+    // endregion
 }

@@ -1,27 +1,59 @@
 package com.biblio.entity;
 
+import javax.persistence.*;
 import java.io.Serializable;
+import java.util.Set;
 
+@Entity
+@Table(name = "cart")
 public class Cart implements Serializable {
-    private String id;
+
+    //region Attributes
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    //endregion
+
+    // region Relationships
+
+    @OneToMany(mappedBy = "cart")
+    private Set<OrderItem> orderItems;
+
+    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JoinColumn(name = "customer_id")
     private Customer customer;
-    private OrderItem[] books;
+
+    // endregion
+
+    // region Constructors
 
     public Cart() {
     }
 
-    public Cart(String id, Customer customer, OrderItem[] books) {
+    public Cart(Long id) {
         this.id = id;
-        this.customer = customer;
-        this.books = books;
     }
 
-    public String getId() {
+    // endregion
+
+    // region Getters & Setters
+
+    public Long getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(Long id) {
         this.id = id;
+    }
+
+    public Set<OrderItem> getOrderItems() {
+        return orderItems;
+    }
+
+    public void setOrderItems(Set<OrderItem> orderItems) {
+        this.orderItems = orderItems;
     }
 
     public Customer getCustomer() {
@@ -32,11 +64,5 @@ public class Cart implements Serializable {
         this.customer = customer;
     }
 
-    public OrderItem[] getBooks() {
-        return books;
-    }
-
-    public void setBooks(OrderItem[] books) {
-        this.books = books;
-    }
+    // endregion
 }

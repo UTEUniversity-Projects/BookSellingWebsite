@@ -3,28 +3,75 @@ package com.biblio.entity;
 import com.biblio.enumeration.EPromotionStatus;
 import com.biblio.enumeration.EPromotionType;
 
+import javax.persistence.*;
 import java.io.Serializable;
-import java.sql.Date;
+import java.time.LocalDateTime;
+import java.util.Set;
 
+@Entity
+@Table(name = "promotion")
 public class Promotion implements Serializable {
-    private String id;
-    private Date createdAt; // Using LocalDateTime for date and time
+
+    // region Attributes
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    @Column(name = "created_at", nullable = false)
+    private LocalDateTime createdAt;
+
+    @Column(name = "code", nullable = false)
     private String code;
-    private Date effectiveDate; // Effective date of promotion
-    private Date expirationDate; // Expiration date of promotion
+
+    @Column(name = "effective_date", nullable = false)
+    private LocalDateTime effectiveDate;
+
+    @Column(name = "expiration_date", nullable = false)
+    private LocalDateTime expirationDate;
+
+    @Column(name = "title", nullable = false)
     private String title;
+
+    @Column(name = "description", nullable = false)
     private String description;
+
+    @Column(name = "percent_discount", nullable = false)
     private double percentDiscount;
+
+    @Column(name = "discount_limit", nullable = false)
     private double discountLimit;
+
+    @Column(name = "min_value_to_be_applied", nullable = false)
     private double minValueToBeApplied;
-    private EPromotionType type; // Enum for promotion type
-    private PromotionTarget[] targets; // Array of PromotionTarget
+
+    @Enumerated(EnumType.STRING)
+    @Column(name = "type", nullable = false)
+    private EPromotionType type;
+
+    @Enumerated(EnumType.STRING)
+    @Column(name = "status", nullable = false)
     private EPromotionStatus status;
+
+    // endregion
+
+    // region Relationships
+
+    @OneToMany(mappedBy = "promotion")
+    private Set<PromotionTarget> promotionTargets;
+
+    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JoinColumn(name = "order_id", nullable = false)
+    private Order order;
+
+    // endregion
+
+    // region Constructors
 
     public Promotion() {
     }
 
-    public Promotion(String id, Date createdAt, String code, Date effectiveDate, Date expirationDate, String title, String description, double percentDiscount, double minValueToBeApplied, double discountLimit, EPromotionType type, PromotionTarget[] targets, EPromotionStatus status) {
+    public Promotion(Long id, LocalDateTime createdAt, String code, LocalDateTime effectiveDate, LocalDateTime expirationDate, String title, String description, double percentDiscount, double discountLimit, double minValueToBeApplied, EPromotionType type, EPromotionStatus status) {
         this.id = id;
         this.createdAt = createdAt;
         this.code = code;
@@ -33,19 +80,28 @@ public class Promotion implements Serializable {
         this.title = title;
         this.description = description;
         this.percentDiscount = percentDiscount;
-        this.minValueToBeApplied = minValueToBeApplied;
         this.discountLimit = discountLimit;
+        this.minValueToBeApplied = minValueToBeApplied;
         this.type = type;
-        this.targets = targets;
         this.status = status;
     }
 
-    public String getId() {
+    // region Getters & Setters
+
+    public Long getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(Long id) {
         this.id = id;
+    }
+
+    public LocalDateTime getCreatedAt() {
+        return createdAt;
+    }
+
+    public void setCreatedAt(LocalDateTime createdAt) {
+        this.createdAt = createdAt;
     }
 
     public String getCode() {
@@ -56,28 +112,20 @@ public class Promotion implements Serializable {
         this.code = code;
     }
 
-    public Date getCreatedAt() {
-        return createdAt;
-    }
-
-    public void setCreatedAt(Date createdAt) {
-        this.createdAt = createdAt;
-    }
-
-    public Date getExpirationDate() {
-        return expirationDate;
-    }
-
-    public void setExpirationDate(Date expirationDate) {
-        this.expirationDate = expirationDate;
-    }
-
-    public Date getEffectiveDate() {
+    public LocalDateTime getEffectiveDate() {
         return effectiveDate;
     }
 
-    public void setEffectiveDate(Date effectiveDate) {
+    public void setEffectiveDate(LocalDateTime effectiveDate) {
         this.effectiveDate = effectiveDate;
+    }
+
+    public LocalDateTime getExpirationDate() {
+        return expirationDate;
+    }
+
+    public void setExpirationDate(LocalDateTime expirationDate) {
+        this.expirationDate = expirationDate;
     }
 
     public String getTitle() {
@@ -104,20 +152,20 @@ public class Promotion implements Serializable {
         this.percentDiscount = percentDiscount;
     }
 
-    public double getMinValueToBeApplied() {
-        return minValueToBeApplied;
-    }
-
-    public void setMinValueToBeApplied(double minValueToBeApplied) {
-        this.minValueToBeApplied = minValueToBeApplied;
-    }
-
     public double getDiscountLimit() {
         return discountLimit;
     }
 
     public void setDiscountLimit(double discountLimit) {
         this.discountLimit = discountLimit;
+    }
+
+    public double getMinValueToBeApplied() {
+        return minValueToBeApplied;
+    }
+
+    public void setMinValueToBeApplied(double minValueToBeApplied) {
+        this.minValueToBeApplied = minValueToBeApplied;
     }
 
     public EPromotionType getType() {
@@ -128,14 +176,6 @@ public class Promotion implements Serializable {
         this.type = type;
     }
 
-    public PromotionTarget[] getTargets() {
-        return targets;
-    }
-
-    public void setTargets(PromotionTarget[] targets) {
-        this.targets = targets;
-    }
-
     public EPromotionStatus getStatus() {
         return status;
     }
@@ -143,4 +183,22 @@ public class Promotion implements Serializable {
     public void setStatus(EPromotionStatus status) {
         this.status = status;
     }
+
+    public Set<PromotionTarget> getPromotionTargets() {
+        return promotionTargets;
+    }
+
+    public void setPromotionTargets(Set<PromotionTarget> promotionTargets) {
+        this.promotionTargets = promotionTargets;
+    }
+
+    public Order getOrder() {
+        return order;
+    }
+
+    public void setOrder(Order order) {
+        this.order = order;
+    }
+
+    // endregion
 }

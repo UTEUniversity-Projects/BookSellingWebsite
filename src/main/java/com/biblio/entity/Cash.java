@@ -1,23 +1,51 @@
 package com.biblio.entity;
 
+import com.biblio.enumeration.EPaymentCurrency;
+import com.biblio.enumeration.EPaymentStatus;
+
+import javax.persistence.*;
 import java.io.Serializable;
+import java.sql.Timestamp;
+import java.time.LocalDateTime;
 
-public class Cash implements Serializable {
-    //region Attributes
+@Entity
+@Table(name = "cash")
+public class Cash extends Payment implements Serializable {
+
+    // region Attributes
+
+    @Column(name = "cash_received", nullable = false)
     private double cashReceived;
-    private double change;
-    //endregion
 
-    //region Constructors
+    @Column(name = "[change]", nullable = false)
+    private double change;
+
+    // endregion
+
+    // region Relationships
+
+    // endregion
+
+    // region Constructors
+
+    public Cash() {
+        super();
+    }
 
     public Cash(double cashReceived, double change) {
         this.cashReceived = cashReceived;
         this.change = change;
     }
 
-    //endregion
+    public Cash(Long id, LocalDateTime createdAt, double amount, EPaymentStatus status, EPaymentCurrency currency, double cashReceived, double change) {
+        super(id, createdAt, amount, status, currency);
+        this.cashReceived = cashReceived;
+        this.change = change;
+    }
 
-    //region Getters & Setters
+    // endregion
+
+    // region Getters & Setters
 
     public double getCashReceived() {
         return cashReceived;
@@ -35,5 +63,14 @@ public class Cash implements Serializable {
         this.change = change;
     }
 
-    //endregion
+    // endregion
+
+    //  region Methods
+
+    @Override
+    public void processPayment() {
+
+    }
+
+    // endregion
 }

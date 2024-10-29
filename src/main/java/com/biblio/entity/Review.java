@@ -1,34 +1,67 @@
 package com.biblio.entity;
 
-import java.sql.Date;
+import javax.persistence.*;
+import java.io.Serializable;
+import java.time.LocalDateTime;
 
-public class Review {
-    private String id;
+@Entity
+@Table(name = "review")
+public class Review implements Serializable {
+
+    // region Attributes
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    @Column(name = "rate", nullable = false)
     private int rate;
+
+    @Column(name = "content", nullable = false)
     private String content;
+
+    @Column(name = "ready_to_introduce", nullable = false, columnDefinition = "bit")
     private boolean readyToIntroduce;
+
+    @Column(name = "created_at", nullable = false)
+    private LocalDateTime createdAt;
+
+    // endregion
+
+    // region Relationships
+
+    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JoinColumn(name = "book_id", nullable = false)
     private Book book;
-    private Customer createdBy;
-    private Date createdAt;
+
+    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JoinColumn(name = "customer_id", nullable = false)
+    private Customer customer;
+
+    // endregion
+
+    //region Constructors
 
     public Review() {
     }
 
-    public Review(String id, int rate, String content, boolean readyToIntroduce, Book book, Customer createdBy, Date createdAt) {
+    public Review(Long id, int rate, String content, boolean readyToIntroduce, LocalDateTime createdAt) {
         this.id = id;
         this.rate = rate;
         this.content = content;
         this.readyToIntroduce = readyToIntroduce;
-        this.book = book;
-        this.createdBy = createdBy;
         this.createdAt = createdAt;
     }
 
-    public String getId() {
+    // endregion
+
+    // region Getters & Setters
+
+    public Long getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -56,6 +89,14 @@ public class Review {
         this.readyToIntroduce = readyToIntroduce;
     }
 
+    public LocalDateTime getCreatedAt() {
+        return createdAt;
+    }
+
+    public void setCreatedAt(LocalDateTime createdAt) {
+        this.createdAt = createdAt;
+    }
+
     public Book getBook() {
         return book;
     }
@@ -64,19 +105,13 @@ public class Review {
         this.book = book;
     }
 
-    public Customer getCreatedBy() {
-        return createdBy;
+    public Customer getCustomer() {
+        return customer;
     }
 
-    public void setCreatedBy(Customer createdBy) {
-        this.createdBy = createdBy;
+    public void setCustomer(Customer customer) {
+        this.customer = customer;
     }
 
-    public Date getCreatedAt() {
-        return createdAt;
-    }
-
-    public void setCreatedAt(Date createdAt) {
-        this.createdAt = createdAt;
-    }
+    // endregion
 }

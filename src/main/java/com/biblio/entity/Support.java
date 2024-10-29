@@ -2,57 +2,83 @@ package com.biblio.entity;
 
 import com.biblio.enumeration.ESupportStatus;
 
+import javax.persistence.*;
 import java.io.Serializable;
-import java.util.Date;
+import java.sql.Timestamp;
+import java.time.LocalDateTime;
 
+@Entity
+@Table(name = "support")
 public class Support implements Serializable {
-    //region Attributes
 
-    private String id;
-    private Customer customer;
+    // region Attributes
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    @Column(name = "title", nullable = false)
     private String title;
+
+    @Column(name = "request_content", nullable = false)
     private String requestContent;
-    private Staff staff;
+
+    @Column(name = "feed_back_content", nullable = false)
     private String feedbackContent;
+
+    @Column(name = "rate", nullable = false)
     private int rate;
+
+    @Enumerated(EnumType.STRING)
+    @Column(name = "status", nullable = false)
     private ESupportStatus status;
-    private Date createdAt;
 
-    //endregion
+    @Column(name = "created_at", nullable = false)
+    private LocalDateTime createdAt;
 
-    //region Constructors
+    @Column(name = "responsed_at", nullable = false)
+    private LocalDateTime responsedAt;
 
+    // endregion
 
-    public Support(String id, Customer customer, String title, String requestContent, Staff staff, String feedbackContent, int rate, ESupportStatus status, Date createdAt) {
+    // region Relationships
+
+    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JoinColumn(name = "staff_id", nullable = false)
+    private Staff staff;
+
+    @ManyToOne(cascade = CascadeType.ALL, fetch =  FetchType.LAZY)
+    @JoinColumn(name = "customer_id", nullable = false)
+    private Customer customer;
+
+    // endregion
+
+    // region Constructors
+
+    public Support() {
+    }
+
+    public Support(Long id, String title, String requestContent, String feedbackContent, int rate, ESupportStatus status, LocalDateTime createdAt, LocalDateTime responsedAt) {
         this.id = id;
-        this.customer = customer;
         this.title = title;
         this.requestContent = requestContent;
-        this.staff = staff;
         this.feedbackContent = feedbackContent;
         this.rate = rate;
         this.status = status;
         this.createdAt = createdAt;
+        this.responsedAt = responsedAt;
     }
 
-    //endregion
+    // endregion
 
-    //region Getters & Setters
+    // region Getters & Setters
 
-    public String getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(Long id) {
         this.id = id;
-    }
-
-    public Customer getCustomer() {
-        return customer;
-    }
-
-    public void setCustomer(Customer customer) {
-        this.customer = customer;
     }
 
     public String getTitle() {
@@ -69,14 +95,6 @@ public class Support implements Serializable {
 
     public void setRequestContent(String requestContent) {
         this.requestContent = requestContent;
-    }
-
-    public Staff getStaff() {
-        return staff;
-    }
-
-    public void setStaff(Staff staff) {
-        this.staff = staff;
     }
 
     public String getFeedbackContent() {
@@ -103,14 +121,37 @@ public class Support implements Serializable {
         this.status = status;
     }
 
-    public Date getCreatedAt() {
+    public LocalDateTime getCreatedAt() {
         return createdAt;
     }
 
-    public void setCreatedAt(Date createdAt) {
+    public void setCreatedAt(LocalDateTime createdAt) {
         this.createdAt = createdAt;
     }
 
-    //endregion
+    public LocalDateTime getResponsedAt() {
+        return responsedAt;
+    }
 
+    public void setResponsedAt(LocalDateTime responsedAt) {
+        this.responsedAt = responsedAt;
+    }
+
+    public Staff getStaff() {
+        return staff;
+    }
+
+    public void setStaff(Staff staff) {
+        this.staff = staff;
+    }
+
+    public Customer getCustomer() {
+        return customer;
+    }
+
+    public void setCustomer(Customer customer) {
+        this.customer = customer;
+    }
+
+    // endregion
 }

@@ -3,68 +3,108 @@ package com.biblio.entity;
 import com.biblio.enumeration.ENotificationStatus;
 import com.biblio.enumeration.ENotificationType;
 
+import javax.persistence.*;
 import java.io.Serializable;
-import java.util.Date;
-import java.util.List;
+import java.sql.Timestamp;
+import java.time.LocalDateTime;
+import java.util.Set;
 
+@Entity
+@Table(name = "notification")
 public class Notification implements Serializable {
-    //region Attributes
-    private String id;
-    private Date createdAt;
-    private Date sentTime;
-    private List<User> receiver;
+
+    // region Attributes
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    @Column(name = "created_at", nullable = false)
+    private LocalDateTime createdAt;
+
+    @Column(name = "sent_time", nullable = false)
+    private LocalDateTime sentTime;
+
+    @Column(name = "title", nullable = false)
     private String title;
+
+    @Column(name = "content", nullable = false)
     private String content;
+
+    @Column(name = "hyper_link", nullable = false)
     private String hyperlink;
+
+    @Enumerated(EnumType.STRING)
+    @Column(name = "type", nullable = false)
     private ENotificationType type;
+
+    @Enumerated(EnumType.STRING)
+    @Column(name = "status", nullable = false)
     private ENotificationStatus status;
+
     //endregion
 
-    //region Contructors
-    public Notification(String id, Date createdAt, Date sentTime, List<User> receiver, String title, String content, String hyperlink, ENotificationType type, ENotificationStatus status) {
+    // region Relationships
+
+    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JoinTable(name = "notification_owner", joinColumns = @JoinColumn(name = "notification_id", nullable = false),
+            inverseJoinColumns = @JoinColumn(name = "owner_id", nullable = false))
+    private Set<Owner> owners;
+
+    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JoinTable(name = "notification_staff", joinColumns = @JoinColumn(name = "notification_id", nullable = false),
+            inverseJoinColumns = @JoinColumn(name = "staff_id", nullable = false))
+    private Set<Staff> staffs;
+
+    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JoinTable(name = "notification_customer", joinColumns = @JoinColumn(name = "notification_id", nullable = false),
+            inverseJoinColumns = @JoinColumn(name = "customer_id", nullable = false))
+    private Set<Customer> customers;
+
+    // endregion
+
+    // region Constructors
+
+    public Notification() {
+    }
+
+    public Notification(Long id, LocalDateTime createdAt, LocalDateTime sentTime, String title, String content, String hyperlink, ENotificationType type, ENotificationStatus status) {
         this.id = id;
         this.createdAt = createdAt;
         this.sentTime = sentTime;
-        this.receiver = receiver;
         this.title = title;
         this.content = content;
         this.hyperlink = hyperlink;
         this.type = type;
         this.status = status;
     }
-    //endregion
 
-    //region Getters & Setters
-    public String getId() {
+    // endregion
+
+    // region Getters & Setters
+
+    public Long getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
-    public Date getCreatedAt() {
+    public LocalDateTime getCreatedAt() {
         return createdAt;
     }
 
-    public void setCreatedAt(Date createdAt) {
+    public void setCreatedAt(LocalDateTime createdAt) {
         this.createdAt = createdAt;
     }
 
-    public Date getSentTime() {
+    public LocalDateTime getSentTime() {
         return sentTime;
     }
 
-    public void setSentTime(Date sentTime) {
+    public void setSentTime(LocalDateTime sentTime) {
         this.sentTime = sentTime;
-    }
-
-    public List<User> getReceiver() {
-        return receiver;
-    }
-
-    public void setReceiver(List<User> receiver) {
-        this.receiver = receiver;
     }
 
     public String getTitle() {
@@ -106,5 +146,30 @@ public class Notification implements Serializable {
     public void setStatus(ENotificationStatus status) {
         this.status = status;
     }
-    //endregion
+
+    public Set<Owner> getOwners() {
+        return owners;
+    }
+
+    public void setOwners(Set<Owner> owners) {
+        this.owners = owners;
+    }
+
+    public Set<Staff> getStaffs() {
+        return staffs;
+    }
+
+    public void setStaffs(Set<Staff> staffs) {
+        this.staffs = staffs;
+    }
+
+    public Set<Customer> getCustomers() {
+        return customers;
+    }
+
+    public void setCustomers(Set<Customer> customers) {
+        this.customers = customers;
+    }
+
+    // endregion
 }

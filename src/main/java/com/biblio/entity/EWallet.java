@@ -1,27 +1,54 @@
 package com.biblio.entity;
 
+import com.biblio.enumeration.EPaymentCurrency;
+import com.biblio.enumeration.EPaymentStatus;
 import com.biblio.enumeration.EWalletProvider;
 
+import javax.persistence.*;
 import java.io.Serializable;
+import java.sql.Timestamp;
+import java.time.LocalDateTime;
+import java.util.Date;
 
-public class EWallet implements Serializable {
-    //region Attributes
+@Entity
+@Table(name = "ewallet")
+public class EWallet extends Payment implements Serializable {
+
+    // region Attributes
+
+    @Column(name = "wallet_id", nullable = false)
     private String walletId;
+
+    @Enumerated(EnumType.STRING)
+    @Column(name = "provider", nullable = false)
     private EWalletProvider provider;
+
+    @Column(name = "transaction_id", nullable = false)
     private String transactionId;
-    //endregion
 
-    //region Constructors
+    // endregion
 
-    public EWallet(String walletId, EWalletProvider provider, String transactionId) {
+    // region Relationships
+
+    // endregion
+
+    // region Constructors
+
+    public EWallet() {
+        super();
+    }
+
+    public EWallet(Long id, LocalDateTime createdAt, double amount, EPaymentStatus status, EPaymentCurrency currency, String walletId, EWalletProvider provider, String transactionId) {
+        super(id, createdAt, amount, status, currency);
         this.walletId = walletId;
         this.provider = provider;
         this.transactionId = transactionId;
     }
 
-    //endregion
 
-    //region Getters & Setters
+    // endregion
+
+    // region Getters & Setters
 
     public String getWalletId() {
         return walletId;
@@ -47,5 +74,14 @@ public class EWallet implements Serializable {
         this.transactionId = transactionId;
     }
 
-    //endregion
+    // endregion
+
+    // region Methods
+
+    @Override
+    public void processPayment() {
+
+    }
+
+    // endregion
 }

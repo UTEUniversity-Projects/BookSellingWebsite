@@ -2,70 +2,90 @@ package com.biblio.entity;
 
 import com.biblio.enumeration.EGender;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.io.Serializable;
-import java.util.Date;
+import java.time.LocalDateTime;
 
+@MappedSuperclass
 public class User implements Serializable {
-    //region Attributes
-    private String id;
-    private String userName;
+
+    // region Attributes
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
+    private Long id;
+
+    @Column(name = "username", nullable = false)
+    private String username;
+
+    @Column(name = "full_name", nullable = false)
     private String fullName;
+
+    @Column(name = "password", nullable = false)
     private String password;
+
+    @Column(name = "email_address", nullable = false)
     private String emailAddress;
+
+    @Column(name = "date_of_birth", nullable = false)
     private String dateOfBirth;
+
+    @Enumerated(EnumType.STRING)
+    @Column(name = "gender", nullable = false)
     private EGender gender;
+
+    @Column(name = "phone_number", nullable = false)
     private String phoneNumber;
-    private MediaFile avatar;
-    private Date joinAt;
-    //endregion
 
-    //region Contructors
+    @Column(name = "join_at", nullable = false)
+    private LocalDateTime joinAt;
 
-    public User() {}
+    // endregion
 
-    public User(String id, String userName, String fullName, String password, String emailAddress, String dateOfBirth, EGender gender, String phoneNumber, MediaFile avatar, Date joinAt) {
+    // region Relationships
+
+    @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
+    @JoinColumn(name = "address_id", nullable = false)
+    private Address address;
+
+    // endregion
+
+    // region Constructors
+
+    public User() {
+    }
+
+    public User(Long id, String username, String fullName, String password, String emailAddress, String dateOfBirth, EGender gender, String phoneNumber, LocalDateTime joinAt) {
         this.id = id;
-        this.userName = userName;
+        this.username = username;
         this.fullName = fullName;
         this.password = password;
         this.emailAddress = emailAddress;
         this.dateOfBirth = dateOfBirth;
         this.gender = gender;
         this.phoneNumber = phoneNumber;
-        this.avatar = avatar;
         this.joinAt = joinAt;
     }
 
-    //endregion
+    // endregion
 
-    //region Getters & Setters
+    // region Getters & Setters
 
-    public String getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
-    public String getUserName() {
-        return userName;
+    public String getUsername() {
+        return username;
     }
 
-    public void setUserName(String userName) {
-        this.userName = userName;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     public String getFullName() {
@@ -74,6 +94,14 @@ public class User implements Serializable {
 
     public void setFullName(String fullName) {
         this.fullName = fullName;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 
     public String getEmailAddress() {
@@ -108,21 +136,13 @@ public class User implements Serializable {
         this.phoneNumber = phoneNumber;
     }
 
-    public MediaFile getAvatar() {
-        return avatar;
-    }
-
-    public void setAvatar(MediaFile avatar) {
-        this.avatar = avatar;
-    }
-
-    public Date getJoinAt() {
+    public LocalDateTime getJoinAt() {
         return joinAt;
     }
 
-    public void setJoinAt(Date joinAt) {
+    public void setJoinAt(LocalDateTime joinAt) {
         this.joinAt = joinAt;
     }
 
-    //endregion
+    // endregion
 }

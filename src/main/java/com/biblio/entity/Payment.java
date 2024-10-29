@@ -3,55 +3,67 @@ package com.biblio.entity;
 import com.biblio.enumeration.EPaymentCurrency;
 import com.biblio.enumeration.EPaymentStatus;
 
+import javax.persistence.*;
 import java.io.Serializable;
-import java.util.Date;
+import java.time.LocalDateTime;
 
-public class Payment implements Serializable {
-    //region Attributes
-    private String id;
-    private Order order;
-    private Date createdAt;
+@Entity
+@Inheritance(strategy = InheritanceType.JOINED)
+@DiscriminatorColumn(name = "payment_type")
+public abstract class Payment implements Serializable {
+
+    // region Attributes
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    @Column(name = "created_at", nullable = false)
+    private LocalDateTime createdAt;
+
+    @Column(name = "amount", nullable = false)
     private double amount;
+
+    @Enumerated(EnumType.STRING)
+    @Column(name = "status", nullable = false)
     private EPaymentStatus status;
+
+    @Enumerated(EnumType.STRING)
+    @Column(name = "currency", nullable = false)
     private EPaymentCurrency currency;
-    //endregion
 
-    //region Constructors
+    // endregion
 
-    public Payment(String id, Order order, Date createdAt, double amount, EPaymentStatus status, EPaymentCurrency currency) {
+    // region Constructors
+
+    public Payment() {
+    }
+
+    public Payment(Long id, LocalDateTime createdAt, double amount, EPaymentStatus status, EPaymentCurrency currency) {
         this.id = id;
-        this.order = order;
         this.createdAt = createdAt;
         this.amount = amount;
         this.status = status;
         this.currency = currency;
     }
 
-    //endregion
+    // endregion
 
-    //region Getters & Setters
+    // region Getters & Setters
 
-    public String getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
-    public Order getOrder() {
-        return order;
-    }
-
-    public void setOrder(Order order) {
-        this.order = order;
-    }
-
-    public Date getCreatedAt() {
+    public LocalDateTime getCreatedAt() {
         return createdAt;
     }
 
-    public void setCreatedAt(Date createdAt) {
+    public void setCreatedAt(LocalDateTime createdAt) {
         this.createdAt = createdAt;
     }
 
@@ -79,5 +91,11 @@ public class Payment implements Serializable {
         this.currency = currency;
     }
 
-    //endregion
+    // endregion
+
+    // region Abstract Methods
+
+    public abstract void processPayment();
+
+    // endregion
 }
