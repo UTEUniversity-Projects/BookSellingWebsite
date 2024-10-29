@@ -8,18 +8,15 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-/**
- * Servlet implementation class HomeController
- */
-@WebServlet("/staff/dashboard")
-public class DashboardController extends HttpServlet {
+@WebServlet("/staff/product-dashboard")
+public class ProductDashboardController extends HttpServlet {
     @Serial
     private static final long serialVersionUID = 1L;
 
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public DashboardController() {
+    public ProductDashboardController() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -29,7 +26,7 @@ public class DashboardController extends HttpServlet {
      */
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         // TODO Auto-generated method stub
-        request.getRequestDispatcher("/views/staff/dashboard.jsp").forward(request, response);
+        request.getRequestDispatcher("/views/staff/product-dashboard.jsp").forward(request, response);
     }
 
     /**
@@ -39,5 +36,4 @@ public class DashboardController extends HttpServlet {
         // TODO Auto-generated method stub
         doGet(request, response);
     }
-
 }

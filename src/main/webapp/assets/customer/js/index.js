@@ -13,4 +13,4 @@ $(document).ready(() => {
 	forgotPassword();
 	countNotifications();
 	updateInformation();
-});
+}
