@@ -3,8 +3,8 @@
 <!-- Register -->
 <section class="section-register padding-tb-100">
     <div class="container-md">
-        <div class="row">
-            <div class="col-12">
+        <div class="row justify-center">
+            <div class="col-12 col-sm-10 col-md-12">
                 <div
                         class="cr-register"
                         data-aos="fade-up"
@@ -13,7 +13,7 @@
                 >
                     <div class="flex">
                         <div class="form-logo basis-[70%]">
-                            <img src="customer/img/logo/biblio.png" alt="logo" class="w-full h-full object-contain"/>
+                            <img src="${pageContext.request.contextPath}/customer/img/logo/biblio.png" alt="logo" class="w-full h-full object-contain"/>
                         </div>
                         <div class="form-logo col-6 basis-[30%] rounded-full border-2 border-solid border-gray-100 p-2 overflow-hidden shadow:md">
                             <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS-Javwn-7MizS4Uur3j8_A-sk6T_TRToe6Uw&s"
@@ -21,9 +21,9 @@
                                  alt="avatar"/>
                         </div>
                     </div>
-                    <form action="update-information" method="post" class="cr-content-form">
+                    <form class="cr-content-form">
                         <div class="row">
-                            <div class="col-6">
+                            <div class="col-sm-12 col-md-12">
                                 <div class="form-group mb-2">
                                     <label class="text-md text-slate-700 mb-1 ml-2"
                                     >Họ và tên*</label
@@ -35,7 +35,7 @@
                                     />
                                 </div>
                             </div>
-                            <div class="col-6">
+                            <div class="col-sm-12 col-md-12">
                                 <div class="form-group mb-2">
                                     <label class="text-md text-slate-700 mb-1 ml-2"
                                     >Tên đăng nhập*</label
@@ -57,7 +57,7 @@
                                     />
                                 </div>
                             </div>
-                            <div class="col-6">
+                            <div class="col-sm-12 col-md-12">
                                 <div class="form-group mb-2">
                                     <label class="text-md text-slate-700 mb-1 ml-2"
                                     >Số điện thoại*</label
@@ -69,7 +69,7 @@
                                     />
                                 </div>
                             </div>
-                            <div class="col-6">
+                            <div class="col-sm-12 col-md-12">
                                 <div class="form-group mb-2">
                                     <label class="text-md text-slate-700 mb-1 ml-2">Ngày sinh</label>
                                     <input id="" type="date"
@@ -109,7 +109,6 @@
                                 </div>
 
                             </div>
-
                             <div class="col-12">
                                 <div class="form-group mb-2">
                                     <label class="text-md text-slate-700 mb-1 ml-2"
@@ -134,7 +133,7 @@
                                     />
                                 </div>
                             </div>
-                            <div class="col-sm-6">
+                            <div class="col-sm-12 col-md-12">
                                 <div class="form-group mb-2">
                                     <label
                                             for="city"
@@ -149,7 +148,7 @@
                                     </select>
                                 </div>
                             </div>
-                            <div class="col-sm-6">
+                            <div class="col-sm-12 col-md-12">
                                 <div class="form-group mb-2">
                                     <label
                                             for="district"
@@ -164,7 +163,7 @@
                                     </select>
                                 </div>
                             </div>
-                            <div class="col-sm-6">
+                            <div class="col-sm-12 col-md-12">
                                 <div class="form-group mb-2">
                                     <label
                                             for="ward"
@@ -179,7 +178,7 @@
                                     </select>
                                 </div>
                             </div>
-                            <div class="col-sm-6">
+                            <div class="col-sm-12 col-md-12">
                                 <div class="form-group mb-2">
                                     <label
                                             for="hamlet"
@@ -223,7 +222,7 @@
                                         Thông tin cá nhân
                                     </a>
                                     <button
-                                            type="submit"
+                                            type="button"
                                             class="btn-update-information py-2 border border-solid px-4 inline-block rounded-md hover:bg-gray-100 transition-all duration-300"
                                     >
                                         Cập nhật
@@ -237,20 +236,6 @@
         </div>
     </div>
 </section>
-
-<div class="modal-update-information inset-0 z-[999] transition-all duration-300">
-    <div class="overlay cursor-pointer opacity-0 bg-black/20 inset-0 z-[1000]"></div>
-    <div class="modal-content absolute z-[1000] top-[30%] left-1/2 bg-white rounded w-[400px] h-[200px] bottomup">
-        <div class="checkmark-wrapper">
-            <svg class="checkmark" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 52 52">
-                <circle class="checkmark-circle" cx="26" cy="26" r="25" fill="none"/>
-                <path class="checkmark-check" fill="none" d="M14 27l7 7 16-16"/>
-            </svg>
-            <p class="success-message">Email đã được gửi thành công!</p>
-        </div>
-    </div>
-</div>
-
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"
         integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g=="
@@ -272,3 +257,5 @@
 		});
 	});
 </script>
+
+<script src="customer/js/update-information.js" type="module"></script>

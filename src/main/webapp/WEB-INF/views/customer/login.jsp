@@ -12,7 +12,7 @@
                         data-aos-delay="400"
                 >
                     <div class="form-logo">
-                        <img src="customer/img/logo/logo.png" alt="logo"/>
+                        <img src="${pageContext.request.contextPath}/customer/img/logo/logo.png" alt="logo"/>
                     </div>
                     <form class="cr-content-form">
                         <div class="mb-2 flex flex-col">
@@ -21,7 +21,7 @@
                             >
                             <input
                                     type="email"
-                                    autocomplete="on"
+                                    autocomplete=on
                                     placeholder="Nhập email của bạn"
                                     class="input block w-full py-2 px-4 text-gray-900 border-1 border-gray-300 rounded-lg text-[16px] focus:ring-blue-500 focus:border-blue-500 transition-all ease-linear bg-white focus:shadow-lg focus:shadow-[rgba(3,_102,_214,_0.3)_0px_0px_0px_3px]"
                             />
@@ -151,4 +151,6 @@
         </div>
     </div>
 </section>
+
+<script src="customer/js/login.js" type="module"></script>
 

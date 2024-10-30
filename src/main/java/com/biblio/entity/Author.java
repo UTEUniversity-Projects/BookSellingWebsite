@@ -27,12 +27,13 @@ public class Author extends ContributorProfile implements Serializable {
     // region Constructors
 
     public Author() {
-        super();
     }
 
-    public Author(Long id, String name, String introduction, LocalDateTime joinAt) {
+    public Author(String id, String name, String introduction, LocalDateTime joinAt) {
         super(id, name, introduction, joinAt);
     }
+
+    // endregion Getters & Setters
 
     public Set<Book> getBooks() {
         return books;
@@ -49,6 +50,7 @@ public class Author extends ContributorProfile implements Serializable {
     public void setAvatar(MediaFile avatar) {
         this.avatar = avatar;
     }
+
 
     // endregion Constructors
 }

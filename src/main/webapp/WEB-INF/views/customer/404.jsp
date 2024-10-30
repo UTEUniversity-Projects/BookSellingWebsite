@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Không tìm thấy trang</title>
 
-    <link rel="stylesheet" href="customer/css/vendor/tailwind.min.css"/>
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/customer/css/vendor/tailwind.min.css"/>
     <link rel="shortcut icon" href="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSmPkxphYFYgA_tGRoVsA7Fb3EToOyQHWP2nw&s"/>
     <style>
         .emoji-404 {

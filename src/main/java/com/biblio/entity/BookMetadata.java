@@ -1,10 +1,12 @@
 package com.biblio.entity;
 
 import com.biblio.enumeration.EBookStatus;
+import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
 import java.io.Serializable;
 import java.time.LocalDateTime;
+import java.util.HashSet;
 import java.util.Set;
 
 @Entity
@@ -14,8 +16,9 @@ public class BookMetadata implements Serializable {
     // region Attributes
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    @GeneratedValue(generator = "uuid")
+    @GenericGenerator(name = "uuid", strategy = "org.hibernate.id.UUIDGenerator")
+    private String id;
 
     @Column(name = "created_at", nullable = false)
     private LocalDateTime createdAt;
@@ -40,7 +43,7 @@ public class BookMetadata implements Serializable {
             joinColumns = @JoinColumn(name = "book_metadata_id", nullable = false),
             inverseJoinColumns = @JoinColumn(name = "tag_id", nullable = false)
     )
-    private Set<Tag> tags;
+    private Set<Tag> tags = new HashSet<Tag>();
 
     @OneToOne(mappedBy = "metadata")
     private Book book;
@@ -55,7 +58,7 @@ public class BookMetadata implements Serializable {
     public BookMetadata() {
     }
 
-    public BookMetadata(Long id, LocalDateTime createdAt, LocalDateTime openingDate, double importPrice, EBookStatus status) {
+    public BookMetadata(String id, LocalDateTime createdAt, LocalDateTime openingDate, double importPrice, EBookStatus status) {
         this.id = id;
         this.createdAt = createdAt;
         this.openingDate = openingDate;
@@ -67,11 +70,11 @@ public class BookMetadata implements Serializable {
 
     // region Getters & Setters
 
-    public Long getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(String id) {
         this.id = id;
     }
 

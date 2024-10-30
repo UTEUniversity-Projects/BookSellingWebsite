@@ -5,6 +5,7 @@ import com.biblio.enumeration.EBookAgeRecommend;
 import com.biblio.enumeration.EBookCondition;
 import com.biblio.enumeration.EBookFormat;
 import com.biblio.enumeration.EBookLanguage;
+import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -20,8 +21,9 @@ public class Book implements Serializable {
     // region Attributes
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    @GeneratedValue(generator = "uuid")
+    @GenericGenerator(name = "uuid", strategy = "org.hibernate.id.UUIDGenerator")
+    private String id;
 
     @Column(name = "title", nullable = false)
     private String title;
@@ -115,7 +117,7 @@ public class Book implements Serializable {
     public Book() {
     }
 
-    public Book(Long id, String title, String description, double sellingPrice, LocalDateTime publicationDate, int edition, String codeISBN10, String codeISBN13, EBookFormat format, int handcover, double length, double width, double height, Set<EBookLanguage> languages, double weight, EBookCondition condition, EBookAgeRecommend recommendedAge) {
+    public Book(String id, String title, String description, double sellingPrice, LocalDateTime publicationDate, int edition, String codeISBN10, String codeISBN13, EBookFormat format, int handcover, double length, double width, double height, Set<EBookLanguage> languages, double weight, EBookCondition condition, EBookAgeRecommend recommendedAge) {
         this.id = id;
         this.title = title;
         this.description = description;
@@ -139,11 +141,11 @@ public class Book implements Serializable {
 
     // region Getters & Setters
 
-    public Long getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(String id) {
         this.id = id;
     }
 

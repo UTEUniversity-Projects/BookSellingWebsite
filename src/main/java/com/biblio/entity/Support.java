@@ -1,6 +1,7 @@
 package com.biblio.entity;
 
 import com.biblio.enumeration.ESupportStatus;
+import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -14,8 +15,9 @@ public class Support implements Serializable {
     // region Attributes
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    @GeneratedValue(generator = "uuid")
+    @GenericGenerator(name = "uuid", strategy = "org.hibernate.id.UUIDGenerator")
+    private String id;
 
     @Column(name = "title", nullable = false)
     private String title;
@@ -58,7 +60,7 @@ public class Support implements Serializable {
     public Support() {
     }
 
-    public Support(Long id, String title, String requestContent, String feedbackContent, int rate, ESupportStatus status, LocalDateTime createdAt, LocalDateTime responsedAt) {
+    public Support(String id, String title, String requestContent, String feedbackContent, int rate, ESupportStatus status, LocalDateTime createdAt, LocalDateTime responsedAt) {
         this.id = id;
         this.title = title;
         this.requestContent = requestContent;
@@ -73,11 +75,11 @@ public class Support implements Serializable {
 
     // region Getters & Setters
 
-    public Long getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(String id) {
         this.id = id;
     }
 

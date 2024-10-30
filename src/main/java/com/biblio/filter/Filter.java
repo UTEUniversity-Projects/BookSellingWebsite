@@ -1,25 +1,25 @@
-package com.biblio.controller.customer;
+package com.biblio.filter;
 
+import java.io.IOException;
+import java.io.Serial;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.io.IOException;
-import java.io.Serial;
 
 /**
- * Servlet implementation class HomeController
+ * Servlet implementation class Filter
  */
-@WebServlet("/product")
-public class ProductController extends HttpServlet {
+@WebServlet("/Filter")
+public class Filter extends HttpServlet {
     @Serial
     private static final long serialVersionUID = 1L;
 
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public ProductController() {
+    public Filter() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -29,8 +29,7 @@ public class ProductController extends HttpServlet {
      */
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         // TODO Auto-generated method stub
-        request.setAttribute("breadcumb", "Chi tiết sách");
-        request.getRequestDispatcher("/views/customer/product.jsp").forward(request, response);
+        response.getWriter().append("Served at: ").append(request.getContextPath());
     }
 
     /**

@@ -30,7 +30,7 @@
             <div class="w-[100px] h-[100px] flex-shrink-0">
               <img
                       class="w-full h-full object-cover"
-                      src="customer/img/product/10.jpg"
+                      src="${pageContext.request.contextPath}/customer/img/product/10.jpg"
                       alt="Product"
               />
             </div>

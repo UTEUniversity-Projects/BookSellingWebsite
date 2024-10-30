@@ -1,7 +1,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java"%>
 
 <footer class="footer padding-t-100 bg-off-white">
-    <div class="container-xxl">
+    <div class="container-md">
         <div class="row footer-top padding-b-100">
             <div class="col-xl-4 col-lg-6 col-sm-12 col-12 cr-footer-border">
                 <div class="cr-footer-logo">

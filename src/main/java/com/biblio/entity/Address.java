@@ -1,7 +1,11 @@
 package com.biblio.entity;
 
+import org.hibernate.annotations.GenericGenerator;
+
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Table(name = "address")
@@ -10,9 +14,9 @@ public class Address implements Serializable {
     // region Attributes
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
-    private Long id;
+    @GeneratedValue(generator = "uuid")
+    @GenericGenerator(name = "uuid", strategy = "org.hibernate.id.UUIDGenerator")
+    private String id;
 
     @Column(name = "nation", nullable = false)
     private String nation;
@@ -33,12 +37,17 @@ public class Address implements Serializable {
 
     // region Relationships
 
-//    @OneToOne
-//    @JoinColumn(name = "user_id")
-//    private User user;
-
     @OneToOne(mappedBy = "address")
     private Order order;
+
+    @ManyToMany(mappedBy = "addresses")
+    private Set<Customer> customers = new HashSet<Customer>();
+
+    @ManyToMany(mappedBy = "addresses")
+    private Set<Staff> staffs = new HashSet<Staff>();
+
+    @ManyToMany(mappedBy = "addresses")
+    private Set<Owner> owners = new HashSet<Owner>();
 
     // endregion
 
@@ -46,7 +55,8 @@ public class Address implements Serializable {
 
     public Address() {}
 
-    public Address(String nation, String province, String district, String village, String detail) {
+    public Address(String id, String nation, String province, String district, String village, String detail) {
+        this.id = id;
         this.nation = nation;
         this.province = province;
         this.district = district;
@@ -58,11 +68,11 @@ public class Address implements Serializable {
 
     // region Getters & Setters
 
-    public Long getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(String id) {
         this.id = id;
     }
 
@@ -112,6 +122,30 @@ public class Address implements Serializable {
 
     public void setOrder(Order order) {
         this.order = order;
+    }
+
+    public Set<Customer> getCustomers() {
+        return customers;
+    }
+
+    public void setCustomers(Set<Customer> customers) {
+        this.customers = customers;
+    }
+
+    public Set<Staff> getStaffs() {
+        return staffs;
+    }
+
+    public void setStaffs(Set<Staff> staffs) {
+        this.staffs = staffs;
+    }
+
+    public Set<Owner> getOwners() {
+        return owners;
+    }
+
+    public void setOwners(Set<Owner> owners) {
+        this.owners = owners;
     }
 
     // endregion

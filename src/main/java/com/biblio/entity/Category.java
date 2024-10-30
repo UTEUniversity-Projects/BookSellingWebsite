@@ -13,7 +13,6 @@ import java.util.Set;
 @Table(name = "category")
 public class Category extends Classification implements Serializable {
 
-
     // region Relationships
 
     @OneToMany(mappedBy = "category")
@@ -31,7 +30,7 @@ public class Category extends Classification implements Serializable {
     }
 
 
-    public Category(Long id, String name, String shortScript, String fullScript, EClassificationStatus status) {
+    public Category(String id, String name, String shortScript, String fullScript, EClassificationStatus status) {
         super(id, name, shortScript, fullScript, status);
     }
 

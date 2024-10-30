@@ -5,7 +5,7 @@
             <div class="col-lg-12">
                 <div class="top-header">
                     <a href="home" class="cr-logo">
-                        <img src="customer/img/logo/biblio.png" alt="logo" class="logo"/>
+                        <img src="${pageContext.request.contextPath}/customer/img/logo/biblio.png" alt="logo" class="logo"/>
                     </a>
                     <form class="cr-search" method="post">
                         <input
@@ -66,7 +66,7 @@
                                 <i class="ri-notification-3-line"></i>
                                 <span>Thông báo</span>
                                 <p class="notification-count absolute top-[-10px] left-[10px] rounded-full bg-black text-white inline-block w-4 h-4 text-[10px] text-center">
-                                    3</p>
+                                    0</p>
                             </a>
                             <div class="notification-content transition-all duration-300">
                                 <div class="text-right px-4 py-2">
@@ -201,3 +201,5 @@
         </div>
     </div>
 </header>
+
+<script src="customer/js/notifications.js" type="module"></script>

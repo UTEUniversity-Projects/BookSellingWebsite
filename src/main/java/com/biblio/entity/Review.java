@@ -1,5 +1,7 @@
 package com.biblio.entity;
 
+import org.hibernate.annotations.GenericGenerator;
+
 import javax.persistence.*;
 import java.io.Serializable;
 import java.time.LocalDateTime;
@@ -11,8 +13,9 @@ public class Review implements Serializable {
     // region Attributes
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    @GeneratedValue(generator = "uuid")
+    @GenericGenerator(name = "uuid", strategy = "org.hibernate.id.UUIDGenerator")
+    private String id;
 
     @Column(name = "rate", nullable = false)
     private int rate;
@@ -45,7 +48,7 @@ public class Review implements Serializable {
     public Review() {
     }
 
-    public Review(Long id, int rate, String content, boolean readyToIntroduce, LocalDateTime createdAt) {
+    public Review(String id, int rate, String content, boolean readyToIntroduce, LocalDateTime createdAt) {
         this.id = id;
         this.rate = rate;
         this.content = content;
@@ -57,11 +60,11 @@ public class Review implements Serializable {
 
     // region Getters & Setters
 
-    public Long getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(String id) {
         this.id = id;
     }
 

@@ -1,6 +1,7 @@
 package com.biblio.entity;
 
 import com.biblio.enumeration.EClassificationStatus;
+import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -11,8 +12,9 @@ public abstract class Classification implements Serializable {
     // region Attributes
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    @GeneratedValue(generator = "uuid")
+    @GenericGenerator(name = "uuid", strategy = "org.hibernate.id.UUIDGenerator")
+    private String id;
 
     @Column(name = "name", nullable = false)
     private String name;
@@ -33,7 +35,7 @@ public abstract class Classification implements Serializable {
 
     public Classification() {}
 
-    public Classification(Long id, String name, String shortScript, String fullScript, EClassificationStatus status) {
+    public Classification(String id, String name, String shortScript, String fullScript, EClassificationStatus status) {
         this.id = id;
         this.name = name;
         this.shortScript = shortScript;
@@ -45,11 +47,11 @@ public abstract class Classification implements Serializable {
 
     // region Getters & Setters
 
-    public Long getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(String id) {
         this.id = id;
     }
 

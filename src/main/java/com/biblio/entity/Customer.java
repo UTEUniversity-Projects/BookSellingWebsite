@@ -6,6 +6,7 @@ import com.biblio.enumeration.EMembership;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.time.LocalDateTime;
+import java.util.HashSet;
 import java.util.Set;
 
 @Entity
@@ -22,24 +23,26 @@ public class Customer extends User implements Serializable {
 
     // region Relationships
 
+    @ManyToMany(fetch = FetchType.LAZY)
+    @JoinTable(name = "customer_address",
+            joinColumns = @JoinColumn(name = "customer_id", nullable = false),
+            inverseJoinColumns = @JoinColumn(name = "address_id", nullable = false))
+    private Set<Address> addresses = new HashSet<Address>();
+
     @OneToMany(mappedBy = "customer", cascade = CascadeType.ALL, orphanRemoval = true)
-    private Set<Order> orders;
+    private Set<Order> orders = new HashSet<Order>();
 
     @OneToOne(mappedBy = "customer", cascade = CascadeType.ALL, orphanRemoval = true)
     private Cart cart;
 
     @OneToMany(mappedBy = "customer", cascade = CascadeType.ALL, orphanRemoval = true)
-    private Set<Support> supports;
+    private Set<Support> supports = new HashSet<Support>();
 
     @ManyToMany(mappedBy = "customers")
-    private Set<Notification> notifications;
+    private Set<Notification> notifications = new HashSet<Notification>();
 
     @OneToMany(mappedBy = "customer", cascade = CascadeType.ALL, orphanRemoval = true)
-    private Set<Review> reviews;
-
-    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    @JoinColumn(name = "media_file_id")
-    private MediaFile avatar;
+    private Set<Review> reviews = new HashSet<Review>();
 
     // endregion
 
@@ -49,12 +52,8 @@ public class Customer extends User implements Serializable {
         super();
     }
 
-    public Customer(EMembership membership) {
-        this.membership = membership;
-    }
-
-    public Customer(Long id, String username, String fullName, String password, String emailAddress, String dateOfBirth, EGender gender, String phoneNumber, LocalDateTime joinAt, EMembership membership) {
-        super(id, username, fullName, password, emailAddress, dateOfBirth, gender, phoneNumber, joinAt);
+    public Customer(String id, String username, String fullName, String password, String emailAddress, String dateOfBirth, EGender gender, String phoneNumber, String avatar, LocalDateTime joinAt, EMembership membership) {
+        super(id, username, fullName, password, emailAddress, dateOfBirth, gender, phoneNumber, avatar, joinAt);
         this.membership = membership;
     }
 
@@ -68,6 +67,14 @@ public class Customer extends User implements Serializable {
 
     public void setMembership(EMembership membership) {
         this.membership = membership;
+    }
+
+    public Set<Address> getAddresses() {
+        return addresses;
+    }
+
+    public void setAddresses(Set<Address> addresses) {
+        this.addresses = addresses;
     }
 
     public Set<Order> getOrders() {
@@ -109,15 +116,6 @@ public class Customer extends User implements Serializable {
     public void setReviews(Set<Review> reviews) {
         this.reviews = reviews;
     }
-
-    public MediaFile getAvatar() {
-        return avatar;
-    }
-
-    public void setAvatar(MediaFile avatar) {
-        this.avatar = avatar;
-    }
-
 
     // endregion
 }

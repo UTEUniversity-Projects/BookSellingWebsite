@@ -178,7 +178,7 @@
                                         </div>
                                     </div>
                                     <img
-                                            src="customer/img/categories/3.jpg"
+                                            src="${pageContext.request.contextPath}/customer/img/categories/3.jpg"
                                             alt="categories-3"
                                     />
                                 </div>
@@ -205,7 +205,7 @@
                                         </div>
                                     </div>
                                     <img
-                                            src="customer/img/categories/4.jpg"
+                                            src="${pageContext.request.contextPath}/customer/img/categories/4.jpg"
                                             alt="categories-4"
                                     />
                                 </div>
@@ -241,7 +241,7 @@
                                         </div>
                                     </div>
                                     <img
-                                            src="customer/img/categories/1.jpg"
+                                            src="${pageContext.request.contextPath}/customer/img/categories/1.jpg"
                                             alt="categories-1"
                                     />
                                 </div>
@@ -268,7 +268,7 @@
                                         </div>
                                     </div>
                                     <img
-                                            src="customer/img/categories/2.jpg"
+                                            src="${pageContext.request.contextPath}/customer/img/categories/2.jpg"
                                             alt="categories-2"
                                     />
                                 </div>
@@ -304,7 +304,7 @@
                                         </div>
                                     </div>
                                     <img
-                                            src="customer/img/categories/5.jpg"
+                                            src="${pageContext.request.contextPath}/customer/img/categories/5.jpg"
                                             alt="categories-5"
                                     />
                                 </div>
@@ -331,7 +331,7 @@
                                         </div>
                                     </div>
                                     <img
-                                            src="customer/img/categories/6.jpg"
+                                            src="${pageContext.request.contextPath}/customer/img/categories/6.jpg"
                                             alt="categories-6"
                                     />
                                 </div>
@@ -367,7 +367,7 @@
                                         </div>
                                     </div>
                                     <img
-                                            src="customer/img/categories/7.jpg"
+                                            src="${pageContext.request.contextPath}/customer/img/categories/7.jpg"
                                             alt="categories-7"
                                     />
                                 </div>
@@ -394,7 +394,7 @@
                                         </div>
                                     </div>
                                     <img
-                                            src="customer/img/categories/8.jpg"
+                                            src="${pageContext.request.contextPath}/customer/img/categories/8.jpg"
                                             alt="categories-8"
                                     />
                                 </div>
@@ -430,7 +430,7 @@
                                         </div>
                                     </div>
                                     <img
-                                            src="customer/img/categories/9.jpg"
+                                            src="${pageContext.request.contextPath}/customer/img/categories/9.jpg"
                                             alt="categories-9"
                                     />
                                 </div>
@@ -457,7 +457,7 @@
                                         </div>
                                     </div>
                                     <img
-                                            src="customer/img/categories/10.jpg"
+                                            src="${pageContext.request.contextPath}/customer/img/categories/10.jpg"
                                             alt="categories-10"
                                     />
                                 </div>
@@ -507,7 +507,7 @@
                     >
                         <div class="cr-ice-cubes">
                             <img
-                                    src="customer/img/product/product-banner.jpg"
+                                    src="${pageContext.request.contextPath}/customer/img/product/product-banner.jpg"
                                     alt="product banner"
                             />
                             <div class="cr-ice-cubes-contain">
@@ -530,7 +530,7 @@
                         <div class="cr-product-card">
                             <div class="cr-product-image">
                                 <div class="cr-image-inner zoom-image-hover">
-                                    <img src="customer/img/product/1.jpg" alt="product-1"/>
+                                    <img src="${pageContext.request.contextPath}/customer/img/product/1.jpg" alt="product-1"/>
                                 </div>
                                 <div class="cr-side-view">
                                     <a href="javascript:void(0)" class="wishlist">
@@ -577,7 +577,7 @@
                         <div class="cr-product-card">
                             <div class="cr-product-image">
                                 <div class="cr-image-inner zoom-image-hover">
-                                    <img src="customer/img/product/9.jpg" alt="product-1"/>
+                                    <img src="${pageContext.request.contextPath}/customer/img/product/9.jpg" alt="product-1"/>
                                 </div>
                                 <div class="cr-side-view">
                                     <a href="javascript:void(0)" class="wishlist">
@@ -624,7 +624,7 @@
                         <div class="cr-product-card">
                             <div class="cr-product-image">
                                 <div class="cr-image-inner zoom-image-hover">
-                                    <img src="customer/img/product/2.jpg" alt="product-1"/>
+                                    <img src="${pageContext.request.contextPath}/customer/img/product/2.jpg" alt="product-1"/>
                                 </div>
                                 <div class="cr-side-view">
                                     <a href="javascript:void(0)" class="wishlist">
@@ -671,7 +671,7 @@
                         <div class="cr-product-card">
                             <div class="cr-product-image">
                                 <div class="cr-image-inner zoom-image-hover">
-                                    <img src="customer/img/product/17.jpg" alt="product-1"/>
+                                    <img src="${pageContext.request.contextPath}/customer/img/product/17.jpg" alt="product-1"/>
                                 </div>
                                 <div class="cr-side-view">
                                     <a href="javascript:void(0)" class="wishlist">
@@ -718,7 +718,7 @@
                         <div class="cr-product-card">
                             <div class="cr-product-image">
                                 <div class="cr-image-inner zoom-image-hover">
-                                    <img src="customer/img/product/11.jpg" alt="product-1"/>
+                                    <img src="${pageContext.request.contextPath}/customer/img/product/11.jpg" alt="product-1"/>
                                 </div>
                                 <div class="cr-side-view">
                                     <a href="javascript:void(0)" class="wishlist">
@@ -765,7 +765,7 @@
                         <div class="cr-product-card">
                             <div class="cr-product-image">
                                 <div class="cr-image-inner zoom-image-hover">
-                                    <img src="customer/img/product/3.jpg" alt="product-1"/>
+                                    <img src="${pageContext.request.contextPath}/customer/img/product/3.jpg" alt="product-1"/>
                                 </div>
                                 <div class="cr-side-view">
                                     <a href="javascript:void(0)" class="wishlist">
@@ -812,7 +812,7 @@
                         <div class="cr-product-card">
                             <div class="cr-product-image">
                                 <div class="cr-image-inner zoom-image-hover">
-                                    <img src="customer/img/product/10.jpg" alt="product-1"/>
+                                    <img src="${pageContext.request.contextPath}/customer/img/product/10.jpg" alt="product-1"/>
                                 </div>
                                 <div class="cr-side-view">
                                     <a href="javascript:void(0)" class="wishlist">
@@ -859,7 +859,7 @@
                         <div class="cr-product-card">
                             <div class="cr-product-image">
                                 <div class="cr-image-inner zoom-image-hover">
-                                    <img src="customer/img/product/17.jpg" alt="product-1"/>
+                                    <img src="${pageContext.request.contextPath}/customer/img/product/17.jpg" alt="product-1"/>
                                 </div>
                                 <div class="cr-side-view">
                                     <a href="javascript:void(0)" class="wishlist">
@@ -920,7 +920,7 @@
                         >
                             <div class="cr-product-banner-image">
                                 <img
-                                        src="customer/img/product-banner/1.jpg"
+                                        src="${pageContext.request.contextPath}/customer/img/product-banner/1.jpg"
                                         alt="product-banner"
                                 />
                                 <div class="cr-product-banner-contain">
@@ -948,7 +948,7 @@
                         >
                             <div class="cr-product-banner-image">
                                 <img
-                                        src="customer/img/product-banner/2.jpg"
+                                        src="${pageContext.request.contextPath}/customer/img/product-banner/2.jpg"
                                         alt="product-banner"
                                 />
                                 <div class="cr-product-banner-contain">
@@ -973,7 +973,7 @@
                         >
                             <div class="cr-product-banner-image">
                                 <img
-                                        src="customer/img/product-banner/3.jpg"
+                                        src="${pageContext.request.contextPath}/customer/img/product-banner/3.jpg"
                                         alt="product-banner"
                                 />
                                 <div class="cr-product-banner-contain">
@@ -1133,7 +1133,7 @@
                         <div class="cr-product-card">
                             <div class="cr-product-image">
                                 <div class="cr-image-inner zoom-image-hover">
-                                    <img src="customer/img/product/9.jpg" alt="product-1"/>
+                                    <img src="${pageContext.request.contextPath}/customer/img/product/9.jpg" alt="product-1"/>
                                 </div>
                                 <div class="cr-side-view">
                                     <a href="javascript:void(0)" class="wishlist">
@@ -1178,7 +1178,7 @@
                         <div class="cr-product-card">
                             <div class="cr-product-image">
                                 <div class="cr-image-inner zoom-image-hover">
-                                    <img src="customer/img/product/10.jpg" alt="product-1"/>
+                                    <img src="${pageContext.request.contextPath}/customer/img/product/10.jpg" alt="product-1"/>
                                 </div>
                                 <div class="cr-side-view">
                                     <a href="javascript:void(0)" class="wishlist">
@@ -1223,7 +1223,7 @@
                         <div class="cr-product-card">
                             <div class="cr-product-image">
                                 <div class="cr-image-inner zoom-image-hover">
-                                    <img src="customer/img/product/1.jpg" alt="product-1"/>
+                                    <img src="${pageContext.request.contextPath}/customer/img/product/1.jpg" alt="product-1"/>
                                 </div>
                                 <div class="cr-side-view">
                                     <a href="javascript:void(0)" class="wishlist">
@@ -1268,7 +1268,7 @@
                         <div class="cr-product-card">
                             <div class="cr-product-image">
                                 <div class="cr-image-inner zoom-image-hover">
-                                    <img src="customer/img/product/2.jpg" alt="product-1"/>
+                                    <img src="${pageContext.request.contextPath}/customer/img/product/2.jpg" alt="product-1"/>
                                 </div>
                                 <div class="cr-side-view">
                                     <a href="javascript:void(0)" class="wishlist">
@@ -1313,7 +1313,7 @@
                         <div class="cr-product-card">
                             <div class="cr-product-image">
                                 <div class="cr-image-inner zoom-image-hover">
-                                    <img src="customer/img/product/3.jpg" alt="product-1"/>
+                                    <img src="${pageContext.request.contextPath}/customer/img/product/3.jpg" alt="product-1"/>
                                 </div>
                                 <div class="cr-side-view">
                                     <a href="javascript:void(0)" class="wishlist">
@@ -1363,7 +1363,7 @@
             >
                 <div class="cr-products-rightbar">
                     <img
-                            src="customer/img/product/products-rightview.jpg"
+                            src="${pageContext.request.contextPath}/customer/img/product/products-rightview.jpg"
                             alt="products-rightview"
                     />
                     <div class="cr-products-rightbar-content">
@@ -1416,7 +1416,7 @@
                             <div class="cr-testimonial">
                                 <div class="cr-testimonial-image">
                                     <img
-                                            src="customer/img/testimonial/1.jpg"
+                                            src="${pageContext.request.contextPath}/customer/img/testimonial/1.jpg"
                                             alt="businessman"
                                     />
                                 </div>
@@ -1445,7 +1445,7 @@
                             <div class="cr-testimonial">
                                 <div class="cr-testimonial-image">
                                     <img
-                                            src="customer/img/testimonial/2.jpg"
+                                            src="${pageContext.request.contextPath}/customer/img/testimonial/2.jpg"
                                             alt="businessman"
                                     />
                                 </div>
@@ -1474,7 +1474,7 @@
                             <div class="cr-testimonial">
                                 <div class="cr-testimonial-image">
                                     <img
-                                            src="customer/img/testimonial/3.jpg"
+                                            src="${pageContext.request.contextPath}/customer/img/testimonial/3.jpg"
                                             alt="businessman"
                                     />
                                 </div>
@@ -1543,7 +1543,7 @@
                                     >
                                 </div>
                                 <div class="cr-blog-image">
-                                    <img src="customer/img/blog/2.jpg" alt="blog-2"/>
+                                    <img src="${pageContext.request.contextPath}/customer/img/blog/2.jpg" alt="blog-2"/>
                                     <div class="cr-blog-date">
                         <span>
                           10
@@ -1570,7 +1570,7 @@
                                     >
                                 </div>
                                 <div class="cr-blog-image">
-                                    <img src="customer/img/blog/1.jpg" alt="blog-1"/>
+                                    <img src="${pageContext.request.contextPath}/customer/img/blog/1.jpg" alt="blog-1"/>
                                     <div class="cr-blog-date">
                                         <span> 09<code>sep</code> </span>
                                     </div>
@@ -1596,7 +1596,7 @@
                                     >
                                 </div>
                                 <div class="cr-blog-image">
-                                    <img src="customer/img/blog/3.jpg" alt="blog-2"/>
+                                    <img src="${pageContext.request.contextPath}/customer/img/blog/3.jpg" alt="blog-2"/>
                                     <div class="cr-blog-date">
                         <span>
                           12
@@ -1623,7 +1623,7 @@
                                     >
                                 </div>
                                 <div class="cr-blog-image">
-                                    <img src="customer/img/blog/2.jpg" alt="blog-3"/>
+                                    <img src="${pageContext.request.contextPath}/customer/img/blog/2.jpg" alt="blog-3"/>
                                     <div class="cr-blog-date">
                         <span>
                           22

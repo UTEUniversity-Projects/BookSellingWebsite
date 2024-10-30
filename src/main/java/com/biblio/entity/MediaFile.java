@@ -1,5 +1,7 @@
 package com.biblio.entity;
 
+import org.hibernate.annotations.GenericGenerator;
+
 import javax.persistence.*;
 import java.io.Serializable;
 
@@ -7,11 +9,12 @@ import java.io.Serializable;
 @Table(name = "media_file")
 public class MediaFile implements Serializable {
 
-    //region Attributes
+    // region Attributes
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    @GeneratedValue(generator = "uuid")
+    @GenericGenerator(name = "uuid", strategy = "org.hibernate.id.UUIDGenerator")
+    private String id;
 
     @Column(name = "file_name", nullable = false)
     private String fileName;
@@ -36,35 +39,26 @@ public class MediaFile implements Serializable {
     @OneToOne(mappedBy = "avatar")
     private Translator translator;
 
-    @OneToOne(mappedBy = "avatar")
-    private Customer customer;
-
-    @OneToOne(mappedBy = "avatar")
-    private Staff staff;
-
-    @OneToOne(mappedBy = "avatar")
-    private Owner owner;
-
     // endregion
 
     //region Constructors
     public MediaFile() {
     }
 
-    public MediaFile(Long id, String fileName, String storedCode) {
+    public MediaFile(String id, String fileName, String storedCode) {
         this.id = id;
         this.fileName = fileName;
         this.storedCode = storedCode;
     }
     //endregion
 
-    //region Getters & Setters
+    // region Getters & Setters
 
-    public Long getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(String id) {
         this.id = id;
     }
 
@@ -116,29 +110,5 @@ public class MediaFile implements Serializable {
         this.translator = translator;
     }
 
-    public Customer getCustomer() {
-        return customer;
-    }
-
-    public void setCustomer(Customer customer) {
-        this.customer = customer;
-    }
-
-    public Staff getStaff() {
-        return staff;
-    }
-
-    public void setStaff(Staff staff) {
-        this.staff = staff;
-    }
-
-    public Owner getOwner() {
-        return owner;
-    }
-
-    public void setOwner(Owner owner) {
-        this.owner = owner;
-    }
-
-    //endregion
+    // endregion
 }

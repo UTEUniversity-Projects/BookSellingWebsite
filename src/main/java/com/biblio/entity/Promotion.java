@@ -2,10 +2,12 @@ package com.biblio.entity;
 
 import com.biblio.enumeration.EPromotionStatus;
 import com.biblio.enumeration.EPromotionType;
+import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
 import java.io.Serializable;
 import java.time.LocalDateTime;
+import java.util.HashSet;
 import java.util.Set;
 
 @Entity
@@ -15,8 +17,9 @@ public class Promotion implements Serializable {
     // region Attributes
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    @GeneratedValue(generator = "uuid")
+    @GenericGenerator(name = "uuid", strategy = "org.hibernate.id.UUIDGenerator")
+    private String id;
 
     @Column(name = "created_at", nullable = false)
     private LocalDateTime createdAt;
@@ -57,8 +60,11 @@ public class Promotion implements Serializable {
 
     // region Relationships
 
-    @OneToMany(mappedBy = "promotion")
-    private Set<PromotionTarget> promotionTargets;
+    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JoinTable(name = "promotion_promotion_target",
+            joinColumns = @JoinColumn(name = "promotion_id", nullable = false),
+            inverseJoinColumns = @JoinColumn(name = "promotion_target_id", nullable = false))
+    private Set<PromotionTarget> promotionTargets = new HashSet<PromotionTarget>();
 
     @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JoinColumn(name = "order_id", nullable = false)
@@ -71,7 +77,7 @@ public class Promotion implements Serializable {
     public Promotion() {
     }
 
-    public Promotion(Long id, LocalDateTime createdAt, String code, LocalDateTime effectiveDate, LocalDateTime expirationDate, String title, String description, double percentDiscount, double discountLimit, double minValueToBeApplied, EPromotionType type, EPromotionStatus status) {
+    public Promotion(String id, LocalDateTime createdAt, String code, LocalDateTime effectiveDate, LocalDateTime expirationDate, String title, String description, double percentDiscount, double discountLimit, double minValueToBeApplied, EPromotionType type, EPromotionStatus status) {
         this.id = id;
         this.createdAt = createdAt;
         this.code = code;
@@ -88,11 +94,11 @@ public class Promotion implements Serializable {
 
     // region Getters & Setters
 
-    public Long getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(String id) {
         this.id = id;
     }
 

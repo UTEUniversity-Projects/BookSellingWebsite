@@ -2,11 +2,12 @@ package com.biblio.entity;
 
 import com.biblio.enumeration.ENotificationStatus;
 import com.biblio.enumeration.ENotificationType;
+import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.sql.Timestamp;
 import java.time.LocalDateTime;
+import java.util.HashSet;
 import java.util.Set;
 
 @Entity
@@ -16,8 +17,9 @@ public class Notification implements Serializable {
     // region Attributes
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    @GeneratedValue(generator = "uuid")
+    @GenericGenerator(name = "uuid", strategy = "org.hibernate.id.UUIDGenerator")
+    private String id;
 
     @Column(name = "created_at", nullable = false)
     private LocalDateTime createdAt;
@@ -49,17 +51,17 @@ public class Notification implements Serializable {
     @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JoinTable(name = "notification_owner", joinColumns = @JoinColumn(name = "notification_id", nullable = false),
             inverseJoinColumns = @JoinColumn(name = "owner_id", nullable = false))
-    private Set<Owner> owners;
+    private Set<Owner> owners = new HashSet<Owner>();
 
     @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JoinTable(name = "notification_staff", joinColumns = @JoinColumn(name = "notification_id", nullable = false),
             inverseJoinColumns = @JoinColumn(name = "staff_id", nullable = false))
-    private Set<Staff> staffs;
+    private Set<Staff> staffs = new HashSet<Staff>();
 
     @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JoinTable(name = "notification_customer", joinColumns = @JoinColumn(name = "notification_id", nullable = false),
             inverseJoinColumns = @JoinColumn(name = "customer_id", nullable = false))
-    private Set<Customer> customers;
+    private Set<Customer> customers = new HashSet<Customer>();
 
     // endregion
 
@@ -68,7 +70,7 @@ public class Notification implements Serializable {
     public Notification() {
     }
 
-    public Notification(Long id, LocalDateTime createdAt, LocalDateTime sentTime, String title, String content, String hyperlink, ENotificationType type, ENotificationStatus status) {
+    public Notification(String id, LocalDateTime createdAt, LocalDateTime sentTime, String title, String content, String hyperlink, ENotificationType type, ENotificationStatus status) {
         this.id = id;
         this.createdAt = createdAt;
         this.sentTime = sentTime;
@@ -83,11 +85,11 @@ public class Notification implements Serializable {
 
     // region Getters & Setters
 
-    public Long getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(String id) {
         this.id = id;
     }
 

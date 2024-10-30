@@ -9,7 +9,7 @@
                 <!-- Form Sản phẩm -->
                 <div class="product-return-form p-4 bg-white shadow rounded mb-4">
                     <div class="form-logo text-center mb-4">
-                        <img src="customer/img/logo/mebook-2.png" alt="logo" class="img-fluid" style="max-width: 150px;" />
+                        <img src="${pageContext.request.contextPath}/customer/img/logo/mebook-2.png" alt="logo" class="img-fluid" style="max-width: 150px;" />
                     </div>
                     <form class="cr-content-form">
                         <div class="return-product-box p-4 rounded-lg shadow-sm bg-white">

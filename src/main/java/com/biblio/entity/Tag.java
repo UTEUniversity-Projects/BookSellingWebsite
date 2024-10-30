@@ -6,6 +6,7 @@ import javax.persistence.Entity;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 import java.io.Serializable;
+import java.util.HashSet;
 import java.util.Set;
 
 @Entity
@@ -15,7 +16,7 @@ public class Tag extends Classification implements Serializable {
     // region Relationships
 
     @ManyToMany(mappedBy = "tags")
-    private Set<BookMetadata> metadatas;
+    private Set<BookMetadata> metadatas = new HashSet<BookMetadata>();
 
     // endregion
 
@@ -25,7 +26,7 @@ public class Tag extends Classification implements Serializable {
         super();
     }
 
-    public Tag(Long id, String name, String shortScript, String fullScript, EClassificationStatus status) {
+    public Tag(String id, String name, String shortScript, String fullScript, EClassificationStatus status) {
         super(id, name, shortScript, fullScript, status);
     }
 
