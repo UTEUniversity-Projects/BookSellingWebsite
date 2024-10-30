@@ -2,6 +2,7 @@ package com.biblio.entity;
 
 import com.biblio.enumeration.EPaymentCurrency;
 import com.biblio.enumeration.EPaymentStatus;
+import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -15,8 +16,9 @@ public abstract class Payment implements Serializable {
     // region Attributes
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    @GeneratedValue(generator = "uuid")
+    @GenericGenerator(name = "uuid", strategy = "org.hibernate.id.UUIDGenerator")
+    private String id;
 
     @Column(name = "created_at", nullable = false)
     private LocalDateTime createdAt;
@@ -39,7 +41,7 @@ public abstract class Payment implements Serializable {
     public Payment() {
     }
 
-    public Payment(Long id, LocalDateTime createdAt, double amount, EPaymentStatus status, EPaymentCurrency currency) {
+    public Payment(String id, LocalDateTime createdAt, double amount, EPaymentStatus status, EPaymentCurrency currency) {
         this.id = id;
         this.createdAt = createdAt;
         this.amount = amount;
@@ -51,11 +53,11 @@ public abstract class Payment implements Serializable {
 
     // region Getters & Setters
 
-    public Long getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(String id) {
         this.id = id;
     }
 

@@ -32,7 +32,7 @@
                 <div class="cr-product-card">
                     <div class="cr-product-image">
                         <div class="cr-image-inner zoom-image-hover">
-                            <img src="customer/img/product/1.jpg" alt="product-1" />
+                            <img src="${pageContext.request.contextPath}/customer/img/product/1.jpg" alt="product-1" />
                         </div>
                         <div class="cr-side-view">
                             <a class="cr-remove-product" href="javascript:void(0)">
@@ -89,7 +89,7 @@
                 <div class="cr-product-card">
                     <div class="cr-product-image">
                         <div class="cr-image-inner zoom-image-hover">
-                            <img src="customer/img/product/9.jpg" alt="product-1" />
+                            <img src="${pageContext.request.contextPath}/customer/img/product/9.jpg" alt="product-1" />
                         </div>
                         <div class="cr-side-view">
                             <a class="cr-remove-product" href="javascript:void(0)">
@@ -147,7 +147,7 @@
                 <div class="cr-product-card">
                     <div class="cr-product-image">
                         <div class="cr-image-inner zoom-image-hover">
-                            <img src="customer/img/product/2.jpg" alt="product-1" />
+                            <img src="${pageContext.request.contextPath}/customer/img/product/2.jpg" alt="product-1" />
                         </div>
                         <div class="cr-side-view">
                             <a class="cr-remove-product" href="javascript:void(0)">
@@ -205,7 +205,7 @@
                 <div class="cr-product-card">
                     <div class="cr-product-image">
                         <div class="cr-image-inner zoom-image-hover">
-                            <img src="customer/img/product/3.jpg" alt="product-1" />
+                            <img src="${pageContext.request.contextPath}/customer/img/product/3.jpg" alt="product-1" />
                         </div>
                         <div class="cr-side-view">
                             <a class="cr-remove-product" href="javascript:void(0)">

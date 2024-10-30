@@ -1,9 +1,11 @@
 package com.biblio.entity;
 
 import com.biblio.enumeration.EOrderStatus;
+import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.HashSet;
 import java.util.Set;
 
 @Entity
@@ -13,9 +15,9 @@ public class Order implements Serializable {
     // region Attributes
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
-    private Long id;
+    @GeneratedValue(generator = "uuid")
+    @GenericGenerator(name = "uuid", strategy = "org.hibernate.id.UUIDGenerator")
+    private String id;
 
     @Column(name = "note", nullable = false)
     private String note;
@@ -40,11 +42,11 @@ public class Order implements Serializable {
     @JoinColumn(name = "payment_id", nullable = false)
     private Payment payment;
 
-    @OneToMany(mappedBy = "order")
-    private Set<OrderItem> orderItems;
+    @OneToMany(mappedBy = "order", fetch = FetchType.LAZY)
+    private Set<OrderItem> orderItems = new HashSet<OrderItem>();
 
     @OneToMany(mappedBy = "order")
-    private Set<Promotion> promotions;
+    private Set<Promotion> promotions = new HashSet<Promotion>();
 
     // endregion
 
@@ -53,7 +55,7 @@ public class Order implements Serializable {
     public Order() {
     }
 
-    public Order(Long id, String note, EOrderStatus status) {
+    public Order(String id, String note, EOrderStatus status) {
         this.id = id;
         this.note = note;
         this.status = status;
@@ -63,11 +65,11 @@ public class Order implements Serializable {
 
     // region Getters & Setters
 
-    public Long getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(String id) {
         this.id = id;
     }
 

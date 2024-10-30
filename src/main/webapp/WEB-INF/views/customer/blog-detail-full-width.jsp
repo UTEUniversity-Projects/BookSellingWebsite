@@ -22,7 +22,7 @@
       <div class="col-lg-12">
         <div class="cr-blog-details">
           <div class="cr-blog-details-image">
-            <img src="customer/img/blog/blog-1.jpg" alt="blog-1">
+            <img src="${pageContext.request.contextPath}/customer/img/blog/blog-1.jpg" alt="blog-1">
           </div>
           <div class="cr-blog-details-content">
             <div class="cr-admin-date">
@@ -44,7 +44,7 @@
             <div class="col-6">
               <div class="cr-blog-inner-cols">
                 <div class="blog-img">
-                  <img src="customer/img/blog/blog-2.jpg" alt="blog-2">
+                  <img src="${pageContext.request.contextPath}/customer/img/blog/blog-2.jpg" alt="blog-2">
                 </div>
                 <div class="cr-blog-inner-content">
                   <p>Lorem ipsum dolor consectetur adipisicing elit. Molestias, dolorum!</p>
@@ -54,7 +54,7 @@
             <div class="col-6">
               <div class="cr-blog-inner-cols">
                 <div class="blog-img">
-                  <img src="customer/img/blog/blog-3.jpg" alt="blog-3">
+                  <img src="${pageContext.request.contextPath}/customer/img/blog/blog-3.jpg" alt="blog-3">
                 </div>
                 <div class="cr-blog-inner-content">
                   <p>Lorem ipsum dolor consectetur adipisicing elit. Molestias, dolorum!</p>

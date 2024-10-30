@@ -1,5 +1,5 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<div class="container-xl mx-auto">
+<section class="container-xl mx-auto">
   <div class="mt-[50px]">
     <div class="flex items-center justify-between">
       <div class="w-[200px] h-[200px] flex-shrink-0">
@@ -23,4 +23,4 @@
       <a href="notification-detail" class='px-4 py-2 bg-gray-200'>Xem chi tiết</a>
     </div>
   </div>
-</div>
+</section>

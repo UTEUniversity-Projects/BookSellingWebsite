@@ -1,5 +1,7 @@
 package com.biblio.entity;
 
+import org.hibernate.annotations.GenericGenerator;
+
 import javax.persistence.*;
 import java.io.Serializable;
 import java.sql.Timestamp;
@@ -13,8 +15,9 @@ public abstract class ContributorProfile implements Serializable {
     // region Attributes
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    @GeneratedValue(generator = "uuid")
+    @GenericGenerator(name = "uuid", strategy = "org.hibernate.id.UUIDGenerator")
+    private String id;
 
     @Column(name = "name", nullable = false)
     private String name;
@@ -32,7 +35,7 @@ public abstract class ContributorProfile implements Serializable {
     public ContributorProfile() {
     }
 
-    public ContributorProfile(Long id, String name, String introduction, LocalDateTime joinAt) {
+    public ContributorProfile(String id, String name, String introduction, LocalDateTime joinAt) {
         this.id = id;
         this.name = name;
         this.introduction = introduction;
@@ -43,11 +46,11 @@ public abstract class ContributorProfile implements Serializable {
 
     // region Getters & Setters
 
-    public Long getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(String id) {
         this.id = id;
     }
 

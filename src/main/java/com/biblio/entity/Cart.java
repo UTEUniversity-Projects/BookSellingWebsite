@@ -1,7 +1,10 @@
 package com.biblio.entity;
 
+import org.hibernate.annotations.GenericGenerator;
+
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.HashSet;
 import java.util.Set;
 
 @Entity
@@ -11,15 +14,16 @@ public class Cart implements Serializable {
     //region Attributes
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    @GeneratedValue(generator = "uuid")
+    @GenericGenerator(name = "uuid", strategy = "org.hibernate.id.UUIDGenerator")
+    private String id;
 
     //endregion
 
     // region Relationships
 
     @OneToMany(mappedBy = "cart")
-    private Set<OrderItem> orderItems;
+    private Set<OrderItem> orderItems = new HashSet<OrderItem>();
 
     @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JoinColumn(name = "customer_id")
@@ -32,7 +36,7 @@ public class Cart implements Serializable {
     public Cart() {
     }
 
-    public Cart(Long id) {
+    public Cart(String id) {
         this.id = id;
     }
 
@@ -40,11 +44,11 @@ public class Cart implements Serializable {
 
     // region Getters & Setters
 
-    public Long getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(String id) {
         this.id = id;
     }
 

@@ -475,7 +475,6 @@
 
 <!-- Main Custom -->
 <script src="customer/js/main.js?v=1"></script>
-<script src="customer/js/index.js?v=99" type="module"></script>
 </body>
 <div id="toast"></div>
 </html>

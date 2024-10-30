@@ -31,7 +31,7 @@
                         <a href="javascript:void(0)">read more</a>
                     </div>
                     <div class="cr-blog-image">
-                        <img src="customer/img/blog/blog-1.jpg" alt="blog-1">
+                        <img src="${pageContext.request.contextPath}/customer/img/blog/blog-1.jpg" alt="blog-1">
                     </div>
                 </div>
                 <div class="cr-blog-classic" data-aos="fade-up" data-aos-duration="2000" data-aos-delay="400">
@@ -45,7 +45,7 @@
                         <a href="javascript:void(0)">read more</a>
                     </div>
                     <div class="cr-blog-image">
-                        <img src="customer/img/blog/blog-2.jpg" alt="blog-2">
+                        <img src="${pageContext.request.contextPath}/customer/img/blog/blog-2.jpg" alt="blog-2">
                     </div>
                 </div>
                 <div class="cr-blog-classic" data-aos="fade-up" data-aos-duration="2000" data-aos-delay="400">
@@ -59,7 +59,7 @@
                         <a href="javascript:void(0)">read more</a>
                     </div>
                     <div class="cr-blog-image">
-                        <img src="customer/img/blog/blog-3.jpg" alt="blog-3">
+                        <img src="${pageContext.request.contextPath}/customer/img/blog/blog-3.jpg" alt="blog-3">
                     </div>
                 </div>
             </div>
@@ -75,7 +75,7 @@
                         <a href="javascript:void(0)">read more</a>
                     </div>
                     <div class="cr-blog-image">
-                        <img src="customer/img/blog/blog-2.jpg" alt="blog-2">
+                        <img src="${pageContext.request.contextPath}/customer/img/blog/blog-2.jpg" alt="blog-2">
                     </div>
                 </div>
                 <div class="cr-blog-classic" data-aos="fade-up" data-aos-duration="2000" data-aos-delay="400">
@@ -89,7 +89,7 @@
                         <a href="javascript:void(0)">read more</a>
                     </div>
                     <div class="cr-blog-image">
-                        <img src="customer/img/blog/blog-3.jpg" alt="blog-3">
+                        <img src="${pageContext.request.contextPath}/customer/img/blog/blog-3.jpg" alt="blog-3">
                     </div>
                 </div>
                 <div class="cr-blog-classic" data-aos="fade-up" data-aos-duration="2000" data-aos-delay="400">
@@ -103,7 +103,7 @@
                         <a href="javascript:void(0)">read more</a>
                     </div>
                     <div class="cr-blog-image">
-                        <img src="customer/img/blog/blog-1.jpg" alt="blog-1">
+                        <img src="${pageContext.request.contextPath}/customer/img/blog/blog-1.jpg" alt="blog-1">
                     </div>
                 </div>
             </div>

@@ -1,6 +1,7 @@
 package com.biblio.entity;
 
 import com.biblio.enumeration.EGender;
+import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -12,9 +13,9 @@ public class User implements Serializable {
     // region Attributes
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
-    private Long id;
+    @GeneratedValue(generator = "uuid")
+    @GenericGenerator(name = "uuid", strategy = "org.hibernate.id.UUIDGenerator")
+    private String id;
 
     @Column(name = "username", nullable = false)
     private String username;
@@ -38,16 +39,15 @@ public class User implements Serializable {
     @Column(name = "phone_number", nullable = false)
     private String phoneNumber;
 
+    @Column(name = "avatar", nullable = false)
+    private String avatar;
+
     @Column(name = "join_at", nullable = false)
     private LocalDateTime joinAt;
 
     // endregion
 
     // region Relationships
-
-    @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
-    @JoinColumn(name = "address_id", nullable = false)
-    private Address address;
 
     // endregion
 
@@ -56,7 +56,7 @@ public class User implements Serializable {
     public User() {
     }
 
-    public User(Long id, String username, String fullName, String password, String emailAddress, String dateOfBirth, EGender gender, String phoneNumber, LocalDateTime joinAt) {
+    public User(String id, String username, String fullName, String password, String emailAddress, String dateOfBirth, EGender gender, String phoneNumber, String avatar, LocalDateTime joinAt) {
         this.id = id;
         this.username = username;
         this.fullName = fullName;
@@ -65,6 +65,7 @@ public class User implements Serializable {
         this.dateOfBirth = dateOfBirth;
         this.gender = gender;
         this.phoneNumber = phoneNumber;
+        this.avatar = avatar;
         this.joinAt = joinAt;
     }
 
@@ -72,11 +73,11 @@ public class User implements Serializable {
 
     // region Getters & Setters
 
-    public Long getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(String id) {
         this.id = id;
     }
 
@@ -134,6 +135,14 @@ public class User implements Serializable {
 
     public void setPhoneNumber(String phoneNumber) {
         this.phoneNumber = phoneNumber;
+    }
+
+    public String getAvatar() {
+        return avatar;
+    }
+
+    public void setAvatar(String avatar) {
+        this.avatar = avatar;
     }
 
     public LocalDateTime getJoinAt() {

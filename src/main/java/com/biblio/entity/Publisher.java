@@ -3,6 +3,7 @@ package com.biblio.entity;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.time.LocalDateTime;
+import java.util.HashSet;
 import java.util.Set;
 
 @Entity
@@ -12,7 +13,7 @@ public class Publisher extends ContributorProfile implements Serializable {
     // region Relationships
 
     @OneToMany(mappedBy = "publisher")
-    private Set<Book> books;
+    private Set<Book> books = new HashSet<Book>();
 
    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
    @JoinColumn(name = "avatar_id", nullable = false)
@@ -26,7 +27,7 @@ public class Publisher extends ContributorProfile implements Serializable {
         super();
     }
 
-    public Publisher(Long id, String name, String introduction, LocalDateTime joinAt) {
+    public Publisher(String id, String name, String introduction, LocalDateTime joinAt) {
         super(id, name, introduction, joinAt);
     }
 

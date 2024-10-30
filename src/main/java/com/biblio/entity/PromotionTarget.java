@@ -1,9 +1,12 @@
 package com.biblio.entity;
 
 import com.biblio.enumeration.EPromotionTargetType;
+import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Table(name = "promotion_target")
@@ -12,8 +15,9 @@ public class PromotionTarget implements Serializable {
     // region Attributes
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    @GeneratedValue(generator = "uuid")
+    @GenericGenerator(name = "uuid", strategy = "org.hibernate.id.UUIDGenerator")
+    private String id;
 
     @Column(name = "applicable_object_id", nullable = false)
     private String applicableObjectId;
@@ -26,9 +30,8 @@ public class PromotionTarget implements Serializable {
 
     // region Relationships
 
-    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    @JoinColumn(name = "promotion_id", nullable = false)
-    private Promotion promotion;
+    @ManyToMany(mappedBy = "promotionTargets")
+    private Set<Promotion> promotions = new HashSet<Promotion>();
 
     // endregion
 
@@ -37,7 +40,7 @@ public class PromotionTarget implements Serializable {
     public PromotionTarget() {
     }
 
-    public PromotionTarget(Long id, String applicableObjectId, EPromotionTargetType type) {
+    public PromotionTarget(String id, String applicableObjectId, EPromotionTargetType type) {
         this.id = id;
         this.applicableObjectId = applicableObjectId;
         this.type = type;
@@ -47,11 +50,11 @@ public class PromotionTarget implements Serializable {
 
     // region Getters & Setters
 
-    public Long getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(String id) {
         this.id = id;
     }
 
@@ -71,12 +74,12 @@ public class PromotionTarget implements Serializable {
         this.type = type;
     }
 
-    public Promotion getPromotion() {
-        return promotion;
+    public Set<Promotion> getPromotions() {
+        return promotions;
     }
 
-    public void setPromotion(Promotion promotion) {
-        this.promotion = promotion;
+    public void setPromotions(Set<Promotion> promotions) {
+        this.promotions = promotions;
     }
 
     // endregion

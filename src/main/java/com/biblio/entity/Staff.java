@@ -4,8 +4,8 @@ import com.biblio.enumeration.EGender;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.sql.Timestamp;
 import java.time.LocalDateTime;
+import java.util.HashSet;
 import java.util.Set;
 
 @Entity
@@ -14,15 +14,17 @@ public class Staff extends User implements Serializable {
 
     // region Relationships
 
+    @ManyToMany(fetch = FetchType.LAZY)
+    @JoinTable(name = "staff_address",
+            joinColumns = @JoinColumn(name = "staff_id", nullable = false),
+            inverseJoinColumns = @JoinColumn(name = "address_id", nullable = false))
+    private Set<Address> addresses;
+
     @OneToMany(mappedBy = "staff")
-    private Set<Support> supports;
+    private Set<Support> supports = new HashSet<Support>();
 
     @ManyToMany(mappedBy = "staffs")
-    private Set<Notification> notifications;
-
-    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    @JoinColumn(name = "media_file_id")
-    private MediaFile avatar;
+    private Set<Notification> notifications = new HashSet<Notification>();
 
     // endregion
 
@@ -32,9 +34,13 @@ public class Staff extends User implements Serializable {
         super();
     }
 
-    public Staff(Long id, String username, String fullName, String password, String emailAddress, String dateOfBirth, EGender gender, String phoneNumber, LocalDateTime joinAt) {
-        super(id, username, fullName, password, emailAddress, dateOfBirth, gender, phoneNumber, joinAt);
+    public Staff(String id, String username, String fullName, String password, String emailAddress, String dateOfBirth, EGender gender, String phoneNumber, String avatar, LocalDateTime joinAt) {
+        super(id, username, fullName, password, emailAddress, dateOfBirth, gender, phoneNumber, avatar, joinAt);
     }
+
+    // endregion
+
+    // region Getters & Setters
 
     public Set<Support> getSupports() {
         return supports;
@@ -50,14 +56,6 @@ public class Staff extends User implements Serializable {
 
     public void setNotifications(Set<Notification> notifications) {
         this.notifications = notifications;
-    }
-
-    public MediaFile getAvatar() {
-        return avatar;
-    }
-
-    public void setAvatar(MediaFile avatar) {
-        this.avatar = avatar;
     }
 
     // endregion

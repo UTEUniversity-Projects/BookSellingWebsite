@@ -50,7 +50,7 @@ public class CreditCard extends Payment implements Serializable {
         this.billingAddress = billingAddress;
     }
 
-    public CreditCard(Long id, LocalDateTime createdAt, double amount, EPaymentStatus status, EPaymentCurrency currency, String cardNumber, String cardHolderName, LocalDateTime expirationDate, String cvv, String billingAddress) {
+    public CreditCard(String id, LocalDateTime createdAt, double amount, EPaymentStatus status, EPaymentCurrency currency, String cardNumber, String cardHolderName, LocalDateTime expirationDate, String cvv, String billingAddress) {
         super(id, createdAt, amount, status, currency);
         this.cardNumber = cardNumber;
         this.cardHolderName = cardHolderName;

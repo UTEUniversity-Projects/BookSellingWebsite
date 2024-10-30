@@ -2,9 +2,9 @@
 
 <!-- Register -->
 <section class="section-register padding-tb-100">
-    <div class="container-md">
-        <div class="row">
-            <div class="col-12">
+    <div class="container-md mx-auto">
+        <div class="row justify-center">
+            <div class="col-sm-8 col-md-12">
                 <div
                         class="cr-register"
                         data-aos="fade-up"
@@ -12,11 +12,11 @@
                         data-aos-delay="400"
                 >
                     <div class="form-logo">
-                        <img src="customer/img/logo/biblio.png" alt="logo"/>
+                        <img src="${pageContext.request.contextPath}/customer/img/logo/biblio.png" alt="logo"/>
                     </div>
                     <form action="#" class="cr-content-form">
                         <div class="row">
-                            <div class="col-6">
+                            <div class="col-sm-12 col-md-12">
                                 <div class="form-group mb-2">
                                     <label class="text-md text-slate-700 mb-1 ml-2"
                                     >Họ và tên*</label
@@ -28,7 +28,7 @@
                                     />
                                 </div>
                             </div>
-                            <div class="col-6">
+                            <div class="col-sm-12 col-md-12">
                                 <div class="form-group mb-2">
                                     <label class="text-md text-slate-700 mb-1 ml-2"
                                     >Tên đăng nhập*</label
@@ -50,7 +50,7 @@
                                     />
                                 </div>
                             </div>
-                            <div class="col-6">
+                            <div class="col-sm-12 col-md-12">
                                 <div class="form-group mb-2">
                                     <label class="text-md text-slate-700 mb-1 ml-2"
                                     >Số điện thoại*</label
@@ -62,7 +62,7 @@
                                     />
                                 </div>
                             </div>
-                            <div class="col-6">
+                            <div class="col-sm-12 col-md-12">
                                 <div class="form-group mb-2">
                                     <label class="text-md text-slate-700 mb-1 ml-2">Ngày sinh</label>
                                     <input id="" type="date"
@@ -102,7 +102,6 @@
                                 </div>
 
                             </div>
-
                             <div class="col-12">
                                 <div class="form-group mb-2">
                                     <label class="text-md text-slate-700 mb-1 ml-2"
@@ -127,7 +126,7 @@
                                     />
                                 </div>
                             </div>
-                            <div class="col-sm-6">
+                            <div class="col-sm-12 col-md-12">
                                 <div class="form-group mb-2">
                                     <label
                                             for="city"
@@ -142,7 +141,7 @@
                                     </select>
                                 </div>
                             </div>
-                            <div class="col-sm-6">
+                            <div class="col-sm-12 col-md-12">
                                 <div class="form-group mb-2">
                                     <label
                                             for="district"
@@ -157,7 +156,7 @@
                                     </select>
                                 </div>
                             </div>
-                            <div class="col-sm-6">
+                            <div class="col-sm-12 col-md-12">
                                 <div class="form-group mb-2">
                                     <label
                                             for="ward"
@@ -172,7 +171,7 @@
                                     </select>
                                 </div>
                             </div>
-                            <div class="col-sm-6">
+                            <div class="col-sm-12 col-md-12">
                                 <div class="form-group mb-2">
                                     <label
                                             for="hamlet"
@@ -198,15 +197,15 @@
                             </div>
                             <div class="col-12">
                                 <div class="form-group mb-2 flex justify-center items-center">
-                                    <div class="mt-4 hidden w-[300px] h-[300px] border-2 border-solid border-gray-100 rounded">
+                                    <div class="mt-4 hidden border-2 border-solid border-gray-100 rounded">
                                         <img id="preview"
-                                             class="object-cover w-full h-full"
+                                             class="object-contain w-full h-full"
                                              alt="Ảnh xem trước">
                                     </div>
                                 </div>
                             </div>
                             <div class="col-12">
-                                <div class="ml-5 mb-5 inline-flex items-center flex-wrap">
+                                <div class="mb-5 inline-flex items-center flex-wrap">
                                     <label
                                             class="flex items-center cursor-pointer relative"
                                             for="check-with-link"
@@ -289,10 +288,10 @@
                         </span>
                                     </label>
                                     <label
-                                            class="cursor-pointer ml-2 text-[16px]"
+                                            class="cursor-pointer ml-2 "
                                             for="check-with-link"
                                     >
-                                        <p>
+                                        <p class="text-[12px] sm:text-[14px] md:text-[16px]">
                                             Tôi đồng ý với
                                             <a
                                                     href="policy"
@@ -305,7 +304,7 @@
                                     </label>
                                 </div>
                             </div>
-                            <div class="flex justify-between mx-5 flex-nowrap gap-x-2">
+                            <div class="flex justify-between flex-nowrap gap-x-2">
                                 <button
                                         type="button"
                                         class="btn-register btn--success font-medium text-md bg-emerald-600 px-4 py-2 rounded-md text-white hover:bg-emerald-700 transition-all duration-300"
@@ -327,19 +326,6 @@
     </div>
 </section>
 
-<%--<div class="modal-register inset-0 z-[999] transition-all duration-300">--%>
-<%--    <div class="overlay cursor-pointer opacity-0 bg-black/20 inset-0 z-[1000]"></div>--%>
-<%--    <div class="modal-content absolute z-[1000] top-[30%] left-1/2 bg-white rounded w-[400px] h-[200px] bottomup">--%>
-<%--        <div class="checkmark-wrapper">--%>
-<%--            <svg class="checkmark" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 52 52">--%>
-<%--                <circle class="checkmark-circle" cx="26" cy="26" r="25" fill="none"/>--%>
-<%--                <path class="checkmark-check" fill="none" d="M14 27l7 7 16-16"/>--%>
-<%--            </svg>--%>
-<%--            <p class="success-message">Email đã được gửi thành công!</p>--%>
-<%--        </div>--%>
-<%--    </div>--%>
-<%--</div>--%>
-
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"
         integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g=="
         crossorigin="anonymous" referrerpolicy="no-referrer"></script>
@@ -360,3 +346,4 @@
 		});
 	});
 </script>
+<script src="customer/js/register.js" type="module"></script>

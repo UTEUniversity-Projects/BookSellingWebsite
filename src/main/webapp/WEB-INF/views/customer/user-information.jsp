@@ -2,8 +2,8 @@
 
 <section class="section-register padding-tb-100">
     <div class="container-md">
-        <div class="row">
-            <div class="col-12">
+        <div class="row justify-center">
+            <div class="col-sm-8 col-md-12">
                 <div
                         class="cr-register"
                         data-aos="fade-up"
@@ -12,7 +12,8 @@
                 >
                     <div class="flex">
                         <div class="form-logo basis-[70%]">
-                            <img src="customer/img/logo/biblio.png" alt="logo" class="w-full h-full object-contain"/>
+                            <img src="${pageContext.request.contextPath}/customer/img/logo/biblio.png" alt="logo"
+                                 class="w-full h-full object-contain"/>
                         </div>
                         <div class="form-logo col-6 basis-[30%] rounded-full border-2 border-solid border-gray-100 p-2 overflow-hidden shadow:md">
                             <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS-Javwn-7MizS4Uur3j8_A-sk6T_TRToe6Uw&s"
@@ -22,7 +23,7 @@
                     </div>
                     <form action="#" class="cr-content-form">
                         <div class="row">
-                            <div class="col-6">
+                            <div class="col-sm-12 col-md-6">
                                 <div class="form-group mb-2">
                                     <label class="text-md text-slate-700 mb-1 ml-2"
                                     >Họ và tên*</label
@@ -35,7 +36,7 @@
                                     />
                                 </div>
                             </div>
-                            <div class="col-6">
+                            <div class="col-sm-12 col-md-6">
                                 <div class="form-group mb-2">
                                     <label class="text-md text-slate-700 mb-1 ml-2"
                                     >Tên đăng nhập*</label
@@ -51,15 +52,21 @@
                             <div class="col-12">
                                 <div class="form-group mb-2">
                                     <label class="text-md text-slate-700 mb-1 ml-2">Email*</label>
-                                    <input
-                                            type="email"
-                                            placeholder="Nhập email của bạn"
-                                            readonly
-                                            class="select-none pointer-events-none block w-full py-2 px-4 text-gray-900 border-1 border-gray-300 rounded-lg text-[16px] focus:ring-blue-500 focus:border-blue-500 transition-all ease-linear bg-white focus:shadow-lg focus:shadow-[rgba(3,_102,_214,_0.3)_0px_0px_0px_3px]"
-                                    />
+                                    <div class="flex items-center justify-between border-1 border-solid border-gray-300 rounded-lg">
+                                        <input readonly="" type="email" placeholder="Email"
+                                               class="block w-full py-2 px-4 text-gray-900 rounded-lg bg-gray-50 text-[16px] transition-all ease-linear bg-white select-none pointer-events-none">
+                                        <div class="text-red-500 flex items-center justify-center bg-red-200/60 hover:bg-red-200/80 transition-all ease-linear w-5 h-5 rounded-full mr-2 relative group">
+                                            <span><i class="fa-regular fa-circle-xmark"></i></span>
+                                            <div class="absolute verify-email absolute bg-red-200/50 px-3 py-2 text-center hover:bg-red-200/80 transition-all ease-linear rounded-md transition-all ease-linear opacity-0 invisible scale-0 group-hover:opacity-100 group-hover:visible group-hover:scale-100 duration-300 w-[250px] translate-x-2/4 origin-[50%_-20px] right-2/4 top-10">
+                                                <p>Email chưa được xác thực</p>
+                                                <a href="#" class="inline-block p-2 rounded-md bg-red-200">Xác thực
+                                                    ngay</a>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
-                            <div class="col-6">
+                            <div class="col-sm-12 col-md-6">
                                 <div class="form-group mb-2">
                                     <label class="text-md text-slate-700 mb-1 ml-2"
                                     >Số điện thoại*</label
@@ -68,12 +75,11 @@
                                             type="tel"
                                             placeholder="Nhập số điện thoại của bạn"
                                             readonly
-                                            readonly
                                             class="select-none pointer-events-none block w-full py-2 px-4 text-gray-900 border-1 border-gray-300 rounded-lg text-[16px] focus:ring-blue-500 focus:border-blue-500 transition-all ease-linear bg-white focus:shadow-lg focus:shadow-[rgba(3,_102,_214,_0.3)_0px_0px_0px_3px]"
                                     />
                                 </div>
                             </div>
-                            <div class="col-6">
+                            <div class="col-sm-12 col-md-6">
                                 <div class="form-group mb-2">
                                     <label class="text-md text-slate-700 mb-1 ml-2">Ngày sinh</label>
                                     <input id="" type="date" readonly
@@ -113,33 +119,7 @@
                                 </div>
 
                             </div>
-                            <div class="col-12">
-                                <div class="form-group mb-2">
-                                    <label class="text-md text-slate-700 mb-1 ml-2"
-                                    >Mật khẩu*</label
-                                    >
-                                    <input
-                                            type="password"
-                                            placeholder="Nhập mật khẩu"
-                                            readonly
-                                            class="select-none pointer-events-none  block w-full py-2 px-4 text-gray-900 border-1 border-gray-300 rounded-lg text-[16px] focus:ring-blue-500 focus:border-blue-500 transition-all ease-linear bg-white focus:shadow-lg focus:shadow-[rgba(3,_102,_214,_0.3)_0px_0px_0px_3px]"
-                                    />
-                                </div>
-                            </div>
-                            <div class="col-12">
-                                <div class="form-group mb-2">
-                                    <label class="text-md text-slate-700 mb-1 ml-2"
-                                    >Nhập lại mật khẩu*</label
-                                    >
-                                    <input
-                                            type="password"
-                                            placeholder="Nhập mật lại khẩu"
-                                            readonly
-                                            class="select-none pointer-events-none block w-full py-2 px-4 text-gray-900 border-1 border-gray-300 rounded-lg text-[16px] focus:ring-blue-500 focus:border-blue-500 transition-all ease-linear bg-white focus:shadow-lg focus:shadow-[rgba(3,_102,_214,_0.3)_0px_0px_0px_3px]"
-                                    />
-                                </div>
-                            </div>
-                            <div class="col-sm-6">
+                            <div class="col-sm-12 col-md-6">
                                 <div class="form-group mb-2">
                                     <label
                                             for="city"
@@ -154,7 +134,7 @@
                                     </select>
                                 </div>
                             </div>
-                            <div class="col-sm-6">
+                            <div class="col-sm-12 col-md-6">
                                 <div class="form-group mb-2">
                                     <label
                                             for="district"
@@ -169,7 +149,7 @@
                                     </select>
                                 </div>
                             </div>
-                            <div class="col-sm-6">
+                            <div class="col-sm-12 col-md-6">
                                 <div class="form-group mb-2">
                                     <label
                                             for="ward"
@@ -184,7 +164,7 @@
                                     </select>
                                 </div>
                             </div>
-                            <div class="col-sm-6">
+                            <div class="col-sm-12 col-md-6">
                                 <div class="form-group mb-2">
                                     <label
                                             for="hamlet"
@@ -199,7 +179,7 @@
                                     </select>
                                 </div>
                             </div>
-                            <div class="flex justify-between mx-5 flex-nowrap gap-x-2">
+                            <div class="flex justify-between flex-nowrap gap-x-2 mt-2">
                                 <button
                                         type="button"
                                         class="btn-register font-medium text-md bg-emerald-600 px-4 py-2 rounded-md text-white hover:bg-emerald-700 transition-all duration-300"

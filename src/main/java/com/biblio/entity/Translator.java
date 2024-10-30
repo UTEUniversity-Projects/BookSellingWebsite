@@ -16,7 +16,7 @@ public class Translator extends ContributorProfile implements Serializable {
     @JoinTable(name = "translator_book",
                 joinColumns = @JoinColumn(name = "translator_id", nullable = false),
     inverseJoinColumns = @JoinColumn(name = "book_id", nullable = false))
-    private Set<Book> books = new HashSet<>();
+    private Set<Book> books = new HashSet<Book>();
 
     @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JoinColumn(name = "avatar_id", nullable = false)
@@ -30,7 +30,7 @@ public class Translator extends ContributorProfile implements Serializable {
         super();
     }
 
-    public Translator(Long id, String name, String introduction, LocalDateTime joinAt) {
+    public Translator(String id, String name, String introduction, LocalDateTime joinAt) {
         super(id, name, introduction, joinAt);
     }
 

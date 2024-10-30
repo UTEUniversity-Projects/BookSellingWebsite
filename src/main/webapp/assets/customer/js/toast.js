@@ -44,4 +44,4 @@ export function toast({
             </div>`;
 		main.appendChild(toast);
 	}
-};
+}
