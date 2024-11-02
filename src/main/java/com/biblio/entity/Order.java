@@ -106,6 +106,14 @@ public class Order implements Serializable {
         this.customer = customer;
     }
 
+    public Payment getPayment() {
+        return payment;
+    }
+
+    public void setPayment(Payment payment) {
+        this.payment = payment;
+    }
+
     public Set<OrderItem> getOrderItems() {
         return orderItems;
     }
