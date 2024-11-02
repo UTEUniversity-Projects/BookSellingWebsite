@@ -1,6 +1,7 @@
 package com.biblio.entity;
 
 import com.biblio.enumeration.EGender;
+import com.biblio.enumeration.EUserRole;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -34,8 +35,8 @@ public class Staff extends User implements Serializable {
         super();
     }
 
-    public Staff(String id, String username, String fullName, String password, String emailAddress, String dateOfBirth, EGender gender, String phoneNumber, String avatar, LocalDateTime joinAt) {
-        super(id, username, fullName, password, emailAddress, dateOfBirth, gender, phoneNumber, avatar, joinAt);
+    public Staff(String id, String username, String fullName, String password, String emailAddress, String dateOfBirth, EGender gender, String phoneNumber, String avatar, LocalDateTime joinAt, EUserRole role) {
+        super(id, username, fullName, password, emailAddress, dateOfBirth, gender, phoneNumber, avatar, joinAt, role);
     }
 
     // endregion

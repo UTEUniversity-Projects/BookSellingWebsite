@@ -36,6 +36,12 @@ public abstract class Payment implements Serializable {
 
     // endregion
 
+    // region Relationships
+    @OneToOne(mappedBy = "payment")
+    private Order order;
+
+    // endregion
+
     // region Constructors
 
     public Payment() {
