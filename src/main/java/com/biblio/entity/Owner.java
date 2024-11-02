@@ -1,6 +1,7 @@
 package com.biblio.entity;
 
 import com.biblio.enumeration.EGender;
+import com.biblio.enumeration.EUserRole;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -18,7 +19,7 @@ public class Owner extends User implements Serializable {
     @JoinTable(name = "owner_address",
             joinColumns = @JoinColumn(name = "owner_id", nullable = false),
             inverseJoinColumns = @JoinColumn(name = "address_id", nullable = false))
-    private Set<Address> addresses; 
+    private Set<Address> addresses;
 
     @ManyToMany(mappedBy = "owners")
     private Set<Notification> notifications = new HashSet<Notification>();
@@ -31,8 +32,8 @@ public class Owner extends User implements Serializable {
         super();
     }
 
-    public Owner(String id, String username, String fullName, String password, String emailAddress, String dateOfBirth, EGender gender, String phoneNumber, String avatar, LocalDateTime joinAt) {
-        super(id, username, fullName, password, emailAddress, dateOfBirth, gender, phoneNumber, avatar, joinAt);
+    public Owner(String id, String username, String fullName, String password, String emailAddress, String dateOfBirth, EGender gender, String phoneNumber, String avatar, LocalDateTime joinAt, EUserRole role) {
+        super(id, username, fullName, password, emailAddress, dateOfBirth, gender, phoneNumber, avatar, joinAt, role);
     }
 
     // endregion

@@ -1,6 +1,7 @@
 package com.biblio.entity;
 
 import com.biblio.enumeration.EGender;
+import com.biblio.enumeration.EUserRole;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
@@ -45,6 +46,10 @@ public class User implements Serializable {
     @Column(name = "join_at", nullable = false)
     private LocalDateTime joinAt;
 
+    @Enumerated(EnumType.STRING)
+    @Column(name = "role", nullable = false)
+    private EUserRole role;
+
     // endregion
 
     // region Relationships
@@ -56,7 +61,7 @@ public class User implements Serializable {
     public User() {
     }
 
-    public User(String id, String username, String fullName, String password, String emailAddress, String dateOfBirth, EGender gender, String phoneNumber, String avatar, LocalDateTime joinAt) {
+    public User(String id, String username, String fullName, String password, String emailAddress, String dateOfBirth, EGender gender, String phoneNumber, String avatar, LocalDateTime joinAt, EUserRole role) {
         this.id = id;
         this.username = username;
         this.fullName = fullName;
@@ -67,6 +72,7 @@ public class User implements Serializable {
         this.phoneNumber = phoneNumber;
         this.avatar = avatar;
         this.joinAt = joinAt;
+        this.role = role;
     }
 
     // endregion
@@ -151,6 +157,14 @@ public class User implements Serializable {
 
     public void setJoinAt(LocalDateTime joinAt) {
         this.joinAt = joinAt;
+    }
+
+    public EUserRole getRole() {
+        return role;
+    }
+
+    public void setRole(EUserRole role) {
+        this.role = role;
     }
 
     // endregion

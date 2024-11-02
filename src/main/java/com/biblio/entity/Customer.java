@@ -2,6 +2,7 @@ package com.biblio.entity;
 
 import com.biblio.enumeration.EGender;
 import com.biblio.enumeration.EMembership;
+import com.biblio.enumeration.EUserRole;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -52,8 +53,8 @@ public class Customer extends User implements Serializable {
         super();
     }
 
-    public Customer(String id, String username, String fullName, String password, String emailAddress, String dateOfBirth, EGender gender, String phoneNumber, String avatar, LocalDateTime joinAt, EMembership membership) {
-        super(id, username, fullName, password, emailAddress, dateOfBirth, gender, phoneNumber, avatar, joinAt);
+    public Customer(String id, String username, String fullName, String password, String emailAddress, String dateOfBirth, EGender gender, String phoneNumber, String avatar, LocalDateTime joinAt, EUserRole role, EMembership membership) {
+        super(id, username, fullName, password, emailAddress, dateOfBirth, gender, phoneNumber, avatar, joinAt, role);
         this.membership = membership;
     }
 
