@@ -91,6 +91,5 @@ public class OrderItem implements Serializable {
         this.cart = cart;
     }
 
-
     // endregion
 }

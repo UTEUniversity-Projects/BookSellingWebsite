@@ -54,6 +54,5 @@ public class Translator extends ContributorProfile implements Serializable {
         this.avatar = avatar;
     }
 
-
     // endregion
 }

@@ -30,7 +30,7 @@ public class Tag extends Classification implements Serializable {
         super(id, name, shortScript, fullScript, status);
     }
 
-    // endregion Constructors
+    // endregion
 
     // region Getters & Setters
 

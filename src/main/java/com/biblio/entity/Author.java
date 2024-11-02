@@ -51,6 +51,5 @@ public class Author extends ContributorProfile implements Serializable {
         this.avatar = avatar;
     }
 
-
     // endregion Constructors
 }
