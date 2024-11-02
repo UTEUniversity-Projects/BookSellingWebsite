@@ -40,12 +40,8 @@ public class Order implements Serializable {
     private Customer customer;
 
     @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    @JoinColumn(name = "payment_id", nullable = false, insertable = false, updatable = false)
-    private BankTransfer bankTransfer;
-
-    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    @JoinColumn(name = "payment_id", nullable = false, insertable = false, updatable = false)
-    private Cash cash;
+    @JoinColumn(name = "payment_id", nullable = false)
+    private Payment payment;
 
     @OneToMany(mappedBy = "order", fetch = FetchType.LAZY)
     private Set<OrderItem> orderItems = new HashSet<OrderItem>();
