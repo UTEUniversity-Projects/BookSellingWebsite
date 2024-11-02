@@ -29,7 +29,6 @@ public class Category extends Classification implements Serializable {
         super();
     }
 
-
     public Category(String id, String name, String shortScript, String fullScript, EClassificationStatus status) {
         super(id, name, shortScript, fullScript, status);
     }

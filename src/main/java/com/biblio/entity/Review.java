@@ -43,7 +43,7 @@ public class Review implements Serializable {
 
     // endregion
 
-    //region Constructors
+    // region Constructors
 
     public Review() {
     }

@@ -130,6 +130,5 @@ public class Order implements Serializable {
         this.promotions = promotions;
     }
 
-
     // endregion
 }
