@@ -6,7 +6,7 @@
             <div class="col-xl-4 col-lg-6 col-sm-12 col-12 cr-footer-border">
                 <div class="cr-footer-logo">
                     <div class="image">
-                        <img src="customer/img/logo/biblio.png" alt="logo" class="logo" />
+                        <img src="${pageContext.request.contextPath}/assets/customer/img/logo/biblio.png" alt="logo" class="logo" />
                     </div>
                     <p>
                         Carrot is the biggest market of grocery products. Get your daily
@@ -125,49 +125,49 @@
                             <div class="swiper-wrapper">
                                 <div class="swiper-slide">
                                     <a href="#" class="cr-payment-image">
-                                        <img src="customer/img/insta/1.jpg" alt="insta" />
+                                        <img src="${pageContext.request.contextPath}/assets/customer/img/insta/1.jpg" alt="insta" />
                                         <div class="payment-overlay"></div>
                                     </a>
                                 </div>
                                 <div class="swiper-slide">
                                     <a href="#" class="cr-payment-image">
-                                        <img src="customer/img/insta/2.jpg" alt="insta" />
+                                        <img src="${pageContext.request.contextPath}/assets/customer/img/insta/2.jpg" alt="insta" />
                                         <div class="payment-overlay"></div>
                                     </a>
                                 </div>
                                 <div class="swiper-slide">
                                     <a href="#" class="cr-payment-image">
-                                        <img src="customer/img/insta/3.jpg" alt="insta" />
+                                        <img src="${pageContext.request.contextPath}/assets/customer/img/insta/3.jpg" alt="insta" />
                                         <div class="payment-overlay"></div>
                                     </a>
                                 </div>
                                 <div class="swiper-slide">
                                     <a href="#" class="cr-payment-image">
-                                        <img src="customer/img/insta/4.jpg" alt="insta" />
+                                        <img src="${pageContext.request.contextPath}/assets/customer/img/insta/4.jpg" alt="insta" />
                                         <div class="payment-overlay"></div>
                                     </a>
                                 </div>
                                 <div class="swiper-slide">
                                     <a href="#" class="cr-payment-image">
-                                        <img src="customer/img/insta/5.jpg" alt="insta" />
+                                        <img src="${pageContext.request.contextPath}/assets/customer/img/insta/5.jpg" alt="insta" />
                                         <div class="payment-overlay"></div>
                                     </a>
                                 </div>
                                 <div class="swiper-slide">
                                     <a href="#" class="cr-payment-image">
-                                        <img src="customer/img/insta/6.jpg" alt="insta" />
+                                        <img src="${pageContext.request.contextPath}/assets/customer/img/insta/6.jpg" alt="insta" />
                                         <div class="payment-overlay"></div>
                                     </a>
                                 </div>
                                 <div class="swiper-slide">
                                     <a href="#" class="cr-payment-image">
-                                        <img src="customer/img/insta/7.jpg" alt="insta" />
+                                        <img src="${pageContext.request.contextPath}/assets/customer/img/insta/7.jpg" alt="insta" />
                                         <div class="payment-overlay"></div>
                                     </a>
                                 </div>
                                 <div class="swiper-slide">
                                     <a href="#" class="cr-payment-image">
-                                        <img src="customer/img/insta/8.jpg" alt="insta" />
+                                        <img src="${pageContext.request.contextPath}/assets/customer/img/insta/8.jpg" alt="insta" />
                                         <div class="payment-overlay"></div>
                                     </a>
                                 </div>
@@ -180,7 +180,7 @@
         <div class="cr-last-footer">
             <p>
                 &copy; <span id="copyright_year"></span>
-                <a href="index.html">Carrot</a>, All rights reserved.
+                <a href="home">Biblio</a>, All rights reserved.
             </p>
         </div>
     </div>

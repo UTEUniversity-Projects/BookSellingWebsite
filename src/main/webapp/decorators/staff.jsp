@@ -12,14 +12,14 @@
     <title>Staff</title>
 
     <!-- Logo -->
-    <link rel="shortcut icon" href="/assets/staff/img/logo/collapse-logo.png"/>
+    <link rel="shortcut icon" href="${pageContext.request.contextPath}/assets/staff/img/logo/collapse-logo.png"/>
     <!-- Icon CSS -->
     <link
-            href="/assets/staff/css/vendor/materialdesignicons.min.css"
+            href="${pageContext.request.contextPath}/assets/staff/css/vendor/materialdesignicons.min.css"
             rel="stylesheet"
     />
-    <link href="/assets/staff/css/vendor/remixicon.css" rel="stylesheet"/>
-    <link href="/assets/staff/css/vendor/owl.carousel.min.css" rel="stylesheet"/>
+    <link href="${pageContext.request.contextPath}/assets/staff/css/vendor/remixicon.css" rel="stylesheet"/>
+    <link href="${pageContext.request.contextPath}/assets/staff/css/vendor/owl.carousel.min.css" rel="stylesheet"/>
 
     <!-- Font -->
     <link rel="preconnect" href="https://fonts.googleapis.com"/>
@@ -30,23 +30,23 @@
     />
     <!-- Vendor CSS -->
     <link
-            href="/assets/staff/css/vendor/datatables.bootstrap5.min.css"
+            href="${pageContext.request.contextPath}/assets/staff/css/vendor/datatables.bootstrap5.min.css"
             rel="stylesheet"
     />
     <link
-            href="/assets/staff/css/vendor/responsive.datatables.min.css"
+            href="${pageContext.request.contextPath}/assets/staff/css/vendor/responsive.datatables.min.css"
             rel="stylesheet"
     />
-    <link href="/assets/staff/css/vendor/daterangepicker.css" rel="stylesheet"/>
-    <link href="/assets/staff/css/vendor/simplebar.css" rel="stylesheet"/>
-    <link href="/assets/staff/css/vendor/bootstrap.min.css" rel="stylesheet"/>
+    <link href="${pageContext.request.contextPath}/assets/staff/css/vendor/daterangepicker.css" rel="stylesheet"/>
+    <link href="${pageContext.request.contextPath}/assets/staff/css/vendor/simplebar.css" rel="stylesheet"/>
+    <link href="${pageContext.request.contextPath}/assets/staff/css/vendor/bootstrap.min.css" rel="stylesheet"/>
     <link
-            href="/assets/staff/css/vendor/jquery-jvectormap-1.2.2.css"
+            href="${pageContext.request.contextPath}/assets/staff/css/vendor/jquery-jvectormap-1.2.2.css"
             rel="stylesheet"
     />
 
     <!-- Main CSS -->
-    <link id="main-css" href="/assets/staff/css/style.css" rel="stylesheet"/>
+    <link id="main-css" href="${pageContext.request.contextPath}/assets/staff/css/style.css" rel="stylesheet"/>
 </head>
 <body>
 <main class="wrapper sb-default ecom">
@@ -61,25 +61,25 @@
 </main>
 
 <!-- Vendor Custom -->
-<script src="/assets/staff/js/vendor/jquery-3.6.4.min.js"></script>
-<script src="/assets/staff/js/vendor/simplebar.min.js"></script>
-<script src="/assets/staff/js/vendor/bootstrap.bundle.min.js"></script>
-<script src="/assets/staff/js/vendor/apexcharts.min.js"></script>
-<script src="/assets/staff/js/vendor/jquery-jvectormap-1.2.2.min.js"></script>
-<script src="/assets/staff/js/vendor/jquery-jvectormap-world-mill-en.js"></script>
-<script src="/assets/staff/js/vendor/owl.carousel.min.js"></script>
+<script src="${pageContext.request.contextPath}/assets/staff/js/vendor/jquery-3.6.4.min.js"></script>
+<script src="${pageContext.request.contextPath}/assets/staff/js/vendor/simplebar.min.js"></script>
+<script src="${pageContext.request.contextPath}/assets/staff/js/vendor/bootstrap.bundle.min.js"></script>
+<script src="${pageContext.request.contextPath}/assets/staff/js/vendor/apexcharts.min.js"></script>
+<script src="${pageContext.request.contextPath}/assets/staff/js/vendor/jquery-jvectormap-1.2.2.min.js"></script>
+<script src="${pageContext.request.contextPath}/assets/staff/js/vendor/jquery-jvectormap-world-mill-en.js"></script>
+<script src="${pageContext.request.contextPath}/assets/staff/js/vendor/owl.carousel.min.js"></script>
 <!-- Data Tables -->
-<script src="/assets/staff/js/vendor/jquery.datatables.min.js"></script>
-<script src="/assets/staff/js/vendor/datatables.bootstrap5.min.js"></script>
-<script src="/assets/staff/js/vendor/datatables.responsive.min.js"></script>
+<script src="${pageContext.request.contextPath}/assets/staff/js/vendor/jquery.datatables.min.js"></script>
+<script src="${pageContext.request.contextPath}/assets/staff/js/vendor/datatables.bootstrap5.min.js"></script>
+<script src="${pageContext.request.contextPath}/assets/staff/js/vendor/datatables.responsive.min.js"></script>
 <!-- Caleddar -->
-<script src="/assets/staff/js/vendor/jquery.simple-calendar.js"></script>
+<script src="${pageContext.request.contextPath}/assets/staff/js/vendor/jquery.simple-calendar.js"></script>
 <!-- Date Range Picker -->
-<script src="/assets/staff/js/vendor/moment.min.js"></script>
-<script src="/assets/staff/js/vendor/daterangepicker.js"></script>
-<script src="/assets/staff/js/vendor/date-range.js"></script>
+<script src="${pageContext.request.contextPath}/assets/staff/js/vendor/moment.min.js"></script>
+<script src="${pageContext.request.contextPath}/assets/staff/js/vendor/daterangepicker.js"></script>
+<script src="${pageContext.request.contextPath}/assets/staff/js/vendor/date-range.js"></script>
 
 <!-- Main Custom -->
-<script src="/assets/staff/js/main.js"></script>
+<script src="${pageContext.request.contextPath}/assets/staff/js/main.js"></script>
 </body>
 </html>

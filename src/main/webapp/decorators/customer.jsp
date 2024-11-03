@@ -24,26 +24,26 @@
     </title>
 
     <!-- App favicon -->
-    <link rel="shortcut icon" href="customer/img/logo/favicon.ico"/>
+    <link rel="shortcut icon" href="${pageContext.request.contextPath}/assets/customer/img/logo/favicon.ico"/>
 
     <!-- Icon CSS -->
     <link
             rel="stylesheet"
-            href="customer/css/vendor/materialdesignicons.min.css"
+            href="${pageContext.request.contextPath}/assets/customer/css/vendor/materialdesignicons.min.css"
     />
-    <link rel="stylesheet" href="customer/css/vendor/remixicon.css"/>
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/customer/css/vendor/remixicon.css"/>
 
     <!-- Vendor -->
-    <link rel="stylesheet" href="customer/css/vendor/animate.css"/>
-    <link rel="stylesheet" href="customer/css/vendor/bootstrap.min.css"/>
-    <link rel="stylesheet" href="customer/css/vendor/aos.min.css"/>
-    <link rel="stylesheet" href="customer/css/vendor/range-slider.css"/>
-    <link rel="stylesheet" href="customer/css/vendor/swiper-bundle.min.css"/>
-    <link rel="stylesheet" href="customer/css/vendor/jquery.slick.css"/>
-    <link rel="stylesheet" href="customer/css/vendor/slick-theme.css"/>
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/customer/css/vendor/animate.css"/>
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/customer/css/vendor/bootstrap.min.css"/>
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/customer/css/vendor/aos.min.css"/>
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/customer/css/vendor/range-slider.css"/>
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/customer/css/vendor/swiper-bundle.min.css"/>
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/customer/css/vendor/jquery.slick.css"/>
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/customer/css/vendor/slick-theme.css"/>
 
     <!-- Main CSS -->
-    <link rel="stylesheet" href="customer/css/style.css?v=1"/>
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/customer/css/style.css?v=1"/>
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
           integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg=="
@@ -187,7 +187,7 @@
                     <div class="col-md-5 col-sm-12 col-xs-12">
                         <div class="zoom-image-hover modal-border-image">
                             <img
-                                    src="customer/img/product/tab-1.jpg"
+                                    src="${pageContext.request.contextPath}/assets/customer/img/product/tab-1.jpg"
                                     alt="product-tab-2"
                                     class="product-image"
                             />
@@ -275,8 +275,8 @@
             </div>
             <ul class="crcart-pro-items">
                 <li>
-                    <a href="product-left-sidebar.html" class="crside_pro_img"
-                    ><img src="customer/img/product/4.jpg" alt="product-1"
+                    <a href="product" class="crside_pro_img"
+                    ><img src="${pageContext.request.contextPath}/assets/customer/img/product/4.jpg" alt="product-1"
                     /></a>
                     <div class="cr-pro-content">
                         <a href="product-left-sidebar.html" class="cart_pro_title"
@@ -302,7 +302,7 @@
                 </li>
                 <li>
                     <a href="product-left-sidebar.html" class="crside_pro_img"
-                    ><img src="customer/img/product/2.jpg" alt="product-2"
+                    ><img src="${pageContext.request.contextPath}/assets/customer/img/product/2.jpg" alt="product-2"
                     /></a>
                     <div class="cr-pro-content">
                         <a href="product-left-sidebar.html" class="cart_pro_title"
@@ -328,7 +328,7 @@
                 </li>
                 <li>
                     <a href="product-left-sidebar.html" class="crside_pro_img"
-                    ><img src="customer/img/product/3.jpg" alt="product-3"
+                    ><img src="${pageContext.request.contextPath}/assets/customer/img/product/3.jpg" alt="product-3"
                     /></a>
                     <div class="cr-pro-content">
                         <a href="product-left-sidebar.html" class="cart_pro_title"
@@ -438,22 +438,22 @@
                 </div>
                 <ul class="bg-panel">
                     <li class="bg-1">
-                        <img src="customer/img/shape/bg-shape-1.png" alt="bg-shape-1">
+                        <img src="${pageContext.request.contextPath}/assets/customer/img/shape/bg-shape-1.png" alt="bg-shape-1">
                     </li>
                     <li class="bg-2">
-                        <img src="customer/img/shape/bg-shape-2.png" alt="bg-shape-2">
+                        <img src="${pageContext.request.contextPath}/assets/customer/img/shape/bg-shape-2.png" alt="bg-shape-2">
                     </li>
                     <li class="bg-3">
-                        <img src="customer/img/shape/bg-shape-3.png" alt="bg-shape-3">
+                        <img src="${pageContext.request.contextPath}/assets/customer/img/shape/bg-shape-3.png" alt="bg-shape-3">
                     </li>
                     <li class="bg-4">
-                        <img src="customer/img/shape/bg-shape-4.png" alt="bg-shape-4">
+                        <img src="${pageContext.request.contextPath}/assets/customer/img/shape/bg-shape-4.png" alt="bg-shape-4">
                     </li>
                     <li class="bg-5">
-                        <img src="customer/img/shape/bg-shape-5.png" alt="bg-shape-5">
+                        <img src="${pageContext.request.contextPath}/assets/customer/img/shape/bg-shape-5.png" alt="bg-shape-5">
                     </li>
                     <li class="bg-6 active-bg-panel">
-                        <img src="customer/img/shape/bg-shape-6.png" alt="bg-shape-6">
+                        <img src="${pageContext.request.contextPath}/assets/customer/img/shape/bg-shape-6.png" alt="bg-shape-6">
                     </li>
                 </ul>
             </div>
@@ -462,19 +462,19 @@
 </div>
 
 <!-- Vendor Custom -->
-<script src="customer/js/vendor/jquery-3.6.4.min.js"></script>
-<script src="customer/js/vendor/jquery.zoom.min.js"></script>
-<script src="customer/js/vendor/bootstrap.bundle.min.js"></script>
-<script src="customer/js/vendor/mixitup.min.js"></script>
+<script src="${pageContext.request.contextPath}/assets/customer/js/vendor/jquery-3.6.4.min.js"></script>
+<script src="${pageContext.request.contextPath}/assets/customer/js/vendor/jquery.zoom.min.js"></script>
+<script src="${pageContext.request.contextPath}/assets/customer/js/vendor/bootstrap.bundle.min.js"></script>
+<script src="${pageContext.request.contextPath}/assets/customer/js/vendor/mixitup.min.js"></script>
 
-<script src="customer/js/vendor/range-slider.js"></script>
-<script src="customer/js/vendor/aos.min.js"></script>
-<script src="customer/js/vendor/swiper-bundle.min.js"></script>
-<script src="customer/js/vendor/slick.min.js"></script>
-<script src="customer/js/vendor/tailwind.min.js"></script>
+<script src="${pageContext.request.contextPath}/assets/customer/js/vendor/range-slider.js"></script>
+<script src="${pageContext.request.contextPath}/assets/customer/js/vendor/aos.min.js"></script>
+<script src="${pageContext.request.contextPath}/assets/customer/js/vendor/swiper-bundle.min.js"></script>
+<script src="${pageContext.request.contextPath}/assets/customer/js/vendor/slick.min.js"></script>
+<script src="${pageContext.request.contextPath}/assets/customer/js/vendor/tailwind.min.js"></script>
 
 <!-- Main Custom -->
-<script src="customer/js/main.js?v=1"></script>
+<script src="${pageContext.request.contextPath}/assets/customer/js/main.js?v=1"></script>
 </body>
 <div id="toast"></div>
 </html>

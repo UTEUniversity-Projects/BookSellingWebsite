@@ -1201,7 +1201,7 @@ const categorySelectDiscount = document.getElementById('category-select-discount
 const subcategorySelectDiscount = document.getElementById('subcategory-select-discount');
 const listproductcategorysubcategoryDiscount = document.getElementById('list-product-category-subcategory-discount');
 
-objectSelectDiscount.addEventListener('change', function () {
+objectSelectDiscount?.addEventListener('change', function () {
     handleObjectSelectChange(objectSelectDiscount, listproductcategorysubcategoryDiscount, categorySelectDiscount, subcategorySelectDiscount);
 });
 const objectSelectVoucher = document.getElementById('select-object-voucher');
@@ -1209,7 +1209,7 @@ const categorySelectVoucher = document.getElementById('category-select-voucher')
 const subcategorySelectVoucher = document.getElementById('subcategory-select-voucher');
 const listproductcategorysubcategoryVoucher = document.getElementById('list-product-category-subcategory-voucher');
 
-objectSelectVoucher.addEventListener('change', function () {
+objectSelectVoucher?.addEventListener('change', function () {
     handleObjectSelectChange(objectSelectVoucher, listproductcategorysubcategoryVoucher, categorySelectVoucher, subcategorySelectVoucher);
 });
 const objectSelectCoupon = document.getElementById('select-object-coupon');
@@ -1217,7 +1217,7 @@ const categorySelectCoupon = document.getElementById('category-select-coupon');
 const subcategorySelectCoupon = document.getElementById('subcategory-select-coupon');
 const listproductcategorysubcategoryCoupon = document.getElementById('list-product-category-subcategory-coupon');
 
-objectSelectCoupon.addEventListener('change', function () {
+objectSelectCoupon?.addEventListener('change', function () {
     handleObjectSelectChange(objectSelectCoupon, listproductcategorysubcategoryCoupon, categorySelectCoupon, subcategorySelectCoupon);
 });
 const objectSelectFreeship = document.getElementById('select-object-freeship');
@@ -1225,7 +1225,7 @@ const categorySelectFreeship = document.getElementById('category-select-freeship
 const subcategorySelectFreeship = document.getElementById('subcategory-select-freeship');
 const listproductcategorysubcategoryFreeship = document.getElementById('list-product-category-subcategory-freeship');
 
-objectSelectFreeship.addEventListener('change', function () {
+objectSelectFreeship?.addEventListener('change', function () {
     handleObjectSelectChange(objectSelectFreeship, listproductcategorysubcategoryFreeship, categorySelectFreeship, subcategorySelectFreeship);
 });
 // check box promotion
@@ -1235,7 +1235,7 @@ const rowCheckboxes = document.querySelectorAll('.row-checkbox');
 
 const rows = document.querySelectorAll('.selectable-row');
 
-selectAllCheckbox.addEventListener('change', function () {
+selectAllCheckbox?.addEventListener('change', function () {
     const isChecked = selectAllCheckbox.checked;
 
     rowCheckboxes.forEach(checkbox => {

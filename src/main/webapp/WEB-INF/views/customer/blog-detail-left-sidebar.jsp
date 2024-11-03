@@ -49,7 +49,7 @@
             </div>
             <div class="cr-blog-recent-post">
               <div class="cr-blog-recent-image">
-                <img src="${pageContext.request.contextPath}/customer/img/blog/1.jpg" alt="blog-1">
+                <img src="${pageContext.request.contextPath}/assets/customer/img/blog/1.jpg" alt="blog-1">
               </div>
               <div class="cr-blog-recent-content">
                 <span>Sep 09, 2023</span>
@@ -65,22 +65,22 @@
             <div class="cr-blog-instagram-image">
               <div class="cr-blog-instagram-image-inner">
                 <a href="#">
-                  <img src="${pageContext.request.contextPath}/customer/img/insta/1.jpg" alt="1">
+                  <img src="${pageContext.request.contextPath}/assets/customer/img/insta/1.jpg" alt="1">
                 </a>
                 <a href="#">
-                  <img src="${pageContext.request.contextPath}/customer/img/insta/2.jpg" alt="2">
+                  <img src="${pageContext.request.contextPath}/assets/customer/img/insta/2.jpg" alt="2">
                 </a>
                 <a href="#">
-                  <img src="${pageContext.request.contextPath}/customer/img/insta/3.jpg" alt="3">
+                  <img src="${pageContext.request.contextPath}/assets/customer/img/insta/3.jpg" alt="3">
                 </a>
                 <a href="#">
-                  <img src="${pageContext.request.contextPath}/customer/img/insta/4.jpg" alt="4">
+                  <img src="${pageContext.request.contextPath}/assets/customer/img/insta/4.jpg" alt="4">
                 </a>
                 <a href="#">
-                  <img src="${pageContext.request.contextPath}/customer/img/insta/5.jpg" alt="5">
+                  <img src="${pageContext.request.contextPath}/assets/customer/img/insta/5.jpg" alt="5">
                 </a>
                 <a href="#">
-                  <img src="${pageContext.request.contextPath}/customer/img/insta/6.jpg" alt="6">
+                  <img src="${pageContext.request.contextPath}/assets/customer/img/insta/6.jpg" alt="6">
                 </a>
               </div>
             </div>
@@ -105,7 +105,7 @@
       <div class="col-lg-9 col-12 md-30" data-aos="fade-up" data-aos-duration="2000" data-aos-delay="400">
         <div class="cr-blog-details">
           <div class="cr-blog-details-image">
-            <img src="${pageContext.request.contextPath}/customer/img/blog/blog-1.jpg" alt="blog-1">
+            <img src="${pageContext.request.contextPath}/assets/customer/img/blog/blog-1.jpg" alt="blog-1">
           </div>
           <div class="cr-blog-details-content">
             <div class="cr-admin-date">
@@ -127,7 +127,7 @@
             <div class="col-6">
               <div class="cr-blog-inner-cols">
                 <div class="blog-img">
-                  <img src="${pageContext.request.contextPath}/customer/img/blog/blog-2.jpg" alt="blog-2">
+                  <img src="${pageContext.request.contextPath}/assets/customer/img/blog/blog-2.jpg" alt="blog-2">
                 </div>
                 <div class="cr-blog-inner-content">
                   <p>Lorem ipsum dolor consectetur adipisicing elit. Molestias, dolorum!</p>
@@ -137,7 +137,7 @@
             <div class="col-6">
               <div class="cr-blog-inner-cols">
                 <div class="blog-img">
-                  <img src="${pageContext.request.contextPath}/customer/img/blog/blog-3.jpg" alt="blog-3">
+                  <img src="${pageContext.request.contextPath}/assets/customer/img/blog/blog-3.jpg" alt="blog-3">
                 </div>
                 <div class="cr-blog-inner-content">
                   <p>Lorem ipsum dolor consectetur adipisicing elit. Molestias, dolorum!</p>

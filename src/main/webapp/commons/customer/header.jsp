@@ -5,7 +5,7 @@
             <div class="col-lg-12">
                 <div class="top-header">
                     <a href="home" class="cr-logo">
-                        <img src="${pageContext.request.contextPath}/customer/img/logo/biblio.png" alt="logo" class="logo"/>
+                        <img src="${pageContext.request.contextPath}/assets/customer/img/logo/biblio.png" alt="logo" class="logo"/>
                     </a>
                     <form class="cr-search" method="post">
                         <input
@@ -202,4 +202,4 @@
     </div>
 </header>
 
-<script src="customer/js/notifications.js" type="module"></script>
+<script src="${pageContext.request.contextPath}/assets/customer/js/notifications.js" type="module"></script>

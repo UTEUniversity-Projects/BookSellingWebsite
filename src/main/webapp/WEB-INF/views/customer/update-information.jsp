@@ -13,7 +13,7 @@
                 >
                     <div class="flex">
                         <div class="form-logo basis-[70%]">
-                            <img src="${pageContext.request.contextPath}/customer/img/logo/biblio.png" alt="logo" class="w-full h-full object-contain"/>
+                            <img src="${pageContext.request.contextPath}/assets/customer/img/logo/biblio.png" alt="logo" class="w-full h-full object-contain"/>
                         </div>
                         <div class="form-logo col-6 basis-[30%] rounded-full border-2 border-solid border-gray-100 p-2 overflow-hidden shadow:md">
                             <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS-Javwn-7MizS4Uur3j8_A-sk6T_TRToe6Uw&s"
@@ -258,4 +258,4 @@
 	});
 </script>
 
-<script src="customer/js/update-information.js" type="module"></script>
+<script src="${pageContext.request.contextPath}/assets/customer/js/update-information.js" type="module"></script>

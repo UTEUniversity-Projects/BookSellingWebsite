@@ -12,7 +12,7 @@
                         data-aos-delay="400"
                 >
                     <div class="form-logo">
-                        <img src="${pageContext.request.contextPath}/customer/img/logo/biblio.png" alt="logo"/>
+                        <img src="${pageContext.request.contextPath}/assets/customer/img/logo/biblio.png" alt="logo"/>
                     </div>
                     <form action="#" class="cr-content-form">
                         <div class="row">
@@ -346,4 +346,4 @@
 		});
 	});
 </script>
-<script src="customer/js/register.js" type="module"></script>
+<script src="${pageContext.request.contextPath}/assets/customer/js/register.js" type="module"></script>

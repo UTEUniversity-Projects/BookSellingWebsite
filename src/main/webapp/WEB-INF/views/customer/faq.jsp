@@ -6,7 +6,7 @@
         <div class="row">
             <div class="col-lg-6">
                 <div class="cr-faq-img">
-                    <img src="${pageContext.request.contextPath}/customer/img/about/1.jpg" alt="about">
+                    <img src="${pageContext.request.contextPath}/assets/customer/img/about/1.jpg" alt="about">
                 </div>
             </div>
             <div class="col-lg-6">
