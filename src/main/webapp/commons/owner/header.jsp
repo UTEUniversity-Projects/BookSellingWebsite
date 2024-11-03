@@ -45,7 +45,7 @@
                 <div class="cr-right-tool cr-user-drop">
                     <div class="cr-hover-drop">
                         <div class="cr-hover-tool">
-                            <img class="user" src="/assets/owner/img/user/1.jpg" alt="user" />
+                            <img class="user" src="${pageContext.request.contextPath}/assets/owner/img/user/1.jpg" alt="user" />
                         </div>
                         <div class="cr-hover-drop-panel right">
                             <div class="details">

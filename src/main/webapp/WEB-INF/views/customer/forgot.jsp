@@ -7,7 +7,7 @@
       <div class="col-12">
         <div class="cr-login" data-aos="fade-up" data-aos-duration="2000" data-aos-delay="400">
           <div class="form-logo">
-            <img src="${pageContext.request.contextPath}/customer/img/logo/biblio.png" alt="logo">
+            <img src="${pageContext.request.contextPath}/assets/customer/img/logo/biblio.png" alt="logo">
           </div>
           <form class="cr-content-form">
             <div class="form-group mb-2">
@@ -28,4 +28,4 @@
   </div>
 </section>
 
-<script src="customer/js/forgot-password.js" type="module"></script>
+<script src="${pageContext.request.contextPath}/assets/customer/js/forgot-password.js" type="module"></script>

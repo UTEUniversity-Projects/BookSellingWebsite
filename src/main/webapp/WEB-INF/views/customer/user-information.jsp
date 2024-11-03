@@ -12,7 +12,7 @@
                 >
                     <div class="flex">
                         <div class="form-logo basis-[70%]">
-                            <img src="${pageContext.request.contextPath}/customer/img/logo/biblio.png" alt="logo"
+                            <img src="${pageContext.request.contextPath}/assets/customer/img/logo/biblio.png" alt="logo"
                                  class="w-full h-full object-contain"/>
                         </div>
                         <div class="form-logo col-6 basis-[30%] rounded-full border-2 border-solid border-gray-100 p-2 overflow-hidden shadow:md">

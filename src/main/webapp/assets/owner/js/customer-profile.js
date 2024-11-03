@@ -8,7 +8,7 @@ $(function() {
       var years = moment().diff(start, 'years');
     });
 });
-document.getElementById('edit-button').addEventListener('click', function(event) {
+document.getElementById('edit-button')?.addEventListener('click', function(event) {
     event.preventDefault(); // Ngăn điều hướng trang
 
     const isEditing = this.textContent.trim() === 'Chỉnh sửa';
@@ -63,12 +63,12 @@ document.getElementById('edit-button').addEventListener('click', function(event)
 });
 
 // Khi nhấn vào icon, mở hộp thoại chọn tệp
-document.getElementById('edit-avatar').addEventListener('click', function() {
+document.getElementById('edit-avatar')?.addEventListener('click', function() {
     document.getElementById('avatarUpload').click();
 });
 
 // Khi chọn tệp, đọc và hiển thị ảnh mới
-document.getElementById('avatarUpload').addEventListener('change', function() {
+document.getElementById('avatarUpload')?.addEventListener('change', function() {
     readURL(this);
 });
 

@@ -12,7 +12,7 @@
                         data-aos-delay="400"
                 >
                     <div class="form-logo">
-                        <img src="${pageContext.request.contextPath}/customer/img/logo/logo.png" alt="logo"/>
+                        <img src="${pageContext.request.contextPath}/assets/customer/img/logo/logo.png" alt="logo"/>
                     </div>
                     <form class="cr-content-form">
                         <div class="mb-2 flex flex-col">
@@ -152,5 +152,5 @@
     </div>
 </section>
 
-<script src="customer/js/login.js" type="module"></script>
+<script src="${pageContext.request.contextPath}/assets/customer/js/login.js" type="module"></script>
 

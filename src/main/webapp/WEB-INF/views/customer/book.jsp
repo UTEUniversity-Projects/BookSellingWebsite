@@ -16,7 +16,7 @@
               <div class="slider-banner-image">
                 <div class="zoom-image-hover">
                   <img
-                          src="${pageContext.request.contextPath}/customer/img/product/9.jpg"
+                          src="${pageContext.request.contextPath}/assets/customer/img/product/9.jpg"
                           alt="product-tab-1"
                           class="product-image"
                   />
@@ -25,7 +25,7 @@
               <div class="slider-banner-image">
                 <div class="zoom-image-hover">
                   <img
-                          src="${pageContext.request.contextPath}/customer/img/product/10.jpg"
+                          src="${pageContext.request.contextPath}/assets/customer/img/product/10.jpg"
                           alt="product-tab-2"
                           class="product-image"
                   />
@@ -34,7 +34,7 @@
               <div class="slider-banner-image">
                 <div class="zoom-image-hover">
                   <img
-                          src="${pageContext.request.contextPath}/customer/img/product/11.jpg"
+                          src="${pageContext.request.contextPath}/assets/customer/img/product/11.jpg"
                           alt="product-tab-3"
                           class="product-image"
                   />
@@ -43,7 +43,7 @@
               <div class="slider-banner-image">
                 <div class="zoom-image-hover">
                   <img
-                          src="${pageContext.request.contextPath}/customer/img/product/12.jpg"
+                          src="${pageContext.request.contextPath}/assets/customer/img/product/12.jpg"
                           alt="product-tab-1"
                           class="product-image"
                   />
@@ -52,7 +52,7 @@
               <div class="slider-banner-image">
                 <div class="zoom-image-hover">
                   <img
-                          src="${pageContext.request.contextPath}/customer/img/product/13.jpg"
+                          src="${pageContext.request.contextPath}/assets/customer/img/product/13.jpg"
                           alt="product-tab-2"
                           class="product-image"
                   />
@@ -61,7 +61,7 @@
               <div class="slider-banner-image">
                 <div class="zoom-image-hover">
                   <img
-                          src="${pageContext.request.contextPath}/customer/img/product/14.jpg"
+                          src="${pageContext.request.contextPath}/assets/customer/img/product/14.jpg"
                           alt="product-tab-3"
                           class="product-image"
                   />
@@ -70,7 +70,7 @@
               <div class="slider-banner-image">
                 <div class="zoom-image-hover">
                   <img
-                          src="${pageContext.request.contextPath}/customer/img/product/15.jpg"
+                          src="${pageContext.request.contextPath}/assets/customer/img/product/15.jpg"
                           alt="product-tab-1"
                           class="product-image"
                   />
@@ -79,7 +79,7 @@
               <div class="slider-banner-image">
                 <div class="zoom-image-hover">
                   <img
-                          src="${pageContext.request.contextPath}/customer/img/product/16.jpg"
+                          src="${pageContext.request.contextPath}/assets/customer/img/product/16.jpg"
                           alt="product-tab-2"
                           class="product-image"
                   />
@@ -89,13 +89,13 @@
             <div class="slider slider-nav thumb-image">
               <div class="thumbnail-image">
                 <div class="thumbImg">
-                  <img src="${pageContext.request.contextPath}/customer/img/product/9.jpg" alt="product-tab-1" />
+                  <img src="${pageContext.request.contextPath}/assets/customer/img/product/9.jpg" alt="product-tab-1" />
                 </div>
               </div>
               <div class="thumbnail-image">
                 <div class="thumbImg">
                   <img
-                          src="${pageContext.request.contextPath}/customer/img/product/10.jpg"
+                          src="${pageContext.request.contextPath}/assets/customer/img/product/10.jpg"
                           alt="product-tab-2"
                   />
                 </div>
@@ -103,7 +103,7 @@
               <div class="thumbnail-image">
                 <div class="thumbImg">
                   <img
-                          src="${pageContext.request.contextPath}/customer/img/product/11.jpg"
+                          src="${pageContext.request.contextPath}/assets/customer/img/product/11.jpg"
                           alt="product-tab-3"
                   />
                 </div>
@@ -111,7 +111,7 @@
               <div class="thumbnail-image">
                 <div class="thumbImg">
                   <img
-                          src="${pageContext.request.contextPath}/customer/img/product/12.jpg"
+                          src="${pageContext.request.contextPath}/assets/customer/img/product/12.jpg"
                           alt="product-tab-1"
                   />
                 </div>
@@ -119,7 +119,7 @@
               <div class="thumbnail-image">
                 <div class="thumbImg">
                   <img
-                          src="${pageContext.request.contextPath}/customer/img/product/13.jpg"
+                          src="${pageContext.request.contextPath}/assets/customer/img/product/13.jpg"
                           alt="product-tab-2"
                   />
                 </div>
@@ -127,7 +127,7 @@
               <div class="thumbnail-image">
                 <div class="thumbImg">
                   <img
-                          src="${pageContext.request.contextPath}/customer/img/product/14.jpg"
+                          src="${pageContext.request.contextPath}/assets/customer/img/product/14.jpg"
                           alt="product-tab-3"
                   />
                 </div>
@@ -135,7 +135,7 @@
               <div class="thumbnail-image">
                 <div class="thumbImg">
                   <img
-                          src="${pageContext.request.contextPath}/customer/img/product/15.jpg"
+                          src="${pageContext.request.contextPath}/assets/customer/img/product/15.jpg"
                           alt="product-tab-1"
                   />
                 </div>
@@ -143,7 +143,7 @@
               <div class="thumbnail-image">
                 <div class="thumbImg">
                   <img
-                          src="${pageContext.request.contextPath}/customer/img/product/16.jpg"
+                          src="${pageContext.request.contextPath}/assets/customer/img/product/16.jpg"
                           alt="product-tab-2"
                   />
                 </div>
@@ -156,7 +156,7 @@
                       class="author-container"
               >
                 <img
-                        src="${pageContext.request.contextPath}/customer/img/logo/logo.png"
+                        src="${pageContext.request.contextPath}/assets/customer/img/logo/logo.png"
                         alt="Author Image"
                         class="author-image"
                 />
@@ -445,7 +445,7 @@
               <div class="cr-tab-content-from">
                 <div class="post">
                   <div class="content">
-                    <img src="${pageContext.request.contextPath}/customer/img/review/1.jpg" alt="review" />
+                    <img src="${pageContext.request.contextPath}/assets/customer/img/review/1.jpg" alt="review" />
                     <div class="details">
                       <span class="date">Jan 08, 2024</span>
                       <span class="name">Oreo Noman</span>
@@ -465,7 +465,7 @@
                     dolor! quae vero in perferendis provident quis.
                   </p>
                   <div class="content mt-30">
-                    <img src="${pageContext.request.contextPath}/customer/img/review/2.jpg" alt="review" />
+                    <img src="${pageContext.request.contextPath}/assets/customer/img/review/2.jpg" alt="review" />
                     <div class="details">
                       <span class="date">Mar 22, 2024</span>
                       <span class="name">Lina Wilson</span>
@@ -559,7 +559,7 @@
             <div class="cr-product-card">
               <div class="cr-product-image">
                 <div class="cr-image-inner zoom-image-hover">
-                  <img src="${pageContext.request.contextPath}/customer/img/product/9.jpg" alt="product-1" />
+                  <img src="${pageContext.request.contextPath}/assets/customer/img/product/9.jpg" alt="product-1" />
                 </div>
                 <div class="cr-side-view">
                   <a href="javascript:void(0)" class="wishlist">
@@ -604,7 +604,7 @@
             <div class="cr-product-card">
               <div class="cr-product-image">
                 <div class="cr-image-inner zoom-image-hover">
-                  <img src="${pageContext.request.contextPath}/customer/img/product/10.jpg" alt="product-1" />
+                  <img src="${pageContext.request.contextPath}/assets/customer/img/product/10.jpg" alt="product-1" />
                 </div>
                 <div class="cr-side-view">
                   <a href="javascript:void(0)" class="wishlist">
@@ -649,7 +649,7 @@
             <div class="cr-product-card">
               <div class="cr-product-image">
                 <div class="cr-image-inner zoom-image-hover">
-                  <img src="${pageContext.request.contextPath}/customer/img/product/1.jpg" alt="product-1" />
+                  <img src="${pageContext.request.contextPath}/assets/customer/img/product/1.jpg" alt="product-1" />
                 </div>
                 <div class="cr-side-view">
                   <a href="javascript:void(0)" class="wishlist">
@@ -694,7 +694,7 @@
             <div class="cr-product-card">
               <div class="cr-product-image">
                 <div class="cr-image-inner zoom-image-hover">
-                  <img src="${pageContext.request.contextPath}/customer/img/product/2.jpg" alt="product-1" />
+                  <img src="${pageContext.request.contextPath}/assets/customer/img/product/2.jpg" alt="product-1" />
                 </div>
                 <div class="cr-side-view">
                   <a href="javascript:void(0)" class="wishlist">
@@ -739,7 +739,7 @@
             <div class="cr-product-card">
               <div class="cr-product-image">
                 <div class="cr-image-inner zoom-image-hover">
-                  <img src="${pageContext.request.contextPath}/customer/img/product/3.jpg" alt="product-1" />
+                  <img src="${pageContext.request.contextPath}/assets/customer/img/product/3.jpg" alt="product-1" />
                 </div>
                 <div class="cr-side-view">
                   <a href="javascript:void(0)" class="wishlist">

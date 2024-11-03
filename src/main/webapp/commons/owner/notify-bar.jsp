@@ -158,7 +158,7 @@
                         <li>
                             <a href="chatapp.html" class="reply">Reply</a>
                             <div class="user">
-                                <img src="/assets/owner/img/user/9.jpg" alt="user"/>
+                                <img src="${pageContext.request.contextPath}/assets/owner/img/user/9.jpg" alt="user"/>
                                 <span class="label online"></span>
                             </div>
                             <div class="detail">
@@ -171,13 +171,13 @@
                                 </p>
                                 <span class="download-files">
 												<span class="download">
-													<img src="/assets/owner/img/other/1.jpg" alt="image"/>
+													<img src="${pageContext.request.contextPath}/assets/owner/img/other/1.jpg" alt="image"/>
 													<a href="javascript:void(0)"
                                                     ><i class="ri-download-2-line"></i
                                                     ></a>
 												</span>
 												<span class="download">
-													<img src="/assets/owner/img/other/2.jpg" alt="image"/>
+													<img src="${pageContext.request.contextPath}/assets/owner/img/other/2.jpg" alt="image"/>
 													<a href="javascript:void(0)"
                                                     ><i class="ri-download-2-line"></i
                                                     ></a>
@@ -196,7 +196,7 @@
                         <li>
                             <a href="chatapp.html" class="reply">Reply</a>
                             <div class="user">
-                                <img src="/assets/owner/img/user/8.jpg" alt="user"/>
+                                <img src="${pageContext.request.contextPath}/assets/owner/img/user/8.jpg" alt="user"/>
                                 <span class="label offline"></span>
                             </div>
                             <div class="detail">
@@ -211,7 +211,7 @@
                         <li>
                             <a href="chatapp.html" class="reply">Reply</a>
                             <div class="user">
-                                <img src="/assets/owner/img/user/7.jpg" alt="user"/>
+                                <img src="${pageContext.request.contextPath}/assets/owner/img/user/7.jpg" alt="user"/>
                                 <span class="label busy"></span>
                             </div>
                             <div class="detail">
@@ -252,7 +252,7 @@
                         <li>
                             <a href="chatapp.html" class="reply">Reply</a>
                             <div class="user">
-                                <img src="/assets/owner/img/user/6.jpg" alt="user"/>
+                                <img src="${pageContext.request.contextPath}/assets/owner/img/user/6.jpg" alt="user"/>
                                 <span class="label busy"></span>
                             </div>
                             <div class="detail">
@@ -267,7 +267,7 @@
                         <li>
                             <a href="chatapp.html" class="reply">Reply</a>
                             <div class="user">
-                                <img src="/assets/owner/img/user/5.jpg" alt="user"/>
+                                <img src="${pageContext.request.contextPath}/assets/owner/img/user/5.jpg" alt="user"/>
                                 <span class="label busy"></span>
                             </div>
                             <div class="detail">
@@ -301,13 +301,13 @@
                             </p>
                             <span class="download-files">
 											<span class="download">
-												<img src="/assets/owner/img/other/1.jpg" alt="image"/>
+												<img src="${pageContext.request.contextPath}/assets/owner/img/other/1.jpg" alt="image"/>
 												<a href="javascript:void(0)"
                                                 ><i class="ri-download-2-line"></i
                                                 ></a>
 											</span>
 											<span class="download">
-												<img src="/assets/owner/img/other/2.jpg" alt="image"/>
+												<img src="${pageContext.request.contextPath}/assets/owner/img/other/2.jpg" alt="image"/>
 												<a href="javascript:void(0)"
                                                 ><i class="ri-download-2-line"></i
                                                 ></a>
@@ -346,7 +346,7 @@
                                                 ></a>
 											</span>
 											<span class="download">
-												<img src="/assets/owner/img/other/3.jpg" alt="image"/>
+												<img src="${pageContext.request.contextPath}/assets/owner/img/other/3.jpg" alt="image"/>
 												<a href="javascript:void(0)"
                                                 ><i class="ri-download-2-line"></i
                                                 ></a>

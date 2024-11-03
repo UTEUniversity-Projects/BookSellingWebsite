@@ -245,7 +245,7 @@
             <div class="cr-product-card">
               <div class="cr-product-image">
                 <div class="cr-image-inner zoom-image-hover">
-                  <img src="${pageContext.request.contextPath}/customer/img/product/1.jpg" alt="product-1">
+                  <img src="${pageContext.request.contextPath}/assets/customer/img/product/1.jpg" alt="product-1">
                 </div>
                 <div class="cr-side-view">
                   <!-- <a href="javascript:void(0)" class="wishlist">
@@ -291,7 +291,7 @@
             <div class="cr-product-card">
               <div class="cr-product-image">
                 <div class="cr-image-inner zoom-image-hover">
-                  <img src="${pageContext.request.contextPath}/customer/img/product/9.jpg" alt="product-1">
+                  <img src="${pageContext.request.contextPath}/assets/customer/img/product/9.jpg" alt="product-1">
                 </div>
                 <div class="cr-side-view">
                   <!-- <a href="javascript:void(0)" class="wishlist">
@@ -337,7 +337,7 @@
             <div class="cr-product-card">
               <div class="cr-product-image">
                 <div class="cr-image-inner zoom-image-hover">
-                  <img src="${pageContext.request.contextPath}/customer/img/product/2.jpg" alt="product-1">
+                  <img src="${pageContext.request.contextPath}/assets/customer/img/product/2.jpg" alt="product-1">
                 </div>
                 <div class="cr-side-view">
                   <!-- <a href="javascript:void(0)" class="wishlist">
@@ -383,7 +383,7 @@
             <div class="cr-product-card">
               <div class="cr-product-image">
                 <div class="cr-image-inner zoom-image-hover">
-                  <img src="${pageContext.request.contextPath}/customer/img/product/3.jpg" alt="product-1">
+                  <img src="${pageContext.request.contextPath}/assets/customer/img/product/3.jpg" alt="product-1">
                 </div>
                 <div class="cr-side-view">
                   <!-- <a href="javascript:void(0)" class="wishlist">
@@ -429,7 +429,7 @@
             <div class="cr-product-card">
               <div class="cr-product-image">
                 <div class="cr-image-inner zoom-image-hover">
-                  <img src="${pageContext.request.contextPath}/customer/img/product/10.jpg" alt="product-1">
+                  <img src="${pageContext.request.contextPath}/assets/customer/img/product/10.jpg" alt="product-1">
                 </div>
                 <div class="cr-side-view">
                   <!-- <a href="javascript:void(0)" class="wishlist">
@@ -475,7 +475,7 @@
             <div class="cr-product-card">
               <div class="cr-product-image">
                 <div class="cr-image-inner zoom-image-hover">
-                  <img src="${pageContext.request.contextPath}/customer/img/product/17.jpg" alt="product-1">
+                  <img src="${pageContext.request.contextPath}/assets/customer/img/product/17.jpg" alt="product-1">
                 </div>
                 <div class="cr-side-view">
                   <!-- <a href="javascript:void(0)" class="wishlist">
@@ -521,7 +521,7 @@
             <div class="cr-product-card">
               <div class="cr-product-image">
                 <div class="cr-image-inner zoom-image-hover">
-                  <img src="${pageContext.request.contextPath}/customer/img/product/13.jpg" alt="product-1">
+                  <img src="${pageContext.request.contextPath}/assets/customer/img/product/13.jpg" alt="product-1">
                 </div>
                 <div class="cr-side-view">
                   <!-- <a href="javascript:void(0)" class="wishlist">
@@ -567,7 +567,7 @@
             <div class="cr-product-card">
               <div class="cr-product-image">
                 <div class="cr-image-inner zoom-image-hover">
-                  <img src="${pageContext.request.contextPath}/customer/img/product/11.jpg" alt="product-1">
+                  <img src="${pageContext.request.contextPath}/assets/customer/img/product/11.jpg" alt="product-1">
                 </div>
                 <div class="cr-side-view">
                   <!-- <a href="javascript:void(0)" class="wishlist">
@@ -613,7 +613,7 @@
             <div class="cr-product-card">
               <div class="cr-product-image">
                 <div class="cr-image-inner zoom-image-hover">
-                  <img src="${pageContext.request.contextPath}/customer/img/product/12.jpg" alt="product-1">
+                  <img src="${pageContext.request.contextPath}/assets/customer/img/product/12.jpg" alt="product-1">
                 </div>
                 <div class="cr-side-view">
                   <!-- <a href="javascript:void(0)" class="wishlist">
@@ -659,7 +659,7 @@
             <div class="cr-product-card">
               <div class="cr-product-image">
                 <div class="cr-image-inner zoom-image-hover">
-                  <img src="${pageContext.request.contextPath}/customer/img/product/1.jpg" alt="product-1">
+                  <img src="${pageContext.request.contextPath}/assets/customer/img/product/1.jpg" alt="product-1">
                 </div>
                 <div class="cr-side-view">
                   <!-- <a href="javascript:void(0)" class="wishlist">
@@ -705,7 +705,7 @@
             <div class="cr-product-card">
               <div class="cr-product-image">
                 <div class="cr-image-inner zoom-image-hover">
-                  <img src="${pageContext.request.contextPath}/customer/img/product/9.jpg" alt="product-1">
+                  <img src="${pageContext.request.contextPath}/assets/customer/img/product/9.jpg" alt="product-1">
                 </div>
                 <div class="cr-side-view">
                   <!-- <a href="javascript:void(0)" class="wishlist">
@@ -751,7 +751,7 @@
             <div class="cr-product-card">
               <div class="cr-product-image">
                 <div class="cr-image-inner zoom-image-hover">
-                  <img src="${pageContext.request.contextPath}/customer/img/product/2.jpg" alt="product-1">
+                  <img src="${pageContext.request.contextPath}/assets/customer/img/product/2.jpg" alt="product-1">
                 </div>
                 <div class="cr-side-view">
                   <!-- <a href="javascript:void(0)" class="wishlist">
