@@ -1,5 +1,6 @@
+import { toast } from "./toast.js";
+
 $(document).ready(() => {
-	import { toast } from "./toast.js";
 
 	class Register {
 		constructor(props) {

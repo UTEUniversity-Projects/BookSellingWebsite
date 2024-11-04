@@ -6,9 +6,7 @@ import com.biblio.enumeration.EWalletProvider;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.sql.Timestamp;
 import java.time.LocalDateTime;
-import java.util.Date;
 
 @Entity
 @Table(name = "ewallet")
