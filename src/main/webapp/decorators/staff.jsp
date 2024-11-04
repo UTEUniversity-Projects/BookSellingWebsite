@@ -56,6 +56,7 @@
     </div>
     <%@include file="/commons/staff/header.jsp" %>
     <%@include file="/commons/staff/sidebar.jsp" %>
+    <%@include file="/commons/staff/notify-bar.jsp" %>
     <decorator:body/>
     <%@include file="/commons/staff/footer.jsp" %>
 </main>
