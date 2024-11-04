@@ -346,4 +346,4 @@
 		});
 	});
 </script>
-<script src="${pageContext.request.contextPath}/assets/customer/js/register.js?v=1" type="module"></script>
+<script src="${pageContext.request.contextPath}/assets/customer/js/register.js" type="module"></script>
