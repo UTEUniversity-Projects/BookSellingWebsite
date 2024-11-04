@@ -5,7 +5,6 @@ import com.biblio.enumeration.EPaymentStatus;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.sql.Timestamp;
 import java.time.LocalDateTime;
 
 @Entity
