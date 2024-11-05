@@ -47,8 +47,7 @@ public class User implements Serializable {
 
     // region Relationships
 
-    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY, orphanRemoval = true)
-    @JoinColumn(name = "account_id", nullable = false)
+    @OneToOne(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private Account account;
 
     @ManyToMany(fetch = FetchType.LAZY)

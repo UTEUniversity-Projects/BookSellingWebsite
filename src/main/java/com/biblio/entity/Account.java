@@ -27,7 +27,8 @@ public class Account implements Serializable {
     @Column(name = "role", nullable = false)
     private EUserRole userRole;
 
-    @OneToOne(mappedBy = "account")
+    @OneToOne
+    @JoinColumn(name = "user_id", nullable = false)
     private User user;
 
     // endregion
