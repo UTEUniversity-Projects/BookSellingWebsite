@@ -41,13 +41,7 @@ public class Address implements Serializable {
     private Order order;
 
     @ManyToMany(mappedBy = "addresses")
-    private Set<Customer> customers = new HashSet<Customer>();
-
-    @ManyToMany(mappedBy = "addresses")
-    private Set<Staff> staffs = new HashSet<Staff>();
-
-    @ManyToMany(mappedBy = "addresses")
-    private Set<Owner> owners = new HashSet<Owner>();
+    private Set<User> users = new HashSet<User>();
 
     // endregion
 
@@ -55,13 +49,15 @@ public class Address implements Serializable {
 
     public Address() {}
 
-    public Address(String id, String nation, String province, String district, String village, String detail) {
+    public Address(String id, String nation, String province, String district, String village, String detail, Order order, Set<User> users) {
         this.id = id;
         this.nation = nation;
         this.province = province;
         this.district = district;
         this.village = village;
         this.detail = detail;
+        this.order = order;
+        this.users = users;
     }
 
     // endregion
@@ -124,28 +120,12 @@ public class Address implements Serializable {
         this.order = order;
     }
 
-    public Set<Customer> getCustomers() {
-        return customers;
+    public Set<User> getUsers() {
+        return users;
     }
 
-    public void setCustomers(Set<Customer> customers) {
-        this.customers = customers;
-    }
-
-    public Set<Staff> getStaffs() {
-        return staffs;
-    }
-
-    public void setStaffs(Set<Staff> staffs) {
-        this.staffs = staffs;
-    }
-
-    public Set<Owner> getOwners() {
-        return owners;
-    }
-
-    public void setOwners(Set<Owner> owners) {
-        this.owners = owners;
+    public void setUsers(Set<User> users) {
+        this.users = users;
     }
 
     // endregion

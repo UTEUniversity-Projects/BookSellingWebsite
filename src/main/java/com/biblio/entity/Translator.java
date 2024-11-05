@@ -18,10 +18,6 @@ public class Translator extends ContributorProfile implements Serializable {
     inverseJoinColumns = @JoinColumn(name = "book_id", nullable = false))
     private Set<Book> books = new HashSet<Book>();
 
-    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    @JoinColumn(name = "avatar_id", nullable = false)
-    private MediaFile avatar;
-
     // endregion
 
     // region Constructors
@@ -30,8 +26,9 @@ public class Translator extends ContributorProfile implements Serializable {
         super();
     }
 
-    public Translator(String id, String name, String introduction, LocalDateTime joinAt) {
-        super(id, name, introduction, joinAt);
+    public Translator(String id, String name, String introduction, LocalDateTime joinAt, String avatar, Set<Book> books) {
+        super(id, name, introduction, joinAt, avatar);
+        this.books = books;
     }
 
     // endregion
@@ -46,13 +43,6 @@ public class Translator extends ContributorProfile implements Serializable {
         this.books = books;
     }
 
-    public MediaFile getAvatar() {
-        return avatar;
-    }
-
-    public void setAvatar(MediaFile avatar) {
-        this.avatar = avatar;
-    }
 
     // endregion
 }

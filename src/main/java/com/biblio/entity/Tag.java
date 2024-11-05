@@ -26,8 +26,9 @@ public class Tag extends Classification implements Serializable {
         super();
     }
 
-    public Tag(String id, String name, String shortScript, String fullScript, EClassificationStatus status) {
+    public Tag(String id, String name, String shortScript, String fullScript, EClassificationStatus status, Set<BookMetadata> metadatas) {
         super(id, name, shortScript, fullScript, status);
+        this.metadatas = metadatas;
     }
 
     // endregion

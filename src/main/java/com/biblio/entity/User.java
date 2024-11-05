@@ -1,14 +1,16 @@
 package com.biblio.entity;
 
 import com.biblio.enumeration.EGender;
-import com.biblio.enumeration.EUserRole;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
 import java.io.Serializable;
 import java.time.LocalDateTime;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
+@Table(name = "user")
 @Inheritance(strategy = InheritanceType.JOINED)
 public class User implements Serializable {
 
@@ -17,43 +19,49 @@ public class User implements Serializable {
     @Id
     @GeneratedValue(generator = "uuid")
     @GenericGenerator(name = "uuid", strategy = "org.hibernate.id.UUIDGenerator")
-    private String id;
-
-    @Column(name = "username", nullable = false)
-    private String username;
+    protected String id;
 
     @Column(name = "full_name", nullable = false)
-    private String fullName;
-
-    @Column(name = "password", nullable = false)
-    private String password;
+    protected String fullName;
 
     @Column(name = "email_address", nullable = false)
-    private String emailAddress;
+    protected String emailAddress;
 
     @Column(name = "date_of_birth", nullable = false)
-    private String dateOfBirth;
+    protected String dateOfBirth;
 
     @Enumerated(EnumType.STRING)
     @Column(name = "gender", nullable = false)
-    private EGender gender;
+    protected EGender gender;
 
     @Column(name = "phone_number", nullable = false)
-    private String phoneNumber;
+    protected String phoneNumber;
 
     @Column(name = "avatar", nullable = false)
-    private String avatar;
+    protected String avatar;
 
     @Column(name = "join_at", nullable = false)
-    private LocalDateTime joinAt;
-
-    @Enumerated(EnumType.STRING)
-    @Column(name = "role", nullable = false)
-    private EUserRole role;
+    protected LocalDateTime joinAt;
 
     // endregion
 
     // region Relationships
+
+    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY, orphanRemoval = true)
+    @JoinColumn(name = "account_id", nullable = false)
+    private Account account;
+
+    @ManyToMany(fetch = FetchType.LAZY)
+    @JoinTable(name = "user_address",
+            joinColumns = @JoinColumn(name = "user_id", nullable = false),
+            inverseJoinColumns = @JoinColumn(name = "address_id", nullable = false))
+    private Set<Address> addresses = new HashSet<Address>();
+
+    @ManyToMany(cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
+    @JoinTable(name = "user_notification",
+            joinColumns = @JoinColumn(name = "customer_id"),
+            inverseJoinColumns = @JoinColumn(name = "notification_id"))
+    private Set<Notification> notifications = new HashSet<Notification>();
 
     // endregion
 
@@ -62,18 +70,18 @@ public class User implements Serializable {
     public User() {
     }
 
-    public User(String id, String username, String fullName, String password, String emailAddress, String dateOfBirth, EGender gender, String phoneNumber, String avatar, LocalDateTime joinAt, EUserRole role) {
+    public User(String id, String fullName, String emailAddress, String dateOfBirth, EGender gender, String phoneNumber, String avatar, LocalDateTime joinAt, Account account, Set<Address> addresses, Set<Notification> notifications) {
         this.id = id;
-        this.username = username;
         this.fullName = fullName;
-        this.password = password;
         this.emailAddress = emailAddress;
         this.dateOfBirth = dateOfBirth;
         this.gender = gender;
         this.phoneNumber = phoneNumber;
         this.avatar = avatar;
         this.joinAt = joinAt;
-        this.role = role;
+        this.account = account;
+        this.addresses = addresses;
+        this.notifications = notifications;
     }
 
     // endregion
@@ -88,28 +96,12 @@ public class User implements Serializable {
         this.id = id;
     }
 
-    public String getUsername() {
-        return username;
-    }
-
-    public void setUsername(String username) {
-        this.username = username;
-    }
-
     public String getFullName() {
         return fullName;
     }
 
     public void setFullName(String fullName) {
         this.fullName = fullName;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
     }
 
     public String getEmailAddress() {
@@ -160,13 +152,30 @@ public class User implements Serializable {
         this.joinAt = joinAt;
     }
 
-    public EUserRole getRole() {
-        return role;
+    public Account getAccount() {
+        return account;
     }
 
-    public void setRole(EUserRole role) {
-        this.role = role;
+    public void setAccount(Account account) {
+        this.account = account;
     }
+
+    public Set<Address> getAddresses() {
+        return addresses;
+    }
+
+    public void setAddresses(Set<Address> addresses) {
+        this.addresses = addresses;
+    }
+
+    public Set<Notification> getNotifications() {
+        return notifications;
+    }
+
+    public void setNotifications(Set<Notification> notifications) {
+        this.notifications = notifications;
+    }
+
 
     // endregion
 }

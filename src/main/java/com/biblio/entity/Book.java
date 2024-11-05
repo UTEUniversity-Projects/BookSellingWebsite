@@ -77,7 +77,7 @@ public class Book implements Serializable {
     @Column(name = "recommended_age", nullable = false)
     private EBookAgeRecommend recommendedAge;
 
-    // endregion Attributes
+    // endregion
 
     // region Relationships
 
@@ -116,7 +116,7 @@ public class Book implements Serializable {
     public Book() {
     }
 
-    public Book(String id, String title, String description, double sellingPrice, LocalDateTime publicationDate, int edition, String codeISBN10, String codeISBN13, EBookFormat format, int handcover, double length, double width, double height, Set<EBookLanguage> languages, double weight, EBookCondition condition, EBookAgeRecommend recommendedAge) {
+    public Book(String id, String title, String description, double sellingPrice, LocalDateTime publicationDate, int edition, String codeISBN10, String codeISBN13, EBookFormat format, int handcover, double length, double width, double height, Set<EBookLanguage> languages, double weight, EBookCondition condition, EBookAgeRecommend recommendedAge, BookMetadata metadata, Category category, SubCategory subCategory, Publisher publisher, Set<Author> authors, Set<Translator> translators, Set<Review> reviews, Set<OrderItem> orderItems) {
         this.id = id;
         this.title = title;
         this.description = description;
@@ -134,6 +134,14 @@ public class Book implements Serializable {
         this.weight = weight;
         this.condition = condition;
         this.recommendedAge = recommendedAge;
+        this.metadata = metadata;
+        this.category = category;
+        this.subCategory = subCategory;
+        this.publisher = publisher;
+        this.authors = authors;
+        this.translators = translators;
+        this.reviews = reviews;
+        this.orderItems = orderItems;
     }
 
     // endregion
@@ -339,6 +347,7 @@ public class Book implements Serializable {
     public void setOrderItems(Set<OrderItem> orderItems) {
         this.orderItems = orderItems;
     }
+
 
     // endregion
 }

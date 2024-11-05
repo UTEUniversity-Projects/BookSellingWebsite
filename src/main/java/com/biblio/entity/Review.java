@@ -48,12 +48,14 @@ public class Review implements Serializable {
     public Review() {
     }
 
-    public Review(String id, int rate, String content, boolean readyToIntroduce, LocalDateTime createdAt) {
+    public Review(String id, int rate, String content, boolean readyToIntroduce, LocalDateTime createdAt, Book book, Customer customer) {
         this.id = id;
         this.rate = rate;
         this.content = content;
         this.readyToIntroduce = readyToIntroduce;
         this.createdAt = createdAt;
+        this.book = book;
+        this.customer = customer;
     }
 
     // endregion

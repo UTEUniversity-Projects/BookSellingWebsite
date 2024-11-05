@@ -48,20 +48,8 @@ public class Notification implements Serializable {
 
     // region Relationships
 
-    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    @JoinTable(name = "notification_owner", joinColumns = @JoinColumn(name = "notification_id", nullable = false),
-            inverseJoinColumns = @JoinColumn(name = "owner_id", nullable = false))
-    private Set<Owner> owners = new HashSet<Owner>();
-
-    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    @JoinTable(name = "notification_staff", joinColumns = @JoinColumn(name = "notification_id", nullable = false),
-            inverseJoinColumns = @JoinColumn(name = "staff_id", nullable = false))
-    private Set<Staff> staffs = new HashSet<Staff>();
-
-    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    @JoinTable(name = "notification_customer", joinColumns = @JoinColumn(name = "notification_id", nullable = false),
-            inverseJoinColumns = @JoinColumn(name = "customer_id", nullable = false))
-    private Set<Customer> customers = new HashSet<Customer>();
+    @ManyToMany(fetch = FetchType.LAZY, mappedBy = "notifications")
+    private Set<User> users = new HashSet<User>();
 
     // endregion
 
@@ -70,7 +58,7 @@ public class Notification implements Serializable {
     public Notification() {
     }
 
-    public Notification(String id, LocalDateTime createdAt, LocalDateTime sentTime, String title, String content, String hyperlink, ENotificationType type, ENotificationStatus status) {
+    public Notification(String id, LocalDateTime createdAt, LocalDateTime sentTime, String title, String content, String hyperlink, ENotificationType type, ENotificationStatus status, Set<User> users) {
         this.id = id;
         this.createdAt = createdAt;
         this.sentTime = sentTime;
@@ -79,6 +67,7 @@ public class Notification implements Serializable {
         this.hyperlink = hyperlink;
         this.type = type;
         this.status = status;
+        this.users = users;
     }
 
     // endregion
@@ -149,28 +138,12 @@ public class Notification implements Serializable {
         this.status = status;
     }
 
-    public Set<Owner> getOwners() {
-        return owners;
+    public Set<User> getUsers() {
+        return users;
     }
 
-    public void setOwners(Set<Owner> owners) {
-        this.owners = owners;
-    }
-
-    public Set<Staff> getStaffs() {
-        return staffs;
-    }
-
-    public void setStaffs(Set<Staff> staffs) {
-        this.staffs = staffs;
-    }
-
-    public Set<Customer> getCustomers() {
-        return customers;
-    }
-
-    public void setCustomers(Set<Customer> customers) {
-        this.customers = customers;
+    public void setUsers(Set<User> users) {
+        this.users = users;
     }
 
     // endregion

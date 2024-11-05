@@ -15,17 +15,8 @@ public class Staff extends User implements Serializable {
 
     // region Relationships
 
-    @ManyToMany(fetch = FetchType.LAZY)
-    @JoinTable(name = "staff_address",
-            joinColumns = @JoinColumn(name = "staff_id", nullable = false),
-            inverseJoinColumns = @JoinColumn(name = "address_id", nullable = false))
-    private Set<Address> addresses;
-
     @OneToMany(mappedBy = "staff")
     private Set<Support> supports = new HashSet<Support>();
-
-    @ManyToMany(mappedBy = "staffs")
-    private Set<Notification> notifications = new HashSet<Notification>();
 
     // endregion
 
@@ -35,8 +26,9 @@ public class Staff extends User implements Serializable {
         super();
     }
 
-    public Staff(String id, String username, String fullName, String password, String emailAddress, String dateOfBirth, EGender gender, String phoneNumber, String avatar, LocalDateTime joinAt, EUserRole role) {
-        super(id, username, fullName, password, emailAddress, dateOfBirth, gender, phoneNumber, avatar, joinAt, role);
+    public Staff(String id, String fullName, String emailAddress, String dateOfBirth, EGender gender, String phoneNumber, String avatar, LocalDateTime joinAt, Account account, Set<Address> addresses, Set<Notification> notifications, Set<Support> supports) {
+        super(id, fullName, emailAddress, dateOfBirth, gender, phoneNumber, avatar, joinAt, account, addresses, notifications);
+        this.supports = supports;
     }
 
     // endregion
@@ -49,14 +41,6 @@ public class Staff extends User implements Serializable {
 
     public void setSupports(Set<Support> supports) {
         this.supports = supports;
-    }
-
-    public Set<Notification> getNotifications() {
-        return notifications;
-    }
-
-    public void setNotifications(Set<Notification> notifications) {
-        this.notifications = notifications;
     }
 
     // endregion

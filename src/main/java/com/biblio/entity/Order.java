@@ -55,10 +55,15 @@ public class Order implements Serializable {
     public Order() {
     }
 
-    public Order(String id, String note, EOrderStatus status) {
+    public Order(String id, String note, EOrderStatus status, Address address, Customer customer, Payment payment, Set<OrderItem> orderItems, Set<Promotion> promotions) {
         this.id = id;
         this.note = note;
         this.status = status;
+        this.address = address;
+        this.customer = customer;
+        this.payment = payment;
+        this.orderItems = orderItems;
+        this.promotions = promotions;
     }
 
     // endregion
@@ -128,6 +133,7 @@ public class Order implements Serializable {
     public void setPromotions(Set<Promotion> promotions) {
         this.promotions = promotions;
     }
+
 
     // endregion
 }

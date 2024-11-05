@@ -8,8 +8,8 @@ import java.sql.Timestamp;
 import java.time.LocalDateTime;
 import java.util.Date;
 
-@MappedSuperclass
-@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
+@Entity
+@Inheritance(strategy = InheritanceType.JOINED)
 public abstract class ContributorProfile implements Serializable {
 
     // region Attributes
@@ -17,16 +17,23 @@ public abstract class ContributorProfile implements Serializable {
     @Id
     @GeneratedValue(generator = "uuid")
     @GenericGenerator(name = "uuid", strategy = "org.hibernate.id.UUIDGenerator")
-    private String id;
+    protected String id;
 
     @Column(name = "name", nullable = false)
-    private String name;
+    protected String name;
 
     @Column(name = "introduction", nullable = false)
-    private String introduction;
+    protected String introduction;
 
     @Column(name = "join_at", nullable = false)
-    private LocalDateTime joinAt;
+    protected LocalDateTime joinAt;
+
+    @Column(name = "avatar", nullable = false)
+    private String avatar;
+
+    // endregion
+
+    // region Relationships
 
     // endregion
 
@@ -35,11 +42,12 @@ public abstract class ContributorProfile implements Serializable {
     public ContributorProfile() {
     }
 
-    public ContributorProfile(String id, String name, String introduction, LocalDateTime joinAt) {
+    public ContributorProfile(String id, String name, String introduction, LocalDateTime joinAt, String avatar) {
         this.id = id;
         this.name = name;
         this.introduction = introduction;
         this.joinAt = joinAt;
+        this.avatar = avatar;
     }
 
     // endregion
@@ -77,6 +85,15 @@ public abstract class ContributorProfile implements Serializable {
     public void setJoinAt(LocalDateTime joinAt) {
         this.joinAt = joinAt;
     }
+
+    public String getAvatar() {
+        return avatar;
+    }
+
+    public void setAvatar(String avatar) {
+        this.avatar = avatar;
+    }
+
 
     // endregion
 }

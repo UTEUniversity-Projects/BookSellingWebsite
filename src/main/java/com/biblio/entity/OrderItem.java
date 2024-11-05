@@ -42,9 +42,12 @@ public class OrderItem implements Serializable {
     public OrderItem() {
     }
 
-    public OrderItem(String id, int quantity) {
+    public OrderItem(String id, int quantity, Book book, Order order, Cart cart) {
         this.id = id;
         this.quantity = quantity;
+        this.book = book;
+        this.order = order;
+        this.cart = cart;
     }
 
     // endregion
