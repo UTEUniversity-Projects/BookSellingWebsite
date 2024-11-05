@@ -6,7 +6,8 @@ import org.hibernate.annotations.GenericGenerator;
 import javax.persistence.*;
 import java.io.Serializable;
 
-@MappedSuperclass
+@Entity
+@Inheritance(strategy = InheritanceType.JOINED)
 public abstract class Classification implements Serializable {
 
     // region Attributes
@@ -14,20 +15,20 @@ public abstract class Classification implements Serializable {
     @Id
     @GeneratedValue(generator = "uuid")
     @GenericGenerator(name = "uuid", strategy = "org.hibernate.id.UUIDGenerator")
-    private String id;
+    protected String id;
 
     @Column(name = "name", nullable = false)
-    private String name;
+    protected String name;
 
     @Column(name = "short_script", nullable = false)
-    private String shortScript;
+    protected String shortScript;
 
     @Column(name = "full_script", nullable = false)
-    private String fullScript;
+    protected String fullScript;
 
     @Enumerated(EnumType.STRING)
     @Column(name = "status", nullable = false)
-    private EClassificationStatus status;
+    protected EClassificationStatus status;
 
     // endregion
 

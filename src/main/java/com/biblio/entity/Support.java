@@ -59,7 +59,7 @@ public class Support implements Serializable {
     public Support() {
     }
 
-    public Support(String id, String title, String requestContent, String feedbackContent, int rate, ESupportStatus status, LocalDateTime createdAt, LocalDateTime responsedAt) {
+    public Support(String id, String title, String requestContent, String feedbackContent, int rate, ESupportStatus status, LocalDateTime createdAt, LocalDateTime responsedAt, Staff staff, Customer customer) {
         this.id = id;
         this.title = title;
         this.requestContent = requestContent;
@@ -68,6 +68,8 @@ public class Support implements Serializable {
         this.status = status;
         this.createdAt = createdAt;
         this.responsedAt = responsedAt;
+        this.staff = staff;
+        this.customer = customer;
     }
 
     // endregion
@@ -153,6 +155,7 @@ public class Support implements Serializable {
     public void setCustomer(Customer customer) {
         this.customer = customer;
     }
+
 
     // endregion
 }

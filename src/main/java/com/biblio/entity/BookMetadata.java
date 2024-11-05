@@ -37,7 +37,7 @@ public class BookMetadata implements Serializable {
 
     // region Relationships
 
-    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @ManyToMany(cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
     @JoinTable(
             name = "book_metadata_tag",
             joinColumns = @JoinColumn(name = "book_metadata_id", nullable = false),

@@ -30,26 +30,20 @@ public class MediaFile implements Serializable {
     @JoinColumn(name = "book_metadata_id")
     private BookMetadata bookMetadata;
 
-    @OneToOne(mappedBy = "avatar")
-    private Publisher publisher;
-
-    @OneToOne(mappedBy = "avatar")
-    private Author author;
-
-    @OneToOne(mappedBy = "avatar")
-    private Translator translator;
-
     // endregion
 
-    //region Constructors
+    // region Constructors
+
     public MediaFile() {
     }
 
-    public MediaFile(String id, String fileName, String storedCode) {
+    public MediaFile(String id, String fileName, String storedCode, BookMetadata bookMetadata) {
         this.id = id;
         this.fileName = fileName;
         this.storedCode = storedCode;
+        this.bookMetadata = bookMetadata;
     }
+
     //endregion
 
     // region Getters & Setters
@@ -86,29 +80,6 @@ public class MediaFile implements Serializable {
         this.bookMetadata = bookMetadata;
     }
 
-    public Publisher getPublisher() {
-        return publisher;
-    }
-
-    public void setPublisher(Publisher publisher) {
-        this.publisher = publisher;
-    }
-
-    public Author getAuthor() {
-        return author;
-    }
-
-    public void setAuthor(Author author) {
-        this.author = author;
-    }
-
-    public Translator getTranslator() {
-        return translator;
-    }
-
-    public void setTranslator(Translator translator) {
-        this.translator = translator;
-    }
 
     // endregion
 }

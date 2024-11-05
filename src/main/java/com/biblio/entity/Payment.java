@@ -10,7 +10,6 @@ import java.time.LocalDateTime;
 
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED)
-@DiscriminatorColumn(name = "payment_type")
 public abstract class Payment implements Serializable {
 
     // region Attributes
@@ -18,21 +17,21 @@ public abstract class Payment implements Serializable {
     @Id
     @GeneratedValue(generator = "uuid")
     @GenericGenerator(name = "uuid", strategy = "org.hibernate.id.UUIDGenerator")
-    private String id;
+    protected String id;
 
     @Column(name = "created_at", nullable = false)
-    private LocalDateTime createdAt;
+    protected LocalDateTime createdAt;
 
     @Column(name = "amount", nullable = false)
-    private double amount;
+    protected double amount;
 
     @Enumerated(EnumType.STRING)
     @Column(name = "status", nullable = false)
-    private EPaymentStatus status;
+    protected EPaymentStatus status;
 
     @Enumerated(EnumType.STRING)
     @Column(name = "currency", nullable = false)
-    private EPaymentCurrency currency;
+    protected EPaymentCurrency currency;
 
     // endregion
 

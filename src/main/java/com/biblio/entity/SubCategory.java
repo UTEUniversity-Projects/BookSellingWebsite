@@ -28,8 +28,10 @@ public class SubCategory extends Classification implements Serializable {
         super();
     }
 
-    public SubCategory(String id, String name, String shortScript, String fullScript, EClassificationStatus status) {
+    public SubCategory(String id, String name, String shortScript, String fullScript, EClassificationStatus status, Set<Book> books, Category category) {
         super(id, name, shortScript, fullScript, status);
+        this.books = books;
+        this.category = category;
     }
 
     // endregion
@@ -51,6 +53,7 @@ public class SubCategory extends Classification implements Serializable {
     public void setCategory(Category category) {
         this.category = category;
     }
+
 
     // endregion
 

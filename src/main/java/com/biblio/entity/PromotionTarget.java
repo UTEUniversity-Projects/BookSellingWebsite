@@ -40,10 +40,11 @@ public class PromotionTarget implements Serializable {
     public PromotionTarget() {
     }
 
-    public PromotionTarget(String id, String applicableObjectId, EPromotionTargetType type) {
+    public PromotionTarget(String id, String applicableObjectId, EPromotionTargetType type, Set<Promotion> promotions) {
         this.id = id;
         this.applicableObjectId = applicableObjectId;
         this.type = type;
+        this.promotions = promotions;
     }
 
     // endregion
@@ -81,6 +82,7 @@ public class PromotionTarget implements Serializable {
     public void setPromotions(Set<Promotion> promotions) {
         this.promotions = promotions;
     }
+
 
     // endregion
 }

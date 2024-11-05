@@ -60,7 +60,7 @@ public class Promotion implements Serializable {
 
     // region Relationships
 
-    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @ManyToMany(cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
     @JoinTable(name = "promotion_promotion_target",
             joinColumns = @JoinColumn(name = "promotion_id", nullable = false),
             inverseJoinColumns = @JoinColumn(name = "promotion_target_id", nullable = false))
@@ -77,7 +77,7 @@ public class Promotion implements Serializable {
     public Promotion() {
     }
 
-    public Promotion(String id, LocalDateTime createdAt, String code, LocalDateTime effectiveDate, LocalDateTime expirationDate, String title, String description, double percentDiscount, double discountLimit, double minValueToBeApplied, EPromotionType type, EPromotionStatus status) {
+    public Promotion(String id, LocalDateTime createdAt, String code, LocalDateTime effectiveDate, LocalDateTime expirationDate, String title, String description, double percentDiscount, double discountLimit, double minValueToBeApplied, EPromotionType type, EPromotionStatus status, Set<PromotionTarget> promotionTargets, Order order) {
         this.id = id;
         this.createdAt = createdAt;
         this.code = code;
@@ -90,6 +90,8 @@ public class Promotion implements Serializable {
         this.minValueToBeApplied = minValueToBeApplied;
         this.type = type;
         this.status = status;
+        this.promotionTargets = promotionTargets;
+        this.order = order;
     }
 
     // region Getters & Setters
@@ -205,6 +207,7 @@ public class Promotion implements Serializable {
     public void setOrder(Order order) {
         this.order = order;
     }
+
 
     // endregion
 }

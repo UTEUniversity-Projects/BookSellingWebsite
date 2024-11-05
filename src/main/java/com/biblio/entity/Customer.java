@@ -24,12 +24,6 @@ public class Customer extends User implements Serializable {
 
     // region Relationships
 
-    @ManyToMany(fetch = FetchType.LAZY)
-    @JoinTable(name = "customer_address",
-            joinColumns = @JoinColumn(name = "customer_id", nullable = false),
-            inverseJoinColumns = @JoinColumn(name = "address_id", nullable = false))
-    private Set<Address> addresses = new HashSet<Address>();
-
     @OneToMany(mappedBy = "customer", cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<Order> orders = new HashSet<Order>();
 
@@ -53,9 +47,14 @@ public class Customer extends User implements Serializable {
         super();
     }
 
-    public Customer(String id, String username, String fullName, String password, String emailAddress, String dateOfBirth, EGender gender, String phoneNumber, String avatar, LocalDateTime joinAt, EUserRole role, EMembership membership) {
-        super(id, username, fullName, password, emailAddress, dateOfBirth, gender, phoneNumber, avatar, joinAt, role);
+    public Customer(String id, String fullName, String emailAddress, String dateOfBirth, EGender gender, String phoneNumber, String avatar, LocalDateTime joinAt, Account account, Set<Address> addresses, Set<Notification> notifications, EMembership membership, Set<Order> orders, Cart cart, Set<Support> supports, Set<Notification> notifications1, Set<Review> reviews) {
+        super(id, fullName, emailAddress, dateOfBirth, gender, phoneNumber, avatar, joinAt, account, addresses, notifications);
         this.membership = membership;
+        this.orders = orders;
+        this.cart = cart;
+        this.supports = supports;
+        this.notifications = notifications1;
+        this.reviews = reviews;
     }
 
     // endregion
@@ -68,14 +67,6 @@ public class Customer extends User implements Serializable {
 
     public void setMembership(EMembership membership) {
         this.membership = membership;
-    }
-
-    public Set<Address> getAddresses() {
-        return addresses;
-    }
-
-    public void setAddresses(Set<Address> addresses) {
-        this.addresses = addresses;
     }
 
     public Set<Order> getOrders() {
@@ -102,10 +93,12 @@ public class Customer extends User implements Serializable {
         this.supports = supports;
     }
 
+    @Override
     public Set<Notification> getNotifications() {
         return notifications;
     }
 
+    @Override
     public void setNotifications(Set<Notification> notifications) {
         this.notifications = notifications;
     }
@@ -117,6 +110,7 @@ public class Customer extends User implements Serializable {
     public void setReviews(Set<Review> reviews) {
         this.reviews = reviews;
     }
+
 
     // endregion
 }

@@ -15,15 +15,6 @@ public class Owner extends User implements Serializable {
 
     // region Relationships
 
-    @ManyToMany(fetch = FetchType.LAZY)
-    @JoinTable(name = "owner_address",
-            joinColumns = @JoinColumn(name = "owner_id", nullable = false),
-            inverseJoinColumns = @JoinColumn(name = "address_id", nullable = false))
-    private Set<Address> addresses;
-
-    @ManyToMany(mappedBy = "owners")
-    private Set<Notification> notifications = new HashSet<Notification>();
-
     // endregion
 
     // region Constructors
@@ -32,21 +23,13 @@ public class Owner extends User implements Serializable {
         super();
     }
 
-    public Owner(String id, String username, String fullName, String password, String emailAddress, String dateOfBirth, EGender gender, String phoneNumber, String avatar, LocalDateTime joinAt, EUserRole role) {
-        super(id, username, fullName, password, emailAddress, dateOfBirth, gender, phoneNumber, avatar, joinAt, role);
+    public Owner(String id, String fullName, String emailAddress, String dateOfBirth, EGender gender, String phoneNumber, String avatar, LocalDateTime joinAt, Account account, Set<Address> addresses, Set<Notification> notifications) {
+        super(id, fullName, emailAddress, dateOfBirth, gender, phoneNumber, avatar, joinAt, account, addresses, notifications);
     }
 
     // endregion
 
     // region Getters & Setters
-
-    public Set<Notification> getNotifications() {
-        return notifications;
-    }
-
-    public void setNotifications(Set<Notification> notifications) {
-        this.notifications = notifications;
-    }
 
     // endregion
 }
