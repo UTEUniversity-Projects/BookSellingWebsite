@@ -15,7 +15,8 @@ public class Staff extends User implements Serializable {
 
     // region Relationships
 
-    @OneToOne(mappedBy = "staff")
+    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JoinColumn(name = "account_id")
     private Account account;
 
     @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)

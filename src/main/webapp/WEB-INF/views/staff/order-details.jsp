@@ -7,7 +7,7 @@
             <div class="cr-breadcrumb">
                 <ul>
                     <li><a href="#">Biblio</a></li>
-                    <li><a href="/staff/order-dashboard">Danh sách đơn hàng</a></li>
+                    <li><a href="${pageContext.request.contextPath}/staff/order-dashboard">Danh sách đơn hàng</a></li>
                     <li>Chi tiết đơn hàng</li>
                 </ul>
             </div>
@@ -17,10 +17,24 @@
                 <div class="cr-card">
                     <div class="cr-card-header">
                         <div class="cr-card-info">
-                            <p class="cr-card-id">Mã đơn hàng #123</p>
+                            <%--<p class="cr-card-id">Mã đơn hàng ${order.id}</p>--%>
+                            <p class="cr-card-id">Mã đơn hàng: 240724DBC1RDJ7</p>
+                            <p class="cr-card-customer">
+                                <i class="ri-account-pin-box-line"></i>
+                                Phạm Khánh Huy
+                            </p>
+                            <p class="cr-card-phone-number">
+                                <i class="ri-phone-line"></i>
+                                03274500xx
+                            </p>
+                            <p class="cr-card-location">
+                                <i class="ri-map-pin-line"></i>
+                                Dt 741 khu phố 4 phường long phước thị xã phước long tỉnh bình phước, Phường Phước Bình,
+                                Thị Xã Phước Long, Bình Phước
+                            </p>
                             <p class="cr-card-date">
                                 <i class="ri-calendar-2-line"></i>
-                                Aug 17, 2020, 5:48 (ET)
+                                10:15 29-07-2024
                             </p>
                         </div>
                         <div>
@@ -36,8 +50,8 @@
                         <div class="cr-card-content-body">
                             <div class="table-responsive">
                                 <table
-                                    id="order-product-data-table"
-                                    class="table table-hover"
+                                        id="order-product-data-table"
+                                        class="table table-hover"
                                 >
                                     <thead>
                                     <tr>
@@ -53,9 +67,9 @@
                                     <tr>
                                         <td>
                                             <img
-                                                class="tbl-thumb"
-                                                src="/assets/staff/img/product/1.jpg"
-                                                alt="Product Image"
+                                                    class="tbl-thumb"
+                                                    src="${pageContext.request.contextPath}/assets/staff/img/product/1.jpg"
+                                                    alt="Product Image"
                                             />
                                         </td>
                                         <td>Avira Venusio</td>
@@ -71,9 +85,9 @@
                                     <tr>
                                         <td>
                                             <img
-                                                class="tbl-thumb"
-                                                src="/assets/staff/img/product/1.jpg"
-                                                alt="Product Image"
+                                                    class="tbl-thumb"
+                                                    src="${pageContext.request.contextPath}/assets/staff/img/product/1.jpg"
+                                                    alt="Product Image"
                                             />
                                         </td>
                                         <td>Avira Venusio</td>
@@ -89,9 +103,9 @@
                                     <tr>
                                         <td>
                                             <img
-                                                class="tbl-thumb"
-                                                src="/assets/staff/img/product/1.jpg"
-                                                alt="Product Image"
+                                                    class="tbl-thumb"
+                                                    src="/assets/staff/img/product/1.jpg"
+                                                    alt="Product Image"
                                             />
                                         </td>
                                         <td>Avira Venusio</td>
@@ -107,9 +121,9 @@
                                     <tr>
                                         <td>
                                             <img
-                                                class="tbl-thumb"
-                                                src="/assets/staff/img/product/1.jpg"
-                                                alt="Product Image"
+                                                    class="tbl-thumb"
+                                                    src="/assets/staff/img/product/1.jpg"
+                                                    alt="Product Image"
                                             />
                                         </td>
                                         <td>Avira Venusio</td>
@@ -128,26 +142,36 @@
                         </div>
                     </div>
                     <div class="cr-card-content">
-                        <div class="row align-items-start">
-                            <div class="col-md-6">
-                                <dl class="row">
-                                    <dt class="col-sm-6">Subtotal:</dt>
-                                    <dd class="col-sm-6">$65.00</dd>
-                                    <dt class="col-sm-6">Shipping fee:</dt>
-                                    <dd class="col-sm-6">$0.00</dd>
-                                    <dt class="col-sm-6">Tax:</dt>
-                                    <dd class="col-sm-6">$7.00</dd>
-                                    <dt class="col-sm-6">Total:</dt>
-                                    <dd class="col-sm-6">$65.00</dd>
-                                    <dt class="col-sm-6">Amount paid:</dt>
-                                    <dd class="col-sm-6">$65.00</dd>
-                                </dl>
+                        <div class="price-summary">
+                            <div class="summary-row">
+                                <div class="summary-label">Tổng tiền hàng</div>
+                                <div class="summary-value price-value">100000</div>
                             </div>
-                            <div class="col-md-6 text-end">
-                                <button class="btn btn-success">Xác nhận</button>
-                                <button class="btn btn-danger">Từ chối</button>
+                            <div class="summary-row">
+                                <div class="summary-label">Phí vận chuyển</div>
+                                <div class="summary-value price-value">42500</div>
+                            </div>
+                            <div class="summary-row">
+                                <div class="summary-label">Giảm giá phí vận chuyển</div>
+                                <div class="summary-value price-value minus-value">42500</div>
+                            </div>
+                            <div class="summary-row">
+                                <div class="summary-label">Voucher từ Shop</div>
+                                <div class="summary-value price-value minus-value">42500</div>
+                            </div>
+                            <div class="summary-row total-row">
+                                <div class="summary-label">Thành tiền</div>
+                                <div class="summary-value price-value total-value">42500</div>
+                            </div>
+                            <div class="summary-row">
+                                <div class="summary-label">Phương thức thanh toán</div>
+                                <div class="summary-value">Momo</div>
                             </div>
                         </div>
+                    </div>
+                    <div class="cr-card-content d-grid gap-3 d-md-flex justify-content-md-end">
+                        <button class="btn btn-success">Xác nhận</button>
+                        <button class="btn btn-outline-danger">Từ chối</button>
                     </div>
                 </div>
             </div>
