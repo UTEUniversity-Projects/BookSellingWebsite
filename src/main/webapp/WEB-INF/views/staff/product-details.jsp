@@ -2,17 +2,19 @@
 <!-- Product -->
 <div class="cr-main-content mb-3">
     <div class="container-fluid">
-        <!-- Page title & breadcrumb -->
+        <!-- region Page title & breadcrumb -->
         <div class="cr-page-title cr-page-title-2">
             <div class="cr-breadcrumb">
                 <ul>
                     <li><a href="#">Biblio</a></li>
-                    <li><a href="${pageContext.request.contextPath}/staff/staff/product-dashboard">Danh sách sản
+                    <li><a href="${pageContext.request.contextPath}/staff/product-dashboard">Danh sách sản
                         phẩm</a></li>
                     <li>Chi tiết sản phẩm</li>
                 </ul>
             </div>
         </div>
+        <!-- endregion -->
+
         <div
                 class="row mb-minus-24"
                 data-aos="fade-up"
@@ -160,20 +162,6 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="author-section">
-                            <span class="author-follow-text">Theo dõi tác giả</span>
-                            <a
-                                    href="https://www.amazon.com/stores/Richard-Koch/author/B001IXPR7Y?ref=ap_rdr&isDramIntegrated=true&shoppingPortalEnabled=true"
-                                    class="author-container"
-                            >
-                                <img
-                                        src="${pageContext.request.contextPath}/assets/staff/img/logo/full-logo.png"
-                                        alt="Author Image"
-                                        class="author-image"
-                                />
-                                <label class="author-name">Richard Koch</label>
-                            </a>
-                        </div>
                     </div>
                 </div>
             </div>
@@ -286,6 +274,20 @@
                                     aria-selected="false"
                             >
                                 Đánh giá sản phẩm
+                            </button>
+                        </li>
+                        <li class="nav-item" role="presentation">
+                            <button
+                                    class="nav-link"
+                                    id="author-tab"
+                                    data-bs-toggle="tab"
+                                    data-bs-target="#author"
+                                    type="button"
+                                    role="tab"
+                                    aria-controls="author"
+                                    aria-selected="false"
+                            >
+                                Thông tin tác giả
                             </button>
                         </li>
                     </ul>
@@ -416,59 +418,119 @@
                                                  alt="review"/>
                                         </div>
                                         <div class="review-item__content">
-                                            <span class="name">Oreo Noman</span>
-                                            <span class="date">Jan 08, 2024</span>
-                                            <div class="cr-t-review-rating">
-                                                <i class="ri-star-s-fill"></i>
-                                                <i class="ri-star-s-fill"></i>
-                                                <i class="ri-star-s-fill"></i>
-                                                <i class="ri-star-s-fill"></i>
-                                                <i class="ri-star-s-fill"></i>
+                                            <div class="header">
+                                                <div class="header__left">
+                                                    <span class="name">Oreo Noman</span>
+                                                    <div class="rating">
+                                                        <i class="ri-star-s-fill"></i>
+                                                        <i class="ri-star-s-fill"></i>
+                                                        <i class="ri-star-s-fill"></i>
+                                                        <i class="ri-star-s-fill"></i>
+                                                        <i class="ri-star-s-fill"></i>
+                                                    </div>
+                                                </div>
+                                                <div class="header__right">
+                                                    <button class="action-btn action-btn__hide">
+                                                        <i class="ri-eye-off-line"></i>
+                                                    </button>
+                                                    <button type="button" class="action-btn action-btn__response"
+                                                            data-bs-toggle="modal" data-bs-target="#feedbackModal">
+                                                        <i class="ri-reply-line"></i>
+                                                    </button>
+                                                </div>
                                             </div>
-                                            <p>
-                                                Lorem ipsum dolor sit amet consectetur adipisicing
-                                                elit. Error in vero sapiente doloribus debitis
-                                                corporis, eaque dicta, repellat amet, illum adipisci
-                                                vel perferendis dolor! quae vero in perferendis
-                                                provident quis.
-                                            </p>
+                                            <span class="date">Jan 08, 2024</span>
+
+                                            <div class="review-content">
+                                                Cảm ơn shop rất nhiều
+                                            </div>
+
+                                            <div class="response-review">
+                                                <div class="response-title">Phản Hồi Của Người Bán</div>
+                                                <div class="response-text">
+                                                    Dạ vâng adidas cảm ơn quý khách đã tin tưởng và ủng hộ ❤️. Sự góp ý
+                                                    của quý khách sẽ giúp adidas
+                                                    ngày càng hoàn thiện hơn về dịch vụ. Adidas rất mong được phục vụ
+                                                    quý khách vào các lần mua tới.
+                                                    Chúc quý khách một ngày mới thật tốt lành!
+                                                    Dạ vâng adidas cảm ơn quý khách đã tin tưởng và ủng hộ ❤️. Sự góp ý
+                                                    của quý khách sẽ giúp adidas
+                                                    ngày càng hoàn thiện hơn về dịch vụ. Adidas rất mong được phục vụ
+                                                    quý khách vào các lần mua tới.
+                                                    Chúc quý khách một ngày mới thật tốt lành!
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li class="review-item">
+                                        <div class="review-item__image">
+                                            <img src="${pageContext.request.contextPath}/assets/staff/img/product/1.jpg"
+                                                 alt="review"/>
+                                        </div>
+                                        <div class="review-item__content">
+                                            <div class="header">
+                                                <div class="header__left">
+                                                    <span class="name">Oreo Noman</span>
+                                                    <div class="rating">
+                                                        <i class="ri-star-s-fill"></i>
+                                                        <i class="ri-star-s-fill"></i>
+                                                        <i class="ri-star-s-fill"></i>
+                                                        <i class="ri-star-s-fill"></i>
+                                                        <i class="ri-star-s-fill"></i>
+                                                    </div>
+                                                </div>
+                                                <div class="header__right">
+                                                    <button class="action-btn action-btn__hide">
+                                                        <i class="ri-eye-off-line"></i>
+                                                    </button>
+                                                    <button type="button" class="action-btn action-btn__response"
+                                                            data-bs-toggle="modal" data-bs-target="#feedbackModal">
+                                                        <i class="ri-reply-line"></i>
+                                                    </button>
+                                                </div>
+                                            </div>
+                                            <span class="date">Jan 08, 2024</span>
+
+                                            <div class="review-content">
+                                                Cảm ơn shop rất nhiều
+                                            </div>
+
+                                            <div class="response-review">
+                                                <div class="response-title">Phản Hồi Của Người Bán</div>
+                                                <div class="response-text">
+                                                    Dạ vâng adidas cảm ơn quý khách đã tin tưởng và ủng hộ ❤️. Sự góp ý
+                                                </div>
+                                            </div>
                                         </div>
                                     </li>
                                 </ul>
-
-                                <h4 class="heading">Thêm đánh giá</h4>
-                                <form action="javascript:void(0)">
-                                    <div class="cr-ratting-star">
-                                        <span>Mức đánh giá của bạn :</span>
-                                        <div class="cr-t-review-rating">
-                                            <i class="ri-star-s-fill"></i>
-                                            <i class="ri-star-s-fill"></i>
-                                            <i class="ri-star-s-line"></i>
-                                            <i class="ri-star-s-line"></i>
-                                            <i class="ri-star-s-line"></i>
-                                        </div>
+                            </div>
+                        </div>
+                        <div class="cr-tab-content">
+                            <div
+                                    class="tab-pane fade"
+                                    id="author"
+                                    role="tabpanel"
+                                    aria-labelledby="author-tab"
+                            >
+                                <div class="cr-tab-content">
+                                    <div class="cr-description">
+                                        <img src="${pageContext.request.contextPath}/assets/customer/img/product/1.jpg"
+                                             alt="">
+                                        <p>
+                                            <b>Richard Koch</b> is the author of The 80/20 Principle,
+                                            which has sold more than a million copies,
+                                            and been published in approximately forty languages.
+                                            He is also a successful entrepreneur and investor whose ventures have
+                                            included Filofax,
+                                            Plymouth Gin, Belgo restaurants and Betfair, the world’s largest betting
+                                            exchange.
+                                            He was formerly a partner of Bain & Company, and co-founder of LEK
+                                            Consulting.
+                                            He has written more than twenty acclaimed books on business and ideas.
+                                        </p>
                                     </div>
-                                    <div class="cr-ratting-input">
-                                        <input name="your-name" placeholder="Tên" type="text"/>
-                                    </div>
-                                    <div class="cr-ratting-input">
-                                        <input
-                                                name="your-email"
-                                                placeholder="Email*"
-                                                type="email"
-                                                required=""
-                                        />
-                                    </div>
-                                    <div class="cr-ratting-input form-submit">
-												<textarea
-                                                        name="your-commemt"
-                                                        placeholder="Nhập bình luận của bạn"
-                                                ></textarea>
-                                        <button class="cr-button" type="submit" value="Submit">
-                                            Gửi
-                                        </button>
-                                    </div>
-                                </form>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -477,3 +539,29 @@
         </div>
     </div>
 </div>
+
+<!-- region Modal -->
+<div class="modal fade" id="feedbackModal" tabindex="-1" aria-labelledby="feedbackModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="feedbackModalLabel">Phản hồi của bạn</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form id="feedbackForm">
+                    <div class="mb-3">
+                        <label for="feedbackContent" class="form-label">Nội dung phản hồi</label>
+                        <textarea id="feedbackContent" class="form-control" placeholder="Nhập nội dung phản hồi..."
+                                  rows="4"></textarea>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Hủy</button>
+                <button type="button" class="btn btn-primary" id="submitFeedback">Gửi</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- endregion -->

@@ -687,3 +687,14 @@
 
   // console.log($)
 })(jQuery);
+
+document.getElementById('submitFeedback').addEventListener('click', function () {
+  const feedbackContent = document.getElementById('feedbackContent').value;
+  if (feedbackContent) {
+    alert('Phản hồi của bạn: ' + feedbackContent); // Xử lý nội dung phản hồi
+    document.getElementById('feedbackContent').value = ''; // Xóa nội dung sau khi gửi
+    $('#feedbackModal').modal('hide'); // Ẩn modal sau khi gửi
+  } else {
+    alert('Vui lòng nhập nội dung phản hồi.');
+  }
+});
