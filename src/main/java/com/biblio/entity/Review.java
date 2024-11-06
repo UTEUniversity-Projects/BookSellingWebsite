@@ -26,6 +26,9 @@ public class Review implements Serializable {
     @Column(name = "ready_to_introduce", nullable = false, columnDefinition = "bit")
     private boolean readyToIntroduce;
 
+    @Column(name = "id_hidden", nullable = false)
+    private boolean idHidden;
+
     @Column(name = "created_at", nullable = false)
     private LocalDateTime createdAt;
 

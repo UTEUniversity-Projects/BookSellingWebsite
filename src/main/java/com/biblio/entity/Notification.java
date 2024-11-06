@@ -48,8 +48,14 @@ public class Notification implements Serializable {
 
     // region Relationships
 
-    @ManyToMany(fetch = FetchType.LAZY, mappedBy = "notifications")
-    private Set<User> users = new HashSet<User>();
+    @ManyToMany(mappedBy = "notifications")
+    private Set<Customer> customers = new HashSet<Customer>();
+
+    @ManyToMany(mappedBy = "notifications")
+    private Set<Staff> staff = new HashSet<Staff>();
+
+    @ManyToMany(mappedBy = "notifications")
+    private Set<Owner> owner = new HashSet<Owner>();
 
     // endregion
 
@@ -58,7 +64,7 @@ public class Notification implements Serializable {
     public Notification() {
     }
 
-    public Notification(String id, LocalDateTime createdAt, LocalDateTime sentTime, String title, String content, String hyperlink, ENotificationType type, ENotificationStatus status, Set<User> users) {
+    public Notification(String id, LocalDateTime createdAt, LocalDateTime sentTime, String title, String content, String hyperlink, ENotificationType type, ENotificationStatus status) {
         this.id = id;
         this.createdAt = createdAt;
         this.sentTime = sentTime;
@@ -67,7 +73,6 @@ public class Notification implements Serializable {
         this.hyperlink = hyperlink;
         this.type = type;
         this.status = status;
-        this.users = users;
     }
 
     // endregion
@@ -136,14 +141,6 @@ public class Notification implements Serializable {
 
     public void setStatus(ENotificationStatus status) {
         this.status = status;
-    }
-
-    public Set<User> getUsers() {
-        return users;
-    }
-
-    public void setUsers(Set<User> users) {
-        this.users = users;
     }
 
     // endregion

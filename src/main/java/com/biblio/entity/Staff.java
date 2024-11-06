@@ -15,8 +15,27 @@ public class Staff extends User implements Serializable {
 
     // region Relationships
 
+    @OneToOne(mappedBy = "staff")
+    private Account account;
+
+    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JoinTable(name = "staff_notification",
+            joinColumns = @JoinColumn(name = "staff_id", nullable = false),
+            inverseJoinColumns = @JoinColumn(name = "notification_id", nullable = false))
+    private Set<Notification> notifications = new HashSet<Notification>();
+
     @OneToMany(mappedBy = "staff")
     private Set<Support> supports = new HashSet<Support>();
+
+    @ManyToMany(cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
+    @JoinTable(name = "staff_address",
+            joinColumns = @JoinColumn(name = "staff_id"),
+            inverseJoinColumns = @JoinColumn(name = "address_id"))
+    private Set<Address> addresses;
+
+    public Set<Address> getAddresses() {
+        return addresses;
+    }
 
     // endregion
 
@@ -24,11 +43,6 @@ public class Staff extends User implements Serializable {
 
     public Staff() {
         super();
-    }
-
-    public Staff(String id, String fullName, String emailAddress, String dateOfBirth, EGender gender, String phoneNumber, String avatar, LocalDateTime joinAt, Account account, Set<Address> addresses, Set<Notification> notifications, Set<Support> supports) {
-        super(id, fullName, emailAddress, dateOfBirth, gender, phoneNumber, avatar, joinAt, account, addresses, notifications);
-        this.supports = supports;
     }
 
     // endregion

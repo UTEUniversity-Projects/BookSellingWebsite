@@ -15,16 +15,31 @@ public class Owner extends User implements Serializable {
 
     // region Relationships
 
+    @OneToOne(mappedBy = "owner")
+    private Account account;
+
+    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JoinTable(name = "owner_notification",
+            joinColumns = @JoinColumn(name = "owner_id", nullable = false),
+            inverseJoinColumns = @JoinColumn(name = "notification_id", nullable = false))
+    private Set<Notification> notifications = new HashSet<Notification>();
+
+    @ManyToMany(cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
+    @JoinTable(name = "owner_address",
+            joinColumns = @JoinColumn(name = "owner_id"),
+            inverseJoinColumns = @JoinColumn(name = "address_id"))
+    private Set<Address> addresses;
+
+    public Set<Address> getAddresses() {
+        return addresses;
+    }
+
     // endregion
 
     // region Constructors
 
     public Owner() {
         super();
-    }
-
-    public Owner(String id, String fullName, String emailAddress, String dateOfBirth, EGender gender, String phoneNumber, String avatar, LocalDateTime joinAt, Account account, Set<Address> addresses, Set<Notification> notifications) {
-        super(id, fullName, emailAddress, dateOfBirth, gender, phoneNumber, avatar, joinAt, account, addresses, notifications);
     }
 
     // endregion

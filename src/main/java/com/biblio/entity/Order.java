@@ -30,40 +30,41 @@ public class Order implements Serializable {
 
     // region Relationships
 
-    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    @JoinColumn(name = "address_id", nullable = false)
-    private Address address;
-
     @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JoinColumn(name = "customer_id", nullable = false)
     private Customer customer;
 
-    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    @JoinColumn(name = "payment_id", nullable = false)
-    private Payment payment;
+    @OneToOne(mappedBy = "order")
+    private BankTransfer bankTransfer;
+
+    @OneToOne(mappedBy = "order")
+    private CreditCard creditCard;
+
+    @OneToOne(mappedBy = "order")
+    private Cash cash;
+
+    @OneToOne(mappedBy = "order")
+    private EWallet wallet;
 
     @OneToMany(mappedBy = "order", fetch = FetchType.LAZY)
     private Set<OrderItem> orderItems = new HashSet<OrderItem>();
 
-    @OneToMany(mappedBy = "order")
+    @OneToMany(mappedBy = "order", fetch = FetchType.LAZY)
     private Set<Promotion> promotions = new HashSet<Promotion>();
+
+    // endregion
+
+    // region Relationships
+
+    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JoinColumn(name = "address_id")
+    private Address address;
 
     // endregion
 
     // region Constructors
 
     public Order() {
-    }
-
-    public Order(String id, String note, EOrderStatus status, Address address, Customer customer, Payment payment, Set<OrderItem> orderItems, Set<Promotion> promotions) {
-        this.id = id;
-        this.note = note;
-        this.status = status;
-        this.address = address;
-        this.customer = customer;
-        this.payment = payment;
-        this.orderItems = orderItems;
-        this.promotions = promotions;
     }
 
     // endregion
@@ -94,28 +95,12 @@ public class Order implements Serializable {
         this.status = status;
     }
 
-    public Address getAddress() {
-        return address;
-    }
-
-    public void setAddress(Address address) {
-        this.address = address;
-    }
-
     public Customer getCustomer() {
         return customer;
     }
 
     public void setCustomer(Customer customer) {
         this.customer = customer;
-    }
-
-    public Payment getPayment() {
-        return payment;
-    }
-
-    public void setPayment(Payment payment) {
-        this.payment = payment;
     }
 
     public Set<OrderItem> getOrderItems() {

@@ -8,8 +8,7 @@ import javax.persistence.*;
 import java.io.Serializable;
 import java.time.LocalDateTime;
 
-@Entity
-@Inheritance(strategy = InheritanceType.JOINED)
+@MappedSuperclass
 public abstract class Payment implements Serializable {
 
     // region Attributes
@@ -37,8 +36,6 @@ public abstract class Payment implements Serializable {
 
     // region Relationships
 
-    @OneToOne(mappedBy = "payment")
-    private Order order;
 
     // endregion
 

@@ -1,12 +1,9 @@
 package com.biblio.entity;
 
-import com.biblio.enumeration.EGender;
 import com.biblio.enumeration.EMembership;
-import com.biblio.enumeration.EUserRole;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.time.LocalDateTime;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -24,6 +21,21 @@ public class Customer extends User implements Serializable {
 
     // region Relationships
 
+    @OneToOne(mappedBy = "customer")
+    private Account account;
+
+    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JoinTable(name = "customer_notification",
+            joinColumns = @JoinColumn(name = "customer_id", nullable = false),
+            inverseJoinColumns = @JoinColumn(name = "notification_id", nullable = false))
+    private Set<Notification> notifications = new HashSet<Notification>();
+
+    @ManyToMany(cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
+    @JoinTable(name = "customer_address",
+            joinColumns = @JoinColumn(name = "customer_id"),
+            inverseJoinColumns = @JoinColumn(name = "address_id"))
+    private Set<Address> addresses;
+
     @OneToMany(mappedBy = "customer", cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<Order> orders = new HashSet<Order>();
 
@@ -33,11 +45,12 @@ public class Customer extends User implements Serializable {
     @OneToMany(mappedBy = "customer", cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<Support> supports = new HashSet<Support>();
 
-    @ManyToMany(mappedBy = "customers")
-    private Set<Notification> notifications = new HashSet<Notification>();
-
     @OneToMany(mappedBy = "customer", cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<Review> reviews = new HashSet<Review>();
+
+    public Set<Address> getAddresses() {
+        return addresses;
+    }
 
     // endregion
 
@@ -47,70 +60,9 @@ public class Customer extends User implements Serializable {
         super();
     }
 
-    public Customer(String id, String fullName, String emailAddress, String dateOfBirth, EGender gender, String phoneNumber, String avatar, LocalDateTime joinAt, Account account, Set<Address> addresses, Set<Notification> notifications, EMembership membership, Set<Order> orders, Cart cart, Set<Support> supports, Set<Notification> notifications1, Set<Review> reviews) {
-        super(id, fullName, emailAddress, dateOfBirth, gender, phoneNumber, avatar, joinAt, account, addresses, notifications);
-        this.membership = membership;
-        this.orders = orders;
-        this.cart = cart;
-        this.supports = supports;
-        this.notifications = notifications1;
-        this.reviews = reviews;
-    }
-
     // endregion
 
     // region Getters & Setters
-
-    public EMembership getMembership() {
-        return membership;
-    }
-
-    public void setMembership(EMembership membership) {
-        this.membership = membership;
-    }
-
-    public Set<Order> getOrders() {
-        return orders;
-    }
-
-    public void setOrders(Set<Order> orders) {
-        this.orders = orders;
-    }
-
-    public Cart getCart() {
-        return cart;
-    }
-
-    public void setCart(Cart cart) {
-        this.cart = cart;
-    }
-
-    public Set<Support> getSupports() {
-        return supports;
-    }
-
-    public void setSupports(Set<Support> supports) {
-        this.supports = supports;
-    }
-
-    @Override
-    public Set<Notification> getNotifications() {
-        return notifications;
-    }
-
-    @Override
-    public void setNotifications(Set<Notification> notifications) {
-        this.notifications = notifications;
-    }
-
-    public Set<Review> getReviews() {
-        return reviews;
-    }
-
-    public void setReviews(Set<Review> reviews) {
-        this.reviews = reviews;
-    }
-
 
     // endregion
 }
