@@ -1,0 +1,39 @@
+.price-summary {
+  background-color: #fafafa;
+  border-top: 1px solid rgba(0, 0, 0, .09);
+}
+
+.summary-row {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  font-size: 12px;
+  border-bottom: 1px dotted rgba(0, 0, 0, .09);
+  padding: 0 24px;
+  text-align: right;
+}
+
+.summary-label {
+  color: rgba(0, 0, 0, .54);
+  padding: 13px 10px;
+}
+
+.summary-value {
+  border-left: 1px dotted rgba(0, 0, 0, .09);
+  justify-content: flex-end;
+  padding: 13px 0 13px 10px;
+  width: 240px;
+  word-wrap: break-word;
+  color: rgba(0, 0, 0, .8);
+}
+
+.currency-symbol {
+  position: relative;
+  top: -4px; /* Adjust this value as needed */
+  font-size: 0.9em; /* Optional: make the symbol slightly smaller */
+}
+
+.total-value {
+  color: rgba(238, 77, 45, 0.91);
+  font-size: 16px;
+}
