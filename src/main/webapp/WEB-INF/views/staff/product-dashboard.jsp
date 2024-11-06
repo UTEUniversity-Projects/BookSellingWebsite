@@ -6,7 +6,7 @@
         <div class="cr-page-title cr-page-title-2">
             <div class="cr-breadcrumb">
                 <ul>
-                    <li><a href="index.html">Biblio</a></li>
+                    <li><a href="#">Biblio</a></li>
                     <li>Danh sách sản phẩm</li>
                 </ul>
             </div>
@@ -87,12 +87,12 @@
                                 </tr>
                                 </thead>
                                 <tbody>
-                                <tr>
+                                <tr class="product-row" data-href="/staff/product-details">
                                     <td>
                                         <img
-                                                class="tbl-thumb"
-                                                src="/assets/staff/img/product/1.jpg"
-                                                alt="Product Image"
+                                            class="tbl-thumb"
+                                            src="${pageContext.request.contextPath}/assets/staff/img/product/1.jpg"
+                                            alt="Product Image"
                                         />
                                     </td>
                                     <td>Mens t-shirt</td>
@@ -136,11 +136,11 @@
                                         </div>
                                     </td>
                                 </tr>
-                                <tr>
+                                <tr class="product-row" data-href="/staff/product-details">
                                     <td>
                                         <img
                                                 class="tbl-thumb"
-                                                src="/assets/staff/img/product/1.jpg"
+                                                src="${pageContext.request.contextPath}/assets/staff/img/product/1.jpg"
                                                 alt="Product Image"
                                         />
                                     </td>
@@ -185,11 +185,11 @@
                                         </div>
                                     </td>
                                 </tr>
-                                <tr>
+                                <tr class="product-row" data-href="/staff/product-details">
                                     <td>
                                         <img
                                                 class="tbl-thumb"
-                                                src="/assets/staff/img/product/1.jpg"
+                                                src="${pageContext.request.contextPath}/assets/staff/img/product/1.jpg"
                                                 alt="Product Image"
                                         />
                                     </td>
@@ -234,11 +234,11 @@
                                         </div>
                                     </td>
                                 </tr>
-                                <tr>
+                                <tr class="product-row" data-href="/staff/product-details">
                                     <td>
                                         <img
                                             class="tbl-thumb"
-                                            src="/assets/staff/img/product/1.jpg"
+                                            src="${pageContext.request.contextPath}/assets/staff/img/product/1.jpg"
                                             alt="Product Image"
                                         />
                                     </td>

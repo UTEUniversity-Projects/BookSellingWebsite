@@ -695,6 +695,13 @@
 			}
 		});
 
+		$(".product-row").on("click", function () {
+			var href = $(this).data("href");
+			if (href) {
+				window.location.href = href;
+			}
+		});
+
 		// Product table
 		var productTable = initializeDataTable(
 			"#product-data-table",

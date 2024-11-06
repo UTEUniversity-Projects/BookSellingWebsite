@@ -3,32 +3,38 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <!-- region Meta -->
     <meta charset="utf-8"/>
     <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
     <meta name="viewport" content="width=device-width, initial-scale=1"/>
     <meta name="keywords" content="staff, dashboard"/>
     <meta name="description" content="Biblio - Staff"/>
+    <!-- endregion -->
 
     <title>Staff</title>
 
     <!-- Logo -->
     <link rel="shortcut icon" href="${pageContext.request.contextPath}/assets/staff/img/logo/collapse-logo.png"/>
-    <!-- Icon CSS -->
+
+    <!-- region Icon CSS -->
     <link
             href="${pageContext.request.contextPath}/assets/staff/css/vendor/materialdesignicons.min.css"
             rel="stylesheet"
     />
     <link href="${pageContext.request.contextPath}/assets/staff/css/vendor/remixicon.css" rel="stylesheet"/>
     <link href="${pageContext.request.contextPath}/assets/staff/css/vendor/owl.carousel.min.css" rel="stylesheet"/>
+    <!-- endregion -->
 
-    <!-- Font -->
+    <!-- region Font -->
     <link rel="preconnect" href="https://fonts.googleapis.com"/>
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
     <link
             href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
             rel="stylesheet"
     />
-    <!-- Vendor CSS -->
+    <!-- endregion -->
+
+    <!-- region Vendor CSS -->
     <link
             href="${pageContext.request.contextPath}/assets/staff/css/vendor/datatables.bootstrap5.min.css"
             rel="stylesheet"
@@ -44,6 +50,15 @@
             href="${pageContext.request.contextPath}/assets/staff/css/vendor/jquery-jvectormap-1.2.2.css"
             rel="stylesheet"
     />
+
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/staff/css/vendor/animate.css" />
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/staff/css/vendor/bootstrap.min.css" />
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/staff/css/vendor/aos.min.css" />
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/staff/css/vendor/range-slider.css" />
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/staff/css/vendor/swiper-bundle.min.css" />
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/staff/css/vendor/jquery.slick.css" />
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/staff/css/vendor/slick-theme.css" />
+    <!-- endregion -->
 
     <!-- Main CSS -->
     <link id="main-css" href="${pageContext.request.contextPath}/assets/staff/css/style.css" rel="stylesheet"/>
@@ -61,7 +76,7 @@
     <%@include file="/commons/staff/footer.jsp" %>
 </main>
 
-<!-- Vendor Custom -->
+<!-- region Vendor Custom JS -->
 <script src="${pageContext.request.contextPath}/assets/staff/js/vendor/jquery-3.6.4.min.js"></script>
 <script src="${pageContext.request.contextPath}/assets/staff/js/vendor/simplebar.min.js"></script>
 <script src="${pageContext.request.contextPath}/assets/staff/js/vendor/bootstrap.bundle.min.js"></script>
@@ -80,7 +95,18 @@
 <script src="${pageContext.request.contextPath}/assets/staff/js/vendor/daterangepicker.js"></script>
 <script src="${pageContext.request.contextPath}/assets/staff/js/vendor/date-range.js"></script>
 
-<!-- Main Custom -->
+<script src="${pageContext.request.contextPath}/assets/staff/js/vendor/jquery.zoom.min.js"></script>
+<script src="${pageContext.request.contextPath}/assets/staff/js/vendor/mixitup.min.js"></script>
+<script src="${pageContext.request.contextPath}/assets/staff/js/vendor/range-slider.js"></script>
+<script src="${pageContext.request.contextPath}/assets/staff/js/vendor/aos.min.js"></script>
+<script src="${pageContext.request.contextPath}/assets/staff/js/vendor/swiper-bundle.min.js"></script>
+<script src="${pageContext.request.contextPath}/assets/staff/js/vendor/slick.min.js"></script>
+<!-- endregion JS-->
+
+<!-- region Main Custom JS -->
 <script src="${pageContext.request.contextPath}/assets/staff/js/main.js"></script>
+<script src="${pageContext.request.contextPath}/assets/staff/js/order-details.js"></script>
+<script src="${pageContext.request.contextPath}/assets/staff/js/product-details.js"></script>
+<!-- endregion -->
 </body>
 </html>
