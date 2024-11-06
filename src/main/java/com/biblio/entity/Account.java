@@ -32,16 +32,13 @@ public class Account implements Serializable {
 
     // region Relationships
 
-    @OneToOne()
-    @JoinColumn(name = "customer_id", nullable = false)
+    @OneToOne(mappedBy = "account")
     private Customer customer;
 
-    @OneToOne()
-    @JoinColumn(name = "staff_id", nullable = false)
+    @OneToOne(mappedBy = "account")
     private Staff staff;
 
-    @OneToOne()
-    @JoinColumn(name = "owner_id", nullable = false)
+    @OneToOne(mappedBy = "account")
     private Owner owner;
 
     // endregion
