@@ -2,6 +2,7 @@ package com.biblio.apis;
 
 import com.biblio.dto.request.UserRegisterRequest;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.google.gson.Gson;
 
 import java.io.IOException;
 import java.io.Serial;
@@ -10,6 +11,8 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import org.json.JSONObject;
 
 /**
  * Servlet implementation class RegisterAPI
@@ -47,6 +50,15 @@ public class RegisterAPI extends HttpServlet {
         ObjectMapper objectMapper = new ObjectMapper();
         UserRegisterRequest user = objectMapper.readValue(request.getInputStream(), UserRegisterRequest.class);
         System.out.println("Register API: " + user);
+
+        JSONObject jsonResponse = new JSONObject();
+        jsonResponse.append("status", "success");
+
+        Gson gson = new Gson();
+
+        response.setContentType("application/json");
+        response.setCharacterEncoding("UTF-8");
+        response.getWriter().write(gson.toJson(jsonResponse));
     }
 
 }

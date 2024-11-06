@@ -93,7 +93,7 @@ $(document).ready(() => {
 		}
 
 		register() {
-			$("#registerForm").submit(async function (event) {
+			$("#registerForm").submit(function(event) {
 				event.preventDefault();
 				const formData = new FormData(this);
 				const email = formData.get('email');
@@ -103,25 +103,24 @@ $(document).ready(() => {
 				const userData = {
 					email,
 					phoneNumber,
-					username,
+					username
 				};
 
-				try {
-					const response = await fetch(`${contextPath}/register-api`, {
-						method: 'POST',
-						headers: {
-							'Content-Type': 'application/json'
-						},
-						body: JSON.stringify(userData)
-					});
-
-					// const result = await response.json();
-					// alert(result.message);
-
-				} catch (error) {
-					console.error('Lỗi:', error);
-					alert('Có lỗi xảy ra, vui lòng thử lại!');
-				}
+				$.ajax({
+					url: `${contextPath}/register-api`,
+					type: 'POST',
+					contentType: 'application/json',
+					data: JSON.stringify(userData),
+					success: function(response) {
+						// xử lý kết quả trả về từ server (nếu cần)
+						// ví dụ: alert(response.message);
+						console.log(response);
+					},
+					error: function(xhr, status, error) {
+						console.error('Lỗi:', error);
+						alert('Có lỗi xảy ra, vui lòng thử lại!');
+					}
+				});
 			});
 		}
 
