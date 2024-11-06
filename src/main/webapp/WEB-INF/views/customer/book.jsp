@@ -149,26 +149,6 @@
                 </div>
               </div>
             </div>
-            <div class="author-section">
-              <span class="author-follow-text">Theo dõi tác giả</span>
-              <a
-                      href="https://www.amazon.com/stores/Richard-Koch/author/B001IXPR7Y?ref=ap_rdr&isDramIntegrated=true&shoppingPortalEnabled=true"
-                      class="author-container"
-              >
-                <img
-                        src="${pageContext.request.contextPath}/assets/customer/img/logo/logo.png"
-                        alt="Author Image"
-                        class="author-image"
-                />
-                <label class="author-name">Richard Koch</label>
-                <button
-                        type="button"
-                        class="follow-button cr-btn-secondary"
-                >
-                  Theo dõi
-                </button>
-              </a>
-            </div>
           </div>
         </div>
       </div>
@@ -457,48 +437,40 @@
                     aria-labelledby="review-tab"
             >
               <div class="cr-tab-content-from">
-                <div class="post">
-                  <div class="content">
-                    <img src="${pageContext.request.contextPath}/assets/customer/img/review/1.jpg" alt="review" />
-                    <div class="details">
+                <ul class="review-list">
+                  <li class="review-item">
+                    <div class="review-item__image">
+                      <img src="${pageContext.request.contextPath}/assets/staff/img/product/1.jpg"
+                           alt="review"/>
+                    </div>
+                    <div class="review-item__content">
+                      <div class="header">
+                        <div class="header__left">
+                          <span class="name">Oreo Noman</span>
+                          <div class="rating">
+                            <i class="ri-star-s-fill"></i>
+                            <i class="ri-star-s-fill"></i>
+                            <i class="ri-star-s-fill"></i>
+                            <i class="ri-star-s-fill"></i>
+                            <i class="ri-star-s-fill"></i>
+                          </div>
+                        </div>
+                      </div>
                       <span class="date">Jan 08, 2024</span>
-                      <span class="name">Oreo Noman</span>
+
+                      <div class="review-content">
+                        Cảm ơn shop rất nhiều
+                      </div>
+
+                      <div class="response-review">
+                        <div class="response-title">Phản Hồi Của Người Bán</div>
+                        <div class="response-text">
+                          Dạ vâng adidas cảm ơn quý khách đã tin tưởng và ủng hộ ❤️. Sự góp ý
+                        </div>
+                      </div>
                     </div>
-                    <div class="cr-t-review-rating">
-                      <i class="ri-star-s-fill"></i>
-                      <i class="ri-star-s-fill"></i>
-                      <i class="ri-star-s-fill"></i>
-                      <i class="ri-star-s-fill"></i>
-                      <i class="ri-star-s-fill"></i>
-                    </div>
-                  </div>
-                  <p>
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                    Error in vero sapiente doloribus debitis corporis, eaque
-                    dicta, repellat amet, illum adipisci vel perferendis
-                    dolor! quae vero in perferendis provident quis.
-                  </p>
-                  <div class="content mt-30">
-                    <img src="${pageContext.request.contextPath}/assets/customer/img/review/2.jpg" alt="review" />
-                    <div class="details">
-                      <span class="date">Mar 22, 2024</span>
-                      <span class="name">Lina Wilson</span>
-                    </div>
-                    <div class="cr-t-review-rating">
-                      <i class="ri-star-s-fill"></i>
-                      <i class="ri-star-s-fill"></i>
-                      <i class="ri-star-s-fill"></i>
-                      <i class="ri-star-s-fill"></i>
-                      <i class="ri-star-s-line"></i>
-                    </div>
-                  </div>
-                  <p>
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                    Error in vero sapiente doloribus debitis corporis, eaque
-                    dicta, repellat amet, illum adipisci vel perferendis
-                    dolor! quae vero in perferendis provident quis.
-                  </p>
-                </div>
+                  </li>
+                </ul>
 
                 <h4 class="heading">Thêm đánh giá</h4>
                 <form action="javascript:void(0)">
@@ -543,7 +515,7 @@
             >
               <div class="cr-tab-content">
                 <div class="cr-description">
-                  <img src="${pageContext.request.contextPath}/assets/customer/img/logo/biblio.png">
+                  <img src="${pageContext.request.contextPath}/assets/customer/img/product/1.jpg" alt="">
                   <p>
                     <b>Richard Koch</b> is the author of The 80/20 Principle,
                     which has sold more than a million copies,
