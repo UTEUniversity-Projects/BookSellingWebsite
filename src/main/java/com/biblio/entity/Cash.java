@@ -23,6 +23,10 @@ public class Cash extends Payment implements Serializable {
 
     // region Relationships
 
+    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JoinColumn(name = "order_id")
+    private Order order;
+
     // endregion
 
     // region Constructors

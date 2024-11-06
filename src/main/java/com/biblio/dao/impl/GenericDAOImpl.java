@@ -19,19 +19,31 @@ public class GenericDAOImpl<T, ID> implements IGenericDAO<T, ID> {
     @Override
     public T findById(Object id) {
         EntityManager em = JpaConfig.getEntityManager();
-        T entity = em.find(entityClass, id);
-        em.close();
-        return entity;
+        try {
+            return em.find(entityClass, id);
+        } catch (Exception e) {
+            throw new RuntimeException("Error while finding entity by ID", e);
+        } finally {
+            if (em != null && em.isOpen()) {
+                em.close();
+            }
+        }
     }
 
     @Override
     public List<T> findAll() {
         EntityManager em = JpaConfig.getEntityManager();
-        CriteriaQuery<T> criteriaQuery = em.getCriteriaBuilder().createQuery(entityClass);
-        criteriaQuery.select(criteriaQuery.from(entityClass));
-        List<T> results = em.createQuery(criteriaQuery).getResultList();
-        em.close();
-        return results;
+        try {
+            CriteriaQuery<T> criteriaQuery = em.getCriteriaBuilder().createQuery(entityClass);
+            criteriaQuery.select(criteriaQuery.from(entityClass));
+            return em.createQuery(criteriaQuery).getResultList();
+        } catch (Exception e) {
+            throw new RuntimeException("Error while finding all entities", e);
+        } finally {
+            if (em != null && em.isOpen()) {
+                em.close();
+            }
+        }
     }
 
     @Override
@@ -43,8 +55,12 @@ public class GenericDAOImpl<T, ID> implements IGenericDAO<T, ID> {
                 query.setParameter(i + 1, params[i]);
             }
             return query.getResultStream().findFirst().orElse(null);
+        } catch (Exception e) {
+            throw new RuntimeException("Error while finding single entity by JPQL", e);
         } finally {
-            em.close();
+            if (em != null && em.isOpen()) {
+                em.close();
+            }
         }
     }
 
@@ -57,27 +73,47 @@ public class GenericDAOImpl<T, ID> implements IGenericDAO<T, ID> {
                 query.setParameter(i + 1, params[i]);
             }
             return query.getResultList();
+        } catch (Exception e) {
+            throw new RuntimeException("Error while finding entities by JPQL", e);
         } finally {
-            em.close();
+            if (em != null && em.isOpen()) {
+                em.close();
+            }
         }
     }
 
     @Override
     public void save(T entity) {
         EntityManager em = JpaConfig.getEntityManager();
-        em.getTransaction().begin();
-        em.persist(entity);
-        em.getTransaction().commit();
-        em.close();
+        try {
+            em.getTransaction().begin();
+            em.persist(entity);
+            em.getTransaction().commit();
+        } catch (Exception e) {
+            em.getTransaction().rollback();
+            throw new RuntimeException("Error while saving entity", e);
+        } finally {
+            if (em != null && em.isOpen()) {
+                em.close();
+            }
+        }
     }
 
     @Override
     public void update(T entity) {
         EntityManager em = JpaConfig.getEntityManager();
-        em.getTransaction().begin();
-        em.merge(entity);
-        em.getTransaction().commit();
-        em.close();
+        try {
+            em.getTransaction().begin();
+            em.merge(entity);
+            em.getTransaction().commit();
+        } catch (Exception e) {
+            em.getTransaction().rollback();
+            throw new RuntimeException("Error while updating entity", e);
+        } finally {
+            if (em != null && em.isOpen()) {
+                em.close();
+            }
+        }
     }
 
     @Override
@@ -95,23 +131,31 @@ public class GenericDAOImpl<T, ID> implements IGenericDAO<T, ID> {
             }
         } catch (Exception e) {
             em.getTransaction().rollback();
-            throw e;
+            throw new RuntimeException("Error while deleting entity", e);
         } finally {
-            em.close();
+            if (em != null && em.isOpen()) {
+                em.close();
+            }
         }
     }
 
     @Override
     public List<T> findAllPaginated(int pageNumber, int pageSize) {
         EntityManager em = JpaConfig.getEntityManager();
-        CriteriaQuery<T> criteriaQuery = em.getCriteriaBuilder().createQuery(entityClass);
-        criteriaQuery.select(criteriaQuery.from(entityClass));
-        TypedQuery<T> query = em.createQuery(criteriaQuery);
-        query.setFirstResult((pageNumber - 1) * pageSize);
-        query.setMaxResults(pageSize);
-        List<T> results = query.getResultList();
-        em.close();
-        return results;
+        try {
+            CriteriaQuery<T> criteriaQuery = em.getCriteriaBuilder().createQuery(entityClass);
+            criteriaQuery.select(criteriaQuery.from(entityClass));
+            TypedQuery<T> query = em.createQuery(criteriaQuery);
+            query.setFirstResult((pageNumber - 1) * pageSize);
+            query.setMaxResults(pageSize);
+            return query.getResultList();
+        } catch (Exception e) {
+            throw new RuntimeException("Error while finding paginated entities", e);
+        } finally {
+            if (em != null && em.isOpen()) {
+                em.close();
+            }
+        }
     }
 
     @Override
@@ -125,8 +169,12 @@ public class GenericDAOImpl<T, ID> implements IGenericDAO<T, ID> {
             query.setFirstResult((pageNumber - 1) * pageSize);
             query.setMaxResults(pageSize);
             return query.getResultList();
+        } catch (Exception e) {
+            throw new RuntimeException("Error while finding paginated entities by JPQL", e);
         } finally {
-            em.close();
+            if (em != null && em.isOpen()) {
+                em.close();
+            }
         }
     }
 }

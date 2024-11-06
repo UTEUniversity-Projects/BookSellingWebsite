@@ -1,7 +1,8 @@
 package com.biblio.entity;
 
-import com.biblio.enumeration.EUserRole;
 import org.hibernate.annotations.GenericGenerator;
+
+import com.biblio.enumeration.EUserRole;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -12,7 +13,7 @@ public class Account implements Serializable {
 
     // region Attributes
 
-    @Id
+	@Id
     @GeneratedValue(generator = "uuid")
     @GenericGenerator(name = "uuid", strategy = "org.hibernate.id.UUIDGenerator")
     private String id;
@@ -27,8 +28,21 @@ public class Account implements Serializable {
     @Column(name = "role", nullable = false)
     private EUserRole userRole;
 
-    @OneToOne(mappedBy = "account")
-    private User user;
+    // endregion
+
+    // region Relationships
+
+    @OneToOne()
+    @JoinColumn(name = "customer_id", nullable = false)
+    private Customer customer;
+
+    @OneToOne()
+    @JoinColumn(name = "staff_id", nullable = false)
+    private Staff staff;
+
+    @OneToOne()
+    @JoinColumn(name = "owner_id", nullable = false)
+    private Owner owner;
 
     // endregion
 
@@ -36,16 +50,16 @@ public class Account implements Serializable {
 
     public Account() {
     }
+    
+    public Account(String id, String username, String password, EUserRole userRole) {
+		super();
+		this.id = id;
+		this.username = username;
+		this.password = password;
+		this.userRole = userRole;
+	}
 
-    public Account(String id, String username, String password, EUserRole userRole, User user) {
-        this.id = id;
-        this.username = username;
-        this.password = password;
-        this.userRole = userRole;
-        this.user = user;
-    }
-
-    // endregion
+	// endregion
 
     // region Getters & Setters
 
@@ -71,22 +85,6 @@ public class Account implements Serializable {
 
     public void setPassword(String password) {
         this.password = password;
-    }
-
-    public EUserRole getUserRole() {
-        return userRole;
-    }
-
-    public void setUserRole(EUserRole userRole) {
-        this.userRole = userRole;
-    }
-
-    public User getUser() {
-        return user;
-    }
-
-    public void setUser(User user) {
-        this.user = user;
     }
 
     // endregion

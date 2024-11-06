@@ -1,10 +1,18 @@
 package com.biblio.controller.customer;
 
+import com.biblio.dto.request.UserRegisterRequest;
+import com.biblio.utils.UploadFileUtil;
+import com.fasterxml.jackson.databind.ObjectMapper;
+
+import org.apache.commons.beanutils.BeanUtils;
+
 import javax.servlet.ServletException;
+import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.Part;
 import java.io.IOException;
 import java.io.Serial;
 
@@ -12,6 +20,11 @@ import java.io.Serial;
  * Servlet implementation class HomeController
  */
 @WebServlet("/register")
+@MultipartConfig(
+        fileSizeThreshold = 1024 * 1024 * 2, // 2MB
+        maxFileSize = 1024 * 1024 * 10,      // 10MB
+        maxRequestSize = 1024 * 1024 * 50    // 50MB
+)
 public class RegisterController extends HttpServlet {
     @Serial
     private static final long serialVersionUID = 1L;
@@ -38,7 +51,20 @@ public class RegisterController extends HttpServlet {
      */
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         // TODO Auto-generated method stub
-        doGet(request, response);
+        response.setContentType("text/html");
+        response.setCharacterEncoding("UTF-8");
+        request.setCharacterEncoding("UTF-8");
+
+        UserRegisterRequest user = new UserRegisterRequest();
+
+        try {
+            BeanUtils.populate(user, request.getParameterMap());
+            Part part = request.getPart("image");
+            user.setAvatar(UploadFileUtil.UploadImage(part, getServletContext()));
+            System.out.println(user);
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
     }
 
 }
