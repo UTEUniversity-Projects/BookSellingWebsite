@@ -1,9 +1,11 @@
 package com.biblio.entity;
 
+import com.biblio.enumeration.EGender;
 import com.biblio.enumeration.EMembership;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.time.LocalDateTime;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -61,9 +63,81 @@ public class Customer extends User implements Serializable {
         super();
     }
 
+    public Customer(Long id, String fullName, String emailAddress, String dateOfBirth, EGender gender, String phoneNumber, String avatar, LocalDateTime joinAt, EMembership membership, Account account, Set<Notification> notifications, Set<Address> addresses, Set<Order> orders, Cart cart, Set<Support> supports, Set<Review> reviews) {
+        super(id, fullName, emailAddress, dateOfBirth, gender, phoneNumber, avatar, joinAt);
+        this.membership = membership;
+        this.account = account;
+        this.notifications = notifications;
+        this.addresses = addresses;
+        this.orders = orders;
+        this.cart = cart;
+        this.supports = supports;
+        this.reviews = reviews;
+    }
+
     // endregion
 
     // region Getters & Setters
+
+    public EMembership getMembership() {
+        return membership;
+    }
+
+    public void setMembership(EMembership membership) {
+        this.membership = membership;
+    }
+
+    public Account getAccount() {
+        return account;
+    }
+
+    public void setAccount(Account account) {
+        this.account = account;
+    }
+
+    public Set<Notification> getNotifications() {
+        return notifications;
+    }
+
+    public void setNotifications(Set<Notification> notifications) {
+        this.notifications = notifications;
+    }
+
+    public void setAddresses(Set<Address> addresses) {
+        this.addresses = addresses;
+    }
+
+    public Set<Order> getOrders() {
+        return orders;
+    }
+
+    public void setOrders(Set<Order> orders) {
+        this.orders = orders;
+    }
+
+    public Cart getCart() {
+        return cart;
+    }
+
+    public void setCart(Cart cart) {
+        this.cart = cart;
+    }
+
+    public Set<Support> getSupports() {
+        return supports;
+    }
+
+    public void setSupports(Set<Support> supports) {
+        this.supports = supports;
+    }
+
+    public Set<Review> getReviews() {
+        return reviews;
+    }
+
+    public void setReviews(Set<Review> reviews) {
+        this.reviews = reviews;
+    }
 
     // endregion
 }

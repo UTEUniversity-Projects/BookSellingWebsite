@@ -25,7 +25,7 @@ public class Author extends ContributorProfile implements Serializable {
     public Author() {
     }
 
-    public Author(String id, String name, String introduction, LocalDateTime joinAt, String avatar, Set<Book> books) {
+    public Author(Long id, String name, String introduction, LocalDateTime joinAt, String avatar, Set<Book> books) {
         super(id, name, introduction, joinAt, avatar);
         this.books = books;
     }

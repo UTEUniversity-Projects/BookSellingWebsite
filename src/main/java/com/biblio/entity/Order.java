@@ -1,7 +1,6 @@
 package com.biblio.entity;
 
 import com.biblio.enumeration.EOrderStatus;
-import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -15,9 +14,8 @@ public class Order implements Serializable {
     // region Attributes
 
     @Id
-    @GeneratedValue(generator = "uuid")
-    @GenericGenerator(name = "uuid", strategy = "org.hibernate.id.UUIDGenerator")
-    private String id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
     @Column(name = "note", nullable = false)
     private String note;
@@ -67,15 +65,29 @@ public class Order implements Serializable {
     public Order() {
     }
 
+    public Order(Long id, String note, EOrderStatus status, Customer customer, BankTransfer bankTransfer, CreditCard creditCard, Cash cash, EWallet wallet, Set<OrderItem> orderItems, Set<Promotion> promotions, Address address) {
+        this.id = id;
+        this.note = note;
+        this.status = status;
+        this.customer = customer;
+        this.bankTransfer = bankTransfer;
+        this.creditCard = creditCard;
+        this.cash = cash;
+        this.wallet = wallet;
+        this.orderItems = orderItems;
+        this.promotions = promotions;
+        this.address = address;
+    }
+
     // endregion
 
     // region Getters & Setters
 
-    public String getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -103,6 +115,38 @@ public class Order implements Serializable {
         this.customer = customer;
     }
 
+    public BankTransfer getBankTransfer() {
+        return bankTransfer;
+    }
+
+    public void setBankTransfer(BankTransfer bankTransfer) {
+        this.bankTransfer = bankTransfer;
+    }
+
+    public CreditCard getCreditCard() {
+        return creditCard;
+    }
+
+    public void setCreditCard(CreditCard creditCard) {
+        this.creditCard = creditCard;
+    }
+
+    public Cash getCash() {
+        return cash;
+    }
+
+    public void setCash(Cash cash) {
+        this.cash = cash;
+    }
+
+    public EWallet getWallet() {
+        return wallet;
+    }
+
+    public void setWallet(EWallet wallet) {
+        this.wallet = wallet;
+    }
+
     public Set<OrderItem> getOrderItems() {
         return orderItems;
     }
@@ -119,6 +163,13 @@ public class Order implements Serializable {
         this.promotions = promotions;
     }
 
+    public Address getAddress() {
+        return address;
+    }
+
+    public void setAddress(Address address) {
+        this.address = address;
+    }
 
     // endregion
 }

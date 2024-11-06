@@ -40,10 +40,11 @@ public class Cash extends Payment implements Serializable {
         this.change = change;
     }
 
-    public Cash(String id, LocalDateTime createdAt, double amount, EPaymentStatus status, EPaymentCurrency currency, double cashReceived, double change) {
+    public Cash(Long id, LocalDateTime createdAt, double amount, EPaymentStatus status, EPaymentCurrency currency, double cashReceived, double change, Order order) {
         super(id, createdAt, amount, status, currency);
         this.cashReceived = cashReceived;
         this.change = change;
+        this.order = order;
     }
 
     // endregion
@@ -64,6 +65,14 @@ public class Cash extends Payment implements Serializable {
 
     public void setChange(double change) {
         this.change = change;
+    }
+
+    public Order getOrder() {
+        return order;
+    }
+
+    public void setOrder(Order order) {
+        this.order = order;
     }
 
     // endregion

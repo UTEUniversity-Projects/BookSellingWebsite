@@ -29,8 +29,10 @@ public class Category extends Classification implements Serializable {
         super();
     }
 
-    public Category(String id, String name, String shortScript, String fullScript, EClassificationStatus status) {
+    public Category(Long id, String name, String shortScript, String fullScript, EClassificationStatus status, Set<Book> books, Set<SubCategory> subCategories) {
         super(id, name, shortScript, fullScript, status);
+        this.books = books;
+        this.subCategories = subCategories;
     }
 
     // region Getters & Setters

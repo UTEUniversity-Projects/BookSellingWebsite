@@ -1,7 +1,5 @@
 package com.biblio.entity;
 
-import org.hibernate.annotations.GenericGenerator;
-
 import javax.persistence.*;
 import java.io.Serializable;
 
@@ -12,9 +10,8 @@ public class OrderItem implements Serializable {
     // region Attributes
 
     @Id
-    @GeneratedValue(generator = "uuid")
-    @GenericGenerator(name = "uuid", strategy = "org.hibernate.id.UUIDGenerator")
-    private String id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
     @Column(name = "quantity", nullable = false)
     private int quantity;
@@ -42,7 +39,7 @@ public class OrderItem implements Serializable {
     public OrderItem() {
     }
 
-    public OrderItem(String id, int quantity, Book book, Order order, Cart cart) {
+    public OrderItem(Long id, int quantity, Book book, Order order, Cart cart) {
         this.id = id;
         this.quantity = quantity;
         this.book = book;
@@ -54,11 +51,11 @@ public class OrderItem implements Serializable {
 
     // region Getters & Setters
 
-    public String getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

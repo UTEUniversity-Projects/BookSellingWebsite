@@ -2,7 +2,6 @@ package com.biblio.entity;
 
 import com.biblio.enumeration.EPromotionStatus;
 import com.biblio.enumeration.EPromotionType;
-import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -17,9 +16,8 @@ public class Promotion implements Serializable {
     // region Attributes
 
     @Id
-    @GeneratedValue(generator = "uuid")
-    @GenericGenerator(name = "uuid", strategy = "org.hibernate.id.UUIDGenerator")
-    private String id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
     @Column(name = "created_at", nullable = false)
     private LocalDateTime createdAt;
@@ -77,7 +75,7 @@ public class Promotion implements Serializable {
     public Promotion() {
     }
 
-    public Promotion(String id, LocalDateTime createdAt, String code, LocalDateTime effectiveDate, LocalDateTime expirationDate, String title, String description, double percentDiscount, double discountLimit, double minValueToBeApplied, EPromotionType type, EPromotionStatus status, Set<PromotionTarget> promotionTargets, Order order) {
+    public Promotion(Long id, LocalDateTime createdAt, String code, LocalDateTime effectiveDate, LocalDateTime expirationDate, String title, String description, double percentDiscount, double discountLimit, double minValueToBeApplied, EPromotionType type, EPromotionStatus status, Set<PromotionTarget> promotionTargets, Order order) {
         this.id = id;
         this.createdAt = createdAt;
         this.code = code;
@@ -96,11 +94,11 @@ public class Promotion implements Serializable {
 
     // region Getters & Setters
 
-    public String getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -207,7 +205,6 @@ public class Promotion implements Serializable {
     public void setOrder(Order order) {
         this.order = order;
     }
-
 
     // endregion
 }

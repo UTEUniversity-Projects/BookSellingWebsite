@@ -44,21 +44,14 @@ public class CreditCard extends Payment implements Serializable {
         super();
     }
 
-    public CreditCard(String cardNumber, String cardHolderName, LocalDateTime expirationDate, String cvv, String billingAddress) {
-        this.cardNumber = cardNumber;
-        this.cardHolderName = cardHolderName;
-        this.expirationDate = expirationDate;
-        this.cvv = cvv;
-        this.billingAddress = billingAddress;
-    }
-
-    public CreditCard(String id, LocalDateTime createdAt, double amount, EPaymentStatus status, EPaymentCurrency currency, String cardNumber, String cardHolderName, LocalDateTime expirationDate, String cvv, String billingAddress) {
+    public CreditCard(Long id, LocalDateTime createdAt, double amount, EPaymentStatus status, EPaymentCurrency currency, String cardNumber, String cardHolderName, LocalDateTime expirationDate, String cvv, String billingAddress, Order order) {
         super(id, createdAt, amount, status, currency);
         this.cardNumber = cardNumber;
         this.cardHolderName = cardHolderName;
         this.expirationDate = expirationDate;
         this.cvv = cvv;
         this.billingAddress = billingAddress;
+        this.order = order;
     }
 
     // endregion
@@ -103,6 +96,14 @@ public class CreditCard extends Payment implements Serializable {
 
     public void setBillingAddress(String billingAddress) {
         this.billingAddress = billingAddress;
+    }
+
+    public Order getOrder() {
+        return order;
+    }
+
+    public void setOrder(Order order) {
+        this.order = order;
     }
 
     // endregion

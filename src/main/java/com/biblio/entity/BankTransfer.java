@@ -38,17 +38,12 @@ public class BankTransfer extends Payment implements Serializable {
         super();
     }
 
-    public BankTransfer(String bankAccountNumber, String bankName, String transactionId) {
-        this.bankAccountNumber = bankAccountNumber;
-        this.bankName = bankName;
-        this.transactionId = transactionId;
-    }
-
-    public BankTransfer(String id, LocalDateTime createdAt, double amount, EPaymentStatus status, EPaymentCurrency currency, String bankAccountNumber, String bankName, String transactionId) {
+    public BankTransfer(Long id, LocalDateTime createdAt, double amount, EPaymentStatus status, EPaymentCurrency currency, String bankAccountNumber, String bankName, String transactionId, Order order) {
         super(id, createdAt, amount, status, currency);
         this.bankAccountNumber = bankAccountNumber;
         this.bankName = bankName;
         this.transactionId = transactionId;
+        this.order = order;
     }
 
     // endregion
@@ -77,6 +72,14 @@ public class BankTransfer extends Payment implements Serializable {
 
     public void setTransactionId(String transactionId) {
         this.transactionId = transactionId;
+    }
+
+    public Order getOrder() {
+        return order;
+    }
+
+    public void setOrder(Order order) {
+        this.order = order;
     }
 
     // endregion

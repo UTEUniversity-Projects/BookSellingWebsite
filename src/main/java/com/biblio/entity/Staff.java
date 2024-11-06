@@ -1,7 +1,6 @@
 package com.biblio.entity;
 
 import com.biblio.enumeration.EGender;
-import com.biblio.enumeration.EUserRole;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -19,7 +18,7 @@ public class Staff extends User implements Serializable {
     @JoinColumn(name = "account_id")
     private Account account;
 
-    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @ManyToMany(cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
     @JoinTable(name = "staff_notification",
             joinColumns = @JoinColumn(name = "staff_id", nullable = false),
             inverseJoinColumns = @JoinColumn(name = "notification_id", nullable = false))
@@ -34,8 +33,8 @@ public class Staff extends User implements Serializable {
             inverseJoinColumns = @JoinColumn(name = "address_id"))
     private Set<Address> addresses;
 
-    public Set<Address> getAddresses() {
-        return addresses;
+    public Set<Notification> getNotifications() {
+        return notifications;
     }
 
     // endregion
@@ -46,9 +45,29 @@ public class Staff extends User implements Serializable {
         super();
     }
 
+    public Staff(Long id, String fullName, String emailAddress, String dateOfBirth, EGender gender, String phoneNumber, String avatar, LocalDateTime joinAt, Account account, Set<Notification> notifications, Set<Support> supports, Set<Address> addresses) {
+        super(id, fullName, emailAddress, dateOfBirth, gender, phoneNumber, avatar, joinAt);
+        this.account = account;
+        this.notifications = notifications;
+        this.supports = supports;
+        this.addresses = addresses;
+    }
+
     // endregion
 
     // region Getters & Setters
+
+    public Account getAccount() {
+        return account;
+    }
+
+    public void setAccount(Account account) {
+        this.account = account;
+    }
+
+    public void setNotifications(Set<Notification> notifications) {
+        this.notifications = notifications;
+    }
 
     public Set<Support> getSupports() {
         return supports;
@@ -56,6 +75,14 @@ public class Staff extends User implements Serializable {
 
     public void setSupports(Set<Support> supports) {
         this.supports = supports;
+    }
+
+    public Set<Address> getAddresses() {
+        return addresses;
+    }
+
+    public void setAddresses(Set<Address> addresses) {
+        this.addresses = addresses;
     }
 
     // endregion
