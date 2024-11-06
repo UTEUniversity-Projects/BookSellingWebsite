@@ -58,7 +58,7 @@ public class RegisterAPI extends HttpServlet {
 
         response.setContentType("application/json");
         response.setCharacterEncoding("UTF-8");
-        response.getWriter().write(gson.toJson(jsonResponse));
+        response.getWriter().write(gson.toJson(user));
     }
 
 }

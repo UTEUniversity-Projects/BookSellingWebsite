@@ -1,7 +1,6 @@
 package com.biblio.entity;
 
 import com.biblio.enumeration.EGender;
-import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -13,9 +12,8 @@ public class User implements Serializable {
     // region Attributes
 
     @Id
-    @GeneratedValue(generator = "uuid")
-    @GenericGenerator(name = "uuid", strategy = "org.hibernate.id.UUIDGenerator")
-    protected String id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
     @Column(name = "full_name", nullable = false)
     protected String fullName;
@@ -50,7 +48,7 @@ public class User implements Serializable {
     public User() {
     }
 
-    public User(String id, String fullName, String emailAddress, String dateOfBirth, EGender gender, String phoneNumber, String avatar, LocalDateTime joinAt) {
+    public User(Long id, String fullName, String emailAddress, String dateOfBirth, EGender gender, String phoneNumber, String avatar, LocalDateTime joinAt) {
         this.id = id;
         this.fullName = fullName;
         this.emailAddress = emailAddress;
@@ -65,11 +63,11 @@ public class User implements Serializable {
 
     // region Getters & Setters
 
-    public String getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

@@ -1,7 +1,5 @@
 package com.biblio.entity;
 
-import org.hibernate.annotations.GenericGenerator;
-
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.HashSet;
@@ -14,9 +12,8 @@ public class Cart implements Serializable {
     //region Attributes
 
     @Id
-    @GeneratedValue(generator = "uuid")
-    @GenericGenerator(name = "uuid", strategy = "org.hibernate.id.UUIDGenerator")
-    private String id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
     //endregion
 
@@ -36,7 +33,7 @@ public class Cart implements Serializable {
     public Cart() {
     }
 
-    public Cart(String id) {
+    public Cart(Long id) {
         this.id = id;
     }
 
@@ -44,11 +41,11 @@ public class Cart implements Serializable {
 
     // region Getters & Setters
 
-    public String getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

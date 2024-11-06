@@ -64,7 +64,7 @@ public class Notification implements Serializable {
     public Notification() {
     }
 
-    public Notification(String id, LocalDateTime createdAt, LocalDateTime sentTime, String title, String content, String hyperlink, ENotificationType type, ENotificationStatus status) {
+    public Notification(String id, LocalDateTime createdAt, LocalDateTime sentTime, String title, String content, String hyperlink, ENotificationType type, ENotificationStatus status, Set<Customer> customers, Set<Staff> staff, Set<Owner> owner) {
         this.id = id;
         this.createdAt = createdAt;
         this.sentTime = sentTime;
@@ -73,6 +73,9 @@ public class Notification implements Serializable {
         this.hyperlink = hyperlink;
         this.type = type;
         this.status = status;
+        this.customers = customers;
+        this.staff = staff;
+        this.owner = owner;
     }
 
     // endregion
@@ -141,6 +144,30 @@ public class Notification implements Serializable {
 
     public void setStatus(ENotificationStatus status) {
         this.status = status;
+    }
+
+    public Set<Customer> getCustomers() {
+        return customers;
+    }
+
+    public void setCustomers(Set<Customer> customers) {
+        this.customers = customers;
+    }
+
+    public Set<Staff> getStaff() {
+        return staff;
+    }
+
+    public void setStaff(Set<Staff> staff) {
+        this.staff = staff;
+    }
+
+    public Set<Owner> getOwner() {
+        return owner;
+    }
+
+    public void setOwner(Set<Owner> owner) {
+        this.owner = owner;
     }
 
     // endregion

@@ -14,9 +14,8 @@ public abstract class ContributorProfile implements Serializable {
     // region Attributes
 
     @Id
-    @GeneratedValue(generator = "uuid")
-    @GenericGenerator(name = "uuid", strategy = "org.hibernate.id.UUIDGenerator")
-    protected String id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
     @Column(name = "name", nullable = false)
     protected String name;
@@ -41,7 +40,7 @@ public abstract class ContributorProfile implements Serializable {
     public ContributorProfile() {
     }
 
-    public ContributorProfile(String id, String name, String introduction, LocalDateTime joinAt, String avatar) {
+    public ContributorProfile(Long id, String name, String introduction, LocalDateTime joinAt, String avatar) {
         this.id = id;
         this.name = name;
         this.introduction = introduction;
@@ -53,11 +52,11 @@ public abstract class ContributorProfile implements Serializable {
 
     // region Getters & Setters
 
-    public String getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -92,7 +91,6 @@ public abstract class ContributorProfile implements Serializable {
     public void setAvatar(String avatar) {
         this.avatar = avatar;
     }
-
 
     // endregion
 }

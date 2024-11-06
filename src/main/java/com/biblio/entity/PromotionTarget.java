@@ -47,6 +47,7 @@ public class PromotionTarget implements Serializable {
         this.promotions = promotions;
     }
 
+
     // endregion
 
     // region Getters & Setters

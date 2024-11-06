@@ -1,7 +1,5 @@
 package com.biblio.entity;
 
-import org.hibernate.annotations.GenericGenerator;
-
 import javax.persistence.*;
 import java.io.Serializable;
 
@@ -12,9 +10,8 @@ public class MediaFile implements Serializable {
     // region Attributes
 
     @Id
-    @GeneratedValue(generator = "uuid")
-    @GenericGenerator(name = "uuid", strategy = "org.hibernate.id.UUIDGenerator")
-    private String id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
     @Column(name = "file_name", nullable = false)
     private String fileName;
@@ -37,7 +34,7 @@ public class MediaFile implements Serializable {
     public MediaFile() {
     }
 
-    public MediaFile(String id, String fileName, String storedCode, BookMetadata bookMetadata) {
+    public MediaFile(Long id, String fileName, String storedCode, BookMetadata bookMetadata) {
         this.id = id;
         this.fileName = fileName;
         this.storedCode = storedCode;
@@ -48,11 +45,11 @@ public class MediaFile implements Serializable {
 
     // region Getters & Setters
 
-    public String getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -79,7 +76,6 @@ public class MediaFile implements Serializable {
     public void setBookMetadata(BookMetadata bookMetadata) {
         this.bookMetadata = bookMetadata;
     }
-
 
     // endregion
 }

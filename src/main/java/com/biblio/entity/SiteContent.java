@@ -1,7 +1,5 @@
 package com.biblio.entity;
 
-import org.hibernate.annotations.GenericGenerator;
-
 import javax.persistence.*;
 
 @Entity
@@ -11,9 +9,8 @@ public class SiteContent {
     // region Attributes
 
     @Id
-    @GeneratedValue(generator = "uuid")
-    @GenericGenerator(name = "uuid", strategy = "org.hibernate.id.UUIDGenerator")
-    private String id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
     @Column(name = "title", nullable = false)
     private String title;
@@ -31,7 +28,7 @@ public class SiteContent {
     public SiteContent() {
     }
 
-    public SiteContent(String id, String title, String content, boolean isEffective) {
+    public SiteContent(Long id, String title, String content, boolean isEffective) {
         this.id = id;
         this.title = title;
         this.content = content;
@@ -42,11 +39,11 @@ public class SiteContent {
 
     // region Getters & Setters
 
-    public String getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
