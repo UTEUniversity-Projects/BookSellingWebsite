@@ -298,7 +298,7 @@
                       aria-controls="additional"
                       aria-selected="false"
               >
-                Thông tin chi tiết
+                Chi tiết sản phẩm
               </button>
             </li>
             <li class="nav-item" role="presentation">
@@ -313,6 +313,20 @@
                       aria-selected="false"
               >
                 Đánh giá sản phẩm
+              </button>
+            </li>
+            <li class="nav-item" role="presentation">
+              <button
+                      class="nav-link"
+                      id="author-tab"
+                      data-bs-toggle="tab"
+                      data-bs-target="#author"
+                      type="button"
+                      role="tab"
+                      aria-controls="author"
+                      aria-selected="false"
+              >
+                Thông tin tác giả
               </button>
             </li>
           </ul>
@@ -519,6 +533,27 @@
                     </button>
                   </div>
                 </form>
+              </div>
+            </div>
+            <div
+                    class="tab-pane fade"
+                    id="author"
+                    role="tabpanel"
+                    aria-labelledby="author-tab"
+            >
+              <div class="cr-tab-content">
+                <div class="cr-description">
+                  <img src="${pageContext.request.contextPath}/assets/customer/img/logo/biblio.png">
+                  <p>
+                    <b>Richard Koch</b> is the author of The 80/20 Principle,
+                    which has sold more than a million copies,
+                    and been published in approximately forty languages.
+                    He is also a successful entrepreneur and investor whose ventures have included Filofax,
+                    Plymouth Gin, Belgo restaurants and Betfair, the world’s largest betting exchange.
+                    He was formerly a partner of Bain & Company, and co-founder of LEK Consulting.
+                    He has written more than twenty acclaimed books on business and ideas.
+                  </p>
+                </div>
               </div>
             </div>
           </div>
