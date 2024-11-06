@@ -37,11 +37,17 @@ public class Address implements Serializable {
 
     // region Relationships
 
+    @ManyToMany(mappedBy = "addresses", fetch = FetchType.LAZY)
+    private Set<Customer> customers = new HashSet<Customer>();
+
+    @ManyToMany(mappedBy = "addresses", fetch = FetchType.LAZY)
+    private Set<Staff> staffs = new HashSet<Staff>();
+
+    @ManyToMany(mappedBy = "addresses", fetch = FetchType.LAZY)
+    private Set<Owner> owners = new HashSet<Owner>();
+
     @OneToOne(mappedBy = "address")
     private Order order;
-
-    @ManyToMany(mappedBy = "addresses")
-    private Set<User> users = new HashSet<User>();
 
     // endregion
 
@@ -49,15 +55,13 @@ public class Address implements Serializable {
 
     public Address() {}
 
-    public Address(String id, String nation, String province, String district, String village, String detail, Order order, Set<User> users) {
+    public Address(String id, String nation, String province, String district, String village, String detail) {
         this.id = id;
         this.nation = nation;
         this.province = province;
         this.district = district;
         this.village = village;
         this.detail = detail;
-        this.order = order;
-        this.users = users;
     }
 
     // endregion
@@ -110,22 +114,6 @@ public class Address implements Serializable {
 
     public void setDetail(String detail) {
         this.detail = detail;
-    }
-
-    public Order getOrder() {
-        return order;
-    }
-
-    public void setOrder(Order order) {
-        this.order = order;
-    }
-
-    public Set<User> getUsers() {
-        return users;
-    }
-
-    public void setUsers(Set<User> users) {
-        this.users = users;
     }
 
     // endregion

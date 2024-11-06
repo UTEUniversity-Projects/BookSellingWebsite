@@ -62,7 +62,8 @@ public class Book implements Serializable {
     private double height;
 
     @ElementCollection
-    @CollectionTable(name = "book_languages", joinColumns = @JoinColumn(name = "book_id"))
+    @CollectionTable(name = "book_languages",
+            joinColumns = @JoinColumn(name = "book_id"))
     @Column(name = "language", nullable = false)
     private Set<EBookLanguage> languages = new HashSet<>();
 
