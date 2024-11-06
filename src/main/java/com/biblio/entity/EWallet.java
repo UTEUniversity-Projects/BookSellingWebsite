@@ -28,6 +28,10 @@ public class EWallet extends Payment implements Serializable {
 
     // region Relationships
 
+    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JoinColumn(name = "order_id")
+    private Order order;
+
     // endregion
 
     // region Constructors
@@ -36,11 +40,12 @@ public class EWallet extends Payment implements Serializable {
         super();
     }
 
-    public EWallet(String id, LocalDateTime createdAt, double amount, EPaymentStatus status, EPaymentCurrency currency, String walletId, EWalletProvider provider, String transactionId) {
+    public EWallet(Long id, LocalDateTime createdAt, double amount, EPaymentStatus status, EPaymentCurrency currency, String walletId, EWalletProvider provider, String transactionId, Order order) {
         super(id, createdAt, amount, status, currency);
         this.walletId = walletId;
         this.provider = provider;
         this.transactionId = transactionId;
+        this.order = order;
     }
 
     // endregion
@@ -69,6 +74,14 @@ public class EWallet extends Payment implements Serializable {
 
     public void setTransactionId(String transactionId) {
         this.transactionId = transactionId;
+    }
+
+    public Order getOrder() {
+        return order;
+    }
+
+    public void setOrder(Order order) {
+        this.order = order;
     }
 
     // endregion

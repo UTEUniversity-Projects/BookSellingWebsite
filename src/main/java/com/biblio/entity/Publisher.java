@@ -23,7 +23,7 @@ public class Publisher extends ContributorProfile implements Serializable {
         super();
     }
 
-    public Publisher(String id, String name, String introduction, LocalDateTime joinAt, String avatar, Set<Book> books) {
+    public Publisher(Long id, String name, String introduction, LocalDateTime joinAt, String avatar, Set<Book> books) {
         super(id, name, introduction, joinAt, avatar);
         this.books = books;
     }

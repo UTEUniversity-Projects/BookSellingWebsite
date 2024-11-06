@@ -1,25 +1,19 @@
 package com.biblio.entity;
 
 import com.biblio.enumeration.EGender;
-import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
 import java.io.Serializable;
 import java.time.LocalDateTime;
-import java.util.HashSet;
-import java.util.Set;
 
-@Entity
-@Table(name = "user")
-@Inheritance(strategy = InheritanceType.JOINED)
+@MappedSuperclass
 public class User implements Serializable {
 
     // region Attributes
 
     @Id
-    @GeneratedValue(generator = "uuid")
-    @GenericGenerator(name = "uuid", strategy = "org.hibernate.id.UUIDGenerator")
-    protected String id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
     @Column(name = "full_name", nullable = false)
     protected String fullName;
@@ -47,22 +41,6 @@ public class User implements Serializable {
 
     // region Relationships
 
-    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY, orphanRemoval = true)
-    @JoinColumn(name = "account_id", nullable = false)
-    private Account account;
-
-    @ManyToMany(fetch = FetchType.LAZY)
-    @JoinTable(name = "user_address",
-            joinColumns = @JoinColumn(name = "user_id", nullable = false),
-            inverseJoinColumns = @JoinColumn(name = "address_id", nullable = false))
-    private Set<Address> addresses = new HashSet<Address>();
-
-    @ManyToMany(cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
-    @JoinTable(name = "user_notification",
-            joinColumns = @JoinColumn(name = "customer_id"),
-            inverseJoinColumns = @JoinColumn(name = "notification_id"))
-    private Set<Notification> notifications = new HashSet<Notification>();
-
     // endregion
 
     // region Constructors
@@ -70,7 +48,7 @@ public class User implements Serializable {
     public User() {
     }
 
-    public User(String id, String fullName, String emailAddress, String dateOfBirth, EGender gender, String phoneNumber, String avatar, LocalDateTime joinAt, Account account, Set<Address> addresses, Set<Notification> notifications) {
+    public User(Long id, String fullName, String emailAddress, String dateOfBirth, EGender gender, String phoneNumber, String avatar, LocalDateTime joinAt) {
         this.id = id;
         this.fullName = fullName;
         this.emailAddress = emailAddress;
@@ -79,20 +57,17 @@ public class User implements Serializable {
         this.phoneNumber = phoneNumber;
         this.avatar = avatar;
         this.joinAt = joinAt;
-        this.account = account;
-        this.addresses = addresses;
-        this.notifications = notifications;
     }
 
     // endregion
 
     // region Getters & Setters
 
-    public String getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -151,31 +126,6 @@ public class User implements Serializable {
     public void setJoinAt(LocalDateTime joinAt) {
         this.joinAt = joinAt;
     }
-
-    public Account getAccount() {
-        return account;
-    }
-
-    public void setAccount(Account account) {
-        this.account = account;
-    }
-
-    public Set<Address> getAddresses() {
-        return addresses;
-    }
-
-    public void setAddresses(Set<Address> addresses) {
-        this.addresses = addresses;
-    }
-
-    public Set<Notification> getNotifications() {
-        return notifications;
-    }
-
-    public void setNotifications(Set<Notification> notifications) {
-        this.notifications = notifications;
-    }
-
 
     // endregion
 }

@@ -149,26 +149,6 @@
                 </div>
               </div>
             </div>
-            <div class="author-section">
-              <span class="author-follow-text">Theo dõi tác giả</span>
-              <a
-                      href="https://www.amazon.com/stores/Richard-Koch/author/B001IXPR7Y?ref=ap_rdr&isDramIntegrated=true&shoppingPortalEnabled=true"
-                      class="author-container"
-              >
-                <img
-                        src="${pageContext.request.contextPath}/assets/customer/img/logo/logo.png"
-                        alt="Author Image"
-                        class="author-image"
-                />
-                <label class="author-name">Richard Koch</label>
-                <button
-                        type="button"
-                        class="follow-button cr-btn-secondary"
-                >
-                  Theo dõi
-                </button>
-              </a>
-            </div>
           </div>
         </div>
       </div>
@@ -298,7 +278,7 @@
                       aria-controls="additional"
                       aria-selected="false"
               >
-                Thông tin chi tiết
+                Chi tiết sản phẩm
               </button>
             </li>
             <li class="nav-item" role="presentation">
@@ -313,6 +293,20 @@
                       aria-selected="false"
               >
                 Đánh giá sản phẩm
+              </button>
+            </li>
+            <li class="nav-item" role="presentation">
+              <button
+                      class="nav-link"
+                      id="author-tab"
+                      data-bs-toggle="tab"
+                      data-bs-target="#author"
+                      type="button"
+                      role="tab"
+                      aria-controls="author"
+                      aria-selected="false"
+              >
+                Thông tin tác giả
               </button>
             </li>
           </ul>
@@ -443,48 +437,40 @@
                     aria-labelledby="review-tab"
             >
               <div class="cr-tab-content-from">
-                <div class="post">
-                  <div class="content">
-                    <img src="${pageContext.request.contextPath}/assets/customer/img/review/1.jpg" alt="review" />
-                    <div class="details">
+                <ul class="review-list">
+                  <li class="review-item">
+                    <div class="review-item__image">
+                      <img src="${pageContext.request.contextPath}/assets/staff/img/product/1.jpg"
+                           alt="review"/>
+                    </div>
+                    <div class="review-item__content">
+                      <div class="header">
+                        <div class="header__left">
+                          <span class="name">Oreo Noman</span>
+                          <div class="rating">
+                            <i class="ri-star-s-fill"></i>
+                            <i class="ri-star-s-fill"></i>
+                            <i class="ri-star-s-fill"></i>
+                            <i class="ri-star-s-fill"></i>
+                            <i class="ri-star-s-fill"></i>
+                          </div>
+                        </div>
+                      </div>
                       <span class="date">Jan 08, 2024</span>
-                      <span class="name">Oreo Noman</span>
+
+                      <div class="review-content">
+                        Cảm ơn shop rất nhiều
+                      </div>
+
+                      <div class="response-review">
+                        <div class="response-title">Phản Hồi Của Người Bán</div>
+                        <div class="response-text">
+                          Dạ vâng adidas cảm ơn quý khách đã tin tưởng và ủng hộ ❤️. Sự góp ý
+                        </div>
+                      </div>
                     </div>
-                    <div class="cr-t-review-rating">
-                      <i class="ri-star-s-fill"></i>
-                      <i class="ri-star-s-fill"></i>
-                      <i class="ri-star-s-fill"></i>
-                      <i class="ri-star-s-fill"></i>
-                      <i class="ri-star-s-fill"></i>
-                    </div>
-                  </div>
-                  <p>
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                    Error in vero sapiente doloribus debitis corporis, eaque
-                    dicta, repellat amet, illum adipisci vel perferendis
-                    dolor! quae vero in perferendis provident quis.
-                  </p>
-                  <div class="content mt-30">
-                    <img src="${pageContext.request.contextPath}/assets/customer/img/review/2.jpg" alt="review" />
-                    <div class="details">
-                      <span class="date">Mar 22, 2024</span>
-                      <span class="name">Lina Wilson</span>
-                    </div>
-                    <div class="cr-t-review-rating">
-                      <i class="ri-star-s-fill"></i>
-                      <i class="ri-star-s-fill"></i>
-                      <i class="ri-star-s-fill"></i>
-                      <i class="ri-star-s-fill"></i>
-                      <i class="ri-star-s-line"></i>
-                    </div>
-                  </div>
-                  <p>
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                    Error in vero sapiente doloribus debitis corporis, eaque
-                    dicta, repellat amet, illum adipisci vel perferendis
-                    dolor! quae vero in perferendis provident quis.
-                  </p>
-                </div>
+                  </li>
+                </ul>
 
                 <h4 class="heading">Thêm đánh giá</h4>
                 <form action="javascript:void(0)">
@@ -519,6 +505,27 @@
                     </button>
                   </div>
                 </form>
+              </div>
+            </div>
+            <div
+                    class="tab-pane fade"
+                    id="author"
+                    role="tabpanel"
+                    aria-labelledby="author-tab"
+            >
+              <div class="cr-tab-content">
+                <div class="cr-description">
+                  <img src="${pageContext.request.contextPath}/assets/customer/img/product/1.jpg" alt="">
+                  <p>
+                    <b>Richard Koch</b> is the author of The 80/20 Principle,
+                    which has sold more than a million copies,
+                    and been published in approximately forty languages.
+                    He is also a successful entrepreneur and investor whose ventures have included Filofax,
+                    Plymouth Gin, Belgo restaurants and Betfair, the world’s largest betting exchange.
+                    He was formerly a partner of Bain & Company, and co-founder of LEK Consulting.
+                    He has written more than twenty acclaimed books on business and ideas.
+                  </p>
+                </div>
               </div>
             </div>
           </div>

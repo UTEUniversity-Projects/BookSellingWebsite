@@ -4726,875 +4726,6 @@ ul.navbar-nav .dropdown:hover .dropdown-menu {
   }
 }
 /* pages */
-/* Products-page */
-p {
-  margin-bottom: 0px;
-  font-size: 14px;
-  color: #7a7a7a;
-  line-height: 1.75;
-}
-
-.section-related-products {
-  padding: 70px 0;
-}
-
-.author-section {
-  margin-top: 30px;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  gap: 20px;
-}
-
-.author-follow-text {
-  font-size: 16px;
-  font-weight: 600;
-  color: #2b2b2d;
-}
-
-.author-container {
-  display: flex;
-  align-items: center;
-  gap: 30px;
-}
-
-.author-image {
-  width: 50px;
-  height: 50px;
-  border-radius: 50%;
-  object-fit: cover;
-}
-
-.author-name {
-  font-size: 16px;
-  font-weight: 600;
-  color: #2b2b2d;
-}
-
-.cr-product-card {
-  height: 100%;
-  padding: 12px;
-  border: 1px solid #e9e9e9;
-  background-color: #fff;
-  border-radius: 5px;
-  overflow: hidden;
-  display: flex;
-  flex-direction: column;
-}
-.cr-product-card:hover .cr-product-image .cr-side-view {
-  right: 12px;
-  opacity: 1;
-}
-.cr-product-card .cr-product-image {
-  border-radius: 5px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  position: relative;
-}
-.cr-product-card .cr-product-image .cr-side-view {
-  transition: all 0.5s ease-in-out;
-  position: absolute;
-  z-index: 20;
-  transition: all 0.4s ease-in-out;
-  top: 15px;
-  right: -40px;
-  display: grid;
-  opacity: 0;
-}
-.cr-product-card .cr-product-image .cr-side-view a {
-  width: 35px;
-  height: 35px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin: 0;
-  padding: 0;
-  border: none;
-  background-color: transparent;
-  background-color: #fff;
-  border: 1px solid #e9e9e9;
-  border-radius: 100%;
-}
-.cr-product-card .cr-product-image .cr-side-view a:last-child {
-  margin-top: 5px;
-}
-.cr-product-card .cr-product-image .cr-side-view a i {
-  font-size: 18px;
-  line-height: 10px;
-}
-.cr-product-card .cr-product-image .cr-side-view .wishlist.active {
-  background-color: #64b496;
-  color: #fff;
-}
-.cr-product-card .cr-product-image .cr-image-inner {
-  width: 100%;
-  height: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  position: relative;
-  overflow: hidden;
-}
-.cr-product-card .cr-product-image .cr-image-inner img {
-  width: 100%;
-  border-radius: 5px;
-}
-.cr-product-card .cr-product-image .cr-shopping-bag {
-  height: 35px;
-  width: 35px;
-  position: absolute;
-  bottom: -16px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background-color: #f7f7f8;
-  border: 1px solid #e9e9e9;
-  border-radius: 100%;
-}
-.cr-product-card .cr-product-image .cr-shopping-bag i {
-  color: #64b496;
-}
-.cr-product-card .cr-product-image .cr-shopping-bag.active {
-  background-color: #64b496;
-  border: 1px solid #64b496;
-}
-.cr-product-card .cr-product-image .cr-shopping-bag.active i {
-  color: #fff;
-}
-.cr-product-card .cr-product-image .cr-remove-product {
-  margin-bottom: 5px !important;
-  background-color: #000 !important;
-  color: #fff;
-}
-
-.cr-product-details {
-  padding-top: 24px;
-  text-align: center;
-  overflow: hidden;
-}
-.cr-product-details .cr-brand a {
-  transition: all 0.3s ease-in-out;
-  margin-bottom: 5px;
-  font-size: 13px;
-  color: #777;
-  display: flex;
-  justify-content: center;
-}
-.cr-product-details .cr-brand a:hover {
-  color: #64b496;
-}
-.cr-product-details .cr-star {
-  margin-bottom: 12px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-.cr-product-details .cr-star p {
-  margin-left: 5px;
-  color: #999;
-  font-size: 11px;
-  line-height: 10px;
-}
-.cr-product-details .cr-star i {
-  margin: 0 1px;
-  font-size: 15px;
-  color: #f5885f;
-}
-.cr-product-details a.title {
-  transition: all 0.3s ease-in-out;
-  margin-bottom: 12px;
-  font-family: "Be Vietnam Pro", sans-serif;
-  font-size: 15px;
-  font-weight: 500;
-  line-height: 24px;
-  color: #2b2b2d;
-  display: flex;
-  justify-content: center;
-}
-.cr-product-details a.title:hover {
-  color: #64b496;
-}
-.cr-product-details p.cr-price {
-  font-family: "Be Vietnam Pro", sans-serif;
-  font-size: 16px;
-  line-height: 1.75;
-}
-.cr-product-details p.cr-price .new-price {
-  color: #64b496;
-  font-weight: 700;
-}
-.cr-product-details p.cr-price .old-price {
-  margin-left: 5px;
-  font-size: 13px;
-  text-decoration: line-through;
-}
-
-.cr-product-info {
-  margin-top: 15px;
-  padding-top: 15px;
-  border-top: 1px solid #eee;
-}
-.cr-product-info ul {
-  margin: 0;
-  padding: 0;
-}
-.cr-product-info ul li {
-  padding: 5px 0;
-  list-style: none;
-  font-size: 14px;
-  color: #777;
-}
-
-.product-tabs {
-  display: flex;
-}
-.product-tabs .nav-tabs {
-  border: none;
-  display: block;
-}
-.product-tabs .nav-tabs .nav-link {
-  margin-bottom: 10px;
-  margin-right: 10px;
-  padding: 0;
-  border: none;
-  background-color: #fff;
-  border-radius: 5px;
-}
-.product-tabs .nav-tabs .nav-link img {
-  width: 60px;
-  height: 60px;
-  padding: 10px;
-  border: 1px solid #e9e9e9;
-  border-radius: 5px;
-}
-.product-tabs .nav-tabs .nav-link.active {
-  border: none;
-}
-.product-tabs .tab-content {
-  width: 100%;
-  height: 100%;
-  border-radius: 5px;
-}
-
-.cr-size-and-weight-contain {
-  border-bottom: 1px solid #e9e9e9;
-  padding-bottom: 20px;
-}
-.cr-size-and-weight-contain h2.heading {
-  margin: 0 0 15px 0;
-  display: block;
-  color: #2b2b2d;
-  font-size: 22px;
-  text-decoration: none;
-  line-height: 1.5;
-  font-weight: 500;
-}
-.cr-size-and-weight-contain p {
-  font-size: 14px;
-}
-
-.cr-size-and-weight {
-  padding-top: 20px;
-}
-.cr-size-and-weight .list ul {
-  margin-top: 15px;
-  padding: 0;
-}
-.cr-size-and-weight .list ul li {
-  padding: 5px 0;
-  color: #777;
-  list-style: none;
-  display: flex;
-}
-.cr-size-and-weight .list ul li label {
-  min-width: 100px;
-  margin-right: 10px;
-  color: #2b2b2d;
-  font-weight: 600;
-  display: flex;
-  justify-content: space-between;
-}
-.cr-size-and-weight .cr-review-star {
-  display: flex;
-}
-.cr-size-and-weight .cr-review-star .cr-star {
-  margin-right: 10px;
-}
-.cr-size-and-weight .cr-review-star .cr-star i {
-  font-size: 16px;
-  color: #f5885f;
-}
-.cr-size-and-weight .cr-review-star p {
-  font-size: 15px;
-}
-.cr-size-and-weight .cr-product-price {
-  padding-top: 20px;
-}
-.cr-size-and-weight .cr-product-price span.new-price {
-  font-family: "Be Vietnam Pro", sans-serif;
-  font-size: 24px;
-  font-weight: 600;
-  line-height: 1.167;
-  color: #64b496;
-}
-.cr-size-and-weight .cr-product-price span.old-price {
-  font-family: "Be Vietnam Pro", sans-serif;
-  font-size: 16px;
-  text-decoration: line-through;
-  line-height: 1.75;
-  color: #7a7a7a;
-}
-.cr-size-and-weight .cr-size-weight {
-  display: flex;
-  align-items: center;
-  padding-top: 20px;
-}
-.cr-size-and-weight .cr-size-weight h5 {
-  margin-bottom: 0;
-  font-family: "Be Vietnam Pro", sans-serif;
-  font-size: 16px;
-  line-height: 1.556;
-  color: #2b2b2d;
-}
-.cr-size-and-weight .cr-size-weight .cr-kg {
-  padding-left: 10px;
-}
-.cr-size-and-weight .cr-size-weight .cr-kg ul {
-  width: 100%;
-  padding: 0;
-  margin: 0;
-  list-style-type: none;
-  display: flex;
-  flex-wrap: wrap;
-}
-.cr-size-and-weight .cr-size-weight .cr-kg ul li {
-  margin: 2px;
-  padding: 5px 10px;
-  font-family: "Be Vietnam Pro", sans-serif;
-  font-size: 12px;
-  line-height: 1;
-  background-color: #fff;
-  color: #777;
-  border: 1px solid #e9e9e9;
-  border-radius: 5px;
-  cursor: pointer;
-  transition: 0.3s ease-in-out;
-}
-.cr-size-and-weight .cr-size-weight .cr-kg ul .active-color {
-  background-color: #64b496;
-  color: #fff;
-}
-.cr-size-and-weight .cr-add-card {
-  display: flex;
-  padding-top: 20px;
-}
-.cr-size-and-weight .cr-add-card .cr-qty-main {
-  height: 100%;
-  display: flex;
-  position: relative;
-}
-.cr-size-and-weight .cr-add-card .cr-qty-main input {
-  height: 40px;
-  width: 40px;
-  margin-right: 5px;
-  text-align: center;
-  border: 1px solid #e9e9e9;
-  border-radius: 5px;
-}
-.cr-size-and-weight .cr-add-card .cr-qty-main button {
-  height: 18px;
-  width: 18px;
-  padding: 0;
-  background-color: #fff;
-  border: 1px solid #e9e9e9;
-  border-radius: 5px;
-  line-height: 0;
-}
-.cr-size-and-weight .cr-add-card .cr-qty-main .minus {
-  position: absolute;
-  bottom: 0;
-  right: 0;
-}
-.cr-size-and-weight .cr-add-card .cr-add-button {
-  margin-left: 15px;
-}
-.cr-size-and-weight .cr-add-card .cr-buy-button {
-  margin-left: 15px;
-}
-.cr-size-and-weight .cr-add-card .cr-card-icon {
-  margin-left: 15px;
-  display: flex;
-}
-.cr-size-and-weight .cr-add-card .cr-card-icon a {
-  margin: 0;
-  padding: 0;
-  background-color: transparent;
-}
-.cr-size-and-weight .cr-add-card .cr-card-icon a i {
-  height: 40px;
-  width: 40px;
-  margin-right: 10px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 22px;
-  background-color: #fff;
-  transition: all 0.3s ease 0s;
-  border: 1px solid #e9e9e9;
-  border-radius: 5px;
-}
-.cr-size-and-weight .cr-add-card .cr-card-icon a i:hover {
-  background-color: #64b496;
-  color: #fff;
-}
-
-.thumb-image {
-  margin: 0 -6px;
-}
-
-.thumbnail-image .thumbImg {
-  margin: 0 6px;
-  border: 1px solid #e9e9e9;
-  border-radius: 5px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-.thumbnail-image .thumbImg img {
-  width: 100%;
-  padding: 2px;
-  border-radius: 5px;
-}
-
-.vehicle-detail-banner {
-  height: 100%;
-}
-.vehicle-detail-banner .banner-slider {
-  position: sticky;
-  top: 30px;
-}
-
-.zoom-image-hover {
-  height: 100%;
-  display: flex;
-  align-items: center;
-  text-align: center;
-  border: 1px solid #e9e9e9;
-  background-color: #f7f7f8;
-  border-radius: 5px;
-  cursor: crosshair;
-}
-.zoom-image-hover img {
-  width: 100%;
-  display: block;
-  margin: auto;
-}
-
-.vehicle-detail-banner .banner-slider .slider-for {
-  padding-bottom: 15px;
-}
-
-.cr-paking-delivery {
-  margin-top: 40px;
-  padding: 24px;
-  background-color: #fff;
-  border: 1px solid #e9e9e9;
-  border-radius: 5px;
-}
-.cr-paking-delivery .nav-tabs {
-  display: flex;
-  justify-content: left;
-}
-.cr-paking-delivery .nav-tabs .nav-item {
-  margin-right: 30px;
-  position: relative;
-}
-.cr-paking-delivery .nav-tabs .nav-item .nav-link {
-  margin-bottom: 25px;
-  padding: 0;
-  font-family: "Be Vietnam Pro", sans-serif;
-  font-size: 17px;
-  font-weight: 600;
-  line-height: 1.5;
-  color: #2b2b2d;
-  border: 0;
-  text-align: left;
-}
-.cr-paking-delivery .nav-tabs .nav-item .nav-link::after {
-  transition: all 0.3s ease 0s;
-  height: 2px;
-  width: 0;
-  margin: 0 auto;
-  content: "";
-  position: absolute;
-  top: auto;
-  bottom: 0;
-  background-color: #64b496;
-  left: 0;
-  right: auto;
-}
-.cr-paking-delivery .nav-tabs .nav-item .nav-link:hover::after {
-  width: 100%;
-  background-color: #64b496;
-}
-.cr-paking-delivery .nav-tabs .nav-item .nav-link.active {
-  color: #64b496;
-}
-.cr-paking-delivery .nav-tabs .nav-item .nav-link.active::after {
-  transition: all 0.3s ease 0s;
-  height: 2px;
-  width: 100%;
-  margin: 0 auto;
-  content: "";
-  position: absolute;
-  top: auto;
-  bottom: 0;
-  background-color: #64b496;
-  left: 0;
-  right: auto;
-}
-.cr-paking-delivery .cr-tab-content .list ul {
-  margin-top: 30px;
-  margin-bottom: -5px;
-  padding: 0;
-}
-.cr-paking-delivery .cr-tab-content .list ul li {
-  padding: 5px 0;
-  color: #777;
-  list-style: none;
-  display: flex;
-}
-.cr-paking-delivery .cr-tab-content .list ul li label {
-  min-width: 100px;
-  margin-right: 10px;
-  color: #2b2b2d;
-  font-weight: 600;
-  display: flex;
-  justify-content: space-between;
-}
-.cr-paking-delivery .cr-tab-content .cr-description {
-  padding-top: 30px;
-}
-.cr-paking-delivery .cr-tab-content .cr-description p {
-  font-size: 14px;
-  text-align: left;
-}
-.cr-paking-delivery .cr-tab-content h4.heading {
-  margin-bottom: 0;
-  padding-top: 30px;
-  padding-bottom: 20px;
-  font-family: "Be Vietnam Pro", sans-serif;
-  font-size: 16px;
-  font-weight: 500;
-  line-height: 1.5;
-  text-align: left;
-  color: #2b2b2d;
-  border-bottom: 1px solid #e9e9e9;
-}
-
-.cr-tab-content-from {
-  padding-top: 30px;
-}
-.cr-tab-content-from h4.heading {
-  font-family: "Be Vietnam Pro", sans-serif;
-  font-size: 16px;
-  font-weight: 500;
-  line-height: 1.5;
-  color: #2b2b2d;
-  padding-bottom: 10px;
-}
-.cr-tab-content-from .cr-ratting-star {
-  display: flex;
-}
-.cr-tab-content-from .cr-ratting-star span {
-  font-family: "Be Vietnam Pro", sans-serif;
-  font-size: 14px;
-  color: #7a7a7a;
-  line-height: 1.75;
-  margin-right: 10px;
-}
-.cr-tab-content-from .cr-ratting-star .cr-t-review-rating {
-  margin-bottom: 20px;
-}
-.cr-tab-content-from .cr-ratting-star .cr-t-review-rating i {
-  font-size: 19px;
-  letter-spacing: -5px;
-}
-.cr-tab-content-from .cr-ratting-star .cr-t-review-rating .ri-star-s-fill {
-  color: #f5885f;
-}
-.cr-tab-content-from .cr-ratting-star .cr-t-review-rating .ri-star-s-line {
-  color: #999;
-}
-.cr-tab-content-from .cr-ratting-input:not(:last-child) {
-  margin-bottom: 10px;
-}
-.cr-tab-content-from .cr-ratting-input input {
-  width: 100%;
-  height: 50px;
-  margin-bottom: 15px;
-  padding: 5px 20px;
-  outline: none;
-  box-shadow: none;
-  border: 1px solid #e9e9e9;
-  border-radius: 5px;
-  color: #777;
-  font-size: 14px;
-}
-.cr-tab-content-from .cr-ratting-input textarea {
-  height: 150px;
-  width: 100%;
-  margin-bottom: 15px;
-  padding: 20px;
-  background-color: transparent;
-  font-size: 14px;
-  border: 1px solid #e9e9e9;
-  border-radius: 5px;
-  color: #777;
-  outline: none;
-}
-.cr-tab-content-from .post {
-  margin-bottom: 30px;
-}
-.cr-tab-content-from .post .content {
-  display: flex;
-}
-.cr-tab-content-from .post .content img {
-  width: 50px;
-  height: 50px;
-  margin-right: 24px;
-  border-radius: 5px;
-}
-.cr-tab-content-from .post .content .details {
-  display: flex;
-  flex-direction: column;
-}
-.cr-tab-content-from .post .content .details .date {
-  margin-bottom: 10px;
-  font-size: 13px;
-  color: #777;
-}
-.cr-tab-content-from .post .content .details .name {
-  margin-bottom: 10px;
-  font-weight: 500;
-  font-size: 17px;
-}
-.cr-tab-content-from .post p {
-  padding-left: 74px;
-}
-.cr-tab-content-from .post .cr-t-review-rating {
-  margin-left: auto;
-  margin-bottom: 20px;
-}
-.cr-tab-content-from .post .cr-t-review-rating i {
-  font-size: 19px;
-  letter-spacing: 0;
-}
-.cr-tab-content-from .post .cr-t-review-rating .ri-star-s-fill {
-  color: #f5885f;
-  letter-spacing: -5px;
-}
-.cr-tab-content-from .post .cr-t-review-rating .ri-star-s-line {
-  color: #999;
-}
-.cr-tab-content-from .review-list {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 40px;
-  padding: 0 10px;
-  margin-bottom: 40px;
-}
-.cr-tab-content-from .review-list .review-item {
-  display: flex;
-  flex-direction: column;
-}
-.cr-tab-content-from .review-list .review-item__top {
-  display: flex;
-  justify-content: center;
-}
-.cr-tab-content-from .review-list .review-item__top img {
-  width: 50px;
-  height: 50px;
-  margin-right: 24px;
-  border-radius: 5px;
-}
-.cr-tab-content-from .review-list .review-item__top .details {
-  display: flex;
-  flex-direction: column;
-}
-.cr-tab-content-from .review-list .review-item__top .details .date {
-  margin-bottom: 10px;
-  font-size: 13px;
-  color: #777;
-}
-.cr-tab-content-from .review-list .review-item__top .details .name {
-  margin-bottom: 10px;
-  font-weight: 500;
-  font-size: 17px;
-}
-.cr-tab-content-from .review-list p {
-  padding-left: 74px;
-}
-.cr-tab-content-from .review-list .cr-t-review-rating {
-  margin-left: auto;
-  margin-bottom: 20px;
-}
-.cr-tab-content-from .review-list .cr-t-review-rating i {
-  font-size: 19px;
-  letter-spacing: 0;
-}
-.cr-tab-content-from .review-list .cr-t-review-rating .ri-star-s-fill {
-  color: #f5885f;
-  letter-spacing: -5px;
-}
-.cr-tab-content-from .review-list .cr-t-review-rating .ri-star-s-line {
-  color: #999;
-}
-
-.modal-border-image {
-  border: 1px solid #e9e9e9;
-}
-
-/* Responsive */
-@media only screen and (max-width: 1399px) {
-  .cr-paking-delivery .nav-tabs .nav-item .nav-link {
-    font-size: 18px;
-  }
-  .cr-size-and-weight-contain h2.heading {
-    font-size: 26px;
-  }
-}
-@media only screen and (max-width: 1199px) {
-  .cr-product-details {
-    padding-top: 20px;
-  }
-  .cr-product-details h5 {
-    margin-bottom: 0;
-    font-size: 15px;
-  }
-  .cr-product-details p.cr-price {
-    font-size: 14px;
-  }
-  .cr-product-details p.cr-price .old-price {
-    font-size: 12px;
-  }
-  .cr-size-and-weight .cr-size-weight h5 {
-    min-width: 100px;
-    font-size: 14px;
-  }
-  .cr-size-and-weight .cr-size-weight .cr-kg ul li {
-    font-size: 12px;
-    margin-right: 5px;
-  }
-  .cr-add-button .cr-button,
-  .cr-buy-button .cr-button {
-    padding: 8px 15px;
-  }
-}
-@media only screen and (max-width: 991px) {
-  .cr-product-card .cr-product-image .cr-side-view {
-    right: 12px;
-  }
-  .cr-product-card .cr-product-image .cr-image-inner {
-    pointer-events: none;
-  }
-  .product-tabs {
-    margin-bottom: 24px;
-  }
-  .cr-size-and-weight-contain h2.heading {
-    font-size: 20px;
-  }
-  .cr-products-categories {
-    max-width: 350px;
-    margin: auto;
-  }
-}
-@media only screen and (max-width: 767px) {
-  .cr-paking-delivery .nav-tabs .nav-item .nav-link {
-    font-size: 16px;
-  }
-  .cr-products-categories {
-    max-width: 300px;
-    margin: auto;
-  }
-  .cr-size-and-weight .cr-product-price span.new-price {
-    font-size: 22px;
-  }
-  .cr-size-and-weight-contain {
-    margin-top: 24px;
-  }
-}
-@media only screen and (max-width: 575px) {
-  .cr-paking-delivery .nav-tabs .nav-item .nav-link {
-    margin-bottom: 15px;
-  }
-  .cr-paking-delivery .nav-tabs .nav-item .nav-link.active:after {
-    display: none;
-  }
-  /* model */
-  .cr-model .cr-modal-dialog {
-    max-width: 400px;
-    width: 400px;
-  }
-  .cr-product-card-block .col-lg-4 .cr-product-card {
-    max-width: 100%;
-  }
-  .product-tabs {
-    display: block;
-  }
-  .product-tabs .nav-tabs {
-    display: flex;
-  }
-  .cr-tab-content-from .post p {
-    padding: 0;
-  }
-  .cr-tab-content-from .post .cr-t-review-rating {
-    margin: 0 0 24px 0;
-  }
-  .cr-tab-content-from .post .content {
-    flex-direction: column;
-  }
-  .cr-tab-content-from .post .content img {
-    margin: 0 0 24px 0;
-  }
-  .cr-size-and-weight .cr-product-price span.new-price {
-    font-size: 20px;
-  }
-}
-@media only screen and (max-width: 480px) {
-  .cr-product-box,
-  .cr-product-card {
-    width: 100%;
-  }
-  .banner-480 {
-    display: none;
-  }
-}
-@media only screen and (max-width: 380px) {
-  .cr-add-button {
-    display: none;
-  }
-  .cr-size-and-weight .cr-review-star p {
-    display: none;
-  }
-  .cr-size-and-weight .cr-buy-button {
-    display: none;
-  }
-  .cr-size-and-weight .cr-size-and-weight .cr-review-star p {
-    display: none;
-  }
-  .cr-size-and-weight .cr-size-and-weight .cr-size-weight {
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-    align-items: flex-start;
-  }
-  .cr-size-and-weight .cr-size-and-weight .cr-size-weight .cr-kg {
-    padding: 10px 0 0 0;
-  }
-}
 /* Shop */
 .cr-shop-bredekamp {
   margin-bottom: 30px;
@@ -9240,6 +8371,967 @@ input[type=radio]:checked ~ .rating .star-rating .star:hover, input[type=radio]:
   to {
     transform: translate(-50%, -250%);
   }
+}
+/* Products-page */
+p {
+  margin-bottom: 0px;
+  font-size: 14px;
+  color: #7a7a7a;
+  line-height: 1.75;
+}
+
+#author .cr-tab-content .cr-description {
+  display: flex;
+  gap: 50px;
+  padding: 30px 200px 0;
+}
+#author .cr-tab-content .cr-description img {
+  width: 250px;
+}
+
+.section-related-products {
+  padding: 70px 0;
+}
+
+.cr-product-card {
+  height: 100%;
+  padding: 12px;
+  border: 1px solid #e9e9e9;
+  background-color: #fff;
+  border-radius: 5px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+.cr-product-card:hover .cr-product-image .cr-side-view {
+  right: 12px;
+  opacity: 1;
+}
+.cr-product-card .cr-product-image {
+  border-radius: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+.cr-product-card .cr-product-image .cr-side-view {
+  transition: all 0.5s ease-in-out;
+  position: absolute;
+  z-index: 20;
+  transition: all 0.4s ease-in-out;
+  top: 15px;
+  right: -40px;
+  display: grid;
+  opacity: 0;
+}
+.cr-product-card .cr-product-image .cr-side-view a {
+  width: 35px;
+  height: 35px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0;
+  padding: 0;
+  border: none;
+  background-color: transparent;
+  background-color: #fff;
+  border: 1px solid #e9e9e9;
+  border-radius: 100%;
+}
+.cr-product-card .cr-product-image .cr-side-view a:last-child {
+  margin-top: 5px;
+}
+.cr-product-card .cr-product-image .cr-side-view a i {
+  font-size: 18px;
+  line-height: 10px;
+}
+.cr-product-card .cr-product-image .cr-side-view .wishlist.active {
+  background-color: #64b496;
+  color: #fff;
+}
+.cr-product-card .cr-product-image .cr-image-inner {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+}
+.cr-product-card .cr-product-image .cr-image-inner img {
+  width: 100%;
+  border-radius: 5px;
+}
+.cr-product-card .cr-product-image .cr-shopping-bag {
+  height: 35px;
+  width: 35px;
+  position: absolute;
+  bottom: -16px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #f7f7f8;
+  border: 1px solid #e9e9e9;
+  border-radius: 100%;
+}
+.cr-product-card .cr-product-image .cr-shopping-bag i {
+  color: #64b496;
+}
+.cr-product-card .cr-product-image .cr-shopping-bag.active {
+  background-color: #64b496;
+  border: 1px solid #64b496;
+}
+.cr-product-card .cr-product-image .cr-shopping-bag.active i {
+  color: #fff;
+}
+.cr-product-card .cr-product-image .cr-remove-product {
+  margin-bottom: 5px !important;
+  background-color: #000 !important;
+  color: #fff;
+}
+
+.cr-product-details {
+  padding-top: 24px;
+  text-align: center;
+  overflow: hidden;
+}
+.cr-product-details .cr-brand a {
+  transition: all 0.3s ease-in-out;
+  margin-bottom: 5px;
+  font-size: 13px;
+  color: #777;
+  display: flex;
+  justify-content: center;
+}
+.cr-product-details .cr-brand a:hover {
+  color: #64b496;
+}
+.cr-product-details .cr-star {
+  margin-bottom: 12px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.cr-product-details .cr-star p {
+  margin-left: 5px;
+  color: #999;
+  font-size: 11px;
+  line-height: 10px;
+}
+.cr-product-details .cr-star i {
+  margin: 0 1px;
+  font-size: 15px;
+  color: #f5885f;
+}
+.cr-product-details a.title {
+  transition: all 0.3s ease-in-out;
+  margin-bottom: 12px;
+  font-family: "Be Vietnam Pro", sans-serif;
+  font-size: 15px;
+  font-weight: 500;
+  line-height: 24px;
+  color: #2b2b2d;
+  display: flex;
+  justify-content: center;
+}
+.cr-product-details a.title:hover {
+  color: #64b496;
+}
+.cr-product-details p.cr-price {
+  font-family: "Be Vietnam Pro", sans-serif;
+  font-size: 16px;
+  line-height: 1.75;
+}
+.cr-product-details p.cr-price .new-price {
+  color: #64b496;
+  font-weight: 700;
+}
+.cr-product-details p.cr-price .old-price {
+  margin-left: 5px;
+  font-size: 13px;
+  text-decoration: line-through;
+}
+
+.cr-product-info {
+  margin-top: 15px;
+  padding-top: 15px;
+  border-top: 1px solid #eee;
+}
+.cr-product-info ul {
+  margin: 0;
+  padding: 0;
+}
+.cr-product-info ul li {
+  padding: 5px 0;
+  list-style: none;
+  font-size: 14px;
+  color: #777;
+}
+
+.product-tabs {
+  display: flex;
+}
+.product-tabs .nav-tabs {
+  border: none;
+  display: block;
+}
+.product-tabs .nav-tabs .nav-link {
+  margin-bottom: 10px;
+  margin-right: 10px;
+  padding: 0;
+  border: none;
+  background-color: #fff;
+  border-radius: 5px;
+}
+.product-tabs .nav-tabs .nav-link img {
+  width: 60px;
+  height: 60px;
+  padding: 10px;
+  border: 1px solid #e9e9e9;
+  border-radius: 5px;
+}
+.product-tabs .nav-tabs .nav-link.active {
+  border: none;
+}
+.product-tabs .tab-content {
+  width: 100%;
+  height: 100%;
+  border-radius: 5px;
+}
+
+.cr-size-and-weight-contain {
+  border-bottom: 1px solid #e9e9e9;
+  padding-bottom: 20px;
+}
+.cr-size-and-weight-contain h2.heading {
+  margin: 0 0 15px 0;
+  display: block;
+  color: #2b2b2d;
+  font-size: 22px;
+  text-decoration: none;
+  line-height: 1.5;
+  font-weight: 500;
+}
+.cr-size-and-weight-contain p {
+  font-size: 14px;
+}
+
+.cr-size-and-weight {
+  padding-top: 20px;
+}
+.cr-size-and-weight .list ul {
+  margin-top: 15px;
+  padding: 0;
+}
+.cr-size-and-weight .list ul li {
+  padding: 5px 0;
+  color: #777;
+  list-style: none;
+  display: flex;
+}
+.cr-size-and-weight .list ul li label {
+  min-width: 100px;
+  margin-right: 10px;
+  color: #2b2b2d;
+  font-weight: 600;
+  display: flex;
+  justify-content: space-between;
+}
+.cr-size-and-weight .cr-review-star {
+  display: flex;
+}
+.cr-size-and-weight .cr-review-star .cr-star {
+  margin-right: 10px;
+}
+.cr-size-and-weight .cr-review-star .cr-star i {
+  font-size: 16px;
+  color: #f5885f;
+}
+.cr-size-and-weight .cr-review-star p {
+  font-size: 15px;
+}
+.cr-size-and-weight .cr-product-price {
+  padding-top: 20px;
+}
+.cr-size-and-weight .cr-product-price span.new-price {
+  font-family: "Be Vietnam Pro", sans-serif;
+  font-size: 24px;
+  font-weight: 600;
+  line-height: 1.167;
+  color: #64b496;
+}
+.cr-size-and-weight .cr-product-price span.old-price {
+  font-family: "Be Vietnam Pro", sans-serif;
+  font-size: 16px;
+  text-decoration: line-through;
+  line-height: 1.75;
+  color: #7a7a7a;
+}
+.cr-size-and-weight .cr-size-weight {
+  display: flex;
+  align-items: center;
+  padding-top: 20px;
+}
+.cr-size-and-weight .cr-size-weight h5 {
+  margin-bottom: 0;
+  font-family: "Be Vietnam Pro", sans-serif;
+  font-size: 16px;
+  line-height: 1.556;
+  color: #2b2b2d;
+}
+.cr-size-and-weight .cr-size-weight .cr-kg {
+  padding-left: 10px;
+}
+.cr-size-and-weight .cr-size-weight .cr-kg ul {
+  width: 100%;
+  padding: 0;
+  margin: 0;
+  list-style-type: none;
+  display: flex;
+  flex-wrap: wrap;
+}
+.cr-size-and-weight .cr-size-weight .cr-kg ul li {
+  margin: 2px;
+  padding: 5px 10px;
+  font-family: "Be Vietnam Pro", sans-serif;
+  font-size: 12px;
+  line-height: 1;
+  background-color: #fff;
+  color: #777;
+  border: 1px solid #e9e9e9;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: 0.3s ease-in-out;
+}
+.cr-size-and-weight .cr-size-weight .cr-kg ul .active-color {
+  background-color: #64b496;
+  color: #fff;
+}
+.cr-size-and-weight .cr-add-card {
+  display: flex;
+  padding-top: 20px;
+}
+.cr-size-and-weight .cr-add-card .cr-qty-main {
+  height: 100%;
+  display: flex;
+  position: relative;
+}
+.cr-size-and-weight .cr-add-card .cr-qty-main input {
+  height: 40px;
+  width: 40px;
+  margin-right: 5px;
+  text-align: center;
+  border: 1px solid #e9e9e9;
+  border-radius: 5px;
+}
+.cr-size-and-weight .cr-add-card .cr-qty-main button {
+  height: 18px;
+  width: 18px;
+  padding: 0;
+  background-color: #fff;
+  border: 1px solid #e9e9e9;
+  border-radius: 5px;
+  line-height: 0;
+}
+.cr-size-and-weight .cr-add-card .cr-qty-main .minus {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+}
+.cr-size-and-weight .cr-add-card .cr-add-button {
+  margin-left: 15px;
+}
+.cr-size-and-weight .cr-add-card .cr-buy-button {
+  margin-left: 15px;
+}
+.cr-size-and-weight .cr-add-card .cr-card-icon {
+  margin-left: 15px;
+  display: flex;
+}
+.cr-size-and-weight .cr-add-card .cr-card-icon a {
+  margin: 0;
+  padding: 0;
+  background-color: transparent;
+}
+.cr-size-and-weight .cr-add-card .cr-card-icon a i {
+  height: 40px;
+  width: 40px;
+  margin-right: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 22px;
+  background-color: #fff;
+  transition: all 0.3s ease 0s;
+  border: 1px solid #e9e9e9;
+  border-radius: 5px;
+}
+.cr-size-and-weight .cr-add-card .cr-card-icon a i:hover {
+  background-color: #64b496;
+  color: #fff;
+}
+
+.thumb-image {
+  margin: 0 -6px;
+}
+
+.thumbnail-image .thumbImg {
+  margin: 0 6px;
+  border: 1px solid #e9e9e9;
+  border-radius: 5px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.thumbnail-image .thumbImg img {
+  width: 100%;
+  padding: 2px;
+  border-radius: 5px;
+}
+
+.vehicle-detail-banner {
+  height: 100%;
+}
+.vehicle-detail-banner .banner-slider {
+  position: sticky;
+  top: 30px;
+}
+
+.zoom-image-hover {
+  height: 100%;
+  display: flex;
+  align-items: center;
+  text-align: center;
+  border: 1px solid #e9e9e9;
+  background-color: #f7f7f8;
+  border-radius: 5px;
+  cursor: crosshair;
+}
+.zoom-image-hover img {
+  width: 100%;
+  display: block;
+  margin: auto;
+}
+
+.vehicle-detail-banner .banner-slider .slider-for {
+  padding-bottom: 15px;
+}
+
+.cr-paking-delivery {
+  margin-top: 40px;
+  padding: 24px;
+  background-color: #fff;
+  border: 1px solid #e9e9e9;
+  border-radius: 5px;
+}
+.cr-paking-delivery .nav-tabs {
+  display: flex;
+  justify-content: left;
+}
+.cr-paking-delivery .nav-tabs .nav-item {
+  margin-right: 30px;
+  position: relative;
+}
+.cr-paking-delivery .nav-tabs .nav-item .nav-link {
+  margin-bottom: 25px;
+  padding: 0;
+  font-family: "Be Vietnam Pro", sans-serif;
+  font-size: 17px;
+  font-weight: 600;
+  line-height: 1.5;
+  color: #2b2b2d;
+  border: 0;
+  text-align: left;
+}
+.cr-paking-delivery .nav-tabs .nav-item .nav-link::after {
+  transition: all 0.3s ease 0s;
+  height: 2px;
+  width: 0;
+  margin: 0 auto;
+  content: "";
+  position: absolute;
+  top: auto;
+  bottom: 0;
+  background-color: #64b496;
+  left: 0;
+  right: auto;
+}
+.cr-paking-delivery .nav-tabs .nav-item .nav-link:hover::after {
+  width: 100%;
+  background-color: #64b496;
+}
+.cr-paking-delivery .nav-tabs .nav-item .nav-link.active {
+  color: #64b496;
+}
+.cr-paking-delivery .nav-tabs .nav-item .nav-link.active::after {
+  transition: all 0.3s ease 0s;
+  height: 2px;
+  width: 100%;
+  margin: 0 auto;
+  content: "";
+  position: absolute;
+  top: auto;
+  bottom: 0;
+  background-color: #64b496;
+  left: 0;
+  right: auto;
+}
+.cr-paking-delivery .cr-tab-content .list ul {
+  margin-top: 30px;
+  margin-bottom: -5px;
+  padding: 0;
+}
+.cr-paking-delivery .cr-tab-content .list ul li {
+  padding: 5px 0;
+  color: #777;
+  list-style: none;
+  display: flex;
+}
+.cr-paking-delivery .cr-tab-content .list ul li label {
+  min-width: 100px;
+  margin-right: 10px;
+  color: #2b2b2d;
+  font-weight: 600;
+  display: flex;
+  justify-content: space-between;
+}
+.cr-paking-delivery .cr-tab-content .cr-description {
+  padding-top: 30px;
+}
+.cr-paking-delivery .cr-tab-content .cr-description p {
+  font-size: 14px;
+  text-align: left;
+}
+.cr-paking-delivery .cr-tab-content h4.heading {
+  margin-bottom: 0;
+  padding-top: 30px;
+  padding-bottom: 20px;
+  font-family: "Be Vietnam Pro", sans-serif;
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 1.5;
+  text-align: left;
+  color: #2b2b2d;
+  border-bottom: 1px solid #e9e9e9;
+}
+
+.cr-tab-content-from {
+  padding-top: 30px;
+}
+.cr-tab-content-from h4.heading {
+  font-family: "Be Vietnam Pro", sans-serif;
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 1.5;
+  color: #2b2b2d;
+  padding-bottom: 10px;
+}
+.cr-tab-content-from .cr-ratting-star {
+  display: flex;
+}
+.cr-tab-content-from .cr-ratting-star span {
+  font-family: "Be Vietnam Pro", sans-serif;
+  font-size: 14px;
+  color: #7a7a7a;
+  line-height: 1.75;
+  margin-right: 10px;
+}
+.cr-tab-content-from .cr-ratting-star .cr-t-review-rating {
+  margin-bottom: 20px;
+}
+.cr-tab-content-from .cr-ratting-star .cr-t-review-rating i {
+  font-size: 19px;
+  letter-spacing: -5px;
+}
+.cr-tab-content-from .cr-ratting-star .cr-t-review-rating .ri-star-s-fill {
+  color: #f5885f;
+}
+.cr-tab-content-from .cr-ratting-star .cr-t-review-rating .ri-star-s-line {
+  color: #999;
+}
+.cr-tab-content-from .cr-ratting-input:not(:last-child) {
+  margin-bottom: 10px;
+}
+.cr-tab-content-from .cr-ratting-input input {
+  width: 100%;
+  height: 50px;
+  margin-bottom: 15px;
+  padding: 5px 20px;
+  outline: none;
+  box-shadow: none;
+  border: 1px solid #e9e9e9;
+  border-radius: 5px;
+  color: #777;
+  font-size: 14px;
+}
+.cr-tab-content-from .cr-ratting-input textarea {
+  height: 150px;
+  width: 100%;
+  margin-bottom: 15px;
+  padding: 20px;
+  background-color: transparent;
+  font-size: 14px;
+  border: 1px solid #e9e9e9;
+  border-radius: 5px;
+  color: #777;
+  outline: none;
+}
+.cr-tab-content-from .post {
+  margin-bottom: 30px;
+}
+.cr-tab-content-from .post .content {
+  display: flex;
+}
+.cr-tab-content-from .post .content img {
+  width: 50px;
+  height: 50px;
+  margin-right: 24px;
+  border-radius: 5px;
+}
+.cr-tab-content-from .post .content .details {
+  display: flex;
+  flex-direction: column;
+}
+.cr-tab-content-from .post .content .details .date {
+  margin-bottom: 10px;
+  font-size: 13px;
+  color: #777;
+}
+.cr-tab-content-from .post .content .details .name {
+  margin-bottom: 10px;
+  font-weight: 500;
+  font-size: 17px;
+}
+.cr-tab-content-from .post p {
+  padding-left: 74px;
+}
+.cr-tab-content-from .post .cr-t-review-rating {
+  margin-left: auto;
+  margin-bottom: 20px;
+}
+.cr-tab-content-from .post .cr-t-review-rating i {
+  font-size: 19px;
+  letter-spacing: 0;
+}
+.cr-tab-content-from .post .cr-t-review-rating .ri-star-s-fill {
+  color: #f5885f;
+  letter-spacing: -5px;
+}
+.cr-tab-content-from .post .cr-t-review-rating .ri-star-s-line {
+  color: #999;
+}
+.cr-tab-content-from .review-list {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 40px;
+  padding: 0 10px;
+  margin-bottom: 40px;
+}
+.cr-tab-content-from .review-list .review-item {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+.cr-tab-content-from .review-list .review-item__top {
+  display: flex;
+  justify-content: center;
+}
+.cr-tab-content-from .review-list .review-item__top img {
+  width: 50px;
+  height: 50px;
+  margin-right: 24px;
+  border-radius: 5px;
+}
+.cr-tab-content-from .review-list .review-item__top .details {
+  display: flex;
+  flex-direction: column;
+}
+.cr-tab-content-from .review-list .review-item__top .details .date {
+  margin-bottom: 10px;
+  font-size: 13px;
+  color: #777;
+}
+.cr-tab-content-from .review-list .review-item__top .details .name {
+  margin-bottom: 10px;
+  font-weight: 500;
+  font-size: 17px;
+}
+.cr-tab-content-from .review-list p {
+  padding-left: 74px;
+}
+.cr-tab-content-from .review-list .cr-t-review-rating {
+  margin-left: auto;
+  margin-bottom: 20px;
+}
+.cr-tab-content-from .review-list .cr-t-review-rating i {
+  font-size: 19px;
+  letter-spacing: 0;
+}
+.cr-tab-content-from .review-list .cr-t-review-rating .ri-star-s-fill {
+  color: #f5885f;
+  letter-spacing: -5px;
+}
+.cr-tab-content-from .review-list .cr-t-review-rating .ri-star-s-line {
+  color: #999;
+}
+
+.modal-border-image {
+  border: 1px solid #e9e9e9;
+}
+
+/* Responsive */
+@media only screen and (max-width: 1399px) {
+  .cr-paking-delivery .nav-tabs .nav-item .nav-link {
+    font-size: 18px;
+  }
+  .cr-size-and-weight-contain h2.heading {
+    font-size: 26px;
+  }
+}
+@media only screen and (max-width: 1199px) {
+  .cr-product-details {
+    padding-top: 20px;
+  }
+  .cr-product-details h5 {
+    margin-bottom: 0;
+    font-size: 15px;
+  }
+  .cr-product-details p.cr-price {
+    font-size: 14px;
+  }
+  .cr-product-details p.cr-price .old-price {
+    font-size: 12px;
+  }
+  .cr-size-and-weight .cr-size-weight h5 {
+    min-width: 100px;
+    font-size: 14px;
+  }
+  .cr-size-and-weight .cr-size-weight .cr-kg ul li {
+    font-size: 12px;
+    margin-right: 5px;
+  }
+  .cr-add-button .cr-button,
+  .cr-buy-button .cr-button {
+    padding: 8px 15px;
+  }
+}
+@media only screen and (max-width: 991px) {
+  .cr-product-card .cr-product-image .cr-side-view {
+    right: 12px;
+  }
+  .cr-product-card .cr-product-image .cr-image-inner {
+    pointer-events: none;
+  }
+  .product-tabs {
+    margin-bottom: 24px;
+  }
+  .cr-size-and-weight-contain h2.heading {
+    font-size: 20px;
+  }
+  .cr-products-categories {
+    max-width: 350px;
+    margin: auto;
+  }
+}
+@media only screen and (max-width: 767px) {
+  .cr-paking-delivery .nav-tabs .nav-item .nav-link {
+    font-size: 16px;
+  }
+  .cr-products-categories {
+    max-width: 300px;
+    margin: auto;
+  }
+  .cr-size-and-weight .cr-product-price span.new-price {
+    font-size: 22px;
+  }
+  .cr-size-and-weight-contain {
+    margin-top: 24px;
+  }
+}
+@media only screen and (max-width: 575px) {
+  .cr-paking-delivery .nav-tabs .nav-item .nav-link {
+    margin-bottom: 15px;
+  }
+  .cr-paking-delivery .nav-tabs .nav-item .nav-link.active:after {
+    display: none;
+  }
+  /* model */
+  .cr-model .cr-modal-dialog {
+    max-width: 400px;
+    width: 400px;
+  }
+  .cr-product-card-block .col-lg-4 .cr-product-card {
+    max-width: 100%;
+  }
+  .product-tabs {
+    display: block;
+  }
+  .product-tabs .nav-tabs {
+    display: flex;
+  }
+  .cr-tab-content-from .post p {
+    padding: 0;
+  }
+  .cr-tab-content-from .post .cr-t-review-rating {
+    margin: 0 0 24px 0;
+  }
+  .cr-tab-content-from .post .content {
+    flex-direction: column;
+  }
+  .cr-tab-content-from .post .content img {
+    margin: 0 0 24px 0;
+  }
+  .cr-size-and-weight .cr-product-price span.new-price {
+    font-size: 20px;
+  }
+}
+@media only screen and (max-width: 480px) {
+  .cr-product-box,
+  .cr-product-card {
+    width: 100%;
+  }
+  .banner-480 {
+    display: none;
+  }
+}
+@media only screen and (max-width: 380px) {
+  .cr-add-button {
+    display: none;
+  }
+  .cr-size-and-weight .cr-review-star p {
+    display: none;
+  }
+  .cr-size-and-weight .cr-buy-button {
+    display: none;
+  }
+  .cr-size-and-weight .cr-size-and-weight .cr-review-star p {
+    display: none;
+  }
+  .cr-size-and-weight .cr-size-and-weight .cr-size-weight {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+  }
+  .cr-size-and-weight .cr-size-and-weight .cr-size-weight .cr-kg {
+    padding: 10px 0 0 0;
+  }
+}
+.review-list {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  padding: 0 10px;
+  margin-bottom: 20px;
+}
+.review-list .review-item {
+  display: flex;
+  padding: 16px;
+  border: 1px solid #eaeaea;
+  border-radius: 15px;
+  background-color: #fff;
+  margin-bottom: 8px;
+}
+.review-list .review-item__image {
+  flex-shrink: 0;
+  width: 50px;
+  height: 50px;
+  margin-right: 12px;
+}
+.review-list .review-item__image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 50%;
+}
+.review-list .review-item__content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+.review-list .review-item__content .header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 8px;
+}
+.review-list .review-item__content .header__left, .review-list .review-item__content .header__right {
+  display: flex;
+  align-items: center;
+}
+.review-list .review-item__content .header .action-btn {
+  background-color: #f0f0f0;
+  border: none;
+  padding: 10px 15px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s, transform 0.2s;
+  font-size: 18px;
+  margin-right: 10px;
+}
+.review-list .review-item__content .header .action-btn i {
+  font-size: 20px;
+  color: #333;
+}
+.review-list .review-item__content .header .action-btn:hover {
+  background-color: #d0d0d0;
+  transform: scale(1.05);
+}
+.review-list .review-item__content .header .action-btn .ri-eye-off-line {
+  color: #ff6b6b;
+}
+.review-list .review-item__content .header .action-btn .ri-reply-line {
+  color: #4a90e2;
+}
+.review-list .review-item__content .header .name {
+  font-weight: bold;
+  font-size: 16px;
+  margin-right: 8px;
+}
+.review-list .review-item__content .header .rating {
+  display: flex;
+}
+.review-list .review-item__content .header .rating i {
+  color: #ffcc00;
+  font-size: 14px;
+}
+.review-list .review-item__content .date {
+  font-size: 12px;
+  color: #888;
+  margin-bottom: 8px;
+}
+.review-list .review-item__content .product-info {
+  font-size: 14px;
+  margin-bottom: 8px;
+}
+.review-list .review-item__content .product-info span {
+  font-weight: bold;
+}
+.review-list .review-item__content .review-content {
+  font-size: 14px;
+  color: #333;
+  line-height: 1.5;
+  margin-bottom: 8px;
+}
+.review-list .review-item__content .response-review {
+  background-color: #f9f9f9;
+  padding: 12px;
+  border-radius: 6px;
+  font-size: 14px;
+  color: #555;
+  line-height: 1.4;
+  margin-top: 8px;
+}
+.review-list .review-item__content .response-review .response-title {
+  font-weight: bold;
+  margin-bottom: 4px;
+  color: #333;
+}
+.review-list .review-item__content .response-review .response-text {
+  margin-top: 4px;
+  color: #666;
 }
 
 /*# sourceMappingURL=style.css.map */

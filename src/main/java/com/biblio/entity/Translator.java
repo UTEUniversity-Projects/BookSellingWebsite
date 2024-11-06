@@ -26,7 +26,7 @@ public class Translator extends ContributorProfile implements Serializable {
         super();
     }
 
-    public Translator(String id, String name, String introduction, LocalDateTime joinAt, String avatar, Set<Book> books) {
+    public Translator(Long id, String name, String introduction, LocalDateTime joinAt, String avatar, Set<Book> books) {
         super(id, name, introduction, joinAt, avatar);
         this.books = books;
     }
@@ -42,7 +42,6 @@ public class Translator extends ContributorProfile implements Serializable {
     public void setBooks(Set<Book> books) {
         this.books = books;
     }
-
 
     // endregion
 }

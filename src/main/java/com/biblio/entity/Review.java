@@ -1,7 +1,5 @@
 package com.biblio.entity;
 
-import org.hibernate.annotations.GenericGenerator;
-
 import javax.persistence.*;
 import java.io.Serializable;
 import java.time.LocalDateTime;
@@ -13,9 +11,8 @@ public class Review implements Serializable {
     // region Attributes
 
     @Id
-    @GeneratedValue(generator = "uuid")
-    @GenericGenerator(name = "uuid", strategy = "org.hibernate.id.UUIDGenerator")
-    private String id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
     @Column(name = "rate", nullable = false)
     private int rate;
@@ -25,6 +22,9 @@ public class Review implements Serializable {
 
     @Column(name = "ready_to_introduce", nullable = false, columnDefinition = "bit")
     private boolean readyToIntroduce;
+
+    @Column(name = "id_hidden", nullable = false)
+    private boolean idHidden;
 
     @Column(name = "created_at", nullable = false)
     private LocalDateTime createdAt;
@@ -48,11 +48,12 @@ public class Review implements Serializable {
     public Review() {
     }
 
-    public Review(String id, int rate, String content, boolean readyToIntroduce, LocalDateTime createdAt, Book book, Customer customer) {
+    public Review(Long id, int rate, String content, boolean readyToIntroduce, boolean idHidden, LocalDateTime createdAt, Book book, Customer customer) {
         this.id = id;
         this.rate = rate;
         this.content = content;
         this.readyToIntroduce = readyToIntroduce;
+        this.idHidden = idHidden;
         this.createdAt = createdAt;
         this.book = book;
         this.customer = customer;
@@ -62,11 +63,11 @@ public class Review implements Serializable {
 
     // region Getters & Setters
 
-    public String getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -92,6 +93,14 @@ public class Review implements Serializable {
 
     public void setReadyToIntroduce(boolean readyToIntroduce) {
         this.readyToIntroduce = readyToIntroduce;
+    }
+
+    public boolean isIdHidden() {
+        return idHidden;
+    }
+
+    public void setIdHidden(boolean idHidden) {
+        this.idHidden = idHidden;
     }
 
     public LocalDateTime getCreatedAt() {

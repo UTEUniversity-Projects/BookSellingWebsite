@@ -7,9 +7,9 @@ $(document).ready(() => {
 
 		}
 
-		register() {
+		validate() {
 			$('.btn--success').on('click', function (event) {
-				event.preventDefault();
+				// event.preventDefault();
 
 				$('.form-group').removeClass('has-error');
 				$('.error-message').remove();
@@ -92,13 +92,46 @@ $(document).ready(() => {
 			});
 		}
 
+		register() {
+			$("#registerForm").submit(function(event) {
+				event.preventDefault();
+				const formData = new FormData(this);
+				const email = formData.get('email');
+				const phoneNumber = formData.get('phoneNumber');
+				const username = formData.get('username');
+
+				const userData = {
+					email,
+					phoneNumber,
+					username
+				};
+
+				$.ajax({
+					url: `${contextPath}/register-api`,
+					type: 'POST',
+					contentType: 'application/json',
+					data: JSON.stringify(userData),
+					success: function(response) {
+						// xử lý kết quả trả về từ server (nếu cần)
+						// ví dụ: alert(response.message);
+						console.log(response);
+					},
+					error: function(xhr, status, error) {
+						console.error('Lỗi:', error);
+						alert('Có lỗi xảy ra, vui lòng thử lại!');
+					}
+				});
+			});
+
+		}
+
 		getAddress() {
 			const BASE_URL = 'https://web.giaohangtietkiem.vn/api/v1/public/address';
 
 			$.getJSON(`${BASE_URL}/list`, async function (city) {
 				if (city.success) {
 					$.each(city.data, function (key, value) {
-						$('#city').append(`<option value="${value.id}">${value.name}</option>`);
+						$('#city').append(`<option value="${value.id}" data-name="${value.name}">${value.name}</option>`);
 					});
 
 					$('#city').change(function (e) {
@@ -114,7 +147,7 @@ $(document).ready(() => {
 
 									$.each(district.data, function (key, value) {
 										$('#district').append(
-											`<option value="${value.id}">${value.name}</option>`
+											`<option value="${value.id}" data-name="${value.name}">${value.name}</option>`
 										);
 									});
 								}
@@ -134,7 +167,7 @@ $(document).ready(() => {
 								if (ward.success) {
 									$.each(ward.data, function (key, value) {
 										$('#ward').append(
-											`<option value="${value.id}">${value.name}</option>`
+											`<option value="${value.id}" data-name="${value.name}">${value.name}</option>`
 										);
 									});
 								}
@@ -150,7 +183,7 @@ $(document).ready(() => {
 							if (hamlet.success) {
 								$.each(hamlet?.data?.hamlet_address, function (key, value) {
 									$('#hamlet').append(
-										`<option value="${value.id}">${value.name}</option>`
+										`<option value="${value.id}" data-name="${value.name}">${value.name}</option>`
 									);
 								});
 							}
@@ -163,6 +196,7 @@ $(document).ready(() => {
 	}
 
 	const register = new Register();
+	// register.validate();
 	register.register();
 	register.getAddress();
 });

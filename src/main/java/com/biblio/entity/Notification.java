@@ -48,8 +48,14 @@ public class Notification implements Serializable {
 
     // region Relationships
 
-    @ManyToMany(fetch = FetchType.LAZY, mappedBy = "notifications")
-    private Set<User> users = new HashSet<User>();
+    @ManyToMany(mappedBy = "notifications")
+    private Set<Customer> customers = new HashSet<Customer>();
+
+    @ManyToMany(mappedBy = "notifications")
+    private Set<Staff> staff = new HashSet<Staff>();
+
+    @ManyToMany(mappedBy = "notifications")
+    private Set<Owner> owner = new HashSet<Owner>();
 
     // endregion
 
@@ -58,7 +64,7 @@ public class Notification implements Serializable {
     public Notification() {
     }
 
-    public Notification(String id, LocalDateTime createdAt, LocalDateTime sentTime, String title, String content, String hyperlink, ENotificationType type, ENotificationStatus status, Set<User> users) {
+    public Notification(String id, LocalDateTime createdAt, LocalDateTime sentTime, String title, String content, String hyperlink, ENotificationType type, ENotificationStatus status, Set<Customer> customers, Set<Staff> staff, Set<Owner> owner) {
         this.id = id;
         this.createdAt = createdAt;
         this.sentTime = sentTime;
@@ -67,7 +73,9 @@ public class Notification implements Serializable {
         this.hyperlink = hyperlink;
         this.type = type;
         this.status = status;
-        this.users = users;
+        this.customers = customers;
+        this.staff = staff;
+        this.owner = owner;
     }
 
     // endregion
@@ -138,12 +146,28 @@ public class Notification implements Serializable {
         this.status = status;
     }
 
-    public Set<User> getUsers() {
-        return users;
+    public Set<Customer> getCustomers() {
+        return customers;
     }
 
-    public void setUsers(Set<User> users) {
-        this.users = users;
+    public void setCustomers(Set<Customer> customers) {
+        this.customers = customers;
+    }
+
+    public Set<Staff> getStaff() {
+        return staff;
+    }
+
+    public void setStaff(Set<Staff> staff) {
+        this.staff = staff;
+    }
+
+    public Set<Owner> getOwner() {
+        return owner;
+    }
+
+    public void setOwner(Set<Owner> owner) {
+        this.owner = owner;
     }
 
     // endregion

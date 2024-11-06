@@ -5,7 +5,6 @@ import com.biblio.enumeration.EBookAgeRecommend;
 import com.biblio.enumeration.EBookCondition;
 import com.biblio.enumeration.EBookFormat;
 import com.biblio.enumeration.EBookLanguage;
-import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -20,14 +19,14 @@ public class Book implements Serializable {
     // region Attributes
 
     @Id
-    @GeneratedValue(generator = "uuid")
-    @GenericGenerator(name = "uuid", strategy = "org.hibernate.id.UUIDGenerator")
-    private String id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
     @Column(name = "title", nullable = false)
     private String title;
 
-    @Column(name = "description", nullable = false)
+    @Lob
+    @Column(name = "description", nullable = false, columnDefinition = "longtext")
     private String description;
 
     @Column(name = "selling_price", nullable = false)
@@ -62,7 +61,8 @@ public class Book implements Serializable {
     private double height;
 
     @ElementCollection
-    @CollectionTable(name = "book_languages", joinColumns = @JoinColumn(name = "book_id"))
+    @CollectionTable(name = "book_languages",
+            joinColumns = @JoinColumn(name = "book_id"))
     @Column(name = "language", nullable = false)
     private Set<EBookLanguage> languages = new HashSet<>();
 
@@ -116,7 +116,7 @@ public class Book implements Serializable {
     public Book() {
     }
 
-    public Book(String id, String title, String description, double sellingPrice, LocalDateTime publicationDate, int edition, String codeISBN10, String codeISBN13, EBookFormat format, int handcover, double length, double width, double height, Set<EBookLanguage> languages, double weight, EBookCondition condition, EBookAgeRecommend recommendedAge, BookMetadata metadata, Category category, SubCategory subCategory, Publisher publisher, Set<Author> authors, Set<Translator> translators, Set<Review> reviews, Set<OrderItem> orderItems) {
+    public Book(Long id, String title, String description, double sellingPrice, LocalDateTime publicationDate, int edition, String codeISBN10, String codeISBN13, EBookFormat format, int handcover, double length, double width, double height, Set<EBookLanguage> languages, double weight, EBookCondition condition, EBookAgeRecommend recommendedAge, BookMetadata metadata, Category category, SubCategory subCategory, Publisher publisher, Set<Author> authors, Set<Translator> translators, Set<Review> reviews, Set<OrderItem> orderItems) {
         this.id = id;
         this.title = title;
         this.description = description;
@@ -148,11 +148,11 @@ public class Book implements Serializable {
 
     // region Getters & Setters
 
-    public String getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -347,7 +347,6 @@ public class Book implements Serializable {
     public void setOrderItems(Set<OrderItem> orderItems) {
         this.orderItems = orderItems;
     }
-
 
     // endregion
 }

@@ -1,7 +1,6 @@
 package com.biblio.entity;
 
 import com.biblio.enumeration.EOrderStatus;
-import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -15,9 +14,8 @@ public class Order implements Serializable {
     // region Attributes
 
     @Id
-    @GeneratedValue(generator = "uuid")
-    @GenericGenerator(name = "uuid", strategy = "org.hibernate.id.UUIDGenerator")
-    private String id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
     @Column(name = "note", nullable = false)
     private String note;
@@ -30,23 +28,35 @@ public class Order implements Serializable {
 
     // region Relationships
 
-    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    @JoinColumn(name = "address_id", nullable = false)
-    private Address address;
-
     @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JoinColumn(name = "customer_id", nullable = false)
     private Customer customer;
 
-    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    @JoinColumn(name = "payment_id", nullable = false)
-    private Payment payment;
+    @OneToOne(mappedBy = "order")
+    private BankTransfer bankTransfer;
+
+    @OneToOne(mappedBy = "order")
+    private CreditCard creditCard;
+
+    @OneToOne(mappedBy = "order")
+    private Cash cash;
+
+    @OneToOne(mappedBy = "order")
+    private EWallet wallet;
 
     @OneToMany(mappedBy = "order", fetch = FetchType.LAZY)
     private Set<OrderItem> orderItems = new HashSet<OrderItem>();
 
-    @OneToMany(mappedBy = "order")
+    @OneToMany(mappedBy = "order", fetch = FetchType.LAZY)
     private Set<Promotion> promotions = new HashSet<Promotion>();
+
+    // endregion
+
+    // region Relationships
+
+    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JoinColumn(name = "address_id")
+    private Address address;
 
     // endregion
 
@@ -55,26 +65,29 @@ public class Order implements Serializable {
     public Order() {
     }
 
-    public Order(String id, String note, EOrderStatus status, Address address, Customer customer, Payment payment, Set<OrderItem> orderItems, Set<Promotion> promotions) {
+    public Order(Long id, String note, EOrderStatus status, Customer customer, BankTransfer bankTransfer, CreditCard creditCard, Cash cash, EWallet wallet, Set<OrderItem> orderItems, Set<Promotion> promotions, Address address) {
         this.id = id;
         this.note = note;
         this.status = status;
-        this.address = address;
         this.customer = customer;
-        this.payment = payment;
+        this.bankTransfer = bankTransfer;
+        this.creditCard = creditCard;
+        this.cash = cash;
+        this.wallet = wallet;
         this.orderItems = orderItems;
         this.promotions = promotions;
+        this.address = address;
     }
 
     // endregion
 
     // region Getters & Setters
 
-    public String getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -94,14 +107,6 @@ public class Order implements Serializable {
         this.status = status;
     }
 
-    public Address getAddress() {
-        return address;
-    }
-
-    public void setAddress(Address address) {
-        this.address = address;
-    }
-
     public Customer getCustomer() {
         return customer;
     }
@@ -110,12 +115,36 @@ public class Order implements Serializable {
         this.customer = customer;
     }
 
-    public Payment getPayment() {
-        return payment;
+    public BankTransfer getBankTransfer() {
+        return bankTransfer;
     }
 
-    public void setPayment(Payment payment) {
-        this.payment = payment;
+    public void setBankTransfer(BankTransfer bankTransfer) {
+        this.bankTransfer = bankTransfer;
+    }
+
+    public CreditCard getCreditCard() {
+        return creditCard;
+    }
+
+    public void setCreditCard(CreditCard creditCard) {
+        this.creditCard = creditCard;
+    }
+
+    public Cash getCash() {
+        return cash;
+    }
+
+    public void setCash(Cash cash) {
+        this.cash = cash;
+    }
+
+    public EWallet getWallet() {
+        return wallet;
+    }
+
+    public void setWallet(EWallet wallet) {
+        this.wallet = wallet;
     }
 
     public Set<OrderItem> getOrderItems() {
@@ -134,6 +163,13 @@ public class Order implements Serializable {
         this.promotions = promotions;
     }
 
+    public Address getAddress() {
+        return address;
+    }
+
+    public void setAddress(Address address) {
+        this.address = address;
+    }
 
     // endregion
 }

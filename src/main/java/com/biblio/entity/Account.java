@@ -1,7 +1,6 @@
 package com.biblio.entity;
 
 import com.biblio.enumeration.EUserRole;
-import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -13,9 +12,8 @@ public class Account implements Serializable {
     // region Attributes
 
     @Id
-    @GeneratedValue(generator = "uuid")
-    @GenericGenerator(name = "uuid", strategy = "org.hibernate.id.UUIDGenerator")
-    private String id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
     @Column(name = "username", unique = true, nullable = false)
     private String username;
@@ -27,8 +25,18 @@ public class Account implements Serializable {
     @Column(name = "role", nullable = false)
     private EUserRole userRole;
 
+    // endregion
+
+    // region Relationships
+
     @OneToOne(mappedBy = "account")
-    private User user;
+    private Customer customer;
+
+    @OneToOne(mappedBy = "account")
+    private Staff staff;
+
+    @OneToOne(mappedBy = "account")
+    private Owner owner;
 
     // endregion
 
@@ -37,23 +45,25 @@ public class Account implements Serializable {
     public Account() {
     }
 
-    public Account(String id, String username, String password, EUserRole userRole, User user) {
+    public Account(Long id, String username, String password, EUserRole userRole, Customer customer, Staff staff, Owner owner) {
         this.id = id;
         this.username = username;
         this.password = password;
         this.userRole = userRole;
-        this.user = user;
+        this.customer = customer;
+        this.staff = staff;
+        this.owner = owner;
     }
 
     // endregion
 
     // region Getters & Setters
 
-    public String getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -81,12 +91,28 @@ public class Account implements Serializable {
         this.userRole = userRole;
     }
 
-    public User getUser() {
-        return user;
+    public Customer getCustomer() {
+        return customer;
     }
 
-    public void setUser(User user) {
-        this.user = user;
+    public void setCustomer(Customer customer) {
+        this.customer = customer;
+    }
+
+    public Staff getStaff() {
+        return staff;
+    }
+
+    public void setStaff(Staff staff) {
+        this.staff = staff;
+    }
+
+    public Owner getOwner() {
+        return owner;
+    }
+
+    public void setOwner(Owner owner) {
+        this.owner = owner;
     }
 
     // endregion
