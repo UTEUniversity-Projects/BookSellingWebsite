@@ -2,7 +2,6 @@ package com.biblio.controller.customer;
 
 import com.biblio.dto.request.UserRegisterRequest;
 import com.biblio.utils.UploadFileUtil;
-import com.fasterxml.jackson.databind.ObjectMapper;
 
 import org.apache.commons.beanutils.BeanUtils;
 
@@ -21,9 +20,9 @@ import java.io.Serial;
  */
 @WebServlet("/register")
 @MultipartConfig(
-        fileSizeThreshold = 1024 * 1024 * 2, // 2MB
-        maxFileSize = 1024 * 1024 * 10,      // 10MB
-        maxRequestSize = 1024 * 1024 * 50    // 50MB
+        fileSizeThreshold = 1024 * 1024 * 2,
+        maxFileSize = 1024 * 1024 * 10,
+        maxRequestSize = 1024 * 1024 * 50
 )
 public class RegisterController extends HttpServlet {
     @Serial
