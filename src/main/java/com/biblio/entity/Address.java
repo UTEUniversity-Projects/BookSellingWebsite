@@ -34,14 +34,17 @@ public class Address implements Serializable {
 
     // region Relationships
 
-    @ManyToMany(mappedBy = "addresses", fetch = FetchType.LAZY)
-    private Set<Customer> customers = new HashSet<Customer>();
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "customer_id")
+    private Customer customer;
 
-    @ManyToMany(mappedBy = "addresses", fetch = FetchType.LAZY)
-    private Set<Staff> staffs = new HashSet<Staff>();
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "staff_id")
+    private Staff staff;
 
-    @ManyToMany(mappedBy = "addresses", fetch = FetchType.LAZY)
-    private Set<Owner> owners = new HashSet<Owner>();
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "owner_id")
+    private Owner owner;
 
     @OneToOne(mappedBy = "address")
     private Order order;
@@ -52,16 +55,16 @@ public class Address implements Serializable {
 
     public Address() {}
 
-    public Address(Long id, String nation, String province, String district, String village, String detail, Set<Customer> customers, Set<Staff> staffs, Set<Owner> owners, Order order) {
+    public Address(Long id, String nation, String province, String district, String village, String detail, Customer customer, Staff staff, Owner owner, Order order) {
         this.id = id;
         this.nation = nation;
         this.province = province;
         this.district = district;
         this.village = village;
         this.detail = detail;
-        this.customers = customers;
-        this.staffs = staffs;
-        this.owners = owners;
+        this.customer = customer;
+        this.staff = staff;
+        this.owner = owner;
         this.order = order;
     }
 
@@ -117,28 +120,28 @@ public class Address implements Serializable {
         this.detail = detail;
     }
 
-    public Set<Customer> getCustomers() {
-        return customers;
+    public Customer getCustomer() {
+        return customer;
     }
 
-    public void setCustomers(Set<Customer> customers) {
-        this.customers = customers;
+    public void setCustomer(Customer customer) {
+        this.customer = customer;
     }
 
-    public Set<Staff> getStaffs() {
-        return staffs;
+    public Staff getStaff() {
+        return staff;
     }
 
-    public void setStaffs(Set<Staff> staffs) {
-        this.staffs = staffs;
+    public void setStaff(Staff staff) {
+        this.staff = staff;
     }
 
-    public Set<Owner> getOwners() {
-        return owners;
+    public Owner getOwner() {
+        return owner;
     }
 
-    public void setOwners(Set<Owner> owners) {
-        this.owners = owners;
+    public void setOwner(Owner owner) {
+        this.owner = owner;
     }
 
     public Order getOrder() {
@@ -148,6 +151,7 @@ public class Address implements Serializable {
     public void setOrder(Order order) {
         this.order = order;
     }
+
 
     // endregion
 }
