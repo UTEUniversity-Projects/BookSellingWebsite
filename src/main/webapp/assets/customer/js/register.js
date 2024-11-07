@@ -93,7 +93,7 @@ $(document).ready(() => {
 		}
 
 		register() {
-			$("#registerForm").submit(function(event) {
+			$("#registerForm").submit(function (event) {
 				event.preventDefault();
 				const formData = new FormData(this);
 				const email = formData.get('email');
@@ -101,19 +101,26 @@ $(document).ready(() => {
 				const username = formData.get('username');
 
 				const userData = {
-					email,
-					phoneNumber,
-					username
+					fullName: "Nguyen Van A",
+					email: "nguyenvana@example.com",
+					phoneNumber: "0123456789",
+					dateOfBirth: "1990-01-01",
+					gender: "Male",
+					username: "nguyenvana",
+					password: "securepassword",
+					city: "Ho Chi Minh City",
+					district: "District 1",
+					ward: "Ward 1",
+					hamlet: "Hamlet 1",
+					avatar: "https://example.com/avatar.jpg",
 				};
 
 				$.ajax({
-					url: `${contextPath}/register-api`,
+					url: `${contextPath}/api-register`,
 					type: 'POST',
 					contentType: 'application/json',
 					data: JSON.stringify(userData),
 					success: function(response) {
-						// xử lý kết quả trả về từ server (nếu cần)
-						// ví dụ: alert(response.message);
 						console.log(response);
 					},
 					error: function(xhr, status, error) {
@@ -121,6 +128,7 @@ $(document).ready(() => {
 						alert('Có lỗi xảy ra, vui lòng thử lại!');
 					}
 				});
+
 			});
 
 		}
