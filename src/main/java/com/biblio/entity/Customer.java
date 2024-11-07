@@ -2,6 +2,7 @@ package com.biblio.entity;
 
 import com.biblio.enumeration.EGender;
 import com.biblio.enumeration.EMembership;
+import com.biblio.utils.DateTimeUtil;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -136,6 +137,18 @@ public class Customer extends User implements Serializable {
         this.reviews = reviews;
     }
 
+    @Override
+    public String toString() {
+        return "Customer{" +
+                "fullName='" + fullName + '\'' +
+                ", emailAddress='" + emailAddress + '\'' +
+                ", dateOfBirth='" + dateOfBirth + '\'' +
+                ", gender=" + gender +
+                ", phoneNumber='" + phoneNumber + '\'' +
+                ", avatar='" + avatar + '\'' +
+                ", joinAt=" + DateTimeUtil.formatDateTime(joinAt, "HH:mm:ss dd/MM/yyyy a") +
+                '}';
+    }
 
     // endregion
 }

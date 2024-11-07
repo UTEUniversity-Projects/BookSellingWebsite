@@ -1,4 +1,4 @@
-package com.biblio.dao.staff.impl;
+package com.biblio.dao.impl;
 
 public class StaffDAOImpl {
 }

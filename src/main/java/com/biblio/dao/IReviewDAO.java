@@ -1,4 +1,4 @@
-package com.biblio.dao.staff;
+package com.biblio.dao;
 
 public interface IReviewDAO {
 }
