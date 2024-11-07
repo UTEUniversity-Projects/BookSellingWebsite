@@ -7,7 +7,7 @@
             <div class="cr-breadcrumb">
                 <ul>
                     <li><a href="#">Biblio</a></li>
-                    <li><a href="${pageContext.request.contextPath}/staff/product-dashboard">Danh sách sản
+                    <li><a href="${pageContext.request.contextPath}/owner/product-list">Danh sách sản
                         phẩm</a></li>
                     <li>Chi tiết sản phẩm</li>
                 </ul>
