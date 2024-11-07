@@ -1,5 +1,6 @@
 package com.biblio.entity;
 
+import com.biblio.enumeration.EAccountStatus;
 import com.biblio.enumeration.EUserRole;
 
 import javax.persistence.*;
@@ -25,6 +26,10 @@ public class Account implements Serializable {
     @Column(name = "role", nullable = false)
     private EUserRole userRole;
 
+    @Enumerated(EnumType.STRING)
+    @Column(name = "status")
+    private EAccountStatus status;
+
     // endregion
 
     // region Relationships
@@ -45,11 +50,12 @@ public class Account implements Serializable {
     public Account() {
     }
 
-    public Account(Long id, String username, String password, EUserRole userRole, Customer customer, Staff staff, Owner owner) {
+    public Account(Long id, String username, String password, EUserRole userRole, EAccountStatus status, Customer customer, Staff staff, Owner owner) {
         this.id = id;
         this.username = username;
         this.password = password;
         this.userRole = userRole;
+        this.status = status;
         this.customer = customer;
         this.staff = staff;
         this.owner = owner;
@@ -91,6 +97,14 @@ public class Account implements Serializable {
         this.userRole = userRole;
     }
 
+    public EAccountStatus getStatus() {
+        return status;
+    }
+
+    public void setStatus(EAccountStatus status) {
+        this.status = status;
+    }
+
     public Customer getCustomer() {
         return customer;
     }
@@ -114,6 +128,7 @@ public class Account implements Serializable {
     public void setOwner(Owner owner) {
         this.owner = owner;
     }
+
 
     // endregion
 }
