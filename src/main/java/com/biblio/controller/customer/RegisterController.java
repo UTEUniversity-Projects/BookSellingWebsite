@@ -1,6 +1,6 @@
 package com.biblio.controller.customer;
 
-import com.biblio.dto.request.UserRegisterRequest;
+import com.biblio.dto.request.CustomerRegisterRequest;
 import com.biblio.utils.UploadFileUtil;
 
 import org.apache.commons.beanutils.BeanUtils;
@@ -54,7 +54,7 @@ public class RegisterController extends HttpServlet {
         response.setCharacterEncoding("UTF-8");
         request.setCharacterEncoding("UTF-8");
 
-        UserRegisterRequest user = new UserRegisterRequest();
+        CustomerRegisterRequest user = new CustomerRegisterRequest();
 
         try {
             BeanUtils.populate(user, request.getParameterMap());

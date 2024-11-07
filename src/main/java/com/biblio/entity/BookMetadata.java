@@ -43,7 +43,8 @@ public class BookMetadata implements Serializable {
     )
     private Set<Tag> tags = new HashSet<Tag>();
 
-    @OneToOne(mappedBy = "metadata")
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "book_id")
     private Book book;
 
     @OneToMany(mappedBy = "bookMetadata", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
