@@ -24,15 +24,8 @@ public class Owner extends User implements Serializable {
             inverseJoinColumns = @JoinColumn(name = "notification_id", nullable = false))
     private Set<Notification> notifications = new HashSet<Notification>();
 
-    @ManyToMany(cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
-    @JoinTable(name = "owner_address",
-            joinColumns = @JoinColumn(name = "owner_id"),
-            inverseJoinColumns = @JoinColumn(name = "address_id"))
+    @OneToMany(mappedBy = "owner", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private Set<Address> addresses;
-
-    public Set<Address> getAddresses() {
-        return addresses;
-    }
 
     // endregion
 
@@ -71,6 +64,10 @@ public class Owner extends User implements Serializable {
 
     public void setAddresses(Set<Address> addresses) {
         this.addresses = addresses;
+    }
+
+    public Set<Address> getAddresses() {
+        return addresses;
     }
 
     // endregion

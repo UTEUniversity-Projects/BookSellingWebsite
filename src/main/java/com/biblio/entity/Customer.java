@@ -34,7 +34,7 @@ public class Customer extends User implements Serializable {
     private Set<Notification> notifications = new HashSet<Notification>();
 
     @OneToMany(mappedBy = "customer")
-    private Set<Address> addresss;
+    private Set<Address> addresses;
 
     @OneToMany(mappedBy = "customer", cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<Order> orders = new HashSet<Order>();
@@ -56,12 +56,12 @@ public class Customer extends User implements Serializable {
         super();
     }
 
-    public Customer(Long id, String fullName, String emailAddress, String dateOfBirth, EGender gender, String phoneNumber, String avatar, LocalDateTime joinAt, EMembership membership, Account account, Set<Notification> notifications, Set<Address> addresss, Set<Order> orders, Cart cart, Set<Support> supports, Set<Review> reviews) {
+    public Customer(Long id, String fullName, String emailAddress, String dateOfBirth, EGender gender, String phoneNumber, String avatar, LocalDateTime joinAt, EMembership membership, Account account, Set<Notification> notifications, Set<Address> addresses, Set<Order> orders, Cart cart, Set<Support> supports, Set<Review> reviews) {
         super(id, fullName, emailAddress, dateOfBirth, gender, phoneNumber, avatar, joinAt);
         this.membership = membership;
         this.account = account;
         this.notifications = notifications;
-        this.addresss = addresss;
+        this.addresses = addresses;
         this.orders = orders;
         this.cart = cart;
         this.supports = supports;
@@ -96,12 +96,12 @@ public class Customer extends User implements Serializable {
         this.notifications = notifications;
     }
 
-    public Set<Address> getAddresss() {
-        return addresss;
+    public Set<Address> getAddresses() {
+        return addresses;
     }
 
-    public void setAddresss(Set<Address> addresss) {
-        this.addresss = addresss;
+    public void setAddresses(Set<Address> addresses) {
+        this.addresses = addresses;
     }
 
     public Set<Order> getOrders() {
@@ -135,6 +135,7 @@ public class Customer extends User implements Serializable {
     public void setReviews(Set<Review> reviews) {
         this.reviews = reviews;
     }
+
 
     // endregion
 }
