@@ -33,11 +33,8 @@ public class Customer extends User implements Serializable {
             inverseJoinColumns = @JoinColumn(name = "notification_id", nullable = false))
     private Set<Notification> notifications = new HashSet<Notification>();
 
-    @ManyToMany(cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
-    @JoinTable(name = "customer_address",
-            joinColumns = @JoinColumn(name = "customer_id"),
-            inverseJoinColumns = @JoinColumn(name = "address_id"))
-    private Set<Address> addresses;
+    @OneToMany(mappedBy = "customer")
+    private Set<Address> addresss;
 
     @OneToMany(mappedBy = "customer", cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<Order> orders = new HashSet<Order>();
@@ -51,10 +48,6 @@ public class Customer extends User implements Serializable {
     @OneToMany(mappedBy = "customer", cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<Review> reviews = new HashSet<Review>();
 
-    public Set<Address> getAddresses() {
-        return addresses;
-    }
-
     // endregion
 
     // region Constructors
@@ -63,12 +56,12 @@ public class Customer extends User implements Serializable {
         super();
     }
 
-    public Customer(Long id, String fullName, String emailAddress, String dateOfBirth, EGender gender, String phoneNumber, String avatar, LocalDateTime joinAt, EMembership membership, Account account, Set<Notification> notifications, Set<Address> addresses, Set<Order> orders, Cart cart, Set<Support> supports, Set<Review> reviews) {
+    public Customer(Long id, String fullName, String emailAddress, String dateOfBirth, EGender gender, String phoneNumber, String avatar, LocalDateTime joinAt, EMembership membership, Account account, Set<Notification> notifications, Set<Address> addresss, Set<Order> orders, Cart cart, Set<Support> supports, Set<Review> reviews) {
         super(id, fullName, emailAddress, dateOfBirth, gender, phoneNumber, avatar, joinAt);
         this.membership = membership;
         this.account = account;
         this.notifications = notifications;
-        this.addresses = addresses;
+        this.addresss = addresss;
         this.orders = orders;
         this.cart = cart;
         this.supports = supports;
@@ -103,8 +96,12 @@ public class Customer extends User implements Serializable {
         this.notifications = notifications;
     }
 
-    public void setAddresses(Set<Address> addresses) {
-        this.addresses = addresses;
+    public Set<Address> getAddresss() {
+        return addresss;
+    }
+
+    public void setAddresss(Set<Address> addresss) {
+        this.addresss = addresss;
     }
 
     public Set<Order> getOrders() {
