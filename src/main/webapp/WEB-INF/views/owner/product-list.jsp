@@ -7,7 +7,7 @@
             <div class="cr-breadcrumb">
                 <h5>Danh sách sản phẩm</h5>
                 <ul>
-                    <li><a href="index.html">Biblio</a></li>
+                    <li><a href="#">Biblio</a></li>
                     <li>Danh sách sản phẩm</li>
                 </ul>
             </div>
@@ -32,9 +32,11 @@
                                 </thead>
 
                                 <tbody>
-                                <tr>
-                                    <td><img class="tbl-thumb" src="/assets/owner/img/product/1.jpg"
-                                             alt="Product Image"></td>
+                                <tr class="product-row" data-href="/owner/product-details">
+                                    <td>
+                                        <img class="tbl-thumb" src="${pageContext.request.contextPath}/assets/owner/img/product/1.jpg"
+                                             alt="Product Image">
+                                    </td>
                                     <td>Mens t-shirt</td>
                                     <td>278.000 VNĐ</td>
                                     <td>25% OFF</td>

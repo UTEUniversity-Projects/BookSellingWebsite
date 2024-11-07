@@ -13,34 +13,33 @@ $(function () {
     var end = moment();
     var cb = function (start, end) {
       $("#pagedate .cr-date-range span").html(
-        
-        "<a href='javascript:void(0)' class='calendar' title='Date'><i class='ri-calendar-line'></i>" + start.format("ll") + " - " + end.format("ll") + "</a>"
+        "<a href='javascript:void(0)' class='calendar' title='Date'><i class='ri-calendar-line'></i>" +
+          start.format("ll") +
+          " - " +
+          end.format("ll") +
+          "</a>"
       );
-    };
+    };  
 
     $("#pagedate .cr-date-range").daterangepicker(
       {
         startDate: start,
         endDate: end,
-        opens: 'left',
+        opens: "left",
         ranges: {
           Today: [moment(), moment()],
           Yesterday: [
             moment().subtract(1, "days"),
-            moment().subtract(1, "days")
+            moment().subtract(1, "days"),
           ],
           "Last 7 Days": [moment().subtract(6, "days"), moment()],
           "Last 30 Days": [moment().subtract(29, "days"), moment()],
           "This Month": [moment().startOf("month"), moment().endOf("month")],
           "Last Month": [
-            moment()
-              .subtract(1, "month")
-              .startOf("month"),
-            moment()
-              .subtract(1, "month")
-              .endOf("month")
-          ]
-        }
+            moment().subtract(1, "month").startOf("month"),
+            moment().subtract(1, "month").endOf("month"),
+          ],
+        },
       },
       cb
     );
@@ -61,65 +60,60 @@ $(function () {
       {
         startDate: start,
         endDate: end,
-        opens: 'left',
+        opens: "left",
         ranges: {
           Today: [moment(), moment()],
           Yesterday: [
             moment().subtract(1, "days"),
-            moment().subtract(1, "days")
+            moment().subtract(1, "days"),
           ],
           "Last 7 Days": [moment().subtract(6, "days"), moment()],
           "Last 30 Days": [moment().subtract(29, "days"), moment()],
           "This Month": [moment().startOf("month"), moment().endOf("month")],
           "Last Month": [
-            moment()
-              .subtract(1, "month")
-              .startOf("month"),
-            moment()
-              .subtract(1, "month")
-              .endOf("month")
-          ]
-        }
+            moment().subtract(1, "month").startOf("month"),
+            moment().subtract(1, "month").endOf("month"),
+          ],
+        },
       },
       cb
     );
     cb(start, end);
   }
 
-   /*======== 3. Map(index.html), recent order(ecommerce.html), best seller(ecommerce.html),top product(ecommerce.html), Device user(analytics)  ========*/
-   if ($("#fxmap, #ordertbl, #best_seller_tbl, #top_product_tbl, #deviceUser")) {
+  /*======== 3. Map(index.html), recent order(ecommerce.html), best seller(ecommerce.html),top product(ecommerce.html), Device user(analytics)  ========*/
+  if ($("#fxmap, #ordertbl, #best_seller_tbl, #top_product_tbl, #deviceUser")) {
     var start = moment();
     var end = moment();
     var cb = function (start, end) {
-      $("#fxmap .cr-date-range span, #ordertbl .cr-date-range span, #best_seller_tbl .cr-date-range span, #top_product_tbl .cr-date-range span, #deviceUser .cr-date-range span").html(
-        
+      $(
+        "#fxmap .cr-date-range span, #ordertbl .cr-date-range span, #best_seller_tbl .cr-date-range span, #top_product_tbl .cr-date-range span, #deviceUser .cr-date-range span"
+      ).html(
         "<a href='javascript:void(0)' class='calendar' title='Date'><i class='ri-equalizer-line'></i></a>"
       );
     };
 
-    $("#fxmap .cr-date-range, #ordertbl .cr-date-range, #best_seller_tbl .cr-date-range, #top_product_tbl .cr-date-range, #deviceUser .cr-date-range").daterangepicker(
+    $(
+      "#fxmap .cr-date-range, #ordertbl .cr-date-range, #best_seller_tbl .cr-date-range, #top_product_tbl .cr-date-range, #deviceUser .cr-date-range"
+    ).daterangepicker(
       {
         startDate: start,
         endDate: end,
-        opens: 'left',
+        opens: "left",
         ranges: {
           Today: [moment(), moment()],
           Yesterday: [
             moment().subtract(1, "days"),
-            moment().subtract(1, "days")
+            moment().subtract(1, "days"),
           ],
           "Last 7 Days": [moment().subtract(6, "days"), moment()],
           "Last 30 Days": [moment().subtract(29, "days"), moment()],
           "This Month": [moment().startOf("month"), moment().endOf("month")],
           "Last Month": [
-            moment()
-              .subtract(1, "month")
-              .startOf("month"),
-            moment()
-              .subtract(1, "month")
-              .endOf("month")
-          ]
-        }
+            moment().subtract(1, "month").startOf("month"),
+            moment().subtract(1, "month").endOf("month"),
+          ],
+        },
       },
       cb
     );
@@ -132,7 +126,6 @@ $(function () {
     var end = moment();
     var cb = function (start, end) {
       $("#dealtbl .cr-date-range span").html(
-        
         "<a href='javascript:void(0)' class='calendar' title='Date'><i class='ri-equalizer-line'></i></a>"
       );
     };
@@ -141,78 +134,72 @@ $(function () {
       {
         startDate: start,
         endDate: end,
-        opens: 'left',
+        opens: "left",
         ranges: {
           Today: [moment(), moment()],
           Yesterday: [
             moment().subtract(1, "days"),
-            moment().subtract(1, "days")
+            moment().subtract(1, "days"),
           ],
           "Last 7 Days": [moment().subtract(6, "days"), moment()],
           "Last 30 Days": [moment().subtract(29, "days"), moment()],
           "This Month": [moment().startOf("month"), moment().endOf("month")],
           "Last Month": [
-            moment()
-              .subtract(1, "month")
-              .startOf("month"),
-            moment()
-              .subtract(1, "month")
-              .endOf("month")
-          ]
-        }
+            moment().subtract(1, "month").startOf("month"),
+            moment().subtract(1, "month").endOf("month"),
+          ],
+        },
       },
       cb
     );
     cb(start, end);
   }
 
-    /*======== 5. Deal table ========*/
-    if ($("#campaigns")) {
-      var start = moment();
-      var end = moment();
-      var cb = function (start, end) {
-        $("#campaigns .cr-date-range span").html(
-          
-          "<a href='javascript:void(0)' class='calendar' title='Date'><i class='ri-equalizer-line'></i></a>"
-        );
-      };
-  
-      $("#campaigns .cr-date-range").daterangepicker(
-        {
-          startDate: start,
-          endDate: end,
-          opens: 'left',
-          ranges: {
-            Today: [moment(), moment()],
-            Yesterday: [
-              moment().subtract(1, "days"),
-              moment().subtract(1, "days")
-            ],
-            "Last 7 Days": [moment().subtract(6, "days"), moment()],
-            "Last 30 Days": [moment().subtract(29, "days"), moment()],
-            "This Month": [moment().startOf("month"), moment().endOf("month")],
-            "Last Month": [
-              moment()
-                .subtract(1, "month")
-                .startOf("month"),
-              moment()
-                .subtract(1, "month")
-                .endOf("month")
-            ]
-          }
-        },
-        cb
+  /*======== 5. Deal table ========*/
+  if ($("#campaigns")) {
+    var start = moment();
+    var end = moment();
+    var cb = function (start, end) {
+      $("#campaigns .cr-date-range span").html(
+        "<a href='javascript:void(0)' class='calendar' title='Date'><i class='ri-equalizer-line'></i></a>"
       );
-      cb(start, end);
-    }
-    /*======== 6. Single date picker (create-project.html) ========*/
-    $('input[name="deadline"]').daterangepicker({
+    };
+
+    $("#campaigns .cr-date-range").daterangepicker(
+      {
+        startDate: start,
+        endDate: end,
+        opens: "left",
+        ranges: {
+          Today: [moment(), moment()],
+          Yesterday: [
+            moment().subtract(1, "days"),
+            moment().subtract(1, "days"),
+          ],
+          "Last 7 Days": [moment().subtract(6, "days"), moment()],
+          "Last 30 Days": [moment().subtract(29, "days"), moment()],
+          "This Month": [moment().startOf("month"), moment().endOf("month")],
+          "Last Month": [
+            moment().subtract(1, "month").startOf("month"),
+            moment().subtract(1, "month").endOf("month"),
+          ],
+        },
+      },
+      cb
+    );
+    cb(start, end);
+  }
+  /*======== 6. Single date picker (create-project.html) ========*/
+  $('input[name="deadline"]').daterangepicker(
+    {
       singleDatePicker: true,
       showDropdowns: true,
       minYear: 2022,
       maxYear: 2030,
-    }, function(start, end, label) {
-      var years = moment().diff(start, 'years');
+    },
+    function (start, end, label) {
+      var years = moment().diff(start, "years");
       // alert("You are " + years + " years old!");
-    });
+    }
+  );
 });

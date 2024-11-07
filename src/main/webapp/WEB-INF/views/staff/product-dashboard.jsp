@@ -83,16 +83,16 @@
                                     <th>
                                         <span>Trạng thái</span>
                                     </th>
-                                    <th width="11%">Hành động</th>
+                                    <%--                                    <th width="11%">Hành động</th>--%>
                                 </tr>
                                 </thead>
                                 <tbody>
                                 <tr class="product-row" data-href="/staff/product-details">
                                     <td>
                                         <img
-                                            class="tbl-thumb"
-                                            src="${pageContext.request.contextPath}/assets/staff/img/product/1.jpg"
-                                            alt="Product Image"
+                                                class="tbl-thumb"
+                                                src="${pageContext.request.contextPath}/assets/staff/img/product/1.jpg"
+                                                alt="Product Image"
                                         />
                                     </td>
                                     <td>Mens t-shirt</td>
@@ -101,39 +101,7 @@
                                     <td>61</td>
                                     <td>05/11/2023</td>
                                     <td data-status="ON_SALE">
-														<span class="status status__on_sale"
-                                                        >Đang mở bán</span
-                                                        >
-                                    </td>
-                                    <td>
-                                        <div class="d-flex justify-content-start">
-                                            <button
-                                                    type="button"
-                                                    class="btn btn-outline-success dropdown-toggle dropdown-toggle-split"
-                                                    data-bs-toggle="dropdown"
-                                                    aria-haspopup="true"
-                                                    aria-expanded="false"
-                                                    data-display="static"
-                                            >
-																<span class="sr-only">
-																	<i class="ri-settings-3-line"></i>
-																</span>
-                                            </button>
-                                            <div class="dropdown-menu">
-                                                <a class="dropdown-item" href="#">
-                                                    <i class="ri-eye-line"></i>
-                                                    Xem trước
-                                                </a>
-                                                <a class="dropdown-item" href="#">
-                                                    <i class="ri-pencil-line"></i>
-                                                    Chỉnh sửa
-                                                </a>
-                                                <a class="dropdown-item" href="#">
-                                                    <i class="ri-delete-bin-line"></i>
-                                                    Xóa
-                                                </a>
-                                            </div>
-                                        </div>
+                                        <span class="status status__on_sale">Đang mở bán</span>
                                     </td>
                                 </tr>
                                 <tr class="product-row" data-href="/staff/product-details">
@@ -154,36 +122,6 @@
                                                         >Hết hàng</span
                                                         >
                                     </td>
-                                    <td>
-                                        <div class="d-flex justify-content-start">
-                                            <button
-                                                    type="button"
-                                                    class="btn btn-outline-success dropdown-toggle dropdown-toggle-split"
-                                                    data-bs-toggle="dropdown"
-                                                    aria-haspopup="true"
-                                                    aria-expanded="false"
-                                                    data-display="static"
-                                            >
-                                                    <span class="sr-only">
-                                                        <i class="ri-settings-3-line"></i>
-                                                    </span>
-                                            </button>
-                                            <div class="dropdown-menu">
-                                                <a class="dropdown-item" href="#">
-                                                    <i class="ri-eye-line"></i>
-                                                    Xem trước
-                                                </a>
-                                                <a class="dropdown-item" href="#">
-                                                    <i class="ri-pencil-line"></i>
-                                                    Chỉnh sửa
-                                                </a>
-                                                <a class="dropdown-item" href="#">
-                                                    <i class="ri-delete-bin-line"></i>
-                                                    Xóa
-                                                </a>
-                                            </div>
-                                        </div>
-                                    </td>
                                 </tr>
                                 <tr class="product-row" data-href="/staff/product-details">
                                     <td>
@@ -203,43 +141,13 @@
                                                         >Sắp mở bán</span
                                                         >
                                     </td>
-                                    <td>
-                                        <div class="d-flex justify-content-start">
-                                            <button
-                                                    type="button"
-                                                    class="btn btn-outline-success dropdown-toggle dropdown-toggle-split"
-                                                    data-bs-toggle="dropdown"
-                                                    aria-haspopup="true"
-                                                    aria-expanded="false"
-                                                    data-display="static"
-                                            >
-																<span class="sr-only">
-																	<i class="ri-settings-3-line"></i>
-																</span>
-                                            </button>
-                                            <div class="dropdown-menu">
-                                                <a class="dropdown-item" href="#">
-                                                    <i class="ri-eye-line"></i>
-                                                    Xem trước
-                                                </a>
-                                                <a class="dropdown-item" href="#">
-                                                    <i class="ri-pencil-line"></i>
-                                                    Chỉnh sửa
-                                                </a>
-                                                <a class="dropdown-item" href="#">
-                                                    <i class="ri-delete-bin-line"></i>
-                                                    Xóa
-                                                </a>
-                                            </div>
-                                        </div>
-                                    </td>
                                 </tr>
                                 <tr class="product-row" data-href="/staff/product-details">
                                     <td>
                                         <img
-                                            class="tbl-thumb"
-                                            src="${pageContext.request.contextPath}/assets/staff/img/product/1.jpg"
-                                            alt="Product Image"
+                                                class="tbl-thumb"
+                                                src="${pageContext.request.contextPath}/assets/staff/img/product/1.jpg"
+                                                alt="Product Image"
                                         />
                                     </td>
                                     <td>Mens t-shirt</td>
@@ -251,36 +159,6 @@
 														<span class="status status__stop_selling">
 															Ngừng kinh doanh
 														</span>
-                                    </td>
-                                    <td>
-                                        <div class="d-flex justify-content-start">
-                                            <button
-                                                    type="button"
-                                                    class="btn btn-outline-success dropdown-toggle dropdown-toggle-split"
-                                                    data-bs-toggle="dropdown"
-                                                    aria-haspopup="true"
-                                                    aria-expanded="false"
-                                                    data-display="static"
-                                            >
-																<span class="sr-only">
-																	<i class="ri-settings-3-line"></i>
-																</span>
-                                            </button>
-                                            <div class="dropdown-menu">
-                                                <a class="dropdown-item" href="#">
-                                                    <i class="ri-eye-line"></i>
-                                                    Xem trước
-                                                </a>
-                                                <a class="dropdown-item" href="#">
-                                                    <i class="ri-pencil-line"></i>
-                                                    Chỉnh sửa
-                                                </a>
-                                                <a class="dropdown-item" href="#">
-                                                    <i class="ri-delete-bin-line"></i>
-                                                    Xóa
-                                                </a>
-                                            </div>
-                                        </div>
                                     </td>
                                 </tr>
                                 </tbody>
