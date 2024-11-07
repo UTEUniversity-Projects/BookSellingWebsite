@@ -27,10 +27,7 @@ public class Staff extends User implements Serializable {
     @OneToMany(mappedBy = "staff")
     private Set<Support> supports = new HashSet<Support>();
 
-    @ManyToMany(cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
-    @JoinTable(name = "staff_address",
-            joinColumns = @JoinColumn(name = "staff_id"),
-            inverseJoinColumns = @JoinColumn(name = "address_id"))
+    @OneToMany(mappedBy = "staff", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private Set<Address> addresses;
 
     public Set<Notification> getNotifications() {
