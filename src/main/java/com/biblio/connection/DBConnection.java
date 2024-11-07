@@ -73,7 +73,6 @@ public class DBConnection implements PersistenceUnitInfo {
         Reflections reflections = new Reflections("com.biblio.entity"); // Specify your package here
         Set<Class<?>> entities = reflections.getTypesAnnotatedWith(Entity.class);
 
-        System.out.println(entities);
         return entities.stream()
                 .map(Class::getName)
                 .toList();

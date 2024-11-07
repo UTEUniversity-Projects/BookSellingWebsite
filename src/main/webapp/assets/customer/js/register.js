@@ -107,13 +107,11 @@ $(document).ready(() => {
 				};
 
 				$.ajax({
-					url: `${contextPath}/register-api`,
+					url: `${contextPath}/api-register`,
 					type: 'POST',
 					contentType: 'application/json',
 					data: JSON.stringify(userData),
 					success: function(response) {
-						// xử lý kết quả trả về từ server (nếu cần)
-						// ví dụ: alert(response.message);
 						console.log(response);
 					},
 					error: function(xhr, status, error) {
