@@ -1,15 +1,18 @@
 package com.biblio.entity;
 
-import com.biblio.enumeration.EPaymentCurrency;
-import com.biblio.enumeration.EPaymentStatus;
 import com.biblio.enumeration.EWalletProvider;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "ewallet")
+@NoArgsConstructor
+@Getter
+@Setter
 public class EWallet extends Payment implements Serializable {
 
     // region Attributes
@@ -31,58 +34,6 @@ public class EWallet extends Payment implements Serializable {
     @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JoinColumn(name = "order_id")
     private Order order;
-
-    // endregion
-
-    // region Constructors
-
-    public EWallet() {
-        super();
-    }
-
-    public EWallet(Long id, LocalDateTime createdAt, double amount, EPaymentStatus status, EPaymentCurrency currency, String walletId, EWalletProvider provider, String transactionId, Order order) {
-        super(id, createdAt, amount, status, currency);
-        this.walletId = walletId;
-        this.provider = provider;
-        this.transactionId = transactionId;
-        this.order = order;
-    }
-
-    // endregion
-
-    // region Getters & Setters
-
-    public String getWalletId() {
-        return walletId;
-    }
-
-    public void setWalletId(String walletId) {
-        this.walletId = walletId;
-    }
-
-    public EWalletProvider getProvider() {
-        return provider;
-    }
-
-    public void setProvider(EWalletProvider provider) {
-        this.provider = provider;
-    }
-
-    public String getTransactionId() {
-        return transactionId;
-    }
-
-    public void setTransactionId(String transactionId) {
-        this.transactionId = transactionId;
-    }
-
-    public Order getOrder() {
-        return order;
-    }
-
-    public void setOrder(Order order) {
-        this.order = order;
-    }
 
     // endregion
 

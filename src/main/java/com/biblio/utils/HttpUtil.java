@@ -28,7 +28,6 @@ public class HttpUtil {
             sb.append(line);
         }
 
-
         return new HttpUtil(sb.toString());
     }
 

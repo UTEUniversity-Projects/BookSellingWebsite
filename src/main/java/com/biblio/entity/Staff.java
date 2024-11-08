@@ -1,15 +1,19 @@
 package com.biblio.entity;
 
-import com.biblio.enumeration.EGender;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.time.LocalDateTime;
 import java.util.HashSet;
 import java.util.Set;
 
 @Entity
 @Table(name = "staff")
+@NoArgsConstructor
+@Getter
+@Setter
 public class Staff extends User implements Serializable {
 
     // region Relationships
@@ -30,57 +34,6 @@ public class Staff extends User implements Serializable {
     @OneToMany(mappedBy = "staff", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private Set<Address> addresses;
 
-    public Set<Notification> getNotifications() {
-        return notifications;
-    }
-
     // endregion
 
-    // region Constructors
-
-    public Staff() {
-        super();
-    }
-
-    public Staff(Long id, String fullName, String emailAddress, String dateOfBirth, EGender gender, String phoneNumber, String avatar, LocalDateTime joinAt, Account account, Set<Notification> notifications, Set<Support> supports, Set<Address> addresses) {
-        super(id, fullName, emailAddress, dateOfBirth, gender, phoneNumber, avatar, joinAt);
-        this.account = account;
-        this.notifications = notifications;
-        this.supports = supports;
-        this.addresses = addresses;
-    }
-
-    // endregion
-
-    // region Getters & Setters
-
-    public Account getAccount() {
-        return account;
-    }
-
-    public void setAccount(Account account) {
-        this.account = account;
-    }
-
-    public void setNotifications(Set<Notification> notifications) {
-        this.notifications = notifications;
-    }
-
-    public Set<Support> getSupports() {
-        return supports;
-    }
-
-    public void setSupports(Set<Support> supports) {
-        this.supports = supports;
-    }
-
-    public Set<Address> getAddresses() {
-        return addresses;
-    }
-
-    public void setAddresses(Set<Address> addresses) {
-        this.addresses = addresses;
-    }
-
-    // endregion
 }

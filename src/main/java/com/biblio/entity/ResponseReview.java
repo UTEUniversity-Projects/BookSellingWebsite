@@ -1,10 +1,17 @@
 package com.biblio.entity;
 
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
 import javax.persistence.*;
 import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "response_review")
+@NoArgsConstructor
+@Getter
+@Setter
 public class ResponseReview {
 
     // region Attributes
@@ -27,62 +34,4 @@ public class ResponseReview {
 
     // endregion
 
-    // region Constructors
-
-    public ResponseReview() {
-    }
-
-    public ResponseReview(Long id, String reviewId, String content, String createdBy, LocalDateTime createdAt) {
-        this.id = id;
-        this.reviewId = reviewId;
-        this.content = content;
-        this.createdBy = createdBy;
-        this.createdAt = createdAt;
-    }
-
-    // endregion
-
-    // region Getters & Setters
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getReviewId() {
-        return reviewId;
-    }
-
-    public void setReviewId(String reviewId) {
-        this.reviewId = reviewId;
-    }
-
-    public String getContent() {
-        return content;
-    }
-
-    public void setContent(String content) {
-        this.content = content;
-    }
-
-    public String getCreatedBy() {
-        return createdBy;
-    }
-
-    public void setCreatedBy(String createdBy) {
-        this.createdBy = createdBy;
-    }
-
-    public LocalDateTime getCreatedAt() {
-        return createdAt;
-    }
-
-    public void setCreatedAt(LocalDateTime createdAt) {
-        this.createdAt = createdAt;
-    }
-
-    // endregion
 }

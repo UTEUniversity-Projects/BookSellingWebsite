@@ -95,35 +95,18 @@ $(document).ready(() => {
 		register() {
 			$("#registerForm").submit(function (event) {
 				event.preventDefault();
-				const formData = new FormData(this);
-				const email = formData.get('email');
-				const phoneNumber = formData.get('phoneNumber');
-				const username = formData.get('username');
 
-				const userData = {
-					fullName: "Nguyen Van A",
-					email: "nguyenvana@example.com",
-					phoneNumber: "0123456789",
-					dateOfBirth: "1990-01-01",
-					gender: "Male",
-					username: "nguyenvana",
-					password: "securepassword",
-					city: "Ho Chi Minh City",
-					district: "District 1",
-					ward: "Ward 1",
-					hamlet: "Hamlet 1",
-					avatar: "https://example.com/avatar.jpg",
-				};
+				const formData = new FormData(this);
 
 				$.ajax({
-					url: `${contextPath}/api-register`,
+					url: `${contextPath}/api/customer/register`,
 					type: 'POST',
 					contentType: 'application/json',
-					data: JSON.stringify(userData),
-					success: function(response) {
+					data: JSON.stringify(formData),
+					success: function (response, status, xhr) {
 						console.log(response);
 					},
-					error: function(xhr, status, error) {
+					error: function (xhr, status, error) {
 						console.error('Lỗi:', error);
 						alert('Có lỗi xảy ra, vui lòng thử lại!');
 					}
@@ -183,20 +166,20 @@ $(document).ready(() => {
 						);
 					});
 
-					$('#ward').change(function (e) {
-						const hamletId = $(this).val();
-						$('#hamlet').html(`<option value="0">Số nhà | Ấp | Tổ</option>`);
-
-						$.getJSON(`${BASE_URL}/hamlet?parentId=${hamletId}`, function (hamlet) {
-							if (hamlet.success) {
-								$.each(hamlet?.data?.hamlet_address, function (key, value) {
-									$('#hamlet').append(
-										`<option value="${value.id}" data-name="${value.name}">${value.name}</option>`
-									);
-								});
-							}
-						});
-					});
+					// $('#ward').change(function (e) {
+					// 	const hamletId = $(this).val();
+					// 	$('#hamlet').html(`<option value="0">Số nhà | Ấp | Tổ</option>`);
+					//
+					// 	$.getJSON(`${BASE_URL}/hamlet?parentId=${hamletId}`, function (hamlet) {
+					// 		if (hamlet.success) {
+					// 			$.each(hamlet?.data?.hamlet_address, function (key, value) {
+					// 				$('#hamlet').append(
+					// 					`<option value="${value.id}" data-name="${value.name}">${value.name}</option>`
+					// 				);
+					// 			});
+					// 		}
+					// 	});
+					// });
 				}
 			});
 		}

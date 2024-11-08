@@ -1,6 +1,10 @@
 package com.biblio.entity;
 
 import com.biblio.enumeration.EOrderStatus;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -9,6 +13,10 @@ import java.util.Set;
 
 @Entity
 @Table(name = "[order]")
+@NoArgsConstructor
+@AllArgsConstructor
+@Getter
+@Setter
 public class Order implements Serializable {
 
     // region Attributes
@@ -47,12 +55,11 @@ public class Order implements Serializable {
     @OneToMany(mappedBy = "order", fetch = FetchType.LAZY)
     private Set<OrderItem> orderItems = new HashSet<OrderItem>();
 
-    @OneToMany(mappedBy = "order", fetch = FetchType.LAZY)
+    @ManyToMany(cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
+    @JoinTable(name = "order_promotion",
+            joinColumns = @JoinColumn(name = "order_id", nullable = false),
+            inverseJoinColumns = @JoinColumn(name = "promotion_id", nullable = false))
     private Set<Promotion> promotions = new HashSet<Promotion>();
-
-    // endregion
-
-    // region Relationships
 
     @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JoinColumn(name = "address_id")
@@ -60,116 +67,4 @@ public class Order implements Serializable {
 
     // endregion
 
-    // region Constructors
-
-    public Order() {
-    }
-
-    public Order(Long id, String note, EOrderStatus status, Customer customer, BankTransfer bankTransfer, CreditCard creditCard, Cash cash, EWallet wallet, Set<OrderItem> orderItems, Set<Promotion> promotions, Address address) {
-        this.id = id;
-        this.note = note;
-        this.status = status;
-        this.customer = customer;
-        this.bankTransfer = bankTransfer;
-        this.creditCard = creditCard;
-        this.cash = cash;
-        this.wallet = wallet;
-        this.orderItems = orderItems;
-        this.promotions = promotions;
-        this.address = address;
-    }
-
-    // endregion
-
-    // region Getters & Setters
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getNote() {
-        return note;
-    }
-
-    public void setNote(String note) {
-        this.note = note;
-    }
-
-    public EOrderStatus getStatus() {
-        return status;
-    }
-
-    public void setStatus(EOrderStatus status) {
-        this.status = status;
-    }
-
-    public Customer getCustomer() {
-        return customer;
-    }
-
-    public void setCustomer(Customer customer) {
-        this.customer = customer;
-    }
-
-    public BankTransfer getBankTransfer() {
-        return bankTransfer;
-    }
-
-    public void setBankTransfer(BankTransfer bankTransfer) {
-        this.bankTransfer = bankTransfer;
-    }
-
-    public CreditCard getCreditCard() {
-        return creditCard;
-    }
-
-    public void setCreditCard(CreditCard creditCard) {
-        this.creditCard = creditCard;
-    }
-
-    public Cash getCash() {
-        return cash;
-    }
-
-    public void setCash(Cash cash) {
-        this.cash = cash;
-    }
-
-    public EWallet getWallet() {
-        return wallet;
-    }
-
-    public void setWallet(EWallet wallet) {
-        this.wallet = wallet;
-    }
-
-    public Set<OrderItem> getOrderItems() {
-        return orderItems;
-    }
-
-    public void setOrderItems(Set<OrderItem> orderItems) {
-        this.orderItems = orderItems;
-    }
-
-    public Set<Promotion> getPromotions() {
-        return promotions;
-    }
-
-    public void setPromotions(Set<Promotion> promotions) {
-        this.promotions = promotions;
-    }
-
-    public Address getAddress() {
-        return address;
-    }
-
-    public void setAddress(Address address) {
-        this.address = address;
-    }
-
-    // endregion
 }

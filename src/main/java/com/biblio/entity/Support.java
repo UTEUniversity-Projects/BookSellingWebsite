@@ -1,6 +1,9 @@
 package com.biblio.entity;
 
 import com.biblio.enumeration.ESupportStatus;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -8,6 +11,9 @@ import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "support")
+@NoArgsConstructor
+@Getter
+@Setter
 public class Support implements Serializable {
 
     // region Attributes
@@ -52,107 +58,4 @@ public class Support implements Serializable {
 
     // endregion
 
-    // region Constructors
-
-    public Support() {
-    }
-
-    public Support(Long id, String title, String requestContent, String feedbackContent, int rate, ESupportStatus status, LocalDateTime createdAt, LocalDateTime responsedAt, Staff staff, Customer customer) {
-        this.id = id;
-        this.title = title;
-        this.requestContent = requestContent;
-        this.feedbackContent = feedbackContent;
-        this.rate = rate;
-        this.status = status;
-        this.createdAt = createdAt;
-        this.responsedAt = responsedAt;
-        this.staff = staff;
-        this.customer = customer;
-    }
-
-    // endregion
-
-    // region Getters & Setters
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getTitle() {
-        return title;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
-    public String getRequestContent() {
-        return requestContent;
-    }
-
-    public void setRequestContent(String requestContent) {
-        this.requestContent = requestContent;
-    }
-
-    public String getFeedbackContent() {
-        return feedbackContent;
-    }
-
-    public void setFeedbackContent(String feedbackContent) {
-        this.feedbackContent = feedbackContent;
-    }
-
-    public int getRate() {
-        return rate;
-    }
-
-    public void setRate(int rate) {
-        this.rate = rate;
-    }
-
-    public ESupportStatus getStatus() {
-        return status;
-    }
-
-    public void setStatus(ESupportStatus status) {
-        this.status = status;
-    }
-
-    public LocalDateTime getCreatedAt() {
-        return createdAt;
-    }
-
-    public void setCreatedAt(LocalDateTime createdAt) {
-        this.createdAt = createdAt;
-    }
-
-    public LocalDateTime getResponsedAt() {
-        return responsedAt;
-    }
-
-    public void setResponsedAt(LocalDateTime responsedAt) {
-        this.responsedAt = responsedAt;
-    }
-
-    public Staff getStaff() {
-        return staff;
-    }
-
-    public void setStaff(Staff staff) {
-        this.staff = staff;
-    }
-
-    public Customer getCustomer() {
-        return customer;
-    }
-
-    public void setCustomer(Customer customer) {
-        this.customer = customer;
-    }
-
-    // endregion
 }

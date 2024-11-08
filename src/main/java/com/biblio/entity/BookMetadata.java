@@ -1,6 +1,9 @@
 package com.biblio.entity;
 
 import com.biblio.enumeration.EBookStatus;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -10,6 +13,9 @@ import java.util.Set;
 
 @Entity
 @Table(name = "book_metadata")
+@NoArgsConstructor
+@Getter
+@Setter
 public class BookMetadata implements Serializable {
 
     // region Attributes
@@ -52,89 +58,4 @@ public class BookMetadata implements Serializable {
 
     // endregion
 
-    // region Constructors
-
-    public BookMetadata() {
-    }
-
-    public BookMetadata(Long id, LocalDateTime createdAt, LocalDateTime openingDate, double importPrice, EBookStatus status, Set<Tag> tags, Book book, Set<MediaFile> mediaFiles) {
-        this.id = id;
-        this.createdAt = createdAt;
-        this.openingDate = openingDate;
-        this.importPrice = importPrice;
-        this.status = status;
-        this.tags = tags;
-        this.book = book;
-        this.mediaFiles = mediaFiles;
-    }
-
-    // endregion Constructors
-
-    // region Getters & Setters
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public LocalDateTime getCreatedAt() {
-        return createdAt;
-    }
-
-    public void setCreatedAt(LocalDateTime createdAt) {
-        this.createdAt = createdAt;
-    }
-
-    public LocalDateTime getOpeningDate() {
-        return openingDate;
-    }
-
-    public void setOpeningDate(LocalDateTime openingDate) {
-        this.openingDate = openingDate;
-    }
-
-    public double getImportPrice() {
-        return importPrice;
-    }
-
-    public void setImportPrice(double importPrice) {
-        this.importPrice = importPrice;
-    }
-
-    public EBookStatus getStatus() {
-        return status;
-    }
-
-    public void setStatus(EBookStatus status) {
-        this.status = status;
-    }
-
-    public Set<Tag> getTags() {
-        return tags;
-    }
-
-    public void setTags(Set<Tag> tags) {
-        this.tags = tags;
-    }
-
-    public Book getBook() {
-        return book;
-    }
-
-    public void setBook(Book book) {
-        this.book = book;
-    }
-
-    public Set<MediaFile> getMediaFiles() {
-        return mediaFiles;
-    }
-
-    public void setMediaFiles(Set<MediaFile> mediaFiles) {
-        this.mediaFiles = mediaFiles;
-    }
-
-    // endregion Getters & Setters
 }
