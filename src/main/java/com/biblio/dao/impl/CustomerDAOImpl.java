@@ -17,6 +17,18 @@ public class CustomerDAOImpl extends GenericDAOImpl<Customer> implements ICustom
         return  super.findAll();
     }
 
+
+    @Override
+    public void deactivateCustomer(Customer customer) {
+        System.out.println(customer.toString());
+        //super.update(customer);
+    }
+
+    @Override
+    public void activateCustomer(Customer customer) {
+        super.update(customer);
+    }
+
 //    public static void main(String[] args) {
 //        List<Customer> list = new CustomerDAOImpl().findAll();
 //        for (Customer customer : list) {
@@ -26,6 +38,6 @@ public class CustomerDAOImpl extends GenericDAOImpl<Customer> implements ICustom
 //            }
 //            System.out.println(customer.getId());
 //        }
-
+//
 //    }
 }

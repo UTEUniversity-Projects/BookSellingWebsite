@@ -1,5 +1,6 @@
 package com.biblio.mapper;
 
+import com.biblio.dto.request.CustomerActiveInActiveRequest;
 import com.biblio.dto.request.CustomerRegisterRequest;
 import com.biblio.dto.response.CustomerGetListResponse;
 import com.biblio.entity.Account;
@@ -49,7 +50,7 @@ public class CustomerMapper {
         customerGetListResponse.setJoinAt(customer.getJoinAt().toString());
         customerGetListResponse.setPhoneNumber(customer.getPhoneNumber());
         customerGetListResponse.setMemberShip(customer.getMembership().toString());
-
+        customerGetListResponse.setStatus(customer.getAccount().getStatus().toString());
         customerGetListResponse.setUsername(customer.getAccount().getUsername());
         customerGetListResponse.setPassword(customer.getAccount().getPassword());
 
@@ -58,6 +59,13 @@ public class CustomerMapper {
         }
 
         return customerGetListResponse;
+    }
+
+    public static Customer toCustomerActiveInActiveRequest(CustomerActiveInActiveRequest customerActiveInActiveRequest) {
+        Customer customer = new Customer();
+        customer.setId(customerActiveInActiveRequest.getId());
+        customer.getAccount().setStatus(customerActiveInActiveRequest.getStatus());
+        return customer;
     }
 
 }

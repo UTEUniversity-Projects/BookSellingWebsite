@@ -613,13 +613,13 @@ INSERT INTO cart (customer_id) VALUES
 -- 18. Table Order
 INSERT INTO `order` (note, status, address_id, customer_id) VALUES
 ('Order note 1', 'COMPLETE_DELIVERY', 4, 1),
-('Order note 2', 'CANCLED', 5, 2),
+('Order note 2', 'CANCELED', 5, 2),
 ('Order note 3', 'COMPLETE_DELIVERY', 4, 1),
-('Order note 4', 'CANCLED', 5, 2),
+('Order note 4', 'CANCELED', 5, 2),
 ('Order note 5', 'COMPLETE_DELIVERY', 4, 1),
-('Order note 6', 'CANCLED', 5, 2),
+('Order note 6', 'CANCELED', 5, 2),
 ('Order note 7', 'COMPLETE_DELIVERY', 4, 1),
-('Order note 8', 'CANCLED', 5, 2);
+('Order note 8', 'CANCELED', 5, 2);
 
 -- 19. Table Order Item
 INSERT INTO order_item (quantity, book_id, cart_id, order_id) VALUES
