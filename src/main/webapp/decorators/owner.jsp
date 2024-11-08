@@ -71,8 +71,8 @@
     <decorator:body/>
     <%@include file="/commons/owner/footer.jsp" %>
 </main>
-<!-- region Vendor Custom JS -->
 
+<!-- region Vendor Custom JS -->
 <script src="${pageContext.request.contextPath}/assets/owner/js/vendor/jquery-3.6.4.min.js"></script>
 <script src="${pageContext.request.contextPath}/assets/owner/js/vendor/simplebar.min.js"></script>
 <script src="${pageContext.request.contextPath}/assets/owner/js/vendor/bootstrap.bundle.min.js"></script>
@@ -89,20 +89,15 @@
 <!-- Date Range Picker -->
 <script src="${pageContext.request.contextPath}/assets/owner/js/vendor/moment.min.js"></script>
 <script src="${pageContext.request.contextPath}/assets/owner/js/vendor/daterangepicker.js"></script>
+<script src="${pageContext.request.contextPath}/assets/owner/js/vendor/daterangepicker.min.js"></script>
 <script src="${pageContext.request.contextPath}/assets/owner/js/vendor/date-range.js"></script>
+<script src="${pageContext.request.contextPath}/assets/owner/js/DateRange/daterange.js"></script>
+<!-- endregion -->
 
-<script src="${pageContext.request.contextPath}/assets/owner/js/vendor/jquery.zoom.min.js"></script>
-<script src="${pageContext.request.contextPath}/assets/owner/js/vendor/mixitup.min.js"></script>
-<script src="${pageContext.request.contextPath}/assets/owner/js/vendor/range-slider.js"></script>
-<script src="${pageContext.request.contextPath}/assets/owner/js/vendor/aos.min.js"></script>
-<script src="${pageContext.request.contextPath}/assets/owner/js/vendor/swiper-bundle.min.js"></script>
-<script src="${pageContext.request.contextPath}/assets/owner/js/vendor/slick.min.js"></script>
-<!-- endregion JS-->
-<!-- Main Custom -->
+<!-- region Main Custom -->
 <script src="${pageContext.request.contextPath}/assets/owner/js/main.js"></script>
 <script src="${pageContext.request.contextPath}/assets/owner/js/customer-profile.js"></script>
 <script src="${pageContext.request.contextPath}/assets/owner/js/data/ecommerce-chart-data.js"></script>
-<script src="${pageContext.request.contextPath}/assets/owner/js/product-details.js"></script>
-<script src="${pageContext.request.contextPath}/assets/owner/js/vendor/daterangepicker.min.js"></script>
+<!-- endregion -->
 </body>
 </html>

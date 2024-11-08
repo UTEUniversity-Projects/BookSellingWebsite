@@ -6,7 +6,7 @@
         <div class="cr-page-title cr-page-title-2">
             <div class="cr-breadcrumb">
                 <ul>
-                    <li><a href="#">Biblio</a></li>
+                    <li><a href="/staff/product-dashboard">Biblio</a></li>
                     <li><a href="${pageContext.request.contextPath}/staff/product-dashboard">Danh sách sản
                         phẩm</a></li>
                     <li>Chi tiết sản phẩm</li>
@@ -563,3 +563,14 @@
     </div>
 </div>
 <!-- endregion -->
+
+<!-- region VENDOR JS -->
+<script src="${pageContext.request.contextPath}/assets/staff/js/vendor/jquery.zoom.min.js" defer></script>
+<script src="${pageContext.request.contextPath}/assets/staff/js/vendor/mixitup.min.js" defer></script>
+<script src="${pageContext.request.contextPath}/assets/staff/js/vendor/range-slider.js" defer></script>
+<script src="${pageContext.request.contextPath}/assets/staff/js/vendor/aos.min.js" defer></script>
+<script src="${pageContext.request.contextPath}/assets/staff/js/vendor/swiper-bundle.min.js" defer></script>
+<script src="${pageContext.request.contextPath}/assets/staff/js/vendor/slick.min.js" defer></script>
+<!-- endregion -->
+
+<script src="${pageContext.request.contextPath}/assets/staff/js/product-details.js" defer></script>

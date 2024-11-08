@@ -2,13 +2,14 @@ package com.biblio.dao.impl;
 
 import com.biblio.dao.IGenericDAO;
 import com.biblio.jpaconfig.JpaConfig;
+import com.sun.xml.bind.v2.model.core.ID;
 
 import javax.persistence.EntityManager;
 import javax.persistence.TypedQuery;
 import javax.persistence.criteria.CriteriaQuery;
 import java.util.List;
 
-public class GenericDAOImpl<T, ID> implements IGenericDAO<T, ID> {
+public class GenericDAOImpl<T> implements IGenericDAO<T> {
 
     private final Class<T> entityClass;
 

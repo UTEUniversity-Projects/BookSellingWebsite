@@ -1,6 +1,7 @@
 package com.biblio.entity;
 
 import com.biblio.enumeration.EMembership;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -13,6 +14,7 @@ import java.util.Set;
 @Entity
 @Table(name = "customer")
 @NoArgsConstructor
+@AllArgsConstructor
 @Getter
 @Setter
 public class Customer extends User implements Serializable {
@@ -31,7 +33,7 @@ public class Customer extends User implements Serializable {
     @JoinColumn(name = "account_id")
     private Account account;
 
-    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JoinTable(name = "customer_notification",
             joinColumns = @JoinColumn(name = "customer_id", nullable = false),
             inverseJoinColumns = @JoinColumn(name = "notification_id", nullable = false))
