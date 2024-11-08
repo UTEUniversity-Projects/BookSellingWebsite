@@ -2,12 +2,20 @@ package com.biblio.entity;
 
 import com.biblio.enumeration.EAccountStatus;
 import com.biblio.enumeration.EUserRole;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import javax.persistence.*;
 import java.io.Serializable;
 
 @Entity
 @Table(name = "account")
+@NoArgsConstructor
+@AllArgsConstructor
+@Getter
+@Setter
 public class Account implements Serializable {
 
     // region Attributes
@@ -45,90 +53,4 @@ public class Account implements Serializable {
 
     // endregion
 
-    // region Constructors
-
-    public Account() {
-    }
-
-    public Account(Long id, String username, String password, EUserRole userRole, EAccountStatus status, Customer customer, Staff staff, Owner owner) {
-        this.id = id;
-        this.username = username;
-        this.password = password;
-        this.userRole = userRole;
-        this.status = status;
-        this.customer = customer;
-        this.staff = staff;
-        this.owner = owner;
-    }
-
-    // endregion
-
-    // region Getters & Setters
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getUsername() {
-        return username;
-    }
-
-    public void setUsername(String username) {
-        this.username = username;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    public EUserRole getUserRole() {
-        return userRole;
-    }
-
-    public void setUserRole(EUserRole userRole) {
-        this.userRole = userRole;
-    }
-
-    public EAccountStatus getStatus() {
-        return status;
-    }
-
-    public void setStatus(EAccountStatus status) {
-        this.status = status;
-    }
-
-    public Customer getCustomer() {
-        return customer;
-    }
-
-    public void setCustomer(Customer customer) {
-        this.customer = customer;
-    }
-
-    public Staff getStaff() {
-        return staff;
-    }
-
-    public void setStaff(Staff staff) {
-        this.staff = staff;
-    }
-
-    public Owner getOwner() {
-        return owner;
-    }
-
-    public void setOwner(Owner owner) {
-        this.owner = owner;
-    }
-
-
-    // endregion
 }

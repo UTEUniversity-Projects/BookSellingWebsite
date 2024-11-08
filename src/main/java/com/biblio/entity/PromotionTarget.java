@@ -23,9 +23,8 @@ public class PromotionTarget implements Serializable {
     // region Attributes
 
     @Id
-    @GeneratedValue(generator = "uuid")
-    @GenericGenerator(name = "uuid", strategy = "org.hibernate.id.UUIDGenerator")
-    private String id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
     @Column(name = "applicable_object_id", nullable = false)
     private String applicableObjectId;
