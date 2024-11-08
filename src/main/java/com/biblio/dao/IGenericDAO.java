@@ -10,11 +10,13 @@ public interface IGenericDAO<T, ID> {
 
     void save(T entity);
 
-    List<T> findByJPQL(String jpql, Object... params);
-
     T findSingleByJPQL(String jpql, Object... params);
 
+    List<T> findByJPQL(String jpql, Object... params);
+
     List<T> findAll();
+
+    List<T> findAll(String jpql);
 
     T findById(Object id);
 

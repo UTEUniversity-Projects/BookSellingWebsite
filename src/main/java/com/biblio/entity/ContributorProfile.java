@@ -1,14 +1,21 @@
 package com.biblio.entity;
 
-import org.hibernate.annotations.GenericGenerator;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.experimental.SuperBuilder;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.sql.Timestamp;
 import java.time.LocalDateTime;
-import java.util.Date;
 
 @MappedSuperclass
+@NoArgsConstructor
+@AllArgsConstructor
+@Getter
+@Setter
+@SuperBuilder
 public abstract class ContributorProfile implements Serializable {
 
     // region Attributes
@@ -28,69 +35,6 @@ public abstract class ContributorProfile implements Serializable {
 
     @Column(name = "avatar", nullable = false)
     private String avatar;
-
-    // endregion
-
-    // region Relationships
-
-    // endregion
-
-    // region Constructors
-
-    public ContributorProfile() {
-    }
-
-    public ContributorProfile(Long id, String name, String introduction, LocalDateTime joinAt, String avatar) {
-        this.id = id;
-        this.name = name;
-        this.introduction = introduction;
-        this.joinAt = joinAt;
-        this.avatar = avatar;
-    }
-
-    // endregion
-
-    // region Getters & Setters
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getIntroduction() {
-        return introduction;
-    }
-
-    public void setIntroduction(String introduction) {
-        this.introduction = introduction;
-    }
-
-    public LocalDateTime getJoinAt() {
-        return joinAt;
-    }
-
-    public void setJoinAt(LocalDateTime joinAt) {
-        this.joinAt = joinAt;
-    }
-
-    public String getAvatar() {
-        return avatar;
-    }
-
-    public void setAvatar(String avatar) {
-        this.avatar = avatar;
-    }
 
     // endregion
 }

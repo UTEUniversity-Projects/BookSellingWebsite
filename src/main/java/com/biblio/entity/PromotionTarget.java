@@ -1,23 +1,27 @@
 package com.biblio.entity;
 
 import com.biblio.enumeration.EPromotionTargetType;
-import org.hibernate.annotations.GenericGenerator;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.util.HashSet;
-import java.util.Set;
 
 @Entity
 @Table(name = "promotion_target")
+@NoArgsConstructor
+@AllArgsConstructor
+@Getter
+@Setter
 public class PromotionTarget implements Serializable {
 
     // region Attributes
 
     @Id
-    @GeneratedValue(generator = "uuid")
-    @GenericGenerator(name = "uuid", strategy = "org.hibernate.id.UUIDGenerator")
-    private String id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
     @Column(name = "applicable_object_id", nullable = false)
     private String applicableObjectId;
@@ -26,64 +30,17 @@ public class PromotionTarget implements Serializable {
     @Column(name = "type", nullable = false)
     private EPromotionTargetType type;
 
+    @Column(name = "quantity")
+    private int quantity;
+
     // endregion
 
     // region Relationships
 
-    @ManyToMany(mappedBy = "promotionTargets")
-    private Set<Promotion> promotions = new HashSet<Promotion>();
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "promotion_id", nullable = false)
+    private Promotion promotion;
 
     // endregion
 
-    // region Constructors
-
-    public PromotionTarget() {
-    }
-
-    public PromotionTarget(String id, String applicableObjectId, EPromotionTargetType type, Set<Promotion> promotions) {
-        this.id = id;
-        this.applicableObjectId = applicableObjectId;
-        this.type = type;
-        this.promotions = promotions;
-    }
-
-
-    // endregion
-
-    // region Getters & Setters
-
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
-    }
-
-    public String getApplicableObjectId() {
-        return applicableObjectId;
-    }
-
-    public void setApplicableObjectId(String applicableObjectId) {
-        this.applicableObjectId = applicableObjectId;
-    }
-
-    public EPromotionTargetType getType() {
-        return type;
-    }
-
-    public void setType(EPromotionTargetType type) {
-        this.type = type;
-    }
-
-    public Set<Promotion> getPromotions() {
-        return promotions;
-    }
-
-    public void setPromotions(Set<Promotion> promotions) {
-        this.promotions = promotions;
-    }
-
-
-    // endregion
 }

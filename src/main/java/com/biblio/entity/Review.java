@@ -1,11 +1,18 @@
 package com.biblio.entity;
 
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
 import javax.persistence.*;
 import java.io.Serializable;
 import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "review")
+@NoArgsConstructor
+@Getter
+@Setter
 public class Review implements Serializable {
 
     // region Attributes
@@ -23,7 +30,7 @@ public class Review implements Serializable {
     @Column(name = "ready_to_introduce", nullable = false, columnDefinition = "bit")
     private boolean readyToIntroduce;
 
-    @Column(name = "id_hidden", nullable = false)
+    @Column(name = "is_hidden", nullable = false)
     private boolean idHidden;
 
     @Column(name = "created_at", nullable = false)
@@ -40,92 +47,6 @@ public class Review implements Serializable {
     @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JoinColumn(name = "customer_id", nullable = false)
     private Customer customer;
-
-    // endregion
-
-    // region Constructors
-
-    public Review() {
-    }
-
-    public Review(Long id, int rate, String content, boolean readyToIntroduce, boolean idHidden, LocalDateTime createdAt, Book book, Customer customer) {
-        this.id = id;
-        this.rate = rate;
-        this.content = content;
-        this.readyToIntroduce = readyToIntroduce;
-        this.idHidden = idHidden;
-        this.createdAt = createdAt;
-        this.book = book;
-        this.customer = customer;
-    }
-
-    // endregion
-
-    // region Getters & Setters
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public int getRate() {
-        return rate;
-    }
-
-    public void setRate(int rate) {
-        this.rate = rate;
-    }
-
-    public String getContent() {
-        return content;
-    }
-
-    public void setContent(String content) {
-        this.content = content;
-    }
-
-    public boolean isReadyToIntroduce() {
-        return readyToIntroduce;
-    }
-
-    public void setReadyToIntroduce(boolean readyToIntroduce) {
-        this.readyToIntroduce = readyToIntroduce;
-    }
-
-    public boolean isIdHidden() {
-        return idHidden;
-    }
-
-    public void setIdHidden(boolean idHidden) {
-        this.idHidden = idHidden;
-    }
-
-    public LocalDateTime getCreatedAt() {
-        return createdAt;
-    }
-
-    public void setCreatedAt(LocalDateTime createdAt) {
-        this.createdAt = createdAt;
-    }
-
-    public Book getBook() {
-        return book;
-    }
-
-    public void setBook(Book book) {
-        this.book = book;
-    }
-
-    public Customer getCustomer() {
-        return customer;
-    }
-
-    public void setCustomer(Customer customer) {
-        this.customer = customer;
-    }
 
     // endregion
 }

@@ -1,9 +1,16 @@
 package com.biblio.entity;
 
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
 import javax.persistence.*;
 
 @Entity
 @Table(name = "site_content")
+@NoArgsConstructor
+@Getter
+@Setter
 public class SiteContent {
 
     // region Attributes
@@ -23,53 +30,4 @@ public class SiteContent {
 
     // endregion
 
-    // region Constructors
-
-    public SiteContent() {
-    }
-
-    public SiteContent(Long id, String title, String content, boolean isEffective) {
-        this.id = id;
-        this.title = title;
-        this.content = content;
-        this.isEffective = isEffective;
-    }
-
-    // endregion
-
-    // region Getters & Setters
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getTitle() {
-        return title;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
-    public String getContent() {
-        return content;
-    }
-
-    public void setContent(String content) {
-        this.content = content;
-    }
-
-    public boolean isEffective() {
-        return isEffective;
-    }
-
-    public void setEffective(boolean effective) {
-        isEffective = effective;
-    }
-
-    // endregion
 }
