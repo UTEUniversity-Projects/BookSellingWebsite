@@ -1,4 +1,9 @@
 package com.biblio.dao;
 
-public interface ICustomerDAO {
+import com.biblio.entity.Customer;
+
+import java.util.List;
+
+public interface ICustomerDAO extends IGenericDAO<Customer, Long> {
+    List<Customer> findAll();
 }

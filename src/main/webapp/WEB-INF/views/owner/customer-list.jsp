@@ -1,3 +1,5 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!-- main content -->
 <div class="cr-main-content">
@@ -30,28 +32,29 @@
                                 </thead>
 
                                 <tbody>
-                                <tr class="customer-row" data-href="/owner/customer-profile">
-                                    <td>#012</td>
-                                    <td>name</td>
-                                    <td>name@gmail.com</td>
-                                    <td>78</td>
-                                    <td class="cod">Tài khoản bị khóa</td>
-                                    <td>
-                                        <div class="d-flex justify-content-start">
-                                            <button type="button"
-                                                    class="btn btn-outline-success dropdown-toggle dropdown-toggle-split"
-                                                    data-bs-toggle="dropdown" aria-haspopup="true"
-                                                    aria-expanded="false" data-display="static">
-															<span class="sr-only"><i
-                                                                    class="ri-settings-3-line"></i></span>
-                                            </button>
-                                            <div class="dropdown-menu">
-                                                <a class="dropdown-item" href="#">Vô hiệu hóa tài khoản</a>
-                                                <a class="dropdown-item" href="#">Mở khóa tài khoản</a>
+                                <c:forEach var="customer" items="${customers}">
+                                    <tr class="customer-row" data-href="/owner/customer-profile?id=${customer.id}">
+                                        <td>${customer.id}</td>
+                                        <td>${customer.fullName}</td>
+                                        <td>${customer.email}</td>
+                                        <td>100</td>
+                                        <td class="cod">Vô hiệu hóa</td>
+                                        <td>
+                                            <div class="d-flex justify-content-start">
+                                                <button type="button"
+                                                        class="btn btn-outline-success dropdown-toggle dropdown-toggle-split"
+                                                        data-bs-toggle="dropdown" aria-haspopup="true"
+                                                        aria-expanded="false" data-display="static">
+                                                    <span class="sr-only"><i class="ri-settings-3-line"></i></span>
+                                                </button>
+                                                <div class="dropdown-menu">
+                                                    <a class="dropdown-item" href="#">Vô hiệu hóa tài khoản</a>
+                                                    <a class="dropdown-item" href="#">Mở khóa tài khoản</a>
+                                                </div>
                                             </div>
-                                        </div>
-                                    </td>
-                                </tr>
+                                        </td>
+                                    </tr>
+                                </c:forEach>
                                 </tbody>
                             </table>
                         </div>

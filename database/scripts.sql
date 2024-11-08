@@ -406,3 +406,87 @@ INSERT INTO translator_book (translator_id, book_id) VALUES
 (4, 9),  -- Một đời như kẻ tìm đường
 (5, 10);  -- Tuổi trẻ đáng giá bao nhiêu
 
+-- 12. Table Review
+INSERT INTO review (content, created_at, is_hidden, rate, ready_to_introduce, book_id, customer_id) VALUES
+-- Đánh giá của customer_id = 1 cho 5 cuốn sách đầu
+('Cuốn sách rất hay và bổ ích, đáng để đọc.', '2023-01-05 09:30:00', 0, 5, 1, 1, 1),
+('Rất hài lòng với nội dung, nhiều kiến thức bổ ích.', '2023-01-15 10:00:00', 0, 4, 1, 2, 1),
+('Một tác phẩm tuyệt vời, cung cấp góc nhìn mới.', '2023-01-25 14:30:00', 0, 5, 1, 3, 1),
+('Sách rất thú vị và truyền cảm hứng, tôi thích điều đó.', '2023-02-05 11:45:00', 0, 4, 1, 4, 1),
+('Một cuốn sách đáng để giới thiệu cho mọi người.', '2023-02-15 13:20:00', 0, 5, 1, 5, 1),
+
+-- Đánh giá của customer_id = 2 cho 5 cuốn sách đầu
+('Nội dung rất sâu sắc và dễ hiểu, rất thích cuốn này.', '2023-01-10 08:45:00', 0, 5, 1, 1, 2),
+('Sách có nhiều thông tin hữu ích cho người đọc.', '2023-01-20 09:15:00', 0, 4, 1, 2, 2),
+('Tôi học được nhiều điều mới qua cuốn sách này.', '2023-01-30 15:10:00', 0, 5, 1, 3, 2),
+('Rất hài lòng với cuốn sách, dễ đọc và thực tế.', '2023-02-10 10:25:00', 0, 4, 1, 4, 2),
+('Cuốn sách rất phù hợp để phát triển bản thân.', '2023-02-20 12:40:00', 0, 5, 1, 5, 2);
+-- 13. Table Address:
+-- Địa chỉ cho owner
+INSERT INTO address (detail, district, nation, province, village, owner_id) VALUES
+('123 Lê Lợi', 'Quận 1', 'Việt Nam', 'TP HCM', 'Phường Bến Nghé', 1);
+
+-- Địa chỉ cho staff 
+INSERT INTO address (detail, district, nation, province, village, staff_id) VALUES
+('456 Nguyễn Huệ', 'Quận 1', 'Việt Nam', 'TP HCM', 'Phường Bến Thành', 1),
+('789 Trần Hưng Đạo', 'Quận 5', 'Việt Nam', 'TP HCM', 'Phường 7', 2);
+
+-- Địa chỉ cho customer 
+INSERT INTO address (detail, district, nation, province, village, customer_id) VALUES
+('101 Nguyễn Đình Chiểu', 'Quận 3', 'Việt Nam', 'TP HCM', 'Phường 6', 1),
+('102 Hai Bà Trưng', 'Quận 3', 'Việt Nam', 'TP HCM', 'Phường 8', 2),
+('103 Lý Thái Tổ', 'Quận 10', 'Việt Nam', 'TP HCM', 'Phường 14', 3),
+('104 Điện Biên Phủ', 'Quận Bình Thạnh', 'Việt Nam', 'TP HCM', 'Phường 25', 4),
+('105 Bạch Đằng', 'Quận Tân Bình', 'Việt Nam', 'TP HCM', 'Phường 2', 5),
+('106 Hoàng Văn Thụ', 'Quận Phú Nhuận', 'Việt Nam', 'TP HCM', 'Phường 9', 6),
+('107 Nguyễn Văn Cừ', 'Quận 5', 'Việt Nam', 'TP HCM', 'Phường 4', 7),
+('108 Trường Chinh', 'Quận Tân Bình', 'Việt Nam', 'TP HCM', 'Phường 15', 8),
+('109 Phan Xích Long', 'Quận Phú Nhuận', 'Việt Nam', 'TP HCM', 'Phường 7', 9),
+('110 Lê Quang Định', 'Quận Bình Thạnh', 'Việt Nam', 'TP HCM', 'Phường 14', 10),
+('111 Hồng Bàng', 'Quận 5', 'Việt Nam', 'TP HCM', 'Phường 12', 11),
+('112 Nguyễn Trãi', 'Quận 1', 'Việt Nam', 'TP HCM', 'Phường Phạm Ngũ Lão', 12),
+('113 Cách Mạng Tháng Tám', 'Quận 3', 'Việt Nam', 'TP HCM', 'Phường 11', 13),
+('114 Tô Hiến Thành', 'Quận 10', 'Việt Nam', 'TP HCM', 'Phường 13', 14),
+('115 Phạm Văn Đồng', 'Quận Thủ Đức', 'Việt Nam', 'TP HCM', 'Phường Linh Đông', 15);
+
+
+-- 13. Table Promotion: 
+-- Thêm 10 mã COUPON
+INSERT INTO promotion (code, created_at, description, discount_limit, effective_date, expiration_date, min_value_to_be_applied, percent_discount, status, title, type) VALUES
+('COUPON1', '2024-11-01 09:00:00', 'Giảm giá 10% cho đơn hàng từ 100k', 50000, '2024-11-01 00:00:00', '2024-11-30 23:59:59', 100000, 10, 'EFFECTIVE', 'Khuyến mãi COUPON', 'COUPON'),
+('COUPON2', '2024-11-02 10:00:00', 'Giảm giá 15% cho đơn hàng từ 200k', 70000, '2024-11-02 00:00:00', '2024-11-30 23:59:59', 200000, 15, 'NULL_AND_VOID', 'Khuyến mãi COUPON', 'COUPON'),
+('COUPON3', '2024-11-03 11:00:00', 'Giảm giá 20% cho đơn hàng từ 300k', 100000, '2024-11-03 00:00:00', '2024-11-30 23:59:59', 300000, 20, 'USED_OUT', 'Khuyến mãi COUPON', 'COUPON'),
+('COUPON4', '2024-11-04 12:00:00', 'Giảm giá 5% cho đơn hàng từ 50k', 30000, '2024-11-04 00:00:00', '2024-11-30 23:59:59', 50000, 5, 'EFFECTIVE', 'Khuyến mãi COUPON', 'COUPON'),
+('COUPON5', '2024-11-05 13:00:00', 'Giảm giá 12% cho đơn hàng từ 150k', 60000, '2024-11-05 00:00:00', '2024-11-10 23:59:59', 150000, 12, 'EXPIRED', 'Khuyến mãi COUPON', 'COUPON'),
+('COUPON6', '2024-11-06 14:00:00', 'Giảm giá 8% cho đơn hàng từ 120k', 40000, '2024-11-06 00:00:00', '2024-11-30 23:59:59', 120000, 8, 'EFFECTIVE', 'Khuyến mãi COUPON', 'COUPON'),
+('COUPON7', '2024-11-07 15:00:00', 'Giảm giá 18% cho đơn hàng từ 250k', 80000, '2024-11-07 00:00:00', '2024-11-30 23:59:59', 250000, 18, 'USED_OUT', 'Khuyến mãi COUPON', 'COUPON'),
+('COUPON8', '2024-11-08 16:00:00', 'Giảm giá 25% cho đơn hàng từ 350k', 150000, '2024-11-08 00:00:00', '2024-11-30 23:59:59', 350000, 25, 'EFFECTIVE', 'Khuyến mãi COUPON', 'COUPON'),
+('COUPON9', '2024-11-09 17:00:00', 'Giảm giá 30% cho đơn hàng từ 500k', 200000, '2024-11-09 00:00:00', '2024-11-30 23:59:59', 500000, 30, 'NULL_AND_VOID', 'Khuyến mãi COUPON', 'COUPON'),
+('COUPON10', '2024-11-10 18:00:00', 'Giảm giá 35% cho đơn hàng từ 700k', 250000, '2024-11-10 00:00:00', '2024-11-10 23:59:59', 700000, 35, 'EXPIRED', 'Khuyến mãi COUPON', 'COUPON');
+
+-- Thêm 10 mã VOUCHER
+INSERT INTO promotion (code, created_at, description, discount_limit, effective_date, expiration_date, min_value_to_be_applied, percent_discount, status, title, type) VALUES
+('VOUCHER1', '2024-11-11 09:00:00', 'Giảm giá 20% cho đơn hàng từ 100k', 50000, '2024-11-11 00:00:00', '2024-11-30 23:59:59', 100000, 20, 'EFFECTIVE', 'Khuyến mãi VOUCHER', 'VOUCHER'),
+('VOUCHER2', '2024-11-12 10:00:00', 'Giảm giá 25% cho đơn hàng từ 200k', 70000, '2024-11-12 00:00:00', '2024-11-30 23:59:59', 200000, 25, 'NULL_AND_VOID', 'Khuyến mãi VOUCHER', 'VOUCHER'),
+('VOUCHER3', '2024-11-13 11:00:00', 'Giảm giá 30% cho đơn hàng từ 300k', 100000, '2024-11-13 00:00:00', '2024-11-30 23:59:59', 300000, 30, 'USED_OUT', 'Khuyến mãi VOUCHER', 'VOUCHER'),
+('VOUCHER4', '2024-11-14 12:00:00', 'Giảm giá 10% cho đơn hàng từ 50k', 30000, '2024-11-14 00:00:00', '2024-11-30 23:59:59', 50000, 10, 'EFFECTIVE', 'Khuyến mãi VOUCHER', 'VOUCHER'),
+('VOUCHER5', '2024-11-15 13:00:00', 'Giảm giá 15% cho đơn hàng từ 150k', 60000, '2024-11-15 00:00:00', '2024-11-10 23:59:59', 150000, 15, 'EXPIRED', 'Khuyến mãi VOUCHER', 'VOUCHER'),
+('VOUCHER6', '2024-11-16 14:00:00', 'Giảm giá 18% cho đơn hàng từ 120k', 40000, '2024-11-16 00:00:00', '2024-11-30 23:59:59', 120000, 18, 'EFFECTIVE', 'Khuyến mãi VOUCHER', 'VOUCHER'),
+('VOUCHER7', '2024-11-17 15:00:00', 'Giảm giá 22% cho đơn hàng từ 250k', 80000, '2024-11-17 00:00:00', '2024-11-30 23:59:59', 250000, 22, 'USED_OUT', 'Khuyến mãi VOUCHER', 'VOUCHER'),
+('VOUCHER8', '2024-11-18 16:00:00', 'Giảm giá 28% cho đơn hàng từ 350k', 150000, '2024-11-18 00:00:00', '2024-11-30 23:59:59', 350000, 28, 'EFFECTIVE', 'Khuyến mãi VOUCHER', 'VOUCHER'),
+('VOUCHER9', '2024-11-19 17:00:00', 'Giảm giá 35% cho đơn hàng từ 500k', 200000, '2024-11-19 00:00:00', '2024-11-30 23:59:59', 500000, 35, 'NULL_AND_VOID', 'Khuyến mãi VOUCHER', 'VOUCHER'),
+('VOUCHER10', '2024-11-20 18:00:00', 'Giảm giá 40% cho đơn hàng từ 700k', 250000, '2024-11-20 00:00:00', '2024-11-10 23:59:59', 700000, 40, 'EXPIRED', 'Khuyến mãi VOUCHER', 'VOUCHER');
+
+-- Thêm 10 mã FREESHIP
+INSERT INTO promotion (code, created_at, description, discount_limit, effective_date, expiration_date, min_value_to_be_applied, percent_discount, status, title, type) VALUES
+('FREESHIP1', '2024-11-21 09:00:00', 'Miễn phí vận chuyển cho đơn hàng từ 100k', 30000, '2024-11-21 00:00:00', '2024-11-30 23:59:59', 100000, 100, 'EFFECTIVE', 'Khuyến mãi FREESHIP', 'FREESHIP'),
+('FREESHIP2', '2024-11-22 10:00:00', 'Miễn phí vận chuyển cho đơn hàng từ 200k', 30000, '2024-11-22 00:00:00', '2024-11-30 23:59:59', 200000, 100, 'NULL_AND_VOID', 'Khuyến mãi FREESHIP', 'FREESHIP'),
+('FREESHIP3', '2024-11-23 11:00:00', 'Miễn phí vận chuyển cho đơn hàng từ 300k', 30000, '2024-11-23 00:00:00', '2024-11-30 23:59:59', 300000, 100, 'USED_OUT', 'Khuyến mãi FREESHIP', 'FREESHIP'),
+('FREESHIP4', '2024-11-24 12:00:00', 'Miễn phí vận chuyển cho đơn hàng từ 50k', 15000, '2024-11-24 00:00:00', '2024-11-30 23:59:59', 50000, 100, 'EFFECTIVE', 'Khuyến mãi FREESHIP', 'FREESHIP'),
+('FREESHIP5', '2024-11-25 13:00:00', 'Miễn phí vận chuyển cho đơn hàng từ 150k', 15000, '2024-11-25 00:00:00', '2024-11-10 23:59:59', 150000, 100, 'EXPIRED', 'Khuyến mãi FREESHIP', 'FREESHIP'),
+('FREESHIP6', '2024-11-26 14:00:00', 'Miễn phí vận chuyển cho đơn hàng từ 120k', 15000, '2024-11-26 00:00:00', '2024-11-30 23:59:59', 120000, 100, 'EFFECTIVE', 'Khuyến mãi FREESHIP', 'FREESHIP'),
+('FREESHIP7', '2024-11-27 15:00:00', 'Miễn phí vận chuyển cho đơn hàng từ 250k', 15000, '2024-11-27 00:00:00', '2024-11-30 23:59:59', 250000, 100, 'USED_OUT', 'Khuyến mãi FREESHIP', 'FREESHIP'),
+('FREESHIP8', '2024-11-28 16:00:00', 'Miễn phí vận chuyển cho đơn hàng từ 350k', 15000, '2024-11-28 00:00:00', '2024-11-30 23:59:59', 350000, 100, 'EFFECTIVE', 'Khuyến mãi FREESHIP', 'FREESHIP'),
+('FREESHIP9', '2024-11-29 17:00:00', 'Miễn phí vận chuyển cho đơn hàng từ 500k', 15000, '2024-11-29 00:00:00', '2024-11-30 23:59:59', 500000, 100, 'NULL_AND_VOID', 'Khuyến mãi FREESHIP', 'FREESHIP'),
+('FREESHIP10', '2024-11-30 18:00:00', 'Miễn phí vận chuyển cho đơn hàng từ 700k', 15000, '2024-11-30 00:00:00', '2024-11-10 23:59:59', 700000, 100, 'EXPIRED', 'Khuyến mãi FREESHIP', 'FREESHIP');
+
