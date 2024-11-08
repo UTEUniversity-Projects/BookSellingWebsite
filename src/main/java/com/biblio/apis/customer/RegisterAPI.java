@@ -49,26 +49,26 @@ public class RegisterAPI extends HttpServlet {
      */
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         // TODO Auto-generated method stub
-//        request.setCharacterEncoding("UTF-8");
-//        response.setContentType("application/json");
-//
-//        CustomerRegisterRequest user = HttpUtil.of(request.getReader()).toModel(CustomerRegisterRequest.class);
-//        System.out.println(CustomerMapper.toCustomerRegister(user));
-//        ObjectMapper mapper = new ObjectMapper();
-//        mapper.writeValue(response.getOutputStream(), user);
-
-        ObjectMapper objectMapper = new ObjectMapper();
-        CustomerRegisterRequest user = objectMapper.readValue(request.getInputStream(), CustomerRegisterRequest.class);
-        System.out.println("Register API: " + user);
-
-        JSONObject jsonResponse = new JSONObject();
-        jsonResponse.append("status", "success");
-
-        Gson gson = new Gson();
-
+        request.setCharacterEncoding("UTF-8");
         response.setContentType("application/json");
-        response.setCharacterEncoding("UTF-8");
-        response.getWriter().write(gson.toJson(user));
+
+        CustomerRegisterRequest user = HttpUtil.of(request.getReader()).toModel(CustomerRegisterRequest.class);
+        System.out.println(CustomerMapper.toCustomerRegister(user));
+        ObjectMapper mapper = new ObjectMapper();
+        mapper.writeValue(response.getOutputStream(), user);
+
+//        ObjectMapper objectMapper = new ObjectMapper();
+//        CustomerRegisterRequest user = objectMapper.readValue(request.getInputStream(), CustomerRegisterRequest.class);
+//        System.out.println("Register API: " + user);
+//
+//        JSONObject jsonResponse = new JSONObject();
+//        jsonResponse.append("status", "success");
+//
+//        Gson gson = new Gson();
+//
+//        response.setContentType("application/json");
+//        response.setCharacterEncoding("UTF-8");
+//        response.getWriter().write(gson.toJson(user));
     }
 
 }
