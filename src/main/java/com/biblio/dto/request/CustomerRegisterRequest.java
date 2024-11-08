@@ -1,14 +1,18 @@
 package com.biblio.dto.request;
 
-import lombok.*;
-
-import java.time.LocalDateTime;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.ToString;
 
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 @ToString
-
+@Getter
+@Setter
 public class CustomerRegisterRequest {
 
 	private String fullName;
