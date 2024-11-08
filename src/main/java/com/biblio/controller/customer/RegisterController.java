@@ -59,7 +59,7 @@ public class RegisterController extends HttpServlet {
         try {
             BeanUtils.populate(user, request.getParameterMap());
             Part part = request.getPart("image");
-            user.setAvatar(UploadFileUtil.UploadImage(part, getServletContext()));
+//            user.setAvatar(UploadFileUtil.UploadImage(part, getServletContext()));
             System.out.println(user);
         } catch (Exception e) {
             System.out.println(e.getMessage());

@@ -119,7 +119,7 @@
                             <ul class="cr-sb-subdrop condense">
                                 <li>
                                     <a
-                                            href="/owner/customer-list"
+                                            href="${pageContext.request.contextPath}/owner/customer-list"
                                             class="cr-page-link subdrop"
                                     ><i class="ri-checkbox-blank-circle-line"></i>Danh
                                         sách khách hàng</a

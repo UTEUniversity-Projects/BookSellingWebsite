@@ -4,6 +4,6 @@ import com.biblio.entity.Customer;
 
 import java.util.List;
 
-public interface ICustomerDAO extends IGenericDAO<Customer, Long> {
+public interface ICustomerDAO {
     List<Customer> findAll();
 }

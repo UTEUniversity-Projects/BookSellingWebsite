@@ -2,7 +2,11 @@ package com.biblio.dao;
 
 import java.util.List;
 
-public interface IGenericDAO<T, ID> {
+public interface IGenericDAO<T> {
+
+    List<T> findByJPQLPaginated(String jpql, int pageNumber, int pageSize, Object... params);
+
+    List<T> findAllPaginated(int pageNumber, int pageSize);
 
     void delete(Object id);
 
@@ -10,17 +14,14 @@ public interface IGenericDAO<T, ID> {
 
     void save(T entity);
 
-    T findSingleByJPQL(String jpql, Object... params);
-
     List<T> findByJPQL(String jpql, Object... params);
+
+    T findSingleByJPQL(String jpql, Object... params);
 
     List<T> findAll();
 
-    List<T> findAll(String jpql);
-
     T findById(Object id);
 
-    List<T> findAllPaginated(int pageNumber, int pageSize);
+    List<T> findAll(String jpql);
 
-    List<T> findByJPQLPaginated(String jpql, int pageNumber, int pageSize, Object... params);
 }
