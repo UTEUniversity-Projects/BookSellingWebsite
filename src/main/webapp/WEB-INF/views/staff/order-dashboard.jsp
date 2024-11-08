@@ -6,7 +6,7 @@
         <div class="cr-page-title cr-page-title-2">
             <div class="cr-breadcrumb">
                 <ul>
-                    <li><a href="index.html">Carrot</a></li>
+                    <li><a href="/staff/product-dashboard">Carrot</a></li>
                     <li>Danh sách đơn hàng</li>
                 </ul>
             </div>

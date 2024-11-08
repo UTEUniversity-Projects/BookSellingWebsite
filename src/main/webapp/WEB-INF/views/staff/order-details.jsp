@@ -6,7 +6,7 @@
         <div class="cr-page-title cr-page-title-2">
             <div class="cr-breadcrumb">
                 <ul>
-                    <li><a href="#">Biblio</a></li>
+                    <li><a href="/staff/product-dashboard">Biblio</a></li>
                     <li><a href="${pageContext.request.contextPath}/staff/order-dashboard">Danh sách đơn hàng</a></li>
                     <li>Chi tiết đơn hàng</li>
                 </ul>
@@ -178,3 +178,5 @@
         </div>
     </div>
 </div>
+
+<script src="${pageContext.request.contextPath}/assets/staff/js/order-details.js" defer></script>

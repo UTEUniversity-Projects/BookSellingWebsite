@@ -71,36 +71,33 @@
     <decorator:body/>
     <%@include file="/commons/owner/footer.jsp" %>
 </main>
-<!-- region Vendor Custom JS -->
-<script src="${pageContext.request.contextPath}/assets/staff/js/vendor/jquery-3.6.4.min.js"></script>
-<script src="${pageContext.request.contextPath}/assets/staff/js/vendor/simplebar.min.js"></script>
-<script src="${pageContext.request.contextPath}/assets/staff/js/vendor/bootstrap.bundle.min.js"></script>
-<script src="${pageContext.request.contextPath}/assets/staff/js/vendor/apexcharts.min.js"></script>
-<script src="${pageContext.request.contextPath}/assets/staff/js/vendor/jquery-jvectormap-1.2.2.min.js"></script>
-<script src="${pageContext.request.contextPath}/assets/staff/js/vendor/jquery-jvectormap-world-mill-en.js"></script>
-<script src="${pageContext.request.contextPath}/assets/staff/js/vendor/owl.carousel.min.js"></script>
-<!-- Data Tables -->
-<script src="${pageContext.request.contextPath}/assets/staff/js/vendor/jquery.datatables.min.js"></script>
-<script src="${pageContext.request.contextPath}/assets/staff/js/vendor/datatables.bootstrap5.min.js"></script>
-<script src="${pageContext.request.contextPath}/assets/staff/js/vendor/datatables.responsive.min.js"></script>
-<!-- Caleddar -->
-<script src="${pageContext.request.contextPath}/assets/staff/js/vendor/jquery.simple-calendar.js"></script>
-<!-- Date Range Picker -->
-<script src="${pageContext.request.contextPath}/assets/staff/js/vendor/moment.min.js"></script>
-<script src="${pageContext.request.contextPath}/assets/staff/js/vendor/daterangepicker.js"></script>
-<script src="${pageContext.request.contextPath}/assets/staff/js/vendor/date-range.js"></script>
 
-<script src="${pageContext.request.contextPath}/assets/staff/js/vendor/jquery.zoom.min.js"></script>
-<script src="${pageContext.request.contextPath}/assets/staff/js/vendor/mixitup.min.js"></script>
-<script src="${pageContext.request.contextPath}/assets/staff/js/vendor/range-slider.js"></script>
-<script src="${pageContext.request.contextPath}/assets/staff/js/vendor/aos.min.js"></script>
-<script src="${pageContext.request.contextPath}/assets/staff/js/vendor/swiper-bundle.min.js"></script>
-<script src="${pageContext.request.contextPath}/assets/staff/js/vendor/slick.min.js"></script>
-<!-- endregion JS-->
-<!-- Main Custom -->
+<!-- region Vendor Custom JS -->
+<script src="${pageContext.request.contextPath}/assets/owner/js/vendor/jquery-3.6.4.min.js"></script>
+<script src="${pageContext.request.contextPath}/assets/owner/js/vendor/simplebar.min.js"></script>
+<script src="${pageContext.request.contextPath}/assets/owner/js/vendor/bootstrap.bundle.min.js"></script>
+<script src="${pageContext.request.contextPath}/assets/owner/js/vendor/apexcharts.min.js"></script>
+<script src="${pageContext.request.contextPath}/assets/owner/js/vendor/jquery-jvectormap-1.2.2.min.js"></script>
+<script src="${pageContext.request.contextPath}/assets/owner/js/vendor/jquery-jvectormap-world-mill-en.js"></script>
+<script src="${pageContext.request.contextPath}/assets/owner/js/vendor/owl.carousel.min.js"></script>
+<!-- Data Tables -->
+<script src="${pageContext.request.contextPath}/assets/owner/js/vendor/jquery.datatables.min.js"></script>
+<script src="${pageContext.request.contextPath}/assets/owner/js/vendor/datatables.bootstrap5.min.js"></script>
+<script src="${pageContext.request.contextPath}/assets/owner/js/vendor/datatables.responsive.min.js"></script>
+<!-- Caleddar -->
+<script src="${pageContext.request.contextPath}/assets/owner/js/vendor/jquery.simple-calendar.js"></script>
+<!-- Date Range Picker -->
+<script src="${pageContext.request.contextPath}/assets/owner/js/vendor/moment.min.js"></script>
+<script src="${pageContext.request.contextPath}/assets/owner/js/vendor/daterangepicker.js"></script>
+<script src="${pageContext.request.contextPath}/assets/owner/js/vendor/daterangepicker.min.js"></script>
+<script src="${pageContext.request.contextPath}/assets/owner/js/vendor/date-range.js"></script>
+<script src="${pageContext.request.contextPath}/assets/owner/js/DateRange/daterange.js"></script>
+<!-- endregion -->
+
+<!-- region Main Custom -->
 <script src="${pageContext.request.contextPath}/assets/owner/js/main.js"></script>
 <script src="${pageContext.request.contextPath}/assets/owner/js/customer-profile.js"></script>
 <script src="${pageContext.request.contextPath}/assets/owner/js/data/ecommerce-chart-data.js"></script>
-<script src="${pageContext.request.contextPath}/assets/owner/js/product-details.js"></script>
+<!-- endregion -->
 </body>
 </html>

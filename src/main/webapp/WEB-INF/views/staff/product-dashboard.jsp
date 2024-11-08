@@ -6,7 +6,7 @@
         <div class="cr-page-title cr-page-title-2">
             <div class="cr-breadcrumb">
                 <ul>
-                    <li><a href="#">Biblio</a></li>
+                    <li><a href="/staff/product-dashboard">Biblio</a></li>
                     <li>Danh sách sản phẩm</li>
                 </ul>
             </div>

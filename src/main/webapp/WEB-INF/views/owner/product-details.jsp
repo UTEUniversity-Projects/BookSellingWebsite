@@ -563,3 +563,12 @@
     </div>
 </div>
 <!-- endregion -->
+
+<script src="${pageContext.request.contextPath}/assets/owner/js/vendor/jquery.zoom.min.js" defer></script>
+<script src="${pageContext.request.contextPath}/assets/owner/js/vendor/mixitup.min.js" defer></script>
+<script src="${pageContext.request.contextPath}/assets/owner/js/vendor/range-slider.js" defer></script>
+<script src="${pageContext.request.contextPath}/assets/owner/js/vendor/aos.min.js" defer></script>
+<script src="${pageContext.request.contextPath}/assets/owner/js/vendor/swiper-bundle.min.js" defer></script>
+<script src="${pageContext.request.contextPath}/assets/owner/js/vendor/slick.min.js" defer></script>
+
+<script src="${pageContext.request.contextPath}/assets/owner/js/product-details.js" defer></script>
