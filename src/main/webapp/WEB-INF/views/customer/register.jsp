@@ -138,11 +138,15 @@
                             </div>
                             <div class="col-sm-12 col-md-12">
                                 <div class="form-group mb-2">
-                                    <label for="hamlet" class="text-md text-slate-700 mb-1 ml-2">Số
-                                        nhà | Ấp | Tổ</label> <select name="hamlet" id="hamlet"
-                                                                      class="bg-gray-50 border border-gray-300 text-gray-900 text-md rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5">
-                                    <option selected>Số nhà | Ấp | Tổ</option>
-                                </select>
+                                    <label for="detail" class="text-md text-slate-700 mb-1 ml-2">Số
+                                        nhà | Ấp | Tổ</label>
+                                    <input id="detail" name="detail"
+                                           placeholder="Số nhà, Ấp, Tổ,..."
+                                           class="block w-full py-2 px-4 text-gray-900 border-1 border-gray-300 rounded-lg text-[16px] focus:ring-blue-500 focus:border-blue-500 transition-all ease-linear bg-white focus:shadow-lg focus:shadow-[rgba(3,_102,_214,_0.3)_0px_0px_0px_3px]"/>
+                                    <%--                                    <select name="hamlet" id="hamlet"--%>
+                                    <%--                                                                      class="bg-gray-50 border border-gray-300 text-gray-900 text-md rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5">--%>
+                                    <%--                                    <option selected>Số nhà | Ấp | Tổ</option>--%>
+                                    <%--                                </select>--%>
                                 </div>
                             </div>
                             <div class="col-12">
