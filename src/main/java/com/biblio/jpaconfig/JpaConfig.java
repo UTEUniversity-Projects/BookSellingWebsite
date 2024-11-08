@@ -27,7 +27,7 @@ public class JpaConfig {
         map.put(JPA_JDBC_PASSWORD, Constant.PASSWORD);
         map.put(DIALECT, org.hibernate.dialect.MySQL8Dialect.class);
         map.put(HBM2DDL_AUTO, "update");
-        map.put(SHOW_SQL, "true");
+       // map.put(SHOW_SQL, "true");
         map.put(FORMAT_SQL, "true");
         map.put(QUERY_STARTUP_CHECKING, "false");
         map.put(GENERATE_STATISTICS, "false");

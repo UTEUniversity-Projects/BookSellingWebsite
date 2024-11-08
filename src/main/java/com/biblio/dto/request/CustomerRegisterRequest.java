@@ -8,6 +8,7 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @AllArgsConstructor
 @ToString
+
 public class CustomerRegisterRequest {
 
 	private String fullName;
