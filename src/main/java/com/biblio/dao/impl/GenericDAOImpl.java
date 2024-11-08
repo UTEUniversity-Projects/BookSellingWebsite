@@ -47,6 +47,21 @@ public class GenericDAOImpl<T, ID> implements IGenericDAO<T, ID> {
     }
 
     @Override
+    public List<T> findAll(String jpql) {
+        EntityManager em = JpaConfig.getEntityManager();
+        try {
+            TypedQuery<T> query = em.createQuery(jpql, entityClass);
+            return query.getResultList();
+        } catch (Exception e) {
+            throw new RuntimeException("Error while finding all entities", e);
+        } finally {
+            if (em != null && em.isOpen()) {
+                em.close();
+            }
+        }
+    }
+
+    @Override
     public T findSingleByJPQL(String jpql, Object... params) {
         EntityManager em = JpaConfig.getEntityManager();
         try {
