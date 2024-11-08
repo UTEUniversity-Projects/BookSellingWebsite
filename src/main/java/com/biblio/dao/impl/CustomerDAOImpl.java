@@ -12,8 +12,9 @@ public class CustomerDAOImpl extends GenericDAOImpl<Customer> implements ICustom
 
     @Override
     public List<Customer> findAll() {
-        String jpql = "SELECT c.id, c.email FROM Customer c";
-       return super.findAll(jpql);
+//        String jpql = "SELECT c FROM Customer c";
+//        return super.findAll(jpql);
+        return  super.findAll();
     }
 
 //    public static void main(String[] args) {

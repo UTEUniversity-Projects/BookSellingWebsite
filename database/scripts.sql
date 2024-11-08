@@ -19,7 +19,7 @@ INSERT INTO account (password, status, role, username) VALUES
 ('abc', 'ACTIVE', 'CUSTOMER', 'customer_12'),
 ('abc', 'ACTIVE', 'CUSTOMER', 'customer_13'),
 ('abc', 'ACTIVE', 'CUSTOMER', 'customer_14'),
-('abc', 'ACTIVE', 'CUSTOMER', 'customer_15');notification
+('abc', 'ACTIVE', 'CUSTOMER', 'customer_15');
 
 -- 2. Table Owner:customer_notificationnotification
 INSERT INTO owner (avatar, date_of_birth, email_address, full_name, gender, join_at, phone_number, account_id)
@@ -592,13 +592,91 @@ INSERT INTO customer_notification (customer_id, notification_id) VALUES
 (5,18),
 (5,20);
 
-INSERT INTO customer_notification (customer_id, notification_id) VALUES
-(4,1),
-(4,4),
-(4,7),
-(4,8),
-(4,11),
-(5,14),
-(5,15),
-(5,18),
-(5,20);
+-- 17. Table Cart
+INSERT INTO cart (customer_id) VALUES
+(1),
+(2),
+(3),
+(4),
+(5),
+(6),
+(7),
+(8),
+(9),
+(10),
+(11),
+(12),
+(13),
+(14),
+(15);
+
+-- 18. Table Order
+INSERT INTO `order` (note, status, address_id, customer_id) VALUES
+('Order note 1', 'COMPLETE_DELIVERY', 4, 1),
+('Order note 2', 'CANCLED', 5, 2),
+('Order note 3', 'COMPLETE_DELIVERY', 4, 1),
+('Order note 4', 'CANCLED', 5, 2),
+('Order note 5', 'COMPLETE_DELIVERY', 4, 1),
+('Order note 6', 'CANCLED', 5, 2),
+('Order note 7', 'COMPLETE_DELIVERY', 4, 1),
+('Order note 8', 'CANCLED', 5, 2);
+
+-- 19. Table Order Item
+INSERT INTO order_item (quantity, book_id, cart_id, order_id) VALUES
+-- Order 1: 2 items
+(3, 1, 1, 1),
+(2, 2, 1, 1),
+
+-- Order 2: 1 item
+(1, 3, 2, 2),
+
+-- Order 3: 3 items
+(4, 4, 1, 3),
+(1, 5, 1, 3),
+(2, 6, 1, 3),
+
+-- Order 4: 2 items
+(2, 7, 2, 4),
+(5, 8, 2, 4),
+
+-- Order 5: 4 items
+(1, 9, 1, 5),
+(2, 10, 1, 5),
+(3, 1, 1, 5),
+(4, 2, 1, 5),
+
+-- Order 6: 1 item
+(3, 3, 2, 6),
+
+-- Order 7: 3 items
+(2, 4, 1, 7),
+(4, 5, 1, 7),
+(1, 6, 1, 7),
+
+-- Order 8: 2 items
+(5, 7, 2, 8),
+(3, 8, 2, 8);
+
+-- 20. Table Bank Transfer
+-- Bank transfer for Order 1 and 2
+INSERT INTO bank_transfer (amount, created_at, currency, status, bank_account_number, bank_name, transaction_id, order_id) VALUES
+(810000, '2024-11-01 10:30:00', 'VND', 'COMPLETED', '1234567890', 'Vietcombank', 'TRANS1', 1),
+(170000, '2024-11-02 11:00:00', 'VND', 'COMPLETED', '0987654321', 'Techcombank', 'TRANS2', 2);
+
+-- Table Cash
+-- Cash payment for Order 3 and 4
+INSERT INTO cash (amount, created_at, currency, status, cash_received, `change`, order_id) VALUES
+(1430000, '2024-11-03 15:00:00', 'VND', 'COMPLETED', 1400000, 20000, 3),
+(1230000, '2024-11-04 16:30:00', 'VND', 'COMPLETED', 800000, 50000, 4);
+
+-- Table Credit Card
+-- Credit card payment for Order 5 and 6
+INSERT INTO credit_card (amount, created_at, currency, status, billing_address, card_holder_name, card_number, cvv, expiration_date, order_id) VALUES
+(1650000, '2024-11-05 17:00:00', 'VND', 'COMPLETED', '123 Phan Xich Long, TP HCM', 'Nguyen Van A', '4111111111111111', '123', '2026-12-31 00:00:00', 5),
+(510000, '2024-11-06 18:45:00', 'VND', 'COMPLETED', '456 Tran Hung Dao, TP HCM', 'Tran Thi B', '5555555555554444', '456', '2025-08-31 00:00:00', 6);
+
+-- Table EWallet
+-- Ewallet payment for Order 7
+INSERT INTO ewallet (amount, created_at, currency, status, provider, transaction_id, wallet_id, order_id) VALUES
+(1170000, '2024-11-07 09:30:00', 'VND', 'COMPLETED', 'MOMO', 'TXN1234567890', 'WALLET12345', 7),
+(1270000, '2024-11-08 10:15:00', 'VND', 'COMPLETED', 'PAYPAL', 'TXN9876543210', 'WALLET67890', 8);
