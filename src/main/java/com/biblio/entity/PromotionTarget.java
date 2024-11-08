@@ -34,7 +34,7 @@ public class PromotionTarget implements Serializable {
     @Column(name = "type", nullable = false)
     private EPromotionTargetType type;
 
-    @Column(name = "quantity")
+    @Column(name = "quantity", nullable = false)
     private int quantity;
 
     // endregion
