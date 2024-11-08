@@ -15,10 +15,10 @@ import java.util.Set;
 
 @Entity
 @Table(name = "promotion")
-@Getter
-@Setter
 @NoArgsConstructor
 @AllArgsConstructor
+@Getter
+@Setter
 public class Promotion implements Serializable {
 
     // region Attributes
@@ -77,9 +77,4 @@ public class Promotion implements Serializable {
 
     // endregion
 
-    // region Constructors
-
-    // region Getters & Setters
-
-    // endregion
 }

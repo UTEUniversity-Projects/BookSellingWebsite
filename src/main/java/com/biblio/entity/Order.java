@@ -13,10 +13,10 @@ import java.util.Set;
 
 @Entity
 @Table(name = "[order]")
-@Getter
-@Setter
 @NoArgsConstructor
 @AllArgsConstructor
+@Getter
+@Setter
 public class Order implements Serializable {
 
     // region Attributes
