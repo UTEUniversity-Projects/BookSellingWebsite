@@ -1,15 +1,19 @@
 package com.biblio.entity;
 
-import com.biblio.enumeration.EGender;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.time.LocalDateTime;
 import java.util.HashSet;
 import java.util.Set;
 
 @Entity
 @Table(name = "owner")
+@NoArgsConstructor
+@Getter
+@Setter
 public class Owner extends User implements Serializable {
 
     // region Relationships
@@ -29,46 +33,4 @@ public class Owner extends User implements Serializable {
 
     // endregion
 
-    // region Constructors
-
-    public Owner() {
-        super();
-    }
-
-    public Owner(Long id, String fullName, String emailAddress, String dateOfBirth, EGender gender, String phoneNumber, String avatar, LocalDateTime joinAt, Account account, Set<Notification> notifications, Set<Address> addresses) {
-        super(id, fullName, emailAddress, dateOfBirth, gender, phoneNumber, avatar, joinAt);
-        this.account = account;
-        this.notifications = notifications;
-        this.addresses = addresses;
-    }
-
-    // endregion
-
-    // region Getters & Setters
-
-    public Account getAccount() {
-        return account;
-    }
-
-    public void setAccount(Account account) {
-        this.account = account;
-    }
-
-    public Set<Notification> getNotifications() {
-        return notifications;
-    }
-
-    public void setNotifications(Set<Notification> notifications) {
-        this.notifications = notifications;
-    }
-
-    public void setAddresses(Set<Address> addresses) {
-        this.addresses = addresses;
-    }
-
-    public Set<Address> getAddresses() {
-        return addresses;
-    }
-
-    // endregion
 }

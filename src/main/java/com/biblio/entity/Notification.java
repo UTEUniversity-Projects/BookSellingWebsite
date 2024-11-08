@@ -2,6 +2,9 @@ package com.biblio.entity;
 
 import com.biblio.enumeration.ENotificationStatus;
 import com.biblio.enumeration.ENotificationType;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
@@ -12,6 +15,9 @@ import java.util.Set;
 
 @Entity
 @Table(name = "notification")
+@NoArgsConstructor
+@Getter
+@Setter
 public class Notification implements Serializable {
 
     // region Attributes
@@ -56,119 +62,6 @@ public class Notification implements Serializable {
 
     @ManyToMany(mappedBy = "notifications")
     private Set<Owner> owner = new HashSet<Owner>();
-
-    // endregion
-
-    // region Constructors
-
-    public Notification() {
-    }
-
-    public Notification(String id, LocalDateTime createdAt, LocalDateTime sentTime, String title, String content, String hyperlink, ENotificationType type, ENotificationStatus status, Set<Customer> customers, Set<Staff> staff, Set<Owner> owner) {
-        this.id = id;
-        this.createdAt = createdAt;
-        this.sentTime = sentTime;
-        this.title = title;
-        this.content = content;
-        this.hyperlink = hyperlink;
-        this.type = type;
-        this.status = status;
-        this.customers = customers;
-        this.staff = staff;
-        this.owner = owner;
-    }
-
-    // endregion
-
-    // region Getters & Setters
-
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
-    }
-
-    public LocalDateTime getCreatedAt() {
-        return createdAt;
-    }
-
-    public void setCreatedAt(LocalDateTime createdAt) {
-        this.createdAt = createdAt;
-    }
-
-    public LocalDateTime getSentTime() {
-        return sentTime;
-    }
-
-    public void setSentTime(LocalDateTime sentTime) {
-        this.sentTime = sentTime;
-    }
-
-    public String getTitle() {
-        return title;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
-    public String getContent() {
-        return content;
-    }
-
-    public void setContent(String content) {
-        this.content = content;
-    }
-
-    public String getHyperlink() {
-        return hyperlink;
-    }
-
-    public void setHyperlink(String hyperlink) {
-        this.hyperlink = hyperlink;
-    }
-
-    public ENotificationType getType() {
-        return type;
-    }
-
-    public void setType(ENotificationType type) {
-        this.type = type;
-    }
-
-    public ENotificationStatus getStatus() {
-        return status;
-    }
-
-    public void setStatus(ENotificationStatus status) {
-        this.status = status;
-    }
-
-    public Set<Customer> getCustomers() {
-        return customers;
-    }
-
-    public void setCustomers(Set<Customer> customers) {
-        this.customers = customers;
-    }
-
-    public Set<Staff> getStaff() {
-        return staff;
-    }
-
-    public void setStaff(Set<Staff> staff) {
-        this.staff = staff;
-    }
-
-    public Set<Owner> getOwner() {
-        return owner;
-    }
-
-    public void setOwner(Set<Owner> owner) {
-        this.owner = owner;
-    }
 
     // endregion
 }

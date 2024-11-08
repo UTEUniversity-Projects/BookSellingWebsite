@@ -1,5 +1,9 @@
 package com.biblio.entity;
 
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.HashSet;
@@ -7,6 +11,9 @@ import java.util.Set;
 
 @Entity
 @Table(name = "cart")
+@NoArgsConstructor
+@Getter
+@Setter
 public class Cart implements Serializable {
 
     //region Attributes
@@ -28,42 +35,4 @@ public class Cart implements Serializable {
 
     // endregion
 
-    // region Constructors
-
-    public Cart() {
-    }
-
-    public Cart(Long id) {
-        this.id = id;
-    }
-
-    // endregion
-
-    // region Getters & Setters
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public Set<OrderItem> getOrderItems() {
-        return orderItems;
-    }
-
-    public void setOrderItems(Set<OrderItem> orderItems) {
-        this.orderItems = orderItems;
-    }
-
-    public Customer getCustomer() {
-        return customer;
-    }
-
-    public void setCustomer(Customer customer) {
-        this.customer = customer;
-    }
-
-    // endregion
 }

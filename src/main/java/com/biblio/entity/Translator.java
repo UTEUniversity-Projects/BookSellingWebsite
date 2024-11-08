@@ -1,13 +1,19 @@
 package com.biblio.entity;
 
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
 import javax.persistence.*;
 import java.io.Serializable;
-import java.time.LocalDateTime;
 import java.util.HashSet;
 import java.util.Set;
 
 @Entity
 @Table(name = "translator")
+@NoArgsConstructor
+@Getter
+@Setter
 public class Translator extends ContributorProfile implements Serializable {
 
     // region Relationships
@@ -20,28 +26,4 @@ public class Translator extends ContributorProfile implements Serializable {
 
     // endregion
 
-    // region Constructors
-
-    public Translator() {
-        super();
-    }
-
-    public Translator(Long id, String name, String introduction, LocalDateTime joinAt, String avatar, Set<Book> books) {
-        super(id, name, introduction, joinAt, avatar);
-        this.books = books;
-    }
-
-    // endregion
-
-    // region Getters & Setters
-
-    public Set<Book> getBooks() {
-        return books;
-    }
-
-    public void setBooks(Set<Book> books) {
-        this.books = books;
-    }
-
-    // endregion
 }

@@ -1,6 +1,8 @@
 package com.biblio.entity;
 
-import com.biblio.enumeration.EClassificationStatus;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import javax.persistence.Entity;
 import javax.persistence.OneToMany;
@@ -11,6 +13,9 @@ import java.util.Set;
 
 @Entity
 @Table(name = "category")
+@NoArgsConstructor
+@Getter
+@Setter
 public class Category extends Classification implements Serializable {
 
     // region Relationships
@@ -20,38 +25,6 @@ public class Category extends Classification implements Serializable {
 
     @OneToMany(mappedBy = "category")
     private Set<SubCategory> subCategories;
-
-    // endregion
-
-    // region Constructors
-
-    public Category() {
-        super();
-    }
-
-    public Category(Long id, String name, String shortScript, String fullScript, EClassificationStatus status, Set<Book> books, Set<SubCategory> subCategories) {
-        super(id, name, shortScript, fullScript, status);
-        this.books = books;
-        this.subCategories = subCategories;
-    }
-
-    // region Getters & Setters
-
-    public Set<Book> getBooks() {
-        return books;
-    }
-
-    public void setBooks(Set<Book> books) {
-        this.books = books;
-    }
-
-    public Set<SubCategory> getSubCategories() {
-        return subCategories;
-    }
-
-    public void setSubCategories(Set<SubCategory> subCategories) {
-        this.subCategories = subCategories;
-    }
 
     // endregion
 }

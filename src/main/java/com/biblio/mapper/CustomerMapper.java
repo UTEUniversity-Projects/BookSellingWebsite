@@ -1,6 +1,7 @@
 package com.biblio.mapper;
 
 import com.biblio.dto.request.CustomerRegisterRequest;
+import com.biblio.dto.response.CustomerGetListResponse;
 import com.biblio.entity.Account;
 import com.biblio.entity.Address;
 import com.biblio.entity.Customer;
@@ -9,6 +10,8 @@ import com.biblio.enumeration.EGender;
 import com.biblio.enumeration.EUserRole;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Set;
 
 public class CustomerMapper {
@@ -37,4 +40,26 @@ public class CustomerMapper {
         customer.setJoinAt(LocalDateTime.now());
         return customer;
     }
+    public static CustomerGetListResponse toCustomerGetListResponse(Customer customer) {
+        CustomerGetListResponse customerGetListResponse = new CustomerGetListResponse();
+        customerGetListResponse.setId(customer.getId());
+        customerGetListResponse.setAvatar(customer.getAvatar());
+        customerGetListResponse.setDateOfBirth(customer.getDateOfBirth());
+        customerGetListResponse.setEmail(customer.getEmailAddress());
+        customerGetListResponse.setFullName(customer.getFullName());
+        customerGetListResponse.setGender(customer.getGender().toString());
+        customerGetListResponse.setJoinAt(customer.getJoinAt().toString());
+        customerGetListResponse.setPhoneNumber(customer.getPhoneNumber());
+        customerGetListResponse.setMemberShip(customer.getMembership().toString());
+
+        customerGetListResponse.setUsername(customer.getAccount().getUsername());
+        customerGetListResponse.setPassword(customer.getAccount().getPassword());
+
+        for (Address address : customer.getAddresses()) {
+            customerGetListResponse.getAddresses().add(AddressMapper.toAddressResponse(address));
+        }
+
+        return customerGetListResponse;
+    }
+
 }

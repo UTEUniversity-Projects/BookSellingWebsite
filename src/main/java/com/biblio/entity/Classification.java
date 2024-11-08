@@ -1,11 +1,17 @@
 package com.biblio.entity;
 
 import com.biblio.enumeration.EClassificationStatus;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import javax.persistence.*;
 import java.io.Serializable;
 
 @MappedSuperclass
+@NoArgsConstructor
+@Getter
+@Setter
 public abstract class Classification implements Serializable {
 
     // region Attributes
@@ -29,61 +35,4 @@ public abstract class Classification implements Serializable {
 
     // endregion
 
-    // region Constructors
-
-    public Classification() {}
-
-    public Classification(Long id, String name, String shortScript, String fullScript, EClassificationStatus status) {
-        this.id = id;
-        this.name = name;
-        this.shortScript = shortScript;
-        this.fullScript = fullScript;
-        this.status = status;
-    }
-
-    // endregion
-
-    // region Getters & Setters
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getShortScript() {
-        return shortScript;
-    }
-
-    public void setShortScript(String shortScript) {
-        this.shortScript = shortScript;
-    }
-
-    public String getFullScript() {
-        return fullScript;
-    }
-
-    public void setFullScript(String fullScript) {
-        this.fullScript = fullScript;
-    }
-
-    public EClassificationStatus getStatus() {
-        return status;
-    }
-
-    public void setStatus(EClassificationStatus status) {
-        this.status = status;
-    }
-
-    // endregion
 }
