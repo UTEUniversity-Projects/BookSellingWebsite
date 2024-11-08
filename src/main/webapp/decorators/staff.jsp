@@ -51,13 +51,13 @@
             rel="stylesheet"
     />
 
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/staff/css/vendor/animate.css" />
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/staff/css/vendor/bootstrap.min.css" />
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/staff/css/vendor/aos.min.css" />
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/staff/css/vendor/range-slider.css" />
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/staff/css/vendor/swiper-bundle.min.css" />
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/staff/css/vendor/jquery.slick.css" />
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/staff/css/vendor/slick-theme.css" />
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/staff/css/vendor/animate.css"/>
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/staff/css/vendor/bootstrap.min.css"/>
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/staff/css/vendor/aos.min.css"/>
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/staff/css/vendor/range-slider.css"/>
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/staff/css/vendor/swiper-bundle.min.css"/>
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/staff/css/vendor/jquery.slick.css"/>
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/staff/css/vendor/slick-theme.css"/>
     <!-- endregion -->
 
     <!-- Main CSS -->
@@ -95,18 +95,11 @@
 <script src="${pageContext.request.contextPath}/assets/staff/js/vendor/daterangepicker.js"></script>
 <script src="${pageContext.request.contextPath}/assets/staff/js/vendor/date-range.js"></script>
 
-<script src="${pageContext.request.contextPath}/assets/staff/js/vendor/jquery.zoom.min.js"></script>
-<script src="${pageContext.request.contextPath}/assets/staff/js/vendor/mixitup.min.js"></script>
-<script src="${pageContext.request.contextPath}/assets/staff/js/vendor/range-slider.js"></script>
-<script src="${pageContext.request.contextPath}/assets/staff/js/vendor/aos.min.js"></script>
-<script src="${pageContext.request.contextPath}/assets/staff/js/vendor/swiper-bundle.min.js"></script>
-<script src="${pageContext.request.contextPath}/assets/staff/js/vendor/slick.min.js"></script>
 <!-- endregion JS-->
 
 <!-- region Main Custom JS -->
 <script src="${pageContext.request.contextPath}/assets/staff/js/main.js"></script>
-<script src="${pageContext.request.contextPath}/assets/staff/js/order-details.js"></script>
-<script src="${pageContext.request.contextPath}/assets/staff/js/product-details.js"></script>
 <!-- endregion -->
+
 </body>
 </html>
