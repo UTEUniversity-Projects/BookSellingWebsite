@@ -6,7 +6,6 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import lombok.experimental.SuperBuilder;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -17,7 +16,6 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 @Getter
 @Setter
-@SuperBuilder
 public abstract class Payment implements Serializable {
 
     // region Attributes
@@ -39,10 +37,6 @@ public abstract class Payment implements Serializable {
     @Enumerated(EnumType.STRING)
     @Column(name = "currency", nullable = false)
     protected EPaymentCurrency currency;
-
-    // endregion
-
-    // region Relationships
 
     // endregion
 

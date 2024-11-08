@@ -102,5 +102,6 @@
 <script src="${pageContext.request.contextPath}/assets/owner/js/customer-profile.js"></script>
 <script src="${pageContext.request.contextPath}/assets/owner/js/data/ecommerce-chart-data.js"></script>
 <script src="${pageContext.request.contextPath}/assets/owner/js/product-details.js"></script>
+<script src="${pageContext.request.contextPath}/assets/js/vendor/daterangepicker.min.js"></script>
 </body>
 </html>

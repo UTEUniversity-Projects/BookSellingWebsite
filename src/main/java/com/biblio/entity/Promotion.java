@@ -66,11 +66,8 @@ public class Promotion implements Serializable {
 
     // region Relationships
 
-    @ManyToMany(cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
-    @JoinTable(name = "promotion_promotion_target",
-            joinColumns = @JoinColumn(name = "promotion_id", nullable = false),
-            inverseJoinColumns = @JoinColumn(name = "promotion_target_id", nullable = false))
-    private Set<PromotionTarget> promotionTargets = new HashSet<PromotionTarget>();
+    @OneToMany(mappedBy = "promotion")
+    private Set<PromotionTarget> promotionTargets = new HashSet<>();
 
     @ManyToMany(mappedBy = "promotions", fetch = FetchType.LAZY)
     private Set<Order> orders;

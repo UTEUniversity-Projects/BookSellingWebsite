@@ -1,8 +1,5 @@
 package com.biblio.entity;
 
-import com.biblio.enumeration.EPaymentCurrency;
-import com.biblio.enumeration.EPaymentStatus;
-import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -13,7 +10,6 @@ import java.io.Serializable;
 @Entity
 @Table(name = "bank_transfer")
 @NoArgsConstructor
-@AllArgsConstructor
 @Getter
 @Setter
 public class BankTransfer extends Payment implements Serializable {

@@ -2,7 +2,6 @@ package com.biblio.entity;
 
 import com.biblio.enumeration.EAccountStatus;
 import com.biblio.enumeration.EUserRole;
-import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -13,7 +12,6 @@ import java.io.Serializable;
 @Entity
 @Table(name = "account")
 @NoArgsConstructor
-@AllArgsConstructor
 @Getter
 @Setter
 public class Account implements Serializable {

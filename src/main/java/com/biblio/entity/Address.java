@@ -11,7 +11,6 @@ import java.io.Serializable;
 @Entity
 @Table(name = "address")
 @NoArgsConstructor
-@AllArgsConstructor
 @Getter
 @Setter
 public class Address implements Serializable {

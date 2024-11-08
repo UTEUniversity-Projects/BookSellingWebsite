@@ -5,12 +5,9 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.util.HashSet;
-import java.util.Set;
 
 @Entity
 @Table(name = "promotion_target")
@@ -40,8 +37,9 @@ public class PromotionTarget implements Serializable {
 
     // region Relationships
 
-    @ManyToMany(mappedBy = "promotionTargets")
-    private Set<Promotion> promotions = new HashSet<Promotion>();
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "promotion_id", nullable = false)
+    private Promotion promotion;
 
     // endregion
 

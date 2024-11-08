@@ -1,6 +1,8 @@
 package com.biblio.entity;
 
-import com.biblio.enumeration.EClassificationStatus;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import javax.persistence.Entity;
 import javax.persistence.ManyToMany;
@@ -11,6 +13,9 @@ import java.util.Set;
 
 @Entity
 @Table(name = "tag")
+@NoArgsConstructor
+@Getter
+@Setter
 public class Tag extends Classification implements Serializable {
 
     // region Relationships
@@ -20,28 +25,4 @@ public class Tag extends Classification implements Serializable {
 
     // endregion
 
-    // region Constructors
-
-    public Tag() {
-        super();
-    }
-
-    public Tag(Long id, String name, String shortScript, String fullScript, EClassificationStatus status, Set<BookMetadata> metadatas) {
-        super(id, name, shortScript, fullScript, status);
-        this.metadatas = metadatas;
-    }
-
-    // endregion
-
-    // region Getters & Setters
-
-    public Set<BookMetadata> getMetadatas() {
-        return metadatas;
-    }
-
-    public void setMetadatas(Set<BookMetadata> metadatas) {
-        this.metadatas = metadatas;
-    }
-
-    // endregion
 }

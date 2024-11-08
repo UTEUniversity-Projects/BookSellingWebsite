@@ -1,10 +1,12 @@
 package com.biblio.entity;
 
-
 import com.biblio.enumeration.EBookAgeRecommend;
 import com.biblio.enumeration.EBookCondition;
 import com.biblio.enumeration.EBookFormat;
 import com.biblio.enumeration.EBookLanguage;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -14,6 +16,9 @@ import java.util.Set;
 
 @Entity
 @Table(name = "book")
+@NoArgsConstructor
+@Getter
+@Setter
 public class Book implements Serializable {
 
     // region Attributes
@@ -107,245 +112,6 @@ public class Book implements Serializable {
 
     @OneToMany(mappedBy = "book")
     private Set<OrderItem> orderItems = new HashSet<>();
-
-    // endregion
-
-    // region Constructors
-
-    public Book() {
-    }
-
-    public Book(Long id, String title, String description, double sellingPrice, LocalDateTime publicationDate, int edition, String codeISBN10, String codeISBN13, EBookFormat format, int handcover, double length, double width, double height, Set<EBookLanguage> languages, double weight, EBookCondition condition, EBookAgeRecommend recommendedAge, BookMetadata metadata, Category category, SubCategory subCategory, Publisher publisher, Set<Author> authors, Set<Translator> translators, Set<Review> reviews, Set<OrderItem> orderItems) {
-        this.id = id;
-        this.title = title;
-        this.description = description;
-        this.sellingPrice = sellingPrice;
-        this.publicationDate = publicationDate;
-        this.edition = edition;
-        this.codeISBN10 = codeISBN10;
-        this.codeISBN13 = codeISBN13;
-        this.format = format;
-        this.handcover = handcover;
-        this.length = length;
-        this.width = width;
-        this.height = height;
-        this.languages = languages;
-        this.weight = weight;
-        this.condition = condition;
-        this.recommendedAge = recommendedAge;
-        this.metadata = metadata;
-        this.category = category;
-        this.subCategory = subCategory;
-        this.publisher = publisher;
-        this.authors = authors;
-        this.translators = translators;
-        this.reviews = reviews;
-        this.orderItems = orderItems;
-    }
-
-    // endregion
-
-    // region Getters & Setters
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getTitle() {
-        return title;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    public double getSellingPrice() {
-        return sellingPrice;
-    }
-
-    public void setSellingPrice(double sellingPrice) {
-        this.sellingPrice = sellingPrice;
-    }
-
-    public LocalDateTime getPublicationDate() {
-        return publicationDate;
-    }
-
-    public void setPublicationDate(LocalDateTime publicationDate) {
-        this.publicationDate = publicationDate;
-    }
-
-    public int getEdition() {
-        return edition;
-    }
-
-    public void setEdition(int edition) {
-        this.edition = edition;
-    }
-
-    public String getCodeISBN10() {
-        return codeISBN10;
-    }
-
-    public void setCodeISBN10(String codeISBN10) {
-        this.codeISBN10 = codeISBN10;
-    }
-
-    public String getCodeISBN13() {
-        return codeISBN13;
-    }
-
-    public void setCodeISBN13(String codeISBN13) {
-        this.codeISBN13 = codeISBN13;
-    }
-
-    public EBookFormat getFormat() {
-        return format;
-    }
-
-    public void setFormat(EBookFormat format) {
-        this.format = format;
-    }
-
-    public int getHandcover() {
-        return handcover;
-    }
-
-    public void setHandcover(int handcover) {
-        this.handcover = handcover;
-    }
-
-    public double getLength() {
-        return length;
-    }
-
-    public void setLength(double length) {
-        this.length = length;
-    }
-
-    public double getWidth() {
-        return width;
-    }
-
-    public void setWidth(double width) {
-        this.width = width;
-    }
-
-    public double getHeight() {
-        return height;
-    }
-
-    public void setHeight(double height) {
-        this.height = height;
-    }
-
-    public Set<EBookLanguage> getLanguages() {
-        return languages;
-    }
-
-    public void setLanguages(Set<EBookLanguage> languages) {
-        this.languages = languages;
-    }
-
-    public double getWeight() {
-        return weight;
-    }
-
-    public void setWeight(double weight) {
-        this.weight = weight;
-    }
-
-    public EBookCondition getCondition() {
-        return condition;
-    }
-
-    public void setCondition(EBookCondition condition) {
-        this.condition = condition;
-    }
-
-    public EBookAgeRecommend getRecommendedAge() {
-        return recommendedAge;
-    }
-
-    public void setRecommendedAge(EBookAgeRecommend recommendedAge) {
-        this.recommendedAge = recommendedAge;
-    }
-
-    public BookMetadata getMetadata() {
-        return metadata;
-    }
-
-    public void setMetadata(BookMetadata metadata) {
-        this.metadata = metadata;
-    }
-
-    public Category getCategory() {
-        return category;
-    }
-
-    public void setCategory(Category category) {
-        this.category = category;
-    }
-
-    public SubCategory getSubCategory() {
-        return subCategory;
-    }
-
-    public void setSubCategory(SubCategory subCategory) {
-        this.subCategory = subCategory;
-    }
-
-    public Publisher getPublisher() {
-        return publisher;
-    }
-
-    public void setPublisher(Publisher publisher) {
-        this.publisher = publisher;
-    }
-
-    public Set<Author> getAuthors() {
-        return authors;
-    }
-
-    public void setAuthors(Set<Author> authors) {
-        this.authors = authors;
-    }
-
-    public Set<Translator> getTranslators() {
-        return translators;
-    }
-
-    public void setTranslators(Set<Translator> translators) {
-        this.translators = translators;
-    }
-
-    public Set<Review> getReviews() {
-        return reviews;
-    }
-
-    public void setReviews(Set<Review> reviews) {
-        this.reviews = reviews;
-    }
-
-    public Set<OrderItem> getOrderItems() {
-        return orderItems;
-    }
-
-    public void setOrderItems(Set<OrderItem> orderItems) {
-        this.orderItems = orderItems;
-    }
 
     // endregion
 }

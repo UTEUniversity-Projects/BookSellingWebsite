@@ -67,11 +67,4 @@ public class Order implements Serializable {
 
     // endregion
 
-    // region Constructors
-
-    // endregion
-
-    // region Getters & Setters
-
-    // endregion
 }
