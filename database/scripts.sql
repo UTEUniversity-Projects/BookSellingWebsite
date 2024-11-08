@@ -1,27 +1,27 @@
 -- Dữ liệu ảo
 -- USE `bsw-biblio`;
 -- 1. Table Account:
-INSERT INTO account (password, role, username) VALUES
-('abc', 'OWNER', 'owner_1'),
-('abc', 'STAFF', 'staff_1'),
-('abc', 'STAFF', 'staff_2'),
-('abc', 'CUSTOMER', 'customer_1'),
-('abc', 'CUSTOMER', 'customer_2'),
-('abc', 'CUSTOMER', 'customer_3'),
-('abc', 'CUSTOMER', 'customer_4'),
-('abc', 'CUSTOMER', 'customer_5'),
-('abc', 'CUSTOMER', 'customer_6'),
-('abc', 'CUSTOMER', 'customer_7'),
-('abc', 'CUSTOMER', 'customer_8'),
-('abc', 'CUSTOMER', 'customer_9'),
-('abc', 'CUSTOMER', 'customer_10'),
-('abc', 'CUSTOMER', 'customer_11'),
-('abc', 'CUSTOMER', 'customer_12'),
-('abc', 'CUSTOMER', 'customer_13'),
-('abc', 'CUSTOMER', 'customer_14'),
-('abc', 'CUSTOMER', 'customer_15');
+INSERT INTO account (password, status, role, username) VALUES
+('abc', 'ACTIVE', 'OWNER', 'owner_1'),
+('abc', 'ACTIVE', 'STAFF', 'staff_1'),
+('abc', 'ACTIVE', 'STAFF', 'staff_2'),
+('abc', 'ACTIVE', 'CUSTOMER', 'customer_1'),
+('abc', 'ACTIVE', 'CUSTOMER', 'customer_2'),
+('abc', 'ACTIVE', 'CUSTOMER', 'customer_3'),
+('abc', 'ACTIVE', 'CUSTOMER', 'customer_4'),
+('abc', 'ACTIVE', 'CUSTOMER', 'customer_5'),
+('abc', 'ACTIVE', 'CUSTOMER', 'customer_6'),
+('abc', 'ACTIVE', 'CUSTOMER', 'customer_7'),
+('abc', 'ACTIVE', 'CUSTOMER', 'customer_8'),
+('abc', 'ACTIVE', 'CUSTOMER', 'customer_9'),
+('abc', 'ACTIVE', 'CUSTOMER', 'customer_10'),
+('abc', 'ACTIVE', 'CUSTOMER', 'customer_11'),
+('abc', 'ACTIVE', 'CUSTOMER', 'customer_12'),
+('abc', 'ACTIVE', 'CUSTOMER', 'customer_13'),
+('abc', 'ACTIVE', 'CUSTOMER', 'customer_14'),
+('abc', 'ACTIVE', 'CUSTOMER', 'customer_15');notification
 
--- 2. Table Owner:
+-- 2. Table Owner:customer_notificationnotification
 INSERT INTO owner (avatar, date_of_birth, email_address, full_name, gender, join_at, phone_number, account_id)
 VALUES 
 ('https://kenh14cdn.com/203336854389633024/2022/4/9/1732920193150637133093626329146106221360649n-164947443607057196887.jpeg', '1985-07-15', 'owner_1@gmail.com', 'Nguyễn Văn An', 'MALE', '2023-03-15', '0123456789', 1);
@@ -490,3 +490,115 @@ INSERT INTO promotion (code, created_at, description, discount_limit, effective_
 ('FREESHIP9', '2024-11-29 17:00:00', 'Miễn phí vận chuyển cho đơn hàng từ 500k', 15000, '2024-11-29 00:00:00', '2024-11-30 23:59:59', 500000, 100, 'NULL_AND_VOID', 'Khuyến mãi FREESHIP', 'FREESHIP'),
 ('FREESHIP10', '2024-11-30 18:00:00', 'Miễn phí vận chuyển cho đơn hàng từ 700k', 15000, '2024-11-30 00:00:00', '2024-11-10 23:59:59', 700000, 100, 'EXPIRED', 'Khuyến mãi FREESHIP', 'FREESHIP');
 
+-- Thêm 5 mã Discount
+INSERT INTO promotion (code, created_at, description, discount_limit, effective_date, expiration_date, min_value_to_be_applied, percent_discount, status, title, type) VALUES
+('DISCOUNT1', '2024-11-01 09:00:00', 'Giảm giá đặc biệt DISCOUNT1', 0, '2024-11-01 00:00:00', '2024-11-30 23:59:59', 0, 10, 'EFFECTIVE', 'Khuyến mãi DISCOUNT1', 'DISCOUNT'),
+('DISCOUNT2', '2024-11-02 10:00:00', 'Giảm giá đặc biệt DISCOUNT2', 0, '2024-11-02 00:00:00', '2024-11-30 23:59:59', 0, 15, 'EFFECTIVE', 'Khuyến mãi DISCOUNT2', 'DISCOUNT'),
+('DISCOUNT3', '2024-11-03 11:00:00', 'Giảm giá đặc biệt DISCOUNT3', 0, '2024-11-03 00:00:00', '2024-11-30 23:59:59', 0, 20, 'USED_OUT', 'Khuyến mãi DISCOUNT3', 'DISCOUNT'),
+('DISCOUNT4', '2024-11-04 12:00:00', 'Giảm giá đặc biệt DISCOUNT4', 0, '2024-11-04 00:00:00', '2024-11-10 23:59:59', 0, 25, 'EXPIRED', 'Khuyến mãi DISCOUNT4', 'DISCOUNT'),
+('DISCOUNT5', '2024-11-05 13:00:00', 'Giảm giá đặc biệt DISCOUNT5', 0, '2024-11-05 00:00:00', '2024-11-30 23:59:59', 0, 30, 'NULL_AND_VOID', 'Khuyến mãi DISCOUNT5', 'DISCOUNT');
+
+-- 14. Table Promotion_Target:
+INSERT INTO promotion_target (applicable_object_id, quantity, type, promotion_id) VALUES
+('WHOLE', 30, 'WHOLE', 1),
+('WHOLE', 30, 'WHOLE', 2),
+('WHOLE', 30, 'WHOLE', 3),
+('WHOLE', 30, 'WHOLE', 4),
+('WHOLE', 30, 'WHOLE', 5),
+('WHOLE', 30, 'WHOLE', 6),
+('WHOLE', 30, 'WHOLE', 7),
+('WHOLE', 30, 'WHOLE', 8),
+('WHOLE', 30, 'WHOLE', 9),
+('WHOLE', 30, 'WHOLE', 10),
+('WHOLE', 30, 'WHOLE', 11),
+('WHOLE', 30, 'WHOLE', 12),
+('WHOLE', 30, 'WHOLE', 13),
+('WHOLE', 30, 'WHOLE', 14),
+('WHOLE', 30, 'WHOLE', 15),
+('WHOLE', 30, 'WHOLE', 16),
+('WHOLE', 30, 'WHOLE', 17),
+('WHOLE', 30, 'WHOLE', 18),
+('WHOLE', 30, 'WHOLE', 19),
+('WHOLE', 30, 'WHOLE', 20),
+('WHOLE', 30, 'WHOLE', 21),
+('WHOLE', 30, 'WHOLE', 22),
+('WHOLE', 30, 'WHOLE', 23),
+('WHOLE', 30, 'WHOLE', 24),
+('WHOLE', 30, 'WHOLE', 25),
+('WHOLE', 30, 'WHOLE', 26),
+('WHOLE', 30, 'WHOLE', 27),
+('WHOLE', 30, 'WHOLE', 28),
+('WHOLE', 30, 'WHOLE', 29),
+('WHOLE', 30, 'WHOLE', 30);
+
+-- promotion_id = 31
+INSERT INTO promotion_target (applicable_object_id, quantity, type, promotion_id) VALUES
+('1', NULL, 'BOOK', 31),
+('2', NULL, 'BOOK', 31),
+('3', NULL, 'BOOK', 31),
+('4', NULL, 'BOOK', 31),
+('5', NULL, 'BOOK', 31),
+('6', NULL, 'BOOK', 31),
+('7', NULL, 'BOOK', 31),
+('8', NULL, 'BOOK', 31),
+('9', NULL, 'BOOK', 31),
+('10', NULL, 'BOOK', 31);
+
+-- promotion_id = 32
+INSERT INTO promotion_target (applicable_object_id, quantity, type, promotion_id) VALUES
+('1', NULL, 'BOOK', 32),
+('2', NULL, 'BOOK', 32),
+('3', NULL, 'BOOK', 32),
+('4', NULL, 'BOOK', 32),
+('5', NULL, 'BOOK', 32),
+('6', NULL, 'BOOK', 32),
+('7', NULL, 'BOOK', 32),
+('8', NULL, 'BOOK', 32),
+('9', NULL, 'BOOK', 32),
+('10', NULL, 'BOOK', 32);
+
+-- 15. Table Notification:
+INSERT INTO notification (content, created_at, hyper_link, sent_time, status, title, type) VALUES
+('Nội dung thông báo 1', '2024-11-01 09:00:00', NULL, '2024-11-01 09:05:00', 'NOT_SEEN', 'Thông báo 1', 'ORDER'),
+('Nội dung thông báo 2', '2024-11-02 10:00:00', NULL, '2024-11-02 10:05:00', 'VIEWED', 'Thông báo 2', 'SUPPORT'),
+('Nội dung thông báo 3', '2024-11-03 11:00:00', NULL, '2024-11-03 11:05:00', 'NOT_SEEN', 'Thông báo 3', 'SYSTEM'),
+('Nội dung thông báo 4', '2024-11-04 12:00:00', NULL, '2024-11-04 12:05:00', 'VIEWED', 'Thông báo 4', 'ORDER'),
+('Nội dung thông báo 5', '2024-11-05 13:00:00', NULL, '2024-11-05 13:05:00', 'NOT_SEEN', 'Thông báo 5', 'SUPPORT'),
+('Nội dung thông báo 6', '2024-11-06 14:00:00', NULL, '2024-11-06 14:05:00', 'VIEWED', 'Thông báo 6', 'SYSTEM'),
+('Nội dung thông báo 7', '2024-11-07 15:00:00', NULL, '2024-11-07 15:05:00', 'NOT_SEEN', 'Thông báo 7', 'OTHER'),
+('Nội dung thông báo 8', '2024-11-08 16:00:00', NULL, '2024-11-08 16:05:00', 'VIEWED', 'Thông báo 8', 'ORDER'),
+('Nội dung thông báo 9', '2024-11-09 17:00:00', NULL, '2024-11-09 17:05:00', 'NOT_SEEN', 'Thông báo 9', 'SUPPORT'),
+('Nội dung thông báo 10', '2024-11-10 18:00:00', NULL, '2024-11-10 18:05:00', 'VIEWED', 'Thông báo 10', 'SYSTEM'),
+('Nội dung thông báo 11', '2024-11-11 19:00:00', NULL, '2024-11-11 19:05:00', 'NOT_SEEN', 'Thông báo 11', 'ORDER'),
+('Nội dung thông báo 12', '2024-11-12 20:00:00', NULL, '2024-11-12 20:05:00', 'VIEWED', 'Thông báo 12', 'SUPPORT'),
+('Nội dung thông báo 13', '2024-11-13 21:00:00', NULL, '2024-11-13 21:05:00', 'NOT_SEEN', 'Thông báo 13', 'SYSTEM'),
+('Nội dung thông báo 14', '2024-11-14 22:00:00', NULL, '2024-11-14 22:05:00', 'VIEWED', 'Thông báo 14', 'OTHER'),
+('Nội dung thông báo 15', '2024-11-15 23:00:00', NULL, '2024-11-15 23:05:00', 'NOT_SEEN', 'Thông báo 15', 'ORDER'),
+('Nội dung thông báo 16', '2024-11-16 08:00:00', NULL, '2024-11-16 08:05:00', 'VIEWED', 'Thông báo 16', 'SUPPORT'),
+('Nội dung thông báo 17', '2024-11-17 09:00:00', NULL, '2024-11-17 09:05:00', 'NOT_SEEN', 'Thông báo 17', 'SYSTEM'),
+('Nội dung thông báo 18', '2024-11-18 10:00:00', NULL, '2024-11-18 10:05:00', 'VIEWED', 'Thông báo 18', 'ORDER'),
+('Nội dung thông báo 19', '2024-11-19 11:00:00', NULL, '2024-11-19 11:05:00', 'NOT_SEEN', 'Thông báo 19', 'SUPPORT'),
+('Nội dung thông báo 20', '2024-11-20 12:00:00', NULL, '2024-11-20 12:05:00', 'VIEWED', 'Thông báo 20', 'OTHER');
+
+-- 16. Table Notification_Customer:
+INSERT INTO customer_notification (customer_id, notification_id) VALUES
+(4,1),
+(4,4),
+(4,7),
+(4,8),
+(4,11),
+(5,14),
+(5,15),
+(5,18),
+(5,20);
+
+INSERT INTO customer_notification (customer_id, notification_id) VALUES
+(4,1),
+(4,4),
+(4,7),
+(4,8),
+(4,11),
+(5,14),
+(5,15),
+(5,18),
+(5,20);

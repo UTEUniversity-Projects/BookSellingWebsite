@@ -1,13 +1,9 @@
 package com.biblio.dao.impl;
 
 import com.biblio.dao.ICustomerDAO;
-import com.biblio.entity.Account;
-import com.biblio.entity.Address;
 import com.biblio.entity.Customer;
-import org.jboss.jandex.Main;
 
 import java.util.List;
-import java.util.Set;
 
 public class CustomerDAOImpl extends GenericDAOImpl<Customer, Long> implements ICustomerDAO {
     public CustomerDAOImpl() {
@@ -15,7 +11,8 @@ public class CustomerDAOImpl extends GenericDAOImpl<Customer, Long> implements I
     }
     @Override
     public List<Customer> findAll() {
-       return super.findAll();
+        String jpql = "SELECT c.id, c.email FROM Customer c";
+       return super.findAll(jpql);
     }
     public static void main(String[] args) {
         List<Customer> list = new CustomerDAOImpl().findAll();
@@ -24,7 +21,7 @@ public class CustomerDAOImpl extends GenericDAOImpl<Customer, Long> implements I
 //            for (Address address : addresses) {
 //                System.out.println(address.getProvince());
 //            }
-            System.out.println(customer.getAccount().getUsername());
+            System.out.println(customer.getId());
         }
 
     }
