@@ -32,22 +32,10 @@ public class CustomerDAOImpl extends GenericDAOImpl<Customer> implements ICustom
     }
 
     public static void main(String[] args) {
-        long startTime = System.nanoTime();
-//        Customer customer = new Customer();
-//        customer.setId(1L);
-//        customer.getAccount().setStatus(EAccountStatus.INACTIVE);
-//        CustomerDAOImpl dao = new CustomerDAOImpl();
-//        dao.deactivateCustomer(customer);
-        List<Customer> list = new CustomerDAOImpl().findAll();
+        CustomerDAOImpl dao = new CustomerDAOImpl();
+        List<Customer> list = dao.findAll();
         for (Customer customer : list) {
-//            Set<Address> addresses = customer.getAddresses();
-//            for (Address address : addresses) {
-//                System.out.println(address.getProvince());
-//            }
-           System.out.println(customer.getId());
+           System.out.println(customer.getFullName());
         }
-        long endTime = System.nanoTime();
-        long duration = endTime - startTime; // Tính thời gian chạy
-        System.out.println("Time taken to execute query: " + duration / Math.pow(10, 9) + " seconds");
     }
 }

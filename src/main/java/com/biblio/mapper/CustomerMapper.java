@@ -32,13 +32,14 @@ public class CustomerMapper {
         address.setDistrict(customerRegisterRequest.getDistrict());
         address.setVillage(customerRegisterRequest.getHamlet());
         customer.setAddresses(Set.of(address));
-//        address.setCustomer(customer);
+        address.setCustomer(customer);
         customer.setAvatar(customerRegisterRequest.getAvatar());
         customer.setJoinAt(LocalDateTime.now());
         return customer;
     }
     public static CustomerGetListResponse toCustomerGetListResponse(Customer customer) {
         CustomerGetListResponse customerGetListResponse = new CustomerGetListResponse();
+
         customerGetListResponse.setId(customer.getId());
         customerGetListResponse.setAvatar(customer.getAvatar());
         customerGetListResponse.setDateOfBirth(customer.getDateOfBirth());
