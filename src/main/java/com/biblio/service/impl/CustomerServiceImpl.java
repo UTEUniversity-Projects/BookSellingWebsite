@@ -42,4 +42,12 @@ public class CustomerServiceImpl implements ICustomerService {
         CustomerGetListResponse customerGetListResponse = new CustomerGetListResponse();
         return CustomerMapper.toCustomerGetListResponse(customerDAO.findById(id));
     }
+
+    @Override
+    public void addCustomer(CustomerRegisterRequest request) {
+
+        Customer customer = CustomerMapper.toCustomerRegister(request);
+        customerDAO.addCustomer(customer);
+    }
+
 }

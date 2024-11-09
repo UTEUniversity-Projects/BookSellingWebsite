@@ -1,8 +1,9 @@
 package com.biblio.apis.customer;
 
 import com.biblio.dto.request.CustomerRegisterRequest;
-import com.biblio.mapper.CustomerMapper;
+import com.biblio.service.ICustomerService;
 import com.biblio.utils.HttpUtil;
+import com.google.gson.Gson;
 
 import javax.inject.Inject;
 import javax.servlet.ServletException;
@@ -12,6 +13,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.Serial;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Servlet implementation class RegisterAPI
@@ -22,7 +25,7 @@ public class RegisterAPI extends HttpServlet {
     private static final long serialVersionUID = 1L;
 
     @Inject
-    private CustomerMapper customerMapper;
+    ICustomerService customerService;
 
     /**
      * @see HttpServlet#HttpServlet()
@@ -46,25 +49,18 @@ public class RegisterAPI extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         // TODO Auto-generated method stub
         request.setCharacterEncoding("UTF-8");
+
+        CustomerRegisterRequest customer = HttpUtil.of(request.getReader()).toModel(CustomerRegisterRequest.class);
+
+        customerService.addCustomer(customer);
+
+        Gson gson = new Gson();
+        Map<String, Object> map = new HashMap<>();
+        map.put("code", 1000);
+        map.put("msg", "Đăng ký thành công !");
         response.setContentType("application/json");
-
-        CustomerRegisterRequest user = HttpUtil.of(request.getReader()).toModel(CustomerRegisterRequest.class);
-//        System.out.println(CustomerMapper.toCustomerRegister(user));
-//        ObjectMapper mapper = new ObjectMapper();
-//        mapper.writeValue(response.getOutputStream(), user);
-
-//        ObjectMapper objectMapper = new ObjectMapper();
-//        CustomerRegisterRequest user = objectMapper.readValue(request.getInputStream(), CustomerRegisterRequest.class);
-//        System.out.println("Register API: " + user);
-//
-//        JSONObject jsonResponse = new JSONObject();
-//        jsonResponse.append("status", "success");
-//
-//        Gson gson = new Gson();
-//
-//        response.setContentType("application/json");
-//        response.setCharacterEncoding("UTF-8");
-//        response.getWriter().write(gson.toJson(user));
+        response.setCharacterEncoding("UTF-8");
+        response.getWriter().write(gson.toJson(map));
     }
 
 }

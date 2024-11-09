@@ -9,4 +9,5 @@ public interface ICustomerDAO extends IGenericDAO<Customer> {
     Customer findById(Long id);
     void deactivateCustomer(Customer customer);
     void activateCustomer(Customer customer);
+    void addCustomer(Customer customer);
 }

@@ -30,4 +30,10 @@ public class CustomerDAOImpl extends GenericDAOImpl<Customer> implements ICustom
     public void activateCustomer(Customer customer) {
         super.update(customer);
     }
+
+    @Override
+    public void addCustomer(Customer customer) {
+        super.save(customer);
+    }
+
 }

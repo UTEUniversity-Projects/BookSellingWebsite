@@ -111,8 +111,8 @@
                             </div>
                             <div class="col-sm-12 col-md-12">
                                 <div class="form-group mb-2">
-                                    <label for="city" class="text-md text-slate-700 mb-1 ml-2">Tỉnh
-                                        thành phố</label> <select name="city" id="city"
+                                    <label for="province" class="text-md text-slate-700 mb-1 ml-2">Tỉnh
+                                        thành phố</label> <select name="city" id="province"
                                                                   class="bg-gray-50 border border-gray-300 text-gray-900 text-md rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5">
                                     <option selected>Thành phố</option>
                                 </select>
@@ -129,8 +129,8 @@
                             </div>
                             <div class="col-sm-12 col-md-12">
                                 <div class="form-group mb-2">
-                                    <label for="ward" class="text-md text-slate-700 mb-1 ml-2">Phường
-                                        Xã</label> <select name="ward" id="ward"
+                                    <label for="village" class="text-md text-slate-700 mb-1 ml-2">Phường
+                                        Xã</label> <select name="ward" id="village"
                                                            class="bg-gray-50 border border-gray-300 text-gray-900 text-md rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5">
                                     <option selected>Phường Xã</option>
                                 </select>
