@@ -9,7 +9,7 @@ $(document).ready(() => {
 
 		validate() {
 			$('.btn--success').on('click', function (event) {
-				// event.preventDefault();
+				event.preventDefault();
 
 				$('.form-group').removeClass('has-error');
 				$('.error-message').remove();
@@ -92,29 +92,83 @@ $(document).ready(() => {
 			});
 		}
 
+
 		register() {
-			$("#registerForm").submit(function (event) {
+			$("#registerForm").submit(async function (event) {
 				event.preventDefault();
 
-				const formData = new FormData(this);
+				const uploadImage = async () => {
+					const fileInput = document.getElementById('avatar');
+					const file = fileInput?.files[0];
 
-				$.ajax({
-					url: `${contextPath}/api/customer/register`,
-					type: 'POST',
-					contentType: 'application/json',
-					data: JSON.stringify(formData),
-					success: function (response, status, xhr) {
-						console.log(response);
-					},
-					error: function (xhr, status, error) {
-						console.error('Lỗi:', error);
-						alert('Có lỗi xảy ra, vui lòng thử lại!');
+					if (!file) {
+						alert("Please select a file.");
+						return null;
 					}
-				});
+
+					const formData = new FormData();
+					formData.append("image", file);
+
+					try {
+						return await $.ajax({
+							url: `${contextPath}/upload`,
+							type: 'POST',
+							data: formData,
+							enctype: 'multipart/form-data',
+							processData: false,
+							contentType: false,
+						});
+
+					} catch (error) {
+						console.error('Error uploading file:', error);
+						alert('Error uploading file: ' + error);
+						return null;
+					}
+				};
+
+				const handleRegistration = async () => {
+					let avatar = await uploadImage();
+					if (!avatar) {
+						return;
+					}
 
 
+					const formData = new FormData(document.getElementById("registerForm"));
+
+					const userData = {
+						fullName: formData.get("fullName"),
+						email: formData.get("Email"),
+						phoneNumber: formData.get("phoneNumber"),
+						dateOfBirth: formData.get("dateOfBirth"),
+						gender: formData.get("gender"),
+						username: formData.get("username"),
+						password: formData.get("password"),
+						province: formData.get("province"),
+						district: formData.get("district"),
+						village: formData.get("village"),
+						detail: formData.get("detail"),
+						avatar: avatar
+					};
+
+					console.log(userData);
+
+					$.ajax({
+						url: `${contextPath}/api/customer/register`,
+						type: 'POST',
+						contentType: 'application/json',
+						data: JSON.stringify(userData),
+						success: function (response, status, xhr) {
+							console.log(response);
+						},
+						error: function (xhr, status, error) {
+							console.error('Lỗi:', error);
+							alert('Có lỗi xảy ra, vui lòng thử lại!');
+						}
+					});
+				};
+
+				await handleRegistration().then(res => console.log(res));
 			});
-
 		}
 
 		getAddress() {
@@ -123,10 +177,10 @@ $(document).ready(() => {
 			$.getJSON(`${BASE_URL}/list`, async function (city) {
 				if (city.success) {
 					$.each(city.data, function (key, value) {
-						$('#city').append(`<option value="${value.id}" data-name="${value.name}">${value.name}</option>`);
+						$('#province').append(`<option value="${value.id}" data-name="${value.name}">${value.name}</option>`);
 					});
 
-					$('#city').change(function (e) {
+					$('#province').change(function (e) {
 						const cityId = $(this).val();
 
 						$.getJSON(
@@ -150,8 +204,8 @@ $(document).ready(() => {
 					$('#district').change(function (e) {
 						const wardId = $(this).val();
 
-						$('#ward').html(`<option value="0">Phường Xã</option>`);
-						$('#hamlet').html(`<option value="0">Số nhà | Ấp | Tổ</option>`);
+						$('#village').html(`<option value="0">Phường Xã</option>`);
+						// $('#hamlet').html(`<option value="0">Số nhà | Ấp | Tổ</option>`);
 
 						$.getJSON(
 							`${BASE_URL}/list?parentId=${wardId}&type=1`,

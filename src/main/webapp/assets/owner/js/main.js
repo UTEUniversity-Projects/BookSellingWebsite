@@ -681,24 +681,50 @@
         });
     }
 
-    document.addEventListener("DOMContentLoaded", function () {
-        const rows = document.querySelectorAll(
-            "#customer-data-table tbody .customer-row"
-        );
-        console.log(rows);
-        rows.forEach((row) => {
-            row.addEventListener("click", function (event) {
-                if (
-                    !event.target.closest("button") &&
-                    !event.target.closest(".dropdown-menu")
-                ) {
-                    const href = this.getAttribute("data-href");
-                    window.location.href = href;
-                }
-            });
+    var responsiveDataTable = $("#discount-data-table");
+    if (responsiveDataTable.length !== 0) {
+        responsiveDataTable.DataTable({
+            aLengthMenu: [
+                [10, 20, 30, -1],
+                [10, 20, 30, "All"],
+            ],
+            pageLength: 10,
+            dom: '<"row justify-content-between top-information"lf>rt<"row justify-content-between bottom-information"ip><"clear">',
         });
-    });
-
+    }
+    var responsiveDataTable = $("#voucher-data-table");
+    if (responsiveDataTable.length !== 0) {
+        responsiveDataTable.DataTable({
+            aLengthMenu: [
+                [10, 20, 30, -1],
+                [10, 20, 30, "All"],
+            ],
+            pageLength: 10,
+            dom: '<"row justify-content-between top-information"lf>rt<"row justify-content-between bottom-information"ip><"clear">',
+        });
+    }
+    var responsiveDataTable = $("#coupon-data-table");
+    if (responsiveDataTable.length !== 0) {
+        responsiveDataTable.DataTable({
+            aLengthMenu: [
+                [10, 20, 30, -1],
+                [10, 20, 30, "All"],
+            ],
+            pageLength: 10,
+            dom: '<"row justify-content-between top-information"lf>rt<"row justify-content-between bottom-information"ip><"clear">',
+        });
+    }
+    var responsiveDataTable = $("#freeship-data-table");
+    if (responsiveDataTable.length !== 0) {
+        responsiveDataTable.DataTable({
+            aLengthMenu: [
+                [10, 20, 30, -1],
+                [10, 20, 30, "All"],
+            ],
+            pageLength: 10,
+            dom: '<"row justify-content-between top-information"lf>rt<"row justify-content-between bottom-information"ip><"clear">',
+        });
+    }
     var responsiveDataTable = $("#discount_list");
     if (responsiveDataTable.length !== 0) {
         responsiveDataTable.DataTable({
@@ -1302,4 +1328,19 @@ barChartRevenueIcon.addEventListener('click', function () {
 
 lineChartRevenueIcon.addEventListener('click', function () {
     changeChartId('revenueBarChart', 'revenueLineChart');
+});
+
+document.querySelectorAll('.price-value').forEach(el => {
+    const rawValue = el.textContent.trim();
+
+    const value = parseFloat(rawValue);
+
+    if (!isNaN(value)) {
+        const formattedValue = value.toLocaleString('vi-VN');
+        if (el.classList.contains('minus-value')) {
+            el.innerHTML = `-<span class="currency-symbol">₫</span>${formattedValue}`;
+        } else {
+            el.innerHTML = `<span class="currency-symbol">₫</span>${formattedValue}`;
+        }
+    }
 });

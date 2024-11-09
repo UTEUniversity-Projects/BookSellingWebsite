@@ -72,7 +72,6 @@
     padding: 15px;
     position: relative;
     border: 1px solid #eee;
-    border-radius: 0;
   }
 .avatar-preview > div {
     width: 100%;
@@ -104,4 +103,6 @@
     font-size: 36px;
     cursor: pointer;
 }
-
+.textbox-customer-info input {
+    background-color: white;
+}

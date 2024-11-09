@@ -8,6 +8,8 @@ import lombok.Setter;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -36,23 +38,23 @@ public class Order implements Serializable {
 
     // region Relationships
 
-    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinColumn(name = "customer_id", nullable = false)
     private Customer customer;
 
-    @OneToOne(mappedBy = "order")
-    private BankTransfer bankTransfer;
+//    @OneToOne(mappedBy = "order")
+//    private BankTransfer bankTransfer;
+//
+//    @OneToOne(mappedBy = "order")
+//    private CreditCard creditCard;
+//
+//    @OneToOne(mappedBy = "order")
+//    private Cash cash;
+//
+//    @OneToOne(mappedBy = "order")
+//    private EWallet wallet;
 
-    @OneToOne(mappedBy = "order")
-    private CreditCard creditCard;
-
-    @OneToOne(mappedBy = "order")
-    private Cash cash;
-
-    @OneToOne(mappedBy = "order")
-    private EWallet wallet;
-
-    @OneToMany(mappedBy = "order", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "order", fetch = FetchType.EAGER)
     private Set<OrderItem> orderItems = new HashSet<OrderItem>();
 
     @ManyToMany(cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
@@ -61,10 +63,17 @@ public class Order implements Serializable {
             inverseJoinColumns = @JoinColumn(name = "promotion_id", nullable = false))
     private Set<Promotion> promotions = new HashSet<Promotion>();
 
-    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    @JoinColumn(name = "address_id")
+    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @JoinColumn(name = "address_id", nullable = false)
     private Address address;
 
     // endregion
-
+    public double calTotalPrice() {
+        double totalPrice = 0.0;
+        for (OrderItem item : orderItems) {
+            totalPrice += item.calPriceItem();
+        }
+        BigDecimal roundedTotal = new BigDecimal(totalPrice).setScale(2, RoundingMode.HALF_UP);
+        return roundedTotal.doubleValue();
+    }
 }

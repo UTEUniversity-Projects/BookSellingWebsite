@@ -20,7 +20,7 @@ public enum EPromotionStatus {
 
     @Override
     public String toString() {
-        return name() + " (" + description + ")";
+        return name();
     }
 }
 
