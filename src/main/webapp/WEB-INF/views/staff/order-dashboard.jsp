@@ -1,4 +1,5 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!-- main content -->
 <div class="cr-main-content">
     <div class="container-fluid">
@@ -25,12 +26,12 @@
                             </div>
                             <div>
                                 <button
-                                    type="button"
-                                    class="btn btn-outline-success dropdown-toggle dropdown-toggle-split"
-                                    data-bs-toggle="dropdown"
-                                    aria-haspopup="true"
-                                    aria-expanded="false"
-                                    data-display="static"
+                                        type="button"
+                                        class="btn btn-outline-success dropdown-toggle dropdown-toggle-split"
+                                        data-bs-toggle="dropdown"
+                                        aria-haspopup="true"
+                                        aria-expanded="false"
+                                        data-display="static"
                                 >
                                     <span id="selected-text">Tất cả</span>
                                     <span class="sr-only">
@@ -42,9 +43,9 @@
                                         Tất cả
                                     </a>
                                     <a
-                                        class="dropdown-item"
-                                        href="#"
-                                        data-value="WAITING_CONFIRMATION"
+                                            class="dropdown-item"
+                                            href="#"
+                                            data-value="WAITING_CONFIRMATION"
                                     >
                                         Chờ xác nhận
                                     </a>
@@ -55,9 +56,9 @@
                                         Đang vận chuyển
                                     </a>
                                     <a
-                                        class="dropdown-item"
-                                        href="#"
-                                        data-value="COMPLETE_DELIVERY"
+                                            class="dropdown-item"
+                                            href="#"
+                                            data-value="COMPLETE_DELIVERY"
                                     >
                                         Đã hoàn thành
                                     </a>
@@ -65,9 +66,9 @@
                                         Đã hủy
                                     </a>
                                     <a
-                                        class="dropdown-item"
-                                        href="#"
-                                        data-value="REQUEST_REFUND"
+                                            class="dropdown-item"
+                                            href="#"
+                                            data-value="REQUEST_REFUND"
                                     >
                                         Yêu cầu hoàn trả
                                     </a>
@@ -92,90 +93,20 @@
                                 </tr>
                                 </thead>
                                 <tbody>
-                                <tr class="order-row" data-href="/staff/order-details">
-                                    <td class="token">#fx2650</td>
-                                    <td>Avira Venusio</td>
-                                    <td>10/14/2024</td>
-                                    <td>1.000.000VND</td>
-                                    <td>Momo</td>
-                                    <td data-status="WAITING_CONFIRMATION">
-                                        <span class="status status__pending">
-                                            Chờ xác nhận
-                                        </span>
-                                    </td>
-                                </tr>
-                                <tr class="order-row" data-href="/staff/order-details">
-                                    <td class="token">#fx2650</td>
-                                    <td>Bvira Venusio</td>
-                                    <td>10/14/2024</td>
-                                    <td>2.000.000VND</td>
-                                    <td>Momo</td>
-                                    <td data-status="PACKING">
-                                        <span class="status status__packing">
-                                            Đang đóng gói
-                                        </span>
-                                    </td>
-                                </tr>
-                                <tr class="order-row" data-href="/staff/order-details">
-                                    <td class="token">#fx2650</td>
-                                    <td>Cvira Venusio</td>
-                                    <td>10/14/2024</td>
-                                    <td>5.000.000VND</td>
-                                    <td>Momo</td>
-                                    <td data-status="SHIPPING">
-                                        <span class="status status__shipping">
-                                            Đang vận chuyển
-                                        </span>
-                                    </td>
-                                </tr>
-                                <tr class="order-row" data-href="/staff/order-details">
-                                    <td class="token">#fx2650</td>
-                                    <td>Dvira Venusio</td>
-                                    <td>10/14/2024</td>
-                                    <td>3.000.000VND</td>
-                                    <td>Momo</td>
-                                    <td data-status="COMPLETE_DELIVERY">
-                                        <span class="status status__completed">
-                                            Đã hoàn thành
-                                        </span>
-                                    </td>
-                                </tr>
-                                <tr class="order-row" data-href="/staff/order-details">
-                                    <td class="token">#fx2650</td>
-                                    <td>Evira Venusio</td>
-                                    <td>10/14/2024</td>
-                                    <td>7.000.000VND</td>
-                                    <td>Momo</td>
-                                    <td data-status="CANCELED">
-                                        <span class="status status__canceled">
-                                            Đã hủy
-                                        </span>
-                                    </td>
-                                </tr>
-                                <tr class="order-row" data-href="/staff/order-details">
-                                    <td class="token">#fx2650</td>
-                                    <td>Avira Venusio</td>
-                                    <td>10/14/2024</td>
-                                    <td>500.000VND</td>
-                                    <td>Momo</td>
-                                    <td data-status="REQUEST_REFUND">
-                                        <span class="status status__request_refund">
-                                            Yêu cầu trả hàng
-                                        </span>
-                                    </td>
-                                </tr>
-                                <tr class="order-row" data-href="/staff/order-details">
-                                    <td class="token">#fx2650</td>
-                                    <td>Jvira Venusio</td>
-                                    <td>10/14/2024</td>
-                                    <td>10.000.000VND</td>
-                                    <td>Momo</td>
-                                    <td data-status="REFUNDED">
-                                        <span class="status status__refunded">
-                                            Hoàn trả
-                                        </span>
-                                    </td>
-                                </tr>
+                                <c:forEach var="order" items="${orders}">
+                                    <tr class="order-row" data-href="/staff/order-details?id=${order.id}">
+                                        <td class="token">${order.id}</td>
+                                        <td>${order.customerName}</td>
+                                        <td>123</td>
+                                        <td class="price-value">${order.totalPrice}</td>
+                                        <td>Momo</td>
+                                        <td data-status="${order.status}">
+                                            <span class="status status__${order.statusStyle}">
+                                                    ${order.statusDisplay}
+                                            </span>
+                                        </td>
+                                    </tr>
+                                </c:forEach>
                                 </tbody>
                             </table>
                         </div>
