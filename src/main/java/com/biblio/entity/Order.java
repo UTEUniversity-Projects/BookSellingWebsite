@@ -41,7 +41,7 @@ public class Order implements Serializable {
     @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinColumn(name = "customer_id", nullable = false)
     private Customer customer;
-
+  
 //    @OneToOne(mappedBy = "order")
 //    private BankTransfer bankTransfer;
 //
