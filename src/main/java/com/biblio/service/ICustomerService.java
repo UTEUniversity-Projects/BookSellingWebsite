@@ -8,4 +8,5 @@ public interface ICustomerService {
     List<CustomerGetListResponse> findAll();
     void deactivateCustomer(Long id);
     void activateCustomer(Long id);
+    CustomerGetListResponse findById(Long id);
 }

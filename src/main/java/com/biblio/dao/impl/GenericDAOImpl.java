@@ -2,7 +2,6 @@ package com.biblio.dao.impl;
 
 import com.biblio.dao.IGenericDAO;
 import com.biblio.jpaconfig.JpaConfig;
-import com.sun.xml.bind.v2.model.core.ID;
 
 import javax.persistence.EntityManager;
 import javax.persistence.TypedQuery;

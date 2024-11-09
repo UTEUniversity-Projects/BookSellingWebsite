@@ -618,52 +618,52 @@ INSERT INTO promotion_target (applicable_object_id, quantity, type, promotion_id
 
 -- promotion_id = 31
 INSERT INTO promotion_target (applicable_object_id, quantity, type, promotion_id) VALUES
-('1', NULL, 'BOOK', 31),
-('2', NULL, 'BOOK', 31),
-('3', NULL, 'BOOK', 31),
-('4', NULL, 'BOOK', 31),
-('5', NULL, 'BOOK', 31),
-('6', NULL, 'BOOK', 31),
-('7', NULL, 'BOOK', 31),
-('8', NULL, 'BOOK', 31),
-('9', NULL, 'BOOK', 31),
-('10', NULL, 'BOOK', 31);
+('1', -1, 'BOOK', 31),
+('2', -1, 'BOOK', 31),
+('3', -1, 'BOOK', 31),
+('4', -1, 'BOOK', 31),
+('5', -1, 'BOOK', 31),
+('6', -1, 'BOOK', 31),
+('7', -1, 'BOOK', 31),
+('8', -1, 'BOOK', 31),
+('9', -1, 'BOOK', 31),
+('10', -1, 'BOOK', 31);
 
 -- promotion_id = 32
 INSERT INTO promotion_target (applicable_object_id, quantity, type, promotion_id) VALUES
-('1', NULL, 'BOOK', 32),
-('2', NULL, 'BOOK', 32),
-('3', NULL, 'BOOK', 32),
-('4', NULL, 'BOOK', 32),
-('5', NULL, 'BOOK', 32),
-('6', NULL, 'BOOK', 32),
-('7', NULL, 'BOOK', 32),
-('8', NULL, 'BOOK', 32),
-('9', NULL, 'BOOK', 32),
-('10', NULL, 'BOOK', 32);
+('1', -1, 'BOOK', 32),
+('2', -1, 'BOOK', 32),
+('3', -1, 'BOOK', 32),
+('4', -1, 'BOOK', 32),
+('5', -1, 'BOOK', 32),
+('6', -1, 'BOOK', 32),
+('7', -1, 'BOOK', 32),
+('8', -1, 'BOOK', 32),
+('9', -1, 'BOOK', 32),
+('10', -1, 'BOOK', 32);
 
 -- 15. Table Notification:
 INSERT INTO notification (content, created_at, hyper_link, sent_time, status, title, type) VALUES
-('Nội dung thông báo 1', '2024-11-01 09:00:00', NULL, '2024-11-01 09:05:00', 'NOT_SEEN', 'Thông báo 1', 'ORDER'),
-('Nội dung thông báo 2', '2024-11-02 10:00:00', NULL, '2024-11-02 10:05:00', 'VIEWED', 'Thông báo 2', 'SUPPORT'),
-('Nội dung thông báo 3', '2024-11-03 11:00:00', NULL, '2024-11-03 11:05:00', 'NOT_SEEN', 'Thông báo 3', 'SYSTEM'),
-('Nội dung thông báo 4', '2024-11-04 12:00:00', NULL, '2024-11-04 12:05:00', 'VIEWED', 'Thông báo 4', 'ORDER'),
-('Nội dung thông báo 5', '2024-11-05 13:00:00', NULL, '2024-11-05 13:05:00', 'NOT_SEEN', 'Thông báo 5', 'SUPPORT'),
-('Nội dung thông báo 6', '2024-11-06 14:00:00', NULL, '2024-11-06 14:05:00', 'VIEWED', 'Thông báo 6', 'SYSTEM'),
-('Nội dung thông báo 7', '2024-11-07 15:00:00', NULL, '2024-11-07 15:05:00', 'NOT_SEEN', 'Thông báo 7', 'OTHER'),
-('Nội dung thông báo 8', '2024-11-08 16:00:00', NULL, '2024-11-08 16:05:00', 'VIEWED', 'Thông báo 8', 'ORDER'),
-('Nội dung thông báo 9', '2024-11-09 17:00:00', NULL, '2024-11-09 17:05:00', 'NOT_SEEN', 'Thông báo 9', 'SUPPORT'),
-('Nội dung thông báo 10', '2024-11-10 18:00:00', NULL, '2024-11-10 18:05:00', 'VIEWED', 'Thông báo 10', 'SYSTEM'),
-('Nội dung thông báo 11', '2024-11-11 19:00:00', NULL, '2024-11-11 19:05:00', 'NOT_SEEN', 'Thông báo 11', 'ORDER'),
-('Nội dung thông báo 12', '2024-11-12 20:00:00', NULL, '2024-11-12 20:05:00', 'VIEWED', 'Thông báo 12', 'SUPPORT'),
-('Nội dung thông báo 13', '2024-11-13 21:00:00', NULL, '2024-11-13 21:05:00', 'NOT_SEEN', 'Thông báo 13', 'SYSTEM'),
-('Nội dung thông báo 14', '2024-11-14 22:00:00', NULL, '2024-11-14 22:05:00', 'VIEWED', 'Thông báo 14', 'OTHER'),
-('Nội dung thông báo 15', '2024-11-15 23:00:00', NULL, '2024-11-15 23:05:00', 'NOT_SEEN', 'Thông báo 15', 'ORDER'),
-('Nội dung thông báo 16', '2024-11-16 08:00:00', NULL, '2024-11-16 08:05:00', 'VIEWED', 'Thông báo 16', 'SUPPORT'),
-('Nội dung thông báo 17', '2024-11-17 09:00:00', NULL, '2024-11-17 09:05:00', 'NOT_SEEN', 'Thông báo 17', 'SYSTEM'),
-('Nội dung thông báo 18', '2024-11-18 10:00:00', NULL, '2024-11-18 10:05:00', 'VIEWED', 'Thông báo 18', 'ORDER'),
-('Nội dung thông báo 19', '2024-11-19 11:00:00', NULL, '2024-11-19 11:05:00', 'NOT_SEEN', 'Thông báo 19', 'SUPPORT'),
-('Nội dung thông báo 20', '2024-11-20 12:00:00', NULL, '2024-11-20 12:05:00', 'VIEWED', 'Thông báo 20', 'OTHER');
+('Nội dung thông báo 1', '2024-11-01 09:00:00', 'link', '2024-11-01 09:05:00', 'NOT_SEEN', 'Thông báo 1', 'ORDER'),
+('Nội dung thông báo 2', '2024-11-02 10:00:00', 'link', '2024-11-02 10:05:00', 'VIEWED', 'Thông báo 2', 'SUPPORT'),
+('Nội dung thông báo 3', '2024-11-03 11:00:00', 'link', '2024-11-03 11:05:00', 'NOT_SEEN', 'Thông báo 3', 'SYSTEM'),
+('Nội dung thông báo 4', '2024-11-04 12:00:00', 'link', '2024-11-04 12:05:00', 'VIEWED', 'Thông báo 4', 'ORDER'),
+('Nội dung thông báo 5', '2024-11-05 13:00:00', 'link', '2024-11-05 13:05:00', 'NOT_SEEN', 'Thông báo 5', 'SUPPORT'),
+('Nội dung thông báo 6', '2024-11-06 14:00:00', 'link', '2024-11-06 14:05:00', 'VIEWED', 'Thông báo 6', 'SYSTEM'),
+('Nội dung thông báo 7', '2024-11-07 15:00:00', 'link', '2024-11-07 15:05:00', 'NOT_SEEN', 'Thông báo 7', 'OTHER'),
+('Nội dung thông báo 8', '2024-11-08 16:00:00', 'link', '2024-11-08 16:05:00', 'VIEWED', 'Thông báo 8', 'ORDER'),
+('Nội dung thông báo 9', '2024-11-09 17:00:00', 'link', '2024-11-09 17:05:00', 'NOT_SEEN', 'Thông báo 9', 'SUPPORT'),
+('Nội dung thông báo 10', '2024-11-10 18:00:00', 'link', '2024-11-10 18:05:00', 'VIEWED', 'Thông báo 10', 'SYSTEM'),
+('Nội dung thông báo 11', '2024-11-11 19:00:00', 'link', '2024-11-11 19:05:00', 'NOT_SEEN', 'Thông báo 11', 'ORDER'),
+('Nội dung thông báo 12', '2024-11-12 20:00:00', 'link', '2024-11-12 20:05:00', 'VIEWED', 'Thông báo 12', 'SUPPORT'),
+('Nội dung thông báo 13', '2024-11-13 21:00:00', 'link', '2024-11-13 21:05:00', 'NOT_SEEN', 'Thông báo 13', 'SYSTEM'),
+('Nội dung thông báo 14', '2024-11-14 22:00:00', 'link', '2024-11-14 22:05:00', 'VIEWED', 'Thông báo 14', 'OTHER'),
+('Nội dung thông báo 15', '2024-11-15 23:00:00', 'link', '2024-11-15 23:05:00', 'NOT_SEEN', 'Thông báo 15', 'ORDER'),
+('Nội dung thông báo 16', '2024-11-16 08:00:00', 'link', '2024-11-16 08:05:00', 'VIEWED', 'Thông báo 16', 'SUPPORT'),
+('Nội dung thông báo 17', '2024-11-17 09:00:00', 'link', '2024-11-17 09:05:00', 'NOT_SEEN', 'Thông báo 17', 'SYSTEM'),
+('Nội dung thông báo 18', '2024-11-18 10:00:00', 'link', '2024-11-18 10:05:00', 'VIEWED', 'Thông báo 18', 'ORDER'),
+('Nội dung thông báo 19', '2024-11-19 11:00:00', 'link', '2024-11-19 11:05:00', 'NOT_SEEN', 'Thông báo 19', 'SUPPORT'),
+('Nội dung thông báo 20', '2024-11-20 12:00:00', 'link', '2024-11-20 12:05:00', 'VIEWED', 'Thông báo 20', 'OTHER');
 
 -- 16. Table Notification_Customer:
 INSERT INTO customer_notification (customer_id, notification_id) VALUES

@@ -1,4 +1,9 @@
 package com.biblio.dao;
 
-public interface IPromotionDAO {
+import com.biblio.entity.Promotion;
+
+import java.util.List;
+
+public interface IPromotionDAO extends IGenericDAO<Promotion>  {
+    List<Promotion> findAll();
 }
