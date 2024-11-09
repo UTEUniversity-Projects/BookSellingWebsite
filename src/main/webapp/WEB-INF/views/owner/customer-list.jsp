@@ -1,6 +1,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+
 <!-- main content -->
 <div class="cr-main-content">
     <div class="container-fluid">
@@ -32,35 +33,6 @@
                                 </thead>
 
                                 <tbody>
-<%--                                <c:forEach var="customer" items="${customers}">--%>
-<%--                                    <tr class="customer-row" data-href="/owner/customer-profile?id=${customer.id}">--%>
-<%--                                        <td>${customer.id}</td>--%>
-<%--                                        <td>${customer.fullName}</td>--%>
-<%--                                        <td>${customer.email}</td>--%>
-<%--                                        <td>100</td>--%>
-<%--                                        <td class="cod">${customer.status}</td>--%>
-<%--                                        <td>--%>
-<%--                                            <div class="d-flex justify-content-start">--%>
-<%--                                                <button type="button"--%>
-<%--                                                        class="btn btn-outline-success dropdown-toggle dropdown-toggle-split"--%>
-<%--                                                        data-bs-toggle="dropdown" aria-haspopup="true"--%>
-<%--                                                        aria-expanded="false" data-display="static">--%>
-<%--                                                    <span class="sr-only"><i class="ri-settings-3-line"></i></span>--%>
-<%--                                                </button>--%>
-<%--                                                <div class="dropdown-menu">--%>
-<%--                                                    <c:choose>--%>
-<%--                                                        <c:when test="${customer.status == 'ACTIVE'}">--%>
-<%--                                                            <a class="dropdown-item" href="#" onclick="changeStatus(${customer.id}, 'deactivate')">Vô hiệu hóa tài khoản</a>--%>
-<%--                                                        </c:when>--%>
-<%--                                                        <c:otherwise>--%>
-<%--                                                            <a class="dropdown-item" href="#" onclick="changeStatus(${customer.id}, 'activate')">Mở khóa tài khoản</a>--%>
-<%--                                                        </c:otherwise>--%>
-<%--                                                    </c:choose>--%>
-<%--                                                </div>--%>
-<%--                                            </div>--%>
-<%--                                        </td>--%>
-<%--                                    </tr>--%>
-<%--                                </c:forEach>--%>
                                     <c:forEach var="customer" items="${customers}">
                                         <tr class="customer-row" data-href="/owner/customer-profile?id=${customer.id}">
                                             <td>${customer.id}</td>
@@ -79,10 +51,10 @@
                                                     <div class="dropdown-menu">
                                                         <c:choose>
                                                             <c:when test="${customer.status == 'ACTIVE'}">
-                                                                <a class="dropdown-item" href="#" onclick="changeStatus(${customer.id}, 'deactivate')">Vô hiệu hóa tài khoản</a>
+                                                                <a class="dropdown-item pop-positioned-timeout" href="#" onclick="changeStatus(${customer.id}, 'deactivate'); return false;">Vô hiệu hóa tài khoản</a>
                                                             </c:when>
                                                             <c:otherwise>
-                                                                <a class="dropdown-item" href="#" onclick="changeStatus(${customer.id}, 'activate')">Mở khóa tài khoản</a>
+                                                                <a class="dropdown-item pop-positioned-timeout" href="#" onclick="changeStatus(${customer.id}, 'activate'); return false;">Mở khóa tài khoản</a>
                                                             </c:otherwise>
                                                         </c:choose>
                                                     </div>
@@ -100,4 +72,4 @@
         </div>
     </div>
 </div>
-<script src="${pageContext.request.contextPath}/assets/owner/js/manange-customer.js"></script>
+<script src="${pageContext.request.contextPath}/assets/owner/js/manange-customer.js" defer></script>

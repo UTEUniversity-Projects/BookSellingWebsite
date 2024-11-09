@@ -6497,7 +6497,6 @@ div.dataTables_wrapper div.dataTables_info {
   padding: 15px;
   position: relative;
   border: 1px solid #eee;
-  border-radius: 0;
 }
 
 .avatar-preview > div {
@@ -6531,6 +6530,10 @@ div.dataTables_wrapper div.dataTables_info {
   right: 0px;
   font-size: 36px;
   cursor: pointer;
+}
+
+.textbox-customer-info input {
+  background-color: white;
 }
 
 /* Products-page */

@@ -1,4 +1,5 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!-- main content -->
 <div class="cr-main-content">
     <div class="container-fluid">
@@ -17,20 +18,18 @@
                 <div class="cr-card">
                     <div class="cr-card-header">
                         <div class="cr-card-info">
-                            <%--<p class="cr-card-id">Mã đơn hàng ${order.id}</p>--%>
-                            <p class="cr-card-id">Mã đơn hàng: 240724DBC1RDJ7</p>
+                            <p class="cr-card-id">Mã đơn hàng #${order.id}</p>
                             <p class="cr-card-customer">
                                 <i class="ri-account-pin-box-line"></i>
-                                Phạm Khánh Huy
+                                ${order.customerName}
                             </p>
                             <p class="cr-card-phone-number">
                                 <i class="ri-phone-line"></i>
-                                03274500xx
+                                ${order.phoneNumber}
                             </p>
                             <p class="cr-card-location">
                                 <i class="ri-map-pin-line"></i>
-                                Dt 741 khu phố 4 phường long phước thị xã phước long tỉnh bình phước, Phường Phước Bình,
-                                Thị Xã Phước Long, Bình Phước
+                                ${order.address}
                             </p>
                             <p class="cr-card-date">
                                 <i class="ri-calendar-2-line"></i>
@@ -38,8 +37,8 @@
                             </p>
                         </div>
                         <div>
-                            <p class="cr-card-status cr-card-status--completed">
-                                Đã hoàn thành
+                            <p class="cr-card-status cr-card-status--${order.statusStyle}">
+                                ${order.statusDisplay}
                             </p>
                         </div>
                     </div>
@@ -64,78 +63,26 @@
                                     </tr>
                                     </thead>
                                     <tbody>
-                                    <tr>
-                                        <td>
-                                            <img
+                                    <c:forEach var="product" items="${order.products}">
+                                        <tr>
+                                            <td>
+                                                <img
                                                     class="tbl-thumb"
                                                     src="${pageContext.request.contextPath}/assets/staff/img/product/1.jpg"
-                                                    alt="Product Image"
-                                            />
-                                        </td>
-                                        <td>Avira Venusio</td>
-                                        <td>
-                                            <span class="status status__pending">
-                                                Đang đóng gói
-                                            </span>
-                                        </td>
-                                        <td>3</td>
-                                        <td>100.000VND</td>
-                                        <td>300.300VND</td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            <img
-                                                    class="tbl-thumb"
-                                                    src="${pageContext.request.contextPath}/assets/staff/img/product/1.jpg"
-                                                    alt="Product Image"
-                                            />
-                                        </td>
-                                        <td>Avira Venusio</td>
-                                        <td>
-                                            <span class="status status__completed">
-                                                Sẳn sàng
-                                            </span>
-                                        </td>
-                                        <td>3</td>
-                                        <td>100.000VND</td>
-                                        <td>300.300VND</td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            <img
-                                                    class="tbl-thumb"
-                                                    src="/assets/staff/img/product/1.jpg"
-                                                    alt="Product Image"
-                                            />
-                                        </td>
-                                        <td>Avira Venusio</td>
-                                        <td>
-                                            <span class="status status__pending">
-                                                Đang đóng gói
-                                            </span>
-                                        </td>
-                                        <td>3</td>
-                                        <td>100.000VND</td>
-                                        <td>300.300VND</td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            <img
-                                                    class="tbl-thumb"
-                                                    src="/assets/staff/img/product/1.jpg"
-                                                    alt="Product Image"
-                                            />
-                                        </td>
-                                        <td>Avira Venusio</td>
-                                        <td>
-                                            <span class="status status__completed">
-                                                Sẳn sàng
-                                            </span>
-                                        </td>
-                                        <td>3</td>
-                                        <td>100.000VND</td>
-                                        <td>300.300VND</td>
-                                    </tr>
+                                                    alt="${product.title}"
+                                                />
+                                            </td>
+                                            <td>${product.title}</td>
+                                            <td>
+                                                <span class="status status__pending">
+                                                    Đang đóng gói
+                                                </span>
+                                            </td>
+                                            <td>${product.quantity}</td>
+                                            <td class="price-value">${product.sellingPrice} VND</td>
+                                            <td class="price-value">${product.totalPrice} VND</td>
+                                        </tr>
+                                    </c:forEach>
                                     </tbody>
                                 </table>
                             </div>
@@ -178,5 +125,3 @@
         </div>
     </div>
 </div>
-
-<script src="${pageContext.request.contextPath}/assets/staff/js/order-details.js" defer></script>

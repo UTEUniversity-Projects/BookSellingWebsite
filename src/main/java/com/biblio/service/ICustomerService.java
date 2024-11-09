@@ -13,4 +13,6 @@ public interface ICustomerService {
     void activateCustomer(Long id);
 
     void addCustomer(CustomerRegisterRequest request);
+  
+    CustomerGetListResponse findById(Long id);
 }
