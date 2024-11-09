@@ -31,21 +31,6 @@ public class CustomerListController extends HttpServlet {
      * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
      */
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        String action = request.getParameter("action");
-        String id = request.getParameter("id");
-
-        if (action != null && id != null) {
-            long customerId = Long.parseLong(id);
-            if ("deactivate".equals(action)) {
-                customerService.deactivateCustomer(customerId);
-                response.getWriter().write("success");
-            } else if ("activate".equals(action)) {
-                customerService.activateCustomer(customerId);
-                response.getWriter().write("success");
-            }
-            return;
-        }
-
         List<CustomerGetListResponse> list = customerService.findAll();
         request.setAttribute("customers", list);
         request.getRequestDispatcher("/views/owner/customer-list.jsp").forward(request, response);
@@ -57,6 +42,28 @@ public class CustomerListController extends HttpServlet {
      */
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         // TODO Auto-generated method stub
+        String action = request.getParameter("action");
+        String id = request.getParameter("id");
+
+        if (action != null && id != null) {
+            try {
+                long customerId = Long.parseLong(id);
+
+                if ("deactivate".equals(action)) {
+                    customerService.deactivateCustomer(customerId);
+                    response.getWriter().write("success");
+                } else if ("activate".equals(action)) {
+                    customerService.activateCustomer(customerId);
+                    response.getWriter().write("success");
+                }
+            } catch (NumberFormatException e) {
+                response.getWriter().write("error");
+            }
+            return;
+        }
+
+        // Nếu không có action và id, ta có thể chuyển tiếp để lấy danh sách
         doGet(request, response);
+
     }
 }

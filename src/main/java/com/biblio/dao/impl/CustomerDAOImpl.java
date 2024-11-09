@@ -2,7 +2,6 @@ package com.biblio.dao.impl;
 
 import com.biblio.dao.ICustomerDAO;
 import com.biblio.entity.Customer;
-import com.biblio.enumeration.EAccountStatus;
 
 import java.util.List;
 
@@ -13,16 +12,18 @@ public class CustomerDAOImpl extends GenericDAOImpl<Customer> implements ICustom
 
     @Override
     public List<Customer> findAll() {
-//        String jpql = "SELECT c FROM Customer c";
-//        return super.findAll(jpql);
         return  super.findAll();
+    }
+
+    @Override
+    public Customer findById(Long id) {
+        return super.findById(id);
     }
 
 
     @Override
     public void deactivateCustomer(Customer customer) {
-        System.out.println(customer.toString());
-        //super.update(customer);
+        super.update(customer);
     }
 
     @Override
@@ -31,18 +32,22 @@ public class CustomerDAOImpl extends GenericDAOImpl<Customer> implements ICustom
     }
 
     public static void main(String[] args) {
-        Customer customer = new Customer();
-        customer.setId(1L);
-        customer.getAccount().setStatus(EAccountStatus.INACTIVE);
-        new CustomerDAOImpl().deactivateCustomer(customer);
-//        List<Customer> list = new CustomerDAOImpl().findAll();
-//        for (Customer customer : list) {
+        long startTime = System.nanoTime();
+//        Customer customer = new Customer();
+//        customer.setId(1L);
+//        customer.getAccount().setStatus(EAccountStatus.INACTIVE);
+//        CustomerDAOImpl dao = new CustomerDAOImpl();
+//        dao.deactivateCustomer(customer);
+        List<Customer> list = new CustomerDAOImpl().findAll();
+        for (Customer customer : list) {
 //            Set<Address> addresses = customer.getAddresses();
 //            for (Address address : addresses) {
 //                System.out.println(address.getProvince());
 //            }
-//            System.out.println(customer.getId());
-//        }
-
+           System.out.println(customer.getId());
+        }
+        long endTime = System.nanoTime();
+        long duration = endTime - startTime; // Tính thời gian chạy
+        System.out.println("Time taken to execute query: " + duration / Math.pow(10, 9) + " seconds");
     }
 }
