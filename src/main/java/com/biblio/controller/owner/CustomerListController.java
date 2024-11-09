@@ -31,6 +31,7 @@ public class CustomerListController extends HttpServlet {
      * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
      */
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
         List<CustomerGetListResponse> list = customerService.findAll();
         request.setAttribute("customers", list);
         request.getRequestDispatcher("/views/owner/customer-list.jsp").forward(request, response);

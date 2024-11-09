@@ -1,16 +1,15 @@
 package com.biblio.dto.response;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-import lombok.ToString;
+import lombok.*;
 
 import java.util.HashSet;
 import java.util.Set;
 
-@Data
+
 @NoArgsConstructor
 @AllArgsConstructor
+@Getter
+@Setter
 @ToString
 public class CustomerGetListResponse {
     private Long id;
@@ -26,4 +25,5 @@ public class CustomerGetListResponse {
     private String username;
     private String password;
     private Set<AddressResponse> addresses = new HashSet<>();
+
 }
