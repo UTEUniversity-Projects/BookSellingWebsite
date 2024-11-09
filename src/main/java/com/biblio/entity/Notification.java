@@ -37,7 +37,7 @@ public class Notification implements Serializable {
     @Column(name = "content", nullable = false)
     private String content;
 
-    @Column(name = "hyper_link")
+    @Column(name = "hyper_link", nullable = true)
     private String hyperlink;
 
     @Enumerated(EnumType.STRING)

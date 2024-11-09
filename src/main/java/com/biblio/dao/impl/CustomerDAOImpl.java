@@ -31,11 +31,9 @@ public class CustomerDAOImpl extends GenericDAOImpl<Customer> implements ICustom
         super.update(customer);
     }
 
-    public static void main(String[] args) {
-        CustomerDAOImpl dao = new CustomerDAOImpl();
-        List<Customer> list = dao.findAll();
-        for (Customer customer : list) {
-           System.out.println(customer.getFullName());
-        }
+    @Override
+    public void addCustomer(Customer customer) {
+        super.save(customer);
     }
+
 }
