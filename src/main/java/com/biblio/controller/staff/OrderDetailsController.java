@@ -1,5 +1,9 @@
 package com.biblio.controller.staff;
 
+import com.biblio.dto.response.OrderDetailsResponse;
+import com.biblio.service.IOrderService;
+
+import javax.inject.Inject;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -12,6 +16,8 @@ import java.io.Serial;
 public class OrderDetailsController extends HttpServlet {
     @Serial
     private static final long serialVersionUID = 1L;
+    @Inject
+    IOrderService orderService;
 
     /**
      * @see HttpServlet#HttpServlet()
@@ -26,6 +32,9 @@ public class OrderDetailsController extends HttpServlet {
      */
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         // TODO Auto-generated method stub
+        Long orderId = Long.parseLong(request.getParameter("id"));
+        OrderDetailsResponse orderDetailsResponse = orderService.getOrderDetails(orderId);
+        request.setAttribute("order", orderDetailsResponse);
         request.getRequestDispatcher("/views/staff/order-details.jsp").forward(request, response);
     }
 

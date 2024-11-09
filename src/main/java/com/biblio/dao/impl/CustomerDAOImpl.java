@@ -15,7 +15,7 @@ public class CustomerDAOImpl extends GenericDAOImpl<Customer> implements ICustom
     public List<Customer> findAll() {
 //        String jpql = "SELECT c FROM Customer c";
 //        return super.findAll(jpql);
-        return  super.findAll();
+        return super.findAll();
     }
 
 
@@ -31,18 +31,21 @@ public class CustomerDAOImpl extends GenericDAOImpl<Customer> implements ICustom
     }
 
     public static void main(String[] args) {
-        Customer customer = new Customer();
-        customer.setId(1L);
-        customer.getAccount().setStatus(EAccountStatus.INACTIVE);
-        new CustomerDAOImpl().deactivateCustomer(customer);
-//        List<Customer> list = new CustomerDAOImpl().findAll();
-//        for (Customer customer : list) {
+//        Customer customer = new Customer();
+//        customer.setId(1L);
+//        customer.getAccount().setStatus(EAccountStatus.INACTIVE);
+//        new CustomerDAOImpl().deactivateCustomer(customer);
+        long startTime = System.nanoTime();
+        List<Customer> list = new CustomerDAOImpl().findAll();
+        long endTime = System.nanoTime();
+        long duration = endTime - startTime; // Tính thời gian chạy
+        System.out.println("Time taken to execute query: " + duration / Math.pow(10, 9) + " seconds");
+        for (Customer customer : list) {
 //            Set<Address> addresses = customer.getAddresses();
 //            for (Address address : addresses) {
 //                System.out.println(address.getProvince());
 //            }
-//            System.out.println(customer.getId());
-//        }
-
+            System.out.println(customer.getId());
+        }
     }
 }

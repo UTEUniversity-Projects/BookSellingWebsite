@@ -7,6 +7,8 @@ import lombok.Setter;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Table(name = "address")
@@ -52,8 +54,34 @@ public class Address implements Serializable {
     @JoinColumn(name = "owner_id")
     private Owner owner;
 
-    @OneToOne(mappedBy = "address")
-    private Order order;
+    @OneToMany(mappedBy = "address", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
+    private Set<Order> orders = new HashSet<Order>();
 
     // endregion
+
+    public String getFullAddress() {
+        StringBuilder fullAddress = new StringBuilder();
+
+        if (detail != null && !detail.isEmpty()) {
+            fullAddress.append(detail).append(", ");
+        }
+        if (village != null && !village.isEmpty()) {
+            fullAddress.append(village).append(", ");
+        }
+        if (district != null && !district.isEmpty()) {
+            fullAddress.append(district).append(", ");
+        }
+        if (province != null && !province.isEmpty()) {
+            fullAddress.append(province).append(", ");
+        }
+        if (nation != null && !nation.isEmpty()) {
+            fullAddress.append(nation);
+        }
+
+        if (fullAddress.length() > 0 && fullAddress.charAt(fullAddress.length() - 2) == ',') {
+            fullAddress.setLength(fullAddress.length() - 2);
+        }
+
+        return fullAddress.toString();
+    }
 }

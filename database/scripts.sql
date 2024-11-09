@@ -21,6 +21,45 @@ INSERT INTO account (password, status, role, username) VALUES
 ('abc', 'ACTIVE', 'CUSTOMER', 'customer_14'),
 ('abc', 'ACTIVE', 'CUSTOMER', 'customer_15');
 
+
+INSERT INTO account (password, status, role, username) VALUES
+('abc', 'ACTIVE', 'CUSTOMER', 'customer_16'),
+('abc', 'ACTIVE', 'CUSTOMER', 'customer_17'),
+('abc', 'ACTIVE', 'CUSTOMER', 'customer_18'),
+('abc', 'ACTIVE', 'CUSTOMER', 'customer_19'),
+('abc', 'ACTIVE', 'CUSTOMER', 'customer_20'),
+('abc', 'ACTIVE', 'CUSTOMER', 'customer_21'),
+('abc', 'ACTIVE', 'CUSTOMER', 'customer_22'),
+('abc', 'ACTIVE', 'CUSTOMER', 'customer_23'),
+('abc', 'ACTIVE', 'CUSTOMER', 'customer_24'),
+('abc', 'ACTIVE', 'CUSTOMER', 'customer_25'),
+('abc', 'ACTIVE', 'CUSTOMER', 'customer_26'),
+('abc', 'ACTIVE', 'CUSTOMER', 'customer_27'),
+('abc', 'ACTIVE', 'CUSTOMER', 'customer_28'),
+('abc', 'ACTIVE', 'CUSTOMER', 'customer_29'),
+('abc', 'ACTIVE', 'CUSTOMER', 'customer_30'),
+('abc', 'ACTIVE', 'CUSTOMER', 'customer_31'),
+('abc', 'ACTIVE', 'CUSTOMER', 'customer_32'),
+('abc', 'ACTIVE', 'CUSTOMER', 'customer_33'),
+('abc', 'ACTIVE', 'CUSTOMER', 'customer_34'),
+('abc', 'ACTIVE', 'CUSTOMER', 'customer_35'),
+('abc', 'ACTIVE', 'CUSTOMER', 'customer_36'),
+('abc', 'ACTIVE', 'CUSTOMER', 'customer_37'),
+('abc', 'ACTIVE', 'CUSTOMER', 'customer_38'),
+('abc', 'ACTIVE', 'CUSTOMER', 'customer_39'),
+('abc', 'ACTIVE', 'CUSTOMER', 'customer_40'),
+('abc', 'ACTIVE', 'CUSTOMER', 'customer_41'),
+('abc', 'ACTIVE', 'CUSTOMER', 'customer_42'),
+('abc', 'ACTIVE', 'CUSTOMER', 'customer_43'),
+('abc', 'ACTIVE', 'CUSTOMER', 'customer_44'),
+('abc', 'ACTIVE', 'CUSTOMER', 'customer_45'),
+('abc', 'ACTIVE', 'CUSTOMER', 'customer_46'),
+('abc', 'ACTIVE', 'CUSTOMER', 'customer_47'),
+('abc', 'ACTIVE', 'CUSTOMER', 'customer_48'),
+('abc', 'ACTIVE', 'CUSTOMER', 'customer_49'),
+('abc', 'ACTIVE', 'CUSTOMER', 'customer_50');
+
+
 -- 2. Table Owner:customer_notificationnotification
 INSERT INTO owner (avatar, date_of_birth, email_address, full_name, gender, join_at, phone_number, account_id)
 VALUES 
@@ -49,6 +88,47 @@ VALUES
 ('https://kenh14cdn.com/203336854389633024/2022/4/9/1732920193150637133093626329146106221360649n-164947443607057196887.jpeg', '1987-01-25', 'customer_13@gmail.com', 'Võ Minh Châu', 'FEMALE', '2022-12-21', '0901234573', 'GOLD', 16),
 ('https://kenh14cdn.com/203336854389633024/2022/4/9/1732920193150637133093626329146106221360649n-164947443607057196887.jpeg', '1993-09-19', 'customer_14@gmail.com', 'Hoàng Văn Nam', 'MALE', '2023-02-16', '0901234574', 'GOLD', 17),
 ('https://kenh14cdn.com/203336854389633024/2022/4/9/1732920193150637133093626329146106221360649n-164947443607057196887.jpeg', '1989-03-16', 'customer_15@gmail.com', 'Trần Thị Bích', 'FEMALE', '2023-06-05', '0901234575', 'GOLD', 18);
+
+INSERT INTO customer (avatar, date_of_birth, email_address, full_name, gender, join_at, phone_number, membership, account_id)
+VALUES 
+-- Từ customer_16 đến customer_50
+('https://kenh14cdn.com/203336854389633024/2022/4/9/1732920193150637133093626329146106221360649n-164947443607057196887.jpeg', '1992-05-10', 'customer_16@gmail.com', 'Lê Minh Hoàng', 'MALE', '2023-06-12', '0901234576', 'GOLD', 19),
+('https://kenh14cdn.com/203336854389633024/2022/4/9/1732920193150637133093626329146106221360649n-164947443607057196887.jpeg', '1994-07-22', 'customer_17@gmail.com', 'Nguyễn Hồng Ngọc', 'FEMALE', '2023-02-23', '0901234577', 'GOLD', 20),
+('https://kenh14cdn.com/203336854389633024/2022/4/9/1732920193150637133093626329146106221360649n-164947443607057196887.jpeg', '1991-08-16', 'customer_18@gmail.com', 'Phạm Hữu Khang', 'MALE', '2022-07-15', '0901234578', 'GOLD', 21),
+('https://kenh14cdn.com/203336854389633024/2022/4/9/1732920193150637133093626329146106221360649n-164947443607057196887.jpeg', '1995-12-03', 'customer_19@gmail.com', 'Trần Thanh Hà', 'FEMALE', '2023-03-10', '0901234579', 'GOLD', 22),
+('https://kenh14cdn.com/203336854389633024/2022/4/9/1732920193150637133093626329146106221360649n-164947443607057196887.jpeg', '1989-09-09', 'customer_20@gmail.com', 'Bùi Khánh Nam', 'MALE', '2022-12-17', '0901234580', 'GOLD', 23),
+('https://kenh14cdn.com/203336854389633024/2022/4/9/1732920193150637133093626329146106221360649n-164947443607057196887.jpeg', '1993-06-18', 'customer_21@gmail.com', 'Lý Thị Hồng', 'FEMALE', '2023-08-19', '0901234581', 'GOLD', 24),
+('https://kenh14cdn.com/203336854389633024/2022/4/9/1732920193150637133093626329146106221360649n-164947443607057196887.jpeg', '1988-10-28', 'customer_22@gmail.com', 'Đỗ Tuấn Anh', 'MALE', '2022-09-15', '0901234582', 'GOLD', 25),
+('https://kenh14cdn.com/203336854389633024/2022/4/9/1732920193150637133093626329146106221360649n-164947443607057196887.jpeg', '1992-11-09', 'customer_23@gmail.com', 'Lê Hải Dương', 'MALE', '2023-11-05', '0901234583', 'GOLD', 26),
+('https://kenh14cdn.com/203336854389633024/2022/4/9/1732920193150637133093626329146106221360649n-164947443607057196887.jpeg', '1994-05-01', 'customer_24@gmail.com', 'Trương Thị Mai', 'FEMALE', '2022-08-12', '0901234584', 'GOLD', 27),
+('https://kenh14cdn.com/203336854389633024/2022/4/9/1732920193150637133093626329146106221360649n-164947443607057196887.jpeg', '1990-01-19', 'customer_25@gmail.com', 'Phan Ngọc Hải', 'MALE', '2023-02-28', '0901234585', 'GOLD', 28),
+('https://kenh14cdn.com/203336854389633024/2022/4/9/1732920193150637133093626329146106221360649n-164947443607057196887.jpeg', '1987-03-17', 'customer_26@gmail.com', 'Trần Hồng Ánh', 'FEMALE', '2022-06-15', '0901234586', 'GOLD', 29),
+('https://kenh14cdn.com/203336854389633024/2022/4/9/1732920193150637133093626329146106221360649n-164947443607057196887.jpeg', '1991-12-20', 'customer_27@gmail.com', 'Nguyễn Văn Sơn', 'MALE', '2023-05-22', '0901234587', 'GOLD', 30),
+('https://kenh14cdn.com/203336854389633024/2022/4/9/1732920193150637133093626329146106221360649n-164947443607057196887.jpeg', '1993-07-25', 'customer_28@gmail.com', 'Đặng Thị Thảo', 'FEMALE', '2023-01-01', '0901234588', 'GOLD', 31),
+('https://kenh14cdn.com/203336854389633024/2022/4/9/1732920193150637133093626329146106221360649n-164947443607057196887.jpeg', '1992-11-11', 'customer_29@gmail.com', 'Hoàng Nam Phương', 'MALE', '2022-10-10', '0901234589', 'GOLD', 32),
+('https://kenh14cdn.com/203336854389633024/2022/4/9/1732920193150637133093626329146106221360649n-164947443607057196887.jpeg', '1988-08-13', 'customer_30@gmail.com', 'Đoàn Thị Lan', 'FEMALE', '2023-04-04', '0901234590', 'GOLD', 33),
+('https://kenh14cdn.com/203336854389633024/2022/4/9/1732920193150637133093626329146106221360649n-164947443607057196887.jpeg', '1989-10-05', 'customer_31@gmail.com', 'Võ Văn Phúc', 'MALE', '2023-06-20', '0901234591', 'GOLD', 34),
+('https://kenh14cdn.com/203336854389633024/2022/4/9/1732920193150637133093626329146106221360649n-164947443607057196887.jpeg', '1995-09-09', 'customer_32@gmail.com', 'Trần Thị Hiếu', 'FEMALE', '2022-12-31', '0901234592', 'GOLD', 35),
+('https://kenh14cdn.com/203336854389633024/2022/4/9/1732920193150637133093626329146106221360649n-164947443607057196887.jpeg', '1991-06-30', 'customer_33@gmail.com', 'Đinh Tuấn Tú', 'MALE', '2023-03-29', '0901234593', 'GOLD', 36),
+('https://kenh14cdn.com/203336854389633024/2022/4/9/1732920193150637133093626329146106221360649n-164947443607057196887.jpeg', '1992-10-14', 'customer_34@gmail.com', 'Nguyễn Thị Phương', 'FEMALE', '2022-05-09', '0901234594', 'GOLD', 37),
+('https://kenh14cdn.com/203336854389633024/2022/4/9/1732920193150637133093626329146106221360649n-164947443607057196887.jpeg', '1987-01-03', 'customer_35@gmail.com', 'Ngô Minh Khôi', 'MALE', '2023-08-17', '0901234595', 'GOLD', 38),
+('https://kenh14cdn.com/203336854389633024/2022/4/9/1732920193150637133093626329146106221360649n-164947443607057196887.jpeg', '1990-04-25', 'customer_36@gmail.com', 'Phan Thị Huệ', 'FEMALE', '2022-10-21', '0901234596', 'GOLD', 39),
+('https://kenh14cdn.com/203336854389633024/2022/4/9/1732920193150637133093626329146106221360649n-164947443607057196887.jpeg', '1991-08-17', 'customer_37@gmail.com', 'Bùi Công Minh', 'MALE', '2023-07-22', '0901234597', 'GOLD', 40),
+('https://kenh14cdn.com/203336854389633024/2022/4/9/1732920193150637133093626329146106221360649n-164947443607057196887.jpeg', '1989-12-13', 'customer_38@gmail.com', 'Lê Thanh Nga', 'FEMALE', '2023-06-07', '0901234598', 'GOLD', 41),
+('https://kenh14cdn.com/203336854389633024/2022/4/9/1732920193150637133093626329146106221360649n-164947443607057196887.jpeg', '1993-09-21', 'customer_39@gmail.com', 'Đỗ Văn Kiên', 'MALE', '2022-11-20', '0901234599', 'GOLD', 42),
+('https://kenh14cdn.com/203336854389633024/2022/4/9/1732920193150637133093626329146106221360649n-164947443607057196887.jpeg', '1990-02-07', 'customer_40@gmail.com', 'Phạm Thị Thùy', 'FEMALE', '2023-03-08', '0901234600', 'GOLD', 43),
+('https://kenh14cdn.com/203336854389633024/2022/4/9/1732920193150637133093626329146106221360649n-164947443607057196887.jpeg', '1988-05-29', 'customer_41@gmail.com', 'Đặng Văn Thái', 'MALE', '2022-12-18', '0901234601', 'GOLD', 44),
+('https://kenh14cdn.com/203336854389633024/2022/4/9/1732920193150637133093626329146106221360649n-164947443607057196887.jpeg', '1994-06-24', 'customer_42@gmail.com', 'Lý Khánh Linh', 'FEMALE', '2023-07-19', '0901234602', 'GOLD', 45),
+('https://kenh14cdn.com/203336854389633024/2022/4/9/1732920193150637133093626329146106221360649n-164947443607057196887.jpeg', '1991-03-11', 'customer_43@gmail.com', 'Nguyễn Đình Huy', 'MALE', '2022-08-09', '0901234603', 'GOLD', 46),
+('https://kenh14cdn.com/203336854389633024/2022/4/9/1732920193150637133093626329146106221360649n-164947443607057196887.jpeg', '1987-07-05', 'customer_44@gmail.com', 'Phan Thị Ngọc', 'FEMALE', '2023-02-18', '0901234604', 'GOLD', 47),
+('https://kenh14cdn.com/203336854389633024/2022/4/9/1732920193150637133093626329146106221360649n-164947443607057196887.jpeg', '1992-04-19', 'customer_45@gmail.com', 'Hoàng Văn Bình', 'MALE', '2022-05-25', '0901234605', 'GOLD', 48),
+('https://kenh14cdn.com/203336854389633024/2022/4/9/1732920193150637133093626329146106221360649n-164947443607057196887.jpeg', '1993-01-10', 'customer_46@gmail.com', 'Bùi Thanh Phương', 'FEMALE', '2023-09-21', '0901234606', 'GOLD', 49),
+('https://kenh14cdn.com/203336854389633024/2022/4/9/1732920193150637133093626329146106221360649n-164947443607057196887.jpeg', '1990-09-06', 'customer_47@gmail.com', 'Ngô Quốc Tuấn', 'MALE', '2023-05-29', '0901234607', 'GOLD', 50),
+('https://kenh14cdn.com/203336854389633024/2022/4/9/1732920193150637133093626329146106221360649n-164947443607057196887.jpeg', '1991-12-22', 'customer_48@gmail.com', 'Vũ Thị Yến', 'FEMALE', '2023-03-17', '0901234608', 'GOLD', 51),
+('https://kenh14cdn.com/203336854389633024/2022/4/9/1732920193150637133093626329146106221360649n-164947443607057196887.jpeg', '1988-11-17', 'customer_49@gmail.com', 'Đặng Đức Hòa', 'MALE', '2022-09-14', '0901234609', 'GOLD', 52),
+('https://kenh14cdn.com/203336854389633024/2022/4/9/1732920193150637133093626329146106221360649n-164947443607057196887.jpeg', '1993-02-02', 'customer_50@gmail.com', 'Lý Thị Mai', 'FEMALE', '2023-07-31', '0901234610', 'GOLD', 53);
+
+
 
 -- 5. Table Category:
 INSERT INTO category (full_script, name, short_script, status) VALUES 
@@ -256,7 +336,7 @@ Cuốn sách Tầm Nhìn Giáo Dục không những khơi gợi cho bạn đọc
 ('1122334455', '9781122334455', 'NEW', 'Đừng Lựa Chọn An Nhàn Khi Còn Trẻ
 Trong độ xuân xanh phơi phới ngày ấy, bạn không dám mạo hiểm, không dám nỗ lực để kiếm học bổng, không chịu tìm tòi những thử thách trong công việc, không phấn đấu hướng đến ước mơ của mình. Bạn mơ mộng rằng làm việc xong sẽ vào làm ở một công ty nổi tiếng, làm một thời gian sẽ thăng quan tiến chức. Mơ mộng rằng khởi nghiệp xong sẽ lập tức nhận được tiền đầu tư, cầm được tiền đầu tư là sẽ niêm yết trên sàn chứng khoán. Mơ mộng rằng muốn gì sẽ có đó, không thiếu tiền cũng chẳng thiếu tình, an hưởng những năm tháng êm đềm trong cuộc đời mình.
 Nhưng vì sao bạn lại nghĩ rằng bạn chẳng cần bỏ ra chút công sức nào, cuộc sống sẽ dâng đến tận miệng những thứ bạn muốn? Bạn cần phải hiểu rằng: Hấp tấp muốn mau chóng thành công rất dễ khiến chúng ta đi vào mê lộ. Thanh xuân là khoảng thời gian đẹp đẽ nhất trong đời, cũng là những năm tháng then chốt có thể quyết định tương lai của một người. Nếu bạn lựa chọn an nhàn trong 10 năm, tương lai sẽ buộc bạn phải vất vả trong 50 năm để bù đắp lại. Nếu bạn bươn chải vất vả trong 10 năm, thứ mà bạn chắc chắn có được là 50 năm hạnh phúc. Điều quý giá nhất không phải là tiền mà là tiền bạc.
-Thế nên, bạn à, đừng lựa chọn an nhàn khi còn trẻ.', 2, 'PAPERBACK', 316, 20.0, 13.0, '2019-08-10 09:45:00', '16_TO_18_YEARS_OLD', 170000, 'Đừng lựa chọn an nhàn khi còn trẻ', 0.45, 1.1, 4, 3, 44),
+Thế nên, bạn à, đừng lựa chọn an nhàn khi còn trẻ.', 2, 'PAPERBACK', 316, 20.0, 13.0, '2019-08-10 09:45:00', 'SIXTEEN_TO_EIGHTEEN_YEARS_OLD', 170000, 'Đừng lựa chọn an nhàn khi còn trẻ', 0.45, 1.1, 4, 3, 44),
 ('6677889900', '9786677889900', 'USED', 'Hai cuốn sách trước của Giáo sư Phan Văn Trường, Một đời thương thuyết và Một đời quản trị, là sự chắt lọc từ những trải nghiệm trong suốt nhiều năm tháng nghề nghiệp của bản thân. Tuy nhiên, đến với cuốn sách này, tác giả lại muốn dành một khoảng không gian riêng để có thể phản ảnh những cảm nhận cá nhân về cuộc sống, với góc nhìn từ những năm tháng tuổi trẻ cho đến độ tuổi xế chiều này.
 Khoảnh khắc khó chịu nhất có lẽ là khi mình đã lỡ chọn một hướng đi, nhưng ngộ được rằng con đường này nhiều chông gai, lắm rào cản và lại còn không phù hợp. Trong lòng, lúc ấy chỉ muốn được quay trở lại để bắt đầu, để lựa chọn lại một hướng khôn ngoan hơn. 
 Việc lựa chọn tất nhiên đòi hỏi nhiều sáng suốt, nhưng trên hết người lựa chọn phải hiểu rõ thế giới mà mình đang sống và biết rõ chính mình muốn gì, và một mặt khác phải sẵn sàng cáng đáng lấy trách nhiệm trong sự lựa chọn. Nói một cách hoa mỹ hơn, mình chỉ tìm ra hướng đi đúng đắn và phù hợp cho bản thân nếu thấu hiểu rõ bản năng, bản ngã và cả tiềm thức của chính mình. Cùng một tinh thần luôn sẵn sàng đối mặt với những hệ quả tốt và xấu từ sự lựa chọn ấy.', 1, 'HARDCOVER', 414, 22.5, 14.5, '2018-05-18 13:20:00', 'OVER_18_YEARS_OLD', 200000, 'Một đời như kẻ tìm đường', 0.55, 1.3, 4, 4, 44),
@@ -270,7 +350,7 @@ Vì sau tất cả, chẳng ai quan tâm.”
 Tuổi trẻ đáng giá bao nhiêu? được tác giả chia làm 3 phần: HỌC, LÀM, ĐI.
 Nhưng tôi thấy cuốn sách còn thể hiện một phần thứ tư nữa, đó là ĐỌC.
 Hãy đọc sách, nếu bạn đọc sách một cách bền bỉ, sẽ đến lúc bạn bị thôi thúc không ngừng bởi ý muốn viết nên cuốn sách của riêng mình.
-Nếu tôi còn ở tuổi đôi mươi, hẳn là tôi sẽ đọc Tuổi trẻ đáng giá bao nhiêu? nhiều hơn một lần.”', 1, 'PAPERBACK', 370, 21.0, 14.0, '2020-09-25 15:00:00', '16_TO_18_YEARS_OLD', 130000, 'Tuổi trẻ đáng giá bao nhiêu', 0.4, 1.1, 4, 5, 44),
+Nếu tôi còn ở tuổi đôi mươi, hẳn là tôi sẽ đọc Tuổi trẻ đáng giá bao nhiêu? nhiều hơn một lần.”', 1, 'PAPERBACK', 370, 21.0, 14.0, '2020-09-25 15:00:00', 'SIXTEEN_TO_EIGHTEEN_YEARS_OLD', 130000, 'Tuổi trẻ đáng giá bao nhiêu', 0.4, 1.1, 4, 5, 44),
 ('3344556677', '9783344556677', 'NEW', 'Đắc Nhân Tâm
 Đắc nhân tâm (tên tiếng Anh là How to Win Friends and Influence People) là một trong những cuốn sách về chủ đề nghệ thuật ứng xử và giao tiếp thành công nhất, bán chạy nhất và được biết đến nhiều nhất cho đến tận ngày nay, đưa tên tuổi của Dale Carnegie vang danh khắp thế giới.
 Dale Carnegie từng nói, việc kiếm được một triệu đô la vẫn dễ hơn thêm một cụm từ vào từ điển tiếng Anh. Vậy mà Đắc nhân tâm đã trở thành một cụm từ như thế: được trích dẫn, diễn giải, tái chế; được sử dụng trong vô số bối cảnh, từ phim hoạt hình, chính trị cho tới tiểu thuyết. Bản thân cuốn sách cũng được dịch sang hầu hết các ngôn ngữ được biết đến trên thế giới. Mỗi thế hệ lại khám phá tác phẩm theo một cách hoàn toàn mới và tìm ra những giá trị vẫn hữu dụng trong thời đại của họ.
@@ -299,7 +379,7 @@ Hầu hết những ai đọc cuốn sách này đều có thể cải thiện c
 “Một cách nhìn cuộc sống gần như hoàn chỉnh từ con mắt trẻ thơ… có sức mạnh sưởi ấm và làm tan nát cõi lòng, dù người đọc ở lứa tuổi nào.” - The National
 Hãy làm quen với Zezé, cậu bé tinh nghịch siêu hạng đồng thời cũng đáng yêu bậc nhất, với ước mơ lớn lên trở thành nhà thơ cổ thắt nơ bướm. Chẳng phải ai cũng công nhận khoản “đáng yêu” kia đâu nhé. Bởi vì, ở cái xóm ngoại ô nghèo ấy, nỗi khắc khổ bủa vây đã che mờ mắt người ta trước trái tim thiện lương cùng trí tưởng tượng tuyệt vời của cậu bé con năm tuổi.
 Có hề gì đâu bao nhiêu là hắt hủi, đánh mắng, vì Zezé đã có một người bạn đặc biệt để trút nỗi lòng: cây cam ngọt nơi vườn sau. Và cả một người bạn nữa, bằng xương bằng thịt, một ngày kia xuất hiện, cho cậu bé nhạy cảm khôn sớm biết thế nào là trìu mến, thế nào là nỗi đau, và mãi mãi thay đổi cuộc đời cậu.
-Mở đầu bằng những thanh âm trong sáng và kết thúc lắng lại trong những nốt trầm hoài niệm, Cây cam ngọt của tôi khiến ta nhận ra vẻ đẹp thực sự của cuộc sống đến từ những điều giản dị như bông hoa trắng của cái cây sau nhà, và rằng cuộc đời thật khốn khổ nếu thiếu đi lòng yêu thương và niềm trắc ẩn. Cuốn sách kinh điển này bởi thế không ngừng khiến trái tim người đọc khắp thế giới thổn thức, kể từ khi ra mắt lần đầu năm 1968 tại Brazil.', 1, 'PAPERBACK', 244, 23.0, 15.0, '2020-12-12 10:00:00', '16_TO_18_YEARS_OLD', 120000, 'Cây cam ngọt của tôi', 0.6, 1.3, 1, 9, 9),
+Mở đầu bằng những thanh âm trong sáng và kết thúc lắng lại trong những nốt trầm hoài niệm, Cây cam ngọt của tôi khiến ta nhận ra vẻ đẹp thực sự của cuộc sống đến từ những điều giản dị như bông hoa trắng của cái cây sau nhà, và rằng cuộc đời thật khốn khổ nếu thiếu đi lòng yêu thương và niềm trắc ẩn. Cuốn sách kinh điển này bởi thế không ngừng khiến trái tim người đọc khắp thế giới thổn thức, kể từ khi ra mắt lần đầu năm 1968 tại Brazil.', 1, 'PAPERBACK', 244, 23.0, 15.0, '2020-12-12 10:00:00', 'SIXTEEN_TO_EIGHTEEN_YEARS_OLD', 120000, 'Cây cam ngọt của tôi', 0.6, 1.3, 1, 9, 9),
 ('5544332211', '9785544332211', 'NEW', 'Khi hơi thở hóa thinh không là tự truyện của một bác sĩ bị mắc bệnh ung thư phổi. Trong cuốn sách này, tác giả đã chia sẻ những trải nghiệm từ khi mới bắt đầu học ngành y, tiếp xúc với bệnh nhân cho tới khi phát hiện ra mình bị ung thư và phải điều trị lâu dài.
 Kalanithi rất yêu thích văn chương nên câu chuyện của anh đã được thuật lại theo một phong cách mượt mà, dung dị và đầy cảm xúc. Độc giả cũng được hiểu thêm về triết lý sống, triết lý nghề y của Kalanithi, thông qua ký ức về những ngày anh còn là sinh viên, rồi thực tập, cho đến khi chính thức hành nghề phẫu thuật thần kinh. “Đối với bệnh nhân và gia đình, phẫu thuật não là sự kiện bi thảm nhất mà họ từng phải đối mặt và nó có tác động như bất kỳ một biến cố lớn lao trong đời. Trong những thời điểm nguy cấp đó, câu hỏi không chỉ đơn thuần là sống hay chết mà còn là cuộc sống nào đáng sống.” – Kalanithi luôn biết cách đưa vào câu chuyện những suy nghĩ sâu sắc và đầy sự đồng cảm như thế.
 Bạn bè và gia đình đã dành tặng những lời trìu mến nhất cho con người đáng kính trọng cả về tài năng lẫn nhân cách này. Dù không thể vượt qua cơn bệnh nan y, nhưng thông điệp của tác giả sẽ còn khiến người đọc nhớ mãi.', 1, 'HARDCOVER', 236, 24.0, 16.0, '2017-11-25 11:15:00', 'OVER_18_YEARS_OLD', 180000, 'Khi hơi thở hóa thinh không', 0.65, 1.4, 1, 10, 16);
@@ -448,6 +528,11 @@ INSERT INTO address (detail, district, nation, province, village, customer_id) V
 ('113 Cách Mạng Tháng Tám', 'Quận 3', 'Việt Nam', 'TP HCM', 'Phường 11', 13),
 ('114 Tô Hiến Thành', 'Quận 10', 'Việt Nam', 'TP HCM', 'Phường 13', 14),
 ('115 Phạm Văn Đồng', 'Quận Thủ Đức', 'Việt Nam', 'TP HCM', 'Phường Linh Đông', 15);
+
+INSERT INTO address (detail, district, nation, province, village, customer_id) VALUES
+('121 Nguyễn Đình Chiểu', 'Quận 3', 'Việt Nam', 'TP HCM', 'Phường 6', 1),
+('14 Hai Bà Trưng', 'Quận 3', 'Việt Nam', 'TP HCM', 'Phường 8', 1),
+('12 Lý Thái Tổ', 'Quận 10', 'Việt Nam', 'TP HCM', 'Phường 14', 2);
 
 
 -- 13. Table Promotion: 
