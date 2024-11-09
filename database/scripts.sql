@@ -384,6 +384,141 @@ Mở đầu bằng những thanh âm trong sáng và kết thúc lắng lại tr
 Kalanithi rất yêu thích văn chương nên câu chuyện của anh đã được thuật lại theo một phong cách mượt mà, dung dị và đầy cảm xúc. Độc giả cũng được hiểu thêm về triết lý sống, triết lý nghề y của Kalanithi, thông qua ký ức về những ngày anh còn là sinh viên, rồi thực tập, cho đến khi chính thức hành nghề phẫu thuật thần kinh. “Đối với bệnh nhân và gia đình, phẫu thuật não là sự kiện bi thảm nhất mà họ từng phải đối mặt và nó có tác động như bất kỳ một biến cố lớn lao trong đời. Trong những thời điểm nguy cấp đó, câu hỏi không chỉ đơn thuần là sống hay chết mà còn là cuộc sống nào đáng sống.” – Kalanithi luôn biết cách đưa vào câu chuyện những suy nghĩ sâu sắc và đầy sự đồng cảm như thế.
 Bạn bè và gia đình đã dành tặng những lời trìu mến nhất cho con người đáng kính trọng cả về tài năng lẫn nhân cách này. Dù không thể vượt qua cơn bệnh nan y, nhưng thông điệp của tác giả sẽ còn khiến người đọc nhớ mãi.', 1, 'HARDCOVER', 236, 24.0, 16.0, '2017-11-25 11:15:00', 'OVER_18_YEARS_OLD', 180000, 'Khi hơi thở hóa thinh không', 0.65, 1.4, 1, 10, 16);
 
+
+-- Table BookMetaData:
+INSERT INTO book_metadata (created_at, import_price, opening_date, status, book_id)
+VALUES
+
+('2024-08-01 10:00:00', 135000, '2024-08-01 10:00:00', 'ON_SALE', 1),
+('2024-08-02 11:00:00', 120000, '2024-08-02 11:00:00', 'ON_SALE', 2),
+('2024-08-03 09:30:00', 125000, '2024-08-03 09:30:00', 'ON_SALE', 3),
+('2024-08-04 14:45:00', 138000, '2024-08-04 14:45:00', 'ON_SALE', 4),
+('2024-08-05 13:15:00', 132000, '2024-08-05 13:15:00', 'ON_SALE', 5),
+('2024-08-06 16:20:00', 115000, '2024-08-06 16:20:00', 'ON_SALE', 6),
+('2024-08-07 17:10:00', 130000, '2024-08-07 17:10:00', 'ON_SALE', 7),
+('2024-08-08 12:25:00', 127000, '2024-08-08 12:25:00', 'ON_SALE', 8),
+('2024-08-09 15:30:00', 118000, '2024-08-09 15:30:00', 'ON_SALE', 9),
+('2024-08-10 08:40:00', 134000, '2024-08-10 08:40:00', 'ON_SALE', 10);
+
+-- Table Media-file:
+INSERT INTO media_file (file_name, stored_code, book_metadata_id)
+VALUES
+ -- Trên Đường Băng
+('image1', '\\assets\\owner\\img\\book\\TrenDuongBang\\image1.jpg', 1),
+('image2', '\\assets\\owner\\img\\book\\TrenDuongBang\\image2.jpg', 1),
+('image3', '\\assets\\owner\\img\\book\\TrenDuongBang\\image3.jpg', 1),
+('image4', '\\assets\\owner\\img\\book\\TrenDuongBang\\image4.jpg', 1),
+('image5', '\\assets\\owner\\img\\book\\TrenDuongBang\\image5.jpg', 1),
+('image6', '\\assets\\owner\\img\\book\\TrenDuongBang\\image6.jpg', 1),
+('image7', '\\assets\\owner\\img\\book\\TrenDuongBang\\image7.jpg', 1),
+('image8', '\\assets\\owner\\img\\book\\TrenDuongBang\\image8.jpg', 1),
+('image9', '\\assets\\owner\\img\\book\\TrenDuongBang\\image9.jpg', 1),
+('image10', '\\assets\\owner\\img\\book\\TrenDuongBang\\image10.jpg', 1),
+
+-- Tầm Nhìn Giáo Dục
+('image1', '\\assets\\owner\\img\\book\\TamNhinGiaoDuc\\image1.jpg', 2),
+('image2', '\\assets\\owner\\img\\book\\TamNhinGiaoDuc\\image2.jpg', 2),
+('image3', '\\assets\\owner\\img\\book\\TamNhinGiaoDuc\\image3.jpg', 2),
+('image4', '\\assets\\owner\\img\\book\\TamNhinGiaoDuc\\image4.jpg', 2),
+('image5', '\\assets\\owner\\img\\book\\TamNhinGiaoDuc\\image5.jpg', 2),
+('image6', '\\assets\\owner\\img\\book\\TamNhinGiaoDuc\\image6.jpg', 2),
+('image7', '\\assets\\owner\\img\\book\\TamNhinGiaoDuc\\image7.jpg', 2),
+('image8', '\\assets\\owner\\img\\book\\TamNhinGiaoDuc\\image8.jpg', 2),
+
+-- Đừng lựa chọn an nhàn khi còn trẻ
+('image1', '\\assets\\owner\\img\\book\\DungLuaChonAnNhanKhiConTre\\image1.jpg', 3),
+('image2', '\\assets\\owner\\img\\book\\DungLuaChonAnNhanKhiConTre\\image2.jpg', 3),
+('image3', '\\assets\\owner\\img\\book\\DungLuaChonAnNhanKhiConTre\\image3.jpg', 3),
+('image4', '\\assets\\owner\\img\\book\\DungLuaChonAnNhanKhiConTre\\image4.jpg', 3),
+('image5', '\\assets\\owner\\img\\book\\DungLuaChonAnNhanKhiConTre\\image5.jpg', 3),
+('image6', '\\assets\\owner\\img\\book\\DungLuaChonAnNhanKhiConTre\\image6.jpg', 3),
+('image7', '\\assets\\owner\\img\\book\\DungLuaChonAnNhanKhiConTre\\image7.jpg', 3),
+('image8', '\\assets\\owner\\img\\book\\DungLuaChonAnNhanKhiConTre\\image8.jpg', 3),
+
+-- Một đời như kẻ tìm đường
+('image1', '\\assets\\owner\\img\\book\\MotDoiNhuKeTimDuong\\image1.jpg', 4),
+('image2', '\\assets\\owner\\img\\book\\MotDoiNhuKeTimDuong\\image2.jpg', 4),
+('image3', '\\assets\\owner\\img\\book\\MotDoiNhuKeTimDuong\\image3.jpg', 4),
+('image4', '\\assets\\owner\\img\\book\\MotDoiNhuKeTimDuong\\image4.jpg', 4),
+('image5', '\\assets\\owner\\img\\book\\MotDoiNhuKeTimDuong\\image5.jpg', 4),
+('image6', '\\assets\\owner\\img\\book\\MotDoiNhuKeTimDuong\\image6.jpg', 4),
+('image7', '\\assets\\owner\\img\\book\\MotDoiNhuKeTimDuong\\image7.jpg', 4),
+('image8', '\\assets\\owner\\img\\book\\MotDoiNhuKeTimDuong\\image8.jpg', 4),
+
+-- Tuổi trẻ đáng giá bao nhiêu
+('image1', '\\assets\\owner\\img\\book\\TuoiTreDangGiaBaoNhieu\\image1.jpg', 5),
+('image2', '\\assets\\owner\\img\\book\\TuoiTreDangGiaBaoNhieu\\image2.jpg', 5),
+('image3', '\\assets\\owner\\img\\book\\TuoiTreDangGiaBaoNhieu\\image3.jpg', 5),
+('image4', '\\assets\\owner\\img\\book\\TuoiTreDangGiaBaoNhieu\\image4.jpg', 5),
+('image5', '\\assets\\owner\\img\\book\\TuoiTreDangGiaBaoNhieu\\image5.jpg', 5),
+('image6', '\\assets\\owner\\img\\book\\TuoiTreDangGiaBaoNhieu\\image6.jpg', 5),
+('image7', '\\assets\\owner\\img\\book\\TuoiTreDangGiaBaoNhieu\\image7.jpg', 5),
+('image8', '\\assets\\owner\\img\\book\\TuoiTreDangGiaBaoNhieu\\image8.jpg', 5),
+('image9', '\\assets\\owner\\img\\book\\TuoiTreDangGiaBaoNhieu\\image9.jpg', 5);
+
+INSERT INTO media_file (file_name, stored_code, book_metadata_id)
+VALUES
+-- Đắc nhân tâm
+('image1', '\\assets\\owner\\img\\book\\DacNhanTam\\image1.jpg', 6),
+('image2', '\\assets\\owner\\img\\book\\DacNhanTam\\image2.jpg', 6),
+('image3', '\\assets\\owner\\img\\book\\DacNhanTam\\image3.jpg', 6),
+('image4', '\\assets\\owner\\img\\book\\DacNhanTam\\image4.jpg', 6),
+('image5', '\\assets\\owner\\img\\book\\DacNhanTam\\image5.jpg', 6),
+('image6', '\\assets\\owner\\img\\book\\DacNhanTam\\image6.jpg', 6),
+('image7', '\\assets\\owner\\img\\book\\DacNhanTam\\image7.jpg', 6),
+('image8', '\\assets\\owner\\img\\book\\DacNhanTam\\image8.jpg', 6),
+('image9', '\\assets\\owner\\img\\book\\DacNhanTam\\image9.jpg', 6),
+('image10', '\\assets\\owner\\img\\book\\DacNhanTam\\image10.jpg', 6),
+
+-- Tư duy ngược
+('image1', '\\assets\\owner\\img\\book\\TuDuyNguoc\\image1.jpg', 7),
+('image2', '\\assets\\owner\\img\\book\\TuDuyNguoc\\image2.jpg', 7),
+('image3', '\\assets\\owner\\img\\book\\TuDuyNguoc\\image3.jpg', 7),
+('image4', '\\assets\\owner\\img\\book\\TuDuyNguoc\\image4.jpg', 7),
+('image5', '\\assets\\owner\\img\\book\\TuDuyNguoc\\image5.jpg', 7),
+('image6', '\\assets\\owner\\img\\book\\TuDuyNguoc\\image6.jpg', 7),
+('image7', '\\assets\\owner\\img\\book\\TuDuyNguoc\\image7.jpg', 7),
+('image8', '\\assets\\owner\\img\\book\\TuDuyNguoc\\image8.jpg', 7),
+('image9', '\\assets\\owner\\img\\book\\TuDuyNguoc\\image9.jpg', 7),
+('image10', '\\assets\\owner\\img\\book\\TuDuyNguoc\\image10.jpg', 7),
+
+-- Đàn ông sao hỏa đàn bà sao kim
+('image1', '\\assets\\owner\\img\\book\\DanOngSaoHoaDanBaSaoKim\\image1.jpg', 8),
+('image2', '\\assets\\owner\\img\\book\\DanOngSaoHoaDanBaSaoKim\\image2.jpg', 8),
+('image3', '\\assets\\owner\\img\\book\\DanOngSaoHoaDanBaSaoKim\\image3.jpg', 8),
+('image4', '\\assets\\owner\\img\\book\\DanOngSaoHoaDanBaSaoKim\\image4.jpg', 8),
+('image5', '\\assets\\owner\\img\\book\\DanOngSaoHoaDanBaSaoKim\\image5.jpg', 8),
+('image6', '\\assets\\owner\\img\\book\\DanOngSaoHoaDanBaSaoKim\\image6.jpg', 8),
+('image7', '\\assets\\owner\\img\\book\\DanOngSaoHoaDanBaSaoKim\\image7.jpg', 8),
+('image8', '\\assets\\owner\\img\\book\\DanOngSaoHoaDanBaSaoKim\\image8.jpg', 8),
+('image9', '\\assets\\owner\\img\\book\\DanOngSaoHoaDanBaSaoKim\\image9.jpg', 8),
+('image10', '\\assets\\owner\\img\\book\\DanOngSaoHoaDanBaSaoKim\\image10.jpg', 8),
+
+-- Cây cam ngọt của tôi
+('image1', '\\assets\\owner\\img\\book\\CayCamNgotCuaToi\\image1.jpg', 9),
+('image2', '\\assets\\owner\\img\\book\\CayCamNgotCuaToi\\image2.jpg', 9),
+('image3', '\\assets\\owner\\img\\book\\CayCamNgotCuaToi\\image3.jpg', 9),
+('image4', '\\assets\\owner\\img\\book\\CayCamNgotCuaToi\\image4.jpg', 9),
+('image5', '\\assets\\owner\\img\\book\\CayCamNgotCuaToi\\image5.jpg', 9),
+('image6', '\\assets\\owner\\img\\book\\CayCamNgotCuaToi\\image6.jpg', 9),
+('image7', '\\assets\\owner\\img\\book\\CayCamNgotCuaToi\\image7.jpg', 9),
+('image8', '\\assets\\owner\\img\\book\\CayCamNgotCuaToi\\image8.jpg', 9),
+('image9', '\\assets\\owner\\img\\book\\CayCamNgotCuaToi\\image9.jpg', 9),
+('image10', '\\assets\\owner\\img\\book\\CayCamNgotCuaToi\\image10.jpg', 9),
+
+-- Khi hơi thở hóa thinh không
+('image1', '\\assets\\owner\\img\\book\\KhiHoiThoHoaThinhKhong\\image1.jpg', 10),
+('image2', '\\assets\\owner\\img\\book\\KhiHoiThoHoaThinhKhong\\image2.jpg', 10),
+('image3', '\\assets\\owner\\img\\book\\KhiHoiThoHoaThinhKhong\\image3.jpg', 10),
+('image4', '\\assets\\owner\\img\\book\\KhiHoiThoHoaThinhKhong\\image4.jpg', 10),
+('image5', '\\assets\\owner\\img\\book\\KhiHoiThoHoaThinhKhong\\image5.jpg', 10),
+('image6', '\\assets\\owner\\img\\book\\KhiHoiThoHoaThinhKhong\\image6.jpg', 10),
+('image7', '\\assets\\owner\\img\\book\\KhiHoiThoHoaThinhKhong\\image7.jpg', 10),
+('image8', '\\assets\\owner\\img\\book\\KhiHoiThoHoaThinhKhong\\image8.jpg', 10),
+('image9', '\\assets\\owner\\img\\book\\KhiHoiThoHoaThinhKhong\\image9.jpg', 10),
+('image10', '\\assets\\owner\\img\\book\\KhiHoiThoHoaThinhKhong\\image10.jpg', 10);
+
+
 -- 8. Table Author:
 -- Thêm dữ liệu vào bảng author
 INSERT INTO author (avatar, introduction, join_at, name) VALUES
