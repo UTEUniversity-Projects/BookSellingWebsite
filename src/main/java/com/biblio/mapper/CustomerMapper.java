@@ -41,6 +41,7 @@ public class CustomerMapper {
     }
     public static CustomerGetListResponse toCustomerGetListResponse(Customer customer) {
         CustomerGetListResponse customerGetListResponse = new CustomerGetListResponse();
+
         customerGetListResponse.setId(customer.getId());
         customerGetListResponse.setAvatar(customer.getAvatar());
         customerGetListResponse.setDateOfBirth(customer.getDateOfBirth());
