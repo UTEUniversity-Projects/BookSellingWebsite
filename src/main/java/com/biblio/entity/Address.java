@@ -1,6 +1,5 @@
 package com.biblio.entity;
 
-import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -52,8 +51,8 @@ public class Address implements Serializable {
     @JoinColumn(name = "owner_id")
     private Owner owner;
 
-    @OneToOne(mappedBy = "address")
-    private Order order;
+//    @OneToOne(mappedBy = "address")
+//    private Order order;
 
     // endregion
 }

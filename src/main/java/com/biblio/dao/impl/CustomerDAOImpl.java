@@ -2,7 +2,6 @@ package com.biblio.dao.impl;
 
 import com.biblio.dao.ICustomerDAO;
 import com.biblio.entity.Customer;
-import com.biblio.enumeration.EAccountStatus;
 
 import java.util.List;
 
@@ -30,19 +29,9 @@ public class CustomerDAOImpl extends GenericDAOImpl<Customer> implements ICustom
         super.update(customer);
     }
 
-    public static void main(String[] args) {
-        Customer customer = new Customer();
-        customer.setId(1L);
-        customer.getAccount().setStatus(EAccountStatus.INACTIVE);
-        new CustomerDAOImpl().deactivateCustomer(customer);
-//        List<Customer> list = new CustomerDAOImpl().findAll();
-//        for (Customer customer : list) {
-//            Set<Address> addresses = customer.getAddresses();
-//            for (Address address : addresses) {
-//                System.out.println(address.getProvince());
-//            }
-//            System.out.println(customer.getId());
-//        }
-
+    @Override
+    public void addCustomer(Customer customer) {
+        super.save(customer);
     }
+
 }

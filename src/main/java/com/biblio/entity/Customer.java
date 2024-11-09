@@ -1,7 +1,6 @@
 package com.biblio.entity;
 
 import com.biblio.enumeration.EMembership;
-import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -14,7 +13,6 @@ import java.util.Set;
 @Entity
 @Table(name = "customer")
 @NoArgsConstructor
-@AllArgsConstructor
 @Getter
 @Setter
 public class Customer extends User implements Serializable {
@@ -39,8 +37,8 @@ public class Customer extends User implements Serializable {
             inverseJoinColumns = @JoinColumn(name = "notification_id", nullable = false))
     private Set<Notification> notifications = new HashSet<Notification>();
 
-    @OneToMany(mappedBy = "customer", fetch = FetchType.EAGER)
-    private Set<Address> addresses;
+    @OneToMany(mappedBy = "customer", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    private Set<Address> addresses = new HashSet<>();
 
     @OneToMany(mappedBy = "customer", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
     private Set<Order> orders = new HashSet<Order>();

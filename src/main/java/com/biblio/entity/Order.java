@@ -40,17 +40,17 @@ public class Order implements Serializable {
     @JoinColumn(name = "customer_id", nullable = false)
     private Customer customer;
 
-    @OneToOne(mappedBy = "order")
-    private BankTransfer bankTransfer;
-
-    @OneToOne(mappedBy = "order")
-    private CreditCard creditCard;
-
-    @OneToOne(mappedBy = "order")
-    private Cash cash;
-
-    @OneToOne(mappedBy = "order")
-    private EWallet wallet;
+//    @OneToOne(mappedBy = "order")
+//    private BankTransfer bankTransfer;
+//
+//    @OneToOne(mappedBy = "order")
+//    private CreditCard creditCard;
+//
+//    @OneToOne(mappedBy = "order")
+//    private Cash cash;
+//
+//    @OneToOne(mappedBy = "order")
+//    private EWallet wallet;
 
     @OneToMany(mappedBy = "order", fetch = FetchType.LAZY)
     private Set<OrderItem> orderItems = new HashSet<OrderItem>();

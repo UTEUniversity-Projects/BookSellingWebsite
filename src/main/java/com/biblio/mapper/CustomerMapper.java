@@ -8,11 +8,11 @@ import com.biblio.entity.Address;
 import com.biblio.entity.Customer;
 import com.biblio.enumeration.EAccountStatus;
 import com.biblio.enumeration.EGender;
+import com.biblio.enumeration.EMembership;
 import com.biblio.enumeration.EUserRole;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.Set;
 
 public class CustomerMapper {
     public static Customer toCustomerRegister(CustomerRegisterRequest customerRegisterRequest) {
@@ -30,13 +30,14 @@ public class CustomerMapper {
         customer.setAccount(account);
         Address address = new Address();
         address.setNation("Việt Nam");
-        address.setProvince(customerRegisterRequest.getCity());
+        address.setProvince(customerRegisterRequest.getProvince());
         address.setDistrict(customerRegisterRequest.getDistrict());
-        address.setVillage(customerRegisterRequest.getHamlet());
-        customer.setAddresses(Set.of(address));
-//        address.setCustomer(customer);
+        address.setVillage(customerRegisterRequest.getVillage());
+        address.setDetail(customerRegisterRequest.getDetail());
+        customer.getAddresses().add(address);
         customer.setAvatar(customerRegisterRequest.getAvatar());
         customer.setJoinAt(LocalDateTime.now());
+        customer.setMembership(EMembership.MEMBER);
         return customer;
     }
     public static CustomerGetListResponse toCustomerGetListResponse(Customer customer) {

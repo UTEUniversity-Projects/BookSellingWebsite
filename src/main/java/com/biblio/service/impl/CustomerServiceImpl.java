@@ -2,6 +2,7 @@ package com.biblio.service.impl;
 
 import com.biblio.dao.ICustomerDAO;
 import com.biblio.dto.request.CustomerActiveInActiveRequest;
+import com.biblio.dto.request.CustomerRegisterRequest;
 import com.biblio.dto.response.CustomerGetListResponse;
 import com.biblio.entity.Customer;
 import com.biblio.enumeration.EAccountStatus;
@@ -46,4 +47,12 @@ public class CustomerServiceImpl implements ICustomerService {
         Customer customer = CustomerMapper.toCustomerActiveInActiveRequest(customerActiveInActiveRequest);
         customerDAO.activateCustomer(customer);
     }
+
+    @Override
+    public void addCustomer(CustomerRegisterRequest request) {
+
+        Customer customer = CustomerMapper.toCustomerRegister(request);
+        customerDAO.addCustomer(customer);
+    }
+
 }
