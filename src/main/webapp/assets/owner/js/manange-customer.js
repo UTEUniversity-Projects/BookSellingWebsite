@@ -1,19 +1,25 @@
-$(document).ready(function() {
-    $.ajax({
-        url: '/api/owner/customer',  // URL của servlet
-        method: 'GET',
-        dataType: 'json',          // Định dạng dữ liệu mong đợi là JSON
-        success: function(data) {
-            // Xử lý dữ liệu JSON nhận được từ servlet
-            console.log(data); // Hiển thị dữ liệu trong console để kiểm tra
-            data.forEach(function(customer) {
-                // Ví dụ: hiển thị tên của khách hàng
-                console.log("Tên khách hàng: " + customer.fullName);
-                // Bạn có thể thêm mã để hiển thị dữ liệu trên giao diện người dùng
-            });
-        },
-        error: function(jqXHR, textStatus, errorThrown) {
-            console.error("Lỗi: " + textStatus + " - " + errorThrown);
-        }
-    });
-})
+function changeStatus(customerId, action) {
+    const url = `/owner/customer-list?action=${action}&id=${customerId}`;
+
+    fetch(url, {
+        method: 'GET'
+    })
+        .then(response => response.text())
+        .then(data => {
+            if (data === 'success') {
+                alert(action === 'deactivate' ? 'Tài khoản đã bị vô hiệu hóa' : 'Tài khoản đã được mở khóa');
+
+                // Cập nhật trạng thái hiển thị
+                const statusElement = document.getElementById(`status-${customerId}`);
+                if (statusElement) {
+                    statusElement.innerText = (action === 'deactivate') ? 'INACTIVE' : 'ACTIVE';
+                }
+            } else {
+                alert('Có lỗi xảy ra khi thay đổi trạng thái tài khoản');
+            }
+        })
+        .catch(error => {
+            console.error('Error:', error);
+            alert('Có lỗi xảy ra khi kết nối tới server');
+        });
+}
