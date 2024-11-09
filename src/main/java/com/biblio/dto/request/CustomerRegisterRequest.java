@@ -1,11 +1,6 @@
 package com.biblio.dto.request;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.*;
 
 @Data
 @NoArgsConstructor
@@ -22,10 +17,10 @@ public class CustomerRegisterRequest {
 	private String gender;
 	private String username;
 	private String password;
-	private String city;
+	private String province;
 	private String district;
-	private String ward;
-	private String hamlet;
+	private String village;
+	private String detail;
 	private String avatar;
 
 }
