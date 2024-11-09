@@ -1,8 +1,10 @@
 package com.biblio.service.impl;
 
 import com.biblio.dao.ICustomerDAO;
+import com.biblio.dto.request.CustomerActiveInActiveRequest;
 import com.biblio.dto.response.CustomerGetListResponse;
 import com.biblio.entity.Customer;
+import com.biblio.enumeration.EAccountStatus;
 import com.biblio.mapper.CustomerMapper;
 import com.biblio.service.ICustomerService;
 
@@ -20,5 +22,28 @@ public class CustomerServiceImpl implements ICustomerService {
             list.add(CustomerMapper.toCustomerGetListResponse(customer));
         }
         return list;
+    }
+
+    @Override
+    public void deactivateCustomer(Long id) {
+        CustomerActiveInActiveRequest customerActiveInActiveRequest = new CustomerActiveInActiveRequest();
+        customerActiveInActiveRequest.setId(id);
+        customerActiveInActiveRequest.setStatus(EAccountStatus.INACTIVE);
+
+        Customer customer = CustomerMapper.toCustomerActiveInActiveRequest(customerActiveInActiveRequest);
+     //   Customer customer = new Customer();
+//        customer.setId(customerActiveInActiveRequest.getId());
+//        customer.getAccount().setStatus(EAccountStatus.INACTIVE);
+        customerDAO.deactivateCustomer(customer);
+    }
+
+    @Override
+    public void activateCustomer(Long id) {
+        CustomerActiveInActiveRequest customerActiveInActiveRequest = new CustomerActiveInActiveRequest();
+        customerActiveInActiveRequest.setId(id);
+        customerActiveInActiveRequest.setStatus(EAccountStatus.ACTIVE);
+
+        Customer customer = CustomerMapper.toCustomerActiveInActiveRequest(customerActiveInActiveRequest);
+        customerDAO.activateCustomer(customer);
     }
 }

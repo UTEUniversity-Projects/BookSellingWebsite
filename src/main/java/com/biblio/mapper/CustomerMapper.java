@@ -1,5 +1,6 @@
 package com.biblio.mapper;
 
+import com.biblio.dto.request.CustomerActiveInActiveRequest;
 import com.biblio.dto.request.CustomerRegisterRequest;
 import com.biblio.dto.response.CustomerGetListResponse;
 import com.biblio.entity.Account;
@@ -10,6 +11,7 @@ import com.biblio.enumeration.EGender;
 import com.biblio.enumeration.EUserRole;
 
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Set;
 
 public class CustomerMapper {
@@ -49,7 +51,7 @@ public class CustomerMapper {
         customerGetListResponse.setJoinAt(customer.getJoinAt().toString());
         customerGetListResponse.setPhoneNumber(customer.getPhoneNumber());
         customerGetListResponse.setMemberShip(customer.getMembership().toString());
-
+        customerGetListResponse.setStatus(customer.getAccount().getStatus().toString());
         customerGetListResponse.setUsername(customer.getAccount().getUsername());
         customerGetListResponse.setPassword(customer.getAccount().getPassword());
 
@@ -58,6 +60,23 @@ public class CustomerMapper {
         }
 
         return customerGetListResponse;
+    }
+
+    public static Customer toCustomerActiveInActiveRequest(CustomerActiveInActiveRequest customerActiveInActiveRequest) {
+        Customer customer = new Customer();
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+        customer.setId(customerActiveInActiveRequest.getId());
+        customer.setAvatar(customerActiveInActiveRequest.getAvatar());
+        customer.setDateOfBirth(customerActiveInActiveRequest.getDateOfBirth());
+        customer.setEmailAddress(customerActiveInActiveRequest.getEmail());
+        customer.setFullName(customerActiveInActiveRequest.getFullName());
+        customer.setGender(EGender.valueOf(customerActiveInActiveRequest.getGender()));
+        customer.setJoinAt( LocalDateTime.parse(customerActiveInActiveRequest.getJoinAt(), formatter));
+        customer.setPhoneNumber(customerActiveInActiveRequest.getPhoneNumber());
+        customer.setMembership(customerActiveInActiveRequest.getMemberShip());
+        customer.getAccount().setStatus(customerActiveInActiveRequest.getStatus());
+        customer.getAccount().setUsername(customerActiveInActiveRequest.getUsername());
+        return customer;
     }
 
 }

@@ -2,6 +2,7 @@ package com.biblio.dao.impl;
 
 import com.biblio.dao.ICustomerDAO;
 import com.biblio.entity.Customer;
+import com.biblio.enumeration.EAccountStatus;
 
 import java.util.List;
 
@@ -12,11 +13,28 @@ public class CustomerDAOImpl extends GenericDAOImpl<Customer> implements ICustom
 
     @Override
     public List<Customer> findAll() {
-        String jpql = "SELECT c.id, c.email FROM Customer c";
-       return super.findAll(jpql);
+//        String jpql = "SELECT c FROM Customer c";
+//        return super.findAll(jpql);
+        return  super.findAll();
     }
 
-//    public static void main(String[] args) {
+
+    @Override
+    public void deactivateCustomer(Customer customer) {
+        System.out.println(customer.toString());
+        //super.update(customer);
+    }
+
+    @Override
+    public void activateCustomer(Customer customer) {
+        super.update(customer);
+    }
+
+    public static void main(String[] args) {
+        Customer customer = new Customer();
+        customer.setId(1L);
+        customer.getAccount().setStatus(EAccountStatus.INACTIVE);
+        new CustomerDAOImpl().deactivateCustomer(customer);
 //        List<Customer> list = new CustomerDAOImpl().findAll();
 //        for (Customer customer : list) {
 //            Set<Address> addresses = customer.getAddresses();
@@ -26,5 +44,5 @@ public class CustomerDAOImpl extends GenericDAOImpl<Customer> implements ICustom
 //            System.out.println(customer.getId());
 //        }
 
-//    }
+    }
 }
