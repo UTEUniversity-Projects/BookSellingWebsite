@@ -30,10 +30,10 @@ public class CustomerServiceImpl implements ICustomerService {
         customerActiveInActiveRequest.setId(id);
         customerActiveInActiveRequest.setStatus(EAccountStatus.INACTIVE);
 
-        //Customer customer = CustomerMapper.toCustomerActiveInActiveRequest(customerActiveInActiveRequest);
-        Customer customer = new Customer();
-        customer.setId(customerActiveInActiveRequest.getId());
-        customer.getAccount().setStatus(EAccountStatus.INACTIVE);
+        Customer customer = CustomerMapper.toCustomerActiveInActiveRequest(customerActiveInActiveRequest);
+     //   Customer customer = new Customer();
+//        customer.setId(customerActiveInActiveRequest.getId());
+//        customer.getAccount().setStatus(EAccountStatus.INACTIVE);
         customerDAO.deactivateCustomer(customer);
     }
 
