@@ -25,7 +25,6 @@ public class CustomerMapper {
         account.setPassword(customerRegisterRequest.getPassword());
         account.setUserRole(EUserRole.CUSTOMER);
         account.setStatus(EAccountStatus.ACTIVE);
-        account.setCustomer(customer);
         customer.setAccount(account);
         Address address = new Address();
         address.setNation("Việt Nam");
@@ -33,7 +32,7 @@ public class CustomerMapper {
         address.setDistrict(customerRegisterRequest.getDistrict());
         address.setVillage(customerRegisterRequest.getHamlet());
         customer.setAddresses(Set.of(address));
-        address.setCustomer(customer);
+//        address.setCustomer(customer);
         customer.setAvatar(customerRegisterRequest.getAvatar());
         customer.setJoinAt(LocalDateTime.now());
         return customer;
