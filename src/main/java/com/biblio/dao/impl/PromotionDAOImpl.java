@@ -2,10 +2,10 @@ package com.biblio.dao.impl;
 
 import com.biblio.dao.IPromotionDAO;
 import com.biblio.entity.Promotion;
-import com.biblio.entity.PromotionTarget;
 
+import java.util.HashMap;
 import java.util.List;
-import java.util.Set;
+import java.util.Map;
 
 public class PromotionDAOImpl extends GenericDAOImpl<Promotion> implements IPromotionDAO {
     public PromotionDAOImpl() {
@@ -15,15 +15,39 @@ public class PromotionDAOImpl extends GenericDAOImpl<Promotion> implements IProm
     public List<Promotion> findAll() {
         return super.findAll();
     }
+    public Promotion findById(Long id) {
+        return super.findById(id);
+    }
+
+    @Override
+    public void insert(Promotion promotion) {
+        System.out.println(promotion.getCode());
+        super.save(promotion);
+    }
+
+    @Override
+    public void updatePromotion(Promotion promotion) {
+        super.update(promotion);
+    }
+
+
+    @Override
+    public Promotion findLastPromotion() {
+        String jpql = "SELECT p FROM Promotion p ORDER BY p.id DESC";
+        Map<String, Object> params = new HashMap<>();
+        return super.findSingleByJPQL(jpql, params);
+    }
+
+
     public static void main(String[] args) {
         PromotionDAOImpl dao = new PromotionDAOImpl();
-        List<Promotion> promotions = dao.findAll();
-
-        for (Promotion promotion : promotions) {
-            Set<PromotionTarget> promotionTargets = promotion.getPromotionTargets();
-            for (PromotionTarget promotionTarget : promotionTargets) {
-                System.out.println(promotionTarget.getApplicableObjectId());
-            }
-        }
+        Promotion promotion = dao.findLastPromotion();
+        System.out.println(promotion.getCode());
+//        for (Promotion promotion : promotions) {
+//            Set<PromotionTarget> promotionTargets = promotion.getPromotionTargets();
+//            for (PromotionTarget promotionTarget : promotionTargets) {
+//                System.out.println(promotionTarget.getApplicableObjectId());
+//            }
+//        }
     }
 }
