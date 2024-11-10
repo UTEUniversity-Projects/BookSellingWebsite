@@ -1,27 +1,41 @@
 package com.biblio.dao;
 
+
 import java.util.List;
+import java.util.Map;
+
 
 public interface IGenericDAO<T> {
 
-    List<T> findByJPQLPaginated(String jpql, int pageNumber, int pageSize, Object... params);
+
+    List<T> findByJPQLPaginated(String jpql, int pageNumber, int pageSize, Map<String, Object> params);
+
 
     List<T> findAllPaginated(int pageNumber, int pageSize);
 
-    void delete(Object id);
 
-    void update(T entity);
+    T delete(Object id);
 
-    void save(T entity);
 
-    List<T> findByJPQL(String jpql, Object... params);
+    T update(T entity);
 
-    T findSingleByJPQL(String jpql, Object... params);
+
+    T save(T entity);
+
+
+    List<T> findByJPQL(String jpql, Map<String, Object> params);
+
+
+    T findSingleByJPQL(String jpql, Map<String, Object> params);
+
 
     List<T> findAll();
 
+
     T findById(Object id);
 
+
     List<T> findAll(String jpql);
+
 
 }

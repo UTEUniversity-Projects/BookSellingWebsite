@@ -72,4 +72,4 @@
         </div>
     </div>
 </div>
-<script src="${pageContext.request.contextPath}/assets/owner/js/manange-customer.js" defer></script>
+<script src="${pageContext.request.contextPath}/assets/owner/js/manage-customer.js" defer></script>

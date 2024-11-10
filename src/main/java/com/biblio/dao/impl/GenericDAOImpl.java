@@ -1,20 +1,27 @@
 package com.biblio.dao.impl;
 
+
 import com.biblio.dao.IGenericDAO;
 import com.biblio.jpaconfig.JpaConfig;
+
 
 import javax.persistence.EntityManager;
 import javax.persistence.TypedQuery;
 import javax.persistence.criteria.CriteriaQuery;
 import java.util.List;
+import java.util.Map;
+
 
 public class GenericDAOImpl<T> implements IGenericDAO<T> {
 
+
     private final Class<T> entityClass;
+
 
     public GenericDAOImpl(Class<T> entityClass) {
         this.entityClass = entityClass;
     }
+
 
     @Override
     public T findById(Object id) {
@@ -24,11 +31,10 @@ public class GenericDAOImpl<T> implements IGenericDAO<T> {
         } catch (Exception e) {
             throw new RuntimeException("Error while finding entity by ID", e);
         } finally {
-            if (em != null && em.isOpen()) {
-                em.close();
-            }
+            closeEntityManager(em);
         }
     }
+
 
     @Override
     public List<T> findAll() {
@@ -40,11 +46,10 @@ public class GenericDAOImpl<T> implements IGenericDAO<T> {
         } catch (Exception e) {
             throw new RuntimeException("Error while finding all entities", e);
         } finally {
-            if (em != null && em.isOpen()) {
-                em.close();
-            }
+            closeEntityManager(em);
         }
     }
+
 
     @Override
     public List<T> findAll(String jpql) {
@@ -53,86 +58,79 @@ public class GenericDAOImpl<T> implements IGenericDAO<T> {
             TypedQuery<T> query = em.createQuery(jpql, entityClass);
             return query.getResultList();
         } catch (Exception e) {
-            throw new RuntimeException("Error while finding all entities", e);
+            throw new RuntimeException("Error while finding all entities by JPQL", e);
         } finally {
-            if (em != null && em.isOpen()) {
-                em.close();
-            }
+            closeEntityManager(em);
         }
     }
 
+
     @Override
-    public T findSingleByJPQL(String jpql, Object... params) {
+    public T findSingleByJPQL(String jpql, Map<String, Object> params) {
         EntityManager em = JpaConfig.getEntityManager();
         try {
             TypedQuery<T> query = em.createQuery(jpql, entityClass);
-            for (int i = 0; i < params.length; i++) {
-                query.setParameter(i + 1, params[i]);
-            }
+            setQueryParameters(query, params);
             return query.getResultStream().findFirst().orElse(null);
         } catch (Exception e) {
             throw new RuntimeException("Error while finding single entity by JPQL", e);
         } finally {
-            if (em != null && em.isOpen()) {
-                em.close();
-            }
+            closeEntityManager(em);
         }
     }
 
+
     @Override
-    public List<T> findByJPQL(String jpql, Object... params) {
+    public List<T> findByJPQL(String jpql, Map<String, Object> params) {
         EntityManager em = JpaConfig.getEntityManager();
         try {
             TypedQuery<T> query = em.createQuery(jpql, entityClass);
-            for (int i = 0; i < params.length; i++) {
-                query.setParameter(i + 1, params[i]);
-            }
+            setQueryParameters(query, params);
             return query.getResultList();
         } catch (Exception e) {
             throw new RuntimeException("Error while finding entities by JPQL", e);
         } finally {
-            if (em != null && em.isOpen()) {
-                em.close();
-            }
+            closeEntityManager(em);
         }
     }
 
+
     @Override
-    public void save(T entity) {
+    public T save(T entity) {
         EntityManager em = JpaConfig.getEntityManager();
         try {
             em.getTransaction().begin();
             em.persist(entity);
             em.getTransaction().commit();
+            return entity;
         } catch (Exception e) {
             em.getTransaction().rollback();
             throw new RuntimeException("Error while saving entity", e);
         } finally {
-            if (em != null && em.isOpen()) {
-                em.close();
-            }
+            closeEntityManager(em);
         }
     }
 
+
     @Override
-    public void update(T entity) {
+    public T update(T entity) {
         EntityManager em = JpaConfig.getEntityManager();
         try {
             em.getTransaction().begin();
             em.merge(entity);
             em.getTransaction().commit();
+            return entity;
         } catch (Exception e) {
             em.getTransaction().rollback();
             throw new RuntimeException("Error while updating entity", e);
         } finally {
-            if (em != null && em.isOpen()) {
-                em.close();
-            }
+            closeEntityManager(em);
         }
     }
 
+
     @Override
-    public void delete(Object id) {
+    public T delete(Object id) {
         EntityManager em = JpaConfig.getEntityManager();
         try {
             em.getTransaction().begin();
@@ -140,6 +138,7 @@ public class GenericDAOImpl<T> implements IGenericDAO<T> {
             if (entity != null) {
                 em.remove(entity);
                 em.getTransaction().commit();
+                return entity;
             } else {
                 em.getTransaction().rollback();
                 throw new IllegalArgumentException("Entity not found with ID: " + id);
@@ -148,11 +147,10 @@ public class GenericDAOImpl<T> implements IGenericDAO<T> {
             em.getTransaction().rollback();
             throw new RuntimeException("Error while deleting entity", e);
         } finally {
-            if (em != null && em.isOpen()) {
-                em.close();
-            }
+            closeEntityManager(em);
         }
     }
+
 
     @Override
     public List<T> findAllPaginated(int pageNumber, int pageSize) {
@@ -167,29 +165,38 @@ public class GenericDAOImpl<T> implements IGenericDAO<T> {
         } catch (Exception e) {
             throw new RuntimeException("Error while finding paginated entities", e);
         } finally {
-            if (em != null && em.isOpen()) {
-                em.close();
-            }
+            closeEntityManager(em);
         }
     }
 
+
     @Override
-    public List<T> findByJPQLPaginated(String jpql, int pageNumber, int pageSize, Object... params) {
+    public List<T> findByJPQLPaginated(String jpql, int pageNumber, int pageSize, Map<String, Object> params) {
         EntityManager em = JpaConfig.getEntityManager();
         try {
             TypedQuery<T> query = em.createQuery(jpql, entityClass);
-            for (int i = 0; i < params.length; i++) {
-                query.setParameter(i + 1, params[i]);
-            }
+            setQueryParameters(query, params);
             query.setFirstResult((pageNumber - 1) * pageSize);
             query.setMaxResults(pageSize);
             return query.getResultList();
         } catch (Exception e) {
             throw new RuntimeException("Error while finding paginated entities by JPQL", e);
         } finally {
-            if (em != null && em.isOpen()) {
-                em.close();
-            }
+            closeEntityManager(em);
+        }
+    }
+
+
+    private void setQueryParameters(TypedQuery<?> query, Map<String, Object> params) {
+        for (Map.Entry<String, Object> entry : params.entrySet()) {
+            query.setParameter(entry.getKey(), entry.getValue());
+        }
+    }
+
+
+    private void closeEntityManager(EntityManager em) {
+        if (em != null && em.isOpen()) {
+            em.close();
         }
     }
 }
