@@ -15,6 +15,7 @@ import java.util.List;
 public class CustomerServiceImpl implements ICustomerService {
     @Inject
     ICustomerDAO customerDAO;
+
     @Override
     public List<CustomerGetListResponse> findAll() {
         List<CustomerGetListResponse> list = new ArrayList<>();
