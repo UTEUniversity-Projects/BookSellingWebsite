@@ -1,6 +1,7 @@
 package com.biblio.service.impl;
 
 import com.biblio.dao.ICustomerDAO;
+import com.biblio.dto.request.CustomerRegisterRequest;
 import com.biblio.dto.response.CustomerGetListResponse;
 import com.biblio.entity.Customer;
 import com.biblio.enumeration.EAccountStatus;
@@ -14,6 +15,7 @@ import java.util.List;
 public class CustomerServiceImpl implements ICustomerService {
     @Inject
     ICustomerDAO customerDAO;
+
     @Override
     public List<CustomerGetListResponse> findAll() {
         List<CustomerGetListResponse> list = new ArrayList<>();
