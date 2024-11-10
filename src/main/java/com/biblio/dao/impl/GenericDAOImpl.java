@@ -186,13 +186,11 @@ public class GenericDAOImpl<T> implements IGenericDAO<T> {
         }
     }
 
-
     private void setQueryParameters(TypedQuery<?> query, Map<String, Object> params) {
         for (Map.Entry<String, Object> entry : params.entrySet()) {
             query.setParameter(entry.getKey(), entry.getValue());
         }
     }
-
 
     private void closeEntityManager(EntityManager em) {
         if (em != null && em.isOpen()) {

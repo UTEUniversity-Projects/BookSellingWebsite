@@ -12,7 +12,7 @@ public class CustomerDAOImpl extends GenericDAOImpl<Customer> implements ICustom
 
     @Override
     public List<Customer> findAll() {
-        return  super.findAll();
+        return super.findAll();
     }
 
     @Override
