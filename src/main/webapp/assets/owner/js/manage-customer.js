@@ -1,5 +1,5 @@
 function changeStatus(customerId, action) {
-    const url = `/owner/customer-list`;
+    const url = `${contextPath}/owner/customer-list`;
 
     $.ajax({
         url: url,
