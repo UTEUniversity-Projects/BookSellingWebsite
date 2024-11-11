@@ -1,9 +1,11 @@
 package com.biblio.entity;
 
 import com.biblio.enumeration.EBookStatus;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.Builder;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -13,9 +15,11 @@ import java.util.Set;
 
 @Entity
 @Table(name = "book_metadata")
-@NoArgsConstructor
 @Getter
 @Setter
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 public class BookMetadata implements Serializable {
 
     // region Attributes

@@ -10,9 +10,11 @@ import java.util.Set;
 
 @Entity
 @Table(name = "author")
-@NoArgsConstructor
 @Getter
 @Setter
+@SuperBuilder
+@NoArgsConstructor
+@AllArgsConstructor
 public class Author extends ContributorProfile implements Serializable {
 
     // region Relationships

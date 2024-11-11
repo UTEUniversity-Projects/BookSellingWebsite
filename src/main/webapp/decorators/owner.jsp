@@ -12,7 +12,7 @@
     <title>Owner</title>
 
     <!-- App favicon -->
-    <link rel="shortcut icon" href="/assets/owner/img/logo/collapse-logo.png"/>
+    <link rel="shortcut icon" href="${pageContext.request.contextPath}/assets/owner/img/logo/collapse-logo.png"/>
 
     <!-- Icon CSS -->
     <link
@@ -56,7 +56,6 @@
     <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/owner/css/vendor/jquery.slick.css" />
     <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/owner/css/vendor/slick-theme.css" />
 
-
     <!-- Main CSS -->
     <link id="main-css" href="${pageContext.request.contextPath}/assets/owner/css/style.css" rel="stylesheet"/>
 </head>
@@ -85,7 +84,7 @@
 <script src="${pageContext.request.contextPath}/assets/owner/js/vendor/jquery.datatables.min.js"></script>
 <script src="${pageContext.request.contextPath}/assets/owner/js/vendor/datatables.bootstrap5.min.js"></script>
 <script src="${pageContext.request.contextPath}/assets/owner/js/vendor/datatables.responsive.min.js"></script>
-<!-- Caleddar -->
+<!-- Calendar -->
 <script src="${pageContext.request.contextPath}/assets/owner/js/vendor/jquery.simple-calendar.js"></script>
 <!-- Date Range Picker -->
 <script src="${pageContext.request.contextPath}/assets/owner/js/vendor/moment.min.js"></script>

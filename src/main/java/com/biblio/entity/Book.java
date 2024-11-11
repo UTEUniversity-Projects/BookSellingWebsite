@@ -4,9 +4,11 @@ import com.biblio.enumeration.EBookAgeRecommend;
 import com.biblio.enumeration.EBookCondition;
 import com.biblio.enumeration.EBookFormat;
 import com.biblio.enumeration.EBookLanguage;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.Builder;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -16,9 +18,11 @@ import java.util.Set;
 
 @Entity
 @Table(name = "book")
-@NoArgsConstructor
 @Getter
 @Setter
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 public class Book implements Serializable {
 
     // region Attributes
