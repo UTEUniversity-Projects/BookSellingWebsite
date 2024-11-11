@@ -223,11 +223,11 @@
                                         />
                                         <h3>Thêm Voucher</h3>
                                         <form action="/owner/add-promotion" method="POST">
-                                            <input type="hidden" name="formType" value="addVoucher" />
+                                            <input type="hidden" name="formType" value="addVoucher"/>
                                             <div class="form-group">
                                                 <label>Mã</label>
                                                 <div class="col-12">
-                                                    <input name="code" class="form-control here slug-title" type="text" value="#20-10" />
+                                                    <input name="code" class="form-control here slug-title" type="text" required/>
                                                 </div>
                                             </div>
                                             <div class="form-group">
@@ -292,12 +292,13 @@
                                                 src="assets/img/product/1.jpg"
                                         />
                                         <h3>Thêm Coupon</h3>
-                                        <form>
+                                        <form action="/owner/add-promotion" method="POST">
+                                            <input type="hidden" name="formType" value="addCoupon" />
                                             <div class="form-group">
                                                 <label>Mã</label>
                                                 <div class="col-12">
                                                     <input
-                                                            name="text"
+                                                            name="code"
                                                             class="form-control here slug-title"
                                                             type="text"
                                                             value="#20-10"
@@ -308,7 +309,7 @@
                                                 <label>Tiêu đề</label>
                                                 <div class="col-12">
                                                     <input
-                                                            name="text"
+                                                            name="title"
                                                             class="form-control here slug-title"
                                                             type="text"
                                                             value="20 - 10"
@@ -319,7 +320,7 @@
                                                 <label>Phần trăm giảm (%)</label>
                                                 <div class="col-12">
                                                     <input
-                                                            name="text"
+                                                            name="percentDiscount"
                                                             class="form-control here slug-title"
                                                             type="text"
                                                             value="50%"
@@ -330,7 +331,7 @@
                                                 <label>Giảm tối da</label>
                                                 <div class="col-12">
                                                     <input
-                                                            name="text"
+                                                            name="discountLimit"
                                                             class="form-control here slug-title"
                                                             type="text"
                                                             value="50.000 vnđ"
@@ -340,25 +341,15 @@
                                             <div class="form-group">
                                                 <label>Số lượng khuyến mãi</label>
                                                 <div class="col-12">
-                                                    <input
-                                                            name="text"
-                                                            class="form-control here slug-title"
-                                                            type="text"
-                                                    />
-                                                    <label
-                                                    ><input
-                                                            type="checkbox"
-                                                            value="Không giới hạn"
-                                                            style="margin-top: 5px"
-                                                    />
-                                                        Không giới hạn</label
-                                                    >
+                                                    <input name="quantity" class="form-control here slug-title" type="text" />
+                                                    <label><input type="checkbox" name="unlimited" value="true" style="margin-top: 5px" /> Không giới hạn</label>
                                                 </div>
                                             </div>
                                             <div class="form-group">
                                                 <label>Mô tả</label>
                                                 <div class="col-12">
 																<textarea
+                                                                        name="description"
                                                                         class="form-control"
                                                                         rows="4"
                                                                 ></textarea>
@@ -398,12 +389,13 @@
                                                 src="assets/img/product/1.jpg"
                                         />
                                         <h3>Thêm Freeship</h3>
-                                        <form>
+                                        <form action="/owner/add-promotion" method="POST">
+                                            <input type="hidden" name="formType" value="addFreeShip" />
                                             <div class="form-group">
                                                 <label>Mã</label>
                                                 <div class="col-12">
                                                     <input
-                                                            name="text"
+                                                            name="code"
                                                             class="form-control here slug-title"
                                                             type="text"
                                                             value="#20-10"
@@ -414,7 +406,7 @@
                                                 <label>Tiêu đề</label>
                                                 <div class="col-12">
                                                     <input
-                                                            name="text"
+                                                            name="title"
                                                             class="form-control here slug-title"
                                                             type="text"
                                                             value="20 - 10"
@@ -422,21 +414,10 @@
                                                 </div>
                                             </div>
                                             <div class="form-group">
-                                                <label>Phần trăm giảm (%)</label>
+                                                <label>Số tiền giảm</label>
                                                 <div class="col-12">
                                                     <input
-                                                            name="text"
-                                                            class="form-control here slug-title"
-                                                            type="text"
-                                                            value="50%"
-                                                    />
-                                                </div>
-                                            </div>
-                                            <div class="form-group">
-                                                <label>Giảm tối da</label>
-                                                <div class="col-12">
-                                                    <input
-                                                            name="text"
+                                                            name="discountLimit"
                                                             class="form-control here slug-title"
                                                             type="text"
                                                             value="50.000 vnđ"
@@ -446,25 +427,15 @@
                                             <div class="form-group">
                                                 <label>Số lượng khuyến mãi</label>
                                                 <div class="col-12">
-                                                    <input
-                                                            name="text"
-                                                            class="form-control here slug-title"
-                                                            type="text"
-                                                    />
-                                                    <label
-                                                    ><input
-                                                            type="checkbox"
-                                                            value="Không giới hạn"
-                                                            style="margin-top: 5px"
-                                                    />
-                                                        Không giới hạn</label
-                                                    >
+                                                    <input name="quantity" class="form-control here slug-title" type="text" />
+                                                    <label><input type="checkbox" name="unlimited" value="true" style="margin-top: 5px" /> Không giới hạn</label>
                                                 </div>
                                             </div>
                                             <div class="form-group">
                                                 <label>Mô tả</label>
                                                 <div class="col-12">
 																<textarea
+                                                                        name="description"
                                                                         class="form-control"
                                                                         rows="4"
                                                                 ></textarea>

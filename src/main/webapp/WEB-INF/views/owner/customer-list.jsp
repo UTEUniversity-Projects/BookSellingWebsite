@@ -72,4 +72,5 @@
         </div>
     </div>
 </div>
+<script>const contextPath = "<%=request.getContextPath() %>";</script>
 <script src="${pageContext.request.contextPath}/assets/owner/js/manage-customer.js" defer></script>
