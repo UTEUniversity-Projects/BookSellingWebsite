@@ -17,6 +17,8 @@ public class OrderDetailsResponse {
     private String customerName;
     private String phoneNumber;
     private String address;
+    private String orderDate;
+    private String note;
     private List<OrderProductResponse> products;
     private double totalPrice;
     private EOrderStatus status;
