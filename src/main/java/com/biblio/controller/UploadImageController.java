@@ -29,8 +29,8 @@ public class UploadImageController extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         response.setContentType("text/plain");
         Part part = request.getPart("image");
-
-        String avatar = UploadFileUtil.UploadImage(part, request.getServletContext());
+        String username = request.getParameter("username");
+        String avatar = UploadFileUtil.UploadImage(part, request.getServletContext(), username);
 
         response.getWriter().write(avatar);
     }

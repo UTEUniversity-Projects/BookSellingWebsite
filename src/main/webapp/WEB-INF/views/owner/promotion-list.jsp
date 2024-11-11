@@ -25,7 +25,7 @@
                 </div>
                 <div class="cr-card card-default ">
                     <div class="cr-card-content promotion-list" data-tab="1" style="width: 100%;">
-                        <table id="discount-data-table" class="table table-hover">
+                        <table class="table table-hover promotion-data-table">
                             <thead>
                             <tr>
                                 <th>#</th>
@@ -33,14 +33,13 @@
                                 <th>Tiêu Đề</th>
                                 <th>%</th>
                                 <th>Trạng thái</th>
-                                <th>Action</th>
                             </tr>
                             </thead>
 
                             <tbody>
                             <c:forEach var="promotion" items="${promotions}">
                                 <c:if test="${promotion.type == 'DISCOUNT'}">
-                                    <tr class="customer-row" data-href="/owner/customer-profile?id=${promotion.id}">
+                                    <tr class="promotion-row" data-href="/owner/promotion-details?id=${promotion.id}">
                                     <td>
                                         <img class="tbl-thumb" src="/assets/owner/img/product/1.jpg" alt="Product Image">
                                     </td>
@@ -48,26 +47,6 @@
                                     <td>${promotion.title}</td>
                                     <td>${promotion.percentDiscount} %</td>
                                     <td class="cod" id="status-${promotion.id}">${promotion.status}</td>
-                                    <td>
-                                        <div class="d-flex justify-content-start">
-                                            <button type="button"
-                                                    class="btn btn-outline-success dropdown-toggle dropdown-toggle-split"
-                                                    data-bs-toggle="dropdown" aria-haspopup="true"
-                                                    aria-expanded="false" data-display="static">
-                                                <span class="sr-only"><i class="ri-settings-3-line"></i></span>
-                                            </button>
-                                            <div class="dropdown-menu">
-                                                <c:choose>
-                                                    <c:when test="${customer.status == 'ACTIVE'}">
-                                                        <a class="dropdown-item pop-positioned-timeout" href="#" onclick="changeStatus(${customer.id}, 'deactivate'); return false;">Vô hiệu hóa tài khoản</a>
-                                                    </c:when>
-                                                    <c:otherwise>
-                                                        <a class="dropdown-item pop-positioned-timeout" href="#" onclick="changeStatus(${customer.id}, 'activate'); return false;">Mở khóa tài khoản</a>
-                                                    </c:otherwise>
-                                                </c:choose>
-                                            </div>
-                                        </div>
-                                    </td>
                                 </tr>
                                 </c:if>
                             </c:forEach>
@@ -75,7 +54,7 @@
                         </table>
                     </div>
                     <div class="cr-card-content promotion-list" data-tab="2" style="width: 100%;">
-                        <table id="voucher-data-table" class="table table-hover">
+                        <table class="table table-hover promotion-data-table">
                             <thead>
                             <tr>
                                 <th>#</th>
@@ -83,14 +62,13 @@
                                 <th>Tiêu Đề</th>
                                 <th>%</th>
                                 <th>Trạng thái</th>
-                                <th>Action</th>
                             </tr>
                             </thead>
 
                             <tbody>
                             <c:forEach var="promotion" items="${promotions}">
                                 <c:if test="${promotion.type == 'VOUCHER'}">
-                                    <tr class="customer-row" data-href="/owner/customer-profile?id=${promotion.id}">
+                                    <tr class="promotion-row" data-href="/owner/promotion-details?id=${promotion.id}">
                                         <td>
                                             <img class="tbl-thumb" src="/assets/owner/img/product/1.jpg" alt="Product Image">
                                         </td>
@@ -98,26 +76,6 @@
                                         <td>${promotion.title}</td>
                                         <td>${promotion.percentDiscount} %</td>
                                         <td class="cod" id="status-${promotion.id}">${promotion.status}</td>
-                                        <td>
-                                            <div class="d-flex justify-content-start">
-                                                <button type="button"
-                                                        class="btn btn-outline-success dropdown-toggle dropdown-toggle-split"
-                                                        data-bs-toggle="dropdown" aria-haspopup="true"
-                                                        aria-expanded="false" data-display="static">
-                                                    <span class="sr-only"><i class="ri-settings-3-line"></i></span>
-                                                </button>
-                                                <div class="dropdown-menu">
-                                                    <c:choose>
-                                                        <c:when test="${customer.status == 'ACTIVE'}">
-                                                            <a class="dropdown-item pop-positioned-timeout" href="#" onclick="changeStatus(${customer.id}, 'deactivate'); return false;">Vô hiệu hóa tài khoản</a>
-                                                        </c:when>
-                                                        <c:otherwise>
-                                                            <a class="dropdown-item pop-positioned-timeout" href="#" onclick="changeStatus(${customer.id}, 'activate'); return false;">Mở khóa tài khoản</a>
-                                                        </c:otherwise>
-                                                    </c:choose>
-                                                </div>
-                                            </div>
-                                        </td>
                                     </tr>
                                 </c:if>
                             </c:forEach>
@@ -125,22 +83,22 @@
                         </table>
                     </div>
                     <div class="cr-card-content promotion-list" data-tab="3" style="width: 100%;">
-                        <table id="coupon-data-table" class="table table-hover">
+                        <table class="table table-hover promotion-data-table">
                             <thead>
+
                             <tr>
                                 <th>#</th>
                                 <th>Mã</th>
                                 <th>Tiêu Đề</th>
                                 <th>%</th>
                                 <th>Trạng thái</th>
-                                <th>Action</th>
                             </tr>
                             </thead>
 
                             <tbody>
                             <c:forEach var="promotion" items="${promotions}">
                                 <c:if test="${promotion.type == 'COUPON'}">
-                                    <tr class="customer-row" data-href="/owner/customer-profile?id=${promotion.id}">
+                                    <tr class="promotion-row" data-href="/owner/promotion-details?id=${promotion.id}">
                                         <td>
                                             <img class="tbl-thumb" src="/assets/owner/img/product/1.jpg" alt="Product Image">
                                         </td>
@@ -148,26 +106,6 @@
                                         <td>${promotion.title}</td>
                                         <td>${promotion.percentDiscount} %</td>
                                         <td class="cod" id="status-${promotion.id}">${promotion.status}</td>
-                                        <td>
-                                            <div class="d-flex justify-content-start">
-                                                <button type="button"
-                                                        class="btn btn-outline-success dropdown-toggle dropdown-toggle-split"
-                                                        data-bs-toggle="dropdown" aria-haspopup="true"
-                                                        aria-expanded="false" data-display="static">
-                                                    <span class="sr-only"><i class="ri-settings-3-line"></i></span>
-                                                </button>
-                                                <div class="dropdown-menu">
-                                                    <c:choose>
-                                                        <c:when test="${customer.status == 'ACTIVE'}">
-                                                            <a class="dropdown-item pop-positioned-timeout" href="#" onclick="changeStatus(${customer.id}, 'deactivate'); return false;">Vô hiệu hóa tài khoản</a>
-                                                        </c:when>
-                                                        <c:otherwise>
-                                                            <a class="dropdown-item pop-positioned-timeout" href="#" onclick="changeStatus(${customer.id}, 'activate'); return false;">Mở khóa tài khoản</a>
-                                                        </c:otherwise>
-                                                    </c:choose>
-                                                </div>
-                                            </div>
-                                        </td>
                                     </tr>
                                 </c:if>
                             </c:forEach>
@@ -175,7 +113,7 @@
                         </table>
                     </div>
                     <div class="cr-card-content promotion-list" data-tab="4" style="width: 100%;">
-                        <table id="freeship-data-table" class="table table-hover">
+                        <table class="table table-hover promotion-data-table">
                             <thead>
                             <tr>
                                 <th>#</th>
@@ -183,14 +121,13 @@
                                 <th>Tiêu Đề</th>
                                 <th>%</th>
                                 <th>Trạng thái</th>
-                                <th>Action</th>
                             </tr>
                             </thead>
 
                             <tbody>
                             <c:forEach var="promotion" items="${promotions}">
                                 <c:if test="${promotion.type == 'FREESHIP'}">
-                                    <tr class="customer-row" data-href="/owner/customer-profile?id=${promotion.id}">
+                                    <tr class="promotion-row" data-href="/owner/promotion-details?id=${promotion.id}">
                                         <td>
                                             <img class="tbl-thumb" src="/assets/owner/img/product/1.jpg" alt="Product Image">
                                         </td>
@@ -198,26 +135,6 @@
                                         <td>${promotion.title}</td>
                                         <td>${promotion.percentDiscount} %</td>
                                         <td class="cod" id="status-${promotion.id}">${promotion.status}</td>
-                                        <td>
-                                            <div class="d-flex justify-content-start">
-                                                <button type="button"
-                                                        class="btn btn-outline-success dropdown-toggle dropdown-toggle-split"
-                                                        data-bs-toggle="dropdown" aria-haspopup="true"
-                                                        aria-expanded="false" data-display="static">
-                                                    <span class="sr-only"><i class="ri-settings-3-line"></i></span>
-                                                </button>
-                                                <div class="dropdown-menu">
-                                                    <c:choose>
-                                                        <c:when test="${customer.status == 'ACTIVE'}">
-                                                            <a class="dropdown-item pop-positioned-timeout" href="#" onclick="changeStatus(${customer.id}, 'deactivate'); return false;">Vô hiệu hóa tài khoản</a>
-                                                        </c:when>
-                                                        <c:otherwise>
-                                                            <a class="dropdown-item pop-positioned-timeout" href="#" onclick="changeStatus(${customer.id}, 'activate'); return false;">Mở khóa tài khoản</a>
-                                                        </c:otherwise>
-                                                    </c:choose>
-                                                </div>
-                                            </div>
-                                        </td>
                                     </tr>
                                 </c:if>
                             </c:forEach>
@@ -229,3 +146,6 @@
         </div>
     </div>
 </div>
+
+<script src="${pageContext.request.contextPath}/assets/owner/js/manage-promotion.js" defer></script>
+

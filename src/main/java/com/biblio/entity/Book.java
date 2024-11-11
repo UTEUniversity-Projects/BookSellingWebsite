@@ -70,8 +70,9 @@ public class Book implements Serializable {
     private double height;
 
     @ElementCollection
+    @Enumerated(EnumType.STRING)
     @CollectionTable(name = "book_languages",
-            joinColumns = @JoinColumn(name = "book_id"))
+            joinColumns = @JoinColumn(name = "book_id", nullable = false))
     @Column(name = "language", nullable = false)
     private Set<EBookLanguage> languages = new HashSet<>();
 

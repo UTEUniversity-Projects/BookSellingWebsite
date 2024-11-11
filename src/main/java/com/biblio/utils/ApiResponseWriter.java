@@ -9,6 +9,7 @@ import java.io.IOException;
 public class ApiResponseWriter {
     public static void writeResponse(HttpServletResponse response, ApiResponse apiResponse) throws IOException {
         response.setContentType("application/json");
+        response.setCharacterEncoding("UTF-8");
         response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
         ObjectMapper mapper = new ObjectMapper();
         String jsonResponse = mapper.writeValueAsString(apiResponse);

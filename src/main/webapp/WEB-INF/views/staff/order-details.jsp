@@ -33,7 +33,11 @@
                             </p>
                             <p class="cr-card-date">
                                 <i class="ri-calendar-2-line"></i>
-                                10:15 29-07-2024
+                                ${order.orderDate}
+                            </p>
+                            <p class="cr-card-note">
+                                <i class="ri-sticky-note-line"></i>
+                                ${order.note}
                             </p>
                         </div>
                         <div>
@@ -79,8 +83,8 @@
                                                 </span>
                                             </td>
                                             <td>${product.quantity}</td>
-                                            <td class="price-value">${product.sellingPrice} VND</td>
-                                            <td class="price-value">${product.totalPrice} VND</td>
+                                            <td class="price-value">${product.sellingPrice}</td>
+                                            <td class="price-value">${product.totalPrice}</td>
                                         </tr>
                                     </c:forEach>
                                     </tbody>
@@ -92,7 +96,7 @@
                         <div class="price-summary">
                             <div class="summary-row">
                                 <div class="summary-label">Tổng tiền hàng</div>
-                                <div class="summary-value price-value">100000</div>
+                                <div class="summary-value price-value">${order.totalPrice}</div>
                             </div>
                             <div class="summary-row">
                                 <div class="summary-label">Phí vận chuyển</div>

@@ -2,12 +2,11 @@ package com.biblio.dto.request;
 
 import lombok.*;
 
-@Data
 @NoArgsConstructor
 @AllArgsConstructor
-@ToString
 @Getter
 @Setter
+@Builder
 public class CustomerRegisterRequest {
 
 	private String fullName;
