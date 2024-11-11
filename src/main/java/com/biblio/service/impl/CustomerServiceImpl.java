@@ -38,7 +38,7 @@ public class CustomerServiceImpl implements ICustomerService {
     public void activateCustomer(Long id) {
         Customer customer = customerDAO.findById(id);
         customer.getAccount().setStatus(EAccountStatus.ACTIVE);
-        customerDAO.deactivateCustomer(customer);
+        customerDAO.activateCustomer(customer);
     }
 
     @Override

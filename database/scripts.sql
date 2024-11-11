@@ -673,42 +673,42 @@ INSERT INTO address (detail, district, nation, province, village, customer_id) V
 -- 13. Table Promotion: 
 -- Thêm 10 mã COUPON
 INSERT INTO promotion (code, created_at, description, discount_limit, effective_date, expiration_date, min_value_to_be_applied, percent_discount, status, title, type) VALUES
-('COUPON1', '2024-11-01 09:00:00', 'Giảm giá 10% cho đơn hàng từ 100k', 50000, '2024-11-01 00:00:00', '2024-11-30 23:59:59', 100000, 10, 'EFFECTIVE', 'Khuyến mãi COUPON', 'COUPON'),
-('COUPON2', '2024-11-02 10:00:00', 'Giảm giá 15% cho đơn hàng từ 200k', 70000, '2024-11-02 00:00:00', '2024-11-30 23:59:59', 200000, 15, 'NULL_AND_VOID', 'Khuyến mãi COUPON', 'COUPON'),
-('COUPON3', '2024-11-03 11:00:00', 'Giảm giá 20% cho đơn hàng từ 300k', 100000, '2024-11-03 00:00:00', '2024-11-30 23:59:59', 300000, 20, 'USED_OUT', 'Khuyến mãi COUPON', 'COUPON'),
-('COUPON4', '2024-11-04 12:00:00', 'Giảm giá 5% cho đơn hàng từ 50k', 30000, '2024-11-04 00:00:00', '2024-11-30 23:59:59', 50000, 5, 'EFFECTIVE', 'Khuyến mãi COUPON', 'COUPON'),
-('COUPON5', '2024-11-05 13:00:00', 'Giảm giá 12% cho đơn hàng từ 150k', 60000, '2024-11-05 00:00:00', '2024-11-10 23:59:59', 150000, 12, 'EXPIRED', 'Khuyến mãi COUPON', 'COUPON'),
-('COUPON6', '2024-11-06 14:00:00', 'Giảm giá 8% cho đơn hàng từ 120k', 40000, '2024-11-06 00:00:00', '2024-11-30 23:59:59', 120000, 8, 'EFFECTIVE', 'Khuyến mãi COUPON', 'COUPON'),
-('COUPON7', '2024-11-07 15:00:00', 'Giảm giá 18% cho đơn hàng từ 250k', 80000, '2024-11-07 00:00:00', '2024-11-30 23:59:59', 250000, 18, 'USED_OUT', 'Khuyến mãi COUPON', 'COUPON'),
-('COUPON8', '2024-11-08 16:00:00', 'Giảm giá 25% cho đơn hàng từ 350k', 150000, '2024-11-08 00:00:00', '2024-11-30 23:59:59', 350000, 25, 'EFFECTIVE', 'Khuyến mãi COUPON', 'COUPON'),
-('COUPON9', '2024-11-09 17:00:00', 'Giảm giá 30% cho đơn hàng từ 500k', 200000, '2024-11-09 00:00:00', '2024-11-30 23:59:59', 500000, 30, 'NULL_AND_VOID', 'Khuyến mãi COUPON', 'COUPON'),
-('COUPON10', '2024-11-10 18:00:00', 'Giảm giá 35% cho đơn hàng từ 700k', 250000, '2024-11-10 00:00:00', '2024-11-10 23:59:59', 700000, 35, 'EXPIRED', 'Khuyến mãi COUPON', 'COUPON');
+('COUPON1', '2024-11-01 09:00:00', 'Giảm giá 10% ', 50000, '2024-11-01 00:00:00', '2024-11-30 23:59:59', 0, 10, 'EFFECTIVE', 'Khuyến mãi COUPON', 'COUPON'),
+('COUPON2', '2024-11-02 10:00:00', 'Giảm giá 15%', 70000, '2024-11-02 00:00:00', '2024-11-30 23:59:59', 0, 15, 'NULL_AND_VOID', 'Khuyến mãi COUPON', 'COUPON'),
+('COUPON3', '2024-11-03 11:00:00', 'Giảm giá 20%', 100000, '2024-11-03 00:00:00', '2024-11-30 23:59:59', 0, 20, 'USED_OUT', 'Khuyến mãi COUPON', 'COUPON'),
+('COUPON4', '2024-11-04 12:00:00', 'Giảm giá 5%', 30000, '2024-11-04 00:00:00', '2024-11-30 23:59:59', 0, 5, 'EFFECTIVE', 'Khuyến mãi COUPON', 'COUPON'),
+('COUPON5', '2024-11-05 13:00:00', 'Giảm giá 12%', 60000, '2024-11-05 00:00:00', '2024-11-10 23:59:59', 0, 12, 'EXPIRED', 'Khuyến mãi COUPON', 'COUPON'),
+('COUPON6', '2024-11-06 14:00:00', 'Giảm giá 8%', 40000, '2024-11-06 00:00:00', '2024-11-30 23:59:59', 0, 8, 'EFFECTIVE', 'Khuyến mãi COUPON', 'COUPON'),
+('COUPON7', '2024-11-07 15:00:00', 'Giảm giá 18%', 80000, '2024-11-07 00:00:00', '2024-11-30 23:59:59', 0, 18, 'USED_OUT', 'Khuyến mãi COUPON', 'COUPON'),
+('COUPON8', '2024-11-08 16:00:00', 'Giảm giá 25%', 150000, '2024-11-08 00:00:00', '2024-11-30 23:59:59', 0, 25, 'EFFECTIVE', 'Khuyến mãi COUPON', 'COUPON'),
+('COUPON9', '2024-11-09 17:00:00', 'Giảm giá 30%', 200000, '2024-11-09 00:00:00', '2024-11-30 23:59:59', 0, 30, 'NULL_AND_VOID', 'Khuyến mãi COUPON', 'COUPON'),
+('COUPON10', '2024-11-10 18:00:00', 'Giảm giá 35%', 250000, '2024-11-10 00:00:00', '2024-11-10 23:59:59', 0, 35, 'EXPIRED', 'Khuyến mãi COUPON', 'COUPON');
 
 -- Thêm 10 mã VOUCHER
 INSERT INTO promotion (code, created_at, description, discount_limit, effective_date, expiration_date, min_value_to_be_applied, percent_discount, status, title, type) VALUES
-('VOUCHER1', '2024-11-11 09:00:00', 'Giảm giá 20% cho đơn hàng từ 100k', 50000, '2024-11-11 00:00:00', '2024-11-30 23:59:59', 100000, 20, 'EFFECTIVE', 'Khuyến mãi VOUCHER', 'VOUCHER'),
-('VOUCHER2', '2024-11-12 10:00:00', 'Giảm giá 25% cho đơn hàng từ 200k', 70000, '2024-11-12 00:00:00', '2024-11-30 23:59:59', 200000, 25, 'NULL_AND_VOID', 'Khuyến mãi VOUCHER', 'VOUCHER'),
-('VOUCHER3', '2024-11-13 11:00:00', 'Giảm giá 30% cho đơn hàng từ 300k', 100000, '2024-11-13 00:00:00', '2024-11-30 23:59:59', 300000, 30, 'USED_OUT', 'Khuyến mãi VOUCHER', 'VOUCHER'),
-('VOUCHER4', '2024-11-14 12:00:00', 'Giảm giá 10% cho đơn hàng từ 50k', 30000, '2024-11-14 00:00:00', '2024-11-30 23:59:59', 50000, 10, 'EFFECTIVE', 'Khuyến mãi VOUCHER', 'VOUCHER'),
-('VOUCHER5', '2024-11-15 13:00:00', 'Giảm giá 15% cho đơn hàng từ 150k', 60000, '2024-11-15 00:00:00', '2024-11-10 23:59:59', 150000, 15, 'EXPIRED', 'Khuyến mãi VOUCHER', 'VOUCHER'),
-('VOUCHER6', '2024-11-16 14:00:00', 'Giảm giá 18% cho đơn hàng từ 120k', 40000, '2024-11-16 00:00:00', '2024-11-30 23:59:59', 120000, 18, 'EFFECTIVE', 'Khuyến mãi VOUCHER', 'VOUCHER'),
-('VOUCHER7', '2024-11-17 15:00:00', 'Giảm giá 22% cho đơn hàng từ 250k', 80000, '2024-11-17 00:00:00', '2024-11-30 23:59:59', 250000, 22, 'USED_OUT', 'Khuyến mãi VOUCHER', 'VOUCHER'),
-('VOUCHER8', '2024-11-18 16:00:00', 'Giảm giá 28% cho đơn hàng từ 350k', 150000, '2024-11-18 00:00:00', '2024-11-30 23:59:59', 350000, 28, 'EFFECTIVE', 'Khuyến mãi VOUCHER', 'VOUCHER'),
-('VOUCHER9', '2024-11-19 17:00:00', 'Giảm giá 35% cho đơn hàng từ 500k', 200000, '2024-11-19 00:00:00', '2024-11-30 23:59:59', 500000, 35, 'NULL_AND_VOID', 'Khuyến mãi VOUCHER', 'VOUCHER'),
-('VOUCHER10', '2024-11-20 18:00:00', 'Giảm giá 40% cho đơn hàng từ 700k', 250000, '2024-11-20 00:00:00', '2024-11-10 23:59:59', 700000, 40, 'EXPIRED', 'Khuyến mãi VOUCHER', 'VOUCHER');
+('VOUCHER1', '2024-11-11 09:00:00', 'Giảm giá cho đơn hàng từ 100k', 50000, '2024-11-11 00:00:00', '2024-11-30 23:59:59', 100000, 100, 'EFFECTIVE', 'Khuyến mãi VOUCHER', 'VOUCHER'),
+('VOUCHER2', '2024-11-12 10:00:00', 'Giảm giá cho đơn hàng từ 200k', 70000, '2024-11-12 00:00:00', '2024-11-30 23:59:59', 200000, 100, 'NULL_AND_VOID', 'Khuyến mãi VOUCHER', 'VOUCHER'),
+('VOUCHER3', '2024-11-13 11:00:00', 'Giảm giá cho đơn hàng từ 300k', 100000, '2024-11-13 00:00:00', '2024-11-30 23:59:59', 300000, 100, 'USED_OUT', 'Khuyến mãi VOUCHER', 'VOUCHER'),
+('VOUCHER4', '2024-11-14 12:00:00', 'Giảm giá cho đơn hàng từ 50k', 30000, '2024-11-14 00:00:00', '2024-11-30 23:59:59', 50000, 100, 'EFFECTIVE', 'Khuyến mãi VOUCHER', 'VOUCHER'),
+('VOUCHER5', '2024-11-15 13:00:00', 'Giảm giá cho đơn hàng từ 150k', 60000, '2024-11-15 00:00:00', '2024-11-10 23:59:59', 150000, 100, 'EXPIRED', 'Khuyến mãi VOUCHER', 'VOUCHER'),
+('VOUCHER6', '2024-11-16 14:00:00', 'Giảm giá cho đơn hàng từ 120k', 40000, '2024-11-16 00:00:00', '2024-11-30 23:59:59', 120000, 100, 'EFFECTIVE', 'Khuyến mãi VOUCHER', 'VOUCHER'),
+('VOUCHER7', '2024-11-17 15:00:00', 'Giảm giá cho đơn hàng từ 250k', 80000, '2024-11-17 00:00:00', '2024-11-30 23:59:59', 250000, 100, 'USED_OUT', 'Khuyến mãi VOUCHER', 'VOUCHER'),
+('VOUCHER8', '2024-11-18 16:00:00', 'Giảm giá cho đơn hàng từ 350k', 150000, '2024-11-18 00:00:00', '2024-11-30 23:59:59', 350000, 100, 'EFFECTIVE', 'Khuyến mãi VOUCHER', 'VOUCHER'),
+('VOUCHER9', '2024-11-19 17:00:00', 'Giảm giá cho đơn hàng từ 500k', 200000, '2024-11-19 00:00:00', '2024-11-30 23:59:59', 500000, 100, 'NULL_AND_VOID', 'Khuyến mãi VOUCHER', 'VOUCHER'),
+('VOUCHER10', '2024-11-20 18:00:00', 'Giảm giá cho đơn hàng từ 700k', 250000, '2024-11-20 00:00:00', '2024-11-10 23:59:59', 700000, 100, 'EXPIRED', 'Khuyến mãi VOUCHER', 'VOUCHER');
 
 -- Thêm 10 mã FREESHIP
 INSERT INTO promotion (code, created_at, description, discount_limit, effective_date, expiration_date, min_value_to_be_applied, percent_discount, status, title, type) VALUES
-('FREESHIP1', '2024-11-21 09:00:00', 'Miễn phí vận chuyển cho đơn hàng từ 100k', 30000, '2024-11-21 00:00:00', '2024-11-30 23:59:59', 100000, 100, 'EFFECTIVE', 'Khuyến mãi FREESHIP', 'FREESHIP'),
-('FREESHIP2', '2024-11-22 10:00:00', 'Miễn phí vận chuyển cho đơn hàng từ 200k', 30000, '2024-11-22 00:00:00', '2024-11-30 23:59:59', 200000, 100, 'NULL_AND_VOID', 'Khuyến mãi FREESHIP', 'FREESHIP'),
-('FREESHIP3', '2024-11-23 11:00:00', 'Miễn phí vận chuyển cho đơn hàng từ 300k', 30000, '2024-11-23 00:00:00', '2024-11-30 23:59:59', 300000, 100, 'USED_OUT', 'Khuyến mãi FREESHIP', 'FREESHIP'),
-('FREESHIP4', '2024-11-24 12:00:00', 'Miễn phí vận chuyển cho đơn hàng từ 50k', 15000, '2024-11-24 00:00:00', '2024-11-30 23:59:59', 50000, 100, 'EFFECTIVE', 'Khuyến mãi FREESHIP', 'FREESHIP'),
-('FREESHIP5', '2024-11-25 13:00:00', 'Miễn phí vận chuyển cho đơn hàng từ 150k', 15000, '2024-11-25 00:00:00', '2024-11-10 23:59:59', 150000, 100, 'EXPIRED', 'Khuyến mãi FREESHIP', 'FREESHIP'),
-('FREESHIP6', '2024-11-26 14:00:00', 'Miễn phí vận chuyển cho đơn hàng từ 120k', 15000, '2024-11-26 00:00:00', '2024-11-30 23:59:59', 120000, 100, 'EFFECTIVE', 'Khuyến mãi FREESHIP', 'FREESHIP'),
-('FREESHIP7', '2024-11-27 15:00:00', 'Miễn phí vận chuyển cho đơn hàng từ 250k', 15000, '2024-11-27 00:00:00', '2024-11-30 23:59:59', 250000, 100, 'USED_OUT', 'Khuyến mãi FREESHIP', 'FREESHIP'),
-('FREESHIP8', '2024-11-28 16:00:00', 'Miễn phí vận chuyển cho đơn hàng từ 350k', 15000, '2024-11-28 00:00:00', '2024-11-30 23:59:59', 350000, 100, 'EFFECTIVE', 'Khuyến mãi FREESHIP', 'FREESHIP'),
-('FREESHIP9', '2024-11-29 17:00:00', 'Miễn phí vận chuyển cho đơn hàng từ 500k', 15000, '2024-11-29 00:00:00', '2024-11-30 23:59:59', 500000, 100, 'NULL_AND_VOID', 'Khuyến mãi FREESHIP', 'FREESHIP'),
-('FREESHIP10', '2024-11-30 18:00:00', 'Miễn phí vận chuyển cho đơn hàng từ 700k', 15000, '2024-11-30 00:00:00', '2024-11-10 23:59:59', 700000, 100, 'EXPIRED', 'Khuyến mãi FREESHIP', 'FREESHIP');
+('FREESHIP1', '2024-11-21 09:00:00', 'Miễn phí vận chuyển', 30000, '2024-11-21 00:00:00', '2024-11-30 23:59:59', 0, 100, 'EFFECTIVE', 'Khuyến mãi FREESHIP', 'FREESHIP'),
+('FREESHIP2', '2024-11-22 10:00:00', 'Miễn phí vận chuyển', 30000, '2024-11-22 00:00:00', '2024-11-30 23:59:59', 0, 100, 'NULL_AND_VOID', 'Khuyến mãi FREESHIP', 'FREESHIP'),
+('FREESHIP3', '2024-11-23 11:00:00', 'Miễn phí vận chuyển', 30000, '2024-11-23 00:00:00', '2024-11-30 23:59:59', 0, 100, 'USED_OUT', 'Khuyến mãi FREESHIP', 'FREESHIP'),
+('FREESHIP4', '2024-11-24 12:00:00', 'Miễn phí vận chuyển', 15000, '2024-11-24 00:00:00', '2024-11-30 23:59:59', 0, 100, 'EFFECTIVE', 'Khuyến mãi FREESHIP', 'FREESHIP'),
+('FREESHIP5', '2024-11-25 13:00:00', 'Miễn phí vận chuyển', 15000, '2024-11-25 00:00:00', '2024-11-10 23:59:59', 0, 100, 'EXPIRED', 'Khuyến mãi FREESHIP', 'FREESHIP'),
+('FREESHIP6', '2024-11-26 14:00:00', 'Miễn phí vận chuyển', 15000, '2024-11-26 00:00:00', '2024-11-30 23:59:59', 0, 100, 'EFFECTIVE', 'Khuyến mãi FREESHIP', 'FREESHIP'),
+('FREESHIP7', '2024-11-27 15:00:00', 'Miễn phí vận chuyển', 15000, '2024-11-27 00:00:00', '2024-11-30 23:59:59', 0, 100, 'USED_OUT', 'Khuyến mãi FREESHIP', 'FREESHIP'),
+('FREESHIP8', '2024-11-28 16:00:00', 'Miễn phí vận chuyển', 15000, '2024-11-28 00:00:00', '2024-11-30 23:59:59', 0, 100, 'EFFECTIVE', 'Khuyến mãi FREESHIP', 'FREESHIP'),
+('FREESHIP9', '2024-11-29 17:00:00', 'Miễn phí vận chuyển', 15000, '2024-11-29 00:00:00', '2024-11-30 23:59:59', 0, 100, 'NULL_AND_VOID', 'Khuyến mãi FREESHIP', 'FREESHIP'),
+('FREESHIP10', '2024-11-30 18:00:00', 'Miễn phí vận chuyển', 15000, '2024-11-30 00:00:00', '2024-11-10 23:59:59', 0, 100, 'EXPIRED', 'Khuyến mãi FREESHIP', 'FREESHIP');
 
 -- Thêm 5 mã Discount
 INSERT INTO promotion (code, created_at, description, discount_limit, effective_date, expiration_date, min_value_to_be_applied, percent_discount, status, title, type) VALUES

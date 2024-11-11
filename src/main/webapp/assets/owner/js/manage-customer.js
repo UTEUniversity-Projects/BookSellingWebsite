@@ -1,15 +1,14 @@
 function changeStatus(customerId, action) {
     const url = `/owner/customer-list`;
 
-    fetch(url, {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/x-www-form-urlencoded'
+    $.ajax({
+        url: url,
+        type: 'POST',
+        data: {
+            action: action,
+            id: customerId
         },
-        body: `action=${action}&id=${customerId}`
-    })
-        .then(response => response.text())
-        .then(data => {
+        success: function(data) {
             if (data === 'success') {
                 alert(action === 'deactivate' ? 'Tài khoản đã bị vô hiệu hóa' : 'Tài khoản đã được mở khóa');
 
@@ -21,12 +20,14 @@ function changeStatus(customerId, action) {
             } else {
                 alert('Có lỗi xảy ra khi thay đổi trạng thái tài khoản');
             }
-        })
-        .catch(error => {
+        },
+        error: function(xhr, status, error) {
             console.error('Error:', error);
             alert('Có lỗi xảy ra khi kết nối tới server');
-        });
+        }
+    });
 }
+
 document.addEventListener("DOMContentLoaded", function () {
     const tableBody = document.querySelector("#customer-data-table tbody");
 
