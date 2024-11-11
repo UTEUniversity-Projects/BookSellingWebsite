@@ -696,15 +696,16 @@ INSERT INTO cart (customer_id) VALUES
 (15);
 
 -- 18. Table Order
-INSERT INTO `order` (note, status, address_id, customer_id) VALUES
-('Order note 1', 'COMPLETE_DELIVERY', 4, 1),
-('Order note 2', 'CANCELED', 5, 2),
-('Order note 3', 'COMPLETE_DELIVERY', 4, 1),
-('Order note 4', 'CANCELED', 5, 2),
-('Order note 5', 'COMPLETE_DELIVERY', 4, 1),
-('Order note 6', 'CANCELED', 5, 2),
-('Order note 7', 'COMPLETE_DELIVERY', 4, 1),
-('Order note 8', 'CANCELED', 5, 2);
+INSERT INTO `order` (note, order_date, status, address_id, customer_id) VALUES
+('Order note 1', '2023-01-01 10:30:00', 'COMPLETE_DELIVERY', 4, 1),
+('Order note 2', '2023-01-02 14:00:00', 'CANCELED', 5, 2),
+('Order note 3', '2023-01-03 09:15:00', 'COMPLETE_DELIVERY', 4, 1),
+('Order note 4', '2023-01-04 16:45:00', 'CANCELED', 5, 2),
+('Order note 5', '2023-01-05 11:20:00', 'COMPLETE_DELIVERY', 4, 1),
+('Order note 6', '2023-01-06 15:30:00', 'CANCELED', 5, 2),
+('Order note 7', '2023-01-07 08:00:00', 'COMPLETE_DELIVERY', 4, 1),
+('Order note 8', '2023-01-08 13:55:00', 'CANCELED', 5, 2);
+
 
 -- 19. Table Order Item
 INSERT INTO order_item (quantity, book_id, cart_id, order_id) VALUES
