@@ -11,7 +11,6 @@ import javax.persistence.criteria.CriteriaQuery;
 import java.util.List;
 import java.util.Map;
 
-
 public class GenericDAOImpl<T> implements IGenericDAO<T> {
 
 
