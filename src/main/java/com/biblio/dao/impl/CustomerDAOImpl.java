@@ -20,7 +20,6 @@ public class CustomerDAOImpl extends GenericDAOImpl<Customer> implements ICustom
         return super.findById(id);
     }
 
-
     @Override
     public void deactivateCustomer(Customer customer) {
         super.update(customer);

@@ -47,7 +47,6 @@ public class CustomerServiceImpl implements ICustomerService {
 
     @Override
     public void addCustomer(CustomerRegisterRequest request) {
-
         Customer customer = CustomerMapper.toCustomerRegister(request);
         customerDAO.addCustomer(customer);
     }

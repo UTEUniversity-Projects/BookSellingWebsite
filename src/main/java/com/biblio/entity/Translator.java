@@ -1,8 +1,7 @@
 package com.biblio.entity;
 
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
+import lombok.experimental.SuperBuilder;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -11,9 +10,11 @@ import java.util.Set;
 
 @Entity
 @Table(name = "translator")
-@NoArgsConstructor
 @Getter
 @Setter
+@SuperBuilder
+@NoArgsConstructor
+@AllArgsConstructor
 public class Translator extends ContributorProfile implements Serializable {
 
     // region Relationships

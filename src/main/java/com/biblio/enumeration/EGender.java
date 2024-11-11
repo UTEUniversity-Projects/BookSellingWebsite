@@ -1,8 +1,8 @@
 package com.biblio.enumeration;
 
 public enum EGender {
-    MALE("Male"),
-    FEMALE("Female");
+    MALE("Nam"),
+    FEMALE("Nữ");
 
     private final String displayName;
 

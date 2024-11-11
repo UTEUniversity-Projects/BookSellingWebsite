@@ -2,18 +2,22 @@ package com.biblio.entity;
 
 import com.biblio.enumeration.EAccountStatus;
 import com.biblio.enumeration.EUserRole;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.experimental.SuperBuilder;
 
 import javax.persistence.*;
 import java.io.Serializable;
 
 @Entity
 @Table(name = "account")
-@NoArgsConstructor
 @Getter
 @Setter
+@SuperBuilder
+@NoArgsConstructor
+@AllArgsConstructor
 public class Account implements Serializable {
 
     // region Attributes
