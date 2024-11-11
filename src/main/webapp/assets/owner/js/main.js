@@ -680,8 +680,8 @@
             dom: '<"row justify-content-between top-information"lf>rt<"row justify-content-between bottom-information"ip><"clear">',
         });
     }
-
-    var responsiveDataTable = $("#discount-data-table");
+    /*======== Promotion list DATA TABLE ========*/
+    var responsiveDataTable = $(".promotion-data-table");
     if (responsiveDataTable.length !== 0) {
         responsiveDataTable.DataTable({
             aLengthMenu: [
@@ -692,76 +692,44 @@
             dom: '<"row justify-content-between top-information"lf>rt<"row justify-content-between bottom-information"ip><"clear">',
         });
     }
-    var responsiveDataTable = $("#voucher-data-table");
-    if (responsiveDataTable.length !== 0) {
-        responsiveDataTable.DataTable({
-            aLengthMenu: [
-                [10, 20, 30, -1],
-                [10, 20, 30, "All"],
-            ],
-            pageLength: 10,
-            dom: '<"row justify-content-between top-information"lf>rt<"row justify-content-between bottom-information"ip><"clear">',
-        });
-    }
-    var responsiveDataTable = $("#coupon-data-table");
-    if (responsiveDataTable.length !== 0) {
-        responsiveDataTable.DataTable({
-            aLengthMenu: [
-                [10, 20, 30, -1],
-                [10, 20, 30, "All"],
-            ],
-            pageLength: 10,
-            dom: '<"row justify-content-between top-information"lf>rt<"row justify-content-between bottom-information"ip><"clear">',
-        });
-    }
-    var responsiveDataTable = $("#freeship-data-table");
-    if (responsiveDataTable.length !== 0) {
-        responsiveDataTable.DataTable({
-            aLengthMenu: [
-                [10, 20, 30, -1],
-                [10, 20, 30, "All"],
-            ],
-            pageLength: 10,
-            dom: '<"row justify-content-between top-information"lf>rt<"row justify-content-between bottom-information"ip><"clear">',
-        });
-    }
-    var responsiveDataTable = $("#discount_list");
-    if (responsiveDataTable.length !== 0) {
-        responsiveDataTable.DataTable({
-            "aLengthMenu": [[10, 20, 30, -1], [10, 20, 30, "All"]],
-            "pageLength": 10,
-            "dom": '<"row justify-content-between top-information"lf>rt<"row justify-content-between bottom-information"ip><"clear">'
-        });
-    }
 
-    var responsiveDataTable = $("#voucher_list");
-    if (responsiveDataTable.length !== 0) {
-        responsiveDataTable.DataTable({
-            "aLengthMenu": [[10, 20, 30, -1], [10, 20, 30, "All"]],
-            "pageLength": 10,
-            "dom": '<"row justify-content-between top-information"lf>rt<"row justify-content-between bottom-information"ip><"clear">'
-        });
-    }
-
-
-    var responsiveDataTable = $("#coupon_list");
-    if (responsiveDataTable.length !== 0) {
-        responsiveDataTable.DataTable({
-            "aLengthMenu": [[10, 20, 30, -1], [10, 20, 30, "All"]],
-            "pageLength": 10,
-            "dom": '<"row justify-content-between top-information"lf>rt<"row justify-content-between bottom-information"ip><"clear">'
-        });
-    }
-
-
-    var responsiveDataTable = $("#freeship_list");
-    if (responsiveDataTable.length !== 0) {
-        responsiveDataTable.DataTable({
-            "aLengthMenu": [[10, 20, 30, -1], [10, 20, 30, "All"]],
-            "pageLength": 10,
-            "dom": '<"row justify-content-between top-information"lf>rt<"row justify-content-between bottom-information"ip><"clear">'
-        });
-    }
+    // var responsiveDataTable = $("#discount_list");
+    // if (responsiveDataTable.length !== 0) {
+    //     responsiveDataTable.DataTable({
+    //         "aLengthMenu": [[10, 20, 30, -1], [10, 20, 30, "All"]],
+    //         "pageLength": 10,
+    //         "dom": '<"row justify-content-between top-information"lf>rt<"row justify-content-between bottom-information"ip><"clear">'
+    //     });
+    // }
+    //
+    // var responsiveDataTable = $("#voucher_list");
+    // if (responsiveDataTable.length !== 0) {
+    //     responsiveDataTable.DataTable({
+    //         "aLengthMenu": [[10, 20, 30, -1], [10, 20, 30, "All"]],
+    //         "pageLength": 10,
+    //         "dom": '<"row justify-content-between top-information"lf>rt<"row justify-content-between bottom-information"ip><"clear">'
+    //     });
+    // }
+    //
+    //
+    // var responsiveDataTable = $("#coupon_list");
+    // if (responsiveDataTable.length !== 0) {
+    //     responsiveDataTable.DataTable({
+    //         "aLengthMenu": [[10, 20, 30, -1], [10, 20, 30, "All"]],
+    //         "pageLength": 10,
+    //         "dom": '<"row justify-content-between top-information"lf>rt<"row justify-content-between bottom-information"ip><"clear">'
+    //     });
+    // }
+    //
+    //
+    // var responsiveDataTable = $("#freeship_list");
+    // if (responsiveDataTable.length !== 0) {
+    //     responsiveDataTable.DataTable({
+    //         "aLengthMenu": [[10, 20, 30, -1], [10, 20, 30, "All"]],
+    //         "pageLength": 10,
+    //         "dom": '<"row justify-content-between top-information"lf>rt<"row justify-content-between bottom-information"ip><"clear">'
+    //     });
+    // }
     /*========== On ckick card zoom (full screen) ===========*/
     $(".cr-full-card").on("click", function () {
         $(this).hide();

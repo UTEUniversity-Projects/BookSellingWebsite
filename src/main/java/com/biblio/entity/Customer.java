@@ -1,9 +1,8 @@
 package com.biblio.entity;
 
 import com.biblio.enumeration.EMembership;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
+import lombok.experimental.SuperBuilder;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -13,8 +12,10 @@ import java.util.Set;
 @Entity
 @Table(name = "customer")
 @NoArgsConstructor
+@AllArgsConstructor
 @Getter
 @Setter
+@SuperBuilder
 public class Customer extends User implements Serializable {
 
     // region Attributes
@@ -38,6 +39,7 @@ public class Customer extends User implements Serializable {
     private Set<Notification> notifications = new HashSet<Notification>();
 
     @OneToMany(mappedBy = "customer", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @Singular
     private Set<Address> addresses = new HashSet<>();
 
     @OneToMany(mappedBy = "customer", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)

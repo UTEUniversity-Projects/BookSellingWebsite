@@ -1,5 +1,6 @@
 package com.biblio.mapper;
 
+import com.biblio.dto.request.PromotionTargetInsertRequest;
 import com.biblio.dto.response.PromotionTargetResponse;
 import com.biblio.entity.PromotionTarget;
 
@@ -12,5 +13,15 @@ public class PromotionTargetMapper {
         promotionTargetResponse.setType(promotionTarget.getType().toString());
 
         return promotionTargetResponse;
+    }
+
+    public static PromotionTarget toPromotionTarget(PromotionTargetInsertRequest promotionTargetInsertRequest) {
+        PromotionTarget promotionTarget = new PromotionTarget();
+
+        promotionTarget.setApplicableObjectId(promotionTargetInsertRequest.getApplicableObjectId());
+        promotionTarget.setQuantity(promotionTargetInsertRequest.getQuantity());
+        promotionTarget.setType(promotionTargetInsertRequest.getType());
+
+        return promotionTarget;
     }
 }
