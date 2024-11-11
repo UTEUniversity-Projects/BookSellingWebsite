@@ -1,17 +1,11 @@
 package com.biblio.controller.customer;
 
-import com.biblio.dto.request.CustomerRegisterRequest;
-import com.biblio.utils.UploadFileUtil;
-
-import org.apache.commons.beanutils.BeanUtils;
-
 import javax.servlet.ServletException;
 import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.Part;
 import java.io.IOException;
 import java.io.Serial;
 
@@ -50,20 +44,7 @@ public class RegisterController extends HttpServlet {
      */
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         // TODO Auto-generated method stub
-        response.setContentType("text/html");
-        response.setCharacterEncoding("UTF-8");
-        request.setCharacterEncoding("UTF-8");
 
-        CustomerRegisterRequest user = new CustomerRegisterRequest();
-
-        try {
-            BeanUtils.populate(user, request.getParameterMap());
-            Part part = request.getPart("image");
-//            user.setAvatar(UploadFileUtil.UploadImage(part, getServletContext()));
-            System.out.println(user);
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
-        }
     }
 
 }

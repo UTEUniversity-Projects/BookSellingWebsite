@@ -1,9 +1,8 @@
 package com.biblio.entity;
 
 import com.biblio.enumeration.EGender;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
+import lombok.experimental.SuperBuilder;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -11,8 +10,10 @@ import java.time.LocalDateTime;
 
 @MappedSuperclass
 @NoArgsConstructor
+@AllArgsConstructor
 @Getter
 @Setter
+@SuperBuilder
 public class User implements Serializable {
 
     // region Attributes
@@ -24,7 +25,7 @@ public class User implements Serializable {
     @Column(name = "full_name", nullable = false)
     protected String fullName;
 
-    @Column(name = "email_address", nullable = false)
+    @Column(name = "email_address", nullable = false, unique = true)
     protected String emailAddress;
 
     @Column(name = "date_of_birth", nullable = false)
@@ -34,7 +35,7 @@ public class User implements Serializable {
     @Column(name = "gender", nullable = false)
     protected EGender gender;
 
-    @Column(name = "phone_number", nullable = false)
+    @Column(name = "phone_number", nullable = false, unique = true)
     protected String phoneNumber;
 
     @Column(name = "avatar", nullable = false)

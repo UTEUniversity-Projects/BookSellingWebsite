@@ -7,6 +7,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.TypedQuery;
 import javax.persistence.criteria.CriteriaQuery;
 import java.util.List;
+import java.util.Map;
 
 public class GenericDAOImpl<T> implements IGenericDAO<T> {
 
@@ -56,7 +57,7 @@ public class GenericDAOImpl<T> implements IGenericDAO<T> {
     }
 
     @Override
-    public T findSingleByJPQL(String jpql, Object... params) {
+    public T findSingleByJPQL(String jpql, Map<String, Object> params) {
         EntityManager em = JpaConfig.getEntityManager();
         try {
             TypedQuery<T> query = em.createQuery(jpql, entityClass);
@@ -70,7 +71,7 @@ public class GenericDAOImpl<T> implements IGenericDAO<T> {
     }
 
     @Override
-    public List<T> findByJPQL(String jpql, Object... params) {
+    public List<T> findByJPQL(String jpql, Map<String, Object> params) {
         EntityManager em = JpaConfig.getEntityManager();
         try {
             TypedQuery<T> query = em.createQuery(jpql, entityClass);
@@ -84,12 +85,13 @@ public class GenericDAOImpl<T> implements IGenericDAO<T> {
     }
 
     @Override
-    public void save(T entity) {
+    public T save(T entity) {
         EntityManager em = JpaConfig.getEntityManager();
         try {
             em.getTransaction().begin();
             em.persist(entity);
             em.getTransaction().commit();
+            return entity;
         } catch (Exception e) {
             em.getTransaction().rollback();
             throw new RuntimeException("Error while saving entity", e);
@@ -99,12 +101,13 @@ public class GenericDAOImpl<T> implements IGenericDAO<T> {
     }
 
     @Override
-    public void update(T entity) {
+    public T update(T entity) {
         EntityManager em = JpaConfig.getEntityManager();
         try {
             em.getTransaction().begin();
             em.merge(entity);
             em.getTransaction().commit();
+            return entity;
         } catch (Exception e) {
             em.getTransaction().rollback();
             throw new RuntimeException("Error while updating entity", e);
@@ -114,7 +117,7 @@ public class GenericDAOImpl<T> implements IGenericDAO<T> {
     }
 
     @Override
-    public void delete(Object id) {
+    public T delete(Object id) {
         EntityManager em = JpaConfig.getEntityManager();
         try {
             em.getTransaction().begin();
@@ -122,6 +125,7 @@ public class GenericDAOImpl<T> implements IGenericDAO<T> {
             if (entity != null) {
                 em.remove(entity);
                 em.getTransaction().commit();
+                return entity;
             } else {
                 em.getTransaction().rollback();
                 throw new IllegalArgumentException("Entity not found with ID: " + id);
@@ -152,7 +156,7 @@ public class GenericDAOImpl<T> implements IGenericDAO<T> {
     }
 
     @Override
-    public List<T> findByJPQLPaginated(String jpql, int pageNumber, int pageSize, Object... params) {
+    public List<T> findByJPQLPaginated(String jpql, int pageNumber, int pageSize, Map<String, Object> params) {
         EntityManager em = JpaConfig.getEntityManager();
         try {
             TypedQuery<T> query = em.createQuery(jpql, entityClass);
@@ -167,9 +171,9 @@ public class GenericDAOImpl<T> implements IGenericDAO<T> {
         }
     }
 
-    private void setQueryParameters(TypedQuery<?> query, Object... params) {
-        for (int i = 0; i < params.length; i++) {
-            query.setParameter(i + 1, params[i]);
+    private void setQueryParameters(TypedQuery<?> query, Map<String, Object> params) {
+        for (Map.Entry<String, Object> entry : params.entrySet()) {
+            query.setParameter(entry.getKey(), entry.getValue());
         }
     }
 

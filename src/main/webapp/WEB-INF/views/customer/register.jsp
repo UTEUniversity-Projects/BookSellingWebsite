@@ -18,34 +18,39 @@
                               enctype="multipart/form-data">
                             <div class="col-sm-12 col-md-12">
                                 <div class="form-group mb-2">
-                                    <label class="text-md text-slate-700 mb-1 ml-2">Họ và
+                                    <label for="fullName" class="text-md text-slate-700 mb-1 ml-2">Họ và
                                         tên*</label> <input name="fullName" type="text"
+                                                            id="fullName"
                                                             placeholder="Nhập họ và tên của bạn"
                                                             class="block w-full py-2 px-4 text-gray-900 border-1 border-gray-300 rounded-lg text-[16px] focus:ring-blue-500 focus:border-blue-500 transition-all ease-linear bg-white focus:shadow-lg focus:shadow-[rgba(3,_102,_214,_0.3)_0px_0px_0px_3px]"/>
+                                    <span class="form-message text-[16px] text-red-500"></span>
                                 </div>
                             </div>
                             <div class="col-12">
                                 <div class="form-group mb-2">
-                                    <label class="text-md text-slate-700 mb-1 ml-2">Email*</label>
-                                    <input name="email" type="email"
+                                    <label for="email" class="text-md text-slate-700 mb-1 ml-2">Email*</label>
+                                    <input name="email" type="email" id="email"
                                            placeholder="Nhập email của bạn"
                                            class="block w-full py-2 px-4 text-gray-900 border-1 border-gray-300 rounded-lg text-[16px] focus:ring-blue-500 focus:border-blue-500 transition-all ease-linear bg-white focus:shadow-lg focus:shadow-[rgba(3,_102,_214,_0.3)_0px_0px_0px_3px]"/>
+                                    <span class="form-message text-[16px] text-red-500"></span>
                                 </div>
                             </div>
                             <div class="col-sm-12 col-md-12">
                                 <div class="form-group mb-2">
-                                    <label class="text-md text-slate-700 mb-1 ml-2">Số điện
-                                        thoại*</label> <input name="phoneNumber" type="tel"
+                                    <label for="phoneNumber" class="text-md text-slate-700 mb-1 ml-2">Số điện
+                                        thoại*</label> <input name="phoneNumber" type="tel" id="phoneNumber"
                                                               placeholder="Nhập số điện thoại của bạn"
                                                               class="block w-full py-2 px-4 text-gray-900 border-1 border-gray-300 rounded-lg text-[16px] focus:ring-blue-500 focus:border-blue-500 transition-all ease-linear bg-white focus:shadow-lg focus:shadow-[rgba(3,_102,_214,_0.3)_0px_0px_0px_3px]"/>
+                                    <span class="form-message text-[16px] text-red-500"></span>
                                 </div>
                             </div>
                             <div class="col-sm-12 col-md-12">
                                 <div class="form-group mb-2">
-                                    <label class="text-md text-slate-700 mb-1 ml-2">Ngày
-                                        sinh</label> <input name="dateOfBirth" type="date"
+                                    <label for="dob" class="text-md text-slate-700 mb-1 ml-2">Ngày
+                                        sinh</label> <input name="dateOfBirth" type="date" id="dob"
                                                             class="bg-white border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-3 p-2.5"
                                                             placeholder="Ngày sinh">
+                                    <span class="form-message text-[16px] text-red-500"></span>
                                 </div>
                             </div>
                             <div class="col-12">
@@ -57,7 +62,7 @@
                                         <li
                                                 class="w-full border-b border-gray-200 rounded-t-lg dark:border-gray-600">
                                             <div class="w-full flex justify-center items-center ps-3">
-                                                <input id="male" type="radio" value="MALE" name="gender"
+                                                <input id="male" checked type="radio" value="MALE" name="gender"
                                                        class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 cursor-pointer">
                                                 <label for="male"
                                                        class="py-3 ms-2 text-sm font-medium text-black cursor-pointer">Nam</label>
@@ -82,40 +87,46 @@
                                             </div>
                                         </li>
                                     </ul>
+                                    <span class="form-message text-[16px] text-red-500"></span>
                                 </div>
 
                             </div>
                             <div class="col-sm-12 col-md-12">
                                 <div class="form-group mb-2">
-                                    <label class="text-md text-slate-700 mb-1 ml-2">Tên
-                                        đăng nhập*</label> <input name="username" type="text"
+                                    <label for="username" class="text-md text-slate-700 mb-1 ml-2">Tên
+                                        đăng nhập*</label> <input name="username" type="text" id="username"
                                                                   placeholder="Nhập tên đăng nhập"
                                                                   class="block w-full py-2 px-4 text-gray-900 border-1 border-gray-300 rounded-lg text-[16px] focus:ring-blue-500 focus:border-blue-500 transition-all ease-linear bg-white focus:shadow-lg focus:shadow-[rgba(3,_102,_214,_0.3)_0px_0px_0px_3px]"/>
+                                    <span class="form-message text-[16px] text-red-500"></span>
                                 </div>
                             </div>
                             <div class="col-12">
                                 <div class="form-group mb-2">
-                                    <label class="text-md text-slate-700 mb-1 ml-2">Mật
-                                        khẩu*</label> <input name="password" type="password"
+                                    <label for="password" class="text-md text-slate-700 mb-1 ml-2">Mật
+                                        khẩu*</label> <input name="password" type="password" id="password"
                                                              placeholder="Nhập mật khẩu"
                                                              class="block w-full py-2 px-4 text-gray-900 border-1 border-gray-300 rounded-lg text-[16px] focus:ring-blue-500 focus:border-blue-500 transition-all ease-linear bg-white focus:shadow-lg focus:shadow-[rgba(3,_102,_214,_0.3)_0px_0px_0px_3px]"/>
+                                    <span class="form-message text-[16px] text-red-500"></span>
                                 </div>
                             </div>
                             <div class="col-12">
                                 <div class="form-group mb-2">
-                                    <label class="text-md text-slate-700 mb-1 ml-2">Nhập
-                                        lại mật khẩu*</label> <input type="password"
+                                    <label for="re-password" class="text-md text-slate-700 mb-1 ml-2">Nhập
+                                        lại mật khẩu*</label> <input type="password" id="re-password"
                                                                      placeholder="Nhập mật lại khẩu"
                                                                      class="block w-full py-2 px-4 text-gray-900 border-1 border-gray-300 rounded-lg text-[16px] focus:ring-blue-500 focus:border-blue-500 transition-all ease-linear bg-white focus:shadow-lg focus:shadow-[rgba(3,_102,_214,_0.3)_0px_0px_0px_3px]"/>
+                                    <span class="form-message text-[16px] text-red-500"></span>
                                 </div>
                             </div>
                             <div class="col-sm-12 col-md-12">
                                 <div class="form-group mb-2">
                                     <label for="province" class="text-md text-slate-700 mb-1 ml-2">Tỉnh
-                                        thành phố</label> <select name="city" id="province"
+                                        thành phố</label> <select name="province" id="province"
                                                                   class="bg-gray-50 border border-gray-300 text-gray-900 text-md rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5">
-                                    <option selected>Thành phố</option>
+                                    <option selected>Tỉnh thành phố
+                                    </option>
                                 </select>
+                                    <span class="form-message text-[16px] text-red-500"></span>
                                 </div>
                             </div>
                             <div class="col-sm-12 col-md-12">
@@ -125,15 +136,17 @@
                                                               class="bg-gray-50 border border-gray-300 text-gray-900 text-md rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5">
                                     <option selected>Quận Huyện</option>
                                 </select>
+                                    <span class="form-message text-[16px] text-red-500"></span>
                                 </div>
                             </div>
                             <div class="col-sm-12 col-md-12">
                                 <div class="form-group mb-2">
-                                    <label for="village" class="text-md text-slate-700 mb-1 ml-2">Phường
-                                        Xã</label> <select name="ward" id="village"
-                                                           class="bg-gray-50 border border-gray-300 text-gray-900 text-md rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5">
-                                    <option selected>Phường Xã</option>
-                                </select>
+                                    <label for="village" class="text-md text-slate-700 mb-1 ml-2">Phường Xã</label>
+                                    <select name="village" id="village"
+                                            class="bg-gray-50 border border-gray-300 text-gray-900 text-md rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5">
+                                        <option selected>Phường Xã</option>
+                                    </select>
+                                    <span class="form-message text-[16px] text-red-500"></span>
                                 </div>
                             </div>
                             <div class="col-sm-12 col-md-12">
@@ -147,6 +160,7 @@
                                     <%--                                                                      class="bg-gray-50 border border-gray-300 text-gray-900 text-md rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5">--%>
                                     <%--                                    <option selected>Số nhà | Ấp | Tổ</option>--%>
                                     <%--                                </select>--%>
+                                    <span class="form-message text-[16px] text-red-500"></span>
                                 </div>
                             </div>
                             <div class="col-12">
@@ -161,14 +175,14 @@
                             <div class="col-12">
                                 <div class="form-group mb-2 flex justify-center items-center">
                                     <div
-                                            class="mt-4 hidden border-2 border-solid border-gray-100 rounded">
+                                            class="mt-4 hidden w-[200px] h-[200px] border-2 border-solid border-gray-100 rounded">
                                         <img id="preview" class="object-contain w-full h-full"
                                              alt="Ảnh xem trước">
                                     </div>
                                 </div>
                             </div>
                             <div class="col-12">
-                                <div class="mb-5 inline-flex items-center flex-wrap">
+                                <div class="form-group mb-5 ml-2 inline-flex items-center flex-wrap">
                                     <label class="flex items-center cursor-pointer relative"
                                            for="check-with-link"> <input type="checkbox"
                                                                          class="peer h-5 w-5 cursor-pointer transition-all appearance-none rounded shadow hover:shadow-md border border-slate-200 checked:bg-[#26aa99] checked:border-[#26bb99]"
@@ -222,19 +236,22 @@
                             </g>
                           </svg>
 									</span>
-                                    </label> <label class="cursor-pointer ml-2 " for="check-with-link">
-                                    <p class="text-[12px] sm:text-[14px] md:text-[16px]">
-                                        Tôi đồng ý với <a href="policy"
-                                                          class="font-medium text-emerald-700"> điều khoản và
-                                        chính sách </a> của Biblio.
-                                    </p>
-                                </label>
+                                    </label>
+                                    <label for="check-with-link" class="cursor-pointer ml-2">
+                                        <p class="text-[12px] sm:text-[14px] md:text-[16px]">
+                                            Tôi đồng ý với <a href="policy"
+                                                              class="font-medium text-emerald-700"> điều khoản và
+                                            chính sách </a> của Biblio.
+                                        </p>
+                                    </label>
+                                    <span class="form-message text-[16px] text-red-500"></span>
                                 </div>
                             </div>
                             <div class="flex justify-between flex-nowrap gap-x-2">
                                 <button type="submit"
-                                        class="btn-register btn--success font-medium text-md bg-emerald-600 px-4 py-2 rounded-md text-white hover:bg-emerald-700 transition-all duration-300">
-                                    Đăng Ký
+                                        class="btn-register w-[100px] btn--success font-medium text-md bg-emerald-600 px-4 py-2 rounded-md text-white hover:bg-emerald-700 transition-all duration-300">
+                                    Đăng ký
+
                                 </button>
                                 <a href="login"
                                    class="py-2 border border-solid px-4 inline-block rounded-md hover:bg-gray-100 transition-all duration-300">
@@ -273,3 +290,4 @@
 <script
         src="${pageContext.request.contextPath}/assets/customer/js/register.js?v=1"
         type="module"></script>
+

@@ -3,6 +3,7 @@ package com.biblio.service.impl;
 import com.biblio.dao.ICustomerDAO;
 import com.biblio.dto.request.CustomerRegisterRequest;
 import com.biblio.dto.response.CustomerGetListResponse;
+import com.biblio.dto.response.CustomerRegisterResponse;
 import com.biblio.entity.Customer;
 import com.biblio.enumeration.EAccountStatus;
 import com.biblio.mapper.CustomerMapper;
@@ -13,8 +14,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class CustomerServiceImpl implements ICustomerService {
+
     @Inject
-    ICustomerDAO customerDAO;
+    private ICustomerDAO customerDAO;
 
     @Override
     public List<CustomerGetListResponse> findAll() {
@@ -46,10 +48,18 @@ public class CustomerServiceImpl implements ICustomerService {
     }
 
     @Override
-    public void addCustomer(CustomerRegisterRequest request) {
-
-        Customer customer = CustomerMapper.toCustomerRegister(request);
-        customerDAO.addCustomer(customer);
+    public CustomerRegisterResponse addCustomer(CustomerRegisterRequest request) {
+        Customer customer = CustomerMapper.toCustomer(request);
+        return CustomerMapper.toCustomerRegisterResponse(customerDAO.addCustomer(customer));
     }
 
+    @Override
+    public boolean isEmailExisted(String email) {
+        return customerDAO.isEmailExisted(email);
+    }
+
+    @Override
+    public boolean isPhoneNumberExisted(String phoneNumber) {
+        return customerDAO.isPhoneNumberExisted(phoneNumber);
+    }
 }
