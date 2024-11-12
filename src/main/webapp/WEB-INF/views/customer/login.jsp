@@ -14,15 +14,16 @@
                     <div class="form-logo">
                         <img src="${pageContext.request.contextPath}/assets/customer/img/logo/logo.png" alt="logo"/>
                     </div>
-                    <form class="cr-content-form">
+                    <form class="cr-content-form" action="login" method="POST">
                         <div class="mb-2 flex flex-col">
                             <label class="text-md text-slate-700 mb-1 ml-2"
                             >Email*</label
                             >
                             <input
-                                    type="email"
+                                    type="text"
+                                    name="username"
                                     autocomplete=on
-                                    placeholder="Nhập email của bạn"
+                                    placeholder="Nhập username"
                                     class="input block w-full py-2 px-4 text-gray-900 border-1 border-gray-300 rounded-lg text-[16px] focus:ring-blue-500 focus:border-blue-500 transition-all ease-linear bg-white focus:shadow-lg focus:shadow-[rgba(3,_102,_214,_0.3)_0px_0px_0px_3px]"
                             />
                         </div>
@@ -32,6 +33,7 @@
                             >
                             <input
                                     type="password"
+                                    name="password"
                                     placeholder="Nhập mật khẩu của bạn"
                                     class="input block w-full py-2 px-4 text-gray-900 border-1 border-gray-300 rounded-lg text-[16px] focus:ring-blue-500 focus:border-blue-500 transition-all ease-linear bg-white focus:shadow-lg focus:shadow-[rgba(3,_102,_214,_0.3)_0px_0px_0px_3px]"
                             />
@@ -133,7 +135,7 @@
                         </div>
                         <div class="login-buttons">
                             <button
-                                    type="button"
+                                    type="submit"
                                     class="btn-login font-medium text-md bg-emerald-600 px-4 py-2 rounded-md text-white hover:bg-emerald-700 transition-all duration-300"
                             >
                                 Đăng nhập
