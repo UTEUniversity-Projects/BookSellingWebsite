@@ -38,7 +38,7 @@ public class PromotionDAOImpl extends GenericDAOImpl<Promotion> implements IProm
         return super.findSingleByJPQL(jpql, params);
     }
     @Override
-    public boolean isCodeExist(String code) {
+    public boolean existsByCode(String code) {
         String jpql = "SELECT p FROM Promotion p WHERE p.code = :code";
         Map<String, Object> params = new HashMap<String, Object>();
         params.put("code", code);
@@ -56,7 +56,7 @@ public class PromotionDAOImpl extends GenericDAOImpl<Promotion> implements IProm
 //                System.out.println(promotionTarget.getApplicableObjectId());
 //            }
 //        }
-        Boolean check = dao.isCodeExist("1");
+        Boolean check = dao.existsByCode("COUPON12");
         System.out.println(check);
     }
 }

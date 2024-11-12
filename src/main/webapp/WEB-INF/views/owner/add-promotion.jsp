@@ -297,7 +297,7 @@
 
                                                 <div class="row">
                                                     <div class="col-12 d-flex">
-                                                        <button type="submit" class="cr-btn-primary" onclick="return validateForm()">Thêm</button>
+                                                        <button type="submit" class="btn-voucher cr-btn-primary" onclick="return validateForm()">Thêm</button>
                                                     </div>
                                                 </div>
                                             </form>
@@ -462,5 +462,6 @@
         </div>
     </div>
 </div>
+<script>const contextPath = "<%= request.getContextPath()%>";</script>
 <script src="${pageContext.request.contextPath}/assets/owner/js/add-promotion.js" defer></script>
 <script src="${pageContext.request.contextPath}/assets/owner/js/validator.js" defer></script>

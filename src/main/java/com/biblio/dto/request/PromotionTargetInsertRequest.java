@@ -8,7 +8,7 @@ import lombok.*;
 @ToString
 @Getter
 @Setter
-
+@Builder
 public class PromotionTargetInsertRequest {
     private String applicableObjectId;
     private int quantity;
