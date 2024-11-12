@@ -1,36 +1,32 @@
 package com.biblio.dto.response;
 
+import com.biblio.enumeration.EBookLanguage;
+import java.util.HashSet;
+import java.util.Set;
 import lombok.*;
+import lombok.experimental.FieldDefaults;
 
-import java.util.ArrayList;
-import java.util.List;
-
+@Data
+@Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@Getter
-@Setter
-@ToString
+@FieldDefaults(level = AccessLevel.PRIVATE)
 public class BookResponse {
-    private Long id;
-    private String title;
-    private String description;
-    private double sellingPrice;
-    private String publicationDate;
-    private int edition;
-    private String codeISBN10;
-    private String codeISBN13;
-    private String format;
-    private int handcover;
-    private double length;
-    private double width;
-    private double height;
-    private double weight;
-    private String condition;
-    private String recommendedAge;
-    private String languages;
-
-    private CategoryResponse category;
-    private PublisherResponse publisher;
-    private BookMetadataResponse metadata;
-    private List<AuthorResponse> authors = new ArrayList<>();
+    String id;
+    String title;
+    String description;
+    String sellingPrice;
+    String publicationDate;
+    String edition;
+    String codeISBN10;
+    String codeISBN13;
+    String format;
+    String handCover;
+    String length;
+    String width;
+    String height;
+    String weight;
+    String condition;
+    String recommendedAge;
+    Set<EBookLanguage> languages = new HashSet<>();
 }

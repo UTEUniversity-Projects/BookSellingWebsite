@@ -1,20 +1,19 @@
-function changeStatus(customerId, action) {
-    const url = `/owner/customer-list`;
+function changeStatus(staffId, action) {
+    const url = `/owner/staff-list`;
 
     fetch(url, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/x-www-form-urlencoded'
         },
-        body: `action=${action}&id=${customerId}`
+        body: `action=${action}&id=${staffId}`
     })
         .then(response => response.text())
         .then(data => {
             if (data === 'success') {
                 alert(action === 'deactivate' ? 'Tài khoản đã bị vô hiệu hóa' : 'Tài khoản đã được mở khóa');
 
-                // Cập nhật trạng thái hiển thị
-                const statusElement = document.getElementById(`status-${customerId}`);
+                const statusElement = document.getElementById(`status-${staffId}`);
                 if (statusElement) {
                     statusElement.innerText = (action === 'deactivate') ? 'INACTIVE' : 'ACTIVE';
                 }
@@ -28,21 +27,18 @@ function changeStatus(customerId, action) {
         });
 }
 document.addEventListener("DOMContentLoaded", function () {
-    const tableBody = document.querySelector("#customer-data-table tbody");
+    const tableBody = document.querySelector("#staff-data-table tbody");
 
-    // Đảm bảo `tableBody` không phải là null
     if (tableBody) {
         tableBody.addEventListener("click", function (event) {
-            // Kiểm tra xem phần tử được nhấp có phải là .customer-row hay không
-            const row = event.target.closest(".customer-row");
+            const row = event.target.closest(".staff-row");
 
             if (
                 row &&
                 !event.target.closest("button") &&
                 !event.target.closest(".dropdown-menu")
             ) {
-                const href = row.getAttribute("data-href");
-                window.location.href = href;
+                window.location.href = row.getAttribute("data-href");
             }
         });
     }

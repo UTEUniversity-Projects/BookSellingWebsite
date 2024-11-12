@@ -1,25 +1,29 @@
 package com.biblio.mapper;
 
-import com.biblio.dto.response.CategoryGetListResponse;
+import com.biblio.dto.request.CategoryRequest;
 import com.biblio.dto.response.CategoryResponse;
 import com.biblio.entity.Category;
+import com.biblio.enumeration.EClassificationStatus;
+import com.biblio.utils.EnumUtil;
 
 public class CategoryMapper {
-    public static CategoryResponse toCategoryResponse(Category category) {
-        CategoryResponse categoryResponse = new CategoryResponse();
-        categoryResponse.setId(category.getId());
-        categoryResponse.setName(category.getName());
-        categoryResponse.setShortScript(category.getShortScript());
-        categoryResponse.setFullScript(category.getFullScript());
-        categoryResponse.setStatus(category.getStatus().toString());
-        return categoryResponse;
+    public static Category toCategoryEntity(CategoryRequest categoryRequest) {
+        return Category.builder()
+                .id(Long.parseLong(categoryRequest.getId()))
+                .name(categoryRequest.getName())
+                .shortScript(categoryRequest.getShortScript())
+                .fullScript(categoryRequest.getFullScript())
+                .status(EnumUtil.fromDisplayName(EClassificationStatus.class, categoryRequest.getStatus()))
+                .build();
     }
 
-    public static CategoryGetListResponse toCategoryGetListResponse(Category category) {
-        CategoryGetListResponse categoryGetListResponse = new CategoryGetListResponse();
-        categoryGetListResponse.setId(category.getId());
-        categoryGetListResponse.setName(category.getName());
-
-        return categoryGetListResponse;
+    public static CategoryResponse toCategoryResponse(Category category) {
+        return CategoryResponse.builder()
+                .id(category.getId().toString())
+                .name(category.getName())
+                .shortScript(category.getShortScript())
+                .fullScript(category.getFullScript())
+                .status(EnumUtil.toDisplayName(category.getStatus()))
+                .build();
     }
 }

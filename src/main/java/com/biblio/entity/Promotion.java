@@ -66,7 +66,7 @@ public class Promotion implements Serializable {
 
     // region Relationships
 
-    @OneToMany(mappedBy = "promotion", fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "promotion", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private Set<PromotionTarget> promotionTargets = new HashSet<>();
 
     @ManyToMany(mappedBy = "promotions", fetch = FetchType.LAZY)

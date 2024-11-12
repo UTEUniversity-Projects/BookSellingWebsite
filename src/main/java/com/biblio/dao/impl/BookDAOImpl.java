@@ -21,6 +21,21 @@ public class BookDAOImpl extends GenericDAOImpl<Book> implements IBookDAO {
         return super.findById(id);
     }
 
+    @Override
+    public void addBook(Book book) {
+        super.save(book);
+    }
+
+    @Override
+    public void updateBook(Book book) {
+        super.update(book);
+    }
+
+    @Override
+    public void deleteBook(Long id) {
+        super.delete(id);
+    }
+
     public static void main(String[] args) {
         BookDAOImpl dao = new BookDAOImpl();
         List<Book> list = dao.findAll();

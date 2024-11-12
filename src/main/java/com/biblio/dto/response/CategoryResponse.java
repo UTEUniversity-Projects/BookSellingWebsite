@@ -1,16 +1,17 @@
 package com.biblio.dto.response;
 
 import lombok.*;
+import lombok.experimental.FieldDefaults;
 
+@Data
+@Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@Getter
-@Setter
-@ToString
+@FieldDefaults(level = AccessLevel.PRIVATE)
 public class CategoryResponse {
-    private Long id;
-    private String name;
-    private String shortScript;
-    private String fullScript;
-    private String status;
+    String id;
+    String name;
+    String shortScript;
+    String fullScript;
+    String status;
 }

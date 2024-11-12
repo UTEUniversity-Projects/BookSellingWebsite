@@ -1,236 +1,154 @@
 import { toast } from "./toast.js";
+import Validator from "./validator.js";
 
 $(document).ready(() => {
 
 	class Register {
-		constructor(props) {
-
+		constructor() {
 		}
 
-		validate() {
-			$('.btn--success').on('click', function (event) {
-				event.preventDefault();
+		async register() {
 
-				$('.form-group').removeClass('has-error');
-				$('.error-message').remove();
-
-				let isValid = true;
-
-				$('.form-group')
-					.slice(0, -1)
-					.each(function () {
-						let input = $(this).find('input');
-						if (input.attr('type') !== 'radio' && input.val() === '') {
-							isValid = false;
-							$(this).addClass('has-error');
-
-							if ($(this).find('.error-message').length === 0) {
-								input.after(
-									'<div class="error-message text-[16px] text-red-500">Trường này không được để trống.</div>'
-								);
-							}
-						}
-					});
-
-				const email = $('input[type="email"]').val();
-				const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-				if (email && !emailPattern.test(email)) {
-					isValid = false;
-					$('input[type="email"]').closest('.form-group').addClass('has-error');
-					$('input[type="email"]').after(
-						'<div class="error-message text-[16px] text-red-500">Email không hợp lệ.</div>'
-					);
-				}
-
-				const password = $('input[type="password"]').eq(0).val();
-				const confirmPassword = $('input[type="password"]').eq(1).val();
-				if (password !== confirmPassword) {
-					isValid = false;
-					$('input[type="password"]')
-						.eq(1)
-						.closest('.form-group')
-						.addClass('has-error');
-					$('input[type="password"]')
-						.eq(1)
-						.after(
-							'<div class="error-message text-[16px] text-red-500">Mật khẩu không khớp.</div>'
-						);
-				}
-
-				const gender = $("input[type='radio']:checked");
-				if (gender.length === 0) {
-					isValid = false;
-					const genderUl = $("input[type='radio']").closest('ul');
-					genderUl.after(
-						'<div class="error-message text-[16px] text-red-500">Vui lòng chọn giới tính.</div>'
-					);
-				}
-
-				const termsCheckbox = $('#check-with-link')[0];
-				const errorMsg =
-					'<div class="ml-[30px] error-message text-[16px] text-red-500">Bạn cần đồng ý với các điều khoản.</div>';
-				if (!termsCheckbox.checked) {
-					isValid = false;
-					termsCheckbox.parentNode.parentNode.insertAdjacentHTML(
-						'beforeend',
-						errorMsg
-					);
-				}
-
-				if (isValid) {
-					toast({
-						title: "Đăng ký",
-						message: "Đăng ký thành công",
-						type: "success",
-						duration: 3000,
-					});
-
-					// setTimeout(() => {
-					// 	window.location.href = "login";
-					// }, 1000);
-				}
-			});
-		}
-
-
-		register() {
-			$("#registerForm").submit(async function (event) {
-				event.preventDefault();
-
-				const uploadImage = async () => {
-					const fileInput = document.getElementById('avatar');
-					const file = fileInput?.files[0];
-
+			const uploadImage = async () => {
+				try {
+					const fileInput = document.querySelector("#avatar");
+					let file = fileInput?.files[0];
 					if (!file) {
-						alert("Please select a file.");
 						return null;
 					}
 
 					const formData = new FormData();
 					formData.append("image", file);
+					formData.append("username", $("#username").val())
 
-					try {
-						return await $.ajax({
-							url: `${contextPath}/upload`,
-							type: 'POST',
-							data: formData,
-							enctype: 'multipart/form-data',
-							processData: false,
-							contentType: false,
-						});
-
-					} catch (error) {
-						console.error('Error uploading file:', error);
-						alert('Error uploading file: ' + error);
-						return null;
-					}
-				};
-
-				const handleRegistration = async () => {
-					let avatar = await uploadImage();
-					if (!avatar) {
-						return;
-					}
-
-
-					const formData = new FormData(document.getElementById("registerForm"));
-
-					const userData = {
-						fullName: formData.get("fullName"),
-						email: formData.get("Email"),
-						phoneNumber: formData.get("phoneNumber"),
-						dateOfBirth: formData.get("dateOfBirth"),
-						gender: formData.get("gender"),
-						username: formData.get("username"),
-						password: formData.get("password"),
-						province: formData.get("province"),
-						district: formData.get("district"),
-						village: formData.get("village"),
-						detail: formData.get("detail"),
-						avatar: avatar
-					};
-
-					console.log(userData);
-
-					$.ajax({
-						url: `${contextPath}/api/customer/register`,
+					return await $.ajax({
+						url: `${contextPath}/upload`,
 						type: 'POST',
-						contentType: 'application/json',
-						data: JSON.stringify(userData),
-						success: function (response, status, xhr) {
-							console.log(response);
-						},
-						error: function (xhr, status, error) {
-							console.error('Lỗi:', error);
-							alert('Có lỗi xảy ra, vui lòng thử lại!');
-						}
+						data: formData,
+						enctype: 'multipart/form-data',
+						processData: false,
+						contentType: false,
 					});
+
+				} catch (error) {
+					console.error('Error uploading file:', error);
+					return null;
+				}
+			};
+
+			const handleRegistration = async () => {
+
+				let avatar = await uploadImage();
+				if (!avatar) {
+					avatar = `${contextPath}/assets/customer/img/avatar/img.png`;
+				}
+
+				const formData = new FormData(document.getElementById("registerForm"));
+
+				const userData = {
+					fullName: formData.get("fullName"),
+					email: formData.get("email"),
+					phoneNumber: formData.get("phoneNumber"),
+					dateOfBirth: formData.get("dateOfBirth"),
+					gender: formData.get("gender"),
+					username: formData.get("username"),
+					password: formData.get("password"),
+					province: formData.get("province"),
+					district: formData.get("district"),
+					village: formData.get("village"),
+					detail: formData.get("detail"),
+					avatar: avatar
 				};
 
-				await handleRegistration().then(res => console.log(res));
-			});
+				$.ajax({
+					url: `${contextPath}/api/customer/register`,
+					type: 'POST',
+					contentType: 'application/json',
+					data: JSON.stringify(userData),
+					success: function (response, status, xhr) {
+						console.log(response);
+						if (response.code === 200) {
+							toast({
+								title: "Đăng ký",
+								message: "Đăng ký thành công",
+								type: "success",
+								duration: 3000,
+							});
+						} else {
+							toast({
+								title: "Đăng ký",
+								message: "Thông tin đã tồn tại !",
+								type: "error",
+								duration: 3000,
+							})
+							Object.keys(response).forEach(key => {
+								if (key !== "code") {
+									$(`#${key}`).next().text(response[key]);
+								}
+							});
+						}
+					},
+					error: function (xhr, status, error) {
+						toast({
+							title: "Lỗi",
+							message: "Có lỗi xảy ra",
+							type: "error",
+							duration: 3000
+						})
+					}
+				});
+
+			};
+
+			await handleRegistration();
 		}
 
 		getAddress() {
 			const BASE_URL = 'https://web.giaohangtietkiem.vn/api/v1/public/address';
+			$("#province").html(`<option selected>Tỉnh thành phố</option>`);
 
-			$.getJSON(`${BASE_URL}/list`, async function (city) {
-				if (city.success) {
-					$.each(city.data, function (key, value) {
-						$('#province').append(`<option value="${value.id}" data-name="${value.name}">${value.name}</option>`);
+			$.getJSON(`${BASE_URL}/list`, function (province) {
+				if (province.success) {
+					$.each(province.data, function (key, value) {
+						$('#province').append(`<option value="${value.name}" data-id="${value.id}">${value.name}</option>`);
 					});
 
 					$('#province').change(function (e) {
-						const cityId = $(this).val();
+						const cityId = $(this).find('option:selected').data('id');
+						$.getJSON(`${BASE_URL}/list?parentId=${cityId}&type=3`, function (district) {
+							if (district.success) {
+								$('#district').html(`<option value="0">Quận Huyện</option>`);
+								$('#village').html(`<option value="0">Phường Xã</option>`);
 
-						$.getJSON(
-							`${BASE_URL}/list?parentId=${cityId}&type=3`,
-							function (district) {
-								if (district.success) {
-									$('#district').html(`<option value="0">Quận Huyện</option>`);
-									$('#ward').html(`<option value="0">Phường Xã</option>`);
-									$('#hamlet').html(`<option value="0">Số nhà | Ấp | Tổ</option>`);
-
-									$.each(district.data, function (key, value) {
-										$('#district').append(
-											`<option value="${value.id}" data-name="${value.name}">${value.name}</option>`
-										);
-									});
-								}
+								$.each(district.data, function (key, value) {
+									$('#district').append(`<option value="${value.name}" data-id="${value.id}">${value.name}</option>`);
+								});
 							}
-						);
+						});
 					});
 
 					$('#district').change(function (e) {
-						const wardId = $(this).val();
-
+						const wardId = $(this).find('option:selected').data('id');
 						$('#village').html(`<option value="0">Phường Xã</option>`);
-						// $('#hamlet').html(`<option value="0">Số nhà | Ấp | Tổ</option>`);
 
-						$.getJSON(
-							`${BASE_URL}/list?parentId=${wardId}&type=1`,
-							function (ward) {
-								if (ward.success) {
-									$.each(ward.data, function (key, value) {
-										$('#ward').append(
-											`<option value="${value.id}" data-name="${value.name}">${value.name}</option>`
-										);
-									});
-								}
+						$.getJSON(`${BASE_URL}/list?parentId=${wardId}&type=1`, function (village) {
+							if (village.success) {
+								$.each(village.data, function (key, value) {
+									$('#village').append(`<option value="${value.name}" data-id="${value.id}">${value.name}</option>`);
+								});
 							}
-						);
+						});
 					});
 
+					// Uncomment and update the following code if you want to handle more nested levels.
 					// $('#ward').change(function (e) {
-					// 	const hamletId = $(this).val();
+					// 	const hamletId = $(this).find('option:selected').data('id');
 					// 	$('#hamlet').html(`<option value="0">Số nhà | Ấp | Tổ</option>`);
-					//
+
 					// 	$.getJSON(`${BASE_URL}/hamlet?parentId=${hamletId}`, function (hamlet) {
 					// 		if (hamlet.success) {
-					// 			$.each(hamlet?.data?.hamlet_address, function (key, value) {
-					// 				$('#hamlet').append(
-					// 					`<option value="${value.id}" data-name="${value.name}">${value.name}</option>`
-					// 				);
+					// 			$.each(hamlet.data.hamlet_address, function (key, value) {
+					// 				$('#hamlet').append(`<option value="${value.name}" data-id="${value.id}">${value.name}</option>`);
 					// 			});
 					// 		}
 					// 	});
@@ -242,7 +160,37 @@ $(document).ready(() => {
 	}
 
 	const register = new Register();
-	// register.validate();
-	register.register();
 	register.getAddress();
+
+	Validator({
+		form: '#registerForm',
+		formGroupSelector: '.form-group',
+		errorSelector: '.form-message',
+		rules: [
+			Validator.isRequired('#fullName'),
+			Validator.isRequired('#email'),
+			Validator.isRequired('#phoneNumber'),
+			Validator.isRequired('#dob', 'Vui lòng chọn ngày sinh !'),
+			Validator.isRequired("#username"),
+			Validator.isRequired('#password'),
+			Validator.isRequired('#re-password'),
+			Validator.isConfirmed('#re-password', function () {
+				return document.querySelector('#registerForm #password').value;
+			}, 'Mật khẩu nhập lại không chính xác !'),
+			Validator.isRequiredSelected('#province', 'Vui lòng chọn Tỉnh thành phố !', 'Tỉnh thành phố'),
+			Validator.isRequiredSelected('#district', 'Vui lòng chọn Quận Huyện !', 'Quận Huyện'),
+			Validator.isRequiredSelected('#village', 'Vui lòng chọn Phường Xã !', 'Phường Xã'),
+			Validator.isRequired('#detail'),
+			Validator.isChecked('#check-with-link', 'Vui lòng đồng ý với điều khoản và chính sách của Biblio !'),
+			Validator.isEmail('#email', 'Email không đúng định dạng !'),
+			Validator.phoneNumber("#phoneNumber", 10, 'Số điện thoại phải bao gồm 10 số và chỉ bao gồm số !'),
+			Validator.isAllLowercase("#username", 'Username chỉ bao gồm chữ thường và số !'),
+			Validator.minLength('#username', 8),
+			Validator.minLength('#password', 8),
+
+		],
+		onSubmit: async function (data) {
+			await register.register();
+		}
+	});
 });

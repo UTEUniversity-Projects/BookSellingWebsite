@@ -1,8 +1,6 @@
 package com.biblio.entity;
 
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -12,8 +10,10 @@ import java.util.Set;
 @Entity
 @Table(name = "address")
 @NoArgsConstructor
+@AllArgsConstructor
 @Getter
 @Setter
+@Builder
 public class Address implements Serializable {
 
     // region Attributes
@@ -77,7 +77,7 @@ public class Address implements Serializable {
             fullAddress.append(nation);
         }
 
-        if (fullAddress.length() > 0 && fullAddress.charAt(fullAddress.length() - 2) == ',') {
+        if (!fullAddress.isEmpty() && fullAddress.charAt(fullAddress.length() - 2) == ',') {
             fullAddress.setLength(fullAddress.length() - 2);
         }
 

@@ -9,8 +9,6 @@
     'use strict';
     AOS.init({
       once: true,
-
-
     });
 
     /* Product grid & column */
@@ -772,13 +770,6 @@
   $('.bg-6').on('click', function () {
     $('body').addClass('body-bg-6').removeClass();
     $('#add_bg').remove();
-  });
-  $('.search-btn').click(function (event) {
-    var inputVal = $('.search-input').val();
-    if (inputVal.trim() === '') {
-      alert('Vui lòng nhập thông tin tìm kiếm');
-      event.preventDefault();
-    }
   });
 
   const orderStatusTabs = $('li[data-tab]');

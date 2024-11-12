@@ -1,15 +1,17 @@
 package com.biblio.dto.response;
 
 import lombok.*;
+import lombok.experimental.FieldDefaults;
 
-@NoArgsConstructor
+@Data
+@Builder
 @AllArgsConstructor
-@Getter
-@Setter
-@ToString
+@NoArgsConstructor
+@FieldDefaults(level = AccessLevel.PRIVATE)
 public class AuthorResponse {
-    private Long id;
-    private String name;
-    private String introduction;
-    private String avatar;
+    String id;
+    String name;
+    String avatar;
+    String introduction;
+    String joinAt;
 }

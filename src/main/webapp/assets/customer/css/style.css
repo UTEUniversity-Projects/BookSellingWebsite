@@ -819,7 +819,7 @@ ul {
   border-left: 4px solid;
   box-shadow: 0 5px 8px rgba(0, 0, 0, 0.08);
   padding: 20px 0;
-  width: auto;
+  min-width: 200px;
   transition: all 0.2s linear;
 }
 

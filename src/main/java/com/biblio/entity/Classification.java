@@ -1,17 +1,21 @@
 package com.biblio.entity;
 
 import com.biblio.enumeration.EClassificationStatus;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.experimental.SuperBuilder;
 
 import javax.persistence.*;
 import java.io.Serializable;
 
 @MappedSuperclass
-@NoArgsConstructor
 @Getter
 @Setter
+@SuperBuilder
+@NoArgsConstructor
+@AllArgsConstructor
 public abstract class Classification implements Serializable {
 
     // region Attributes

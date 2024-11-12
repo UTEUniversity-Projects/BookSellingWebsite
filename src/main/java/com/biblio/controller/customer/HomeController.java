@@ -11,11 +11,14 @@ import java.io.IOException;
 import java.io.Serial;
 import java.util.List;
 import javax.inject.Inject;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
+import java.io.Serial;
 
 /**
  * Servlet implementation class HomeController
@@ -30,6 +33,7 @@ public class HomeController extends HttpServlet {
 
     @Inject
     private IBookService bookService;
+  
     /**
      * @see HttpServlet#HttpServlet()
      */
@@ -43,10 +47,12 @@ public class HomeController extends HttpServlet {
      */
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         // TODO Auto-generated method stub
+
         List<CategoryGetListResponse> categories = categoryService.findAll();
         List<BookGetListResponse> books = bookService.findAll();
         request.setAttribute("categories", categories);
         request.setAttribute("books", books);
+
         request.getRequestDispatcher("/views/customer/home.jsp").forward(request, response);
     }
 
