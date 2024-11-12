@@ -1,5 +1,8 @@
 package com.biblio.enumeration;
 
+import lombok.Getter;
+
+@Getter
 public enum EBookCondition {
     NEW("Mới"),
     USED("Đã qua sử dụng");
@@ -10,7 +13,4 @@ public enum EBookCondition {
         this.bookCondition = bookCondition;
     }
 
-    public String getBookCondition() {
-        return bookCondition;
-    }
 }

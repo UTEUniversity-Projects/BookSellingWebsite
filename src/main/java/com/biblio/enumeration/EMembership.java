@@ -1,5 +1,8 @@
 package com.biblio.enumeration;
 
+import lombok.Getter;
+
+@Getter
 public enum EMembership {
     MEMBER("Member"),
     BRONZE("Bronze"),
@@ -13,7 +16,4 @@ public enum EMembership {
         this.displayName = displayName;
     }
 
-    public String getDisplayName() {
-        return displayName;
-    }
 }

@@ -1,5 +1,8 @@
 package com.biblio.enumeration;
 
+import lombok.Getter;
+
+@Getter
 public enum EPaymentStatus {
     PENDING("Pending"),
     CANCELED("Canceled"),
@@ -13,7 +16,4 @@ public enum EPaymentStatus {
         this.displayName = displayName;
     }
 
-    public String getDisplayName() {
-        return displayName;
-    }
 }

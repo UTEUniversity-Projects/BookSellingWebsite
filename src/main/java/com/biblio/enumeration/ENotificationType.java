@@ -1,5 +1,8 @@
 package com.biblio.enumeration;
 
+import lombok.Getter;
+
+@Getter
 public enum ENotificationType {
     ORDER("Order"),
     SUPPORT("Support"),
@@ -12,7 +15,4 @@ public enum ENotificationType {
         this.displayName = displayName;
     }
 
-    public String getDisplayName() {
-        return displayName;
-    }
 }

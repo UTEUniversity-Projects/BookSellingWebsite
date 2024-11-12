@@ -1,5 +1,8 @@
 package com.biblio.enumeration;
 
+import lombok.Getter;
+
+@Getter
 public enum ESupportStatus {
     SENT("Đã gửi"),
     NOT_RESPONDED("Chưa phản hồi"),
@@ -11,7 +14,4 @@ public enum ESupportStatus {
         this.displayName = displayName;
     }
 
-    public String getDisplayName() {
-        return displayName;
-    }
 }

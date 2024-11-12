@@ -15,9 +15,9 @@ public interface ICustomerDAO extends IGenericDAO<Customer> {
 
     Customer addCustomer(Customer customer);
 
-    boolean isEmailExisted(String email);
+    boolean existsByEmail(String email);
 
-    boolean isPhoneNumberExisted(String phoneNumber);
+    boolean existsByPhoneNumber(String phoneNumber);
 
-    public void updateSupport_Notification(Customer customer);
+    void updateSupport_Notification(Customer customer);
 }
