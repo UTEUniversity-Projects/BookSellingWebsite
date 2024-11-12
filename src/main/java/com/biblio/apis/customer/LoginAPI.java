@@ -11,7 +11,7 @@ import java.io.Serial;
 /**
  * Servlet implementation class LoginAPI
  */
-@WebServlet("/api/customer/register")
+@WebServlet("/api/customer/login")
 public class LoginAPI extends HttpServlet {
     @Serial
 	private static final long serialVersionUID = 1L;
