@@ -25,8 +25,7 @@ public class PromotionServiceImpl implements IPromotionService {
 
     @Override
     public PromotionGetResponse findById(Long id) {
-        PromotionGetResponse promotion = PromotionMapper.toPromotionGetResponse(promotionDAO.findById(id));
-        return promotion;
+        return PromotionMapper.toPromotionGetResponse(promotionDAO.findById(id));
     }
 
     @Override
@@ -36,7 +35,7 @@ public class PromotionServiceImpl implements IPromotionService {
     }
 
     @Override
-    public Boolean isCodeExist(String code) {
-        return promotionDAO.isCodeExist(code);
+    public Boolean isCodeExisted(String code) {
+        return promotionDAO.existsByCode(code);
     }
 }
