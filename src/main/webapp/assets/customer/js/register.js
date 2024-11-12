@@ -66,6 +66,7 @@ $(document).ready(() => {
 					contentType: 'application/json',
 					data: JSON.stringify(userData),
 					success: function (response, status, xhr) {
+						console.log(response);
 						if (response.code === 200) {
 							toast({
 								title: "Đăng ký",

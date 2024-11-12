@@ -174,7 +174,7 @@ public class AddPromotionController extends HttpServlet {
 
         try {
             BeanUtils.populate(promotionInsertRequest, request.getParameterMap());
-            Boolean isCodeExist = promotionService.isCodeExist(promotionInsertRequest.getCode());
+            Boolean isCodeExist = promotionService.isCodeExisted(promotionInsertRequest.getCode());
             if (isCodeExist) {
                 request.setAttribute("errorMessage", "Mã khuyến mãi đã tồn tại.");
                 request.getRequestDispatcher("/owner/add-promotion").forward(request, response);
