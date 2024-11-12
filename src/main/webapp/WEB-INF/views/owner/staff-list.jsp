@@ -22,15 +22,15 @@
                         <div class="table-responsive">
                             <table id="staff-data-table" class="table table-hover">
                                 <thead>
-                                <tr>
-                                    <th>Mã</th>
-                                    <th>Họ và Tên</th>
-                                    <th>Email</th>
-                                    <th>Số điện thoại</th>
-                                    <th>Bắt đầu làm việc</th>
-                                    <th>Trạng thái</th>
-                                    <th>Thao tác</th>
-                                </tr>
+                                    <tr>
+                                        <th>Mã</th>
+                                        <th>Họ và Tên</th>
+                                        <th>Email</th>
+                                        <th>Số điện thoại</th>
+                                        <th>Bắt đầu làm việc</th>
+                                        <th>Trạng thái</th>
+                                        <th>Thao tác</th>
+                                    </tr>
                                 </thead>
 
                                 <tbody>
