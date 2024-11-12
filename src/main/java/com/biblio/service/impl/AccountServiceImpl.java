@@ -15,7 +15,7 @@ public class AccountServiceImpl implements IAccountService {
 
     @Override
     public boolean isUsernameExisted(String username) {
-        return accountDAO.isUsernameExist(username);
+        return accountDAO.existsByUsername(username);
     }
 
     @Override

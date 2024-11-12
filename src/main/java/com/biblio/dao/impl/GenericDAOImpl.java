@@ -1,3 +1,5 @@
+package com.biblio.dao.impl;
+
 import com.biblio.dao.IGenericDAO;
 import com.biblio.jpaconfig.JpaConfig;
 
