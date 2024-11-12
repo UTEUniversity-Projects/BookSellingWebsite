@@ -17,7 +17,6 @@ public class CategoryDAOImpl extends GenericDAOImpl<Category> implements ICatego
         return super.findAll();
     }
 
-
     @Override
     public Category findById(Long id) {
         return super.findById(id);
@@ -45,4 +44,5 @@ public class CategoryDAOImpl extends GenericDAOImpl<Category> implements ICatego
     public void deleteCategory(Long id) {
         super.delete(id);
     }
+  
 }
