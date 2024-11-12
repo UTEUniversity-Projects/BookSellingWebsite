@@ -51,25 +51,25 @@
                             ></a>
                             <ul class="cr-sb-subdrop condense">
                                 <li>
-                                    <a href="/owner/product-list" class="cr-page-link drop"
+                                    <a href="${pageContext.request.contextPath}/owner/product-list" class="cr-page-link drop"
                                     ><i class="ri-checkbox-blank-circle-line"></i>Danh
                                         sách sản phẩm</a
                                     >
                                 </li>
                                 <li>
-                                    <a href="/owner/add-product" class="cr-page-link drop"
+                                    <a href="${pageContext.request.contextPath}/owner/add-product" class="cr-page-link drop"
                                     ><i class="ri-checkbox-blank-circle-line"></i>Thêm sản
                                         phẩm</a>
                                 </li>
                                 <li>
-                                    <a href="/owner/add-product-tag" class="cr-page-link drop"
+                                    <a href="${pageContext.request.contextPath}/owner/add-product-tag" class="cr-page-link drop"
                                     ><i class="ri-checkbox-blank-circle-line"></i>Thêm
                                         nhãn</a
                                     >
                                 </li>
                                 <li>
                                     <a
-                                            href="/owner/add-product-category"
+                                            href="${pageContext.request.contextPath}/owner/add-product-category"
                                             class="cr-page-link drop"
                                     ><i class="ri-checkbox-blank-circle-line"></i>Thêm
                                         phân loại</a
@@ -77,7 +77,7 @@
                                 </li>
                                 <li>
                                     <a
-                                            href="/owner/add-sub-product-category"
+                                            href="${pageContext.request.contextPath}/owner/add-product-sub-category"
                                             class="cr-page-link drop"
                                     ><i class="ri-checkbox-blank-circle-line"></i>Thêm
                                         phân loại con</a
@@ -143,7 +143,7 @@
                                     </a>
                                 </li>
                                 <li>
-                                    <a href="/owner/add-staff" class="cr-page-link subdrop">
+                                    <a href="${pageContext.request.contextPath}/owner/add-staff" class="cr-page-link subdrop">
                                         <i class="ri-checkbox-blank-circle-line"></i>
                                         Thêm nhân viên
                                     </a>
@@ -160,13 +160,13 @@
                             ></a>
                             <ul class="cr-sb-subdrop condense">
                                 <li>
-                                    <a href="/owner/content-list" class="cr-page-link subdrop"
+                                    <a href="${pageContext.request.contextPath}/owner/content-list" class="cr-page-link subdrop"
                                     ><i class="ri-checkbox-blank-circle-line"></i>Danh
                                         sách nội dung</a
                                     >
                                 </li>
                                 <li>
-                                    <a href="/owner/add-content" class="cr-page-link drop"
+                                    <a href="${pageContext.request.contextPath}/owner/add-content" class="cr-page-link drop"
                                     ><i class="ri-checkbox-blank-circle-line"></i>Thêm nội
                                         dung</a
                                     >
@@ -183,20 +183,20 @@
                             ></a>
                             <ul class="cr-sb-subdrop condense">
                                 <li>
-                                    <a href="/owner/add-author" class="cr-page-link subdrop"
+                                    <a href="${pageContext.request.contextPath}/owner/author-list" class="cr-page-link subdrop"
                                     ><i class="ri-checkbox-blank-circle-line"></i>Tác
                                         giả</a
                                     >
                                 </li>
                                 <li>
-                                    <a href="/owner/add-translator" class="cr-page-link drop"
+                                    <a href="${pageContext.request.contextPath}/owner/translator-list" class="cr-page-link drop"
                                     ><i class="ri-checkbox-blank-circle-line"></i>Dịch
                                         giả</a
                                     >
                                 </li>
                                 <li>
                                     <a
-                                            href="/owner/add-publisher"
+                                            href="${pageContext.request.contextPath}/owner/publisher-list"
                                             class="cr-page-link subdrop"
                                     ><i class="ri-checkbox-blank-circle-line"></i>Nhà xuất
                                         bản</a
