@@ -2,6 +2,9 @@ package com.biblio.service.impl;
 
 import com.biblio.dao.IBookDAO;
 
+import com.biblio.dto.request.BookRequest;
+import com.biblio.dto.response.BookCardResponse;
+import com.biblio.dto.response.BookDetailsResponse;
 import com.biblio.dto.response.BookResponse;
 import com.biblio.entity.Book;
 import com.biblio.mapper.BookMapper;
@@ -16,29 +19,23 @@ public class BookServiceImpl implements IBookService {
     private IBookDAO bookDAO;
 
     @Override
-    public List<BookGetListResponse> findAll() {
-        List<BookGetListResponse> list = new ArrayList<>();
+    public List<BookCardResponse> getAllBookCardResponse() {
+        List<BookCardResponse> list = new ArrayList<>();
         for (Book book : bookDAO.findAll()) {
-            System.out.println("Books: " + book.getTitle());
-            list.add(BookMapper.toBookGetListResponse(book));
+            list.add(BookMapper.toBookCardResponse(book));
         }
         return list;
     }
 
     @Override
-    public BookResponse findById(Long id) {
+    public BookDetailsResponse getBookDetailsResponse(Long id) {
         Book book = bookDAO.findById(id);
-        return BookMapper.toBookResponse(book);
+        return BookMapper.toBookDetailsResponse(book);
     }
 
     @Override
     public List<BookResponse> findAll() {
         return List.of();
-    }
-
-    @Override
-    public BookResponse findById(Long id) {
-        return null;
     }
 
     @Override
