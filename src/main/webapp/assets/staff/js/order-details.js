@@ -1,14 +1,18 @@
-document.querySelectorAll('.price-value').forEach(el => {
-    const rawValue = el.textContent.trim();
+function showSuccessToast() {
+    toast({
+        title: "Thành công!",
+        message: "Bạn đã xác nhận đơn hàng thành công.",
+        type: "success",
+        duration: 1000,
+    });
+    console.log("CLick")
+}
 
-    const value = parseFloat(rawValue);
-
-    if (!isNaN(value)) {
-        const formattedValue = value.toLocaleString('vi-VN');
-        if (el.classList.contains('minus-value')) {
-            el.innerHTML = `-<span class="currency-symbol">₫</span>${formattedValue}`;
-        } else {
-            el.innerHTML = `<span class="currency-symbol">₫</span>${formattedValue}`;
-        }
-    }
-});
+function showErrorToast() {
+    toast({
+        title: "Thất bại!",
+        message: "Có lỗi xảy ra, vui lòng liên hệ quản trị viên.",
+        type: "error",
+        duration: 1000,
+    });
+}
