@@ -902,3 +902,47 @@ INSERT INTO credit_card (amount, created_at, currency, status, billing_address, 
 INSERT INTO ewallet (amount, created_at, currency, status, provider, transaction_id, wallet_id, order_id) VALUES
 (1170000, '2024-11-07 09:30:00', 'VND', 'COMPLETED', 'MOMO', 'TXN1234567890', 'WALLET12345', 7),
 (1270000, '2024-11-08 10:15:00', 'VND', 'COMPLETED', 'PAYPAL', 'TXN9876543210', 'WALLET67890', 8);
+
+-- Book Languages
+INSERT INTO book_languages (book_id, language) VALUES
+-- Book 1
+(1, 'VIETNAMESE'),
+(1, 'ENGLISH'),
+
+-- Book 2
+(2, 'VIETNAMESE'),
+(2, 'FRENCH'),
+
+-- Book 3
+(3, 'ENGLISH'),
+(3, 'SPANISH'),
+(3, 'GERMAN'),
+
+-- Book 4
+(4, 'VIETNAMESE'),
+(4, 'CHINESE'),
+
+-- Book 5
+(5, 'ENGLISH'),
+(5, 'JAPANESE'),
+
+-- Book 6
+(6, 'VIETNAMESE'),
+(6, 'KOREAN'),
+
+-- Book 7
+(7, 'ENGLISH'),
+(7, 'ITALIAN'),
+
+-- Book 8
+(8, 'VIETNAMESE'),
+(8, 'RUSSIAN'),
+
+-- Book 9
+(9, 'ENGLISH'),
+(9, 'PORTUGUESE'),
+
+-- Book 10
+(10, 'VIETNAMESE'),
+(10, 'FRENCH'),
+(10, 'ARABIC');
