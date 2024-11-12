@@ -3,6 +3,7 @@ package com.biblio.service.impl;
 import com.biblio.dao.ICategoryDAO;
 
 import com.biblio.dto.response.CategoryGetListResponse;
+import com.biblio.dto.response.CategorySidebarResponse;
 import com.biblio.entity.Category;
 import com.biblio.dto.request.CategoryRequest;
 import com.biblio.dto.response.CategoryResponse;
@@ -19,7 +20,16 @@ public class CategoryServiceImpl implements ICategoryService {
     ICategoryDAO categoryDAO;
 
     @Override
-    public List<CategoryResponse> findAll() {
+    public List<CategorySidebarResponse> getAllCategorySidebarResponse() {
+        List<CategorySidebarResponse> list = new ArrayList<CategorySidebarResponse>();
+        for (Category category : categoryDAO.findAll()) {
+            list.add(CategoryMapper.toCategorySidebarResponse(category));
+        }
+        return list;
+    }
+
+    @Override
+    public List<CategoryResponse> getAllCategories() {
         List<CategoryResponse> list = new ArrayList<CategoryResponse>();
         for (Category category : categoryDAO.findAll()) {
             list.add(CategoryMapper.toCategoryResponse(category));

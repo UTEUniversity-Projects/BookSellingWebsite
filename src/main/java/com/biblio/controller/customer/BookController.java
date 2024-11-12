@@ -1,6 +1,8 @@
 package com.biblio.controller.customer;
 
 import com.biblio.dao.IBookDAO;
+import com.biblio.dto.response.BookCardResponse;
+import com.biblio.dto.response.BookDetailsResponse;
 import com.biblio.dto.response.BookResponse;
 import com.biblio.service.IBookService;
 
@@ -38,7 +40,7 @@ public class BookController extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         // TODO Auto-generated method stub
         Long id = Long.parseLong(request.getParameter("id"));
-        BookResponse book = bookService.findById(id);
+        BookDetailsResponse book = bookService.getBookDetailsResponse(id);
         request.setAttribute("book", book);
         request.setAttribute("breadcumb", "Chi tiết sách");
         request.getRequestDispatcher("/views/customer/book.jsp").forward(request, response);

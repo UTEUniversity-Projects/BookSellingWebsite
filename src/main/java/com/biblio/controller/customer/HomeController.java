@@ -1,8 +1,6 @@
 package com.biblio.controller.customer;
 
-import com.biblio.dto.response.BookGetListResponse;
-import com.biblio.dto.response.CategoryGetListResponse;
-import com.biblio.dto.response.CategoryResponse;
+import com.biblio.dto.response.*;
 import com.biblio.service.IBookService;
 import com.biblio.service.ICategoryService;
 import com.biblio.service.IUserService;
@@ -48,8 +46,8 @@ public class HomeController extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         // TODO Auto-generated method stub
 
-        List<CategoryGetListResponse> categories = categoryService.findAll();
-        List<BookGetListResponse> books = bookService.findAll();
+        List<CategorySidebarResponse> categories = categoryService.getAllCategorySidebarResponse();
+        List<BookCardResponse> books = bookService.getAllBookCardResponse();
         request.setAttribute("categories", categories);
         request.setAttribute("books", books);
 
