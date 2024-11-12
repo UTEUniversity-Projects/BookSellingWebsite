@@ -1,5 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+
 <!-- main content -->
 <div class="cr-main-content">
     <div class="container-fluid">
@@ -33,7 +34,11 @@
                             </p>
                             <p class="cr-card-date">
                                 <i class="ri-calendar-2-line"></i>
-                                10:15 29-07-2024
+                                ${order.orderDate}
+                            </p>
+                            <p class="cr-card-note">
+                                <i class="ri-sticky-note-line"></i>
+                                ${order.note}
                             </p>
                         </div>
                         <div>
@@ -68,7 +73,7 @@
                                             <td>
                                                 <img
                                                     class="tbl-thumb"
-                                                    src="${pageContext.request.contextPath}/assets/staff/img/product/1.jpg"
+                                                    src="${pageContext.request.contextPath}${product.imagePath}"
                                                     alt="${product.title}"
                                                 />
                                             </td>
@@ -79,8 +84,8 @@
                                                 </span>
                                             </td>
                                             <td>${product.quantity}</td>
-                                            <td class="price-value">${product.sellingPrice} VND</td>
-                                            <td class="price-value">${product.totalPrice} VND</td>
+                                            <td class="price-value">${product.sellingPrice}</td>
+                                            <td class="price-value">${product.totalPrice}</td>
                                         </tr>
                                     </c:forEach>
                                     </tbody>
@@ -92,7 +97,7 @@
                         <div class="price-summary">
                             <div class="summary-row">
                                 <div class="summary-label">Tổng tiền hàng</div>
-                                <div class="summary-value price-value">100000</div>
+                                <div class="summary-value price-value">${order.totalPrice}</div>
                             </div>
                             <div class="summary-row">
                                 <div class="summary-label">Phí vận chuyển</div>
@@ -117,11 +122,12 @@
                         </div>
                     </div>
                     <div class="cr-card-content d-grid gap-3 d-md-flex justify-content-md-end">
-                        <button class="btn btn-success">Xác nhận</button>
-                        <button class="btn btn-outline-danger">Từ chối</button>
+                        <button class="btn btn-success" onclick="showSuccessToast();">Xác nhận</button>
+                        <button class="btn btn-outline-danger" onclick="showErrorToast();">Từ chối</button>
                     </div>
                 </div>
             </div>
         </div>
     </div>
 </div>
+<script src="${pageContext.request.contextPath}/assets/staff/js/order-details.js" defer></script>

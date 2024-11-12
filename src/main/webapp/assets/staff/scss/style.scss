@@ -42,6 +42,7 @@
 @import "components/_notify-bar";
 @import "components/_tools-sidebar";
 
+
 // Layouts
 @import "layouts/_cards";
 @import "layouts/_all-chart";
@@ -57,3 +58,5 @@
 @import "pages/_alert-popup-page";
 @import "pages/_product-details-page";
 @import "pages/_order-details-page";
+
+@import "components/_toast";

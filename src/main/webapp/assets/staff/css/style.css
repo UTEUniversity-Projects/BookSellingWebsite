@@ -1205,7 +1205,7 @@ button.btn.btn-outline-success.dropdown-toggle.dropdown-toggle-split {
 }
 .dropdown-menu__status a[data-value=ALL]:hover {
   color: #6c757d;
-  background-color: #d8dbdd;
+  background-color: rgb(215.8369098712, 218.6566523605, 221.1630901288);
 }
 .dropdown-menu__status a[data-value=WAITING_CONFIRMATION]:hover, .dropdown-menu__status a[data-value=COMING_SOON]:hover, .dropdown-menu__status a[data-value=NOT_RESPONDED]:hover {
   color: #ffc107;
@@ -1213,26 +1213,26 @@ button.btn.btn-outline-success.dropdown-toggle.dropdown-toggle-split {
 }
 .dropdown-menu__status a[data-value=PACKING]:hover {
   color: #17a2b8;
-  background-color: #a7e9f4;
+  background-color: rgb(167, 233.4782608696, 244);
 }
 .dropdown-menu__status a[data-value=SHIPPING]:hover {
   color: #007bff;
-  background-color: #cce5ff;
+  background-color: rgb(204, 228.6, 255);
 }
 .dropdown-menu__status a[data-value=COMPLETE_DELIVERY]:hover, .dropdown-menu__status a[data-value=ON_SALE]:hover, .dropdown-menu__status a[data-value=RESPONDED]:hover {
   color: #28a745;
-  background-color: #afecbd;
+  background-color: rgb(175.1304347826, 235.8695652174, 189);
 }
 .dropdown-menu__status a[data-value=CANCELED]:hover, .dropdown-menu__status a[data-value=OUT_OF_STOCK]:hover {
   color: #dc3545;
-  background-color: #fae3e5;
+  background-color: rgb(250.1265822785, 226.8734177215, 229.1012658228);
 }
 .dropdown-menu__status a[data-value=CANCELED] i, .dropdown-menu__status a[data-value=OUT_OF_STOCK] i {
   margin-right: 10px;
 }
 .dropdown-menu__status a[data-value=REFUNDED]:hover, .dropdown-menu__status a[data-value=STOP_SELLING]:hover {
   color: #6c757d;
-  background-color: #d8dbdd;
+  background-color: rgb(215.8369098712, 218.6566523605, 221.1630901288);
 }
 
 .dropdown-item {
@@ -3155,15 +3155,7 @@ Tools sidebar
   font-weight: 500;
   margin: 0;
 }
-.cr-card-phone-number {
-  font-size: 13px;
-  margin: 0;
-}
-.cr-card-location {
-  font-size: 13px;
-  margin: 0;
-}
-.cr-card-date {
+.cr-card-phone-number, .cr-card-location, .cr-card-date, .cr-card-note {
   font-size: 13px;
   margin: 0;
 }
@@ -3175,7 +3167,35 @@ Tools sidebar
 }
 .cr-card-status--completed {
   color: #28a745;
-  background-color: #afecbd;
+  background-color: rgb(175.1304347826, 235.8695652174, 189);
+}
+.cr-card-status--canceled, .cr-card-status--out_of_stock {
+  color: #dc3545;
+  background-color: #fae3e5;
+}
+.cr-card-status--pending, .cr-card-status--coming_soon {
+  color: #ffc107;
+  background-color: #fff4d3;
+}
+.cr-card-status--packing {
+  color: #17a2b8;
+  background-color: #a7e9f4;
+}
+.cr-card-status--shipping {
+  color: #007bff;
+  background-color: #cce5ff;
+}
+.cr-card-status--complete_delivery, .cr-card-status--on_sale {
+  color: #28a745;
+  background-color: #d8f6df;
+}
+.cr-card-status--request_refund {
+  color: #fd7e14;
+  background-color: #ffedde;
+}
+.cr-card-status--refunded, .cr-card-status--stop_selling {
+  color: #6c757d;
+  background-color: #d8dbdd;
 }
 .cr-card-content {
   padding: 24px;
@@ -4048,11 +4068,11 @@ table.dataTable .status {
 }
 table.dataTable .status__completed {
   color: #30cb83;
-  background-color: #d3f4e5;
+  background-color: rgb(210.5179282869, 244.4820717131, 228.7051792829);
 }
 table.dataTable .status__canceled, table.dataTable .status__out_of_stock {
   color: #dc3545;
-  background-color: #fae3e5;
+  background-color: rgb(250.1265822785, 226.8734177215, 229.1012658228);
 }
 table.dataTable .status__pending, table.dataTable .status__coming_soon {
   color: #ffc107;
@@ -4060,23 +4080,23 @@ table.dataTable .status__pending, table.dataTable .status__coming_soon {
 }
 table.dataTable .status__packing {
   color: #17a2b8;
-  background-color: #a7e9f4;
+  background-color: rgb(167, 233.4782608696, 244);
 }
 table.dataTable .status__shipping {
   color: #007bff;
-  background-color: #cce5ff;
+  background-color: rgb(204, 228.6, 255);
 }
 table.dataTable .status__complete_delivery, table.dataTable .status__on_sale {
   color: #28a745;
-  background-color: #d8f6df;
+  background-color: rgb(216.2753623188, 245.7246376812, 223);
 }
 table.dataTable .status__request_refund {
   color: #fd7e14;
-  background-color: #ffedde;
+  background-color: rgb(254.7215189873, 237.0379746835, 222.2784810127);
 }
 table.dataTable .status__refunded, table.dataTable .status__stop_selling {
   color: #6c757d;
-  background-color: #d8dbdd;
+  background-color: rgb(215.8369098712, 218.6566523605, 221.1630901288);
 }
 table.dataTable td.token {
   font-weight: 500;
@@ -7864,13 +7884,116 @@ p {
 
 .currency-symbol {
   position: relative;
-  top: -4px; /* Adjust this value as needed */
-  font-size: 0.9em; /* Optional: make the symbol slightly smaller */
+  top: -4px;
+  font-size: 0.9em;
 }
 
 .total-value {
   color: rgba(238, 77, 45, 0.91);
   font-size: 16px;
+}
+
+#toast {
+  position: fixed;
+  top: 32px;
+  right: 16px;
+  z-index: 999999;
+}
+
+.toast {
+  display: flex !important;
+  align-items: center;
+  background-color: #fff;
+  border-radius: 2px;
+  min-width: 400px;
+  padding: 20px 0px;
+  max-width: 450px;
+  border-left: 4px solid;
+  box-shadow: 0 5px 8px rgba(0, 0, 0, 0.08);
+  transition: all linear 0.3s;
+}
+
+@keyframes slideInLeft {
+  from {
+    opacity: 0;
+    transform: translateX(calc(100% + 32px));
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+@keyframes fadeOut {
+  to {
+    opacity: 0;
+  }
+}
+.toast--success {
+  border-color: #47d864;
+}
+
+.toast--success .toast__icon {
+  color: #47d864;
+}
+
+.toast--info {
+  border-color: #2f86eb;
+}
+
+.toast--info .toast__icon {
+  color: #2f86eb;
+}
+
+.toast--warning {
+  border-color: #ffc021;
+}
+
+.toast--warning .toast__icon {
+  color: #ffc021;
+}
+
+.toast--error {
+  border-color: #ff623d;
+}
+
+.toast--error .toast__icon {
+  color: #ff623d;
+}
+
+.toast + .toast {
+  margin-top: 24px;
+}
+
+.toast__icon {
+  font-size: 24px;
+}
+
+.toast__icon,
+.toast__close {
+  padding: 0 16px;
+}
+
+.toast__body {
+  flex-grow: 1;
+}
+
+.toast__title {
+  font-size: 16px;
+  font-weight: 600;
+  color: #333;
+}
+
+.toast__msg {
+  font-size: 14px;
+  color: #888;
+  margin-top: 6px;
+  line-height: 1.5;
+}
+
+.toast__close {
+  font-size: 20px;
+  color: rgba(0, 0, 0, 0.5);
+  cursor: pointer;
 }
 
 /*# sourceMappingURL=style.css.map */

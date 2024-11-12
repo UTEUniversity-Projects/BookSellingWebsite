@@ -97,7 +97,7 @@
                                     <tr class="order-row" data-href="/staff/order-details?id=${order.id}">
                                         <td class="token">${order.id}</td>
                                         <td>${order.customerName}</td>
-                                        <td>123</td>
+                                        <td>${order.orderDate}</td>
                                         <td class="price-value">${order.totalPrice}</td>
                                         <td>Momo</td>
                                         <td data-status="${order.status}">

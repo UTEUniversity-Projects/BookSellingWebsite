@@ -1,36 +1,5 @@
 @charset "UTF-8";
 
-/*---------------------------------------------------------------------------------
-    Included CSS INDEX
------------------------------------------------------------------------------------
-
-01. Typography
-02. Components
-    - Common
-    - Sidebar
-    - Header
-    - Footer
-    - Notify-bar
-    - Tools-sidebar
-
-03. Layout 
-    - Cards
-    - All-chart
-    - Tables
-    - Event-calendar
-
-04. Pages
-    - Chatapp-page
-    - Todo-page
-    - Ecommerce-page
-    - Auth-pages
-    - Vendor-pages
-    - Buttons-page
-    - Accordion-page
-    - Alert-popup-page
-
------------------------------------------------------------------------------------*/
-
 // Typography
 // @import "base/_typography";
 
@@ -45,6 +14,7 @@
 @import "components/_footer";
 @import "components/_notify-bar";
 @import "components/_tools-sidebar";
+@import "components/_toast";
 
 // Layouts
 @import "layouts/_cards";

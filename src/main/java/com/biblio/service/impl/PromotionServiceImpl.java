@@ -34,4 +34,9 @@ public class PromotionServiceImpl implements IPromotionService {
         Promotion promotion = PromotionMapper.toPromotion(promotionInsertRequest);
         promotionDAO.insert(promotion);
     }
+
+    @Override
+    public Boolean isCodeExist(String code) {
+        return promotionDAO.isCodeExist(code);
+    }
 }

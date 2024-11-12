@@ -1,9 +1,11 @@
 package com.biblio.entity;
 
 import com.biblio.enumeration.EBookStatus;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.Builder;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -13,9 +15,11 @@ import java.util.Set;
 
 @Entity
 @Table(name = "book_metadata")
-@NoArgsConstructor
 @Getter
 @Setter
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 public class BookMetadata implements Serializable {
 
     // region Attributes
@@ -53,7 +57,7 @@ public class BookMetadata implements Serializable {
     @JoinColumn(name = "book_id")
     private Book book;
 
-    @OneToMany(mappedBy = "bookMetadata", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "bookMetadata", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private Set<MediaFile> mediaFiles;
 
     // endregion

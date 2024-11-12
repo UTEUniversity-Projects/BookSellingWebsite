@@ -1,8 +1,10 @@
 package com.biblio.entity;
 
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.experimental.SuperBuilder;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -11,9 +13,11 @@ import java.util.Set;
 
 @Entity
 @Table(name = "sub_category")
-@NoArgsConstructor
 @Getter
 @Setter
+@SuperBuilder
+@NoArgsConstructor
+@AllArgsConstructor
 public class SubCategory extends Classification implements Serializable {
 
     // region Relationships

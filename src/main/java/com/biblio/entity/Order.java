@@ -1,15 +1,13 @@
 package com.biblio.entity;
 
 import com.biblio.enumeration.EOrderStatus;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import javax.persistence.*;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
+import java.time.LocalDateTime;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -19,6 +17,7 @@ import java.util.Set;
 @AllArgsConstructor
 @Getter
 @Setter
+@Builder
 public class Order implements Serializable {
 
     // region Attributes
@@ -29,6 +28,9 @@ public class Order implements Serializable {
 
     @Column(name = "note", nullable = false)
     private String note;
+
+    @Column(name = "order_date", nullable = false)
+    private LocalDateTime orderDate;
 
     @Enumerated(EnumType.STRING)
     @Column(name = "status", nullable = false)

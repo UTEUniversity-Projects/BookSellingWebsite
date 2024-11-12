@@ -182,17 +182,10 @@
     margin: 0;
   }
 
-  &-phone-number {
-    font-size: 13px;
-    margin: 0;
-  }
-
-  &-location {
-    font-size: 13px;
-    margin: 0;
-  }
-
-  &-date {
+  &-phone-number,
+  &-location,
+  &-date,
+  &-note {
     font-size: 13px;
     margin: 0;
   }
@@ -207,6 +200,46 @@
       color: $complete-color;
       background-color: lighten($complete-color, 40%);
     }
+
+    &--canceled,
+    &--out_of_stock {
+      color: $canceled-color;
+      background-color: lighten($canceled-color, 40%);
+    }
+
+    &--pending,
+    &--coming_soon {
+      color: $waiting-confirmation-color;
+      background-color: lighten($waiting-confirmation-color, 40%);
+    }
+
+    &--packing {
+      color: $packing-color;
+      background-color: lighten($packing-color, 40%);
+    }
+
+    &--shipping {
+      color: $shipping-color;
+      background-color: lighten($shipping-color, 40%);
+    }
+
+    &--complete_delivery,
+    &--on_sale {
+      color: $complete-color;
+      background-color: lighten($complete-color, 50%);
+    }
+
+    &--request_refund {
+      color: $request-refund-color;
+      background-color: lighten($request-refund-color, 40%);
+    }
+
+    &--refunded,
+    &--stop_selling {
+      color: $refunded-color;
+      background-color: lighten($refunded-color, 40%);
+    }
+
   }
 
   &-content {
