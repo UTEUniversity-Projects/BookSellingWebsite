@@ -45,7 +45,7 @@ public class LoginController extends HttpServlet {
         // TODO Auto-generated method stub
         String username = request.getParameter("username");
         String password = request.getParameter("password");
-        if (accountService.isUsernameExist(username) ) {
+        if (accountService.isUsernameExisted(username) ) {
             AccountGetResponse account = accountService.getAccountByUsername(username);
             if (account.getPassword().equals(password)) {
                 HttpSession session = request.getSession();

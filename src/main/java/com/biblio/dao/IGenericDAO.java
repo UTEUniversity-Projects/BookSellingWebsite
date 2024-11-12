@@ -27,6 +27,6 @@ public interface IGenericDAO<T> {
 
     long count();
 
-    long countByJQPL(String jpql, Map<String, Object> params);
+    long countByJPQL(String jpql, Map<String, Object> params);
 
 }
