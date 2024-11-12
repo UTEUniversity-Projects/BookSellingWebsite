@@ -60,6 +60,7 @@
     <link id="main-css" href="${pageContext.request.contextPath}/assets/owner/css/style.css" rel="stylesheet"/>
 </head>
 <body>
+<div id="toast"></div>
 <main class="wrapper sb-default ecom">
     <!-- Loader -->
     <div id="cr-overlay">
@@ -98,6 +99,7 @@
 <script src="${pageContext.request.contextPath}/assets/owner/js/main.js"></script>
 <script src="${pageContext.request.contextPath}/assets/owner/js/customer-profile.js"></script>
 <script src="${pageContext.request.contextPath}/assets/owner/js/data/ecommerce-chart-data.js"></script>
+<script src="${pageContext.request.contextPath}/assets/owner/js/toast.js"></script>
 <!-- endregion -->
 </body>
 </html>

@@ -8,26 +8,51 @@ function changeStatus(customerId, action) {
             action: action,
             id: customerId
         },
-        success: function(data) {
+        success: function (data) {
             if (data === 'success') {
-                alert(action === 'deactivate' ? 'Tài khoản đã bị vô hiệu hóa' : 'Tài khoản đã được mở khóa');
-
+                const message = action === 'deactivate' ? 'Tài khoản đã bị vô hiệu hóa' : 'Tài khoản đã được mở khóa';
+                toast({
+                    title: "Thành công!",
+                    message: message,
+                    type: "success",
+                    duration: 1000,
+                });
+                console.log(message);
                 // Cập nhật trạng thái hiển thị
                 const statusElement = document.getElementById(`status-${customerId}`);
                 if (statusElement) {
                     statusElement.innerText = (action === 'deactivate') ? 'INACTIVE' : 'ACTIVE';
                 }
+
+                // Cập nhật nội dung dropdown-menu
+                const dropdownMenu = statusElement.closest('tr').querySelector('.dropdown-menu');
+                if (dropdownMenu) {
+                    if (action === 'deactivate') {
+                        dropdownMenu.innerHTML = `<a class="dropdown-item pop-positioned-timeout" href="#" onclick="changeStatus(${customerId}, 'activate'); return false;">Mở khóa tài khoản</a>`;
+                    } else {
+                        dropdownMenu.innerHTML = `<a class="dropdown-item pop-positioned-timeout" href="#" onclick="changeStatus(${customerId}, 'deactivate'); return false;">Vô hiệu hóa tài khoản</a>`;
+                    }
+                }
             } else {
-                alert('Có lỗi xảy ra khi thay đổi trạng thái tài khoản');
+                toast({
+                    title: "Thất bại!",
+                    message: "Có lỗi xảy ra khi thay đổi trạng thái tài khoản.",
+                    type: "error",
+                    duration: 1000,
+                });
             }
         },
-        error: function(xhr, status, error) {
+        error: function (xhr, status, error) {
             console.error('Error:', error);
-            alert('Có lỗi xảy ra khi kết nối tới server');
+            toast({
+                title: "Thất bại!",
+                message: "Có lỗi xảy ra khi kết nối tới server.",
+                type: "error",
+                duration: 1000,
+            });
         }
     });
 }
-
 
 document.addEventListener("DOMContentLoaded", function () {
     const tableBody = document.querySelector("#customer-data-table tbody");

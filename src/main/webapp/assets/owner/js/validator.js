@@ -38,7 +38,7 @@ document.querySelectorAll('.promotionForm .form-control').forEach(input => {
 
 // Sự kiện cho checkbox "Không giới hạn"
 document.querySelectorAll('.promotionForm input[name="unlimited"]').forEach(checkbox => {
-    checkbox.addEventListener('change', function() {
+    checkbox.addEventListener('change', function () {
         const quantityError = checkbox.closest('.col-12').querySelector('.quantityError');
         if (checkbox.checked) {
             quantityError.textContent = ""; // Xóa lỗi khi chọn "Không giới hạn"
@@ -97,9 +97,22 @@ function validateForm(form) {
 }
 
 document.querySelectorAll('.promotionForm').forEach(form => {
-    form.addEventListener('submit', function(event) {
+    form.addEventListener('submit', function (event) {
         if (!validateForm(form)) {
+            toast({
+                title: "Thất bại!",
+                message: 'Vui lòng điền đầy đủ thông tin',
+                type: "warning",
+                duration: 3000,
+            });
             event.preventDefault(); // Ngăn không cho submit nếu có lỗi
+        } else {
+            toast({
+                title: "Thành công!",
+                message: 'Thêm thành công',
+                type: "success",
+                duration: 3000,
+            });
         }
     });
 });
