@@ -3,7 +3,9 @@ package com.biblio.dao.impl;
 import com.biblio.dao.ICategoryDAO;
 import com.biblio.entity.Category;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class CategoryDAOImpl extends GenericDAOImpl<Category> implements ICategoryDAO {
     public CategoryDAOImpl() {
@@ -23,8 +25,10 @@ public class CategoryDAOImpl extends GenericDAOImpl<Category> implements ICatego
 
     @Override
     public Category findBySubCategoryId(Long id) {
-        String jpql = "SELECT c.* FROM category c, (SELECT s.category_id FROM sub_category s WHERE s.id = :id) AS sub WHERE c.id = sub.category_id";
-        return super.findSingleByJPQL(jpql, id);
+        String jpql = "SELECT c FROM Category c WHERE c.id = (SELECT s.category.id FROM SubCategory s WHERE s.id = :id)";
+        Map<String, Object> params = new HashMap<>();
+        params.put("id", id);
+        return super.findSingleByJPQL(jpql, params);
     }
 
     @Override
