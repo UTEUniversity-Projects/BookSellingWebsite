@@ -64,6 +64,7 @@
     <link id="main-css" href="${pageContext.request.contextPath}/assets/staff/css/style.css" rel="stylesheet"/>
 </head>
 <body>
+<div id="toast"></div>
 <main class="wrapper sb-default ecom">
     <!-- Loader -->
     <div id="cr-overlay">
@@ -98,6 +99,8 @@
 <!-- endregion JS-->
 
 <!-- region Main Custom JS -->
+<script src="${pageContext.request.contextPath}/assets/staff/js/toast.js"></script>
+
 <script src="${pageContext.request.contextPath}/assets/staff/js/main.js"></script>
 <!-- endregion -->
 

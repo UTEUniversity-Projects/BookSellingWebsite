@@ -1,5 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+
 <!-- main content -->
 <div class="cr-main-content">
     <div class="container-fluid">
@@ -72,7 +73,7 @@
                                             <td>
                                                 <img
                                                     class="tbl-thumb"
-                                                    src="${pageContext.request.contextPath}/assets/staff/img/product/1.jpg"
+                                                    src="${pageContext.request.contextPath}${product.imagePath}"
                                                     alt="${product.title}"
                                                 />
                                             </td>
@@ -121,11 +122,12 @@
                         </div>
                     </div>
                     <div class="cr-card-content d-grid gap-3 d-md-flex justify-content-md-end">
-                        <button class="btn btn-success">Xác nhận</button>
-                        <button class="btn btn-outline-danger">Từ chối</button>
+                        <button class="btn btn-success" onclick="showSuccessToast();">Xác nhận</button>
+                        <button class="btn btn-outline-danger" onclick="showErrorToast();">Từ chối</button>
                     </div>
                 </div>
             </div>
         </div>
     </div>
 </div>
+<script src="${pageContext.request.contextPath}/assets/staff/js/order-details.js" defer></script>

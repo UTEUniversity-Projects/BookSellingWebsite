@@ -1,5 +1,11 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!-- main content -->
+<style>
+    .error-message {
+        color: red;
+        font-size: 0.7em;
+    }
+</style>
 <div class="cr-main-content">
     <div class="container-fluid">
         <!-- Page title & breadcrumb -->
@@ -222,57 +228,79 @@
                                                 src="assets/img/product/1.jpg"
                                         />
                                         <h3>Thêm Voucher</h3>
-                                        <form action="/owner/add-promotion" method="POST">
-                                            <input type="hidden" name="formType" value="addVoucher"/>
-                                            <div class="form-group">
-                                                <label>Mã</label>
-                                                <div class="col-12">
-                                                    <input name="code" class="form-control here slug-title" type="text" required/>
+                                            <form action="/owner/add-promotion" method="POST" class="promotionForm">
+                                                <input type="hidden" name="formType" value="addVoucher"/>
+
+                                                <!-- Mã -->
+                                                <div class="form-group">
+                                                    <label>Mã</label>
+                                                    <div class="col-12">
+                                                        <input name="code" class="form-control here slug-title" type="text" onblur="validateInput(this)" />
+                                                        <span class="error-message codeError"></span>
+                                                    </div>
                                                 </div>
-                                            </div>
-                                            <div class="form-group">
-                                                <label>Tiêu đề</label>
-                                                <div class="col-12">
-                                                    <input name="title" class="form-control here slug-title" type="text" value="20 - 10" />
+
+                                                <!-- Tiêu đề -->
+                                                <div class="form-group">
+                                                    <label>Tiêu đề</label>
+                                                    <div class="col-12">
+                                                        <input name="title" class="form-control here slug-title" type="text" onblur="validateInput(this)" />
+                                                        <span class="error-message titleError"></span>
+                                                    </div>
                                                 </div>
-                                            </div>
-                                            <div class="form-group">
-                                                <label>Số tiền giảm</label>
-                                                <div class="col-12">
-                                                    <input name="discountLimit" class="form-control here slug-title" type="text" value="50.000 vnđ" />
+
+                                                <!-- Số tiền giảm -->
+                                                <div class="form-group">
+                                                    <label>Số tiền giảm</label>
+                                                    <div class="col-12">
+                                                        <input name="discountLimit" class="form-control here slug-title" type="number" onblur="validateInput(this)" />
+                                                        <span class="error-message discountLimitError"></span>
+                                                    </div>
                                                 </div>
-                                            </div>
-                                            <div class="form-group">
-                                                <label>Số tiền yêu cầu trên hóa đơn</label>
-                                                <div class="col-12">
-                                                    <input name="minValueApplied" class="form-control here slug-title" type="text" value="50.000 vnđ" />
+
+                                                <!-- Số tiền yêu cầu trên hóa đơn -->
+                                                <div class="form-group">
+                                                    <label>Số tiền yêu cầu trên hóa đơn</label>
+                                                    <div class="col-12">
+                                                        <input name="minValueApplied" class="form-control here slug-title" type="number" onblur="validateInput(this)" />
+                                                        <span class="error-message minValueAppliedError"></span>
+                                                    </div>
                                                 </div>
-                                            </div>
-                                            <div class="form-group">
-                                                <label>Số lượng khuyến mãi</label>
-                                                <div class="col-12">
-                                                    <input name="quantity" class="form-control here slug-title" type="text" />
-                                                    <label><input type="checkbox" name="unlimited" value="true" style="margin-top: 5px" /> Không giới hạn</label>
+
+                                                <!-- Số lượng khuyến mãi -->
+                                                <div class="form-group">
+                                                    <label>Số lượng khuyến mãi</label>
+                                                    <div class="col-12">
+                                                        <input name="quantity" class="form-control here slug-title" type="number" onblur="validateInput(this)" />
+                                                        <label><input type="checkbox" name="unlimited" value="true" style="margin-top: 5px" /> Không giới hạn</label>
+                                                        <span class="error-message quantityError"></span>
+                                                    </div>
                                                 </div>
-                                            </div>
-                                            <div class="form-group">
-                                                <label>Mô tả</label>
-                                                <div class="col-12">
-                                                    <textarea name="description" class="form-control" rows="4"></textarea>
+
+                                                <!-- Mô tả -->
+                                                <div class="form-group">
+                                                    <label>Mô tả</label>
+                                                    <div class="col-12">
+                                                        <textarea name="description" class="form-control" rows="4" onblur="validateInput(this)"></textarea>
+                                                        <span class="error-message descriptionError"></span>
+                                                    </div>
                                                 </div>
-                                            </div>
-                                            <div class="form-group row">
-                                                <label>Thời gian áp dụng</label>
-                                                <div class="col-12">
-                                                    <input type="text" name="dateeffective" style="width: 100%;" />
+
+                                                <!-- Thời gian áp dụng -->
+                                                <div class="form-group row">
+                                                    <label>Thời gian áp dụng</label>
+                                                    <div class="col-12">
+                                                        <input type="text" name="dateeffective" style="width: 100%;" onblur="validateInput(this)" />
+                                                        <span class="error-message dateeffectiveError"></span>
+                                                    </div>
                                                 </div>
-                                            </div>
-                                            <div class="row">
-                                                <div class="col-12 d-flex">
-                                                    <button type="submit" class="cr-btn-primary">Thêm</button>
+
+                                                <div class="row">
+                                                    <div class="col-12 d-flex">
+                                                        <button type="submit" class="cr-btn-primary" onclick="return validateForm()">Thêm</button>
+                                                    </div>
                                                 </div>
-                                            </div>
-                                        </form>
+                                            </form>
                                     </div>
                                 </div>
                             </div>
@@ -292,81 +320,64 @@
                                                 src="assets/img/product/1.jpg"
                                         />
                                         <h3>Thêm Coupon</h3>
-                                        <form action="/owner/add-promotion" method="POST">
+                                        <form action="/owner/add-promotion" method="POST" class="promotionForm">
                                             <input type="hidden" name="formType" value="addCoupon" />
                                             <div class="form-group">
                                                 <label>Mã</label>
                                                 <div class="col-12">
-                                                    <input
-                                                            name="code"
-                                                            class="form-control here slug-title"
-                                                            type="text"
-                                                            value="#20-10"
-                                                    />
+                                                    <input name="code" class="form-control here slug-title" type="text" onblur="validateInput(this)" />
+                                                    <span class="error-message codeError"></span>
                                                 </div>
                                             </div>
                                             <div class="form-group">
                                                 <label>Tiêu đề</label>
                                                 <div class="col-12">
-                                                    <input
-                                                            name="title"
-                                                            class="form-control here slug-title"
-                                                            type="text"
-                                                            value="20 - 10"
-                                                    />
+                                                    <input name="title" class="form-control here slug-title" type="text" onblur="validateInput(this)" />
+                                                    <span class="error-message titleError"></span>
                                                 </div>
                                             </div>
                                             <div class="form-group">
                                                 <label>Phần trăm giảm (%)</label>
                                                 <div class="col-12">
-                                                    <input
-                                                            name="percentDiscount"
-                                                            class="form-control here slug-title"
-                                                            type="text"
-                                                            value="50%"
-                                                    />
+                                                    <div class="col-12">
+                                                        <input name="percentDiscount" class="form-control here slug-title" type="number" onblur="validateInput(this)" />
+                                                        <span class="error-message percentDiscountError"></span>
+                                                    </div>
                                                 </div>
                                             </div>
                                             <div class="form-group">
                                                 <label>Giảm tối da</label>
                                                 <div class="col-12">
-                                                    <input
-                                                            name="discountLimit"
-                                                            class="form-control here slug-title"
-                                                            type="text"
-                                                            value="50.000 vnđ"
-                                                    />
+                                                    <input name="discountLimit" class="form-control here slug-title" type="number" onblur="validateInput(this)" />
+                                                    <span class="error-message discountLimitError"></span>
                                                 </div>
                                             </div>
                                             <div class="form-group">
                                                 <label>Số lượng khuyến mãi</label>
                                                 <div class="col-12">
-                                                    <input name="quantity" class="form-control here slug-title" type="text" />
+                                                    <input name="quantity" class="form-control here slug-title" type="number" onblur="validateInput(this)" />
                                                     <label><input type="checkbox" name="unlimited" value="true" style="margin-top: 5px" /> Không giới hạn</label>
+                                                    <span class="error-message quantityError"></span>
                                                 </div>
                                             </div>
                                             <div class="form-group">
                                                 <label>Mô tả</label>
                                                 <div class="col-12">
-																<textarea
-                                                                        name="description"
-                                                                        class="form-control"
-                                                                        rows="4"
-                                                                ></textarea>
+                                                    <textarea name="description" class="form-control" rows="4" onblur="validateInput(this)"></textarea>
+                                                    <span class="error-message descriptionError"></span>
                                                 </div>
                                             </div>
                                             <div class="form-group row">
                                                 <label>Thời gian áp dụng</label>
                                                 <div class="col-12">
-                                                    <input type="text" name="dateeffective" style="width: 100%;">
+                                                    <input type="text" name="dateeffective" style="width: 100%;" onblur="validateInput(this)" />
+                                                    <span class="error-message dateeffectiveError"></span>
                                                 </div>
                                             </div>
 
                                             <div class="row">
                                                 <div class="col-12 d-flex">
-                                                    <button type="submit" class="cr-btn-primary">
-                                                        Thêm
-                                                    </button>
+                                                    <button type="submit" class="cr-btn-primary" onclick="return validateForm()">Thêm</button>
                                                 </div>
                                             </div>
                                         </form>
@@ -389,70 +400,55 @@
                                                 src="assets/img/product/1.jpg"
                                         />
                                         <h3>Thêm Freeship</h3>
-                                        <form action="/owner/add-promotion" method="POST">
+                                        <form action="/owner/add-promotion" method="POST" class="promotionForm">
                                             <input type="hidden" name="formType" value="addFreeShip" />
                                             <div class="form-group">
                                                 <label>Mã</label>
                                                 <div class="col-12">
-                                                    <input
-                                                            name="code"
-                                                            class="form-control here slug-title"
-                                                            type="text"
-                                                            value="#20-10"
-                                                    />
+                                                    <input name="code" class="form-control here slug-title" type="text" onblur="validateInput(this)" />
+                                                    <span class="error-message codeError"></span>
                                                 </div>
                                             </div>
                                             <div class="form-group">
                                                 <label>Tiêu đề</label>
                                                 <div class="col-12">
-                                                    <input
-                                                            name="title"
-                                                            class="form-control here slug-title"
-                                                            type="text"
-                                                            value="20 - 10"
-                                                    />
+                                                    <input name="title" class="form-control here slug-title" type="text" onblur="validateInput(this)" />
+                                                    <span class="error-message titleError"></span>
                                                 </div>
                                             </div>
                                             <div class="form-group">
                                                 <label>Số tiền giảm</label>
                                                 <div class="col-12">
-                                                    <input
-                                                            name="discountLimit"
-                                                            class="form-control here slug-title"
-                                                            type="text"
-                                                            value="50.000 vnđ"
-                                                    />
+                                                    <input name="discountLimit" class="form-control here slug-title" type="number" onblur="validateInput(this)" />
+                                                    <span class="error-message discountLimitError"></span>
                                                 </div>
                                             </div>
                                             <div class="form-group">
                                                 <label>Số lượng khuyến mãi</label>
                                                 <div class="col-12">
-                                                    <input name="quantity" class="form-control here slug-title" type="text" />
+                                                    <input name="quantity" class="form-control here slug-title" type="number" onblur="validateInput(this)" />
                                                     <label><input type="checkbox" name="unlimited" value="true" style="margin-top: 5px" /> Không giới hạn</label>
+                                                    <span class="error-message quantityError"></span>
                                                 </div>
                                             </div>
                                             <div class="form-group">
                                                 <label>Mô tả</label>
                                                 <div class="col-12">
-																<textarea
-                                                                        name="description"
-                                                                        class="form-control"
-                                                                        rows="4"
-                                                                ></textarea>
+                                                    <textarea name="description" class="form-control" rows="4" onblur="validateInput(this)"></textarea>
+                                                    <span class="error-message descriptionError"></span>
                                                 </div>
                                             </div>
                                             <div class="form-group row">
                                                 <label>Thời gian áp dụng</label>
                                                 <div class="col-12">
-                                                    <input type="text" name="dateeffective" style="width: 100%;">
+                                                    <input type="text" name="dateeffective" style="width: 100%;" onblur="validateInput(this)" />
+                                                    <span class="error-message dateeffectiveError"></span>
                                                 </div>
                                             </div>
 
                                             <div class="row">
                                                 <div class="col-12 d-flex">
-                                                    <button type="submit" class="cr-btn-primary">
-                                                        Thêm
-                                                    </button>
+                                                    <button type="submit" class="cr-btn-primary" onclick="return validateForm()">Thêm</button>
                                                 </div>
                                             </div>
                                         </form>
@@ -467,3 +463,4 @@
     </div>
 </div>
 <script src="${pageContext.request.contextPath}/assets/owner/js/add-promotion.js" defer></script>
+<script src="${pageContext.request.contextPath}/assets/owner/js/validator.js" defer></script>

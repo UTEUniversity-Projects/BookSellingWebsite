@@ -1,8 +1,6 @@
 package com.biblio.entity;
 
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -10,8 +8,10 @@ import java.io.Serializable;
 @Entity
 @Table(name = "order_item")
 @NoArgsConstructor
+@AllArgsConstructor
 @Getter
 @Setter
+@Builder
 public class OrderItem implements Serializable {
 
     // region Attributes

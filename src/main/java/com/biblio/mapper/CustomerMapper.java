@@ -69,24 +69,44 @@ public class CustomerMapper {
     }
 
     public static CustomerGetListResponse toCustomerGetListResponse(Customer customer) {
-        CustomerGetListResponse customerGetListResponse = new CustomerGetListResponse();
-
-        customerGetListResponse.setId(customer.getId());
-        customerGetListResponse.setAvatar(customer.getAvatar());
-        customerGetListResponse.setDateOfBirth(customer.getDateOfBirth());
-        customerGetListResponse.setEmail(customer.getEmailAddress());
-        customerGetListResponse.setFullName(customer.getFullName());
-        customerGetListResponse.setGender(customer.getGender().toString());
-        customerGetListResponse.setJoinAt(customer.getJoinAt().toString());
-        customerGetListResponse.setPhoneNumber(customer.getPhoneNumber());
-        customerGetListResponse.setMemberShip(customer.getMembership().toString());
-        customerGetListResponse.setStatus(customer.getAccount().getStatus().toString());
-        customerGetListResponse.setUsername(customer.getAccount().getUsername());
-        customerGetListResponse.setPassword(customer.getAccount().getPassword());
+//        CustomerGetListResponse customerGetListResponse = new CustomerGetListResponse();
+//
+//        customerGetListResponse.setId(customer.getId());
+//        customerGetListResponse.setAvatar(customer.getAvatar());
+//        customerGetListResponse.setDateOfBirth(customer.getDateOfBirth());
+//        customerGetListResponse.setEmail(customer.getEmailAddress());
+//        customerGetListResponse.setFullName(customer.getFullName());
+//        customerGetListResponse.setGender(customer.getGender().toString());
+//        customerGetListResponse.setJoinAt(customer.getJoinAt().toString());
+//        customerGetListResponse.setPhoneNumber(customer.getPhoneNumber());
+//        customerGetListResponse.setMemberShip(customer.getMembership().toString());
+//        customerGetListResponse.setStatus(customer.getAccount().getStatus().toString());
+//        customerGetListResponse.setUsername(customer.getAccount().getUsername());
+//        customerGetListResponse.setPassword(customer.getAccount().getPassword());
+//
+//        for (Address address : customer.getAddresses()) {
+//            customerGetListResponse.getAddresses().add(AddressMapper.toAddressResponse(address));
+//        }
+        CustomerGetListResponse customerGetListResponse = CustomerGetListResponse.builder()
+                .id(customer.getId())
+                .avatar(customer.getAvatar())
+                .dateOfBirth(customer.getDateOfBirth())
+                .email(customer.getEmailAddress())
+                .fullName(customer.getFullName())
+                .gender(customer.getGender().getDisplayName())
+                .joinAt(customer.getJoinAt().toString())
+                .phoneNumber(customer.getPhoneNumber())
+                .memberShip(customer.getMembership().toString())
+                .status(customer.getAccount().getStatus().toString())
+                .username(customer.getAccount().getUsername())
+                .password(customer.getAccount().getPassword())
+                .build();
 
         for (Address address : customer.getAddresses()) {
             customerGetListResponse.getAddresses().add(AddressMapper.toAddressResponse(address));
         }
+
+
         return customerGetListResponse;
     }
 

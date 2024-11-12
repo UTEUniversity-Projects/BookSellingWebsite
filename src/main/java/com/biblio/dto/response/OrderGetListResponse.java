@@ -1,18 +1,11 @@
 package com.biblio.dto.response;
 
 import com.biblio.enumeration.EOrderStatus;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-import lombok.ToString;
-
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.util.HashSet;
-import java.util.Set;
+import lombok.*;
 
 @Data
 @NoArgsConstructor
+@Builder
 @AllArgsConstructor
 @ToString
 public class OrderGetListResponse {

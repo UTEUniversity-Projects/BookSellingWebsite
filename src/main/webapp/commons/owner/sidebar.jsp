@@ -137,7 +137,7 @@
                             </a>
                             <ul class="cr-sb-subdrop condense">
                                 <li>
-                                    <a href="/owner/staff-list" class="cr-page-link subdrop">
+                                    <a href="${pageContext.request.contextPath}/owner/staff-list" class="cr-page-link subdrop">
                                         <i class="ri-checkbox-blank-circle-line"></i>
                                         Danh sách nhân viên
                                     </a>
