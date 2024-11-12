@@ -28,6 +28,7 @@ function changeStatus(customerId, action) {
     });
 }
 
+
 document.addEventListener("DOMContentLoaded", function () {
     const tableBody = document.querySelector("#customer-data-table tbody");
 

@@ -9,4 +9,5 @@ public interface IPromotionService {
     List<PromotionGetResponse> findAll();
     PromotionGetResponse findById(Long id);
     void insert(PromotionInsertRequest promotionInsertRequest);
+    Boolean isCodeExist(String code);
 }

@@ -37,17 +37,26 @@ public class PromotionDAOImpl extends GenericDAOImpl<Promotion> implements IProm
         Map<String, Object> params = new HashMap<>();
         return super.findSingleByJPQL(jpql, params);
     }
+    @Override
+    public boolean isCodeExist(String code) {
+        String jpql = "SELECT p FROM Promotion p WHERE p.code = :code";
+        Map<String, Object> params = new HashMap<String, Object>();
+        params.put("code", code);
+        return super.findSingleByJPQL(jpql, params) != null;
+    }
 
 
     public static void main(String[] args) {
         PromotionDAOImpl dao = new PromotionDAOImpl();
-        Promotion promotion = dao.findLastPromotion();
-        System.out.println(promotion.getCode());
+//        Promotion promotion = dao.findLastPromotion();
+//        System.out.println(promotion.getCode());
 //        for (Promotion promotion : promotions) {
 //            Set<PromotionTarget> promotionTargets = promotion.getPromotionTargets();
 //            for (PromotionTarget promotionTarget : promotionTargets) {
 //                System.out.println(promotionTarget.getApplicableObjectId());
 //            }
 //        }
+        Boolean check = dao.isCodeExist("1");
+        System.out.println(check);
     }
 }

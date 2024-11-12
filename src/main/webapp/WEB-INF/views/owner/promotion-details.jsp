@@ -193,7 +193,7 @@
                                         <div class="form-group row" style="padding-bottom: 20px;">
                                             <label>Thời gian áp dụng</label>
                                             <div class="col-12">
-                                                <input type="text" name="dateeffective" style="width: 100%;" id="promotion-time-effective" disabled>
+                                                <input type="text" name="time-promotion" style="width: 100%;" id="promotion-time-effective" disabled>
                                             </div>
                                         </div>
 
@@ -359,6 +359,68 @@
         </c:if>
     </div>
 </div>
+
+<script type="text/javascript" src="https://cdn.jsdelivr.net/jquery/latest/jquery.min.js"></script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
+<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
+<script>
+    $(function() {
+        $('input[name="time-promotion"]').daterangepicker({
+            timePicker: true,
+            startDate: moment().subtract(7, 'days').startOf('day'), // Cố định ngày bắt đầu là 7 ngày trước
+            endDate: moment().startOf('hour').add(32, 'hour'), // Ngày kết thúc có thể thay đổi
+            minDate: moment().subtract(7, 'days'), // Giữ giới hạn thấp nhất là 7 ngày trước
+            autoUpdateInput: true,
+            locale: {
+                format: 'M/DD hh:mm A'
+            }
+        }).on('apply.daterangepicker', function(ev, picker) {
+            // Reset ngày bắt đầu mỗi khi chọn để cố định
+            picker.setStartDate(moment().subtract(7, 'days').startOf('day'));
+        });
+    });
+</script>
+<%--<script>--%>
+<%--    $(function() {--%>
+<%--        $('input[name="time-promotion"]').daterangepicker({--%>
+<%--            singleDatePicker: true, // Chỉ chọn một ngày thay vì phạm vi--%>
+<%--            timePicker: true, // Hiển thị bộ chọn giờ--%>
+<%--            startDate: moment(), // Ngày bắt đầu mặc định là thời điểm hiện tại--%>
+<%--            minDate: moment(), // Ngày nhỏ nhất có thể chọn là thời điểm hiện tại--%>
+<%--            locale: {--%>
+<%--                format: 'M/DD hh:mm A' // Định dạng ngày giờ--%>
+<%--            }--%>
+<%--        });--%>
+<%--    });--%>
+<%--</script>--%>
+
+
+
+
+
+
+<script>
+    $(function() {
+        $('input[name="birthday"]').daterangepicker({
+            singleDatePicker: true,
+            showDropdowns: true,
+            minYear: 1901,
+            maxYear: parseInt(moment().format('YYYY'), 10),
+            timePicker: true, // Bật lựa chọn giờ
+            timePickerIncrement: 1, // Bước chọn phút (mỗi phút)
+            timePicker24Hour: false, // Định dạng giờ 12 tiếng với AM/PM
+            locale: {
+                format: 'M/DD hh:mm A' // Định dạng bao gồm ngày, giờ 12 tiếng với AM/PM
+            }
+        }, function(start, end, label) {
+            var years = moment().diff(start, 'years');
+            alert("You are " + years + " years old! Your selected date and time: " + start.format('M/DD hh:mm A'));
+        });
+    });
+</script>
+
+
 <script src="${pageContext.request.contextPath}/assets/owner/js/promotion-detail.js" defer></script>
 
 
