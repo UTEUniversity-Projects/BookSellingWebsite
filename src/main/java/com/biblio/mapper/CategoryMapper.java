@@ -2,6 +2,7 @@ package com.biblio.mapper;
 
 import com.biblio.dto.request.CategoryRequest;
 import com.biblio.dto.response.CategoryResponse;
+import com.biblio.dto.response.CategorySidebarResponse;
 import com.biblio.entity.Category;
 import com.biblio.enumeration.EClassificationStatus;
 import com.biblio.utils.EnumUtil;
@@ -24,6 +25,12 @@ public class CategoryMapper {
                 .shortScript(category.getShortScript())
                 .fullScript(category.getFullScript())
                 .status(EnumUtil.toDisplayName(category.getStatus()))
+                .build();
+    }
+    public static CategorySidebarResponse toCategorySidebarResponse(Category category) {
+        return CategorySidebarResponse.builder()
+                .id(category.getId())
+                .name(category.getName())
                 .build();
     }
 }

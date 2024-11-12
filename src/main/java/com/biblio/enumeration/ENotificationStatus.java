@@ -1,5 +1,8 @@
 package com.biblio.enumeration;
 
+import lombok.Getter;
+
+@Getter
 public enum ENotificationStatus {
     NOT_SEEN("Chưa xem"),
     VIEWED("Đã xem");
@@ -10,7 +13,4 @@ public enum ENotificationStatus {
         this.displayName = displayName;
     }
 
-    public String getDisplayName() {
-        return displayName;
-    }
 }

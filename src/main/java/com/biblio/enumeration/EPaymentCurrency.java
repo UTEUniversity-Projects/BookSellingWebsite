@@ -1,5 +1,8 @@
 package com.biblio.enumeration;
 
+import lombok.Getter;
+
+@Getter
 public enum EPaymentCurrency {
     VND("VNĐ"),
     DOLLAR("$");
@@ -10,7 +13,4 @@ public enum EPaymentCurrency {
         this.displayName = displayName;
     }
 
-    public String getDisplayName() {
-        return displayName;
-    }
 }

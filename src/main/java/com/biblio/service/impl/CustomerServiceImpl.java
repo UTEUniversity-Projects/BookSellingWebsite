@@ -55,11 +55,11 @@ public class CustomerServiceImpl implements ICustomerService {
 
     @Override
     public boolean isEmailExisted(String email) {
-        return customerDAO.isEmailExisted(email);
+        return customerDAO.existsByEmail(email);
     }
 
     @Override
     public boolean isPhoneNumberExisted(String phoneNumber) {
-        return customerDAO.isPhoneNumberExisted(phoneNumber);
+        return customerDAO.existsByPhoneNumber(phoneNumber);
     }
 }
