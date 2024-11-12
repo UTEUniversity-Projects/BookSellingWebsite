@@ -36,8 +36,6 @@ $(document).ready(() => {
 				}
 			};
 
-			console.log(await uploadImage());
-
 			const handleRegistration = async () => {
 
 				let avatar = await uploadImage();
@@ -90,6 +88,12 @@ $(document).ready(() => {
 						}
 					},
 					error: function (xhr, status, error) {
+						toast({
+							title: "Lỗi",
+							message: "Có lỗi xảy ra",
+							type: "error",
+							duration: 3000
+						})
 					}
 				});
 
@@ -182,6 +186,7 @@ $(document).ready(() => {
 			Validator.isAllLowercase("#username", 'Username chỉ bao gồm chữ thường và số !'),
 			Validator.minLength('#username', 8),
 			Validator.minLength('#password', 8),
+
 		],
 		onSubmit: async function (data) {
 			await register.register();
