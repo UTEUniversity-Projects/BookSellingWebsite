@@ -7,15 +7,18 @@
                     <a href="home" class="cr-logo">
                         <img src="${pageContext.request.contextPath}/assets/customer/img/logo/biblio.png" alt="logo" class="logo"/>
                     </a>
-                    <form class="cr-search" method="post">
-                        <input
-                                class="search-input"
-                                type="text"
-                                placeholder="Tìm kiếm sản phẩm..."
-                        />
-                        <a href="search" class="search-btn">
+                    <form class="cr-search" action="#" method="post" id="search-book">
+                        <div class="form-group">
+                            <input
+                                    class="search-input"
+                                    type="text"
+                                    placeholder="Tìm kiếm sản phẩm..."
+                            />
+                        </div>
+                        <button class="btn-search search-btn" type="submit">
                             <i class="ri-search-line"></i>
-                        </a>
+                        </button>
+                        <span class="form-message text-[16px] text-red-500"></span>
                     </form>
                     <div class="cr-right-bar">
                         <ul class="my-0">
@@ -201,5 +204,9 @@
         </div>
     </div>
 </header>
-
+<script
+        src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"
+        integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="${pageContext.request.contextPath}/assets/customer/js/search-book.js" type="module"></script>
 <script src="${pageContext.request.contextPath}/assets/customer/js/notifications.js" type="module"></script>
