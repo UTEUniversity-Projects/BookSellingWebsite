@@ -1,4 +1,5 @@
 $(document).ready(() => {
+
 	class Notifications {
 		constructor() {
 		}
@@ -10,4 +11,4 @@ $(document).ready(() => {
 
 	const notifications = new Notifications();
 	notifications.countNotifications();
-})
+});

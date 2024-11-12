@@ -265,13 +265,8 @@
 
     </div>
 </section>
-
-<script
-        src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"
-        integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g=="
-        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 <script>
-	$(document).ready(function () {
+    $(document).ready(() => {
 		$('#avatar').on('change', function (event) {
 			const file = event.target.files[0];
 			if (file) {
@@ -284,10 +279,6 @@
 				reader.readAsDataURL(file);
 			}
 		});
-	});
-	const contextPath = "<%=request.getContextPath() %>";
+    });
 </script>
-<script
-        src="${pageContext.request.contextPath}/assets/customer/js/register.js?v=1"
-        type="module"></script>
-
+<script type="module" src="${pageContext.request.contextPath}/assets/customer/js/register.js"></script>
