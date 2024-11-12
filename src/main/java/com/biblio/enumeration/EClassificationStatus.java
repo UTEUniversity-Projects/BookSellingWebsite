@@ -1,5 +1,8 @@
 package com.biblio.enumeration;
 
+import lombok.Getter;
+
+@Getter
 public enum EClassificationStatus {
     ACTIVE("Hoạt động"),
     INACTIVE("Không hoạt động");
@@ -8,10 +11,6 @@ public enum EClassificationStatus {
 
     EClassificationStatus(String status) {
         this.status = status;
-    }
-
-    public String getStatus() {
-        return status;
     }
 
 }

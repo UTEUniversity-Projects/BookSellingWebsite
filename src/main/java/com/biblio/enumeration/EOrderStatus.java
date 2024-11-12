@@ -1,5 +1,8 @@
 package com.biblio.enumeration;
 
+import lombok.Getter;
+
+@Getter
 public enum EOrderStatus {
     WAITING_PAYMENT("Đang chờ thanh toán"),
     PAID("Đã thanh toán"),
@@ -11,16 +14,12 @@ public enum EOrderStatus {
     REQUEST_REFUND("Yêu cầu hoàn tiền"),
     REFUNDED("Đã hoàn tiền");
 
+    // Getter for description
     private final String description;
 
     // Constructor
     EOrderStatus(String description) {
         this.description = description;
-    }
-
-    // Getter for description
-    public String getDescription() {
-        return description;
     }
 
     @Override

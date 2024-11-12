@@ -1,5 +1,8 @@
 package com.biblio.enumeration;
 
+import lombok.Getter;
+
+@Getter
 public enum EWalletProvider {
     PAYPAL("PayPal"),
     MOMO("Momo"),
@@ -11,7 +14,4 @@ public enum EWalletProvider {
         this.displayName = displayName;
     }
 
-    public String getDisplayName() {
-        return displayName;
-    }
 }

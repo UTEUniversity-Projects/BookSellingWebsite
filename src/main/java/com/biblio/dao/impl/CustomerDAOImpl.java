@@ -40,7 +40,7 @@ public class CustomerDAOImpl extends GenericDAOImpl<Customer> implements ICustom
     }
 
     @Override
-    public boolean isEmailExisted(String email) {
+    public boolean existsByEmail(String email) {
         String jpql = "SELECT c FROM Customer c WHERE c.emailAddress = :email";
         Map<String, Object> params = new HashMap<String, Object>();
         params.put("email", email);
@@ -48,7 +48,7 @@ public class CustomerDAOImpl extends GenericDAOImpl<Customer> implements ICustom
     }
 
     @Override
-    public boolean isPhoneNumberExisted(String phoneNumber) {
+    public boolean existsByPhoneNumber(String phoneNumber) {
         String jpql = "SELECT c FROM Customer c WHERE c.phoneNumber = :phoneNumber";
         Map<String, Object> params = new HashMap<String, Object>();
         params.put("phoneNumber", phoneNumber);
