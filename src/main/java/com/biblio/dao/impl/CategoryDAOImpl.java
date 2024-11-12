@@ -24,8 +24,8 @@ public class CategoryDAOImpl extends GenericDAOImpl<Category> implements ICatego
 
     @Override
     public Category findBySubCategoryId(Long id) {
-        String jpql = "SELECT c FROM Category c WHERE c.id = (SELECT s.category.id FROM SubCategory s WHERE s.id = :id)";
-        Map<String, Object> params = new HashMap<>();
+        String jpql = "SELECT c.* FROM category c, (SELECT s.category_id FROM sub_category s WHERE s.id = :id) AS sub WHERE c.id = sub.category_id";
+        Map<String, Object> params = new HashMap<String, Object>();
         params.put("id", id);
         return super.findSingleByJPQL(jpql, params);
     }
