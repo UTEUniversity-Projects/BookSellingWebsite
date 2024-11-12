@@ -69,7 +69,7 @@ public class Book implements Serializable {
     @Column(name = "height", nullable = false)
     private double height;
 
-    @ElementCollection
+    @ElementCollection(fetch = FetchType.EAGER)
     @Enumerated(EnumType.STRING)
     @CollectionTable(name = "book_languages",
             joinColumns = @JoinColumn(name = "book_id", nullable = false))
@@ -94,7 +94,7 @@ public class Book implements Serializable {
     @OneToOne(mappedBy = "book", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private BookMetadata metadata;
 
-    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinColumn(name = "category_id", nullable = false)
     private Category category;
 
@@ -102,21 +102,36 @@ public class Book implements Serializable {
     @JoinColumn(name = "sub_category_id", nullable = false)
     private SubCategory subCategory;
 
-    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinColumn(name = "publisher_id", nullable = false)
     private Publisher publisher;
 
-    @ManyToMany(mappedBy = "books")
+    @ManyToMany(mappedBy = "books", fetch = FetchType.EAGER)
     private Set<Author> authors = new HashSet<>();
 
     @ManyToMany(mappedBy = "books")
     private Set<Translator> translators = new HashSet<>();
 
-    @OneToMany(mappedBy = "book")
+    @OneToMany(mappedBy = "book", fetch = FetchType.EAGER)
     private Set<Review> reviews = new HashSet<>();
 
     @OneToMany(mappedBy = "book")
     private Set<OrderItem> orderItems = new HashSet<>();
 
+    // endregion
+
+    // region Methods
+    public double calculateReviewRate() {
+        if (reviews == null || reviews.isEmpty()) {
+            return 0;
+        }
+
+        double totalRating = 0;
+        for (Review review : reviews) {
+            totalRating += review.getRate();
+        }
+
+        return totalRating / reviews.size();
+    }
     // endregion
 }

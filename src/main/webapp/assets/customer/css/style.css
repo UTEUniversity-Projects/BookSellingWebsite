@@ -9026,7 +9026,6 @@ p {
   align-items: center;
   gap: 40px;
   padding: 0 10px;
-  margin-bottom: 40px;
 }
 .cr-tab-content-from .review-list .review-item {
   display: flex;
@@ -9224,7 +9223,6 @@ p {
   align-items: center;
   gap: 10px;
   padding: 0 10px;
-  margin-bottom: 20px;
 }
 .review-list .review-item {
   display: flex;
