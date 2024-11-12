@@ -10,6 +10,5 @@ public interface IPromotionDAO extends IGenericDAO<Promotion>  {
     void insert(Promotion promotion);
     void updatePromotion(Promotion promotion);
     Promotion findLastPromotion();
-    boolean isCodeExist(String code);
-
+    boolean existsByCode(String code);
 }

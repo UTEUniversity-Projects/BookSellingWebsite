@@ -1,8 +1,8 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<!-- Main content -->
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+
 <div class="cr-main-content">
     <div class="container-fluid">
-        <!-- Page title & breadcrumb -->
         <div class="cr-page-title cr-page-title-2">
             <div class="cr-breadcrumb">
                 <ul>
@@ -59,6 +59,7 @@
                             </div>
                         </div>
                     </div>
+
                     <div class="cr-card-content card-default">
                         <div class="table-responsive">
                             <table id="support-cus-list" class="table">
@@ -72,70 +73,25 @@
                                 </tr>
                                 </thead>
                                 <tbody>
-                                <tr>
-                                    <td>Nguyễn Văn A</td>
-                                    <td>Hoàn trả</td>
-                                    <td>07/10/2024</td>
-                                    <td data-status="NOT_RESPONDED">
-														<span class="status status__pending">
-															Chưa phản hồi
-														</span>
-                                    </td>
-                                    <td>
-                                        <div class="d-flex justify-content-start">
-                                            <button
-                                                    type="button"
-                                                    class="btn btn-outline-success dropdown-toggle dropdown-toggle-split"
-                                                    data-bs-toggle="dropdown"
-                                                    aria-haspopup="true"
-                                                    aria-expanded="false"
-                                                    data-display="static"
-                                            >
-																<span class="sr-only">
-																	<i class="ri-settings-3-line"></i>
-																</span>
-                                            </button>
-                                            <div class="dropdown-menu">
-                                                <a class="dropdown-item" href="#">
-                                                    <i class="ri-feedback-line"></i>
-                                                    Phản hồi
-                                                </a>
-                                            </div>
-                                        </div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>Nguyễn Văn B</td>
-                                    <td>Hoàn trả</td>
-                                    <td>07/10/2024</td>
-                                    <td data-status="RESPONDED">
-														<span class="status status__completed">
-															Đã phản hồi
-														</span>
-                                    </td>
-                                    <td>
-                                        <div class="d-flex justify-content-start">
-                                            <button
-                                                    type="button"
-                                                    class="btn btn-outline-success dropdown-toggle dropdown-toggle-split"
-                                                    data-bs-toggle="dropdown"
-                                                    aria-haspopup="true"
-                                                    aria-expanded="false"
-                                                    data-display="static"
-                                            >
-																<span class="sr-only">
-																	<i class="ri-settings-3-line"></i>
-																</span>
-                                            </button>
-                                            <div class="dropdown-menu">
-                                                <a class="dropdown-item" href="#">
-                                                    <i class="ri-feedback-line"></i>
-                                                    Phản hồi
-                                                </a>
-                                            </div>
-                                        </div>
-                                    </td>
-                                </tr>
+                                <c:forEach items="${supportRequests}" var="request">
+                                    <tr>
+                                        <td>${request.customer.fullName}</td>
+                                        <td>${request.title}</td>
+                                        <td>${request.createdAt}</td>
+                                        <td data-status="${request.status}">
+                                            <span class="status ${request.status == 'RESPONDED' ? 'status__completed' : 'status__pending'}">
+                                                    ${request.status == 'RESPONDED' ? 'Đã phản hồi' : 'Chưa phản hồi'}
+                                            </span>
+                                        </td>
+                                        <td>
+                                            <a class="btn btn-outline-success"
+                                               href="${pageContext.request.contextPath}/staff/support-customer-dashboard?action=detail&id=${request.id}">
+                                                Phản hồi
+                                            </a>
+                                        </td>
+                                    </tr>
+                                </c:forEach>
+
                                 </tbody>
                             </table>
                         </div>

@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
 <!-- Product -->
@@ -13,157 +14,34 @@
         <div class="vehicle-detail-banner banner-content clearfix">
           <div class="banner-slider">
             <div class="slider slider-for">
-              <div class="slider-banner-image">
-                <div class="zoom-image-hover">
-                  <img
-                          src="${pageContext.request.contextPath}/assets/customer/img/product/9.jpg"
-                          alt="product-tab-1"
-                          class="product-image"
-                  />
+              <c:forEach var="mediaFile" items="${book.metadata.mediaFiles}">
+                <div class="slider-banner-image">
+                  <div class="zoom-image-hover">
+                    <img
+                            src="${pageContext.request.contextPath}${mediaFile.storedCode}"
+                            alt="product-tab-${mediaFile.fileName}"
+                            class="product-image"
+                    />
+                  </div>
                 </div>
-              </div>
-              <div class="slider-banner-image">
-                <div class="zoom-image-hover">
-                  <img
-                          src="${pageContext.request.contextPath}/assets/customer/img/product/10.jpg"
-                          alt="product-tab-2"
-                          class="product-image"
-                  />
-                </div>
-              </div>
-              <div class="slider-banner-image">
-                <div class="zoom-image-hover">
-                  <img
-                          src="${pageContext.request.contextPath}/assets/customer/img/product/11.jpg"
-                          alt="product-tab-3"
-                          class="product-image"
-                  />
-                </div>
-              </div>
-              <div class="slider-banner-image">
-                <div class="zoom-image-hover">
-                  <img
-                          src="${pageContext.request.contextPath}/assets/customer/img/product/12.jpg"
-                          alt="product-tab-1"
-                          class="product-image"
-                  />
-                </div>
-              </div>
-              <div class="slider-banner-image">
-                <div class="zoom-image-hover">
-                  <img
-                          src="${pageContext.request.contextPath}/assets/customer/img/product/13.jpg"
-                          alt="product-tab-2"
-                          class="product-image"
-                  />
-                </div>
-              </div>
-              <div class="slider-banner-image">
-                <div class="zoom-image-hover">
-                  <img
-                          src="${pageContext.request.contextPath}/assets/customer/img/product/14.jpg"
-                          alt="product-tab-3"
-                          class="product-image"
-                  />
-                </div>
-              </div>
-              <div class="slider-banner-image">
-                <div class="zoom-image-hover">
-                  <img
-                          src="${pageContext.request.contextPath}/assets/customer/img/product/15.jpg"
-                          alt="product-tab-1"
-                          class="product-image"
-                  />
-                </div>
-              </div>
-              <div class="slider-banner-image">
-                <div class="zoom-image-hover">
-                  <img
-                          src="${pageContext.request.contextPath}/assets/customer/img/product/16.jpg"
-                          alt="product-tab-2"
-                          class="product-image"
-                  />
-                </div>
-              </div>
+              </c:forEach>
             </div>
             <div class="slider slider-nav thumb-image">
-              <div class="thumbnail-image">
-                <div class="thumbImg">
-                  <img src="${pageContext.request.contextPath}/assets/customer/img/product/9.jpg" alt="product-tab-1" />
+              <c:forEach var="mediaFile" items="${book.metadata.mediaFiles}">
+                <div class="thumbnail-image">
+                    <div class="thumbImg">
+                      <img src="${pageContext.request.contextPath}${mediaFile.storedCode}" alt="product-tab-${mediaFile.fileName}" />
+                    </div>
                 </div>
-              </div>
-              <div class="thumbnail-image">
-                <div class="thumbImg">
-                  <img
-                          src="${pageContext.request.contextPath}/assets/customer/img/product/10.jpg"
-                          alt="product-tab-2"
-                  />
-                </div>
-              </div>
-              <div class="thumbnail-image">
-                <div class="thumbImg">
-                  <img
-                          src="${pageContext.request.contextPath}/assets/customer/img/product/11.jpg"
-                          alt="product-tab-3"
-                  />
-                </div>
-              </div>
-              <div class="thumbnail-image">
-                <div class="thumbImg">
-                  <img
-                          src="${pageContext.request.contextPath}/assets/customer/img/product/12.jpg"
-                          alt="product-tab-1"
-                  />
-                </div>
-              </div>
-              <div class="thumbnail-image">
-                <div class="thumbImg">
-                  <img
-                          src="${pageContext.request.contextPath}/assets/customer/img/product/13.jpg"
-                          alt="product-tab-2"
-                  />
-                </div>
-              </div>
-              <div class="thumbnail-image">
-                <div class="thumbImg">
-                  <img
-                          src="${pageContext.request.contextPath}/assets/customer/img/product/14.jpg"
-                          alt="product-tab-3"
-                  />
-                </div>
-              </div>
-              <div class="thumbnail-image">
-                <div class="thumbImg">
-                  <img
-                          src="${pageContext.request.contextPath}/assets/customer/img/product/15.jpg"
-                          alt="product-tab-1"
-                  />
-                </div>
-              </div>
-              <div class="thumbnail-image">
-                <div class="thumbImg">
-                  <img
-                          src="${pageContext.request.contextPath}/assets/customer/img/product/16.jpg"
-                          alt="product-tab-2"
-                  />
-                </div>
-              </div>
+              </c:forEach>
             </div>
           </div>
         </div>
       </div>
       <div class="col-xxl-8 col-xl-7 col-md-6 col-12 mb-24">
         <div class="cr-size-and-weight-contain">
-          <h2 class="heading">
-            The 80/20 Principle: The Secret to Success by Achieving More
-            with Less
-          </h2>
-          <p>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Iusto,
-            nam corrupti doloribus facere provident ipsam blanditiis quae
-            dolorum ullam itaque soluta distinctio. Explicabo eos neque
-            blanditiis velit repellat sit nemo?
-          </p>
+          <h2 class="heading">${book.title}</h2>
+          <p>${book.description}</p>
         </div>
         <div class="cr-size-and-weight">
           <div class="cr-review-star">
@@ -180,25 +58,25 @@
             <ul>
               <li>
                 <label>Tác giả <span>:</span></label
-                >Richard Koch
+                >${book.authors[0].name}
               </li>
               <li>
                 <label>NXB <span>:</span></label
-                >Currency
+                >${book.publisher.name}
               </li>
               <li>
                 <label>Ngày XB <span>:</span></label
-                >19/10/1999
+                >${book.publicationDate}
               </li>
               <li>
                 <label>Ngôn ngữ <span>:</span></label
-                >Tiếng Anh
+                >${book.languages}
               </li>
             </ul>
           </div>
           <div class="cr-product-price">
-            <span class="new-price">363.600 đ</span>
-            <span class="old-price">404.000 đ</span>
+            <span class="new-price">${book.sellingPrice} đ</span>
+<%--            <span class="old-price">404.000 đ</span>--%>
           </div>
           <div class="cr-size-weight">
             <h5><span>Tình trạng</span> :</h5>
@@ -223,12 +101,12 @@
               <button type="button" class="minus">-</button>
             </div>
             <div class="cr-add-button">
-              <button type="button" class="cr-button cr-btn-secondary">
+              <button type="button" class="cr-button cr-btn-secondary cr-shopping-bag">
                 Thêm vào giỏ hàng
               </button>
             </div>
             <div class="cr-buy-button">
-              <button type="button" class="cr-button cr-shopping-bag">
+              <button type="button" class="cr-button">
                 Mua ngay
               </button>
             </div>
@@ -319,39 +197,8 @@
             >
               <div class="cr-tab-content">
                 <div class="cr-description">
-                  <p>
-                    Be more effective with less effort by learning how to
-                    identify and leverage the 80/20 principle: that 80
-                    percent of all our results in business and in life stem
-                    from a mere 20 percent of our efforts. The 80/20
-                    principle is one of the great secrets of highly
-                    effective people and organizations. Did you know, for
-                    example, that 20 percent of customers account for 80
-                    percent of revenues? That 20 percent of our time
-                    accounts for 80 percent of the work we accomplish? The
-                    80/20 Principle shows how we can achieve much more with
-                    much less effort, time, and resources, simply by
-                    identifying and focusing our efforts on the 20 percent
-                    that really counts. Although the 80/20 principle has
-                    long influenced today's business world, author Richard
-                    Koch reveals how the principle works and shows how we
-                    can use it in a systematic and practical way to vastly
-                    increase our effectiveness, and improve our careers and
-                    our companies. The unspoken corollary to the 80/20
-                    principle is that little of what we spend our time on
-                    actually counts. But by concentrating on those things
-                    that do, we can unlock the enormous potential of the
-                    magic 20 percent, and transform our effectiveness in our
-                    jobs, our careers, our businesses, and our lives.
-                  </p>
+                  <p>${book.description}</p>
                 </div>
-                <!-- <h4 class="heading">Packaging & Delivery</h4>
-                                <div class="cr-description">
-                                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Error in vero
-                                        perferendis dolor! Quis vel consequuntur repellat distinctio rem. Corrupti
-                                        ratione alias odio, error dolore temporibus consequatur, nobis veniam odit
-                                        laborum dignissimos consectetur quae vero in perferendis provident quis.</p>
-                                </div> -->
               </div>
             </div>
             <div
@@ -362,21 +209,13 @@
             >
               <div class="cr-tab-content">
                 <div class="cr-description">
-                  <p>
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                    Error in vero sapiente doloribus debitis corporis, eaque
-                    dicta, repellat amet, illum adipisci vel perferendis
-                    dolor! Quis vel consequuntur repellat distinctio rem.
-                    Corrupti ratione alias odio, error dolore temporibus
-                    consequatur, nobis veniam odit laborum dignissimos
-                    consectetur quae vero in perferendis provident quis.
-                  </p>
+                  <p>${book.description}</p>
                 </div>
                 <div class="list">
                   <ul>
                     <li>
                       <label>Danh mục <span>:</span></label
-                      >Sách kỹ năng sống
+                      >${book.category.name}
                     </li>
                     <li>
                       <label>Kho <span>:</span></label
@@ -384,47 +223,51 @@
                     </li>
                     <li>
                       <label>Tác giả <span>:</span></label
-                      >Richard Koch
+                      >${book.authors[0].name}
                     </li>
                     <li>
                       <label>NXB <span>:</span></label
-                      >Currency
+                      >${book.publisher.name}
                     </li>
                     <li>
                       <label>Ngày XB <span>:</span></label
-                      >19/10/1999
+                      >${book.publicationDate}
+                    </li>
+                    <li>
+                      <label>Phiên bản <span>:</span></label
+                      >${book.edition}
                     </li>
                     <li>
                       <label>Ngôn ngữ <span>:</span></label
-                      >Tiếng Anh
+                      >${book.languages}
                     </li>
                     <li>
                       <label>Trọng lượng <span>:</span></label
-                      >238 gram
+                      >${book.weight} kg
                     </li>
                     <li>
                       <label>Kích thước <span>:</span></label
-                      >20.3 x 13 x 1.8 cm
+                      >${book.height} x ${book.length} x ${book.width} cm
                     </li>
                     <li>
                       <label>Số trang <span>:</span></label
-                      >336
+                      >${book.handcover} trang
                     </li>
                     <li>
                       <label>Định dạng <span>:</span></label
-                      >Bìa mềm
+                      >${book.format}
                     </li>
                     <li>
                       <label>ISBN-10 <span>:</span></label
-                      >9780385491747
+                      >${book.codeISBN10}
                     </li>
                     <li>
                       <label>ISBN-13 <span>:</span></label
-                      >978-0385491747
+                      >${book.codeISBN13}
                     </li>
                     <li>
                       <label>Độ tuổi <span>:</span></label
-                      >Tất cả
+                      >${book.recommendedAge}
                     </li>
                   </ul>
                 </div>
@@ -471,40 +314,6 @@
                     </div>
                   </li>
                 </ul>
-
-                <h4 class="heading">Thêm đánh giá</h4>
-                <form action="javascript:void(0)">
-                  <div class="cr-ratting-star">
-                    <span>Mức đánh giá của bạn :</span>
-                    <div class="cr-t-review-rating">
-                      <i class="ri-star-s-fill"></i>
-                      <i class="ri-star-s-fill"></i>
-                      <i class="ri-star-s-line"></i>
-                      <i class="ri-star-s-line"></i>
-                      <i class="ri-star-s-line"></i>
-                    </div>
-                  </div>
-                  <div class="cr-ratting-input">
-                    <input name="your-name" placeholder="Tên" type="text" />
-                  </div>
-                  <div class="cr-ratting-input">
-                    <input
-                            name="your-email"
-                            placeholder="Email*"
-                            type="email"
-                            required=""
-                    />
-                  </div>
-                  <div class="cr-ratting-input form-submit">
-                        <textarea
-                                name="your-commemt"
-                                placeholder="Nhập bình luận của bạn"
-                        ></textarea>
-                    <button class="cr-button" type="submit" value="Submit">
-                      Gửi
-                    </button>
-                  </div>
-                </form>
               </div>
             </div>
             <div
@@ -515,16 +324,10 @@
             >
               <div class="cr-tab-content">
                 <div class="cr-description">
-                  <img src="${pageContext.request.contextPath}/assets/customer/img/product/1.jpg" alt="">
-                  <p>
-                    <b>Richard Koch</b> is the author of The 80/20 Principle,
-                    which has sold more than a million copies,
-                    and been published in approximately forty languages.
-                    He is also a successful entrepreneur and investor whose ventures have included Filofax,
-                    Plymouth Gin, Belgo restaurants and Betfair, the world’s largest betting exchange.
-                    He was formerly a partner of Bain & Company, and co-founder of LEK Consulting.
-                    He has written more than twenty acclaimed books on business and ideas.
-                  </p>
+                  <c:forEach var="author" items="${book.authors}">
+                    <img src="${author.avatar}" alt="">
+                    <p>${author.introduction}</p>
+                  </c:forEach>
                 </div>
               </div>
             </div>

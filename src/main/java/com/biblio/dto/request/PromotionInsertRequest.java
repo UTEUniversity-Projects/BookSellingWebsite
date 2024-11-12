@@ -12,6 +12,7 @@ import java.util.Set;
 @ToString
 @Getter
 @Setter
+@Builder
 public class PromotionInsertRequest {
     private String code;
     private String title;

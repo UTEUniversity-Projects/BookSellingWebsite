@@ -10,6 +10,7 @@ public class BookDAOImpl extends GenericDAOImpl<Book> implements IBookDAO {
     public BookDAOImpl() {
         super(Book.class);
     }
+
     @Override
     public List<Book> findAll() {
         return super.findAll();
