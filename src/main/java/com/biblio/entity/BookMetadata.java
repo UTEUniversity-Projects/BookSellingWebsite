@@ -57,7 +57,7 @@ public class BookMetadata implements Serializable {
     @JoinColumn(name = "book_id")
     private Book book;
 
-    @OneToMany(mappedBy = "bookMetadata", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "bookMetadata", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private Set<MediaFile> mediaFiles;
 
     // endregion

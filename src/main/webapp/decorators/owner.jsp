@@ -55,22 +55,22 @@
         <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/owner/css/vendor/swiper-bundle.min.css" />
         <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/owner/css/vendor/jquery.slick.css" />
         <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/owner/css/vendor/slick-theme.css" />
-
-        <!-- Main CSS -->
-        <link id="main-css" href="${pageContext.request.contextPath}/assets/owner/css/style.css" rel="stylesheet"/>
-    </head>
-    <body>
-        <main class="wrapper sb-default ecom">
-            <!-- Loader -->
-            <div id="cr-overlay">
-                <div class="loader"></div>
-            </div>
-            <%@include file="/commons/owner/header.jsp" %>
-            <%@include file="/commons/owner/sidebar.jsp" %>
-            <%@include file="/commons/owner/notify-bar.jsp" %>
-            <decorator:body/>
-            <%@include file="/commons/owner/footer.jsp" %>
-        </main>
+    <!-- Main CSS -->
+    <link id="main-css" href="${pageContext.request.contextPath}/assets/owner/css/style.css" rel="stylesheet"/>
+</head>
+<body>
+<div id="toast"></div>
+<main class="wrapper sb-default ecom">
+    <!-- Loader -->
+    <div id="cr-overlay">
+        <div class="loader"></div>
+    </div>
+    <%@include file="/commons/owner/header.jsp" %>
+    <%@include file="/commons/owner/sidebar.jsp" %>
+    <%@include file="/commons/owner/notify-bar.jsp" %>
+    <decorator:body/>
+    <%@include file="/commons/owner/footer.jsp" %>
+</main>
 
         <!-- region Vendor Custom JS -->
         <script src="${pageContext.request.contextPath}/assets/owner/js/vendor/jquery-3.6.4.min.js"></script>
@@ -98,6 +98,7 @@
         <script src="${pageContext.request.contextPath}/assets/owner/js/main.js"></script>
         <script src="${pageContext.request.contextPath}/assets/owner/js/customer-profile.js"></script>
         <script src="${pageContext.request.contextPath}/assets/owner/js/data/ecommerce-chart-data.js"></script>
-        <!-- endregion -->
-    </body>
+        <script src="${pageContext.request.contextPath}/assets/owner/js/toast.js"></script>
+</body>
+
 </html>

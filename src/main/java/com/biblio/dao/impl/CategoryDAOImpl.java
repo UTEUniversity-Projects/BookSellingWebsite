@@ -44,4 +44,5 @@ public class CategoryDAOImpl extends GenericDAOImpl<Category> implements ICatego
     public void deleteCategory(Long id) {
         super.delete(id);
     }
+  
 }

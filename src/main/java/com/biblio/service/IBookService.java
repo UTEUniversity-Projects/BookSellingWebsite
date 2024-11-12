@@ -6,6 +6,7 @@ import com.biblio.dto.response.BookResponse;
 import java.util.List;
 
 public interface IBookService {
+
     List<BookResponse> findAll();
     BookResponse findById(Long id);
     void addBook(BookRequest bookRequest);
