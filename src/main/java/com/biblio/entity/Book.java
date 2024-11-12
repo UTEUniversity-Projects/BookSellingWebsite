@@ -87,7 +87,7 @@ public class Book implements Serializable {
 
     // region Relationships
 
-    @OneToOne(mappedBy = "book", cascade = CascadeType.ALL)
+    @OneToOne(mappedBy = "book", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private BookMetadata metadata;
 
     @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
