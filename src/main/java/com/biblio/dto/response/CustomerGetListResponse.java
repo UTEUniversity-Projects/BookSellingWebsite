@@ -11,6 +11,7 @@ import java.util.Set;
 @Getter
 @Setter
 @ToString
+@Builder
 public class CustomerGetListResponse {
     private Long id;
     private String avatar;
@@ -24,6 +25,7 @@ public class CustomerGetListResponse {
     private String status;
     private String username;
     private String password;
+    @Builder.Default
     private Set<AddressResponse> addresses = new HashSet<>();
 
 }
