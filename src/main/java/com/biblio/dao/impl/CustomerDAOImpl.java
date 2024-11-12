@@ -2,7 +2,9 @@ package com.biblio.dao.impl;
 
 import com.biblio.dao.ICustomerDAO;
 import com.biblio.entity.Customer;
+import com.biblio.jpaconfig.JpaConfig;
 
+import javax.persistence.EntityManager;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -51,6 +53,24 @@ public class CustomerDAOImpl extends GenericDAOImpl<Customer> implements ICustom
         Map<String, Object> params = new HashMap<String, Object>();
         params.put("phoneNumber", phoneNumber);
         return super.findSingleByJPQL(jpql, params) != null;
+    }
+
+    public void updateSupport_Notification(Customer customer) {
+        EntityManager entityManager = JpaConfig.getEntityManager(); // Obtain a new EntityManager
+        try {
+            entityManager.getTransaction().begin();
+            entityManager.merge(customer);
+            entityManager.getTransaction().commit();
+        } catch (Exception e) {
+            e.printStackTrace();
+            if (entityManager.getTransaction().isActive()) {
+                entityManager.getTransaction().rollback();
+            }
+        } finally {
+            if (entityManager.isOpen()) {
+                entityManager.close();
+            }
+        }
     }
 
 }
