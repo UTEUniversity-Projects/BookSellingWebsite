@@ -17,7 +17,7 @@ public class Author extends ContributorProfile implements Serializable {
 
     // region Relationships
 
-    @ManyToMany(fetch = FetchType.LAZY)
+    @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "author_book",
             joinColumns = @JoinColumn(name = "author_id", nullable = false),
             inverseJoinColumns = @JoinColumn(name = "book_id", nullable = false))

@@ -6,4 +6,5 @@ import java.util.List;
 
 public interface IBookDAO {
     public List<Book> findAll();
+    Book findById(Long id);
 }
