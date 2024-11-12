@@ -12,7 +12,7 @@ public class AccountDAOImpl extends GenericDAOImpl<Account> implements IAccountD
     }
 
     @Override
-    public boolean isUsernameExist(String username) {
+    public boolean existsByUsername(String username) {
         String jpql = "SELECT a FROM Account a WHERE a.username = :username";
         Map<String, Object> params = new HashMap<String, Object>();
         params.put("username", username);

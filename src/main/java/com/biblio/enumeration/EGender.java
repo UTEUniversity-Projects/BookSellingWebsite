@@ -1,5 +1,8 @@
 package com.biblio.enumeration;
 
+import lombok.Getter;
+
+@Getter
 public enum EGender {
     MALE("Nam"),
     FEMALE("Nữ");
@@ -10,7 +13,4 @@ public enum EGender {
         this.displayName = displayName;
     }
 
-    public String getDisplayName() {
-        return displayName;
-    }
 }

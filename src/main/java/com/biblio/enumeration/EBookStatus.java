@@ -1,5 +1,8 @@
 package com.biblio.enumeration;
 
+import lombok.Getter;
+
+@Getter
 public enum EBookStatus {
     COMING_SOON("Sắp ra mắt"),
     ON_SALE("Đang mở bán"),
@@ -12,7 +15,4 @@ public enum EBookStatus {
         this.bookStatus = bookStatus;
     }
 
-    public String getBookStatus() {
-        return bookStatus;
-    }
 }

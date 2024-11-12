@@ -61,7 +61,7 @@ public class RegisterAPI extends HttpServlet {
         CustomerRegisterRequest customerRegisterRequest = HttpUtil.of(request.getReader()).toModel(CustomerRegisterRequest.class);
         Map<String, Object> map = new HashMap<>();
 
-        boolean isUsernameExisted = accountService.isUsernameExist(customerRegisterRequest.getUsername().trim());
+        boolean isUsernameExisted = accountService.isUsernameExisted(customerRegisterRequest.getUsername().trim());
         boolean isEmailExisted = customerService.isEmailExisted(customerRegisterRequest.getEmail().trim());
         boolean isPhoneNumberExisted = customerService.isPhoneNumberExisted(customerRegisterRequest.getPhoneNumber().trim());
 

@@ -1,5 +1,8 @@
 package com.biblio.enumeration;
 
+import lombok.Getter;
+
+@Getter
 public enum EPromotionType {
     DISCOUNT("Discount"),
     COUPON("Coupon"),
@@ -12,8 +15,5 @@ public enum EPromotionType {
         this.description = description;
     }
 
-    public String getDescription() {
-        return description;
-    }
 }
 

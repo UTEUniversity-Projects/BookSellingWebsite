@@ -3,7 +3,6 @@ package com.biblio.mapper;
 import com.biblio.dto.request.BookRequest;
 import com.biblio.dto.response.BookCardResponse;
 import com.biblio.dto.response.BookDetailsResponse;
-import com.biblio.dto.response.BookGetListResponse;
 import com.biblio.dto.response.BookResponse;
 import com.biblio.entity.Author;
 import com.biblio.entity.Book;
@@ -16,10 +15,9 @@ import com.biblio.utils.EnumUtil;
 import java.time.LocalDateTime;
 import java.util.stream.Collectors;
 
-import static com.biblio.mapper.CategoryMapper.toCategoryResponse;
+import static com.biblio.mapper.BookMetadataMapper.toBookMetadataResponse;
 import static com.biblio.mapper.CategoryMapper.toCategorySidebarResponse;
 import static com.biblio.mapper.PublisherMapper.toPublisherResponse;
-import static com.biblio.mapper.BookMetadataMapper.toBookMetadataResponse;
 import static com.biblio.utils.DateTimeUtil.formatDateTime;
 
 public class BookMapper {
