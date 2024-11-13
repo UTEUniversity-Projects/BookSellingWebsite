@@ -116,3 +116,4 @@ document.querySelectorAll('.promotionForm').forEach(form => {
         }
     });
 });
+
