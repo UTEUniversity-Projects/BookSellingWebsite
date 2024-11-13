@@ -228,7 +228,7 @@
                                                 src="assets/img/product/1.jpg"
                                         />
                                         <h3>Thêm Voucher</h3>
-                                            <form action="/owner/add-promotion" method="POST" class="promotionForm">
+                                            <form class="promotionForm">
                                                 <input type="hidden" name="formType" value="addVoucher"/>
 
                                                 <!-- Mã -->
@@ -295,9 +295,14 @@
                                                     </div>
                                                 </div>
 
+<%--                                                <div class="row">--%>
+<%--                                                    <div class="col-12 d-flex">--%>
+<%--                                                        <button type="submit" class="btn-voucher cr-btn-primary"  onclick="return validateForm()">Thêm</button>--%>
+<%--                                                    </div>--%>
+<%--                                                </div>--%>
                                                 <div class="row">
                                                     <div class="col-12 d-flex">
-                                                        <button type="submit" class="btn-voucher cr-btn-primary" onclick="return validateForm()">Thêm</button>
+                                                        <button type="submit" class="btn-voucher cr-btn-primary">Thêm</button>
                                                     </div>
                                                 </div>
                                             </form>
@@ -319,8 +324,9 @@
                                                 class="img-promotion"
                                                 src="assets/img/product/1.jpg"
                                         />
+                                        <%-- action="/owner/add-promotion" method="POST" --%>
                                         <h3>Thêm Coupon</h3>
-                                        <form action="/owner/add-promotion" method="POST" class="promotionForm">
+                                        <form class="promotionForm">
                                             <input type="hidden" name="formType" value="addCoupon" />
                                             <div class="form-group">
                                                 <label>Mã</label>
@@ -400,7 +406,7 @@
                                                 src="assets/img/product/1.jpg"
                                         />
                                         <h3>Thêm Freeship</h3>
-                                        <form action="/owner/add-promotion" method="POST" class="promotionForm">
+                                        <form class="promotionForm">
                                             <input type="hidden" name="formType" value="addFreeShip" />
                                             <div class="form-group">
                                                 <label>Mã</label>
