@@ -1,40 +1,50 @@
 package com.biblio.apis.owner;
 
-import com.biblio.dto.request.PromotionInsertRequest;
 import com.biblio.service.IPromotionService;
 import com.biblio.utils.HttpUtil;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.node.ObjectNode;
 
 import javax.inject.Inject;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
-@WebServlet(urlPatterns = {"/owner/promotion/checkCode"})
-public class CheckCodePromotionAPI {
+@WebServlet(urlPatterns = {"/owner/promotion/check-code"})
+public class CheckCodePromotionAPI extends HttpServlet {
     @Inject
     private IPromotionService promotionService;
+
     public CheckCodePromotionAPI() {
         super();
     }
+
+    @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         request.setCharacterEncoding("UTF-8");
-        PromotionInsertRequest promotionInsertRequest = HttpUtil.of(request.getReader()).toModel(PromotionInsertRequest.class);
-        boolean isCodeExisted = promotionService.isCodeExisted(promotionInsertRequest.getCode().trim());
+        response.setContentType("application/json");
+        response.setCharacterEncoding("UTF-8");
+
+        // Đọc code từ JSON
+        ObjectMapper mapper = new ObjectMapper();
+        ObjectNode jsonNode = (ObjectNode) mapper.readTree(request.getReader());
+        String code = jsonNode.get("code").asText().trim();
+
+        boolean isCodeExisted = promotionService.isCodeExisted(code);
 
         Map<String, Object> map = new HashMap<>();
         if (isCodeExisted) {
             map.put("isCodeExisted", true);
-            map.put("message", "Mã khuyến mãi đã tồn tại.");
+        } else {
+            map.put("isCodeExisted", false);
         }
-        // Send JSON response
-        ObjectMapper mapper = new ObjectMapper();
-        response.setContentType("application/json");
-        response.setCharacterEncoding("UTF-8");
+
+        // Gửi JSON response
         response.getWriter().write(mapper.writeValueAsString(map));
     }
 }
