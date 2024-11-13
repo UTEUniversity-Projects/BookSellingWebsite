@@ -4,7 +4,7 @@ import lombok.Getter;
 
 @Getter
 public enum EBookMetadataStatus {
-    Sold("Đã bán"),
+    SOLD("Đã bán"),
     IN_STOCK("Chưa bán");
 
     private final String value;

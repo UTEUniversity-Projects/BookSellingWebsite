@@ -4,11 +4,7 @@ import com.biblio.enumeration.EBookAgeRecommend;
 import com.biblio.enumeration.EBookCondition;
 import com.biblio.enumeration.EBookFormat;
 import com.biblio.enumeration.EBookLanguage;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-import lombok.Builder;
+import lombok.*;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -72,7 +68,7 @@ public class Book implements Serializable {
     @Column(name = "weight", nullable = false)
     private double weight;
 
-    @ElementCollection(fetch = FetchType.EAGER)
+    @ElementCollection
     @Enumerated(EnumType.STRING)
     @CollectionTable(name = "book_languages",
             joinColumns = @JoinColumn(name = "book_id", nullable = false))
@@ -91,7 +87,7 @@ public class Book implements Serializable {
 
     // region Relationships
 
-    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "book_inventory_id", nullable = false)
     private BookInventory bookInventory;
 
