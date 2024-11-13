@@ -49,7 +49,8 @@ document.querySelectorAll('.promotionForm input[name="unlimited"]').forEach(chec
 function validateForm(form) {
     let isValid = true;
     const inputs = form.querySelectorAll('.form-control');
-
+    const codeInput = form.querySelector('input[name="code"]');
+    const codeValue = codeInput ? codeInput.value.trim() : "";
     inputs.forEach(input => {
         const errorSpan = input.closest('.col-12').querySelector('.' + input.name + 'Error');
 
@@ -98,6 +99,8 @@ function validateForm(form) {
 
 document.querySelectorAll('.promotionForm').forEach(form => {
     form.addEventListener('submit', function (event) {
+        // Lấy giá trị của input name="code"
+
         if (!validateForm(form)) {
             toast({
                 title: "Thất bại!",
@@ -106,14 +109,56 @@ document.querySelectorAll('.promotionForm').forEach(form => {
                 duration: 3000,
             });
             event.preventDefault(); // Ngăn không cho submit nếu có lỗi
+
         } else {
-            toast({
-                title: "Thành công!",
-                message: 'Thêm thành công',
-                type: "success",
-                duration: 3000,
-            });
+            const codeInput = form.querySelector('input[name="code"]');
+            const codeValue = codeInput ? codeInput.value.trim() : "";
+
+            // Tạo JSON từ codeValue
+            const data = JSON.stringify({ code: codeValue });
+
+            // Gửi yêu cầu đến API
+            fetch('/owner/promotion/check-code', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: data
+            })
+                .then(response => response.json())
+                .then(result => {
+                    if (result.isCodeExisted) {
+                        toast({
+                            title: "Thất bại!",
+                            message: 'Mã khuyến mãi đã tồn tại.',
+                            type: "warning",
+                            duration: 3000,
+                        });
+                        event.preventDefault(); // Ngăn không cho submit nếu có lỗi
+
+                    } else {
+                        toast({
+                            title: "Thành công!",
+                            message: 'Thêm thành công',
+                            type: "success",
+                            duration: 3000,
+
+                        });
+                    }
+                })
+                .catch(error => {
+                    console.error("Lỗi khi gọi API:", error);
+                    toast({
+                        title: "Lỗi!",
+                        message: 'Đã xảy ra lỗi trong quá trình kiểm tra mã khuyến mãi.',
+                        type: "error",
+                        duration: 3000,
+                    });
+                });
+
+            event.preventDefault(); // Ngăn không cho submit form khi đang xử lý API
         }
     });
 });
+
 

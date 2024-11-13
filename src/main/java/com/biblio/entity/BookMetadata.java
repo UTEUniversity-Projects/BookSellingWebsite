@@ -1,11 +1,7 @@
 package com.biblio.entity;
 
-import com.biblio.enumeration.EBookStatus;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-import lombok.Builder;
+import com.biblio.enumeration.EBookMetadataStatus;
+import lombok.*;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -31,19 +27,19 @@ public class BookMetadata implements Serializable {
     @Column(name = "created_at", nullable = false)
     private LocalDateTime createdAt;
 
-    @Column(name = "opening_date", nullable = false)
-    private LocalDateTime openingDate;
-
     @Column(name = "import_price", nullable = false)
     private double importPrice;
 
     @Enumerated(EnumType.STRING)
     @Column(name = "status", nullable = false)
-    private EBookStatus status;
+    private EBookMetadataStatus status;
 
     // endregion Attributes
 
     // region Relationships
+
+    @OneToOne(mappedBy = "bookMetadata")
+    private Book book;
 
     @ManyToMany(cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
     @JoinTable(
@@ -51,14 +47,7 @@ public class BookMetadata implements Serializable {
             joinColumns = @JoinColumn(name = "book_metadata_id", nullable = false),
             inverseJoinColumns = @JoinColumn(name = "tag_id", nullable = false)
     )
-    private Set<Tag> tags = new HashSet<Tag>();
-
-    @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "book_id")
-    private Book book;
-
-    @OneToMany(mappedBy = "bookMetadata", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    private Set<MediaFile> mediaFiles;
+    private Set<Tag> tags = new HashSet<>();
 
     // endregion
 

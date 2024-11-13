@@ -10,7 +10,6 @@ import javax.persistence.Entity;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import java.io.Serializable;
-import java.util.HashSet;
 import java.util.Set;
 
 @Entity
@@ -23,9 +22,6 @@ import java.util.Set;
 public class Category extends Classification implements Serializable {
 
     // region Relationships
-
-    @OneToMany(mappedBy = "category")
-    private Set<Book> books = new HashSet<Book>();
 
     @OneToMany(mappedBy = "category")
     private Set<SubCategory> subCategories;
