@@ -46,16 +46,16 @@ public class AddPromotionController extends HttpServlet {
      */
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         // TODO Auto-generated method stub
-//        String formType = request.getParameter("formType");
-//
-//        if ("addVoucher".equals(formType)) {
-//            handleAddVoucher(request, response);
-//        } else if ("addCoupon".equals(formType)) {
-//            handleAddCoupon(request, response);
-//        } else if ("addFreeShip".equals(formType)) {
-//            handleAddFreeShip(request, response);
-//        }
-//        response.sendRedirect(request.getContextPath() + "/owner/add-promotion");
+        String formType = request.getParameter("formType");
+
+        if ("addVoucher".equals(formType)) {
+            handleAddVoucher(request, response);
+        } else if ("addCoupon".equals(formType)) {
+            handleAddCoupon(request, response);
+        } else if ("addFreeShip".equals(formType)) {
+            handleAddFreeShip(request, response);
+        }
+        response.sendRedirect(request.getContextPath() + "/owner/add-promotion");
     }
 
 
@@ -64,12 +64,6 @@ public class AddPromotionController extends HttpServlet {
 
         try {
             BeanUtils.populate(promotionInsertRequest, request.getParameterMap());
-            Boolean isCodeExist = promotionService.isCodeExisted(promotionInsertRequest.getCode());
-            if (isCodeExist) {
-                request.setAttribute("errorMessage", "Mã khuyến mãi đã tồn tại.");
-                request.getRequestDispatcher("/owner/add-promotion").forward(request, response);
-                return;
-            }
 
             promotionInsertRequest.setStatus(EPromotionStatus.EFFECTIVE);
             promotionInsertRequest.setType(type);
