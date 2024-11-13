@@ -15,7 +15,6 @@ import com.biblio.utils.EnumUtil;
 import java.time.LocalDateTime;
 import java.util.stream.Collectors;
 
-import static com.biblio.mapper.BookMetadataMapper.toBookMetadataResponse;
 import static com.biblio.mapper.CategoryMapper.toCategorySidebarResponse;
 import static com.biblio.mapper.PublisherMapper.toPublisherResponse;
 import static com.biblio.utils.DateTimeUtil.formatDateTime;
@@ -28,8 +27,8 @@ public class BookMapper {
         bookCardResponse.setDescription(book.getDescription());
         bookCardResponse.setSellingPrice(book.getSellingPrice());
 
-        bookCardResponse.setCategory(toCategorySidebarResponse(book.getCategory()));
-        bookCardResponse.setMetadata(toBookMetadataResponse(book.getMetadata()));
+        bookCardResponse.setCategory(toCategorySidebarResponse(book.getSubCategory().getCategory()));
+//        bookCardResponse.setMetadata(toBookMetadataResponse(book.getMetadata()));
         bookCardResponse.setReviewRate(book.calculateReviewRate());
 
         return bookCardResponse;
@@ -58,9 +57,9 @@ public class BookMapper {
                 .collect(Collectors.joining(", "));
         bookDetailsResponse.setLanguages(languages);
 
-        bookDetailsResponse.setCategory(toCategorySidebarResponse(book.getCategory()));
+        bookDetailsResponse.setCategory(toCategorySidebarResponse(book.getSubCategory().getCategory()));
         bookDetailsResponse.setPublisher(toPublisherResponse(book.getPublisher()));
-        bookDetailsResponse.setMetadata(toBookMetadataResponse(book.getMetadata()));
+//        bookDetailsResponse.setMetadata(toBookMetadataResponse(book.getMetadata()));
         for (Author author : book.getAuthors()) {
             bookDetailsResponse.getAuthors().add(AuthorMapper.toAuthorResponse(author));
         }
