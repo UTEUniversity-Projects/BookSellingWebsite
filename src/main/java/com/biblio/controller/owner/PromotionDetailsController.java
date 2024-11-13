@@ -35,7 +35,7 @@ public class PromotionDetailsController extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         // TODO Auto-generated method stub
         String id = request.getParameter("id");
-        PromotionGetResponse promotion = promotionService.findById(Long.parseLong(id));
+        PromotionGetResponse promotion = promotionService.getPromotionById(Long.parseLong(id));
         request.setAttribute("promotion", promotion);
         request.getRequestDispatcher("/views/owner/promotion-details.jsp").forward(request, response);
     }
