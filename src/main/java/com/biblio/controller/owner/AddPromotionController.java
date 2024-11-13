@@ -45,17 +45,17 @@ public class AddPromotionController extends HttpServlet {
      * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
      */
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        // TODO Auto-generated method stub
-        String formType = request.getParameter("formType");
-
-        if ("addVoucher".equals(formType)) {
-            handleAddVoucher(request, response);
-        } else if ("addCoupon".equals(formType)) {
-            handleAddCoupon(request, response);
-        } else if ("addFreeShip".equals(formType)) {
-            handleAddFreeShip(request, response);
-        }
-        response.sendRedirect(request.getContextPath() + "/owner/add-promotion");
+//        // TODO Auto-generated method stub
+//        String formType = request.getParameter("formType");
+//
+//        if ("addVoucher".equals(formType)) {
+//            handleAddVoucher(request, response);
+//        } else if ("addCoupon".equals(formType)) {
+//            handleAddCoupon(request, response);
+//        } else if ("addFreeShip".equals(formType)) {
+//            handleAddFreeShip(request, response);
+//        }
+//        response.sendRedirect(request.getContextPath() + "/owner/add-promotion");
     }
 
 
@@ -76,7 +76,7 @@ public class AddPromotionController extends HttpServlet {
             PromotionTargetInsertRequest promotionTargetInsertRequest = createPromotionTargetRequest(request);
             promotionInsertRequest.getPromotionTargets().add(promotionTargetInsertRequest);
 
-            promotionService.insert(promotionInsertRequest);
+            promotionService.insertPromotion(promotionInsertRequest);
         } catch (Exception e) {
             e.printStackTrace();
         }
