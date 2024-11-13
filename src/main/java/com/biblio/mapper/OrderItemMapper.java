@@ -1,7 +1,6 @@
 package com.biblio.mapper;
 
 import com.biblio.dto.response.OrderProductResponse;
-import com.biblio.entity.MediaFile;
 import com.biblio.entity.OrderItem;
 
 
@@ -10,7 +9,7 @@ public class OrderItemMapper {
         return OrderProductResponse.builder()
                 .title(orderItem.getBook().getTitle())
                 .imagePath(orderItem.getBook()
-                        .getMetadata()
+                        .getBookInventory()
                         .getMediaFiles()
                         .iterator().next()
                         .getStoredCode()

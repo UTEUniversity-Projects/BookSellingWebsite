@@ -69,15 +69,15 @@ public class Book implements Serializable {
     @Column(name = "height", nullable = false)
     private double height;
 
+    @Column(name = "weight", nullable = false)
+    private double weight;
+
     @ElementCollection(fetch = FetchType.EAGER)
     @Enumerated(EnumType.STRING)
     @CollectionTable(name = "book_languages",
             joinColumns = @JoinColumn(name = "book_id", nullable = false))
     @Column(name = "language", nullable = false)
     private Set<EBookLanguage> languages = new HashSet<>();
-
-    @Column(name = "weight", nullable = false)
-    private double weight;
 
     @Enumerated(EnumType.STRING)
     @Column(name = "[condition]")
@@ -91,12 +91,13 @@ public class Book implements Serializable {
 
     // region Relationships
 
-    @OneToOne(mappedBy = "book", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    private BookMetadata metadata;
-
     @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    @JoinColumn(name = "category_id", nullable = false)
-    private Category category;
+    @JoinColumn(name = "book_inventory_id", nullable = false)
+    private BookInventory bookInventory;
+
+    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @JoinColumn(name = "book_metadata_id", nullable = false)
+    private BookMetadata bookMetadata;
 
     @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JoinColumn(name = "sub_category_id", nullable = false)
