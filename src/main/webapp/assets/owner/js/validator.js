@@ -214,15 +214,18 @@ document.querySelectorAll('.promotionForm').forEach(form => {
                     data["effectiveDate"] = effectiveDate;
                     data["expirationDate"] = expirationDate;
 
-                    // Thiết lập status dựa trên ngày bắt đầu
                     const effectiveDateObj = new Date(effectiveDate);
                     const currentDate = new Date();
                     data["status"] = effectiveDateObj > currentDate ? "COMING_SOON" : "EFFECTIVE";
-                } else if (key === "quantity") {
+                } else if (key === "quantity" || key === "unlimited") {
                     const unlimitedCheckbox = form.querySelector('input[name="unlimited"]');
-                    const quantity = unlimitedCheckbox.checked ? -1 : parseInt(value.trim(), 10);
+                    let quantity = parseInt(value.trim(), 10);
 
-                    // Thiết lập promotionTargets
+                    // Đặt quantity là -1 nếu checkbox được chọn hoặc quantity rỗng/không hợp lệ
+                    if (unlimitedCheckbox.checked || isNaN(quantity)) {
+                        quantity = -1;
+                    }
+
                     data["promotionTargets"] = [
                         {
                             applicableObjectId: "WHOLE",
@@ -235,7 +238,6 @@ document.querySelectorAll('.promotionForm').forEach(form => {
                 }
             });
 
-            // Thiết lập type và các giá trị khác dựa trên formType
             const formType = data["formType"];
             switch (formType) {
                 case "addVoucher":
@@ -256,10 +258,8 @@ document.querySelectorAll('.promotionForm').forEach(form => {
                     return;
             }
 
-            // Xóa formType khỏi data trước khi gửi nếu không cần trong API
             delete data["formType"];
 
-            // Gửi data xuống API bằng AJAX
             $.ajax({
                 url: '/owner/promotion/add',
                 type: 'POST',
@@ -287,6 +287,7 @@ document.querySelectorAll('.promotionForm').forEach(form => {
         }
     });
 });
+
 
 
 
