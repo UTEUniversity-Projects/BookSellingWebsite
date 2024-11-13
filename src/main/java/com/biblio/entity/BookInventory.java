@@ -30,8 +30,7 @@ public class BookInventory {
     @OneToMany(mappedBy = "bookInventory", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private Set<MediaFile> mediaFiles = new HashSet<>();
 
-    @OneToMany(fetch = FetchType.EAGER)
-    @JoinColumn(name = "book_id", nullable = false)
+    @OneToMany(mappedBy = "bookInventory", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private Set<Book> books = new HashSet<>();
 
 }

@@ -32,7 +32,7 @@ public class PromotionListController extends HttpServlet {
      */
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         // TODO Auto-generated method stub
-        List<PromotionGetResponse> list = promotionService.findAll();
+        List<PromotionGetResponse> list = promotionService.getAllPromotions();
         request.setAttribute("promotions", list);
         request.getRequestDispatcher("/views/owner/promotion-list.jsp").forward(request, response);
     }
