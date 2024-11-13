@@ -144,31 +144,33 @@ public class AddPromotionAPI extends HttpServlet {
     public AddPromotionAPI() {
         super();
     }
+
+    @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         request.setCharacterEncoding("UTF-8");
+        response.setContentType("application/json");
+        response.setCharacterEncoding("UTF-8");
 
         // Parse JSON request to PromotionInsertRequest model
         PromotionInsertRequest promotionInsertRequest = HttpUtil.of(request.getReader()).toModel(PromotionInsertRequest.class);
 
-        // Check if the code already exists
-        boolean isCodeExisted = promotionService.isCodeExisted(promotionInsertRequest.getCode().trim());
-
-        // Prepare response map
         Map<String, Object> map = new HashMap<>();
-        if (isCodeExisted) {
-            map.put("isCodeExisted", true);
-            map.put("message", "Mã khuyến mãi đã tồn tại.");
-        } else {
-            // Additional logic for inserting promotion can be added here
-            promotionService.insert(promotionInsertRequest); // Call to insert the promotion
+        ObjectMapper mapper = new ObjectMapper();
+
+        try {
+            // Insert promotion directly without code existence check
+            promotionService.insertPromotion(promotionInsertRequest);
             map.put("isCodeExisted", false);
-            map.put("message", "Thêm khuyến mãi thành công.");
+            map.put("message", "Promotion added successfully");
+        } catch (Exception e) {
+            map.put("isCodeExisted", false); // Không kiểm tra mã nên vẫn là false
+            map.put("message", "Failed to add promotion: " + e.getMessage());
+            response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+            e.printStackTrace();
         }
 
         // Send JSON response
-        ObjectMapper mapper = new ObjectMapper();
-        response.setContentType("application/json");
-        response.setCharacterEncoding("UTF-8");
         response.getWriter().write(mapper.writeValueAsString(map));
     }
 }
+
