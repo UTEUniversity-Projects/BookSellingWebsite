@@ -46,128 +46,18 @@ public class AddPromotionController extends HttpServlet {
      */
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         // TODO Auto-generated method stub
-        String formType = request.getParameter("formType");
-
-        if ("addVoucher".equals(formType)) {
-            handleAddVoucher(request, response);
-        } else if ("addCoupon".equals(formType)) {
-            handleAddCoupon(request, response);
-        } else if ("addFreeShip".equals(formType)) {
-            handleAddFreeShip(request, response);
-        }
-        response.sendRedirect(request.getContextPath() + "/owner/add-promotion");
+//        String formType = request.getParameter("formType");
+//
+//        if ("addVoucher".equals(formType)) {
+//            handleAddVoucher(request, response);
+//        } else if ("addCoupon".equals(formType)) {
+//            handleAddCoupon(request, response);
+//        } else if ("addFreeShip".equals(formType)) {
+//            handleAddFreeShip(request, response);
+//        }
+//        response.sendRedirect(request.getContextPath() + "/owner/add-promotion");
     }
 
-    // Hàm xử lý form thêm voucher
-//    private void handleAddVoucher(HttpServletRequest request, HttpServletResponse response) {
-//        PromotionInsertRequest promotionInsertRequest = new PromotionInsertRequest();
-//
-//        try {
-//            BeanUtils.populate(promotionInsertRequest, request.getParameterMap());
-//            promotionInsertRequest.setStatus(EPromotionStatus.EFFECTIVE);
-//            promotionInsertRequest.setType(EPromotionType.VOUCHER);
-//            promotionInsertRequest.setPercentDiscount(100);
-//            String time = request.getParameter("dateeffective");
-//
-//            String[] parts = time.split(" - ");
-//            DateTimeFormatter inputFormatter = DateTimeFormatter.ofPattern("MM/dd hh:mm a");
-//            DateTimeFormatter outputFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss.SSSSSS");
-//            int currentYear = LocalDateTime.now().getYear();
-//            LocalDateTime startDateTime = LocalDateTime.parse(currentYear + "/" + parts[0], DateTimeFormatter.ofPattern("yyyy/MM/dd hh:mm a"));
-//            LocalDateTime endDateTime = LocalDateTime.parse(currentYear + "/" + parts[1], DateTimeFormatter.ofPattern("yyyy/MM/dd hh:mm a"));
-//            promotionInsertRequest.setEffectiveDate(startDateTime.format(outputFormatter));
-//            promotionInsertRequest.setExpirationDate(endDateTime.format(outputFormatter));
-//
-//            PromotionTargetInsertRequest promotionTargetInsertRequest = new PromotionTargetInsertRequest();
-//            promotionTargetInsertRequest.setApplicableObjectId(EPromotionTargetType.WHOLE.toString());
-//            promotionTargetInsertRequest.setType(EPromotionTargetType.WHOLE);
-//            String unlimited = request.getParameter("unlimited");
-//            int quantity = getQuantity(request);
-//            promotionTargetInsertRequest.setQuantity(quantity);
-//
-//            promotionInsertRequest.getPromotionTargets().add(promotionTargetInsertRequest);
-//            promotionService.insert(promotionInsertRequest);
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//        }
-//        // Gọi service để lưu vào database
-//    }
-//    private void handleAddCoupon(HttpServletRequest request, HttpServletResponse response) {
-//        PromotionInsertRequest promotionInsertRequest = new PromotionInsertRequest();
-//
-//        try {
-//            BeanUtils.populate(promotionInsertRequest, request.getParameterMap());
-//            promotionInsertRequest.setStatus(EPromotionStatus.EFFECTIVE);
-//            promotionInsertRequest.setType(EPromotionType.COUPON);
-//            promotionInsertRequest.setMinValueApplied(0);
-//            String time = request.getParameter("dateeffective");
-//
-//            String[] parts = time.split(" - ");
-//            DateTimeFormatter inputFormatter = DateTimeFormatter.ofPattern("MM/dd hh:mm a");
-//            DateTimeFormatter outputFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss.SSSSSS");
-//            int currentYear = LocalDateTime.now().getYear();
-//            LocalDateTime startDateTime = LocalDateTime.parse(currentYear + "/" + parts[0], DateTimeFormatter.ofPattern("yyyy/MM/dd hh:mm a"));
-//            LocalDateTime endDateTime = LocalDateTime.parse(currentYear + "/" + parts[1], DateTimeFormatter.ofPattern("yyyy/MM/dd hh:mm a"));
-//            promotionInsertRequest.setEffectiveDate(startDateTime.format(outputFormatter));
-//            promotionInsertRequest.setExpirationDate(endDateTime.format(outputFormatter));
-//
-//            PromotionTargetInsertRequest promotionTargetInsertRequest = new PromotionTargetInsertRequest();
-//            promotionTargetInsertRequest.setApplicableObjectId(EPromotionTargetType.WHOLE.toString());
-//            promotionTargetInsertRequest.setType(EPromotionTargetType.WHOLE);
-//            String unlimited = request.getParameter("unlimited");
-//            int quantity = getQuantity(request);
-//            promotionTargetInsertRequest.setQuantity(quantity);
-//
-//            promotionInsertRequest.getPromotionTargets().add(promotionTargetInsertRequest);
-//            promotionService.insert(promotionInsertRequest);
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//        }
-//        // Gọi service để lưu vào database
-//    }
-//    private void handleAddFreeShip(HttpServletRequest request, HttpServletResponse response) {
-//        PromotionInsertRequest promotionInsertRequest = new PromotionInsertRequest();
-//
-//        try {
-//            BeanUtils.populate(promotionInsertRequest, request.getParameterMap());
-//            promotionInsertRequest.setStatus(EPromotionStatus.EFFECTIVE);
-//            promotionInsertRequest.setType(EPromotionType.FREESHIP);
-//            promotionInsertRequest.setPercentDiscount(100);
-//            promotionInsertRequest.setMinValueApplied(0);
-//            String time = request.getParameter("dateeffective");
-//
-//            String[] parts = time.split(" - ");
-//            DateTimeFormatter inputFormatter = DateTimeFormatter.ofPattern("MM/dd hh:mm a");
-//            DateTimeFormatter outputFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss.SSSSSS");
-//            int currentYear = LocalDateTime.now().getYear();
-//            LocalDateTime startDateTime = LocalDateTime.parse(currentYear + "/" + parts[0], DateTimeFormatter.ofPattern("yyyy/MM/dd hh:mm a"));
-//            LocalDateTime endDateTime = LocalDateTime.parse(currentYear + "/" + parts[1], DateTimeFormatter.ofPattern("yyyy/MM/dd hh:mm a"));
-//            promotionInsertRequest.setEffectiveDate(startDateTime.format(outputFormatter));
-//            promotionInsertRequest.setExpirationDate(endDateTime.format(outputFormatter));
-//
-//            PromotionTargetInsertRequest promotionTargetInsertRequest = new PromotionTargetInsertRequest();
-//            promotionTargetInsertRequest.setApplicableObjectId(EPromotionTargetType.WHOLE.toString());
-//            promotionTargetInsertRequest.setType(EPromotionTargetType.WHOLE);
-//            String unlimited = request.getParameter("unlimited");
-//            int quantity = getQuantity(request);
-//            promotionTargetInsertRequest.setQuantity(quantity);
-//
-//            promotionInsertRequest.getPromotionTargets().add(promotionTargetInsertRequest);
-//            promotionService.insert(promotionInsertRequest);
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//        }
-//        // Gọi service để lưu vào database
-//    }
-//    public int getQuantity(HttpServletRequest request) {
-//        String unlimited = request.getParameter("unlimited");
-//
-//        if ("true".equals(unlimited)) {
-//            return -1;
-//        } else {
-//            return Integer.parseInt(request.getParameter("quantity"));
-//        }
-//    }
 
     private void handleAddPromotion(HttpServletRequest request, HttpServletResponse response, EPromotionType type, Double percentDiscount, Double minValueApplied) {
         PromotionInsertRequest promotionInsertRequest = new PromotionInsertRequest();

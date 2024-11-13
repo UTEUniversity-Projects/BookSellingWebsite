@@ -35,24 +35,25 @@ $(document).ready(() => {
     const formData = new FormData(document.querySelector("form"));
 
     const promotionData = {
-        "code": "COUPON1",
-        "title": "Black Friday Discount",
-        "description": "Get amazing discounts on selected items",
-        "percentDiscount": 20.5,
-        "discountLimit": 50.0,
-        "minValueApplied": 100.0,
+        "code": "2",
+        "title": "Giảm giá cuối năm",
+        "description": "Khuyến mãi giảm giá 20% cho khách hàng.",
+        "percentDiscount": 20.0,
+        "discountLimit": 100000.0,
+        "minValueApplied": 50000.0,
         "status": "EFFECTIVE",
-        "effectiveDate": "2024-11-25",
-        "expirationDate": "2024-12-01",
-        "type": "FREESHIP",
+        "effectiveDate": "2024-11-20 00:00:00.000000",
+        "expirationDate": "2024-12-31 23:59:59.000000",
+        "type": "VOUCHER",
         "promotionTargets": [
             {
                 "applicableObjectId": "WHOLE",
-                "quantity": 10,
+                "quantity": -1,
                 "type": "WHOLE"
             }
         ]
     };
+
 
     $(".btn-voucher").click(function (event) {
         event.preventDefault();
@@ -73,3 +74,6 @@ $(document).ready(() => {
 
 
 });
+
+
+
