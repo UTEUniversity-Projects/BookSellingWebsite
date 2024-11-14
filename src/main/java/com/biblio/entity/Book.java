@@ -88,8 +88,8 @@ public class Book implements Serializable {
     // region Relationships
 
     @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "book_inventory_id", nullable = false)
-    private BookInventory bookInventory;
+    @JoinColumn(name = "book_template_id", nullable = false)
+    private BookTemplate bookTemplate;
 
     @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinColumn(name = "book_metadata_id", nullable = false)
@@ -103,33 +103,9 @@ public class Book implements Serializable {
     @JoinColumn(name = "publisher_id", nullable = false)
     private Publisher publisher;
 
-    @ManyToMany(mappedBy = "books", fetch = FetchType.EAGER)
-    private Set<Author> authors = new HashSet<>();
-
-    @ManyToMany(mappedBy = "books")
-    private Set<Translator> translators = new HashSet<>();
-
-    @OneToMany(mappedBy = "book", fetch = FetchType.EAGER)
-    private Set<Review> reviews = new HashSet<>();
-
-    @ManyToOne
-    @JoinColumn(name = "order_id")
-    private Order order;
-
     // endregion
 
     // region Methods
-    public double calculateReviewRate() {
-        if (reviews == null || reviews.isEmpty()) {
-            return 0;
-        }
 
-        double totalRating = 0;
-        for (Review review : reviews) {
-            totalRating += review.getRate();
-        }
-
-        return totalRating / reviews.size();
-    }
     // endregion
 }

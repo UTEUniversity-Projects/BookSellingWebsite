@@ -29,7 +29,7 @@ public class BookMapper {
 
         bookCardResponse.setCategory(toCategorySidebarResponse(book.getSubCategory().getCategory()));
 //        bookCardResponse.setMetadata(toBookMetadataResponse(book.getMetadata()));
-        bookCardResponse.setReviewRate(book.calculateReviewRate());
+        bookCardResponse.setReviewRate(book.getBookTemplate().calculateReviewRate());
 
         return bookCardResponse;
     }
@@ -60,7 +60,7 @@ public class BookMapper {
         bookDetailsResponse.setCategory(toCategorySidebarResponse(book.getSubCategory().getCategory()));
         bookDetailsResponse.setPublisher(toPublisherResponse(book.getPublisher()));
 //        bookDetailsResponse.setMetadata(toBookMetadataResponse(book.getMetadata()));
-        for (Author author : book.getAuthors()) {
+        for (Author author : book.getBookTemplate().getAuthors()) {
             bookDetailsResponse.getAuthors().add(AuthorMapper.toAuthorResponse(author));
         }
         return bookDetailsResponse;
