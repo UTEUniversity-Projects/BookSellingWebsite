@@ -52,7 +52,7 @@ public class BookMapper {
         bookDetailsResponse.setWeight(book.getWeight());
         bookDetailsResponse.setCondition(book.getCondition().toString());
         bookDetailsResponse.setRecommendedAge(book.getRecommendedAge().getBookAgeRecommend());
-        String languages = book.getLanguages().stream()
+        String languages = book.getBookTemplate().getLanguages().stream()
                 .map(EBookLanguage::getDescription)
                 .collect(Collectors.joining(", "));
         bookDetailsResponse.setLanguages(languages);
@@ -84,7 +84,6 @@ public class BookMapper {
                 .weight(Double.parseDouble(bookRequest.getWeight()))
                 .condition(EnumUtil.fromDisplayName(EBookCondition.class, bookRequest.getCondition()))
                 .recommendedAge(EnumUtil.fromDisplayName(EBookAgeRecommend.class, bookRequest.getRecommendedAge()))
-                .languages(bookRequest.getLanguages())
                 .build();
     }
 
@@ -106,7 +105,7 @@ public class BookMapper {
                 .weight(Double.toString(book.getWeight()))
                 .condition(EnumUtil.toDisplayName(book.getCondition()))
                 .recommendedAge(EnumUtil.toDisplayName(book.getRecommendedAge()))
-                .languages(book.getLanguages())
+                .languages(book.getBookTemplate().getLanguages())
                 .build();
     }
 }

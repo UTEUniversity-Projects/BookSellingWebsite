@@ -1,5 +1,6 @@
 package com.biblio.entity;
 
+import com.biblio.enumeration.EBookLanguage;
 import com.biblio.enumeration.EBookTemplateStatus;
 import lombok.*;
 
@@ -16,6 +17,9 @@ import java.util.Set;
 @Setter
 @Builder
 public class BookTemplate {
+
+    // region Attributes
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
@@ -26,6 +30,17 @@ public class BookTemplate {
 
     @Column(name = "opening_date", nullable = false)
     private LocalDateTime openingDate;
+
+    @ElementCollection
+    @Enumerated(EnumType.STRING)
+    @CollectionTable(name = "book_template_languages",
+            joinColumns = @JoinColumn(name = "book_template_id", nullable = false))
+    @Column(name = "language", nullable = false)
+    private Set<EBookLanguage> languages = new HashSet<>();
+
+    // endregion
+
+    // region Relationships
 
     @ManyToMany(mappedBy = "bookTemplates", fetch = FetchType.EAGER)
     private Set<Author> authors = new HashSet<>();
@@ -45,7 +60,10 @@ public class BookTemplate {
     @OneToMany(mappedBy = "bookTemplate", fetch = FetchType.EAGER)
     private Set<Review> reviews = new HashSet<>();
 
+    // endregion
+
     // region Methods
+
     public double calculateReviewRate() {
         if (reviews == null || reviews.isEmpty()) {
             return 0;
@@ -58,5 +76,7 @@ public class BookTemplate {
 
         return totalRating / reviews.size();
     }
+
     // endregion
+
 }
