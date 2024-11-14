@@ -29,7 +29,7 @@ public class BookMapper {
 
         bookCardResponse.setCategory(toCategorySidebarResponse(book.getSubCategory().getCategory()));
 //        bookCardResponse.setMetadata(toBookMetadataResponse(book.getMetadata()));
-        bookCardResponse.setReviewRate(book.calculateReviewRate());
+        bookCardResponse.setReviewRate(book.getBookTemplate().calculateReviewRate());
 
         return bookCardResponse;
     }
@@ -52,7 +52,7 @@ public class BookMapper {
         bookDetailsResponse.setWeight(book.getWeight());
         bookDetailsResponse.setCondition(book.getCondition().toString());
         bookDetailsResponse.setRecommendedAge(book.getRecommendedAge().getBookAgeRecommend());
-        String languages = book.getLanguages().stream()
+        String languages = book.getBookTemplate().getLanguages().stream()
                 .map(EBookLanguage::getDescription)
                 .collect(Collectors.joining(", "));
         bookDetailsResponse.setLanguages(languages);
@@ -60,7 +60,7 @@ public class BookMapper {
         bookDetailsResponse.setCategory(toCategorySidebarResponse(book.getSubCategory().getCategory()));
         bookDetailsResponse.setPublisher(toPublisherResponse(book.getPublisher()));
 //        bookDetailsResponse.setMetadata(toBookMetadataResponse(book.getMetadata()));
-        for (Author author : book.getAuthors()) {
+        for (Author author : book.getBookTemplate().getAuthors()) {
             bookDetailsResponse.getAuthors().add(AuthorMapper.toAuthorResponse(author));
         }
         return bookDetailsResponse;
@@ -84,7 +84,6 @@ public class BookMapper {
                 .weight(Double.parseDouble(bookRequest.getWeight()))
                 .condition(EnumUtil.fromDisplayName(EBookCondition.class, bookRequest.getCondition()))
                 .recommendedAge(EnumUtil.fromDisplayName(EBookAgeRecommend.class, bookRequest.getRecommendedAge()))
-                .languages(bookRequest.getLanguages())
                 .build();
     }
 
@@ -106,7 +105,7 @@ public class BookMapper {
                 .weight(Double.toString(book.getWeight()))
                 .condition(EnumUtil.toDisplayName(book.getCondition()))
                 .recommendedAge(EnumUtil.toDisplayName(book.getRecommendedAge()))
-                .languages(book.getLanguages())
+                .languages(book.getBookTemplate().getLanguages())
                 .build();
     }
 }
