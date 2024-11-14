@@ -26,8 +26,8 @@ public class Cart implements Serializable {
     // region Relationships
 
     @ManyToMany
-    @JoinTable(name = "cart_book_inventory", joinColumns = @JoinColumn(name = "cart_id"), inverseJoinColumns = @JoinColumn(name = "book_inventory_id"))
-    private Set<BookInventory> bookInventories;
+    @JoinTable(name = "cart_book_template", joinColumns = @JoinColumn(name = "cart_id"), inverseJoinColumns = @JoinColumn(name = "book_template_id"))
+    private Set<BookTemplate> bookTemplates;
 
     @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JoinColumn(name = "customer_id")

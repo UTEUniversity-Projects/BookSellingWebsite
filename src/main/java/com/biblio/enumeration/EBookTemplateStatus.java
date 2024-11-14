@@ -3,7 +3,7 @@ package com.biblio.enumeration;
 import lombok.Getter;
 
 @Getter
-public enum EBookInventoryStatus {
+public enum EBookTemplateStatus {
 
     COMING_SOON("Sắp ra mắt"),
     ON_SALE("Đang mở bán"),
@@ -12,7 +12,7 @@ public enum EBookInventoryStatus {
 
     private final String value;
 
-    EBookInventoryStatus(String value) {
+    EBookTemplateStatus(String value) {
         this.value = value;
     }
 }
