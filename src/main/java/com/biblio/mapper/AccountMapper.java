@@ -9,6 +9,7 @@ import com.biblio.entity.Customer;
 public class AccountMapper {
     public static AccountGetResponse toAccountGetResponse(Account account) {
         AccountGetResponse accountGetResponse = new AccountGetResponse();
+        accountGetResponse.setId(account.getId());
         accountGetResponse.setUsername(account.getUsername());
         accountGetResponse.setPassword(account.getPassword());
         accountGetResponse.setStatus(account.getStatus().toString());
