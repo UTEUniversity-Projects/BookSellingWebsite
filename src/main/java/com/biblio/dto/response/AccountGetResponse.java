@@ -10,6 +10,7 @@ import lombok.*;
 @Setter
 @Builder
 public class AccountGetResponse {
+    private Long id;
     private String username;
     private String password;
     private String status;

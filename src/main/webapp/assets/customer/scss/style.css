@@ -51,7 +51,6 @@
 
 -----------------------------------------------------------------------------------*/
 /* Typography */
-@import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,700;1,800;1,900&display=swap");
 *,
 *:before,
 *:after {
@@ -226,109 +225,10 @@ body {
   font-weight: 400;
   font-size: 16px;
   line-height: 1;
-  font-family: "Poppins", sans-serif;
+  font-family: "Be Vietnam Pro", sans-serif;
   overflow-x: hidden;
 }
 
-/* Typography */
-/* Manrope */
-@font-face {
-  font-family: "Manrope", sans-serif;
-  src: url("./../font/manrope/Manrope-ExtraLight.ttf") format("truetype");
-  font-weight: 200;
-  font-style: normal;
-}
-@font-face {
-  font-family: "Manrope", sans-serif;
-  src: url("./../font/manrope/Manrope-Light.ttf") format("truetype");
-  font-weight: 300;
-  font-style: normal;
-}
-@font-face {
-  font-family: "Manrope", sans-serif;
-  src: url("./../font/manrope/Manrope-Regular.ttf") format("truetype");
-  font-weight: 400;
-  font-style: normal;
-}
-@font-face {
-  font-family: "Manrope", sans-serif;
-  src: url("./../font/manrope/Manrope-Medium.ttf") format("truetype");
-  font-weight: 500;
-  font-style: normal;
-}
-@font-face {
-  font-family: "Manrope", sans-serif;
-  src: url("./../font/manrope/Manrope-SemiBold.ttf") format("truetype");
-  font-weight: 600;
-  font-style: normal;
-}
-@font-face {
-  font-family: "Manrope", sans-serif;
-  src: url("./../font/manrope/Manrope-Bold.ttf") format("truetype");
-  font-weight: 700;
-  font-style: normal;
-}
-@font-face {
-  font-family: "Manrope", sans-serif;
-  src: url("./../font/manrope/Manrope-ExtraBold.ttf") format("truetype");
-  font-weight: 800;
-  font-style: normal;
-}
-/* Poppins */
-@font-face {
-  font-family: "Poppins", sans-serif;
-  src: url("./../font/poppins/Poppins-Thin.ttf") format("truetype");
-  font-weight: 100;
-  font-style: normal;
-}
-@font-face {
-  font-family: "Poppins", sans-serif;
-  src: url("./../font/poppins/Poppins-ExtraLight.ttf") format("truetype");
-  font-weight: 200;
-  font-style: normal;
-}
-@font-face {
-  font-family: "Poppins", sans-serif;
-  src: url("./../font/poppins/Poppins-Light.ttf");
-  font-weight: 300;
-  font-style: normal;
-}
-@font-face {
-  font-family: "Poppins", sans-serif;
-  src: url("./../font/poppins/Poppins-Regular.ttf") format("truetype");
-  font-weight: 400;
-  font-style: normal;
-}
-@font-face {
-  font-family: "Poppins", sans-serif;
-  src: url("./../font/poppins/Poppins-Medium.ttf") format("truetype");
-  font-weight: 500;
-  font-style: normal;
-}
-@font-face {
-  font-family: "Poppins", sans-serif;
-  src: url("./../font/poppins/Poppins-SemiBold.ttf") format("truetype");
-  font-weight: 600;
-  font-style: normal;
-}
-@font-face {
-  font-family: "Poppins", sans-serif;
-  src: url("./../font/poppins/Poppins-Bold.ttf") format("truetype");
-  font-weight: 700;
-  font-style: normal;
-}
-@font-face {
-  font-family: "Poppins", sans-serif;
-  src: url("./../font/poppins/Poppins-ExtraBold.ttf") format("truetype");
-  font-weight: 800;
-  font-style: normal;
-}
-@font-face {
-  font-family: "Poppins", sans-serif;
-  src: url("./../font/poppins/Poppins-Black.ttf") format("truetype");
-  font-weight: 900;
-  font-style: normal;
-}
 /* Utilities */
 /* variables */
 /* Font Family */
@@ -349,7 +249,7 @@ a {
   text-align: center;
 }
 .cr-banner h2 {
-  font-family: "Poppins", sans-serif;
+  font-family: "Be Vietnam Pro", sans-serif;
   font-size: 32px;
   font-weight: bold;
   color: #2b2b2d;
@@ -361,7 +261,7 @@ a {
 .section-title .cr-title {
   margin-bottom: 5px;
   padding: 0 64px;
-  font-family: "Poppins", sans-serif;
+  font-family: "Be Vietnam Pro", sans-serif;
   font-size: 30px;
   font-weight: 800;
   color: #2b2b2d;
@@ -479,7 +379,7 @@ a {
   transition: all 0.3s ease-in-out;
   padding: 8px 22px;
   font-size: 14px;
-  font-family: "Poppins", sans-serif;
+  font-family: "Be Vietnam Pro", sans-serif;
   font-weight: bold;
   text-transform: capitalize;
   line-height: 1.2;
@@ -500,7 +400,7 @@ a {
   transition: all 0.3s ease-in-out;
   padding: 8px 22px;
   font-size: 14px;
-  font-family: "Poppins", sans-serif;
+  font-family: "Be Vietnam Pro", sans-serif;
   font-weight: bold;
   text-transform: capitalize;
   line-height: 1.2;
@@ -687,13 +587,13 @@ a {
 }
 .cr-breadcrumb-image .cr-breadcrumb-title h2 {
   margin-bottom: 0;
-  font-family: "Poppins", sans-serif;
+  font-family: "Be Vietnam Pro", sans-serif;
   font-size: 19px;
   line-height: 1;
   font-weight: bold;
 }
 .cr-breadcrumb-image .cr-breadcrumb-title span {
-  font-family: "Poppins", sans-serif;
+  font-family: "Be Vietnam Pro", sans-serif;
   font-size: 14px;
   line-height: 1.3;
   font-weight: 500;
@@ -792,6 +692,8 @@ a.back-to-top .back-to-top-wrap svg path {
 @media only screen and (min-width: 1200px) {
   .cr-col-5 {
     width: 20%;
+    -webkit-box-flex: 0;
+    -ms-flex: 0 0 20%;
     flex: 0 0 20%;
   }
 }
@@ -902,6 +804,131 @@ ul {
   list-style-type: none;
 }
 
+#toast {
+  position: fixed;
+  top: 32px;
+  right: 32px;
+  z-index: 999999;
+}
+
+.toast {
+  display: flex !important;
+  align-items: center;
+  background: #fff;
+  border-radius: 2px;
+  border-left: 4px solid;
+  box-shadow: 0 5px 8px rgba(0, 0, 0, 0.08);
+  padding: 20px 0;
+  min-width: 200px;
+  transition: all 0.2s linear;
+}
+
+@keyframes slideInLeft {
+  from {
+    opacity: 0;
+    transform: translateX(calc(100% + 32px));
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+@keyframes fadeOut {
+  to {
+    opacity: 0;
+  }
+}
+.toast__icon {
+  padding: 0 16px;
+  font-size: 24px;
+}
+
+.toast__body {
+  flex-grow: 1;
+}
+
+.toast__title {
+  font-size: 16px;
+  font-weight: 600;
+  color: #333;
+}
+
+.toast__message {
+  font-size: 14px;
+  color: #888;
+  margin-top: 4px;
+  line-height: 1.4;
+}
+
+.toast__close {
+  padding: 0 16px;
+  font-size: 20px;
+  color: rgba(0, 0, 0, 0.3);
+  cursor: pointer;
+}
+
+.toast + .toast {
+  margin-top: 24px;
+}
+
+.toast--success {
+  border-color: #47d864;
+}
+
+.toast--success .toast__icon {
+  color: #47d864;
+}
+
+.toast--info {
+  border-color: #3f8cd7;
+}
+
+.toast--info .toast__icon {
+  color: #3f8cd7;
+}
+
+.toast--warning {
+  border-color: #f7b924;
+}
+
+.toast--warning .toast__icon {
+  color: #f7b924;
+}
+
+.toast--error {
+  border-color: #f14668;
+}
+
+.toast--error .toast__icon {
+  color: #f14668;
+}
+
+.btn {
+  padding: 20px 40px;
+  font-weight: 500;
+  font-size: 16px;
+  background-color: var(--bg-color);
+  border-radius: 30px;
+  color: #fff;
+  cursor: pointer;
+}
+
+.btn--success {
+  --bg-color: #47d864;
+}
+
+.btn--info {
+  --bg-color: #3f8cd7;
+}
+
+.btn--warning {
+  --bg-color: #f7b924;
+}
+
+.btn--error {
+  --bg-color: #f14668;
+}
+
 /* Footer */
 .footer {
   position: relative;
@@ -968,7 +995,7 @@ ul {
 }
 
 .cr-footer h4.cr-sub-title {
-  font-family: "Poppins", sans-serif;
+  font-family: "Be Vietnam Pro", sans-serif;
   font-size: 18px;
   font-weight: bold;
   line-height: 1.3;
@@ -982,7 +1009,7 @@ ul {
 }
 .cr-footer ul li {
   margin-bottom: 12px;
-  font-family: "Poppins", sans-serif;
+  font-family: "Be Vietnam Pro", sans-serif;
   font-size: 14px;
   line-height: 26px;
   color: #777;
@@ -1035,7 +1062,7 @@ ul {
 }
 .cr-footer .cr-social-media span {
   margin: 2px;
-  font-family: "Poppins", sans-serif;
+  font-family: "Be Vietnam Pro", sans-serif;
   font-size: 17px;
   font-weight: 400;
   line-height: 1.625;
@@ -1057,6 +1084,7 @@ ul {
   color: #64b496;
 }
 .cr-footer .cr-payment .swiper-wrapper {
+  -webkit-transition-timing-function: linear !important;
   transition-timing-function: linear !important;
   position: relative;
 }
@@ -1115,13 +1143,8 @@ ul {
   outline: none;
   border-radius: 5px;
 }
-.cr-search-footer input::-moz-placeholder {
-  font-family: "Poppins", sans-serif;
-  font-size: 14px;
-  color: #7a7a7a;
-}
 .cr-search-footer input::placeholder {
-  font-family: "Poppins", sans-serif;
+  font-family: "Be Vietnam Pro", sans-serif;
   font-size: 14px;
   color: #7a7a7a;
 }
@@ -1146,7 +1169,7 @@ ul {
   text-align: center;
 }
 .cr-last-footer p {
-  font-family: "Poppins", sans-serif;
+  font-family: "Be Vietnam Pro", sans-serif;
   font-size: 14px;
   color: #000;
   line-height: 1.2;
@@ -1302,8 +1325,10 @@ header {
   left: 0;
   width: 100%;
   z-index: 10;
+  -webkit-box-shadow: 0px 0px 8px rgba(51, 51, 51, 0.2);
   box-shadow: 0px 0px 8px rgba(51, 51, 51, 0.2);
   background: #ffffff;
+  -webkit-transition: top 1s;
   transition: top 1s;
 }
 .cr-fix.menu_fixed .top-header {
@@ -1316,8 +1341,10 @@ header {
   left: 0;
   width: 100%;
   z-index: 10;
+  -webkit-box-shadow: 0px 0px 8px rgba(51, 51, 51, 0.2);
   box-shadow: 0px 0px 8px rgba(51, 51, 51, 0.2);
   background: #ffffff;
+  -webkit-transition: top 1s;
   transition: top 1s;
 }
 .cr-fix.menu_fixed_up .top-header {
@@ -1334,7 +1361,7 @@ header {
 .cr-menu-list .cr-category-dropdown button {
   padding: 12px 30px;
   border: none;
-  font-family: "Poppins", sans-serif;
+  font-family: "Be Vietnam Pro", sans-serif;
   font-size: 14px;
   background-color: #64b496;
   border-radius: 5px;
@@ -1372,7 +1399,7 @@ header {
   margin-right: 25px;
 }
 .cr-menu-list nav ul li a {
-  font-family: "Poppins", sans-serif;
+  font-family: "Be Vietnam Pro", sans-serif;
   font-size: 13px;
   color: #777;
 }
@@ -1409,8 +1436,7 @@ header {
 .top-header .cr-logo img {
   width: 100%;
   height: 100%;
-  -o-object-fit: cover;
-     object-fit: cover;
+  object-fit: cover;
 }
 .top-header .cr-search {
   position: relative;
@@ -1438,13 +1464,8 @@ header {
   border-radius: 5px;
   outline: none;
 }
-.top-header .cr-search input::-moz-placeholder {
-  font-family: "Poppins", sans-serif;
-  font-size: 13px;
-  color: #7a7a7a;
-}
 .top-header .cr-search input::placeholder {
-  font-family: "Poppins", sans-serif;
+  font-family: "Be Vietnam Pro", sans-serif;
   font-size: 13px;
   color: #7a7a7a;
 }
@@ -1496,7 +1517,7 @@ header {
 }
 .top-header .cr-right-bar .cr-right-bar-item span {
   transition: 0.3s ease-in-out;
-  font-family: "Poppins", sans-serif;
+  font-family: "Be Vietnam Pro", sans-serif;
   font-size: 15px;
   line-height: 15px;
   font-weight: 500;
@@ -1530,7 +1551,7 @@ ul.navbar-nav li.nav-item:hover a.nav-link::before {
 }
 ul.navbar-nav li.nav-item a.nav-link {
   padding: 11px 8px;
-  font-family: "Poppins", sans-serif;
+  font-family: "Be Vietnam Pro", sans-serif;
   font-size: 14px;
   font-weight: 500;
   color: #000;
@@ -1856,12 +1877,6 @@ ul.navbar-nav .dropdown:hover .dropdown-menu {
   border-radius: 5px;
   background-color: #eee;
 }
-.cr-side-cart .cr-menu-box::-moz-placeholder {
-  text-transform: capitalize;
-  font-size: 15px;
-  font-weight: 500;
-  color: #444;
-}
 .cr-side-cart .cr-menu-box::placeholder {
   text-transform: capitalize;
   font-size: 15px;
@@ -2121,10 +2136,6 @@ ul.navbar-nav .dropdown:hover .dropdown-menu {
   margin: 0 auto;
 }
 
-.search-input::-moz-placeholder {
-  font-size: 16px !important;
-}
-
 .search-input::placeholder {
   font-size: 16px !important;
 }
@@ -2375,7 +2386,7 @@ ul.navbar-nav .dropdown:hover .dropdown-menu {
 .cr-left-side-contain h5 {
   margin-bottom: 20px;
   font-size: 20px;
-  font-family: "Poppins", sans-serif;
+  font-family: "Be Vietnam Pro", sans-serif;
   font-weight: 700;
 }
 .cr-left-side-contain h5 span {
@@ -2390,7 +2401,7 @@ ul.navbar-nav .dropdown:hover .dropdown-menu {
 .cr-left-side-contain h1 {
   margin-bottom: 25px;
   font-size: 55px;
-  font-family: "Poppins", sans-serif;
+  font-family: "Be Vietnam Pro", sans-serif;
   font-weight: 800;
   line-height: 68px;
   color: #000;
@@ -2411,7 +2422,7 @@ ul.navbar-nav .dropdown:hover .dropdown-menu {
 }
 .cr-left-side-contain .cr-last-buttons h4 span {
   font-size: 30px;
-  font-family: "Poppins", sans-serif;
+  font-family: "Be Vietnam Pro", sans-serif;
   font-weight: bold;
   color: #000;
 }
@@ -2578,7 +2589,6 @@ ul.navbar-nav .dropdown:hover .dropdown-menu {
   right: -230px;
   z-index: 20;
   color: #000;
-  overflow-y: scroll;
 }
 .cr-tool .cr-tool-btn {
   display: flex;
@@ -2640,7 +2650,7 @@ ul.navbar-nav .dropdown:hover .dropdown-menu {
 }
 .cr-tool .cr-tool-btn .color-variant .cr-tools-detail .heading h2 {
   margin-bottom: 0;
-  font-family: "Poppins", sans-serif;
+  font-family: "Be Vietnam Pro", sans-serif;
   font-size: 14px;
   font-weight: 600;
   color: #2b2b2d !important;
@@ -3009,7 +3019,7 @@ ul.navbar-nav .dropdown:hover .dropdown-menu {
   text-align: left;
 }
 .cr-deal-rightside .cr-deal-content span {
-  font-family: "Poppins", sans-serif;
+  font-family: "Be Vietnam Pro", sans-serif;
   font-size: 16px;
   font-weight: 400;
 }
@@ -3022,7 +3032,7 @@ ul.navbar-nav .dropdown:hover .dropdown-menu {
 .cr-deal-rightside .cr-deal-content h4.cr-deal-title {
   margin-top: 12px;
   margin-bottom: 15px;
-  font-family: "Poppins", sans-serif;
+  font-family: "Be Vietnam Pro", sans-serif;
   font-size: 28px;
   font-weight: bold;
   line-height: 1.2;
@@ -3049,7 +3059,7 @@ ul.navbar-nav .dropdown:hover .dropdown-menu {
   margin: 0;
   position: relative;
   display: grid;
-  font-family: "Poppins", sans-serif;
+  font-family: "Be Vietnam Pro", sans-serif;
   font-size: 14px;
   line-height: 1.2;
   font-weight: 400;
@@ -3057,7 +3067,7 @@ ul.navbar-nav .dropdown:hover .dropdown-menu {
   text-align: center;
 }
 .cr-counter .cr-counter-inner h4 span {
-  font-family: "Poppins", sans-serif;
+  font-family: "Be Vietnam Pro", sans-serif;
   font-size: 20px;
   font-weight: bold;
   line-height: 1.2;
@@ -3225,13 +3235,13 @@ ul.navbar-nav .dropdown:hover .dropdown-menu {
   text-align: center;
 }
 .cr-testimonial .cr-testimonial-inner span {
-  font-family: "Poppins", sans-serif;
+  font-family: "Be Vietnam Pro", sans-serif;
   font-size: 14px;
   line-height: 2.357;
   color: #7a7a7a;
 }
 .cr-testimonial .cr-testimonial-inner h4.title {
-  font-family: "Poppins", sans-serif;
+  font-family: "Be Vietnam Pro", sans-serif;
   font-size: 18px;
   font-weight: bold;
   line-height: 1.833;
@@ -3402,7 +3412,7 @@ ul.navbar-nav .dropdown:hover .dropdown-menu {
   padding: 12px 15px;
   position: relative;
   background-color: #f7f7f8;
-  font-family: "Poppins", sans-serif;
+  font-family: "Be Vietnam Pro", sans-serif;
   font-size: 14px;
   font-weight: bold;
   line-height: 1.667;
@@ -3449,7 +3459,7 @@ ul.navbar-nav .dropdown:hover .dropdown-menu {
 }
 .cr-ice-cubes .cr-ice-cubes-contain h4.title {
   margin-bottom: 5px;
-  font-family: "Poppins", sans-serif;
+  font-family: "Be Vietnam Pro", sans-serif;
   font-size: 40px;
   color: #fff;
   font-weight: 300;
@@ -3457,7 +3467,7 @@ ul.navbar-nav .dropdown:hover .dropdown-menu {
 }
 .cr-ice-cubes .cr-ice-cubes-contain h5.sub-title {
   margin-bottom: 5px;
-  font-family: "Poppins", sans-serif;
+  font-family: "Be Vietnam Pro", sans-serif;
   text-transform: uppercase;
   font-size: 38px;
   color: #f7e8aa;
@@ -3465,7 +3475,7 @@ ul.navbar-nav .dropdown:hover .dropdown-menu {
   line-height: 1.2;
 }
 .cr-ice-cubes .cr-ice-cubes-contain span {
-  font-family: "Poppins", sans-serif;
+  font-family: "Be Vietnam Pro", sans-serif;
   font-size: 16px;
   color: #fff;
 }
@@ -3527,7 +3537,7 @@ ul.navbar-nav .dropdown:hover .dropdown-menu {
 }
 .cr-products-rightbar .cr-products-rightbar-content h4 {
   margin-bottom: 0px;
-  font-family: "Poppins", sans-serif;
+  font-family: "Be Vietnam Pro", sans-serif;
   font-size: 24px;
   font-weight: 900;
   line-height: 1.562;
@@ -3542,7 +3552,7 @@ ul.navbar-nav .dropdown:hover .dropdown-menu {
 .cr-products-rightbar .cr-products-rightbar-content .cr-off span {
   margin-left: 7px;
   padding: 0 6px;
-  font-family: "Poppins", sans-serif;
+  font-family: "Be Vietnam Pro", sans-serif;
   font-size: 20px;
   font-weight: 900;
   line-height: 1.2;
@@ -3594,7 +3604,7 @@ ul.navbar-nav .dropdown:hover .dropdown-menu {
   flex-direction: column;
 }
 .cr-products-leftbar .cr-products-leftbar-content h2 {
-  font-family: "Poppins", sans-serif;
+  font-family: "Be Vietnam Pro", sans-serif;
   font-size: 44px;
   font-weight: bold;
   line-height: 1.2;
@@ -3602,14 +3612,14 @@ ul.navbar-nav .dropdown:hover .dropdown-menu {
   color: #64b496;
 }
 .cr-products-leftbar .cr-products-leftbar-content h4 {
-  font-family: "Poppins", sans-serif;
+  font-family: "Be Vietnam Pro", sans-serif;
   font-size: 30px;
   font-weight: bold;
   line-height: 1.2;
   color: #2b2b2d;
 }
 .cr-products-leftbar .cr-products-leftbar-content span {
-  font-family: "Poppins", sans-serif;
+  font-family: "Be Vietnam Pro", sans-serif;
   font-size: 20px;
   line-height: 1.2;
   color: #7a7a7a;
@@ -3811,7 +3821,7 @@ ul.navbar-nav .dropdown:hover .dropdown-menu {
 }
 .cr-product-banner-image .cr-product-banner-contain p {
   padding-bottom: 15px;
-  font-family: "Poppins", sans-serif;
+  font-family: "Be Vietnam Pro", sans-serif;
   font-size: 14px;
   line-height: 1.2;
   color: #777;
@@ -3824,7 +3834,7 @@ ul.navbar-nav .dropdown:hover .dropdown-menu {
 }
 .cr-product-banner-image .cr-product-banner-contain h5 {
   margin-bottom: 15px;
-  font-family: "Poppins", sans-serif;
+  font-family: "Be Vietnam Pro", sans-serif;
   font-size: 20px;
   font-weight: bold;
   line-height: 1.2;
@@ -3967,7 +3977,7 @@ ul.navbar-nav .dropdown:hover .dropdown-menu {
 }
 .cr-side-categories .categories-inner h4 {
   margin: 0;
-  font-family: "Poppins", sans-serif;
+  font-family: "Be Vietnam Pro", sans-serif;
   font-size: 54px;
   font-weight: bold;
   text-transform: uppercase;
@@ -3991,7 +4001,7 @@ ul.navbar-nav .dropdown:hover .dropdown-menu {
 }
 .cr-side-categories .categories-contain .categories-text h5 {
   margin-bottom: 12px;
-  font-family: "Poppins", sans-serif;
+  font-family: "Be Vietnam Pro", sans-serif;
   font-size: 22px;
   font-weight: bold;
   line-height: 1.2;
@@ -4041,7 +4051,7 @@ ul.navbar-nav .dropdown:hover .dropdown-menu {
   display: flex;
   flex-direction: column;
   align-items: center;
-  font-family: "Poppins", sans-serif;
+  font-family: "Be Vietnam Pro", sans-serif;
   font-weight: 500;
   font-size: 16px;
 }
@@ -4053,7 +4063,7 @@ ul.navbar-nav .dropdown:hover .dropdown-menu {
   padding: 26px 0;
   text-align: center;
   margin-bottom: 0px;
-  font-family: "Poppins", sans-serif;
+  font-family: "Be Vietnam Pro", sans-serif;
   color: #2b2b2d;
   font-weight: 700;
   line-height: 1.429;
@@ -4073,7 +4083,7 @@ ul.navbar-nav .dropdown:hover .dropdown-menu {
   font-size: 16px;
   display: flex;
   justify-content: center;
-  font-family: "Poppins", sans-serif;
+  font-family: "Be Vietnam Pro", sans-serif;
   font-size: 16px;
   color: #64b496 !important;
   font-weight: bold;
@@ -4274,7 +4284,7 @@ ul.navbar-nav .dropdown:hover .dropdown-menu {
 .cr-services .cr-services-contain h4 {
   margin-bottom: 5px;
   font-size: 18px;
-  font-family: "Poppins", sans-serif;
+  font-family: "Be Vietnam Pro", sans-serif;
   color: #2b2b2d;
   font-weight: bold;
   line-height: 1.667;
@@ -4387,21 +4397,21 @@ ul.navbar-nav .dropdown:hover .dropdown-menu {
   text-align: left;
 }
 .cr-blog .cr-blog-content span {
-  font-family: "Poppins", sans-serif;
+  font-family: "Be Vietnam Pro", sans-serif;
   font-size: 14px;
   font-weight: 400;
   line-height: 2;
   color: #7a7a7a;
 }
 .cr-blog .cr-blog-content span code {
-  font-family: "Poppins", sans-serif;
+  font-family: "Be Vietnam Pro", sans-serif;
   font-size: 14px;
   font-weight: 400;
   color: #777;
 }
 .cr-blog .cr-blog-content h5 {
   margin-top: 5px;
-  font-family: "Poppins", sans-serif;
+  font-family: "Be Vietnam Pro", sans-serif;
   font-size: 17px;
   font-weight: 600;
   line-height: 24px;
@@ -4410,7 +4420,7 @@ ul.navbar-nav .dropdown:hover .dropdown-menu {
 .cr-blog .cr-blog-content a {
   transition: all 0.3s ease-in-out;
   position: relative;
-  font-family: "Poppins", sans-serif;
+  font-family: "Be Vietnam Pro", sans-serif;
   font-size: 14px;
   font-weight: 300;
   line-height: 1.875;
@@ -4421,7 +4431,7 @@ ul.navbar-nav .dropdown:hover .dropdown-menu {
 }
 .cr-blog .cr-blog-content .read {
   position: relative;
-  font-family: "Poppins", sans-serif;
+  font-family: "Be Vietnam Pro", sans-serif;
   font-size: 14px;
   font-weight: bold;
   line-height: 1.875;
@@ -4454,7 +4464,7 @@ ul.navbar-nav .dropdown:hover .dropdown-menu {
   z-index: 2;
 }
 .cr-blog .cr-blog-image .cr-blog-date span {
-  font-family: "Poppins", sans-serif;
+  font-family: "Be Vietnam Pro", sans-serif;
   font-size: 23px;
   font-weight: bold;
   line-height: 1.1;
@@ -4517,6 +4527,7 @@ ul.navbar-nav .dropdown:hover .dropdown-menu {
   max-width: 960px;
   width: 960px;
   padding: 35px;
+  -webkit-transition: all 0.3s ease 0s;
   transition: all 0.3s ease 0s;
 }
 .quickview-modal .modal-body {
@@ -4534,7 +4545,11 @@ ul.navbar-nav .dropdown:hover .dropdown-menu {
 
 .zoom-image-hover {
   height: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
   align-items: center;
   text-align: center;
   border: 1px solid #e9e9e9;
@@ -4711,791 +4726,6 @@ ul.navbar-nav .dropdown:hover .dropdown-menu {
   }
 }
 /* pages */
-/* Products-page */
-.section-related-products {
-  padding: 0 0 70px;
-}
-
-.cr-product-card {
-  height: 100%;
-  padding: 12px;
-  border: 1px solid #e9e9e9;
-  background-color: #fff;
-  border-radius: 5px;
-  overflow: hidden;
-  display: flex;
-  flex-direction: column;
-}
-.cr-product-card:hover .cr-product-image .cr-side-view {
-  right: 12px;
-  opacity: 1;
-}
-.cr-product-card .cr-product-image {
-  border-radius: 5px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  position: relative;
-}
-.cr-product-card .cr-product-image .cr-side-view {
-  transition: all 0.5s ease-in-out;
-  position: absolute;
-  z-index: 20;
-  transition: all 0.4s ease-in-out;
-  top: 15px;
-  right: -40px;
-  display: grid;
-  opacity: 0;
-}
-.cr-product-card .cr-product-image .cr-side-view a {
-  width: 35px;
-  height: 35px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin: 0;
-  padding: 0;
-  border: none;
-  background-color: transparent;
-  background-color: #fff;
-  border: 1px solid #e9e9e9;
-  border-radius: 100%;
-}
-.cr-product-card .cr-product-image .cr-side-view a:last-child {
-  margin-top: 5px;
-}
-.cr-product-card .cr-product-image .cr-side-view a i {
-  font-size: 18px;
-  line-height: 10px;
-}
-.cr-product-card .cr-product-image .cr-side-view .wishlist.active {
-  background-color: #64b496;
-  color: #fff;
-}
-.cr-product-card .cr-product-image .cr-image-inner {
-  width: 100%;
-  height: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  position: relative;
-  overflow: hidden;
-}
-.cr-product-card .cr-product-image .cr-image-inner img {
-  width: 100%;
-  border-radius: 5px;
-}
-.cr-product-card .cr-product-image .cr-shopping-bag {
-  height: 35px;
-  width: 35px;
-  position: absolute;
-  bottom: -16px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background-color: #f7f7f8;
-  border: 1px solid #e9e9e9;
-  border-radius: 100%;
-}
-.cr-product-card .cr-product-image .cr-shopping-bag i {
-  color: #64b496;
-}
-.cr-product-card .cr-product-image .cr-shopping-bag.active {
-  background-color: #64b496;
-  border: 1px solid #64b496;
-}
-.cr-product-card .cr-product-image .cr-shopping-bag.active i {
-  color: #fff;
-}
-.cr-product-card .cr-product-image .cr-remove-product {
-  margin-bottom: 5px !important;
-  background-color: #000 !important;
-  color: #fff;
-}
-
-.cr-product-details {
-  padding-top: 24px;
-  text-align: center;
-  overflow: hidden;
-}
-.cr-product-details .cr-brand a {
-  transition: all 0.3s ease-in-out;
-  margin-bottom: 5px;
-  font-size: 13px;
-  color: #777;
-  display: flex;
-  justify-content: center;
-}
-.cr-product-details .cr-brand a:hover {
-  color: #64b496;
-}
-.cr-product-details .cr-star {
-  margin-bottom: 12px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-.cr-product-details .cr-star p {
-  margin-left: 5px;
-  color: #999;
-  font-size: 11px;
-  line-height: 10px;
-}
-.cr-product-details .cr-star i {
-  margin: 0 1px;
-  font-size: 15px;
-  color: #f5885f;
-}
-.cr-product-details a.title {
-  transition: all 0.3s ease-in-out;
-  margin-bottom: 12px;
-  font-family: "Poppins", sans-serif;
-  font-size: 15px;
-  font-weight: 500;
-  line-height: 24px;
-  color: #2b2b2d;
-  display: flex;
-  justify-content: center;
-}
-.cr-product-details a.title:hover {
-  color: #64b496;
-}
-.cr-product-details p.cr-price {
-  font-family: "Poppins", sans-serif;
-  font-size: 16px;
-  line-height: 1.75;
-}
-.cr-product-details p.cr-price .new-price {
-  color: #64b496;
-  font-weight: 700;
-}
-.cr-product-details p.cr-price .old-price {
-  margin-left: 5px;
-  font-size: 13px;
-  text-decoration: line-through;
-}
-
-.cr-product-info {
-  margin-top: 15px;
-  padding-top: 15px;
-  border-top: 1px solid #eee;
-}
-.cr-product-info ul {
-  margin: 0;
-  padding: 0;
-}
-.cr-product-info ul li {
-  padding: 5px 0;
-  list-style: none;
-  font-size: 14px;
-  color: #777;
-}
-
-.product-tabs {
-  display: flex;
-}
-.product-tabs .nav-tabs {
-  border: none;
-  display: block;
-}
-.product-tabs .nav-tabs .nav-link {
-  margin-bottom: 10px;
-  margin-right: 10px;
-  padding: 0;
-  border: none;
-  background-color: #fff;
-  border-radius: 5px;
-}
-.product-tabs .nav-tabs .nav-link img {
-  width: 60px;
-  height: 60px;
-  padding: 10px;
-  border: 1px solid #e9e9e9;
-  border-radius: 5px;
-}
-.product-tabs .nav-tabs .nav-link.active {
-  border: none;
-}
-.product-tabs .tab-content {
-  width: 100%;
-  height: 100%;
-  border-radius: 5px;
-}
-
-.cr-size-and-weight-contain {
-  border-bottom: 1px solid #e9e9e9;
-  padding-bottom: 20px;
-}
-.cr-size-and-weight-contain h2.heading {
-  margin: 0 0 15px 0;
-  display: block;
-  color: #2b2b2d;
-  font-size: 22px;
-  text-decoration: none;
-  line-height: 1.5;
-  font-weight: 500;
-}
-.cr-size-and-weight-contain p {
-  font-size: 14px;
-}
-
-.cr-size-and-weight {
-  padding-top: 20px;
-}
-.cr-size-and-weight .list ul {
-  margin-top: 15px;
-  padding: 0;
-}
-.cr-size-and-weight .list ul li {
-  padding: 5px 0;
-  color: #777;
-  list-style: none;
-  display: flex;
-}
-.cr-size-and-weight .list ul li label {
-  min-width: 100px;
-  margin-right: 10px;
-  color: #2b2b2d;
-  font-weight: 600;
-  display: flex;
-  justify-content: space-between;
-}
-.cr-size-and-weight .cr-review-star {
-  display: flex;
-}
-.cr-size-and-weight .cr-review-star .cr-star {
-  margin-right: 10px;
-}
-.cr-size-and-weight .cr-review-star .cr-star i {
-  font-size: 16px;
-  color: #f5885f;
-}
-.cr-size-and-weight .cr-review-star p {
-  font-size: 15px;
-}
-.cr-size-and-weight .cr-product-price {
-  padding-top: 20px;
-}
-.cr-size-and-weight .cr-product-price span.new-price {
-  font-family: "Poppins", sans-serif;
-  font-size: 24px;
-  font-weight: 600;
-  line-height: 1.167;
-  color: #64b496;
-}
-.cr-size-and-weight .cr-product-price span.old-price {
-  font-family: "Poppins", sans-serif;
-  font-size: 16px;
-  text-decoration: line-through;
-  line-height: 1.75;
-  color: #7a7a7a;
-}
-.cr-size-and-weight .cr-size-weight {
-  display: flex;
-  align-items: center;
-  padding-top: 20px;
-}
-.cr-size-and-weight .cr-size-weight h5 {
-  margin-bottom: 0;
-  font-family: "Poppins", sans-serif;
-  font-size: 16px;
-  line-height: 1.556;
-  color: #2b2b2d;
-}
-.cr-size-and-weight .cr-size-weight .cr-kg {
-  padding-left: 10px;
-}
-.cr-size-and-weight .cr-size-weight .cr-kg ul {
-  width: 100%;
-  padding: 0;
-  margin: 0;
-  list-style-type: none;
-  display: flex;
-  flex-wrap: wrap;
-}
-.cr-size-and-weight .cr-size-weight .cr-kg ul li {
-  margin: 2px;
-  padding: 5px 10px;
-  font-family: "Poppins", sans-serif;
-  font-size: 12px;
-  line-height: 1;
-  background-color: #fff;
-  color: #777;
-  border: 1px solid #e9e9e9;
-  border-radius: 5px;
-  cursor: pointer;
-  transition: 0.3s ease-in-out;
-}
-.cr-size-and-weight .cr-size-weight .cr-kg ul .active-color {
-  background-color: #64b496;
-  color: #fff;
-}
-.cr-size-and-weight .cr-add-card {
-  display: flex;
-  padding-top: 20px;
-}
-.cr-size-and-weight .cr-add-card .cr-qty-main {
-  height: 100%;
-  display: flex;
-  position: relative;
-}
-.cr-size-and-weight .cr-add-card .cr-qty-main input {
-  height: 40px;
-  width: 40px;
-  margin-right: 5px;
-  text-align: center;
-  border: 1px solid #e9e9e9;
-  border-radius: 5px;
-}
-.cr-size-and-weight .cr-add-card .cr-qty-main button {
-  height: 18px;
-  width: 18px;
-  padding: 0;
-  background-color: #fff;
-  border: 1px solid #e9e9e9;
-  border-radius: 5px;
-  line-height: 0;
-}
-.cr-size-and-weight .cr-add-card .cr-qty-main .minus {
-  position: absolute;
-  bottom: 0;
-  right: 0;
-}
-.cr-size-and-weight .cr-add-card .cr-add-button {
-  margin-left: 15px;
-}
-.cr-size-and-weight .cr-add-card .cr-buy-button {
-  margin-left: 15px;
-}
-.cr-size-and-weight .cr-add-card .cr-card-icon {
-  margin-left: 15px;
-  display: flex;
-}
-.cr-size-and-weight .cr-add-card .cr-card-icon a {
-  margin: 0;
-  padding: 0;
-  background-color: transparent;
-}
-.cr-size-and-weight .cr-add-card .cr-card-icon a i {
-  height: 40px;
-  width: 40px;
-  margin-right: 10px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 22px;
-  background-color: #fff;
-  transition: all 0.3s ease 0s;
-  border: 1px solid #e9e9e9;
-  border-radius: 5px;
-}
-.cr-size-and-weight .cr-add-card .cr-card-icon a i:hover {
-  background-color: #64b496;
-  color: #fff;
-}
-
-.thumb-image {
-  margin: 0 -6px;
-}
-
-.thumbnail-image .thumbImg {
-  margin: 0 6px;
-  border: 1px solid #e9e9e9;
-  border-radius: 5px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-.thumbnail-image .thumbImg img {
-  width: 100%;
-  padding: 2px;
-  border-radius: 5px;
-}
-
-.vehicle-detail-banner {
-  height: 100%;
-}
-.vehicle-detail-banner .banner-slider {
-  position: sticky;
-  top: 30px;
-}
-
-.zoom-image-hover {
-  height: 100%;
-  display: flex;
-  align-items: center;
-  text-align: center;
-  border: 1px solid #e9e9e9;
-  background-color: #f7f7f8;
-  border-radius: 5px;
-  cursor: crosshair;
-}
-.zoom-image-hover img {
-  width: 100%;
-  display: block;
-  margin: auto;
-}
-
-.vehicle-detail-banner .banner-slider .slider-for {
-  padding-bottom: 15px;
-}
-
-.cr-paking-delivery {
-  margin-top: 40px;
-  padding: 24px;
-  background-color: #fff;
-  border: 1px solid #e9e9e9;
-  border-radius: 5px;
-}
-.cr-paking-delivery .nav-tabs {
-  display: flex;
-  justify-content: left;
-}
-.cr-paking-delivery .nav-tabs .nav-item {
-  margin-right: 30px;
-  position: relative;
-}
-.cr-paking-delivery .nav-tabs .nav-item .nav-link {
-  margin-bottom: 25px;
-  padding: 0;
-  font-family: "Poppins", sans-serif;
-  font-size: 17px;
-  font-weight: 600;
-  line-height: 1.5;
-  color: #2b2b2d;
-  border: 0;
-  text-align: left;
-}
-.cr-paking-delivery .nav-tabs .nav-item .nav-link::after {
-  transition: all 0.3s ease 0s;
-  height: 2px;
-  width: 0;
-  margin: 0 auto;
-  content: "";
-  position: absolute;
-  top: auto;
-  bottom: 0;
-  background-color: #64b496;
-  left: 0;
-  right: auto;
-}
-.cr-paking-delivery .nav-tabs .nav-item .nav-link:hover::after {
-  width: 100%;
-  background-color: #64b496;
-}
-.cr-paking-delivery .nav-tabs .nav-item .nav-link.active {
-  color: #64b496;
-}
-.cr-paking-delivery .nav-tabs .nav-item .nav-link.active::after {
-  transition: all 0.3s ease 0s;
-  height: 2px;
-  width: 100%;
-  margin: 0 auto;
-  content: "";
-  position: absolute;
-  top: auto;
-  bottom: 0;
-  background-color: #64b496;
-  left: 0;
-  right: auto;
-}
-.cr-paking-delivery .cr-tab-content .list ul {
-  margin-top: 30px;
-  margin-bottom: -5px;
-  padding: 0;
-}
-.cr-paking-delivery .cr-tab-content .list ul li {
-  padding: 5px 0;
-  color: #777;
-  list-style: none;
-  display: flex;
-}
-.cr-paking-delivery .cr-tab-content .list ul li label {
-  min-width: 100px;
-  margin-right: 10px;
-  color: #2b2b2d;
-  font-weight: 600;
-  display: flex;
-  justify-content: space-between;
-}
-.cr-paking-delivery .cr-tab-content .cr-description {
-  padding-top: 30px;
-}
-.cr-paking-delivery .cr-tab-content .cr-description p {
-  font-size: 14px;
-  text-align: left;
-}
-.cr-paking-delivery .cr-tab-content h4.heading {
-  margin-bottom: 0;
-  padding-top: 30px;
-  padding-bottom: 20px;
-  font-family: "Poppins", sans-serif;
-  font-size: 16px;
-  font-weight: 500;
-  line-height: 1.5;
-  text-align: left;
-  color: #2b2b2d;
-  border-bottom: 1px solid #e9e9e9;
-}
-
-.cr-tab-content-from {
-  padding-top: 30px;
-}
-.cr-tab-content-from h4.heading {
-  font-family: "Poppins", sans-serif;
-  font-size: 16px;
-  font-weight: 500;
-  line-height: 1.5;
-  color: #2b2b2d;
-  padding-bottom: 10px;
-}
-.cr-tab-content-from .cr-ratting-star {
-  display: flex;
-}
-.cr-tab-content-from .cr-ratting-star span {
-  font-family: "Poppins", sans-serif;
-  font-size: 14px;
-  color: #7a7a7a;
-  line-height: 1.75;
-  margin-right: 10px;
-}
-.cr-tab-content-from .cr-ratting-star .cr-t-review-rating {
-  margin-bottom: 20px;
-}
-.cr-tab-content-from .cr-ratting-star .cr-t-review-rating i {
-  font-size: 19px;
-  letter-spacing: -5px;
-}
-.cr-tab-content-from .cr-ratting-star .cr-t-review-rating .ri-star-s-fill {
-  color: #f5885f;
-}
-.cr-tab-content-from .cr-ratting-star .cr-t-review-rating .ri-star-s-line {
-  color: #999;
-}
-.cr-tab-content-from .cr-ratting-input:not(:last-child) {
-  margin-bottom: 10px;
-}
-.cr-tab-content-from .cr-ratting-input input {
-  width: 100%;
-  height: 50px;
-  margin-bottom: 15px;
-  padding: 5px 20px;
-  outline: none;
-  box-shadow: none;
-  border: 1px solid #e9e9e9;
-  border-radius: 5px;
-  color: #777;
-  font-size: 14px;
-}
-.cr-tab-content-from .cr-ratting-input textarea {
-  height: 150px;
-  width: 100%;
-  margin-bottom: 15px;
-  padding: 20px;
-  background-color: transparent;
-  font-size: 14px;
-  border: 1px solid #e9e9e9;
-  border-radius: 5px;
-  color: #777;
-  outline: none;
-}
-.cr-tab-content-from .review-list {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 40px;
-  padding: 0 10px;
-  margin-bottom: 40px;
-}
-.cr-tab-content-from .review-list .review-item {
-  display: flex;
-  flex-direction: column;
-}
-.cr-tab-content-from .review-list .review-item__top {
-  display: flex;
-  justify-content: center;
-}
-.cr-tab-content-from .review-list .review-item__top img {
-  width: 50px;
-  height: 50px;
-  margin-right: 24px;
-  border-radius: 5px;
-}
-.cr-tab-content-from .review-list .review-item__top .details {
-  display: flex;
-  flex-direction: column;
-}
-.cr-tab-content-from .review-list .review-item__top .details .date {
-  margin-bottom: 10px;
-  font-size: 13px;
-  color: #777;
-}
-.cr-tab-content-from .review-list .review-item__top .details .name {
-  margin-bottom: 10px;
-  font-weight: 500;
-  font-size: 17px;
-}
-.cr-tab-content-from .review-list p {
-  padding-left: 74px;
-}
-.cr-tab-content-from .review-list .cr-t-review-rating {
-  margin-left: auto;
-  margin-bottom: 20px;
-}
-.cr-tab-content-from .review-list .cr-t-review-rating i {
-  font-size: 19px;
-  letter-spacing: 0;
-}
-.cr-tab-content-from .review-list .cr-t-review-rating .ri-star-s-fill {
-  color: #f5885f;
-  letter-spacing: -5px;
-}
-.cr-tab-content-from .review-list .cr-t-review-rating .ri-star-s-line {
-  color: #999;
-}
-
-.modal-border-image {
-  border: 1px solid #e9e9e9;
-}
-
-/* Responsive */
-@media only screen and (max-width: 1399px) {
-  .cr-paking-delivery .nav-tabs .nav-item .nav-link {
-    font-size: 18px;
-  }
-  .cr-size-and-weight-contain h2.heading {
-    font-size: 26px;
-  }
-}
-@media only screen and (max-width: 1199px) {
-  .cr-product-details {
-    padding-top: 20px;
-  }
-  .cr-product-details h5 {
-    margin-bottom: 0;
-    font-size: 15px;
-  }
-  .cr-product-details p.cr-price {
-    font-size: 14px;
-  }
-  .cr-product-details p.cr-price .old-price {
-    font-size: 12px;
-  }
-  .cr-size-and-weight .cr-size-weight h5 {
-    min-width: 100px;
-    font-size: 14px;
-  }
-  .cr-size-and-weight .cr-size-weight .cr-kg ul li {
-    font-size: 12px;
-    margin-right: 5px;
-  }
-  .cr-add-button .cr-button,
-  .cr-buy-button .cr-button {
-    padding: 8px 15px;
-  }
-}
-@media only screen and (max-width: 991px) {
-  .cr-product-card .cr-product-image .cr-side-view {
-    right: 12px;
-  }
-  .cr-product-card .cr-product-image .cr-image-inner {
-    pointer-events: none;
-  }
-  .product-tabs {
-    margin-bottom: 24px;
-  }
-  .cr-size-and-weight-contain h2.heading {
-    font-size: 20px;
-  }
-  .cr-products-categories {
-    max-width: 350px;
-    margin: auto;
-  }
-}
-@media only screen and (max-width: 767px) {
-  .cr-paking-delivery .nav-tabs .nav-item .nav-link {
-    font-size: 16px;
-  }
-  .cr-products-categories {
-    max-width: 300px;
-    margin: auto;
-  }
-  .cr-size-and-weight .cr-product-price span.new-price {
-    font-size: 22px;
-  }
-  .cr-size-and-weight-contain {
-    margin-top: 24px;
-  }
-}
-@media only screen and (max-width: 575px) {
-  .cr-paking-delivery .nav-tabs .nav-item .nav-link {
-    margin-bottom: 15px;
-  }
-  .cr-paking-delivery .nav-tabs .nav-item .nav-link.active:after {
-    display: none;
-  }
-  /* model */
-  .cr-model .cr-modal-dialog {
-    max-width: 400px;
-    width: 400px;
-  }
-  .cr-product-card-block .col-lg-4 .cr-product-card {
-    max-width: 100%;
-  }
-  .product-tabs {
-    display: block;
-  }
-  .product-tabs .nav-tabs {
-    display: flex;
-  }
-  .cr-tab-content-from .post p {
-    padding: 0;
-  }
-  .cr-tab-content-from .post .cr-t-review-rating {
-    margin: 0 0 24px 0;
-  }
-  .cr-tab-content-from .post .content {
-    flex-direction: column;
-  }
-  .cr-tab-content-from .post .content img {
-    margin: 0 0 24px 0;
-  }
-  .cr-size-and-weight .cr-product-price span.new-price {
-    font-size: 20px;
-  }
-}
-@media only screen and (max-width: 480px) {
-  .cr-product-box,
-  .cr-product-card {
-    width: 100%;
-  }
-  .banner-480 {
-    display: none;
-  }
-}
-@media only screen and (max-width: 380px) {
-  .cr-add-button {
-    display: none;
-  }
-  .cr-size-and-weight .cr-review-star p {
-    display: none;
-  }
-  .cr-size-and-weight .cr-buy-button {
-    display: none;
-  }
-  .cr-size-and-weight .cr-size-and-weight .cr-review-star p {
-    display: none;
-  }
-  .cr-size-and-weight .cr-size-and-weight .cr-size-weight {
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-    align-items: flex-start;
-  }
-  .cr-size-and-weight .cr-size-and-weight .cr-size-weight .cr-kg {
-    padding: 10px 0 0 0;
-  }
-}
 /* Shop */
 .cr-shop-bredekamp {
   margin-bottom: 30px;
@@ -5552,7 +4782,7 @@ ul.navbar-nav .dropdown:hover .dropdown-menu {
 }
 .cr-shop-bredekamp .center-content span {
   padding: 0 12px;
-  font-family: "Poppins", sans-serif;
+  font-family: "Be Vietnam Pro", sans-serif;
   font-size: 14px;
   line-height: 1.875;
   color: #7a7a7a;
@@ -5567,14 +4797,14 @@ ul.navbar-nav .dropdown:hover .dropdown-menu {
   display: flex;
 }
 .cr-shop-bredekamp .cr-select label {
-  font-family: "Poppins", sans-serif;
+  font-family: "Be Vietnam Pro", sans-serif;
   font-size: 15px;
   line-height: 1.7;
   color: #7a7a7a;
 }
 .cr-shop-bredekamp .cr-select select {
   padding: 0 2rem 0 0.8rem;
-  font-family: "Poppins", sans-serif;
+  font-family: "Be Vietnam Pro", sans-serif;
   font-size: 15px;
   background-size: 10px;
   line-height: 1.2;
@@ -5598,7 +4828,7 @@ ul.navbar-nav .dropdown:hover .dropdown-menu {
 h4.cr-shop-sub-title {
   margin-bottom: 0px;
   padding-bottom: 10px;
-  font-family: "Poppins", sans-serif;
+  font-family: "Be Vietnam Pro", sans-serif;
   font-size: 16px;
   font-weight: 500;
   line-height: 1.6;
@@ -5640,7 +4870,7 @@ h4.cr-shop-sub-title {
 }
 .cr-checkbox .checkbox-group label {
   position: relative;
-  font-family: "Poppins", sans-serif;
+  font-family: "Be Vietnam Pro", sans-serif;
   font-size: 14px;
   color: #7a7a7a;
   cursor: pointer;
@@ -5661,7 +4891,7 @@ h4.cr-shop-sub-title {
   cursor: pointer;
 }
 .cr-checkbox .checkbox-group span {
-  font-family: "Poppins", sans-serif;
+  font-family: "Be Vietnam Pro", sans-serif;
   font-size: 12px;
   color: #7a7a7a;
   position: absolute;
@@ -5680,7 +4910,7 @@ h4.cr-shop-sub-title {
   display: flex;
 }
 .cr-shop-price .price-range-slider .range-value label {
-  font-family: "Poppins", sans-serif;
+  font-family: "Be Vietnam Pro", sans-serif;
   font-size: 15px;
   font-weight: bold;
   line-height: 1.2;
@@ -5690,7 +4920,7 @@ h4.cr-shop-sub-title {
   width: calc(100% - 50px);
   padding-left: 6px;
   background: none;
-  font-family: "Poppins", sans-serif;
+  font-family: "Be Vietnam Pro", sans-serif;
   font-size: 15px;
   font-weight: bold;
   line-height: 1.2;
@@ -5776,7 +5006,7 @@ ul.cr-tags li a {
   padding: 0 15px;
   margin: 5px;
   border-radius: 5px;
-  font-family: "Poppins", sans-serif;
+  font-family: "Be Vietnam Pro", sans-serif;
   font-size: 14px;
   background-color: #fff;
   color: #7a7a7a;
@@ -6061,20 +5291,20 @@ ul.cr-tags li a:hover {
   padding-bottom: 10px;
 }
 .cr-blog-classic .cr-blog-classic-content .cr-comment span {
-  font-family: "Poppins", sans-serif;
+  font-family: "Be Vietnam Pro", sans-serif;
   font-size: 12px;
   color: #64b496;
   line-height: 1;
 }
 .cr-blog-classic .cr-blog-classic-content .cr-comment span code {
-  font-family: "Poppins", sans-serif;
+  font-family: "Be Vietnam Pro", sans-serif;
   font-size: 12px;
   color: #7a7a7a;
 }
 .cr-blog-classic .cr-blog-classic-content h4 {
   margin-bottom: 0px;
   padding-bottom: 15px;
-  font-family: "Poppins", sans-serif;
+  font-family: "Be Vietnam Pro", sans-serif;
   font-size: 24px;
   font-weight: bold;
   line-height: 1.2;
@@ -6085,7 +5315,7 @@ ul.cr-tags li a:hover {
   font-size: 14px;
 }
 .cr-blog-classic .cr-blog-classic-content a {
-  font-family: "Poppins", sans-serif;
+  font-family: "Be Vietnam Pro", sans-serif;
   font-size: 14px;
   font-weight: bold;
   line-height: 1.875;
@@ -6141,13 +5371,8 @@ ul.cr-tags li a:hover {
   border-radius: 5px;
   outline: none;
 }
-.cr-blog-sideview .cr-serch-box .cr-search input::-moz-placeholder {
-  font-family: "Poppins", sans-serif;
-  font-size: 14px;
-  color: #7a7a7a;
-}
 .cr-blog-sideview .cr-serch-box .cr-search input::placeholder {
-  font-family: "Poppins", sans-serif;
+  font-family: "Be Vietnam Pro", sans-serif;
   font-size: 14px;
   color: #7a7a7a;
 }
@@ -6176,7 +5401,7 @@ ul.cr-tags li a:hover {
 }
 .cr-blog-sideview .blog-heading h4 {
   margin-bottom: 0;
-  font-family: "Poppins", sans-serif;
+  font-family: "Be Vietnam Pro", sans-serif;
   font-size: 16px;
   font-weight: 500;
   line-height: 1;
@@ -6194,7 +5419,7 @@ ul.cr-tags li a:hover {
 .cr-blog-categories-content ul li {
   padding: 12px;
   position: relative;
-  font-family: "Poppins", sans-serif;
+  font-family: "Be Vietnam Pro", sans-serif;
   font-size: 14px;
   line-height: 1;
   color: #7a7a7a;
@@ -6210,7 +5435,7 @@ ul.cr-tags li a:hover {
   position: absolute;
   right: 12px;
   font-size: 11px;
-  font-family: "Poppins", sans-serif;
+  font-family: "Be Vietnam Pro", sans-serif;
   color: #7a7a7a;
   line-height: 1;
 }
@@ -6233,7 +5458,7 @@ ul.cr-tags li a:hover {
   text-align: center;
 }
 .cr-blog-recent-post .cr-blog-recent-content span {
-  font-family: "Poppins", sans-serif;
+  font-family: "Be Vietnam Pro", sans-serif;
   font-size: 13px;
   color: #64b496;
   line-height: 2.5;
@@ -6241,7 +5466,7 @@ ul.cr-tags li a:hover {
 .cr-blog-recent-post .cr-blog-recent-content h4 {
   margin-bottom: 0px;
   padding-bottom: 5px;
-  font-family: "Poppins", sans-serif;
+  font-family: "Be Vietnam Pro", sans-serif;
   font-size: 14px;
   font-weight: bold;
   color: #2b2b2d;
@@ -6272,9 +5497,6 @@ ul.cr-tags li a:hover {
   }
   .cr-blog-sideview .cr-serch-box .cr-search input {
     padding-left: 8px;
-  }
-  .cr-blog-sideview .cr-serch-box .cr-search input::-moz-placeholder {
-    font-size: 12px;
   }
   .cr-blog-sideview .cr-serch-box .cr-search input::placeholder {
     font-size: 12px;
@@ -6314,14 +5536,14 @@ ul.cr-tags li a:hover {
   padding-bottom: 15px;
 }
 .cr-blog-details .cr-blog-details-content .cr-admin-date span {
-  font-family: "Poppins", sans-serif;
+  font-family: "Be Vietnam Pro", sans-serif;
   font-size: 15px;
   font-weight: 600;
   line-height: 2;
   color: #7a7a7a;
 }
 .cr-blog-details .cr-blog-details-content .cr-admin-date span code {
-  font-family: "Poppins", sans-serif;
+  font-family: "Be Vietnam Pro", sans-serif;
   font-size: 15px;
   font-weight: 600;
   line-height: 2;
@@ -6361,7 +5583,7 @@ ul.cr-tags li a:hover {
 }
 .cr-blog-inner-cols .cr-blog-inner-content p {
   padding-left: 35px;
-  font-family: "Poppins", sans-serif;
+  font-family: "Be Vietnam Pro", sans-serif;
   font-size: 16px;
   font-weight: bold;
   line-height: 1.8;
@@ -6390,7 +5612,7 @@ ul.cr-tags li a:hover {
 }
 .cr-blog-details-message p {
   padding-bottom: 15px;
-  font-family: "Poppins", sans-serif;
+  font-family: "Be Vietnam Pro", sans-serif;
   font-size: 14px;
   font-weight: 500;
   line-height: 2;
@@ -6398,7 +5620,7 @@ ul.cr-tags li a:hover {
 }
 .cr-blog-details-message h5.title {
   margin-bottom: 0px;
-  font-family: "Poppins", sans-serif;
+  font-family: "Be Vietnam Pro", sans-serif;
   font-size: 20px;
   font-weight: bold;
   line-height: 1;
@@ -6409,7 +5631,7 @@ ul.cr-tags li a:hover {
   margin-top: 30px;
 }
 .cr-blog-details-paragrap p {
-  font-family: "Poppins", sans-serif;
+  font-family: "Be Vietnam Pro", sans-serif;
   font-size: 14px;
   color: #7a7a7a;
   line-height: 1.867;
@@ -6433,7 +5655,7 @@ ul.cr-tags li a:hover {
 }
 .cr-blog-details-tags .cr-details-tags span {
   margin-right: 10px;
-  font-family: "Poppins", sans-serif;
+  font-family: "Be Vietnam Pro", sans-serif;
   font-size: 16px;
   font-weight: bold;
   line-height: 2;
@@ -6511,7 +5733,7 @@ ul.cr-tags li a:hover {
 .cr-faq .accordion .accordion-item .accordion-button {
   padding: 15px;
   background-color: transparent;
-  font-family: "Poppins", sans-serif;
+  font-family: "Be Vietnam Pro", sans-serif;
   font-size: 16px;
   color: #000;
 }
@@ -6561,7 +5783,7 @@ ul.cr-tags li a:hover {
 }
 .cr-about h4.heading {
   margin-bottom: 16px;
-  font-family: "Poppins", sans-serif;
+  font-family: "Be Vietnam Pro", sans-serif;
   font-size: 36px;
   font-weight: 700;
   line-height: 46px;
@@ -6596,7 +5818,7 @@ ul.cr-tags li a:hover {
   border: 1px solid #e9e9e9;
 }
 .cr-about-content h4.elementor {
-  font-family: "Poppins", sans-serif;
+  font-family: "Be Vietnam Pro", sans-serif;
   font-size: 60px;
   font-weight: 700;
   line-height: 1;
@@ -6615,7 +5837,7 @@ ul.cr-tags li a:hover {
   text-align: center;
 }
 .cr-about-content .elementor-counter-title span {
-  font-family: "Poppins", sans-serif;
+  font-family: "Be Vietnam Pro", sans-serif;
   font-size: 16px;
   font-weight: 600;
   line-height: 1;
@@ -6679,7 +5901,7 @@ ul.cr-tags li a:hover {
   color: #64b496;
 }
 .cr-info-box .cr-info-content h4.heading {
-  font-family: "Poppins", sans-serif;
+  font-family: "Be Vietnam Pro", sans-serif;
   font-size: 18px;
   font-weight: bold;
   color: #2b2b2d;
@@ -6698,9 +5920,6 @@ iframe {
   border-radius: 5px;
 }
 
-.cr-content-form .form-group {
-  margin-bottom: 24px;
-}
 .cr-content-form .form-group .cr-form-control {
   width: 100%;
   padding: 0.575rem 0.75rem;
@@ -6711,14 +5930,8 @@ iframe {
   color: #000;
   border: 1px solid #e9e9e9;
   outline: none;
-  -webkit-appearance: none;
-     -moz-appearance: none;
-          appearance: none;
+  appearance: none;
   border-radius: 5px;
-}
-.cr-content-form .form-group .cr-form-control::-moz-placeholder {
-  font-size: 14px;
-  color: #777;
 }
 .cr-content-form .form-group .cr-form-control::placeholder {
   font-size: 14px;
@@ -6762,16 +5975,21 @@ iframe {
   color: #444;
   font-size: 15px;
   font-weight: 600;
-  text-align: left;
+  text-align: center;
   text-transform: capitalize;
   vertical-align: middle;
   white-space: nowrap;
   line-height: 1;
   letter-spacing: 0;
-  background-color: #e9e9e9;
+  background-color: #e4f2ed;
 }
 .cr-table-content table tbody tr {
   border-bottom: 1px solid #e9e9e9;
+}
+.cr-table-content table tbody tr .cr-cart-checkbox {
+  text-align: center;
+  width: 60px;
+  padding-right: 0;
 }
 .cr-table-content table tbody tr .cr-cart-name {
   width: 40%;
@@ -6790,15 +6008,17 @@ iframe {
   color: #555;
   font-size: 15px;
   font-weight: 500;
+  text-align: center;
 }
 .cr-table-content table tbody tr .cr-cart-subtotal {
   color: #555;
   font-weight: 500;
   font-size: 15px;
+  text-align: center;
 }
 .cr-table-content table tbody tr .cr-cart-remove {
   width: 90px;
-  text-align: right;
+  text-align: center;
 }
 .cr-table-content table tbody tr .cr-cart-remove a {
   margin: 0 auto;
@@ -6816,6 +6036,7 @@ iframe {
   font-size: 16px;
   text-align: left;
   background-color: #f7f7f8;
+  vertical-align: middle;
 }
 .cr-table-content table tbody tr td .cr-cart-img {
   width: 60px;
@@ -6867,6 +6088,24 @@ iframe {
   align-items: center;
 }
 
+.cr-cart-summary {
+  margin-top: 30px; /* Khoảng cách giữa giỏ hàng và tổng giá trị */
+  display: flex;
+  justify-content: flex-end; /* Đẩy phần tổng sang bên phải */
+}
+
+.summary-sub-total {
+  margin-left: auto; /* Đẩy sang bên phải */
+  padding: 10px;
+  border: 1px solid #e9e9e9; /* Thêm viền nếu cần */
+  border-radius: 5px; /* Bo góc */
+}
+
+.summary-table {
+  width: auto; /* Đặt chiều rộng tự động */
+  margin: 0; /* Bỏ margin */
+}
+
 .cr-cart-update-bottom {
   padding: 30px 0 0;
   display: flex;
@@ -6909,14 +6148,6 @@ iframe {
   background-color: #fff;
   border: 1px solid #e9e9e9;
   border-radius: 5px;
-}
-.cr-login .cr-content-form .form-group label {
-  margin-bottom: 9px;
-  color: #444;
-  font-size: 15px;
-  font-weight: 500;
-  letter-spacing: 0;
-  line-height: 1;
 }
 .cr-login .cr-content-form .remember {
   color: #777;
@@ -7027,14 +6258,6 @@ iframe {
   border: 1px solid #e9e9e9;
   border-radius: 5px;
 }
-.cr-register form .form-group label {
-  margin-bottom: 9px;
-  color: #444;
-  font-size: 15px;
-  font-weight: 500;
-  letter-spacing: 0;
-  line-height: 1;
-}
 .cr-register form .form-group .cr-form-control {
   font-size: 14px;
   color: #777;
@@ -7116,13 +6339,14 @@ iframe {
 
 .has-error .error-message {
   margin-top: 5px;
+  font-size: 16px;
 }
 
 /* elemets-products */
 .cr-product-csc {
   transition: all 0.4s ease-out;
   background-color: #fff;
-  font-family: "Poppins", sans-serif;
+  font-family: "Be Vietnam Pro", sans-serif;
   text-align: center;
   border: 1px solid #e9e9e9;
   overflow: hidden;
@@ -7231,7 +6455,7 @@ iframe {
   line-height: 30px;
   text-align: justify;
   letter-spacing: 1px;
-  font-family: "Poppins", sans-serif;
+  font-family: "Be Vietnam Pro", sans-serif;
 }
 .typography .cr-disc li {
   margin-bottom: 15px;
@@ -7939,6 +7163,7 @@ iframe {
   padding: 30px 15px;
   display: table-cell;
   position: relative;
+  -webkit-transition: all 0.25s ease-in-out;
   transition: all 0.25s ease-in-out;
   border-right: 1px solid #e9e9e9;
   color: #777;
@@ -7956,6 +7181,7 @@ iframe {
   text-decoration: none;
 }
 .cr-track .cr-step:hover .cr-step-indicator {
+  -webkit-transition: all 0.25s ease-in-out;
   transition: all 0.25s ease-in-out;
   border-color: transparent;
   background-color: #e9e9e9;
@@ -7993,6 +7219,7 @@ iframe {
   height: 1.5rem;
   margin: 0 auto;
   margin-bottom: 0.75rem;
+  -webkit-transition: all 0.25s ease-in-out;
   transition: all 0.25s ease-in-out;
   color: #999;
   font-size: 22px;
@@ -8140,8 +7367,10 @@ table {
   top: 4px;
   left: 4px;
   border-radius: 100%;
+  -webkit-transition: all 0.2s ease;
   transition: all 0.2s ease;
   opacity: 1;
+  -webkit-transform: scale(1);
   transform: scale(1);
 }
 .cr-checkout-section [type=radio]:not(:checked) {
@@ -8178,8 +7407,10 @@ table {
   top: 4px;
   left: 4px;
   border-radius: 100%;
+  -webkit-transition: all 0.2s ease;
   transition: all 0.2s ease;
   opacity: 0;
+  -webkit-transform: scale(0);
   transform: scale(0);
 }
 
@@ -8408,9 +7639,7 @@ table {
 }
 .cr-checkout-wrap .cr-check-bill-form .cr-bl-select-inner select {
   padding: 0 15px;
-  -webkit-appearance: none;
-     -moz-appearance: none;
-          appearance: none;
+  appearance: none;
   outline: 0;
   box-shadow: none;
   border: 0 !important;
@@ -8496,12 +7725,12 @@ table {
   font-size: 16px;
   font-weight: 600;
   color: #2b2b2d;
-  font-family: "Poppins", sans-serif;
+  font-family: "Be Vietnam Pro", sans-serif;
 }
 .cr-checkout-summary .cr-checkout-summary-total .text-right {
   font-size: 16px;
   font-weight: 600;
-  font-family: "Poppins", sans-serif;
+  font-family: "Be Vietnam Pro", sans-serif;
 }
 
 /*-----  Sidebar Page CSS  ------*/
@@ -8728,6 +7957,7 @@ table {
   background-color: #ffffff;
   border: 1px solid #ededed;
   border-radius: 4px;
+  -webkit-transition: all 300ms linear;
   transition: all 300ms linear;
 }
 .cr-sidebar-wrap.cr-checkout-pay-wrap .cr-pay-agree .checked:after {
@@ -8807,24 +8037,202 @@ table {
     margin-bottom: 24px;
   }
 }
-.verify-email::before {
-  content: "";
-  position: absolute;
-  left: -15px;
-  top: calc(50% - 8px);
-  transform: translateY(calc(-50% + 8px));
-  width: 0;
-  height: 0;
-  border-top: 15px solid transparent;
-  border-bottom: 15px solid transparent;
-  border-right: 15px solid rgba(254, 202, 202, 0.5);
+.section-profile {
+  padding: 100px 0;
 }
 
-body {
-  font-family: "Arial", sans-serif;
-  background-color: #f7f7f7;
-  margin: 0;
-  padding: 0;
+.profile-card {
+  border: 1px solid #ddd;
+  padding: 20px;
+  border-radius: 10px;
+  background-color: #fff;
+}
+
+.logo-container {
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.logo {
+  width: 150px; /* Kích thước của logo */
+  height: auto;
+}
+
+.left-section {
+  text-align: center;
+  padding: 20px;
+  border-right: 1px solid #ddd;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Form styles */
+.cr-content-form input,
+.cr-content-form select {
+  border: 1px solid #d1d5db;
+  border-radius: 4px;
+  padding: 10px;
+  font-size: 16px;
+  width: 100%;
+  transition: all 0.3s ease;
+  background-color: #f9fafb;
+}
+
+.cr-content-form input:focus,
+.cr-content-form select:focus {
+  border-color: #10b981;
+  box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.3);
+}
+
+.avatar-container {
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.avatar {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.user-info {
+  font-size: 16px;
+  text-align: center;
+}
+
+.name {
+  font-size: 22px;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.gender, .membership {
+  font-size: 14px;
+  color: #666;
+}
+
+.profile-form .form-group {
+  margin-bottom: 15px;
+}
+
+.label {
+  font-size: 14px;
+  color: #333;
+}
+
+.form-control {
+  width: 100%;
+  padding: 10px;
+  border-radius: 5px;
+  border: 1px solid #ddd;
+  font-size: 14px;
+  background-color: #f9f9f9;
+  color: #333;
+}
+
+.update-button {
+  background-color: #4CAF50;
+  color: #fff;
+  padding: 10px 20px;
+  border-radius: 5px;
+  text-decoration: none;
+  font-size: 16px;
+  transition: background-color 0.3s;
+}
+
+.update-button:hover {
+  background-color: #45a049;
+}
+
+.button-container {
+  text-align: right;
+  margin-top: 20px;
+}
+
+@media (max-width: 768px) {
+  .left-section {
+    text-align: center;
+    padding: 10px;
+    border-right: none;
+  }
+  .col-md-4, .col-md-8 {
+    width: 100%;
+    margin-bottom: 20px;
+  }
+  .profile-card {
+    padding: 15px;
+  }
+}
+/* Logo */
+.logo-container .logo {
+  display: block;
+  margin: 0 auto;
+  width: 200px; /* Điều chỉnh kích thước logo */
+  height: auto;
+}
+
+/* Avatar */
+.avatar-container .avatar {
+  width: 100px; /* Kích thước avatar */
+  height: 100px;
+  border-radius: 50%;
+  border: 2px solid #ddd; /* Đường viền avatar */
+  margin-bottom: 15px;
+}
+
+/* Section bên trái */
+.left-section {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding-bottom: 20px;
+}
+
+/* Chỉnh các thành phần trong form */
+.profile-form .form-group {
+  margin-bottom: 1rem;
+}
+
+/* Group buttons */
+.button-group {
+  display: flex;
+  justify-content: space-between; /* Đặt hai nút ở hai bên */
+  gap: 10px;
+  margin-top: 20px;
+}
+
+/* Các nút */
+.update-button, .change-password-button {
+  display: inline-block;
+  padding: 10px 20px;
+  font-size: 14px; /* Giảm kích thước font để thu nhỏ lại */
+  border-radius: 5px;
+  width: 22%; /* Chiếm 48% chiều rộng của container */
+  text-align: center;
+  transition: background-color 0.3s;
+}
+
+.update-button {
+  background-color: #4CAF50;
+  color: white;
+}
+
+.update-button:hover {
+  background-color: #45a049;
+}
+
+.change-password-button {
+  background-color: #ff6f00; /* Màu cam */
+  color: white;
+}
+
+.change-password-button:hover {
+  background-color: #e65c00;
 }
 
 .review-section {
@@ -8835,7 +8243,6 @@ body {
   border-radius: 12px;
   box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
   border: 1px solid #e0e0e0;
-  font-family: "Poppins", sans-serif;
 }
 .review-section h1 {
   font-size: 26px;
@@ -8850,7 +8257,6 @@ body {
 }
 
 .product-info {
-  font-family: "Poppins", sans-serif;
   font-size: 16px;
   color: #555;
 }
@@ -9033,4 +8439,1082 @@ input[type=radio]:checked ~ .rating .star-rating .star:hover, input[type=radio]:
 }
 .submit-review .submit-btn:hover {
   background-color: #2e5c38;
-}/*# sourceMappingURL=style.css.map */
+}
+
+.checkmark-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+}
+
+.checkmark {
+  width: 80px;
+  height: 80px;
+}
+
+.checkmark-circle {
+  fill: #64b595;
+  opacity: 0;
+}
+
+.checkmark-check {
+  fill: none;
+  stroke: white;
+  stroke-width: 5;
+  stroke-dasharray: 48;
+  stroke-dashoffset: 48;
+}
+
+.circle-animation {
+  animation: circle-animation 0.3s ease-in-out 0.3s forwards;
+}
+
+.check-animation {
+  animation: check-animation 0.3s ease-in-out 0.3s forwards;
+}
+
+@keyframes circle-animation {
+  0% {
+    r: 0;
+    opacity: 0;
+  }
+  50% {
+    r: 25;
+    opacity: 1;
+  }
+  100% {
+    r: 25;
+    opacity: 1;
+  }
+}
+@keyframes circle-fade-out {
+  0% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+@keyframes check-animation {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+.success-message {
+  font-size: 18px;
+  color: #64b595;
+  margin-top: 20px;
+  text-align: center;
+}
+
+.fade-in {
+  animation: fadeIn 0.5s ease-in forwards;
+}
+
+.fade-out {
+  animation: fadeOut 0.5s ease-in-out forwards;
+}
+
+.topdown {
+  animation: topdown 0.3s ease-in-out forwards;
+}
+
+.bottomup {
+  animation: bottomup 0.2s linear forwards;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+@keyframes fadeOut {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
+@keyframes topdown {
+  from {
+    transform: translate(-50%, -250%);
+  }
+  to {
+    transform: translate(-50%, 0);
+  }
+}
+@keyframes bottomup {
+  from {
+    transform: translate(-50%, 0);
+  }
+  to {
+    transform: translate(-50%, -250%);
+  }
+}
+/* Products-page */
+p {
+  margin-bottom: 0px;
+  font-size: 14px;
+  color: #7a7a7a;
+  line-height: 1.75;
+}
+
+#author .cr-tab-content .cr-description {
+  display: flex;
+  gap: 50px;
+  padding: 30px 200px 0;
+}
+#author .cr-tab-content .cr-description img {
+  width: 250px;
+}
+
+.section-related-products {
+  padding: 70px 0;
+}
+
+.cr-product-card {
+  height: 100%;
+  padding: 12px;
+  border: 1px solid #e9e9e9;
+  background-color: #fff;
+  border-radius: 5px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+.cr-product-card:hover .cr-product-image .cr-side-view {
+  right: 12px;
+  opacity: 1;
+}
+.cr-product-card .cr-product-image {
+  border-radius: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+.cr-product-card .cr-product-image .cr-side-view {
+  transition: all 0.5s ease-in-out;
+  position: absolute;
+  z-index: 20;
+  transition: all 0.4s ease-in-out;
+  top: 15px;
+  right: -40px;
+  display: grid;
+  opacity: 0;
+}
+.cr-product-card .cr-product-image .cr-side-view a {
+  width: 35px;
+  height: 35px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0;
+  padding: 0;
+  border: none;
+  background-color: transparent;
+  background-color: #fff;
+  border: 1px solid #e9e9e9;
+  border-radius: 100%;
+}
+.cr-product-card .cr-product-image .cr-side-view a:last-child {
+  margin-top: 5px;
+}
+.cr-product-card .cr-product-image .cr-side-view a i {
+  font-size: 18px;
+  line-height: 10px;
+}
+.cr-product-card .cr-product-image .cr-side-view .wishlist.active {
+  background-color: #64b496;
+  color: #fff;
+}
+.cr-product-card .cr-product-image .cr-image-inner {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+}
+.cr-product-card .cr-product-image .cr-image-inner img {
+  width: 100%;
+  border-radius: 5px;
+}
+.cr-product-card .cr-product-image .cr-shopping-bag {
+  height: 35px;
+  width: 35px;
+  position: absolute;
+  bottom: -16px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #f7f7f8;
+  border: 1px solid #e9e9e9;
+  border-radius: 100%;
+}
+.cr-product-card .cr-product-image .cr-shopping-bag i {
+  color: #64b496;
+}
+.cr-product-card .cr-product-image .cr-shopping-bag.active {
+  background-color: #64b496;
+  border: 1px solid #64b496;
+}
+.cr-product-card .cr-product-image .cr-shopping-bag.active i {
+  color: #fff;
+}
+.cr-product-card .cr-product-image .cr-remove-product {
+  margin-bottom: 5px !important;
+  background-color: #000 !important;
+  color: #fff;
+}
+
+.cr-product-details {
+  padding-top: 24px;
+  text-align: center;
+  overflow: hidden;
+}
+.cr-product-details .cr-brand a {
+  transition: all 0.3s ease-in-out;
+  margin-bottom: 5px;
+  font-size: 13px;
+  color: #777;
+  display: flex;
+  justify-content: center;
+}
+.cr-product-details .cr-brand a:hover {
+  color: #64b496;
+}
+.cr-product-details .cr-star {
+  margin-bottom: 12px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.cr-product-details .cr-star p {
+  margin-left: 5px;
+  color: #999;
+  font-size: 11px;
+  line-height: 10px;
+}
+.cr-product-details .cr-star i {
+  margin: 0 1px;
+  font-size: 15px;
+  color: #f5885f;
+}
+.cr-product-details a.title {
+  transition: all 0.3s ease-in-out;
+  margin-bottom: 12px;
+  font-family: "Be Vietnam Pro", sans-serif;
+  font-size: 15px;
+  font-weight: 500;
+  line-height: 24px;
+  color: #2b2b2d;
+  display: flex;
+  justify-content: center;
+}
+.cr-product-details a.title:hover {
+  color: #64b496;
+}
+.cr-product-details p.cr-price {
+  font-family: "Be Vietnam Pro", sans-serif;
+  font-size: 16px;
+  line-height: 1.75;
+}
+.cr-product-details p.cr-price .new-price {
+  color: #64b496;
+  font-weight: 700;
+}
+.cr-product-details p.cr-price .old-price {
+  margin-left: 5px;
+  font-size: 13px;
+  text-decoration: line-through;
+}
+
+.cr-product-info {
+  margin-top: 15px;
+  padding-top: 15px;
+  border-top: 1px solid #eee;
+}
+.cr-product-info ul {
+  margin: 0;
+  padding: 0;
+}
+.cr-product-info ul li {
+  padding: 5px 0;
+  list-style: none;
+  font-size: 14px;
+  color: #777;
+}
+
+.product-tabs {
+  display: flex;
+}
+.product-tabs .nav-tabs {
+  border: none;
+  display: block;
+}
+.product-tabs .nav-tabs .nav-link {
+  margin-bottom: 10px;
+  margin-right: 10px;
+  padding: 0;
+  border: none;
+  background-color: #fff;
+  border-radius: 5px;
+}
+.product-tabs .nav-tabs .nav-link img {
+  width: 60px;
+  height: 60px;
+  padding: 10px;
+  border: 1px solid #e9e9e9;
+  border-radius: 5px;
+}
+.product-tabs .nav-tabs .nav-link.active {
+  border: none;
+}
+.product-tabs .tab-content {
+  width: 100%;
+  height: 100%;
+  border-radius: 5px;
+}
+
+.cr-size-and-weight-contain {
+  border-bottom: 1px solid #e9e9e9;
+  padding-bottom: 20px;
+}
+.cr-size-and-weight-contain h2.heading {
+  margin: 0 0 15px 0;
+  display: block;
+  color: #2b2b2d;
+  font-size: 22px;
+  text-decoration: none;
+  line-height: 1.5;
+  font-weight: 500;
+}
+.cr-size-and-weight-contain p {
+  font-size: 14px;
+}
+
+.cr-size-and-weight {
+  padding-top: 20px;
+}
+.cr-size-and-weight .list ul {
+  margin-top: 15px;
+  padding: 0;
+}
+.cr-size-and-weight .list ul li {
+  padding: 5px 0;
+  color: #777;
+  list-style: none;
+  display: flex;
+}
+.cr-size-and-weight .list ul li label {
+  min-width: 100px;
+  margin-right: 10px;
+  color: #2b2b2d;
+  font-weight: 600;
+  display: flex;
+  justify-content: space-between;
+}
+.cr-size-and-weight .cr-review-star {
+  display: flex;
+}
+.cr-size-and-weight .cr-review-star .cr-star {
+  margin-right: 10px;
+}
+.cr-size-and-weight .cr-review-star .cr-star i {
+  font-size: 16px;
+  color: #f5885f;
+}
+.cr-size-and-weight .cr-review-star p {
+  font-size: 15px;
+}
+.cr-size-and-weight .cr-product-price {
+  padding-top: 20px;
+}
+.cr-size-and-weight .cr-product-price span.new-price {
+  font-family: "Be Vietnam Pro", sans-serif;
+  font-size: 24px;
+  font-weight: 600;
+  line-height: 1.167;
+  color: #64b496;
+}
+.cr-size-and-weight .cr-product-price span.old-price {
+  font-family: "Be Vietnam Pro", sans-serif;
+  font-size: 16px;
+  text-decoration: line-through;
+  line-height: 1.75;
+  color: #7a7a7a;
+}
+.cr-size-and-weight .cr-size-weight {
+  display: flex;
+  align-items: center;
+  padding-top: 20px;
+}
+.cr-size-and-weight .cr-size-weight h5 {
+  margin-bottom: 0;
+  font-family: "Be Vietnam Pro", sans-serif;
+  font-size: 16px;
+  line-height: 1.556;
+  color: #2b2b2d;
+}
+.cr-size-and-weight .cr-size-weight .cr-kg {
+  padding-left: 10px;
+}
+.cr-size-and-weight .cr-size-weight .cr-kg ul {
+  width: 100%;
+  padding: 0;
+  margin: 0;
+  list-style-type: none;
+  display: flex;
+  flex-wrap: wrap;
+}
+.cr-size-and-weight .cr-size-weight .cr-kg ul li {
+  margin: 2px;
+  padding: 5px 10px;
+  font-family: "Be Vietnam Pro", sans-serif;
+  font-size: 12px;
+  line-height: 1;
+  background-color: #fff;
+  color: #777;
+  border: 1px solid #e9e9e9;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: 0.3s ease-in-out;
+}
+.cr-size-and-weight .cr-size-weight .cr-kg ul .active-color {
+  background-color: #64b496;
+  color: #fff;
+}
+.cr-size-and-weight .cr-add-card {
+  display: flex;
+  padding-top: 20px;
+}
+.cr-size-and-weight .cr-add-card .cr-qty-main {
+  height: 100%;
+  display: flex;
+  position: relative;
+}
+.cr-size-and-weight .cr-add-card .cr-qty-main input {
+  height: 40px;
+  width: 40px;
+  margin-right: 5px;
+  text-align: center;
+  border: 1px solid #e9e9e9;
+  border-radius: 5px;
+}
+.cr-size-and-weight .cr-add-card .cr-qty-main button {
+  height: 18px;
+  width: 18px;
+  padding: 0;
+  background-color: #fff;
+  border: 1px solid #e9e9e9;
+  border-radius: 5px;
+  line-height: 0;
+}
+.cr-size-and-weight .cr-add-card .cr-qty-main .minus {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+}
+.cr-size-and-weight .cr-add-card .cr-add-button {
+  margin-left: 15px;
+}
+.cr-size-and-weight .cr-add-card .cr-buy-button {
+  margin-left: 15px;
+}
+.cr-size-and-weight .cr-add-card .cr-card-icon {
+  margin-left: 15px;
+  display: flex;
+}
+.cr-size-and-weight .cr-add-card .cr-card-icon a {
+  margin: 0;
+  padding: 0;
+  background-color: transparent;
+}
+.cr-size-and-weight .cr-add-card .cr-card-icon a i {
+  height: 40px;
+  width: 40px;
+  margin-right: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 22px;
+  background-color: #fff;
+  transition: all 0.3s ease 0s;
+  border: 1px solid #e9e9e9;
+  border-radius: 5px;
+}
+.cr-size-and-weight .cr-add-card .cr-card-icon a i:hover {
+  background-color: #64b496;
+  color: #fff;
+}
+
+.thumb-image {
+  margin: 0 -6px;
+}
+
+.thumbnail-image .thumbImg {
+  margin: 0 6px;
+  border: 1px solid #e9e9e9;
+  border-radius: 5px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.thumbnail-image .thumbImg img {
+  width: 100%;
+  padding: 2px;
+  border-radius: 5px;
+}
+
+.vehicle-detail-banner {
+  height: 100%;
+}
+.vehicle-detail-banner .banner-slider {
+  position: sticky;
+  top: 30px;
+}
+
+.zoom-image-hover {
+  height: 100%;
+  display: flex;
+  align-items: center;
+  text-align: center;
+  border: 1px solid #e9e9e9;
+  background-color: #f7f7f8;
+  border-radius: 5px;
+  cursor: crosshair;
+}
+.zoom-image-hover img {
+  width: 100%;
+  display: block;
+  margin: auto;
+}
+
+.vehicle-detail-banner .banner-slider .slider-for {
+  padding-bottom: 15px;
+}
+
+.cr-paking-delivery {
+  margin-top: 40px;
+  padding: 24px;
+  background-color: #fff;
+  border: 1px solid #e9e9e9;
+  border-radius: 5px;
+}
+.cr-paking-delivery .nav-tabs {
+  display: flex;
+  justify-content: left;
+}
+.cr-paking-delivery .nav-tabs .nav-item {
+  margin-right: 30px;
+  position: relative;
+}
+.cr-paking-delivery .nav-tabs .nav-item .nav-link {
+  margin-bottom: 25px;
+  padding: 0;
+  font-family: "Be Vietnam Pro", sans-serif;
+  font-size: 17px;
+  font-weight: 600;
+  line-height: 1.5;
+  color: #2b2b2d;
+  border: 0;
+  text-align: left;
+}
+.cr-paking-delivery .nav-tabs .nav-item .nav-link::after {
+  transition: all 0.3s ease 0s;
+  height: 2px;
+  width: 0;
+  margin: 0 auto;
+  content: "";
+  position: absolute;
+  top: auto;
+  bottom: 0;
+  background-color: #64b496;
+  left: 0;
+  right: auto;
+}
+.cr-paking-delivery .nav-tabs .nav-item .nav-link:hover::after {
+  width: 100%;
+  background-color: #64b496;
+}
+.cr-paking-delivery .nav-tabs .nav-item .nav-link.active {
+  color: #64b496;
+}
+.cr-paking-delivery .nav-tabs .nav-item .nav-link.active::after {
+  transition: all 0.3s ease 0s;
+  height: 2px;
+  width: 100%;
+  margin: 0 auto;
+  content: "";
+  position: absolute;
+  top: auto;
+  bottom: 0;
+  background-color: #64b496;
+  left: 0;
+  right: auto;
+}
+.cr-paking-delivery .cr-tab-content .list ul {
+  margin-top: 30px;
+  margin-bottom: -5px;
+  padding: 0;
+}
+.cr-paking-delivery .cr-tab-content .list ul li {
+  padding: 5px 0;
+  color: #777;
+  list-style: none;
+  display: flex;
+}
+.cr-paking-delivery .cr-tab-content .list ul li label {
+  min-width: 100px;
+  margin-right: 10px;
+  color: #2b2b2d;
+  font-weight: 600;
+  display: flex;
+  justify-content: space-between;
+}
+.cr-paking-delivery .cr-tab-content .cr-description {
+  padding-top: 30px;
+}
+.cr-paking-delivery .cr-tab-content .cr-description p {
+  font-size: 14px;
+  text-align: left;
+}
+.cr-paking-delivery .cr-tab-content h4.heading {
+  margin-bottom: 0;
+  padding-top: 30px;
+  padding-bottom: 20px;
+  font-family: "Be Vietnam Pro", sans-serif;
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 1.5;
+  text-align: left;
+  color: #2b2b2d;
+  border-bottom: 1px solid #e9e9e9;
+}
+
+.cr-tab-content-from {
+  padding-top: 30px;
+}
+.cr-tab-content-from h4.heading {
+  font-family: "Be Vietnam Pro", sans-serif;
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 1.5;
+  color: #2b2b2d;
+  padding-bottom: 10px;
+}
+.cr-tab-content-from .cr-ratting-star {
+  display: flex;
+}
+.cr-tab-content-from .cr-ratting-star span {
+  font-family: "Be Vietnam Pro", sans-serif;
+  font-size: 14px;
+  color: #7a7a7a;
+  line-height: 1.75;
+  margin-right: 10px;
+}
+.cr-tab-content-from .cr-ratting-star .cr-t-review-rating {
+  margin-bottom: 20px;
+}
+.cr-tab-content-from .cr-ratting-star .cr-t-review-rating i {
+  font-size: 19px;
+  letter-spacing: -5px;
+}
+.cr-tab-content-from .cr-ratting-star .cr-t-review-rating .ri-star-s-fill {
+  color: #f5885f;
+}
+.cr-tab-content-from .cr-ratting-star .cr-t-review-rating .ri-star-s-line {
+  color: #999;
+}
+.cr-tab-content-from .cr-ratting-input:not(:last-child) {
+  margin-bottom: 10px;
+}
+.cr-tab-content-from .cr-ratting-input input {
+  width: 100%;
+  height: 50px;
+  margin-bottom: 15px;
+  padding: 5px 20px;
+  outline: none;
+  box-shadow: none;
+  border: 1px solid #e9e9e9;
+  border-radius: 5px;
+  color: #777;
+  font-size: 14px;
+}
+.cr-tab-content-from .cr-ratting-input textarea {
+  height: 150px;
+  width: 100%;
+  margin-bottom: 15px;
+  padding: 20px;
+  background-color: transparent;
+  font-size: 14px;
+  border: 1px solid #e9e9e9;
+  border-radius: 5px;
+  color: #777;
+  outline: none;
+}
+.cr-tab-content-from .post {
+  margin-bottom: 30px;
+}
+.cr-tab-content-from .post .content {
+  display: flex;
+}
+.cr-tab-content-from .post .content img {
+  width: 50px;
+  height: 50px;
+  margin-right: 24px;
+  border-radius: 5px;
+}
+.cr-tab-content-from .post .content .details {
+  display: flex;
+  flex-direction: column;
+}
+.cr-tab-content-from .post .content .details .date {
+  margin-bottom: 10px;
+  font-size: 13px;
+  color: #777;
+}
+.cr-tab-content-from .post .content .details .name {
+  margin-bottom: 10px;
+  font-weight: 500;
+  font-size: 17px;
+}
+.cr-tab-content-from .post p {
+  padding-left: 74px;
+}
+.cr-tab-content-from .post .cr-t-review-rating {
+  margin-left: auto;
+  margin-bottom: 20px;
+}
+.cr-tab-content-from .post .cr-t-review-rating i {
+  font-size: 19px;
+  letter-spacing: 0;
+}
+.cr-tab-content-from .post .cr-t-review-rating .ri-star-s-fill {
+  color: #f5885f;
+  letter-spacing: -5px;
+}
+.cr-tab-content-from .post .cr-t-review-rating .ri-star-s-line {
+  color: #999;
+}
+.cr-tab-content-from .review-list {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 40px;
+  padding: 0 10px;
+}
+.cr-tab-content-from .review-list .review-item {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+.cr-tab-content-from .review-list .review-item__top {
+  display: flex;
+  justify-content: center;
+}
+.cr-tab-content-from .review-list .review-item__top img {
+  width: 50px;
+  height: 50px;
+  margin-right: 24px;
+  border-radius: 5px;
+}
+.cr-tab-content-from .review-list .review-item__top .details {
+  display: flex;
+  flex-direction: column;
+}
+.cr-tab-content-from .review-list .review-item__top .details .date {
+  margin-bottom: 10px;
+  font-size: 13px;
+  color: #777;
+}
+.cr-tab-content-from .review-list .review-item__top .details .name {
+  margin-bottom: 10px;
+  font-weight: 500;
+  font-size: 17px;
+}
+.cr-tab-content-from .review-list p {
+  padding-left: 74px;
+}
+.cr-tab-content-from .review-list .cr-t-review-rating {
+  margin-left: auto;
+  margin-bottom: 20px;
+}
+.cr-tab-content-from .review-list .cr-t-review-rating i {
+  font-size: 19px;
+  letter-spacing: 0;
+}
+.cr-tab-content-from .review-list .cr-t-review-rating .ri-star-s-fill {
+  color: #f5885f;
+  letter-spacing: -5px;
+}
+.cr-tab-content-from .review-list .cr-t-review-rating .ri-star-s-line {
+  color: #999;
+}
+
+.modal-border-image {
+  border: 1px solid #e9e9e9;
+}
+
+/* Responsive */
+@media only screen and (max-width: 1399px) {
+  .cr-paking-delivery .nav-tabs .nav-item .nav-link {
+    font-size: 18px;
+  }
+  .cr-size-and-weight-contain h2.heading {
+    font-size: 26px;
+  }
+}
+@media only screen and (max-width: 1199px) {
+  .cr-product-details {
+    padding-top: 20px;
+  }
+  .cr-product-details h5 {
+    margin-bottom: 0;
+    font-size: 15px;
+  }
+  .cr-product-details p.cr-price {
+    font-size: 14px;
+  }
+  .cr-product-details p.cr-price .old-price {
+    font-size: 12px;
+  }
+  .cr-size-and-weight .cr-size-weight h5 {
+    min-width: 100px;
+    font-size: 14px;
+  }
+  .cr-size-and-weight .cr-size-weight .cr-kg ul li {
+    font-size: 12px;
+    margin-right: 5px;
+  }
+  .cr-add-button .cr-button,
+  .cr-buy-button .cr-button {
+    padding: 8px 15px;
+  }
+}
+@media only screen and (max-width: 991px) {
+  .cr-product-card .cr-product-image .cr-side-view {
+    right: 12px;
+  }
+  .cr-product-card .cr-product-image .cr-image-inner {
+    pointer-events: none;
+  }
+  .product-tabs {
+    margin-bottom: 24px;
+  }
+  .cr-size-and-weight-contain h2.heading {
+    font-size: 20px;
+  }
+  .cr-products-categories {
+    max-width: 350px;
+    margin: auto;
+  }
+}
+@media only screen and (max-width: 767px) {
+  .cr-paking-delivery .nav-tabs .nav-item .nav-link {
+    font-size: 16px;
+  }
+  .cr-products-categories {
+    max-width: 300px;
+    margin: auto;
+  }
+  .cr-size-and-weight .cr-product-price span.new-price {
+    font-size: 22px;
+  }
+  .cr-size-and-weight-contain {
+    margin-top: 24px;
+  }
+}
+@media only screen and (max-width: 575px) {
+  .cr-paking-delivery .nav-tabs .nav-item .nav-link {
+    margin-bottom: 15px;
+  }
+  .cr-paking-delivery .nav-tabs .nav-item .nav-link.active:after {
+    display: none;
+  }
+  /* model */
+  .cr-model .cr-modal-dialog {
+    max-width: 400px;
+    width: 400px;
+  }
+  .cr-product-card-block .col-lg-4 .cr-product-card {
+    max-width: 100%;
+  }
+  .product-tabs {
+    display: block;
+  }
+  .product-tabs .nav-tabs {
+    display: flex;
+  }
+  .cr-tab-content-from .post p {
+    padding: 0;
+  }
+  .cr-tab-content-from .post .cr-t-review-rating {
+    margin: 0 0 24px 0;
+  }
+  .cr-tab-content-from .post .content {
+    flex-direction: column;
+  }
+  .cr-tab-content-from .post .content img {
+    margin: 0 0 24px 0;
+  }
+  .cr-size-and-weight .cr-product-price span.new-price {
+    font-size: 20px;
+  }
+}
+@media only screen and (max-width: 480px) {
+  .cr-product-box,
+  .cr-product-card {
+    width: 100%;
+  }
+  .banner-480 {
+    display: none;
+  }
+}
+@media only screen and (max-width: 380px) {
+  .cr-add-button {
+    display: none;
+  }
+  .cr-size-and-weight .cr-review-star p {
+    display: none;
+  }
+  .cr-size-and-weight .cr-buy-button {
+    display: none;
+  }
+  .cr-size-and-weight .cr-size-and-weight .cr-review-star p {
+    display: none;
+  }
+  .cr-size-and-weight .cr-size-and-weight .cr-size-weight {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+  }
+  .cr-size-and-weight .cr-size-and-weight .cr-size-weight .cr-kg {
+    padding: 10px 0 0 0;
+  }
+}
+.review-list {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  padding: 0 10px;
+}
+.review-list .review-item {
+  display: flex;
+  padding: 16px;
+  border: 1px solid #eaeaea;
+  border-radius: 15px;
+  background-color: #fff;
+  margin-bottom: 8px;
+}
+.review-list .review-item__image {
+  flex-shrink: 0;
+  width: 50px;
+  height: 50px;
+  margin-right: 12px;
+}
+.review-list .review-item__image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 50%;
+}
+.review-list .review-item__content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+.review-list .review-item__content .header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 8px;
+}
+.review-list .review-item__content .header__left, .review-list .review-item__content .header__right {
+  display: flex;
+  align-items: center;
+}
+.review-list .review-item__content .header .action-btn {
+  background-color: #f0f0f0;
+  border: none;
+  padding: 10px 15px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s, transform 0.2s;
+  font-size: 18px;
+  margin-right: 10px;
+}
+.review-list .review-item__content .header .action-btn i {
+  font-size: 20px;
+  color: #333;
+}
+.review-list .review-item__content .header .action-btn:hover {
+  background-color: #d0d0d0;
+  transform: scale(1.05);
+}
+.review-list .review-item__content .header .action-btn .ri-eye-off-line {
+  color: #ff6b6b;
+}
+.review-list .review-item__content .header .action-btn .ri-reply-line {
+  color: #4a90e2;
+}
+.review-list .review-item__content .header .name {
+  font-weight: bold;
+  font-size: 16px;
+  margin-right: 8px;
+}
+.review-list .review-item__content .header .rating {
+  display: flex;
+}
+.review-list .review-item__content .header .rating i {
+  color: #ffcc00;
+  font-size: 14px;
+}
+.review-list .review-item__content .date {
+  font-size: 12px;
+  color: #888;
+  margin-bottom: 8px;
+}
+.review-list .review-item__content .product-info {
+  font-size: 14px;
+  margin-bottom: 8px;
+}
+.review-list .review-item__content .product-info span {
+  font-weight: bold;
+}
+.review-list .review-item__content .review-content {
+  font-size: 14px;
+  color: #333;
+  line-height: 1.5;
+  margin-bottom: 8px;
+}
+.review-list .review-item__content .response-review {
+  background-color: #f9f9f9;
+  padding: 12px;
+  border-radius: 6px;
+  font-size: 14px;
+  color: #555;
+  line-height: 1.4;
+  margin-top: 8px;
+}
+.review-list .review-item__content .response-review .response-title {
+  font-weight: bold;
+  margin-bottom: 4px;
+  color: #333;
+}
+.review-list .review-item__content .response-review .response-text {
+  margin-top: 4px;
+  color: #666;
+}
+
+/*# sourceMappingURL=style.css.map */
