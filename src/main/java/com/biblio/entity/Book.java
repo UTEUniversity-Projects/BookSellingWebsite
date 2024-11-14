@@ -68,13 +68,6 @@ public class Book implements Serializable {
     @Column(name = "weight", nullable = false)
     private double weight;
 
-    @ElementCollection
-    @Enumerated(EnumType.STRING)
-    @CollectionTable(name = "book_languages",
-            joinColumns = @JoinColumn(name = "book_id", nullable = false))
-    @Column(name = "language", nullable = false)
-    private Set<EBookLanguage> languages = new HashSet<>();
-
     @Enumerated(EnumType.STRING)
     @Column(name = "[condition]")
     private EBookCondition condition;
