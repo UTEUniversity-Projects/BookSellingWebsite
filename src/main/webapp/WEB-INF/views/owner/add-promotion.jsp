@@ -227,8 +227,9 @@
                                                 class="img-promotion"
                                                 src="assets/img/product/1.jpg"
                                         />
-                                        <h3>Thêm Voucher</h3>
-                                            <form action="/owner/add-promotion" method="POST" class="promotionForm">
+                                        <h3>Thêm Voucher action="/owner/add-promotion" method="POST" </h3>
+
+                                            <form class="promotionForm">
                                                 <input type="hidden" name="formType" value="addVoucher"/>
 
                                                 <!-- Mã -->
@@ -300,11 +301,7 @@
                                                         <button type="submit" class="btn-voucher cr-btn-primary"  onclick="return validateForm()">Thêm</button>
                                                     </div>
                                                 </div>
-<%--                                                <div class="row">--%>
-<%--                                                    <div class="col-12 d-flex">--%>
-<%--                                                        <button type="submit" class="btn-voucher cr-btn-primary">Thêm</button>--%>
-<%--                                                    </div>--%>
-<%--                                                </div>--%>
+
                                             </form>
                                     </div>
                                 </div>
