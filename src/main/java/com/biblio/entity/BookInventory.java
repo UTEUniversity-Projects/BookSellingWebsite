@@ -33,4 +33,7 @@ public class BookInventory {
     @OneToMany(mappedBy = "bookInventory", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private Set<Book> books = new HashSet<>();
 
+    @ManyToMany(mappedBy = "bookInventories")
+    private Set<Cart> carts;
+
 }

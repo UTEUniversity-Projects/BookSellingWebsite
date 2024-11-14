@@ -6,7 +6,6 @@ import lombok.Setter;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.util.HashSet;
 import java.util.Set;
 
 @Entity
@@ -26,8 +25,9 @@ public class Cart implements Serializable {
 
     // region Relationships
 
-    @OneToMany(mappedBy = "cart")
-    private Set<OrderItem> orderItems = new HashSet<OrderItem>();
+    @ManyToMany
+    @JoinTable(name = "cart_book_inventory", joinColumns = @JoinColumn(name = "cart_id"), inverseJoinColumns = @JoinColumn(name = "book_inventory_id"))
+    private Set<BookInventory> bookInventories;
 
     @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JoinColumn(name = "customer_id")

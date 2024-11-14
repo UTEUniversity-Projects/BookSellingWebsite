@@ -112,8 +112,9 @@ public class Book implements Serializable {
     @OneToMany(mappedBy = "book", fetch = FetchType.EAGER)
     private Set<Review> reviews = new HashSet<>();
 
-    @OneToMany(mappedBy = "book")
-    private Set<OrderItem> orderItems = new HashSet<>();
+    @ManyToOne
+    @JoinColumn(name = "order_id")
+    private Order order;
 
     // endregion
 
