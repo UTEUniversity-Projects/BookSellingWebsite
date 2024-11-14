@@ -24,7 +24,7 @@
     </title>
 
     <!-- App favicon -->
-    <link rel="shortcut icon" href="${pageContext.request.contextPath}/assets/customer/img/logo/favicon.ico"/>
+    <link rel="shortcut icon" href="${pageContext.request.contextPath}/assets/customer/img/logo/collapse-logo.png"/>
 
     <!-- Icon CSS -->
     <link
