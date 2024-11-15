@@ -31,18 +31,19 @@ public class OrderMapper {
 //                .map(OrderItemMapper::mapToOrderProductResponse)
 //                .collect(Collectors.toList());
         List<OrderProductResponse> products = new ArrayList<>();
-        return OrderDetailsResponse.builder()
-                .id(order.getId())
-                .customerName(order.getCustomer().getFullName())
-                .phoneNumber(order.getCustomer().getPhoneNumber())
-                .address(order.getAddress().getFullAddress())
-                .orderDate(order.getOrderDate().format(formatter))
-                .note(order.getNote())
-                .products(products)
-                .status(order.getStatus())
-                .statusDisplay(order.getStatus().getDescription())
-                .statusStyle(order.getStatus().getStatusStyle())
-                .totalPrice(order.calTotalPrice())
-                .build();
+        return new OrderDetailsResponse();
+//        return OrderDetailsResponse.builder()
+//                .id(order.getId())
+//                .customerName(order.getCustomer().getFullName())
+//                .phoneNumber(order.getCustomer().getPhoneNumber())
+//                .address(order.getAddress().getFullAddress())
+//                .orderDate(order.getOrderDate().format(formatter))
+//                .note(order.getNote())
+//                .products(products)
+//                .status(order.getStatus())
+//                .statusDisplay(order.getStatus().getDescription())
+//                .statusStyle(order.getStatus().getStatusStyle())
+//                .totalPrice(order.calTotalPrice())
+//                .build();
     }
 }

@@ -48,5 +48,8 @@ public class Review implements Serializable {
     @JoinColumn(name = "customer_id", nullable = false)
     private Customer customer;
 
+    @OneToOne(mappedBy = "review")
+    private ResponseReview responseReview;
+
     // endregion
 }

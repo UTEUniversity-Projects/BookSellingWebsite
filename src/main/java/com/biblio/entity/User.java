@@ -17,7 +17,7 @@ import java.time.LocalDateTime;
 @SuperBuilder
 @NoArgsConstructor
 @AllArgsConstructor
-public class User implements Serializable {
+public abstract class User implements Serializable {
 
     // region Attributes
 

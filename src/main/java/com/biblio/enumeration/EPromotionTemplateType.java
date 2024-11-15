@@ -3,15 +3,14 @@ package com.biblio.enumeration;
 import lombok.Getter;
 
 @Getter
-public enum EPromotionType {
+public enum EPromotionTemplateType {
     DISCOUNT("Discount"),
-    COUPON("Coupon"),
     VOUCHER("Voucher"),
     FREESHIP("Free Shipping");
 
     private final String description;
 
-    EPromotionType(String description) {
+    EPromotionTemplateType(String description) {
         this.description = description;
     }
 

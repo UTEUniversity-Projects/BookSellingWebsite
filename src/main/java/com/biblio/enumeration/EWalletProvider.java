@@ -4,9 +4,8 @@ import lombok.Getter;
 
 @Getter
 public enum EWalletProvider {
-    PAYPAL("PayPal"),
-    MOMO("Momo"),
-    ZALOPAY("ZaloPay");
+    VNPAY("VNPAY"),
+    MOMO("Momo");
 
     private final String displayName;
 

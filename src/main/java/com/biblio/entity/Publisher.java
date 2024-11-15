@@ -8,7 +8,9 @@ import lombok.experimental.SuperBuilder;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -22,8 +24,8 @@ public class Publisher extends ContributorProfile implements Serializable {
 
     // region Relationships
 
-    @OneToMany(mappedBy = "publisher")
-    private Set<Book> books = new HashSet<Book>();
+    @OneToMany(mappedBy = "publisher", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private Set<BookTemplate> bookTemplates = new HashSet<>();
 
     // endregion
 }

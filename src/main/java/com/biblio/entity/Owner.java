@@ -22,11 +22,8 @@ public class Owner extends User implements Serializable {
     @JoinColumn(name = "account_id")
     private Account account;
 
-    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    @JoinTable(name = "owner_notification",
-            joinColumns = @JoinColumn(name = "owner_id", nullable = false),
-            inverseJoinColumns = @JoinColumn(name = "notification_id", nullable = false))
-    private Set<Notification> notifications = new HashSet<Notification>();
+    @OneToMany(mappedBy = "owner")
+    private Set<Notification> notifications = new HashSet<>();
 
     @OneToMany(mappedBy = "owner", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private Set<Address> addresses;
