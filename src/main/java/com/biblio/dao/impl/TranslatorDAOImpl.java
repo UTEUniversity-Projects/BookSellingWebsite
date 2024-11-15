@@ -6,6 +6,7 @@ import com.biblio.entity.Translator;
 import java.util.List;
 
 public class TranslatorDAOImpl extends GenericDAOImpl<Translator> implements ITranslatorDAO {
+
     public TranslatorDAOImpl() {
         super(Translator.class);
     }
@@ -34,4 +35,5 @@ public class TranslatorDAOImpl extends GenericDAOImpl<Translator> implements ITr
     public void deleteTranslator(Long id) {
         super.delete(id);
     }
+
 }

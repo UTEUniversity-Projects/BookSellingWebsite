@@ -6,6 +6,7 @@ import com.biblio.entity.Publisher;
 import java.util.List;
 
 public class PublisherDAOImpl extends GenericDAOImpl<Publisher> implements IPublisherDAO {
+    
     public PublisherDAOImpl() {
         super(Publisher.class);
     }

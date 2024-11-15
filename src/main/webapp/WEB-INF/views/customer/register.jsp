@@ -248,14 +248,17 @@
                                 </div>
                             </div>
                             <div class="flex justify-between flex-nowrap gap-x-2">
-                                <button type="submit"
-                                        class="btn-register w-[100px] btn--success font-medium text-md bg-emerald-600 px-4 py-2 rounded-md text-white hover:bg-emerald-700 transition-all duration-300">
-                                    Đăng ký
 
-                                </button>
                                 <a href="login"
                                    class="py-2 border border-solid px-4 inline-block rounded-md hover:bg-gray-100 transition-all duration-300">
                                     Bạn đã có tài khoản? </a>
+
+                                <button type="submit"
+                                        class="btn-register px-6 btn--success font-medium text-md bg-emerald-600 px-4 py-2 rounded-md text-white hover:bg-emerald-700 transition-all duration-300">
+                                    <p class="button-text text-white text-[16px]">Đăng ký</p>
+                                    <div class="spinner hidden w-[20px] h-[20px] border-[4px] border-solid border-[#fff] rounded-full border-t-transparent animate-spin mx-auto"></div>
+                                </button>
+
                             </div>
                         </form>
                     </div>
@@ -266,7 +269,7 @@
     </div>
 </section>
 <script>
-    $(document).ready(() => {
+	$(document).ready(() => {
 		$('#avatar').on('change', function (event) {
 			const file = event.target.files[0];
 			if (file) {
@@ -279,6 +282,6 @@
 				reader.readAsDataURL(file);
 			}
 		});
-    });
+	});
 </script>
 <script type="module" src="${pageContext.request.contextPath}/assets/customer/js/register.js"></script>

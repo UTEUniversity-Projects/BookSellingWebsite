@@ -7,10 +7,12 @@ import lombok.*;
 @Getter
 @Setter
 @Builder
-public class AccountGetResponse {
-    private Long id;
+public class LoginResponse {
+
     private String username;
     private String password;
     private String status;
     private String role;
+
 }
+

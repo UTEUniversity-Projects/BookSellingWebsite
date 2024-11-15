@@ -1,4 +1,4 @@
-package com.biblio.dto.response;
+package com.biblio.dto.request;
 
 import lombok.*;
 
@@ -7,10 +7,9 @@ import lombok.*;
 @Getter
 @Setter
 @Builder
-public class AccountGetResponse {
-    private Long id;
+public class LoginRequest {
+
     private String username;
     private String password;
-    private String status;
-    private String role;
+
 }

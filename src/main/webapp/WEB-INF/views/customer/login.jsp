@@ -14,29 +14,22 @@
                     <div class="form-logo">
                         <img src="${pageContext.request.contextPath}/assets/customer/img/logo/logo.png" alt="logo"/>
                     </div>
-                    <form class="cr-content-form" action="login" method="POST">
-                        <div class="mb-2 flex flex-col">
-                            <label class="text-md text-slate-700 mb-1 ml-2"
-                            >Email*</label
-                            >
-                            <input
-                                    type="text"
-                                    name="username"
-                                    autocomplete=on
-                                    placeholder="Nhập username"
-                                    class="input block w-full py-2 px-4 text-gray-900 border-1 border-gray-300 rounded-lg text-[16px] focus:ring-blue-500 focus:border-blue-500 transition-all ease-linear bg-white focus:shadow-lg focus:shadow-[rgba(3,_102,_214,_0.3)_0px_0px_0px_3px]"
-                            />
+                    <form class="cr-content-form" action="login" method="POST" id="loginForm">
+                        <div class="form-group mb-2">
+                            <label for="username" class="text-md text-slate-700 mb-1 ml-2">Username*</label> <input
+                                name="username" type="text"
+                                id="username"
+                                placeholder="Nhập username..."
+                                class="block w-full py-2 px-4 text-gray-900 border-1 border-gray-300 rounded-lg text-[16px] focus:ring-blue-500 focus:border-blue-500 transition-all ease-linear bg-white focus:shadow-lg focus:shadow-[rgba(3,_102,_214,_0.3)_0px_0px_0px_3px]"/>
+                            <span class="form-message text-[16px] text-red-500"></span>
                         </div>
-                        <div class="mb-2 flex flex-col gap-1">
-                            <label class="text-md text-slate-700 mb-1 ml-2"
-                            >Mật khẩu*</label
-                            >
-                            <input
-                                    type="password"
-                                    name="password"
-                                    placeholder="Nhập mật khẩu của bạn"
-                                    class="input block w-full py-2 px-4 text-gray-900 border-1 border-gray-300 rounded-lg text-[16px] focus:ring-blue-500 focus:border-blue-500 transition-all ease-linear bg-white focus:shadow-lg focus:shadow-[rgba(3,_102,_214,_0.3)_0px_0px_0px_3px]"
-                            />
+                        <div class="form-group mb-2">
+                            <label for="username" class="text-md text-slate-700 mb-1 ml-2">Mật khẩu*</label> <input
+                                name="password" type="password"
+                                id="password"
+                                placeholder="Nhập mật khẩu..."
+                                class="block w-full py-2 px-4 text-gray-900 border-1 border-gray-300 rounded-lg text-[16px] focus:ring-blue-500 focus:border-blue-500 transition-all ease-linear bg-white focus:shadow-lg focus:shadow-[rgba(3,_102,_214,_0.3)_0px_0px_0px_3px]"/>
+                            <span class="form-message text-[16px] text-red-500"></span>
                         </div>
                         <div class="flex justify-between items-center mb-2">
                             <div class="ml-2 flex items-center">
@@ -130,22 +123,26 @@
                                 </label>
                             </div>
                             <div>
-                                <a href="forgot" class="text-md text-[#26a397] hover:opacity-80 transition-all duration-300">Quên mật khẩu</a>
+                                <a href="forgot"
+                                   class="text-md text-[#26a397] hover:opacity-80 transition-all duration-300">Quên mật
+                                    khẩu</a>
                             </div>
                         </div>
                         <div class="login-buttons">
-                            <button
-                                    type="submit"
-                                    class="btn-login font-medium text-md bg-emerald-600 px-4 py-2 rounded-md text-white hover:bg-emerald-700 transition-all duration-300"
-                            >
-                                Đăng nhập
-                            </button>
                             <a
                                     href="register"
                                     class="py-2 border border-solid px-4 inline-block rounded-md hover:bg-gray-100 transition-all duration-300"
                             >
                                 Đăng ký
                             </a>
+
+                            <button
+                                    type="submit"
+                                    class="btn-login font-medium text-md bg-emerald-600 px-4 py-2 rounded-md text-white hover:bg-emerald-700 transition-all duration-300"
+                            >
+                                <span class="button-text">Đăng nhập</span>
+                                <div class="spinner hidden w-[20px] h-[20px] border-[4px] border-solid border-[#fff] rounded-full border-t-transparent animate-spin mx-auto"></div>
+                            </button>
                         </div>
                     </form>
                 </div>

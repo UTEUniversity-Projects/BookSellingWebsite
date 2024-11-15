@@ -6,6 +6,7 @@ import com.biblio.entity.SubCategory;
 import java.util.List;
 
 public class SubCategoryDAOImpl extends GenericDAOImpl<SubCategory> implements ISubCategoryDAO {
+
     public SubCategoryDAOImpl() {
         super(SubCategory.class);
     }

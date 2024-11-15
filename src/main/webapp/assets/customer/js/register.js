@@ -60,6 +60,14 @@ $(document).ready(() => {
 					avatar: avatar
 				};
 
+				const registerButton = $('.btn-register');
+				const spinner = registerButton.find('.spinner');
+				const buttonText = registerButton.find('.button-text');
+
+				registerButton.prop('disabled', true);
+				buttonText.addClass('hidden');
+				spinner.removeClass('hidden');
+
 				$.ajax({
 					url: `${contextPath}/api/customer/register`,
 					type: 'POST',
@@ -95,6 +103,11 @@ $(document).ready(() => {
 							type: "error",
 							duration: 3000
 						})
+					},
+					complete: function () {
+						registerButton.prop('disabled', false);
+						buttonText.removeClass('hidden');
+						spinner.addClass('hidden');
 					}
 				});
 
@@ -162,6 +175,35 @@ $(document).ready(() => {
 	const register = new Register();
 	register.getAddress();
 
+	$(".btn-register").click(() => {
+		const formData = new FormData(document.getElementById("registerForm"));
+
+		const userData = {
+			fullName: formData.get("fullName"),
+			email: formData.get("email"),
+			phoneNumber: formData.get("phoneNumber"),
+			dateOfBirth: formData.get("dateOfBirth"),
+			gender: formData.get("gender"),
+			username: formData.get("username"),
+			password: formData.get("password"),
+			province: formData.get("province"),
+			district: formData.get("district"),
+			village: formData.get("village"),
+			detail: formData.get("detail"),
+		};
+		for (const key in userData) {
+			if (userData[key] === null || userData[key] === "" || userData[key] === "0") {
+				toast({
+					title: "Thông tin",
+					message: "Vui lòng điền đầy đủ thông tin",
+					type: "info",
+					duration: 4000
+				});
+				break;
+			}
+		}
+	});
+
 	Validator({
 		form: '#registerForm',
 		formGroupSelector: '.form-group',
@@ -187,7 +229,6 @@ $(document).ready(() => {
 			Validator.isAllLowercase("#username", 'Username chỉ bao gồm chữ thường và số !'),
 			Validator.minLength('#username', 8),
 			Validator.minLength('#password', 8),
-
 		],
 		onSubmit: async function (data) {
 			await register.register();
