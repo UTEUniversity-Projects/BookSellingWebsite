@@ -4,11 +4,8 @@ import lombok.Getter;
 
 @Getter
 public enum EPromotionStatus {
-    NULL_AND_VOID("Promotion is null and void"),
-    EFFECTIVE("Promotion is currently effective"),
-    COMING_SOON("Promotion will coming soon"),
-    USED_OUT("Promotion has been used out"),
-    EXPIRED("Promotion has expired");
+    USED("Đã sử dụng"),
+    NOT_UES("Chưa sử dụng");
 
     // Getter for description
     private final String description;
