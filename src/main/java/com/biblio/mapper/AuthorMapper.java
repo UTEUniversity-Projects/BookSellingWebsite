@@ -8,6 +8,7 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 public class AuthorMapper {
+
     public static Author toAuthorEntity(AuthorRequest authorRequest) {
         return Author.builder()
                 .id(Long.parseLong(authorRequest.getId()))
@@ -27,4 +28,5 @@ public class AuthorMapper {
                 .joinAt(author.getJoinAt().format(DateTimeFormatter.ofPattern("dd/MM/yyyy")))
                 .build();
     }
+    
 }

@@ -4,6 +4,7 @@ import com.biblio.dto.response.AddressResponse;
 import com.biblio.entity.Address;
 
 public class AddressMapper {
+
     public static AddressResponse toAddressResponse(Address address) {
         AddressResponse addressResponse = new AddressResponse();
         addressResponse.setId(address.getId());
@@ -14,4 +15,5 @@ public class AddressMapper {
         addressResponse.setDetail(address.getDetail());
         return addressResponse;
     }
+
 }

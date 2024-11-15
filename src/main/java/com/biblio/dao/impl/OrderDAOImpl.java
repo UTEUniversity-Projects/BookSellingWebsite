@@ -6,6 +6,7 @@ import com.biblio.entity.Order;
 import java.util.List;
 
 public class OrderDAOImpl extends GenericDAOImpl<Order> implements IOrderDAO {
+
     public OrderDAOImpl() {
         super(Order.class);
     }

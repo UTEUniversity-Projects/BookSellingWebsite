@@ -4,7 +4,8 @@ import com.biblio.entity.Customer;
 
 import java.util.List;
 
-public interface ICustomerDAO extends IGenericDAO<Customer> {
+public interface ICustomerDAO {
+
     List<Customer> findAll();
 
     Customer findById(Long id);
@@ -20,4 +21,5 @@ public interface ICustomerDAO extends IGenericDAO<Customer> {
     boolean existsByPhoneNumber(String phoneNumber);
 
     void updateSupport_Notification(Customer customer);
+
 }

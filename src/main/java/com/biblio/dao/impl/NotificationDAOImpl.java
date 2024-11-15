@@ -7,6 +7,7 @@ import com.biblio.jpaconfig.JpaConfig;
 import javax.persistence.EntityManager;
 
 public class NotificationDAOImpl implements INotificationDAO {
+
     @Override
     public void saveSupport_Notification(Notification notification) {
         EntityManager entityManager = JpaConfig.getEntityManager();
@@ -23,4 +24,5 @@ public class NotificationDAOImpl implements INotificationDAO {
             entityManager.close();
         }
     }
+
 }

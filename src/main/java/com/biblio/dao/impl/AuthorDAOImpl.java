@@ -6,6 +6,7 @@ import com.biblio.entity.Author;
 import java.util.List;
 
 public class AuthorDAOImpl extends GenericDAOImpl<Author> implements IAuthorDAO {
+
     public AuthorDAOImpl() {
         super(Author.class);
     }
@@ -43,4 +44,5 @@ public class AuthorDAOImpl extends GenericDAOImpl<Author> implements IAuthorDAO 
             System.out.println(author.getName());
         }
     }
+
 }
