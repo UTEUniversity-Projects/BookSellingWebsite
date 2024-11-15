@@ -1,5 +1,6 @@
 package com.biblio.entity;
 
+import com.biblio.enumeration.EPromotionStatus;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -45,6 +46,10 @@ public class Promotion implements Serializable {
 
     @Column(name = "min_value_to_be_applied", nullable = false)
     private double minValueToBeApplied;
+
+    @Enumerated(EnumType.STRING)
+    @Column(name = "status", nullable = false)
+    private EPromotionStatus status;
 
     // endregion
 

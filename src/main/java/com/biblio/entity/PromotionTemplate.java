@@ -41,12 +41,9 @@ public class PromotionTemplate implements Serializable {
     @Column(name = "type", nullable = false)
     private EPromotionTemplateType type;
 
-    @Enumerated(EnumType.STRING)
-    @Column(name = "status", nullable = false)
-    private EPromotionStatus status;
 
     @Enumerated(EnumType.STRING)
-    @Column(name = "promotion_template_status", nullable = false)
+    @Column(name = "status", nullable = false)
     private EPromotionTemplateStatus promotionTemplateStatus;
 
     // endregion
