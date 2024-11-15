@@ -54,7 +54,7 @@ public class Address implements Serializable {
     private Owner owner;
 
     @OneToMany(mappedBy = "address", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
-    private Set<Order> orders = new HashSet<Order>();
+    private Set<Shipping> shippings = new HashSet<>();
 
     // endregion
 

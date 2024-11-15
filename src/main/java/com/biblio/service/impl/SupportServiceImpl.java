@@ -56,32 +56,32 @@ public class SupportServiceImpl implements ISupportService {
 
     @Override
     public void respondToSupportRequest(SupportRequest request) throws SQLException {
-        Support support = supportDAO.findById(request.getId());
-        if (support != null) {
-            support.setFeedbackContent(request.getFeedbackContent());
-            support.setStatus(ESupportStatus.RESPONDED);
-            support.setResponsedAt(LocalDateTime.now());
-            supportDAO.update(support);
-
-            // Create and save a notification for the customer
-            Notification notification = new Notification();
-            notification.setCreatedAt(LocalDateTime.now());
-            notification.setSentTime(LocalDateTime.now());
-            notification.setTitle("Your support request has been responded to");
-            notification.setContent("We have responded to your request: " + support.getFeedbackContent());
-            notification.setType(ENotificationType.SUPPORT);
-            notification.setStatus(ENotificationStatus.NOT_SEEN);
-
-            // Set up the customer relationship
-            Customer customer = support.getCustomer();
-            if (notification.getCustomers() == null) {
-                notification.setCustomers(new HashSet<>()); // Initialize if null
-            }
-            notification.getCustomers().add(customer);
-            customer.getNotifications().add(notification);
-            notificationDAO.saveSupport_Notification(notification);
-            customerDAO.updateSupport_Notification(customer);
-        }
+//        Support support = supportDAO.findById(request.getId());
+//        if (support != null) {
+//            support.setFeedbackContent(request.getFeedbackContent());
+//            support.setStatus(ESupportStatus.RESPONDED);
+//            support.setResponsedAt(LocalDateTime.now());
+//            supportDAO.update(support);
+//
+//            // Create and save a notification for the customer
+//            Notification notification = new Notification();
+//            notification.setCreatedAt(LocalDateTime.now());
+//            notification.setSentTime(LocalDateTime.now());
+//            notification.setTitle("Your support request has been responded to");
+//            notification.setContent("We have responded to your request: " + support.getFeedbackContent());
+//            notification.setType(ENotificationType.SUPPORT);
+//            notification.setStatus(ENotificationStatus.NOT_SEEN);
+//
+//            // Set up the customer relationship
+//            Customer customer = support.getCustomer();
+//            if (notification.getCustomers() == null) {
+//                notification.setCustomers(new HashSet<>()); // Initialize if null
+//            }
+//            notification.getCustomers().add(customer);
+//            customer.getNotifications().add(notification);
+//            notificationDAO.saveSupport_Notification(notification);
+//            customerDAO.updateSupport_Notification(customer);
+//        }
     }
 
 

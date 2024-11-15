@@ -52,14 +52,14 @@ public class Notification implements Serializable {
 
     // region Relationships
 
-    @ManyToMany(mappedBy = "notifications")
-    private Set<Customer> customers = new HashSet<Customer>();
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    private Customer customer;
 
-    @ManyToMany(mappedBy = "notifications")
-    private Set<Staff> staff = new HashSet<Staff>();
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    private Staff staff;
 
-    @ManyToMany(mappedBy = "notifications")
-    private Set<Owner> owner = new HashSet<Owner>();
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    private Owner owner;
 
     // endregion
 }

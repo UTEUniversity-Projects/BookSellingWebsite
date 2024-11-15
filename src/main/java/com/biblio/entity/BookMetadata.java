@@ -27,6 +27,9 @@ public class BookMetadata implements Serializable {
     @Column(name = "created_at", nullable = false)
     private LocalDateTime createdAt;
 
+    @Column(name = "opening_date", nullable = false)
+    private LocalDateTime openingDate;
+
     @Column(name = "import_price", nullable = false)
     private double importPrice;
 

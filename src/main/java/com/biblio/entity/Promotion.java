@@ -1,7 +1,5 @@
 package com.biblio.entity;
 
-import com.biblio.enumeration.EPromotionStatus;
-import com.biblio.enumeration.EPromotionType;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -27,23 +25,17 @@ public class Promotion implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "created_at", nullable = false)
-    private LocalDateTime createdAt;
-
-    @Column(name = "code", nullable = false)
-    private String code;
-
     @Column(name = "effective_date", nullable = false)
     private LocalDateTime effectiveDate;
 
     @Column(name = "expiration_date", nullable = false)
     private LocalDateTime expirationDate;
 
-    @Column(name = "title", nullable = false)
-    private String title;
-
     @Column(name = "description", nullable = false)
     private String description;
+
+    @Column(name = "title", nullable = false)
+    private String title;
 
     @Column(name = "percent_discount", nullable = false)
     private double percentDiscount;
@@ -54,17 +46,13 @@ public class Promotion implements Serializable {
     @Column(name = "min_value_to_be_applied", nullable = false)
     private double minValueToBeApplied;
 
-    @Enumerated(EnumType.STRING)
-    @Column(name = "type", nullable = false)
-    private EPromotionType type;
-
-    @Enumerated(EnumType.STRING)
-    @Column(name = "status", nullable = false)
-    private EPromotionStatus status;
-
     // endregion
 
     // region Relationships
+
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "promotion_template_id", nullable = false)
+    private PromotionTemplate promotionTemplate;
 
     @OneToMany(mappedBy = "promotion", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private Set<PromotionTarget> promotionTargets = new HashSet<>();
