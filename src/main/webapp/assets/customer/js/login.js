@@ -32,7 +32,9 @@ $(document).ready(() => {
 							type: 'success',
 							duration: 3000
 						});
-						window.location.href = `${contextPath}/waiting`;
+						setTimeout(() => {
+							window.location.href = `${contextPath}/waiting`;
+						}, 1000);
 					} else {
 						toast({
 							title: 'Đăng nhập',
@@ -63,9 +65,33 @@ $(document).ready(() => {
 				}
 			});
 		}
+
+		showRequiredInput() {
+			$(".btn-login").click(() => {
+				const formData = new FormData(document.getElementById("loginForm"));
+
+				const userData = {
+					username: formData.get("username"),
+					password: formData.get("password"),
+				};
+				for (const key in userData) {
+					if (userData[key] === null || userData[key] === "" || userData[key] === "0") {
+						toast({
+							title: "Thông tin",
+							message: "Vui lòng điền đầy đủ thông tin !",
+							type: "info",
+							duration: 4000
+						});
+						break;
+					}
+				}
+			});
+		}
 	}
 
 	const login = new Login();
+	login.showRequiredInput();
+
 
 	Validator({
 		form: '#loginForm',

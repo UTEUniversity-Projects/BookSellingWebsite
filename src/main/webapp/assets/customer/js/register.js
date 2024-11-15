@@ -170,39 +170,42 @@ $(document).ready(() => {
 			});
 		}
 
+		showRequiredInput() {
+			$(".btn-register").click(() => {
+				const formData = new FormData(document.getElementById("registerForm"));
+
+				const userData = {
+					fullName: formData.get("fullName"),
+					email: formData.get("email"),
+					phoneNumber: formData.get("phoneNumber"),
+					dateOfBirth: formData.get("dateOfBirth"),
+					gender: formData.get("gender"),
+					username: formData.get("username"),
+					password: formData.get("password"),
+					province: formData.get("province"),
+					district: formData.get("district"),
+					village: formData.get("village"),
+					detail: formData.get("detail"),
+				};
+				for (const key in userData) {
+					if (userData[key] === null || userData[key] === "" || userData[key] === "0") {
+						toast({
+							title: "Thông tin",
+							message: "Vui lòng điền đầy đủ thông tin",
+							type: "info",
+							duration: 4000
+						});
+						break;
+					}
+				}
+			});
+		}
 	}
 
 	const register = new Register();
 	register.getAddress();
 
-	$(".btn-register").click(() => {
-		const formData = new FormData(document.getElementById("registerForm"));
-
-		const userData = {
-			fullName: formData.get("fullName"),
-			email: formData.get("email"),
-			phoneNumber: formData.get("phoneNumber"),
-			dateOfBirth: formData.get("dateOfBirth"),
-			gender: formData.get("gender"),
-			username: formData.get("username"),
-			password: formData.get("password"),
-			province: formData.get("province"),
-			district: formData.get("district"),
-			village: formData.get("village"),
-			detail: formData.get("detail"),
-		};
-		for (const key in userData) {
-			if (userData[key] === null || userData[key] === "" || userData[key] === "0") {
-				toast({
-					title: "Thông tin",
-					message: "Vui lòng điền đầy đủ thông tin",
-					type: "info",
-					duration: 4000
-				});
-				break;
-			}
-		}
-	});
+	register.showRequiredInput();
 
 	Validator({
 		form: '#registerForm',
