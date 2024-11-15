@@ -1,7 +1,7 @@
 package com.biblio.dto.request;
 
 import com.biblio.enumeration.EPromotionStatus;
-import com.biblio.enumeration.EPromotionType;
+import com.biblio.enumeration.EPromotionTemplateType;
 import lombok.*;
 
 import java.util.HashSet;
@@ -23,6 +23,6 @@ public class PromotionInsertRequest {
     private EPromotionStatus status;
     private String effectiveDate;
     private String expirationDate;
-    private EPromotionType type;
+    private EPromotionTemplateType type;
     private Set<PromotionTargetInsertRequest> promotionTargets = new HashSet<>();
 }

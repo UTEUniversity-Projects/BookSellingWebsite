@@ -10,11 +10,11 @@ import java.util.Set;
 
 @Entity
 @Table(name = "staff")
+@NoArgsConstructor
+@AllArgsConstructor
 @Getter
 @Setter
 @SuperBuilder
-@NoArgsConstructor
-@AllArgsConstructor
 public class Staff extends User implements Serializable {
 
     // region Relationships
@@ -23,14 +23,11 @@ public class Staff extends User implements Serializable {
     @JoinColumn(name = "account_id")
     private Account account;
 
-    @ManyToMany(cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH}, fetch = FetchType.LAZY)
-    @JoinTable(name = "staff_notification",
-            joinColumns = @JoinColumn(name = "staff_id", nullable = false),
-            inverseJoinColumns = @JoinColumn(name = "notification_id", nullable = false))
-    private Set<Notification> notifications = new HashSet<Notification>();
+    @OneToMany(mappedBy = "owner")
+    private Set<Notification> notifications = new HashSet<>();
 
     @OneToMany(mappedBy = "staff")
-    private Set<Support> supports = new HashSet<Support>();
+    private Set<ResponseSupport> responseSupports = new HashSet<>();
 
     @OneToMany(mappedBy = "staff", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private Set<Address> addresses;

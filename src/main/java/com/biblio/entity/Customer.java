@@ -32,11 +32,8 @@ public class Customer extends User implements Serializable {
     @JoinColumn(name = "account_id")
     private Account account;
 
-    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    @JoinTable(name = "customer_notification",
-            joinColumns = @JoinColumn(name = "customer_id", nullable = false),
-            inverseJoinColumns = @JoinColumn(name = "notification_id", nullable = false))
-    private Set<Notification> notifications = new HashSet<Notification>();
+    @OneToMany(mappedBy = "customer")
+    private Set<Notification> notifications = new HashSet<>();
 
     @OneToMany(mappedBy = "customer", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @Singular

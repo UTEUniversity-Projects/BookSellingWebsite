@@ -28,9 +28,6 @@ public class BookTemplate {
     @Column(name = "status", nullable = false)
     private EBookTemplateStatus status;
 
-    @Column(name = "opening_date", nullable = false)
-    private LocalDateTime openingDate;
-
     @ElementCollection
     @Enumerated(EnumType.STRING)
     @CollectionTable(name = "book_template_languages",
@@ -47,6 +44,10 @@ public class BookTemplate {
 
     @ManyToMany(mappedBy = "bookTemplates")
     private Set<Translator> translators = new HashSet<>();
+
+    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JoinColumn(name = "publisher_id", nullable = false)
+    private Publisher publisher;
 
     @OneToMany(mappedBy = "bookTemplate", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private Set<MediaFile> mediaFiles = new HashSet<>();

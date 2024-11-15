@@ -21,8 +21,8 @@ public class PromotionDAOImpl extends GenericDAOImpl<Promotion> implements IProm
 
     @Override
     public void insert(Promotion promotion) {
-        System.out.println(promotion.getCode());
-        super.save(promotion);
+//        System.out.println(promotion.getCode());
+//        super.save(promotion);
     }
 
     @Override

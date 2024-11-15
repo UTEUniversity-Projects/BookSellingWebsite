@@ -92,10 +92,6 @@ public class Book implements Serializable {
     @JoinColumn(name = "sub_category_id", nullable = false)
     private SubCategory subCategory;
 
-    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    @JoinColumn(name = "publisher_id", nullable = false)
-    private Publisher publisher;
-
     // endregion
 
     // region Methods
