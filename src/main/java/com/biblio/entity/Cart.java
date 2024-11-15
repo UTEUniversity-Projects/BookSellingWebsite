@@ -25,7 +25,7 @@ public class Cart implements Serializable {
 
     // region Relationships
 
-    @ManyToMany
+    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JoinTable(name = "cart_book_template", joinColumns = @JoinColumn(name = "cart_id"), inverseJoinColumns = @JoinColumn(name = "book_template_id"))
     private Set<BookTemplate> bookTemplates;
 

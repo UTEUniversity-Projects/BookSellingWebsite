@@ -3,14 +3,11 @@ package com.biblio.entity;
 import com.biblio.enumeration.EBookAgeRecommend;
 import com.biblio.enumeration.EBookCondition;
 import com.biblio.enumeration.EBookFormat;
-import com.biblio.enumeration.EBookLanguage;
 import lombok.*;
 
 import javax.persistence.*;
 import java.io.Serializable;
 import java.time.LocalDateTime;
-import java.util.HashSet;
-import java.util.Set;
 
 @Entity
 @Table(name = "book")
