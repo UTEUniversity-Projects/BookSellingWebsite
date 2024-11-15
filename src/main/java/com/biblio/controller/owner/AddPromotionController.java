@@ -65,7 +65,7 @@ public class AddPromotionController extends HttpServlet {
         try {
             BeanUtils.populate(promotionInsertRequest, request.getParameterMap());
 
-            promotionInsertRequest.setStatus(EPromotionStatus.EFFECTIVE);
+            //promotionInsertRequest.setStatus(EPromotionStatus.EFFECTIVE);
             promotionInsertRequest.setType(type);
             promotionInsertRequest.setPercentDiscount(percentDiscount);
             promotionInsertRequest.setMinValueApplied(minValueApplied);
