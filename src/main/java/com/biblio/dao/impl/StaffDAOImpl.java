@@ -6,6 +6,7 @@ import com.biblio.entity.Staff;
 import java.util.List;
 
 public class StaffDAOImpl extends GenericDAOImpl<Staff> implements IStaffDAO {
+
     public StaffDAOImpl() {
         super(Staff.class);
     }

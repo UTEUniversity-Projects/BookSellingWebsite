@@ -4,12 +4,10 @@ import com.biblio.dto.response.OrderDetailsResponse;
 import com.biblio.dto.response.OrderGetListResponse;
 import com.biblio.dto.response.OrderProductResponse;
 import com.biblio.entity.Order;
-import com.biblio.entity.OrderItem;
 
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class OrderMapper {
     public static OrderGetListResponse mapToOrderGetListResponse(Order order) {
@@ -29,10 +27,10 @@ public class OrderMapper {
     public static OrderDetailsResponse mapToOrderDetailsResponse(Order order) {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm dd-MM-yyyy");
 
-        List<OrderProductResponse> products = order.getOrderItems().stream()
-                .map(OrderItemMapper::mapToOrderProductResponse)
-                .collect(Collectors.toList());
-
+//        List<OrderProductResponse> products = order.getOrderItems().stream()
+//                .map(OrderItemMapper::mapToOrderProductResponse)
+//                .collect(Collectors.toList());
+        List<OrderProductResponse> products = new ArrayList<>();
         return OrderDetailsResponse.builder()
                 .id(order.getId())
                 .customerName(order.getCustomer().getFullName())

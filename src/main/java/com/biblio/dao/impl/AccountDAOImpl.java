@@ -7,6 +7,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class AccountDAOImpl extends GenericDAOImpl<Account> implements IAccountDAO {
+    
     public AccountDAOImpl() {
         super(Account.class);
     }

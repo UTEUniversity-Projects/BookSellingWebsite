@@ -9,7 +9,7 @@ public class OrderItemMapper {
         return OrderProductResponse.builder()
                 .title(orderItem.getBook().getTitle())
                 .imagePath(orderItem.getBook()
-                        .getBookInventory()
+                        .getBookTemplate()
                         .getMediaFiles()
                         .iterator().next()
                         .getStoredCode()

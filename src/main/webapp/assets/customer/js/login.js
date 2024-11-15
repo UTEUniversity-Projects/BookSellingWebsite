@@ -1,56 +1,83 @@
-import { toast } from "./toast.js";
+import { toast } from './toast.js';
+import Validator from './validator.js';
+
 $(document).ready(() => {
 
 	class Login {
-		constructor() {
+		constructor () {
 		}
 
-		login() {
+		login ({ username, password }) {
+			const loginButton = $('.btn-login');
+			const spinner = loginButton.find('.spinner');
+			const buttonText = loginButton.find('.button-text');
 
-			$('.btn-login').on('click', function (event) {
+			const loginData = { username, password };
 
-				$('.form-group').removeClass('has-error');
-				$('.error-message').remove();
+			loginButton.prop('disabled', true);
+			buttonText.addClass('hidden');
+			spinner.removeClass('hidden');
 
-				let isValid = true;
-
-				$('.input').each(function () {
-					if ($(this).val() === '') {
-						isValid = false;
-						$(this).closest('.form-group').addClass('has-error');
-						$(this).after(
-							'<div class="error-message text-[16px] text-red-500">Trường này không được để trống</div>'
-						);
+			$.ajax({
+				url: `${contextPath}/api/login`,
+				type: 'POST',
+				contentType: 'application/json',
+				data: JSON.stringify(loginData),
+				success: function (response) {
+					console.log(response);
+					if (response.status === 'success') {
+						toast({
+							title: 'Đăng nhập',
+							message: 'Đăng nhập thành công !',
+							type: 'success',
+							duration: 3000
+						});
+						window.location.href = `${contextPath}/waiting`;
+					} else {
+						toast({
+							title: 'Đăng nhập',
+							message: 'Đăng nhập thất bại !',
+							type: 'error',
+							duration: 3000
+						});
+						Object.keys(response).forEach(key => {
+							if (key !== 'code') {
+								$(`#${key}`).next().text(response[key]);
+							}
+						});
 					}
-				});
-
-				const email = $('input[type="email"]').val();
-				const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-				if (email && !emailPattern.test(email)) {
-					isValid = false;
-					$('input[type="email"]').closest('.form-group').addClass('has-error');
-					$('input[type="email"]').after(
-						'<div class="error-message text-[16px] text-red-500">Email không hợp lệ</div>'
-					);
-				}
-
-				if (isValid) {
+				},
+				error: function (xhr, status, error) {
 					toast({
-						title: "Đăng nhập thành công",
-						message: "",
-						type: "success"
+						title: 'Đăng nhập',
+						message: 'Có lỗi kết nối đến server !',
+						type: 'error',
+						duration: 3000
 					});
-					setTimeout(() => {
-						window.location.href = "home";
-					}, 1000);
-				} else {
-					event.preventDefault();
+				},
+				complete: function () {
+					// Show button text, hide loading spinner, and enable button
+					loginButton.prop('disabled', false);
+					buttonText.removeClass('hidden');
+					spinner.addClass('hidden');
 				}
 			});
 		}
 	}
 
 	const login = new Login();
-	login.login();
+
+	Validator({
+		form: '#loginForm',
+		formGroupSelector: '.form-group',
+		errorSelector: '.form-message',
+		rules: [
+			Validator.isRequired('#username', 'Vui lòng nhập username !'),
+			Validator.isRequired('#password', 'Vui lòng nhập password !')
+		],
+		onSubmit: function (data) {
+			login.login(data);
+		}
+	});
 
 });

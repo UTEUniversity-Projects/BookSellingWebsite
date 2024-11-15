@@ -2,11 +2,11 @@ package com.biblio.dao.impl;
 
 import com.biblio.dao.IBookDAO;
 import com.biblio.entity.Book;
-import com.biblio.entity.Order;
 
 import java.util.List;
 
 public class BookDAOImpl extends GenericDAOImpl<Book> implements IBookDAO {
+
     public BookDAOImpl() {
         super(Book.class);
     }
@@ -43,4 +43,5 @@ public class BookDAOImpl extends GenericDAOImpl<Book> implements IBookDAO {
             System.out.println(book.getSellingPrice());
         }
     }
+
 }

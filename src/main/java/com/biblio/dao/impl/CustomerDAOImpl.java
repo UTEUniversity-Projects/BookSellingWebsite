@@ -10,6 +10,7 @@ import java.util.List;
 import java.util.Map;
 
 public class CustomerDAOImpl extends GenericDAOImpl<Customer> implements ICustomerDAO {
+
     public CustomerDAOImpl() {
         super(Customer.class);
     }

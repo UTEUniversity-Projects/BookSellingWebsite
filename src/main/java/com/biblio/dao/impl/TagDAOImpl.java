@@ -6,6 +6,7 @@ import com.biblio.entity.Tag;
 import java.util.List;
 
 public class TagDAOImpl extends GenericDAOImpl<Tag> implements ITagDAO {
+
     public TagDAOImpl() {
         super(Tag.class);
     }
@@ -34,4 +35,5 @@ public class TagDAOImpl extends GenericDAOImpl<Tag> implements ITagDAO {
     public void deleteTag(Long id) {
         super.delete(id);
     }
+
 }

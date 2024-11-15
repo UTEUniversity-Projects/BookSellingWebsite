@@ -8,13 +8,16 @@ import java.util.List;
 import java.util.Map;
 
 public class PromotionDAOImpl extends GenericDAOImpl<Promotion> implements IPromotionDAO {
+
     public PromotionDAOImpl() {
         super(Promotion.class);
     }
+
     @Override
     public List<Promotion> findAll() {
         return super.findAll();
     }
+
     public Promotion findById(Long id) {
         return super.findById(id);
     }
@@ -37,6 +40,7 @@ public class PromotionDAOImpl extends GenericDAOImpl<Promotion> implements IProm
         Map<String, Object> params = new HashMap<>();
         return super.findSingleByJPQL(jpql, params);
     }
+
     @Override
     public boolean existsByCode(String code) {
         String jpql = "SELECT p FROM Promotion p WHERE p.code = :code";
@@ -59,4 +63,5 @@ public class PromotionDAOImpl extends GenericDAOImpl<Promotion> implements IProm
         Boolean check = dao.existsByCode("COUPON12");
         System.out.println(check);
     }
+
 }
