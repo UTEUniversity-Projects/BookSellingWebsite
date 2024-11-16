@@ -44,17 +44,6 @@ public class LoginController extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
         // TODO Auto-generated method stub
-        String username = request.getParameter("username");
-        String password = request.getParameter("password");
-        if (accountService.isUsernameExist(username) ) {
-            AccountGetResponse account = accountService.getAccountByUsername(username);
-            if (account.getPassword().equals(password)) {
-                HttpSession session = request.getSession();
-                session.setAttribute("account", account);
-            }
-            request.getRequestDispatcher("/views/customer/login.jsp").forward(request, response);
-        }
-        response.sendRedirect(request.getContextPath() + "/home");
 
     }
 
