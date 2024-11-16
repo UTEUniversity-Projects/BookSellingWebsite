@@ -5,7 +5,7 @@ import lombok.Getter;
 @Getter
 public enum EBookCondition {
     NEW("Mới"),
-    USED("Đã qua sử dụng");
+    USED("Cũ");
 
     private final String bookCondition;
 

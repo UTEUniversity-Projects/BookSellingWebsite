@@ -1,4 +1,8 @@
 package com.biblio.dao;
 
-public interface IResponseReviewDAO {
+import com.biblio.entity.Promotion;
+import com.biblio.entity.ResponseReview;
+
+public interface IResponseReviewDAO extends IGenericDAO<ResponseReview> {
+    ResponseReview save(ResponseReview responseReview);
 }

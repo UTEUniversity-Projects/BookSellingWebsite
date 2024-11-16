@@ -8,7 +8,7 @@ import lombok.*;
 @Builder
 @AllArgsConstructor
 @ToString
-public class OrderGetListResponse {
+public class OrderManagementResponse {
     private Long id;
     private String customerName;
     private String orderDate;

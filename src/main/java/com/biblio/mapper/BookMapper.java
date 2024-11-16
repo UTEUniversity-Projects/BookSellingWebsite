@@ -2,6 +2,7 @@ package com.biblio.mapper;
 
 import com.biblio.dto.request.BookRequest;
 import com.biblio.dto.response.BookCardResponse;
+import com.biblio.dto.response.BookDetailsManagementResponse;
 import com.biblio.dto.response.BookDetailsResponse;
 import com.biblio.dto.response.BookResponse;
 import com.biblio.entity.Author;
@@ -20,6 +21,8 @@ import static com.biblio.mapper.PublisherMapper.toPublisherResponse;
 import static com.biblio.utils.DateTimeUtil.formatDateTime;
 
 public class BookMapper {
+    // region EntityToDTO
+
     public static BookCardResponse toBookCardResponse(Book book) {
         BookCardResponse bookCardResponse = new BookCardResponse();
         bookCardResponse.setId(book.getId());
@@ -66,27 +69,6 @@ public class BookMapper {
         return bookDetailsResponse;
     }
 
-    public static Book toBookEntity(BookRequest bookRequest) {
-        return Book.builder()
-                .id(Long.parseLong(bookRequest.getId()))
-                .title(bookRequest.getTitle())
-                .description(bookRequest.getDescription())
-                .sellingPrice(Double.parseDouble(bookRequest.getSellingPrice()))
-                .publicationDate(LocalDateTime.parse(bookRequest.getPublicationDate()))
-                .edition(Integer.parseInt(bookRequest.getEdition()))
-                .codeISBN10(bookRequest.getCodeISBN10())
-                .codeISBN13(bookRequest.getCodeISBN13())
-                .format(EnumUtil.fromDisplayName(EBookFormat.class, bookRequest.getFormat()))
-                .handcover(Integer.parseInt(bookRequest.getHandCover()))
-                .length(Double.parseDouble(bookRequest.getLength()))
-                .width(Double.parseDouble(bookRequest.getWidth()))
-                .height(Double.parseDouble(bookRequest.getHeight()))
-                .weight(Double.parseDouble(bookRequest.getWeight()))
-                .condition(EnumUtil.fromDisplayName(EBookCondition.class, bookRequest.getCondition()))
-                .recommendedAge(EnumUtil.fromDisplayName(EBookAgeRecommend.class, bookRequest.getRecommendedAge()))
-                .build();
-    }
-
     public static BookResponse toBookResponse(Book book) {
         return BookResponse.builder()
                 .id(book.getId().toString())
@@ -108,4 +90,31 @@ public class BookMapper {
                 .languages(book.getBookTemplate().getLanguages())
                 .build();
     }
+
+    // endregion
+
+    // region DTOtoEntity
+
+    public static Book toBookEntity(BookRequest bookRequest) {
+        return Book.builder()
+                .id(Long.parseLong(bookRequest.getId()))
+                .title(bookRequest.getTitle())
+                .description(bookRequest.getDescription())
+                .sellingPrice(Double.parseDouble(bookRequest.getSellingPrice()))
+                .publicationDate(LocalDateTime.parse(bookRequest.getPublicationDate()))
+                .edition(Integer.parseInt(bookRequest.getEdition()))
+                .codeISBN10(bookRequest.getCodeISBN10())
+                .codeISBN13(bookRequest.getCodeISBN13())
+                .format(EnumUtil.fromDisplayName(EBookFormat.class, bookRequest.getFormat()))
+                .handcover(Integer.parseInt(bookRequest.getHandCover()))
+                .length(Double.parseDouble(bookRequest.getLength()))
+                .width(Double.parseDouble(bookRequest.getWidth()))
+                .height(Double.parseDouble(bookRequest.getHeight()))
+                .weight(Double.parseDouble(bookRequest.getWeight()))
+                .condition(EnumUtil.fromDisplayName(EBookCondition.class, bookRequest.getCondition()))
+                .recommendedAge(EnumUtil.fromDisplayName(EBookAgeRecommend.class, bookRequest.getRecommendedAge()))
+                .build();
+    }
+
+    // endregion
 }

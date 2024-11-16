@@ -1,10 +1,8 @@
 package com.biblio.service.impl;
 
-import com.biblio.dao.ICustomerDAO;
 import com.biblio.dao.IOrderDAO;
-import com.biblio.dao.impl.OrderDAOImpl;
-import com.biblio.dto.response.OrderDetailsResponse;
-import com.biblio.dto.response.OrderGetListResponse;
+import com.biblio.dto.response.OrderDetailsManagementResponse;
+import com.biblio.dto.response.OrderManagementResponse;
 import com.biblio.entity.Order;
 import com.biblio.mapper.OrderMapper;
 import com.biblio.service.IOrderService;
@@ -18,18 +16,18 @@ public class OrderServiceImpl implements IOrderService {
     IOrderDAO orderDAO;
 
     @Override
-    public OrderDetailsResponse getOrderDetails(Long id) {
+    public OrderDetailsManagementResponse getOrderDetailsManagementResponse(Long id) {
         Order order = orderDAO.findOne(id);
-        return OrderMapper.mapToOrderDetailsResponse(order);
+        return OrderMapper.mapToOrderDetailsManagementResponse(order);
     }
 
     @Override
-    public List<OrderGetListResponse> getOrders() {
-        List<Order> orderEntities = orderDAO.findAll();
-        List<OrderGetListResponse> orderDTOs = new ArrayList<>();
-        for (Order order : orderEntities) {
-            orderDTOs.add(OrderMapper.mapToOrderGetListResponse(order));
+    public List<OrderManagementResponse> getAllOrderManagementResponse() {
+        List<Order> orders = orderDAO.findAll();
+        List<OrderManagementResponse> orderManagementResponse = new ArrayList<>();
+        for (Order order : orders) {
+            orderManagementResponse.add(OrderMapper.mapToOrderManagementResponse(order));
         }
-        return orderDTOs;
+        return orderManagementResponse;
     }
 }

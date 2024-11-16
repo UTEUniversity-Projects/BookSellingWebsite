@@ -1,8 +1,6 @@
 package com.biblio.entity;
 
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
@@ -10,8 +8,10 @@ import java.time.LocalDateTime;
 @Entity
 @Table(name = "response_review")
 @NoArgsConstructor
+@AllArgsConstructor
 @Getter
 @Setter
+@Builder
 public class ResponseReview {
 
     // region Attributes
