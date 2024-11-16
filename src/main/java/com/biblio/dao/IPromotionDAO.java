@@ -1,12 +1,15 @@
 package com.biblio.dao;
 
 import com.biblio.entity.Promotion;
+import com.biblio.enumeration.EPromotionStatus;
 
 import java.util.List;
 
 public interface IPromotionDAO extends IGenericDAO<Promotion> {
 
     List<Promotion> findAll();
+
+    List<Promotion> findAllByIdAndStatus(Long id, EPromotionStatus status);
 
     Promotion findById(Long id);
 

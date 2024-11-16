@@ -44,7 +44,7 @@ public class PromotionTemplate implements Serializable {
 
     @Enumerated(EnumType.STRING)
     @Column(name = "status", nullable = false)
-    private EPromotionTemplateStatus promotionTemplateStatus;
+    private EPromotionTemplateStatus status;
 
     // endregion
 

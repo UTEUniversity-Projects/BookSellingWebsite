@@ -5,7 +5,7 @@ import lombok.Getter;
 @Getter
 public enum EPromotionStatus {
     USED("Đã sử dụng"),
-    NOT_UES("Chưa sử dụng");
+    NOT_USE("Chưa sử dụng");
 
     // Getter for description
     private final String description;

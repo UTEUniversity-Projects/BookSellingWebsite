@@ -17,11 +17,8 @@ public class PromotionTargetMapper {
 
     public static PromotionTarget toPromotionTarget(PromotionTargetInsertRequest promotionTargetInsertRequest) {
         PromotionTarget promotionTarget = new PromotionTarget();
-
-//        promotionTarget.setApplicableObjectId(promotionTargetInsertRequest.getApplicableObjectId());
-//        promotionTarget.setQuantity(promotionTargetInsertRequest.getQuantity());
-//        promotionTarget.setType(promotionTargetInsertRequest.getType());
-
+        promotionTarget.setApplicableObjectId(promotionTargetInsertRequest.getApplicableObjectId());
+        promotionTarget.setType(promotionTargetInsertRequest.getType());
         return promotionTarget;
     }
 }

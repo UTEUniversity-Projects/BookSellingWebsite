@@ -24,7 +24,7 @@ public class PromotionTarget implements Serializable {
     private Long id;
 
     @Column(name = "applicable_object_id", nullable = false)
-    private String applicableObjectId;
+    private Long applicableObjectId;
 
     @Enumerated(EnumType.STRING)
     @Column(name = "type", nullable = false)

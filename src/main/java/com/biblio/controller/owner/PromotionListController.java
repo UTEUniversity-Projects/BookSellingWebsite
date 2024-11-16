@@ -1,7 +1,9 @@
 package com.biblio.controller.owner;
 
 import com.biblio.dto.response.PromotionGetResponse;
+import com.biblio.dto.response.PromotionTemplateGetResponse;
 import com.biblio.service.IPromotionService;
+import com.biblio.service.IPromotionTemplateService;
 
 import javax.inject.Inject;
 import javax.servlet.ServletException;
@@ -18,7 +20,7 @@ public class PromotionListController extends HttpServlet {
     @Serial
     private static final long serialVersionUID = 1L;
     @Inject
-    IPromotionService promotionService;
+    IPromotionTemplateService promotionTemplateService;
     /**
      * @see HttpServlet#HttpServlet()
      */
@@ -32,7 +34,7 @@ public class PromotionListController extends HttpServlet {
      */
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         // TODO Auto-generated method stub
-        List<PromotionGetResponse> list = promotionService.getAllPromotions();
+        List<PromotionTemplateGetResponse> list = promotionTemplateService.getAllPromotionTemplates();
         request.setAttribute("promotions", list);
         request.getRequestDispatcher("/views/owner/promotion-list.jsp").forward(request, response);
     }

@@ -14,15 +14,13 @@ import java.util.Set;
 @Setter
 @Builder
 public class PromotionInsertRequest {
-    private String code;
     private String title;
     private String description;
     private double percentDiscount;
     private double discountLimit;
     private double minValueApplied;
-    private EPromotionStatus status;
     private String effectiveDate;
     private String expirationDate;
-    private EPromotionTemplateType type;
+    private EPromotionStatus status;
     private Set<PromotionTargetInsertRequest> promotionTargets = new HashSet<>();
 }

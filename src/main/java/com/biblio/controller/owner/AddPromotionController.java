@@ -45,7 +45,7 @@ public class AddPromotionController extends HttpServlet {
      * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
      */
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-//        // TODO Auto-generated method stub
+        // TODO Auto-generated method stub
 //        String formType = request.getParameter("formType");
 //
 //        if ("addVoucher".equals(formType)) {
@@ -59,75 +59,75 @@ public class AddPromotionController extends HttpServlet {
     }
 
 
-    private void handleAddPromotion(HttpServletRequest request, HttpServletResponse response, EPromotionTemplateType type, Double percentDiscount, Double minValueApplied) {
-        PromotionInsertRequest promotionInsertRequest = new PromotionInsertRequest();
-
-        try {
-            BeanUtils.populate(promotionInsertRequest, request.getParameterMap());
-
-            //promotionInsertRequest.setStatus(EPromotionStatus.EFFECTIVE);
-            promotionInsertRequest.setType(type);
-            promotionInsertRequest.setPercentDiscount(percentDiscount);
-            promotionInsertRequest.setMinValueApplied(minValueApplied);
-
-            String time = request.getParameter("dateeffective");
-            setPromotionDates(time, promotionInsertRequest);
-
-            PromotionTargetInsertRequest promotionTargetInsertRequest = createPromotionTargetRequest(request);
-            promotionInsertRequest.getPromotionTargets().add(promotionTargetInsertRequest);
-
-            promotionService.insertPromotion(promotionInsertRequest);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-
-    private void setPromotionDates(String time, PromotionInsertRequest promotionInsertRequest) {
-        try {
-            String[] parts = time.split(" - ");
-            DateTimeFormatter outputFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss.SSSSSS");
-            int currentYear = LocalDateTime.now().getYear();
-
-            LocalDateTime startDateTime = LocalDateTime.parse(currentYear + "/" + parts[0], DateTimeFormatter.ofPattern("yyyy/MM/dd hh:mm a"));
-            LocalDateTime endDateTime = LocalDateTime.parse(currentYear + "/" + parts[1], DateTimeFormatter.ofPattern("yyyy/MM/dd hh:mm a"));
-
-            promotionInsertRequest.setEffectiveDate(startDateTime.format(outputFormatter));
-            promotionInsertRequest.setExpirationDate(endDateTime.format(outputFormatter));
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-
-    private PromotionTargetInsertRequest createPromotionTargetRequest(HttpServletRequest request) {
-        PromotionTargetInsertRequest promotionTargetInsertRequest = new PromotionTargetInsertRequest();
-        promotionTargetInsertRequest.setApplicableObjectId(EPromotionTargetType.WHOLE.toString());
-        promotionTargetInsertRequest.setType(EPromotionTargetType.WHOLE);
-
-        int quantity = getQuantity(request);
-        promotionTargetInsertRequest.setQuantity(quantity);
-
-        return promotionTargetInsertRequest;
-    }
-
-    private int getQuantity(HttpServletRequest request) {
-        String unlimited = request.getParameter("unlimited");
-        return "true".equals(unlimited) ? -1 : Integer.parseInt(request.getParameter("quantity"));
-    }
-
-    // Các phương thức gọi chung
-    private void handleAddVoucher(HttpServletRequest request, HttpServletResponse response) {
-        String minValueApplied = request.getParameter("minValueApplied");
-        handleAddPromotion(request, response, EPromotionTemplateType.VOUCHER,  100.0, Double.parseDouble(minValueApplied));
-    }
-
-    private void handleAddCoupon(HttpServletRequest request, HttpServletResponse response) {
-        String percentDiscount = request.getParameter("percentDiscount");
-//        handleAddPromotion(request, response, EPromotionTemplateType.COUPON, Double.parseDouble(percentDiscount), 0.0); // percentDiscount 0, minValueApplied 0
-    }
-
-    private void handleAddFreeShip(HttpServletRequest request, HttpServletResponse response) {
-        handleAddPromotion(request, response, EPromotionTemplateType.FREESHIP, 100.0, 0.0); // percentDiscount 100, minValueApplied 0
-    }
-
+//    private void handleAddPromotion(HttpServletRequest request, HttpServletResponse response, EPromotionTemplateType type, Double percentDiscount, Double minValueApplied) {
+//        PromotionInsertRequest promotionInsertRequest = new PromotionInsertRequest();
+//
+//        try {
+//            BeanUtils.populate(promotionInsertRequest, request.getParameterMap());
+//
+//            //promotionInsertRequest.setStatus(EPromotionStatus.EFFECTIVE);
+//            promotionInsertRequest.setType(type);
+//            promotionInsertRequest.setPercentDiscount(percentDiscount);
+//            promotionInsertRequest.setMinValueApplied(minValueApplied);
+//
+//            String time = request.getParameter("dateeffective");
+//            setPromotionDates(time, promotionInsertRequest);
+//
+//            PromotionTargetInsertRequest promotionTargetInsertRequest = createPromotionTargetRequest(request);
+//            promotionInsertRequest.getPromotionTargets().add(promotionTargetInsertRequest);
+//
+//            promotionService.insertPromotion(promotionInsertRequest);
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
+//    }
+//
+//    private void setPromotionDates(String time, PromotionInsertRequest promotionInsertRequest) {
+//        try {
+//            String[] parts = time.split(" - ");
+//            DateTimeFormatter outputFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss.SSSSSS");
+//            int currentYear = LocalDateTime.now().getYear();
+//
+//            LocalDateTime startDateTime = LocalDateTime.parse(currentYear + "/" + parts[0], DateTimeFormatter.ofPattern("yyyy/MM/dd hh:mm a"));
+//            LocalDateTime endDateTime = LocalDateTime.parse(currentYear + "/" + parts[1], DateTimeFormatter.ofPattern("yyyy/MM/dd hh:mm a"));
+//
+//            promotionInsertRequest.setEffectiveDate(startDateTime.format(outputFormatter));
+//            promotionInsertRequest.setExpirationDate(endDateTime.format(outputFormatter));
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
+//    }
+//
+//    private PromotionTargetInsertRequest createPromotionTargetRequest(HttpServletRequest request) {
+//        PromotionTargetInsertRequest promotionTargetInsertRequest = new PromotionTargetInsertRequest();
+//        promotionTargetInsertRequest.setApplicableObjectId(EPromotionTargetType.WHOLE.toString());
+//        promotionTargetInsertRequest.setType(EPromotionTargetType.WHOLE);
+//
+//        int quantity = getQuantity(request);
+//        promotionTargetInsertRequest.setQuantity(quantity);
+//
+//        return promotionTargetInsertRequest;
+//    }
+//
+//    private int getQuantity(HttpServletRequest request) {
+//        String unlimited = request.getParameter("unlimited");
+//        return "true".equals(unlimited) ? -1 : Integer.parseInt(request.getParameter("quantity"));
+//    }
+//
+//    // Các phương thức gọi chung
+//    private void handleAddVoucher(HttpServletRequest request, HttpServletResponse response) {
+//        String minValueApplied = request.getParameter("minValueApplied");
+//        handleAddPromotion(request, response, EPromotionTemplateType.VOUCHER,  100.0, Double.parseDouble(minValueApplied));
+//    }
+//
+//    private void handleAddCoupon(HttpServletRequest request, HttpServletResponse response) {
+//        String percentDiscount = request.getParameter("percentDiscount");
+////        handleAddPromotion(request, response, EPromotionTemplateType.COUPON, Double.parseDouble(percentDiscount), 0.0); // percentDiscount 0, minValueApplied 0
+//    }
+//
+//    private void handleAddFreeShip(HttpServletRequest request, HttpServletResponse response) {
+//        handleAddPromotion(request, response, EPromotionTemplateType.FREESHIP, 100.0, 0.0); // percentDiscount 100, minValueApplied 0
+//    }
+//
 }
 

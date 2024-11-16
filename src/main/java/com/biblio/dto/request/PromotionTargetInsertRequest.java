@@ -10,7 +10,6 @@ import lombok.*;
 @Setter
 @Builder
 public class PromotionTargetInsertRequest {
-    private String applicableObjectId;
-    private int quantity;
+    private Long applicableObjectId;
     private EPromotionTargetType type;
 }
