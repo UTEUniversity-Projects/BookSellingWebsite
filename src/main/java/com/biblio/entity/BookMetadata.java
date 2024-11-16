@@ -1,9 +1,7 @@
 package com.biblio.entity;
 
-import com.biblio.enumeration.EBookStatus;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import com.biblio.enumeration.EBookMetadataStatus;
+import lombok.*;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -13,9 +11,11 @@ import java.util.Set;
 
 @Entity
 @Table(name = "book_metadata")
-@NoArgsConstructor
 @Getter
 @Setter
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 public class BookMetadata implements Serializable {
 
     // region Attributes
@@ -35,11 +35,14 @@ public class BookMetadata implements Serializable {
 
     @Enumerated(EnumType.STRING)
     @Column(name = "status", nullable = false)
-    private EBookStatus status;
+    private EBookMetadataStatus status;
 
     // endregion Attributes
 
     // region Relationships
+
+    @OneToOne(mappedBy = "bookMetadata")
+    private Book book;
 
     @ManyToMany(cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
     @JoinTable(
@@ -47,14 +50,7 @@ public class BookMetadata implements Serializable {
             joinColumns = @JoinColumn(name = "book_metadata_id", nullable = false),
             inverseJoinColumns = @JoinColumn(name = "tag_id", nullable = false)
     )
-    private Set<Tag> tags = new HashSet<Tag>();
-
-    @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "book_id")
-    private Book book;
-
-    @OneToMany(mappedBy = "bookMetadata", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private Set<MediaFile> mediaFiles;
+    private Set<Tag> tags = new HashSet<>();
 
     // endregion
 

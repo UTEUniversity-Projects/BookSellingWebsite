@@ -1,4 +1,7 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+
 <!-- main content -->
 <div class="cr-main-content">
     <div class="container-fluid">
@@ -15,48 +18,52 @@
         <div class="row">
             <div class="col-md-12">
                 <div class="cr-card card-default product-list">
-                    <div class="cr-card-content ">
+                    <div class="cr-card-content">
                         <div class="table-responsive">
-                            <table id="product_list" class="table" style="width:100%">
+                            <table id="staff-data-table" class="table table-hover">
                                 <thead>
-                                <tr>
-                                    <th>Mã</th>
-                                    <th>Họ và Tên</th>
-                                    <th>Email</th>
-                                    <th>Số điện thoại</th>
-                                    <th>Bắt đầu làm việc</th>
-                                    <th>Trạng thái</th>
-                                    <th>Thao tác</th>
-                                </tr>
+                                    <tr>
+                                        <th>Mã</th>
+                                        <th>Họ và Tên</th>
+                                        <th>Email</th>
+                                        <th>Số điện thoại</th>
+                                        <th>Bắt đầu làm việc</th>
+                                        <th>Trạng thái</th>
+                                        <th>Thao tác</th>
+                                    </tr>
                                 </thead>
 
                                 <tbody>
-                                <tr>
-                                    <td>#012</td>
-                                    <td>Nguyễn Văn An</td>
-                                    <td>nvan@gmail.com</td>
-                                    <td>0702546327</td>
-                                    <td>05/11/2022</td>
-                                    <td>
-                                        <span class="active">Đang hoạt động</span>
-                                    </td>
-                                    <td>
-                                        <div class="d-flex justify-content-start">
-                                            <button type="button"
-                                                    class="btn btn-outline-success dropdown-toggle dropdown-toggle-split"
-                                                    data-bs-toggle="dropdown" aria-haspopup="true"
-                                                    aria-expanded="false" data-display="static">
-															<span class="sr-only"><i
-                                                                    class="ri-settings-3-line"></i></span>
-                                            </button>
-                                            <div class="dropdown-menu">
-                                                <a class="dropdown-item" href="#">Cập nhật thông tin</a>
-                                                <a class="dropdown-item" href="#">Vô hiệu hóa tài khoản</a>
-                                                <a class="dropdown-item" href="#">Mở khóa tài khoản</a>
-                                            </div>
-                                        </div>
-                                    </td>
-                                </tr>
+                                    <c:forEach var="staff" items="${staffList}">
+                                        <tr class="staff-row" data-href="/owner/staff-profile?id=${staff.id}">
+                                            <td>${staff.id}</td>
+                                            <td>${staff.fullName}</td>
+                                            <td>${staff.emailAddress}</td>
+                                            <td>${staff.phoneNumber}</td>
+                                            <td>${staff.joinAt}</td>
+                                            <td class="cod" id="status-${staff.id}">${staff.status}</td>
+                                            <td>
+                                                <div class="d-flex justify-content-start">
+                                                    <button type="button"
+                                                            class="btn btn-outline-success dropdown-toggle dropdown-toggle-split"
+                                                            data-bs-toggle="dropdown" aria-haspopup="true"
+                                                            aria-expanded="false" data-display="static">
+                                                        <span class="sr-only"><i class="ri-settings-3-line"></i></span>
+                                                    </button>
+                                                    <div class="dropdown-menu">
+                                                        <c:choose>
+                                                            <c:when test="${staff.status == 'ACTIVE'}">
+                                                                <a class="dropdown-item pop-positioned-timeout" href="#" onclick="changeStatus(${staff.id}, 'deactivate'); return false;">Vô hiệu hóa tài khoản</a>
+                                                            </c:when>
+                                                            <c:otherwise>
+                                                                <a class="dropdown-item pop-positioned-timeout" href="#" onclick="changeStatus(${staff.id}, 'activate'); return false;">Mở khóa tài khoản</a>
+                                                            </c:otherwise>
+                                                        </c:choose>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    </c:forEach>
                                 </tbody>
                             </table>
                         </div>
@@ -66,3 +73,4 @@
         </div>
     </div>
 </div>
+<script src="${pageContext.request.contextPath}/assets/owner/js/manage-staff.js" defer></script>

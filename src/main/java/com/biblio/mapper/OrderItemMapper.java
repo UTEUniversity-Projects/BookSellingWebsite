@@ -2,18 +2,22 @@ package com.biblio.mapper;
 
 import com.biblio.dto.response.OrderProductResponse;
 import com.biblio.entity.OrderItem;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-import lombok.ToString;
+
 
 public class OrderItemMapper {
     public static OrderProductResponse mapToOrderProductResponse(OrderItem orderItem) {
-        OrderProductResponse orderProductResponse = new OrderProductResponse();
-        orderProductResponse.setTitle(orderItem.getBook().getTitle());
-        orderProductResponse.setQuantity(orderItem.getQuantity());
-        orderProductResponse.setSellingPrice(orderItem.getBook().getSellingPrice());
-        orderProductResponse.setTotalPrice(orderItem.calPriceItem());
-        return orderProductResponse;
+        return new OrderProductResponse();
+//        return OrderProductResponse.builder()
+//                .title(orderItem.getBook().getTitle())
+//                .imagePath(orderItem.getBook()
+//                        .getBookTemplate()
+//                        .getMediaFiles()
+//                        .iterator().next()
+//                        .getStoredCode()
+//                        .replaceAll("image\\d+\\.jpg", "image1.jpg"))
+//                .quantity(orderItem.getQuantity())
+//                .sellingPrice(orderItem.getBook().getSellingPrice())
+//                .totalPrice(orderItem.calPriceItem())
+//                .build();
     }
 }

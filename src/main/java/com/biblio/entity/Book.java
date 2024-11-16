@@ -3,22 +3,19 @@ package com.biblio.entity;
 import com.biblio.enumeration.EBookAgeRecommend;
 import com.biblio.enumeration.EBookCondition;
 import com.biblio.enumeration.EBookFormat;
-import com.biblio.enumeration.EBookLanguage;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import javax.persistence.*;
 import java.io.Serializable;
 import java.time.LocalDateTime;
-import java.util.HashSet;
-import java.util.Set;
 
 @Entity
 @Table(name = "book")
-@NoArgsConstructor
 @Getter
 @Setter
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 public class Book implements Serializable {
 
     // region Attributes
@@ -65,13 +62,6 @@ public class Book implements Serializable {
     @Column(name = "height", nullable = false)
     private double height;
 
-    @ElementCollection
-    @Enumerated(EnumType.STRING)
-    @CollectionTable(name = "book_languages",
-            joinColumns = @JoinColumn(name = "book_id", nullable = false))
-    @Column(name = "language", nullable = false)
-    private Set<EBookLanguage> languages = new HashSet<>();
-
     @Column(name = "weight", nullable = false)
     private double weight;
 
@@ -87,32 +77,21 @@ public class Book implements Serializable {
 
     // region Relationships
 
-    @OneToOne(mappedBy = "book", cascade = CascadeType.ALL)
-    private BookMetadata metadata;
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "book_template_id", nullable = false)
+    private BookTemplate bookTemplate;
 
-    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    @JoinColumn(name = "category_id", nullable = false)
-    private Category category;
+    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @JoinColumn(name = "book_metadata_id", nullable = false)
+    private BookMetadata bookMetadata;
 
     @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JoinColumn(name = "sub_category_id", nullable = false)
     private SubCategory subCategory;
 
-    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    @JoinColumn(name = "publisher_id", nullable = false)
-    private Publisher publisher;
+    // endregion
 
-    @ManyToMany(mappedBy = "books")
-    private Set<Author> authors = new HashSet<>();
-
-    @ManyToMany(mappedBy = "books")
-    private Set<Translator> translators = new HashSet<>();
-
-    @OneToMany(mappedBy = "book")
-    private Set<Review> reviews = new HashSet<>();
-
-    @OneToMany(mappedBy = "book")
-    private Set<OrderItem> orderItems = new HashSet<>();
+    // region Methods
 
     // endregion
 }

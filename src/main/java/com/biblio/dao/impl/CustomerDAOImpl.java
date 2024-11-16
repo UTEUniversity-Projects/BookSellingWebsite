@@ -2,12 +2,15 @@ package com.biblio.dao.impl;
 
 import com.biblio.dao.ICustomerDAO;
 import com.biblio.entity.Customer;
+import com.biblio.jpaconfig.JpaConfig;
 
+import javax.persistence.EntityManager;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 public class CustomerDAOImpl extends GenericDAOImpl<Customer> implements ICustomerDAO {
+
     public CustomerDAOImpl() {
         super(Customer.class);
     }
@@ -21,7 +24,6 @@ public class CustomerDAOImpl extends GenericDAOImpl<Customer> implements ICustom
     public Customer findById(Long id) {
         return super.findById(id);
     }
-
 
     @Override
     public void deactivateCustomer(Customer customer) {
@@ -39,7 +41,7 @@ public class CustomerDAOImpl extends GenericDAOImpl<Customer> implements ICustom
     }
 
     @Override
-    public boolean isEmailExisted(String email) {
+    public boolean existsByEmail(String email) {
         String jpql = "SELECT c FROM Customer c WHERE c.emailAddress = :email";
         Map<String, Object> params = new HashMap<String, Object>();
         params.put("email", email);
@@ -47,11 +49,29 @@ public class CustomerDAOImpl extends GenericDAOImpl<Customer> implements ICustom
     }
 
     @Override
-    public boolean isPhoneNumberExisted(String phoneNumber) {
+    public boolean existsByPhoneNumber(String phoneNumber) {
         String jpql = "SELECT c FROM Customer c WHERE c.phoneNumber = :phoneNumber";
         Map<String, Object> params = new HashMap<String, Object>();
         params.put("phoneNumber", phoneNumber);
         return super.findSingleByJPQL(jpql, params) != null;
+    }
+
+    public void updateSupport_Notification(Customer customer) {
+        EntityManager entityManager = JpaConfig.getEntityManager(); // Obtain a new EntityManager
+        try {
+            entityManager.getTransaction().begin();
+            entityManager.merge(customer);
+            entityManager.getTransaction().commit();
+        } catch (Exception e) {
+            e.printStackTrace();
+            if (entityManager.getTransaction().isActive()) {
+                entityManager.getTransaction().rollback();
+            }
+        } finally {
+            if (entityManager.isOpen()) {
+                entityManager.close();
+            }
+        }
     }
 
 }

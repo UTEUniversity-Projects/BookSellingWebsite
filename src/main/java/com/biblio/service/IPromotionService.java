@@ -6,7 +6,8 @@ import com.biblio.dto.response.PromotionGetResponse;
 import java.util.List;
 
 public interface IPromotionService {
-    List<PromotionGetResponse> findAll();
-    PromotionGetResponse findById(Long id);
-    void insert(PromotionInsertRequest promotionInsertRequest);
+    List<PromotionGetResponse> getAllPromotions();
+    PromotionGetResponse getPromotionById(Long id);
+    void insertPromotion(PromotionInsertRequest promotionInsertRequest);
+    Boolean isCodeExisted(String code);
 }

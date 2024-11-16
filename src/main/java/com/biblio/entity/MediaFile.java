@@ -30,9 +30,9 @@ public class MediaFile implements Serializable {
 
     // region Relationships
 
-    @ManyToOne
-    @JoinColumn(name = "book_metadata_id")
-    private BookMetadata bookMetadata;
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "book_template_id")
+    private BookTemplate bookTemplate;
 
     // endregion
 

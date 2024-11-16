@@ -42,6 +42,7 @@ public class LoginController extends HttpServlet {
      * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
      */
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
         // TODO Auto-generated method stub
         String username = request.getParameter("username");
         String password = request.getParameter("password");
@@ -54,6 +55,7 @@ public class LoginController extends HttpServlet {
             request.getRequestDispatcher("/views/customer/login.jsp").forward(request, response);
         }
         response.sendRedirect(request.getContextPath() + "/home");
+
     }
 
 }

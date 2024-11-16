@@ -20,9 +20,6 @@ public class ResponseReview {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "review_id", nullable = false)
-    private String reviewId;
-
     @Column(name = "content", nullable = false)
     private String content;
 
@@ -31,6 +28,14 @@ public class ResponseReview {
 
     @Column(name = "created_at", nullable = false)
     private LocalDateTime createdAt;
+
+    // endregion
+
+    // region Relationships
+
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "review_id")
+    private Review review;
 
     // endregion
 

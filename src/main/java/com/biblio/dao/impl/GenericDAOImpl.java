@@ -1,26 +1,23 @@
 package com.biblio.dao.impl;
 
-
 import com.biblio.dao.IGenericDAO;
 import com.biblio.jpaconfig.JpaConfig;
 
-
 import javax.persistence.EntityManager;
 import javax.persistence.TypedQuery;
+import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Root;
 import java.util.List;
 import java.util.Map;
 
 public class GenericDAOImpl<T> implements IGenericDAO<T> {
 
-
     private final Class<T> entityClass;
-
 
     public GenericDAOImpl(Class<T> entityClass) {
         this.entityClass = entityClass;
     }
-
 
     @Override
     public T findById(Object id) {
@@ -33,7 +30,6 @@ public class GenericDAOImpl<T> implements IGenericDAO<T> {
             closeEntityManager(em);
         }
     }
-
 
     @Override
     public List<T> findAll() {
@@ -49,7 +45,6 @@ public class GenericDAOImpl<T> implements IGenericDAO<T> {
         }
     }
 
-
     @Override
     public List<T> findAll(String jpql) {
         EntityManager em = JpaConfig.getEntityManager();
@@ -62,7 +57,6 @@ public class GenericDAOImpl<T> implements IGenericDAO<T> {
             closeEntityManager(em);
         }
     }
-
 
     @Override
     public T findSingleByJPQL(String jpql, Map<String, Object> params) {
@@ -78,7 +72,6 @@ public class GenericDAOImpl<T> implements IGenericDAO<T> {
         }
     }
 
-
     @Override
     public List<T> findByJPQL(String jpql, Map<String, Object> params) {
         EntityManager em = JpaConfig.getEntityManager();
@@ -92,7 +85,6 @@ public class GenericDAOImpl<T> implements IGenericDAO<T> {
             closeEntityManager(em);
         }
     }
-
 
     @Override
     public T save(T entity) {
@@ -110,7 +102,6 @@ public class GenericDAOImpl<T> implements IGenericDAO<T> {
         }
     }
 
-
     @Override
     public T update(T entity) {
         EntityManager em = JpaConfig.getEntityManager();
@@ -126,7 +117,6 @@ public class GenericDAOImpl<T> implements IGenericDAO<T> {
             closeEntityManager(em);
         }
     }
-
 
     @Override
     public T delete(Object id) {
@@ -150,7 +140,6 @@ public class GenericDAOImpl<T> implements IGenericDAO<T> {
         }
     }
 
-
     @Override
     public List<T> findAllPaginated(int pageNumber, int pageSize) {
         EntityManager em = JpaConfig.getEntityManager();
@@ -168,7 +157,6 @@ public class GenericDAOImpl<T> implements IGenericDAO<T> {
         }
     }
 
-
     @Override
     public List<T> findByJPQLPaginated(String jpql, int pageNumber, int pageSize, Map<String, Object> params) {
         EntityManager em = JpaConfig.getEntityManager();
@@ -180,6 +168,36 @@ public class GenericDAOImpl<T> implements IGenericDAO<T> {
             return query.getResultList();
         } catch (Exception e) {
             throw new RuntimeException("Error while finding paginated entities by JPQL", e);
+        } finally {
+            closeEntityManager(em);
+        }
+    }
+
+    @Override
+    public long count() {
+        EntityManager em = JpaConfig.getEntityManager();
+        try {
+            CriteriaBuilder cb = em.getCriteriaBuilder();
+            CriteriaQuery<Long> cq = cb.createQuery(Long.class);
+            Root<T> root = cq.from(entityClass);
+            cq.select(cb.count(root));
+            return em.createQuery(cq).getSingleResult();
+        } catch (Exception e) {
+            throw new RuntimeException("Error while counting entities", e);
+        } finally {
+            closeEntityManager(em);
+        }
+    }
+
+    @Override
+    public long countByJPQL(String jpql, Map<String, Object> params) {
+        EntityManager em = JpaConfig.getEntityManager();
+        try {
+            TypedQuery<Long> query = em.createQuery(jpql, Long.class);
+            setQueryParameters(query, params);
+            return query.getSingleResult();
+        } catch (Exception e) {
+            throw new RuntimeException("Error while counting entities by JPQL", e);
         } finally {
             closeEntityManager(em);
         }

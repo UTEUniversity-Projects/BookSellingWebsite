@@ -1,17 +1,17 @@
 package com.biblio.entity;
 
 import com.biblio.enumeration.EOrderStatus;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import com.biblio.enumeration.EPaymentType;
+import lombok.*;
 
 import javax.persistence.*;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -20,6 +20,7 @@ import java.util.Set;
 @AllArgsConstructor
 @Getter
 @Setter
+@Builder
 public class Order implements Serializable {
 
     // region Attributes
@@ -31,12 +32,19 @@ public class Order implements Serializable {
     @Column(name = "note", nullable = false)
     private String note;
 
+    @Column(name = "vat", nullable = false)
+    private double vat;
+
     @Column(name = "order_date", nullable = false)
     private LocalDateTime orderDate;
 
     @Enumerated(EnumType.STRING)
     @Column(name = "status", nullable = false)
     private EOrderStatus status;
+
+    @Enumerated(EnumType.STRING)
+    @Column(name = "payment_type", nullable = false)
+    private EPaymentType paymentType;
 
     // endregion
 
@@ -58,26 +66,28 @@ public class Order implements Serializable {
 //    @OneToOne(mappedBy = "order")
 //    private EWallet wallet;
 
-    @OneToMany(mappedBy = "order", fetch = FetchType.EAGER)
-    private Set<OrderItem> orderItems = new HashSet<OrderItem>();
+    @OneToMany(mappedBy = "order", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
+    private Set<OrderItem> orderItems = new HashSet<>();
 
     @ManyToMany(cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
     @JoinTable(name = "order_promotion",
             joinColumns = @JoinColumn(name = "order_id", nullable = false),
             inverseJoinColumns = @JoinColumn(name = "promotion_id", nullable = false))
-    private Set<Promotion> promotions = new HashSet<Promotion>();
-
-    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    @JoinColumn(name = "address_id", nullable = false)
-    private Address address;
+    private Set<Promotion> promotions = new HashSet<>();
 
     // endregion
+
+    // region Methods
+
     public double calTotalPrice() {
-        double totalPrice = 0.0;
-        for (OrderItem item : orderItems) {
-            totalPrice += item.calPriceItem();
-        }
-        BigDecimal roundedTotal = new BigDecimal(totalPrice).setScale(2, RoundingMode.HALF_UP);
-        return roundedTotal.doubleValue();
+//        double totalPrice = 0.0;
+//        for (Book item : books) {
+//            totalPrice += item.getSellingPrice();
+//        }
+//        BigDecimal roundedTotal = new BigDecimal(totalPrice).setScale(2, RoundingMode.HALF_UP);
+//        return roundedTotal.doubleValue();
+        return 0;
     }
+
+    // endregion
 }

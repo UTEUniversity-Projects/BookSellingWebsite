@@ -9,4 +9,9 @@ public class BCryptUtil {
         PasswordEncoder passwordEncoder = new BCryptPasswordEncoder(10);
         return passwordEncoder.encode(password);
     }
+
+    public static boolean CheckPassword(String password, String hashedPassword) {
+        PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+        return passwordEncoder.matches(password, hashedPassword);
+    }
 }

@@ -15,23 +15,27 @@ public class PromotionServiceImpl implements IPromotionService {
     @Inject
     IPromotionDAO promotionDAO;
     @Override
-    public List<PromotionGetResponse> findAll() {
+    public List<PromotionGetResponse> getAllPromotions() {
         List<PromotionGetResponse> list = new ArrayList<PromotionGetResponse>();
-        for (Promotion promotion : promotionDAO.findAll()) {
-            list.add(PromotionMapper.toPromotionGetResponse(promotion));
-        }
+        List<Promotion> promotions = promotionDAO.findAll();
+
         return list;
     }
 
     @Override
-    public PromotionGetResponse findById(Long id) {
-        PromotionGetResponse promotion = PromotionMapper.toPromotionGetResponse(promotionDAO.findById(id));
-        return promotion;
+    public PromotionGetResponse getPromotionById(Long id) {
+       // return PromotionMapper.toPromotionGetResponse(promotionDAO.findById(id));
+        return new PromotionGetResponse();
     }
 
     @Override
-    public void insert(PromotionInsertRequest promotionInsertRequest) {
+    public void insertPromotion(PromotionInsertRequest promotionInsertRequest) {
         Promotion promotion = PromotionMapper.toPromotion(promotionInsertRequest);
         promotionDAO.insert(promotion);
+    }
+
+    @Override
+    public Boolean isCodeExisted(String code) {
+        return promotionDAO.existsByCode(code);
     }
 }

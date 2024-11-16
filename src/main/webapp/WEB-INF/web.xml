@@ -13,10 +13,15 @@
         <location>/views/customer/404.jsp</location>
     </error-page>
 
+    <!--    <listener>-->
+    <!--        <listener-class>com.biblio.listener.AppContextListener</listener-class>-->
+    <!--    </listener>-->
+
     <filter>
         <filter-name>sitemesh</filter-name>
         <filter-class>com.opensymphony.sitemesh.webapp.SiteMeshFilter</filter-class>
     </filter>
+
     <filter-mapping>
         <filter-name>sitemesh</filter-name>
         <url-pattern>/*</url-pattern>

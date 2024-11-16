@@ -3,16 +3,17 @@ package com.biblio.entity;
 import com.biblio.enumeration.EAccountStatus;
 import com.biblio.enumeration.EUserRole;
 import lombok.*;
+import lombok.experimental.SuperBuilder;
 
 import javax.persistence.*;
 import java.io.Serializable;
 
 @Entity
 @Table(name = "account")
-@NoArgsConstructor
-@AllArgsConstructor
 @Getter
 @Setter
+@NoArgsConstructor
+@AllArgsConstructor
 @Builder
 public class Account implements Serializable {
 

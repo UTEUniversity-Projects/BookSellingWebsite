@@ -1,7 +1,5 @@
 package com.biblio.dto.response;
 
-import com.biblio.enumeration.EAccountStatus;
-import com.biblio.enumeration.EUserRole;
 import lombok.*;
 
 @NoArgsConstructor
@@ -10,6 +8,7 @@ import lombok.*;
 @Setter
 @Builder
 public class AccountGetResponse {
+    private Long id;
     private String username;
     private String password;
     private String status;

@@ -8037,17 +8037,201 @@ table {
     margin-bottom: 24px;
   }
 }
-.verify-email::before {
-  content: "";
-  position: absolute;
-  left: 50%;
-  top: -15px;
-  transform: translateX(-50%);
-  width: 0;
-  height: 0;
-  border-left: 15px solid transparent;
-  border-right: 15px solid transparent;
-  border-bottom: 15px solid rgba(254, 202, 202, 0.5);
+.section-profile {
+  padding: 100px 0;
+}
+
+.profile-card {
+  border: 1px solid #ddd;
+  padding: 20px;
+  border-radius: 10px;
+  background-color: #fff;
+}
+
+.logo-container {
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.logo {
+  width: 150px; /* Kích thước của logo */
+  height: auto;
+}
+
+.left-section {
+  text-align: center;
+  padding: 20px;
+  border-right: 1px solid #ddd;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Form styles */
+.cr-content-form input,
+.cr-content-form select {
+  border: 1px solid #d1d5db;
+  border-radius: 4px;
+  padding: 10px;
+  font-size: 16px;
+  transition: all 0.3s ease;
+  background-color: #f9fafb;
+}
+
+.cr-content-form input:focus,
+.cr-content-form select:focus {
+  border-color: #10b981;
+  box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.3);
+}
+
+.avatar-container {
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.avatar {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.user-info {
+  font-size: 16px;
+  text-align: center;
+}
+
+.name {
+  font-size: 22px;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.gender, .membership {
+  font-size: 14px;
+  color: #666;
+}
+
+.profile-form .form-group {
+  margin-bottom: 15px;
+}
+
+.label {
+  font-size: 14px;
+  color: #333;
+}
+
+.form-control {
+  width: 100%;
+  padding: 10px;
+  border-radius: 5px;
+  border: 1px solid #ddd;
+  font-size: 14px;
+  background-color: #f9f9f9;
+  color: #333;
+}
+
+.update-button {
+  background-color: #4CAF50;
+  color: #fff;
+  padding: 10px 20px;
+  border-radius: 5px;
+  text-decoration: none;
+  font-size: 16px;
+  transition: background-color 0.3s;
+}
+
+.update-button:hover {
+  background-color: #45a049;
+}
+
+.button-container {
+  text-align: right;
+  margin-top: 20px;
+}
+
+@media (max-width: 768px) {
+  .left-section {
+    text-align: center;
+    padding: 10px;
+    border-right: none;
+  }
+  .col-md-4, .col-md-8 {
+    width: 100%;
+    margin-bottom: 20px;
+  }
+  .profile-card {
+    padding: 15px;
+  }
+}
+/* Logo */
+.logo-container .logo {
+  display: block;
+  margin: 0 auto;
+  width: 200px; /* Điều chỉnh kích thước logo */
+  height: auto;
+}
+
+/* Avatar */
+.avatar-container .avatar {
+  width: 100px; /* Kích thước avatar */
+  height: 100px;
+  border-radius: 50%;
+  border: 2px solid #ddd; /* Đường viền avatar */
+  margin-bottom: 15px;
+}
+
+/* Section bên trái */
+.left-section {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding-bottom: 20px;
+}
+
+/* Chỉnh các thành phần trong form */
+.profile-form .form-group {
+  margin-bottom: 1rem;
+}
+
+/* Group buttons */
+.button-group {
+  display: flex;
+  justify-content: space-between; /* Đặt hai nút ở hai bên */
+  gap: 10px;
+  margin-top: 20px;
+}
+
+/* Các nút */
+.update-button, .change-password-button {
+  display: inline-block;
+  padding: 10px 20px;
+  font-size: 14px; /* Giảm kích thước font để thu nhỏ lại */
+  border-radius: 5px;
+  width: 22%; /* Chiếm 48% chiều rộng của container */
+  text-align: center;
+  transition: background-color 0.3s;
+}
+
+.update-button {
+  background-color: #4CAF50;
+  color: white;
+}
+
+.update-button:hover {
+  background-color: #45a049;
+}
+
+.change-password-button {
+  background-color: #ff6f00; /* Màu cam */
+  color: white;
+}
+
+.change-password-button:hover {
+  background-color: #e65c00;
 }
 
 .review-section {
@@ -8126,38 +8310,137 @@ table {
   display: block;
   margin-bottom: 5px;
 }
-.rating .star-rating {
-  display: flex;
-  direction: ltr;
-}
-.rating .star-rating input[type=radio] {
-  display: none;
-}
-.rating .star-rating .star {
-  cursor: pointer;
-  color: #ccc;
-  font-size: 2rem;
-  margin-right: 5px;
-  transition: color 0.2s;
-}
-.rating .star-rating .star:hover, .rating .star-rating .star:hover ~ .star {
-  color: gold;
-}
-input[type=radio]:checked ~ .rating .star-rating .star {
-  color: gold;
-}
-.rating .star-rating .star input[type=radio]:checked + label,
-.rating .star-rating .star input[type=radio]:checked ~ label {
-  color: gold;
-}
-input[type=radio]:checked ~ .rating .star-rating .star:hover, input[type=radio]:checked ~ .rating .star-rating .star:hover ~ .star {
-  color: gold;
-}
 .rating .rating-text {
   display: block;
   margin-top: 10px;
   font-size: 14px;
   color: #999;
+}
+
+.star-rating {
+  background-image: url("https://www.toptal.com/designers/subtlepatterns/patterns/concrete-texture.png");
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  padding: 0 20px;
+}
+
+.rating {
+  display: flex;
+  width: 100%;
+  justify-content: center;
+  overflow: hidden;
+  flex-direction: row-reverse;
+  height: 150px;
+  position: relative;
+}
+
+.rating-0 {
+  filter: grayscale(100%);
+}
+
+.rating > input {
+  display: none;
+}
+
+.rating > label {
+  cursor: pointer;
+  width: 40px;
+  height: 40px;
+  margin-top: auto;
+  background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' width='126.729' height='126.73'%3e%3cpath fill='%23e3e3e3' d='M121.215 44.212l-34.899-3.3c-2.2-.2-4.101-1.6-5-3.7l-12.5-30.3c-2-5-9.101-5-11.101 0l-12.4 30.3c-.8 2.1-2.8 3.5-5 3.7l-34.9 3.3c-5.2.5-7.3 7-3.4 10.5l26.3 23.1c1.7 1.5 2.4 3.7 1.9 5.9l-7.9 32.399c-1.2 5.101 4.3 9.3 8.9 6.601l29.1-17.101c1.9-1.1 4.2-1.1 6.1 0l29.101 17.101c4.6 2.699 10.1-1.4 8.899-6.601l-7.8-32.399c-.5-2.2.2-4.4 1.9-5.9l26.3-23.1c3.8-3.5 1.6-10-3.6-10.5z'/%3e%3c/svg%3e");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 76%;
+  transition: 0.3s;
+}
+
+.rating > input:checked ~ label,
+.rating > input:checked ~ label ~ label {
+  background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' width='126.729' height='126.73'%3e%3cpath fill='%23fcd93a' d='M121.215 44.212l-34.899-3.3c-2.2-.2-4.101-1.6-5-3.7l-12.5-30.3c-2-5-9.101-5-11.101 0l-12.4 30.3c-.8 2.1-2.8 3.5-5 3.7l-34.9 3.3c-5.2.5-7.3 7-3.4 10.5l26.3 23.1c1.7 1.5 2.4 3.7 1.9 5.9l-7.9 32.399c-1.2 5.101 4.3 9.3 8.9 6.601l29.1-17.101c1.9-1.1 4.2-1.1 6.1 0l29.101 17.101c4.6 2.699 10.1-1.4 8.899-6.601l-7.8-32.399c-.5-2.2.2-4.4 1.9-5.9l26.3-23.1c3.8-3.5 1.6-10-3.6-10.5z'/%3e%3c/svg%3e");
+}
+
+.rating > input:not(:checked) ~ label:hover,
+.rating > input:not(:checked) ~ label:hover ~ label {
+  background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' width='126.729' height='126.73'%3e%3cpath fill='%23d8b11e' d='M121.215 44.212l-34.899-3.3c-2.2-.2-4.101-1.6-5-3.7l-12.5-30.3c-2-5-9.101-5-11.101 0l-12.4 30.3c-.8 2.1-2.8 3.5-5 3.7l-34.9 3.3c-5.2.5-7.3 7-3.4 10.5l26.3 23.1c1.7 1.5 2.4 3.7 1.9 5.9l-7.9 32.399c-1.2 5.101 4.3 9.3 8.9 6.601l29.1-17.101c1.9-1.1 4.2-1.1 6.1 0l29.101 17.101c4.6 2.699 10.1-1.4 8.899-6.601l-7.8-32.399c-.5-2.2.2-4.4 1.9-5.9l26.3-23.1c3.8-3.5 1.6-10-3.6-10.5z'/%3e%3c/svg%3e");
+}
+
+.emoji-wrapper {
+  width: 100%;
+  text-align: center;
+  height: 100px;
+  overflow: hidden;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.emoji-wrapper:before,
+.emoji-wrapper:after {
+  content: "";
+  height: 15px;
+  width: 100%;
+  position: absolute;
+  left: 0;
+  z-index: 1;
+}
+
+.emoji-wrapper:before {
+  top: 0;
+  background: linear-gradient(to bottom, rgb(255, 255, 255) 0%, rgb(255, 255, 255) 35%, rgba(255, 255, 255, 0) 100%);
+}
+
+.emoji-wrapper:after {
+  bottom: 0;
+  background: linear-gradient(to top, rgb(255, 255, 255) 0%, rgb(255, 255, 255) 35%, rgba(255, 255, 255, 0) 100%);
+}
+
+.emoji {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  transition: 0.3s;
+}
+
+.emoji > svg {
+  margin: 15px 0;
+  width: 70px;
+  height: 70px;
+  flex-shrink: 0;
+}
+
+#rating-1:checked ~ .emoji-wrapper > .emoji {
+  transform: translateY(-100px);
+}
+
+#rating-2:checked ~ .emoji-wrapper > .emoji {
+  transform: translateY(-200px);
+}
+
+#rating-3:checked ~ .emoji-wrapper > .emoji {
+  transform: translateY(-300px);
+}
+
+#rating-4:checked ~ .emoji-wrapper > .emoji {
+  transform: translateY(-400px);
+}
+
+#rating-5:checked ~ .emoji-wrapper > .emoji {
+  transform: translateY(-500px);
+}
+
+.feedback {
+  max-width: 360px;
+  background-color: #fff;
+  width: 100%;
+  padding: 30px;
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  align-items: center;
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.05);
 }
 
 .upload-wrapper {
@@ -9026,7 +9309,6 @@ p {
   align-items: center;
   gap: 40px;
   padding: 0 10px;
-  margin-bottom: 40px;
 }
 .cr-tab-content-from .review-list .review-item {
   display: flex;
@@ -9224,7 +9506,6 @@ p {
   align-items: center;
   gap: 10px;
   padding: 0 10px;
-  margin-bottom: 20px;
 }
 .review-list .review-item {
   display: flex;

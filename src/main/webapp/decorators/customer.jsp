@@ -24,7 +24,7 @@
     </title>
 
     <!-- App favicon -->
-    <link rel="shortcut icon" href="${pageContext.request.contextPath}/assets/customer/img/logo/favicon.ico"/>
+    <link rel="shortcut icon" href="${pageContext.request.contextPath}/assets/customer/img/logo/collapse-logo.png"/>
 
     <!-- Icon CSS -->
     <link
@@ -438,29 +438,35 @@
                 </div>
                 <ul class="bg-panel">
                     <li class="bg-1">
-                        <img src="${pageContext.request.contextPath}/assets/customer/img/shape/bg-shape-1.png" alt="bg-shape-1">
+                        <img src="${pageContext.request.contextPath}/assets/customer/img/shape/bg-shape-1.png"
+                             alt="bg-shape-1">
                     </li>
                     <li class="bg-2">
-                        <img src="${pageContext.request.contextPath}/assets/customer/img/shape/bg-shape-2.png" alt="bg-shape-2">
+                        <img src="${pageContext.request.contextPath}/assets/customer/img/shape/bg-shape-2.png"
+                             alt="bg-shape-2">
                     </li>
                     <li class="bg-3">
-                        <img src="${pageContext.request.contextPath}/assets/customer/img/shape/bg-shape-3.png" alt="bg-shape-3">
+                        <img src="${pageContext.request.contextPath}/assets/customer/img/shape/bg-shape-3.png"
+                             alt="bg-shape-3">
                     </li>
                     <li class="bg-4">
-                        <img src="${pageContext.request.contextPath}/assets/customer/img/shape/bg-shape-4.png" alt="bg-shape-4">
+                        <img src="${pageContext.request.contextPath}/assets/customer/img/shape/bg-shape-4.png"
+                             alt="bg-shape-4">
                     </li>
                     <li class="bg-5">
-                        <img src="${pageContext.request.contextPath}/assets/customer/img/shape/bg-shape-5.png" alt="bg-shape-5">
+                        <img src="${pageContext.request.contextPath}/assets/customer/img/shape/bg-shape-5.png"
+                             alt="bg-shape-5">
                     </li>
                     <li class="bg-6 active-bg-panel">
-                        <img src="${pageContext.request.contextPath}/assets/customer/img/shape/bg-shape-6.png" alt="bg-shape-6">
+                        <img src="${pageContext.request.contextPath}/assets/customer/img/shape/bg-shape-6.png"
+                             alt="bg-shape-6">
                     </li>
                 </ul>
             </div>
         </div>
     </div>
 </div>
-
+<script> const contextPath = "<%=request.getContextPath() %>";</script>
 <!-- Vendor Custom -->
 <script src="${pageContext.request.contextPath}/assets/customer/js/vendor/jquery-3.6.4.min.js"></script>
 <script src="${pageContext.request.contextPath}/assets/customer/js/vendor/jquery.zoom.min.js"></script>

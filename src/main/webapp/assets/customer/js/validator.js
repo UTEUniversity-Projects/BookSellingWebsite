@@ -1,6 +1,6 @@
 // Đối tượng `Validator`
-export default function Validator(options) {
-	function getParent(element, selector) {
+export default function Validator (options) {
+	function getParent (element, selector) {
 		while (element.parentElement) {
 			if (element.parentElement.matches(selector)) {
 				return element.parentElement;
@@ -12,7 +12,7 @@ export default function Validator(options) {
 	let selectorRules = {};
 
 	// Hàm thực hiện validate
-	function validate(inputElement, rule) {
+	function validate (inputElement, rule) {
 		let errorElement = getParent(inputElement, options.formGroupSelector).querySelector(options.errorSelector);
 		let errorMessage;
 
@@ -70,7 +70,7 @@ export default function Validator(options) {
 					let enableInputs = formElement.querySelectorAll('[name]');
 					let formValues = Array.from(enableInputs).reduce(function (values, input) {
 
-						switch(input.type) {
+						switch (input.type) {
 							case 'radio':
 								values[input.name] = formElement.querySelector('input[name="' + input.name + '"]:checked').value;
 								break;
@@ -100,7 +100,7 @@ export default function Validator(options) {
 					formElement.submit();
 				}
 			}
-		}
+		};
 
 		// Lặp qua mỗi rule và xử lý (lắng nghe sự kiện blur, input, ...)
 		options.rules.forEach(function (rule) {
@@ -118,20 +118,19 @@ export default function Validator(options) {
 				// Xử lý trường hợp blur khỏi input
 				inputElement.onblur = function () {
 					validate(inputElement, rule);
-				}
+				};
 
 				// Xử lý mỗi khi người dùng nhập vào input
 				inputElement.oninput = function () {
 					let errorElement = getParent(inputElement, options.formGroupSelector).querySelector(options.errorSelector);
 					errorElement.innerText = '';
 					getParent(inputElement, options.formGroupSelector).classList.remove('invalid');
-				}
+				};
 			});
 		});
 	}
 
 }
-
 
 
 // Định nghĩa rules
@@ -142,10 +141,10 @@ Validator.isRequired = function (selector, message) {
 	return {
 		selector: selector,
 		test: function (value) {
-			return value ? undefined :  message || 'Vui lòng nhập trường này !'
+			return value ? undefined : message || 'Vui lòng nhập trường này !';
 		}
 	};
-}
+};
 
 Validator.isRequiredSelected = function (selector, message, defaultValue) {
 	return {
@@ -153,27 +152,27 @@ Validator.isRequiredSelected = function (selector, message, defaultValue) {
 		test: function (value) {
 			return value !== defaultValue ? undefined : message || 'Vui lòng chọn !';
 		}
-	}
-}
+	};
+};
 
 Validator.isEmail = function (selector, message) {
 	return {
 		selector: selector,
 		test: function (value) {
 			let regex = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
-			return regex.test(value) ? undefined :  message || 'Trường này phải là email';
+			return regex.test(value) ? undefined : message || 'Trường này phải là email';
 		}
 	};
-}
+};
 
 Validator.minLength = function (selector, min, message) {
 	return {
 		selector: selector,
 		test: function (value) {
-			return value.length >= min ? undefined :  message || `Vui lòng nhập tối thiểu ${min} kí tự`;
+			return value.length >= min ? undefined : message || `Vui lòng nhập tối thiểu ${min} kí tự`;
 		}
 	};
-}
+};
 
 Validator.phoneNumber = function (selector, message) {
 	return {
@@ -182,8 +181,8 @@ Validator.phoneNumber = function (selector, message) {
 			let regex = /^0\d{9}$/;
 			return regex.test(value) ? undefined : message || 'Số điện thoại phải bắt đầu bằng 0 và có đúng 10 chữ số.';
 		}
-	}
-}
+	};
+};
 
 
 Validator.isConfirmed = function (selector, getConfirmValue, message) {
@@ -192,8 +191,8 @@ Validator.isConfirmed = function (selector, getConfirmValue, message) {
 		test: function (value) {
 			return value === getConfirmValue() ? undefined : message || 'Giá trị nhập vào không chính xác';
 		}
-	}
-}
+	};
+};
 
 Validator.isChecked = function (selector, message) {
 	return {
@@ -201,8 +200,8 @@ Validator.isChecked = function (selector, message) {
 		test: function (value) {
 			return value ? undefined : message || 'Vui lòng chọn ô này';
 		}
-	}
-}
+	};
+};
 
 Validator.isAllLowercase = function (selector, message) {
 	return {
@@ -212,4 +211,4 @@ Validator.isAllLowercase = function (selector, message) {
 			return regex.test(value) ? undefined : message || 'Trường này chỉ bao gồm chữ thường và số !';
 		}
 	};
-}
+};

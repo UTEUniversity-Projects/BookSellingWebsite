@@ -36,8 +36,6 @@ $(document).ready(() => {
 				}
 			};
 
-			console.log(await uploadImage());
-
 			const handleRegistration = async () => {
 
 				let avatar = await uploadImage();
@@ -62,12 +60,21 @@ $(document).ready(() => {
 					avatar: avatar
 				};
 
+				const registerButton = $('.btn-register');
+				const spinner = registerButton.find('.spinner');
+				const buttonText = registerButton.find('.button-text');
+
+				registerButton.prop('disabled', true);
+				buttonText.addClass('hidden');
+				spinner.removeClass('hidden');
+
 				$.ajax({
 					url: `${contextPath}/api/customer/register`,
 					type: 'POST',
 					contentType: 'application/json',
 					data: JSON.stringify(userData),
 					success: function (response, status, xhr) {
+						console.log(response);
 						if (response.code === 200) {
 							toast({
 								title: "Đăng ký",
@@ -90,6 +97,17 @@ $(document).ready(() => {
 						}
 					},
 					error: function (xhr, status, error) {
+						toast({
+							title: "Lỗi",
+							message: "Có lỗi xảy ra",
+							type: "error",
+							duration: 3000
+						})
+					},
+					complete: function () {
+						registerButton.prop('disabled', false);
+						buttonText.removeClass('hidden');
+						spinner.addClass('hidden');
 					}
 				});
 
@@ -152,10 +170,42 @@ $(document).ready(() => {
 			});
 		}
 
+		showRequiredInput() {
+			$(".btn-register").click(() => {
+				const formData = new FormData(document.getElementById("registerForm"));
+
+				const userData = {
+					fullName: formData.get("fullName"),
+					email: formData.get("email"),
+					phoneNumber: formData.get("phoneNumber"),
+					dateOfBirth: formData.get("dateOfBirth"),
+					gender: formData.get("gender"),
+					username: formData.get("username"),
+					password: formData.get("password"),
+					province: formData.get("province"),
+					district: formData.get("district"),
+					village: formData.get("village"),
+					detail: formData.get("detail"),
+				};
+				for (const key in userData) {
+					if (userData[key] === null || userData[key] === "" || userData[key] === "0") {
+						toast({
+							title: "Thông tin",
+							message: "Vui lòng điền đầy đủ thông tin",
+							type: "info",
+							duration: 4000
+						});
+						break;
+					}
+				}
+			});
+		}
 	}
 
 	const register = new Register();
 	register.getAddress();
+
+	register.showRequiredInput();
 
 	Validator({
 		form: '#registerForm',

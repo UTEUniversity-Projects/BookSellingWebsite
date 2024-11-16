@@ -34,7 +34,7 @@
 
                                 <tbody>
                                     <c:forEach var="customer" items="${customers}">
-                                        <tr class="customer-row" data-href="/owner/customer-profile?id=${customer.id}">
+                                        <tr class="customer-row" data-href="${pageContext.request.contextPath}/owner/customer-profile?id=${customer.id}">
                                             <td>${customer.id}</td>
                                             <td>${customer.fullName}</td>
                                             <td>${customer.email}</td>
@@ -62,7 +62,6 @@
                                             </td>
                                         </tr>
                                     </c:forEach>
-
                                 </tbody>
                             </table>
                         </div>

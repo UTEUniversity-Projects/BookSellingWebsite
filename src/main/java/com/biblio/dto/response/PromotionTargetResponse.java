@@ -9,7 +9,6 @@ import lombok.*;
 @ToString
 public class PromotionTargetResponse {
     private Long id;
-    private String applicableObjectId;
-    private int quantity;
+    private Long applicableObjectId;
     private String type;
 }
