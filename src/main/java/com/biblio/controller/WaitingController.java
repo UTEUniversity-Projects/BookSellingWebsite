@@ -37,13 +37,13 @@ public class WaitingController extends HttpServlet {
 
         AccountGetResponse account = (AccountGetResponse) session.getAttribute("account");
         String role = account.getRole();
+
         if ("owner".equals(role)) {
-            request.getRequestDispatcher("/owner/ecommerce").forward(request, response);
+            request.getRequestDispatcher(request.getContextPath() + "/owner/ecommerce").forward(request, response);
         } else if ("staff".equals(role)) {
-        } else {
             response.sendRedirect(request.getContextPath() + "/staff/product-dashboard");
-            System.out.println("Trả về home page customer !");
-//            request.getRequestDispatcher("/home").forward(request, response);
+        } else {
+            request.getRequestDispatcher(request.getContextPath() + "/home").forward(request, response);
         }
     }
 

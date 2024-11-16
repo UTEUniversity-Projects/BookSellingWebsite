@@ -1,6 +1,6 @@
 package com.biblio.controller.owner;
 
-import com.biblio.dto.response.CustomerGetListResponse;
+import com.biblio.dto.response.CustomerDetailResponse;
 import com.biblio.service.ICustomerService;
 
 import javax.inject.Inject;
@@ -32,7 +32,7 @@ public class CustomerListController extends HttpServlet {
      */
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-        List<CustomerGetListResponse> list = customerService.findAll();
+        List<CustomerDetailResponse> list = customerService.findAll();
         request.setAttribute("customers", list);
         request.getRequestDispatcher("/views/owner/customer-list.jsp").forward(request, response);
     }

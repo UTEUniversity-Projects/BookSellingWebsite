@@ -1,14 +1,14 @@
 package com.biblio.service;
 
 import com.biblio.dto.request.CustomerRegisterRequest;
-import com.biblio.dto.response.CustomerGetListResponse;
+import com.biblio.dto.response.CustomerDetailResponse;
 import com.biblio.dto.response.CustomerRegisterResponse;
 
 import java.util.List;
 
 public interface ICustomerService {
 
-    List<CustomerGetListResponse> findAll();
+    List<CustomerDetailResponse> findAll();
 
     void deactivateCustomer(Long id);
 
@@ -16,7 +16,7 @@ public interface ICustomerService {
 
     CustomerRegisterResponse addCustomer(CustomerRegisterRequest request);
 
-    CustomerGetListResponse findById(Long id);
+    CustomerDetailResponse findById(Long id);
 
     boolean isEmailExisted(String email);
 

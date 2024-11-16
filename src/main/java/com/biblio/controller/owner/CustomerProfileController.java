@@ -1,6 +1,6 @@
 package com.biblio.controller.owner;
 
-import com.biblio.dto.response.CustomerGetListResponse;
+import com.biblio.dto.response.CustomerDetailResponse;
 import com.biblio.service.ICustomerService;
 
 import javax.inject.Inject;
@@ -32,8 +32,8 @@ public class CustomerProfileController extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         // TODO Auto-generated method stub
         String id = request.getParameter("id");
-        CustomerGetListResponse customerGetListResponse = customerService.findById(Long.parseLong(id));
-        request.setAttribute("customer", customerGetListResponse);
+        CustomerDetailResponse customerDetailResponse = customerService.findById(Long.parseLong(id));
+        request.setAttribute("customer", customerDetailResponse);
         request.getRequestDispatcher("/views/owner/customer-profile.jsp").forward(request, response);
     }
 
