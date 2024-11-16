@@ -4,6 +4,8 @@ import lombok.*;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Table(name = "[shipping]")
@@ -32,6 +34,9 @@ public class Shipping implements Serializable {
     @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinColumn(name = "address_id", nullable = false)
     private Address address;
+
+    @OneToOne(mappedBy = "shipping")
+    private Order order;
 
     // endregion
 }

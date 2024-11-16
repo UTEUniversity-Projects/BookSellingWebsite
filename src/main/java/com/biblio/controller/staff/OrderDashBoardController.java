@@ -1,7 +1,6 @@
 package com.biblio.controller.staff;
 
-import com.biblio.dto.response.OrderGetListResponse;
-import com.biblio.entity.Order;
+import com.biblio.dto.response.OrderManagementResponse;
 import com.biblio.service.IOrderService;
 
 import java.io.IOException;
@@ -34,7 +33,7 @@ public class OrderDashBoardController extends HttpServlet {
      */
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         // TODO Auto-generated method stub
-        List<OrderGetListResponse> orders = orderService.getOrders();
+        List<OrderManagementResponse> orders = orderService.getAllOrderManagementResponse();
         request.setAttribute("orders", orders);
         request.getRequestDispatcher("/views/staff/order-dashboard.jsp").forward(request, response);
     }

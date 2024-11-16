@@ -1,4 +1,5 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!-- Product -->
 <div class="cr-main-content mb-3">
     <div class="container-fluid">
@@ -6,9 +7,8 @@
         <div class="cr-page-title cr-page-title-2">
             <div class="cr-breadcrumb">
                 <ul>
-                    <li><a href="/staff/product-dashboard">Biblio</a></li>
-                    <li><a href="${pageContext.request.contextPath}/staff/product-dashboard">Danh sách sản
-                        phẩm</a></li>
+                    <li><a href="${pageContext.request.contextPath}/staff/product-dashboard">Biblio</a></li>
+                    <li><a href="${pageContext.request.contextPath}/staff/product-dashboard">Danh sách sản phẩm</a></li>
                     <li>Chi tiết sản phẩm</li>
                 </ul>
             </div>
@@ -25,142 +25,26 @@
                 <div class="vehicle-detail-banner banner-content clearfix">
                     <div class="banner-slider">
                         <div class="slider slider-for">
-                            <div class="slider-banner-image">
-                                <div class="zoom-image-hover">
-                                    <img
-                                            src="${pageContext.request.contextPath}/assets/staff/img/product/9.jpg"
-                                            alt="product-tab-1"
-                                            class="product-image"
-                                    />
+                            <c:forEach var="imageUrl" items="${book.imagesUrl}">
+                                <div class="slider-banner-image">
+                                    <div class="zoom-image-hover">
+                                        <img
+                                                src="${imageUrl}"
+                                                alt="product-image"
+                                                class="product-image"
+                                        />
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="slider-banner-image">
-                                <div class="zoom-image-hover">
-                                    <img
-                                            src="${pageContext.request.contextPath}/assets/staff/img/product/10.jpg"
-                                            alt="product-tab-2"
-                                            class="product-image"
-                                    />
-                                </div>
-                            </div>
-                            <div class="slider-banner-image">
-                                <div class="zoom-image-hover">
-                                    <img
-                                            src="${pageContext.request.contextPath}/assets/staff/img/product/9.jpg"
-                                            alt="product-tab-3"
-                                            class="product-image"
-                                    />
-                                </div>
-                            </div>
-                            <div class="slider-banner-image">
-                                <div class="zoom-image-hover">
-                                    <img
-                                            src="${pageContext.request.contextPath}/assets/staff/img/product/10.jpg"
-                                            alt="product-tab-1"
-                                            class="product-image"
-                                    />
-                                </div>
-                            </div>
-                            <div class="slider-banner-image">
-                                <div class="zoom-image-hover">
-                                    <img
-                                            src="${pageContext.request.contextPath}/assets/staff/img/product/9.jpg"
-                                            alt="product-tab-2"
-                                            class="product-image"
-                                    />
-                                </div>
-                            </div>
-                            <div class="slider-banner-image">
-                                <div class="zoom-image-hover">
-                                    <img
-                                            src="${pageContext.request.contextPath}/assets/staff/img/product/10.jpg"
-                                            alt="product-tab-3"
-                                            class="product-image"
-                                    />
-                                </div>
-                            </div>
-                            <div class="slider-banner-image">
-                                <div class="zoom-image-hover">
-                                    <img
-                                            src="${pageContext.request.contextPath}/assets/staff/img/product/10.jpg"
-                                            alt="product-tab-1"
-                                            class="product-image"
-                                    />
-                                </div>
-                            </div>
-                            <div class="slider-banner-image">
-                                <div class="zoom-image-hover">
-                                    <img
-                                            src="${pageContext.request.contextPath}/assets/staff/img/product/9.jpg"
-                                            alt="product-tab-2"
-                                            class="product-image"
-                                    />
-                                </div>
-                            </div>
+                            </c:forEach>
                         </div>
                         <div class="slider slider-nav thumb-image">
-                            <div class="thumbnail-image">
-                                <div class="thumbImg">
-                                    <img src="${pageContext.request.contextPath}/assets/staff/img/product/9.jpg"
-                                         alt="product-tab-1"/>
+                            <c:forEach var="imageUrl" items="${book.imagesUrl}">
+                                <div class="thumbnail-image">
+                                    <div class="thumbImg">
+                                        <img src="${imageUrl}" alt="product-thumbnail"/>
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="thumbnail-image">
-                                <div class="thumbImg">
-                                    <img
-                                            src="${pageContext.request.contextPath}/assets/staff/img/product/10.jpg"
-                                            alt="product-tab-2"
-                                    />
-                                </div>
-                            </div>
-                            <div class="thumbnail-image">
-                                <div class="thumbImg">
-                                    <img
-                                            src="${pageContext.request.contextPath}/assets/staff/img/product/10.jpg"
-                                            alt="product-tab-3"
-                                    />
-                                </div>
-                            </div>
-                            <div class="thumbnail-image">
-                                <div class="thumbImg">
-                                    <img
-                                            src="${pageContext.request.contextPath}/assets/staff/img/product/10.jpg"
-                                            alt="product-tab-1"
-                                    />
-                                </div>
-                            </div>
-                            <div class="thumbnail-image">
-                                <div class="thumbImg">
-                                    <img
-                                            src="${pageContext.request.contextPath}/assets/staff/img/product/10.jpg"
-                                            alt="product-tab-2"
-                                    />
-                                </div>
-                            </div>
-                            <div class="thumbnail-image">
-                                <div class="thumbImg">
-                                    <img
-                                            src="${pageContext.request.contextPath}/assets/staff/img/product/10.jpg"
-                                            alt="product-tab-3"
-                                    />
-                                </div>
-                            </div>
-                            <div class="thumbnail-image">
-                                <div class="thumbImg">
-                                    <img
-                                            src="${pageContext.request.contextPath}/assets/staff/img/product/10.jpg"
-                                            alt="product-tab-1"
-                                    />
-                                </div>
-                            </div>
-                            <div class="thumbnail-image">
-                                <div class="thumbImg">
-                                    <img
-                                            src="${pageContext.request.contextPath}/assets/staff/img/product/10.jpg"
-                                            alt="product-tab-2"
-                                    />
-                                </div>
-                            </div>
+                            </c:forEach>
                         </div>
                     </div>
                 </div>
@@ -168,57 +52,63 @@
             <div class="col-xxl-8 col-xl-7 col-md-6 col-12 mb-24">
                 <div class="cr-size-and-weight-contain">
                     <h2 class="heading">
-                        The 80/20 Principle: The Secret to Success by Achieving More
-                        with Less
+                        ${book.title}
                     </h2>
                     <p>
-                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Iusto,
-                        nam corrupti doloribus facere provident ipsam blanditiis quae
-                        dolorum ullam itaque soluta distinctio. Explicabo eos neque
-                        blanditiis velit repellat sit nemo?
+                        ${book.description}
                     </p>
                 </div>
                 <div class="cr-size-and-weight">
                     <div class="cr-review-star">
                         <div class="cr-star">
-                            <i class="ri-star-fill"></i>
-                            <i class="ri-star-fill"></i>
-                            <i class="ri-star-fill"></i>
-                            <i class="ri-star-fill"></i>
-                            <i class="ri-star-fill"></i>
+                            <c:set var="rating" value="${book.totalRating}"/>
+                            <c:set var="fullStars" value="${rating - (rating % 1)}"/>
+                            <c:set var="halfStar" value="${(rating % 1) >= 0.5}"/>
+                            <c:set var="emptyStars" value="${5 - fullStars - (halfStar ? 1 : 0)}"/>
+
+                            <c:forEach var="i" begin="1" end="${fullStars}">
+                                <i class="ri-star-fill"></i>
+                            </c:forEach>
+
+                            <c:if test="${halfStar}">
+                                <i class="ri-star-half-fill"></i>
+                            </c:if>
+
+                            <c:forEach var="i" begin="1" end="${emptyStars}">
+                                <i class="ri-star-line"></i>
+                            </c:forEach>
                         </div>
                         <p>( 75 Review )</p>
                     </div>
                     <div class="list">
                         <ul>
                             <li>
-                                <label>Tác giả <span>:</span></label
-                                >Richard Koch
+                                <label>Tác giả <span>:</span></label>
+                                ${book.authors[0].name}
                             </li>
                             <li>
-                                <label>NXB <span>:</span></label
-                                >Currency
+                                <label>NXB <span>:</span></label>
+                                ${book.publisher}
                             </li>
                             <li>
-                                <label>Ngày XB <span>:</span></label
-                                >19/10/1999
+                                <label>Ngày XB <span>:</span></label>
+                                ${book.publicationDate}
                             </li>
                             <li>
-                                <label>Ngôn ngữ <span>:</span></label
-                                >Tiếng Anh
+                                <label>Ngôn ngữ <span>:</span></label>
+                                ${book.languages}
                             </li>
                         </ul>
                     </div>
                     <div class="cr-product-price">
-                        <span class="new-price">363.600 đ</span>
-                        <span class="old-price">404.000 đ</span>
+                        <span class="new-price price-value">${book.sellingPrice}</span>
+                        <span class="old-price price-value">${book.sellingPrice}</span>
                     </div>
                     <div class="cr-size-weight">
                         <h5><span>Tình trạng</span> :</h5>
                         <div class="cr-kg">
                             <ul>
-                                <li class="active-color">Mới</li>
-                                <li>Cũ</li>
+                                <li class="active-color">${book.condition}</li>
                             </ul>
                         </div>
                     </div>
@@ -300,105 +190,74 @@
                         >
                             <div class="cr-tab-content">
                                 <div class="cr-description">
-                                    <p>
-                                        Be more effective with less effort by learning how to
-                                        identify and leverage the 80/20 principle: that 80
-                                        percent of all our results in business and in life stem
-                                        from a mere 20 percent of our efforts. The 80/20
-                                        principle is one of the great secrets of highly
-                                        effective people and organizations. Did you know, for
-                                        example, that 20 percent of customers account for 80
-                                        percent of revenues? That 20 percent of our time
-                                        accounts for 80 percent of the work we accomplish? The
-                                        80/20 Principle shows how we can achieve much more with
-                                        much less effort, time, and resources, simply by
-                                        identifying and focusing our efforts on the 20 percent
-                                        that really counts. Although the 80/20 principle has
-                                        long influenced today's business world, author Richard
-                                        Koch reveals how the principle works and shows how we
-                                        can use it in a systematic and practical way to vastly
-                                        increase our effectiveness, and improve our careers and
-                                        our companies. The unspoken corollary to the 80/20
-                                        principle is that little of what we spend our time on
-                                        actually counts. But by concentrating on those things
-                                        that do, we can unlock the enormous potential of the
-                                        magic 20 percent, and transform our effectiveness in our
-                                        jobs, our careers, our businesses, and our lives.
-                                    </p>
+                                    <div class="cr-description">
+                                        <p>
+                                            ${book.description}
+                                        </p>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                         <div
-                                class="tab-pane fade"
+                                class="tab-pane"
                                 id="additional"
                                 role="tabpanel"
                                 aria-labelledby="additional-tab"
                         >
                             <div class="cr-tab-content">
-                                <div class="cr-description">
-                                    <p>
-                                        Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                                        Error in vero sapiente doloribus debitis corporis, eaque
-                                        dicta, repellat amet, illum adipisci vel perferendis
-                                        dolor! Quis vel consequuntur repellat distinctio rem.
-                                        Corrupti ratione alias odio, error dolore temporibus
-                                        consequatur, nobis veniam odit laborum dignissimos
-                                        consectetur quae vero in perferendis provident quis.
-                                    </p>
-                                </div>
                                 <div class="list">
                                     <ul>
                                         <li>
-                                            <label>Danh mục <span>:</span></label
-                                            >Sách kỹ năng sống
+                                            <label>Danh mục <span>:</span></label>
+                                            Sách kỹ năng sống
                                         </li>
                                         <li>
-                                            <label>Kho <span>:</span></label
-                                            >2
+                                            <label>Kho <span>:</span></label>
+                                            ${book.quantity}
                                         </li>
                                         <li>
-                                            <label>Tác giả <span>:</span></label
-                                            >Richard Koch
+                                            <label>Tác giả <span>:</span></label>
+                                            ${book.authors[0].name}
                                         </li>
                                         <li>
-                                            <label>NXB <span>:</span></label
-                                            >Currency
+                                            <label>NXB <span>:</span></label>
+                                            ${book.publisher}
                                         </li>
                                         <li>
-                                            <label>Ngày XB <span>:</span></label
-                                            >19/10/1999
+                                            <label>Ngày XB <span>:</span></label>
+                                            ${book.publicationDate}
                                         </li>
                                         <li>
-                                            <label>Ngôn ngữ <span>:</span></label
-                                            >Tiếng Anh
+                                            <label>Ngôn ngữ <span>:</span></label>
+                                            ${book.languages}
                                         </li>
                                         <li>
-                                            <label>Trọng lượng <span>:</span></label
-                                            >238 gram
+                                            <label>Trọng lượng <span>:</span></label>
+                                            ${book.weight} gram
                                         </li>
                                         <li>
-                                            <label>Kích thước <span>:</span></label
-                                            >20.3 x 13 x 1.8 cm
+                                            <label>Kích thước <span>:</span></label>
+                                            ${book.size}
                                         </li>
                                         <li>
-                                            <label>Số trang <span>:</span></label
-                                            >336
+                                            <label>Số trang <span>:</span></label>
+                                            ${book.hardcover}
                                         </li>
                                         <li>
-                                            <label>Định dạng <span>:</span></label
-                                            >Bìa mềm
+                                            <label>Định dạng <span>:</span></label>
+                                            ${book.format}
                                         </li>
                                         <li>
-                                            <label>ISBN-10 <span>:</span></label
-                                            >9780385491747
+                                            <label>ISBN-10 <span>:</span></label>
+                                            ${book.codeISBN10}
                                         </li>
                                         <li>
-                                            <label>ISBN-13 <span>:</span></label
-                                            >978-0385491747
+                                            <label>ISBN-13 <span>:</span></label>
+                                            ${book.codeISBN13}
                                         </li>
                                         <li>
-                                            <label>Độ tuổi <span>:</span></label
-                                            >Tất cả
+                                            <label>Độ tuổi <span>:</span></label>
+                                            ${book.ageRecommend}
                                         </li>
                                     </ul>
                                 </div>
@@ -412,97 +271,53 @@
                         >
                             <div class="cr-tab-content-from">
                                 <ul class="review-list">
-                                    <li class="review-item">
-                                        <div class="review-item__image">
-                                            <img src="${pageContext.request.contextPath}/assets/staff/img/product/1.jpg"
-                                                 alt="review"/>
-                                        </div>
-                                        <div class="review-item__content">
-                                            <div class="header">
-                                                <div class="header__left">
-                                                    <span class="name">Oreo Noman</span>
-                                                    <div class="rating">
-                                                        <i class="ri-star-s-fill"></i>
-                                                        <i class="ri-star-s-fill"></i>
-                                                        <i class="ri-star-s-fill"></i>
-                                                        <i class="ri-star-s-fill"></i>
-                                                        <i class="ri-star-s-fill"></i>
+                                    <c:forEach var="review" items="${book.reviews}">
+                                        <li class="review-item" data-review-id="${review.id}">
+                                            <div class="review-item__image">
+                                                <img src="${pageContext.request.contextPath}${review.imageUrl}"
+                                                     alt="review"/>
+                                            </div>
+                                            <div class="review-item__content">
+                                                <div class="header">
+                                                    <div class="header__left">
+                                                        <span class="name">${review.customerName}</span>
+                                                        <div class="rating">
+                                                            <c:forEach var="i" begin="1" end="5">
+                                                                <i class="<c:choose>
+                                                                             <c:when test='${i <= review.rating}'>ri-star-s-fill</c:when>
+                                                                             <c:otherwise>ri-star-line</c:otherwise>
+                                                                         </c:choose>">
+                                                                </i>
+                                                            </c:forEach>
+                                                        </div>
+                                                    </div>
+                                                    <div class="header__right">
+                                                        <button class="action-btn action-btn__hide">
+                                                            <i class="ri-eye-off-line"></i>
+                                                        </button>
+                                                        <c:if test="${empty review.responseContent}">
+                                                            <button type="button"
+                                                                    class="action-btn action-btn__response">
+                                                                <i class="ri-reply-line"></i>
+                                                            </button>
+                                                        </c:if>
                                                     </div>
                                                 </div>
-                                                <div class="header__right">
-                                                    <button class="action-btn action-btn__hide">
-                                                        <i class="ri-eye-off-line"></i>
-                                                    </button>
-                                                    <button type="button" class="action-btn action-btn__response"
-                                                            data-bs-toggle="modal" data-bs-target="#feedbackModal">
-                                                        <i class="ri-reply-line"></i>
-                                                    </button>
-                                                </div>
-                                            </div>
-                                            <span class="date">Jan 08, 2024</span>
+                                                <span class="date">${review.createdAt}</span>
 
-                                            <div class="review-content">
-                                                Cảm ơn shop rất nhiều
-                                            </div>
-
-                                            <div class="response-review">
-                                                <div class="response-title">Phản Hồi Của Người Bán</div>
-                                                <div class="response-text">
-                                                    Dạ vâng adidas cảm ơn quý khách đã tin tưởng và ủng hộ ❤️. Sự góp ý
-                                                    của quý khách sẽ giúp adidas
-                                                    ngày càng hoàn thiện hơn về dịch vụ. Adidas rất mong được phục vụ
-                                                    quý khách vào các lần mua tới.
-                                                    Chúc quý khách một ngày mới thật tốt lành!
-                                                    Dạ vâng adidas cảm ơn quý khách đã tin tưởng và ủng hộ ❤️. Sự góp ý
-                                                    của quý khách sẽ giúp adidas
-                                                    ngày càng hoàn thiện hơn về dịch vụ. Adidas rất mong được phục vụ
-                                                    quý khách vào các lần mua tới.
-                                                    Chúc quý khách một ngày mới thật tốt lành!
+                                                <div class="review-content">
+                                                        ${review.content}
                                                 </div>
-                                            </div>
-                                        </div>
-                                    </li>
-                                    <li class="review-item">
-                                        <div class="review-item__image">
-                                            <img src="${pageContext.request.contextPath}/assets/staff/img/product/1.jpg"
-                                                 alt="review"/>
-                                        </div>
-                                        <div class="review-item__content">
-                                            <div class="header">
-                                                <div class="header__left">
-                                                    <span class="name">Oreo Noman</span>
-                                                    <div class="rating">
-                                                        <i class="ri-star-s-fill"></i>
-                                                        <i class="ri-star-s-fill"></i>
-                                                        <i class="ri-star-s-fill"></i>
-                                                        <i class="ri-star-s-fill"></i>
-                                                        <i class="ri-star-s-fill"></i>
+
+                                                <c:if test="${not empty review.responseContent}">
+                                                    <div class="response-review">
+                                                        <div class="response-title">Phản Hồi Của Người Bán</div>
+                                                        <div class="response-text">${review.responseContent}</div>
                                                     </div>
-                                                </div>
-                                                <div class="header__right">
-                                                    <button class="action-btn action-btn__hide">
-                                                        <i class="ri-eye-off-line"></i>
-                                                    </button>
-                                                    <button type="button" class="action-btn action-btn__response"
-                                                            data-bs-toggle="modal" data-bs-target="#feedbackModal">
-                                                        <i class="ri-reply-line"></i>
-                                                    </button>
-                                                </div>
+                                                </c:if>
                                             </div>
-                                            <span class="date">Jan 08, 2024</span>
-
-                                            <div class="review-content">
-                                                Cảm ơn shop rất nhiều
-                                            </div>
-
-                                            <div class="response-review">
-                                                <div class="response-title">Phản Hồi Của Người Bán</div>
-                                                <div class="response-text">
-                                                    Dạ vâng adidas cảm ơn quý khách đã tin tưởng và ủng hộ ❤️. Sự góp ý
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </li>
+                                        </li>
+                                    </c:forEach>
                                 </ul>
                             </div>
                         </div>
@@ -540,6 +355,7 @@
 
 <!-- region Modal -->
 <div class="modal fade" id="feedbackModal" tabindex="-1" aria-labelledby="feedbackModalLabel" aria-hidden="true">
+    <input class="review-id" value="" hidden>
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
@@ -550,7 +366,7 @@
                 <form id="feedbackForm">
                     <div class="mb-3">
                         <label for="feedbackContent" class="form-label">Nội dung phản hồi</label>
-                        <textarea id="feedbackContent" class="form-control" placeholder="Nhập nội dung phản hồi..."
+                        <textarea id="feedbackContent" name="feedbackContent" class="form-control" placeholder="Nhập nội dung phản hồi..."
                                   rows="4"></textarea>
                     </div>
                 </form>
