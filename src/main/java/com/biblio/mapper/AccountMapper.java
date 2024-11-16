@@ -14,5 +14,5 @@ public class AccountMapper {
                .status(account.getStatus().getValue())
                .build();
     }
-
+  
 }

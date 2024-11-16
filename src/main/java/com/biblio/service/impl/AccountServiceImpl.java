@@ -23,4 +23,10 @@ public class AccountServiceImpl implements IAccountService {
         Account account = accountDAO.getAccountByUsername(username);
         return AccountMapper.toAccountGetResponse(account);
     }
+
+    @Override
+    public AccountGetResponse getAccountByUsername(String username) {
+        Account account = accountDAO.getAccountByUsername(username);
+        return AccountMapper.toAccountGetResponse(account);
+    }
 }
