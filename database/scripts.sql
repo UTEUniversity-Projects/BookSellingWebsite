@@ -3,24 +3,24 @@
 -- USE `bsw-biblio`;
 -- 1. Table Account:
 INSERT INTO account (password, status, role, username) VALUES
-('abc', 'ACTIVE', 'OWNER', 'owner_1'),
-('abc', 'ACTIVE', 'STAFF', 'staff_1'),
-('abc', 'ACTIVE', 'STAFF', 'staff_2'),
-('abc', 'ACTIVE', 'CUSTOMER', 'customer_1'),
-('abc', 'ACTIVE', 'CUSTOMER', 'customer_2'),
-('abc', 'ACTIVE', 'CUSTOMER', 'customer_3'),
-('abc', 'ACTIVE', 'CUSTOMER', 'customer_4'),
-('abc', 'ACTIVE', 'CUSTOMER', 'customer_5'),
-('abc', 'ACTIVE', 'CUSTOMER', 'customer_6'),
-('abc', 'ACTIVE', 'CUSTOMER', 'customer_7'),
-('abc', 'ACTIVE', 'CUSTOMER', 'customer_8'),
-('abc', 'ACTIVE', 'CUSTOMER', 'customer_9'),
-('abc', 'ACTIVE', 'CUSTOMER', 'customer_10'),
-('abc', 'ACTIVE', 'CUSTOMER', 'customer_11'),
-('abc', 'ACTIVE', 'CUSTOMER', 'customer_12'),
-('abc', 'ACTIVE', 'CUSTOMER', 'customer_13'),
-('abc', 'ACTIVE', 'CUSTOMER', 'customer_14'),
-('abc', 'ACTIVE', 'CUSTOMER', 'customer_15');
+('$2y$10$lHBtDRcnnTUMClaM9.BIleOK7sgnHUgUCSr6qcGo8GfqygI5E.3VO', 'ACTIVE', 'OWNER', 'owner_1'),
+('$2y$10$lHBtDRcnnTUMClaM9.BIleOK7sgnHUgUCSr6qcGo8GfqygI5E.3VO', 'ACTIVE', 'STAFF', 'staff_1'),
+('$2y$10$lHBtDRcnnTUMClaM9.BIleOK7sgnHUgUCSr6qcGo8GfqygI5E.3VO', 'ACTIVE', 'STAFF', 'staff_2'),
+('$2y$10$lHBtDRcnnTUMClaM9.BIleOK7sgnHUgUCSr6qcGo8GfqygI5E.3VO', 'ACTIVE', 'CUSTOMER', 'customer_1'),
+('$2y$10$lHBtDRcnnTUMClaM9.BIleOK7sgnHUgUCSr6qcGo8GfqygI5E.3VO', 'ACTIVE', 'CUSTOMER', 'customer_2'),
+('$2y$10$lHBtDRcnnTUMClaM9.BIleOK7sgnHUgUCSr6qcGo8GfqygI5E.3VO', 'ACTIVE', 'CUSTOMER', 'customer_3'),
+('$2y$10$lHBtDRcnnTUMClaM9.BIleOK7sgnHUgUCSr6qcGo8GfqygI5E.3VO', 'ACTIVE', 'CUSTOMER', 'customer_4'),
+('$2y$10$lHBtDRcnnTUMClaM9.BIleOK7sgnHUgUCSr6qcGo8GfqygI5E.3VO', 'ACTIVE', 'CUSTOMER', 'customer_5'),
+('$2y$10$lHBtDRcnnTUMClaM9.BIleOK7sgnHUgUCSr6qcGo8GfqygI5E.3VO', 'ACTIVE', 'CUSTOMER', 'customer_6'),
+('$2y$10$lHBtDRcnnTUMClaM9.BIleOK7sgnHUgUCSr6qcGo8GfqygI5E.3VO', 'ACTIVE', 'CUSTOMER', 'customer_7'),
+('$2y$10$lHBtDRcnnTUMClaM9.BIleOK7sgnHUgUCSr6qcGo8GfqygI5E.3VO', 'ACTIVE', 'CUSTOMER', 'customer_8'),
+('$2y$10$lHBtDRcnnTUMClaM9.BIleOK7sgnHUgUCSr6qcGo8GfqygI5E.3VO', 'ACTIVE', 'CUSTOMER', 'customer_9'),
+('$2y$10$lHBtDRcnnTUMClaM9.BIleOK7sgnHUgUCSr6qcGo8GfqygI5E.3VO', 'ACTIVE', 'CUSTOMER', 'customer_10'),
+('$2y$10$lHBtDRcnnTUMClaM9.BIleOK7sgnHUgUCSr6qcGo8GfqygI5E.3VO', 'ACTIVE', 'CUSTOMER', 'customer_11'),
+('$2y$10$lHBtDRcnnTUMClaM9.BIleOK7sgnHUgUCSr6qcGo8GfqygI5E.3VO', 'ACTIVE', 'CUSTOMER', 'customer_12'),
+('$2y$10$lHBtDRcnnTUMClaM9.BIleOK7sgnHUgUCSr6qcGo8GfqygI5E.3VO', 'ACTIVE', 'CUSTOMER', 'customer_13'),
+('$2y$10$lHBtDRcnnTUMClaM9.BIleOK7sgnHUgUCSr6qcGo8GfqygI5E.3VO', 'ACTIVE', 'CUSTOMER', 'customer_14'),
+('$2y$10$lHBtDRcnnTUMClaM9.BIleOK7sgnHUgUCSr6qcGo8GfqygI5E.3VO', 'ACTIVE', 'CUSTOMER', 'customer_15');
 
 
 INSERT INTO account (password, status, role, username) VALUES
