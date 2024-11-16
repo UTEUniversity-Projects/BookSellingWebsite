@@ -2,7 +2,7 @@ package com.biblio.service.impl;
 
 import com.biblio.dao.ICustomerDAO;
 import com.biblio.dto.request.CustomerRegisterRequest;
-import com.biblio.dto.response.CustomerGetListResponse;
+import com.biblio.dto.response.CustomerDetailResponse;
 import com.biblio.dto.response.CustomerRegisterResponse;
 import com.biblio.entity.Customer;
 import com.biblio.enumeration.EAccountStatus;
@@ -19,10 +19,10 @@ public class CustomerServiceImpl implements ICustomerService {
     private ICustomerDAO customerDAO;
 
     @Override
-    public List<CustomerGetListResponse> findAll() {
-        List<CustomerGetListResponse> list = new ArrayList<>();
+    public List<CustomerDetailResponse> findAll() {
+        List<CustomerDetailResponse> list = new ArrayList<>();
         for (Customer customer : customerDAO.findAll()) {
-            list.add(CustomerMapper.toCustomerGetListResponse(customer));
+            list.add(CustomerMapper.toCustomerDetailResponse(customer));
         }
         return list;
     }
@@ -42,9 +42,8 @@ public class CustomerServiceImpl implements ICustomerService {
     }
 
     @Override
-    public CustomerGetListResponse findById(Long id) {
-        CustomerGetListResponse customerGetListResponse = new CustomerGetListResponse();
-        return CustomerMapper.toCustomerGetListResponse(customerDAO.findById(id));
+    public CustomerDetailResponse findById(Long id) {
+        return CustomerMapper.toCustomerDetailResponse(customerDAO.findById(id));
     }
 
     @Override

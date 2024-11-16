@@ -1,7 +1,7 @@
 package com.biblio.mapper;
 
 import com.biblio.dto.request.CustomerRegisterRequest;
-import com.biblio.dto.response.CustomerGetListResponse;
+import com.biblio.dto.response.CustomerDetailResponse;
 import com.biblio.dto.response.CustomerRegisterResponse;
 import com.biblio.entity.Account;
 import com.biblio.entity.Address;
@@ -68,7 +68,7 @@ public class CustomerMapper {
                 .build();
     }
 
-    public static CustomerGetListResponse toCustomerGetListResponse(Customer customer) {
+    public static CustomerDetailResponse toCustomerDetailResponse(Customer customer) {
 //        CustomerGetListResponse customerGetListResponse = new CustomerGetListResponse();
 //
 //        customerGetListResponse.setId(customer.getId());
@@ -87,7 +87,7 @@ public class CustomerMapper {
 //        for (Address address : customer.getAddresses()) {
 //            customerGetListResponse.getAddresses().add(AddressMapper.toAddressResponse(address));
 //        }
-        CustomerGetListResponse customerGetListResponse = CustomerGetListResponse.builder()
+        CustomerDetailResponse customerDetailResponse = CustomerDetailResponse.builder()
                 .id(customer.getId())
                 .avatar(customer.getAvatar())
                 .dateOfBirth(customer.getDateOfBirth())
@@ -103,11 +103,10 @@ public class CustomerMapper {
                 .build();
 
         for (Address address : customer.getAddresses()) {
-            customerGetListResponse.getAddresses().add(AddressMapper.toAddressResponse(address));
+            customerDetailResponse.getAddresses().add(AddressMapper.toAddressResponse(address));
         }
 
-
-        return customerGetListResponse;
+        return customerDetailResponse;
     }
 
 

@@ -1,11 +1,9 @@
 package com.biblio.controller.customer;
 
 import com.biblio.dto.response.AccountGetResponse;
-import com.biblio.dto.response.CustomerGetListResponse;
+import com.biblio.dto.response.CustomerDetailResponse;
 import com.biblio.service.ICustomerService;
 
-import java.io.IOException;
-import java.io.Serial;
 import javax.inject.Inject;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -13,6 +11,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import java.io.IOException;
+import java.io.Serial;
 
 /**
  * Servlet implementation class UserInformationController
@@ -42,7 +42,7 @@ public class UserInformationController extends HttpServlet {
         Long accountId = account.getId(); // Lấy ID trực tiếp từ account
 
         // Tìm thông tin khách hàng theo accountId
-        CustomerGetListResponse customerGetListResponse = customerService.findById(accountId);
+        CustomerDetailResponse customerGetListResponse = customerService.findById(accountId);
         //CustomerGetListResponse customerGetListResponse = customerService.findById(4L);
         request.setAttribute("customer", customerGetListResponse);
         request.getRequestDispatcher("/views/customer/user-information.jsp").forward(request, response);

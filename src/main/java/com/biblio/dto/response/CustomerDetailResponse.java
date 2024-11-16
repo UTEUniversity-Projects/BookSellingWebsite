@@ -11,7 +11,7 @@ import java.util.Set;
 @Setter
 @ToString
 @Builder
-public class CustomerGetListResponse {
+public class CustomerDetailResponse {
     private Long id;
     private String avatar;
     private String dateOfBirth;
