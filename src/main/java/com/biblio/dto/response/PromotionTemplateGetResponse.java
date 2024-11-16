@@ -2,17 +2,18 @@ package com.biblio.dto.response;
 
 import lombok.*;
 
-import java.util.HashSet;
-import java.util.Set;
-
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter
 @Setter
 @ToString
-public class PromotionGetResponse {
+public class PromotionTemplateGetResponse {
+    private String id;
     private String code;
     private String title;
+    private Double discountLimit;
+    private Double percentDiscount;
     private Long quantity;
     private String type;
+    private String status;
 }

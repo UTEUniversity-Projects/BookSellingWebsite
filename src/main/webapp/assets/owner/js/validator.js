@@ -97,68 +97,6 @@ function validateForm(form) {
     return isValid;
 }
 
-// document.querySelectorAll('.promotionForm').forEach(form => {
-//     form.addEventListener('submit', function (event) {
-//         // Ngăn submit ngay lúc đầu
-//         event.preventDefault();
-//
-//         // Kiểm tra các trường trong form
-//         if (!validateForm(form)) {
-//             toast({
-//                 title: "Thất bại!",
-//                 message: 'Vui lòng điền đầy đủ thông tin',
-//                 type: "warning",
-//                 duration: 3000,
-//             });
-//         } else {
-//             // Lấy giá trị của input name="code"
-//             const codeInput = form.querySelector('input[name="code"]');
-//             const codeValue = codeInput ? codeInput.value.trim() : "";
-//
-//             // Tạo JSON từ codeValue
-//             const data = { code: codeValue };
-//
-//             // Gửi yêu cầu đến API bằng AJAX
-//             $.ajax({
-//                 url: '/owner/promotion/check-code',
-//                 type: 'POST',
-//                 contentType: 'application/json; charset=UTF-8',
-//                 data: JSON.stringify(data),
-//                 success: function(result) {
-//                     if (result.isCodeExisted) {
-//                         // Nếu mã tồn tại, hiển thị cảnh báo và ngăn submit
-//                         toast({
-//                             title: "Thất bại!",
-//                             message: 'Mã khuyến mãi đã tồn tại.',
-//                             type: "warning",
-//                             duration: 3000,
-//                         });
-//                     } else {
-//                         // Nếu mã không tồn tại, cho phép submit form
-//                         toast({
-//                             title: "Thành công!",
-//                             message: 'Thêm thành công',
-//                             type: "success",
-//                             duration: 3000,
-//                         });
-//
-//                         // Submit form sau khi kiểm tra thành công
-//                         form.submit();
-//                     }
-//                 },
-//                 error: function(xhr, status, error) {
-//                     console.error("Lỗi khi gọi API:", error);
-//                     toast({
-//                         title: "Lỗi!",
-//                         message: 'Đã xảy ra lỗi trong quá trình kiểm tra mã khuyến mãi.',
-//                         type: "error",
-//                         duration: 3000,
-//                     });
-//                 }
-//             });
-//         }
-//     });
-// }
 function parseDateRange(input) {
     const currentYear = new Date().getFullYear();
     const [start, end] = input.split(" - ");
@@ -192,7 +130,6 @@ function parseDateRange(input) {
 
     return { effectiveDate, expirationDate };
 }
-
 document.querySelectorAll('.promotionForm').forEach(form => {
     form.addEventListener('submit', function (event) {
         event.preventDefault();
@@ -206,8 +143,9 @@ document.querySelectorAll('.promotionForm').forEach(form => {
             });
         } else {
             const formData = new FormData(form);
-            const data = {};
 
+            const data = {};
+            // Lấy giá trị từ form và xử lý
             formData.forEach((value, key) => {
                 if (key === "dateeffective") {
                     const { effectiveDate, expirationDate } = parseDateRange(value);
@@ -217,68 +155,86 @@ document.querySelectorAll('.promotionForm').forEach(form => {
                     const effectiveDateObj = new Date(effectiveDate);
                     const currentDate = new Date();
                     data["status"] = effectiveDateObj > currentDate ? "COMING_SOON" : "EFFECTIVE";
-                } else if (key === "quantity" || key === "unlimited") {
-                    const unlimitedCheckbox = form.querySelector('input[name="unlimited"]');
-                    let quantity = parseInt(value.trim(), 10);
-
-                    // Đặt quantity là -1 nếu checkbox được chọn hoặc quantity rỗng/không hợp lệ
-                    if (unlimitedCheckbox.checked || isNaN(quantity)) {
-                        quantity = -1;
-                    }
-
-                    data["promotionTargets"] = [
-                        {
-                            applicableObjectId: "WHOLE",
-                            quantity: quantity,
-                            type: "WHOLE"
-                        }
-                    ];
                 } else {
                     data[key] = value.trim();
                 }
             });
 
-            const formType = data["formType"];
-            switch (formType) {
+            // Lấy thông tin về checkbox "unlimited" và quantity
+            const unlimitedCheckbox = form.querySelector('input[name="unlimited"]');
+            let quantity = parseInt(data["quantity"], 10);
+            const isInfinite = unlimitedCheckbox.checked || isNaN(quantity) || quantity <= 0;
+            data["isInfinite"] = isInfinite;
+            if (isInfinite) quantity = 1;
+            switch (data["formType"]) {
                 case "addVoucher":
-                    data["type"] = "VOUCHER";
-                    data["percentDiscount"] = 100;
-                    break;
-                case "addCoupon":
-                    data["type"] = "COUPON";
-                    data["minValueApplied"] = 0;
+                    data["type"] = "VOUCHER"; // Đặt type là VOUCHER
+                    data["percentDiscount"] = 100; // Phần trăm giảm giá là 100%
+                    data["discountLimit"] = parseFloat(100); // Đặt giới hạn giảm giá là 100
                     break;
                 case "addFreeShip":
-                    data["type"] = "FREESHIP";
-                    data["percentDiscount"] = 100;
-                    data["minValueApplied"] = 0.0;
+                    data["type"] = "FREESHIP"; // Đặt type là FREESHIP
+                    data["percentDiscount"] = 100; // Miễn phí vận chuyển
+                    data["minValueApplied"] = 0.0; // Giá trị tối thiểu áp dụng là 0
                     break;
                 default:
-                    console.error("Loại form không hợp lệ");
+                    console.error("Loại form không hợp lệ"); // Xử lý lỗi khi formType không đúng
                     return;
             }
 
-            delete data["formType"];
-
+            // Tạo danh sách promotionInsertRequests
+            const promotionInsertRequests = [];
+            for (let i = 0; i < quantity; i++) {
+                promotionInsertRequests.push({
+                    title: data["title"] || "Default Title",
+                    description: data["description"] || "Default Description",
+                    percentDiscount: parseFloat(data["percentDiscount"]) || 0.0,
+                    discountLimit: parseFloat(data["discountLimit"]) || 0.0,
+                    minValueApplied: parseFloat(data["minValueApplied"]) || 0.0,
+                    effectiveDate: data["effectiveDate"],
+                    expirationDate: data["expirationDate"],
+                    status: "NOT_USE",
+                    promotionTargets: [
+                        {
+                            applicableObjectId: -1,
+                            type: "WHOLE"
+                        }
+                    ]
+                });
+            }
+            const responseData = {
+                code: data["code"],
+                isInfinite: isInfinite,
+                status: data["status"],
+                type: data["type"],
+                promotionInsertRequests: promotionInsertRequests
+            };
+            
+            // Gửi request AJAX
             $.ajax({
                 url: '/owner/promotion/add',
                 type: 'POST',
                 contentType: 'application/json; charset=UTF-8',
-                data: JSON.stringify(data),
-                success: function(result) {
+                data: JSON.stringify(responseData),
+                success: function (result) {
                     toast({
                         title: result.isCodeExisted ? "Thất bại!" : "Thành công!",
                         message: result.isCodeExisted ? 'Mã khuyến mãi đã tồn tại.' : 'Khuyến mãi đã được thêm thành công!',
                         type: result.isCodeExisted ? "warning" : "success",
                         duration: 3000,
                     });
-                    if (!result.isCodeExisted) form.reset();
+                    if (!result.isCodeExisted) {
+                        form.reset();
+                        form.querySelector('input[name="quantity"]').disabled = false;
+
+                    }
                 },
-                error: function(xhr, status, error) {
+                error: function (xhr, status, error) {
                     console.error("Lỗi khi gọi API:", error);
+
                     toast({
                         title: "Lỗi!",
-                        message: 'Đã xảy ra lỗi trong quá trình thêm khuyến mãi.',
+                        message: 'Đã xảy raaaaaaaa lỗi trong quá trình thêm khuyến mãi.',
                         type: "error",
                         duration: 3000,
                     });

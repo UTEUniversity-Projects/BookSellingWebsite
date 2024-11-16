@@ -19,8 +19,7 @@
                     <div class="tab-list-promotion">
                         <div class="tab-item-promotion active" data-tab="1">Discount</div>
                         <div class="tab-item-promotion" data-tab="2">Voucher</div>
-                        <div class="tab-item-promotion" data-tab="3">Coupon</div>
-                        <div class="tab-item-promotion" data-tab="4">Freeship</div>
+                        <div class="tab-item-promotion" data-tab="3">Freeship</div>
                     </div>
                 </div>
                 <div class="cr-card card-default ">
@@ -60,7 +59,8 @@
                                 <th>#</th>
                                 <th>Mã</th>
                                 <th>Tiêu Đề</th>
-                                <th>%</th>
+                                <th>Số tiền giảm</th>
+                                <th>Số lượt còn lại</th>
                                 <th>Trạng thái</th>
                             </tr>
                             </thead>
@@ -74,7 +74,8 @@
                                         </td>
                                         <td>${promotion.code}</td>
                                         <td>${promotion.title}</td>
-                                        <td>${promotion.percentDiscount} %</td>
+                                        <td>${promotion.discountLimit} đ</td>
+                                        <td>${promotion.quantity}</td>
                                         <td class="cod" id="status-${promotion.id}">${promotion.status}</td>
                                     </tr>
                                 </c:if>
@@ -85,41 +86,12 @@
                     <div class="cr-card-content promotion-list" data-tab="3" style="width: 100%;">
                         <table class="table table-hover promotion-data-table">
                             <thead>
-
                             <tr>
                                 <th>#</th>
                                 <th>Mã</th>
                                 <th>Tiêu Đề</th>
-                                <th>%</th>
-                                <th>Trạng thái</th>
-                            </tr>
-                            </thead>
-
-                            <tbody>
-                            <c:forEach var="promotion" items="${promotions}">
-                                <c:if test="${promotion.type == 'COUPON'}">
-                                    <tr class="promotion-row" data-href="/owner/promotion-details?id=${promotion.id}">
-                                        <td>
-                                            <img class="tbl-thumb" src="/assets/owner/img/product/1.jpg" alt="Product Image">
-                                        </td>
-                                        <td>${promotion.code}</td>
-                                        <td>${promotion.title}</td>
-                                        <td>${promotion.percentDiscount} %</td>
-                                        <td class="cod" id="status-${promotion.id}">${promotion.status}</td>
-                                    </tr>
-                                </c:if>
-                            </c:forEach>
-                            </tbody>
-                        </table>
-                    </div>
-                    <div class="cr-card-content promotion-list" data-tab="4" style="width: 100%;">
-                        <table class="table table-hover promotion-data-table">
-                            <thead>
-                            <tr>
-                                <th>#</th>
-                                <th>Mã</th>
-                                <th>Tiêu Đề</th>
-                                <th>%</th>
+                                <th>Số tiền giảm</th>
+                                <th>Số lượt còn lại</th>
                                 <th>Trạng thái</th>
                             </tr>
                             </thead>
@@ -133,7 +105,8 @@
                                         </td>
                                         <td>${promotion.code}</td>
                                         <td>${promotion.title}</td>
-                                        <td>${promotion.percentDiscount} %</td>
+                                        <td>${promotion.discountLimit} đ</td>
+                                        <td>${promotion.quantity}</td>
                                         <td class="cod" id="status-${promotion.id}">${promotion.status}</td>
                                     </tr>
                                 </c:if>

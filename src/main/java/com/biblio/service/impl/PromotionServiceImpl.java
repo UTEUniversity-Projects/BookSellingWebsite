@@ -17,15 +17,15 @@ public class PromotionServiceImpl implements IPromotionService {
     @Override
     public List<PromotionGetResponse> getAllPromotions() {
         List<PromotionGetResponse> list = new ArrayList<PromotionGetResponse>();
-        for (Promotion promotion : promotionDAO.findAll()) {
-            list.add(PromotionMapper.toPromotionGetResponse(promotion));
-        }
+        List<Promotion> promotions = promotionDAO.findAll();
+
         return list;
     }
 
     @Override
     public PromotionGetResponse getPromotionById(Long id) {
-        return PromotionMapper.toPromotionGetResponse(promotionDAO.findById(id));
+       // return PromotionMapper.toPromotionGetResponse(promotionDAO.findById(id));
+        return new PromotionGetResponse();
     }
 
     @Override
