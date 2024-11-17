@@ -1,24 +1,24 @@
 package com.biblio.service.impl;
 
 import com.biblio.dao.IReviewDAO;
-import com.biblio.dao.impl.GenericDAOImpl;
-import com.biblio.dto.response.ReviewResponse;
+
 import com.biblio.entity.Review;
 import com.biblio.service.IReviewService;
 
 import javax.inject.Inject;
-import java.util.List;
 
-public class ReviewServiceImpl extends GenericDAOImpl<Review> implements IReviewService {
+public class ReviewServiceImpl implements IReviewService {
     @Inject
-    private IReviewDAO reviewDAO;
+    IReviewDAO reviewDAO;
 
-    public ReviewServiceImpl() {
-        super(Review.class);
+    @Override
+    public boolean updateReviewHidden(long reviewId, boolean isHidden) {
+        Review review = reviewDAO.findById(reviewId);
+        if (review != null) {
+            review.setHidden(isHidden);
+            reviewDAO.update(review);
+            return true;
+        }
+        return false;
     }
-
-//    @Override
-//    public List<ReviewResponse> getVisibleReviewResponse() {
-//        List<Review> reviews = reviewDAO.findAll();
-//    }
 }

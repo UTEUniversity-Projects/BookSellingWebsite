@@ -531,7 +531,6 @@ p {
   border: 1px solid $border-color;
   background-color: $off-white;
   border-radius: $radius;
-  //box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
   cursor: crosshair;
 
   img {
@@ -1264,4 +1263,13 @@ p {
       width: 250px;
     }
   }
+}
+
+#error-message {
+  display: none;
+  color: red;
+  font-size: 12px;
+  font-style: italic;
+  margin-top: 5px;
+  margin-left: 5px;
 }

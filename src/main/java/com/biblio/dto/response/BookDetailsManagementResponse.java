@@ -40,4 +40,5 @@ public class BookDetailsManagementResponse {
     private String ageRecommend;
 
     private List<ReviewResponse> reviews;
+    private int reviewCount;
 }

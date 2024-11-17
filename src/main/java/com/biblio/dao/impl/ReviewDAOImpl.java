@@ -13,9 +13,16 @@ public class ReviewDAOImpl extends GenericDAOImpl<Review> implements IReviewDAO 
         return super.findById(id);
     }
 
+    @Override
+    public Review update(Review review) {
+        return super.update(review);
+    }
+
     public static void main(String[] args) {
         ReviewDAOImpl dao = new ReviewDAOImpl();
         Review review = dao.findById(1);
-        System.out.println(review.getCustomer().getFullName());
+        review.setHidden(true);
+        review = dao.update(review);
+        System.out.println(review.isHidden());
     }
 }

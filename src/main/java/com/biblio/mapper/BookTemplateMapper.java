@@ -63,6 +63,7 @@ public class BookTemplateMapper {
         }
 
         List<ReviewResponse> reviews = bookTemplate.getReviews().stream()
+                .filter(review -> !review.isHidden())
                 .sorted(Comparator.comparingInt(Review::getRate).reversed()
                         .thenComparing(Review::getCreatedAt, Comparator.reverseOrder()))
                 .map(ReviewMapper::toReviewResponse)
@@ -94,6 +95,7 @@ public class BookTemplateMapper {
                 .codeISBN13(singlebook.getCodeISBN13())
                 .ageRecommend(singlebook.getRecommendedAge().getBookAgeRecommend())
                 .reviews(reviews)
+                .reviewCount(reviews.size())
                 .build();
     }
 

@@ -1,6 +1,7 @@
 // Toast function
-function toast({title = "", message = "", type = "info", duration = 3000}) {
+function toast({title = "", message = "", type = "success", duration = 3000}) {
     const main = document.getElementById("toast");
+    console.log(`Title: ${title}, Message: ${message}, Type: ${type}, Duration: ${duration}`);
     if (main) {
         const toast = document.createElement("div");
 

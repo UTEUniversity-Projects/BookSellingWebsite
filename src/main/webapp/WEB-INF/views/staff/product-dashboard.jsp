@@ -97,7 +97,7 @@
                                         />
                                     </td>
                                     <td>${book.title}</td>
-                                    <td>${book.price}</td>
+                                    <td class="price-value">${book.price}</td>
                                     <td>${book.quantity}</td>
                                     <td>${book.soldCount}</td>
                                     <td>${book.publicationDate}</td>
