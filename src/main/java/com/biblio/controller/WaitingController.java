@@ -39,11 +39,11 @@ public class WaitingController extends HttpServlet {
         String role = account.getRole();
 
         if ("owner".equals(role)) {
-            request.getRequestDispatcher(request.getContextPath() + "/owner/ecommerce").forward(request, response);
+            response.sendRedirect(request.getContextPath() + "/owner/ecommerce");
         } else if ("staff".equals(role)) {
             response.sendRedirect(request.getContextPath() + "/staff/product-dashboard");
         } else {
-            request.getRequestDispatcher(request.getContextPath() + "/home").forward(request, response);
+            response.sendRedirect(request.getContextPath() + "/user-information");
         }
     }
 

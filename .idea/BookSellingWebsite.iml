@@ -8,7 +8,12 @@
         </descriptors>
         <webroots>
           <root url="file://$MODULE_DIR$/.smarttomcat/BookSellingWebsite/conf" relative="/WEB-INF" />
+          <root url="file://$MODULE_DIR$/src" relative="/" />
         </webroots>
+        <sourceRoots>
+          <root url="file://$MODULE_DIR$/src/main/java" />
+          <root url="file://$MODULE_DIR$/src/main/resources" />
+        </sourceRoots>
       </configuration>
     </facet>
   </component>

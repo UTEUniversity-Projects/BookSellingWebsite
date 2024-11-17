@@ -531,7 +531,7 @@
                             <div class="cr-product-card">
                                 <div class="cr-product-image">
                                     <div class="cr-image-inner zoom-image-hover">
-                                        <img src="${pageContext.request.contextPath}${book.metadata.mediaFiles[0].storedCode}" alt="${book.metadata.mediaFiles[0].fileName}"/>
+                                        <img src="${pageContext.request.contextPath}${book.imageUrl}" alt="${book.title}"/>
                                     </div>
                                     <div class="cr-side-view">
                                         <a href="javascript:void(0)" class="wishlist">

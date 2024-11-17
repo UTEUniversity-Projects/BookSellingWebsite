@@ -14,6 +14,6 @@ public class BookCardResponse {
     private double sellingPrice;
 
     private CategorySidebarResponse category;
-    private BookMetadataResponse metadata;
+    private String imageUrl;
     private double reviewRate;
 }

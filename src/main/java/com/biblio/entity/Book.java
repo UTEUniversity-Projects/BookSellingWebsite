@@ -85,7 +85,7 @@ public class Book implements Serializable {
     @JoinColumn(name = "book_metadata_id", nullable = false)
     private BookMetadata bookMetadata;
 
-    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinColumn(name = "sub_category_id", nullable = false)
     private SubCategory subCategory;
 
