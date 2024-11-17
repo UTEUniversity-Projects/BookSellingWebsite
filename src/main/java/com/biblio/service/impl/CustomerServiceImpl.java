@@ -1,8 +1,11 @@
 package com.biblio.service.impl;
 
 import com.biblio.dao.ICustomerDAO;
+import com.biblio.dao.IOrderDAO;
+import com.biblio.dao.impl.CustomerDAOImpl;
 import com.biblio.dto.request.CustomerRegisterRequest;
 import com.biblio.dto.response.CustomerDetailResponse;
+import com.biblio.dto.response.CustomerGetListResponse;
 import com.biblio.dto.response.CustomerRegisterResponse;
 import com.biblio.entity.Customer;
 import com.biblio.enumeration.EAccountStatus;
@@ -19,10 +22,10 @@ public class CustomerServiceImpl implements ICustomerService {
     private ICustomerDAO customerDAO;
 
     @Override
-    public List<CustomerDetailResponse> findAll() {
-        List<CustomerDetailResponse> list = new ArrayList<>();
+    public List<CustomerGetListResponse> findAll() {
+        List<CustomerGetListResponse> list = new ArrayList<>();
         for (Customer customer : customerDAO.findAll()) {
-            list.add(CustomerMapper.toCustomerDetailResponse(customer));
+            list.add(CustomerMapper.toCustomerGetListResponse(customer));
         }
         return list;
     }
@@ -61,4 +64,11 @@ public class CustomerServiceImpl implements ICustomerService {
     public boolean isPhoneNumberExisted(String phoneNumber) {
         return customerDAO.existsByPhoneNumber(phoneNumber);
     }
+
+    @Override
+    public CustomerDetailResponse getCustomerDetailByUsername(String username) {
+        Customer customer = customerDAO.findByUsername(username);
+        return CustomerMapper.toCustomerDetailResponse(customer);
+    }
+
 }

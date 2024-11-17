@@ -11,4 +11,5 @@ public interface ISubCategoryService {
     void addSubCategory(SubCategoryRequest subCategoryRequest);
     void updateSubCategory(SubCategoryRequest subCategoryRequest);
     void deleteSubCategory(Long id);
+    List<SubCategoryResponse> getAllSubCategoriesById(Long id);
 }

@@ -5,6 +5,7 @@ import com.biblio.entity.Customer;
 import com.biblio.jpaconfig.JpaConfig;
 
 import javax.persistence.EntityManager;
+import javax.persistence.TypedQuery;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -17,7 +18,7 @@ public class CustomerDAOImpl extends GenericDAOImpl<Customer> implements ICustom
 
     @Override
     public List<Customer> findAll() {
-        return super.findAll();
+        return super.findAll("SELECT DISTINCT c FROM Customer c LEFT JOIN FETCH c.orders JOIN FETCH c.account");
     }
 
     @Override
@@ -72,6 +73,14 @@ public class CustomerDAOImpl extends GenericDAOImpl<Customer> implements ICustom
                 entityManager.close();
             }
         }
+    }
+
+    @Override
+    public Customer findByUsername(String username) {
+        String jpql = "SELECT c FROM Customer c JOIN FETCH c.addresses WHERE c.account.username = :username";
+        Map<String, Object> params = new HashMap<>();
+        params.put("username", username);
+        return super.findSingleByJPQL(jpql, params);
     }
 
 }

@@ -16,4 +16,5 @@ public interface ISubCategoryDAO {
 
     void deleteSubCategory(Long id);
 
+    List<SubCategory> findByJPQL(Long id);
 }

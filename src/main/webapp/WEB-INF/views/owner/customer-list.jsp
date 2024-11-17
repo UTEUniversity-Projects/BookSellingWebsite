@@ -38,7 +38,7 @@
                                             <td>${customer.id}</td>
                                             <td>${customer.fullName}</td>
                                             <td>${customer.email}</td>
-                                            <td>100</td>
+                                            <td>${customer.orderCount}</td>
                                             <td class="cod" id="status-${customer.id}">${customer.status}</td> <!-- Thêm id duy nhất -->
                                             <td>
                                                 <div class="d-flex justify-content-start">

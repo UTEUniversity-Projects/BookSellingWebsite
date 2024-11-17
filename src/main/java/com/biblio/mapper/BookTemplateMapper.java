@@ -162,6 +162,12 @@ public class BookTemplateMapper {
                 .publisher(bookTemplate.getPublisher().getName())
                 .authors(authors)
                 .reviews(reviews)
+    }
+    public static BookTemplatePromotionResponse toBookTemplatePromotionResponse(BookTemplate bookTemplate) {
+        Book singlebook = bookTemplate.getBooks().iterator().next();
+        return BookTemplatePromotionResponse.builder()
+                .id(bookTemplate.getId())
+                .title(singlebook.getTitle())
                 .build();
     }
     // endregion

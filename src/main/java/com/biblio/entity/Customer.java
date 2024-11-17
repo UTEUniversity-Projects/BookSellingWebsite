@@ -40,16 +40,16 @@ public class Customer extends User implements Serializable {
     private Set<Address> addresses = new HashSet<>();
 
     @OneToMany(mappedBy = "customer", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
-    private Set<Order> orders = new HashSet<Order>();
+    private Set<Order> orders = new HashSet<>();
 
     @OneToOne(mappedBy = "customer", cascade = CascadeType.ALL, orphanRemoval = true)
     private Cart cart;
 
     @OneToMany(mappedBy = "customer", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
-    private Set<Support> supports = new HashSet<Support>();
+    private Set<Support> supports = new HashSet<>();
 
     @OneToMany(mappedBy = "customer", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
-    private Set<Review> reviews = new HashSet<Review>();
+    private Set<Review> reviews = new HashSet<>();
 
     // endregion
 }
