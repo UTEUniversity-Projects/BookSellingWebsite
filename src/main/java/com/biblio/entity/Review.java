@@ -31,7 +31,7 @@ public class Review implements Serializable {
     private boolean readyToIntroduce;
 
     @Column(name = "is_hidden", nullable = false)
-    private boolean idHidden;
+    private boolean isHidden;
 
     @Column(name = "created_at", nullable = false)
     private LocalDateTime createdAt;

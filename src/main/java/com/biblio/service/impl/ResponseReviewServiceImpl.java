@@ -17,4 +17,9 @@ public class ResponseReviewServiceImpl implements IResponseReviewService {
         ResponseReview responseReview = ResponseReviewMapper.toResponseReview(responseReviewRequest);
         return responseReviewDAO.save(responseReview);
     }
+
+    @Override
+    public boolean isExistResponseReview(long idReview) {
+        return responseReviewDAO.isExist(idReview);
+    }
 }
