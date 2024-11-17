@@ -11,5 +11,6 @@ public class CustomerGetListResponse {
     private Long id;
     private String fullName;
     private String email;
+    private Long orderCount;
     private String status;
 }

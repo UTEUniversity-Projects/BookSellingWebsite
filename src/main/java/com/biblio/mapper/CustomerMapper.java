@@ -2,6 +2,7 @@ package com.biblio.mapper;
 
 import com.biblio.dto.request.CustomerRegisterRequest;
 import com.biblio.dto.response.CustomerDetailResponse;
+import com.biblio.dto.response.CustomerGetListResponse;
 import com.biblio.dto.response.CustomerRegisterResponse;
 import com.biblio.dto.response.CustomerResponse;
 import com.biblio.entity.Account;
@@ -68,6 +69,17 @@ public class CustomerMapper {
                 .phoneNumber(customer.getPhoneNumber() != null ? String.valueOf(customer.getPhoneNumber()) : null)
                 .joinAt(customer.getJoinAt())
                 .build();
+    }
+
+    public static CustomerGetListResponse toCustomerGetListResponse(Customer customer) {
+        return CustomerGetListResponse.builder()
+                .id(customer.getId())
+                .fullName(customer.getFullName())
+                .email(customer.getEmailAddress())
+                .status(customer.getAccount().getStatus().toString())
+                .orderCount((long) customer.getOrders().size())
+                .build();
+
     }
 
     public static CustomerDetailResponse toCustomerDetailResponse(Customer customer) {

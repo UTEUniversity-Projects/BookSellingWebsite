@@ -18,7 +18,7 @@ public class CustomerDAOImpl extends GenericDAOImpl<Customer> implements ICustom
 
     @Override
     public List<Customer> findAll() {
-        return super.findAll();
+        return super.findAll("SELECT DISTINCT c FROM Customer c LEFT JOIN FETCH c.orders JOIN FETCH c.account");
     }
 
     @Override
