@@ -25,7 +25,7 @@
                 <div class="vehicle-detail-banner banner-content clearfix">
                     <div class="banner-slider">
                         <div class="slider slider-for">
-                            <c:forEach var="imageUrl" items="${book.imagesUrl}">
+                            <c:forEach var="imageUrl" items="${book.imageUrls}">
                                 <div class="slider-banner-image">
                                     <div class="zoom-image-hover">
                                         <img
@@ -38,7 +38,7 @@
                             </c:forEach>
                         </div>
                         <div class="slider slider-nav thumb-image">
-                            <c:forEach var="imageUrl" items="${book.imagesUrl}">
+                            <c:forEach var="imageUrl" items="${book.imageUrls}">
                                 <div class="thumbnail-image">
                                     <div class="thumbImg">
                                         <img src="${imageUrl}" alt="product-thumbnail"/>
@@ -54,31 +54,25 @@
                     <h2 class="heading">
                         ${book.title}
                     </h2>
-                    <p>
-                        ${book.description}
-                    </p>
                 </div>
                 <div class="cr-size-and-weight">
                     <div class="cr-review-star">
                         <div class="cr-star">
-                            <c:set var="rating" value="${book.totalRating}"/>
-                            <c:set var="fullStars" value="${rating - (rating % 1)}"/>
-                            <c:set var="halfStar" value="${(rating % 1) >= 0.5}"/>
-                            <c:set var="emptyStars" value="${5 - fullStars - (halfStar ? 1 : 0)}"/>
-
-                            <c:forEach var="i" begin="1" end="${fullStars}">
-                                <i class="ri-star-fill"></i>
-                            </c:forEach>
-
-                            <c:if test="${halfStar}">
-                                <i class="ri-star-half-fill"></i>
-                            </c:if>
-
-                            <c:forEach var="i" begin="1" end="${emptyStars}">
-                                <i class="ri-star-line"></i>
+                            <c:forEach var="i" begin="1" end="5" step="1">
+                                <c:choose>
+                                    <c:when test="${book.avgRating >= i}">
+                                        <i class="ri-star-fill"></i>
+                                    </c:when>
+                                    <c:when test="${book.avgRating > i - 1 && book.avgRating < i}">
+                                        <i class="ri-star-half-line"></i>
+                                    </c:when>
+                                    <c:otherwise>
+                                        <i class="ri-star-line"></i>
+                                    </c:otherwise>
+                                </c:choose>
                             </c:forEach>
                         </div>
-                        <p>( 75 Review )</p>
+                        <p>( ${book.reviewCount} Review )</p>
                     </div>
                     <div class="list">
                         <ul>
@@ -209,7 +203,7 @@
                                     <ul>
                                         <li>
                                             <label>Danh mục <span>:</span></label>
-                                            Sách kỹ năng sống
+                                            ${book.category}
                                         </li>
                                         <li>
                                             <label>Kho <span>:</span></label>
@@ -257,7 +251,7 @@
                                         </li>
                                         <li>
                                             <label>Độ tuổi <span>:</span></label>
-                                            ${book.ageRecommend}
+                                            ${book.recommendedAge}
                                         </li>
                                     </ul>
                                 </div>
@@ -329,20 +323,28 @@
                         >
                             <div class="cr-tab-content">
                                 <div class="cr-description">
-                                    <img src="${pageContext.request.contextPath}/assets/customer/img/product/1.jpg"
-                                         alt="">
-                                    <p>
-                                        <b>Richard Koch</b> is the author of The 80/20 Principle,
-                                        which has sold more than a million copies,
-                                        and been published in approximately forty languages.
-                                        He is also a successful entrepreneur and investor whose ventures have
-                                        included Filofax,
-                                        Plymouth Gin, Belgo restaurants and Betfair, the world’s largest betting
-                                        exchange.
-                                        He was formerly a partner of Bain & Company, and co-founder of LEK
-                                        Consulting.
-                                        He has written more than twenty acclaimed books on business and ideas.
-                                    </p>
+                                    <c:forEach var="author" items="${book.authors}">
+                                        <div class="author-item">
+                                            <div class="author-item--avatar">
+                                                <img src="${author.avatar}" alt="">
+                                            </div>
+                                            <div class="author-item--info">
+                                                <span class="name">${author.name} (Tác giả)</span>
+                                                <p>${author.introduction}</p>
+                                            </div>
+                                        </div>
+                                    </c:forEach>
+                                    <c:forEach var="translator" items="${book.translators}">
+                                        <div class="author-item">
+                                            <div class="author-item--avatar">
+                                                <img src="${translator.avatar}" alt="">
+                                            </div>
+                                            <div class="author-item--info">
+                                                <span class="name">${translator.name} (Dịch giả)</span>
+                                                <p>${translator.introduction}</p>
+                                            </div>
+                                        </div>
+                                    </c:forEach>
                                 </div>
                             </div>
                         </div>
@@ -354,6 +356,7 @@
 </div>
 
 <!-- region Modal -->
+<%--FeedbackModal--%>
 <div class="modal fade" id="feedbackModal" tabindex="-1" aria-labelledby="feedbackModalLabel" aria-hidden="true">
     <input class="review-id" value="" hidden>
     <div class="modal-dialog">
@@ -366,14 +369,33 @@
                 <form id="feedbackForm">
                     <div class="mb-3">
                         <label for="feedbackContent" class="form-label">Nội dung phản hồi</label>
-                        <textarea id="feedbackContent" name="feedbackContent" class="form-control" placeholder="Nhập nội dung phản hồi..."
+                        <textarea id="feedbackContent" name="feedbackContent" class="form-control"
+                                  placeholder="Nhập nội dung phản hồi..."
                                   rows="4"></textarea>
+                        <p id="error-message">Vui lòng nhập nội dung!</p>
                     </div>
                 </form>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Hủy</button>
                 <button type="button" class="btn btn-primary" id="submitFeedback">Gửi</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<%--HideModal--%>
+<div class="modal fade" id="hideReviewModal" tabindex="-1" aria-labelledby="hideReviewModalLabel" aria-hidden="true">
+    <input class="review-id" value="" hidden>
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="hideReviewModalLabel">Bạn có chắc muốn ẩn đánh giá này không?</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Hủy</button>
+                <button type="button" class="btn btn-primary" id="confirmHideReview">Ẩn đánh giá</button>
             </div>
         </div>
     </div>

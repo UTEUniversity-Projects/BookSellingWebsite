@@ -9,7 +9,7 @@ public class Constant {
     public static final String PASSWORD = "123456";
 
     public static final String DB_DRIVER = "com.mysql.cj.jdbc.Driver";
-    public static final String DB_MIN_CONNECTIONS = "2";
+    public static final String DB_MIN_CONNECTIONS = "5";
     public static final String DB_MAX_CONNECTIONS = "10";
 
 }

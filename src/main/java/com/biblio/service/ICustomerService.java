@@ -2,6 +2,7 @@ package com.biblio.service;
 
 import com.biblio.dto.request.CustomerRegisterRequest;
 import com.biblio.dto.response.CustomerDetailResponse;
+import com.biblio.dto.response.CustomerGetListResponse;
 import com.biblio.dto.response.CustomerRegisterResponse;
 
 import java.time.LocalDateTime;
@@ -9,7 +10,7 @@ import java.util.List;
 
 public interface ICustomerService {
 
-    List<CustomerDetailResponse> findAll();
+    List<CustomerGetListResponse> findAll();
 
     void deactivateCustomer(Long id);
 

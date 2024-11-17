@@ -1,4 +1,4 @@
-package com.biblio.apis.staff;
+package com.biblio.apis.owner;
 
 import com.biblio.dto.request.ResponseReviewRequest;
 import com.biblio.entity.ResponseReview;
@@ -17,7 +17,7 @@ import java.io.Serial;
 import java.util.HashMap;
 import java.util.Map;
 
-@WebServlet(urlPatterns = {"/staff/response-review/add"})
+@WebServlet(urlPatterns = {"/owner/response-review/add"})
 public class AddResponseReviewAPI extends HttpServlet {
     @Inject
     private IResponseReviewService responseReviewService;

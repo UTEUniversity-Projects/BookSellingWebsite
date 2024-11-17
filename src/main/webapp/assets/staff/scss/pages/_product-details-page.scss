@@ -531,7 +531,6 @@ p {
   border: 1px solid $border-color;
   background-color: $off-white;
   border-radius: $radius;
-  //box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
   cursor: crosshair;
 
   img {
@@ -1254,14 +1253,35 @@ p {
   }
 }
 
-#author .cr-tab-content {
-  .cr-description {
-    display: flex;
-    gap: 50px;
-    padding: 30px 200px 0;
-
+.author-item {
+  display: flex;
+  gap: 30px;
+  border: 1px solid #eaeaea;
+  padding: 16px 20px;
+  margin-bottom: 10px;
+  border-radius: 15px;
+  .author-item--avatar {
+    min-width: 100px;
+    width: 100px;
+    height: 100px;
     img {
-      width: 250px;
+      width: 100%;
+      object-fit: cover;
+      border-radius: 50%;
     }
   }
+  .author-item--info {
+    p {
+      margin-top: 20px;
+    }
+  }
+}
+
+#error-message {
+  display: none;
+  color: red;
+  font-size: 12px;
+  font-style: italic;
+  margin-top: 5px;
+  margin-left: 5px;
 }

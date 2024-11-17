@@ -2,7 +2,6 @@ package com.biblio.dto.response;
 
 import lombok.*;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Getter
@@ -20,19 +19,20 @@ public class BookDetailsResponse {
     private String codeISBN10;
     private String codeISBN13;
     private String format;
-    private int handcover;
-    private double length;
-    private double width;
-    private double height;
+    private int hardcover;
+    private String size;
     private double weight;
     private String condition;
     private String recommendedAge;
     private String languages;
+    private long quantity;
+    private double avgRating;
 
-    private CategorySidebarResponse category;
-    private List<String> imageUrls = new ArrayList<>();
-    private PublisherResponse publisher;
-    private List<AuthorResponse> authors = new ArrayList<>();
-//    private List<TranslatorResponse> translators = new ArrayList<>();
-    private List<ReviewResponse> reviews = new ArrayList<>();
+    private String category;
+    private List<String> imageUrls;
+    private String publisher;
+    private List<AuthorResponse> authors;
+    private List<TranslatorResponse> translators;
+    private List<ReviewResponse> reviews;
+    private int reviewCount;
 }

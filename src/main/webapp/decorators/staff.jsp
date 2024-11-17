@@ -100,7 +100,6 @@
 
 <!-- region Main Custom JS -->
 <script src="${pageContext.request.contextPath}/assets/staff/js/toast.js"></script>
-
 <script src="${pageContext.request.contextPath}/assets/staff/js/main.js"></script>
 <!-- endregion -->
 

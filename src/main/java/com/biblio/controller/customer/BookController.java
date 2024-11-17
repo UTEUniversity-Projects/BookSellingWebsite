@@ -5,6 +5,7 @@ import com.biblio.dto.response.BookCardResponse;
 import com.biblio.dto.response.BookDetailsResponse;
 import com.biblio.dto.response.BookResponse;
 import com.biblio.service.IBookService;
+import com.biblio.service.IBookTemplateService;
 
 import javax.inject.Inject;
 import javax.servlet.ServletException;
@@ -24,7 +25,7 @@ public class BookController extends HttpServlet {
     private static final long serialVersionUID = 1L;
 
     @Inject
-    private IBookService bookService;
+    private IBookTemplateService bookTemplateService;
 
     /**
      * @see HttpServlet#HttpServlet()
@@ -40,7 +41,7 @@ public class BookController extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         // TODO Auto-generated method stub
         Long id = Long.parseLong(request.getParameter("id"));
-        BookDetailsResponse book = bookService.getBookDetailsResponse(id);
+        BookDetailsResponse book = bookTemplateService.getBookDetailsResponse(id);
         request.setAttribute("book", book);
         request.setAttribute("breadcumb", "Chi tiết sách");
         request.getRequestDispatcher("/views/customer/book.jsp").forward(request, response);

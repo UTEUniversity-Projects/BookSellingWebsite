@@ -209,7 +209,7 @@ public class GenericDAOImpl<T> implements IGenericDAO<T> {
         }
     }
 
-    private void closeEntityManager(EntityManager em) {
+    void closeEntityManager(EntityManager em) {
         if (em != null && em.isOpen()) {
             em.close();
         }

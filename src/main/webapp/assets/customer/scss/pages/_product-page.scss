@@ -1099,10 +1099,20 @@ p {
 
 .author-item {
   display: flex;
-  gap: 50px;
-  margin-bottom: 20px;
+  gap: 30px;
+  border: 1px solid #eaeaea;
+  padding: 16px 20px;
+  margin-bottom: 10px;
+  border-radius: 15px;
   .author-item--avatar {
-    width: 250px;
+    min-width: 100px;
+    width: 100px;
+    height: 100px;
+    img {
+      width: 100%;
+      object-fit: cover;
+      border-radius: 50%;
+    }
   }
   .author-item--info {
     p {
@@ -1110,14 +1120,3 @@ p {
     }
   }
 }
-//#author .cr-tab-content{
-//  .author- {
-//    display: flex;
-//    gap: 50px;
-//    padding: 0 200px;
-//    img {
-//      width: 250px;
-//    }
-//  }
-//}
-

@@ -28,28 +28,28 @@ public class Customer extends User implements Serializable {
 
     // region Relationships
 
-    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinColumn(name = "account_id")
     private Account account;
 
     @OneToMany(mappedBy = "customer")
     private Set<Notification> notifications = new HashSet<>();
 
-    @OneToMany(mappedBy = "customer", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "customer", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @Singular
     private Set<Address> addresses = new HashSet<>();
 
     @OneToMany(mappedBy = "customer", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
-    private Set<Order> orders = new HashSet<Order>();
+    private Set<Order> orders = new HashSet<>();
 
     @OneToOne(mappedBy = "customer", cascade = CascadeType.ALL, orphanRemoval = true)
     private Cart cart;
 
     @OneToMany(mappedBy = "customer", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
-    private Set<Support> supports = new HashSet<Support>();
+    private Set<Support> supports = new HashSet<>();
 
     @OneToMany(mappedBy = "customer", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
-    private Set<Review> reviews = new HashSet<Review>();
+    private Set<Review> reviews = new HashSet<>();
 
     // endregion
 }

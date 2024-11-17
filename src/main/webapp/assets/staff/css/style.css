@@ -1,30 +1,4 @@
 @charset "UTF-8";
-/*---------------------------------------------------------------------------------
-01. Typography
-02. Components
-    - Common
-    - Sidebar
-    - Header
-    - Footer
-    - Notify-bar
-    - Tools-sidebar
-
-03. Layout 
-    - Cards
-    - All-chart
-    - Tables
-    - Event-calendar
-
-04. Pages
-    - Chatapp-page
-    - Todo-page
-    - Ecommerce-page
-    - Auth-pages
-    - Vendor-pages
-    - Buttons-page
-    - Accordion-page
-    - Alert-popup-page
------------------------------------------------------------------------------------*/
 /*=== Typography ===*/
 /*--  Poppins font  --*/
 @font-face {
@@ -7848,13 +7822,35 @@ p {
     padding: 10px 0 0 0;
   }
 }
-#author .cr-tab-content .cr-description {
+.author-item {
   display: flex;
-  gap: 50px;
-  padding: 30px 200px 0;
+  gap: 30px;
+  border: 1px solid #eaeaea;
+  padding: 16px 20px;
+  margin-bottom: 10px;
+  border-radius: 15px;
 }
-#author .cr-tab-content .cr-description img {
-  width: 250px;
+.author-item .author-item--avatar {
+  min-width: 100px;
+  width: 100px;
+  height: 100px;
+}
+.author-item .author-item--avatar img {
+  width: 100%;
+  object-fit: cover;
+  border-radius: 50%;
+}
+.author-item .author-item--info p {
+  margin-top: 20px;
+}
+
+#error-message {
+  display: none;
+  color: red;
+  font-size: 12px;
+  font-style: italic;
+  margin-top: 5px;
+  margin-left: 5px;
 }
 
 .price-summary {

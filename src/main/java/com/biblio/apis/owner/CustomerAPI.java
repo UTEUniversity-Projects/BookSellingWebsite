@@ -36,15 +36,15 @@ public class CustomerAPI extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		List<CustomerDetailResponse> list = customerService.findAll();
-
-		// Thiết lập kiểu dữ liệu trả về là JSON
-		response.setContentType("application/json");
-		response.setCharacterEncoding("UTF-8");
-
-		// Dùng Jackson ObjectMapper để chuyển đổi đối tượng sang JSON
-		ObjectMapper objectMapper = new ObjectMapper();
-		objectMapper.writeValue(response.getWriter(), list);
+//		List<CustomerDetailResponse> list = customerService.findAll();
+//
+//		// Thiết lập kiểu dữ liệu trả về là JSON
+//		response.setContentType("application/json");
+//		response.setCharacterEncoding("UTF-8");
+//
+//		// Dùng Jackson ObjectMapper để chuyển đổi đối tượng sang JSON
+//		ObjectMapper objectMapper = new ObjectMapper();
+//		objectMapper.writeValue(response.getWriter(), list);
 	}
 
 	/**
