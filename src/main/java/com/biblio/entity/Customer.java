@@ -28,14 +28,14 @@ public class Customer extends User implements Serializable {
 
     // region Relationships
 
-    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinColumn(name = "account_id")
     private Account account;
 
     @OneToMany(mappedBy = "customer")
     private Set<Notification> notifications = new HashSet<>();
 
-    @OneToMany(mappedBy = "customer", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "customer", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @Singular
     private Set<Address> addresses = new HashSet<>();
 
