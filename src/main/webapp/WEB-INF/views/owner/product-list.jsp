@@ -1,4 +1,5 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!-- main content -->
 <div class="cr-main-content">
     <div class="container-fluid">
@@ -30,36 +31,43 @@
                                     <th>Thao tác</th>
                                 </tr>
                                 </thead>
-
                                 <tbody>
-                                <tr class="product-row" data-href="/owner/product-details">
-                                    <td>
-                                        <img class="tbl-thumb" src="${pageContext.request.contextPath}/assets/owner/img/product/1.jpg"
-                                             alt="Product Image">
-                                    </td>
-                                    <td>Mens t-shirt</td>
-                                    <td>278.000 VNĐ</td>
-                                    <td>25% OFF</td>
-                                    <td>61</td>
-                                    <td>105</td>
-                                    <td><span class="active">Đang mở bán</span></td>
-                                    <td>
-                                        <div class="d-flex justify-content-center">
-                                            <button type="button"
-                                                    class="btn btn-outline-success dropdown-toggle dropdown-toggle-split"
-                                                    data-bs-toggle="dropdown" aria-haspopup="true"
-                                                    aria-expanded="false" data-display="static">
-															<span class="sr-only"><i
-                                                                    class="ri-settings-3-line"></i></span>
-                                            </button>
-                                            <div class="dropdown-menu">
-                                                <a class="dropdown-item" href="#">Xem chi tiết</a>
-                                                <a class="dropdown-item" href="#">Chỉnh sửa</a>
-                                                <a class="dropdown-item" href="#">Xóa sản phẩm</a>
+                                <c:forEach var="book" items="${books}">
+                                    <tr class="product-row" data-href="/owner/product-details?id=${book.id}">
+                                        <td>
+                                            <img
+                                                    class="tbl-thumb"
+                                                    src="${pageContext.request.contextPath}${book.imageUrl}"
+                                                    alt="Product Image"
+                                            />
+                                        </td>
+                                        <td>${book.title}</td>
+                                        <td class="price-value">${book.price}</td>
+                                        <td>${book.quantity}</td>
+                                        <td>${book.soldCount}</td>
+                                        <td>${book.publicationDate}</td>
+                                        <td data-status="ON_SALE">
+                                            <span class="status status__on_sale">Đang mở bán</span>
+                                        </td>
+                                        <td>
+                                            <div class="d-flex justify-content-center">
+                                                <button type="button"
+                                                        class="btn btn-outline-success dropdown-toggle dropdown-toggle-split"
+                                                        data-bs-toggle="dropdown" aria-haspopup="true"
+                                                        aria-expanded="false" data-display="static">
+                                                        <span class="sr-only">
+                                                            <i class="ri-settings-3-line"></i>
+                                                        </span>
+                                                </button>
+                                                <div class="dropdown-menu">
+                                                    <a class="dropdown-item" href="#">Xem chi tiết</a>
+                                                    <a class="dropdown-item" href="#">Chỉnh sửa</a>
+                                                    <a class="dropdown-item" href="#">Xóa sản phẩm</a>
+                                                </div>
                                             </div>
-                                        </div>
-                                    </td>
-                                </tr>
+                                        </td>
+                                    </tr>
+                                </c:forEach>
                                 </tbody>
                             </table>
                         </div>
