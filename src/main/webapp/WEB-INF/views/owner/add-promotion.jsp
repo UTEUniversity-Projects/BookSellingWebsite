@@ -5,6 +5,8 @@
         color: red;
         font-size: 0.7em;
     }
+    /* Màu nền cho dòng được chọn */
+
 </style>
 <div class="cr-main-content">
     <div class="container-fluid">
@@ -27,7 +29,9 @@
         </div>
         <div class="content-promotion">
             <div class="row cr-promotion" data-tab="1">
-                <form class="d-flex flex-column promotionForm">
+                <form class="promotionForm">
+                    <input type="hidden" name="formType" value="addDiscount"/>
+
                     <div class="form-content d-flex">
                         <!-- Cột bên trái -->
                         <div class="col-xl-4 col-lg-12 form-column">
@@ -41,7 +45,6 @@
                                                         src="assets/img/product/1.jpg"
                                                 />
                                                 <h3>Thêm Discount</h3>
-                                                <input type="hidden" name="formType" value="addDiscount"/>
 
                                                 <!-- Mã -->
                                                 <div class="form-group">
@@ -70,13 +73,14 @@
                                                 <div class="form-group">
                                                     <label>Đối tượng áp dụng</label>
                                                     <div class="select-oject-use-voucher">
-                                                        <select class="select-item" name="target" id="select-object-discount">
+                                                        <select class="select-item" name="selectOject" id="select-object-discount" onblur="validateInput(this)">
                                                             <option selected disabled>- Chọn đối tượng áp dụng -</option>
                                                             <option value="1" >Sản phẩm cụ thể</option>
                                                             <option value="2">Giảm theo Category</option>
                                                             <option value="3">Giảm theo Sub Category</option>
                                                             <option value="4">Toàn bộ sản phẩm</option>
                                                         </select>
+                                                        <span class="error-message selectOjectError"></span>
                                                     </div>
                                                 </div>
                                                 <!-- Mô tả -->
@@ -114,40 +118,24 @@
                                                 <select class="select-item" id="category-select-discount" name="category">
                                                     <option value="1"></option>
                                                 </select>
+                                                <span class="categoryError text-danger"></span>
                                             </div>
                                             <div class="select-add-promotion">
                                                 <select class="select-item" id="subcategory-select-discount" name="subcategory">
-                                                    <option value="1">Sách lớp 1</option>
-                                                    <option value="2">Sách lớp 1</option>
-                                                    <option value="3">Sách lớp 1</option>
-                                                    <option value="4">Sách lớp 1</option>
+                                                    <option value="1"></option>
                                                 </select>
+                                                <span class="subcategoryError text-danger"></span>
                                             </div>
                                         </div>
-                                        <table id="discount_table" class="table">
+                                        <table class="table table-hover table_item_to_discount">
                                             <thead>
                                             <tr>
-                                                <th>
-                                                </th>
+                                                <th>Chọn</th>
                                                 <th>Mã</th>
                                                 <th>Tên</th>
                                             </tr>
                                             </thead>
                                             <tbody>
-                                            <tr class="selectable-row">
-                                                <td>
-                                                    <input type="checkbox" class="row-checkbox" name="selectedProducts" value="1321" />
-                                                </td>
-                                                <td>#1321</td>
-                                                <td>Đắc nhân tâm</td>
-                                            </tr>
-                                            <tr class="selectable-row">
-                                                <td>
-                                                    <input type="checkbox" class="row-checkbox" name="selectedProducts" value="1322" />
-                                                </td>
-                                                <td>#1322</td>
-                                                <td>Cuốn theo chiều gió</td>
-                                            </tr>
                                             </tbody>
                                         </table>
                                     </div>
@@ -159,14 +147,10 @@
                     <!-- Nút Thêm -->
                     <div class="row mt-4">
                         <div class="col-12 d-flex justify-content-center" style="padding-bottom: 20px">
-                            <button type="submit" class="cr-btn-primary">
-                                Thêm
-                            </button>
+                            <button type="submit" class="btn-voucher cr-btn-primary"  onclick="return validateForm()">Thêm</button>
                         </div>
                     </div>
                 </form>
-
-
             </div>
             <div class="row cr-promotion" data-tab="2">
                 <div class="col-xl-12 col-lg-12">
@@ -336,6 +320,9 @@
         </div>
     </div>
 </div>
+
+<!-- DataTables -->
+<script src="https://cdn.datatables.net/1.13.1/js/jquery.dataTables.js"></script>
 
 
 <script>const contextPath = "<%= request.getContextPath()%>";</script>

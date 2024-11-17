@@ -19,6 +19,8 @@ function validateInput(input) {
         }
     }
 
+
+
     // Kiểm tra 'percentDiscount' phải trong khoảng từ 0 đến 100
     if (input.name === "percentDiscount") {
         const value = Number(input.value);
@@ -51,6 +53,16 @@ function validateForm(form) {
     const inputs = form.querySelectorAll('.form-control');
     const codeInput = form.querySelector('input[name="code"]');
     const codeValue = codeInput ? codeInput.value.trim() : "";
+
+    const selectElement = form.querySelector('#select-object-discount');
+    const selectErrorSpan = form.querySelector('.selectOjectError');
+    if (selectElement && selectElement.value === "- Chọn đối tượng áp dụng -") {
+        selectErrorSpan.textContent = "Bạn cần chọn một đối tượng áp dụng.";
+        isValid = false;
+    } else if (selectErrorSpan) {
+        selectErrorSpan.textContent = "";
+    }
+
     inputs.forEach(input => {
         const errorSpan = input.closest('.col-12').querySelector('.' + input.name + 'Error');
 
@@ -97,6 +109,7 @@ function validateForm(form) {
     return isValid;
 }
 
+
 function parseDateRange(input) {
     const [start, end] = input.split(" - ");
 
@@ -131,6 +144,144 @@ function parseDateRange(input) {
 }
 
 
+// document.querySelectorAll('.promotionForm').forEach(form => {
+//     form.addEventListener('submit', function (event) {
+//         event.preventDefault();
+//
+//         if (!validateForm(form)) {
+//             toast({
+//                 title: "Thất bại!",
+//                 message: 'Vui lòng điền đầy đủ thông tin',
+//                 type: "warning",
+//                 duration: 3000,
+//             });
+//         } else {
+//             const formData = new FormData(form);
+//             const data = {};
+//             // Lấy giá trị từ form và xử lý
+//             formData.forEach((value, key) => {
+//                 if (key === "datetimes") {
+//                     // Gọi parseDateRange với giá trị và năm hiện tại
+//                     const { effectiveDate, expirationDate } = parseDateRange(value);
+//                     data["effectiveDate"] = effectiveDate;
+//                     data["expirationDate"] = expirationDate;
+//
+//                     const effectiveDateObj = new Date(effectiveDate);
+//                     const currentDate = new Date();
+//                     data["status"] = effectiveDateObj > currentDate ? "COMING_SOON" : "EFFECTIVE";
+//                 } else {
+//                     data[key] = value.trim();
+//                 }
+//             });
+//             // Lấy thông tin về checkbox "unlimited" và quantity
+//             const unlimitedCheckbox = form.querySelector('input[name="unlimited"]');
+//             let quantity = parseInt(data["quantity"], 10);
+//             const isInfinite = unlimitedCheckbox.checked || isNaN(quantity) || quantity <= 0;
+//             data["isInfinite"] = isInfinite;
+//             if (isInfinite) quantity = 1;
+//             switch (data["formType"]) {
+//                 case "addVoucher":
+//                     data["type"] = "VOUCHER"; // Đặt type là VOUCHER
+//                     data["percentDiscount"] = 100; // Phần trăm giảm giá là 100%
+//                     break;
+//                 case "addFreeShip":
+//                     data["type"] = "FREESHIP"; // Đặt type là FREESHIP
+//                     data["percentDiscount"] = 100; // Miễn phí vận chuyển
+//                     data["minValueApplied"] = 0.0; // Giá trị tối thiểu áp dụng là 0
+//                     break;
+//                 default:
+//                     console.error("Loại form không hợp lệ"); // Xử lý lỗi khi formType không đúng
+//                     return;
+//             }
+//
+//             // Tạo danh sách promotionInsertRequests
+//             const promotionInsertRequests = [];
+//             for (let i = 0; i < quantity; i++) {
+//                 promotionInsertRequests.push({
+//                     title: data["title"] || "Default Title",
+//                     description: data["description"] || "Default Description",
+//                     percentDiscount: parseFloat(data["percentDiscount"]) || 0.0,
+//                     discountLimit: parseFloat(data["discountLimit"]) || 0.0,
+//                     minValueApplied: parseFloat(data["minValueApplied"]) || 0.0,
+//                     effectiveDate: data["effectiveDate"],
+//                     expirationDate: data["expirationDate"],
+//                     status: "NOT_USE",
+//                     promotionTargets: [
+//                         {
+//                             applicableObjectId: -1,
+//                             type: "WHOLE"
+//                         }
+//                     ]
+//                 });
+//             }
+//             const responseData = {
+//                 code: data["code"],
+//                 isInfinite: isInfinite,
+//                 status: data["status"],
+//                 type: data["type"],
+//                 promotionInsertRequests: promotionInsertRequests
+//             };
+//
+//
+//
+//             // Gửi request AJAX
+//             $.ajax({
+//                 url: '/owner/promotion/add',
+//                 type: 'POST',
+//                 contentType: 'application/json; charset=UTF-8',
+//                 data: JSON.stringify(responseData),
+//                 success: function (result) {
+//                     toast({
+//                         title: result.isCodeExisted ? "Thất bại!" : "Thành công!",
+//                         message: result.isCodeExisted ? 'Mã khuyến mãi đã tồn tại.' : 'Khuyến mãi đã được thêm thành công!',
+//                         type: result.isCodeExisted ? "warning" : "success",
+//                         duration: 3000,
+//                     });
+//                     if (!result.isCodeExisted) {
+//                         form.reset();
+//                         form.querySelector('input[name="quantity"]').disabled = false;
+//
+//                     }
+//                 },
+//                 error: function (xhr, status, error) {
+//                     console.error("Lỗi khi gọi API:", error);
+//
+//                     toast({
+//                         title: "Lỗi!",
+//                         message: 'Đã xảy raaaaaaaa lỗi trong quá trình thêm khuyến mãi.',
+//                         type: "error",
+//                         duration: 3000,
+//                     });
+//                 }
+//             });
+//         }
+//     });
+// });
+// document.querySelectorAll('.promotionForm').forEach(form => {
+//     form.addEventListener('submit', function (event) {
+//
+//         event.preventDefault();
+//
+//         if (!validateForm(form)) {
+//             toast({
+//                 title: "Thất bại!",
+//                 message: 'Vui lòng điền đầy đủ thông tin',
+//                 type: "warning",
+//                 duration: 3000,
+//             });
+//             alert("sadasd");
+//         } else {
+//             const formData = new FormData(form);
+//             const data = {};
+//
+//             formData.forEach((value, key) => {
+//                 if (key === "formType") {
+//                     alert(value);
+//                 }
+//             });
+//         }
+//     });
+// });
 document.querySelectorAll('.promotionForm').forEach(form => {
     form.addEventListener('submit', function (event) {
         event.preventDefault();
@@ -143,13 +294,13 @@ document.querySelectorAll('.promotionForm').forEach(form => {
                 duration: 3000,
             });
         } else {
+            alert("sdfdsf");
             const formData = new FormData(form);
-
             const data = {};
+
             // Lấy giá trị từ form và xử lý
             formData.forEach((value, key) => {
                 if (key === "datetimes") {
-                    // Gọi parseDateRange với giá trị và năm hiện tại
                     const { effectiveDate, expirationDate } = parseDateRange(value);
                     data["effectiveDate"] = effectiveDate;
                     data["expirationDate"] = expirationDate;
@@ -162,47 +313,38 @@ document.querySelectorAll('.promotionForm').forEach(form => {
                 }
             });
 
-            // Lấy thông tin về checkbox "unlimited" và quantity
+            // Lấy thông tin checkbox và xử lý `quantity`
             const unlimitedCheckbox = form.querySelector('input[name="unlimited"]');
             let quantity = parseInt(data["quantity"], 10);
             const isInfinite = unlimitedCheckbox.checked || isNaN(quantity) || quantity <= 0;
             data["isInfinite"] = isInfinite;
             if (isInfinite) quantity = 1;
-            switch (data["formType"]) {
+
+            // Tách xử lý theo formType
+            const formType = data["formType"];
+            if (!formType) {
+                console.error("Không tìm thấy formType");
+                return;
+            }
+            const promotionInsertRequests = [];
+            switch (formType) {
+                case "addDiscount":
+                    document.getElementById("select-object-discount").addEventListener("change", function () {
+                        const selectedValue = this.value; // Lấy giá trị được chọn
+                        const selectedText = this.options[this.selectedIndex].text; // Lấy nội dung hiển thị của tùy chọn
+                        alert(`Bạn đã chọn: ${selectedText} (Value: ${selectedValue})`);
+                    });
                 case "addVoucher":
-                    data["type"] = "VOUCHER"; // Đặt type là VOUCHER
-                    data["percentDiscount"] = 100; // Phần trăm giảm giá là 100%
+                    handleAddVoucher(data, quantity, promotionInsertRequests);
                     break;
                 case "addFreeShip":
-                    data["type"] = "FREESHIP"; // Đặt type là FREESHIP
-                    data["percentDiscount"] = 100; // Miễn phí vận chuyển
-                    data["minValueApplied"] = 0.0; // Giá trị tối thiểu áp dụng là 0
+                    handleAddFreeShip(data, quantity, promotionInsertRequests);
                     break;
                 default:
-                    console.error("Loại form không hợp lệ"); // Xử lý lỗi khi formType không đúng
+                    console.error("Loại form không hợp lệ:", formType);
                     return;
             }
 
-            // Tạo danh sách promotionInsertRequests
-            const promotionInsertRequests = [];
-            for (let i = 0; i < quantity; i++) {
-                promotionInsertRequests.push({
-                    title: data["title"] || "Default Title",
-                    description: data["description"] || "Default Description",
-                    percentDiscount: parseFloat(data["percentDiscount"]) || 0.0,
-                    discountLimit: parseFloat(data["discountLimit"]) || 0.0,
-                    minValueApplied: parseFloat(data["minValueApplied"]) || 0.0,
-                    effectiveDate: data["effectiveDate"],
-                    expirationDate: data["expirationDate"],
-                    status: "NOT_USE",
-                    promotionTargets: [
-                        {
-                            applicableObjectId: -1,
-                            type: "WHOLE"
-                        }
-                    ]
-                });
-            }
             const responseData = {
                 code: data["code"],
                 isInfinite: isInfinite,
@@ -210,123 +352,393 @@ document.querySelectorAll('.promotionForm').forEach(form => {
                 type: data["type"],
                 promotionInsertRequests: promotionInsertRequests
             };
-            
+
             // Gửi request AJAX
-            $.ajax({
-                url: '/owner/promotion/add',
-                type: 'POST',
-                contentType: 'application/json; charset=UTF-8',
-                data: JSON.stringify(responseData),
-                success: function (result) {
-                    toast({
-                        title: result.isCodeExisted ? "Thất bại!" : "Thành công!",
-                        message: result.isCodeExisted ? 'Mã khuyến mãi đã tồn tại.' : 'Khuyến mãi đã được thêm thành công!',
-                        type: result.isCodeExisted ? "warning" : "success",
-                        duration: 3000,
-                    });
-                    if (!result.isCodeExisted) {
-                        form.reset();
-                        form.querySelector('input[name="quantity"]').disabled = false;
-
-                    }
-                },
-                error: function (xhr, status, error) {
-                    console.error("Lỗi khi gọi API:", error);
-
-                    toast({
-                        title: "Lỗi!",
-                        message: 'Đã xảy raaaaaaaa lỗi trong quá trình thêm khuyến mãi.',
-                        type: "error",
-                        duration: 3000,
-                    });
-                }
-            });
+            sendPromotionRequest(responseData, form);
         }
     });
 });
-$(document).ready(function () {
-    // Khi thay đổi giá trị của "select-object-discount"
-    $('#select-object-discount').change(function () {
-        const selectedValue = $(this).val();
 
-        // Kiểm tra nếu chọn "Sản phẩm cụ thể" (value = 1)
-        if (selectedValue === "1") {
-            $.ajax({
-                url: '/owner/promotion/get-categories', // URL đến servlet
-                type: 'GET',
-                success: function (response) {
-                    // Xóa các tùy chọn cũ
-                    $('#category-select-discount').empty();
+// Hàm xử lý formType "addVoucher"
+function handleAddVoucher(data, quantity, promotionInsertRequests) {
+    data["type"] = "VOUCHER";
+    data["percentDiscount"] = 100; // Giảm giá 100%
 
-                    // Duyệt qua danh sách và thêm các tùy chọn mới
-                    response.forEach(function (category) {
-                        $('#category-select-discount').append(
-                            `<option value="${category.id}">${category.name}</option>`
-                        );
-                    });
+    for (let i = 0; i < quantity; i++) {
+        promotionInsertRequests.push(createPromotionRequest(data));
+    }
+}
 
-                    // Lấy giá trị của tùy chọn đầu tiên
-                    const firstCategoryId = response[0]?.id;
-                    if (firstCategoryId) {
-                        $('#category-select-discount').val(firstCategoryId);
+// Hàm xử lý formType "addFreeShip"
+function handleAddFreeShip(data, quantity, promotionInsertRequests) {
+    data["type"] = "FREESHIP";
+    data["percentDiscount"] = 100; // Miễn phí vận chuyển
+    data["minValueApplied"] = 0.0; // Giá trị tối thiểu áp dụng là 0
 
-                        // Gọi tiếp API để lấy subcategories cho danh mục đầu tiên
-                        loadSubCategories(firstCategoryId);
-                    }
-                },
-                error: function () {
-                    alert('Không thể tải danh sách danh mục!');
-                }
+    for (let i = 0; i < quantity; i++) {
+        promotionInsertRequests.push(createPromotionRequest(data));
+    }
+}
+
+// Hàm tạo một request
+function createPromotionRequest(data) {
+    return {
+        title: data["title"] || "Default Title",
+        description: data["description"] || "Default Description",
+        percentDiscount: parseFloat(data["percentDiscount"]) || 0.0,
+        discountLimit: parseFloat(data["discountLimit"]) || 0.0,
+        minValueApplied: parseFloat(data["minValueApplied"]) || 0.0,
+        effectiveDate: data["effectiveDate"],
+        expirationDate: data["expirationDate"],
+        status: "NOT_USE",
+        promotionTargets: [
+            {
+                applicableObjectId: -1,
+                type: "WHOLE"
+            }
+        ]
+    };
+}
+
+// Hàm gửi request AJAX
+function sendPromotionRequest(responseData, form) {
+    $.ajax({
+        url: '/owner/promotion/add',
+        type: 'POST',
+        contentType: 'application/json; charset=UTF-8',
+        data: JSON.stringify(responseData),
+        success: function (result) {
+            toast({
+                title: result.isCodeExisted ? "Thất bại!" : "Thành công!",
+                message: result.isCodeExisted ? 'Mã khuyến mãi đã tồn tại.' : 'Khuyến mãi đã được thêm thành công!',
+                type: result.isCodeExisted ? "warning" : "success",
+                duration: 3000,
             });
-        } else {
-            // Nếu chọn mục khác, xóa cả hai combo box
-            $('#category-select-discount').empty();
-            $('#subcategory-select-discount').empty();
+            if (!result.isCodeExisted) {
+                form.reset();
+                form.querySelector('input[name="quantity"]').disabled = false;
+            }
+        },
+        error: function (xhr, status, error) {
+            console.error("Lỗi khi gọi API:", error);
+            toast({
+                title: "Lỗi!",
+                message: 'Đã xảy ra lỗi trong quá trình thêm khuyến mãi.',
+                type: "error",
+                duration: 3000,
+            });
         }
     });
+}
 
-    // Hàm để tải subcategories theo categoryId
-    function loadSubCategories(categoryId) {
+// $(document).ready(function () {
+//     var table = $(".table_item_to_discount").DataTable({
+//         "aLengthMenu": [[5, 10, -1], [5, 10, "All"]], // Menu options for rows per page
+//         "pageLength": 5, // Default rows per page
+//         "dom": '<"row justify-content-between top-information"lf>rt<"row justify-content-between bottom-information"ip><"clear">', // Customize control layout
+//     });
+//     // Hàm gọi API chung
+//     function fetchData(url, params, onSuccess, onError) {
+//         $.ajax({
+//             url: url,
+//             type: 'GET',
+//             data: params,
+//             success: function (response) {
+//                 console.log(`API Response [${url}]:`, response); // Debug API
+//                 if (onSuccess) onSuccess(response);
+//             },
+//             error: function () {
+//                 alert(onError || 'Đã xảy ra lỗi khi gọi API.');
+//             }
+//         });
+//     }
+//
+//     // Xử lý khi thay đổi giá trị của "select-object-discount"
+//     $('#select-object-discount').change(function () {
+//         const selectedValue = $(this).val();
+//         $('#category-select-discount, #subcategory-select-discount').empty();
+//         table.clear().draw();
+//
+//         if (selectedValue === "1") {
+//             // Xử lý khi chọn trường hợp 1
+//             console.log("Selected Case 1: Loading categories and subcategories.");
+//             $('#category-select-discount').off('change').on('change', function () {
+//                 const selectedCategoryId = $(this).val();
+//                 if (selectedCategoryId) {
+//                     loadSubCategories(selectedCategoryId); // Tải danh sách subcategories
+//                 } else {
+//                     $('#subcategory-select-discount').empty();
+//                 }
+//             });
+//
+//             // Tải danh sách categories
+//             fetchData('/owner/promotion/get-categories', {}, function (categories) {
+//                 if (categories && categories.length > 0) {
+//                     populateCategories(categories, function (firstCategoryId) {
+//                         if (firstCategoryId) {
+//                             loadSubCategories(firstCategoryId);
+//                         }
+//                     });
+//                 } else {
+//                     alert('Không có danh mục nào!');
+//                 }
+//             }, 'Không thể tải danh sách danh mục!');
+//         } else if (selectedValue === "2") {
+//             // Xử lý khi chọn trường hợp 2
+//             console.log("Selected Case 2: Loading categories into table.");
+//             $('#category-select-discount').off('change');
+//             fetchData('/owner/promotion/get-categories', {}, function (categories) {
+//                 populateTable(categories, 'Không có danh mục nào');
+//             }, 'Không thể tải danh sách danh mục!');
+//         } else if (selectedValue === "3") {
+//             // Xử lý khi chọn trường hợp 3
+//             console.log("Selected Case 3: Loading subcategories into table.");
+//             $('#category-select-discount').off('change').on('change', function () {
+//                 const selectedCategoryId = $(this).val();
+//                 if (selectedCategoryId) {
+//                     loadSubCategoriesToTable(selectedCategoryId);
+//                 } else {
+//                     table.clear().draw();
+//                 }
+//             });
+//
+//             // Tải danh sách categories
+//             fetchData('/owner/promotion/get-categories', {}, function (categories) {
+//                 populateCategories(categories, function (firstCategoryId) {
+//                     if (firstCategoryId) {
+//                         loadSubCategoriesToTable(firstCategoryId);
+//                     }
+//                 });
+//             }, 'Không thể tải danh sách danh mục!');
+//         }
+//     });
+//
+//     // Hàm tải subcategories và cập nhật #subcategory-select-discount
+//     function loadSubCategories(categoryId) {
+//         console.log(`Loading subcategories for categoryId: ${categoryId}`);
+//         fetchData('/owner/promotion/get-subcategories', { categoryId }, function (subcategories) {
+//             const subCategorySelect = $('#subcategory-select-discount');
+//             subCategorySelect.empty();
+//
+//             if (subcategories && subcategories.length > 0) {
+//                 subcategories.forEach(function (subcategory) {
+//                     subCategorySelect.append(
+//                         `<option value="${subcategory.id}">${subcategory.name}</option>`
+//                     );
+//                 });
+//
+//                 // Tải sách của subcategory đầu tiên
+//                 const firstSubCategoryId = subcategories[0]?.id;
+//                 if (firstSubCategoryId) {
+//                     subCategorySelect.val(firstSubCategoryId);
+//                     loadBooks(firstSubCategoryId);
+//                 }
+//                 subCategorySelect.off('change').on('change', function () {
+//                     const selectedSubCategoryId = $(this).val();
+//                     if (selectedSubCategoryId) {
+//                         loadBooks(selectedSubCategoryId);
+//                     }
+//                 });
+//             } else {
+//                 alert('Không có danh mục con nào!');
+//             }
+//         }, 'Không thể tải danh sách subcategories!');
+//     }
+//
+//     // Hàm tải subcategories hiển thị trong bảng
+//     function loadSubCategoriesToTable(categoryId) {
+//         console.log(`Loading subcategories into table for categoryId: ${categoryId}`);
+//         fetchData('/owner/promotion/get-subcategories', { categoryId }, function (subcategories) {
+//             table.clear(); // Xóa dữ liệu cũ
+//
+//             if (subcategories && subcategories.length > 0) {
+//                 subcategories.forEach(function (subcategory) {
+//                     table.row.add([
+//                         `<input type="checkbox" class="row-checkbox" name="selectedItems_${subcategory.id}" value="${subcategory.id}" />`,
+//                         `#${subcategory.id}`,
+//                         `${subcategory.name}`
+//                     ]);
+//                 });
+//                 table.draw(); // Cập nhật bảng
+//             } else {
+//                 table.row.add([
+//                     '',
+//                     '',
+//                     'Không có danh mục con nào'
+//                 ]).draw();
+//             }
+//         }, `Không thể tải danh mục con cho Category ID: ${categoryId}`);
+//     }
+//
+//     // Hàm tải danh sách sách
+//     function loadBooks(subCategoryId) {
+//         console.log(`Loading books for subCategoryId: ${subCategoryId}`);
+//         fetchData('/owner/promotion/get-book', { idSubcategory: subCategoryId }, function (books) {
+//             populateTable(books, 'Không có sách trong danh mục này');
+//         }, 'Không thể tải danh sách sách!');
+//     }
+//
+//     // Hàm thêm danh sách vào category-select-discount
+//     function populateCategories(categories, callback) {
+//         const categorySelect = $('#category-select-discount');
+//         categorySelect.empty();
+//
+//         categories.forEach(function (category) {
+//             categorySelect.append(
+//                 `<option value="${category.id}">${category.name}</option>`
+//             );
+//         });
+//
+//         const firstCategoryId = categories[0]?.id;
+//         if (callback && typeof callback === 'function') {
+//             callback(firstCategoryId);
+//         }
+//     }
+//
+//     // Hàm thêm danh sách vào DataTables
+//     function populateTable(data, emptyMessage) {
+//         table.clear();
+//
+//         if (data && data.length > 0) {
+//             data.forEach(function (item) {
+//                 table.row.add([
+//                     `<input type="checkbox" class="row-checkbox" name="selectedItems_${item.id}" value="${item.id}" />`,
+//                     `#${item.id}`,
+//                     `${item.name || item.title}`
+//                 ]);
+//             });
+//             table.draw();
+//         } else {
+//             table.row.add([
+//                 '',
+//                 '',
+//                 emptyMessage
+//             ]).draw();
+//         }
+//     }
+// });
+$(document).ready(function () {
+    const table = $(".table_item_to_discount").DataTable({
+        aLengthMenu: [[5, 10, -1], [5, 10, "All"]],
+        pageLength: 5,
+        dom: '<"row justify-content-between top-information"lf>rt<"row justify-content-between bottom-information"ip><"clear">',
+    });
+
+    function fetchData(url, params = {}, onSuccess, onError = 'Đã xảy ra lỗi khi gọi API.') {
         $.ajax({
-            url: '/owner/promotion/get-subcategories', // URL đến servlet
+            url,
             type: 'GET',
-            data: { categoryId: categoryId },
-            success: function (response) {
-                // Xóa các tùy chọn cũ
-                $('#subcategory-select-discount').empty();
-
-                // Duyệt qua danh sách và thêm các tùy chọn mới
-                response.forEach(function (subcategory) {
-                    $('#subcategory-select-discount').append(
-                        `<option value="${subcategory.id}">${subcategory.name}</option>`
-                    );
-                });
-
-                // Tùy chọn đầu tiên được chọn mặc định
-                const firstSubCategoryId = response[0]?.id;
-                if (firstSubCategoryId) {
-                    $('#subcategory-select-discount').val(firstSubCategoryId);
-                }
-            },
-            error: function () {
-                alert('Không thể tải danh sách subcategories!');
-            }
+            data: params,
+            success: response => onSuccess?.(response),
+            error: () => alert(onError),
         });
     }
 
-    // Khi thay đổi giá trị của "category-select-discount"
-    $('#category-select-discount').change(function () {
-        const selectedCategoryId = $(this).val();
+    $('#select-object-discount').change(function () {
+        const selectedValue = $(this).val();
+        resetSelections();
 
-        // Gọi API để tải subcategories theo categoryId được chọn
-        if (selectedCategoryId) {
-            loadSubCategories(selectedCategoryId);
-        } else {
-            // Nếu không có giá trị, xóa các tùy chọn trong subcategory
-            $('#subcategory-select-discount').empty();
-        }
+        if (selectedValue === "1") handleCase1();
+        else if (selectedValue === "2") handleCase2();
+        else if (selectedValue === "3") handleCase3();
     });
+
+    function resetSelections() {
+        $('#category-select-discount, #subcategory-select-discount').empty();
+        table.clear().draw();
+    }
+
+    function handleCase1() {
+        $('#category-select-discount').off('change').on('change', function () {
+            const categoryId = $(this).val();
+            categoryId ? loadSubCategories(categoryId) : $('#subcategory-select-discount').empty();
+        });
+        loadCategories(loadSubCategories);
+    }
+
+    function handleCase2() {
+        $('#category-select-discount').off('change');
+        loadCategories(categories => populateTable(categories, 'Không có danh mục nào'));
+    }
+
+    function handleCase3() {
+        $('#category-select-discount').off('change').on('change', function () {
+            const categoryId = $(this).val();
+            categoryId ? loadSubCategoriesToTable(categoryId) : table.clear().draw();
+        });
+        loadCategories(loadSubCategoriesToTable);
+    }
+
+    function loadCategories(callback) {
+        fetchData('/owner/promotion/get-categories', {}, categories => {
+            if (categories?.length) populateCategories(categories, callback);
+            else alert('Không có danh mục nào!');
+        }, 'Không thể tải danh sách danh mục!');
+    }
+
+    function loadSubCategories(categoryId) {
+        fetchData('/owner/promotion/get-subcategories', { categoryId }, subcategories => {
+            const subCategorySelect = $('#subcategory-select-discount');
+            subCategorySelect.empty();
+
+            if (subcategories?.length) {
+                subcategories.forEach(sub => subCategorySelect.append(`<option value="${sub.id}">${sub.name}</option>`));
+                const firstSubCategoryId = subcategories[0]?.id;
+                firstSubCategoryId && subCategorySelect.val(firstSubCategoryId);
+                bindSubCategoryChange(subCategorySelect, loadBooks);
+            } else alert('Không có danh mục con nào!');
+        });
+    }
+
+    function loadSubCategoriesToTable(categoryId) {
+        fetchData('/owner/promotion/get-subcategories', { categoryId }, subcategories => {
+            populateTable(subcategories, 'Không có danh mục con nào');
+        }, `Không thể tải danh mục con cho Category ID: ${categoryId}`);
+    }
+
+    function loadBooks(subCategoryId) {
+        fetchData('/owner/promotion/get-book', { idSubcategory: subCategoryId }, books => {
+            populateTable(books, 'Không có sách trong danh mục này');
+        }, 'Không thể tải danh sách sách!');
+    }
+
+    function populateCategories(categories, callback) {
+        const categorySelect = $('#category-select-discount');
+        categorySelect.empty();
+        categories.forEach(cat => categorySelect.append(`<option value="${cat.id}">${cat.name}</option>`));
+        callback?.(categories[0]?.id);
+    }
+
+    function populateTable(data, emptyMessage) {
+        table.clear();
+        if (data?.length) {
+            data.forEach(item => table.row.add([
+                `<input type="checkbox" class="row-checkbox" name="selectedItems_${item.id}" value="${item.id}" />`,
+                `#${item.id}`,
+                `${item.name || item.title}`
+            ]));
+        } else {
+            table.row.add(['', '', emptyMessage]);
+        }
+        table.draw();
+    }
+
+    function bindSubCategoryChange(subCategorySelect, callback) {
+        subCategorySelect.off('change').on('change', function () {
+            const subCategoryId = $(this).val();
+            subCategoryId && callback(subCategoryId);
+        });
+    }
 });
+
+
+
+
+
+
+
+
+
 
 
 

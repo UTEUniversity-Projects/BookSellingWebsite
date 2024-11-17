@@ -119,6 +119,7 @@ public class BookTemplateMapper {
         return BookTemplatePromotionResponse.builder()
                 .id(bookTemplate.getId())
                 .title(singlebook.getTitle())
+                .subCategoryId(singlebook.getSubCategory().getId())
                 .build();
     }
     // endregion

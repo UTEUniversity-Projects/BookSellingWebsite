@@ -7,12 +7,14 @@ import com.biblio.dto.request.CustomerRegisterRequest;
 import com.biblio.dto.response.CustomerDetailResponse;
 import com.biblio.dto.response.CustomerGetListResponse;
 import com.biblio.dto.response.CustomerRegisterResponse;
+import com.biblio.dto.response.CustomerReportResponse;
 import com.biblio.entity.Customer;
 import com.biblio.enumeration.EAccountStatus;
 import com.biblio.mapper.CustomerMapper;
 import com.biblio.service.ICustomerService;
 
 import javax.inject.Inject;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -70,5 +72,17 @@ public class CustomerServiceImpl implements ICustomerService {
         Customer customer = customerDAO.findByUsername(username);
         return CustomerMapper.toCustomerDetailResponse(customer);
     }
+
+    @Override
+    public Long countCustomersJointAtTime(LocalDateTime start, LocalDateTime end) {
+        return customerDAO.findAll().stream()
+                .filter(customer -> {
+                    LocalDateTime joinAt = customer.getJoinAt();
+                    return (joinAt.isEqual(start) || joinAt.isAfter(start)) &&
+                            (joinAt.isEqual(end) || joinAt.isBefore(end));
+                })
+                .count();
+    }
+
 
 }

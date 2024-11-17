@@ -11,100 +11,80 @@
                     <li>Báo cáo bán hàng</li>
                 </ul>
             </div>
-            <div class="cr-tools">
-                <div class="daterange">
-                    <i class="fa fa-calendar"></i>&nbsp;
-                    <span></span>
-                    <i class="fa fa-caret-down"></i>
+            <!-- Form bao quanh daterange -->
+            <form id="financial-report-form">
+                <div class="cr-tools">
+                    <div class="daterange" id="date-header">
+                        <i class="fa fa-calendar"></i>&nbsp;
+                        <span></span>
+                        <i class="fa fa-caret-down"></i>
+                    </div>
                 </div>
-            </div>
+            </form>
         </div>
         <div class="row">
             <div class="col-xl-12">
                 <div class="row">
+                    <!-- Khách Hàng -->
                     <div class="col-xl-3 col-md-6">
                         <div class="cr-card">
                             <div class="cr-card-content label-card">
                                 <div class="title">
-												<span class="icon icon-1"
-                                                ><i class="ri-shield-user-line"></i
-                                                ></span>
+                                    <span class="icon icon-1"><i class="ri-shield-user-line"></i></span>
                                     <div class="growth-numbers">
                                         <h4>Khách Hàng</h4>
-                                        <h5>40</h5>
+                                        <h5 id="customer-count">0</h5> <!-- ID riêng để load data -->
                                     </div>
                                 </div>
-                                <p class="card-groth up">
-                                    <i class="ri-arrow-up-line"></i>
-                                    32%
-                                    <span>Tháng Trước</span>
-                                </p>
                             </div>
                         </div>
                     </div>
+                    <!-- Đơn Hàng -->
                     <div class="col-xl-3 col-md-6">
                         <div class="cr-card">
                             <div class="cr-card-content label-card">
                                 <div class="title">
-												<span class="icon icon-2"
-                                                ><i class="ri-shopping-bag-3-line"></i
-                                                ></span>
+                                    <span class="icon icon-2"><i class="ri-shopping-bag-3-line"></i></span>
                                     <div class="growth-numbers">
                                         <h4>Đơn Hàng</h4>
-                                        <h5>369</h5>
+                                        <h5 id="order-count">0</h5> <!-- ID riêng -->
                                     </div>
                                 </div>
-                                <p class="card-groth down">
-                                    <i class="ri-arrow-down-line"></i>
-                                    1.7%
-                                    <span>Tháng trước</span>
-                                </p>
                             </div>
                         </div>
                     </div>
+                    <!-- Doanh Thu -->
                     <div class="col-xl-3 col-md-6">
                         <div class="cr-card">
                             <div class="cr-card-content label-card">
                                 <div class="title">
-												<span class="icon icon-3"
-                                                ><i class="ri-money-dollar-circle-line"></i
-                                                ></span>
+                                    <span class="icon icon-3"><i class="ri-money-dollar-circle-line"></i></span>
                                     <div class="growth-numbers">
                                         <h4>Doanh Thu</h4>
-                                        <h5>113.535.362 vnđ</h5>
+                                        <h5 id="revenue-count">0</h5> <!-- ID riêng -->
                                     </div>
                                 </div>
-                                <p class="card-groth down">
-                                    <i class="ri-arrow-down-line"></i>
-                                    3.8%
-                                    <span>Tháng trước</span>
-                                </p>
                             </div>
                         </div>
                     </div>
+                    <!-- Chi Phí -->
                     <div class="col-xl-3 col-md-6">
                         <div class="cr-card">
                             <div class="cr-card-content label-card">
                                 <div class="title">
-												<span class="icon icon-4"
-                                                ><i class="ri-exchange-dollar-line"></i
-                                                ></span>
+                                    <span class="icon icon-4"><i class="ri-exchange-dollar-line"></i></span>
                                     <div class="growth-numbers">
-                                        <h4>Chi Phí</h4>
-                                        <h5>88.287.691 vnđ</h5>
+                                        <h4>Profit</h4>
+                                        <h5 id="expense-count">0</h5> <!-- ID riêng -->
                                     </div>
                                 </div>
-                                <p class="card-groth up">
-                                    <i class="ri-arrow-up-line"></i>
-                                    8%
-                                    <span>Last Month</span>
-                                </p>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
+
         <div class="row">
             <div class="col-xxl-12 col-xl-12">
                 <div class="cr-card revenue-overview">

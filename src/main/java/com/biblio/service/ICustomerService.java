@@ -5,6 +5,7 @@ import com.biblio.dto.response.CustomerDetailResponse;
 import com.biblio.dto.response.CustomerGetListResponse;
 import com.biblio.dto.response.CustomerRegisterResponse;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 public interface ICustomerService {
@@ -24,4 +25,6 @@ public interface ICustomerService {
     boolean isPhoneNumberExisted(String phoneNumber);
 
     CustomerDetailResponse getCustomerDetailByUsername(String username);
+
+    Long countCustomersJointAtTime(LocalDateTime start, LocalDateTime end);
 }
