@@ -2,6 +2,7 @@ package com.biblio.service.impl;
 
 import com.biblio.dao.IPromotionDAO;
 import com.biblio.dto.request.PromotionInsertRequest;
+import com.biblio.dto.request.PromotionUpdateRequest;
 import com.biblio.dto.response.PromotionGetResponse;
 import com.biblio.entity.Promotion;
 import com.biblio.mapper.PromotionMapper;
@@ -30,8 +31,12 @@ public class PromotionServiceImpl implements IPromotionService {
 
     @Override
     public void insertPromotion(PromotionInsertRequest promotionInsertRequest) {
-        Promotion promotion = PromotionMapper.toPromotion(promotionInsertRequest);
-        promotionDAO.insert(promotion);
+        Promotion promotion = promotionDAO.save(PromotionMapper.toPromotion(promotionInsertRequest));
+    }
+
+    @Override
+    public void updatePromotion(PromotionUpdateRequest promotionUpdateRequest) {
+        Promotion promotion = promotionDAO.update(PromotionMapper.toPromotion(promotionUpdateRequest));
     }
 
     @Override

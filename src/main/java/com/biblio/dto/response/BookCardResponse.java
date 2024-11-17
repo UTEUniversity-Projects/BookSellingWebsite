@@ -10,10 +10,8 @@ import lombok.*;
 public class BookCardResponse {
     private Long id;
     private String title;
-    private String description;
     private double sellingPrice;
-
-    private CategorySidebarResponse category;
-    private BookMetadataResponse metadata;
+    private String categoryName;
+    private String imageUrl;
     private double reviewRate;
 }

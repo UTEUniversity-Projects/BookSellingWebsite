@@ -23,7 +23,7 @@ public class SubCategoryMapper {
                 .name(subCategory.getName())
                 .shortScript(subCategory.getShortScript())
                 .fullScript(subCategory.getFullScript())
-                .status(EnumUtil.toDisplayName(subCategory.getStatus()))
+                .status(subCategory.getStatus().toString())
                 .build();
     }
 }

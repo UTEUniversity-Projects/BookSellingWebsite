@@ -1,9 +1,6 @@
 package com.biblio.mapper;
 
-import com.biblio.dto.response.AuthorResponse;
-import com.biblio.dto.response.BookDetailsManagementResponse;
-import com.biblio.dto.response.BookManagementResponse;
-import com.biblio.dto.response.ReviewResponse;
+import com.biblio.dto.response.*;
 import com.biblio.entity.*;
 import com.biblio.enumeration.EBookLanguage;
 import com.biblio.enumeration.EBookMetadataStatus;
@@ -13,6 +10,10 @@ import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
+
+import static com.biblio.mapper.CategoryMapper.toCategorySidebarResponse;
+import static com.biblio.mapper.PublisherMapper.toPublisherResponse;
+import static com.biblio.utils.DateTimeUtil.formatDateTime;
 
 public class BookTemplateMapper {
     // region EntityToDTO
@@ -98,6 +99,79 @@ public class BookTemplateMapper {
                 .build();
     }
 
+    public static BookCardResponse toBookCardResponse(BookTemplate bookTemplate) {
+        Book singlebook = bookTemplate.getBooks().iterator().next();
+        return BookCardResponse.builder()
+                .id(bookTemplate.getId())
+                .title(singlebook.getTitle())
+                .sellingPrice(singlebook.getSellingPrice())
+                .categoryName(singlebook.getSubCategory().getCategory().getName())
+                .imageUrl(bookTemplate
+                        .getMediaFiles()
+                        .iterator().next()
+                        .getStoredCode()
+                        .replaceAll("image\\d+\\.jpg", "image1.jpg"))
+                .reviewRate(bookTemplate.calculateReviewRate())
+                .build();
+    }
+
+    public static BookDetailsResponse toBookDetailsResponse(BookTemplate bookTemplate) {
+        BookDetailsResponse bookDetailsResponse = new BookDetailsResponse();
+        Book singlebook = bookTemplate.getBooks().iterator().next();
+
+        String languages = singlebook.getBookTemplate().getLanguages().stream()
+                .map(EBookLanguage::getDescription)
+                .collect(Collectors.joining(", "));
+
+        List<String> fileNames = bookTemplate.getMediaFiles().stream()
+                .sorted(Comparator.comparing(MediaFile::getId))
+                .map(MediaFile::getStoredCode)
+                .toList();
+
+        List<AuthorResponse> authors = new ArrayList<>();
+        for (Author author : bookTemplate.getAuthors()) {
+            authors.add(AuthorMapper.toAuthorResponse(author));
+        }
+
+        List<ReviewResponse> reviews = bookTemplate.getReviews().stream()
+                .sorted(Comparator.comparingInt(Review::getRate).reversed()
+                        .thenComparing(Review::getCreatedAt, Comparator.reverseOrder()))
+                .map(ReviewMapper::toReviewResponse)
+                .toList();
+
+        return BookDetailsResponse.builder()
+                .id(bookTemplate.getId())
+                .title(singlebook.getTitle())
+                .description(singlebook.getDescription())
+                .sellingPrice(singlebook.getSellingPrice())
+                .publicationDate(formatDateTime(singlebook.getPublicationDate(), "dd-MM-yyyy"))
+                .edition(singlebook.getEdition())
+                .codeISBN10(singlebook.getCodeISBN10())
+                .codeISBN13(singlebook.getCodeISBN13())
+                .format(singlebook.getFormat().getBookFormat())
+                .handcover(singlebook.getHandcover())
+                .size(String.format("%.1f x %.1f x %.1f cm",
+                        singlebook.getHeight(), singlebook.getLength(), singlebook.getWidth()))
+                .weight(singlebook.getWeight())
+                .condition(singlebook.getCondition().getBookCondition())
+                .recommendedAge(singlebook.getRecommendedAge().getBookAgeRecommend())
+                .category(singlebook.getSubCategory().getCategory().getName())
+                .languages(languages)
+                .quantity(bookTemplate.getBooks().stream().
+                        filter(book -> book.getBookMetadata().getStatus() == EBookMetadataStatus.IN_STOCK).count())
+                .avgRating(bookTemplate.calculateReviewRate())
+                .imageUrls(fileNames)
+                .publisher(bookTemplate.getPublisher().getName())
+                .authors(authors)
+                .reviews(reviews)
+    }
+    public static BookTemplatePromotionResponse toBookTemplatePromotionResponse(BookTemplate bookTemplate) {
+        Book singlebook = bookTemplate.getBooks().iterator().next();
+        return BookTemplatePromotionResponse.builder()
+                .id(bookTemplate.getId())
+                .title(singlebook.getTitle())
+                .build();
+    }
     // endregion
 
 }

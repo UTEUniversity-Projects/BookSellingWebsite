@@ -8,9 +8,7 @@ import com.biblio.dto.response.BookResponse;
 import java.util.List;
 
 public interface IBookService {
-    List<BookCardResponse> getAllBookCardResponse();
     List<BookResponse> findAll();
-    BookDetailsResponse getBookDetailsResponse(Long id);
     void addBook(BookRequest bookRequest);
     void updateBook(BookRequest bookRequest);
     void deleteBook(Long id);

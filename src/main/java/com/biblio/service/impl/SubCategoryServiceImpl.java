@@ -43,4 +43,13 @@ public class SubCategoryServiceImpl implements ISubCategoryService {
     public void deleteSubCategory(Long id) {
         subCategoryDAO.deleteSubCategory(id);
     }
+
+    @Override
+    public List<SubCategoryResponse> getAllSubCategoriesById(Long id) {
+        List<SubCategoryResponse> list = new ArrayList<SubCategoryResponse>();
+        for (SubCategory subCategory : subCategoryDAO.findByJPQL(id)) {
+            list.add(SubCategoryMapper.toSubCategoryResponse(subCategory));
+        }
+        return list;
+    }
 }

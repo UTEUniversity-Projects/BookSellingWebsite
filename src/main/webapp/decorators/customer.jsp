@@ -243,11 +243,11 @@
                                             maxlength="20"
                                             class="quantity"
                                     />
-                                    <button type="button" id="add_model" class="plus">
-                                        +
-                                    </button>
                                     <button type="button" id="sub_model" class="minus">
                                         -
+                                    </button>
+                                    <button type="button" id="add_model" class="plus">
+                                        +
                                     </button>
                                 </div>
                                 <div class="cr-add-button">
@@ -285,7 +285,7 @@
                         <span class="cart-price"><span>$56.00</span> x 1kg</span>
                         <div class="cr-cart-qty">
                             <div class="cart-qty-plus-minus">
-                                <button type="button" class="plus">+</button>
+                                <button type="button" class="minus">-</button>
                                 <input
                                         type="text"
                                         placeholder="."
@@ -294,7 +294,7 @@
                                         maxlength="20"
                                         class="quantity"
                                 />
-                                <button type="button" class="minus">-</button>
+                                <button type="button" class="plus">+</button>
                             </div>
                         </div>
                         <a href="javascript:void(0)" class="remove">×</a>
@@ -311,7 +311,7 @@
                         <span class="cart-price"><span>$75.00</span> x 1kg</span>
                         <div class="cr-cart-qty">
                             <div class="cart-qty-plus-minus">
-                                <button type="button" class="plus">+</button>
+                                <button type="button" class="minus">-</button>
                                 <input
                                         type="text"
                                         placeholder="."
@@ -320,7 +320,7 @@
                                         maxlength="20"
                                         class="quantity"
                                 />
-                                <button type="button" class="minus">-</button>
+                                <button type="button" class="plus">+</button>
                             </div>
                         </div>
                         <a href="javascript:void(0)" class="remove">×</a>
@@ -337,7 +337,7 @@
                         <span class="cart-price"><span>$48.00</span> x 5kg</span>
                         <div class="cr-cart-qty">
                             <div class="cart-qty-plus-minus">
-                                <button type="button" class="plus">+</button>
+                                <button type="button" class="minus">-</button>
                                 <input
                                         type="text"
                                         placeholder="."
@@ -346,7 +346,7 @@
                                         maxlength="20"
                                         class="quantity"
                                 />
-                                <button type="button" class="minus">-</button>
+                                <button type="button" class="plus">+</button>
                             </div>
                         </div>
                         <a href="javascript:void(0)" class="remove">×</a>

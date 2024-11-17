@@ -11,5 +11,4 @@ public class ReviewGetListResponse {
     private Long id;
     private String content;
     private String createdAt;
-
 }

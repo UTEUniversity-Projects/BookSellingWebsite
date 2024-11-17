@@ -40,7 +40,10 @@ public class DBConnection implements PersistenceUnitInfo {
         dataSource.setJdbcUrl(Constant.DB_URL);
         dataSource.setUsername(Constant.USERNAME);
         dataSource.setPassword(Constant.PASSWORD);
-        dataSource.setMaximumPoolSize(10);
+        dataSource.setPoolName("MyHikariCP");
+        dataSource.setConnectionTimeout(20000);
+        dataSource.setMaxLifetime(1800000);
+        dataSource.setConnectionTestQuery("SELECT 1");
 
         return dataSource;
     }

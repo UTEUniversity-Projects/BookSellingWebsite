@@ -1,5 +1,4 @@
 package com.biblio.dto.response;
-
 import lombok.*;
 
 @NoArgsConstructor
@@ -7,7 +6,8 @@ import lombok.*;
 @Getter
 @Setter
 @Builder
-public class CustomerResponse {
-    private String avatar;
-    private String fullName;
+@ToString
+public class BookTemplatePromotionResponse {
+    private Long id;
+    private String title;
 }

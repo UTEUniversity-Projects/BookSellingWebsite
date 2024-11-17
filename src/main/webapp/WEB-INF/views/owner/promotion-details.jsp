@@ -1,6 +1,15 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!-- main content -->
+<style>
+    .error-message {
+        color: red;
+        font-size: 0.7em;
+    }
+    .ip-padding {
+        padding-bottom: 20px;
+    }
+</style>
 <div class="cr-main-content">
     <div class="container-fluid">
         <!-- Page title & breadcrumb -->
@@ -150,57 +159,93 @@
                                 <div class="cr-cat-form">
                                     <img class="img-promotion" src="assets/img/product/1.jpg">
                                     <h5>Thông tin Voucher</h5>
-                                    <form class="promotion-form">
-                                        <div class="form-group" style="padding-bottom: 20px;">
+                                    <form action="/owner/promotion-details" method="POST" class="promotionForm">
+                                        <input type="hidden" name="formType" value="editVoucher"/>
+
+                                        <!-- Mã -->
+                                        <div class="form-group ip-padding">
                                             <label>Mã</label>
                                             <div class="col-12">
-                                                <input class="form-control here slug-title" type="text" value="${promotion.code}" id="promotion-code" disabled>
-                                            </div>
-                                        </div>
-                                        <div class="form-group" style="padding-bottom: 20px;">
-                                            <label>Tiêu đề</label>
-                                            <div class="col-12">
-                                                <input class="form-control here slug-title" type="text" value="${promotion.title}" id="promotion-title" disabled>
-                                            </div>
-                                        </div>
-                                        <div class="form-group" style="padding-bottom: 20px;">
-                                            <label>Số tiền giảm</label>
-                                            <div class="col-12">
-                                                <input class="form-control here slug-title" type="text" value="${promotion.discountLimit}" id="promotion-discount-limit" disabled>
-                                            </div>
-                                        </div>
-                                        <div class="form-group" style="padding-bottom: 20px;">
-                                            <label>Số tiền yêu cầu trên hóa đơn</label>
-                                            <div class="col-12">
-                                                <input class="form-control here slug-title" type="text" value="${promotion.minValueApplied}" id="promotion-min-value-to-applied" disabled>
-                                            </div>
-                                        </div>
-                                        <div class="form-group" style="padding-bottom: 20px;">
-                                            <label>Số lượng khuyến mãi</label>
-                                            <div class="col-12">
-                                                <input class="form-control here slug-title" type="text" id="promotion-quantity" value="100" disabled>
-                                                <label>
-                                                    <input type="checkbox" id="unlimited-checkbox" style="margin-top: 5px;"> Không giới hạn
-                                                </label>
-                                            </div>
-                                        </div>
-                                        <div class="form-group" style="padding-bottom: 20px;">
-                                            <label>Mô tả</label>
-                                            <div class="col-12">
-                                                <textarea class="form-control" rows="4" id="promotion-description" disabled></textarea>
-                                            </div>
-                                        </div>
-                                        <div class="form-group row" style="padding-bottom: 20px;">
-                                            <label>Thời gian áp dụng</label>
-                                            <div class="col-12">
-                                                <input type="text" name="time-promotion" style="width: 100%;" id="promotion-time-effective" disabled>
+                                                <input name="code" value="${promotion.code}" class="form-control here slug-title" style="background-color: #f5f5f5;" readonly type="text" onblur="validateInput(this)" />
+                                                <span class="error-message codeError"></span>
                                             </div>
                                         </div>
 
-                                        <div class="row" style="padding-bottom: 20px;">
+                                        <!-- Tiêu đề -->
+                                        <div class="form-group ip-padding">
+                                            <label>Tiêu đề</label>
+                                            <div class="col-12">
+                                                <input name="title" value="${promotion.title}" class="form-control here slug-title" disabled type="text" onblur="validateInput(this)" />
+                                                <span class="error-message titleError"></span>
+                                            </div>
+                                        </div>
+
+                                        <!-- Số tiền giảm -->
+                                        <div class="form-group ip-padding">
+                                            <label>Số tiền giảm</label>
+                                            <div class="col-12">
+                                                <input name="discountLimit" value="${promotion.discountLimit}" class="form-control here slug-title" disabled type="number" onblur="validateInput(this)" />
+                                                <span class="error-message discountLimitError"></span>
+                                            </div>
+                                        </div>
+
+                                        <!-- Số tiền yêu cầu trên hóa đơn -->
+                                        <div class="form-group ip-padding">
+                                            <label>Số tiền yêu cầu trên hóa đơn</label>
+                                            <div class="col-12">
+                                                <input name="minValueApplied" value="${promotion.minValueToApplied}" class="form-control here slug-title" disabled type="number" onblur="validateInput(this)" />
+                                                <span class="error-message minValueAppliedError"></span>
+                                            </div>
+                                        </div>
+
+                                        <!-- Số lượng khuyến mãi -->
+                                        <div class="form-group ip-padding">
+                                            <label>Số lượng khuyến mãi</label>
+                                            <div class="col-12">
+                                                <input
+                                                        name="quantity"
+                                                        class="form-control here slug-title"
+                                                        type="number"
+                                                        <c:if test="${promotion.quantity == -1}">value="" disabled</c:if>
+                                                        <c:if test="${promotion.quantity != -1}">value="${promotion.quantity}" disabled</c:if>
+                                                        onblur="validateInput(this)" />
+                                                <label>
+                                                    <input
+                                                            type="checkbox"
+                                                            name="unlimited"
+                                                            value="true"
+                                                            style="margin-top: 5px"
+                                                            disabled
+                                                            <c:if test="${promotion.quantity == -1}">checked</c:if> />
+                                                    Không giới hạn
+                                                </label>
+
+                                                <span class="error-message quantityError"></span>
+                                            </div>
+
+                                        </div>
+
+                                        <!-- Mô tả -->
+                                        <div class="form-group ip-padding">
+                                            <label>Mô tả</label>
+                                            <div class="col-12">
+                                                <textarea name="description" class="form-control" rows="4" disabled onblur="validateInput(this)">${promotion.description}</textarea>
+                                                <span class="error-message descriptionError"></span>
+                                            </div>
+                                        </div>
+
+                                        <!-- Thời gian áp dụng -->
+                                        <div class="form-group row ip-padding">
+                                            <label>Thời gian áp dụng</label>
+                                            <div class="col-12">
+                                                <input type="text" name="dateeffective" disabled style="width: 100%;" onblur="validateInput(this)" />
+                                                <span class="error-message dateeffectiveError"></span>
+                                            </div>
+                                        </div>
+
+                                        <div class="row ip-padding">
                                             <div class="col-12 d-flex">
-                                                <button type="button" class="cr-btn-primary" id="edit-button">Chỉnh sửa</button>
-                                                <button type="button" class="cr-btn-primary" id="save-button" style="display: none;">Lưu</button>
+                                                <button type="submit" class="btn-voucher cr-btn-primary" data-editing="false">Chỉnh sửa</button>
                                             </div>
                                         </div>
                                     </form>
@@ -211,78 +256,7 @@
                 </div>
             </div>
         </c:if>
-        <c:if test="${promotion.type == 'COUPON'}">
-            <div class="row">
-                <div class="col-xl-12 col-lg-12">
-                    <div class="team-sticky-bar">
-                        <div class="col-md-12">
-                            <div class="cr-cat-list cr-card card-default mb-24px">
-                                <div class="cr-card-content">
-                                    <div class="cr-cat-form">
-                                        <img class="img-promotion" src="assets/img/product/1.jpg">
-                                        <h3>Thông tin Coupon</h3>
-                                        <form class="promotion-form">
-                                            <div class="form-group">
-                                                <label>Mã</label>
-                                                <div class="col-12" style="padding-bottom: 20px;">
-                                                    <input name="text" class="form-control here slug-title" type="text" value="#20-10" disabled>
-                                                </div>
-                                            </div>
-                                            <div class="form-group" style="padding-bottom: 20px;">
-                                                <label>Tiêu đề</label>
-                                                <div class="col-12">
-                                                    <input name="text" class="form-control here slug-title" type="text" value="20 - 10" disabled>
-                                                </div>
-                                            </div>
-                                            <div class="form-group" style="padding-bottom: 20px;">
-                                                <label>Phần trăm giảm (%)</label>
-                                                <div class="col-12">
-                                                    <input name="text" class="form-control here slug-title" type="text" value="50%" disabled>
-                                                </div>
-                                            </div>
-                                            <div class="form-group" style="padding-bottom: 20px;">
-                                                <label>Giảm tối da</label>
-                                                <div class="col-12">
-                                                    <input name="text" class="form-control here slug-title" type="text" value="50.000 vnđ" disabled>
-                                                </div>
-                                            </div>
-                                            <div class="form-group" style="padding-bottom: 20px;">
-                                                <label>Số lượng khuyến mãi</label>
-                                                <div class="col-12">
-                                                    <input class="form-control here slug-title" type="text" id="promotion-quantity" disabled>
-                                                    <label>
-                                                        <input type="checkbox" id="unlimited-checkbox" style="margin-top: 5px;"> Không giới hạn
-                                                    </label>
-                                                </div>
-                                            </div>
-                                            <div class="form-group" style="padding-bottom: 20px;">
-                                                <label>Mô tả</label>
-                                                <div class="col-12">
-                                                    <textarea class="form-control" rows="4" disabled></textarea>
-                                                </div>
-                                            </div>
-                                            <div class="form-group row" style="padding-bottom: 20px;">
-                                                <label>Thời gian áp dụng</label>
-                                                <div class="col-12">
-                                                    <input type="text" name="dateeffective" style="width: 100%;" disabled>
-                                                </div>
-                                            </div>
 
-                                            <div class="row" style="padding-bottom: 20px;">
-                                                <div class="col-12 d-flex">
-                                                    <button type="button" class="cr-btn-primary" id="edit-button">Chỉnh sửa</button>
-                                                    <button type="button" class="cr-btn-primary" id="save-button" style="display: none;">Lưu</button>
-                                                </div>
-                                            </div>
-                                        </form>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </c:if>
         <c:if test="${promotion.type == 'FREESHIP'}">
             <div class="row">
                 <div class="col-xl-12 col-lg-12">
@@ -293,62 +267,73 @@
                                     <div class="cr-cat-form">
                                         <img class="img-promotion" src="assets/img/product/1.jpg">
                                         <h3>Thông tin Freeship</h3>
-                                        <form class="promotion-form">
-                                            <div class="form-group" style="padding-bottom: 20px;">
+                                        <form action="/owner/promotion-details" method="POST" class="promotionForm">
+                                            <input type="hidden" name="formType" value="editFreeShip" />
+                                            <div class="form-group ip-padding">
                                                 <label>Mã</label>
                                                 <div class="col-12">
-                                                    <input name="text" class="form-control here slug-title" type="text" value="#20-10" disabled>
+                                                    <input name="code" class="form-control here slug-title" type="text" value="${promotion.code}" style="background-color: #f5f5f5;" readonly onblur="validateInput(this)" />
+                                                    <span class="error-message codeError"></span>
                                                 </div>
                                             </div>
-                                            <div class="form-group" style="padding-bottom: 20px;">
+                                            <div class="form-group ip-padding">
                                                 <label>Tiêu đề</label>
                                                 <div class="col-12">
-                                                    <input name="text" class="form-control here slug-title" type="text" value="20 - 10" disabled>
+                                                    <input name="title" class="form-control here slug-title" type="text" value="${promotion.title}" disabled onblur="validateInput(this)" />
+                                                    <span class="error-message titleError"></span>
                                                 </div>
                                             </div>
-                                            <div class="form-group" style="padding-bottom: 20px;">
-                                                <label>Phần trăm giảm (%)</label>
+                                            <div class="form-group ip-padding">
+                                                <label>Số tiền giảm</label>
                                                 <div class="col-12">
-                                                    <input name="text" class="form-control here slug-title" type="text" value="50%" disabled>
+                                                    <input name="discountLimit" class="form-control here slug-title" type="number" value="${promotion.discountLimit}" disabled onblur="validateInput(this)" />
+                                                    <span class="error-message discountLimitError"></span>
                                                 </div>
                                             </div>
-                                            <div class="form-group" style="padding-bottom: 20px;">
-                                                <label>Giảm tối da</label>
-                                                <div class="col-12">
-                                                    <input name="text" class="form-control here slug-title" type="text" value="50.000 vnđ" disabled>
-                                                </div>
-                                            </div>
-                                            <div class="form-group" style="padding-bottom: 20px;">
+                                            <div class="form-group ip-padding">
                                                 <label>Số lượng khuyến mãi</label>
                                                 <div class="col-12">
-                                                    <input class="form-control here slug-title" type="text" id="promotion-quantity" disabled>
+                                                    <input
+                                                            name="quantity"
+                                                            class="form-control here slug-title"
+                                                            type="number"
+                                                            <c:if test="${promotion.quantity == -1}">value="" disabled</c:if>
+                                                            <c:if test="${promotion.quantity != -1}">value="${promotion.quantity}" disabled</c:if>
+                                                            onblur="validateInput(this)" />
                                                     <label>
-                                                        <input type="checkbox" id="unlimited-checkbox" style="margin-top: 5px;"> Không giới hạn
+                                                        <input
+                                                                type="checkbox"
+                                                                name="unlimited"
+                                                                value="true"
+                                                                style="margin-top: 5px"
+                                                                disabled
+                                                                <c:if test="${promotion.quantity == -1}">checked</c:if> />
+                                                        Không giới hạn
                                                     </label>
-                                                </div>
-                                            </div>
-                                            <div class="form-group" style="padding-bottom: 20px;">
-                                                <label>Mô tả</label>
-                                                <div class="col-12">
-                                                    <textarea class="form-control" rows="4" disabled></textarea>
 
-                                                </div>
+                                                    <span class="error-message quantityError"></span>
                                             </div>
-                                            <div class="form-group row" style="padding-bottom: 20px;">
+                                                <div class="form-group ip-padding">
+                                                    <label>Mô tả</label>
+                                                    <div class="col-12">
+                                                        <textarea name="description" class="form-control" rows="4" disabled onblur="validateInput(this)">${promotion.description}</textarea>
+                                                        <span class="error-message descriptionError"></span>
+                                                    </div>
+                                                </div>
+                                            <div class="form-group row ip-padding">
                                                 <label>Thời gian áp dụng</label>
                                                 <div class="col-12">
-                                                    <input type="text" name="dateeffective" style="width: 100%;" disabled>
+                                                    <input type="text" name="dateeffective" disabled style="width: 100%;" onblur="validateInput(this)" />
+                                                    <span class="error-message dateeffectiveError"></span>
                                                 </div>
                                             </div>
 
-                                            <div class="row" style="padding-bottom: 20px;">
+                                            <div class="row ip-padding" >
                                                 <div class="col-12 d-flex">
-                                                    <button type="button" class="cr-btn-primary" id="edit-button">Chỉnh sửa</button>
-                                                    <button type="button" class="cr-btn-primary" id="save-button" style="display: none;">Lưu</button>
+                                                    <button type="submit" class="btn-voucher cr-btn-primary" data-editing="false">Chỉnh sửa</button>
                                                 </div>
                                             </div>
                                         </form>
-
                                     </div>
                                 </div>
                             </div>
@@ -366,61 +351,43 @@
 <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
 <script>
     $(function() {
-        $('input[name="time-promotion"]').daterangepicker({
-            timePicker: true,
-            startDate: moment().subtract(7, 'days').startOf('day'), // Cố định ngày bắt đầu là 7 ngày trước
-            endDate: moment().startOf('hour').add(32, 'hour'), // Ngày kết thúc có thể thay đổi
-            minDate: moment().subtract(7, 'days'), // Giữ giới hạn thấp nhất là 7 ngày trước
-            autoUpdateInput: true,
-            locale: {
-                format: 'M/DD hh:mm A'
-            }
-        }).on('apply.daterangepicker', function(ev, picker) {
-            // Reset ngày bắt đầu mỗi khi chọn để cố định
-            picker.setStartDate(moment().subtract(7, 'days').startOf('day'));
-        });
-    });
-</script>
-<%--<script>--%>
-<%--    $(function() {--%>
-<%--        $('input[name="time-promotion"]').daterangepicker({--%>
-<%--            singleDatePicker: true, // Chỉ chọn một ngày thay vì phạm vi--%>
-<%--            timePicker: true, // Hiển thị bộ chọn giờ--%>
-<%--            startDate: moment(), // Ngày bắt đầu mặc định là thời điểm hiện tại--%>
-<%--            minDate: moment(), // Ngày nhỏ nhất có thể chọn là thời điểm hiện tại--%>
-<%--            locale: {--%>
-<%--                format: 'M/DD hh:mm A' // Định dạng ngày giờ--%>
-<%--            }--%>
-<%--        });--%>
-<%--    });--%>
-<%--</script>--%>
+        const fixedStartDate = moment().subtract(7, 'days').startOf('day'); // Ngày bắt đầu cố định
+        const promotionStatus = '${promotion.status}'; // Trạng thái từ server (EFFECTIVE hoặc COMING_SOON)
 
+        // Giá trị từ server
+        const effectiveDate = moment('${promotion.effectiveDate}', 'YYYY-MM-DDTHH:mm:ss'); // Format kiểu ISO nếu cần
+        const expirationDate = moment('${promotion.expirationDate}', 'YYYY-MM-DDTHH:mm:ss'); // Format kiểu ISO nếu cần
 
-
-
-
-
-<script>
-    $(function() {
-        $('input[name="birthday"]').daterangepicker({
-            singleDatePicker: true,
-            showDropdowns: true,
-            minYear: 1901,
-            maxYear: parseInt(moment().format('YYYY'), 10),
-            timePicker: true, // Bật lựa chọn giờ
-            timePickerIncrement: 1, // Bước chọn phút (mỗi phút)
-            timePicker24Hour: false, // Định dạng giờ 12 tiếng với AM/PM
-            locale: {
-                format: 'M/DD hh:mm A' // Định dạng bao gồm ngày, giờ 12 tiếng với AM/PM
-            }
-        }, function(start, end, label) {
-            var years = moment().diff(start, 'years');
-            alert("You are " + years + " years old! Your selected date and time: " + start.format('M/DD hh:mm A'));
-        });
+        if (promotionStatus === 'COMING_SOON') {
+            // Nếu trạng thái là COMING_SOON: Cho chỉnh cả ngày bắt đầu và ngày kết thúc
+            $('input[name="dateeffective"]').daterangepicker({
+                timePicker: true,
+                singleDatePicker: false,
+                startDate: effectiveDate.isValid() ? effectiveDate : fixedStartDate, // Giá trị bắt đầu từ server
+                endDate: expirationDate.isValid() ? expirationDate : moment().startOf('hour').add(32, 'hour'), // Giá trị kết thúc từ server
+                minDate: moment(), // Ngày nhỏ nhất là hôm nay
+                autoUpdateInput: true,
+                locale: {
+                    format: 'M/DD/YYYY hh:mm A' // Hiển thị cả năm
+                }
+            });
+        } else if (promotionStatus === 'EFFECTIVE' || promotionStatus === 'USED_OUT') {
+            // Nếu trạng thái là EFFECTIVE: Chỉ chỉnh ngày kết thúc
+            $('input[name="dateeffective"]').daterangepicker({
+                singleDatePicker: true, // Chỉ chọn một ngày
+                timePicker: true, // Hiển thị bộ chọn giờ
+                startDate: expirationDate.isValid() ? expirationDate : moment(), // Mặc định ngày kết thúc
+                minDate: moment(), // Ngày nhỏ nhất là hôm nay
+                locale: {
+                    format: 'M/DD/YYYY hh:mm A' // Hiển thị cả năm
+                }
+            });
+        }
     });
 </script>
 
+<script>const contextPath = "<%= request.getContextPath()%>";</script>
+<script src="${pageContext.request.contextPath}/assets/owner/js/validator-promotion-details.js" defer></script>
 
-<script src="${pageContext.request.contextPath}/assets/owner/js/promotion-detail.js" defer></script>
 
 

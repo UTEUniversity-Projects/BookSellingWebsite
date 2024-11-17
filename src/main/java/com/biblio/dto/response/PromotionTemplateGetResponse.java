@@ -8,7 +8,7 @@ import lombok.*;
 @Setter
 @ToString
 public class PromotionTemplateGetResponse {
-    private String id;
+    private Long id;
     private String code;
     private String title;
     private Double discountLimit;

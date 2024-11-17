@@ -21,16 +21,17 @@ public class BookDetailsResponse {
     private String codeISBN13;
     private String format;
     private int handcover;
-    private double length;
-    private double width;
-    private double height;
+    private String size;
     private double weight;
     private String condition;
     private String recommendedAge;
     private String languages;
+    private long quantity;
+    private double avgRating;
 
-    private CategorySidebarResponse category;
-    private PublisherResponse publisher;
-    private BookMetadataResponse metadata;
-    private List<AuthorResponse> authors = new ArrayList<>();
+    private String category;
+    private List<String> imageUrls;
+    private String publisher;
+    private List<AuthorResponse> authors;
+    private List<ReviewResponse> reviews;
 }

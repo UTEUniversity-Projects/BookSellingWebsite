@@ -57,8 +57,8 @@ public class BookTemplate {
     @OneToMany(mappedBy = "bookTemplate", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private Set<Book> books = new HashSet<>();
 
-    @ManyToMany(mappedBy = "bookTemplates")
-    private Set<Cart> carts = new HashSet<>();
+    @OneToMany(mappedBy = "bookTemplate", cascade = CascadeType.ALL)
+    private Set<CartItem> cartItems = new HashSet<>();
 
     @OneToMany(mappedBy = "bookTemplate", fetch = FetchType.EAGER)
     private Set<Review> reviews = new HashSet<>();

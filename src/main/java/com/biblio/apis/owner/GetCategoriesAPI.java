@@ -1,32 +1,33 @@
 package com.biblio.apis.owner;
-
-import com.biblio.dto.response.CustomerDetailResponse;
-import com.biblio.service.ICustomerService;
+import com.biblio.dto.response.CategoryResponse;
+import com.biblio.service.ICategoryService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
+import java.io.IOException;
+import java.io.Serial;
+import java.util.List;
 import javax.inject.Inject;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.io.IOException;
-import java.io.Serial;
-import java.util.List;
 
 /**
- * Servlet implementation class CustomerAPI
+ * Servlet implementation class GetCategoriesAPI
  */
-@WebServlet("/api/owner/customer")
-public class CustomerAPI extends HttpServlet {
+@WebServlet("/owner/promotion/get-categories")
+public class GetCategoriesAPI extends HttpServlet {
     @Serial
 	private static final long serialVersionUID = 1L;
+
 	@Inject
-	private ICustomerService customerService;
+	ICategoryService categoryService;
+       
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public CustomerAPI() {
+    public GetCategoriesAPI() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -35,16 +36,13 @@ public class CustomerAPI extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-//		List<CustomerDetailResponse> list = customerService.findAll();
-//
-//		// Thiết lập kiểu dữ liệu trả về là JSON
-//		response.setContentType("application/json");
-//		response.setCharacterEncoding("UTF-8");
-//
-//		// Dùng Jackson ObjectMapper để chuyển đổi đối tượng sang JSON
-//		ObjectMapper objectMapper = new ObjectMapper();
-//		objectMapper.writeValue(response.getWriter(), list);
+		List<CategoryResponse> categoryResponse = categoryService.getAllCategories();
+
+		response.setContentType("application/json");
+		response.setCharacterEncoding("UTF-8");
+
+		ObjectMapper objectMapper = new ObjectMapper();
+		response.getWriter().write(objectMapper.writeValueAsString(categoryResponse));
 	}
 
 	/**
@@ -54,4 +52,5 @@ public class CustomerAPI extends HttpServlet {
 		// TODO Auto-generated method stub
 		doGet(request, response);
 	}
+
 }

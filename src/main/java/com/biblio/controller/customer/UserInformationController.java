@@ -35,35 +35,15 @@ public class UserInformationController extends HttpServlet {
      * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
      */
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        // TODO Auto-generated method stubr
-        HttpSession session = request.getSession(false);
+        // TODO Auto-generated method stub
+
+        HttpSession session = request.getSession();
+
         AccountGetResponse account = (AccountGetResponse) session.getAttribute("account");
-
-        Long accountId = account.getId(); // Lấy ID trực tiếp từ account
-
-        // Tìm thông tin khách hàng theo accountId
-        CustomerDetailResponse customerGetListResponse = customerService.findById(accountId);
-        //CustomerGetListResponse customerGetListResponse = customerService.findById(4L);
-        request.setAttribute("customer", customerGetListResponse);
+        CustomerDetailResponse customer = customerService.getCustomerDetailByUsername(account.getUsername());
+        System.out.println(customer.toString());
+        request.setAttribute("customer", customer);
         request.getRequestDispatcher("/views/customer/user-information.jsp").forward(request, response);
-        // Kiểm tra nếu người dùng đã đăng nhập
-        if (session != null && session.getAttribute("username") != null) {
-//            // Đặt các thuộc tính vào request để hiển thị trong JSP
-//            request.setAttribute("breadcrumb", "Thông tin cá nhân");
-//            request.setAttribute("username", session.getAttribute("username"));
-//            request.setAttribute("date_of_birth", session.getAttribute("date_of_birth"));
-//            request.setAttribute("email_address", session.getAttribute("email_adress"));
-//            request.setAttribute("full_name", session.getAttribute("full_name"));
-//            request.setAttribute("gender", session.getAttribute("gender"));
-//
-//
-//
-//            // Chuyển hướng tới trang user-information.jsp
-//
-        } else {
-            // Nếu chưa đăng nhập, chuyển về trang đăng nhập
-            response.sendRedirect("login.jsp");
-        }
     }
 
     /**

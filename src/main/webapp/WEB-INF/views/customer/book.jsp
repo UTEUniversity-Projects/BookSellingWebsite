@@ -14,12 +14,12 @@
         <div class="vehicle-detail-banner banner-content clearfix">
           <div class="banner-slider">
             <div class="slider slider-for">
-              <c:forEach var="mediaFile" items="${book.metadata.mediaFiles}">
+              <c:forEach var="imageUrl" items="${book.imageUrls}" varStatus="status">
                 <div class="slider-banner-image">
                   <div class="zoom-image-hover">
                     <img
-                            src="${pageContext.request.contextPath}${mediaFile.storedCode}"
-                            alt="product-tab-${mediaFile.fileName}"
+                            src="${pageContext.request.contextPath}${imageUrl}"
+                            alt="product-tab-${status.index}"
                             class="product-image"
                     />
                   </div>
@@ -27,10 +27,10 @@
               </c:forEach>
             </div>
             <div class="slider slider-nav thumb-image">
-              <c:forEach var="mediaFile" items="${book.metadata.mediaFiles}">
+              <c:forEach var="imageUrl" items="${book.imageUrls}" varStatus="status">
                 <div class="thumbnail-image">
                     <div class="thumbImg">
-                      <img src="${pageContext.request.contextPath}${mediaFile.storedCode}" alt="product-tab-${mediaFile.fileName}" />
+                      <img src="${pageContext.request.contextPath}${imageUrl}" alt="product-tab-${status.index}" />
                     </div>
                 </div>
               </c:forEach>
@@ -41,18 +41,25 @@
       <div class="col-xxl-8 col-xl-7 col-md-6 col-12 mb-24">
         <div class="cr-size-and-weight-contain">
           <h2 class="heading">${book.title}</h2>
-          <p>${book.description}</p>
         </div>
         <div class="cr-size-and-weight">
           <div class="cr-review-star">
             <div class="cr-star">
-              <i class="ri-star-fill"></i>
-              <i class="ri-star-fill"></i>
-              <i class="ri-star-fill"></i>
-              <i class="ri-star-fill"></i>
-              <i class="ri-star-fill"></i>
+              <c:forEach var="i" begin="1" end="5" step="1">
+                <c:choose>
+                  <c:when test="${book.avgRating >= i}">
+                    <i class="ri-star-fill"></i>
+                  </c:when>
+                  <c:when test="${book.avgRating > i - 1 && book.avgRating < i}">
+                    <i class="ri-star-half-line"></i>
+                  </c:when>
+                  <c:otherwise>
+                    <i class="ri-star-line"></i>
+                  </c:otherwise>
+                </c:choose>
+              </c:forEach>
             </div>
-            <p>( 75 Review )</p>
+            <p>( ${book.avgRating} )</p>
           </div>
           <div class="list">
             <ul>
@@ -62,7 +69,7 @@
               </li>
               <li>
                 <label>NXB <span>:</span></label
-                >${book.publisher.name}
+                >${book.publisher}
               </li>
               <li>
                 <label>Ngày XB <span>:</span></label
@@ -82,8 +89,7 @@
             <h5><span>Tình trạng</span> :</h5>
             <div class="cr-kg">
               <ul>
-                <li class="active-color">Mới</li>
-                <li>Cũ</li>
+                <li class="active-color">${book.condition}</li>
               </ul>
             </div>
           </div>
@@ -184,7 +190,7 @@
                       aria-controls="author"
                       aria-selected="false"
               >
-                Thông tin tác giả
+                Thông tin tác giả/ dịch giả
               </button>
             </li>
           </ul>
@@ -208,18 +214,15 @@
                     aria-labelledby="additional-tab"
             >
               <div class="cr-tab-content">
-                <div class="cr-description">
-                  <p>${book.description}</p>
-                </div>
                 <div class="list">
                   <ul>
                     <li>
                       <label>Danh mục <span>:</span></label
-                      >${book.category.name}
+                      >${book.category}
                     </li>
                     <li>
                       <label>Kho <span>:</span></label
-                      >2
+                      >${book.quantity}
                     </li>
                     <li>
                       <label>Tác giả <span>:</span></label
@@ -227,7 +230,7 @@
                     </li>
                     <li>
                       <label>NXB <span>:</span></label
-                      >${book.publisher.name}
+                      >${book.publisher}
                     </li>
                     <li>
                       <label>Ngày XB <span>:</span></label
@@ -247,7 +250,7 @@
                     </li>
                     <li>
                       <label>Kích thước <span>:</span></label
-                      >${book.height} x ${book.length} x ${book.width} cm
+                      >${book.size}
                     </li>
                     <li>
                       <label>Số trang <span>:</span></label
@@ -281,38 +284,45 @@
             >
               <div class="cr-tab-content-from">
                 <ul class="review-list">
-                  <li class="review-item">
-                    <div class="review-item__image">
-                      <img src="${pageContext.request.contextPath}/assets/staff/img/product/1.jpg"
-                           alt="review"/>
-                    </div>
-                    <div class="review-item__content">
-                      <div class="header">
-                        <div class="header__left">
-                          <span class="name">Oreo Noman</span>
-                          <div class="rating">
-                            <i class="ri-star-s-fill"></i>
-                            <i class="ri-star-s-fill"></i>
-                            <i class="ri-star-s-fill"></i>
-                            <i class="ri-star-s-fill"></i>
-                            <i class="ri-star-s-fill"></i>
+                  <c:forEach var="review" items="${book.reviews}">
+                    <li class="review-item">
+                      <div class="review-item__image">
+                        <img src="${pageContext.request.contextPath}${review.imageUrl}"
+                             alt="review"/>
+                      </div>
+                      <div class="review-item__content">
+                        <div class="header">
+                          <div class="header__left">
+                            <span>${review.customerName}</span>
+                            <div class="rating">
+                              <c:forEach var="i" begin="1" end="5" step="1">
+                                <c:choose>
+                                  <c:when test="${i <= review.rating}">
+                                    <i class="ri-star-fill"></i>
+                                  </c:when>
+                                  <c:otherwise>
+                                    <i class="ri-star-line"></i>
+                                  </c:otherwise>
+                                </c:choose>
+                              </c:forEach>
+                            </div>
                           </div>
                         </div>
-                      </div>
-                      <span class="date">Jan 08, 2024</span>
+                        <span class="date">${review.createdAt}</span>
 
-                      <div class="review-content">
-                        Cảm ơn shop rất nhiều
-                      </div>
-
-                      <div class="response-review">
-                        <div class="response-title">Phản Hồi Của Người Bán</div>
-                        <div class="response-text">
-                          Dạ vâng adidas cảm ơn quý khách đã tin tưởng và ủng hộ ❤️. Sự góp ý
+                        <div class="review-content">
+                          ${review.content}
                         </div>
+
+<%--                        <div class="response-review">--%>
+<%--                          <div class="response-title">Phản Hồi Của Người Bán</div>--%>
+<%--                          <div class="response-text">--%>
+<%--                            Dạ vâng adidas cảm ơn quý khách đã tin tưởng và ủng hộ ❤️. Sự góp ý--%>
+<%--                          </div>--%>
+<%--                        </div>--%>
                       </div>
-                    </div>
-                  </li>
+                    </li>
+                  </c:forEach>
                 </ul>
               </div>
             </div>
@@ -325,8 +335,15 @@
               <div class="cr-tab-content">
                 <div class="cr-description">
                   <c:forEach var="author" items="${book.authors}">
-                    <img src="${author.avatar}" alt="">
-                    <p>${author.introduction}</p>
+                    <div class="author-item">
+                      <div class="author-item--avatar">
+                        <img src="${author.avatar}" alt="">
+                      </div>
+                      <div class="author-item--info">
+                        <span class="name">${author.name} (Tác giả)</span>
+                        <p>${author.introduction}</p>
+                      </div>
+                    </div>
                   </c:forEach>
                 </div>
               </div>

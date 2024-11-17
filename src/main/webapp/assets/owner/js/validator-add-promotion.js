@@ -98,25 +98,24 @@ function validateForm(form) {
 }
 
 function parseDateRange(input) {
-    const currentYear = new Date().getFullYear();
     const [start, end] = input.split(" - ");
 
     function formatDate(dateString) {
         const [monthDay, time, period] = dateString.split(" ");
-        const [month, day] = monthDay.split("/");
+        const [month, day, year] = monthDay.split("/");
         const [hour, minute] = time.split(":");
 
         let hours = parseInt(hour, 10);
         if (period === "PM" && hours !== 12) hours += 12;
         if (period === "AM" && hours === 12) hours = 0;
 
-        // Tạo đối tượng Date với múi giờ cục bộ
+        // Tạo đối tượng Date
         const date = new Date();
-        date.setFullYear(currentYear);
-        date.setMonth(month - 1);
-        date.setDate(day);
+        date.setFullYear(parseInt(year, 10));
+        date.setMonth(parseInt(month, 10) - 1);
+        date.setDate(parseInt(day, 10));
         date.setHours(hours);
-        date.setMinutes(minute);
+        date.setMinutes(parseInt(minute, 10));
         date.setSeconds(0);
         date.setMilliseconds(0);
 
@@ -130,6 +129,8 @@ function parseDateRange(input) {
 
     return { effectiveDate, expirationDate };
 }
+
+
 document.querySelectorAll('.promotionForm').forEach(form => {
     form.addEventListener('submit', function (event) {
         event.preventDefault();
@@ -147,7 +148,8 @@ document.querySelectorAll('.promotionForm').forEach(form => {
             const data = {};
             // Lấy giá trị từ form và xử lý
             formData.forEach((value, key) => {
-                if (key === "dateeffective") {
+                if (key === "datetimes") {
+                    // Gọi parseDateRange với giá trị và năm hiện tại
                     const { effectiveDate, expirationDate } = parseDateRange(value);
                     data["effectiveDate"] = effectiveDate;
                     data["expirationDate"] = expirationDate;
@@ -170,7 +172,6 @@ document.querySelectorAll('.promotionForm').forEach(form => {
                 case "addVoucher":
                     data["type"] = "VOUCHER"; // Đặt type là VOUCHER
                     data["percentDiscount"] = 100; // Phần trăm giảm giá là 100%
-                    data["discountLimit"] = parseFloat(100); // Đặt giới hạn giảm giá là 100
                     break;
                 case "addFreeShip":
                     data["type"] = "FREESHIP"; // Đặt type là FREESHIP
@@ -243,6 +244,90 @@ document.querySelectorAll('.promotionForm').forEach(form => {
         }
     });
 });
+$(document).ready(function () {
+    // Khi thay đổi giá trị của "select-object-discount"
+    $('#select-object-discount').change(function () {
+        const selectedValue = $(this).val();
+
+        // Kiểm tra nếu chọn "Sản phẩm cụ thể" (value = 1)
+        if (selectedValue === "1") {
+            $.ajax({
+                url: '/owner/promotion/get-categories', // URL đến servlet
+                type: 'GET',
+                success: function (response) {
+                    // Xóa các tùy chọn cũ
+                    $('#category-select-discount').empty();
+
+                    // Duyệt qua danh sách và thêm các tùy chọn mới
+                    response.forEach(function (category) {
+                        $('#category-select-discount').append(
+                            `<option value="${category.id}">${category.name}</option>`
+                        );
+                    });
+
+                    // Lấy giá trị của tùy chọn đầu tiên
+                    const firstCategoryId = response[0]?.id;
+                    if (firstCategoryId) {
+                        $('#category-select-discount').val(firstCategoryId);
+
+                        // Gọi tiếp API để lấy subcategories cho danh mục đầu tiên
+                        loadSubCategories(firstCategoryId);
+                    }
+                },
+                error: function () {
+                    alert('Không thể tải danh sách danh mục!');
+                }
+            });
+        } else {
+            // Nếu chọn mục khác, xóa cả hai combo box
+            $('#category-select-discount').empty();
+            $('#subcategory-select-discount').empty();
+        }
+    });
+
+    // Hàm để tải subcategories theo categoryId
+    function loadSubCategories(categoryId) {
+        $.ajax({
+            url: '/owner/promotion/get-subcategories', // URL đến servlet
+            type: 'GET',
+            data: { categoryId: categoryId },
+            success: function (response) {
+                // Xóa các tùy chọn cũ
+                $('#subcategory-select-discount').empty();
+
+                // Duyệt qua danh sách và thêm các tùy chọn mới
+                response.forEach(function (subcategory) {
+                    $('#subcategory-select-discount').append(
+                        `<option value="${subcategory.id}">${subcategory.name}</option>`
+                    );
+                });
+
+                // Tùy chọn đầu tiên được chọn mặc định
+                const firstSubCategoryId = response[0]?.id;
+                if (firstSubCategoryId) {
+                    $('#subcategory-select-discount').val(firstSubCategoryId);
+                }
+            },
+            error: function () {
+                alert('Không thể tải danh sách subcategories!');
+            }
+        });
+    }
+
+    // Khi thay đổi giá trị của "category-select-discount"
+    $('#category-select-discount').change(function () {
+        const selectedCategoryId = $(this).val();
+
+        // Gọi API để tải subcategories theo categoryId được chọn
+        if (selectedCategoryId) {
+            loadSubCategories(selectedCategoryId);
+        } else {
+            // Nếu không có giá trị, xóa các tùy chọn trong subcategory
+            $('#subcategory-select-discount').empty();
+        }
+    });
+});
+
 
 
 

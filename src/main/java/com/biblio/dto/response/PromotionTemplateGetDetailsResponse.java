@@ -12,7 +12,7 @@ import java.util.Set;
 @ToString
 
 public class PromotionTemplateGetDetailsResponse {
-    private String id;
+    private Long id;
     private String code;
     private String title;
     private String description;
