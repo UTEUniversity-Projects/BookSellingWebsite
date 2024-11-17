@@ -1,6 +1,6 @@
 package com.biblio.controller.staff;
 
-import com.biblio.dto.response.BookDetailsManagementResponse;
+import com.biblio.dto.response.BookDetailsResponse;
 import com.biblio.service.IBookTemplateService;
 
 import javax.inject.Inject;
@@ -33,7 +33,7 @@ public class ProductDetailsController extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         // TODO Auto-generated method stub
         Long bookId = Long.parseLong(request.getParameter("id"));
-        BookDetailsManagementResponse book = bookTemplateService.getBookDetailsManagementResponse(bookId);
+        BookDetailsResponse book = bookTemplateService.getBookDetailsResponse(bookId);
         request.setAttribute("book", book);
         request.getRequestDispatcher("/views/staff/product-details.jsp").forward(request, response);
     }

@@ -2,7 +2,6 @@ package com.biblio.dto.response;
 
 import lombok.*;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Getter
@@ -20,7 +19,7 @@ public class BookDetailsResponse {
     private String codeISBN10;
     private String codeISBN13;
     private String format;
-    private int handcover;
+    private int hardcover;
     private String size;
     private double weight;
     private String condition;
@@ -33,5 +32,7 @@ public class BookDetailsResponse {
     private List<String> imageUrls;
     private String publisher;
     private List<AuthorResponse> authors;
+    private List<TranslatorResponse> translators;
     private List<ReviewResponse> reviews;
+    private int reviewCount;
 }

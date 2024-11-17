@@ -2,13 +2,11 @@ package com.biblio.service.impl;
 
 import com.biblio.dao.IBookTemplateDAO;
 import com.biblio.dto.response.BookCardResponse;
-import com.biblio.dto.response.BookDetailsManagementResponse;
 import com.biblio.dto.response.BookDetailsResponse;
 import com.biblio.dto.response.BookManagementResponse;
 import com.biblio.dto.response.BookTemplatePromotionResponse;
 import com.biblio.entity.BookTemplate;
 import com.biblio.mapper.BookTemplateMapper;
-import com.biblio.service.IBookService;
 import com.biblio.service.IBookTemplateService;
 
 import javax.inject.Inject;
@@ -19,12 +17,12 @@ public class BookTemplateServiceImpl implements IBookTemplateService {
     @Inject
     IBookTemplateDAO bokTemplateDAO;
 
-    @Override
-    public BookDetailsManagementResponse getBookDetailsManagementResponse(Long bookTemplateId) {
-        BookTemplate bookTemplate = bokTemplateDAO.findById(bookTemplateId);
-        BookDetailsManagementResponse bookDetailsManagementResponse = BookTemplateMapper.toBookDetailsManagementResponse(bookTemplate);
-        return bookDetailsManagementResponse;
-    }
+//    @Override
+//    public BookDetailsResponse getBookDetailsManagementResponse(Long bookTemplateId) {
+//        BookTemplate bookTemplate = bokTemplateDAO.findById(bookTemplateId);
+//        BookDetailsResponse bookDetailsManagementResponse = BookTemplateMapper.toBookDetailsManagementResponse(bookTemplate);
+//        return bookDetailsManagementResponse;
+//    }
 
     @Override
     public List<BookManagementResponse> getAllBookManagementResponse() {
@@ -49,8 +47,7 @@ public class BookTemplateServiceImpl implements IBookTemplateService {
     @Override
     public BookDetailsResponse getBookDetailsResponse(Long bookTemplateId) {
         BookTemplate bookTemplate = bokTemplateDAO.findById(bookTemplateId);
-        BookDetailsResponse bookDetailsResponse = BookTemplateMapper.toBookDetailsResponse(bookTemplate);
-        return bookDetailsResponse;
+        return BookTemplateMapper.toBookDetailsResponse(bookTemplate);
     }
   
     @Override

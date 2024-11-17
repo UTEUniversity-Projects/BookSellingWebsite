@@ -5,10 +5,8 @@ import com.biblio.enumeration.EBookTemplateStatus;
 import lombok.*;
 
 import javax.persistence.*;
-import java.time.LocalDateTime;
 import java.util.HashSet;
 import java.util.LinkedHashSet;
-import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -72,12 +70,11 @@ public class BookTemplate {
             return 0;
         }
 
-        double totalRating = 0;
-        for (Review review : reviews) {
-            totalRating += review.getRate();
-        }
-
-        return totalRating / reviews.size();
+        return reviews.stream()
+                .filter(review -> !review.isHidden())
+                .mapToDouble(Review::getRate)
+                .average()
+                .orElse(0);
     }
 
     // endregion

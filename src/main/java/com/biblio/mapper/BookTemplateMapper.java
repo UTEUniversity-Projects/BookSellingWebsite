@@ -10,13 +10,10 @@ import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
-
-import static com.biblio.mapper.CategoryMapper.toCategorySidebarResponse;
-import static com.biblio.mapper.PublisherMapper.toPublisherResponse;
 import static com.biblio.utils.DateTimeUtil.formatDateTime;
 
 public class BookTemplateMapper {
-    // region EntityToDTO
+    // region Entity to DTO
 
     public static BookManagementResponse toBookManagementResponse(BookTemplate bookTemplate) {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm dd-MM-yyyy");
@@ -41,64 +38,6 @@ public class BookTemplateMapper {
                 .build();
     }
 
-    public static BookDetailsManagementResponse toBookDetailsManagementResponse(BookTemplate bookTemplate) {
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
-        Book singlebook = bookTemplate.getBooks().iterator().next();
-
-        List<String> fileNames = bookTemplate.getMediaFiles().stream()
-                .sorted(Comparator.comparing(MediaFile::getId))
-                .map(MediaFile::getStoredCode)
-                .toList();
-
-        String languages = singlebook.getBookTemplate() != null && singlebook.getBookTemplate().getLanguages() != null
-                ? singlebook.getBookTemplate().getLanguages().stream()
-                .map(EBookLanguage::getDescription)
-                .collect(Collectors.joining(", "))
-                : "N/A";
-
-
-        List<AuthorResponse> authors = new ArrayList<>();
-        for (Author author : bookTemplate.getAuthors()) {
-            authors.add(AuthorMapper.toAuthorResponse(author));
-        }
-
-        List<ReviewResponse> reviews = bookTemplate.getReviews().stream()
-                .filter(review -> !review.isHidden())
-                .sorted(Comparator.comparingInt(Review::getRate).reversed()
-                        .thenComparing(Review::getCreatedAt, Comparator.reverseOrder()))
-                .map(ReviewMapper::toReviewResponse)
-                .toList();
-
-
-        return BookDetailsManagementResponse.builder()
-                .imagesUrl(fileNames)
-                .title(singlebook.getTitle())
-                .description(singlebook.getDescription())
-                .totalRating(bookTemplate.calculateReviewRate())
-                .publicationDate(singlebook.getPublicationDate() != null
-                        ? singlebook.getPublicationDate().format(formatter)
-                        : "N/A")
-                .languages(languages)
-                .sellingPrice(singlebook.getSellingPrice())
-                .edition(singlebook.getEdition())
-                .condition(singlebook.getCondition().getBookCondition())
-                .authors(authors)
-                .publisher(bookTemplate.getPublisher().getName())
-                .quantity(bookTemplate.getBooks().stream().
-                        filter(book -> book.getBookMetadata().getStatus() == EBookMetadataStatus.IN_STOCK).count())
-                .size(String.format("%.1f x %.1f x %.1f cm",
-                        singlebook.getLength(), singlebook.getWidth(), singlebook.getHeight()))
-                .weight(singlebook.getWeight())
-                .hardcover(singlebook.getHandcover())
-                .format(singlebook.getFormat().getBookFormat())
-                .codeISBN10(singlebook.getCodeISBN10())
-                .codeISBN13(singlebook.getCodeISBN13())
-                .ageRecommend(singlebook.getRecommendedAge().getBookAgeRecommend())
-                .reviews(reviews)
-                .reviewCount(reviews.size())
-                .build();
-    }
-
     public static BookCardResponse toBookCardResponse(BookTemplate bookTemplate) {
         Book singlebook = bookTemplate.getBooks().iterator().next();
         return BookCardResponse.builder()
@@ -116,12 +55,13 @@ public class BookTemplateMapper {
     }
 
     public static BookDetailsResponse toBookDetailsResponse(BookTemplate bookTemplate) {
-        BookDetailsResponse bookDetailsResponse = new BookDetailsResponse();
         Book singlebook = bookTemplate.getBooks().iterator().next();
 
-        String languages = singlebook.getBookTemplate().getLanguages().stream()
+        String languages = singlebook.getBookTemplate() != null && singlebook.getBookTemplate().getLanguages() != null
+                ? singlebook.getBookTemplate().getLanguages().stream()
                 .map(EBookLanguage::getDescription)
-                .collect(Collectors.joining(", "));
+                .collect(Collectors.joining(", "))
+                : "N/A";
 
         List<String> fileNames = bookTemplate.getMediaFiles().stream()
                 .sorted(Comparator.comparing(MediaFile::getId))
@@ -131,6 +71,11 @@ public class BookTemplateMapper {
         List<AuthorResponse> authors = new ArrayList<>();
         for (Author author : bookTemplate.getAuthors()) {
             authors.add(AuthorMapper.toAuthorResponse(author));
+        }
+
+        List<TranslatorResponse> translators = new ArrayList<>();
+        for (Translator translator : bookTemplate.getTranslators()) {
+            translators.add(TranslatorMapper.toTranslatorResponse(translator));
         }
 
         List<ReviewResponse> reviews = bookTemplate.getReviews().stream()
@@ -149,7 +94,7 @@ public class BookTemplateMapper {
                 .codeISBN10(singlebook.getCodeISBN10())
                 .codeISBN13(singlebook.getCodeISBN13())
                 .format(singlebook.getFormat().getBookFormat())
-                .handcover(singlebook.getHandcover())
+                .hardcover(singlebook.getHandcover())
                 .size(String.format("%.1f x %.1f x %.1f cm",
                         singlebook.getHeight(), singlebook.getLength(), singlebook.getWidth()))
                 .weight(singlebook.getWeight())
@@ -163,7 +108,9 @@ public class BookTemplateMapper {
                 .imageUrls(fileNames)
                 .publisher(bookTemplate.getPublisher().getName())
                 .authors(authors)
+                .translators(translators)
                 .reviews(reviews)
+                .reviewCount(reviews.size())
                 .build();
     }
     public static BookTemplatePromotionResponse toBookTemplatePromotionResponse(BookTemplate bookTemplate) {
@@ -175,4 +122,7 @@ public class BookTemplateMapper {
     }
     // endregion
 
+    // region DTO to Entity
+
+    // endregion
 }
