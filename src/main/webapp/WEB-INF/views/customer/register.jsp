@@ -7,10 +7,11 @@
             <div class="col-sm-8 col-md-12">
                 <div class="cr-register" data-aos="fade-up" data-aos-duration="2000"
                      data-aos-delay="400">
-                    <div class="form-logo">
+                    <div class="form-logo w-[80%] mx-auto">
                         <img
                                 src="${pageContext.request.contextPath}/assets/customer/img/logo/biblio.png"
-                                alt="logo"/>
+                                alt="logo"
+                                class="w-full h-full object-cover"/>
                     </div>
                     <div class="row">
                         <form id="registerForm" action="${pageContext.request.contextPath}/register"

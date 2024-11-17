@@ -22,4 +22,6 @@ public interface ICustomerDAO {
 
     void updateSupport_Notification(Customer customer);
 
+    Customer findByUsername(String username);
+
 }
