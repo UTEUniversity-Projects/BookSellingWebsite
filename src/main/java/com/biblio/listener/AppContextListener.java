@@ -10,6 +10,11 @@ import com.biblio.jpaconfig.JpaConfig;
 public class AppContextListener implements ServletContextListener {
 
     @Override
+    public void contextInitialized(ServletContextEvent sce) {
+        JpaConfig.getEntityManager();
+    }
+
+    @Override
     public void contextDestroyed(ServletContextEvent sce) {
         JpaConfig.closeEntityManagerFactory();
 
