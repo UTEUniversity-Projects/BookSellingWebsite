@@ -203,7 +203,7 @@
                                     <ul>
                                         <li>
                                             <label>Danh mục <span>:</span></label>
-                                            Sách kỹ năng sống
+                                            ${book.category}
                                         </li>
                                         <li>
                                             <label>Kho <span>:</span></label>

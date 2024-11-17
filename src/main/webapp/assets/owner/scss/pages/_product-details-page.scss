@@ -521,8 +521,11 @@ p {
 }
 
 .zoom-image-hover {
-  height: 100%;
+  padding: 10px;
+  max-height: 400px;
+  width: 100%;
   display: flex;
+  justify-content: center;
   align-items: center;
   text-align: center;
   border: 1px solid $border-color;
@@ -531,8 +534,9 @@ p {
   cursor: crosshair;
 
   img {
-    width: 100%;
-    display: block;
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
     margin: auto;
   }
 }
