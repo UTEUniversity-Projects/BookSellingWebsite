@@ -1,14 +1,14 @@
 package com.biblio.dto.response;
+
 import lombok.*;
 
+import java.time.LocalDateTime;
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter
 @Setter
 @Builder
-@ToString
-public class BookTemplatePromotionResponse {
+public class CustomerReportResponse {
     private Long id;
-    private String title;
-    private Long subCategoryId;
+    private LocalDateTime joinAt;
 }

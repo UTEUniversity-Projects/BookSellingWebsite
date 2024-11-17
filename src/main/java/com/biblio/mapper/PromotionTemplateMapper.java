@@ -50,7 +50,7 @@ public class PromotionTemplateMapper {
         promotionTemplate.setCode(promotionTemplateInsertRequest.getCode());
         promotionTemplate.setType(promotionTemplateInsertRequest.getType());
         promotionTemplate.setStatus(promotionTemplateInsertRequest.getStatus());
-        promotionTemplate.setInfinite(promotionTemplate.isInfinite());
+        promotionTemplate.setInfinite(promotionTemplateInsertRequest.getIsInfinite());
         promotionTemplate.setCreatedAt(LocalDateTime.now());
 
         for (PromotionInsertRequest promotionInsertRequest : promotionTemplateInsertRequest.getPromotionInsertRequests()) {
