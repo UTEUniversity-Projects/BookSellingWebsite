@@ -30,7 +30,9 @@ public class BookDetailsResponse {
     private String languages;
 
     private CategorySidebarResponse category;
+    private List<String> imageUrls = new ArrayList<>();
     private PublisherResponse publisher;
-    private BookMetadataResponse metadata;
     private List<AuthorResponse> authors = new ArrayList<>();
+//    private List<TranslatorResponse> translators = new ArrayList<>();
+    private List<ReviewResponse> reviews = new ArrayList<>();
 }

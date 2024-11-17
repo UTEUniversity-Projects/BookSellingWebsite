@@ -25,7 +25,7 @@ public class SubCategory extends Classification implements Serializable {
     @OneToMany(mappedBy = "subCategory")
     private Set<Book> books = new HashSet<Book>();
 
-    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinColumn(name = "category_id", nullable = false)
     private Category category;
 
