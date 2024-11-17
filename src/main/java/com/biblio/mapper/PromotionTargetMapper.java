@@ -23,6 +23,7 @@ public class PromotionTargetMapper {
 
     public static PromotionTarget toPromotionTarget(PromotionTargetUpdateRequest promotionTargetUpdateRequest) {
         PromotionTarget promotionTarget = new PromotionTarget();
+        promotionTarget.setId(promotionTargetUpdateRequest.getId());
         promotionTarget.setApplicableObjectId(promotionTargetUpdateRequest.getApplicableObjectId());
         promotionTarget.setType(promotionTargetUpdateRequest.getType());
         return promotionTarget;

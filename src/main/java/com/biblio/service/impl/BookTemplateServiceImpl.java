@@ -3,6 +3,7 @@ package com.biblio.service.impl;
 import com.biblio.dao.IBookTemplateDAO;
 import com.biblio.dto.response.BookDetailsManagementResponse;
 import com.biblio.dto.response.BookManagementResponse;
+import com.biblio.dto.response.BookTemplatePromotionResponse;
 import com.biblio.entity.BookTemplate;
 import com.biblio.mapper.BookTemplateMapper;
 import com.biblio.service.IBookService;
@@ -31,5 +32,15 @@ public class BookTemplateServiceImpl implements IBookTemplateService {
             bookManagementResponseList.add(BookTemplateMapper.toBookManagementResponse(bookTemplate));
         }
         return bookManagementResponseList;
+    }
+
+    @Override
+    public List<BookTemplatePromotionResponse> getAllBookBookTemplatePromotionResponse() {
+        List<BookTemplate> bookTemplates = bokTemplateDAO.findAll();
+        List<BookTemplatePromotionResponse> bookTemplatePromotionResponse = new ArrayList<>();
+        for (BookTemplate bookTemplate : bookTemplates) {
+            bookTemplatePromotionResponse.add(BookTemplateMapper.toBookTemplatePromotionResponse(bookTemplate));
+        }
+        return bookTemplatePromotionResponse;
     }
 }

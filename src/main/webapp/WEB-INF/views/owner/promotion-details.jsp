@@ -256,6 +256,7 @@
                 </div>
             </div>
         </c:if>
+
         <c:if test="${promotion.type == 'FREESHIP'}">
             <div class="row">
                 <div class="col-xl-12 col-lg-12">
@@ -266,55 +267,70 @@
                                     <div class="cr-cat-form">
                                         <img class="img-promotion" src="assets/img/product/1.jpg">
                                         <h3>Thông tin Freeship</h3>
-                                        <form class="promotionForm">
-                                            <input type="hidden" name="formType" value="addFreeShip" />
-                                            <div class="form-group">
+                                        <form action="/owner/promotion-details" method="POST" class="promotionForm">
+                                            <input type="hidden" name="formType" value="editFreeShip" />
+                                            <div class="form-group ip-padding">
                                                 <label>Mã</label>
                                                 <div class="col-12">
-                                                    <input name="code" class="form-control here slug-title" type="text" onblur="validateInput(this)" />
+                                                    <input name="code" class="form-control here slug-title" type="text" value="${promotion.code}" style="background-color: #f5f5f5;" readonly onblur="validateInput(this)" />
                                                     <span class="error-message codeError"></span>
                                                 </div>
                                             </div>
-                                            <div class="form-group">
+                                            <div class="form-group ip-padding">
                                                 <label>Tiêu đề</label>
                                                 <div class="col-12">
-                                                    <input name="title" class="form-control here slug-title" type="text" onblur="validateInput(this)" />
+                                                    <input name="title" class="form-control here slug-title" type="text" value="${promotion.title}" disabled onblur="validateInput(this)" />
                                                     <span class="error-message titleError"></span>
                                                 </div>
                                             </div>
-                                            <div class="form-group">
+                                            <div class="form-group ip-padding">
                                                 <label>Số tiền giảm</label>
                                                 <div class="col-12">
-                                                    <input name="discountLimit" class="form-control here slug-title" type="number" onblur="validateInput(this)" />
+                                                    <input name="discountLimit" class="form-control here slug-title" type="number" value="${promotion.discountLimit}" disabled onblur="validateInput(this)" />
                                                     <span class="error-message discountLimitError"></span>
                                                 </div>
                                             </div>
-                                            <div class="form-group">
+                                            <div class="form-group ip-padding">
                                                 <label>Số lượng khuyến mãi</label>
                                                 <div class="col-12">
-                                                    <input name="quantity" class="form-control here slug-title" type="number" onblur="validateInput(this)" />
-                                                    <label><input type="checkbox" name="unlimited" value="true" style="margin-top: 5px" /> Không giới hạn</label>
+                                                    <input
+                                                            name="quantity"
+                                                            class="form-control here slug-title"
+                                                            type="number"
+                                                            <c:if test="${promotion.quantity == -1}">value="" disabled</c:if>
+                                                            <c:if test="${promotion.quantity != -1}">value="${promotion.quantity}" disabled</c:if>
+                                                            onblur="validateInput(this)" />
+                                                    <label>
+                                                        <input
+                                                                type="checkbox"
+                                                                name="unlimited"
+                                                                value="true"
+                                                                style="margin-top: 5px"
+                                                                disabled
+                                                                <c:if test="${promotion.quantity == -1}">checked</c:if> />
+                                                        Không giới hạn
+                                                    </label>
+
                                                     <span class="error-message quantityError"></span>
-                                                </div>
                                             </div>
-                                            <div class="form-group">
-                                                <label>Mô tả</label>
-                                                <div class="col-12">
-                                                    <textarea name="description" class="form-control" rows="4" onblur="validateInput(this)"></textarea>
-                                                    <span class="error-message descriptionError"></span>
+                                                <div class="form-group ip-padding">
+                                                    <label>Mô tả</label>
+                                                    <div class="col-12">
+                                                        <textarea name="description" class="form-control" rows="4" disabled onblur="validateInput(this)">${promotion.description}</textarea>
+                                                        <span class="error-message descriptionError"></span>
+                                                    </div>
                                                 </div>
-                                            </div>
-                                            <div class="form-group row">
+                                            <div class="form-group row ip-padding">
                                                 <label>Thời gian áp dụng</label>
                                                 <div class="col-12">
-                                                    <input type="text" name="dateeffective" style="width: 100%;" onblur="validateInput(this)" />
+                                                    <input type="text" name="dateeffective" disabled style="width: 100%;" onblur="validateInput(this)" />
                                                     <span class="error-message dateeffectiveError"></span>
                                                 </div>
                                             </div>
 
-                                            <div class="row">
+                                            <div class="row ip-padding" >
                                                 <div class="col-12 d-flex">
-                                                    <button type="submit" class="cr-btn-primary" onclick="return validateForm()">Chỉnh sửa</button>
+                                                    <button type="submit" class="btn-voucher cr-btn-primary" data-editing="false">Chỉnh sửa</button>
                                                 </div>
                                             </div>
                                         </form>
@@ -352,7 +368,7 @@
                 minDate: moment(), // Ngày nhỏ nhất là hôm nay
                 autoUpdateInput: true,
                 locale: {
-                    format: 'M/DD hh:mm A'
+                    format: 'M/DD/YYYY hh:mm A' // Hiển thị cả năm
                 }
             });
         } else if (promotionStatus === 'EFFECTIVE' || promotionStatus === 'USED_OUT') {
@@ -363,14 +379,13 @@
                 startDate: expirationDate.isValid() ? expirationDate : moment(), // Mặc định ngày kết thúc
                 minDate: moment(), // Ngày nhỏ nhất là hôm nay
                 locale: {
-                    format: 'M/DD hh:mm A' // Định dạng ngày giờ
+                    format: 'M/DD/YYYY hh:mm A' // Hiển thị cả năm
                 }
             });
         }
     });
-
-
 </script>
+
 <script>const contextPath = "<%= request.getContextPath()%>";</script>
 <script src="${pageContext.request.contextPath}/assets/owner/js/validator-promotion-details.js" defer></script>
 

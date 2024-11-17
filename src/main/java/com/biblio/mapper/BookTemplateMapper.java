@@ -1,9 +1,6 @@
 package com.biblio.mapper;
 
-import com.biblio.dto.response.AuthorResponse;
-import com.biblio.dto.response.BookDetailsManagementResponse;
-import com.biblio.dto.response.BookManagementResponse;
-import com.biblio.dto.response.ReviewResponse;
+import com.biblio.dto.response.*;
 import com.biblio.entity.*;
 import com.biblio.enumeration.EBookLanguage;
 import com.biblio.enumeration.EBookMetadataStatus;
@@ -96,6 +93,13 @@ public class BookTemplateMapper {
                 .build();
     }
 
+    public static BookTemplatePromotionResponse toBookTemplatePromotionResponse(BookTemplate bookTemplate) {
+        Book singlebook = bookTemplate.getBooks().iterator().next();
+        return BookTemplatePromotionResponse.builder()
+                .id(bookTemplate.getId())
+                .title(singlebook.getTitle())
+                .build();
+    }
     // endregion
 
 }

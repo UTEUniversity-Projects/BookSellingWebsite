@@ -24,7 +24,7 @@ public class CategoryMapper {
                 .name(category.getName())
                 .shortScript(category.getShortScript())
                 .fullScript(category.getFullScript())
-                .status(EnumUtil.toDisplayName(category.getStatus()))
+                .status(category.getStatus().toString())
                 .build();
     }
     public static CategorySidebarResponse toCategorySidebarResponse(Category category) {
