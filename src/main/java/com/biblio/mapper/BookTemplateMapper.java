@@ -164,6 +164,7 @@ public class BookTemplateMapper {
                 .publisher(bookTemplate.getPublisher().getName())
                 .authors(authors)
                 .reviews(reviews)
+                .build();
     }
     public static BookTemplatePromotionResponse toBookTemplatePromotionResponse(BookTemplate bookTemplate) {
         Book singlebook = bookTemplate.getBooks().iterator().next();
