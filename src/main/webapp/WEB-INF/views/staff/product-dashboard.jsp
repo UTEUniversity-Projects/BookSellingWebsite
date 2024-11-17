@@ -1,4 +1,5 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!-- Main content -->
 <div class="cr-main-content">
     <div class="container-fluid">
@@ -34,17 +35,17 @@
                                 >
                                     <span id="selected-text">Tất cả</span>
                                     <span class="sr-only">
-													<i class="ri-arrow-down-s-line"></i>
-												</span>
+                                        <i class="ri-arrow-down-s-line"></i>
+                                    </span>
                                 </button>
                                 <div class="dropdown-menu dropdown-menu__status">
                                     <a class="dropdown-item" href="#" data-value="ALL">
                                         Tất cả
                                     </a>
                                     <a
-                                            class="dropdown-item"
-                                            href="#"
-                                            data-value="COMING_SOON"
+                                        class="dropdown-item"
+                                        href="#"
+                                        data-value="COMING_SOON"
                                     >
                                         Sắp mở bán
                                     </a>
@@ -52,16 +53,16 @@
                                         Đang bán
                                     </a>
                                     <a
-                                            class="dropdown-item"
-                                            href="#"
-                                            data-value="OUT_OF_STOCK"
+                                        class="dropdown-item"
+                                        href="#"
+                                        data-value="OUT_OF_STOCK"
                                     >
                                         Hết hàng
                                     </a>
                                     <a
-                                            class="dropdown-item"
-                                            href="#"
-                                            data-value="STOP_SELLING"
+                                        class="dropdown-item"
+                                        href="#"
+                                        data-value="STOP_SELLING"
                                     >
                                         Ngừng kinh doanh
                                     </a>
@@ -83,84 +84,28 @@
                                     <th>
                                         <span>Trạng thái</span>
                                     </th>
-                                    <%--                                    <th width="11%">Hành động</th>--%>
                                 </tr>
                                 </thead>
                                 <tbody>
-                                <tr class="product-row" data-href="/staff/product-details">
+                                <c:forEach var="book" items="${books}">
+                                <tr class="product-row" data-href="/staff/product-details?id=${book.id}">
                                     <td>
                                         <img
-                                                class="tbl-thumb"
-                                                src="${pageContext.request.contextPath}/assets/staff/img/product/1.jpg"
-                                                alt="Product Image"
+                                            class="tbl-thumb"
+                                            src="${pageContext.request.contextPath}${book.imageUrl}"
+                                            alt="Product Image"
                                         />
                                     </td>
-                                    <td>Mens t-shirt</td>
-                                    <td>10.000.000VND</td>
-                                    <td>100</td>
-                                    <td>61</td>
-                                    <td>05/11/2023</td>
+                                    <td>${book.title}</td>
+                                    <td>${book.price}</td>
+                                    <td>${book.quantity}</td>
+                                    <td>${book.soldCount}</td>
+                                    <td>${book.publicationDate}</td>
                                     <td data-status="ON_SALE">
                                         <span class="status status__on_sale">Đang mở bán</span>
                                     </td>
                                 </tr>
-                                <tr class="product-row" data-href="/staff/product-details">
-                                    <td>
-                                        <img
-                                                class="tbl-thumb"
-                                                src="${pageContext.request.contextPath}/assets/staff/img/product/1.jpg"
-                                                alt="Product Image"
-                                        />
-                                    </td>
-                                    <td>Mens t-shirt</td>
-                                    <td>10.000.000VND</td>
-                                    <td>100</td>
-                                    <td>61</td>
-                                    <td>05/11/2023</td>
-                                    <td data-status="OUT_OF_STOCK">
-														<span class="status status__out_of_stock"
-                                                        >Hết hàng</span
-                                                        >
-                                    </td>
-                                </tr>
-                                <tr class="product-row" data-href="/staff/product-details">
-                                    <td>
-                                        <img
-                                                class="tbl-thumb"
-                                                src="${pageContext.request.contextPath}/assets/staff/img/product/1.jpg"
-                                                alt="Product Image"
-                                        />
-                                    </td>
-                                    <td>Mens t-shirt</td>
-                                    <td>10.000.000VND</td>
-                                    <td>100</td>
-                                    <td>61</td>
-                                    <td>05/11/2023</td>
-                                    <td data-status="COMING_SOON">
-														<span class="status status__coming_soon"
-                                                        >Sắp mở bán</span
-                                                        >
-                                    </td>
-                                </tr>
-                                <tr class="product-row" data-href="/staff/product-details">
-                                    <td>
-                                        <img
-                                                class="tbl-thumb"
-                                                src="${pageContext.request.contextPath}/assets/staff/img/product/1.jpg"
-                                                alt="Product Image"
-                                        />
-                                    </td>
-                                    <td>Mens t-shirt</td>
-                                    <td>10.000.000VND</td>
-                                    <td>100</td>
-                                    <td>61</td>
-                                    <td>05/11/2023</td>
-                                    <td data-status="STOP_SELLING">
-														<span class="status status__stop_selling">
-															Ngừng kinh doanh
-														</span>
-                                    </td>
-                                </tr>
+                                </c:forEach>
                                 </tbody>
                             </table>
                         </div>

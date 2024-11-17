@@ -40,6 +40,10 @@
                                 <i class="ri-sticky-note-line"></i>
                                 ${order.note}
                             </p>
+                            <p class="cr-card-shipping">
+                                <i class="ri-truck-line"></i>
+                                ${order.shippingUnit}
+                            </p>
                         </div>
                         <div>
                             <p class="cr-card-status cr-card-status--${order.statusStyle}">
@@ -101,7 +105,7 @@
                             </div>
                             <div class="summary-row">
                                 <div class="summary-label">Phí vận chuyển</div>
-                                <div class="summary-value price-value">42500</div>
+                                <div class="summary-value price-value">${order.shippingFee}</div>
                             </div>
                             <div class="summary-row">
                                 <div class="summary-label">Giảm giá phí vận chuyển</div>

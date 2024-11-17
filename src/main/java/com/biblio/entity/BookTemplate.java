@@ -7,6 +7,8 @@ import lombok.*;
 import javax.persistence.*;
 import java.time.LocalDateTime;
 import java.util.HashSet;
+import java.util.LinkedHashSet;
+import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -42,7 +44,7 @@ public class BookTemplate {
     @ManyToMany(mappedBy = "bookTemplates", fetch = FetchType.EAGER)
     private Set<Author> authors = new HashSet<>();
 
-    @ManyToMany(mappedBy = "bookTemplates")
+    @ManyToMany(mappedBy = "bookTemplates", fetch = FetchType.EAGER)
     private Set<Translator> translators = new HashSet<>();
 
     @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
@@ -50,7 +52,7 @@ public class BookTemplate {
     private Publisher publisher;
 
     @OneToMany(mappedBy = "bookTemplate", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    private Set<MediaFile> mediaFiles = new HashSet<>();
+    private Set<MediaFile> mediaFiles = new LinkedHashSet<>();
 
     @OneToMany(mappedBy = "bookTemplate", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private Set<Book> books = new HashSet<>();

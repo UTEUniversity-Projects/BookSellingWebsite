@@ -1,17 +1,20 @@
 package com.biblio.dto.response;
 
-import com.biblio.entity.ResponseReview;
 import lombok.*;
 
+@Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter
 @Setter
+@Builder
 @ToString
 public class ReviewResponse {
-    private String content;
+    private Long id;
+    private String imageUrl;
+    private String customerName;
+    private int rating;
     private String createdAt;
-    private int rate;
-
-    private CustomerResponse customer;
+    private String content;
+    private String responseContent;
 }
