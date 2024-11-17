@@ -51,13 +51,13 @@ public class Order implements Serializable {
     // region Relationships
 
     @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    @JoinColumn(name = "customer_id", nullable = false)
+    @JoinColumn(name = "customer_id", nullable = false, referencedColumnName = "id")
     private Customer customer;
 
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "shipping_id", referencedColumnName = "id")
     private Shipping shipping;
-  
+
 //    @OneToOne(mappedBy = "order")
 //    private BankTransfer bankTransfer;
 //
