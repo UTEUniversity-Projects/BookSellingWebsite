@@ -11,11 +11,14 @@ public interface IPromotionDAO extends IGenericDAO<Promotion> {
 
     List<Promotion> findAllByIdAndStatus(Long id, EPromotionStatus status);
 
+    List<Promotion> findAllById(Long id);
+
     Promotion findById(Long id);
 
-    void insert(Promotion promotion);
 
-    void updatePromotion(Promotion promotion);
+    Promotion save(Promotion promotion);
+
+    Promotion update(Promotion promotion);
 
     Promotion findLastPromotion();
 

@@ -2,6 +2,7 @@ package com.biblio.dao.impl;
 
 import com.biblio.dao.IPromotionDAO;
 import com.biblio.entity.Promotion;
+import com.biblio.entity.PromotionTarget;
 import com.biblio.enumeration.EPromotionStatus;
 
 import java.util.HashMap;
@@ -27,6 +28,12 @@ public class PromotionDAOImpl extends GenericDAOImpl<Promotion> implements IProm
         params.put("status", status);
         return super.findByJPQL(jpql, params);
     }
+    public List<Promotion> findAllById(Long id) {
+        String jpql = "SELECT p FROM Promotion p WHERE p.promotionTemplate.id = :id";
+        Map<String, Object> params = new HashMap<>();
+        params.put("id", id);
+        return super.findByJPQL(jpql, params);
+    }
 
 
     public Promotion findById(Long id) {
@@ -34,14 +41,13 @@ public class PromotionDAOImpl extends GenericDAOImpl<Promotion> implements IProm
     }
 
     @Override
-    public void insert(Promotion promotion) {
-//        System.out.println(promotion.getCode());
-//        super.save(promotion);
+    public Promotion save(Promotion promotion) {
+        return super.save(promotion);
     }
 
     @Override
-    public void updatePromotion(Promotion promotion) {
-        super.update(promotion);
+    public Promotion update(Promotion promotion) {
+         return super.update(promotion);
     }
 
 
@@ -63,10 +69,34 @@ public class PromotionDAOImpl extends GenericDAOImpl<Promotion> implements IProm
 
     public static void main(String[] args) {
         PromotionDAOImpl dao = new PromotionDAOImpl();
-        List<Promotion> list = dao.findAllByIdAndStatus(1L, EPromotionStatus.USED);
-        for (Promotion promotion : list) {
-            System.out.println(promotion.getTitle());
+        Promotion promotion = dao.findById(100L);
+        Promotion promotion2 = new Promotion();
+        promotion2.setStatus(promotion.getStatus());
+        promotion2.setPromotionTemplate(promotion.getPromotionTemplate());
+        promotion2.setTitle(promotion.getTitle());
+        promotion2.setDescription(promotion.getDescription());
+        promotion2.setMinValueToBeApplied(promotion.getMinValueToBeApplied());
+        promotion2.setDiscountLimit(promotion.getDiscountLimit());
+        promotion2.setPercentDiscount(promotion.getPercentDiscount());
+        promotion2.setEffectiveDate(promotion.getEffectiveDate());
+        promotion2.setExpirationDate(promotion.getExpirationDate());
+        promotion2.setPromotionTemplate(promotion.getPromotionTemplate());
+
+        for (PromotionTarget promotionTarget : promotion.getPromotionTargets()) {
+            PromotionTarget promotionTarget2 = new PromotionTarget();
+            promotionTarget2.setType(promotionTarget.getType());
+            promotionTarget2.setApplicableObjectId(promotionTarget.getApplicableObjectId());
+            promotionTarget2.setPromotion(promotionTarget.getPromotion());
+
+            promotion2.getPromotionTargets().add(promotionTarget2);
         }
+
+        Promotion promotion3 = dao.save(promotion2);
+        //System.out.println(promotion3.toString());
+//        List<Promotion> list = dao.findAllByIdAndStatus(1L, EPromotionStatus.USED);
+//        for (Promotion promotion : list) {
+//            System.out.println(promotion.getTitle());
+//        }
 
     }
 
