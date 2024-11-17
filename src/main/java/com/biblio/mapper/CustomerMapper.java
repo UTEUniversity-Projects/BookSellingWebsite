@@ -44,6 +44,7 @@ public class CustomerMapper {
                 .build();
 
         customer.getAddresses().forEach(address -> address.setCustomer(customer));
+
         return customer;
     }
 
@@ -69,24 +70,7 @@ public class CustomerMapper {
     }
 
     public static CustomerDetailResponse toCustomerDetailResponse(Customer customer) {
-//        CustomerGetListResponse customerGetListResponse = new CustomerGetListResponse();
-//
-//        customerGetListResponse.setId(customer.getId());
-//        customerGetListResponse.setAvatar(customer.getAvatar());
-//        customerGetListResponse.setDateOfBirth(customer.getDateOfBirth());
-//        customerGetListResponse.setEmail(customer.getEmailAddress());
-//        customerGetListResponse.setFullName(customer.getFullName());
-//        customerGetListResponse.setGender(customer.getGender().toString());
-//        customerGetListResponse.setJoinAt(customer.getJoinAt().toString());
-//        customerGetListResponse.setPhoneNumber(customer.getPhoneNumber());
-//        customerGetListResponse.setMemberShip(customer.getMembership().toString());
-//        customerGetListResponse.setStatus(customer.getAccount().getStatus().toString());
-//        customerGetListResponse.setUsername(customer.getAccount().getUsername());
-//        customerGetListResponse.setPassword(customer.getAccount().getPassword());
-//
-//        for (Address address : customer.getAddresses()) {
-//            customerGetListResponse.getAddresses().add(AddressMapper.toAddressResponse(address));
-//        }
+
         CustomerDetailResponse customerDetailResponse = CustomerDetailResponse.builder()
                 .id(customer.getId())
                 .avatar(customer.getAvatar())

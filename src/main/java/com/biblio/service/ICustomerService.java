@@ -21,4 +21,6 @@ public interface ICustomerService {
     boolean isEmailExisted(String email);
 
     boolean isPhoneNumberExisted(String phoneNumber);
+
+    CustomerDetailResponse getCustomerDetailByUsername(String username);
 }
