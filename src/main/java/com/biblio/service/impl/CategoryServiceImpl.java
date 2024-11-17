@@ -31,7 +31,8 @@ public class CategoryServiceImpl implements ICategoryService {
     @Override
     public List<CategoryResponse> getAllCategories() {
         List<CategoryResponse> list = new ArrayList<CategoryResponse>();
-        for (Category category : categoryDAO.findAll()) {
+        List<Category> categories = categoryDAO.findAll();
+        for (Category category : categories) {
             list.add(CategoryMapper.toCategoryResponse(category));
         }
         return list;

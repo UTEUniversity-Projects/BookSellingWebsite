@@ -61,7 +61,7 @@ public class PromotionDetailsController extends HttpServlet {
         if ("editVoucher".equals(formType)) {
             handleEditVoucher(request, response);
         } else if ("editFreeShip".equals(formType)) {
-            handleAddFreeShip(request, response);
+            handleEditFreeShip(request, response);
         }
     }
 
@@ -69,36 +69,40 @@ public class PromotionDetailsController extends HttpServlet {
     private void handleEditPromotion(HttpServletRequest request, HttpServletResponse response, EPromotionTemplateType type, Double percentDiscount, Double minValueApplied) {
         PromotionTemplate promotionTemplate = new PromotionTemplate();
         String code = request.getParameter("code");
+        String title = request.getParameter("title");
+        String description = request.getParameter("description");
+        String discountLimit = request.getParameter("discountLimit");
+        String time = request.getParameter("dateeffective");
 
         try {
             PromotionTemplateGetDetailsResponse promotionTemplateGetDetailsResponse = promotionTemplateService.getPromotionTemplateByCode(code);
 
-            if (Objects.equals(promotionTemplateGetDetailsResponse.getStatus(), EPromotionTemplateStatus.EFFECTIVE.toString())) {
+            if (Objects.equals(promotionTemplateGetDetailsResponse.getStatus(), EPromotionTemplateStatus.EFFECTIVE.toString())
+                    || Objects.equals(promotionTemplateGetDetailsResponse.getStatus(), EPromotionTemplateStatus.COMING_SOON.toString())) {
                 if (promotionTemplateGetDetailsResponse.getQuantity() == Long.parseLong(request.getParameter("quantity"))) {
 
                     PromotionTemplateResponse promotionTemplateResponse = promotionTemplateService.getPromotionTemplateDetailsById(promotionTemplateGetDetailsResponse.getId());
-
-                    PromotionTemplateUpdateRequest promotionTemplateUpdateRequest = new PromotionTemplateUpdateRequest();
-
-                    promotionTemplateUpdateRequest.setId(promotionTemplateResponse.getId());
-                    promotionTemplateUpdateRequest.setCode(promotionTemplateResponse.getCode());
-                    promotionTemplateUpdateRequest.setCreateAt(promotionTemplateResponse.getCreateAt());
-                    promotionTemplateUpdateRequest.setIsInfinite(promotionTemplateResponse.getIsInfinite());
-                    promotionTemplateUpdateRequest.setStatus(promotionTemplateResponse.getStatus());
-                    promotionTemplateUpdateRequest.setType(promotionTemplateResponse.getType());
+                    PromotionTemplateUpdateRequest promotionTemplateUpdateRequest = convertToUpdateRequest(promotionTemplateResponse);
 
                     for (PromotionResponse promotionResponse : promotionTemplateResponse.getPromotions()) {
                         PromotionUpdateRequest promotionUpdateRequest = new PromotionUpdateRequest();
 
                         promotionUpdateRequest.setId(promotionResponse.getId());
-                        promotionUpdateRequest.setTitle(request.getParameter("title"));
-                        promotionUpdateRequest.setDescription(request.getParameter("description"));
+                        promotionUpdateRequest.setTitle(title);
+                        promotionUpdateRequest.setDescription(description);
                         promotionUpdateRequest.setPercentDiscount(percentDiscount);
                         promotionUpdateRequest.setMinValueApplied(minValueApplied);
-                        promotionUpdateRequest.setDiscountLimit(Double.parseDouble(request.getParameter("discountLimit")));
+                        promotionUpdateRequest.setDiscountLimit(Double.parseDouble(discountLimit));
                         promotionUpdateRequest.setStatus(promotionResponse.getStatus());
-                        promotionUpdateRequest.setEffectiveDate(promotionResponse.getEffectiveDate());
-                        promotionUpdateRequest.setExpirationDate(convertToIsoFormat(request.getParameter("dateeffective")));
+
+                        if (promotionTemplateResponse.getStatus() == EPromotionTemplateStatus.EFFECTIVE) {
+                            promotionUpdateRequest.setEffectiveDate(promotionResponse.getEffectiveDate());
+                            promotionUpdateRequest.setExpirationDate(convertToIsoFormat(request.getParameter("dateeffective")));
+                        } else {
+                            String[] parts = time.split(" - ");
+                            promotionUpdateRequest.setEffectiveDate(convertToIsoFormat(parts[0]));
+                            promotionUpdateRequest.setExpirationDate(convertToIsoFormat(parts[1]));
+                        }
 
                         for (PromotionTargetResponse promotionTargetResponse : promotionResponse.getPromotionTargets()) {
                             PromotionTargetUpdateRequest promotionTargetUpdateRequest = new PromotionTargetUpdateRequest();
@@ -125,17 +129,11 @@ public class PromotionDetailsController extends HttpServlet {
 
     public static String convertToIsoFormat(String input) {
         try {
-            // Lấy năm hiện tại
-            int currentYear = LocalDate.now().getYear();
-
             // Định dạng chuỗi đầu vào
-            DateTimeFormatter inputFormatter = DateTimeFormatter.ofPattern("MM/dd hh:mm a");
+            DateTimeFormatter inputFormatter = DateTimeFormatter.ofPattern("M/dd/yyyy hh:mm a");
 
             // Chuyển chuỗi đầu vào sang LocalDateTime
-            LocalDateTime parsedDateTime = LocalDateTime.parse(
-                    currentYear + "-" + input,
-                    DateTimeFormatter.ofPattern("yyyy-MM/dd hh:mm a")
-            );
+            LocalDateTime parsedDateTime = LocalDateTime.parse(input, inputFormatter);
 
             // Định dạng lại kết quả theo ISO 8601 (yyyy-MM-dd'T'HH:mm)
             DateTimeFormatter isoFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm");
@@ -147,21 +145,8 @@ public class PromotionDetailsController extends HttpServlet {
     }
 
 
-    private void setPromotionDates(String time, PromotionInsertRequest promotionInsertRequest) {
-        try {
-            String[] parts = time.split(" - ");
-            DateTimeFormatter outputFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss.SSSSSS");
-            int currentYear = LocalDateTime.now().getYear();
 
-            LocalDateTime startDateTime = LocalDateTime.parse(currentYear + "/" + parts[0], DateTimeFormatter.ofPattern("yyyy/MM/dd hh:mm a"));
-            LocalDateTime endDateTime = LocalDateTime.parse(currentYear + "/" + parts[1], DateTimeFormatter.ofPattern("yyyy/MM/dd hh:mm a"));
 
-            promotionInsertRequest.setEffectiveDate(startDateTime.format(outputFormatter));
-            promotionInsertRequest.setExpirationDate(endDateTime.format(outputFormatter));
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
 
     private PromotionTargetInsertRequest createPromotionTargetRequest(HttpServletRequest request) {
         PromotionTargetInsertRequest promotionTargetInsertRequest = new PromotionTargetInsertRequest();
@@ -185,8 +170,23 @@ public class PromotionDetailsController extends HttpServlet {
         handleEditPromotion(request, response, EPromotionTemplateType.VOUCHER,  100.0, Double.parseDouble(minValueApplied));
     }
 
-    private void handleAddFreeShip(HttpServletRequest request, HttpServletResponse response) {
-        //handleAddPromotion(request, response, EPromotionTemplateType.FREESHIP, 100.0, 0.0); // percentDiscount 100, minValueApplied 0
+    private void handleEditFreeShip(HttpServletRequest request, HttpServletResponse response) {
+        handleEditPromotion(request, response, EPromotionTemplateType.FREESHIP, 100.0, 0.0); // percentDiscount 100, minValueApplied 0
     }
+
+
+
+    public PromotionTemplateUpdateRequest convertToUpdateRequest(PromotionTemplateResponse promotionTemplateResponse) {
+        PromotionTemplateUpdateRequest promotionTemplateUpdateRequest = new PromotionTemplateUpdateRequest();
+        promotionTemplateUpdateRequest.setId(promotionTemplateResponse.getId());
+        promotionTemplateUpdateRequest.setCode(promotionTemplateResponse.getCode());
+        promotionTemplateUpdateRequest.setCreateAt(promotionTemplateResponse.getCreateAt());
+        promotionTemplateUpdateRequest.setIsInfinite(promotionTemplateResponse.getIsInfinite());
+        promotionTemplateUpdateRequest.setStatus(promotionTemplateResponse.getStatus());
+        promotionTemplateUpdateRequest.setType(promotionTemplateResponse.getType());
+
+        return promotionTemplateUpdateRequest;
+    }
+
 
 }
