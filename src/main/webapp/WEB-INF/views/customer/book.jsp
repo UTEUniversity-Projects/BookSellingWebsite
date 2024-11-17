@@ -254,7 +254,7 @@
                     </li>
                     <li>
                       <label>Số trang <span>:</span></label
-                      >${book.handcover} trang
+                      >${book.hardcover} trang
                     </li>
                     <li>
                       <label>Định dạng <span>:</span></label
