@@ -2,8 +2,8 @@ package com.biblio.controller.customer;
 
 import com.biblio.dto.response.*;
 import com.biblio.service.IBookService;
+import com.biblio.service.IBookTemplateService;
 import com.biblio.service.ICategoryService;
-import com.biblio.service.IUserService;
 
 import java.io.IOException;
 import java.io.Serial;
@@ -15,8 +15,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.io.IOException;
-import java.io.Serial;
+import javax.servlet.http.HttpSession;
 
 /**
  * Servlet implementation class HomeController
@@ -30,7 +29,7 @@ public class HomeController extends HttpServlet {
     private ICategoryService categoryService;
 
     @Inject
-    private IBookService bookService;
+    private IBookTemplateService bookTemplateService;
   
     /**
      * @see HttpServlet#HttpServlet()
@@ -46,8 +45,13 @@ public class HomeController extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         // TODO Auto-generated method stub
 
+        HttpSession session = request.getSession();
+        AccountGetResponse account = (AccountGetResponse) session.getAttribute("account");
+
+
+
         List<CategorySidebarResponse> categories = categoryService.getAllCategorySidebarResponse();
-        List<BookCardResponse> books = bookService.getAllBookCardResponse();
+        List<BookCardResponse> books = bookTemplateService.getAllBookCardResponse();
         request.setAttribute("categories", categories);
         request.setAttribute("books", books);
 
