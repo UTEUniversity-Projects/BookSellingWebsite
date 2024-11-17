@@ -497,7 +497,7 @@
                             <ul>
                                 <li class="active" data-filter="all">Tất cả</li>
                                 <c:forEach var="category" items="${categories}">
-                                    <li data-filter=".${category.id}">${category.name}</li>
+                                    <li data-filter=".${category.name}">${category.name}</li>
                                 </c:forEach>
                             </ul>
                         </div>
@@ -526,7 +526,7 @@
                 <div class="row mb-minus-24">
                     <c:forEach var="book" items="${books}">
                         <div
-                                class="mix ${book.category.id} col-xxl-3 col-xl-4 col-6 cr-product-box mb-24"
+                                class="mix ${book.categoryName} col-xxl-3 col-xl-4 col-6 cr-product-box mb-24"
                         >
                             <div class="cr-product-card">
                                 <div class="cr-product-image">
@@ -552,7 +552,7 @@
                                 </div>
                                 <div class="cr-product-details">
                                     <div class="cr-brand">
-                                        <a href="shop-left-sidebar.html">${book.category.name}</a>
+                                        <a href="shop-left-sidebar.html">${book.categoryName}</a>
                                         <div class="cr-star">
                                             <c:forEach var="i" begin="1" end="5" step="1">
                                                 <c:choose>

@@ -1,13 +1,10 @@
 package com.biblio.mapper;
 
-import com.biblio.dao.IReviewDAO;
 import com.biblio.dao.impl.ReviewDAOImpl;
 import com.biblio.dto.request.ResponseReviewRequest;
 import com.biblio.entity.ResponseReview;
 import com.biblio.entity.Review;
-import com.biblio.service.IReviewService;
 
-import javax.inject.Inject;
 import java.time.LocalDateTime;
 
 public class ResponseReviewMapper {

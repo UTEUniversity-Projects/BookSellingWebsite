@@ -45,13 +45,21 @@
         <div class="cr-size-and-weight">
           <div class="cr-review-star">
             <div class="cr-star">
-              <i class="ri-star-fill"></i>
-              <i class="ri-star-fill"></i>
-              <i class="ri-star-fill"></i>
-              <i class="ri-star-fill"></i>
-              <i class="ri-star-fill"></i>
+              <c:forEach var="i" begin="1" end="5" step="1">
+                <c:choose>
+                  <c:when test="${book.avgRating >= i}">
+                    <i class="ri-star-fill"></i>
+                  </c:when>
+                  <c:when test="${book.avgRating > i - 1 && book.avgRating < i}">
+                    <i class="ri-star-half-line"></i>
+                  </c:when>
+                  <c:otherwise>
+                    <i class="ri-star-line"></i>
+                  </c:otherwise>
+                </c:choose>
+              </c:forEach>
             </div>
-            <p>( 75 Review )</p>
+            <p>( ${book.avgRating} )</p>
           </div>
           <div class="list">
             <ul>
@@ -61,7 +69,7 @@
               </li>
               <li>
                 <label>NXB <span>:</span></label
-                >${book.publisher.name}
+                >${book.publisher}
               </li>
               <li>
                 <label>Ngày XB <span>:</span></label
@@ -210,11 +218,11 @@
                   <ul>
                     <li>
                       <label>Danh mục <span>:</span></label
-                      >${book.category.name}
+                      >${book.category}
                     </li>
                     <li>
                       <label>Kho <span>:</span></label
-                      >2
+                      >${book.quantity}
                     </li>
                     <li>
                       <label>Tác giả <span>:</span></label
@@ -222,7 +230,7 @@
                     </li>
                     <li>
                       <label>NXB <span>:</span></label
-                      >${book.publisher.name}
+                      >${book.publisher}
                     </li>
                     <li>
                       <label>Ngày XB <span>:</span></label
@@ -242,7 +250,7 @@
                     </li>
                     <li>
                       <label>Kích thước <span>:</span></label
-                      >${book.height} x ${book.length} x ${book.width} cm
+                      >${book.size}
                     </li>
                     <li>
                       <label>Số trang <span>:</span></label
@@ -279,17 +287,17 @@
                   <c:forEach var="review" items="${book.reviews}">
                     <li class="review-item">
                       <div class="review-item__image">
-                        <img src="${pageContext.request.contextPath}${review.customer.avatar}"
+                        <img src="${pageContext.request.contextPath}${review.imageUrl}"
                              alt="review"/>
                       </div>
                       <div class="review-item__content">
                         <div class="header">
                           <div class="header__left">
-                            <span>${review.customer.fullName}</span>
+                            <span>${review.customerName}</span>
                             <div class="rating">
                               <c:forEach var="i" begin="1" end="5" step="1">
                                 <c:choose>
-                                  <c:when test="${i <= review.rate}">
+                                  <c:when test="${i <= review.rating}">
                                     <i class="ri-star-fill"></i>
                                   </c:when>
                                   <c:otherwise>
@@ -306,12 +314,12 @@
                           ${review.content}
                         </div>
 
-                        <div class="response-review">
-                          <div class="response-title">Phản Hồi Của Người Bán</div>
-                          <div class="response-text">
-                            Dạ vâng adidas cảm ơn quý khách đã tin tưởng và ủng hộ ❤️. Sự góp ý
-                          </div>
-                        </div>
+<%--                        <div class="response-review">--%>
+<%--                          <div class="response-title">Phản Hồi Của Người Bán</div>--%>
+<%--                          <div class="response-text">--%>
+<%--                            Dạ vâng adidas cảm ơn quý khách đã tin tưởng và ủng hộ ❤️. Sự góp ý--%>
+<%--                          </div>--%>
+<%--                        </div>--%>
                       </div>
                     </li>
                   </c:forEach>

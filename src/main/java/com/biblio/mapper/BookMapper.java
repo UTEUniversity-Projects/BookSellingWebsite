@@ -22,65 +22,6 @@ import static com.biblio.utils.DateTimeUtil.formatDateTime;
 public class BookMapper {
     // region EntityToDTO
 
-    public static BookCardResponse toBookCardResponse(Book book) {
-        BookCardResponse bookCardResponse = new BookCardResponse();
-        bookCardResponse.setId(book.getId());
-        bookCardResponse.setTitle(book.getTitle());
-        bookCardResponse.setDescription(book.getDescription());
-        bookCardResponse.setSellingPrice(book.getSellingPrice());
-
-        bookCardResponse.setCategory(toCategorySidebarResponse(book.getSubCategory().getCategory()));
-        bookCardResponse.setImageUrl(book.getBookTemplate().getMediaFiles().iterator().next().getStoredCode().replaceAll("image\\d+\\.jpg", "image1.jpg"));
-        bookCardResponse.setReviewRate(book.getBookTemplate().calculateReviewRate());
-
-        return bookCardResponse;
-    }
-
-    public static BookDetailsResponse toBookDetailsResponse(Book book) {
-        BookDetailsResponse bookDetailsResponse = new BookDetailsResponse();
-        bookDetailsResponse.setId(book.getId());
-        bookDetailsResponse.setTitle(book.getTitle());
-        bookDetailsResponse.setDescription(book.getDescription());
-        bookDetailsResponse.setSellingPrice(book.getSellingPrice());
-        bookDetailsResponse.setPublicationDate(formatDateTime(book.getPublicationDate(), "dd-MM-yyyy"));
-        bookDetailsResponse.setEdition(book.getEdition());
-        bookDetailsResponse.setCodeISBN10(book.getCodeISBN10());
-        bookDetailsResponse.setCodeISBN13(book.getCodeISBN13());
-        bookDetailsResponse.setFormat(book.getFormat().getBookFormat());
-        bookDetailsResponse.setHandcover(book.getHandcover());
-        bookDetailsResponse.setLength(book.getLength());
-        bookDetailsResponse.setWidth(book.getWidth());
-        bookDetailsResponse.setHeight(book.getHeight());
-        bookDetailsResponse.setWeight(book.getWeight());
-        bookDetailsResponse.setCondition(book.getCondition().getBookCondition());
-        bookDetailsResponse.setRecommendedAge(book.getRecommendedAge().getBookAgeRecommend());
-        String languages = book.getBookTemplate().getLanguages().stream()
-                .map(EBookLanguage::getDescription)
-                .collect(Collectors.joining(", "));
-        bookDetailsResponse.setLanguages(languages);
-
-        bookDetailsResponse.setCategory(toCategorySidebarResponse(book.getSubCategory().getCategory()));
-        int counter = 1;
-        for (MediaFile mediaFile : book.getBookTemplate().getMediaFiles()) {
-            bookDetailsResponse.getImageUrls().add(mediaFile.getStoredCode().replaceAll("image\\d+\\.jpg", "image" + counter + ".jpg"));
-            counter++;
-        }
-        bookDetailsResponse.setPublisher(toPublisherResponse(book.getBookTemplate().getPublisher()));
-////        bookDetailsResponse.setMetadata(toBookMetadataResponse(book.getMetadata()));
-        for (Author author : book.getBookTemplate().getAuthors()) {
-            bookDetailsResponse.getAuthors().add(AuthorMapper.toAuthorResponse(author));
-        }
-
-//        for (Translator translator : book.getBookTemplate().getTranslators()) {
-//            bookDetailsResponse.getTranslators().add(TranslatorMapper.toTranslatorResponse(translator));
-//        }
-
-        for (Review review : book.getBookTemplate().getReviews()) {
-            bookDetailsResponse.getReviews().add(ReviewMapper.toReviewResponse(review));
-        }
-        return bookDetailsResponse;
-    }
-
     public static BookResponse toBookResponse(Book book) {
         return BookResponse.builder()
                 .id(book.getId().toString())
