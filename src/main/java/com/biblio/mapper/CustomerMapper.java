@@ -3,6 +3,7 @@ package com.biblio.mapper;
 import com.biblio.dto.request.CustomerRegisterRequest;
 import com.biblio.dto.response.CustomerDetailResponse;
 import com.biblio.dto.response.CustomerRegisterResponse;
+import com.biblio.dto.response.CustomerResponse;
 import com.biblio.entity.Account;
 import com.biblio.entity.Address;
 import com.biblio.entity.Customer;
@@ -109,5 +110,12 @@ public class CustomerMapper {
         return customerDetailResponse;
     }
 
+    public static CustomerResponse customerResponse(Customer customer) {
+        CustomerResponse customerResponse = new CustomerResponse();
 
+        customerResponse.setAvatar(customer.getAvatar());
+        customerResponse.setFullName(customer.getFullName());
+
+        return customerResponse;
+    }
 }
