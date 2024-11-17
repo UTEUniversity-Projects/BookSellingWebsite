@@ -170,7 +170,6 @@ document.querySelectorAll('.promotionForm').forEach(form => {
                 case "addVoucher":
                     data["type"] = "VOUCHER"; // Đặt type là VOUCHER
                     data["percentDiscount"] = 100; // Phần trăm giảm giá là 100%
-                    data["discountLimit"] = parseFloat(100); // Đặt giới hạn giảm giá là 100
                     break;
                 case "addFreeShip":
                     data["type"] = "FREESHIP"; // Đặt type là FREESHIP

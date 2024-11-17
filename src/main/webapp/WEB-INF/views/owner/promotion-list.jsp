@@ -75,7 +75,17 @@
                                         <td>${promotion.code}</td>
                                         <td>${promotion.title}</td>
                                         <td>${promotion.discountLimit} đ</td>
-                                        <td>${promotion.quantity}</td>
+                                        <td>
+                                            <c:choose>
+                                                <c:when test="${promotion.quantity == -1}">
+                                                    Không giới hạn
+                                                </c:when>
+                                                <c:otherwise>
+                                                    ${promotion.quantity}
+                                                </c:otherwise>
+                                            </c:choose>
+                                        </td>
+
                                         <td class="cod" id="status-${promotion.id}">${promotion.status}</td>
                                     </tr>
                                 </c:if>
@@ -106,7 +116,17 @@
                                         <td>${promotion.code}</td>
                                         <td>${promotion.title}</td>
                                         <td>${promotion.discountLimit} đ</td>
-                                        <td>${promotion.quantity}</td>
+                                        <td>
+                                            <c:choose>
+                                                <c:when test="${promotion.quantity == -1}">
+                                                    Không giới hạn
+                                                </c:when>
+                                                <c:otherwise>
+                                                    ${promotion.quantity}
+                                                </c:otherwise>
+                                            </c:choose>
+                                        </td>
+
                                         <td class="cod" id="status-${promotion.id}">${promotion.status}</td>
                                     </tr>
                                 </c:if>

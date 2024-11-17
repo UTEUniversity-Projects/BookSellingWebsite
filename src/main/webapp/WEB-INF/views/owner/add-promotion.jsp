@@ -226,7 +226,7 @@
                                                 class="img-promotion"
                                                 src="assets/img/product/1.jpg"
                                         />
-                                        <h3>Thêm Voucher action="/owner/add-promotion" method="POST" </h3>
+                                        <h3>Thêm Voucher</h3>
 
                                             <form class="promotionForm">
                                                 <input type="hidden" name="formType" value="addVoucher"/>
@@ -321,7 +321,7 @@
                                                 src="assets/img/product/1.jpg"
                                         />
                                         <h3>Thêm Freeship</h3>
-                                        <form action="/owner/add-promotion" method="POST" class="promotionForm">
+                                        <form class="promotionForm">
                                             <input type="hidden" name="formType" value="addFreeShip" />
                                             <div class="form-group">
                                                 <label>Mã</label>
@@ -387,4 +387,4 @@
 
 <script>const contextPath = "<%= request.getContextPath()%>";</script>
 <script src="${pageContext.request.contextPath}/assets/owner/js/add-promotion.js" defer></script>
-<script src="${pageContext.request.contextPath}/assets/owner/js/validator.js" defer></script>
+<script src="${pageContext.request.contextPath}/assets/owner/js/validator-add-promotion.js" defer></script>
