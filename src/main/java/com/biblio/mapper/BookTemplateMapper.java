@@ -79,6 +79,7 @@ public class BookTemplateMapper {
         }
 
         List<ReviewResponse> reviews = bookTemplate.getReviews().stream()
+                .filter(review -> !review.isHidden())
                 .sorted(Comparator.comparingInt(Review::getRate).reversed()
                         .thenComparing(Review::getCreatedAt, Comparator.reverseOrder()))
                 .map(ReviewMapper::toReviewResponse)
