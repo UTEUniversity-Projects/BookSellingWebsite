@@ -53,6 +53,10 @@ public class Order implements Serializable {
     @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinColumn(name = "customer_id", nullable = false)
     private Customer customer;
+
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "shipping_id", referencedColumnName = "id")
+    private Shipping shipping;
   
 //    @OneToOne(mappedBy = "order")
 //    private BankTransfer bankTransfer;
@@ -66,7 +70,7 @@ public class Order implements Serializable {
 //    @OneToOne(mappedBy = "order")
 //    private EWallet wallet;
 
-    @OneToMany(mappedBy = "order", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "order", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
     private Set<OrderItem> orderItems = new HashSet<>();
 
     @ManyToMany(cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
@@ -80,13 +84,12 @@ public class Order implements Serializable {
     // region Methods
 
     public double calTotalPrice() {
-//        double totalPrice = 0.0;
-//        for (Book item : books) {
-//            totalPrice += item.getSellingPrice();
-//        }
-//        BigDecimal roundedTotal = new BigDecimal(totalPrice).setScale(2, RoundingMode.HALF_UP);
-//        return roundedTotal.doubleValue();
-        return 0;
+        double totalPrice = 0.0;
+        for (OrderItem item : orderItems) {
+            totalPrice += item.calPriceItem();
+        }
+        BigDecimal roundedTotal = new BigDecimal(totalPrice).setScale(2, RoundingMode.HALF_UP);
+        return roundedTotal.doubleValue();
     }
 
     // endregion

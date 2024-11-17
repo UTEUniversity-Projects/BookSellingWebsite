@@ -50,7 +50,6 @@ public class PromotionDAOImpl extends GenericDAOImpl<Promotion> implements IProm
          return super.update(promotion);
     }
 
-
     @Override
     public Promotion findLastPromotion() {
         String jpql = "SELECT p FROM Promotion p ORDER BY p.id DESC";
@@ -65,7 +64,6 @@ public class PromotionDAOImpl extends GenericDAOImpl<Promotion> implements IProm
         params.put("code", code);
         return super.findSingleByJPQL(jpql, params) != null;
     }
-
 
     public static void main(String[] args) {
         PromotionDAOImpl dao = new PromotionDAOImpl();

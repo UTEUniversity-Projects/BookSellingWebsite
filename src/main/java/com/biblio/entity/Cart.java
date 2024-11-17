@@ -29,7 +29,7 @@ public class Cart implements Serializable {
     @JoinTable(name = "cart_book_template", joinColumns = @JoinColumn(name = "cart_id"), inverseJoinColumns = @JoinColumn(name = "book_template_id"))
     private Set<BookTemplate> bookTemplates;
 
-    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "customer_id")
     private Customer customer;
 

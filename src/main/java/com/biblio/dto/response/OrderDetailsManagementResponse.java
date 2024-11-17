@@ -12,11 +12,13 @@ import java.util.List;
 @Setter
 @Builder
 @ToString
-public class OrderDetailsResponse {
+public class OrderDetailsManagementResponse {
     private Long id;
     private String customerName;
     private String phoneNumber;
     private String address;
+    private String shippingUnit;
+    private double shippingFee;
     private String orderDate;
     private String note;
     private List<OrderProductResponse> products;

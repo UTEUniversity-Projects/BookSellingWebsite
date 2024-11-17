@@ -1,5 +1,10 @@
 package com.biblio.controller.staff;
 
+import com.biblio.dto.response.BookManagementResponse;
+import com.biblio.service.IBookService;
+import com.biblio.service.IBookTemplateService;
+
+import javax.inject.Inject;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -8,9 +13,12 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.io.Serial;
+import java.util.List;
 
 @WebServlet("/staff/product-dashboard")
 public class ProductDashboardController extends HttpServlet {
+    @Inject
+    IBookTemplateService bookTemplateService;
     @Serial
     private static final long serialVersionUID = 1L;
 
@@ -30,6 +38,9 @@ public class ProductDashboardController extends HttpServlet {
 
         HttpSession session = request.getSession();
         System.out.println(session.getAttribute("account"));
+
+        List<BookManagementResponse> books = bookTemplateService.getAllBookManagementResponse();
+        request.setAttribute("books", books);
 
         request.getRequestDispatcher("/views/staff/product-dashboard.jsp").forward(request, response);
     }

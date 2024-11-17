@@ -2,8 +2,11 @@ package com.biblio.dao.impl;
 
 import com.biblio.dao.IBookDAO;
 import com.biblio.entity.Book;
+import com.biblio.entity.BookTemplate;
 
 import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 public class BookDAOImpl extends GenericDAOImpl<Book> implements IBookDAO {
 
@@ -37,11 +40,16 @@ public class BookDAOImpl extends GenericDAOImpl<Book> implements IBookDAO {
     }
 
     public static void main(String[] args) {
-        BookDAOImpl dao = new BookDAOImpl();
-        List<Book> list = dao.findAll();
-        for (Book book : list) {
-            System.out.println(book.getSellingPrice());
-        }
+//        BookDAOImpl dao = new BookDAOImpl();
+//        List<Book> books = dao.findAll();
+//
+//        Map<BookTemplate, Long> countByTemplate = books.stream()
+//                .collect(Collectors.groupingBy(Book::getBookTemplate, Collectors.counting()));
+//
+//        countByTemplate.forEach((template, count) -> {
+//            System.out.println("BookTemplate Name: " + template.getBooks().);
+//            System.out.println("Book Count: " + count);
+//        });
     }
 
 }

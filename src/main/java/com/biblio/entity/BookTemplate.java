@@ -7,6 +7,8 @@ import lombok.*;
 import javax.persistence.*;
 import java.time.LocalDateTime;
 import java.util.HashSet;
+import java.util.LinkedHashSet;
+import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -28,7 +30,7 @@ public class BookTemplate {
     @Column(name = "status", nullable = false)
     private EBookTemplateStatus status;
 
-    @ElementCollection
+    @ElementCollection(fetch = FetchType.EAGER)
     @Enumerated(EnumType.STRING)
     @CollectionTable(name = "book_template_languages",
             joinColumns = @JoinColumn(name = "book_template_id", nullable = false))
@@ -42,15 +44,15 @@ public class BookTemplate {
     @ManyToMany(mappedBy = "bookTemplates", fetch = FetchType.EAGER)
     private Set<Author> authors = new HashSet<>();
 
-    @ManyToMany(mappedBy = "bookTemplates")
+    @ManyToMany(mappedBy = "bookTemplates", fetch = FetchType.EAGER)
     private Set<Translator> translators = new HashSet<>();
 
-    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinColumn(name = "publisher_id", nullable = false)
     private Publisher publisher;
 
     @OneToMany(mappedBy = "bookTemplate", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    private Set<MediaFile> mediaFiles = new HashSet<>();
+    private Set<MediaFile> mediaFiles = new LinkedHashSet<>();
 
     @OneToMany(mappedBy = "bookTemplate", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private Set<Book> books = new HashSet<>();

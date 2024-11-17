@@ -3,24 +3,24 @@
 -- USE `bsw-biblio`;
 -- 1. Table Account:
 INSERT INTO account (password, status, role, username) VALUES
-('abc', 'ACTIVE', 'OWNER', 'owner_1'),
-('abc', 'ACTIVE', 'STAFF', 'staff_1'),
-('abc', 'ACTIVE', 'STAFF', 'staff_2'),
-('abc', 'ACTIVE', 'CUSTOMER', 'customer_1'),
-('abc', 'ACTIVE', 'CUSTOMER', 'customer_2'),
-('abc', 'ACTIVE', 'CUSTOMER', 'customer_3'),
-('abc', 'ACTIVE', 'CUSTOMER', 'customer_4'),
-('abc', 'ACTIVE', 'CUSTOMER', 'customer_5'),
-('abc', 'ACTIVE', 'CUSTOMER', 'customer_6'),
-('abc', 'ACTIVE', 'CUSTOMER', 'customer_7'),
-('abc', 'ACTIVE', 'CUSTOMER', 'customer_8'),
-('abc', 'ACTIVE', 'CUSTOMER', 'customer_9'),
-('abc', 'ACTIVE', 'CUSTOMER', 'customer_10'),
-('abc', 'ACTIVE', 'CUSTOMER', 'customer_11'),
-('abc', 'ACTIVE', 'CUSTOMER', 'customer_12'),
-('abc', 'ACTIVE', 'CUSTOMER', 'customer_13'),
-('abc', 'ACTIVE', 'CUSTOMER', 'customer_14'),
-('abc', 'ACTIVE', 'CUSTOMER', 'customer_15');
+('$2y$10$lHBtDRcnnTUMClaM9.BIleOK7sgnHUgUCSr6qcGo8GfqygI5E.3VO', 'ACTIVE', 'OWNER', 'owner_1'),
+('$2y$10$lHBtDRcnnTUMClaM9.BIleOK7sgnHUgUCSr6qcGo8GfqygI5E.3VO', 'ACTIVE', 'STAFF', 'staff_1'),
+('$2y$10$lHBtDRcnnTUMClaM9.BIleOK7sgnHUgUCSr6qcGo8GfqygI5E.3VO', 'ACTIVE', 'STAFF', 'staff_2'),
+('$2y$10$lHBtDRcnnTUMClaM9.BIleOK7sgnHUgUCSr6qcGo8GfqygI5E.3VO', 'ACTIVE', 'CUSTOMER', 'customer_1'),
+('$2y$10$lHBtDRcnnTUMClaM9.BIleOK7sgnHUgUCSr6qcGo8GfqygI5E.3VO', 'ACTIVE', 'CUSTOMER', 'customer_2'),
+('$2y$10$lHBtDRcnnTUMClaM9.BIleOK7sgnHUgUCSr6qcGo8GfqygI5E.3VO', 'ACTIVE', 'CUSTOMER', 'customer_3'),
+('$2y$10$lHBtDRcnnTUMClaM9.BIleOK7sgnHUgUCSr6qcGo8GfqygI5E.3VO', 'ACTIVE', 'CUSTOMER', 'customer_4'),
+('$2y$10$lHBtDRcnnTUMClaM9.BIleOK7sgnHUgUCSr6qcGo8GfqygI5E.3VO', 'ACTIVE', 'CUSTOMER', 'customer_5'),
+('$2y$10$lHBtDRcnnTUMClaM9.BIleOK7sgnHUgUCSr6qcGo8GfqygI5E.3VO', 'ACTIVE', 'CUSTOMER', 'customer_6'),
+('$2y$10$lHBtDRcnnTUMClaM9.BIleOK7sgnHUgUCSr6qcGo8GfqygI5E.3VO', 'ACTIVE', 'CUSTOMER', 'customer_7'),
+('$2y$10$lHBtDRcnnTUMClaM9.BIleOK7sgnHUgUCSr6qcGo8GfqygI5E.3VO', 'ACTIVE', 'CUSTOMER', 'customer_8'),
+('$2y$10$lHBtDRcnnTUMClaM9.BIleOK7sgnHUgUCSr6qcGo8GfqygI5E.3VO', 'ACTIVE', 'CUSTOMER', 'customer_9'),
+('$2y$10$lHBtDRcnnTUMClaM9.BIleOK7sgnHUgUCSr6qcGo8GfqygI5E.3VO', 'ACTIVE', 'CUSTOMER', 'customer_10'),
+('$2y$10$lHBtDRcnnTUMClaM9.BIleOK7sgnHUgUCSr6qcGo8GfqygI5E.3VO', 'ACTIVE', 'CUSTOMER', 'customer_11'),
+('$2y$10$lHBtDRcnnTUMClaM9.BIleOK7sgnHUgUCSr6qcGo8GfqygI5E.3VO', 'ACTIVE', 'CUSTOMER', 'customer_12'),
+('$2y$10$lHBtDRcnnTUMClaM9.BIleOK7sgnHUgUCSr6qcGo8GfqygI5E.3VO', 'ACTIVE', 'CUSTOMER', 'customer_13'),
+('$2y$10$lHBtDRcnnTUMClaM9.BIleOK7sgnHUgUCSr6qcGo8GfqygI5E.3VO', 'ACTIVE', 'CUSTOMER', 'customer_14'),
+('$2y$10$lHBtDRcnnTUMClaM9.BIleOK7sgnHUgUCSr6qcGo8GfqygI5E.3VO', 'ACTIVE', 'CUSTOMER', 'customer_15');
 
 
 INSERT INTO account (password, status, role, username) VALUES
@@ -1244,6 +1244,22 @@ INSERT INTO review (content, created_at, is_hidden, rate, ready_to_introduce, bo
 ('Tôi học được nhiều điều mới qua cuốn sách này.', '2023-01-30 15:10:00', 0, 5, 1, 3, 2),
 ('Rất hài lòng với cuốn sách, dễ đọc và thực tế.', '2023-02-10 10:25:00', 0, 4, 1, 4, 2),
 ('Cuốn sách rất phù hợp để phát triển bản thân.', '2023-02-20 12:40:00', 0, 5, 1, 5, 2);
+
+-- Table response_review
+-- INSERT INTO response_review (content, created_at, created_by, review_id) VALUES
+-- Phản hồi cho các đánh giá từ customer_id = 1
+-- ('Cảm ơn bạn đã chia sẻ cảm nhận. Hy vọng cuốn sách tiếp tục mang lại giá trị cho bạn!', '2023-01-06 10:00:00', 'Admin', 1),
+-- ('Cảm ơn bạn rất nhiều, chúng tôi rất vui khi cuốn sách hữu ích với bạn.', '2023-01-16 11:00:00', 'Admin', 2),
+-- ('Rất tuyệt vời khi bạn yêu thích cuốn sách, cảm ơn phản hồi của bạn!', '2023-01-26 15:00:00', 'Admin', 3),
+-- ('Cảm ơn bạn đã dành thời gian đánh giá sách, chúc bạn luôn thành công!', '2023-02-06 12:00:00', 'Admin', 4),
+-- ('Chân thành cảm ơn bạn đã giới thiệu cuốn sách này đến mọi người.', '2023-02-16 14:00:00', 'Admin', 5),
+
+-- Phản hồi cho các đánh giá từ customer_id = 2
+-- ('Chúng tôi rất vui khi bạn thấy sách hữu ích, cảm ơn bạn!', '2023-01-21 10:00:00', 'Admin', 7),
+-- ('Rất tuyệt khi biết bạn học được nhiều điều mới từ cuốn sách này!', '2023-01-31 16:00:00', 'Admin', 8),
+-- ('Cảm ơn bạn đã phản hồi tích cực, hy vọng bạn tiếp tục đồng hành cùng chúng tôi.', '2023-02-11 11:00:00', 'Admin', 9),
+-- ('Rất vui khi cuốn sách có ý nghĩa với bạn, cảm ơn đánh giá của bạn!', '2023-02-21 13:00:00', 'Admin', 10);
+
 -- 13. Table Address:
 -- Địa chỉ cho owner
 INSERT INTO address (detail, district, nation, province, village, owner_id) VALUES
@@ -1277,6 +1293,17 @@ INSERT INTO address (detail, district, nation, province, village, customer_id) V
 ('14 Hai Bà Trưng', 'Quận 3', 'Việt Nam', 'TP HCM', 'Phường 8', 1),
 ('12 Lý Thái Tổ', 'Quận 10', 'Việt Nam', 'TP HCM', 'Phường 14', 2);
 
+-- Table Shipping
+INSERT INTO shipping(shipping_fee, shipping_unit, address_id) VALUES
+(25000, N'Giao hàng tiết kiệm', 1),
+(25000, N'Giao hàng tiết kiệm', 2),
+(45000, N'Giao hàng tiết kiệm', 16),
+(25000, N'Giao hàng tiết kiệm', 18),
+(30000, N'Giao hàng tiết kiệm', 1),
+(25000, N'Giao hàng tiết kiệm', 2),
+(25000, N'Giao hàng tiết kiệm', 1),
+(25000, N'Giao hàng tiết kiệm', 2);
+
 -- 17. Table Cart
 INSERT INTO cart (customer_id) VALUES
 (1),
@@ -1296,15 +1323,15 @@ INSERT INTO cart (customer_id) VALUES
 (15);
 
 -- 18. Table Order
-INSERT INTO `order` (note, order_date, payment_type, status, vat, customer_id) VALUES
-('Order note 1', '2023-01-01 10:30:00', 'BANKING', 'COMPLETE_DELIVERY', 0.1, 1),
-('Order note 2', '2023-01-02 14:00:00', 'BANKING','CANCELED', 0.1, 2),
-('Order note 3', '2023-01-03 09:15:00', 'BANKING','COMPLETE_DELIVERY', 0.1, 1),
-('Order note 4', '2023-01-04 16:45:00', 'BANKING','CANCELED', 0.1, 2),
-('Order note 5', '2023-01-05 11:20:00', 'BANKING','COMPLETE_DELIVERY', 0.1, 1),
-('Order note 6', '2023-01-06 15:30:00', 'BANKING','CANCELED', 0.1, 2),
-('Order note 7', '2023-01-07 08:00:00', 'BANKING','COMPLETE_DELIVERY', 0.1, 1),
-('Order note 8', '2023-01-08 13:55:00', 'BANKING','CANCELED', 0.1, 2);
+INSERT INTO `order` (note, order_date, payment_type, status, vat, customer_id, shipping_id) VALUES
+('Order note 1', '2023-01-01 10:30:00', 'BANKING', 'COMPLETE_DELIVERY', 0.1, 1, 1),
+('Order note 2', '2023-01-02 14:00:00', 'BANKING','CANCELED', 0.1, 2, 2),
+('Order note 3', '2023-01-03 09:15:00', 'BANKING','COMPLETE_DELIVERY', 0.1, 1, 3),
+('Order note 4', '2023-01-04 16:45:00', 'BANKING','CANCELED', 0.1, 2, 4),
+('Order note 5', '2023-01-05 11:20:00', 'BANKING','COMPLETE_DELIVERY', 0.1, 1, 5),
+('Order note 6', '2023-01-06 15:30:00', 'BANKING','CANCELED', 0.1, 2, 6),
+('Order note 7', '2023-01-07 08:00:00', 'BANKING','COMPLETE_DELIVERY', 0.1, 1, 7),
+('Order note 8', '2023-01-08 13:55:00', 'BANKING','CANCELED', 0.1, 2, 8);
 
 INSERT INTO order_item (order_id) VALUES
 (1),

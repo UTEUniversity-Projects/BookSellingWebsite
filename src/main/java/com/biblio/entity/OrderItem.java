@@ -26,7 +26,7 @@ public class OrderItem implements Serializable {
 
     // region Relationships
 
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinTable(
             name = "order_item_books",
             joinColumns = @JoinColumn(name = "order_item_id"),
@@ -41,7 +41,10 @@ public class OrderItem implements Serializable {
     // region
 
     public double calPriceItem() {
-//        return this.book.getSellingPrice() * this.quantity;
-        return 0;
+        double totalPrice = 0;
+        for (Book book : books) {
+            totalPrice += book.getSellingPrice();
+        }
+        return totalPrice;
     }
 }
