@@ -60,12 +60,12 @@ public class OrderServiceImpl implements IOrderService {
             if ((orderDate.isEqual(start) || orderDate.isAfter(start)) &&
                     (orderDate.isEqual(end) || orderDate.isBefore(end)) &&
                     EOrderStatus.COMPLETE_DELIVERY.equals(order.getStatus())) {
-                for (OrderItem orderItem : order.getOrderItems()) {
-                    for (Book book : orderItem.getBooks()) {
-                        venue += book.getSellingPrice();
-                    }
-                }
-
+//                for (OrderItem orderItem : order.getOrderItems()) {
+//                    for (Book book : orderItem.getBooks()) {
+//                        venue += book.getSellingPrice();
+//                    }
+//                }
+                venue += order.calTotalPrice();
             }
         }
         return venue;

@@ -5,6 +5,14 @@
         color: red;
         font-size: 0.7em;
     }
+    .tbl-600 {
+        @include scrollbar;
+        overflow: auto;
+
+        >div {
+            min-width: 600px;
+        }
+    }
     /* Màu nền cho dòng được chọn */
 
 </style>
@@ -97,7 +105,7 @@
                                                     <label>Thời gian áp dụng</label>
                                                     <div class="col-12">
                                                         <input type="text" name="datetimes" style="width: 100%;" onblur="validateInput(this)" />
-                                                        <span class="error-message dateeffectiveError"></span>
+                                                        <span class="error-message   datetimesError"></span>
                                                     </div>
                                                 </div>
                                             </div>
@@ -111,7 +119,7 @@
                         <div class="col-xl-8 col-lg-12 form-column" id="list-product-category-subcategory-discount">
                             <div class="cr-cat-list cr-card card-default">
                                 <div class="cr-card-content">
-                                    <div class="table-responsive tbl-800">
+                                    <div class="table-responsive tbl-600">
                                         <div class="select-parent-add-promotion">
                                             <label>Lọc theo:</label>
                                             <div class="select-add-promotion">
@@ -127,12 +135,12 @@
                                                 <span class="subcategoryError text-danger"></span>
                                             </div>
                                         </div>
-                                        <table class="table table-hover table_item_to_discount">
+                                        <table class="table table-hover table_item_to_discount" >
                                             <thead>
                                             <tr>
-                                                <th>Chọn</th>
-                                                <th>Mã</th>
-                                                <th>Tên</th>
+                                                <th width="5%"></th>
+                                                <th width="15%">Mã</th>
+                                                <th width="50%">Tên</th>
                                             </tr>
                                             </thead>
                                             <tbody>
@@ -147,7 +155,7 @@
                     <!-- Nút Thêm -->
                     <div class="row mt-4">
                         <div class="col-12 d-flex justify-content-center" style="padding-bottom: 20px">
-                            <button type="submit" class="btn-voucher cr-btn-primary"  onclick="return validateForm()">Thêm</button>
+                            <button type="submit" class="btn-voucher cr-btn-primary" >Thêm</button>
                         </div>
                     </div>
                 </form>

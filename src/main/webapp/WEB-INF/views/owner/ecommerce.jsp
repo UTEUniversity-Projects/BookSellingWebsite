@@ -61,7 +61,7 @@
                                     <span class="icon icon-3"><i class="ri-money-dollar-circle-line"></i></span>
                                     <div class="growth-numbers">
                                         <h4>Doanh Thu</h4>
-                                        <h5 id="revenue-count">0</h5> <!-- ID riêng -->
+                                        <h5 id="revenue-count" class="price-value">0</h5> <!-- ID riêng -->
                                     </div>
                                 </div>
                             </div>
@@ -75,7 +75,7 @@
                                     <span class="icon icon-4"><i class="ri-exchange-dollar-line"></i></span>
                                     <div class="growth-numbers">
                                         <h4>Profit</h4>
-                                        <h5 id="expense-count">0</h5> <!-- ID riêng -->
+                                        <h5 id="expense-count" class="price-value">0</h5>
                                     </div>
                                 </div>
                             </div>
