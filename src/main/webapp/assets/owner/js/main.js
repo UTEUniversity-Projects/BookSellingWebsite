@@ -1306,9 +1306,9 @@ document.querySelectorAll('.price-value').forEach(el => {
     if (!isNaN(value)) {
         const formattedValue = value.toLocaleString('vi-VN');
         if (el.classList.contains('minus-value')) {
-            el.innerHTML = `-<span class="currency-symbol">₫</span>${formattedValue}`;
+            el.innerHTML = `-${formattedValue}<span class="currency-symbol">₫</span>`;
         } else {
-            el.innerHTML = `<span class="currency-symbol">₫</span>${formattedValue}`;
+            el.innerHTML = `${formattedValue}<span class="currency-symbol">₫</span>`;
         }
     }
 });

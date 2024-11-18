@@ -99,7 +99,7 @@
                                         <td>${order.customerName}</td>
                                         <td>${order.orderDate}</td>
                                         <td class="price-value">${order.totalPrice}</td>
-                                        <td>Momo</td>
+                                        <td>${order.paymentMethod}</td>
                                         <td data-status="${order.status}">
                                             <span class="status status__${order.statusStyle}">
                                                     ${order.statusDisplay}
