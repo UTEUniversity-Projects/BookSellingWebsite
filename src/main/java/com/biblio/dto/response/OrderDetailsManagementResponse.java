@@ -26,4 +26,5 @@ public class OrderDetailsManagementResponse {
     private EOrderStatus status;
     private String statusDisplay;
     private String statusStyle;
+    private String paymentMethod;
 }

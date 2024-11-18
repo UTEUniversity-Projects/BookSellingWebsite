@@ -20,8 +20,7 @@ public class BookTemplateMapper {
         Book singlebook = bookTemplate.getBooks().iterator().next();
         return BookManagementResponse.builder()
                 .id(bookTemplate.getId())
-                .imageUrl(singlebook
-                        .getBookTemplate()
+                .imageUrl(bookTemplate
                         .getMediaFiles()
                         .iterator().next()
                         .getStoredCode()

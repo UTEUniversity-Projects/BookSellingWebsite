@@ -8,7 +8,7 @@
         <div class="cr-page-title cr-page-title-2">
             <div class="cr-breadcrumb">
                 <ul>
-                    <li><a href="/staff/product-dashboard">Biblio</a></li>
+                    <li><a href="${pageContext.request.contextPath}/staff/product-dashboard">Biblio</a></li>
                     <li><a href="${pageContext.request.contextPath}/staff/order-dashboard">Danh sách đơn hàng</a></li>
                     <li>Chi tiết đơn hàng</li>
                 </ul>
@@ -65,7 +65,7 @@
                                     <tr>
                                         <th width="5%"></th>
                                         <th>Sản phẩm</th>
-                                        <th>Trạng thái</th>
+                                        <th>Khuyến mãi</th>
                                         <th>Số lượng</th>
                                         <th>Giá</th>
                                         <th>Tổng tiền</th>
@@ -84,7 +84,7 @@
                                             <td>${product.title}</td>
                                             <td>
                                                 <span class="status status__pending">
-                                                    Đang đóng gói
+                                                    -20%
                                                 </span>
                                             </td>
                                             <td>${product.quantity}</td>
@@ -121,7 +121,7 @@
                             </div>
                             <div class="summary-row">
                                 <div class="summary-label">Phương thức thanh toán</div>
-                                <div class="summary-value">Momo</div>
+                                <div class="summary-value">${order.paymentMethod}</div>
                             </div>
                         </div>
                     </div>

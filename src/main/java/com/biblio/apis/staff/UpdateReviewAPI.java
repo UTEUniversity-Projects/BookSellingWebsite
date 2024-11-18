@@ -58,9 +58,9 @@ public class UpdateReviewAPI extends HttpServlet {
 
     private void handleHideReview(HttpServletRequest request, HttpServletResponse response, Map<String, String> result, ObjectMapper mapper) throws IOException {
         Map<String, Object> jsonMap = mapper.readValue(request.getReader(), Map.class);
-        long idReview = Long.parseLong(jsonMap.get("reviewId").toString());
+        long reviewId = Long.parseLong(jsonMap.get("reviewId").toString());
 
-        boolean success = reviewService.updateReviewHidden(idReview, true);
+        boolean success = reviewService.updateReviewHidden(reviewId, true);
         if (success) {
             result.put("message", "Đánh giá đã được ẩn thành công!");
             result.put("type", "success");
