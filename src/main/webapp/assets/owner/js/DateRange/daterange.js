@@ -3,6 +3,7 @@ $(function () {
     var end = moment();
 
     function animateNumber(element, startValue, endValue, duration) {
+
         $({ count: startValue }).animate(
             { count: endValue },
             {
