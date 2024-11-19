@@ -43,6 +43,7 @@ public class BookTemplateMapper {
                 .id(bookTemplate.getId())
                 .title(singlebook.getTitle())
                 .sellingPrice(singlebook.getSellingPrice())
+                .condition(singlebook.getCondition().getBookCondition())
                 .categoryName(singlebook.getSubCategory().getCategory().getName())
                 .imageUrl(bookTemplate
                         .getMediaFiles()
@@ -50,6 +51,7 @@ public class BookTemplateMapper {
                         .getStoredCode()
                         .replaceAll("image\\d+\\.jpg", "image1.jpg"))
                 .reviewRate(bookTemplate.calculateReviewRate())
+                .numberOfReviews(bookTemplate.getReviews().stream().filter(review -> !review.isHidden()).count())
                 .build();
     }
 

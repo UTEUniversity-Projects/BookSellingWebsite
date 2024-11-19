@@ -7,13 +7,12 @@ import lombok.*;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class BookCardResponse {
+public class CartItemResponse {
     private Long id;
+    private Long bookId;
     private String title;
-    private double sellingPrice;
-    private String categoryName;
-    private String condition;
     private String imageUrl;
-    private double reviewRate;
-    private long numberOfReviews;
+    private double sellingPrice;
+    private long quantity;
+    private double subTotal;
 }
