@@ -120,21 +120,21 @@
                             <div class="cr-cat-list cr-card card-default">
                                 <div class="cr-card-content">
                                     <div class="table-responsive tbl-600">
-                                        <div class="select-parent-add-promotion">
-                                            <label>Lọc theo:</label>
-                                            <div class="select-add-promotion">
-                                                <select class="select-item" id="category-select-discount" name="category">
-                                                    <option value="1"></option>
-                                                </select>
-                                                <span class="categoryError text-danger"></span>
-                                            </div>
-                                            <div class="select-add-promotion">
-                                                <select class="select-item" id="subcategory-select-discount" name="subcategory">
-                                                    <option value="1"></option>
-                                                </select>
-                                                <span class="subcategoryError text-danger"></span>
-                                            </div>
-                                        </div>
+<%--                                        <div class="select-parent-add-promotion">--%>
+<%--                                            <label>Lọc theo:</label>--%>
+<%--                                            <div class="select-add-promotion">--%>
+<%--                                                <select class="select-item" id="category-select-discount" name="category">--%>
+<%--                                                    <option value="1"></option>--%>
+<%--                                                </select>--%>
+<%--                                                <span class="categoryError text-danger"></span>--%>
+<%--                                            </div>--%>
+<%--                                            <div class="select-add-promotion">--%>
+<%--                                                <select class="select-item" id="subcategory-select-discount" name="subcategory">--%>
+<%--                                                    <option value="1"></option>--%>
+<%--                                                </select>--%>
+<%--                                                <span class="subcategoryError text-danger"></span>--%>
+<%--                                            </div>--%>
+<%--                                        </div>--%>
                                         <table class="table table-hover table_item_to_discount" >
                                             <thead>
                                             <tr>
