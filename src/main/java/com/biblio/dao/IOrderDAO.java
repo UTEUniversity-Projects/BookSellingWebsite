@@ -10,4 +10,7 @@ public interface IOrderDAO {
 
     List<Order> findAll();
 
+    List<Order> findAllForManagement();
+
+    Order findOneForDetailsManagement(Long id);
 }

@@ -8,5 +8,10 @@ import java.util.List;
 
 public interface IBookTemplateDAO {
     BookTemplate findById(Long id);
+
     List<BookTemplate> findAll();
+
+    List<BookTemplate> findAllForManagement();
+
+    BookTemplate findOneForDetails(Long id);
 }

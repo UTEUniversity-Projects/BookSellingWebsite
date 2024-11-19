@@ -6,7 +6,9 @@ import com.biblio.entity.MediaFile;
 import com.biblio.entity.Order;
 import com.biblio.entity.OrderItem;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class OrderDAOImpl extends GenericDAOImpl<Order> implements IOrderDAO {
 
@@ -24,10 +26,50 @@ public class OrderDAOImpl extends GenericDAOImpl<Order> implements IOrderDAO {
         return super.findAll();
     }
 
+    @Override
+    public List<Order> findAllForManagement() {
+        StringBuilder jpql = new StringBuilder();
+
+        jpql.append("SELECT DISTINCT o ")
+                .append("FROM Order o ")
+                .append("JOIN FETCH o.customer c ")
+                .append("JOIN FETCH o.orderItems oi ")
+                .append("JOIN FETCH oi.books b ")
+                .append("JOIN FETCH o.shipping s");
+
+        return super.findAll(jpql.toString());
+    }
+
+    @Override
+    public Order findOneForDetailsManagement(Long id) {
+        StringBuilder jpql = new StringBuilder();
+
+        jpql.append("SELECT DISTINCT o ")
+                .append("FROM Order o ")
+                .append("JOIN FETCH o.customer c ")
+                .append("JOIN FETCH c.account ac ")
+                .append("JOIN FETCH o.shipping s ")
+                .append("JOIN FETCH s.address ad ")
+                .append("JOIN FETCH o.orderItems oi ")
+                .append("JOIN FETCH oi.books b ")
+                .append("JOIN FETCH b.bookTemplate bt ")
+                .append("JOIN FETCH bt.mediaFiles m ")
+                .append("JOIN FETCH o.promotions p ")
+                .append("WHERE o.id = :id");
+
+        Map<String, Object> params = new HashMap<>();
+        params.put("id", id);
+
+        return super.findSingleByJPQL(jpql.toString(), params);
+    }
+
     public static void main(String[] args) {
         OrderDAOImpl dao = new OrderDAOImpl();
-        Order order = dao.findOne(1L);
-        System.out.println(order.getPromotions().size());
+        Order order = dao.findOneForDetailsManagement(1L);
+        System.out.println(order.getId());
+//        for (Order order : orders) {
+//            System.out.println(order.getId());
+//        }
 //        for (OrderItem orderItem : order.getOrderItems()) {
 //            System.out.println("Order Item ID: " + orderItem.getId());
 //

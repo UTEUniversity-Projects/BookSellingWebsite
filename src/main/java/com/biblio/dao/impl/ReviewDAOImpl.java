@@ -1,7 +1,12 @@
 package com.biblio.dao.impl;
 
 import com.biblio.dao.IReviewDAO;
+import com.biblio.entity.BookTemplate;
 import com.biblio.entity.Review;
+
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 public class ReviewDAOImpl extends GenericDAOImpl<Review> implements IReviewDAO {
     public ReviewDAOImpl() {
@@ -11,6 +16,20 @@ public class ReviewDAOImpl extends GenericDAOImpl<Review> implements IReviewDAO 
     @Override
     public Review findById(long id) {
         return super.findById(id);
+    }
+
+    @Override
+    public List<Review> findByBookTemplate(BookTemplate bookTemplate) {
+        StringBuilder jpql = new StringBuilder();
+        jpql.append("SELECT DISTINCT r ")
+                .append("FROM Review r ")
+                .append("LEFT JOIN FETCH r.responseReview rr ")
+                .append("JOIN FETCH r.customer c ")
+                .append("WHERE r.bookTemplate = :bookTemplate");
+
+        Map<String, Object> params = new HashMap<>();
+        params.put("bookTemplate", bookTemplate);
+        return super.findByJPQL(jpql.toString(), params);
     }
 
     @Override

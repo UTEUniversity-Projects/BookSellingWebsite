@@ -17,16 +17,9 @@ public class BookTemplateServiceImpl implements IBookTemplateService {
     @Inject
     IBookTemplateDAO bokTemplateDAO;
 
-//    @Override
-//    public BookDetailsResponse getBookDetailsManagementResponse(Long bookTemplateId) {
-//        BookTemplate bookTemplate = bokTemplateDAO.findById(bookTemplateId);
-//        BookDetailsResponse bookDetailsManagementResponse = BookTemplateMapper.toBookDetailsManagementResponse(bookTemplate);
-//        return bookDetailsManagementResponse;
-//    }
-
     @Override
     public List<BookManagementResponse> getAllBookManagementResponse() {
-        List<BookTemplate> bookTemplates = bokTemplateDAO.findAll();
+        List<BookTemplate> bookTemplates = bokTemplateDAO.findAllForManagement();
         List<BookManagementResponse> bookManagementResponseList = new ArrayList<>();
         for (BookTemplate bookTemplate : bookTemplates) {
             bookManagementResponseList.add(BookTemplateMapper.toBookManagementResponse(bookTemplate));
@@ -46,10 +39,10 @@ public class BookTemplateServiceImpl implements IBookTemplateService {
 
     @Override
     public BookDetailsResponse getBookDetailsResponse(Long bookTemplateId) {
-        BookTemplate bookTemplate = bokTemplateDAO.findById(bookTemplateId);
+        BookTemplate bookTemplate = bokTemplateDAO.findOneForDetails(bookTemplateId);
         return BookTemplateMapper.toBookDetailsResponse(bookTemplate);
     }
-  
+
     @Override
     public List<BookTemplatePromotionResponse> getAllBookBookTemplatePromotionResponse() {
         List<BookTemplate> bookTemplates = bokTemplateDAO.findAll();
