@@ -39,9 +39,9 @@ public class GetSubCategoriesAPI extends HttpServlet {
      */
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        String categoryId = request.getParameter("categoryId");
-        List<SubCategoryResponse> subCategoryResponse = subCategoryService.getAllSubCategoriesById(Long.parseLong(categoryId));
-
+        //String categoryId = request.getParameter("categoryId");
+        //List<SubCategoryResponse> subCategoryResponse = subCategoryService.getAllSubCategoriesById(Long.parseLong(categoryId));
+        List<SubCategoryResponse> subCategoryResponse = subCategoryService.findAll();
         // Thiết lập kiểu nội dung là JSON
         response.setContentType("application/json");
         response.setCharacterEncoding("UTF-8");

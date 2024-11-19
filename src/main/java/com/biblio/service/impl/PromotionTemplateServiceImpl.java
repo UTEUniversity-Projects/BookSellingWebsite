@@ -73,7 +73,6 @@ public class PromotionTemplateServiceImpl implements IPromotionTemplateService {
     @Override
     public void updatePromotionTemplate(PromotionTemplateUpdateRequest promotionTemplateUpdateRequest) {
         PromotionTemplate promotionTemplate = PromotionTemplateMapper.toPromotionTemplate(promotionTemplateUpdateRequest);
-        System.out.println(promotionTemplate.getCreatedAt().toString());
         promotionTemplateDAO.update(promotionTemplate);
     }
 
