@@ -151,6 +151,9 @@ function toggleForm(editButton) {
             if (input.name !== "code") {
                 input.disabled = false;
             }
+            if (input.name === "quantity" && input.value === "") {
+                input.disabled = true;
+            }
 
         });
         editButton.innerText = "Lưu";

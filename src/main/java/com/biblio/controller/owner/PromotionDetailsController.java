@@ -73,6 +73,7 @@ public class PromotionDetailsController extends HttpServlet {
         String description = request.getParameter("description");
         String discountLimit = request.getParameter("discountLimit");
         String time = request.getParameter("dateeffective");
+        Long quantity = Long.parseLong(request.getParameter("quantity"));
 
         try {
             PromotionTemplateGetDetailsResponse promotionTemplateGetDetailsResponse = promotionTemplateService.getPromotionTemplateByCode(code);
@@ -86,40 +87,8 @@ public class PromotionDetailsController extends HttpServlet {
                 PromotionTemplateUpdateRequest promotionTemplateUpdateRequest = convertToUpdateRequest(promotionTemplateResponse);
 
                 String startDate = "";
-
-                for (PromotionResponse promotionResponse : promotionTemplateResponse.getPromotions()) {
-                    PromotionUpdateRequest promotionUpdateRequest = new PromotionUpdateRequest();
-
-                    promotionUpdateRequest.setId(promotionResponse.getId());
-                    promotionUpdateRequest.setTitle(title);
-                    promotionUpdateRequest.setDescription(description);
-                    promotionUpdateRequest.setPercentDiscount(percentDiscount);
-                    promotionUpdateRequest.setMinValueApplied(minValueApplied);
-                    promotionUpdateRequest.setDiscountLimit(Double.parseDouble(discountLimit));
-                    promotionUpdateRequest.setStatus(EPromotionStatus.USED);
-
-                    if (promotionTemplateResponse.getStatus() == EPromotionTemplateStatus.EFFECTIVE || promotionTemplateResponse.getStatus() == EPromotionTemplateStatus.USED_OUT) {
-                        promotionUpdateRequest.setEffectiveDate(promotionResponse.getEffectiveDate());
-                        startDate = promotionResponse.getEffectiveDate();
-                        promotionUpdateRequest.setExpirationDate(convertToIsoFormat(request.getParameter("dateeffective")));
-                    } else {
-                        String[] parts = time.split(" - ");
-                        promotionUpdateRequest.setEffectiveDate(convertToIsoFormat(parts[0]));
-                        promotionUpdateRequest.setExpirationDate(convertToIsoFormat(parts[1]));
-                    }
-
-                    for (PromotionTargetResponse promotionTargetResponse : promotionResponse.getPromotionTargets()) {
-                        PromotionTargetUpdateRequest promotionTargetUpdateRequest = new PromotionTargetUpdateRequest();
-
-                        promotionTargetUpdateRequest.setId(promotionTargetResponse.getId());
-                        promotionTargetUpdateRequest.setType(EPromotionTargetType.WHOLE);
-                        promotionTargetUpdateRequest.setApplicableObjectId(promotionTargetResponse.getApplicableObjectId());
-                        promotionUpdateRequest.getPromotionTargets().add(promotionTargetUpdateRequest);
-                    }
-
-                    promotionTemplateUpdateRequest.getPromotionUpdates().add(promotionUpdateRequest);
-                }
-                for (int i = 0; i< Long.parseLong(request.getParameter("quantity")); i++) {
+                if (quantity == null) quantity = 1L;
+                for (int i = 0; i < quantity; i++) {
                     PromotionUpdateRequest promotionUpdateRequest = new PromotionUpdateRequest();
 
                     promotionUpdateRequest.setTitle(title);
@@ -129,7 +98,7 @@ public class PromotionDetailsController extends HttpServlet {
                     promotionUpdateRequest.setDiscountLimit(Double.parseDouble(discountLimit));
                     promotionUpdateRequest.setStatus(EPromotionStatus.NOT_USE);
 
-                    if (promotionTemplateResponse.getStatus() == EPromotionTemplateStatus.EFFECTIVE) {
+                    if (promotionTemplateResponse.getStatus() == EPromotionTemplateStatus.EFFECTIVE || promotionTemplateResponse.getStatus() == EPromotionTemplateStatus.USED_OUT) {
                         promotionUpdateRequest.setEffectiveDate(startDate);
                         promotionUpdateRequest.setExpirationDate(convertToIsoFormat(request.getParameter("dateeffective")));
                     } else {
@@ -145,121 +114,8 @@ public class PromotionDetailsController extends HttpServlet {
 
                     promotionTemplateUpdateRequest.getPromotionUpdates().add(promotionUpdateRequest);
                 }
-
-
-//                if (!promotionTemplateResponse.getIsInfinite() && request.getParameter("quantity") != null) {
-//                    PromotionTemplateUpdateRequest promotionTemplateUpdateRequest = convertToUpdateRequest(promotionTemplateResponse);
-//
-//                    if (promotionTemplateGetDetailsResponse.getQuantity() == Long.parseLong(request.getParameter("quantity"))) {
-//
-//
-//                        for (PromotionResponse promotionResponse : promotionTemplateResponse.getPromotions()) {
-//                            PromotionUpdateRequest promotionUpdateRequest = new PromotionUpdateRequest();
-//
-//                            promotionUpdateRequest.setId(promotionResponse.getId());
-//                            promotionUpdateRequest.setTitle(title);
-//                            promotionUpdateRequest.setDescription(description);
-//                            promotionUpdateRequest.setPercentDiscount(percentDiscount);
-//                            promotionUpdateRequest.setMinValueApplied(minValueApplied);
-//                            promotionUpdateRequest.setDiscountLimit(Double.parseDouble(discountLimit));
-//                            promotionUpdateRequest.setStatus(promotionResponse.getStatus());
-//
-//                            if (promotionTemplateResponse.getStatus() == EPromotionTemplateStatus.EFFECTIVE) {
-//                                promotionUpdateRequest.setEffectiveDate(promotionResponse.getEffectiveDate());
-//                                promotionUpdateRequest.setExpirationDate(convertToIsoFormat(request.getParameter("dateeffective")));
-//                            } else {
-//                                String[] parts = time.split(" - ");
-//                                promotionUpdateRequest.setEffectiveDate(convertToIsoFormat(parts[0]));
-//                                promotionUpdateRequest.setExpirationDate(convertToIsoFormat(parts[1]));
-//                            }
-//
-//                            for (PromotionTargetResponse promotionTargetResponse : promotionResponse.getPromotionTargets()) {
-//                                PromotionTargetUpdateRequest promotionTargetUpdateRequest = new PromotionTargetUpdateRequest();
-//
-//                                promotionTargetUpdateRequest.setId(promotionTargetResponse.getId());
-//                                promotionTargetUpdateRequest.setType(EPromotionTargetType.WHOLE);
-//                                promotionTargetUpdateRequest.setApplicableObjectId(promotionTargetResponse.getApplicableObjectId());
-//                                promotionUpdateRequest.getPromotionTargets().add(promotionTargetUpdateRequest);
-//                            }
-//
-//                            promotionTemplateUpdateRequest.getPromotionUpdates().add(promotionUpdateRequest);
-//                        }
-//                        promotionTemplateService.updatePromotionTemplate(promotionTemplateUpdateRequest);
-//                        response.sendRedirect(request.getContextPath() + "promotion-details?id=" + promotionTemplateUpdateRequest.getId());
-//
-//                    } else if (promotionTemplateGetDetailsResponse.getQuantity() < Long.parseLong(request.getParameter("quantity"))) {
-//
-//                        String dateas = "";
-//                        for (PromotionResponse promotionResponse : promotionTemplateResponse.getPromotions()) {
-//                            PromotionUpdateRequest promotionUpdateRequest = new PromotionUpdateRequest();
-//
-//                            promotionUpdateRequest.setId(promotionResponse.getId());
-//                            promotionUpdateRequest.setTitle(title);
-//                            promotionUpdateRequest.setDescription(description);
-//                            promotionUpdateRequest.setPercentDiscount(percentDiscount);
-//                            promotionUpdateRequest.setMinValueApplied(minValueApplied);
-//                            promotionUpdateRequest.setDiscountLimit(Double.parseDouble(discountLimit));
-//                            promotionUpdateRequest.setStatus(promotionResponse.getStatus());
-//
-//                            dateas = promotionResponse.getEffectiveDate();
-//
-//                            if (promotionTemplateResponse.getStatus() == EPromotionTemplateStatus.EFFECTIVE || promotionTemplateResponse.getStatus() == EPromotionTemplateStatus.USED_OUT) {
-//                                promotionUpdateRequest.setEffectiveDate(promotionResponse.getEffectiveDate());
-//
-//                                promotionUpdateRequest.setExpirationDate(convertToIsoFormat(request.getParameter("dateeffective")));
-//                            } else {
-//                                String[] parts = time.split(" - ");
-//                                promotionUpdateRequest.setEffectiveDate(convertToIsoFormat(parts[0]));
-//                                promotionUpdateRequest.setExpirationDate(convertToIsoFormat(parts[1]));
-//                            }
-//
-//                            for (PromotionTargetResponse promotionTargetResponse : promotionResponse.getPromotionTargets()) {
-//                                PromotionTargetUpdateRequest promotionTargetUpdateRequest = new PromotionTargetUpdateRequest();
-//
-//                                promotionTargetUpdateRequest.setId(promotionTargetResponse.getId());
-//                                promotionTargetUpdateRequest.setType(EPromotionTargetType.WHOLE);
-//                                promotionTargetUpdateRequest.setApplicableObjectId(promotionTargetResponse.getApplicableObjectId());
-//                                promotionUpdateRequest.getPromotionTargets().add(promotionTargetUpdateRequest);
-//                            }
-//
-//                            promotionTemplateUpdateRequest.getPromotionUpdates().add(promotionUpdateRequest);
-//                        }
-//                        for (int i = 0; i< Long.parseLong(request.getParameter("quantity")) - promotionTemplateGetDetailsResponse.getQuantity(); i++) {
-//                            PromotionUpdateRequest promotionUpdateRequest = new PromotionUpdateRequest();
-//
-//
-//                            promotionUpdateRequest.setTitle(title);
-//                            promotionUpdateRequest.setDescription(description);
-//                            promotionUpdateRequest.setPercentDiscount(percentDiscount);
-//                            promotionUpdateRequest.setMinValueApplied(minValueApplied);
-//                            promotionUpdateRequest.setDiscountLimit(Double.parseDouble(discountLimit));
-//                            promotionUpdateRequest.setStatus(EPromotionStatus.NOT_USE);
-//
-//                            if (promotionTemplateResponse.getStatus() == EPromotionTemplateStatus.EFFECTIVE) {
-//                                promotionUpdateRequest.setEffectiveDate(dateas);
-//                                promotionUpdateRequest.setExpirationDate(convertToIsoFormat(request.getParameter("dateeffective")));
-//                            } else {
-//                                String[] parts = time.split(" - ");
-//                                promotionUpdateRequest.setEffectiveDate(convertToIsoFormat(parts[0]));
-//                                promotionUpdateRequest.setExpirationDate(convertToIsoFormat(parts[1]));
-//                            }
-//
-//                            PromotionTargetUpdateRequest promotionTargetUpdate_add = new PromotionTargetUpdateRequest();
-//                            promotionTargetUpdate_add.setType(EPromotionTargetType.WHOLE);
-//                            promotionTargetUpdate_add.setApplicableObjectId(-1L);
-//                            promotionUpdateRequest.getPromotionTargets().add(promotionTargetUpdate_add);
-//
-//                            promotionTemplateUpdateRequest.getPromotionUpdates().add(promotionUpdateRequest);
-//                        }
-//                        promotionTemplateService.updatePromotionTemplate(promotionTemplateUpdateRequest);
-//                        response.sendRedirect(request.getContextPath() + "promotion-details?id=" + promotionTemplateUpdateRequest.getId());
-//
-//                    } else if (promotionTemplateGetDetailsResponse.getQuantity() > Long.parseLong(request.getParameter("quantity"))) {
-//                        String dateas = "";
-//                    }
-//
-//                }
-
+                promotionTemplateService.updatePromotionTemplate(promotionTemplateUpdateRequest);
+                response.sendRedirect("/owner/promotion-details?id=" + promotionTemplateUpdateRequest.getId());
 
             }
         } catch (Exception e) {
@@ -318,12 +174,41 @@ public class PromotionDetailsController extends HttpServlet {
 
     public PromotionTemplateUpdateRequest convertToUpdateRequest(PromotionTemplateResponse promotionTemplateResponse) {
         PromotionTemplateUpdateRequest promotionTemplateUpdateRequest = new PromotionTemplateUpdateRequest();
+
         promotionTemplateUpdateRequest.setId(promotionTemplateResponse.getId());
+
         promotionTemplateUpdateRequest.setCode(promotionTemplateResponse.getCode());
         promotionTemplateUpdateRequest.setCreateAt(promotionTemplateResponse.getCreateAt());
         promotionTemplateUpdateRequest.setIsInfinite(promotionTemplateResponse.getIsInfinite());
         promotionTemplateUpdateRequest.setStatus(promotionTemplateResponse.getStatus());
         promotionTemplateUpdateRequest.setType(promotionTemplateResponse.getType());
+
+        for (PromotionResponse promotionResponse : promotionTemplateResponse.getPromotions()) {
+            PromotionUpdateRequest promotionUpdateRequest = new PromotionUpdateRequest();
+
+            promotionUpdateRequest.setId(promotionResponse.getId());
+            promotionUpdateRequest.setTitle(promotionResponse.getTitle());
+            promotionUpdateRequest.setDescription(promotionResponse.getDescription());
+            promotionUpdateRequest.setPercentDiscount(promotionResponse.getPercentDiscount());
+            promotionUpdateRequest.setMinValueApplied(promotionResponse.getMinValueApplied());
+            promotionUpdateRequest.setDiscountLimit(promotionResponse.getDiscountLimit());
+            promotionUpdateRequest.setStatus(EPromotionStatus.USED);
+            promotionUpdateRequest.setEffectiveDate(promotionResponse.getEffectiveDate());
+            promotionUpdateRequest.setExpirationDate(promotionResponse.getExpirationDate());
+
+            for (PromotionTargetResponse promotionTargetResponse : promotionResponse.getPromotionTargets()) {
+                PromotionTargetUpdateRequest promotionTargetUpdateRequest = new PromotionTargetUpdateRequest();
+
+                promotionTargetUpdateRequest.setId(promotionTargetResponse.getId());
+                promotionTargetUpdateRequest.setType(EPromotionTargetType.WHOLE);
+                promotionTargetUpdateRequest.setApplicableObjectId(promotionTargetResponse.getApplicableObjectId());
+                promotionUpdateRequest.getPromotionTargets().add(promotionTargetUpdateRequest);
+            }
+
+            promotionTemplateUpdateRequest.getPromotionUpdates().add(promotionUpdateRequest);
+        }
+
+
 
         return promotionTemplateUpdateRequest;
     }
