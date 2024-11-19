@@ -12,8 +12,6 @@ public class BookCardResponse {
     private String title;
     private double sellingPrice;
     private String categoryName;
-    private String condition;
     private String imageUrl;
     private double reviewRate;
-    private long numberOfReviews;
 }

@@ -12,9 +12,8 @@ public class OrderManagementResponse {
     private Long id;
     private String customerName;
     private String orderDate;
-    private double totalPrice;
-    private String paymentMethod;
     private EOrderStatus status;
     private String statusDisplay;
     private String statusStyle;
+    private double totalPrice;
 }

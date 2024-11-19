@@ -29,9 +29,6 @@ public class CartController extends HttpServlet {
      */
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         // TODO Auto-generated method stub
-
-
-
         request.setAttribute("breadcumb", "Giỏ hàng");
         request.getRequestDispatcher("/views/customer/cart.jsp").forward(request, response);
     }

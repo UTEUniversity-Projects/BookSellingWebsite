@@ -43,14 +43,37 @@ public class GetBookAPI extends HttpServlet {
      */
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        List<BookTemplatePromotionResponse> allBooks = bookTemplateService.getAllBookBookTemplatePromotionResponse();
+        String idSubcategory = request.getParameter("idSubcategory");
 
-        response.setContentType("application/json");
-        response.setCharacterEncoding("UTF-8");
+        // Kiểm tra nếu idSubcategory không được cung cấp
+        if (idSubcategory == null || idSubcategory.isEmpty()) {
+            response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
+            response.getWriter().write("{\"message\":\"idSubcategory is required\"}");
+            return;
+        }
 
-        ObjectMapper objectMapper = new ObjectMapper();
-        response.getWriter().write(objectMapper.writeValueAsString(allBooks));
+        try {
+            // Parse idSubcategory thành Long
+            Long subCategoryId = Long.parseLong(idSubcategory);
 
+            // Lấy tất cả sách và lọc theo idSubcategory
+            List<BookTemplatePromotionResponse> allBooks = bookTemplateService.getAllBookBookTemplatePromotionResponse();
+            List<BookTemplatePromotionResponse> filteredBooks = allBooks.stream()
+                    .filter(book -> book.getSubCategoryId().equals(subCategoryId))
+                    .collect(Collectors.toList());
+
+            // Trả về danh sách đã lọc dưới dạng JSON
+            response.setContentType("application/json");
+            response.setCharacterEncoding("UTF-8");
+            response.getWriter().write(new Gson().toJson(filteredBooks));
+        } catch (NumberFormatException e) {
+            response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
+            response.getWriter().write("{\"message\":\"idSubcategory must be a valid number\"}");
+        } catch (Exception e) {
+            response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+            response.getWriter().write("{\"message\":\"An error occurred while fetching data\"}");
+            e.printStackTrace();
+        }
     }
 
 

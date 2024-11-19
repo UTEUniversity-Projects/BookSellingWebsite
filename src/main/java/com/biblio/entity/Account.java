@@ -41,8 +41,8 @@ public class Account implements Serializable {
 
     // region Relationships
 
-    @OneToOne(mappedBy = "account", fetch = FetchType.LAZY)
-    private Customer customer;
+//    @OneToOne(mappedBy = "account", fetch = FetchType.LAZY)
+//    private Customer customer;
 //
 //    @OneToOne(mappedBy = "account", fetch = FetchType.LAZY)
 //    private Staff staff;

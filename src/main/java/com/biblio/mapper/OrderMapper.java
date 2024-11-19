@@ -13,15 +13,15 @@ import java.util.stream.Collectors;
 public class OrderMapper {
     public static OrderManagementResponse mapToOrderManagementResponse(Order order) {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm dd-MM-yyyy");
+
         return OrderManagementResponse.builder()
                 .id(order.getId())
                 .customerName(order.getCustomer().getFullName())
                 .orderDate(order.getOrderDate().format(formatter))
-                .totalPrice(order.calTotalPrice())
-                .paymentMethod(order.getPaymentType().getValue())
                 .status(order.getStatus())
                 .statusDisplay(order.getStatus().getDescription())
                 .statusStyle(order.getStatus().getStatusStyle())
+                .totalPrice(order.calTotalPrice())
                 .build();
     }
 
@@ -46,7 +46,6 @@ public class OrderMapper {
                 .statusDisplay(order.getStatus().getDescription())
                 .statusStyle(order.getStatus().getStatusStyle())
                 .totalPrice(order.calTotalPrice())
-                .paymentMethod(order.getPaymentType().getValue())
                 .build();
     }
 }

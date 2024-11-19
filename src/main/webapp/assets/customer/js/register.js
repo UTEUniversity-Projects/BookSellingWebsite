@@ -1,6 +1,5 @@
 import { toast } from "./toast.js";
 import Validator from "./validator.js";
-import { uploadImage } from '../../commons/js/upload-image.js';
 
 $(document).ready(() => {
 
@@ -10,34 +9,32 @@ $(document).ready(() => {
 
 		async register() {
 
-			//const uploadImage = async () => {
-			//	try {
-			//		const fileInput = document.querySelector("#avatar");
-			//		let file = fileInput?.files[0];
-			//		if (!file) {
-			//			return null;
-			//		}
-			//
-			//		const formData = new FormData();
-			//		formData.append("image", file);
-			//		formData.append("username", $("#username").val())
-			//
-			//		return await $.ajax({
-			//			url: `${contextPath}/upload`,
-			//			type: 'POST',
-			//			data: formData,
-			//			enctype: 'multipart/form-data',
-			//			processData: false,
-			//			contentType: false,
-			//		});
-			//
-			//	} catch (error) {
-			//		console.error('Error uploading file:', error);
-			//		return null;
-			//	}
-			//};
+			const uploadImage = async () => {
+				try {
+					const fileInput = document.querySelector("#avatar");
+					let file = fileInput?.files[0];
+					if (!file) {
+						return null;
+					}
 
-			uploadImage(".btn-register", "", "#avatar");
+					const formData = new FormData();
+					formData.append("image", file);
+					formData.append("username", $("#username").val())
+
+					return await $.ajax({
+						url: `${contextPath}/upload`,
+						type: 'POST',
+						data: formData,
+						enctype: 'multipart/form-data',
+						processData: false,
+						contentType: false,
+					});
+
+				} catch (error) {
+					console.error('Error uploading file:', error);
+					return null;
+				}
+			};
 
 			const handleRegistration = async () => {
 

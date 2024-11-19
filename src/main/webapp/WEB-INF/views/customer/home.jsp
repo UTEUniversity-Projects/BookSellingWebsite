@@ -540,7 +540,7 @@
                                         <a
                                                 class="model-oraganic-product"
                                                 data-bs-toggle="modal"
-                                                href="#quickview-${book.id}"
+                                                href="#quickview"
                                                 role="button"
                                         >
                                             <i class="ri-eye-line"></i>
@@ -572,8 +572,8 @@
                                     </div>
                                     <a href="${pageContext.request.contextPath}/book?id=${book.id}" class="title">${book.title}</a>
                                     <p class="cr-price">
-                                        <span class="new-price price-value">${book.sellingPrice}</span>
-                                        <span class="old-price price-value">${book.sellingPrice}</span>
+                                        <span class="new-price">${book.sellingPrice} đ</span>
+<%--                                        <span class="old-price">$123.25</span>--%>
                                     </p>
                                 </div>
                             </div>
@@ -1318,5 +1318,3 @@
         </div>
     </div>
 </section>
-
-<script src="${pageContext.request.contextPath}/assets/customer/js/book-list.js" defer></script>

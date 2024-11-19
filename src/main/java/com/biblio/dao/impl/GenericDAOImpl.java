@@ -77,9 +77,7 @@ public class GenericDAOImpl<T> implements IGenericDAO<T> {
         try {
             TypedQuery<T> query = em.createQuery(jpql, entityClass);
             setQueryParameters(query, params);
-
-            List<T> results = query.setMaxResults(1).getResultList();
-            return results.isEmpty() ? null : results.get(0);
+            return query.getResultStream().findFirst().orElse(null);
         } catch (Exception e) {
             throw new RuntimeException("Error while finding single entity by JPQL", e);
         } finally {

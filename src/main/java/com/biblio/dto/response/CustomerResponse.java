@@ -8,7 +8,6 @@ import lombok.*;
 @Setter
 @Builder
 public class CustomerResponse {
-    private long id;
     private String avatar;
     private String fullName;
 }

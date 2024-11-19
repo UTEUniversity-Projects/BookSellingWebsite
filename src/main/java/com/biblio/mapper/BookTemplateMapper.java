@@ -20,7 +20,8 @@ public class BookTemplateMapper {
         Book singlebook = bookTemplate.getBooks().iterator().next();
         return BookManagementResponse.builder()
                 .id(bookTemplate.getId())
-                .imageUrl(bookTemplate
+                .imageUrl(singlebook
+                        .getBookTemplate()
                         .getMediaFiles()
                         .iterator().next()
                         .getStoredCode()
@@ -43,7 +44,6 @@ public class BookTemplateMapper {
                 .id(bookTemplate.getId())
                 .title(singlebook.getTitle())
                 .sellingPrice(singlebook.getSellingPrice())
-                .condition(singlebook.getCondition().getBookCondition())
                 .categoryName(singlebook.getSubCategory().getCategory().getName())
                 .imageUrl(bookTemplate
                         .getMediaFiles()
@@ -51,7 +51,6 @@ public class BookTemplateMapper {
                         .getStoredCode()
                         .replaceAll("image\\d+\\.jpg", "image1.jpg"))
                 .reviewRate(bookTemplate.calculateReviewRate())
-                .numberOfReviews(bookTemplate.getReviews().stream().filter(review -> !review.isHidden()).count())
                 .build();
     }
 

@@ -9539,21 +9539,11 @@ p {
 }
 .author-item {
   display: flex;
-  gap: 30px;
-  border: 1px solid #eaeaea;
-  padding: 16px 20px;
-  margin-bottom: 10px;
-  border-radius: 15px;
+  gap: 50px;
+  margin-bottom: 20px;
 }
 .author-item .author-item--avatar {
-  min-width: 100px;
-  width: 100px;
-  height: 100px;
-}
-.author-item .author-item--avatar img {
-  width: 100%;
-  object-fit: cover;
-  border-radius: 50%;
+  width: 200px;
 }
 .author-item .author-item--info p {
   margin-top: 20px;
