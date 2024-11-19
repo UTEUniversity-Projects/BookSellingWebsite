@@ -389,5 +389,7 @@
 <script>const contextPath = "<%= request.getContextPath()%>";</script>
 <script src="${pageContext.request.contextPath}/assets/owner/js/validator-promotion-details.js" defer></script>
 
+<script src="${pageContext.request.contextPath}/assets/owner/js/add-promotion.js" defer></script>
+
 
 
