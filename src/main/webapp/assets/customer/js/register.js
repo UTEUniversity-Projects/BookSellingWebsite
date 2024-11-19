@@ -1,5 +1,6 @@
 import { toast } from "./toast.js";
 import Validator from "./validator.js";
+import { uploadImage } from '../../commons/js/upload-image.js';
 
 $(document).ready(() => {
 
@@ -9,32 +10,34 @@ $(document).ready(() => {
 
 		async register() {
 
-			const uploadImage = async () => {
-				try {
-					const fileInput = document.querySelector("#avatar");
-					let file = fileInput?.files[0];
-					if (!file) {
-						return null;
-					}
+			//const uploadImage = async () => {
+			//	try {
+			//		const fileInput = document.querySelector("#avatar");
+			//		let file = fileInput?.files[0];
+			//		if (!file) {
+			//			return null;
+			//		}
+			//
+			//		const formData = new FormData();
+			//		formData.append("image", file);
+			//		formData.append("username", $("#username").val())
+			//
+			//		return await $.ajax({
+			//			url: `${contextPath}/upload`,
+			//			type: 'POST',
+			//			data: formData,
+			//			enctype: 'multipart/form-data',
+			//			processData: false,
+			//			contentType: false,
+			//		});
+			//
+			//	} catch (error) {
+			//		console.error('Error uploading file:', error);
+			//		return null;
+			//	}
+			//};
 
-					const formData = new FormData();
-					formData.append("image", file);
-					formData.append("username", $("#username").val())
-
-					return await $.ajax({
-						url: `${contextPath}/upload`,
-						type: 'POST',
-						data: formData,
-						enctype: 'multipart/form-data',
-						processData: false,
-						contentType: false,
-					});
-
-				} catch (error) {
-					console.error('Error uploading file:', error);
-					return null;
-				}
-			};
+			uploadImage(".btn-register", "", "#avatar");
 
 			const handleRegistration = async () => {
 
@@ -113,7 +116,7 @@ $(document).ready(() => {
 
 			};
 
-			await handleRegistration();
+			//await handleRegistration();
 		}
 
 		getAddress() {
@@ -212,26 +215,26 @@ $(document).ready(() => {
 		formGroupSelector: '.form-group',
 		errorSelector: '.form-message',
 		rules: [
-			Validator.isRequired('#fullName'),
-			Validator.isRequired('#email'),
-			Validator.isRequired('#phoneNumber'),
-			Validator.isRequired('#dob', 'Vui lòng chọn ngày sinh !'),
-			Validator.isRequired("#username"),
-			Validator.isRequired('#password'),
-			Validator.isRequired('#re-password'),
-			Validator.isConfirmed('#re-password', function () {
-				return document.querySelector('#registerForm #password').value;
-			}, 'Mật khẩu nhập lại không chính xác !'),
-			Validator.isRequiredSelected('#province', 'Vui lòng chọn Tỉnh thành phố !', 'Tỉnh thành phố'),
-			Validator.isRequiredSelected('#district', 'Vui lòng chọn Quận Huyện !', 'Quận Huyện'),
-			Validator.isRequiredSelected('#village', 'Vui lòng chọn Phường Xã !', 'Phường Xã'),
-			Validator.isRequired('#detail'),
-			Validator.isChecked('#check-with-link', 'Vui lòng đồng ý với điều khoản và chính sách của Biblio !'),
-			Validator.isEmail('#email', 'Email không đúng định dạng !'),
-			Validator.phoneNumber("#phoneNumber", 10, 'Số điện thoại phải bao gồm 10 số và chỉ bao gồm số !'),
-			Validator.isAllLowercase("#username", 'Username chỉ bao gồm chữ thường và số !'),
-			Validator.minLength('#username', 8),
-			Validator.minLength('#password', 8),
+			//Validator.isRequired('#fullName'),
+			//Validator.isRequired('#email'),
+			//Validator.isRequired('#phoneNumber'),
+			//Validator.isRequired('#dob', 'Vui lòng chọn ngày sinh !'),
+			//Validator.isRequired("#username"),
+			//Validator.isRequired('#password'),
+			//Validator.isRequired('#re-password'),
+			//Validator.isConfirmed('#re-password', function () {
+			//	return document.querySelector('#registerForm #password').value;
+			//}, 'Mật khẩu nhập lại không chính xác !'),
+			//Validator.isRequiredSelected('#province', 'Vui lòng chọn Tỉnh thành phố !', 'Tỉnh thành phố'),
+			//Validator.isRequiredSelected('#district', 'Vui lòng chọn Quận Huyện !', 'Quận Huyện'),
+			//Validator.isRequiredSelected('#village', 'Vui lòng chọn Phường Xã !', 'Phường Xã'),
+			//Validator.isRequired('#detail'),
+			//Validator.isChecked('#check-with-link', 'Vui lòng đồng ý với điều khoản và chính sách của Biblio !'),
+			//Validator.isEmail('#email', 'Email không đúng định dạng !'),
+			//Validator.phoneNumber("#phoneNumber", 10, 'Số điện thoại phải bao gồm 10 số và chỉ bao gồm số !'),
+			//Validator.isAllLowercase("#username", 'Username chỉ bao gồm chữ thường và số !'),
+			//Validator.minLength('#username', 8),
+			//Validator.minLength('#password', 8),
 		],
 		onSubmit: async function (data) {
 			await register.register();

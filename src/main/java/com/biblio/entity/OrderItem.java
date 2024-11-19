@@ -26,7 +26,7 @@ public class OrderItem implements Serializable {
 
     // region Relationships
 
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JoinTable(
             name = "order_item_books",
             joinColumns = @JoinColumn(name = "order_item_id"),

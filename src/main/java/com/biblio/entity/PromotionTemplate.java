@@ -50,7 +50,7 @@ public class PromotionTemplate implements Serializable {
 
     // region Relationships
 
-    @OneToMany(mappedBy = "promotionTemplate", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "promotionTemplate", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private Set<Promotion> promotions = new HashSet<>();
 
     // endregion

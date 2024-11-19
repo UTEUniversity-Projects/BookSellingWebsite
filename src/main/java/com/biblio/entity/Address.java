@@ -14,7 +14,8 @@ import java.util.Set;
 @Getter
 @Setter
 @Builder
-public class Address implements Serializable {
+public class
+Address implements Serializable {
 
     // region Attributes
 

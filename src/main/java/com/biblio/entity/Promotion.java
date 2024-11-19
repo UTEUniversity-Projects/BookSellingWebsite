@@ -57,11 +57,11 @@ public class Promotion implements Serializable {
 
     // region Relationships
 
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "promotion_template_id", nullable = false)
     private PromotionTemplate promotionTemplate;
 
-    @OneToMany(mappedBy = "promotion", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "promotion", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private Set<PromotionTarget> promotionTargets = new HashSet<>();
 
     @ManyToMany(mappedBy = "promotions", fetch = FetchType.LAZY)
