@@ -23,7 +23,10 @@ public class CustomerDAOImpl extends GenericDAOImpl<Customer> implements ICustom
 
     @Override
     public Customer findById(Long id) {
-        return super.findById(id);
+        String jpql = "SELECT DISTINCT c FROM Customer c JOIN FETCH c.account LEFT JOIN FETCH c.orders LEFT JOIN FETCH c.addresses WHERE c.id = :id";
+        Map<String, Object> params = new HashMap<>();
+        params.put("id", id);
+        return super.findSingleByJPQL(jpql, params);
     }
 
     @Override

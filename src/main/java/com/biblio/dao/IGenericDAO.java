@@ -17,6 +17,8 @@ public interface IGenericDAO<T> {
 
     List<T> findByJPQL(String jpql, Map<String, Object> params);
 
+    T findSingleByJPQL(String jpql);
+
     T findSingleByJPQL(String jpql, Map<String, Object> params);
 
     List<T> findAll();

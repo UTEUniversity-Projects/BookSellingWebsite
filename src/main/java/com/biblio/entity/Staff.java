@@ -19,7 +19,7 @@ public class Staff extends User implements Serializable {
 
     // region Relationships
 
-    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JoinColumn(name = "account_id")
     private Account account;
 
@@ -29,7 +29,7 @@ public class Staff extends User implements Serializable {
     @OneToMany(mappedBy = "staff")
     private Set<ResponseSupport> responseSupports = new HashSet<>();
 
-    @OneToMany(mappedBy = "staff", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "staff", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private Set<Address> addresses;
 
     // endregion

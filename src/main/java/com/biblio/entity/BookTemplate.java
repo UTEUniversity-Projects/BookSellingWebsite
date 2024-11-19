@@ -28,7 +28,7 @@ public class BookTemplate {
     @Column(name = "status", nullable = false)
     private EBookTemplateStatus status;
 
-    @ElementCollection(fetch = FetchType.EAGER)
+    @ElementCollection(fetch = FetchType.LAZY)
     @Enumerated(EnumType.STRING)
     @CollectionTable(name = "book_template_languages",
             joinColumns = @JoinColumn(name = "book_template_id", nullable = false))
@@ -39,26 +39,26 @@ public class BookTemplate {
 
     // region Relationships
 
-    @ManyToMany(mappedBy = "bookTemplates", fetch = FetchType.EAGER)
+    @ManyToMany(mappedBy = "bookTemplates", fetch = FetchType.LAZY)
     private Set<Author> authors = new HashSet<>();
 
-    @ManyToMany(mappedBy = "bookTemplates", fetch = FetchType.EAGER)
+    @ManyToMany(mappedBy = "bookTemplates", fetch = FetchType.LAZY)
     private Set<Translator> translators = new HashSet<>();
 
-    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JoinColumn(name = "publisher_id", nullable = false)
     private Publisher publisher;
 
-    @OneToMany(mappedBy = "bookTemplate", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "bookTemplate", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private Set<MediaFile> mediaFiles = new LinkedHashSet<>();
 
-    @OneToMany(mappedBy = "bookTemplate", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "bookTemplate", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private Set<Book> books = new HashSet<>();
 
     @OneToMany(mappedBy = "bookTemplate", cascade = CascadeType.ALL)
     private Set<CartItem> cartItems = new HashSet<>();
 
-    @OneToMany(mappedBy = "bookTemplate", fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "bookTemplate", fetch = FetchType.LAZY)
     private Set<Review> reviews = new HashSet<>();
 
     // endregion
