@@ -12,3 +12,7 @@ document.querySelectorAll('.price-value').forEach(el => {
         }
     }
 });
+
+function viewBook(book) {
+    window.location.href = book;
+}
