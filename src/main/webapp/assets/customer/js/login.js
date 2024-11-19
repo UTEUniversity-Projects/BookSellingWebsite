@@ -92,17 +92,17 @@ $(document).ready(() => {
 	const login = new Login();
 	login.showRequiredInput();
 
-	//Validator({
-	//	form: '#loginForm',
-	//	formGroupSelector: '.form-group',
-	//	errorSelector: '.form-message',
-	//	rules: [
-	//		Validator.isRequired('#username', 'Vui lòng nhập username !'),
-	//		Validator.isRequired('#password', 'Vui lòng nhập password !')
-	//	],
-	//	onSubmit: function (data) {
-	//		login.login(data);
-	//	}
-	//});
+	Validator({
+		form: '#loginForm',
+		formGroupSelector: '.form-group',
+		errorSelector: '.form-message',
+		rules: [
+			Validator.isRequired('#username', 'Vui lòng nhập username !'),
+			Validator.isRequired('#password', 'Vui lòng nhập password !')
+		],
+		onSubmit: function (data) {
+			login.login(data);
+		}
+	});
 
 });
