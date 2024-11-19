@@ -188,7 +188,7 @@ VALUES
 ('https://kenh14cdn.com/203336854389633024/2022/4/9/1732920193150637133093626329146106221360649n-164947443607057196887.jpeg', '1995-08-21', 'customer_8@gmail.com', 'Lê Ngọc Thanh', 'MALE', '2023-01-22', '0901234568', 'GOLD', 11),
 ('https://kenh14cdn.com/203336854389633024/2022/4/9/1732920193150637133093626329146106221360649n-164947443607057196887.jpeg', '1991-04-11', 'customer_9@gmail.com', 'Phan Hữu Nam', 'MALE', '2022-11-10', '0901234569', 'GOLD', 12),
 ('https://kenh14cdn.com/203336854389633024/2022/4/9/1732920193150637133093626329146106221360649n-164947443607057196887.jpeg', '1992-12-17', 'customer_10@gmail.com', 'Trịnh Quang Minh', 'MALE', '2023-04-14', '0901234570', 'GOLD', 13),
-('https://kenh14cdn.com/203336854389633024/2022/4/9/1732920193150637133093626329146106221360649n-164947443607057196887.jpeg', '1988-02-27', 'customer_11@gmail.com', 'Nguyễn Anh Tuấn', 'MALE', '2022-09-18', '0901234571', 'GOLD', 14),
+('https://kenh14cdn.com/203336854389633024/2022/4/9/1732920193150637133093626329146106221360649n-164947443607057196887.jpeg', '1988-02-27', 'book_templatebook_templatecustomer_11@gmail.com', 'Nguyễn Anh Tuấn', 'MALE', '2022-09-18', '0901234571', 'GOLD', 14),
 ('https://kenh14cdn.com/203336854389633024/2022/4/9/1732920193150637133093626329146106221360649n-164947443607057196887.jpeg', '1990-10-30', 'customer_12@gmail.com', 'Đặng Thị Thanh', 'FEMALE', '2023-05-19', '0901234572', 'GOLD', 15),
 ('https://kenh14cdn.com/203336854389633024/2022/4/9/1732920193150637133093626329146106221360649n-164947443607057196887.jpeg', '1987-01-25', 'customer_13@gmail.com', 'Võ Minh Châu', 'FEMALE', '2022-12-21', '0901234573', 'GOLD', 16),
 ('https://kenh14cdn.com/203336854389633024/2022/4/9/1732920193150637133093626329146106221360649n-164947443607057196887.jpeg', '1993-09-19', 'customer_14@gmail.com', 'Hoàng Văn Nam', 'MALE', '2023-02-16', '0901234574', 'GOLD', 17),
@@ -516,7 +516,7 @@ INSERT INTO sub_category (full_script, name, short_script, status, category_id) 
 ('Các loại sách khác không thuộc các chuyên mục đã đề cập.', 'Khác', 'Khác', 'ACTIVE', 22);
 
 -- 7. Table Publisher:
-INSERT INTO publisher (avatar, introduction, join_at, name) VALUES
+INSERT INTO publisher (apromotionpromotion_targetvatar, introduction, join_at, name) VALUES
 ('https://pos.nvncdn.com/a91a50-31439/brand/20180830_RmWPaV3Vj0uKH2CvmadRt7xl.jpg', 'NXB Trẻ chuyên xuất bản sách dành cho thanh thiếu niên và trẻ em, với nhiều thể loại phong phú từ tiểu thuyết đến truyện tranh.', '2015-03-10 10:30:00', 'NXB Trẻ'),
 ('https://pos.nvncdn.com/a91a50-31439/brand/20180830_RmWPaV3Vj0uKH2CvmadRt7xl.jpg', 'NXB Giáo Dục là nhà xuất bản uy tín chuyên cung cấp các sách giáo khoa, giáo trình và tài liệu học tập cho hệ thống giáo dục Việt Nam.', '2010-06-15 09:00:00', 'NXB Giáo Dục'),
 ('https://pos.nvncdn.com/a91a50-31439/brand/20180830_RmWPaV3Vj0uKH2CvmadRt7xl.jpg', 'NXB Kim Đồng nổi tiếng với các ấn phẩm dành cho trẻ em, bao gồm truyện tranh, sách thiếu nhi và các hoạt động giáo dục sáng tạo.', '2008-09-20 14:45:00', 'NXB Kim Đồng'),
@@ -1519,6 +1519,12 @@ INSERT INTO cart (customer_id) VALUES
 (14),
 (15);
 
+-- Cart Item
+INSERT INTO cart_item (book_template_id, cart_id) VALUES
+(1, 1),
+(2, 1),
+(3, 1),
+(4, 1);
 
 -- Table Shipping
 INSERT INTO shipping(shipping_fee, shipping_unit, address_id) VALUES

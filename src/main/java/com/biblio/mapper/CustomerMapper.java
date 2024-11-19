@@ -112,6 +112,7 @@ public class CustomerMapper {
 
         customerResponse.setAvatar(customer.getAvatar());
         customerResponse.setFullName(customer.getFullName());
+        customerResponse.setId(customer.getId());
 
         return customerResponse;
     }
