@@ -516,7 +516,7 @@ INSERT INTO sub_category (full_script, name, short_script, status, category_id) 
 ('Các loại sách khác không thuộc các chuyên mục đã đề cập.', 'Khác', 'Khác', 'ACTIVE', 22);
 
 -- 7. Table Publisher:
-INSERT INTO publisher (apromotionpromotion_targetvatar, introduction, join_at, name) VALUES
+INSERT INTO publisher (avatar, introduction, join_at, name) VALUES
 ('https://pos.nvncdn.com/a91a50-31439/brand/20180830_RmWPaV3Vj0uKH2CvmadRt7xl.jpg', 'NXB Trẻ chuyên xuất bản sách dành cho thanh thiếu niên và trẻ em, với nhiều thể loại phong phú từ tiểu thuyết đến truyện tranh.', '2015-03-10 10:30:00', 'NXB Trẻ'),
 ('https://pos.nvncdn.com/a91a50-31439/brand/20180830_RmWPaV3Vj0uKH2CvmadRt7xl.jpg', 'NXB Giáo Dục là nhà xuất bản uy tín chuyên cung cấp các sách giáo khoa, giáo trình và tài liệu học tập cho hệ thống giáo dục Việt Nam.', '2010-06-15 09:00:00', 'NXB Giáo Dục'),
 ('https://pos.nvncdn.com/a91a50-31439/brand/20180830_RmWPaV3Vj0uKH2CvmadRt7xl.jpg', 'NXB Kim Đồng nổi tiếng với các ấn phẩm dành cho trẻ em, bao gồm truyện tranh, sách thiếu nhi và các hoạt động giáo dục sáng tạo.', '2008-09-20 14:45:00', 'NXB Kim Đồng'),

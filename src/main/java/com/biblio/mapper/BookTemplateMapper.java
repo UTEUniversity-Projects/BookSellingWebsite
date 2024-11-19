@@ -22,9 +22,8 @@ public class BookTemplateMapper {
                 .id(bookTemplate.getId())
                 .imageUrl(bookTemplate
                         .getMediaFiles()
-                        .iterator().next()
-                        .getStoredCode()
-                        .replaceAll("image\\d+\\.jpg", "image1.jpg"))
+                        .get(0)
+                        .getStoredCode())
                 .title(singlebook.getTitle())
                 .price(singlebook.getSellingPrice())
                 .quantity(bookTemplate.getBooks().stream().
@@ -58,11 +57,10 @@ public class BookTemplateMapper {
     public static BookDetailsResponse toBookDetailsResponse(BookTemplate bookTemplate) {
         Book singlebook = bookTemplate.getBooks().iterator().next();
 
-        String languages = singlebook.getBookTemplate() != null && singlebook.getBookTemplate().getLanguages() != null
-                ? singlebook.getBookTemplate().getLanguages().stream()
+        String languages = bookTemplate.getLanguages() != null
+                ? bookTemplate.getLanguages().stream()
                 .map(EBookLanguage::getDescription)
-                .collect(Collectors.joining(", "))
-                : "N/A";
+                .collect(Collectors.joining(", ")) : "N/A";
 
         List<String> fileNames = bookTemplate.getMediaFiles().stream()
                 .sorted(Comparator.comparing(MediaFile::getId))

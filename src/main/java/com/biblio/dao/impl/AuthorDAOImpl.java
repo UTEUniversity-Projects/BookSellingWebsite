@@ -2,8 +2,12 @@ package com.biblio.dao.impl;
 
 import com.biblio.dao.IAuthorDAO;
 import com.biblio.entity.Author;
+import com.biblio.entity.Book;
+import com.biblio.entity.BookTemplate;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class AuthorDAOImpl extends GenericDAOImpl<Author> implements IAuthorDAO {
 
@@ -19,6 +23,19 @@ public class AuthorDAOImpl extends GenericDAOImpl<Author> implements IAuthorDAO 
     @Override
     public Author findById(Long id) {
         return super.findById(id);
+    }
+
+    @Override
+    public List<Author> findByBookTemplate(BookTemplate bookTemplate) {
+        StringBuilder jpql = new StringBuilder();
+        jpql.append("SELECT DISTINCT a ")
+                .append("FROM Author a ")
+                .append("JOIN a.bookTemplates bt ")
+                .append("WHERE bt = :bookTemplate");
+
+        Map<String, Object> params = new HashMap<>();
+        params.put("bookTemplate", bookTemplate);
+        return super.findByJPQL(jpql.toString(), params);
     }
 
     @Override

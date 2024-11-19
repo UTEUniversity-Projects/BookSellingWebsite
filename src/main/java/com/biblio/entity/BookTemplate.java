@@ -5,9 +5,7 @@ import com.biblio.enumeration.EBookTemplateStatus;
 import lombok.*;
 
 import javax.persistence.*;
-import java.util.HashSet;
-import java.util.LinkedHashSet;
-import java.util.Set;
+import java.util.*;
 
 @Entity
 @Table(name = "book_template")
@@ -28,7 +26,7 @@ public class BookTemplate {
     @Column(name = "status", nullable = false)
     private EBookTemplateStatus status;
 
-    @ElementCollection(fetch = FetchType.LAZY)
+    @ElementCollection(fetch = FetchType.EAGER)
     @Enumerated(EnumType.STRING)
     @CollectionTable(name = "book_template_languages",
             joinColumns = @JoinColumn(name = "book_template_id", nullable = false))
@@ -50,7 +48,7 @@ public class BookTemplate {
     private Publisher publisher;
 
     @OneToMany(mappedBy = "bookTemplate", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private Set<MediaFile> mediaFiles = new LinkedHashSet<>();
+    private List<MediaFile> mediaFiles = new ArrayList<>();
 
     @OneToMany(mappedBy = "bookTemplate", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private Set<Book> books = new HashSet<>();
