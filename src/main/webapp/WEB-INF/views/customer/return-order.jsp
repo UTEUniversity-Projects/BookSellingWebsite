@@ -95,7 +95,7 @@
                         </div>
 
                         <!-- Submit Button -->
-                        <div class="row">
+                        <div class="row mt-5">
                             <div class="col-12 col-sm-6">
                                 <form class="form-group mx-auto w-100">
                                     <button

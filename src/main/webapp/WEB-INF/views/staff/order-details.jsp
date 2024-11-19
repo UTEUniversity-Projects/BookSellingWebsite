@@ -76,9 +76,9 @@
                                         <tr>
                                             <td>
                                                 <img
-                                                    class="tbl-thumb"
-                                                    src="${pageContext.request.contextPath}${product.imagePath}"
-                                                    alt="${product.title}"
+                                                        class="tbl-thumb"
+                                                        src="${pageContext.request.contextPath}${product.imagePath}"
+                                                        alt="${product.title}"
                                                 />
                                             </td>
                                             <td>${product.title}</td>
@@ -125,10 +125,15 @@
                             </div>
                         </div>
                     </div>
-                    <div class="cr-card-content d-grid gap-3 d-md-flex justify-content-md-end">
-                        <button class="btn btn-success" onclick="showSuccessToast();">Xác nhận</button>
-                        <button class="btn btn-outline-danger" onclick="showErrorToast();">Từ chối</button>
-                    </div>
+
+                    <c:if test="${order.status == 'REQUEST_REFUND' || order.status == 'WAITING_CONFIRMATION'}">
+                        <div class="cr-card-content d-grid gap-3 d-md-flex justify-content-md-end">
+                            <button class="btn btn-success" onclick="showSuccessToast();">Xác nhận</button>
+                            <button class="btn btn-outline-danger" onclick="showErrorToast();">Từ chối</button>
+                        </div>
+                    </c:if>
+
+
                 </div>
             </div>
         </div>

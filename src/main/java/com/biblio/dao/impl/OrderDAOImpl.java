@@ -27,16 +27,17 @@ public class OrderDAOImpl extends GenericDAOImpl<Order> implements IOrderDAO {
     public static void main(String[] args) {
         OrderDAOImpl dao = new OrderDAOImpl();
         Order order = dao.findOne(1L);
-        for (OrderItem orderItem : order.getOrderItems()) {
-            System.out.println("Order Item ID: " + orderItem.getId());
-
-            if (!orderItem.getBooks().isEmpty()) {
-                Book singleBook = orderItem.getBooks().iterator().next();
-                System.out.println("  - Title of one book: " + singleBook.getTitle());
-                System.out.println("  - Quantity: " + orderItem.getBooks().size());
-            } else {
-                System.out.println("  - No books in this OrderItem");
-            }
-        }
+        System.out.println(order.getPromotions().size());
+//        for (OrderItem orderItem : order.getOrderItems()) {
+//            System.out.println("Order Item ID: " + orderItem.getId());
+//
+//            if (!orderItem.getBooks().isEmpty()) {
+//                Book singleBook = orderItem.getBooks().iterator().next();
+//                System.out.println("  - Title of one book: " + singleBook.getTitle());
+//                System.out.println("  - Quantity: " + orderItem.getBooks().size());
+//            } else {
+//                System.out.println("  - No books in this OrderItem");
+//            }
+//        }
     }
 }

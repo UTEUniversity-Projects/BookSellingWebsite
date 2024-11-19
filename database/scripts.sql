@@ -3754,14 +3754,14 @@ INSERT INTO shipping (shipping_fee, shipping_unit, address_id) VALUES
 (25000, N'Giao hàng tiết kiệm', 8);
 -- 18. Table Order
 INSERT INTO `order` (note, order_date, payment_type, status, vat, customer_id, shipping_id) VALUES
-('Order note 1', '2023-01-01 10:30:00', 'BANKING', 'COMPLETE_DELIVERY', 0.1, 1, 1),
-('Order note 2', '2023-01-02 14:00:00', 'BANKING','CANCELED', 0.1, 2, 2),
-('Order note 3', '2023-01-03 09:15:00', 'BANKING','COMPLETE_DELIVERY', 0.1, 1, 3),
-('Order note 4', '2023-01-04 16:45:00', 'BANKING','CANCELED', 0.1, 2, 4),
-('Order note 5', '2023-01-05 11:20:00', 'BANKING','COMPLETE_DELIVERY', 0.1, 1, 5),
-('Order note 6', '2023-01-06 15:30:00', 'BANKING','CANCELED', 0.1, 2, 6),
-('Order note 7', '2023-01-07 08:00:00', 'BANKING','COMPLETE_DELIVERY', 0.1, 1, 7),
-('Order note 8', '2023-01-08 13:55:00', 'BANKING','CANCELED', 0.1, 2, 8);
+('Order note 1', '2024-11-03 10:30:00', 'BANKING', 'COMPLETE_DELIVERY', 0.1, 1, 1),
+('Order note 2', '2024-11-11 14:00:00', 'BANKING','CANCELED', 0.1, 2, 2),
+('Order note 3', '2024-11-20 09:15:00', 'BANKING','WAITING_CONFIRMATION', 0.1, 1, 3),
+('Order note 4', '2024-11-04 16:45:00', 'BANKING','CANCELED', 0.1, 2, 4),
+('Order note 5', '2024-11-05 11:20:00', 'BANKING','COMPLETE_DELIVERY', 0.1, 1, 5),
+('Order note 6', '2024-11-06 15:30:00', 'BANKING','CANCELED', 0.1, 2, 6),
+('Order note 7', '2024-11-07 08:00:00', 'BANKING','COMPLETE_DELIVERY', 0.1, 1, 7),
+('Order note 8', '2024-11-08 13:55:00', 'BANKING','CANCELED', 0.1, 2, 8);
 
 INSERT INTO `order` (note, order_date, payment_type, status, vat, customer_id, shipping_id) VALUES
 ('Order note 9', '2024-11-06 12:48:23', 'BANKING', 'COMPLETE_DELIVERY', 0.1, 1, 9),
@@ -4065,12 +4065,12 @@ description, discount_limit, effective_date, expiration_date,
 ('VOUCHER 1', 50000.0, '2024-11-02 08:00:00', '2024-11-30 23:59:59', 100000.0, 100.0, 'USED', 'Voucher_5_1', 1),
 ('VOUCHER 2', 50000.0, '2024-11-02 09:00:00', '2024-11-30 23:59:59', 100000.0, 100.0, 'USED', 'Voucher_6_2', 2),
 ('VOUCHER 2', 50000.0, '2024-11-02 09:00:00', '2024-11-30 23:59:59', 100000.0, 100.0, 'USED', 'Voucher_7_2', 2),
-('VOUCHER 2', 50000.0, '2024-11-02 09:00:00', '2024-11-30 23:59:59', 100000.0, 100.0, 'NOT_USE', 'Voucher_8_2', 2),
+('VOUCHER 2', 50000.0, '2024-11-02 09:00:00', '2024-11-30 23:59:59', 100000.0, 100.0, 'USED', 'Voucher_8_2', 2),
 ('VOUCHER 2', 50000.0, '2024-11-02 09:00:00', '2024-11-30 23:59:59', 100000.0, 100.0, 'NOT_USE', 'Voucher_9_2', 2),
 ('VOUCHER 2', 50000.0, '2024-11-02 09:00:00', '2024-11-30 23:59:59', 100000.0, 100.0, 'NOT_USE', 'Voucher_10_2', 2),
 ('VOUCHER 3', 50000.0, '2024-11-02 10:00:00', '2024-11-30 23:59:59', 100000.0, 100.0, 'NOT_USE', 'Voucher_11_3', 3),
-('VOUCHER 3', 50000.0, '2024-11-02 10:00:00', '2024-11-30 23:59:59', 100000.0, 100.0, 'USED', 'Voucher_12_3', 3),
-('VOUCHER 3', 50000.0, '2024-11-02 10:00:00', '2024-11-30 23:59:59', 100000.0, 100.0, 'USED', 'Voucher_13_3', 3),
+('VOUCHER 3', 50000.0, '2024-11-02 10:00:00', '2024-11-30 23:59:59', 100000.0, 100.0, 'NOT_USE', 'Voucher_12_3', 3),
+('VOUCHER 3', 50000.0, '2024-11-02 10:00:00', '2024-11-30 23:59:59', 100000.0, 100.0, 'NOT_USE', 'Voucher_13_3', 3),
 ('VOUCHER 3', 50000.0, '2024-11-02 10:00:00', '2024-11-30 23:59:59', 100000.0, 100.0, 'NOT_USE', 'Voucher_14_3', 3),
 ('VOUCHER 3', 50000.0, '2024-11-02 10:00:00', '2024-11-30 23:59:59', 100000.0, 100.0, 'NOT_USE', 'Voucher_15_3', 3),
 ('VOUCHER 4', 50000.0, '2024-11-02 11:00:00', '2024-11-30 23:59:59', 100000.0, 100.0, 'NOT_USE', 'Voucher_16_4', 4),
@@ -4114,14 +4114,14 @@ INSERT INTO promotion (
 description, discount_limit, effective_date, expiration_date, 
     min_value_to_be_applied, percent_discount, status, title, promotion_template_id
 ) VALUES
-('Ưu đãi FREESHIP 11', 15000, '2024-11-04 00:00:00', '2024-11-30 23:59:59', 0.0, 100.0, 'NOT_USE', 'FREESHIP_1_11', 11),
-('Ưu đãi FREESHIP 11', 30000, '2024-11-04 00:00:00', '2024-11-30 23:59:59', 0.0, 100.0, 'NOT_USE', 'FREESHIP_2_11', 11),
-('Ưu đãi FREESHIP 11', 15000, '2024-11-04 00:00:00', '2024-11-30 23:59:59', 0.0, 100.0, 'NOT_USE', 'FREESHIP_3_11', 11),
-('Ưu đãi FREESHIP 11', 30000, '2024-11-04 00:00:00', '2024-11-30 23:59:59', 0.0, 100.0, 'NOT_USE', 'FREESHIP_4_11', 11),
-('Ưu đãi FREESHIP 11', 15000, '2024-11-04 00:00:00', '2024-11-30 23:59:59', 0.0, 100.0, 'NOT_USE', 'FREESHIP_5_11', 11),
-('Ưu đãi FREESHIP 12', 30000, '2024-11-05 00:00:00', '2024-11-30 23:59:59', 0.0, 100.0, 'NOT_USE', 'FREESHIP_6_12', 12),
-('Ưu đãi FREESHIP 12', 15000, '2024-11-05 00:00:00', '2024-11-30 23:59:59', 0.0, 100.0, 'NOT_USE', 'FREESHIP_7_12', 12),
-('Ưu đãi FREESHIP 12', 30000, '2024-11-05 00:00:00', '2024-11-30 23:59:59', 0.0, 100.0, 'NOT_USE', 'FREESHIP_8_12', 12),
+('Ưu đãi FREESHIP 11', 15000, '2024-11-04 00:00:00', '2024-11-30 23:59:59', 0.0, 100.0, 'USED', 'FREESHIP_1_11', 11),
+('Ưu đãi FREESHIP 11', 30000, '2024-11-04 00:00:00', '2024-11-30 23:59:59', 0.0, 100.0, 'USED', 'FREESHIP_2_11', 11),
+('Ưu đãi FREESHIP 11', 15000, '2024-11-04 00:00:00', '2024-11-30 23:59:59', 0.0, 100.0, 'USED', 'FREESHIP_3_11', 11),
+('Ưu đãi FREESHIP 11', 30000, '2024-11-04 00:00:00', '2024-11-30 23:59:59', 0.0, 100.0, 'USED', 'FREESHIP_4_11', 11),
+('Ưu đãi FREESHIP 11', 15000, '2024-11-04 00:00:00', '2024-11-30 23:59:59', 0.0, 100.0, 'USED', 'FREESHIP_5_11', 11),
+('Ưu đãi FREESHIP 12', 30000, '2024-11-05 00:00:00', '2024-11-30 23:59:59', 0.0, 100.0, 'USED', 'FREESHIP_6_12', 12),
+('Ưu đãi FREESHIP 12', 15000, '2024-11-05 00:00:00', '2024-11-30 23:59:59', 0.0, 100.0, 'USED', 'FREESHIP_7_12', 12),
+('Ưu đãi FREESHIP 12', 30000, '2024-11-05 00:00:00', '2024-11-30 23:59:59', 0.0, 100.0, 'USED', 'FREESHIP_8_12', 12),
 ('Ưu đãi FREESHIP 12', 15000, '2024-11-05 00:00:00', '2024-11-30 23:59:59', 0.0, 100.0, 'NOT_USE', 'FREESHIP_9_12', 12),
 ('Ưu đãi FREESHIP 12', 30000, '2024-11-05 00:00:00', '2024-11-30 23:59:59', 0.0, 100.0, 'NOT_USE', 'FREESHIP_10_12', 12),
 ('Ưu đãi FREESHIP 13', 15000, '2024-11-06 00:00:00', '2024-11-30 23:59:59', 0.0, 100.0, 'NOT_USE', 'FREESHIP_11_13', 13),
@@ -4308,3 +4308,21 @@ INSERT INTO promotion_target (
 (7, 'BOOK', 109),
 (8, 'BOOK', 109),
 (-1, 'WHOLE', 110);
+
+
+INSERT INTO order_promotion values
+(1, 1),
+(2, 2),
+(2, 51),
+(3, 3),
+(3, 52),
+(4, 4),
+(4, 53),
+(5, 5),
+(5, 54),
+(6, 6),
+(6, 55),
+(7, 7),
+(7, 56),
+(8, 8),
+(8, 57);
