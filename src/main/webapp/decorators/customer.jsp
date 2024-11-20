@@ -197,7 +197,7 @@
                         <div class="col-md-7 col-sm-12 col-xs-12">
                             <div class="cr-size-and-weight-contain">
                                 <h2 class="heading">
-                                    ${book.title}
+                                        ${book.title}
                                 </h2>
                             </div>
                             <div class="cr-size-and-weight">
@@ -221,7 +221,7 @@
                                 </div>
                                 <div class="cr-product-price">
                                     <span class="new-price">${book.sellingPrice}</span>
-    <%--                                <span class="old-price">$123.25</span>--%>
+                                        <%--                                <span class="old-price">$123.25</span>--%>
                                 </div>
                                 <div class="cr-size-weight">
                                     <h5><span>Tình trạng</span> :</h5>
@@ -283,7 +283,8 @@
                             <a href="product-left-sidebar.html" class="cart_pro_title"
                             >${cartItem.title}</a
                             >
-                            <span class="cart-price"><span class="price-value">${cartItem.sellingPrice}</span> x ${cartItem.quantity}</span>
+                            <span class="cart-price"><span
+                                    class="price-value">${cartItem.sellingPrice}</span> x ${cartItem.quantity}</span>
                             <div class="cr-cart-qty">
                                 <div class="cart-qty-plus-minus">
                                     <button type="button" class="minus">-</button>
@@ -348,4 +349,10 @@
 <script src="${pageContext.request.contextPath}/assets/customer/js/main.js?v=1"></script>
 </body>
 <div id="toast"></div>
+<div class="checkout">
+    <div class="checkout-overlay bg-black/20"></div>
+    <div class="checkout-qr h-[400px] rounded-lg overflow-hidden transition-all ease-linear duration-300">
+        <img class="w-full h-full object-cover" src="" alt="vietqr">
+    </div>
+</div>
 </html>
