@@ -9,6 +9,25 @@
     .ip-padding {
         padding-bottom: 20px;
     }
+    .table-disabled {
+        position: relative;
+        opacity: 0.6; /* Làm mờ bảng */
+        pointer-events: none; /* Ngăn mọi sự kiện tương tác */
+    }
+
+    .table-disabled::after {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        //background: rgba(255, 255, 255, 0.6); /* Lớp phủ trắng */
+        z-index: 1;
+    }
+
+
+
 </style>
 <div class="cr-main-content">
     <div class="container-fluid">
@@ -23,131 +42,114 @@
             </div>
         </div>
         <c:if test="${promotion.type == 'DISCOUNT'}">
-            <div class="row">
-                <div class="col-xl-4 col-lg-12">
-                    <div class="team-sticky-bar">
-                        <div class="col-md-12">
-                            <div class="cr-cat-list cr-card card-default mb-24px">
-                                <div class="cr-card-content">
-                                    <div class="cr-cat-form">
-                                        <img class="img-promotion" src="assets/img/product/1.jpg">
-                                        <h3>Thêm Discount</h3>
-                                        <form class="promotion-form">
-                                            <div class="form-group" style="padding-bottom: 20px;">
+            <form class="promotionForm">
+                <input type="hidden" name="formType" value="addDiscount"/>
+
+                <div class="form-content d-flex">
+                    <!-- Cột bên trái -->
+                    <div class="col-xl-4 col-lg-12 form-column">
+                        <div class="team-sticky-bar">
+                            <div class="col-md-12">
+                                <div class="cr-cat-list cr-card card-default mb-24px">
+                                    <div class="cr-card-content">
+                                        <div class="cr-cat-form">
+                                            <img
+                                                    class="img-promotion"
+                                                    src="assets/img/product/1.jpg"
+                                            />
+                                            <h3>Thêm Discount</h3>
+
+                                            <!-- Mã -->
+                                            <div class="form-group">
                                                 <label>Mã</label>
                                                 <div class="col-12">
-                                                    <input class="form-control here slug-title" type="text" value="#20-10" disabled>
+                                                    <input name="code" value="${promotion.code}" style="background-color: #f5f5f5;" class="form-control here slug-title" type="text" onblur="validateInput(this)" readonly />
+                                                    <span class="error-message codeError"></span>
                                                 </div>
                                             </div>
-                                            <div class="form-group" style="padding-bottom: 20px;">
+
+                                            <!-- Tiêu đề -->
+                                            <div class="form-group">
                                                 <label>Tiêu đề</label>
                                                 <div class="col-12">
-                                                    <input class="form-control here slug-title" type="text" value="20 - 10" disabled>
+                                                    <input name="title" value="${promotion.title}"  disabled class="form-control here slug-title" type="text" onblur="validateInput(this)" />
+                                                    <span class="error-message titleError"></span>
                                                 </div>
                                             </div>
-                                            <div class="form-group" style="padding-bottom: 20px;">
+                                            <div class="form-group">
                                                 <label>Phần trăm giảm (%)</label>
                                                 <div class="col-12">
-                                                    <input class="form-control here slug-title" type="text" value="50%" disabled>
+                                                    <input name="percentDiscount" value="${promotion.percentDiscount}" disabled class="form-control here slug-title" type="number" onblur="validateInput(this)" />
+                                                    <span class="error-message percentDiscountError"></span>
                                                 </div>
                                             </div>
-                                            <div class="form-group" style="padding-bottom: 20px;">
+                                            <div class="form-group">
                                                 <label>Đối tượng áp dụng</label>
                                                 <div class="select-oject-use-voucher">
-                                                    <select class="select-item" id="select-object-discount" disabled>
-                                                        <option selected disabled> - Chọn - </option>
-                                                        <option value="1">Sản phẩm cụ thể</option>
-                                                        <option value="2">Giảm theo Category</option>
-                                                        <option value="3">Giảm theo Sub Category</option>
-                                                        <option value="4">Toàn bộ sản phẩm</option>
+                                                    <select class="select-item" disabled name="selectOject" id="select-object-discount" onblur="validateInput(this)">
+                                                        <option value="1" ${selectedType == 'BOOK' ? 'selected' : ''}>Sản phẩm cụ thể</option>
+                                                        <option value="2" ${selectedType == 'CATEGORY' ? 'selected' : ''}>Giảm theo Category</option>
+                                                        <option value="3" ${selectedType == 'SUBCATEGORY' ? 'selected' : ''}>Giảm theo Sub Category</option>
+                                                        <option value="4" ${selectedType == 'WHOLE' ? 'selected' : ''}>Toàn bộ sản phẩm</option>
                                                     </select>
+                                                    <span class="error-message selectOjectError"></span>
                                                 </div>
                                             </div>
-                                            <div class="form-group" style="padding-bottom: 20px;">
+
+                                            <!-- Mô tả -->
+                                            <div class="form-group">
                                                 <label>Mô tả</label>
                                                 <div class="col-12">
-                                                    <textarea class="form-control" rows="4" disabled></textarea>
+                                                    <textarea name="description" class="form-control" rows="4" disabled onblur="validateInput(this)">${promotion.description}</textarea>
+                                                    <span class="error-message descriptionError"></span>
                                                 </div>
                                             </div>
-                                            <div class="form-group row" style="padding-bottom: 20px;">
+
+                                            <!-- Thời gian áp dụng -->
+                                            <div class="form-group row">
                                                 <label>Thời gian áp dụng</label>
                                                 <div class="col-12">
-                                                    <input type="text" name="dateeffective"  style="width: 100%;" disabled>
+                                                    <input type="text" name="dateeffective" disabled style="width: 100%;" onblur="validateInput(this)" />
+                                                    <span class="error-message dateeffectiveError"></span>
                                                 </div>
                                             </div>
-                                            <div class="row" style="padding-bottom: 20px;">
-                                                <div class="col-12 d-flex">
-                                                    <button type="button" class="cr-btn-primary" id="edit-button">Chỉnh sửa</button>
-                                                    <button type="button" class="cr-btn-primary" id="save-button" style="display: none;">Lưu</button>
-                                                </div>
-                                            </div>
-                                        </form>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div>
-                <div class="col-xl-8 col-lg-12" id="list-product-category-subcategory-discount">
-                    <div class="cr-cat-list cr-card card-default">
-                        <div class="cr-card-content ">
-                            <div class="table-responsive tbl-800">
-                                <table id="discount_table" class="table">
-                                    <div class="select-parent-add-promotion">
-                                        <label>Lọc theo:</label>
-                                        <div class="select-add-promotion">
-                                            <select class="select-item" id="category-select-discount">
-                                                <option selected disabled> - Categories - </option>
-                                                <option value="1">Sách giáo khoa</option>
-                                                <option value="2">Tiểu thuyết</option>
-                                                <option value="3">Kỹ năng</option>
-                                                <option value="4">Kinh tế</option>
-                                            </select>
-                                        </div>
-                                        <div class="select-add-promotion">
-                                            <select class="select-item" id="subcategory-select-discount">
-                                                <option selected disabled> - Sub Categories - </option>
-                                                <option value="1">Sách lớp 1</option>
-                                                <option value="2">Sách lớp 1</option>
-                                                <option value="3">Sách lớp 1</option>
-                                                <option value="4">Sách lớp 1</option>
-                                            </select>
-                                        </div>
-                                    </div>
 
-                                    <thead>
-                                    <tr>
-                                        <th>
-                                            <input type="checkbox" id="select-all" style="margin-left: -3px;" disabled>
-                                            Chọn tất cả
-                                        </th>
-                                        <th>Mã</th>
-                                        <th>Tên</th>
-                                    </tr>
-                                    </thead>
-                                    <tbody>
-                                    <tr class="selectable-row">
-                                        <td>
-                                            <input type="checkbox" class="row-checkbox">
-                                        </td>
-                                        <td>#1321</td>
-                                        <td>Đắc nhân tâm</td>
-                                    </tr>
-                                    <tr class="selectable-row">
-                                        <td>
-                                            <input type="checkbox" class="row-checkbox">
-                                        </td>
-                                        <td>#1322</td>
-                                        <td>Cuốn theo chiều gió</td>
-                                    </tr>
-                                    </tbody>
-
-                                </table>
+                    <!-- Cột bên phải -->
+                    <div class="col-xl-8 col-lg-12 form-column" id="list-product-category-subcategory-discount">
+                        <div class="cr-cat-list cr-card card-default">
+                            <div class="cr-card-content">
+                                <div class="table-responsive tbl-600">
+                                    <table class="table table-hover table_item_to_discount table-disabled" >
+                                        <thead>
+                                        <tr>
+                                            <th width="5%"></th>
+                                            <th width="15%">Mã</th>
+                                            <th width="50%">Tên</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        </tbody>
+                                    </table>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
+
+                <!-- Nút Thêm -->
+                <div class="row mt-4">
+                    <div class="col-12 d-flex justify-content-center" style="padding-bottom: 20px">
+                        <button type="submit" class="btn-voucher cr-btn-primary" data-editing="false">Chỉnh sửa</button>
+                    </div>
+                </div>
+
+            </form>
         </c:if>
 
         <c:if test="${promotion.type == 'VOUCHER'}">
@@ -333,6 +335,7 @@
                                                     <button type="submit" class="btn-voucher cr-btn-primary" data-editing="false">Chỉnh sửa</button>
                                                 </div>
                                             </div>
+                                            </div>
                                         </form>
                                     </div>
                                 </div>
@@ -386,10 +389,15 @@
     });
 </script>
 
+<script>
+    const selectedIds = ${selectedIds != null ? selectedIds : '[]'};
+</script>
+
+
 <script>const contextPath = "<%= request.getContextPath()%>";</script>
 <script src="${pageContext.request.contextPath}/assets/owner/js/validator-promotion-details.js" defer></script>
 
-<script src="${pageContext.request.contextPath}/assets/owner/js/add-promotion.js" defer></script>
+<script src="${pageContext.request.contextPath}/assets/owner/js/add-p romotion.js" defer></script>
 
 
 

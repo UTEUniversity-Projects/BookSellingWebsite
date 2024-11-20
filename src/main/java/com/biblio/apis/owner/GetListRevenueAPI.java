@@ -20,8 +20,8 @@ import java.util.Map;
 /**
  * Servlet implementation class GetCategoriesAPI
  */
-@WebServlet("/owner/ecommerce/summary-report")
-public class GetSummaryReportAPI extends HttpServlet {
+@WebServlet("/owner/ecommerce/list-revenue")
+public class GetListRevenueAPI extends HttpServlet {
     @Serial
     private static final long serialVersionUID = 1L;
 
@@ -34,7 +34,7 @@ public class GetSummaryReportAPI extends HttpServlet {
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public GetSummaryReportAPI() {
+    public GetListRevenueAPI() {
         super();
         // TODO Auto-generated constructor stub
     }

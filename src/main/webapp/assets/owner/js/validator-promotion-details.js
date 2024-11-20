@@ -51,11 +51,22 @@ function validateForm(form) {
     const inputs = form.querySelectorAll('.form-control');
     const codeInput = form.querySelector('input[name="code"]');
     const codeValue = codeInput ? codeInput.value.trim() : "";
-    inputs.forEach(input => {
-        const errorSpan = input.closest('.col-12').querySelector('.' + input.name + 'Error');
 
+    const selectElement = form.querySelector('#select-object-discount');
+    const selectErrorSpan = form.querySelector('.selectOjectError');
+    if (selectElement && selectElement.value === "- Chọn đối tượng áp dụng -") {
+        // selectErrorSpan.textContent = "Bạn cần chọn một đối tượng áp dụng.";
+        isValid = false;
+    } else if (selectErrorSpan) {
+        selectErrorSpan.textContent = "";
+    }
+
+    inputs.forEach(input => {
+
+        //  const errorSpan = input.closest('.col-12').querySelector(`.${input.name}Error`);
         // Bỏ qua kiểm tra 'quantity' nếu 'unlimited' được chọn
         if (input.name === "quantity") {
+            const errorSpan = input.closest('.col-12').querySelector('.' + input.name + 'Error');
             const unlimitedCheckbox = input.closest('.col-12').querySelector('input[name="unlimited"]');
             if (unlimitedCheckbox && unlimitedCheckbox.checked) {
                 errorSpan.textContent = "";
@@ -65,17 +76,22 @@ function validateForm(form) {
 
         // Kiểm tra nếu input rỗng
         if (input.value.trim() === "") {
+            if (input.type === "search") return
+            const errorSpan = input.closest('.col-12').querySelector('.' + input.name + 'Error');
             errorSpan.textContent = "Mục này không được để trống.";
+            if (input.type === "search") return
             isValid = false;
-            return;
+            // return;
         }
 
         // Kiểm tra số nguyên dương cho các trường 'discountLimit', 'minValueApplied', và 'quantity'
         if (["discountLimit", "minValueApplied", "quantity"].includes(input.name)) {
-            if (!Number.isInteger(Number(input.value)) || Number(input.value) < 0) {
+            const errorSpan = input.closest('.col-12').querySelector('.' + input.name + 'Error');
+
+            if (!Number.isInteger(Number(input.value)) || Number(input.value) < 1) {
                 errorSpan.textContent = "Giá trị không được là số âm.";
                 isValid = false;
-                return;
+                // return;
             } else {
                 errorSpan.textContent = "";
             }
@@ -83,17 +99,17 @@ function validateForm(form) {
 
         // Kiểm tra 'percentDiscount' phải trong khoảng từ 1 đến 100
         if (input.name === "percentDiscount") {
+            const errorSpan = input.closest('.col-12').querySelector('.' + input.name + 'Error');
             const value = Number(input.value);
             if (value < 1 || value > 100) {
                 errorSpan.textContent = "Giá trị phải nằm trong khoảng từ 1% đến 100%.";
                 isValid = false;
-                return;
+                 return;
             } else {
-                errorSpan.textContent = "";
+                 errorSpan.textContent = "";
             }
         }
     });
-
     return isValid;
 }
 
@@ -134,6 +150,7 @@ function toggleForm(editButton) {
     const isEditing = editButton.dataset.editing === "true";
 
     const inputs = form.querySelectorAll("input, textarea, select");
+    const table = document.querySelector(".table_item_to_discount");
 
     if (isEditing) {
         // Khóa form
@@ -141,8 +158,11 @@ function toggleForm(editButton) {
             if (input.name !== "code") {
                 input.disabled = true;
             }
-
         });
+
+        // Vô hiệu hóa bảng
+        table.classList.add("table-disabled");
+
         editButton.innerText = "Chỉnh sửa";
         editButton.dataset.editing = "false";
     } else {
@@ -154,12 +174,107 @@ function toggleForm(editButton) {
             if (input.name === "quantity" && input.value === "") {
                 input.disabled = true;
             }
-
         });
+
+        // Kích hoạt bảng
+        table.classList.remove("table-disabled");
+
         editButton.innerText = "Lưu";
         editButton.dataset.editing = "true";
     }
 }
+
+
+
+
+$(document).ready(function () {
+    const table = $(".table_item_to_discount").DataTable({
+        aLengthMenu: [[10, 30, -1], [10, 30, "All"]],
+        pageLength: 10,
+        ordering: false,
+        dom: '<"row justify-content-between top-information"lf>rt<"row justify-content-between bottom-information"ip><"clear">',
+    });
+
+    function fetchData(url, params = {}, onSuccess, onError = 'Đã xảy ra lỗi khi gọi API.') {
+        $.ajax({
+            url,
+            type: 'GET',
+            data: params,
+            success: response => onSuccess?.(response),
+            error: () => alert(onError),
+        });
+    }
+
+    $('#select-object-discount').change(function () {
+        const selectedValue = $(this).val();
+        resetSelections();
+
+        if (selectedValue === "1") handleCase1();
+        else if (selectedValue === "2") handleCase2();
+        else if (selectedValue === "3") handleCase3();
+    });
+
+    function resetSelections() {
+        table.clear().draw();
+    }
+
+    function handleCase1() {
+        fetchData('/owner/promotion/get-book', {}, books => {
+            populateTable(books, 'Không có sách nào!');
+        }, 'Không thể tải danh sách sách!');
+    }
+
+    function handleCase2() {
+        fetchData('/owner/promotion/get-categories', {}, categories => {
+            populateTable(categories, 'Không có danh mục nào!');
+        }, 'Không thể tải danh sách danh mục!');
+    }
+
+    function handleCase3() {
+        fetchData('/owner/promotion/get-subcategories', {}, subcategories => {
+            populateTable(subcategories, 'Không có danh mục con nào!');
+        }, 'Không thể tải danh mục con!');
+    }
+
+    function populateTable(data, emptyMessage) {
+        table.clear();
+
+        if (data?.length) {
+            data.forEach(item => {
+                const isChecked = selectedIds.includes(parseInt(item.id)) ? 'checked' : '';
+                table.row.add([
+                    `<input type="checkbox" class="row-checkbox" name="selectedItems_${item.id}" value="${item.id}" ${isChecked} />`,
+                    `#${item.id}`,
+                    `${item.name || item.title}`
+                ]);
+            });
+        } else {
+            table.row.add(['', '', emptyMessage]);
+        }
+
+        table.draw();
+
+        // Thêm sự kiện click vào mỗi hàng sau khi bảng được vẽ
+        $('.table_item_to_discount tbody').on('click', 'tr', function (e) {
+            // Nếu nhấn trực tiếp vào checkbox, không làm gì cả
+            if ($(e.target).is('.row-checkbox')) return;
+
+            const checkbox = $(this).find('.row-checkbox');
+            checkbox.prop('checked', !checkbox.prop('checked'));
+        });
+    }
+
+
+
+
+
+    // Gọi hàm xử lý theo lựa chọn mặc định khi load trang
+    const defaultValue = $('#select-object-discount').val();
+    if (defaultValue === "1") handleCase1();
+    else if (defaultValue === "2") handleCase2();
+    else if (defaultValue === "3") handleCase3();
+});
+
 
 
 

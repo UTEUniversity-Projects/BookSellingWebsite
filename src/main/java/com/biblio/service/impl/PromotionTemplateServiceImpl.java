@@ -1,11 +1,9 @@
 package com.biblio.service.impl;
 
 import com.biblio.dao.IPromotionDAO;
-import com.biblio.dao.IPromotionTemplateDao;
-import com.biblio.dto.request.PromotionInsertRequest;
+import com.biblio.dao.IPromotionTemplateDAO;
 import com.biblio.dto.request.PromotionTemplateInsertRequest;
 import com.biblio.dto.request.PromotionTemplateUpdateRequest;
-import com.biblio.dto.response.PromotionGetResponse;
 import com.biblio.dto.response.PromotionTemplateGetDetailsResponse;
 import com.biblio.dto.response.PromotionTemplateGetResponse;
 import com.biblio.dto.response.PromotionTemplateResponse;
@@ -13,9 +11,7 @@ import com.biblio.entity.Promotion;
 import com.biblio.entity.PromotionTemplate;
 import com.biblio.enumeration.EPromotionStatus;
 import com.biblio.enumeration.EPromotionTemplateStatus;
-import com.biblio.mapper.PromotionMapper;
 import com.biblio.mapper.PromotionTemplateMapper;
-import com.biblio.service.IPromotionService;
 import com.biblio.service.IPromotionTemplateService;
 
 import javax.inject.Inject;
@@ -26,7 +22,7 @@ public class PromotionTemplateServiceImpl implements IPromotionTemplateService {
     @Inject
     IPromotionDAO promotionDAO;
     @Inject
-    IPromotionTemplateDao promotionTemplateDAO;
+    IPromotionTemplateDAO promotionTemplateDAO;
 
     @Override
     public PromotionTemplateGetDetailsResponse getPromotionTemplateById(Long id) {

@@ -26,7 +26,7 @@ public class LineItem implements Serializable {
 
     // region Relationships
 
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinTable(
             name = "line_item_books",
             joinColumns = @JoinColumn(name = "line_item_id"),

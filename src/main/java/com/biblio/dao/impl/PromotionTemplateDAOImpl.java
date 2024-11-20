@@ -1,14 +1,14 @@
 package com.biblio.dao.impl;
 
-import com.biblio.dao.IPromotionTemplateDao;
+import com.biblio.dao.IPromotionTemplateDAO;
 import com.biblio.entity.PromotionTemplate;
 
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class PromotionTemplateDaoImpl extends GenericDAOImpl<PromotionTemplate> implements IPromotionTemplateDao {
-    public PromotionTemplateDaoImpl() {
+public class PromotionTemplateDAOImpl extends GenericDAOImpl<PromotionTemplate> implements IPromotionTemplateDAO {
+    public PromotionTemplateDAOImpl() {
         super(PromotionTemplate.class);
     }
 
@@ -42,14 +42,14 @@ public class PromotionTemplateDaoImpl extends GenericDAOImpl<PromotionTemplate> 
     }
 
     public static void main(String[] args) {
-        PromotionTemplateDaoImpl dao = new PromotionTemplateDaoImpl();
+//        PromotionTemplateDaoImpl dao = new PromotionTemplateDaoImpl();
 //        List<PromotionTemplate> list = dao.findByJPQL();
 //        for (PromotionTemplate p : list) {
 //            System.out.println(p.getCode());
 //        }
 //        Boolean check = dao.existsByCode("VOUCHER_11");
 //        System.out.println(check);
-        PromotionTemplate promotionTemplate = dao.findSingleByJPQL("VOUCHER_7");
-        System.out.println(promotionTemplate.getCreatedAt());
+//        PromotionTemplate promotionTemplate = dao.findSingleByJPQL("VOUCHER_7");
+//        System.out.println(promotionTemplate.getCreatedAt());
     }
 }
