@@ -1,10 +1,6 @@
 package com.biblio.controller.customer;
 
-import com.biblio.dao.IBookDAO;
-import com.biblio.dto.response.BookCardResponse;
 import com.biblio.dto.response.BookDetailsResponse;
-import com.biblio.dto.response.BookResponse;
-import com.biblio.service.IBookService;
 import com.biblio.service.IBookTemplateService;
 
 import javax.inject.Inject;

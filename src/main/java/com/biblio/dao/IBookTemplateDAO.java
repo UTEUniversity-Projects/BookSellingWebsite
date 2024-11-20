@@ -13,5 +13,7 @@ public interface IBookTemplateDAO {
 
     List<BookTemplate> findAllForManagement();
 
+    List<BookTemplate> findAllForHome();
+
     BookTemplate findOneForDetails(Long id);
 }
