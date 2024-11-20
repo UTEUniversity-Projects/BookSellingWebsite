@@ -1,6 +1,7 @@
 package com.biblio.controller;
 
 import com.biblio.utils.UploadFileUtil;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.MultipartConfig;
@@ -10,6 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.Part;
 import java.io.IOException;
+import java.util.*;
 
 @WebServlet("/upload")
 @MultipartConfig(fileSizeThreshold = 1024 * 1024 * 1, // 1 MB
@@ -27,11 +29,27 @@ public class UploadImageController extends HttpServlet {
     }
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        response.setContentType("text/plain");
-        Part part = request.getPart("image");
-        String username = request.getParameter("username");
-        String avatar = UploadFileUtil.UploadImage(part, request.getServletContext(), username);
+        String dir = request.getParameter("dir");
+        String fileName = request.getParameter("fileName");
 
-        response.getWriter().write(avatar);
+        System.out.println(fileName);
+        List<String> imageLinks = new ArrayList<String>();
+
+        Collection<Part> parts = request.getParts();
+
+        for (Part part : parts) {
+            if (part.getName().equals("files")) {
+                imageLinks.add(UploadFileUtil.UploadImage(part, request.getServletContext(), dir, fileName));
+            }
+        }
+//        String fileName = request.getParameter("fileName");
+//        String avatar = UploadFileUtil.UploadImage(part, request.getServletContext(), fileName);
+
+        ObjectMapper objectMapper = new ObjectMapper();
+        Map<String, Object> map = new HashMap<>();
+        map.put("imageLinks", imageLinks);
+        map.put("fileName", fileName);
+        response.setContentType("application/json");
+        response.getWriter().write(objectMapper.writeValueAsString(map));
     }
 }
