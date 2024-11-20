@@ -8011,6 +8011,28 @@ table {
     max-width: 100%;
   }
 }
+.checkout.active {
+  position: fixed;
+  inset: 0;
+  z-index: 999;
+}
+
+.checkout.active .checkout-overlay {
+  position: absolute;
+  inset: 0;
+}
+
+.checkout-qr {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -250%);
+}
+
+.checkout.active .checkout-qr {
+  transform: translate(-50%, -50%);
+}
+
 /* Terms & Conditions */
 .cr-common-wrapper {
   padding: 24px 24px 0 24px;
