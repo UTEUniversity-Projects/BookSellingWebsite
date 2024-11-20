@@ -13,14 +13,17 @@ $(document).ready(() => {
 			//const uploadImage = async () => {
 			//	try {
 			//		const fileInput = document.querySelector("#avatar");
-			//		let file = fileInput?.files[0];
-			//		if (!file) {
+			//		let files = fileInput?.files;
+			//		if (!files || files.length === 0) {
 			//			return null;
 			//		}
 			//
 			//		const formData = new FormData();
-			//		formData.append("image", file);
-			//		formData.append("username", $("#username").val())
+			//		for (let i = 0; i < files.length; i++) {
+			//			formData.append("files", files[i]);
+			//		}
+			//		formData.append("dir", 'customer');
+			//		formData.append("fileName", "dopamine");
 			//
 			//		return await $.ajax({
 			//			url: `${contextPath}/upload`,
@@ -37,14 +40,13 @@ $(document).ready(() => {
 			//	}
 			//};
 
-			uploadImage(".btn-register", "", "#avatar");
-
 			const handleRegistration = async () => {
 
-				let avatar = await uploadImage();
+				let avatar = await uploadImage('customer', '#avatar');
 				if (!avatar) {
 					avatar = `${contextPath}/assets/customer/img/avatar/img.png`;
 				}
+				console.log(avatar);
 
 				const formData = new FormData(document.getElementById("registerForm"));
 
@@ -63,60 +65,60 @@ $(document).ready(() => {
 					avatar: avatar
 				};
 
-				const registerButton = $('.btn-register');
-				const spinner = registerButton.find('.spinner');
-				const buttonText = registerButton.find('.button-text');
-
-				registerButton.prop('disabled', true);
-				buttonText.addClass('hidden');
-				spinner.removeClass('hidden');
-
-				$.ajax({
-					url: `${contextPath}/api/customer/register`,
-					type: 'POST',
-					contentType: 'application/json',
-					data: JSON.stringify(userData),
-					success: function (response, status, xhr) {
-						console.log(response);
-						if (response.code === 200) {
-							toast({
-								title: "Đăng ký",
-								message: "Đăng ký thành công",
-								type: "success",
-								duration: 3000,
-							});
-						} else {
-							toast({
-								title: "Đăng ký",
-								message: "Thông tin đã tồn tại !",
-								type: "error",
-								duration: 3000,
-							})
-							Object.keys(response).forEach(key => {
-								if (key !== "code") {
-									$(`#${key}`).next().text(response[key]);
-								}
-							});
-						}
-					},
-					error: function (xhr, status, error) {
-						toast({
-							title: "Lỗi",
-							message: "Có lỗi xảy ra",
-							type: "error",
-							duration: 3000
-						})
-					},
-					complete: function () {
-						registerButton.prop('disabled', false);
-						buttonText.removeClass('hidden');
-						spinner.addClass('hidden');
-					}
-				});
+				//const registerButton = $('.btn-register');
+				//const spinner = registerButton.find('.spinner');
+				//const buttonText = registerButton.find('.button-text');
+				//
+				//registerButton.prop('disabled', true);
+				//buttonText.addClass('hidden');
+				//spinner.removeClass('hidden');
+				//
+				//$.ajax({
+				//	url: `${contextPath}/api/customer/register`,
+				//	type: 'POST',
+				//	contentType: 'application/json',
+				//	data: JSON.stringify(userData),
+				//	success: function (response, status, xhr) {
+				//		console.log(response);
+				//		if (response.code === 200) {
+				//			toast({
+				//				title: "Đăng ký",
+				//				message: "Đăng ký thành công",
+				//				type: "success",
+				//				duration: 3000,
+				//			});
+				//		} else {
+				//			toast({
+				//				title: "Đăng ký",
+				//				message: "Thông tin đã tồn tại !",
+				//				type: "error",
+				//				duration: 3000,
+				//			})
+				//			Object.keys(response).forEach(key => {
+				//				if (key !== "code") {
+				//					$(`#${key}`).next().text(response[key]);
+				//				}
+				//			});
+				//		}
+				//	},
+				//	error: function (xhr, status, error) {
+				//		toast({
+				//			title: "Lỗi",
+				//			message: "Có lỗi xảy ra",
+				//			type: "error",
+				//			duration: 3000
+				//		})
+				//	},
+				//	complete: function () {
+				//		registerButton.prop('disabled', false);
+				//		buttonText.removeClass('hidden');
+				//		spinner.addClass('hidden');
+				//	}
+				//});
 
 			};
 
-			//await handleRegistration();
+			await handleRegistration();
 		}
 
 		getAddress() {
@@ -208,7 +210,7 @@ $(document).ready(() => {
 	const register = new Register();
 	register.getAddress();
 
-	register.showRequiredInput();
+	//register.showRequiredInput();
 
 	Validator({
 		form: '#registerForm',

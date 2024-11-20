@@ -169,7 +169,7 @@
                                     <label class="text-md text-slate-700 mb-1 ml-2" for="avatar">Tải
                                         lên avatar</label> <input type="file" class="form-control" id="avatar"
                                                                   aria-label="Upload" placeholder="Tải lên ảnh...."
-                                                                  name="image">
+                                                                  name="image" multiple>
 
                                 </div>
                             </div>
