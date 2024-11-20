@@ -34,7 +34,7 @@ public class PromotionTarget implements Serializable {
 
     // region Relationships
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "promotion_id", nullable = false)
     private Promotion promotion;
 

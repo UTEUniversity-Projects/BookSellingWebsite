@@ -1,6 +1,5 @@
 package com.biblio.entity;
 
-import com.biblio.enumeration.EPromotionStatus;
 import com.biblio.enumeration.EPromotionTemplateStatus;
 import com.biblio.enumeration.EPromotionTemplateType;
 import lombok.AllArgsConstructor;
@@ -50,7 +49,7 @@ public class PromotionTemplate implements Serializable {
 
     // region Relationships
 
-    @OneToMany(mappedBy = "promotionTemplate", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "promotionTemplate", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private Set<Promotion> promotions = new HashSet<>();
 
     // endregion

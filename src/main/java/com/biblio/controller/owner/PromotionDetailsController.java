@@ -1,15 +1,18 @@
 package com.biblio.controller.owner;
 
-import com.biblio.dto.request.*;
-import com.biblio.dto.response.*;
-import com.biblio.entity.PromotionTemplate;
+import com.biblio.dto.request.PromotionTargetInsertRequest;
+import com.biblio.dto.request.PromotionTargetUpdateRequest;
+import com.biblio.dto.request.PromotionTemplateUpdateRequest;
+import com.biblio.dto.request.PromotionUpdateRequest;
+import com.biblio.dto.response.PromotionResponse;
+import com.biblio.dto.response.PromotionTargetResponse;
+import com.biblio.dto.response.PromotionTemplateGetDetailsResponse;
+import com.biblio.dto.response.PromotionTemplateResponse;
 import com.biblio.enumeration.EPromotionStatus;
 import com.biblio.enumeration.EPromotionTargetType;
 import com.biblio.enumeration.EPromotionTemplateStatus;
 import com.biblio.enumeration.EPromotionTemplateType;
-import com.biblio.service.IPromotionService;
 import com.biblio.service.IPromotionTemplateService;
-import org.apache.commons.beanutils.BeanUtils;
 
 import javax.inject.Inject;
 import javax.servlet.ServletException;
@@ -19,10 +22,12 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.Serial;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Objects;
+import java.util.Optional;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 /**
  * Servlet implementation class PromotionDetailsController
@@ -45,12 +50,29 @@ public class PromotionDetailsController extends HttpServlet {
      * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
      */
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        // TODO Auto-generated method stub
         String id = request.getParameter("id");
         PromotionTemplateGetDetailsResponse promotionTemplateGetDetailsResponse = promotionTemplateService.getPromotionTemplateById(Long.parseLong(id));
+
+        // Lấy danh sách id từ PromotionTargetResponse
+        Set<Long> selectedIds = promotionTemplateGetDetailsResponse.getPromotionTargetResponse()
+                .stream()
+                .map(PromotionTargetResponse::getApplicableObjectId)
+                .collect(Collectors.toSet());
+
+        // Lấy giá trị type đầu tiên
+        String firstType = promotionTemplateGetDetailsResponse.getPromotionTargetResponse()
+                .stream()
+                .findFirst()
+                .map(PromotionTargetResponse::getType)
+                .orElse(null);
+
         request.setAttribute("promotion", promotionTemplateGetDetailsResponse);
+        request.setAttribute("selectedType", firstType); // Gửi type đầu tiên đến JSP
+        request.setAttribute("selectedIds", selectedIds); // Gửi danh sách id về JSP
         request.getRequestDispatcher("/views/owner/promotion-details.jsp").forward(request, response);
     }
+
+
 
     /**
      * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
@@ -67,13 +89,12 @@ public class PromotionDetailsController extends HttpServlet {
 
 
     private void handleEditPromotion(HttpServletRequest request, HttpServletResponse response, EPromotionTemplateType type, Double percentDiscount, Double minValueApplied) {
-        PromotionTemplate promotionTemplate = new PromotionTemplate();
         String code = request.getParameter("code");
         String title = request.getParameter("title");
         String description = request.getParameter("description");
         String discountLimit = request.getParameter("discountLimit");
         String time = request.getParameter("dateeffective");
-        Long quantity = Long.parseLong(request.getParameter("quantity"));
+        String quantity = request.getParameter("quantity");
 
         try {
             PromotionTemplateGetDetailsResponse promotionTemplateGetDetailsResponse = promotionTemplateService.getPromotionTemplateByCode(code);
@@ -86,9 +107,23 @@ public class PromotionDetailsController extends HttpServlet {
 
                 PromotionTemplateUpdateRequest promotionTemplateUpdateRequest = convertToUpdateRequest(promotionTemplateResponse);
 
-                String startDate = "";
-                if (quantity == null) quantity = 1L;
-                for (int i = 0; i < quantity; i++) {
+                Optional<String> optionalStartDate = promotionTemplateUpdateRequest
+                        .getPromotionUpdates()
+                        .stream()
+                        .map(PromotionUpdateRequest::getEffectiveDate)
+                        .findFirst();
+
+                String startDate = optionalStartDate.orElse(null);
+
+                if (quantity == null) {
+                    quantity = "1";
+                    promotionTemplateUpdateRequest.setIsInfinite(true);
+                }
+                else {
+                    promotionTemplateUpdateRequest.setIsInfinite(false);
+
+                }
+                for (int i = 0; i < Long.parseLong(quantity); i++) {
                     PromotionUpdateRequest promotionUpdateRequest = new PromotionUpdateRequest();
 
                     promotionUpdateRequest.setTitle(title);
@@ -179,7 +214,6 @@ public class PromotionDetailsController extends HttpServlet {
 
         promotionTemplateUpdateRequest.setCode(promotionTemplateResponse.getCode());
         promotionTemplateUpdateRequest.setCreateAt(promotionTemplateResponse.getCreateAt());
-        promotionTemplateUpdateRequest.setIsInfinite(promotionTemplateResponse.getIsInfinite());
         promotionTemplateUpdateRequest.setStatus(promotionTemplateResponse.getStatus());
         promotionTemplateUpdateRequest.setType(promotionTemplateResponse.getType());
 
@@ -207,9 +241,6 @@ public class PromotionDetailsController extends HttpServlet {
 
             promotionTemplateUpdateRequest.getPromotionUpdates().add(promotionUpdateRequest);
         }
-
-
-
         return promotionTemplateUpdateRequest;
     }
 
