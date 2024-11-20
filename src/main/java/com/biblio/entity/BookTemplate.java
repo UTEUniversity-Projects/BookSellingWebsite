@@ -52,7 +52,7 @@ public class BookTemplate {
     @OneToMany(mappedBy = "bookTemplate", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private Set<MediaFile> mediaFiles = new LinkedHashSet<>();
 
-    @OneToMany(mappedBy = "bookTemplate", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "bookTemplate", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private Set<Book> books = new HashSet<>();
 
     @OneToMany(mappedBy = "bookTemplate", cascade = CascadeType.ALL)

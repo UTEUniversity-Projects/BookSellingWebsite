@@ -14,7 +14,7 @@
             <!-- Form bao quanh daterange -->
             <form id="financial-report-form">
                 <div class="cr-tools">
-                    <div class="daterange" id="date-header">
+                    <div class="daterange" id="date-summary-report">
                         <i class="fa fa-calendar"></i>&nbsp;
                         <span></span>
                         <i class="fa fa-caret-down"></i>
@@ -105,7 +105,7 @@
                                 <i class="ri-fullscreen-line"></i>
                             </a>
                             <div class="cr-tools">
-                                <div class="daterange">
+                                <div class="daterange" id="date-list-revenue">
                                     <i class="fa fa-calendar"></i>&nbsp;
                                     <span></span>
                                     <i class="fa fa-caret-down"></i>
@@ -439,3 +439,5 @@
         </div>
     </div>
 </div>
+
+

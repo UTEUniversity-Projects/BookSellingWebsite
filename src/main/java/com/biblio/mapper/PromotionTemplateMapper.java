@@ -6,6 +6,7 @@ import com.biblio.dto.request.PromotionTemplateUpdateRequest;
 import com.biblio.dto.request.PromotionUpdateRequest;
 import com.biblio.dto.response.*;
 import com.biblio.entity.Promotion;
+import com.biblio.entity.PromotionTarget;
 import com.biblio.entity.PromotionTemplate;
 import com.biblio.enumeration.EPromotionStatus;
 
@@ -41,6 +42,13 @@ public class PromotionTemplateMapper {
         response.setPercentDiscount(promotion.getPercentDiscount());
         response.setMinValueToApplied(promotion.getMinValueToBeApplied());
 
+        for (PromotionTarget promotionTarget : promotion.getPromotionTargets()) {
+            PromotionTargetResponse promotionTargetResponse = new PromotionTargetResponse();
+            promotionTargetResponse.setType(promotionTarget.getType().toString());
+            promotionTargetResponse.setApplicableObjectId(promotionTarget.getApplicableObjectId());
+            response.getPromotionTargetResponse().add(promotionTargetResponse);
+        }
+
         return response;
     }
 
@@ -70,7 +78,7 @@ public class PromotionTemplateMapper {
         promotionTemplate.setCode(promotionTemplateUpdateRequest.getCode());
         promotionTemplate.setType(promotionTemplateUpdateRequest.getType());
         promotionTemplate.setStatus(promotionTemplateUpdateRequest.getStatus());
-        promotionTemplate.setInfinite(promotionTemplate.isInfinite());
+        promotionTemplate.setInfinite(promotionTemplateUpdateRequest.getIsInfinite());
         promotionTemplate.setCreatedAt(LocalDateTime.parse(promotionTemplateUpdateRequest.getCreateAt()));
 
         for (PromotionUpdateRequest promotionUpdateRequest : promotionTemplateUpdateRequest.getPromotionUpdates()) {
