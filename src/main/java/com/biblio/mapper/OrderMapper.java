@@ -28,7 +28,7 @@ public class OrderMapper {
     public static OrderDetailsManagementResponse mapToOrderDetailsManagementResponse(Order order) {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm dd-MM-yyyy");
 
-        List<OrderProductResponse> products = order.getOrderItems().stream()
+        List<OrderProductResponse> products = order.getLineItems().stream()
                 .map(OrderItemMapper::mapToOrderProductResponse)
                 .collect(Collectors.toList());
 
