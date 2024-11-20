@@ -8,13 +8,13 @@ import java.util.HashSet;
 import java.util.Set;
 
 @Entity
-@Table(name = "order_item")
+@Table(name = "line_item")
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter
 @Setter
 @Builder
-public class OrderItem implements Serializable {
+public class LineItem implements Serializable {
 
     // region Attributes
 
@@ -28,8 +28,8 @@ public class OrderItem implements Serializable {
 
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JoinTable(
-            name = "order_item_books",
-            joinColumns = @JoinColumn(name = "order_item_id"),
+            name = "line_item_books",
+            joinColumns = @JoinColumn(name = "line_item_id"),
             inverseJoinColumns = @JoinColumn(name = "book_id")
     )
     private Set<Book> books = new HashSet<>();
@@ -38,6 +38,10 @@ public class OrderItem implements Serializable {
     @JoinColumn(name = "order_id", nullable = false)
     private Order order;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "return_book_id")
+    private ReturnBook returnBook;
+    
     // region
 
     public double calPriceItem() {

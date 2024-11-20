@@ -9,9 +9,7 @@ import java.io.Serializable;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -71,7 +69,7 @@ public class Order implements Serializable {
 //    private EWallet wallet;
 
     @OneToMany(mappedBy = "order", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
-    private Set<OrderItem> orderItems = new HashSet<>();
+    private Set<LineItem> lineItems = new HashSet<>();
 
     @ManyToMany(cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH}, fetch = FetchType.LAZY)
     @JoinTable(name = "order_promotion",
@@ -85,7 +83,7 @@ public class Order implements Serializable {
 
     public double calTotalPrice() {
         double totalPrice = 0.0;
-        for (OrderItem item : orderItems) {
+        for (LineItem item : lineItems) {
             totalPrice += item.calPriceItem();
         }
         BigDecimal roundedTotal = new BigDecimal(totalPrice).setScale(2, RoundingMode.HALF_UP);

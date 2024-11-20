@@ -1,10 +1,7 @@
 package com.biblio.dao.impl;
 
 import com.biblio.dao.IOrderDAO;
-import com.biblio.entity.Book;
-import com.biblio.entity.MediaFile;
 import com.biblio.entity.Order;
-import com.biblio.entity.OrderItem;
 
 import java.util.HashMap;
 import java.util.List;
@@ -33,8 +30,8 @@ public class OrderDAOImpl extends GenericDAOImpl<Order> implements IOrderDAO {
         jpql.append("SELECT DISTINCT o ")
                 .append("FROM Order o ")
                 .append("JOIN FETCH o.customer c ")
-                .append("JOIN FETCH o.orderItems oi ")
-                .append("JOIN FETCH oi.books b ")
+                .append("JOIN FETCH o.lineItems li ")
+                .append("JOIN FETCH li.books b ")
                 .append("JOIN FETCH o.shipping s");
 
         return super.findAll(jpql.toString());
@@ -50,11 +47,11 @@ public class OrderDAOImpl extends GenericDAOImpl<Order> implements IOrderDAO {
                 .append("JOIN FETCH c.account ac ")
                 .append("JOIN FETCH o.shipping s ")
                 .append("JOIN FETCH s.address ad ")
-                .append("JOIN FETCH o.orderItems oi ")
-                .append("JOIN FETCH oi.books b ")
+                .append("JOIN FETCH o.lineItems li ")
+                .append("JOIN FETCH li.books b ")
                 .append("JOIN FETCH b.bookTemplate bt ")
                 .append("JOIN FETCH bt.mediaFiles m ")
-                .append("JOIN FETCH o.promotions p ")
+                .append("LEFT JOIN FETCH o.promotions p ")
                 .append("WHERE o.id = :id");
 
         Map<String, Object> params = new HashMap<>();

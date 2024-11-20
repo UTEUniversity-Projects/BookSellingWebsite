@@ -47,7 +47,12 @@ public class BookTemplate {
     @JoinColumn(name = "publisher_id", nullable = false)
     private Publisher publisher;
 
-    @OneToMany(mappedBy = "bookTemplate", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @OneToMany
+    @JoinTable(
+            name = "book_template_media_file",
+            joinColumns = @JoinColumn(name = "book_template_id"),
+            inverseJoinColumns = @JoinColumn(name = "media_file_id")
+    )
     private List<MediaFile> mediaFiles = new ArrayList<>();
 
     @OneToMany(mappedBy = "bookTemplate", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
