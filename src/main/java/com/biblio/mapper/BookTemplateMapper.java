@@ -46,9 +46,8 @@ public class BookTemplateMapper {
                 .categoryName(singlebook.getSubCategory().getCategory().getName())
                 .imageUrl(bookTemplate
                         .getMediaFiles()
-                        .iterator().next()
-                        .getStoredCode()
-                        .replaceAll("image\\d+\\.jpg", "image1.jpg"))
+                        .get(0)
+                        .getStoredCode())
                 .reviewRate(bookTemplate.calculateReviewRate())
                 .numberOfReviews(bookTemplate.getReviews().stream().filter(review -> !review.isHidden()).count())
                 .build();

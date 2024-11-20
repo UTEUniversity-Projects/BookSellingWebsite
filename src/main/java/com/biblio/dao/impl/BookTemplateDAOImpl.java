@@ -47,6 +47,22 @@ public class BookTemplateDAOImpl extends GenericDAOImpl<BookTemplate> implements
     }
 
     @Override
+    public List<BookTemplate> findAllForHome() {
+        StringBuilder jpql = new StringBuilder();
+        jpql.append("SELECT DISTINCT bt ")
+                .append("FROM BookTemplate bt ")
+                .append("LEFT JOIN FETCH bt.mediaFiles m");
+
+        List<BookTemplate> bookTemplates = super.findAll(jpql.toString());
+
+        for (BookTemplate bookTemplate : bookTemplates) {
+            Set<Book> books = new HashSet<>(bookDAO.findByBookTemplate(bookTemplate));
+            bookTemplate.setBooks(books);
+        }
+        return bookTemplates;
+    }
+
+    @Override
     public BookTemplate findOneForDetails(Long id) {
         StringBuilder jpql = new StringBuilder();
 

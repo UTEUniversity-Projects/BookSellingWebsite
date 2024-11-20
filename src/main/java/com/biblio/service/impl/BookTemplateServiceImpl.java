@@ -29,7 +29,7 @@ public class BookTemplateServiceImpl implements IBookTemplateService {
 
     @Override
     public List<BookCardResponse> getAllBookCardResponse() {
-        List<BookTemplate> bookTemplates = bokTemplateDAO.findAll();
+        List<BookTemplate> bookTemplates = bokTemplateDAO.findAllForHome();
         List<BookCardResponse> bookCardResponseList = new ArrayList<>();
         for (BookTemplate bookTemplate : bookTemplates) {
             bookCardResponseList.add(BookTemplateMapper.toBookCardResponse(bookTemplate));
