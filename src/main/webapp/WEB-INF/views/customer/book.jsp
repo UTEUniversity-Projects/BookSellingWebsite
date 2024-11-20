@@ -59,7 +59,7 @@
                 </c:choose>
               </c:forEach>
             </div>
-            <p>( ${book.avgRating} )</p>
+            <p>( ${book.reviewCount} Reviews)</p>
           </div>
           <div class="list">
             <ul>
@@ -82,8 +82,8 @@
             </ul>
           </div>
           <div class="cr-product-price">
-            <span class="new-price">${book.sellingPrice} đ</span>
-<%--            <span class="old-price">404.000 đ</span>--%>
+            <span class="new-price price-value">${book.sellingPrice}</span>
+            <span class="old-price price-value">${book.sellingPrice}</span>
           </div>
           <div class="cr-size-weight">
             <h5><span>Tình trạng</span> :</h5>
@@ -313,13 +313,12 @@
                         <div class="review-content">
                           ${review.content}
                         </div>
-
-<%--                        <div class="response-review">--%>
-<%--                          <div class="response-title">Phản Hồi Của Người Bán</div>--%>
-<%--                          <div class="response-text">--%>
-<%--                            Dạ vâng adidas cảm ơn quý khách đã tin tưởng và ủng hộ ❤️. Sự góp ý--%>
-<%--                          </div>--%>
-<%--                        </div>--%>
+                        <c:if test="${not empty review.responseContent}">
+                          <div class="response-review">
+                            <div class="response-title">Phản Hồi Của Người Bán</div>
+                            <div class="response-text">${review.responseContent}</div>
+                          </div>
+                        </c:if>
                       </div>
                     </li>
                   </c:forEach>
@@ -342,6 +341,17 @@
                       <div class="author-item--info">
                         <span class="name">${author.name} (Tác giả)</span>
                         <p>${author.introduction}</p>
+                      </div>
+                    </div>
+                  </c:forEach>
+                  <c:forEach var="translator" items="${book.translators}">
+                    <div class="author-item">
+                      <div class="author-item--avatar">
+                        <img src="${translator.avatar}" alt="">
+                      </div>
+                      <div class="author-item--info">
+                        <span class="name">${translator.name} (Dịch giả)</span>
+                        <p>${translator.introduction}</p>
                       </div>
                     </div>
                   </c:forEach>
@@ -612,3 +622,5 @@
     </div>
   </div>
 </section>
+
+<script src="${pageContext.request.contextPath}/assets/customer/js/book-details.js" defer></script>

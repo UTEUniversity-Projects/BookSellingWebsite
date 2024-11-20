@@ -77,8 +77,9 @@
                                 <tr>
                                     <th width="5%"></th>
                                     <th width="20%">Tiêu đề</th>
-                                    <th>Giá</th>
-                                    <th>Số lượng</th>
+                                    <th>Giá bán</th>
+                                    <th>Khuyến mãi</th>
+                                    <th>Tồn kho</th>
                                     <th>Đã bán</th>
                                     <th>Ngày mở bán</th>
                                     <th>
@@ -98,6 +99,7 @@
                                     </td>
                                     <td>${book.title}</td>
                                     <td class="price-value">${book.price}</td>
+                                    <td>20%</td>
                                     <td>${book.quantity}</td>
                                     <td>${book.soldCount}</td>
                                     <td>${book.publicationDate}</td>

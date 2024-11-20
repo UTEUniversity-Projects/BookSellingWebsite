@@ -1,21 +1,23 @@
 package com.biblio.controller.customer;
 
-import com.biblio.dto.response.*;
-import com.biblio.service.IBookService;
+import com.biblio.dto.response.AccountGetResponse;
+import com.biblio.dto.response.BookCardResponse;
+import com.biblio.dto.response.CartResponse;
+import com.biblio.dto.response.CategorySidebarResponse;
 import com.biblio.service.IBookTemplateService;
+import com.biblio.service.ICartService;
 import com.biblio.service.ICategoryService;
 
-import java.io.IOException;
-import java.io.Serial;
-import java.util.List;
 import javax.inject.Inject;
-
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import java.io.IOException;
+import java.io.Serial;
+import java.util.List;
 
 /**
  * Servlet implementation class HomeController
@@ -30,6 +32,9 @@ public class HomeController extends HttpServlet {
 
     @Inject
     private IBookTemplateService bookTemplateService;
+
+    @Inject
+    private ICartService cartService;
   
     /**
      * @see HttpServlet#HttpServlet()
@@ -48,12 +53,13 @@ public class HomeController extends HttpServlet {
         HttpSession session = request.getSession();
         AccountGetResponse account = (AccountGetResponse) session.getAttribute("account");
 
-
+        CartResponse cart = cartService.getCartResponseByUsername(account.getUsername());
 
         List<CategorySidebarResponse> categories = categoryService.getAllCategorySidebarResponse();
         List<BookCardResponse> books = bookTemplateService.getAllBookCardResponse();
         request.setAttribute("categories", categories);
         request.setAttribute("books", books);
+        request.setAttribute("cart", cart);
 
         request.getRequestDispatcher("/views/customer/home.jsp").forward(request, response);
     }
@@ -63,7 +69,6 @@ public class HomeController extends HttpServlet {
      */
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         // TODO Auto-generated method stub
-        doGet(request, response);
     }
 
 }

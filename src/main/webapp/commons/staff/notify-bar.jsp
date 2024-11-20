@@ -267,7 +267,7 @@
                         <li>
                             <a href="chatapp.html" class="reply">Reply</a>
                             <div class="user">
-                                <img src="//assets/staff/staff/img/user/5.jpg" alt="user"/>
+                                <img src="${pageContext.request.contextPath}/assets/staff/img/user/5.jpg" alt="user"/>
                                 <span class="label busy"></span>
                             </div>
                             <div class="detail">
@@ -301,13 +301,13 @@
                             </p>
                             <span class="download-files">
 											<span class="download">
-												<img src="${pageContext.request.contextPath}//assets/staff/staff/img/other/1.jpg" alt="image"/>
+												<img src="${pageContext.request.contextPath}/assets/staff/img/other/1.jpg" alt="image"/>
 												<a href="javascript:void(0)"
                                                 ><i class="ri-download-2-line"></i
                                                 ></a>
 											</span>
 											<span class="download">
-												<img src="${pageContext.request.contextPath}//assets/staff/staff/img/other/2.jpg" alt="image"/>
+												<img src="${pageContext.request.contextPath}/assets/staff/img/other/2.jpg" alt="image"/>
 												<a href="javascript:void(0)"
                                                 ><i class="ri-download-2-line"></i
                                                 ></a>
@@ -346,7 +346,7 @@
                                                 ></a>
 											</span>
 											<span class="download">
-												<img src="${pageContext.request.contextPath}//assets/staff/staff/img/other/3.jpg" alt="image"/>
+												<img src="${pageContext.request.contextPath}/assets/staff/img/other/3.jpg" alt="image"/>
 												<a href="javascript:void(0)"
                                                 ><i class="ri-download-2-line"></i
                                                 ></a>

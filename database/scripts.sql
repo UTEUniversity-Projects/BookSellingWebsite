@@ -1,6 +1,6 @@
 -- Dữ liệu ảo
 -- CREATE DATABASE `bsw-biblio`;
--- USE `bsw-biblio`;
+USE `bsw-biblio`;
 -- 1. Table Account:
 INSERT INTO account (password, status, role, username) VALUES
 ('$2y$10$lHBtDRcnnTUMClaM9.BIleOK7sgnHUgUCSr6qcGo8GfqygI5E.3VO', 'ACTIVE', 'OWNER', 'owner_1'),
@@ -188,7 +188,7 @@ VALUES
 ('https://kenh14cdn.com/203336854389633024/2022/4/9/1732920193150637133093626329146106221360649n-164947443607057196887.jpeg', '1995-08-21', 'customer_8@gmail.com', 'Lê Ngọc Thanh', 'MALE', '2023-01-22', '0901234568', 'GOLD', 11),
 ('https://kenh14cdn.com/203336854389633024/2022/4/9/1732920193150637133093626329146106221360649n-164947443607057196887.jpeg', '1991-04-11', 'customer_9@gmail.com', 'Phan Hữu Nam', 'MALE', '2022-11-10', '0901234569', 'GOLD', 12),
 ('https://kenh14cdn.com/203336854389633024/2022/4/9/1732920193150637133093626329146106221360649n-164947443607057196887.jpeg', '1992-12-17', 'customer_10@gmail.com', 'Trịnh Quang Minh', 'MALE', '2023-04-14', '0901234570', 'GOLD', 13),
-('https://kenh14cdn.com/203336854389633024/2022/4/9/1732920193150637133093626329146106221360649n-164947443607057196887.jpeg', '1988-02-27', 'customer_11@gmail.com', 'Nguyễn Anh Tuấn', 'MALE', '2022-09-18', '0901234571', 'GOLD', 14),
+('https://kenh14cdn.com/203336854389633024/2022/4/9/1732920193150637133093626329146106221360649n-164947443607057196887.jpeg', '1988-02-27', 'book_templatebook_templatecustomer_11@gmail.com', 'Nguyễn Anh Tuấn', 'MALE', '2022-09-18', '0901234571', 'GOLD', 14),
 ('https://kenh14cdn.com/203336854389633024/2022/4/9/1732920193150637133093626329146106221360649n-164947443607057196887.jpeg', '1990-10-30', 'customer_12@gmail.com', 'Đặng Thị Thanh', 'FEMALE', '2023-05-19', '0901234572', 'GOLD', 15),
 ('https://kenh14cdn.com/203336854389633024/2022/4/9/1732920193150637133093626329146106221360649n-164947443607057196887.jpeg', '1987-01-25', 'customer_13@gmail.com', 'Võ Minh Châu', 'FEMALE', '2022-12-21', '0901234573', 'GOLD', 16),
 ('https://kenh14cdn.com/203336854389633024/2022/4/9/1732920193150637133093626329146106221360649n-164947443607057196887.jpeg', '1993-09-19', 'customer_14@gmail.com', 'Hoàng Văn Nam', 'MALE', '2023-02-16', '0901234574', 'GOLD', 17),
@@ -3683,6 +3683,12 @@ INSERT INTO cart (customer_id) VALUES
 (14),
 (15);
 
+-- Cart Item
+INSERT INTO cart_item (book_template_id, cart_id, quantity) VALUES
+(1, 1, 2),
+(2, 1, 1),
+(3, 1, 3),
+(4, 1, 2);
 
 -- Table Shipping
 INSERT INTO shipping(shipping_fee, shipping_unit, address_id) VALUES

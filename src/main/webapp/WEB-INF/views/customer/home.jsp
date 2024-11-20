@@ -525,8 +525,8 @@
             <div class="col-xl-9 col-lg-8 col-12 mb-24">
                 <div class="row mb-minus-24">
                     <c:forEach var="book" items="${books}">
-                        <div
-                                class="mix ${book.categoryName} col-xxl-3 col-xl-4 col-6 cr-product-box mb-24"
+                        <div onclick="viewBook('${pageContext.request.contextPath}/book?id=${book.id}')"
+                             class="mix ${book.categoryName} col-xxl-3 col-xl-4 col-6 cr-product-box mb-24 cursor-pointer"
                         >
                             <div class="cr-product-card">
                                 <div class="cr-product-image">
@@ -534,13 +534,10 @@
                                         <img src="${pageContext.request.contextPath}${book.imageUrl}" alt="${book.title}"/>
                                     </div>
                                     <div class="cr-side-view">
-                                        <a href="javascript:void(0)" class="wishlist">
-                                            <i class="ri-heart-line"></i>
-                                        </a>
                                         <a
                                                 class="model-oraganic-product"
                                                 data-bs-toggle="modal"
-                                                href="#quickview"
+                                                href="#quickview-${book.id}"
                                                 role="button"
                                         >
                                             <i class="ri-eye-line"></i>
@@ -552,7 +549,7 @@
                                 </div>
                                 <div class="cr-product-details">
                                     <div class="cr-brand">
-                                        <a href="shop-left-sidebar.html">${book.categoryName}</a>
+                                        <p>${book.categoryName}</p>
                                         <div class="cr-star">
                                             <c:forEach var="i" begin="1" end="5" step="1">
                                                 <c:choose>
@@ -572,8 +569,8 @@
                                     </div>
                                     <a href="${pageContext.request.contextPath}/book?id=${book.id}" class="title">${book.title}</a>
                                     <p class="cr-price">
-                                        <span class="new-price">${book.sellingPrice} đ</span>
-<%--                                        <span class="old-price">$123.25</span>--%>
+                                        <span class="new-price price-value">${book.sellingPrice}</span>
+                                        <span class="old-price price-value">${book.sellingPrice}</span>
                                     </p>
                                 </div>
                             </div>
@@ -1318,3 +1315,5 @@
         </div>
     </div>
 </section>
+
+<script src="${pageContext.request.contextPath}/assets/customer/js/book-list.js" defer></script>

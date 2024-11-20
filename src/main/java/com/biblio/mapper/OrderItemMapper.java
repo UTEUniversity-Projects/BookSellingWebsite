@@ -10,12 +10,9 @@ public class OrderItemMapper {
         Book book = orderItem.getBooks().iterator().next();
         return OrderProductResponse.builder()
                 .title(book.getTitle())
-                .imagePath(book
-                        .getBookTemplate()
-                        .getMediaFiles()
-                        .iterator().next()
-                        .getStoredCode()
-                        .replaceAll("image\\d+\\.jpg", "image1.jpg"))
+                .imagePath(book.getBookTemplate()
+                        .getMediaFiles().get(0)
+                        .getStoredCode())
                 .quantity(orderItem.getBooks().size())
                 .sellingPrice(book.getSellingPrice())
                 .totalPrice(orderItem.calPriceItem())

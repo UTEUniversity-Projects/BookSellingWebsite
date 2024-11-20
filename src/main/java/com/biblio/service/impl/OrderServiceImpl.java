@@ -21,13 +21,13 @@ public class OrderServiceImpl implements IOrderService {
 
     @Override
     public OrderDetailsManagementResponse getOrderDetailsManagementResponse(Long id) {
-        Order order = orderDAO.findOne(id);
+        Order order = orderDAO.findOneForDetailsManagement(id);
         return OrderMapper.mapToOrderDetailsManagementResponse(order);
     }
 
     @Override
     public List<OrderManagementResponse> getAllOrderManagementResponse() {
-        List<Order> orders = orderDAO.findAll();
+        List<Order> orders = orderDAO.findAllForManagement();
         List<OrderManagementResponse> orderManagementResponse = new ArrayList<>();
         for (Order order : orders) {
             orderManagementResponse.add(OrderMapper.mapToOrderManagementResponse(order));

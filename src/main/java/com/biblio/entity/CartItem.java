@@ -23,4 +23,11 @@ public class CartItem {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "book_template_id", nullable = false)
     private BookTemplate bookTemplate;
+
+    @Column(name = "quantity")
+    private Long  quantity;
+
+    // region Methods
+
+    // endregion
 }
