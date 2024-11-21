@@ -115,7 +115,7 @@
                     </div>
                     <div class="cr-card-content">
                         <div class="cr-chart-content">
-                            <div id="revenueBarChart" class="mb-m-24"></div>
+                            <div id="revenueLineChart" class="mb-m-24"></div>
                         </div>
                     </div>
                 </div>
@@ -439,5 +439,6 @@
         </div>
     </div>
 </div>
-
+<script>const contextPath = "<%= request.getContextPath()%>";</script>
+<script src="/assets/owner/js/ecommerce.js" defer></script>
 

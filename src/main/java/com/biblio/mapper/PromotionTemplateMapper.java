@@ -78,7 +78,7 @@ public class PromotionTemplateMapper {
         promotionTemplate.setCode(promotionTemplateUpdateRequest.getCode());
         promotionTemplate.setType(promotionTemplateUpdateRequest.getType());
         promotionTemplate.setStatus(promotionTemplateUpdateRequest.getStatus());
-        promotionTemplate.setInfinite(promotionTemplateUpdateRequest.getIsInfinite());
+        promotionTemplate.setInfinite(promotionTemplateUpdateRequest.isInfinite());
         promotionTemplate.setCreatedAt(LocalDateTime.parse(promotionTemplateUpdateRequest.getCreateAt()));
 
         for (PromotionUpdateRequest promotionUpdateRequest : promotionTemplateUpdateRequest.getPromotionUpdates()) {
