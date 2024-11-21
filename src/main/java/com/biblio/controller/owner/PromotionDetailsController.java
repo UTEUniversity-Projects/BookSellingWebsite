@@ -95,6 +95,8 @@ public class PromotionDetailsController extends HttpServlet {
         String discountLimit = request.getParameter("discountLimit");
         String time = request.getParameter("dateeffective");
         String quantity = request.getParameter("quantity");
+        Boolean F = false;
+        Boolean T = true;
 
         try {
             PromotionTemplateGetDetailsResponse promotionTemplateGetDetailsResponse = promotionTemplateService.getPromotionTemplateByCode(code);
@@ -105,7 +107,7 @@ public class PromotionDetailsController extends HttpServlet {
 
                 PromotionTemplateResponse promotionTemplateResponse = promotionTemplateService.getPromotionTemplateDetailsById(promotionTemplateGetDetailsResponse.getId());
 
-                PromotionTemplateUpdateRequest promotionTemplateUpdateRequest = convertToUpdateRequest(promotionTemplateResponse);
+                PromotionTemplateUpdateRequest promotionTemplateUpdateRequest = convertToUpdateRequest(promotionTemplateResponse, quantity);
 
                 Optional<String> optionalStartDate = promotionTemplateUpdateRequest
                         .getPromotionUpdates()
@@ -114,14 +116,8 @@ public class PromotionDetailsController extends HttpServlet {
                         .findFirst();
 
                 String startDate = optionalStartDate.orElse(null);
-
                 if (quantity == null) {
                     quantity = "1";
-                    promotionTemplateUpdateRequest.setIsInfinite(true);
-                }
-                else {
-                    promotionTemplateUpdateRequest.setIsInfinite(false);
-
                 }
                 for (int i = 0; i < Long.parseLong(quantity); i++) {
                     PromotionUpdateRequest promotionUpdateRequest = new PromotionUpdateRequest();
@@ -207,10 +203,16 @@ public class PromotionDetailsController extends HttpServlet {
 
 
 
-    public PromotionTemplateUpdateRequest convertToUpdateRequest(PromotionTemplateResponse promotionTemplateResponse) {
+    public PromotionTemplateUpdateRequest convertToUpdateRequest(PromotionTemplateResponse promotionTemplateResponse, String quantity) {
         PromotionTemplateUpdateRequest promotionTemplateUpdateRequest = new PromotionTemplateUpdateRequest();
 
         promotionTemplateUpdateRequest.setId(promotionTemplateResponse.getId());
+
+        if (quantity == null) {
+            promotionTemplateUpdateRequest.setInfinite(true);
+        } else {
+            promotionTemplateUpdateRequest.setInfinite(false);
+        }
 
         promotionTemplateUpdateRequest.setCode(promotionTemplateResponse.getCode());
         promotionTemplateUpdateRequest.setCreateAt(promotionTemplateResponse.getCreateAt());

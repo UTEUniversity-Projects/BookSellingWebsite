@@ -43,7 +43,7 @@
         </div>
         <c:if test="${promotion.type == 'DISCOUNT'}">
             <form class="promotionForm">
-                <input type="hidden" name="formType" value="addDiscount"/>
+                <input type="hidden" name="formType" value="editDiscount"/>
 
                 <div class="form-content d-flex">
                     <!-- Cột bên trái -->
@@ -397,7 +397,7 @@
 <script>const contextPath = "<%= request.getContextPath()%>";</script>
 <script src="${pageContext.request.contextPath}/assets/owner/js/validator-promotion-details.js" defer></script>
 
-<script src="${pageContext.request.contextPath}/assets/owner/js/add-p romotion.js" defer></script>
+<script src="${pageContext.request.contextPath}/assets/owner/js/add-promotion.js" defer></script>
 
 
 
