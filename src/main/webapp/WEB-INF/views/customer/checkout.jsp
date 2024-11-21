@@ -163,31 +163,21 @@
         </div>
       </div>
     </div>
-    <div class="mt-5 bg-[#f5f5f5] rounded px-4 py-4">
+    <div class="mt-5 bg-[#f5f5f5] rounded px-4 py-4 mb-5">
       <h3 class="text-xl text-[#26a397] font-medium">
         Phương thức thanh toán
       </h3>
       <div class="flex items-center mx-auto justify-evenly h-10 mt-5 mb-5">
         <div
-                class="px-4 py-2 hover:bg-[#63b597] rounded cursor-pointer bg-[#26a397] transition-all duration-300"
-        >
-          <p class="text-white">Chuyển khoản</p>
-        </div>
-        <div
-                class="px-4 py-2 text-white hover:bg-[#63b597] rounded cursor-pointer bg-[#26a397] transition-all duration-300"
-        >
-          <p class="text-white">Thẻ tín dụng</p>
-        </div>
-        <div
-                class="px-4 py-2 text-white rounded cursor-pointer transition-all duration-300 h-full"
+                class="btn-checkout px-4 py-2 text-white hover:bg-gray-50 rounded cursor-pointer bg-white transition-all duration-300 h-full"
         >
           <img
-                  class="w-full h-full object-cover scale-[1]"
-                  src="https://cdn.haitrieu.com/wp-content/uploads/2022/10/Logo-VNPAY-QR.png"
+                  class="w-full h-full object-cover scale-[1.2]"
+                  src="https://res.cloudinary.com/taskmanagereaglob123/image/upload/v1641970995/VietQR.46a78cbb_utwzzh.png"
           />
         </div>
         <div
-                class="px-4 py-2 text-white hover:bg-[#a50164] rounded cursor-pointer bg-[#a50164] transition-all duration-300 h-full"
+                class="btn-checkout px-4 py-2 text-white hover:bg-[#a50164] rounded cursor-pointer bg-[#a50164] transition-all duration-300 h-full"
         >
           <img
                   class="w-full h-full object-cover scale-[1.5]"
@@ -195,11 +185,11 @@
           />
         </div>
         <div
-                class="px-4 py-2 text-white hover:bg-gray-50 rounded cursor-pointer bg-white transition-all duration-300 h-full"
+                class="btn-checkout px-4 py-2 text-white rounded cursor-pointer transition-all duration-300 h-full"
         >
           <img
-                  class="w-full h-full object-cover scale-[1.2]"
-                  src="https://res.cloudinary.com/taskmanagereaglob123/image/upload/v1641970995/VietQR.46a78cbb_utwzzh.png"
+                  class="w-full h-full object-cover scale-[1]"
+                  src="https://cdn.haitrieu.com/wp-content/uploads/2022/10/Logo-VNPAY-QR.png"
           />
         </div>
       </div>
@@ -237,3 +227,4 @@
     </div>
   </div>
 </section>
+<script src="${pageContext.request.contextPath}/assets/customer/js/checkout.js"></script>

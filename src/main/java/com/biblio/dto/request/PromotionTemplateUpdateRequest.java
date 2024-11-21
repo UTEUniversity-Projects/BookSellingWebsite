@@ -17,8 +17,9 @@ public class PromotionTemplateUpdateRequest {
     private Long id;
     private String code;
     private String createAt;
-    private Boolean isInfinite;
+    private boolean isInfinite;
     private EPromotionTemplateStatus status;
     private EPromotionTemplateType type;
     private Set<PromotionUpdateRequest> promotionUpdates = new HashSet<>();
+
 }

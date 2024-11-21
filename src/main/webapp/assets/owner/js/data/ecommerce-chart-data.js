@@ -164,111 +164,111 @@
 //     //     newcampaignsChart.render();
 //     // }
 //
-//     // function revenueLineChart() {
-//     //     var options = {
-//     //         series: [{
-//     //             name: 'Doanh thu',
-//     //             data: [23000000, 12000000, 23000000, 22000000, 15000000, 42000000, 31000000, 27000000, 45000000, 28000000, 37000000]
-//     //         }],
-//     //         chart: {
-//     //             height: 365,
-//     //             type: 'line',
-//     //             stacked: false,
-//     //             foreColor: '#373d3f',
-//     //             sparkline: {
-//     //                 enabled: !1
-//     //             },
-//     //             dropShadow: {
-//     //                 enabled: true,
-//     //                 enabledOnSeries: undefined,
-//     //                 top: 5,
-//     //                 left: 5,
-//     //                 blur: 3,
-//     //                 color: '#000',
-//     //                 opacity: 0.1
-//     //             },
-//     //             toolbar: {
-//     //                 show: !1
-//     //             }
-//     //         },
-//     //         stroke: {
-//     //             width: [2],
-//     //             curve: 'smooth'
-//     //         },
-//     //         plotOptions: {
-//     //             bar: {
-//     //                 horizontal: !1,
-//     //                 columnWidth: 10,
-//     //                 borderRadius: 0
-//     //             }
-//     //         },
-//     //         fill: {
-//     //             opacity: [1],
-//     //             gradient: {
-//     //                 inverseColors: false,
-//     //                 shade: 'light',
-//     //                 type: "vertical",
-//     //                 opacityFrom: .45,
-//     //                 opacityTo: .05,
-//     //                 stops: [50, 100, 100, 100]
-//     //             }
-//     //         },
-//     //         colors: ["#5f6af5"],
-//     //         xaxis: {
-//     //             categories: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
-//     //             axisTicks: {
-//     //                 show: !1
-//     //             },
-//     //             axisBorder: {
-//     //                 show: !1
-//     //             }
-//     //         },
-//     //         legend: {
-//     //             show: !0,
-//     //             horizontalAlign: "center",
-//     //             offsetX: 0,
-//     //             offsetY: -5,
-//     //             markers: {
-//     //                 width: 15,
-//     //                 height: 10,
-//     //                 radius: 6
-//     //             },
-//     //             itemMargin: {
-//     //                 horizontal: 10,
-//     //                 vertical: 0
-//     //             }
-//     //         },
-//     //         grid: {
-//     //             show: !1,
-//     //             xaxis: {
-//     //                 lines: {
-//     //                     show: !1
-//     //                 }
-//     //             },
-//     //             yaxis: {
-//     //                 lines: {
-//     //                     show: !1
-//     //                 }
-//     //             },
-//     //             padding: {
-//     //                 top: 0,
-//     //                 right: -2,
-//     //                 bottom: 15,
-//     //                 left: 0
-//     //             },
-//     //         },
-//     //         yaxis: {
-//     //             labels: {
-//     //                 formatter: function (e) {
-//     //                     return e + " vnđ"
-//     //                 },
-//     //                 show: !0
-//     //             }
-//     //         }
-//     //     };
-//     //     var revenueLineChart = new ApexCharts(document.querySelector("#revenueLineChart"), options);
-//     //     revenueLineChart.render();
-//     // }
+//     function revenueLineChart() {
+//         var options = {
+//             series: [{
+//                 name: 'Doanh thu',
+//                 data: [23000000, 12000000, 23000000, 22000000, 15000000, 42000000, 31000000, 27000000, 45000000, 28000000, 37000000]
+//             }],
+//             chart: {
+//                 height: 365,
+//                 type: 'line',
+//                 stacked: false,
+//                 foreColor: '#373d3f',
+//                 sparkline: {
+//                     enabled: !1
+//                 },
+//                 dropShadow: {
+//                     enabled: true,
+//                     enabledOnSeries: undefined,
+//                     top: 5,
+//                     left: 5,
+//                     blur: 3,
+//                     color: '#000',
+//                     opacity: 0.1
+//                 },
+//                 toolbar: {
+//                     show: !1
+//                 }
+//             },
+//             stroke: {
+//                 width: [2],
+//                 curve: 'smooth'
+//             },
+//             plotOptions: {
+//                 bar: {
+//                     horizontal: !1,
+//                     columnWidth: 10,
+//                     borderRadius: 0
+//                 }
+//             },
+//             fill: {
+//                 opacity: [1],
+//                 gradient: {
+//                     inverseColors: false,
+//                     shade: 'light',
+//                     type: "vertical",
+//                     opacityFrom: .45,
+//                     opacityTo: .05,
+//                     stops: [50, 100, 100, 100]
+//                 }
+//             },
+//             colors: ["#5f6af5"],
+//             xaxis: {
+//                 categories: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
+//                 axisTicks: {
+//                     show: !1
+//                 },
+//                 axisBorder: {
+//                     show: !1
+//                 }
+//             },
+//             legend: {
+//                 show: !0,
+//                 horizontalAlign: "center",
+//                 offsetX: 0,
+//                 offsetY: -5,
+//                 markers: {
+//                     width: 15,
+//                     height: 10,
+//                     radius: 6
+//                 },
+//                 itemMargin: {
+//                     horizontal: 10,
+//                     vertical: 0
+//                 }
+//             },
+//             grid: {
+//                 show: !1,
+//                 xaxis: {
+//                     lines: {
+//                         show: !1
+//                     }
+//                 },
+//                 yaxis: {
+//                     lines: {
+//                         show: !1
+//                     }
+//                 },
+//                 padding: {
+//                     top: 0,
+//                     right: -2,
+//                     bottom: 15,
+//                     left: 0
+//                 },
+//             },
+//             yaxis: {
+//                 labels: {
+//                     formatter: function (e) {
+//                         return e + " vnđ"
+//                     },
+//                     show: !0
+//                 }
+//             }
+//         };
+//         var revenueLineChart = new ApexCharts(document.querySelector("#revenueLineChart"), options);
+//         revenueLineChart.render();
+//     }
 //     // function revenueBarChart() {
 //     //     var options = {
 //     //         chart: {
