@@ -34,6 +34,11 @@ public class OrderServiceImpl implements IOrderService {
     }
 
     @Override
+    public boolean updateStatus(Long id, EOrderStatus status) {
+        return orderDAO.updateStatus(id, status);
+    }
+
+    @Override
     public Long countOrderAtTime(LocalDateTime start, LocalDateTime end) {
         List<Order> list = orderDAO.findAll();
         Long count = 0L;
