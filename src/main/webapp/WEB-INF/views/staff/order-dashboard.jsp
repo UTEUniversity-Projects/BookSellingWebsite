@@ -94,7 +94,7 @@
                                 </thead>
                                 <tbody>
                                 <c:forEach var="order" items="${orders}">
-                                    <tr class="order-row" data-href="/staff/order-details?id=${order.id}">
+                                    <tr class="order-row" data-href="${pageContext.request.contextPath}/staff/order-details?id=${order.id}">
                                         <td class="token">${order.id}</td>
                                         <td>${order.customerName}</td>
                                         <td>${order.orderDate}</td>

@@ -3,6 +3,7 @@ package com.biblio.service;
 import com.biblio.dto.response.OrderCustomerResponse;
 import com.biblio.dto.response.OrderDetailsManagementResponse;
 import com.biblio.dto.response.OrderManagementResponse;
+import com.biblio.entity.Order;
 import com.biblio.enumeration.EOrderStatus;
 import com.biblio.dto.response.RevenueResponse;
 
@@ -24,5 +25,9 @@ public interface IOrderService {
     Double revenueOrderAtTime(LocalDateTime start, LocalDateTime end);
   
     List<RevenueResponse> getListRevenueAtTime(LocalDateTime start, LocalDateTime end);
+
+    public Order findOrderById(Long orderId);
+    void confirmOrder(Long orderId);
+    void rejectOrder(Long orderId, String reason);
 
 }

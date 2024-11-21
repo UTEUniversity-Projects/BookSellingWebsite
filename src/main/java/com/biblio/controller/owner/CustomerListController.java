@@ -11,7 +11,12 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.io.OutputStreamWriter;
+import java.io.PrintWriter;
 import java.io.Serial;
+import java.net.HttpURLConnection;
+import java.net.URL;
+import java.net.URLEncoder;
 import java.util.List;
 
 @WebServlet("/owner/customer-list")
@@ -50,12 +55,14 @@ public class CustomerListController extends HttpServlet {
         if (action != null && id != null) {
             try {
                 long customerId = Long.parseLong(id);
-
+                CustomerDetailResponse customer = customerService.findById(customerId);
                 if ("deactivate".equals(action)) {
                     customerService.deactivateCustomer(customerId);
+                    sendEmailRequest(action, customer.getEmail(), customer.getFullName());
                     response.getWriter().write("success");
                 } else if ("activate".equals(action)) {
                     customerService.activateCustomer(customerId);
+                    sendEmailRequest(action, customer.getEmail(), customer.getFullName());
                     response.getWriter().write("success");
                 }
             } catch (NumberFormatException e) {
@@ -67,5 +74,34 @@ public class CustomerListController extends HttpServlet {
         // Nếu không có action và id, ta có thể chuyển tiếp để lấy danh sách
         doGet(request, response);
 
+    }
+    private void sendEmailRequest(String action, String customerEmail, String customerName) throws IOException {
+        System.out.println("Sending email with action: " + action); // Kiểm tra action gửi email
+        System.out.println("Email target: " + customerEmail); // Kiểm tra địa chỉ email
+        System.out.println("Email target name: " + customerName); // Kiểm tra tên khách hàng
+
+        URL url = new URL("http://localhost:8080/BookSellingWebsite/email");
+        HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+        connection.setRequestMethod("POST");
+        connection.setDoOutput(true);
+        connection.setRequestProperty("Content-Type", "application/x-www-form-urlencoded; charset=UTF-8"); // Đặt mã hóa UTF-8
+
+        try (PrintWriter out = new PrintWriter(new OutputStreamWriter(connection.getOutputStream(), "UTF-8"))) { // Đặt mã hóa UTF-8
+            String data = "action=" + URLEncoder.encode(action, "UTF-8") +
+                    "&customerEmail=" + URLEncoder.encode(customerEmail, "UTF-8") +
+                    "&customerName=" + URLEncoder.encode(customerName, "UTF-8");
+            out.write(data);
+            out.flush();
+            System.out.println("Data sent to EmailController: " + data); // Kiểm tra dữ liệu gửi
+        }
+
+        int responseCode = connection.getResponseCode();
+        if (responseCode == HttpURLConnection.HTTP_OK) {
+            System.out.println("Email sent successfully.");
+        } else {
+            System.err.println("Failed to send email: " + connection.getResponseMessage());
+        }
+
+        connection.disconnect();
     }
 }

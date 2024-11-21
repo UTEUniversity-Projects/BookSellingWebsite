@@ -5,12 +5,16 @@ import com.biblio.entity.Promotion;
 import com.biblio.entity.PromotionTarget;
 import com.biblio.enumeration.EPromotionStatus;
 
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 public class PromotionDAOImpl extends GenericDAOImpl<Promotion> implements IPromotionDAO {
 
+    @PersistenceContext
+    private EntityManager entityManager;
     public PromotionDAOImpl() {
         super(Promotion.class);
     }

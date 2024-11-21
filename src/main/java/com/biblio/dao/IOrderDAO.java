@@ -19,4 +19,7 @@ public interface IOrderDAO {
 
     boolean updateStatus(Long id, EOrderStatus status);
 
+    Order findById(Long id);
+    void updateOrder(Order order);
+
 }

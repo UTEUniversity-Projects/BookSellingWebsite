@@ -6,12 +6,15 @@ import com.biblio.entity.LineItem;
 import com.biblio.entity.Order;
 import com.biblio.enumeration.EBookMetadataStatus;
 import com.biblio.enumeration.EOrderStatus;
+import com.biblio.jpaconfig.JpaConfig;
 
+import javax.persistence.EntityManager;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 public class OrderDAOImpl extends GenericDAOImpl<Order> implements IOrderDAO {
+    private final EntityManager entityManager = JpaConfig.getEntityManager();
 
     public OrderDAOImpl() {
         super(Order.class);
@@ -95,6 +98,18 @@ public class OrderDAOImpl extends GenericDAOImpl<Order> implements IOrderDAO {
 
         super.update(order);
         return true;
+    }
+
+    @Override
+    public Order findById(Long id) {
+        return entityManager.find(Order.class, id);
+    }
+
+    @Override
+    public void updateOrder(Order order) {
+        entityManager.getTransaction().begin();
+        entityManager.merge(order);
+        entityManager.getTransaction().commit();
     }
 
     public static void main(String[] args) {
