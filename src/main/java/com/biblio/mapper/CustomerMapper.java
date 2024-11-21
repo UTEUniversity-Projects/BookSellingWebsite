@@ -107,14 +107,14 @@ public class CustomerMapper {
         return customerDetailResponse;
     }
 
-    public static CustomerResponse customerResponse(Customer customer) {
-        CustomerResponse customerResponse = new CustomerResponse();
-
-        customerResponse.setAvatar(customer.getAvatar());
-        customerResponse.setFullName(customer.getFullName());
-        customerResponse.setId(customer.getId());
-
-        return customerResponse;
+    public static CustomerResponse toCustomerResponse(Customer customer) {
+        return CustomerResponse.builder()
+                .id(customer.getId())
+                .avatar(customer.getAvatar())
+                .fullName(customer.getFullName())
+                .email(customer.getEmailAddress())
+                .phoneNumber(customer.getPhoneNumber())
+                .build();
     }
     public static CustomerReportResponse toCustomerReportResponse(Customer customer) {
         CustomerReportResponse customerReportResponse = new CustomerReportResponse();

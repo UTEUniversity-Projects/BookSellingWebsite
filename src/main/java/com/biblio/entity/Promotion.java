@@ -69,4 +69,24 @@ public class Promotion implements Serializable {
 
     // endregion
 
+    // region Functions
+
+    public double calculateDiscount(double totalPrice) {
+        LocalDateTime now = LocalDateTime.now();
+        if (now.isBefore(effectiveDate) || now.isAfter(expirationDate)) {
+            return 0;
+        }
+
+        if (totalPrice < minValueToBeApplied) {
+            return 0;
+        }
+
+        double discount = totalPrice * (percentDiscount / 100);
+
+        return Math.min(discount, discountLimit);
+    }
+
+
+    // endregion
+
 }

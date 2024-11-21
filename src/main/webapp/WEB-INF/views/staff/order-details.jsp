@@ -22,15 +22,15 @@
                             <p id="order-id" class="cr-card-id" data-order-id="${order.id}">Mã đơn hàng #${order.id}</p>
                             <p class="cr-card-customer">
                                 <i class="ri-account-pin-box-line"></i>
-                                ${order.customerName}
+                                ${order.customer.fullName}
                             </p>
                             <p class="cr-card-phone-number">
                                 <i class="ri-phone-line"></i>
-                                ${order.phoneNumber}
+                                ${order.customer.phoneNumber}
                             </p>
                             <p class="cr-card-location">
                                 <i class="ri-map-pin-line"></i>
-                                ${order.address}
+                                ${order.shipping.address}
                             </p>
                             <p class="cr-card-date">
                                 <i class="ri-calendar-2-line"></i>
@@ -42,7 +42,7 @@
                             </p>
                             <p class="cr-card-shipping">
                                 <i class="ri-truck-line"></i>
-                                ${order.shippingUnit}
+                                ${order.shipping.shippingUnit}
                             </p>
                         </div>
                         <div>
@@ -51,6 +51,7 @@
                             </p>
                         </div>
                     </div>
+
                     <div class="cr-card-content">
                         <div class="cr-card-content-header">
                             <p class="heading">Danh sách sản phẩm</p>
@@ -97,6 +98,7 @@
                             </div>
                         </div>
                     </div>
+
                     <div class="cr-card-content">
                         <div class="price-summary">
                             <div class="summary-row">
@@ -105,19 +107,22 @@
                             </div>
                             <div class="summary-row">
                                 <div class="summary-label">Phí vận chuyển</div>
-                                <div class="summary-value price-value">${order.shippingFee}</div>
+                                <div class="summary-value price-value">${order.shipping.shippingFee}</div>
                             </div>
-                            <div class="summary-row">
-                                <div class="summary-label">Giảm giá phí vận chuyển</div>
-                                <div class="summary-value price-value minus-value">42500</div>
-                            </div>
-                            <div class="summary-row">
-                                <div class="summary-label">Voucher từ Shop</div>
-                                <div class="summary-value price-value minus-value">42500</div>
-                            </div>
+                            <c:forEach var="promotion" items="${order.promotions}">
+                                <div class="summary-row">
+                                    <c:if test="${promotion.promotionType == 'FREESHIP'}">
+                                    <div class="summary-label">Giảm giá phí vận chuyển</div>
+                                    </c:if>
+                                    <c:if test="${promotion.promotionType == 'VOUCHER'}">
+                                        <div class="summary-label">Voucher từ Shop</div>
+                                    </c:if>
+                                    <div class="summary-value price-value minus-value">${promotion.discountAmount}</div>
+                                </div>
+                            </c:forEach>
                             <div class="summary-row total-row">
                                 <div class="summary-label">Thành tiền</div>
-                                <div class="summary-value price-value total-value">42500</div>
+                                <div class="summary-value price-value total-value">${order.finalPrice}</div>
                             </div>
                             <div class="summary-row">
                                 <div class="summary-label">Phương thức thanh toán</div>
@@ -170,7 +175,8 @@
 </div>
 
 <%--ConfirmModal--%>
-<div class="modal fade" id="confirmOrderModal" tabindex="-1" aria-labelledby="confirmOrderModalLabel" aria-hidden="true">
+<div class="modal fade" id="confirmOrderModal" tabindex="-1" aria-labelledby="confirmOrderModalLabel"
+     aria-hidden="true">
     <input class="order-id" value="" hidden>
     <div class="modal-dialog">
         <div class="modal-content">
@@ -180,12 +186,12 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Hủy</button>
-                <!-- Gửi giá trị action="confirm" qua nút Xác nhận -->
                 <button
                         type="button"
                         class="btn cr-btn-primary"
                         id="confirmOrder"
-                        data-action="confirm">Xác nhận</button>
+                        data-action="confirm">Xác nhận
+                </button>
             </div>
         </div>
     </div>

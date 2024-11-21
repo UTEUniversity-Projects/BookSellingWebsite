@@ -287,17 +287,6 @@
                                                             </c:forEach>
                                                         </div>
                                                     </div>
-                                                    <div class="header__right">
-                                                        <button class="action-btn action-btn__hide">
-                                                            <i class="ri-eye-off-line"></i>
-                                                        </button>
-                                                        <c:if test="${empty review.responseContent}">
-                                                            <button type="button"
-                                                                    class="action-btn action-btn__response">
-                                                                <i class="ri-reply-line"></i>
-                                                            </button>
-                                                        </c:if>
-                                                    </div>
                                                 </div>
                                                 <span class="date">${review.createdAt}</span>
 
@@ -356,53 +345,6 @@
         </div>
     </div>
 </div>
-
-<!-- region Modal -->
-<%--FeedbackModal--%>
-<div class="modal fade" id="feedbackModal" tabindex="-1" aria-labelledby="feedbackModalLabel" aria-hidden="true">
-    <input class="review-id" value="" hidden>
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="feedbackModalLabel">Phản hồi của bạn</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                <form id="feedbackForm">
-                    <div class="mb-3">
-                        <label for="feedbackContent" class="form-label">Nội dung phản hồi</label>
-                        <textarea id="feedbackContent" name="feedbackContent" class="form-control"
-                                  placeholder="Nhập nội dung phản hồi..."
-                                  rows="4"></textarea>
-                        <p id="error-message">Vui lòng nhập nội dung!</p>
-                    </div>
-                </form>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Hủy</button>
-                <button type="button" class="btn btn-primary" id="submitFeedback">Gửi</button>
-            </div>
-        </div>
-    </div>
-</div>
-
-<%--HideModal--%>
-<div class="modal fade" id="hideReviewModal" tabindex="-1" aria-labelledby="hideReviewModalLabel" aria-hidden="true">
-    <input class="review-id" value="" hidden>
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="hideReviewModalLabel">Bạn có chắc muốn ẩn đánh giá này không?</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Hủy</button>
-                <button type="button" class="btn btn-primary" id="confirmHideReview">Ẩn đánh giá</button>
-            </div>
-        </div>
-    </div>
-</div>
-<!-- endregion -->
 
 <!-- region VENDOR JS -->
 <script src="${pageContext.request.contextPath}/assets/owner/js/vendor/jquery.zoom.min.js" defer></script>
