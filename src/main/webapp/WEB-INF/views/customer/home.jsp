@@ -1062,7 +1062,7 @@
     </div>
 </section>
 
-<!-- Testimonial -->
+<!-- Testimonial --
 <section class="section-testimonial padding-b-100">
     <div class="container-xl">
         <div class="row">
