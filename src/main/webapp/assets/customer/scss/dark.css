@@ -102,9 +102,6 @@ header {
   background-color: #120f1c;
   color: #ddd;
 }
-.top-header .cr-search input::-moz-placeholder {
-  color: #ddd;
-}
 .top-header .cr-search input::placeholder {
   color: #ddd;
 }
@@ -126,10 +123,16 @@ header {
   cursor: pointer;
   pointer-events: none;
   font-size: 24px;
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
   height: 50px;
   line-height: 1;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
   justify-content: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
   align-items: center;
   color: #7a7a7a;
 }
@@ -372,9 +375,6 @@ ul.navbar-nav .dropdown .dropdown-menu li a {
 }
 .cr-search-footer input:focus {
   border-bottom: 1px solid #27213b;
-}
-.cr-search-footer input::-moz-placeholder {
-  color: #aaa;
 }
 .cr-search-footer input::placeholder {
   color: #aaa;
@@ -780,9 +780,6 @@ ul.cr-tags li a {
 .cr-content-form .form-group .cr-form-control {
   background-color: #120f1c;
   border: 1px solid #27213b;
-  color: #ddd;
-}
-.cr-content-form .form-group .cr-form-control::-moz-placeholder {
   color: #ddd;
 }
 .cr-content-form .form-group .cr-form-control::placeholder {
@@ -1327,4 +1324,6 @@ ul.cr-tags li a {
 }
 .cr-tool .cr-tool-btn .color-variant .cr-tools-detail .heading h2 {
   color: #ddd !important;
-}/*# sourceMappingURL=dark.css.map */
+}
+
+/*# sourceMappingURL=dark.css.map */

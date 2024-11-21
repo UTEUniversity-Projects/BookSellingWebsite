@@ -1,11 +1,19 @@
 package com.biblio.dto.request;
+
+import lombok.*;
+
+@NoArgsConstructor
+@AllArgsConstructor
+@Getter
+@Setter
+@Builder
 public class SupportRequest {
 
     private Long id;
     private String title;
     private String feedbackContent;
     private String status;
-
+    private Long customerId;
     public SupportRequest(Long id, String feedbackContent) {
         this.id = id;
         this.feedbackContent = feedbackContent;

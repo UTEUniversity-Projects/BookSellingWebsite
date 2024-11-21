@@ -12,4 +12,5 @@ public interface IReviewDAO extends IGenericDAO<Review> {
     List<Review> findByBookTemplate(BookTemplate bookTemplate);
 
     Review update(Review review);
+    Review save(Review review);
 }
