@@ -35,15 +35,13 @@ document.querySelectorAll('.remove-item').forEach((button) => {
 * */
 
 // $(document).ready(function () {
-//     // Sự kiện click cho nút "Thêm vào giỏ hàng"
 //     $(".add-to-cart-btn").on("click", function () {
-//         const bookId = $(this).data("book-id"); // Lấy ID của sách
-//         const cartId = 1; // Thay bằng ID giỏ hàng của người dùng (lấy từ session hoặc dữ liệu backend)
-//         const quantity = 1; // Số lượng mặc định là 1, có thể tuỳ chỉnh thêm input
+//         const bookId = $(this).data("book-id");
+//         const cartId = $(this).data("cart-id");
+//         const quantity = $(this).data("quantity");
 //
-//         // Gửi AJAX tới server
 //         $.ajax({
-//             url: "/api/carts/add-item", // Endpoint xử lý thêm vào giỏ hàng
+//             url: `${contextPath}/api/customer/add-cart-item`,
 //             type: "POST",
 //             contentType: "application/json",
 //             data: JSON.stringify({
@@ -51,14 +49,21 @@ document.querySelectorAll('.remove-item').forEach((button) => {
 //                 cartId: cartId,
 //                 quantity: quantity
 //             }),
-//             success: function (response) {
-//                 // Thông báo thêm thành công
-//                 alert("Sản phẩm đã được thêm vào giỏ hàng!");
-//             },
-//             error: function (xhr) {
-//                 // Xử lý lỗi
-//                 alert("Đã xảy ra lỗi khi thêm vào giỏ hàng: " + xhr.responseText);
-//             }
+//             // success: function (response) {
+//             //     updateCartUI(response);
+//             // },
 //         });
 //     });
+//     // function updateCartUI(response) {
+//     //
+//     //     $(".total-book-price").text(response.totalBookPrice);
+//     //
+//     //     response.cartItems.forEach(cartItem => {
+//     //         const $cartItemElement = $(`#cart-item-${cartItem.bookTemplateId}`);
+//     //         $cartItemElement.find(".quantity").val(cartItem.quantity);
+//     //         $cartItemElement.find(".cart-price .price-value").text(cartItem.sellingPrice);
+//     //         // const totalItemPrice = cartItem.sellingPrice * cartItem.quantity;
+//     //         // $cartItemElement.find(".cart-price").text(`${cartItem.sellingPrice} x ${cartItem.quantity} = ${totalItemPrice}`);
+//     //     });
+//     // }
 // });

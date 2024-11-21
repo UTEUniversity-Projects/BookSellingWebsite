@@ -5,5 +5,5 @@ import com.biblio.dto.response.CartResponse;
 
 public interface ICartService {
     CartResponse getCartResponseByUsername(String username);
-//    CartResponse addToCart(AddToCartRequest request);
+    CartResponse addToCart(AddToCartRequest addToCartRequest);
 }
