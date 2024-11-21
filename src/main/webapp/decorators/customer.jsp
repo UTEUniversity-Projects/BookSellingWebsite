@@ -347,6 +347,7 @@
 
 <!-- Main Custom -->
 <script src="${pageContext.request.contextPath}/assets/customer/js/main.js?v=1"></script>
+
 </body>
 <div id="toast"></div>
 <div class="checkout">

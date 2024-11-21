@@ -5,10 +5,13 @@ import com.biblio.entity.*;
 import com.biblio.enumeration.EBookLanguage;
 import com.biblio.enumeration.EBookMetadataStatus;
 
+import java.text.DecimalFormat;
+import java.text.NumberFormat;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
+import java.util.Locale;
 import java.util.stream.Collectors;
 import static com.biblio.utils.DateTimeUtil.formatDateTime;
 
@@ -37,11 +40,14 @@ public class BookTemplateMapper {
     }
 
     public static BookCardResponse toBookCardResponse(BookTemplate bookTemplate) {
+
+        DecimalFormat decimalFormat = new DecimalFormat("#.###");
+
         Book singlebook = bookTemplate.getBooks().iterator().next();
         return BookCardResponse.builder()
                 .id(bookTemplate.getId())
                 .title(singlebook.getTitle())
-                .sellingPrice(singlebook.getSellingPrice())
+                .sellingPrice(decimalFormat.format(singlebook.getSellingPrice()))
                 .condition(singlebook.getCondition().getBookCondition())
                 .categoryName(singlebook.getSubCategory().getCategory().getName())
                 .imageUrl(bookTemplate

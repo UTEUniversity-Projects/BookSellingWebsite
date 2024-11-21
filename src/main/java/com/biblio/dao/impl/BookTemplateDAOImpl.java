@@ -1,21 +1,16 @@
 package com.biblio.dao.impl;
 
-import com.biblio.dao.IBookDAO;
 import com.biblio.dao.IBookTemplateDAO;
 import com.biblio.entity.Book;
 import com.biblio.entity.BookTemplate;
-import com.biblio.entity.MediaFile;
-import com.biblio.enumeration.EBookMetadataStatus;
-
-import javax.inject.Inject;
 import java.util.*;
-import java.util.stream.Collectors;
 
 public class BookTemplateDAOImpl extends GenericDAOImpl<BookTemplate> implements IBookTemplateDAO {
-    private BookDAOImpl bookDAO = new BookDAOImpl();
-    private AuthorDAOImpl authorDAO = new AuthorDAOImpl();
-    private TranslatorDAOImpl translatorDAO = new TranslatorDAOImpl();
-    private ReviewDAOImpl reviewDAO = new ReviewDAOImpl();
+    private final BookDAOImpl bookDAO = new BookDAOImpl();
+    private final AuthorDAOImpl authorDAO = new AuthorDAOImpl();
+    private final TranslatorDAOImpl translatorDAO = new TranslatorDAOImpl();
+    private final ReviewDAOImpl reviewDAO = new ReviewDAOImpl();
+
     public BookTemplateDAOImpl() {
         super(BookTemplate.class);
     }
@@ -83,9 +78,23 @@ public class BookTemplateDAOImpl extends GenericDAOImpl<BookTemplate> implements
         return bookTemplate;
     }
 
+    @Override
+    public List<BookTemplate> findByTitle(String title) {
+        String jpql = "SELECT DISTINCT bt FROM BookTemplate bt "
+                + "JOIN bt.books b "
+                + "LEFT JOIN FETCH bt.mediaFiles "
+                + "WHERE b.title LIKE :title";
+
+        Map<String, Object> params = new HashMap<>();
+        params.put("title", "%" + title + "%");
+
+        return super.findByJPQL(jpql, params);
+    }
+
+
     public static void main(String[] args) {
         BookTemplateDAOImpl dao = new BookTemplateDAOImpl();
-        BookTemplate book = dao.findOneForDetails(3L);
-        System.out.println(book.getId());
+        System.out.println(dao.findOneForDetails(1L).getBooks().size());
     }
+
 }
