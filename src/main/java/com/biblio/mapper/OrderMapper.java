@@ -1,5 +1,6 @@
 package com.biblio.mapper;
 
+import com.biblio.dto.response.OrderCustomerResponse;
 import com.biblio.dto.response.OrderDetailsManagementResponse;
 import com.biblio.dto.response.OrderManagementResponse;
 import com.biblio.dto.response.OrderProductResponse;
@@ -50,6 +51,19 @@ public class OrderMapper {
                 .build();
     }
 
+    public static OrderCustomerResponse toOrderRequest(Order order) {
+        return new OrderCustomerResponse(
+                order.getId(),
+                order.getNote(),
+                order.getOrderDate(),
+                order.getPaymentType() != null ? order.getPaymentType().name() : null,  // Convert EPaymentType to String
+                order.getStatus() != null ? order.getStatus().name() : null,  // Convert EOrderStatus to String
+                order.getVat(),
+                order.getCustomer() != null ? order.getCustomer().getId() : null,
+                order.getShipping() != null ? order.getShipping().getId() : null
+        );
+    }
+
     public static RevenueResponse toRevenueResponse(Order order) {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm dd-MM-yyyy");
         return RevenueResponse.builder()
@@ -57,4 +71,5 @@ public class OrderMapper {
                 .revenue(order.calTotalPrice())
                 .build();
     }
+
 }
