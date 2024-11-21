@@ -46,6 +46,7 @@ public class BookTemplateDAOImpl extends GenericDAOImpl<BookTemplate> implements
         StringBuilder jpql = new StringBuilder();
         jpql.append("SELECT DISTINCT bt ")
                 .append("FROM BookTemplate bt ")
+                .append("LEFT JOIN FETCH bt.reviews r")
                 .append("LEFT JOIN FETCH bt.mediaFiles m");
 
         List<BookTemplate> bookTemplates = super.findAll(jpql.toString());
