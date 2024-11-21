@@ -1,103 +1,4 @@
 /* Typography */
-/* Typography */
-/* Manrope */
-@font-face {
-  font-family: "Manrope", sans-serif;
-  src: url("./../font/manrope/Manrope-ExtraLight.ttf") format("truetype");
-  font-weight: 200;
-  font-style: normal;
-}
-@font-face {
-  font-family: "Manrope", sans-serif;
-  src: url("./../font/manrope/Manrope-Light.ttf") format("truetype");
-  font-weight: 300;
-  font-style: normal;
-}
-@font-face {
-  font-family: "Manrope", sans-serif;
-  src: url("./../font/manrope/Manrope-Regular.ttf") format("truetype");
-  font-weight: 400;
-  font-style: normal;
-}
-@font-face {
-  font-family: "Manrope", sans-serif;
-  src: url("./../font/manrope/Manrope-Medium.ttf") format("truetype");
-  font-weight: 500;
-  font-style: normal;
-}
-@font-face {
-  font-family: "Manrope", sans-serif;
-  src: url("./../font/manrope/Manrope-SemiBold.ttf") format("truetype");
-  font-weight: 600;
-  font-style: normal;
-}
-@font-face {
-  font-family: "Manrope", sans-serif;
-  src: url("./../font/manrope/Manrope-Bold.ttf") format("truetype");
-  font-weight: 700;
-  font-style: normal;
-}
-@font-face {
-  font-family: "Manrope", sans-serif;
-  src: url("./../font/manrope/Manrope-ExtraBold.ttf") format("truetype");
-  font-weight: 800;
-  font-style: normal;
-}
-/* Poppins */
-@font-face {
-  font-family: "Poppins", sans-serif;
-  src: url("./../font/poppins/Poppins-Thin.ttf") format("truetype");
-  font-weight: 100;
-  font-style: normal;
-}
-@font-face {
-  font-family: "Poppins", sans-serif;
-  src: url("./../font/poppins/Poppins-ExtraLight.ttf") format("truetype");
-  font-weight: 200;
-  font-style: normal;
-}
-@font-face {
-  font-family: "Poppins", sans-serif;
-  src: url("./../font/poppins/Poppins-Light.ttf");
-  font-weight: 300;
-  font-style: normal;
-}
-@font-face {
-  font-family: "Poppins", sans-serif;
-  src: url("./../font/poppins/Poppins-Regular.ttf") format("truetype");
-  font-weight: 400;
-  font-style: normal;
-}
-@font-face {
-  font-family: "Poppins", sans-serif;
-  src: url("./../font/poppins/Poppins-Medium.ttf") format("truetype");
-  font-weight: 500;
-  font-style: normal;
-}
-@font-face {
-  font-family: "Poppins", sans-serif;
-  src: url("./../font/poppins/Poppins-SemiBold.ttf") format("truetype");
-  font-weight: 600;
-  font-style: normal;
-}
-@font-face {
-  font-family: "Poppins", sans-serif;
-  src: url("./../font/poppins/Poppins-Bold.ttf") format("truetype");
-  font-weight: 700;
-  font-style: normal;
-}
-@font-face {
-  font-family: "Poppins", sans-serif;
-  src: url("./../font/poppins/Poppins-ExtraBold.ttf") format("truetype");
-  font-weight: 800;
-  font-style: normal;
-}
-@font-face {
-  font-family: "Poppins", sans-serif;
-  src: url("./../font/poppins/Poppins-Black.ttf") format("truetype");
-  font-weight: 900;
-  font-style: normal;
-}
 /* Utilities */
 /* variables */
 /* Font Family */
@@ -118,7 +19,7 @@ a {
   text-align: center;
 }
 .cr-banner h2 {
-  font-family: "Poppins", sans-serif;
+  font-family: "Be Vietnam Pro", sans-serif;
   font-size: 32px;
   font-weight: bold;
   color: #2b2b2d;
@@ -130,7 +31,7 @@ a {
 .section-title .cr-title {
   margin-bottom: 5px;
   padding: 0 64px;
-  font-family: "Poppins", sans-serif;
+  font-family: "Be Vietnam Pro", sans-serif;
   font-size: 30px;
   font-weight: 800;
   color: #2b2b2d;
@@ -248,7 +149,7 @@ a {
   transition: all 0.3s ease-in-out;
   padding: 8px 22px;
   font-size: 14px;
-  font-family: "Poppins", sans-serif;
+  font-family: "Be Vietnam Pro", sans-serif;
   font-weight: bold;
   text-transform: capitalize;
   line-height: 1.2;
@@ -269,7 +170,7 @@ a {
   transition: all 0.3s ease-in-out;
   padding: 8px 22px;
   font-size: 14px;
-  font-family: "Poppins", sans-serif;
+  font-family: "Be Vietnam Pro", sans-serif;
   font-weight: bold;
   text-transform: capitalize;
   line-height: 1.2;
@@ -456,13 +357,13 @@ a {
 }
 .cr-breadcrumb-image .cr-breadcrumb-title h2 {
   margin-bottom: 0;
-  font-family: "Poppins", sans-serif;
+  font-family: "Be Vietnam Pro", sans-serif;
   font-size: 19px;
   line-height: 1;
   font-weight: bold;
 }
 .cr-breadcrumb-image .cr-breadcrumb-title span {
-  font-family: "Poppins", sans-serif;
+  font-family: "Be Vietnam Pro", sans-serif;
   font-size: 14px;
   line-height: 1.3;
   font-weight: 500;
@@ -561,6 +462,8 @@ a.back-to-top .back-to-top-wrap svg path {
 @media only screen and (min-width: 1200px) {
   .cr-col-5 {
     width: 20%;
+    -webkit-box-flex: 0;
+    -ms-flex: 0 0 20%;
     flex: 0 0 20%;
   }
 }
@@ -671,6 +574,131 @@ ul {
   list-style-type: none;
 }
 
+#toast {
+  position: fixed;
+  top: 32px;
+  right: 32px;
+  z-index: 999999;
+}
+
+.toast {
+  display: flex !important;
+  align-items: center;
+  background: #fff;
+  border-radius: 2px;
+  border-left: 4px solid;
+  box-shadow: 0 5px 8px rgba(0, 0, 0, 0.08);
+  padding: 20px 0;
+  min-width: 200px;
+  transition: all 0.2s linear;
+}
+
+@keyframes slideInLeft {
+  from {
+    opacity: 0;
+    transform: translateX(calc(100% + 32px));
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+@keyframes fadeOut {
+  to {
+    opacity: 0;
+  }
+}
+.toast__icon {
+  padding: 0 16px;
+  font-size: 24px;
+}
+
+.toast__body {
+  flex-grow: 1;
+}
+
+.toast__title {
+  font-size: 16px;
+  font-weight: 600;
+  color: #333;
+}
+
+.toast__message {
+  font-size: 14px;
+  color: #888;
+  margin-top: 4px;
+  line-height: 1.4;
+}
+
+.toast__close {
+  padding: 0 16px;
+  font-size: 20px;
+  color: rgba(0, 0, 0, 0.3);
+  cursor: pointer;
+}
+
+.toast + .toast {
+  margin-top: 24px;
+}
+
+.toast--success {
+  border-color: #47d864;
+}
+
+.toast--success .toast__icon {
+  color: #47d864;
+}
+
+.toast--info {
+  border-color: #3f8cd7;
+}
+
+.toast--info .toast__icon {
+  color: #3f8cd7;
+}
+
+.toast--warning {
+  border-color: #f7b924;
+}
+
+.toast--warning .toast__icon {
+  color: #f7b924;
+}
+
+.toast--error {
+  border-color: #f14668;
+}
+
+.toast--error .toast__icon {
+  color: #f14668;
+}
+
+.btn {
+  padding: 20px 40px;
+  font-weight: 500;
+  font-size: 16px;
+  background-color: var(--bg-color);
+  border-radius: 30px;
+  color: #fff;
+  cursor: pointer;
+}
+
+.btn--success {
+  --bg-color: #47d864;
+}
+
+.btn--info {
+  --bg-color: #3f8cd7;
+}
+
+.btn--warning {
+  --bg-color: #f7b924;
+}
+
+.btn--error {
+  --bg-color: #f14668;
+}
+
 /* Header */
 header {
   height: 139px;
@@ -684,8 +712,10 @@ header {
   left: 0;
   width: 100%;
   z-index: 10;
+  -webkit-box-shadow: 0px 0px 8px rgba(51, 51, 51, 0.2);
   box-shadow: 0px 0px 8px rgba(51, 51, 51, 0.2);
   background: #ffffff;
+  -webkit-transition: top 1s;
   transition: top 1s;
 }
 .cr-fix.menu_fixed .top-header {
@@ -698,8 +728,10 @@ header {
   left: 0;
   width: 100%;
   z-index: 10;
+  -webkit-box-shadow: 0px 0px 8px rgba(51, 51, 51, 0.2);
   box-shadow: 0px 0px 8px rgba(51, 51, 51, 0.2);
   background: #ffffff;
+  -webkit-transition: top 1s;
   transition: top 1s;
 }
 .cr-fix.menu_fixed_up .top-header {
@@ -716,7 +748,7 @@ header {
 .cr-menu-list .cr-category-dropdown button {
   padding: 12px 30px;
   border: none;
-  font-family: "Poppins", sans-serif;
+  font-family: "Be Vietnam Pro", sans-serif;
   font-size: 14px;
   background-color: #64b496;
   border-radius: 5px;
@@ -754,7 +786,7 @@ header {
   margin-right: 25px;
 }
 .cr-menu-list nav ul li a {
-  font-family: "Poppins", sans-serif;
+  font-family: "Be Vietnam Pro", sans-serif;
   font-size: 13px;
   color: #777;
 }
@@ -813,13 +845,8 @@ header {
   border-radius: 5px;
   outline: none;
 }
-.top-header .cr-search input::-moz-placeholder {
-  font-family: "Poppins", sans-serif;
-  font-size: 13px;
-  color: #7a7a7a;
-}
 .top-header .cr-search input::placeholder {
-  font-family: "Poppins", sans-serif;
+  font-family: "Be Vietnam Pro", sans-serif;
   font-size: 13px;
   color: #7a7a7a;
 }
@@ -870,7 +897,7 @@ header {
 }
 .top-header .cr-right-bar .cr-right-bar-item span {
   transition: 0.3s ease-in-out;
-  font-family: "Poppins", sans-serif;
+  font-family: "Be Vietnam Pro", sans-serif;
   font-size: 15px;
   line-height: 15px;
   font-weight: 500;
@@ -904,7 +931,7 @@ ul.navbar-nav li.nav-item:hover a.nav-link::before {
 }
 ul.navbar-nav li.nav-item a.nav-link {
   padding: 11px 8px;
-  font-family: "Poppins", sans-serif;
+  font-family: "Be Vietnam Pro", sans-serif;
   font-size: 14px;
   font-weight: 500;
   color: #000;
@@ -1176,12 +1203,6 @@ ul.navbar-nav .dropdown:hover .dropdown-menu {
   outline: none;
   border-radius: 5px;
   background-color: #eee;
-}
-.cr-side-cart .cr-menu-box::-moz-placeholder {
-  text-transform: capitalize;
-  font-size: 15px;
-  font-weight: 500;
-  color: #444;
 }
 .cr-side-cart .cr-menu-box::placeholder {
   text-transform: capitalize;
@@ -1612,7 +1633,7 @@ ul.navbar-nav .dropdown:hover .dropdown-menu {
 }
 
 .cr-footer h4.cr-sub-title {
-  font-family: "Poppins", sans-serif;
+  font-family: "Be Vietnam Pro", sans-serif;
   font-size: 18px;
   font-weight: bold;
   line-height: 1.3;
@@ -1626,7 +1647,7 @@ ul.navbar-nav .dropdown:hover .dropdown-menu {
 }
 .cr-footer ul li {
   margin-bottom: 12px;
-  font-family: "Poppins", sans-serif;
+  font-family: "Be Vietnam Pro", sans-serif;
   font-size: 14px;
   line-height: 26px;
   color: #777;
@@ -1679,7 +1700,7 @@ ul.navbar-nav .dropdown:hover .dropdown-menu {
 }
 .cr-footer .cr-social-media span {
   margin: 2px;
-  font-family: "Poppins", sans-serif;
+  font-family: "Be Vietnam Pro", sans-serif;
   font-size: 17px;
   font-weight: 400;
   line-height: 1.625;
@@ -1712,13 +1733,8 @@ ul.navbar-nav .dropdown:hover .dropdown-menu {
   outline: none;
   border-radius: 5px;
 }
-.cr-search-footer input::-moz-placeholder {
-  font-family: "Poppins", sans-serif;
-  font-size: 14px;
-  color: #7a7a7a;
-}
 .cr-search-footer input::placeholder {
-  font-family: "Poppins", sans-serif;
+  font-family: "Be Vietnam Pro", sans-serif;
   font-size: 14px;
   color: #7a7a7a;
 }
@@ -1746,7 +1762,7 @@ ul.navbar-nav .dropdown:hover .dropdown-menu {
   justify-content: space-between;
 }
 .cr-last-footer p {
-  font-family: "Poppins", sans-serif;
+  font-family: "Be Vietnam Pro", sans-serif;
   font-size: 14px;
   color: #000;
   line-height: 1.2;
@@ -2094,7 +2110,7 @@ p.news {
 .cr-left-side-contain h5 {
   margin-bottom: 20px;
   font-size: 20px;
-  font-family: "Poppins", sans-serif;
+  font-family: "Be Vietnam Pro", sans-serif;
   font-weight: 700;
 }
 .cr-left-side-contain h5 span {
@@ -2109,7 +2125,7 @@ p.news {
 .cr-left-side-contain h1 {
   margin-bottom: 25px;
   font-size: 45px;
-  font-family: "Poppins", sans-serif;
+  font-family: "Be Vietnam Pro", sans-serif;
   font-weight: 800;
   line-height: 55px;
   color: #000;
@@ -2130,7 +2146,7 @@ p.news {
 }
 .cr-left-side-contain .cr-last-buttons h4 span {
   font-size: 30px;
-  font-family: "Poppins", sans-serif;
+  font-family: "Be Vietnam Pro", sans-serif;
   font-weight: bold;
   color: #000;
 }
@@ -2317,7 +2333,6 @@ p.news {
   right: -230px;
   z-index: 20;
   color: #000;
-  overflow-y: scroll;
 }
 .cr-tool .cr-tool-btn {
   display: flex;
@@ -2379,7 +2394,7 @@ p.news {
 }
 .cr-tool .cr-tool-btn .color-variant .cr-tools-detail .heading h2 {
   margin-bottom: 0;
-  font-family: "Poppins", sans-serif;
+  font-family: "Be Vietnam Pro", sans-serif;
   font-size: 14px;
   font-weight: 600;
   color: #2b2b2d !important;
@@ -2857,7 +2872,7 @@ p.news {
   font-weight: 400;
   letter-spacing: 0.85px;
   text-transform: capitalize;
-  font-family: "Poppins", sans-serif;
+  font-family: "Be Vietnam Pro", sans-serif;
 }
 .product-card-2 .cr-pro-content .cr-pro-title a:hover {
   color: #64b496;
@@ -2892,7 +2907,7 @@ p.news {
   color: #2b2b2d;
   font-weight: 600;
   font-size: 15px;
-  font-family: "Poppins", sans-serif;
+  font-family: "Be Vietnam Pro", sans-serif;
 }
 .product-card-2 .cr-pro-content .cr-pro-option {
   transition: all 0.3s ease-in-out;
@@ -3059,32 +3074,70 @@ p.news {
   border: 1px solid #eee;
 }
 .category-block:hover .category-icon {
+  -webkit-animation-name: wobble;
   animation-name: wobble;
   -webkit-animation-duration: 0.8s;
   -webkit-animation-iteration-count: 0.8s;
   -webkit-animation-timing-function: linear;
   -webkit-transform-origin: 50% 100%;
 }
-@keyframes wobble {
+@-webkit-keyframes wobble {
   0% {
+    -webkit-transform: none;
     transform: none;
   }
   15% {
+    -webkit-transform: translate3d(-25%, 0, 0) rotate3d(0, 0, 1, -5deg);
     transform: translate3d(-25%, 0, 0) rotate3d(0, 0, 1, -5deg);
   }
   30% {
+    -webkit-transform: translate3d(20%, 0, 0) rotate3d(0, 0, 1, 3deg);
     transform: translate3d(20%, 0, 0) rotate3d(0, 0, 1, 3deg);
   }
   45% {
+    -webkit-transform: translate3d(-15%, 0, 0) rotate3d(0, 0, 1, -3deg);
     transform: translate3d(-15%, 0, 0) rotate3d(0, 0, 1, -3deg);
   }
   60% {
+    -webkit-transform: translate3d(10%, 0, 0) rotate3d(0, 0, 1, 2deg);
     transform: translate3d(10%, 0, 0) rotate3d(0, 0, 1, 2deg);
   }
   75% {
+    -webkit-transform: translate3d(-5%, 0, 0) rotate3d(0, 0, 1, -1deg);
     transform: translate3d(-5%, 0, 0) rotate3d(0, 0, 1, -1deg);
   }
   100% {
+    -webkit-transform: none;
+    transform: none;
+  }
+}
+@keyframes wobble {
+  0% {
+    -webkit-transform: none;
+    transform: none;
+  }
+  15% {
+    -webkit-transform: translate3d(-25%, 0, 0) rotate3d(0, 0, 1, -5deg);
+    transform: translate3d(-25%, 0, 0) rotate3d(0, 0, 1, -5deg);
+  }
+  30% {
+    -webkit-transform: translate3d(20%, 0, 0) rotate3d(0, 0, 1, 3deg);
+    transform: translate3d(20%, 0, 0) rotate3d(0, 0, 1, 3deg);
+  }
+  45% {
+    -webkit-transform: translate3d(-15%, 0, 0) rotate3d(0, 0, 1, -3deg);
+    transform: translate3d(-15%, 0, 0) rotate3d(0, 0, 1, -3deg);
+  }
+  60% {
+    -webkit-transform: translate3d(10%, 0, 0) rotate3d(0, 0, 1, 2deg);
+    transform: translate3d(10%, 0, 0) rotate3d(0, 0, 1, 2deg);
+  }
+  75% {
+    -webkit-transform: translate3d(-5%, 0, 0) rotate3d(0, 0, 1, -1deg);
+    transform: translate3d(-5%, 0, 0) rotate3d(0, 0, 1, -1deg);
+  }
+  100% {
+    -webkit-transform: none;
     transform: none;
   }
 }
@@ -3189,7 +3242,7 @@ p.news {
   text-align: left;
 }
 .cr-deal-rightside .cr-deal-content span {
-  font-family: "Poppins", sans-serif;
+  font-family: "Be Vietnam Pro", sans-serif;
   font-size: 16px;
   font-weight: 400;
 }
@@ -3202,7 +3255,7 @@ p.news {
 .cr-deal-rightside .cr-deal-content h4.cr-deal-title {
   margin-top: 12px;
   margin-bottom: 15px;
-  font-family: "Poppins", sans-serif;
+  font-family: "Be Vietnam Pro", sans-serif;
   font-size: 28px;
   font-weight: bold;
   line-height: 1.2;
@@ -3229,7 +3282,7 @@ p.news {
   margin: 0;
   position: relative;
   display: grid;
-  font-family: "Poppins", sans-serif;
+  font-family: "Be Vietnam Pro", sans-serif;
   font-size: 14px;
   line-height: 1.2;
   font-weight: 400;
@@ -3237,7 +3290,7 @@ p.news {
   text-align: center;
 }
 .cr-counter .cr-counter-inner h4 span {
-  font-family: "Poppins", sans-serif;
+  font-family: "Be Vietnam Pro", sans-serif;
   font-size: 20px;
   font-weight: bold;
   line-height: 1.2;
@@ -3367,7 +3420,7 @@ p.news {
 }
 .cr-product-banner-image .cr-product-banner-contain p {
   padding-bottom: 15px;
-  font-family: "Poppins", sans-serif;
+  font-family: "Be Vietnam Pro", sans-serif;
   font-size: 14px;
   line-height: 1.2;
   color: #777;
@@ -3380,7 +3433,7 @@ p.news {
 }
 .cr-product-banner-image .cr-product-banner-contain h5 {
   margin-bottom: 15px;
-  font-family: "Poppins", sans-serif;
+  font-family: "Be Vietnam Pro", sans-serif;
   font-size: 20px;
   font-weight: bold;
   line-height: 1.2;
@@ -3523,7 +3576,7 @@ p.news {
 }
 .cr-side-categories .categories-inner h4 {
   margin: 0;
-  font-family: "Poppins", sans-serif;
+  font-family: "Be Vietnam Pro", sans-serif;
   font-size: 54px;
   font-weight: bold;
   text-transform: uppercase;
@@ -3547,7 +3600,7 @@ p.news {
 }
 .cr-side-categories .categories-contain .categories-text h5 {
   margin-bottom: 12px;
-  font-family: "Poppins", sans-serif;
+  font-family: "Be Vietnam Pro", sans-serif;
   font-size: 22px;
   font-weight: bold;
   line-height: 1.2;
@@ -3597,7 +3650,7 @@ p.news {
   display: flex;
   flex-direction: column;
   align-items: center;
-  font-family: "Poppins", sans-serif;
+  font-family: "Be Vietnam Pro", sans-serif;
   font-weight: 500;
   font-size: 16px;
 }
@@ -3609,7 +3662,7 @@ p.news {
   padding: 26px 0;
   text-align: center;
   margin-bottom: 0px;
-  font-family: "Poppins", sans-serif;
+  font-family: "Be Vietnam Pro", sans-serif;
   color: #2b2b2d;
   font-weight: 700;
   line-height: 1.429;
@@ -3629,7 +3682,7 @@ p.news {
   font-size: 16px;
   display: flex;
   justify-content: center;
-  font-family: "Poppins", sans-serif;
+  font-family: "Be Vietnam Pro", sans-serif;
   font-size: 16px;
   color: #64b496 !important;
   font-weight: bold;
@@ -3817,7 +3870,7 @@ p.news {
 .cr-services .cr-services-contain h4 {
   margin-bottom: 5px;
   font-size: 18px;
-  font-family: "Poppins", sans-serif;
+  font-family: "Be Vietnam Pro", sans-serif;
   color: #2b2b2d;
   font-weight: bold;
   line-height: 1.667;
@@ -3904,21 +3957,21 @@ p.news {
   text-align: left;
 }
 .cr-blog .cr-blog-content span {
-  font-family: "Poppins", sans-serif;
+  font-family: "Be Vietnam Pro", sans-serif;
   font-size: 14px;
   font-weight: 400;
   line-height: 2;
   color: #7a7a7a;
 }
 .cr-blog .cr-blog-content span code {
-  font-family: "Poppins", sans-serif;
+  font-family: "Be Vietnam Pro", sans-serif;
   font-size: 14px;
   font-weight: 400;
   color: #777;
 }
 .cr-blog .cr-blog-content h5 {
   margin-top: 5px;
-  font-family: "Poppins", sans-serif;
+  font-family: "Be Vietnam Pro", sans-serif;
   font-size: 17px;
   font-weight: 600;
   line-height: 24px;
@@ -3927,7 +3980,7 @@ p.news {
 .cr-blog .cr-blog-content a {
   transition: all 0.3s ease-in-out;
   position: relative;
-  font-family: "Poppins", sans-serif;
+  font-family: "Be Vietnam Pro", sans-serif;
   font-size: 14px;
   font-weight: 300;
   line-height: 1.875;
@@ -3938,7 +3991,7 @@ p.news {
 }
 .cr-blog .cr-blog-content .read {
   position: relative;
-  font-family: "Poppins", sans-serif;
+  font-family: "Be Vietnam Pro", sans-serif;
   font-size: 14px;
   font-weight: bold;
   line-height: 1.875;
@@ -3971,7 +4024,7 @@ p.news {
   z-index: 2;
 }
 .cr-blog .cr-blog-image .cr-blog-date span {
-  font-family: "Poppins", sans-serif;
+  font-family: "Be Vietnam Pro", sans-serif;
   font-size: 23px;
   font-weight: bold;
   line-height: 1.1;
@@ -4076,6 +4129,7 @@ p.news {
   max-width: 960px;
   width: 960px;
   padding: 35px;
+  -webkit-transition: all 0.3s ease 0s;
   transition: all 0.3s ease 0s;
 }
 .quickview-modal .modal-body {
@@ -4093,7 +4147,11 @@ p.news {
 
 .zoom-image-hover {
   height: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
   align-items: center;
   text-align: center;
   border: 1px solid #e9e9e9;
@@ -4268,4 +4326,6 @@ p.news {
   .cr-size-and-weight .cr-size-weight .cr-kg {
     padding: 10px 0 0 0;
   }
-}/*# sourceMappingURL=demo-2.css.map */
+}
+
+/*# sourceMappingURL=demo-2.css.map */

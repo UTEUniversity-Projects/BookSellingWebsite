@@ -43,23 +43,38 @@ public class SupportDAOImpl implements ISupportDAO {
 
         return support;
     }
-
     @Override
-    public void update(Support support) {
+    public Support save(Support support) {
         EntityManager entityManager = JpaConfig.getEntityManager();
-
         try {
             entityManager.getTransaction().begin();
-            entityManager.merge(support);
+            support = entityManager.merge(support); // Sử dụng merge thay vì persist
             entityManager.getTransaction().commit();
         } catch (Exception e) {
+            entityManager.getTransaction().rollback();
             e.printStackTrace();
-            if (entityManager.getTransaction().isActive()) {
-                entityManager.getTransaction().rollback();
-            }
         } finally {
             entityManager.close();
         }
+        return support;
     }
+
+//    @Override
+//    public void update(Support support) {
+//        EntityManager entityManager = JpaConfig.getEntityManager();
+//
+//        try {
+//            entityManager.getTransaction().begin();
+//            entityManager.merge(support);
+//            entityManager.getTransaction().commit();
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//            if (entityManager.getTransaction().isActive()) {
+//                entityManager.getTransaction().rollback();
+//            }
+//        } finally {
+//            entityManager.close();
+//        }
+//    }
 
 }

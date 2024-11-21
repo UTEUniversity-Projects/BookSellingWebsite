@@ -10,4 +10,5 @@ public interface ISupportService {
     List<Support> getAllSupportRequests();
     Support getSupportRequestById(long id);
     void respondToSupportRequest(SupportRequest request) throws SQLException;
+    void createSupport(SupportRequest request) throws Exception;
 }
