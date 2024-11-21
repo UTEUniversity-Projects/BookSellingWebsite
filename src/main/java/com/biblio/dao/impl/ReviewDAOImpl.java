@@ -23,9 +23,10 @@ public class ReviewDAOImpl extends GenericDAOImpl<Review> implements IReviewDAO 
         StringBuilder jpql = new StringBuilder();
         jpql.append("SELECT DISTINCT r ")
                 .append("FROM Review r ")
+                .append("JOIN r.bookTemplate bt ")
                 .append("LEFT JOIN FETCH r.responseReview rr ")
                 .append("JOIN FETCH r.customer c ")
-                .append("WHERE r.bookTemplate = :bookTemplate");
+                .append("WHERE bt = :bookTemplate");
 
         Map<String, Object> params = new HashMap<>();
         params.put("bookTemplate", bookTemplate);
@@ -40,10 +41,10 @@ public class ReviewDAOImpl extends GenericDAOImpl<Review> implements IReviewDAO 
     public Review save(Review review) { return super.save(review); }
 
     public static void main(String[] args) {
+        BookTemplateDAOImpl bookTemplateDAO = new BookTemplateDAOImpl();
+        BookTemplate bookTemplate = bookTemplateDAO.findById(1L);
         ReviewDAOImpl dao = new ReviewDAOImpl();
-        Review review = dao.findById(1);
-        review.setHidden(true);
-        review = dao.update(review);
-        System.out.println(review.isHidden());
+        List<Review> reviews = dao.findByBookTemplate(bookTemplate);
+        System.out.println(reviews.size());
     }
 }
