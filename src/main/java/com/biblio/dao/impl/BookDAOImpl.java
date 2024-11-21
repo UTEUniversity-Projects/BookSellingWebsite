@@ -55,6 +55,8 @@ public class BookDAOImpl extends GenericDAOImpl<Book> implements IBookDAO {
         super.delete(id);
     }
 
+
+
     public static void main(String[] args) {
 //        BookDAOImpl dao = new BookDAOImpl();
 //        List<Book> books = dao.findAll();

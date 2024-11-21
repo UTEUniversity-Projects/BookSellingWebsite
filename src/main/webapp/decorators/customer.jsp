@@ -346,6 +346,7 @@
 <!-- Main Custom -->
 <script src="${pageContext.request.contextPath}/assets/customer/js/main.js?v=1"></script>
 <script src="${pageContext.request.contextPath}/assets/customer/js/manage-cart.js"></script>
+  
 </body>
 <div id="toast"></div>
 <div class="checkout">

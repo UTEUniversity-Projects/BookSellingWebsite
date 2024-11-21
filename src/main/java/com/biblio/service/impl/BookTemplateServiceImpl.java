@@ -14,12 +14,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class BookTemplateServiceImpl implements IBookTemplateService {
+
     @Inject
-    IBookTemplateDAO bokTemplateDAO;
+    IBookTemplateDAO bookTemplateDAO;
 
     @Override
     public List<BookManagementResponse> getAllBookManagementResponse() {
-        List<BookTemplate> bookTemplates = bokTemplateDAO.findAllForManagement();
+        List<BookTemplate> bookTemplates = bookTemplateDAO.findAllForManagement();
         List<BookManagementResponse> bookManagementResponseList = new ArrayList<>();
         for (BookTemplate bookTemplate : bookTemplates) {
             bookManagementResponseList.add(BookTemplateMapper.toBookManagementResponse(bookTemplate));
@@ -29,7 +30,7 @@ public class BookTemplateServiceImpl implements IBookTemplateService {
 
     @Override
     public List<BookCardResponse> getAllBookCardResponse() {
-        List<BookTemplate> bookTemplates = bokTemplateDAO.findAllForHome();
+        List<BookTemplate> bookTemplates = bookTemplateDAO.findAllForHome();
         List<BookCardResponse> bookCardResponseList = new ArrayList<>();
         for (BookTemplate bookTemplate : bookTemplates) {
             bookCardResponseList.add(BookTemplateMapper.toBookCardResponse(bookTemplate));
@@ -39,17 +40,29 @@ public class BookTemplateServiceImpl implements IBookTemplateService {
 
     @Override
     public BookDetailsResponse getBookDetailsResponse(Long bookTemplateId) {
-        BookTemplate bookTemplate = bokTemplateDAO.findOneForDetails(bookTemplateId);
+        BookTemplate bookTemplate = bookTemplateDAO.findOneForDetails(bookTemplateId);
         return BookTemplateMapper.toBookDetailsResponse(bookTemplate);
     }
 
     @Override
     public List<BookTemplatePromotionResponse> getAllBookBookTemplatePromotionResponse() {
-        List<BookTemplate> bookTemplates = bokTemplateDAO.findAll();
+        List<BookTemplate> bookTemplates = bookTemplateDAO.findAll();
         List<BookTemplatePromotionResponse> bookTemplatePromotionResponse = new ArrayList<>();
         for (BookTemplate bookTemplate : bookTemplates) {
             bookTemplatePromotionResponse.add(BookTemplateMapper.toBookTemplatePromotionResponse(bookTemplate));
         }
         return bookTemplatePromotionResponse;
     }
+
+    @Override
+    public List<BookCardResponse> getBookTemplateByTitle(String title) {
+        List<BookTemplate> bookTemplates = bookTemplateDAO.findByTitle(title);
+        List<BookCardResponse> bookCardResponseList = new ArrayList<>();
+        for (BookTemplate bookTemplate : bookTemplates) {
+            bookCardResponseList.add(BookTemplateMapper.toBookCardResponse(bookTemplate));
+        }
+        return bookCardResponseList;
+
+    }
+
 }

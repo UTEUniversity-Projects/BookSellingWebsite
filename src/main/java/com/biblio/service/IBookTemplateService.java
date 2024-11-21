@@ -8,8 +8,15 @@ import com.biblio.dto.response.BookTemplatePromotionResponse;
 import java.util.List;
 
 public interface IBookTemplateService {
-    public List<BookManagementResponse> getAllBookManagementResponse();
+
+    List<BookManagementResponse> getAllBookManagementResponse();
+
     List<BookCardResponse> getAllBookCardResponse();
+
     BookDetailsResponse getBookDetailsResponse(Long bookTemplateId);
-    public List<BookTemplatePromotionResponse> getAllBookBookTemplatePromotionResponse();
+
+    List<BookTemplatePromotionResponse> getAllBookBookTemplatePromotionResponse();
+
+    List<BookCardResponse> getBookTemplateByTitle(String title);
+
 }

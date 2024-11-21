@@ -5,16 +5,16 @@
             <div class="col-lg-12">
                 <div class="top-header">
                     <a href="home" class="cr-logo">
-                        <img src="${pageContext.request.contextPath}/assets/customer/img/logo/biblio.png" alt="logo" class="logo"/>
+                        <img src="${pageContext.request.contextPath}/assets/customer/img/logo/biblio.png" alt="logo"
+                             class="logo"/>
                     </a>
-                    <form class="cr-search" action="#" method="post" id="search-book">
-                        <div class="form-group">
-                            <input
-                                    class="search-input"
-                                    type="text"
-                                    placeholder="Tìm kiếm sản phẩm..."
-                            />
-                        </div>
+                    <form class="cr-search" action="search" method="GET" id="search-book">
+                        <input
+                                class="search-input"
+                                type="text"
+                                placeholder="Tìm kiếm sản phẩm..."
+                                name="keyword"
+                        />
                         <button class="btn-search search-btn" type="submit">
                             <i class="ri-search-line"></i>
                         </button>

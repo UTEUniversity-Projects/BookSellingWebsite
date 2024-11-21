@@ -525,8 +525,8 @@
             <div class="col-xl-9 col-lg-8 col-12 mb-24">
                 <div class="row mb-minus-24">
                     <c:forEach var="book" items="${books}">
-                        <div
-                             class="mix ${book.categoryName} col-xxl-3 col-xl-4 col-6 cr-product-box mb-24"
+                        <div data-book-id="${book.id}"
+                             class="mix col-xxl-3 col-xl-4 col-6 cr-product-box mb-24"
                         >
                             <div class="cr-product-card">
                                 <div class="cr-product-image">
