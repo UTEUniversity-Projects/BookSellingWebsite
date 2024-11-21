@@ -104,9 +104,9 @@ function validateForm(form) {
             if (value < 1 || value > 100) {
                 errorSpan.textContent = "Giá trị phải nằm trong khoảng từ 1% đến 100%.";
                 isValid = false;
-                 return;
+                return;
             } else {
-                 errorSpan.textContent = "";
+                errorSpan.textContent = "";
             }
         }
     });
@@ -150,7 +150,7 @@ function toggleForm(editButton) {
     const isEditing = editButton.dataset.editing === "true";
 
     const inputs = form.querySelectorAll("input, textarea, select");
-    const table = document.querySelector(".table_item_to_discount");
+   // const table = document.querySelector(".table_item_to_discount");
 
     if (isEditing) {
         // Khóa form
@@ -164,7 +164,7 @@ function toggleForm(editButton) {
         table.classList.add("table-disabled");
 
         editButton.innerText = "Chỉnh sửa";
-        editButton.dataset.editing = "false";
+     //   editButton.dataset.editing = "false";
     } else {
         // Mở khóa form
         inputs.forEach(input => {
@@ -177,7 +177,7 @@ function toggleForm(editButton) {
         });
 
         // Kích hoạt bảng
-        table.classList.remove("table-disabled");
+        //table.classList.remove("table-disabled");
 
         editButton.innerText = "Lưu";
         editButton.dataset.editing = "true";
@@ -263,18 +263,12 @@ $(document).ready(function () {
             checkbox.prop('checked', !checkbox.prop('checked'));
         });
     }
-
-
-
-
-
     // Gọi hàm xử lý theo lựa chọn mặc định khi load trang
     const defaultValue = $('#select-object-discount').val();
     if (defaultValue === "1") handleCase1();
     else if (defaultValue === "2") handleCase2();
     else if (defaultValue === "3") handleCase3();
 });
-
 
 
 

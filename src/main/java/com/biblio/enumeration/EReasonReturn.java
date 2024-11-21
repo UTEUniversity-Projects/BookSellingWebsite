@@ -5,7 +5,7 @@ import lombok.Getter;
 @Getter
 public enum EReasonReturn {
     DAMAGED("Sách bị hỏng"),
-    MISMATCH("Sách không đúng mô tả"),
+    NOT_AS_DESCRIBED("Sách không đúng mô tả"),
     FAKE("Sách giả"),
     NO_NEEDED("Không còn cần thiết");
 

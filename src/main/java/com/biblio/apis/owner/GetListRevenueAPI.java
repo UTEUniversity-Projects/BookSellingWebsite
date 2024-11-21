@@ -1,6 +1,6 @@
 package com.biblio.apis.owner;
 
-import com.biblio.service.ICustomerService;
+import com.biblio.dto.response.RevenueResponse;
 import com.biblio.service.IOrderService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
@@ -13,9 +13,12 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.Serial;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 /**
  * Servlet implementation class GetCategoriesAPI
@@ -24,9 +27,6 @@ import java.util.Map;
 public class GetListRevenueAPI extends HttpServlet {
     @Serial
     private static final long serialVersionUID = 1L;
-
-    @Inject
-    ICustomerService customerService;
 
     @Inject
     IOrderService orderService;
@@ -69,16 +69,20 @@ public class GetListRevenueAPI extends HttpServlet {
                 return;
             }
 
-            // Call service to get data
-            Long customerCount = customerService.countCustomersJointAtTime(startTime, endTime);
-            Long orderCount = orderService.countOrderAtTime(startTime, endTime);
-            Double venueOrder = orderService.venueOrderAtTime(startTime, endTime);
+            List<RevenueResponse> revenueList = orderService.getListRevenueAtTime(startTime, endTime);
+
+            List<Map<String, Object>> revenueJsonList = revenueList.stream()
+                    .map(item -> {
+                        Map<String, Object> map = new HashMap<>();
+                        map.put("date", item.getDate().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")));
+                        map.put("revenue", item.getRevenue());
+                        return map;
+                    })
+                    .collect(Collectors.toList());
 
             // Create a map to represent the JSON response
             Map<String, Object> responseMap = new HashMap<>();
-            responseMap.put("customerCount", customerCount);
-            responseMap.put("orderCount", orderCount);
-            responseMap.put("venueOrder", venueOrder);
+            responseMap.put("revenueList", revenueJsonList);
 
             // Serialize and send the response
             ObjectMapper objectMapper = new ObjectMapper();
@@ -88,6 +92,7 @@ public class GetListRevenueAPI extends HttpServlet {
             response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
             response.getWriter().write("{\"error\":\"Invalid date format. Use 'yyyy-MM-dd'T'HH:mm:ss'\"}");
         } catch (Exception e) {
+            e.printStackTrace(); // Log lỗi chi tiết trong console
             response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
             response.getWriter().write("{\"error\":\"An error occurred while processing the request\"}");
         }
