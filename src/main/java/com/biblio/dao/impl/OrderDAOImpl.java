@@ -63,6 +63,21 @@ public class OrderDAOImpl extends GenericDAOImpl<Order> implements IOrderDAO {
     }
 
     @Override
+    public List<Order> findByJPQL(Long customerId) {
+        StringBuilder jpql = new StringBuilder();
+        jpql.append("SELECT o ")
+                .append("FROM Order o ")
+                .append("WHERE o.customer.id = :customerId");
+
+        // Tạo map để chứa các tham số cần gán
+        Map<String, Object> params = new HashMap<>();
+        params.put("customerId", customerId);
+
+        // Truyền cả câu truy vấn và các tham số vào phương thức findAll
+        return super.findByJPQL(jpql.toString(), params);
+    }
+
+    @Override
     public boolean updateStatus(Long id, EOrderStatus status) {
         Order order = findOne(id);
         if (order == null || order.getStatus().equals(status)) {
