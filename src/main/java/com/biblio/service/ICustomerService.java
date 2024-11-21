@@ -4,6 +4,7 @@ import com.biblio.dto.request.CustomerRegisterRequest;
 import com.biblio.dto.response.CustomerDetailResponse;
 import com.biblio.dto.response.CustomerGetListResponse;
 import com.biblio.dto.response.CustomerRegisterResponse;
+import com.biblio.entity.Customer;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -27,4 +28,6 @@ public interface ICustomerService {
     CustomerDetailResponse getCustomerDetailByUsername(String username);
 
     Long countCustomersJointAtTime(LocalDateTime start, LocalDateTime end);
+
+    List<Customer> findAllCustomers();
 }

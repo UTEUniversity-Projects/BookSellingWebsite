@@ -35,7 +35,7 @@ public class Support implements Serializable {
 
     // region Relationships
 
-    @ManyToOne(cascade = CascadeType.ALL, fetch =  FetchType.LAZY)
+    @ManyToOne(cascade = CascadeType.ALL, fetch =  FetchType.EAGER)
     @JoinColumn(name = "customer_id", nullable = false)
     private Customer customer;
 

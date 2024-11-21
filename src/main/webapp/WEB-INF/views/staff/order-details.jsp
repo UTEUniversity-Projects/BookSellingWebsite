@@ -180,11 +180,17 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Hủy</button>
-                <button type="button" class="btn cr-btn-primary" id="confirmOrder">Xác nhận</button>
+                <!-- Gửi giá trị action="confirm" qua nút Xác nhận -->
+                <button
+                        type="button"
+                        class="btn cr-btn-primary"
+                        id="confirmOrder"
+                        data-action="confirm">Xác nhận</button>
             </div>
         </div>
     </div>
 </div>
+
 <!-- endregion -->
 
 <script src="${pageContext.request.contextPath}/assets/staff/js/order-details.js" defer></script>

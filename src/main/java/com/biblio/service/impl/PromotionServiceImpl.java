@@ -43,4 +43,9 @@ public class PromotionServiceImpl implements IPromotionService {
     public Boolean isCodeExisted(String code) {
         return promotionDAO.existsByCode(code);
     }
+
+    @Override
+    public Promotion findPromotionById(long promotionId) {
+        return promotionDAO.findById(promotionId);
+    }
 }

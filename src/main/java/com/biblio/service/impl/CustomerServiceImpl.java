@@ -84,5 +84,9 @@ public class CustomerServiceImpl implements ICustomerService {
                 .count();
     }
 
+    @Override
+    public List<Customer> findAllCustomers() {
+        return customerDAO.findAll();
+    }
 
 }

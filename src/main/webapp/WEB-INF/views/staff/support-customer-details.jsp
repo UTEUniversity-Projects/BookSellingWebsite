@@ -30,22 +30,27 @@
 
                             <div class="mb-3">
                                 <label for="requestDetails" class="form-label">Yêu cầu</label>
-                                <textarea class="form-control" id="requestDetails" rows="3" readonly>${supportRequest.requestContent}</textarea>
-                            </div>
-
-                            <div class="mb-3">
-                                <label for="supportContent" class="form-label">Nội dung phản hồi</label>
-                                <textarea class="form-control" id="supportContent" rows="3" readonly>${supportRequest.feedbackContent}</textarea>
+                                <textarea class="form-control" id="requestDetails" rows="3" readonly>${supportRequest.content}</textarea>
                             </div>
 
                             <c:choose>
-                                <c:when test="${not empty supportRequest.feedbackContent}">
+                                <c:when test="${not empty responseSupport}">
+                                    <!-- Nếu đã có phản hồi -->
                                     <div class="mb-3">
-                                        <label for="responseText" class="form-label">Phản hồi</label>
-                                        <textarea class="form-control" id="responseText" name="feedbackContent" rows="5" readonly>${supportRequest.feedbackContent}</textarea>
+                                        <label for="responseTitle" class="form-label">Tiêu đề phản hồi</label>
+                                        <input type="text" class="form-control" id="responseTitle" value="${responseSupport.title}" readonly>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="responseContent" class="form-label">Nội dung phản hồi</label>
+                                        <textarea class="form-control" id="responseContent" rows="5" readonly>${responseSupport.content}</textarea>
                                     </div>
                                 </c:when>
                                 <c:otherwise>
+                                    <!-- Nếu chưa có phản hồi, cho phép nhập phản hồi -->
+                                    <div class="mb-3">
+                                        <label for="title" class="form-label">Title</label>
+                                        <input type="text" class="form-control" id="title" name="title" required>
+                                    </div>
                                     <div class="mb-3">
                                         <label for="responseText" class="form-label">Phản hồi</label>
                                         <textarea class="form-control" id="responseText" name="feedbackContent" rows="5"></textarea>

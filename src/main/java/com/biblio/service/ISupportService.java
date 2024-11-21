@@ -7,8 +7,5 @@ import java.sql.SQLException;
 import java.util.List;
 
 public interface ISupportService {
-    List<Support> getAllSupportRequests();
-    Support getSupportRequestById(long id);
-    void respondToSupportRequest(SupportRequest request) throws SQLException;
     void createSupport(SupportRequest request) throws Exception;
 }
