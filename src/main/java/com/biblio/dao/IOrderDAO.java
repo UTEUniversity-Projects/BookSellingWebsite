@@ -1,6 +1,7 @@
 package com.biblio.dao;
 
 import com.biblio.entity.Order;
+import com.biblio.enumeration.EOrderStatus;
 
 import java.util.List;
 
@@ -14,6 +15,8 @@ public interface IOrderDAO {
 
     Order findOneForDetailsManagement(Long id);
 
-
     List<Order> findByJPQL(Long customerId);
+
+    boolean updateStatus(Long id, EOrderStatus status);
+
 }

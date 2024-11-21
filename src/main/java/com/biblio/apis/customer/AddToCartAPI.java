@@ -48,19 +48,19 @@ public class AddToCartAPI extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 //        request.setCharacterEncoding("UTF-8");
 //
-//        // Parse JSON request body to AddToCartRequest
 //        AddToCartRequest addToCartRequest = HttpUtil.of(request.getReader()).toModel(AddToCartRequest.class);
 //
+//        System.out.println(addToCartRequest.getCartId());
+//        System.out.println(addToCartRequest.getBookTemplateId());
+//        System.out.println(addToCartRequest.getQuantity());
 //        Map<String, Object> result = new HashMap<>();
 //        ObjectMapper mapper = new ObjectMapper();
 //
 //        try {
-//            // Call service to add product to cart
 //            cartService.addToCart(addToCartRequest);
 //            result.put("status", "success");
 //            result.put("message", "Sản phẩm đã được thêm vào giỏ hàng thành công!");
 //        } catch (Exception e) {
-//            // Handle exceptions and send error response
 //            result.put("status", "error");
 //            result.put("message", e.getMessage());
 //        }

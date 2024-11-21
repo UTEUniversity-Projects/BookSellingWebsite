@@ -1,12 +1,11 @@
 package com.biblio.dao;
 
-import com.biblio.dto.response.BookDetailsResponse;
-import com.biblio.entity.Book;
 import com.biblio.entity.BookTemplate;
 
 import java.util.List;
 
 public interface IBookTemplateDAO {
+
     BookTemplate findById(Long id);
 
     List<BookTemplate> findAll();
@@ -16,4 +15,7 @@ public interface IBookTemplateDAO {
     List<BookTemplate> findAllForHome();
 
     BookTemplate findOneForDetails(Long id);
+
+    List<BookTemplate> findByTitle(String title);
+
 }

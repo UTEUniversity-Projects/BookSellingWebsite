@@ -36,6 +36,8 @@ public class ReviewDAOImpl extends GenericDAOImpl<Review> implements IReviewDAO 
     public Review update(Review review) {
         return super.update(review);
     }
+    @Override
+    public Review save(Review review) { return super.save(review); }
 
     public static void main(String[] args) {
         ReviewDAOImpl dao = new ReviewDAOImpl();

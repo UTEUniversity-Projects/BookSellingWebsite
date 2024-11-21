@@ -72,7 +72,7 @@ public class GetSummaryReportAPI extends HttpServlet {
             // Call service to get data
             Long customerCount = customerService.countCustomersJointAtTime(startTime, endTime);
             Long orderCount = orderService.countOrderAtTime(startTime, endTime);
-            Double venueOrder = orderService.venueOrderAtTime(startTime, endTime);
+            Double venueOrder = orderService.revenueOrderAtTime(startTime, endTime);
 
             // Create a map to represent the JSON response
             Map<String, Object> responseMap = new HashMap<>();

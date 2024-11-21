@@ -1,6 +1,8 @@
 package com.biblio.service.impl;
 
+import com.biblio.dao.IBookTemplateDAO;
 import com.biblio.dao.ICartDAO;
+import com.biblio.dao.ICartItemDAO;
 import com.biblio.dao.ICustomerDAO;
 import com.biblio.dto.request.AddToCartRequest;
 import com.biblio.dto.response.CartResponse;
@@ -19,7 +21,10 @@ public class CartServiceImpl implements ICartService {
     private ICartDAO cartDAO;
 
     @Inject
-    private ICustomerDAO customerDAO;
+    private IBookTemplateDAO bookTemplateDAO;
+
+    @Inject
+    private ICartItemDAO cartItemDAO;
 
     @Override
     public CartResponse getCartResponseByUsername(String username) {
@@ -28,30 +33,27 @@ public class CartServiceImpl implements ICartService {
         return CartMapper.toCartResponse(cart);
     }
 
-//    @Override
-//    public CartResponse addToCart(AddToCartRequest request) {
-//        Cart cart = cartDAO.findById(request.getCartId())
-//                .orElseThrow(() -> new RuntimeException("Cart not found"));
-//
-//        BookTemplate bookTemplate = bookTemplate.findById(request.getBookTemplateId())
-//                .orElseThrow(() -> new RuntimeException("BookTemplate not found"));
-//
-//        CartItem existingItem = cart.getCartItems().stream()
-//                .filter(item -> item.getBookTemplate().getId().equals(request.getBookTemplateId()))
-//                .findFirst()
-//                .orElse(null);
-//
-//        if (existingItem != null) {
-//            existingItem.setQuantity(existingItem.getQuantity() + request.getQuantity());
-//        } else {
-//            CartItem newItem = new CartItem();
-//            newItem.setCart(cart);
-//            newItem.setBookTemplate(bookTemplate);
-//            newItem.setQuantity(request.getQuantity());
-//            cart.getCartItems().add(newItem);
-//        }
-//
-//        return.(cart);
-//    }
+    @Override
+    public CartResponse addToCart(AddToCartRequest request) {
+        Cart cart = cartDAO.findById(request.getCartId());
 
+        BookTemplate bookTemplate = bookTemplateDAO.findById(request.getBookTemplateId());
+
+        CartItem existingItem = cart.getCartItems().stream()
+                .filter(item -> item.getBookTemplate().getId().equals(request.getBookTemplateId()))
+                .findFirst()
+                .orElse(null);
+
+        if (existingItem != null) {
+            existingItem.setQuantity(existingItem.getQuantity() + request.getQuantity());
+            cartItemDAO.updateCartItem(existingItem);
+        } else {
+            CartItem newItem = new CartItem();
+            newItem.setCart(cart);
+            newItem.setBookTemplate(bookTemplate);
+            newItem.setQuantity(request.getQuantity());
+            cartItemDAO.addCartItem(newItem);
+        }
+        return CartMapper.toCartResponse(cart);
+    }
 }

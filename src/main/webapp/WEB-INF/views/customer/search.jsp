@@ -244,15 +244,15 @@
                         </div>
                     </div>
                 </div>
-                <div class="row col-100 mb-minus-24">
+                <div class="book-list row col-100 mb-minus-24">
                     <c:forEach var="book" items="${books}">
-                        <div onclick="viewBook('${pageContext.request.contextPath}/book?id=${book.id}')"
-                             class="mix ${book.categoryName} col-xxl-3 col-xl-4 col-6 cr-product-box mb-24 cursor-pointer"
+                        <div class="mix ${book.categoryName} col-xxl-3 col-xl-4 col-6 cr-product-box mb-24"
                         >
                             <div class="cr-product-card">
                                 <div class="cr-product-image">
                                     <div class="cr-image-inner zoom-image-hover">
-                                        <img src="${pageContext.request.contextPath}${book.imageUrl}" alt="${book.title}"/>
+                                        <img src="${pageContext.request.contextPath}${book.imageUrl}"
+                                             alt="${book.title}"/>
                                     </div>
                                     <div class="cr-side-view">
                                         <a
@@ -288,7 +288,8 @@
                                             <p>(${book.reviewRate})</p>
                                         </div>
                                     </div>
-                                    <a href="${pageContext.request.contextPath}/book?id=${book.id}" class="title">${book.title}</a>
+                                    <a href="${pageContext.request.contextPath}/book?id=${book.id}"
+                                       class="title">${book.title}</a>
                                     <p class="cr-price">
                                         <span class="new-price price-value">${book.sellingPrice}</span>
                                         <span class="old-price price-value">${book.sellingPrice}</span>

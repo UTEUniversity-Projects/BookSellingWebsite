@@ -13,8 +13,10 @@ import com.biblio.entity.Support;
 import com.biblio.enumeration.ENotificationStatus;
 import com.biblio.enumeration.ENotificationType;
 import com.biblio.enumeration.ESupportStatus;
+import com.biblio.mapper.SupportMapper;
 import com.biblio.service.ISupportService;
 
+import javax.transaction.Transactional;
 import java.sql.SQLException;
 import java.time.LocalDateTime;
 import java.util.HashSet;
@@ -83,7 +85,24 @@ public class SupportServiceImpl implements ISupportService {
 //            customerDAO.updateSupport_Notification(customer);
 //        }
     }
+    @Transactional
+    @Override
+    public void createSupport(SupportRequest request) {
+        if (request == null || request.getTitle() == null || request.getFeedbackContent() == null) {
+            throw new IllegalArgumentException("Request không hợp lệ: Tiêu đề hoặc nội dung không được để trống.");
+        }
 
+        Customer customer = customerDAO.findById(request.getCustomerId());  // Cần thay 'findById' bằng phương thức thích hợp của bạn
+
+        if (customer == null) {
+            throw new IllegalArgumentException("Không tìm thấy khách hàng với ID: " + request.getCustomerId());
+        }
+        // Map DTO sang Entity
+        Support support = SupportMapper.toEntity(request, customer);
+        System.out.println(support);
+        // Lưu yêu cầu hỗ trợ vào cơ sở dữ liệu
+        supportDAO.save(support);
+    }
 
 
 

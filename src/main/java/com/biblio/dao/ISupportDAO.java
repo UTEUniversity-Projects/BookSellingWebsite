@@ -10,6 +10,6 @@ public interface ISupportDAO {
 
     Support findById(Long id);
 
-    void update(Support support);
-
+    //void update(Support support);
+    Support save(Support support) ;
 }

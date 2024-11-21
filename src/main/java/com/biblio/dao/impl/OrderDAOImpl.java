@@ -1,7 +1,11 @@
 package com.biblio.dao.impl;
 
 import com.biblio.dao.IOrderDAO;
+import com.biblio.entity.Book;
+import com.biblio.entity.LineItem;
 import com.biblio.entity.Order;
+import com.biblio.enumeration.EBookMetadataStatus;
+import com.biblio.enumeration.EOrderStatus;
 
 import java.util.HashMap;
 import java.util.List;
@@ -30,8 +34,6 @@ public class OrderDAOImpl extends GenericDAOImpl<Order> implements IOrderDAO {
         jpql.append("SELECT DISTINCT o ")
                 .append("FROM Order o ")
                 .append("JOIN FETCH o.customer c ")
-                .append("JOIN FETCH o.lineItems li ")
-                .append("JOIN FETCH li.books b ")
                 .append("JOIN FETCH o.shipping s");
 
         return super.findAll(jpql.toString());
@@ -75,11 +77,28 @@ public class OrderDAOImpl extends GenericDAOImpl<Order> implements IOrderDAO {
         return super.findByJPQL(jpql.toString(), params);
     }
 
+    @Override
+    public boolean updateStatus(Long id, EOrderStatus status) {
+        Order order = findOne(id);
+        if (order == null || order.getStatus().equals(status)) {
+            return false;
+        }
+        order.setStatus(status);
+
+        if (status == EOrderStatus.CANCELED) {
+            for (LineItem lineItem : order.getLineItems()) {
+                for (Book book : lineItem.getBooks()) {
+                    book.getBookMetadata().setStatus(EBookMetadataStatus.IN_STOCK);
+                }
+            }
+        }
+
+        super.update(order);
+        return true;
+    }
 
     public static void main(String[] args) {
         OrderDAOImpl dao = new OrderDAOImpl();
-        Order order = dao.findOneForDetailsManagement(1L);
-        System.out.println(order.getId());
 //        for (Order order : orders) {
 //            System.out.println(order.getId());
 //        }

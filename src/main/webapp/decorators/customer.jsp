@@ -138,7 +138,7 @@
 <!-- Breadcrumb -->
 <section class="section-breadcrumb">
     <div class="cr-breadcrumb-image">
-        <div class="container">
+        <div class="container-xl">
             <div class="row">
                 <div class="col-lg-12">
                     <div class="cr-breadcrumb-title">
@@ -197,7 +197,7 @@
                         <div class="col-md-7 col-sm-12 col-xs-12">
                             <div class="cr-size-and-weight-contain">
                                 <h2 class="heading">
-                                    ${book.title}
+                                        ${book.title}
                                 </h2>
                             </div>
                             <div class="cr-size-and-weight">
@@ -221,7 +221,7 @@
                                 </div>
                                 <div class="cr-product-price">
                                     <span class="new-price">${book.sellingPrice}</span>
-    <%--                                <span class="old-price">$123.25</span>--%>
+                                        <%--                                <span class="old-price">$123.25</span>--%>
                                 </div>
                                 <div class="cr-size-weight">
                                     <h5><span>Tình trạng</span> :</h5>
@@ -265,67 +265,66 @@
 </c:forEach>
 
 <!-- Cart -->
-<div class="cr-cart-overlay"></div>
-<div class="cr-cart-view">
-    <div class="cr-cart-inner">
-        <div class="cr-cart-top">
-            <div class="cr-cart-title">
-                <h6>Giỏ hàng của tôi</h6>
-                <button type="button" class="close-cart">×</button>
-            </div>
-            <ul class="crcart-pro-items">
-                <c:forEach var="cartItem" items="${cart.cartItems}">
-                    <li>
-                        <a href="${pageContext.request.contextPath}/book?id=${cartItem.bookId}" class="crside_pro_img"
-                        ><img src="${pageContext.request.contextPath}${cartItem.imageUrl}" alt="${cartItem.title}"
-                        /></a>
-                        <div class="cr-pro-content">
-                            <a href="product-left-sidebar.html" class="cart_pro_title"
-                            >${cartItem.title}</a
-                            >
-                            <span class="cart-price"><span class="price-value">${cartItem.sellingPrice}</span> x ${cartItem.quantity}</span>
-                            <div class="cr-cart-qty">
-                                <div class="cart-qty-plus-minus">
-                                    <button type="button" class="minus">-</button>
-                                    <input
-                                            type="text"
-                                            placeholder="."
-                                            value="1"
-                                            minlength="1"
-                                            maxlength="20"
-                                            class="quantity"
-                                    />
-                                    <button type="button" class="plus">+</button>
+<div class="cr-cart-overlay">
+    <div class="cr-cart-view">
+        <div class="cr-cart-inner">
+            <div class="cr-cart-top">
+                <div class="cr-cart-title">
+                    <h6>Giỏ hàng của tôi</h6>
+                    <button type="button" class="close-cart">×</button>
+                </div>
+                <ul class="cr-cart-pro-items">
+                    <c:forEach var="cartItem" items="${cart.cartItems}">
+                        <li id="cart-item-${cartItem.bookId}">
+                            <a href="${pageContext.request.contextPath}/book?id=${cartItem.bookId}" class="crside_pro_img"
+                            ><img src="${pageContext.request.contextPath}${cartItem.imageUrl}" alt="${cartItem.title}"
+                            /></a>
+                            <div class="cr-pro-content">
+                                <a href="product-left-sidebar.html" class="cart_pro_title">${cartItem.title}</a>
+                                <span class="cart-price price-value">${cartItem.sellingPrice}</span>
+                                <div class="cr-cart-qty">
+                                    <div class="cart-qty-plus-minus">
+                                        <button type="button" class="minus">-</button>
+                                        <input
+                                                type="text"
+                                                placeholder="."
+                                                value="${cartItem.quantity}"
+                                                minlength="1"
+                                                maxlength="20"
+                                                class="quantity"
+                                        />
+                                        <button type="button" class="plus">+</button>
+                                    </div>
                                 </div>
+                                <a href="${pageContext.request.contextPath}/book?id=${cartItem.bookId}" class="remove">×</a>
                             </div>
-                            <a href="${pageContext.request.contextPath}/book?id=${cartItem.bookId}" class="remove">×</a>
-                        </div>
-                    </li>
-                </c:forEach>
-            </ul>
-        </div>
-        <div class="cr-cart-bottom">
-            <div class="cart-sub-total">
-                <table class="table cart-table">
-                    <tbody>
-                    <tr>
-                        <td class="text-left">Tiền sách:</td>
-                        <td class="text-right">$300.00</td>
-                    </tr>
-                    <tr>
-                        <td class="text-left">VAT (20%) :</td>
-                        <td class="text-right">$60.00</td>
-                    </tr>
-                    <tr>
-                        <td class="text-left">Thành tiền:</td>
-                        <td class="text-right primary-color">$360.00</td>
-                    </tr>
-                    </tbody>
-                </table>
+                        </li>
+                    </c:forEach>
+                </ul>
             </div>
-            <div class="cart_btn">
-                <a href="cart.html" class="cr-button">Xem giỏ hàng</a>
-                <a href="checkout.html" class="cr-btn-secondary">Thanh toán</a>
+            <div class="cr-cart-bottom">
+                <div class="cart-sub-total">
+                    <table class="table cart-table">
+                        <tbody>
+                        <tr>
+                            <td class="text-left">Tiền sách:</td>
+                            <td class="text-right total-book-price">${cart.totalBookPrice}</td>
+                        </tr>
+                        <tr>
+                            <td class="text-left">VAT (20%) :</td>
+                            <td class="text-right">$60.00</td>
+                        </tr>
+                        <tr>
+                            <td class="text-left">Thành tiền:</td>
+                            <td class="text-right primary-color">$360.00</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="cart_btn">
+                    <a href="cart.html" class="cr-button">Xem giỏ hàng</a>
+                    <a href="checkout.html" class="cr-btn-secondary">Thanh toán</a>
+                </div>
             </div>
         </div>
     </div>
@@ -346,6 +345,14 @@
 
 <!-- Main Custom -->
 <script src="${pageContext.request.contextPath}/assets/customer/js/main.js?v=1"></script>
+<script src="${pageContext.request.contextPath}/assets/customer/js/manage-cart.js"></script>
+  
 </body>
 <div id="toast"></div>
+<div class="checkout">
+    <div class="checkout-overlay bg-black/20"></div>
+    <div class="checkout-qr h-[400px] rounded-lg overflow-hidden transition-all ease-linear duration-300">
+        <img class="w-full h-full object-cover" src="" alt="vietqr">
+    </div>
+</div>
 </html>

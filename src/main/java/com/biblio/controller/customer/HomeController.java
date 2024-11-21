@@ -35,7 +35,7 @@ public class HomeController extends HttpServlet {
 
     @Inject
     private ICartService cartService;
-  
+
     /**
      * @see HttpServlet#HttpServlet()
      */

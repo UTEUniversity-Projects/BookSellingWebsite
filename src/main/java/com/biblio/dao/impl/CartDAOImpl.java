@@ -28,10 +28,18 @@ public class CartDAOImpl extends GenericDAOImpl<Cart> implements ICartDAO {
         return super.findSingleByJPQL(jpql, params);
     }
 
+    @Override
+    public Cart findById(Long cartId) {
+        String jpql = "SELECT c FROM Cart c " +
+                "LEFT JOIN FETCH c.cartItems ci " +
+                "WHERE c.id = :cartId";
+        Map<String, Object> params = Map.of("cartId", cartId);
+        return super.findSingleByJPQL(jpql, params);
+    }
+
     public static void main(String[] args) {
         CartDAOImpl cartDAO = new CartDAOImpl();
-        Cart cart = cartDAO.findByUsername("customer_1");
+        Cart cart = cartDAO.findById(1L);
         System.out.println(cart.getCartItems().size());
-
     }
 }

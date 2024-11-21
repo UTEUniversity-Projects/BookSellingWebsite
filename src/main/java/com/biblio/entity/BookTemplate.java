@@ -1,8 +1,12 @@
 package com.biblio.entity;
 
+import lombok.*;
+
+import javax.persistence.*;
+import java.util.HashSet;
+import java.util.Set;
 import com.biblio.enumeration.EBookLanguage;
 import com.biblio.enumeration.EBookTemplateStatus;
-import lombok.*;
 
 import javax.persistence.*;
 import java.util.*;
@@ -20,7 +24,7 @@ public class BookTemplate {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    private Long id;
 
     @Enumerated(EnumType.STRING)
     @Column(name = "status", nullable = false)
@@ -61,7 +65,7 @@ public class BookTemplate {
     @OneToMany(mappedBy = "bookTemplate", cascade = CascadeType.ALL)
     private Set<CartItem> cartItems = new HashSet<>();
 
-    @OneToMany(mappedBy = "bookTemplate", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "bookTemplate", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
     private Set<Review> reviews = new HashSet<>();
 
     // endregion

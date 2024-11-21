@@ -10,7 +10,7 @@ import lombok.*;
 public class BookCardResponse {
     private Long id;
     private String title;
-    private double sellingPrice;
+    private String sellingPrice;
     private String categoryName;
     private String condition;
     private String imageUrl;
