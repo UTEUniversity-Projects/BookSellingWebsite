@@ -1,6 +1,5 @@
 package com.biblio.dto.response;
 
-import com.biblio.entity.CartItem;
 import lombok.*;
 
 import java.util.List;
@@ -11,6 +10,7 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 public class CartResponse {
+    private Long id;
     private List<CartItemResponse> cartItems;
     private double totalBookPrice;
 }

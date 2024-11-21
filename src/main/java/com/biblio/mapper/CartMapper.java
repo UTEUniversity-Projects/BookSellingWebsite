@@ -1,5 +1,6 @@
 package com.biblio.mapper;
 
+import com.biblio.dto.request.AddToCartRequest;
 import com.biblio.dto.response.CartItemResponse;
 import com.biblio.dto.response.CartResponse;
 import com.biblio.entity.Cart;
@@ -16,7 +17,9 @@ public class CartMapper {
             cartItemResponse.add(CartItemMapper.toCartItemResponse(cartItem));
         }
         return CartResponse.builder()
+                .id(cart.getId())
                 .cartItems(cartItemResponse)
+                .totalBookPrice(cart.getTotalBookPrice())
                 .build();
     }
 }

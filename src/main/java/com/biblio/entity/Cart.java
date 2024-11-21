@@ -35,4 +35,12 @@ public class Cart implements Serializable {
 
     // endregion
 
+    // region Methods
+    public double getTotalBookPrice() {
+        return cartItems.stream()
+                .mapToDouble(item -> item.getQuantity() * item.getBookTemplate().getBooks().iterator().next().getSellingPrice())
+                .sum();
+    }
+    // endregion
+
 }
