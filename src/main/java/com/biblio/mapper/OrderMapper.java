@@ -1,12 +1,12 @@
 package com.biblio.mapper;
 
+import com.biblio.dto.response.OrderCustomerResponse;
 import com.biblio.dto.response.OrderDetailsManagementResponse;
 import com.biblio.dto.response.OrderManagementResponse;
 import com.biblio.dto.response.OrderProductResponse;
 import com.biblio.entity.Order;
 
 import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -49,4 +49,18 @@ public class OrderMapper {
                 .paymentMethod(order.getPaymentType().getValue())
                 .build();
     }
+
+    public static OrderCustomerResponse toOrderRequest(Order order) {
+        return new OrderCustomerResponse(
+                order.getId(),
+                order.getNote(),
+                order.getOrderDate(),
+                order.getPaymentType() != null ? order.getPaymentType().name() : null,  // Convert EPaymentType to String
+                order.getStatus() != null ? order.getStatus().name() : null,  // Convert EOrderStatus to String
+                order.getVat(),
+                order.getCustomer() != null ? order.getCustomer().getId() : null,
+                order.getShipping() != null ? order.getShipping().getId() : null
+        );
+    }
+
 }

@@ -60,6 +60,22 @@ public class OrderDAOImpl extends GenericDAOImpl<Order> implements IOrderDAO {
         return super.findSingleByJPQL(jpql.toString(), params);
     }
 
+    @Override
+    public List<Order> findByJPQL(Long customerId) {
+        StringBuilder jpql = new StringBuilder();
+        jpql.append("SELECT o ")
+                .append("FROM Order o ")
+                .append("WHERE o.customer.id = :customerId");
+
+        // Tạo map để chứa các tham số cần gán
+        Map<String, Object> params = new HashMap<>();
+        params.put("customerId", customerId);
+
+        // Truyền cả câu truy vấn và các tham số vào phương thức findAll
+        return super.findByJPQL(jpql.toString(), params);
+    }
+
+
     public static void main(String[] args) {
         OrderDAOImpl dao = new OrderDAOImpl();
         Order order = dao.findOneForDetailsManagement(1L);

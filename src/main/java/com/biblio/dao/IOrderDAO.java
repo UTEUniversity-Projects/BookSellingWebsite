@@ -13,4 +13,7 @@ public interface IOrderDAO {
     List<Order> findAllForManagement();
 
     Order findOneForDetailsManagement(Long id);
+
+
+    List<Order> findByJPQL(Long customerId);
 }

@@ -1,5 +1,6 @@
 package com.biblio.service;
 
+import com.biblio.dto.response.OrderCustomerResponse;
 import com.biblio.dto.response.OrderDetailsManagementResponse;
 import com.biblio.dto.response.OrderManagementResponse;
 
@@ -14,4 +15,6 @@ public interface IOrderService {
     Long countOrderAtTime(LocalDateTime start, LocalDateTime end);
 
     Double venueOrderAtTime(LocalDateTime start, LocalDateTime end);
+
+    List<OrderCustomerResponse> findOrdersByCustomerId(Long customerId);
 }

@@ -1,6 +1,7 @@
 package com.biblio.service.impl;
 
 import com.biblio.dao.IOrderDAO;
+import com.biblio.dto.response.OrderCustomerResponse;
 import com.biblio.dto.response.OrderDetailsManagementResponse;
 import com.biblio.dto.response.OrderManagementResponse;
 import com.biblio.entity.Order;
@@ -12,6 +13,7 @@ import javax.inject.Inject;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class OrderServiceImpl implements IOrderService {
     @Inject
@@ -67,5 +69,25 @@ public class OrderServiceImpl implements IOrderService {
             }
         }
         return venue;
+    }
+
+    @Override
+    public List<OrderCustomerResponse> findOrdersByCustomerId(Long customerId) {
+        // Fetch data from DAO
+        List<Order> orders = orderDAO.findByJPQL(customerId);
+
+        // Convert Order entities to OrderCustomerResponse DTOs
+        return orders.stream()
+                .map(order -> new OrderCustomerResponse(
+                        order.getId(),
+                        order.getNote(),
+                        order.getOrderDate(),
+                        order.getPaymentType() != null ? order.getPaymentType().name() : null, // Convert enum to String
+                        order.getStatus() != null ? order.getStatus().name() : null, // Convert enum to String
+                        order.getVat(),
+                        order.getCustomer() != null ? order.getCustomer().getId() : null,
+                        order.getShipping() != null ? order.getShipping().getId() : null
+                ))
+                .collect(Collectors.toList());
     }
 }
