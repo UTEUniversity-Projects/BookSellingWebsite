@@ -2,6 +2,7 @@ package com.biblio.service;
 
 import com.biblio.dto.response.OrderDetailsManagementResponse;
 import com.biblio.dto.response.OrderManagementResponse;
+import com.biblio.enumeration.EOrderStatus;
 import com.biblio.dto.response.RevenueResponse;
 
 import java.time.LocalDateTime;
@@ -12,8 +13,11 @@ public interface IOrderService {
 
     List<OrderManagementResponse> getAllOrderManagementResponse();
 
+    boolean updateStatus(Long id, EOrderStatus status);
+
     Long countOrderAtTime(LocalDateTime start, LocalDateTime end);
 
     Double revenueOrderAtTime(LocalDateTime start, LocalDateTime end);
+  
     List<RevenueResponse> getListRevenueAtTime(LocalDateTime start, LocalDateTime end);
 }

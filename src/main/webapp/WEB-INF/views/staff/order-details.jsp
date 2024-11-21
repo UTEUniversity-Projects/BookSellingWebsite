@@ -19,7 +19,7 @@
                 <div class="cr-card">
                     <div class="cr-card-header">
                         <div class="cr-card-info">
-                            <p class="cr-card-id">Mã đơn hàng #${order.id}</p>
+                            <p id="order-id" class="cr-card-id" data-order-id="${order.id}">Mã đơn hàng #${order.id}</p>
                             <p class="cr-card-customer">
                                 <i class="ri-account-pin-box-line"></i>
                                 ${order.customerName}
@@ -46,7 +46,7 @@
                             </p>
                         </div>
                         <div>
-                            <p class="cr-card-status cr-card-status--${order.statusStyle}">
+                            <p id="order-status" class="cr-card-status cr-card-status--${order.statusStyle}">
                                 ${order.statusDisplay}
                             </p>
                         </div>
@@ -127,16 +127,64 @@
                     </div>
 
                     <c:if test="${order.status == 'REQUEST_REFUND' || order.status == 'WAITING_CONFIRMATION'}">
-                        <div class="cr-card-content d-grid gap-3 d-md-flex justify-content-md-end">
-                            <button class="btn btn-success" onclick="showSuccessToast();">Xác nhận</button>
-                            <button class="btn btn-outline-danger" onclick="showErrorToast();">Từ chối</button>
+                        <div class="btn-container cr-card-content d-grid gap-3 d-md-flex justify-content-md-end">
+                            <button id="btn-cancel" class="btn btn-outline-danger">Từ chối</button>
+                            <button id="btn-confirm" class="cr-btn-primary">Xác nhận</button>
                         </div>
                     </c:if>
-
 
                 </div>
             </div>
         </div>
     </div>
 </div>
+
+<!-- region Modal -->
+<%--FeedbackModal--%>
+<div class="modal fade" id="cancelOrderModal" tabindex="-1" aria-labelledby="cancelOrderModalLabel" aria-hidden="true">
+    <input class="order-id" value="" hidden>
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="cancelOrderModalLabel">Thông báo tới khách hàng</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form id="feedbackForm">
+                    <div class="mb-3">
+                        <label for="cancelContent" class="form-label">Lý do từ chối</label>
+                        <textarea id="cancelContent" name="cancelContent" class="form-control"
+                                  placeholder="Nhập lý do ..."
+                                  rows="4">
+                        </textarea>
+                        <p id="error-message">Vui lòng nhập lý do!</p>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Hủy</button>
+                <button type="button" class="btn cr-btn-primary" id="sendReason">Gửi</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<%--ConfirmModal--%>
+<div class="modal fade" id="confirmOrderModal" tabindex="-1" aria-labelledby="confirmOrderModalLabel" aria-hidden="true">
+    <input class="order-id" value="" hidden>
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="confirmOrderModalLabel">Bạn có chắc muốn xác nhận đơn hàng này không?</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Hủy</button>
+                <button type="button" class="btn cr-btn-primary" id="confirmOrder">Xác nhận</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- endregion -->
+
 <script src="${pageContext.request.contextPath}/assets/staff/js/order-details.js" defer></script>

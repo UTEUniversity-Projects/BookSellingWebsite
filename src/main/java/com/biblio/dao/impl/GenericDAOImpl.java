@@ -4,6 +4,7 @@ import com.biblio.dao.IGenericDAO;
 import com.biblio.jpaconfig.JpaConfig;
 
 import javax.persistence.EntityManager;
+import javax.persistence.Query;
 import javax.persistence.TypedQuery;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
