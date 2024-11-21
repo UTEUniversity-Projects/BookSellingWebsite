@@ -14,17 +14,16 @@ import java.util.List;
 @ToString
 public class OrderDetailsManagementResponse {
     private Long id;
-    private String customerName;
-    private String phoneNumber;
-    private String address;
-    private String shippingUnit;
-    private double shippingFee;
+    private CustomerResponse customer;
+    private ShippingResponse shipping;
     private String orderDate;
     private String note;
     private List<OrderProductResponse> products;
     private double totalPrice;
+    private double finalPrice;
     private EOrderStatus status;
     private String statusDisplay;
     private String statusStyle;
     private String paymentMethod;
+    private List<PromotionOrderResponse> promotions;
 }

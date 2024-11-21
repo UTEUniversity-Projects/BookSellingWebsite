@@ -4,6 +4,7 @@ import com.biblio.dto.request.PromotionInsertRequest;
 import com.biblio.dto.request.PromotionTargetInsertRequest;
 import com.biblio.dto.request.PromotionTargetUpdateRequest;
 import com.biblio.dto.request.PromotionUpdateRequest;
+import com.biblio.dto.response.PromotionOrderResponse;
 import com.biblio.dto.response.PromotionResponse;
 import com.biblio.dto.response.PromotionGetResponse;
 import com.biblio.dto.response.PromotionTargetResponse;
@@ -11,13 +12,13 @@ import com.biblio.entity.Promotion;
 import com.biblio.entity.PromotionTarget;
 import com.biblio.enumeration.EPromotionStatus;
 
-import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.Date;
 import java.util.List;
 
 public class PromotionMapper {
+    // region Entity to DTO
+
     public static PromotionGetResponse toPromotionGetResponse(List<Promotion> promotions) {
         Promotion promotion = promotions.get(0);
         PromotionGetResponse promotionGetResponse = new PromotionGetResponse();
@@ -56,6 +57,10 @@ public class PromotionMapper {
 
         return promotionRespone;
     }
+
+    // endregion
+
+    // region DTO to Entity
 
     public static Promotion toPromotion(PromotionInsertRequest promotionInsertRequest) {
         Promotion promotion = new Promotion();
@@ -107,6 +112,11 @@ public class PromotionMapper {
         }
         return promotion;
     }
+
+    // endregion
+
+    // region Functions
+
     public static String convertDateTime(String inputDateTime) {
         try {
             // Định dạng đầu vào
@@ -129,4 +139,6 @@ public class PromotionMapper {
             return "Invalid date format";
         }
     }
+
+    // endregion
 }

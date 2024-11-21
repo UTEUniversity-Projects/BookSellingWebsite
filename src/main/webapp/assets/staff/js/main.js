@@ -655,12 +655,19 @@
         // Product table
         var productTable = initializeDataTable("#product-data-table", [[5, 10, 30, 50, 75, -1], [5, 10, 30, 50, 75, "All"],], [0, 7], '<"row justify-content-between top-information"l>rt<"row justify-content-between bottom-information"ip><"clear">');
         if (productTable) setupFilter(productTable);
+
         // Order table
         var orderTable = initializeDataTable("#order-data-table", [[5, 20, 30, 50, 75, -1], [5, 20, 30, 50, 75, "All"],], [], '<"row justify-content-between top-information"l>rt<"row justify-content-between bottom-information"ip><"clear">');
         if (orderTable) setupFilter(orderTable);
+
         // Order products table
         var orderProductTable = initializeDataTable("#order-product-data-table", [[5, 20, 30, 50, 75, -1], [5, 20, 30, 50, 75, "All"],], [0], 'rt<"clear">');
-        if (orderProductTable) setupFilter(orderTable);
+        // if (orderProductTable) setupFilter(orderProductTable);
+
+        // Order return products table
+        var orderReturnProductTable = initializeDataTable("#order-product-return-data-table", [[5, 20, 30, 50, 75, -1], [5, 20, 30, 50, 75, "All"],], [0], 'rt<"clear">');
+        // if (orderReturnProductTable) setupFilter(orderReturnProductTable);
+
         // Support customer table
         var supportCusTable = initializeDataTable("#support-cus-list", [[5, 20, 30, 50, 75, -1], [5, 20, 30, 50, 75, "All"],], [4], '<"row justify-content-between top-information"l>rt<"row justify-content-between bottom-information"ip><"clear">');
         if (supportCusTable) setupFilter(supportCusTable);
