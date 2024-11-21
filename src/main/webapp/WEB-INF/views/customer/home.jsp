@@ -7,7 +7,7 @@
         <div class="swiper-wrapper">
             <div class="swiper-slide">
                 <div class="cr-hero-banner cr-banner-image-two">
-                    <div class="container-xl">
+                    <div class=container-xl">
                         <div class="row">
                             <div class="col-lg-12">
                                 <div class="cr-left-side-contain slider-animation">
@@ -30,7 +30,7 @@
             </div>
             <div class="swiper-slide">
                 <div class="cr-hero-banner cr-banner-image-one">
-                    <div class="container">
+                    <div class=container-xl">
                         <div class="row">
                             <div class="col-lg-12">
                                 <div class="cr-left-side-contain slider-animation">
@@ -58,7 +58,7 @@
 
 <!-- Categories -->
 <section class="section-categories padding-b-100">
-    <div class="container-xl">
+    <div class=container-xl">
         <div class="row mb-minus-24">
             <div class="col-lg-4 col-12 mb-24">
                 <div class="cr-categories">
@@ -473,7 +473,7 @@
 
 <!-- Popular product -->
 <section class="section-popular-product-shape padding-b-100">
-    <div class="container-xl" data-aos="fade-up" data-aos-duration="2000">
+    <div class=container-xl" data-aos="fade-up" data-aos-duration="2000">
         <div class="row">
             <div class="col-lg-12">
                 <div class="mb-30">
@@ -584,7 +584,7 @@
 
 <!-- Product banner -->
 <section class="section-product-banner padding-b-100">
-    <div class="container-xl">
+    <div class=container-xl">
         <div class="row">
             <div class="col-lg-12">
                 <div class="cr-banner-slider swiper-container">
@@ -679,7 +679,7 @@
 
 <!-- Services -->
 <section class="section-services padding-b-100">
-    <div class="container-xl">
+    <div class=container-xl">
         <div class="row">
             <div class="col-lg-12">
                 <div
@@ -752,7 +752,7 @@
 <!-- Deal -->
 <section class="section-deal padding-b-100">
     <div class="bg-banner-deal">
-        <div class="container-xl">
+        <div class=container-xl">
             <div class="row">
                 <div class="col-12">
                     <div class="cr-deal-rightside">
@@ -797,7 +797,7 @@
 
 <!-- Popular product -->
 <section class="section-popular margin-b-100">
-    <div class="container-xl">
+    <div class=container-xl">
         <div class="row">
             <div
                     class="col-xxl-7 col-xl-6 col-lg-6 col-md-12"
@@ -1064,7 +1064,7 @@
 
 <!-- Testimonial -->
 <section class="section-testimonial padding-b-100">
-    <div class="container-xl">
+    <div class=container-xl">
         <div class="row">
             <div class="col-lg-12">
                 <div class="mb-30" data-aos="fade-up" data-aos-duration="2000">
@@ -1180,7 +1180,7 @@
 
 <!-- Blog -->
 <section class="section-blog padding-b-100">
-    <div class="container-xl">
+    <div class=container-xl">
         <div class="row">
             <div class="col-lg-12">
                 <div class="mb-30" data-aos="fade-up" data-aos-duration="2000">
