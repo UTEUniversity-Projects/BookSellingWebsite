@@ -469,28 +469,29 @@ label {
 		box-shadow: none;
 	}
 }
+
 button.btn.btn-outline-success.dropdown-toggle.dropdown-toggle-split {
 	border-radius: $radius;
 }
 .cr-btn-primary,
 .cr-primary-btn {
 	@include ease3;
-	height: 35px;
-	padding: 0 15px;
+	height: 38px;
+	padding: 6px 12px;
 	display: flex;
 	align-items: center;
 	justify-content: center;
-	background-color: $main-primary-color;
+	background-color: $main-fifth-color;
 	color: $fff;
-	font-size: 14px;
-	border: 1px solid $main-primary-color;
+	font-size: 16px;
+	border: 1px solid $main-fifth-color;
 	border-radius: $radius;
 	cursor: pointer;
 
 	&:hover {
 		background-color: $fff;
-		color: $main-primary-color;
-		border: 1px solid $main-primary-color;
+		color: $up-dark;
+		border: 1px solid $up-dark;
 	}
 
 	&:focus {

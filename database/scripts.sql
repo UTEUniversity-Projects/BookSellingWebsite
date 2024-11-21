@@ -3819,7 +3819,7 @@ INSERT INTO `order` (note, order_date, payment_type, status, vat, customer_id, s
 ('Order note 2', '2024-11-11 14:00:00', 'BANKING','CANCELED', 0.1, 2, 2),
 ('Order note 3', '2024-11-20 09:15:00', 'BANKING','WAITING_CONFIRMATION', 0.1, 1, 3),
 ('Order note 4', '2024-11-04 16:45:00', 'BANKING','CANCELED', 0.1, 2, 4),
-('Order note 5', '2024-11-05 11:20:00', 'BANKING','COMPLETE_DELIVERY', 0.1, 1, 5),
+('Order note 5', '2024-11-05 11:20:00', 'BANKING','WAITING_CONFIRMATION', 0.1, 1, 5),
 ('Order note 6', '2024-11-06 15:30:00', 'BANKING','CANCELED', 0.1, 2, 6),
 ('Order note 7', '2024-11-07 08:00:00', 'BANKING','COMPLETE_DELIVERY', 0.1, 1, 7),
 ('Order note 8', '2024-11-08 13:55:00', 'BANKING','CANCELED', 0.1, 2, 8);

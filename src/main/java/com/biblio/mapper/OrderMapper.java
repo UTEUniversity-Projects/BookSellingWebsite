@@ -3,10 +3,10 @@ package com.biblio.mapper;
 import com.biblio.dto.response.OrderDetailsManagementResponse;
 import com.biblio.dto.response.OrderManagementResponse;
 import com.biblio.dto.response.OrderProductResponse;
+import com.biblio.dto.response.RevenueResponse;
 import com.biblio.entity.Order;
 
 import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -47,6 +47,14 @@ public class OrderMapper {
                 .statusStyle(order.getStatus().getStatusStyle())
                 .totalPrice(order.calTotalPrice())
                 .paymentMethod(order.getPaymentType().getValue())
+                .build();
+    }
+
+    public static RevenueResponse toRevenueResponse(Order order) {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm dd-MM-yyyy");
+        return RevenueResponse.builder()
+                .date(order.getOrderDate())
+                .revenue(order.calTotalPrice())
                 .build();
     }
 }

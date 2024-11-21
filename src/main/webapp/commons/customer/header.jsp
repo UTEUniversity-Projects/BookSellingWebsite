@@ -1,6 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <header>
-    <div class="container">
+    <div class="container-xl">
         <div class="row">
             <div class="col-lg-12">
                 <div class="top-header">
