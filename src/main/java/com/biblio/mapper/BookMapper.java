@@ -2,13 +2,18 @@ package com.biblio.mapper;
 
 import com.biblio.dto.request.BookRequest;
 import com.biblio.dto.response.BookResponse;
-import com.biblio.entity.*;
+import com.biblio.dto.response.BookSoldResponse;
+import com.biblio.dto.response.CountBookSoldResponse;
+import com.biblio.entity.Book;
 import com.biblio.enumeration.EBookAgeRecommend;
 import com.biblio.enumeration.EBookCondition;
 import com.biblio.enumeration.EBookFormat;
 import com.biblio.utils.EnumUtil;
 
 import java.time.LocalDateTime;
+import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 public class BookMapper {
     // region EntityToDTO
@@ -59,6 +64,36 @@ public class BookMapper {
                 .recommendedAge(EnumUtil.fromDisplayName(EBookAgeRecommend.class, bookRequest.getRecommendedAge()))
                 .build();
     }
+
+    public static BookSoldResponse toBookSoldResponse(Book book) {
+        return BookSoldResponse.builder()
+                .id(book.getBookTemplate().getId())
+                .title(book.getTitle())
+//                .srcImg(book.getBookTemplate().getMediaFiles().stream()
+//                        .findFirst()
+//                        .map(MediaFile::getStoredCode)
+//                        .orElse(null))
+                .category(book.getSubCategory().getCategory().getName())// or provide a default value like "" if you prefer
+                .build();
+    }
+    public static List<CountBookSoldResponse> toCountBookSoldResponse (List<BookSoldResponse> bookSoldResponses) {
+        Map<String, Long> countMap = bookSoldResponses.stream()
+                .collect(Collectors.groupingBy(book -> book.getId() + "-" + book.getSrcImg() + "-" + book.getTitle() + "-" + book.getCategory(), Collectors.counting()));
+
+        return countMap.entrySet().stream()
+                .map(entry -> {
+                    String[] parts = entry.getKey().split("-");
+                    return new CountBookSoldResponse(
+                            Long.parseLong(parts[0]),
+                            parts[1],
+                            parts[2],
+                            parts[3],
+                            entry.getValue() // Đây là số lượng
+                    );
+                })
+                .collect(Collectors.toList());
+    }
+
 
     // endregion
 }

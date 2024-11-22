@@ -24,7 +24,7 @@ public abstract class ContributorProfile implements Serializable {
     @Column(name = "name", nullable = false)
     protected String name;
 
-    @Column(name = "introduction", nullable = false)
+    @Column(name = "introduction", nullable = false, columnDefinition = "longtext")
     protected String introduction;
 
     @Column(name = "join_at", nullable = false)
