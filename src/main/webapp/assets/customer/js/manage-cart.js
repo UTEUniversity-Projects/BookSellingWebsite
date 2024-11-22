@@ -34,36 +34,45 @@ document.querySelectorAll('.remove-item').forEach((button) => {
 * Tra ve ket qua thanh cong hay that bai
 * */
 
-// $(document).ready(function () {
-//     $(".add-to-cart-btn").on("click", function () {
-//         const bookId = $(this).data("book-id");
-//         const cartId = $(this).data("cart-id");
-//         const quantity = $(this).data("quantity");
-//
-//         $.ajax({
-//             url: `${contextPath}/api/customer/add-cart-item`,
-//             type: "POST",
-//             contentType: "application/json",
-//             data: JSON.stringify({
-//                 bookTemplateId: bookId,
-//                 cartId: cartId,
-//                 quantity: quantity
-//             }),
-//             // success: function (response) {
-//             //     updateCartUI(response);
-//             // },
-//         });
-//     });
-//     // function updateCartUI(response) {
-//     //
-//     //     $(".total-book-price").text(response.totalBookPrice);
-//     //
-//     //     response.cartItems.forEach(cartItem => {
-//     //         const $cartItemElement = $(`#cart-item-${cartItem.bookTemplateId}`);
-//     //         $cartItemElement.find(".quantity").val(cartItem.quantity);
-//     //         $cartItemElement.find(".cart-price .price-value").text(cartItem.sellingPrice);
-//     //         // const totalItemPrice = cartItem.sellingPrice * cartItem.quantity;
-//     //         // $cartItemElement.find(".cart-price").text(`${cartItem.sellingPrice} x ${cartItem.quantity} = ${totalItemPrice}`);
-//     //     });
-//     // }
-// });
+$(document).ready(function () {
+    $(".add-to-cart-btn").on("click", function () {
+        console.log("Context Path: ", contextPath);
+        const bookId = $(this).data("book-id");
+        const cartId = $(this).data("cart-id");
+        const quantity = $(this).data("quantity") || $(this).closest(".modal-body, .cr-product-card").find(".quantity").val();
+
+        console.log({
+            bookId: bookId,
+            cartId: cartId,
+            quantity: quantity
+        });
+        $.ajax({
+            url: `${contextPath}/api/customer/add-cart-item`,
+            type: "POST",
+            contentType: "application/json",
+            data: JSON.stringify({
+                bookTemplateId: bookId,
+                cartId: cartId,
+                quantity: quantity
+            }),
+            success: function (response) {
+                console.log(response);
+            },
+            error: function (xhr, status, error) {
+                console.error("Error: ", xhr.responseText);
+            }
+        });
+    });
+    // function updateCartUI(response) {
+    //
+    //     $(".total-book-price").text(response.totalBookPrice);
+    //
+    //     response.cartItems.forEach(cartItem => {
+    //         const $cartItemElement = $(`#cart-item-${cartItem.bookTemplateId}`);
+    //         $cartItemElement.find(".quantity").val(cartItem.quantity);
+    //         $cartItemElement.find(".cart-price .price-value").text(cartItem.sellingPrice);
+    //         // const totalItemPrice = cartItem.sellingPrice * cartItem.quantity;
+    //         // $cartItemElement.find(".cart-price").text(`${cartItem.sellingPrice} x ${cartItem.quantity} = ${totalItemPrice}`);
+    //     });
+    // }
+});

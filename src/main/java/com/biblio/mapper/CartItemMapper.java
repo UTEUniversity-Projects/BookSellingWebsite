@@ -15,6 +15,7 @@ public class CartItemMapper {
                 .imageUrl(cartItem.getBookTemplate().getMediaFiles().iterator().next().getStoredCode().replaceAll("image\\d+\\.jpg", "image1.jpg"))
                 .sellingPrice(book.getSellingPrice())
                 .quantity(cartItem.getQuantity())
+                .subTotal(cartItem.calculateSubTotal())
                 .build();
     }
 }

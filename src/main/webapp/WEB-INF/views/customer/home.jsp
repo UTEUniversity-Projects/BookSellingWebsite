@@ -525,7 +525,7 @@
             <div class="col-xl-9 col-lg-8 col-12 mb-24">
                 <div class="row mb-minus-24">
                     <c:forEach var="book" items="${books}">
-                        <div data-book-id="${book.id}"
+                        <div
                              class="mix col-xxl-3 col-xl-4 col-6 cr-product-box mb-24"
                         >
                             <div class="cr-product-card">
@@ -543,7 +543,7 @@
                                             <i class="ri-eye-line"></i>
                                         </a>
                                     </div>
-                                    <a class="cr-shopping-bag add-to-cart-btn" href="javascript:void(0)" data-book-id="${book.id}" data-cart-id="${cart.id}" data-quantity="1">
+                                    <a class="cr-shopping-bag add-to-cart-btn" href="javascript:void(0)" data-cart-id="${cart.id}" data-book-id="${book.id}" data-quantity="1">
                                         <i class="ri-shopping-bag-line"></i>
                                     </a>
                                 </div>
@@ -1315,5 +1315,3 @@
         </div>
     </div>
 </section>
-
-<script src="${pageContext.request.contextPath}/assets/customer/js/book-list.js" defer></script>

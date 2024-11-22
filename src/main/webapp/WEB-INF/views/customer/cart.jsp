@@ -1,8 +1,9 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
 <!-- Cart -->
 <section class="section-cart padding-t-100">
-    <div class="container">
+    <div class="container-xl">
         <div class="row d-none">
             <div class="col-lg-12">
                 <div
@@ -46,122 +47,46 @@
                                     </tr>
                                     </thead>
                                     <tbody>
-                                    <tr>
-                                        <td class="cr-cart-checkbox">
-                                            <input type="checkbox" class="product-checkbox" />
-                                        </td>
-                                        <td class="cr-cart-name">
-                                            <a href="javascript:void(0)">
-                                                <img
-                                                        src="${pageContext.request.contextPath}/assets/customer/img/product/1.jpg"
-                                                        alt="product-1"
-                                                        class="cr-cart-img"
-                                                />
-                                                Organic Lemon
-                                            </a>
-                                        </td>
-                                        <td class="cr-cart-price">
-                                            <span class="amount" data-price="56">$56.00</span>
-                                        </td>
-                                        <td class="cr-cart-qty">
-                                            <div class="cart-qty-plus-minus">
-                                                <button type="button" class="minus">-</button>
-
-                                                <input
-                                                        type="text"
-                                                        placeholder="."
-                                                        value="1"
-                                                        minlength="1"
-                                                        maxlength="20"
-                                                        class="quantity"
-                                                />
-                                                <button type="button" class="plus">+</button>
-                                            </div>
-                                        </td>
-                                        <td class="cr-cart-subtotal">$56.00</td>
-                                        <td class="cr-cart-remove">
-                                            <a href="javascript:void(0)" class="remove-item">
-                                                <i class="ri-delete-bin-line"></i>
-                                            </a>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td class="cr-cart-checkbox">
-                                            <input type="checkbox" class="product-checkbox" />
-                                        </td>
-                                        <td class="cr-cart-name">
-                                            <a href="javascript:void(0)">
-                                                <img
-                                                        src="${pageContext.request.contextPath}/assets/customer/img/product/2.jpg"
-                                                        alt="product-1"
-                                                        class="cr-cart-img"
-                                                />
-                                                Apple Juice
-                                            </a>
-                                        </td>
-                                        <td class="cr-cart-price">
-                                            <span class="amount" data-price="75">$75.00</span>
-                                        </td>
-                                        <td class="cr-cart-qty">
-                                            <div class="cart-qty-plus-minus">
-                                                <button type="button" class="minus">-</button>
-                                                <input
-                                                        type="text"
-                                                        placeholder="."
-                                                        value="1"
-                                                        minlength="1"
-                                                        maxlength="20"
-                                                        class="quantity"
-                                                />
-                                                <button type="button" class="plus">+</button>
-                                            </div>
-                                        </td>
-                                        <td class="cr-cart-subtotal">$75.00</td>
-                                        <td class="cr-cart-remove">
-                                            <a href="javascript:void(0)" class="remove-item">
-                                                <i class="ri-delete-bin-line"></i>
-                                            </a>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td class="cr-cart-checkbox">
-                                            <input type="checkbox" class="product-checkbox" />
-                                        </td>
-                                        <td class="cr-cart-name">
-                                            <a href="javascript:void(0)">
-                                                <img
-                                                        src="${pageContext.request.contextPath}/assets/customer/img/product/3.jpg"
-                                                        alt="product-1"
-                                                        class="cr-cart-img"
-                                                />
-                                                Watermelon 5kg Pack
-                                            </a>
-                                        </td>
-                                        <td class="cr-cart-price">
-                                            <span class="amount" data-price="48">$48.00</span>
-                                        </td>
-                                        <td class="cr-cart-qty">
-                                            <div class="cart-qty-plus-minus">
-                                                <button type="button" class="minus">-</button>
-                                                <input
-                                                        type="text"
-                                                        placeholder="."
-                                                        value="1"
-                                                        minlength="1"
-                                                        maxlength="20"
-                                                        class="quantity"
-                                                />
-                                                <button type="button" class="plus">+</button>
-                                            </div>
-                                        </td>
-                                        <td class="cr-cart-subtotal">$48.00</td>
-                                        <td class="cr-cart-remove">
-                                            <a href="javascript:void(0)" class="remove-item">
-                                                <i class="ri-delete-bin-line"></i>
-                                            </a>
-                                        </td>
-                                    </tr>
-
+                                        <c:forEach var="cartItem" items="${cart.cartItems}">
+                                            <tr>
+                                                <td class="cr-cart-checkbox">
+                                                    <input type="checkbox" class="product-checkbox" />
+                                                </td>
+                                                <td class="cr-cart-name">
+                                                    <a href="${pageContext.request.contextPath}/book?id=${cartItem.bookId}">
+                                                        <img
+                                                                src="${pageContext.request.contextPath}${cartItem.imageUrl}"
+                                                                alt="product-1"
+                                                                class="cr-cart-img"
+                                                        />
+                                                        ${cartItem.title}
+                                                    </a>
+                                                </td>
+                                                <td class="cr-cart-price">
+                                                    <span class="amount price-value" data-price="56">${cartItem.sellingPrice}</span>
+                                                </td>
+                                                <td class="cr-cart-qty">
+                                                    <div class="cart-qty-plus-minus">
+                                                        <button type="button" class="minus">-</button>
+                                                        <input
+                                                                type="text"
+                                                                placeholder="."
+                                                                value="${cartItem.quantity}"
+                                                                minlength="1"
+                                                                maxlength="20"
+                                                                class="quantity"
+                                                        />
+                                                        <button type="button" class="plus">+</button>
+                                                    </div>
+                                                </td>
+                                                <td class="cr-cart-subtotal price-value">${cartItem.subTotal}</td>
+                                                <td class="cr-cart-remove">
+                                                    <a href="javascript:void(0)" class="remove-item">
+                                                        <i class="ri-delete-bin-line"></i>
+                                                    </a>
+                                                </td>
+                                            </tr>
+                                        </c:forEach>
                                     </tbody>
                                 </table>
                             </div>
@@ -171,7 +96,7 @@
                                         <tbody>
                                         <tr>
                                             <td>Tiền sách :</td>
-                                            <td>$300.00</td>
+                                            <td class="price-value">${cart.totalBookPrice}</td>
                                         </tr>
                                         <tr>
                                             <td>Thuế (20%) :</td>
