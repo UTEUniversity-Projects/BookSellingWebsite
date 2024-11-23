@@ -1,14 +1,20 @@
 package com.biblio.mapper;
 
+import com.biblio.dao.impl.BookTemplateDAOImpl;
 import com.biblio.dto.request.BookRequest;
 import com.biblio.dto.response.BookResponse;
-import com.biblio.entity.*;
+import com.biblio.dto.response.BookSoldResponse;
+import com.biblio.dto.response.CountBookSoldResponse;
+import com.biblio.entity.Book;
 import com.biblio.enumeration.EBookAgeRecommend;
 import com.biblio.enumeration.EBookCondition;
 import com.biblio.enumeration.EBookFormat;
 import com.biblio.utils.EnumUtil;
 
 import java.time.LocalDateTime;
+import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 public class BookMapper {
     // region EntityToDTO
@@ -60,5 +66,36 @@ public class BookMapper {
                 .build();
     }
 
+    public static BookSoldResponse toBookSoldResponse(Book book) {
+        BookTemplateDAOImpl bookTemplateDAO = new BookTemplateDAOImpl();
+        return BookSoldResponse.builder()
+                .id(book.getBookTemplate().getId())
+                .title(book.getTitle())
+                .srcImg(book.getBookTemplate()
+                        .getMediaFiles()
+                        .get(0)
+                        .getStoredCode())
+                .category(book.getSubCategory().getCategory().getName())
+                .countInStock(bookTemplateDAO.countInstockById(book.getBookTemplate().getId()))// or provide a default value like "" if you prefer
+                .build();
+    }
+    public static List<CountBookSoldResponse> toCountBookSoldResponse (List<BookSoldResponse> bookSoldResponses) {
+        Map<String, Long> countMap = bookSoldResponses.stream()
+                .collect(Collectors.groupingBy(book -> book.getId() + "-" + book.getSrcImg() + "-" + book.getTitle() + "-" + book.getCategory() + "-" + book.getCountInStock(), Collectors.counting()));
+
+        return countMap.entrySet().stream()
+                .map(entry -> {
+                    String[] parts = entry.getKey().split("-");
+                    return new CountBookSoldResponse(
+                            Long.parseLong(parts[0]),      // id
+                            parts[1],                     // srcImg
+                            parts[2],                     // title
+                            parts[3],                     // category
+                            Long.parseLong(parts[4]),     // countInStock
+                            entry.getValue()              // count
+                    );
+                })
+                .collect(Collectors.toList());
+    }
     // endregion
 }

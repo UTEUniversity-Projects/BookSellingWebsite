@@ -13,6 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.Serial;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.time.format.DateTimeParseException;
 import java.util.HashMap;
 import java.util.Map;
@@ -61,6 +62,8 @@ public class GetSummaryReportAPI extends HttpServlet {
 
             LocalDateTime startTime = LocalDateTime.parse(startParam);
             LocalDateTime endTime = LocalDateTime.parse(endParam);
+            startTime = startTime.toLocalDate().atStartOfDay();
+            endTime = endTime.toLocalDate().atTime(LocalTime.MAX);
 
             // Validate date range
             if (startTime.isAfter(endTime)) {

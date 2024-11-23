@@ -18,4 +18,8 @@ public interface IBookTemplateDAO {
 
     List<BookTemplate> findByTitle(String title);
 
+    Long countSoldById(Long id);
+
+    Long countInstockById(Long id);
+
 }
