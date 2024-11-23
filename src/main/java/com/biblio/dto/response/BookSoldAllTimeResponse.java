@@ -7,13 +7,12 @@ import lombok.*;
 @Getter
 @Setter
 @Builder
-public class CountBookSoldResponse {
+public class BookSoldAllTimeResponse {
     private long id;
     private String srcImg;
     private String title;
     private String category;
-    private Long countInStock;
     private Long countSold;
-
+    private Long countInStock;
 }
 

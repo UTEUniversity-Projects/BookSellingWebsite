@@ -3,6 +3,8 @@ package com.biblio.dao.impl;
 import com.biblio.dao.IBookTemplateDAO;
 import com.biblio.entity.Book;
 import com.biblio.entity.BookTemplate;
+import com.biblio.enumeration.EBookMetadataStatus;
+
 import java.util.*;
 
 public class BookTemplateDAOImpl extends GenericDAOImpl<BookTemplate> implements IBookTemplateDAO {
@@ -92,10 +94,39 @@ public class BookTemplateDAOImpl extends GenericDAOImpl<BookTemplate> implements
         return super.findByJPQL(jpql, params);
     }
 
+    @Override
+    public Long countSoldById(Long bookTemplateId) {
+        String jpql = "SELECT COUNT(b) FROM Book b " +
+                "JOIN b.bookTemplate bt " +
+                "WHERE bt.id = :bookTemplateId " +
+                "AND b.bookMetadata.status = :status";
+
+        Map<String, Object> params = new HashMap<>();
+        params.put("bookTemplateId", bookTemplateId);
+        params.put("status", EBookMetadataStatus.SOLD);
+
+        return super.countByJPQL(jpql, params);
+    }
+
+    @Override
+    public Long countInstockById(Long bookTemplateId) {
+        String jpql = "SELECT COUNT(b) FROM Book b " +
+                "JOIN b.bookTemplate bt " +
+                "WHERE bt.id = :bookTemplateId " +
+                "AND b.bookMetadata.status = :status";
+
+        Map<String, Object> params = new HashMap<>();
+        params.put("bookTemplateId", bookTemplateId);
+        params.put("status", EBookMetadataStatus.IN_STOCK);
+
+        return super.countByJPQL(jpql, params);
+    }
+
+
 
     public static void main(String[] args) {
         BookTemplateDAOImpl dao = new BookTemplateDAOImpl();
-        System.out.println(dao.findOneForDetails(1L).getBooks().size());
+        System.out.println(dao.countInstockById(33L));
     }
 
 }
