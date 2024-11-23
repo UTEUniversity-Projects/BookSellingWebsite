@@ -7,7 +7,8 @@ import lombok.*;
 @Getter
 @Setter
 @Builder
-@ToString
 public class SearchBookRequest {
     String title;
+    Long categoryId;
+    String sortBy;
 }

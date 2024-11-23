@@ -1,5 +1,6 @@
 package com.biblio.service;
 
+import com.biblio.dto.request.SearchBookRequest;
 import com.biblio.dto.response.BookCardResponse;
 import com.biblio.dto.response.BookDetailsResponse;
 import com.biblio.dto.response.BookManagementResponse;
@@ -17,6 +18,8 @@ public interface IBookTemplateService {
 
     List<BookTemplatePromotionResponse> getAllBookBookTemplatePromotionResponse();
 
-    List<BookCardResponse> getBookTemplateByTitle(String title);
+    List<BookCardResponse> getBookTemplateByCriteria(SearchBookRequest request);
+
+    long getBookTemplateQuantityByCriteria(SearchBookRequest request);
 
 }

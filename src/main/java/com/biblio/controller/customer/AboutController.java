@@ -29,7 +29,7 @@ public class AboutController extends HttpServlet {
      */
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         // TODO Auto-generated method stub
-        request.setAttribute("breadcumb", "Giới thiệu");
+        request.setAttribute("breadcrumb", "Giới thiệu");
         request.getRequestDispatcher("/views/customer/about.jsp").forward(request, response);
     }
 

@@ -1,6 +1,7 @@
 package com.biblio.service.impl;
 
 import com.biblio.dao.IBookTemplateDAO;
+import com.biblio.dto.request.SearchBookRequest;
 import com.biblio.dto.response.BookCardResponse;
 import com.biblio.dto.response.BookDetailsResponse;
 import com.biblio.dto.response.BookManagementResponse;
@@ -55,14 +56,20 @@ public class BookTemplateServiceImpl implements IBookTemplateService {
     }
 
     @Override
-    public List<BookCardResponse> getBookTemplateByTitle(String title) {
-        List<BookTemplate> bookTemplates = bookTemplateDAO.findByTitle(title);
+    public List<BookCardResponse> getBookTemplateByCriteria(SearchBookRequest request) {
+
+        List<BookTemplate> bookTemplates = bookTemplateDAO.findByCriteria(request.getTitle().trim(), request.getCategoryId(), request.getSortBy(), 1);
         List<BookCardResponse> bookCardResponseList = new ArrayList<>();
-        for (BookTemplate bookTemplate : bookTemplates) {
-            bookCardResponseList.add(BookTemplateMapper.toBookCardResponse(bookTemplate));
+        for (BookTemplate bt : bookTemplates) {
+            bookCardResponseList.add(BookTemplateMapper.toBookCardResponse(bt));
         }
         return bookCardResponseList;
 
+    }
+
+    @Override
+    public long getBookTemplateQuantityByCriteria(SearchBookRequest request) {
+        return bookTemplateDAO.countByCriteria(request.getTitle(), request.getCategoryId(), request.getSortBy());
     }
 
 }

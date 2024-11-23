@@ -1,8 +1,11 @@
 package com.biblio.dao.impl;
 
 import com.biblio.dao.ICategoryDAO;
+import com.biblio.dto.response.CategoryBookCountResponse;
 import com.biblio.entity.Category;
+import com.biblio.jpaconfig.JpaConfig;
 
+import javax.persistence.TypedQuery;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -45,5 +48,30 @@ public class CategoryDAOImpl extends GenericDAOImpl<Category> implements ICatego
     public void deleteCategory(Long id) {
         super.delete(id);
     }
-  
+
+    public List<CategoryBookCountResponse> countBookPerCategory() {
+        String jpql = "SELECT NEW com.biblio.dto.response.CategoryBookCountResponse(" +
+                "c.id, c.name, COUNT(DISTINCT bt.id))" +
+                "FROM Category c " +
+                "LEFT JOIN c.subCategories sc " +
+                "LEFT JOIN sc.books b " +
+                "LEFT JOIN b.bookTemplate bt " +
+                "GROUP BY c.id, c.name";
+
+        TypedQuery<CategoryBookCountResponse> query = JpaConfig.getEntityManager().createQuery(jpql, CategoryBookCountResponse.class);
+        return query.getResultList();
+    }
+
+    @Override
+    public long countTotalDistinctBooks() {
+        String jpql = "SELECT COUNT(DISTINCT b.title) FROM Book b";
+        return super.countByJPQL(jpql);
+    }
+
+    public static void main(String[] args) {
+        CategoryDAOImpl dao = new CategoryDAOImpl();
+
+        System.out.println(dao.countTotalDistinctBooks());
+    }
+
 }

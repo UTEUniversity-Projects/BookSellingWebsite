@@ -32,7 +32,7 @@ public class CartController extends HttpServlet {
 
 
 
-        request.setAttribute("breadcumb", "Giỏ hàng");
+        request.setAttribute("breadcrumb", "Giỏ hàng");
         request.getRequestDispatcher("/views/customer/cart.jsp").forward(request, response);
     }
 

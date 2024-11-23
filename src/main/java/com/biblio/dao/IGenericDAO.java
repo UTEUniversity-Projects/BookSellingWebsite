@@ -29,6 +29,8 @@ public interface IGenericDAO<T> {
 
     long count();
 
+    long countByJPQL(String jpql);
+
     long countByJPQL(String jpql, Map<String, Object> params);
 
 }

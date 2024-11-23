@@ -29,7 +29,7 @@ public class FaqController extends HttpServlet {
      */
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         // TODO Auto-generated method stub
-        request.setAttribute("breadcumb", "Thắc mắc và giải đáp");
+        request.setAttribute("breadcrumb", "Thắc mắc và giải đáp");
         request.getRequestDispatcher("/views/customer/faq.jsp").forward(request, response);
     }
 

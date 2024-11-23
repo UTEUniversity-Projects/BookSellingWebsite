@@ -2,11 +2,10 @@ package com.biblio.controller.customer;
 
 import com.biblio.dto.request.SearchBookRequest;
 import com.biblio.dto.response.BookCardResponse;
-import com.biblio.dto.response.CategorySidebarResponse;
+import com.biblio.dto.response.CategoryBookCountResponse;
+import com.biblio.dto.response.CategoryTotalBookResponse;
 import com.biblio.service.IBookTemplateService;
 import com.biblio.service.ICategoryService;
-import com.biblio.utils.HttpUtil;
-import com.fasterxml.jackson.databind.ObjectMapper;
 
 import javax.inject.Inject;
 import javax.servlet.ServletException;
@@ -15,16 +14,13 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.io.Serial;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 /**
  * Servlet implementation class SearchController
  */
-@WebServlet("/search")
+@WebServlet(urlPatterns = {"/search", "/book-list"})
 public class SearchController extends HttpServlet {
     @Serial
     private static final long serialVersionUID = 1L;
@@ -48,13 +44,36 @@ public class SearchController extends HttpServlet {
      */
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         // TODO Auto-generated method stub
-        List<CategorySidebarResponse> categories = categoryService.getAllCategorySidebarResponse();
-        List<BookCardResponse> books = bookTemplateService.getAllBookCardResponse();
+        String title = request.getParameter("title");
 
-        System.out.println("GET");
+        SearchBookRequest searchBookRequest = SearchBookRequest.builder().title(title).build();
+
+        List<CategoryBookCountResponse> categories = categoryService.getAllCategoryBookCount();
+        List<BookCardResponse> books = bookTemplateService.getBookTemplateByCriteria(searchBookRequest);
+        long bookCount = bookTemplateService.getBookTemplateQuantityByCriteria(searchBookRequest);
+        CategoryTotalBookResponse categoryTotalBookResponse = categoryService.getAllBookCount();
+
+        int index = 1;
+        int perPage = 8;
+        int endPage = (int) (bookCount / perPage);
+        int leftPage = (int) (bookCount % perPage);
+
+        System.out.println("endPage: " + endPage);
+        System.out.println("leftPage: " + leftPage);
+
+        if (leftPage > 0)
+            endPage++;
+
+        request.setAttribute("index", index);
+        request.setAttribute("endPage", endPage);
+
         request.setAttribute("categories", categories);
         request.setAttribute("books", books);
-        request.setAttribute("breadcumb", "Tìm kiếm sách");
+        request.setAttribute("breadcrumb", "Tìm kiếm sách");
+        request.setAttribute("title", title);
+        request.setAttribute("searchResult", bookCount);
+        request.setAttribute("totalBook", categoryTotalBookResponse.getTotalBook());
+
         request.getRequestDispatcher("/views/customer/search.jsp").forward(request, response);
     }
 
@@ -63,7 +82,6 @@ public class SearchController extends HttpServlet {
      */
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         // TODO Auto-generated method stub
-        System.out.println("POST");
     }
 
 }

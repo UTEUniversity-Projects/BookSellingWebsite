@@ -89,6 +89,14 @@ public class Book implements Serializable {
     @JoinColumn(name = "sub_category_id", nullable = false)
     private SubCategory subCategory;
 
+    @ManyToOne
+    @JoinColumn(name = "return_item_id")
+    private ReturnItem returnItem;
+
+    @ManyToOne
+    @JoinColumn(name = "order_item_id")
+    private OrderItem orderItem;
+
     // endregion
 
     // region Methods

@@ -56,20 +56,8 @@ public class Order implements Serializable {
     @JoinColumn(name = "shipping_id", referencedColumnName = "id")
     private Shipping shipping;
 
-//    @OneToOne(mappedBy = "order")
-//    private BankTransfer bankTransfer;
-//
-//    @OneToOne(mappedBy = "order")
-//    private CreditCard creditCard;
-//
-//    @OneToOne(mappedBy = "order")
-//    private Cash cash;
-//
-//    @OneToOne(mappedBy = "order")
-//    private EWallet wallet;
-
     @OneToMany(mappedBy = "order", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
-    private Set<LineItem> lineItems = new HashSet<>();
+    private Set<OrderItem> orderItems = new HashSet<>();
 
     @ManyToMany(cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH}, fetch = FetchType.LAZY)
     @JoinTable(name = "order_promotion",
@@ -77,13 +65,16 @@ public class Order implements Serializable {
             inverseJoinColumns = @JoinColumn(name = "promotion_id", nullable = false))
     private Set<Promotion> promotions = new HashSet<>();
 
+    @OneToMany(mappedBy = "order", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    private Set<BookReturn> bookReturns = new HashSet<>();
+
     // endregion
 
     // region Methods
 
     public double calTotalPrice() {
         double totalPrice = 0.0;
-        for (LineItem item : lineItems) {
+        for (OrderItem item : orderItems) {
             totalPrice += item.calPriceItem();
         }
         BigDecimal roundedTotal = new BigDecimal(totalPrice).setScale(2, RoundingMode.HALF_UP);
