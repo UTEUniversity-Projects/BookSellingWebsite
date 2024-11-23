@@ -1,5 +1,6 @@
 package com.biblio.mapper;
 
+import com.biblio.dao.impl.BookTemplateDAOImpl;
 import com.biblio.dto.request.BookRequest;
 import com.biblio.dto.response.BookResponse;
 import com.biblio.dto.response.BookSoldResponse;
@@ -66,34 +67,35 @@ public class BookMapper {
     }
 
     public static BookSoldResponse toBookSoldResponse(Book book) {
+        BookTemplateDAOImpl bookTemplateDAO = new BookTemplateDAOImpl();
         return BookSoldResponse.builder()
                 .id(book.getBookTemplate().getId())
                 .title(book.getTitle())
-//                .srcImg(book.getBookTemplate().getMediaFiles().stream()
-//                        .findFirst()
-//                        .map(MediaFile::getStoredCode)
-//                        .orElse(null))
-                .category(book.getSubCategory().getCategory().getName())// or provide a default value like "" if you prefer
+                .srcImg(book.getBookTemplate()
+                        .getMediaFiles()
+                        .get(0)
+                        .getStoredCode())
+                .category(book.getSubCategory().getCategory().getName())
+                .countInStock(bookTemplateDAO.countInstockById(book.getBookTemplate().getId()))// or provide a default value like "" if you prefer
                 .build();
     }
     public static List<CountBookSoldResponse> toCountBookSoldResponse (List<BookSoldResponse> bookSoldResponses) {
         Map<String, Long> countMap = bookSoldResponses.stream()
-                .collect(Collectors.groupingBy(book -> book.getId() + "-" + book.getSrcImg() + "-" + book.getTitle() + "-" + book.getCategory(), Collectors.counting()));
+                .collect(Collectors.groupingBy(book -> book.getId() + "-" + book.getSrcImg() + "-" + book.getTitle() + "-" + book.getCategory() + "-" + book.getCountInStock(), Collectors.counting()));
 
         return countMap.entrySet().stream()
                 .map(entry -> {
                     String[] parts = entry.getKey().split("-");
                     return new CountBookSoldResponse(
-                            Long.parseLong(parts[0]),
-                            parts[1],
-                            parts[2],
-                            parts[3],
-                            entry.getValue() // Đây là số lượng
+                            Long.parseLong(parts[0]),      // id
+                            parts[1],                     // srcImg
+                            parts[2],                     // title
+                            parts[3],                     // category
+                            Long.parseLong(parts[4]),     // countInStock
+                            entry.getValue()              // count
                     );
                 })
                 .collect(Collectors.toList());
     }
-
-
     // endregion
 }

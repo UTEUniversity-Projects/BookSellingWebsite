@@ -147,21 +147,23 @@ public class OrderServiceImpl implements IOrderService {
         List<BookSoldResponse> ListBookSold = new ArrayList<>();
         List<Order> list = orderDAO.findAllForManagement();
         for (Order order : list) {
-            LocalDateTime orderDate = order.getOrderDate();
+            Order orderTmp = orderDAO.findOneForDetailsManagement(order.getId());
+            LocalDateTime orderDate = orderTmp.getOrderDate();
             if ((orderDate.isEqual(start) || orderDate.isAfter(start)) &&
                     (orderDate.isEqual(end) || orderDate.isBefore(end)) &&
-                    EOrderStatus.COMPLETE_DELIVERY.equals(order.getStatus())) {
-                for (LineItem lineItem : order.getLineItems()) {
+                    EOrderStatus.COMPLETE_DELIVERY.equals(orderTmp.getStatus())) {
+                for (LineItem lineItem : orderTmp.getLineItems()) {
                     for (Book book : lineItem.getBooks()) {
                         ListBookSold.add(BookMapper.toBookSoldResponse(book));
                     }
                 }
             }
         }
+        List<CountBookSoldResponse> countBookSoldResponse = BookMapper.toCountBookSoldResponse(ListBookSold);
+        countBookSoldResponse.sort(Comparator.comparingLong(CountBookSoldResponse::getCountSold).reversed());
+        return countBookSoldResponse;
 
-        return BookMapper.toCountBookSoldResponse(ListBookSold);
     }
-
 
     @Override
     public Order findOrderById(Long orderId) {

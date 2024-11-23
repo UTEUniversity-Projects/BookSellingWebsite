@@ -7,7 +7,6 @@ import com.biblio.entity.BookTemplate;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.stream.Collectors;
 
 public class BookDAOImpl extends GenericDAOImpl<Book> implements IBookDAO {
 
@@ -58,8 +57,9 @@ public class BookDAOImpl extends GenericDAOImpl<Book> implements IBookDAO {
 
 
     public static void main(String[] args) {
-//        BookDAOImpl dao = new BookDAOImpl();
-//        List<Book> books = dao.findAll();
+        BookDAOImpl dao = new BookDAOImpl();
+        List<Book> books = dao.findAll();
+        System.out.println(books);
 //
 //        Map<BookTemplate, Long> countByTemplate = books.stream()
 //                .collect(Collectors.groupingBy(Book::getBookTemplate, Collectors.counting()));

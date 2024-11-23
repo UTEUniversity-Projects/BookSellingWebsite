@@ -1,7 +1,7 @@
 package com.biblio.apis.owner;
 
-import com.biblio.dto.response.CountBookSoldResponse;
-import com.biblio.service.IOrderService;
+import com.biblio.dto.response.BookSoldAllTimeResponse;
+import com.biblio.service.IBookTemplateService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import javax.inject.Inject;
@@ -12,8 +12,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.Serial;
-import java.time.LocalDateTime;
-import java.time.LocalTime;
 import java.time.format.DateTimeParseException;
 import java.util.HashMap;
 import java.util.List;
@@ -22,18 +20,18 @@ import java.util.Map;
 /**
  * Servlet implementation class GetCategoriesAPI
  */
-@WebServlet("/owner/ecommerce/count-book-sold-at-time")
-public class CountBookSoldAtTimeAPI extends HttpServlet {
+@WebServlet("/owner/ecommerce/count-book-sold-all-time")
+public class CountBookSoldAllTimeAPI extends HttpServlet {
     @Serial
     private static final long serialVersionUID = 1L;
 
     @Inject
-    IOrderService orderService;
+    IBookTemplateService bookTemplateService;
 
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public CountBookSoldAtTimeAPI() {
+    public CountBookSoldAllTimeAPI() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -47,44 +45,25 @@ public class CountBookSoldAtTimeAPI extends HttpServlet {
         response.setCharacterEncoding("UTF-8");
 
         try {
-            // Parse request parameters
-            String startParam = request.getParameter("startTime");
-            String endParam = request.getParameter("endTime");
 
-            // Validate and convert to LocalDateTime
-            if (startParam == null || endParam == null) {
-                response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
-                response.getWriter().write("{\"error\":\"Missing required parameters: startTime or endTime\"}");
-                return;
-            }
+            List<BookSoldAllTimeResponse> listCountBookSold = bookTemplateService.getListCountBookSoldAllTime();
 
-            LocalDateTime startTime = LocalDateTime.parse(startParam);
-            LocalDateTime endTime = LocalDateTime.parse(endParam);
-            startTime = startTime.toLocalDate().atStartOfDay();
-            endTime = endTime.toLocalDate().atTime(LocalTime.MAX);
-
-            // Validate date range
-            if (startTime.isAfter(endTime)) {
-                response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
-                response.getWriter().write("{\"error\":\"startTime must be before or equal to endTime\"}");
-                return;
-            }
-
-            List<CountBookSoldResponse> listCountBookSold = orderService.getListCountBookSoldAtTime(startTime, endTime);
-
-            List<Map<String, Object>> countBookSoldJsonList = listCountBookSold.stream()
+            List<Map<String, Object>> countBookSoldAllTimeJson = listCountBookSold.stream()
                     .map(item -> {
                         Map<String, Object> map = new HashMap<>();
                         map.put("id", item.getId());
+                        map.put("img", item.getSrcImg());
                         map.put("title", item.getTitle());
-                        map.put("count", item.getCountSold());
+                        map.put("category", item.getCategory());
+                        map.put("countSold", item.getCountSold());
+                        map.put("countInStock", item.getCountInStock());
                         return map;
                     })
                     .toList();
 
             // Create a map to represent the JSON response
             Map<String, Object> responseMap = new HashMap<>();
-            responseMap.put("countBookSoldList", countBookSoldJsonList);
+            responseMap.put("countBookSoldAllTime", countBookSoldAllTimeJson);
 
             // Serialize and send the response
             ObjectMapper objectMapper = new ObjectMapper();

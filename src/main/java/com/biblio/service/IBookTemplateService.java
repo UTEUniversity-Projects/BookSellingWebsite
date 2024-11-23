@@ -1,9 +1,6 @@
 package com.biblio.service;
 
-import com.biblio.dto.response.BookCardResponse;
-import com.biblio.dto.response.BookDetailsResponse;
-import com.biblio.dto.response.BookManagementResponse;
-import com.biblio.dto.response.BookTemplatePromotionResponse;
+import com.biblio.dto.response.*;
 
 import java.util.List;
 
@@ -18,5 +15,6 @@ public interface IBookTemplateService {
     List<BookTemplatePromotionResponse> getAllBookBookTemplatePromotionResponse();
 
     List<BookCardResponse> getBookTemplateByTitle(String title);
+    List<BookSoldAllTimeResponse> getListCountBookSoldAllTime();
 
 }
