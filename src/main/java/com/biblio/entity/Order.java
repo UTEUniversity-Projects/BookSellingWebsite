@@ -56,6 +56,21 @@ public class Order implements Serializable {
     @JoinColumn(name = "shipping_id", referencedColumnName = "id")
     private Shipping shipping;
 
+//    @OneToOne(mappedBy = "order")
+//    private BankTransfer bankTransfer;
+//
+//    @OneToOne(mappedBy = "order")
+//    private CreditCard creditCard;
+//
+//    @OneToOne(mappedBy = "order")
+//    private Cash cash;
+//
+//    @OneToOne(mappedBy = "order")
+//    private EWallet wallet;
+
+    @OneToOne(mappedBy = "order", cascade = CascadeType.ALL)
+    private ReturnBook returnBook;
+
     @OneToMany(mappedBy = "order", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
     private Set<OrderItem> orderItems = new HashSet<>();
 
@@ -64,9 +79,6 @@ public class Order implements Serializable {
             joinColumns = @JoinColumn(name = "order_id", nullable = false),
             inverseJoinColumns = @JoinColumn(name = "promotion_id", nullable = false))
     private Set<Promotion> promotions = new HashSet<>();
-
-    @OneToMany(mappedBy = "order", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    private Set<BookReturn> bookReturns = new HashSet<>();
 
     // endregion
 
