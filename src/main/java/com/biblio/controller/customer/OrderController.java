@@ -1,9 +1,13 @@
 package com.biblio.controller.customer;
 
+import com.biblio.dto.response.AccountGetResponse;
+import com.biblio.dto.response.CustomerDetailResponse;
 import com.biblio.dto.response.OrderCustomerResponse;
 import com.biblio.dto.response.OrderManagementResponse;
 import com.biblio.entity.Order;
+import com.biblio.service.ICustomerService;
 import com.biblio.service.IOrderService;
+import com.google.gson.Gson;
 
 import java.io.IOException;
 import java.io.Serial;
@@ -25,7 +29,8 @@ public class OrderController extends HttpServlet {
     private static final long serialVersionUID = 1L;
     @Inject
     private IOrderService orderService;
-
+    @Inject
+    private ICustomerService customerService;
     /**
      * @see HttpServlet#HttpServlet()
      */
@@ -39,10 +44,11 @@ public class OrderController extends HttpServlet {
      */
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         // Get session
-        HttpSession session = request.getSession();
-        session.setAttribute("customerId", 1L);  // Sample customerId for testing (4L)
-        Long customerId = (Long) session.getAttribute("customerId");
-
+        HttpSession session = request.getSession(false); // false means do not create a new session if it doesn't exist
+        AccountGetResponse account = (AccountGetResponse) session.getAttribute("account");
+        CustomerDetailResponse customer = customerService.getCustomerDetailByUsername(account.getUsername());
+        // Lấy customerId từ account
+        Long customerId = customer.getId();
         // Check if the customer is authenticated
         if (customerId == null) {
             response.sendRedirect(request.getContextPath() + "/login"); // Redirect to login page
@@ -53,39 +59,13 @@ public class OrderController extends HttpServlet {
         List<OrderCustomerResponse> orderList = orderService.findOrdersByCustomerId(customerId);
 
         // Set attributes for the JSP view
-        request.setAttribute("breadcrumb", "Danh sách đơn hàng");
         request.setAttribute("orders", orderList);
-
-        // Convert orders to JSON format for use in JavaScript on the frontend
-        String ordersJson = convertOrdersToJson(orderList);
-        request.setAttribute("ordersJson", ordersJson);
 
         // Forward request to JSP view
         request.getRequestDispatcher("/views/customer/order.jsp").forward(request, response);
     }
 
-    /**
-     * Method to convert the list of orders to JSON format
-     */
-    private String convertOrdersToJson(List<OrderCustomerResponse> orderList) {
-        StringBuilder jsonBuilder = new StringBuilder();
-        jsonBuilder.append("[");
 
-        for (int i = 0; i < orderList.size(); i++) {
-            OrderCustomerResponse order = orderList.get(i);
-            jsonBuilder.append("{")
-                    .append("\"orderId\": \"").append(order.getId()).append("\", ")
-                    .append("\"status\": \"").append(order.getStatus()).append("\", ")
-                    .append("\"vat\": ").append(order.getVat()).append("}");
-
-            if (i < orderList.size() - 1) {
-                jsonBuilder.append(", ");
-            }
-        }
-
-        jsonBuilder.append("]");
-        return jsonBuilder.toString();
-    }
 
     /**
      * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)

@@ -1,116 +1,97 @@
+<script defer src="${pageContext.request.contextPath}/assets/customer/js/order-list.js"></script> <!-- Đường dẫn tới tệp JS -->
+<link rel="stylesheet" href="${pageContext.request.contextPath}/assets/customer/scss/style.css">
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page import="com.biblio.dto.response.OrderCustomerResponse" %>
+<%@ page import="java.util.List" %>
+<%@ page import="com.biblio.dto.response.BookResponse" %>
+<%@ page import="java.util.Set" %>
 
-<!-- Track Order section -->
+<%
+    // Lấy dữ liệu từ controller
+    List<OrderCustomerResponse> orders = (List<OrderCustomerResponse>) request.getAttribute("orders");
+    String currentStatus = request.getParameter("status") != null ? request.getParameter("status") : "all";
+%>
+
 <div class="bg-gray-100 py-5">
-  <div class="max-w-[1024px] mx-auto justify-between">
-    <ul class="order-nav flex justify-evenly items-center bg-white">
-      <li data-tab="all" class="order_item active cursor-pointer relative text-[#a0a0a0] tracking-[0.5px] transition duration-300 ease-linear hover:text-[#26aa99] text-[16px] py-2 whitespace-nowrap">
-        Tất cả
-      </li>
-      <li data-tab="confirming" class="order_item cursor-pointer relative text-[#a0a0a0] tracking-[0.5px] transition duration-300 ease-linear hover:text-[#26aa99] text-[16px] py-2 whitespace-nowrap">
-        Chờ xác nhận
-      </li>
-      <li data-tab="delivering" class="order_item cursor-pointer relative text-[#a0a0a0] tracking-[0.5px] transition duration-300 ease-linear hover:text-[#26aa99] text-[16px] py-2 whitespace-nowrap">
-        Đang vận chuyển
-      </li>
-      <li data-tab="completed" class="order_item cursor-pointer relative text-[#a0a0a0] tracking-[0.5px] transition duration-300 ease-linear hover:text-[#26aa99] text-[16px] py-2 whitespace-nowrap">
-        Hoàn tất giao hàng
-      </li>
-      <li data-tab="cancelled" class="order_item cursor-pointer relative text-[#a0a0a0] tracking-[0.5px] transition duration-300 ease-linear hover:text-[#26aa99] text-[16px] py-2 whitespace-nowrap">
-        Đã hủy
-      </li>
-      <li data-tab="returning" class="order_item cursor-pointer relative text-[#a0a0a0] tracking-[0.5px] transition duration-300 ease-linear hover:text-[#26aa99] text-[16px] py-2 whitespace-nowrap">
-        Hoàn trả
-      </li>
-    </ul>
+    <div class="max-w-[1024px] mx-auto">
+        <!-- Thanh bộ lọc trạng thái -->
+        <div id="order-filters" class="flex justify-evenly items-center bg-white py-3 mb-5 border border-gray-200">
+            <a href="?status=all" class="tag <%= "all".equals(currentStatus) ? "text-[#26aa99] font-bold" : "text-gray-500" %>">Tất cả</a>
+            <a href="?status=WAITING_CONFIRMATION" class="tag <%= "WAITING_CONFIRMATION".equals(currentStatus) ? "text-[#26aa99] font-bold" : "text-gray-500" %>">Chờ xác nhận</a>
+            <a href="?status=COMPLETE_DELIVERY" class="tag <%= "COMPLETE_DELIVERY".equals(currentStatus) ? "text-[#26aa99] font-bold" : "text-gray-500" %>">Hoàn tất giao hàng</a>
+            <a href="?status=CANCELED" class="tag <%= "CANCELED".equals(currentStatus) ? "text-[#26aa99] font-bold" : "text-gray-500" %>">Đã hủy</a>
+        </div>
 
-    <!-- Order Statuses -->
-    <div class="w-full mt-5">
-      <!-- Completed Order -->
-      <div data-tab="completed" class="flex flex-wrap mb-5 p-2 bg-white rounded fade-in">
-        <div class="flex-1 items-center border-b-[1px] mb-5 border-solid border-[rgba(0,0,0,0.12)] flex ml-[0] my-[0] text-right basis-full justify-end px-4 py-2">
-          <a href="order-detail" class="items-center inline-flex m-0">
-            <span class="text-[#26aa99] no-underline align-middle">
-              <svg enable-background="new 0 0 15 15" viewBox="0 0 15 15" x="0" y="0" class="text-[#00bfa5] text-[1rem] mt-[0] mr-[4px] mb-px ml-[0] align-middle stroke-[#26aa99] inline-block h-[1em] w-[1em] fill-current relative">
-                <g>
-                  <line fill="none" stroke-linejoin="round" stroke-miterlimit="10" x1="8.6" x2="4.2" y1="9.8" y2="9.8"></line>
-                  <circle cx="3" cy="11.2" fill="none" r="2" stroke-miterlimit="10"></circle>
-                  <circle cx="10" cy="11.2" fill="none" r="2" stroke-miterlimit="10"></circle>
-                  <line fill="none" stroke-miterlimit="10" x1="10.5" x2="14.4" y1="7.3" y2="7.3"></line>
-                  <polyline fill="none" points="1.5 9.8 .5 9.8 .5 1.8 10 1.8 10 9.1" stroke-linejoin="round" stroke-miterlimit="10"></polyline>
-                  <polyline fill="none" points="9.9 3.8 14 3.8 14.5 10.2 11.9 10.2" stroke-linejoin="round" stroke-miterlimit="10"></polyline>
-                </g>
-              </svg>
-              Giao hàng thành công
-            </span>
-          </a>
-        </div>
-        <div class="flex basis-full items-center gap-x-5">
-          <div class="w-[82px] h-[82px] flex-0">
-            <img src="https://down-vn.img.susercontent.com/file/vn-11134207-7qukw-ljhy12voht6q4c.webp" alt="" class="w-full h-full object-cover"/>
-          </div>
-          <div class="flex-1">
-            <a href="#">
-              <h4 class="overflow-hidden text-[16px] leading-[22px] mt-[0] mx-[0] mb-[5px] max-h-[48px] text-justify" style="display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; text-overflow: ellipsis; word-break: break-word; overflow: hidden;">
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. In hic cumque officiis odio temporibus qui explicabo, voluptate nostrum, vero assumenda dolor autem eligendi perferendis fugit esse consequatur tempore dolore. Voluptate.
-              </h4>
-            </a>
-            <p class="text-[rgba(0,0,0,.54)]">Phân loại:</p>
-            <p>Số lượng: <span>x3</span></p>
-          </div>
-          <div>
-            <span class="text-[#000] ml-[0] mr-[4px] my-[0] opacity-[.26] overflow-hidden text-decoration-line:line-through overflow-ellipsis">₫32.000</span>
-            <span class="text-[18px] font-medium text-[#26aa99]">₫22.950</span>
-          </div>
-        </div>
-        <div class="flex flex-col items-end w-full mt-2">
-          <div>
-            <h3 class="text-[16px] text-black-500 font-medium">Thành tiền: <span class="text-xl text-[#26aa99]">₫68.850</span></h3>
-          </div>
-          <div class="mt-5">
-            <button class="px-4 py-2 bg-[#26aa99] rounded text-white mr-2 hover:bg-[#158d7d] transition duration-300">
-              Đã nhận được hàng
-            </button>
-            <button class="px-4 py-2 rounded text-black border-1 border-solid border-gray-200 hover:bg-gray-100 transition duration-300" onclick="window.location.href='return-order';">
-              Yêu cầu trả/Hoàn tiền
-            </button>
-          </div>
-        </div>
-      </div>
+        <!-- Danh sách đơn hàng -->
+        <div id="order-list" class="mt-5">
+            <% if (orders != null && !orders.isEmpty()) { %>
+            <% for (OrderCustomerResponse order : orders) {
+                String status = order.getStatus();
+                long orderId = order.getId();
+                if ("all".equals(currentStatus) || currentStatus.equals(status)) {
+                    Set<BookResponse> books = order.getBook();
+                    Double totalPrice = order.getTotalPrice();
+            %>
+            <div class="order-item mb-5 p-4 bg-white border border-gray-200 rounded" data-order-id="<%= orderId %>">
+                <!-- Trạng thái -->
+                <div class="flex justify-end mb-3 status-container">
+                    <span class="text-sm font-bold <%= "COMPLETE_DELIVERY".equals(status) ? "text-green-500" : "CANCELED".equals(status) ? "text-red-500" : "text-yellow-500" %>">
+                        <%= "COMPLETE_DELIVERY".equals(status) ? "Giao hàng thành công" : "CANCELED".equals(status) ? "Đã hủy" : "Chờ xác nhận" %>
+                    </span>
+                </div>
 
-      <!-- Cancelled Order -->
-      <div data-tab="cancelled" class="flex flex-wrap mb-5 p-2 bg-white rounded fade-in">
-        <div class="flex-1 items-center border-b-[1px] mb-5 border-solid border-[rgba(0,0,0,0.12)] flex ml-[0] my-[0] text-right basis-full justify-end px-4 py-2">
-          <a href="order-detail" class="items-center inline-flex m-0">
-            <span class="text-[#ee4d2d] no-underline align-middle">
-              Đã hủy
-            </span>
-          </a>
+                <!-- Sản phẩm -->
+                <% int bookIndex = 0; %>
+                <% for (BookResponse book : books) { %>
+                <div class="<%= bookIndex > 0 ? "my-hidden" : "" %> flex items-center mb-3" data-book-index="<%= bookIndex %>">
+                    <div class="flex items-center book-item">
+                        <!-- Hình ảnh sách -->
+                        <div>
+                            <img src="<%= "https://down-vn.img.susercontent.com/file/vn-11134207-7qukw-ljhy12voht6q4c.webp" %>" alt="<%= book.getTitle() %>">
+                        </div>
+
+                        <!-- Thông tin sách -->
+                        <div class="book-info">
+                            <h4><%= book.getTitle() %></h4>
+                            <p>₫<%= book.getSellingPrice() %></p>
+                        </div>
+                    </div>
+
+                </div>
+                <% bookIndex++; %>
+                <% } %>
+
+                <!-- Nút Xem thêm/Thu gọn -->
+                <% if (books.size() > 1) { %>
+                <div class="status-container flex justify-start w-full cursor-pointer text-[#26aa99]" onclick="toggleItems('<%= orderId %>')">
+                    <span id="toggle-text-<%= orderId %>">Xem thêm ▼</span>
+                </div>
+                <% } %>
+
+                <!-- Tổng tiền -->
+                <div class="text-right">
+                    <h3 class="text-lg font-bold">Thành tiền: ₫<%= totalPrice %></h3>
+                </div>
+                <div class="button-container mt-5 text-right">
+                    <% if ("COMPLETE_DELIVERY".equals(status)) { %>
+                    <button class="px-4 py-2 bg-[#26aa99] rounded text-white hover:bg-[#158d7d]" onclick="alert('Chức năng đang được phát triển!'); return false;">Đặt lại đơn hàng</button>
+                    <button class="px-4 py-2 bg-[#ff9800] rounded text-white hover:bg-[#e58900] transition" onclick="alert('Chức năng đang được phát triển!'); return false;">Hoàn trả</button>
+                    <button class="px-4 py-2 bg-[#ffc107] rounded text-white hover:bg-[#e6ac00]" onclick="alert('Chức năng đang được phát triển!'); return false;">Đánh giá</button>
+                    <% } else if ("WAITING_CONFIRMATION".equals(status)) { %>
+                    <button class="px-4 py-2 bg-[#e91e4c] rounded text-white hover:bg-[#d0173f]" onclick="alert('Chức năng đang được phát triển!'); return false;">Hủy đơn hàng</button>
+                    <% } else if ("CANCELED".equals(status)) { %>
+                    <button class="px-4 py-2 bg-[#26aa99] rounded text-white hover:bg-[#158d7d]" onclick="alert('Chức năng đang được phát triển!'); return false;">Mua lại đơn hàng</button>
+                    <% } %>
+                    <!-- Nút luôn hiển thị -->
+                    <button class="px-4 py-2 rounded text-black border border-gray-200 hover:bg-gray-100" onclick="alert('Chức năng đang được phát triển!'); return false;">Liên hệ người bán</button>
+                </div>
+
+            </div>
+            <% } %>
+            <% } %>
+            <% } else { %>
+            <p class="text-center text-gray-500">Không có đơn hàng nào để hiển thị.</p>
+            <% } %>
         </div>
-        <div class="flex basis-full items-center gap-x-5">
-          <div class="w-[82px] h-[82px] flex-0">
-            <img src="https://down-vn.img.susercontent.com/file/vn-11134207-7qukw-ljhy12voht6q4c.webp" alt="" class="w-full h-full object-cover"/>
-          </div>
-          <div class="flex-1">
-            <a href="#">
-              <h4 class="overflow-hidden text-[16px] leading-[22px] mt-[0] mx-[0] mb-[5px] max-h-[48px] text-justify" style="display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; text-overflow: ellipsis; word-break: break-word; overflow: hidden;">
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. In hic cumque officiis odio temporibus qui explicabo, voluptate nostrum, vero assumenda dolor autem eligendi perferendis fugit esse consequatur tempore dolore. Voluptate.
-              </h4>
-            </a>
-            <p class="text-[rgba(0,0,0,.54)]">Phân loại:</p>
-            <p>Số lượng: <span>x3</span></p>
-          </div>
-          <div>
-            <span class="text-[#000] ml-[0] mr-[4px] my-[0] opacity-[.26] overflow-hidden text-decoration-line:line-through overflow-ellipsis">₫32.000</span>
-            <span class="text-[18px] font-medium text-[#26aa99]">₫22.950</span>
-          </div>
-        </div>
-        <div class="flex flex-col items-end w-full mt-2">
-          <div>
-            <h3 class="text-[16px] text-black-500 font-medium">Thành tiền: <span class="text-xl text-[#26aa99]">₫68.850</span></h3>
-          </div>
-        </div>
-      </div>
     </div>
-  </div>
 </div>
