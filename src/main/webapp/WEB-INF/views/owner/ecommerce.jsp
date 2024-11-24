@@ -241,7 +241,7 @@
                         <div class="cr-card-content card-default">
                             <div class="best-seller-table">
                                 <div class="table-responsive">
-                                    <table id="best_seller_data_table" class="table">
+                                    <table id="list_product_sold_in_stock_statistical" class="table">
                                         <thead>
                                         <tr>
                                             <th>#</th>
@@ -251,11 +251,11 @@
                                         </tr>
                                         </thead>
                                         <tbody>
-                                        <tr>
-                                        </tr>
+                                        <!-- Các dòng dữ liệu sẽ được thêm vào đây -->
                                         </tbody>
                                     </table>
                                 </div>
+
                             </div>
                         </div>
                     </div>

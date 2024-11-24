@@ -146,6 +146,8 @@
                 <div class="row mt-4">
                     <div class="col-12 d-flex justify-content-center" style="padding-bottom: 20px">
                         <button type="submit" class="btn-voucher cr-btn-primary" data-editing="false">Chỉnh sửa</button>
+                        <button type="button" class="btn-voucher cr-btn-secondary cancel-btn" style="display: none; margin-left: 10px;" onclick="cancelEdit(this)">Hủy</button>
+                    </div>
                     </div>
                 </div>
 
@@ -248,6 +250,7 @@
                                         <div class="row ip-padding">
                                             <div class="col-12 d-flex">
                                                 <button type="submit" class="btn-voucher cr-btn-primary" data-editing="false">Chỉnh sửa</button>
+                                                <button type="button" class="btn-voucher cr-btn-secondary cancel-btn" style="display: none; margin-left: 10px;" onclick="cancelEdit(this)">Hủy</button>
                                             </div>
                                         </div>
                                     </form>
@@ -330,11 +333,13 @@
                                                 </div>
                                             </div>
 
-                                            <div class="row ip-padding" >
-                                                <div class="col-12 d-flex">
-                                                    <button type="submit" class="btn-voucher cr-btn-primary" data-editing="false">Chỉnh sửa</button>
+                                                <div class="row ip-padding">
+                                                    <div class="col-12 d-flex">
+                                                        <button type="button" class="btn-voucher cr-btn-primary" data-editing="false" onclick="toggleForm(this)">Chỉnh sửa</button>
+                                                        <button type="button" class="btn-voucher cr-btn-secondary cancel-btn" style="display: none; margin-left: 10px;" onclick="cancelEdit(this)">Hủy</button>
+                                                    </div>
                                                 </div>
-                                            </div>
+
                                             </div>
                                         </form>
                                     </div>
