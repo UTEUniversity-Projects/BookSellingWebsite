@@ -1,18 +1,18 @@
 package com.biblio.mapper;
 
+import com.biblio.dao.impl.BookTemplateDAOImpl;
 import com.biblio.dto.response.*;
 import com.biblio.entity.*;
 import com.biblio.enumeration.EBookLanguage;
 import com.biblio.enumeration.EBookMetadataStatus;
 
 import java.text.DecimalFormat;
-import java.text.NumberFormat;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
-import java.util.Locale;
 import java.util.stream.Collectors;
+
 import static com.biblio.utils.DateTimeUtil.formatDateTime;
 
 public class BookTemplateMapper {
@@ -41,13 +41,13 @@ public class BookTemplateMapper {
 
     public static BookCardResponse toBookCardResponse(BookTemplate bookTemplate) {
 
-        DecimalFormat decimalFormat = new DecimalFormat("#.###");
+        DecimalFormat formatter = new DecimalFormat("#.###");
 
         Book singlebook = bookTemplate.getBooks().iterator().next();
         return BookCardResponse.builder()
                 .id(bookTemplate.getId())
                 .title(singlebook.getTitle())
-                .sellingPrice(decimalFormat.format(singlebook.getSellingPrice()))
+                .sellingPrice(formatter.format((int) singlebook.getSellingPrice()))
                 .condition(singlebook.getCondition().getBookCondition())
                 .categoryName(singlebook.getSubCategory().getCategory().getName())
                 .imageUrl(bookTemplate
@@ -118,6 +118,7 @@ public class BookTemplateMapper {
                 .reviewCount(reviews.size())
                 .build();
     }
+
     public static BookTemplatePromotionResponse toBookTemplatePromotionResponse(BookTemplate bookTemplate) {
         Book singlebook = bookTemplate.getBooks().iterator().next();
         return BookTemplatePromotionResponse.builder()
@@ -126,6 +127,21 @@ public class BookTemplateMapper {
                 .subCategoryId(singlebook.getSubCategory().getId())
                 .build();
     }
+    public static BookSoldAllTimeResponse toBookSoldAllTimeResponse(BookTemplate bookTemplate) {
+        BookTemplateDAOImpl bookTemplateDAO = new BookTemplateDAOImpl();
+        Book singlebook = bookTemplate.getBooks().iterator().next();
+        return BookSoldAllTimeResponse.builder()
+                .id(bookTemplate.getId())
+                .srcImg(bookTemplate.getMediaFiles()
+                        .get(0)
+                        .getStoredCode())
+                .title(singlebook.getTitle())
+                .category(singlebook.getSubCategory().getCategory().getName())
+                .countSold(bookTemplateDAO.countSoldById(bookTemplate.getId()))
+                .countInStock(bookTemplateDAO.countInstockById(bookTemplate.getId()))
+                .build();
+    }
+
     // endregion
 
     // region DTO to Entity

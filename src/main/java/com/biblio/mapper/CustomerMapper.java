@@ -1,11 +1,7 @@
 package com.biblio.mapper;
 
 import com.biblio.dto.request.CustomerRegisterRequest;
-import com.biblio.dto.response.CustomerDetailResponse;
-import com.biblio.dto.response.CustomerGetListResponse;
-import com.biblio.dto.response.CustomerRegisterResponse;
-import com.biblio.dto.response.CustomerReportResponse;
-import com.biblio.dto.response.CustomerResponse;
+import com.biblio.dto.response.*;
 import com.biblio.entity.Account;
 import com.biblio.entity.Address;
 import com.biblio.entity.Customer;
@@ -121,5 +117,12 @@ public class CustomerMapper {
         customerReportResponse.setId(customer.getId());
         customerReportResponse.setJoinAt(customer.getJoinAt());
         return customerReportResponse;
+    }
+
+    public static NewCustomerResponse toNewCustomerResponse(Customer customer) {
+        return NewCustomerResponse.builder()
+                .id(customer.getId())
+                .jointAt(customer.getJoinAt())
+                .build();
     }
 }

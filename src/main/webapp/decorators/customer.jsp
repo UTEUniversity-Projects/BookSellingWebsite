@@ -14,8 +14,8 @@
 
     <title>
         <c:choose>
-            <c:when test="${breadcumb != null}">
-                ${breadcumb}
+            <c:when test="${breadcrumb != null}">
+                ${breadcrumb}
             </c:when>
             <c:otherwise>
                 Biblio
@@ -144,11 +144,11 @@
                     <div class="cr-breadcrumb-title">
                         <span>
                             <a href="home">Trang chủ</a>
-                            <c:if test="${breadcumb != null}">
-                                / ${breadcumb}
+                            <c:if test="${breadcrumb != null}">
+                                / ${breadcrumb}
                             </c:if>
                         </span>
-                        <h2>${breadcumb}</h2>
+                        <h2>${breadcrumb}</h2>
                     </div>
                 </div>
             </div>
@@ -220,8 +220,8 @@
                                     <p>( ${book.numberOfReviews} Reviews)</p>
                                 </div>
                                 <div class="cr-product-price">
-                                    <span class="new-price">${book.sellingPrice}</span>
-                                        <%--                                <span class="old-price">$123.25</span>--%>
+                                    <span class="new-price price-value">${book.sellingPrice}</span>
+                                    <span class="old-price price-value">${book.sellingPrice}</span>
                                 </div>
                                 <div class="cr-size-weight">
                                     <h5><span>Tình trạng</span> :</h5>
@@ -245,7 +245,7 @@
                                         <button type="button" class="minus">-</button>
                                     </div>
                                     <div class="cr-add-button">
-                                        <button type="button" class="cr-button cr-btn-secondary cr-shopping-bag">
+                                        <button type="button" class="cr-button cr-btn-secondary cr-shopping-bag add-to-cart-btn" data-cart-id="${cart.id}" data-book-id="${book.id}">
                                             Thêm vào giỏ hàng
                                         </button>
                                     </div>
@@ -274,84 +274,34 @@
                 <button type="button" class="close-cart">×</button>
             </div>
             <ul class="crcart-pro-items">
-                <li>
-                    <a href="product-left-sidebar.html" class="crside_pro_img"
-                    ><img src="assets/img/product/4.jpg" alt="product-1"
-                    /></a>
-                    <div class="cr-pro-content">
-                        <a href="product-left-sidebar.html" class="cart_pro_title"
-                        >Fresh Pomegranate</a
-                        >
-                        <span class="cart-price"><span>$56.00</span> x 1kg</span>
-                        <div class="cr-cart-qty">
-                            <div class="cart-qty-plus-minus">
-                                <button type="button" class="plus">+</button>
-                                <input
-                                        type="text"
-                                        placeholder="."
-                                        value="1"
-                                        minlength="1"
-                                        maxlength="20"
-                                        class="quantity"
-                                />
-                                <button type="button" class="minus">-</button>
+                <c:forEach var="cartItem" items="${cart.cartItems}">
+                    <li>
+                        <a href="${pageContext.request.contextPath}/book?id=${cartItem.bookId}" class="crside_pro_img"
+                        ><img src="${pageContext.request.contextPath}${cartItem.imageUrl}" alt="${cartItem.title}"
+                        /></a>
+                        <div class="cr-pro-content">
+                            <a href="${pageContext.request.contextPath}/book?id=${cartItem.bookId}" class="cart_pro_title"
+                            >${cartItem.title}</a
+                            >
+                            <span class="cart-price"><span class="price-value">${cartItem.sellingPrice}</span></span>
+                            <div class="cr-cart-qty">
+                                <div class="cart-qty-plus-minus">
+                                    <button type="button" class="minus">-</button>
+                                    <input
+                                            type="text"
+                                            placeholder="."
+                                            value="${cartItem.quantity}"
+                                            minlength="1"
+                                            maxlength="20"
+                                            class="quantity"
+                                    />
+                                    <button type="button" class="plus">+</button>
+                                </div>
                             </div>
+                            <a href="javascript:void(0)" class="remove">×</a>
                         </div>
-                        <a href="javascript:void(0)" class="remove">×</a>
-                    </div>
-                </li>
-                <li>
-                    <a href="product-left-sidebar.html" class="crside_pro_img"
-                    ><img src="assets/img/product/2.jpg" alt="product-2"
-                    /></a>
-                    <div class="cr-pro-content">
-                        <a href="product-left-sidebar.html" class="cart_pro_title"
-                        >Green Apples</a
-                        >
-                        <span class="cart-price"><span>$75.00</span> x 1kg</span>
-                        <div class="cr-cart-qty">
-                            <div class="cart-qty-plus-minus">
-                                <button type="button" class="plus">+</button>
-                                <input
-                                        type="text"
-                                        placeholder="."
-                                        value="1"
-                                        minlength="1"
-                                        maxlength="20"
-                                        class="quantity"
-                                />
-                                <button type="button" class="minus">-</button>
-                            </div>
-                        </div>
-                        <a href="javascript:void(0)" class="remove">×</a>
-                    </div>
-                </li>
-                <li>
-                    <a href="product-left-sidebar.html" class="crside_pro_img"
-                    ><img src="assets/img/product/3.jpg" alt="product-3"
-                    /></a>
-                    <div class="cr-pro-content">
-                        <a href="product-left-sidebar.html" class="cart_pro_title"
-                        >Watermelon - Small</a
-                        >
-                        <span class="cart-price"><span>$48.00</span> x 5kg</span>
-                        <div class="cr-cart-qty">
-                            <div class="cart-qty-plus-minus">
-                                <button type="button" class="plus">+</button>
-                                <input
-                                        type="text"
-                                        placeholder="."
-                                        value="1"
-                                        minlength="1"
-                                        maxlength="20"
-                                        class="quantity"
-                                />
-                                <button type="button" class="minus">-</button>
-                            </div>
-                        </div>
-                        <a href="javascript:void(0)" class="remove">×</a>
-                    </div>
-                </li>
+                    </li>
+                </c:forEach>
             </ul>
         </div>
         <div class="cr-cart-bottom">
@@ -360,7 +310,7 @@
                     <tbody>
                     <tr>
                         <td class="text-left">Tiền sách:</td>
-                        <td class="text-right">$300.00</td>
+                        <td class="text-right price-value">${cart.totalBookPrice}</td>
                     </tr>
                     <tr>
                         <td class="text-left">VAT (20%) :</td>
@@ -374,8 +324,8 @@
                 </table>
             </div>
             <div class="cart_btn">
-                <a href="cart.html" class="cr-button">Xem giỏ hàng</a>
-                <a href="checkout.html" class="cr-btn-secondary">Thanh toán</a>
+                <a href="${pageContext.request.contextPath}/cart" class="cr-btn-secondary">Xem giỏ hàng</a>
+                <a href="checkout.html" class="cr-button">Thanh toán</a>
             </div>
         </div>
     </div>
@@ -395,7 +345,7 @@
 <script src="${pageContext.request.contextPath}/assets/customer/js/vendor/tailwind.min.js"></script>
 
 <!-- Main Custom -->
-<script src="${pageContext.request.contextPath}/assets/customer/js/main.js?v=1"></script>
+<script src="${pageContext.request.contextPath}/assets/customer/js/main.js"></script>
 <script src="${pageContext.request.contextPath}/assets/customer/js/manage-cart.js"></script>
   
 </body>

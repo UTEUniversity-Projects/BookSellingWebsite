@@ -5,8 +5,8 @@ import com.biblio.dto.response.CustomerResponse;
 import com.biblio.dto.response.OrderCustomerResponse;
 import com.biblio.dto.response.ShippingResponse;
 import com.biblio.entity.Book;
-import com.biblio.entity.LineItem;
 import com.biblio.entity.Order;
+import com.biblio.entity.OrderItem;
 import com.biblio.enumeration.EBookMetadataStatus;
 import com.biblio.enumeration.EOrderStatus;
 import com.biblio.jpaconfig.JpaConfig;
@@ -57,8 +57,8 @@ public class OrderDAOImpl extends GenericDAOImpl<Order> implements IOrderDAO {
                 .append("JOIN FETCH c.account ac ")
                 .append("JOIN FETCH o.shipping s ")
                 .append("JOIN FETCH s.address ad ")
-                .append("JOIN FETCH o.lineItems li ")
-                .append("JOIN FETCH li.books b ")
+                .append("JOIN FETCH o.orderItems oi ")
+                .append("JOIN FETCH oi.books b ")
                 .append("JOIN FETCH b.bookTemplate bt ")
                 .append("JOIN FETCH bt.mediaFiles m ")
                 .append("LEFT JOIN FETCH o.promotions p ")
@@ -77,11 +77,9 @@ public class OrderDAOImpl extends GenericDAOImpl<Order> implements IOrderDAO {
                 .append("FROM Order o ")
                 .append("WHERE o.customer.id = :customerId");
 
-        // Tạo map để chứa các tham số cần gán
         Map<String, Object> params = new HashMap<>();
         params.put("customerId", customerId);
 
-        // Truyền cả câu truy vấn và các tham số vào phương thức findAll
         return super.findByJPQL(jpql.toString(), params);
     }
 
@@ -94,8 +92,8 @@ public class OrderDAOImpl extends GenericDAOImpl<Order> implements IOrderDAO {
         order.setStatus(status);
 
         if (status == EOrderStatus.CANCELED) {
-            for (LineItem lineItem : order.getLineItems()) {
-                for (Book book : lineItem.getBooks()) {
+            for (OrderItem orderItem : order.getOrderItems()) {
+                for (Book book : orderItem.getBooks()) {
                     book.getBookMetadata().setStatus(EBookMetadataStatus.IN_STOCK);
                 }
             }

@@ -46,27 +46,27 @@ public class AddToCartAPI extends HttpServlet {
      * @see HttpServlet#doPost(HttpServletRequest, HttpServletResponse) (HttpServletRequest request, HttpServletResponse response)
      */
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-//        request.setCharacterEncoding("UTF-8");
-//
-//        AddToCartRequest addToCartRequest = HttpUtil.of(request.getReader()).toModel(AddToCartRequest.class);
-//
-//        System.out.println(addToCartRequest.getCartId());
-//        System.out.println(addToCartRequest.getBookTemplateId());
-//        System.out.println(addToCartRequest.getQuantity());
-//        Map<String, Object> result = new HashMap<>();
-//        ObjectMapper mapper = new ObjectMapper();
-//
-//        try {
-//            cartService.addToCart(addToCartRequest);
-//            result.put("status", "success");
-//            result.put("message", "Sản phẩm đã được thêm vào giỏ hàng thành công!");
-//        } catch (Exception e) {
-//            result.put("status", "error");
-//            result.put("message", e.getMessage());
-//        }
-//
-//        response.setContentType("application/json");
-//        response.setCharacterEncoding("UTF-8");
-//        response.getWriter().write(mapper.writeValueAsString(result));
+        request.setCharacterEncoding("UTF-8");
+
+        AddToCartRequest addToCartRequest = HttpUtil.of(request.getReader()).toModel(AddToCartRequest.class);
+
+        System.out.println(addToCartRequest.getCartId());
+        System.out.println(addToCartRequest.getBookTemplateId());
+        System.out.println(addToCartRequest.getQuantity());
+        Map<String, Object> result = new HashMap<>();
+        ObjectMapper mapper = new ObjectMapper();
+
+        try {
+            cartService.addToCart(addToCartRequest);
+            result.put("status", "success");
+            result.put("message", "Sản phẩm đã được thêm vào giỏ hàng thành công!");
+        } catch (Exception e) {
+            result.put("status", "error");
+            result.put("message", e.getMessage());
+        }
+
+        response.setContentType("application/json");
+        response.setCharacterEncoding("UTF-8");
+        response.getWriter().write(mapper.writeValueAsString(result));
     }
 }

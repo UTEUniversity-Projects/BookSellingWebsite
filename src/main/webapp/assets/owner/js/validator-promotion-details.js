@@ -150,7 +150,7 @@ function toggleForm(editButton) {
     const isEditing = editButton.dataset.editing === "true";
 
     const inputs = form.querySelectorAll("input, textarea, select");
-   // const table = document.querySelector(".table_item_to_discount");
+    const cancelButton = form.querySelector(".cancel-btn");
 
     if (isEditing) {
         // Khóa form
@@ -160,11 +160,11 @@ function toggleForm(editButton) {
             }
         });
 
-        // Vô hiệu hóa bảng
-        table.classList.add("table-disabled");
-
         editButton.innerText = "Chỉnh sửa";
-     //   editButton.dataset.editing = "false";
+        editButton.dataset.editing = "false";
+
+        // Ẩn nút "Hủy"
+        cancelButton.style.display = "none";
     } else {
         // Mở khóa form
         inputs.forEach(input => {
@@ -176,13 +176,20 @@ function toggleForm(editButton) {
             }
         });
 
-        // Kích hoạt bảng
-        //table.classList.remove("table-disabled");
-
         editButton.innerText = "Lưu";
         editButton.dataset.editing = "true";
+
+        // Hiển thị nút "Hủy"
+        cancelButton.style.display = "inline-block";
     }
 }
+
+function cancelEdit(cancelButton) {
+    // Reload lại trang
+    location.reload();
+}
+
+
 
 
 

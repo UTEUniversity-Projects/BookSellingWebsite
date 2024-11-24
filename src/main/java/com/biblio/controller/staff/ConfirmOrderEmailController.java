@@ -2,9 +2,10 @@ package com.biblio.controller.staff;
 
 import com.biblio.dto.response.OrderCustomerResponse;
 import com.biblio.entity.Book;
-import com.biblio.entity.LineItem;
 import com.biblio.entity.MediaFile;
 import com.biblio.entity.Promotion;
+import com.biblio.entity.Order;
+import com.biblio.entity.OrderItem;
 import com.biblio.service.IEmailService;
 import com.biblio.service.IOrderService;
 import com.biblio.service.impl.EmailServiceImpl;
@@ -91,7 +92,8 @@ public class ConfirmOrderEmailController extends HttpServlet {
 
         // Tạo một Map để nhóm các cuốn sách giống nhau
         Map<String, Integer> bookCountMap = new HashMap<>();
-        for (LineItem item : order.getLineItems()) {
+        emailContent.append("Sản phẩm:\n");
+        for (OrderItem item : order.getOrderItems()) {
             for (Book book : item.getBooks()) {
                 String bookTitle = book.getTitle();  // Tên sách
                 bookCountMap.put(bookTitle, bookCountMap.getOrDefault(bookTitle, 0) + 1);
@@ -168,8 +170,5 @@ public class ConfirmOrderEmailController extends HttpServlet {
 
         return emailContent.toString();
     }
-
-
-
-
+  
 }

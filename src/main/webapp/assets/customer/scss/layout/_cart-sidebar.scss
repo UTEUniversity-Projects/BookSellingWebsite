@@ -59,7 +59,12 @@
             ul.crcart-pro-items {
                 margin: 0;
                 padding-left: 0;
+                max-height: 430px;
+                overflow-y: auto;
                 list-style: none;
+                scroll-behavior: smooth;
+                scrollbar-width: none;
+                -ms-overflow-style: none;
                 li {
                     margin-bottom: 20px;
                     padding-bottom: 20px;
@@ -119,6 +124,9 @@
                             color: $red;
                         }
                     }
+                }
+                ul.crcart-pro-items::-webkit-scrollbar {
+                    display: none;
                 }
             }
         }

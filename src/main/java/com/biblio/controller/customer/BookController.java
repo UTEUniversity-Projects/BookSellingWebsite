@@ -39,7 +39,7 @@ public class BookController extends HttpServlet {
         Long id = Long.parseLong(request.getParameter("id"));
         BookDetailsResponse book = bookTemplateService.getBookDetailsResponse(id);
         request.setAttribute("book", book);
-        request.setAttribute("breadcumb", "Chi tiết sách");
+        request.setAttribute("breadcrumb", "Chi tiết sách");
         request.getRequestDispatcher("/views/customer/book.jsp").forward(request, response);
     }
 

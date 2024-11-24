@@ -1,13 +1,20 @@
 package com.biblio.service.impl;
 
 import com.biblio.dao.IOrderDAO;
+
 import com.biblio.dao.impl.OrderDAOImpl;
 import com.biblio.dto.response.OrderCustomerResponse;
 import com.biblio.dto.response.OrderDetailsManagementResponse;
 import com.biblio.dto.response.OrderManagementResponse;
 import com.biblio.dto.response.RevenueResponse;
+
+import com.biblio.dto.response.*;
+import com.biblio.entity.Book;
+
 import com.biblio.entity.Order;
+import com.biblio.entity.OrderItem;
 import com.biblio.enumeration.EOrderStatus;
+import com.biblio.mapper.BookMapper;
 import com.biblio.mapper.OrderMapper;
 import com.biblio.service.IOrderService;
 
@@ -16,12 +23,13 @@ import javax.transaction.Transactional;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
-import java.util.*;
 
 public class OrderServiceImpl implements IOrderService {
-    IOrderDAO orderDAO = new OrderDAOImpl();
+    @Inject
+    IOrderDAO orderDAO;
 
     @Override
     public OrderDetailsManagementResponse getOrderDetailsManagementResponse(Long id) {
@@ -113,21 +121,30 @@ public class OrderServiceImpl implements IOrderService {
             }
         }
 
-        Map<LocalDate, Double> revenueMap = new HashMap<>();
-        for (RevenueResponse response : revenueResponse) {
-            LocalDate date = response.getDate().toLocalDate();
-            revenueMap.put(date, revenueMap.getOrDefault(date, 0.0) + response.getRevenue());
-        }
-
+        // Tạo danh sách ngày từ start đến end với revenue mặc định là 0.0
         List<RevenueResponse> consolidatedRevenue = new ArrayList<>();
-        for (Map.Entry<LocalDate, Double> entry : revenueMap.entrySet()) {
+        LocalDate currentDate = start.toLocalDate();
+        LocalDate endDate = end.toLocalDate();
+
+        while (!currentDate.isAfter(endDate)) {
             RevenueResponse consolidated = new RevenueResponse();
-            consolidated.setDate(entry.getKey().atStartOfDay());
-            consolidated.setRevenue(entry.getValue());
+            consolidated.setDate(currentDate.atStartOfDay());
+            consolidated.setRevenue(0.0);
             consolidatedRevenue.add(consolidated);
+            currentDate = currentDate.plusDays(1);
+        }
+        // Duyệt qua revenueResponse và cộng revenue nếu ngày trùng
+        for (RevenueResponse response : revenueResponse) {// Tổng revenue từ revenueResponse
+            for (RevenueResponse consolidated : consolidatedRevenue) {
+                if (response.getDate().toLocalDate().isEqual(consolidated.getDate().toLocalDate())) {
+                    consolidated.setRevenue(consolidated.getRevenue() + response.getRevenue());
+                    break;
+                }
+            }
         }
 
-        // Sắp xếp danh sách theo ngày (date)
+
+        // Sắp xếp danh sách theo ngày (nếu cần, nhưng thực tế danh sách đã theo thứ tự ngày ban đầu)
         consolidatedRevenue.sort(Comparator.comparing(RevenueResponse::getDate));
 
         return consolidatedRevenue;
@@ -136,6 +153,28 @@ public class OrderServiceImpl implements IOrderService {
     @Override
     public OrderCustomerResponse findOrderById(Long orderId) {
         return orderDAO.findById(orderId);
+    }
+
+    public List<CountBookSoldResponse> getListCountBookSoldAtTime(LocalDateTime start, LocalDateTime end) {
+        List<BookSoldResponse> ListBookSold = new ArrayList<>();
+        List<Order> list = orderDAO.findAllForManagement();
+        for (Order order : list) {
+            Order orderTmp = orderDAO.findOneForDetailsManagement(order.getId());
+            LocalDateTime orderDate = orderTmp.getOrderDate();
+            if ((orderDate.isEqual(start) || orderDate.isAfter(start)) &&
+                    (orderDate.isEqual(end) || orderDate.isBefore(end)) &&
+                    EOrderStatus.COMPLETE_DELIVERY.equals(orderTmp.getStatus())) {
+                for (OrderItem orderItem : orderTmp.getOrderItems()) {
+                    for (Book book : orderItem.getBooks()) {
+                        ListBookSold.add(BookMapper.toBookSoldResponse(book));
+                    }
+                }
+            }
+        }
+        List<CountBookSoldResponse> countBookSoldResponse = BookMapper.toCountBookSoldResponse(ListBookSold);
+        countBookSoldResponse.sort(Comparator.comparingLong(CountBookSoldResponse::getCountSold).reversed());
+        return countBookSoldResponse;
+
     }
 
     @Override
@@ -153,7 +192,5 @@ public class OrderServiceImpl implements IOrderService {
         order.setStatus(EOrderStatus.CANCELED);
         orderDAO.updateOrder(order);
     }
-
-
 
 }

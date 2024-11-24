@@ -35,7 +35,7 @@ public class ContactUsController extends HttpServlet {
      */
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         // TODO Auto-generated method stub
-        request.setAttribute("breadcumb", "Liên hệ");
+        request.setAttribute("breadcrumb", "Liên hệ");
         request.getRequestDispatcher("/views/customer/contact-us.jsp").forward(request, response);
     }
 

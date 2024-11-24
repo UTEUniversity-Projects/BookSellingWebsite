@@ -16,6 +16,12 @@ public interface IBookTemplateDAO {
 
     BookTemplate findOneForDetails(Long id);
 
-    List<BookTemplate> findByTitle(String title);
+    List<BookTemplate> findByCriteria(String title, Long categoryId, String sortBy, int pageNumber);
+
+    long countByCriteria(String title, Long categoryId, String sortBy);
+
+    Long countSoldById(Long id);
+
+    Long countInstockById(Long id);
 
 }

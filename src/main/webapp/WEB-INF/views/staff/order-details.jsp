@@ -99,6 +99,117 @@
                         </div>
                     </div>
 
+                    <div class="cr-card-content row">
+                        <div class="col-xxl-4 col-xl-5 col-md-6 col-12 mb-24">
+                            <div class="vehicle-detail-banner banner-content clearfix">
+                                <div class="banner-slider">
+                                    <div class="slider slider-for">
+                                        <div class="slider-banner-image">
+                                            <div class="zoom-image-hover">
+                                                <img
+                                                        src="${pageContext.request.contextPath}/assets/owner/img/book/DungLuaChonAnNhanKhiConTre/image1.jpg"
+                                                        alt="product-image"
+                                                        class="product-image"
+                                                />
+                                            </div>
+                                        </div>
+                                        <div class="slider-banner-image">
+                                            <div class="zoom-image-hover">
+                                                <img
+                                                        src="${pageContext.request.contextPath}/assets/owner/img/book/DungLuaChonAnNhanKhiConTre/image1.jpg"
+                                                        alt="product-image"
+                                                        class="product-image"
+                                                />
+                                            </div>
+                                        </div>
+                                        <div class="slider-banner-image">
+                                            <div class="zoom-image-hover">
+                                                <img
+                                                        src="${pageContext.request.contextPath}/assets/owner/img/book/DungLuaChonAnNhanKhiConTre/image1.jpg"
+                                                        alt="product-image"
+                                                        class="product-image"
+                                                />
+                                            </div>
+                                        </div>
+                                        <div class="slider-banner-image">
+                                            <div class="zoom-image-hover">
+                                                <img
+                                                        src="${pageContext.request.contextPath}/assets/owner/img/book/DungLuaChonAnNhanKhiConTre/image1.jpg"
+                                                        alt="product-image"
+                                                        class="product-image"
+                                                />
+                                            </div>
+                                        </div>
+                                        <%--                                        <c:forEach var="imageUrl" items="${book.imageUrls}">--%>
+                                        <%--                                            <div class="slider-banner-image">--%>
+                                        <%--                                                <div class="zoom-image-hover">--%>
+                                        <%--                                                    <img--%>
+                                        <%--                                                            src="${imageUrl}"--%>
+                                        <%--                                                            alt="product-image"--%>
+                                        <%--                                                            class="product-image"--%>
+                                        <%--                                                    />--%>
+                                        <%--                                                </div>--%>
+                                        <%--                                            </div>--%>
+                                        <%--                                        </c:forEach>--%>
+                                    </div>
+                                    <div class="slider slider-nav thumb-image">
+                                        <div class="thumbnail-image">
+                                            <div class="thumbImg">
+                                                <img src="${pageContext.request.contextPath}/assets/owner/img/book/DungLuaChonAnNhanKhiConTre/image1.jpg"
+                                                     alt="product-thumbnail"/>
+                                            </div>
+                                        </div>
+                                        <div class="thumbnail-image">
+                                            <div class="thumbImg">
+                                                <img src="${pageContext.request.contextPath}/assets/owner/img/book/DungLuaChonAnNhanKhiConTre/image1.jpg"
+                                                     alt="product-thumbnail"/>
+                                            </div>
+                                        </div>
+                                        <div class="thumbnail-image">
+                                            <div class="thumbImg">
+                                                <img src="${pageContext.request.contextPath}/assets/owner/img/book/DungLuaChonAnNhanKhiConTre/image1.jpg"
+                                                     alt="product-thumbnail"/>
+                                            </div>
+                                        </div>
+                                        <div class="thumbnail-image">
+                                            <div class="thumbImg">
+                                                <img src="${pageContext.request.contextPath}/assets/owner/img/book/DungLuaChonAnNhanKhiConTre/image1.jpg"
+                                                     alt="product-thumbnail"/>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <%--                                    <div class="slider slider-nav thumb-image">--%>
+                                    <%--                                        <c:forEach var="imageUrl" items="${book.imageUrls}">--%>
+                                    <%--                                            <div class="thumbnail-image">--%>
+                                    <%--                                                <div class="thumbImg">--%>
+                                    <%--                                                    <img src="${imageUrl}" alt="product-thumbnail"/>--%>
+                                    <%--                                                </div>--%>
+                                    <%--                                            </div>--%>
+                                    <%--                                        </c:forEach>--%>
+                                    <%--                                    </div>--%>
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xxl-8 col-xl-7 col-md-6 col-12 mb-24">
+                            <div class="return-reason-container">
+                                <div class="return-reason-header">
+                                    <p class="return-reason-title">Lý do trả hàng: Hư</p>
+                                    <p class="cr-card-date">
+                                        <i class="ri-calendar-2-line"></i>
+                                        2121
+                                    </p>
+                                </div>
+                                <div class="return-reason-body">
+                                    <p class="return-reason-label">Mô tả chi tiết:</p>
+                                    <p class="return-reason-description">
+                                        Loreâcsncasnckansckanskcnaskjcnaksjnckasncknjasnckansckjasnckjancccccccccccccccccccccccccccccccccccccccccccccccccm
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
                     <div class="cr-card-content">
                         <div class="price-summary">
                             <div class="summary-row">
@@ -131,17 +242,26 @@
                         </div>
                     </div>
 
-                    <c:if test="${order.status == 'REQUEST_REFUND' || order.status == 'WAITING_CONFIRMATION'}">
-                        <div class="btn-container cr-card-content d-grid gap-3 d-md-flex justify-content-md-end">
-                            <button id="btn-cancel" class="btn btn-outline-danger">Từ chối</button>
-                            <button id="btn-confirm" class="cr-btn-primary">Xác nhận</button>
-                        </div>
-                    </c:if>
 
+                    <div class="btn-container cr-card-content d-grid gap-3 d-md-flex justify-content-md-end
+                                <c:if
+                                    test="${order.status != 'REQUEST_REFUND' && order.status != 'WAITING_CONFIRMATION'}">d-none
+                                </c:if>"
+                    >
+                        <button id="btn-cancel" class="btn btn-outline-danger">Từ chối</button>
+                        <button id="btn-confirm" class="cr-btn-primary">Xác nhận</button>
+                    </div>
+
+                    <div class="btn-container-transport cr-card-content d-grid gap-3 d-md-flex justify-content-md-end
+                         <c:if test="${order.status != 'PACKING'}">d-none</c:if>">
+                        <button id="btn-transport" class="cr-btn-primary">Tiến hành vận chuyển</button>
+                    </div>
                 </div>
+
             </div>
         </div>
     </div>
+</div>
 </div>
 
 <!-- region Modal -->
@@ -193,6 +313,39 @@
     </div>
 </div>
 
+<%--TransportModal--%>
+<div class="modal fade" id="transportOrderModal" tabindex="-1" aria-labelledby="transportOrderModalLabel"
+     aria-hidden="true">
+    <input class="order-id" value="" hidden>
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="transportOrderModalLabel">Bạn có chắc muốn vận chuyển đơn hàng này
+                    không?</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Hủy</button>
+                <button
+                        type="button"
+                        class="btn cr-btn-primary"
+                        id="transportOrder"
+                        data-action="confirm">Xác nhận
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- endregion -->
+
+<!-- region VENDOR JS -->
+<script src="${pageContext.request.contextPath}/assets/owner/js/vendor/jquery.zoom.min.js" defer></script>
+<script src="${pageContext.request.contextPath}/assets/owner/js/vendor/mixitup.min.js" defer></script>
+<script src="${pageContext.request.contextPath}/assets/owner/js/vendor/range-slider.js" defer></script>
+<script src="${pageContext.request.contextPath}/assets/owner/js/vendor/aos.min.js" defer></script>
+<script src="${pageContext.request.contextPath}/assets/owner/js/vendor/swiper-bundle.min.js" defer></script>
+<script src="${pageContext.request.contextPath}/assets/owner/js/vendor/slick.min.js" defer></script>
 <!-- endregion -->
 
 <script src="${pageContext.request.contextPath}/assets/staff/js/order-details.js" defer></script>

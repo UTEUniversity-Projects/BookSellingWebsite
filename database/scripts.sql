@@ -601,11 +601,11 @@ INSERT INTO book_metadata (created_at, import_price, opening_date, status) VALUE
 ('2024-10-01 10:15:30', 100000, '2024-10-02 09:00:00', 'SOLD'),
 ('2024-10-01 10:15:30', 100000, '2024-10-02 09:00:00', 'SOLD'),
 ('2024-10-01 10:15:30', 100000, '2024-10-02 09:00:00', 'SOLD'),
-('2024-10-01 10:15:30', 100000, '2024-10-02 09:00:00', 'IN_STOCK'),
-('2024-10-01 10:15:30', 100000, '2024-10-02 09:00:00', 'IN_STOCK'),
-('2024-10-01 10:15:30', 100000, '2024-10-02 09:00:00', 'IN_STOCK'),
-('2024-10-01 10:15:30', 100000, '2024-10-02 09:00:00', 'IN_STOCK'),
-('2024-10-01 10:15:30', 100000, '2024-10-02 09:00:00', 'IN_STOCK'),
+('2024-10-01 10:15:30', 100000, '2024-10-02 09:00:00', 'SOLD'),
+('2024-10-01 10:15:30', 100000, '2024-10-02 09:00:00', 'SOLD'),
+('2024-10-01 10:15:30', 100000, '2024-10-02 09:00:00', 'SOLD'),
+('2024-10-01 10:15:30', 100000, '2024-10-02 09:00:00', 'SOLD'),
+('2024-10-01 10:15:30', 100000, '2024-10-02 09:00:00', 'SOLD'),
 
 -- 10 dòng với created_at từ `opening_date` của id = 2
 ('2024-10-03 09:30:15', 100000, '2024-10-04 10:00:00', 'SOLD'),
@@ -3510,55 +3510,116 @@ INSERT INTO book_template_media_file (book_template_id, media_file_id) VALUES
 -- 8. Table Author:
 -- Thêm dữ liệu vào bảng author
 INSERT INTO author (avatar, introduction, join_at, name) VALUES
-('https://kenh14cdn.com/203336854389633024/2022/4/9/1732920193150637133093626329146106221360649n-164947443607057196887.jpeg', 
- 'Tác giả nổi tiếng với những tác phẩm về kỹ năng sống và định hướng tuổi trẻ.', 
+('\\assets\\owner\\img\\author_book\\image1.jpg', 
+'Tony Buổi Sáng là một tác giả nổi tiếng với những tác phẩm truyền cảm hứng, đặc biệt tập trung vào kỹ năng sống, tinh thần khởi nghiệp và định hướng tuổi trẻ. Ông không chỉ là một cây bút sắc sảo mà còn là một người thầy dẫn lối, giúp thế hệ trẻ tự tin đối mặt với khó khăn và phát triển bản thân. Các tác phẩm của ông mang phong cách viết vừa dí dỏm, chân thực vừa sâu sắc, truyền tải thông điệp mạnh mẽ về giá trị cuộc sống. Ông luôn khuyến khích độc giả theo đuổi đam mê, bền bỉ và không ngừng học hỏi.', 
  '2019-01-15 10:00:00', 
- 'Tony Buổi Sáng'),
+ 'Tony Buổi Sáng');
 
-('https://kenh14cdn.com/203336854389633024/2022/4/9/1732920193150637133093626329146106221360649n-164947443607057196887.jpeg', 
- 'Chuyên gia giáo dục và nhà nghiên cứu với nhiều tác phẩm truyền cảm hứng.', 
- '2018-05-25 09:30:00', 
- 'Thầy Trần Thế Công'),
 
-('https://kenh14cdn.com/203336854389633024/2022/4/9/1732920193150637133093626329146106221360649n-164947443607057196887.jpeg', 
- 'Nhà văn trẻ, viết nhiều về trải nghiệm tuổi trẻ và sự nghiệp.', 
- '2020-07-10 14:20:00', 
- 'Cảnh Thiên'),
+INSERT INTO author (avatar, introduction, join_at, name) VALUES
+('\\assets\\owner\\img\\author_book\\image2.jpg', 
+'Thầy TRẦN THẾ CÔNG
+Người đã có hơn 10 năm chuyên tâm nghiên cứu, thực hành các phương pháp phát triển Tư duy, Đạo đức, Giáo dục, Tâm linh và đã TỰ mình chứng nghiệm được sự GIÁC NGỘ.
+Người sáng lập, đồng thời là Cố vấn Chiến lược cho Công ty Cổ phần Tâm Khai Sáng và Công ty Cổ phần Giáo dục Đích thực.
+Tác giả của chương trình Sự học Đích thực, bộ khóa học Khai Tâm, Thiền Linh Giác và nhiều chương trình giáo dục chuyên sâu khác.', 
+'2018-05-25 09:30:00', 
+'Thầy Trần Thế Công');
 
-('https://kenh14cdn.com/203336854389633024/2022/4/9/1732920193150637133093626329146106221360649n-164947443607057196887.jpeg', 
- 'Tác giả chuyên viết về hành trình và mục đích sống.', 
- '2016-03-14 11:45:00', 
- 'Phan Văn Trường'),
 
-('https://kenh14cdn.com/203336854389633024/2022/4/9/1732920193150637133093626329146106221360649n-164947443607057196887.jpeg', 
- 'Tác giả nổi tiếng với các sách kỹ năng sống và phát triển cá nhân.', 
- '2017-08-22 15:30:00', 
- 'Rosie Nguyễn'),
+INSERT INTO author (avatar, introduction, join_at, name) VALUES
+('\\assets\\owner\\img\\author_book\\image3.jpg', 
+'Cảnh Thiên là một nhà văn trẻ đầy triển vọng, nổi bật với các tác phẩm khắc họa sống động những trải nghiệm tuổi trẻ, ước mơ và hành trình xây dựng sự nghiệp. Với giọng văn chân thực và giàu cảm xúc, các tác phẩm của anh đã chạm đến trái tim của nhiều độc giả trẻ, giúp họ nhìn nhận lại giá trị cuộc sống và động viên họ kiên định theo đuổi đam mê. Không chỉ viết về thành công, anh còn chia sẻ những góc khuất, thất bại và bài học trưởng thành, giúp độc giả tìm thấy sự đồng cảm và cảm hứng để vượt qua thử thách.
+Cảnh Thiên: thông tin của tác giả không được tiết lộ nhiều chỉ biết đây là tác giả người Trung Quốc, từng nhiều năm làm vị trí biên tập và truyền thông, cung Sư Tử, thích văn chương, mỹ thực và những niềm hạnh phúc nhỏ bé trong cuộc sống. Sách tiêu biểu của tác giả: Phụ nữ cần độc lập về tài chính, Đừng lựa chọn an nhàn khi còn trẻ,…', 
+'2020-07-10 14:20:00', 
+'Cảnh Thiên');
 
-('https://kenh14cdn.com/203336854389633024/2022/4/9/1732920193150637133093626329146106221360649n-164947443607057196887.jpeg', 
- 'Nhà văn và chuyên gia về giao tiếp và các mối quan hệ xã hội.', 
- '2015-09-05 13:50:00', 
- 'Dale Carnegie'),
 
-('https://kenh14cdn.com/203336854389633024/2022/4/9/1732920193150637133093626329146106221360649n-164947443607057196887.jpeg', 
- 'Tác giả nổi tiếng với phong cách viết khác biệt, tư duy mới lạ.', 
- '2019-12-01 10:10:00', 
- 'Nguyễn Anh Dũng'),
+INSERT INTO author (avatar, introduction, join_at, name) VALUES
+('\\assets\\owner\\img\\author_book\\image4.jpg', 
+'Ông Phan Văn Trường là cố vấn thường trực của Chính phủ Cộng hòa Pháp về thương mại quốc tế từ thập niên 1990. Ông hai lần được Tổng thống Pháp phong Hiệp Sĩ (Đa, và được chủ tịch nước CHXHCN Việt Nam tặng huy chương “Vì sự nghiệp giáo dục” (2010).
 
-('https://kenh14cdn.com/203336854389633024/2022/4/9/1732920193150637133093626329146106221360649n-164947443607057196887.jpeg', 
- 'Chuyên gia về mối quan hệ và khác biệt tâm lý giữa giới tính.', 
- '2021-03-17 09:20:00', 
- 'John Gray'),
+Giáo sư giảng dạy Quy hoạch vùng và Kinh tế đô thị, Đại học Paris 1-Panthéton-Sorbonne (1973 - 1975)
 
-('https://kenh14cdn.com/203336854389633024/2022/4/9/1732920193150637133093626329146106221360649n-164947443607057196887.jpeg', 
- 'Nhà văn nổi tiếng với những câu chuyện về gia đình và tuổi thơ.', 
- '2018-11-29 12:30:00', 
- 'José Mauro de Vasconcelos'),
+Ông giữ nhiều vị trí quản lý và quản trị của nhiều tập đoàn hàng đầu thế giới, trong các lĩnh vực kinh doanh, xây dựng, điện lực, giao thông vận tải, lọc nước đô thị và dầu khí (1970 - 2005)
 
-('https://kenh14cdn.com/203336854389633024/2022/4/9/1732920193150637133093626329146106221360649n-164947443607057196887.jpeg', 
- 'Bác sĩ và tác giả, chuyên viết về y học và ý nghĩa cuộc sống.', 
- '2020-02-24 14:45:00', 
- 'Paul Kalanithi');
+Giảng dạy Quy hoạch vùng và Kinh tế đô thị, Đại học Kiến trúc Tp.HCM từ 2006; giảng dạy kỹ năng quản trị và lãnh đạo tại Viện John Von Neumann - Đại học quốc gia Tp.HCM từ 2014.
+
+Tổ chức nhiều hội thảo chuyên môn tại FSB, Học viện lãnh đạo FPT (FLI), các trường đại học như Hoa Sen, Công nghệ Sài Gòn, Tôn Đức Thắng, Giao thông vận tải, Kiến Trúc, cùng nhiều công ty và ngân hàng.
+
+Cố vấn chiến lược cho Viện Quản trị và Công nghệ (FSB, thuộc Đại học FPT) từ năm 2016
+
+Cố vấn cấp cao của Tập đoàn Xây dựng Hòa Bình từ 2018
+
+Những tác phẩm đã xuất bản:
+
+Bộ sách Kết tinh một đời: Một đời thương thuyết, Một đời quản trị, Một đời như kẻ tìm đường
+
+Công dân toàn cầu - Công dân vũ trụ
+
+Cơn lốc quản trị
+
+Các sách đồng tác giả:
+
+Không có đỉnh quá cao
+
+Không có sông quá dài
+
+Trong đó tác phẩm Một đời thương thuyết từng được vinh danh với Giải thưởng Sách Hay 2016, hạng mục Sách quản trị.', 
+'2016-03-14 11:45:00', 
+'Phan Văn Trường');
+
+
+INSERT INTO author (avatar, introduction, join_at, name) VALUES
+('\\assets\\owner\\img\\author_book\\image5.jpg', 
+'Rosie Nguyễn, còn được biết đến với tên thật là Nguyễn Hoàng Nguyên, đã xây dựng cho mình một sự nghiệp đa dạng và phong phú. Với danh hiệu nhà văn, blogger du lịch, huấn luyện viên Yoga, giáo viên và tác giả, Rosie đã ghi dấu ấn trong lòng người qua việc du lịch khắp nơi trên thế giới và chia sẻ những trải nghiệm đó thông qua viết blog và sách.
+
+Với vị trí số 55404 trên bảng xếp hạng thế giới và xếp hạng 189 trong danh sách các blogger nổi tiếng, Rosie Nguyễn là một trong những nữ phượt thủ Việt Nam gây ngưỡng mộ. Mặc dù công việc chính của cô được định danh là "một người viết lách," Rosie luôn mang trong mình đam mê viết từ khi còn nhỏ. Dù áp lực học văn ở trường gây cho cô mệt mỏi, Rosie đã tìm con đường khác bằng việc chọn học Đại học Ngoại thương và trở thành sinh viên chuyên ngành Kinh tế đối ngoại.
+
+Sau 6 năm đi làm từ khi tốt nghiệp, Rosie Nguyễn nhận ra rằng cuộc sống còn nhiều điều thú vị hơn việc chỉ gắn bó với những bức tường hẹp. Cô đã dành thời gian để khám phá những miền đất mới và ghi chép lại chặng đường đi qua, khác biệt với những blogger khác chỉ chia sẻ hình ảnh đẹp. Những bài viết Rosie chia sẻ sau mỗi chuyến đi đã mang lại giá trị thông tin cho độc giả và giúp cô tìm lại niềm vui viết lách nhờ sự ủng hộ nhiệt tình từ cộng đồng. Tuy nhiên, chỉ khi cuốn sách "Ta ba lô trên đất Á" được xuất bản và được đón nhận, Rosie Nguyễn mới thực sự nhận ra đam mê viết và quyết định quay trở lại.
+
+Vượt qua sự phản đối kịch liệt từ gia đình, Rosie Nguyễn đã dũng cảm bỏ lại mọi thứ phía sau để theo đuổi công việc mới - trở thành một tác giả đích thực. Mọi thứ diễn ra bất ngờ thuận lợi và những ước mơ của Rosie Nguyễn dần trở thành hiện thực, là một lần rẽ ngang trong cuộc đời cô, nhưng lần này cô đã biết chắc cuộc sống mà cô muốn.', 
+'2017-08-22 15:30:00', 
+'Rosie Nguyễn');
+
+INSERT INTO author (avatar, introduction, join_at, name) VALUES
+('\\assets\\owner\\img\\author_book\\image6.jpg', 
+'Dale Breckenridge Carnegie (trước kia là Carnagey cho tới năm 1922 và có thể một thời gian muộn hơn) (24 tháng 11 năm 1888 – 1 tháng 11 năm 1955) là một nhà văn và nhà thuyết trình Mỹ và là người phát triển các lớp tự giáo dục, nghệ thuật bán hàng, huấn luyện đoàn thể, nói trước công chúng và các kỹ năng giao tiếp giữa mọi người. Ra đời trong cảnh nghèo đói tại một trang trại ở Missouri, ông là tác giả cuốn Đắc Nhân Tâm, được xuất bản lần đầu năm 1936, một cuốn sách hàng bán chạy nhất và được biết đến nhiều nhất cho đến tận ngày nay, nội dung nói về cách ứng xử, cư xử trong cuộc sống. Ông cũng viết một cuốn tiểu sử Abraham Lincoln, với tựa đề Lincoln con người chưa biết, và nhiều cuốn sách khác.
+
+Carnegie là một trong những người đầu tiên đề xuất cái ngày nay được gọi là đảm đương trách nhiệm, dù nó chỉ được đề cập tỉ mỉ trong tác phẩm viết của ông. Một trong những ý tưởng chủ chốt trong những cuốn sách của ông là có thể thay đổi thái độ của người khác khi thay đổi sự đối xử của ta với họ.', 
+'2015-09-05 13:50:00', 
+'Dale Carnegie');
+
+
+INSERT INTO author (avatar, introduction, join_at, name) VALUES
+('\\assets\\owner\\img\\author_book\\image7.jpg', 
+'Grant was born in the township of West Bloomfield, Michigan, on August 13, 1981, to a lawyer father and a teacher mother.[1][2] He grew up in the suburbs of Detroit, Michigan. Grant participated in springboard diving and aspired to be a professional basketball player growing up.[2] During high school, he was named an All-American in 1999 in diving.[3]
+He received a B.A. from Harvard College, and M.S. and Ph.D. degrees from the University of Michigan in organizational psychology.[4][5] He worked as a professional magician during college.[6]', 
+'2019-12-01 10:10:00', 
+'Adam Grant');
+
+
+INSERT INTO author (avatar, introduction, join_at, name) VALUES
+('\\assets\\owner\\img\\author_book\\image8.jpg', 
+'John Gray (sinh ngày 28 tháng 12 năm 1951) là một cố vấn, giảng viên và tác giả người Mỹ. Năm 1969, ông bắt đầu một liên hệ kéo dài 9 năm với Maharishi Mahesh Yogi trước khi bắt đầu sự nghiệp với tư cách là một tác giả và cố vấn quan hệ cá nhân. Năm 1992, ông xuất bản cuốn sách Men Are from Mars, Women Are from Venus, trở thành cuốn sách bán chạy nhất trong thời gian dài và hình thành chủ đề trung tâm của tất cả các cuốn sách và hoạt động nghề nghiệp tiếp theo của ông. Sách của ông đã bán được hàng triệu bản.', 
+'2021-03-17 09:20:00', 
+'John Gray');
+
+INSERT INTO author (avatar, introduction, join_at, name) VALUES
+('\\assets\\owner\\img\\author_book\\image9.jpg', 
+'Sinh (1920-1984) là nhà văn người Brazil. Sinh ra trong một gia đình nghèo ở ngoại ô Rio de Janeiro, lớn lên ông phải làm đủ nghề để kiếm sống. Nhưng với tài kể chuyện thiên bẩm, trí nhớ phi thường, trí tưởng tượng tuyệt vời cùng vốn sống phong phú, José cảm thấy trong mình thôi thúc phải trở thành nhà văn nên đã bắt đầu sáng tác năm 22 tuổi. Tác phẩm nổi tiếng nhất của ông là tiểu thuyết mang màu sắc tự truyện Cây cam ngọt của tôi.
+
+Cuốn sách được đưa vào chương trình tiểu học của Brazil, được bán bản quyền cho hai mươi quốc gia và chuyển thể thành phim điện ảnh. Ngoài ra, José còn rất thành công trong vai trò diễn viên điện ảnh và biên kịch.', 
+'2018-11-29 12:30:00', 
+'José Mauro de Vasconcelos');
+
+
+INSERT INTO author (avatar, introduction, join_at, name) VALUES
+('\\assets\\owner\\img\\author_book\\image10.jpg', 
+'Paul Sudhir Arul Kalanithi (1 tháng 4 năm 1977 – 9 tháng 3 năm 2015) là một nhà giải phẫu thần kinh và nhà văn người Mỹ gốc Ấn Độ. Cuốn sách When Breath Becomes Air của anh là một cuốn hồi ký về cuộc đời và cuộc chiến đấu với bệnh ung thư phổi di căn giai đoạn IV của anh. Nó được xuất bản sau khi anh qua đời bởi Random House vào tháng 1 năm 2016.[1] Cuốn sách đã lọt vào danh sách những cuốn sách phi hư cấu bán chạy nhất của The New York Times trong nhiều tuần liên tiếp.[2] Tại Việt Nam, cuốn sách này đã được Nhà xuất bản Lao Động dịch và xuất bản vào tháng 7 năm 2017 với tên gọi Khi hơi thở hoá thinh không.', 
+'2020-02-24 14:45:00', 
+'Paul Kalanithi');
+
+
 
 -- 9. Table Author_Book:
 -- Thêm dữ liệu vào bảng author_book (mỗi sách với một tác giả khác nhau)
@@ -3627,38 +3688,42 @@ INSERT INTO author_book_template (author_id, book_template_id) VALUES
 
 -- 10.Table Translator:
 INSERT INTO translator (avatar, introduction, join_at, name) VALUES
-('https://kenh14cdn.com/203336854389633024/2022/4/9/1732920193150637133093626329146106221360649n-164947443607057196887.jpeg', 
- 'Dịch giả nổi tiếng với các tác phẩm dịch thuật trong lĩnh vực văn học và giáo dục.', 
+('\\assets\\owner\\img\\translator_book\\image1.jpg', 
+ 'Ngô Tự Lập là nhà văn, dịch giả và người sáng tác ca khúc, Ngô Tự Lập đồng thời cũng là một nhà nghiên cứu với các công trình trải rông nhiều lĩnh vực như lý luận văn học, triết học kinh tế, ngôn ngữ. Kỹ sư Hàng hải (Baku, Liên Xô, 1986), Cử nhân Luật (Việt Nam, 1993), Thạc sĩ Văn chương (ENS de Fontenay/Saint Cloud, Pháp, 1996), Tiến sĩ Ngôn ngữ và văn học Anh (Illinois State University, Hoa Kỳ, 2006).
+Ông là một trong những trí thức khởi xướng phong trào dịch thuật và truyền bá tinh hoa trí tuệ nhân loại vào Việt Nam đầu thế kỷ 21. Tác phẩm của ông được dịch và xuất bản tại Hoa Kỳ, Bỉ, Pháp, Ấn Độ, Thụy Điển, Canada, Thái Lan, Cộng hòa Séc.', 
  '2019-01-15 10:00:00', 
- 'Trần Văn Bình'),
+ 'Ngô Tự Lập'),
 
-('https://kenh14cdn.com/203336854389633024/2022/4/9/1732920193150637133093626329146106221360649n-164947443607057196887.jpeg', 
- 'Chuyên gia dịch thuật trong lĩnh vực phát triển bản thân và kỹ năng sống.', 
+('\\assets\\owner\\img\\translator_book\\image2.jpg', 
+ 'Tốt nghiệp Đại học Ngoại Giao năm 1983 tại Việt Nam; Thạc sỹ Quan hệ Quốc tế, Đại học Quốc tế Nhật Bản năm 1991; Tiến sỹ Triết học, Đại học Cambridge, Vương Quốc Anh năm 1997.
+Ông làm việc nhiều năm cho Bộ Ngoại giao, Đại sứ quán của Việt Nam tại London, Vương Quốc Anh. Hiện nay ông tham gia biên tập, biên dịch, hiệu đính cho một số báo và tạp chí.', 
  '2020-06-20 11:30:00', 
- 'Lê Thanh Hương'),
+ 'Bùi Minh Dũng'),
 
-('https://kenh14cdn.com/203336854389633024/2022/4/9/1732920193150637133093626329146106221360649n-164947443607057196887.jpeg', 
- 'Dịch giả có kinh nghiệm dịch các sách về tâm lý và giáo dục.', 
+('\\assets\\owner\\img\\translator_book\\image3.jpg', 
+ 'Hiện tại anh làm việc điện tử hóa tài liệu chính phủ về mối quan hệ công dân tại Leon County Government, Florida, Mỹ. Anh tốt nghiệp Đại học Tổng hợp năm 1990 tại Việt Nam; Thạc sỹ Quan hệ Công nghệ thông tin , Đại học Bang Florida, The Diocese of Pensacola-Tallahassee năm 1999.', 
  '2018-09-10 09:45:00', 
- 'Nguyễn Thị Hồng'),
+ 'Đinh Công Bằng'),
 
-('https://kenh14cdn.com/203336854389633024/2022/4/9/1732920193150637133093626329146106221360649n-164947443607057196887.jpeg', 
- 'Dịch giả chuyên về các tác phẩm văn học nổi tiếng trên thế giới.', 
+('\\assets\\owner\\img\\translator_book\\image4.jpg', 
+ 'Anh Tuấn Anh là cựu quản trị(Administrator) của diễn đàn Talawas và người phụ trách từ những ngày đầu trang Evan trang báo VnExpress.
+Anh có nhiều năm sống, học tập và làm việc tại Đức và Việt Nam trong các lĩnh vực báo chí, xuất bản, dịch thuật và tổ chức các sự kiện văn hóa. Hiện anh phụ trách dự án Sách dịch Đức-Việt của Viện Goethe Hà Nội.', 
  '2017-03-25 15:00:00', 
- 'Phạm Minh Châu'),
+ 'Đinh Tuấn Anh'),
 
-('https://kenh14cdn.com/203336854389633024/2022/4/9/1732920193150637133093626329146106221360649n-164947443607057196887.jpeg', 
- 'Dịch giả với nhiều kinh nghiệm dịch sách khoa học và tự truyện.', 
+('\\assets\\owner\\img\\translator_book\\image5.jpg', 
+ 'Lê Xuân Giang, một dịch giả kỳ cựu của văn học Hungary tại Việt Nam, đã được nhận Huân chương Chữ thập Vàng của Cộng hòa Hungary, một trong những phần thưởng cao quý nhất của Nhà nước Hungary.
+Là người đầu tiên chuyển ngữ các tác phẩm văn học Hungary từ nguyên bản, Lê Xuân Giang là dịch giả cuốn tiểu thuyết lịch sử nổi tiếng “Những ngôi sao Eghe” (Egri csillagok), ấn hành năm 1972 và lập tức, đã trở thành một “sự kiện xuất bản” với lượng ấn bản lớn được bán hết trong thời gian rất ngắn. Trong những năm sau, ông đã chuyển ngữ thành công các tác phẩm văn học cổ điển và hiện đại Hungary từ nhiều tác gia lớn của nền văn học nước này.', 
  '2021-12-01 13:20:00', 
- 'Vũ Văn Hải');
+ 'Lê Xuân Giang');
 
 -- 11. Translator_book:
 INSERT INTO translator_book_template (translator_id, book_template_id) VALUES
-(1, 3),  -- Trên đường băng
-(2, 6),  -- Tầm nhìn giáo dục
-(3, 8),  -- Đừng lựa chọn an nhàn khi còn trẻ
-(4, 9),  -- Một đời như kẻ tìm đường
-(5, 10);  -- Tuổi trẻ đáng giá bao nhiêu
+(1, 3), 
+(2, 6),  
+(3, 8),  
+(4, 9),  
+(5, 10); 
 
 -- 12. Table Review
 INSERT INTO review (content, created_at, is_hidden, rate, ready_to_introduce, book_template_id, customer_id) VALUES
@@ -3816,7 +3881,7 @@ INSERT INTO shipping (shipping_fee, shipping_unit, address_id) VALUES
 -- 18. Table Order
 INSERT INTO `order` (note, order_date, payment_type, status, vat, customer_id, shipping_id) VALUES
 ('Order note 1', '2024-11-03 10:30:00', 'BANKING', 'COMPLETE_DELIVERY', 0.1, 1, 1),
-('Order note 2', '2024-11-11 14:00:00', 'BANKING','CANCELED', 0.1, 2, 2),
+('Order note 2', '2024-11-11 14:00:00', 'BANKING','REQUEST_REFUND', 0.1, 2, 2),
 ('Order note 3', '2024-11-20 09:15:00', 'BANKING','WAITING_CONFIRMATION', 0.1, 1, 3),
 ('Order note 4', '2024-11-04 16:45:00', 'BANKING','CANCELED', 0.1, 2, 4),
 ('Order note 5', '2024-11-05 11:20:00', 'BANKING','WAITING_CONFIRMATION', 0.1, 1, 5),
@@ -3876,7 +3941,7 @@ INSERT INTO `order` (note, order_date, payment_type, status, vat, customer_id, s
 ('Order note 57', '2024-10-10 17:02:23', 'BANKING', 'COMPLETE_DELIVERY', 0.1, 4, 57),
 ('Order note 58', '2024-11-03 11:19:54', 'BANKING', 'COMPLETE_DELIVERY', 0.1, 5, 58);
 
-INSERT INTO line_item (order_id) VALUES
+INSERT INTO order_item (order_id) VALUES
 (1),
 (2),
 (3),
@@ -3885,7 +3950,7 @@ INSERT INTO line_item (order_id) VALUES
 (6),
 (7),
 (8);
-INSERT INTO line_item (order_id) VALUES
+INSERT INTO order_item (order_id) VALUES
 (9),
 (10),
 (11),
@@ -3937,7 +4002,7 @@ INSERT INTO line_item (order_id) VALUES
 (57),
 (58);
 
-INSERT INTO line_item_books (line_item_id, book_id) VALUES
+INSERT INTO order_item_books (order_item_id, book_id) VALUES
 (1, 1),
 (1, 2),
 (1, 3),
@@ -3979,7 +4044,7 @@ INSERT INTO line_item_books (line_item_id, book_id) VALUES
 (8, 39),
 (8, 40);
 
-INSERT INTO line_item_books (line_item_id, book_id) VALUES
+INSERT INTO order_item_books (order_item_id, book_id) VALUES
 (9, 51),
 (10, 52),
 (11, 53),
@@ -4387,3 +4452,6 @@ INSERT INTO order_promotion values
 (7, 56),
 (8, 8),
 (8, 57);
+
+INSERT INTO return_book(created_at, description, reason, order_id) values
+('2024-11-12 13:00:00', 'Sách bị gấp, bìa bị rách', 'DAMAGED', 2);

@@ -3,7 +3,7 @@
 
 <!-- Product -->
 <section class="section-product padding-t-100">
-  <div class="container">
+  <div class="container-xl">
     <div
             class="row mb-minus-24"
             data-aos="fade-up"
@@ -107,7 +107,7 @@
               <button type="button" class="minus">-</button>
             </div>
             <div class="cr-add-button">
-              <button type="button" class="cr-button cr-btn-secondary cr-shopping-bag">
+              <button type="button" class="cr-button cr-btn-secondary cr-shopping-bag add-to-cart-btn" data-cart-id="${cart.id}" data-book-id="${book.id}">
                 Thêm vào giỏ hàng
               </button>
             </div>
@@ -116,14 +116,6 @@
                 Mua ngay
               </button>
             </div>
-            <!-- <div class="cr-card-icon">
-                          <a href="javascript:void(0)" class="wishlist">
-                              <i class="ri-heart-line"></i>
-                          </a>
-                          <a class="model-oraganic-product" data-bs-toggle="modal" href="#quickview" role="button">
-                              <i class="ri-eye-line"></i>
-                          </a>
-                      </div> -->
           </div>
         </div>
       </div>
@@ -372,7 +364,7 @@
         data-aos-duration="2000"
         data-aos-delay="400"
 >
-  <div class="container">
+  <div class="container-xl">
     <div class="row">
       <div class="col-lg-12">
         <div class="mb-30">
@@ -622,5 +614,3 @@
     </div>
   </div>
 </section>
-
-<script src="${pageContext.request.contextPath}/assets/customer/js/book-details.js" defer></script>

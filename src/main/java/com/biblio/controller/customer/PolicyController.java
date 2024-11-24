@@ -29,7 +29,7 @@ public class PolicyController extends HttpServlet {
      */
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         // TODO Auto-generated method stub
-        request.setAttribute("breadcumb", "Chính sách cửa hàng");
+        request.setAttribute("breadcrumb", "Chính sách cửa hàng");
         request.getRequestDispatcher("/views/customer/policy.jsp").forward(request, response);
     }
 
