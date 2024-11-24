@@ -2894,14 +2894,14 @@ ul.navbar-nav .dropdown:hover .dropdown-menu {
   width: 100%;
   padding-right: 30px;
   text-decoration: none;
-  color: #777;
+  color: #2b2b2d;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
   display: block;
   font-size: 15px;
   line-height: 18px;
-  font-weight: 400;
+  font-weight: 500;
 }
 .cr-cart-view .cr-cart-inner .cr-cart-top ul.crcart-pro-items li .cr-pro-content .cr-cart-qty {
   margin-top: 5px;
@@ -2914,10 +2914,15 @@ ul.navbar-nav .dropdown:hover .dropdown-menu {
   font-size: 14px;
   display: block;
 }
-.cr-cart-view .cr-cart-inner .cr-cart-top ul.crcart-pro-items li .cr-pro-content .cart-price span {
-  color: #777;
+.cr-cart-view .cr-cart-inner .cr-cart-top ul.crcart-pro-items li .cr-pro-content .cart-price .new-price {
+  color: #64b496;
   font-weight: 700;
-  font-size: 16px;
+}
+.cr-cart-view .cr-cart-inner .cr-cart-top ul.crcart-pro-items li .cr-pro-content .cart-price .old-price {
+  color: #777;
+  margin-left: 5px;
+  font-size: 13px;
+  text-decoration: line-through;
 }
 .cr-cart-view .cr-cart-inner .cr-cart-top ul.crcart-pro-items li .cr-pro-content .remove {
   padding: 0 9px;
@@ -6017,6 +6022,16 @@ iframe {
   font-size: 15px;
   font-weight: 500;
   text-align: center;
+}
+.cr-table-content table tbody tr .cr-cart-price .new-price {
+  color: #64b496;
+  font-weight: 700;
+}
+.cr-table-content table tbody tr .cr-cart-price .old-price {
+  color: #777;
+  margin-left: 5px;
+  font-size: 13px;
+  text-decoration: line-through;
 }
 .cr-table-content table tbody tr .cr-cart-subtotal {
   color: #555;

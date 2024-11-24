@@ -195,6 +195,7 @@
                         <a
                                 href="javascript:void(0)"
                                 class="cr-right-bar-item Shopping-toggle"
+                                id="view-cart-btn"
                         >
                             <i class="ri-shopping-cart-line"></i>
                             <span>Xem giỏ hàng</span>
