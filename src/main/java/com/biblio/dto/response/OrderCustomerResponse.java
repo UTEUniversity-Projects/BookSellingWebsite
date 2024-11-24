@@ -1,9 +1,9 @@
 package com.biblio.dto.response;
 
-import com.biblio.enumeration.EOrderStatus;
 import lombok.*;
 
-import java.time.LocalDateTime;
+import java.util.HashSet;
+import java.util.Set;
 
 @Data
 @NoArgsConstructor
@@ -13,13 +13,15 @@ import java.time.LocalDateTime;
 @Getter
 @Setter
 public class OrderCustomerResponse {
-    private Long id;
+    private long id;
     private String note;
-    private LocalDateTime orderDate;
+    private String orderDate;
     private String paymentType;
     private String status;
     private Double vat;
     private Long customerId;
     private Long shippingId;
+    private Double totalPrice;
+    private Set<BookResponse> book = new HashSet<>();
 
 }
