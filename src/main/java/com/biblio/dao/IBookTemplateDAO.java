@@ -23,5 +23,5 @@ public interface IBookTemplateDAO {
     Long countSoldById(Long id);
 
     Long countInstockById(Long id);
-  
+
 }

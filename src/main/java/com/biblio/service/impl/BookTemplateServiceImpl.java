@@ -84,4 +84,5 @@ public class BookTemplateServiceImpl implements IBookTemplateService {
         return bookTemplateDAO.countByCriteria(request.getTitle(), request.getCategoryId(), request.getSortBy());
     }
 
+
 }

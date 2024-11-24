@@ -163,6 +163,7 @@ public class BookTemplateDAOImpl extends GenericDAOImpl<BookTemplate> implements
         return super.countByJPQL(jpql.toString(), params);
     }
 
+    @Override
     public Long countSoldById(Long bookTemplateId) {
         String jpql = "SELECT COUNT(b) FROM Book b " +
                 "JOIN b.bookTemplate bt " +
