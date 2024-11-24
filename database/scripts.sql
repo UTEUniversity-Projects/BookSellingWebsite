@@ -601,11 +601,11 @@ INSERT INTO book_metadata (created_at, import_price, opening_date, status) VALUE
 ('2024-10-01 10:15:30', 100000, '2024-10-02 09:00:00', 'SOLD'),
 ('2024-10-01 10:15:30', 100000, '2024-10-02 09:00:00', 'SOLD'),
 ('2024-10-01 10:15:30', 100000, '2024-10-02 09:00:00', 'SOLD'),
-('2024-10-01 10:15:30', 100000, '2024-10-02 09:00:00', 'IN_STOCK'),
-('2024-10-01 10:15:30', 100000, '2024-10-02 09:00:00', 'IN_STOCK'),
-('2024-10-01 10:15:30', 100000, '2024-10-02 09:00:00', 'IN_STOCK'),
-('2024-10-01 10:15:30', 100000, '2024-10-02 09:00:00', 'IN_STOCK'),
-('2024-10-01 10:15:30', 100000, '2024-10-02 09:00:00', 'IN_STOCK'),
+('2024-10-01 10:15:30', 100000, '2024-10-02 09:00:00', 'SOLD'),
+('2024-10-01 10:15:30', 100000, '2024-10-02 09:00:00', 'SOLD'),
+('2024-10-01 10:15:30', 100000, '2024-10-02 09:00:00', 'SOLD'),
+('2024-10-01 10:15:30', 100000, '2024-10-02 09:00:00', 'SOLD'),
+('2024-10-01 10:15:30', 100000, '2024-10-02 09:00:00', 'SOLD'),
 
 -- 10 dòng với created_at từ `opening_date` của id = 2
 ('2024-10-03 09:30:15', 100000, '2024-10-04 10:00:00', 'SOLD'),
@@ -3881,7 +3881,7 @@ INSERT INTO shipping (shipping_fee, shipping_unit, address_id) VALUES
 -- 18. Table Order
 INSERT INTO `order` (note, order_date, payment_type, status, vat, customer_id, shipping_id) VALUES
 ('Order note 1', '2024-11-03 10:30:00', 'BANKING', 'COMPLETE_DELIVERY', 0.1, 1, 1),
-('Order note 2', '2024-11-11 14:00:00', 'BANKING','CANCELED', 0.1, 2, 2),
+('Order note 2', '2024-11-11 14:00:00', 'BANKING','REQUEST_REFUND', 0.1, 2, 2),
 ('Order note 3', '2024-11-20 09:15:00', 'BANKING','WAITING_CONFIRMATION', 0.1, 1, 3),
 ('Order note 4', '2024-11-04 16:45:00', 'BANKING','CANCELED', 0.1, 2, 4),
 ('Order note 5', '2024-11-05 11:20:00', 'BANKING','WAITING_CONFIRMATION', 0.1, 1, 5),
@@ -3941,7 +3941,7 @@ INSERT INTO `order` (note, order_date, payment_type, status, vat, customer_id, s
 ('Order note 57', '2024-10-10 17:02:23', 'BANKING', 'COMPLETE_DELIVERY', 0.1, 4, 57),
 ('Order note 58', '2024-11-03 11:19:54', 'BANKING', 'COMPLETE_DELIVERY', 0.1, 5, 58);
 
-INSERT INTO line_item (order_id) VALUES
+INSERT INTO order_item (order_id) VALUES
 (1),
 (2),
 (3),
@@ -3950,7 +3950,7 @@ INSERT INTO line_item (order_id) VALUES
 (6),
 (7),
 (8);
-INSERT INTO line_item (order_id) VALUES
+INSERT INTO order_item (order_id) VALUES
 (9),
 (10),
 (11),
@@ -4002,7 +4002,7 @@ INSERT INTO line_item (order_id) VALUES
 (57),
 (58);
 
-INSERT INTO line_item_books (line_item_id, book_id) VALUES
+INSERT INTO order_item_books (order_item_id, book_id) VALUES
 (1, 1),
 (1, 2),
 (1, 3),
@@ -4044,7 +4044,7 @@ INSERT INTO line_item_books (line_item_id, book_id) VALUES
 (8, 39),
 (8, 40);
 
-INSERT INTO line_item_books (line_item_id, book_id) VALUES
+INSERT INTO order_item_books (order_item_id, book_id) VALUES
 (9, 51),
 (10, 52),
 (11, 53),
@@ -4452,3 +4452,6 @@ INSERT INTO order_promotion values
 (7, 56),
 (8, 8),
 (8, 57);
+
+INSERT INTO return_book(created_at, description, reason, order_id) values
+('2024-11-12 13:00:00', 'Sách bị gấp, bìa bị rách', 'DAMAGED', 2);
