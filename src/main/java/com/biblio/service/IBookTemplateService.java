@@ -21,5 +21,9 @@ public interface IBookTemplateService {
     List<BookCardResponse> getBookTemplateByCriteria(SearchBookRequest request);
 
     long getBookTemplateQuantityByCriteria(SearchBookRequest request);
+  
+    List<BookCardResponse> getBookTemplateByTitle(String title);
+  
+    List<BookSoldAllTimeResponse> getListCountBookSoldAllTime();
 
 }

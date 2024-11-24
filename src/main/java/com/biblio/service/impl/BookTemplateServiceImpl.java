@@ -1,17 +1,20 @@
 package com.biblio.service.impl;
 
 import com.biblio.dao.IBookTemplateDAO;
+
 import com.biblio.dto.request.SearchBookRequest;
 import com.biblio.dto.response.BookCardResponse;
 import com.biblio.dto.response.BookDetailsResponse;
 import com.biblio.dto.response.BookManagementResponse;
 import com.biblio.dto.response.BookTemplatePromotionResponse;
+
 import com.biblio.entity.BookTemplate;
 import com.biblio.mapper.BookTemplateMapper;
 import com.biblio.service.IBookTemplateService;
 
 import javax.inject.Inject;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 
 public class BookTemplateServiceImpl implements IBookTemplateService {
@@ -65,6 +68,18 @@ public class BookTemplateServiceImpl implements IBookTemplateService {
         }
         return bookCardResponseList;
 
+    }
+    @Override
+    public List<BookSoldAllTimeResponse> getListCountBookSoldAllTime() {
+        List<BookSoldAllTimeResponse> listBookSold = new ArrayList<>();
+        List<BookTemplate> bookTemplateList = bookTemplateDAO.findAllForHome();
+        for (BookTemplate bookTemplate : bookTemplateList) {
+            BookTemplate book = bookTemplateDAO.findOneForDetails(bookTemplate.getId());
+            listBookSold.add(BookTemplateMapper.toBookSoldAllTimeResponse(book));
+        }
+
+        listBookSold.sort(Comparator.comparingLong(BookSoldAllTimeResponse::getCountSold).reversed());
+        return listBookSold;
     }
 
     @Override

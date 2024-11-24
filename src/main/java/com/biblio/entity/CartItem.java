@@ -28,6 +28,8 @@ public class CartItem {
     private Long  quantity;
 
     // region Methods
-
+    public double calculateSubTotal() {
+        return quantity * bookTemplate.getBooks().iterator().next().getSellingPrice();
+    }
     // endregion
 }

@@ -543,7 +543,7 @@
                                             <i class="ri-eye-line"></i>
                                         </a>
                                     </div>
-                                    <a class="cr-shopping-bag add-to-cart-btn" href="javascript:void(0)" data-book-id="${book.id}" data-cart-id="${cart.id}" data-quantity="1">
+                                    <a class="cr-shopping-bag add-to-cart-btn" href="javascript:void(0)" data-cart-id="${cart.id}" data-book-id="${book.id}" data-quantity="1">
                                         <i class="ri-shopping-bag-line"></i>
                                     </a>
                                 </div>
@@ -1317,3 +1317,4 @@
 </section>
 
 <script src="${pageContext.request.contextPath}/assets/customer/js/book-list.js"></script>
+

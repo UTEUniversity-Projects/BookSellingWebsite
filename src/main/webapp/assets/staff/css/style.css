@@ -1364,6 +1364,14 @@ span#selected-text {
   color: #777;
 }
 
+.d-none {
+  display: none !important;
+}
+
+.d-flex {
+  display: flex !important;
+}
+
 @keyframes appear {
   0% {
     transform: scale(0);
@@ -3173,6 +3181,7 @@ Tools sidebar
 }
 .cr-card-content {
   padding: 24px;
+  border-bottom: 1px solid #eee;
 }
 .cr-card-content .note {
   margin: 15px 0 0 0;
@@ -6821,6 +6830,97 @@ div.dataTables_wrapper div.dataTables_info {
   border-bottom: 5px solid #50d1f8;
 }
 
+.price-summary {
+  background-color: #fafafa;
+  border-top: 1px solid rgba(0, 0, 0, 0.09);
+}
+
+.summary-row {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  font-size: 12px;
+  border-bottom: 1px dotted rgba(0, 0, 0, 0.09);
+  padding: 0 24px;
+  text-align: right;
+}
+
+.summary-label {
+  color: rgba(0, 0, 0, 0.54);
+  padding: 13px 10px;
+}
+
+.summary-value {
+  border-left: 1px dotted rgba(0, 0, 0, 0.09);
+  justify-content: flex-end;
+  padding: 13px 0 13px 10px;
+  width: 240px;
+  word-wrap: break-word;
+  color: rgba(0, 0, 0, 0.8);
+}
+
+.currency-symbol {
+  position: relative;
+  top: -4px;
+  font-size: 0.9em;
+}
+
+.total-value {
+  color: rgba(238, 77, 45, 0.91);
+  font-size: 16px;
+}
+
+.return-reason-container {
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 16px;
+  background-color: #f9f9f9;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  margin: 20px 0;
+  font-family: Arial, sans-serif;
+}
+.return-reason-container .return-reason-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12px;
+}
+.return-reason-container .return-reason-header .cr-card-date {
+  font-size: 14px;
+  color: #777;
+  display: flex;
+  align-items: center;
+}
+.return-reason-container .return-reason-header .cr-card-date i {
+  margin-right: 4px;
+  color: #555;
+}
+.return-reason-container .return-reason-header .return-reason-title {
+  font-weight: bold;
+  font-size: 16px;
+  color: #333;
+  text-align: right;
+}
+.return-reason-container .return-reason-body {
+  padding: 16px;
+  margin-top: 12px;
+}
+.return-reason-container .return-reason-body .return-reason-label {
+  font-weight: bold;
+  font-size: 15px;
+  color: #333;
+  margin-bottom: 8px;
+}
+.return-reason-container .return-reason-body .return-reason-description {
+  font-size: 14px;
+  color: #555;
+  line-height: 1.6;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  white-space: normal;
+  padding: 8px;
+}
+
 /* Products-page */
 p {
   margin-bottom: 0;
@@ -7851,46 +7951,6 @@ p {
   font-style: italic;
   margin-top: 5px;
   margin-left: 5px;
-}
-
-.price-summary {
-  background-color: #fafafa;
-  border-top: 1px solid rgba(0, 0, 0, 0.09);
-}
-
-.summary-row {
-  display: flex;
-  justify-content: flex-end;
-  align-items: center;
-  font-size: 12px;
-  border-bottom: 1px dotted rgba(0, 0, 0, 0.09);
-  padding: 0 24px;
-  text-align: right;
-}
-
-.summary-label {
-  color: rgba(0, 0, 0, 0.54);
-  padding: 13px 10px;
-}
-
-.summary-value {
-  border-left: 1px dotted rgba(0, 0, 0, 0.09);
-  justify-content: flex-end;
-  padding: 13px 0 13px 10px;
-  width: 240px;
-  word-wrap: break-word;
-  color: rgba(0, 0, 0, 0.8);
-}
-
-.currency-symbol {
-  position: relative;
-  top: -4px;
-  font-size: 0.9em;
-}
-
-.total-value {
-  color: rgba(238, 77, 45, 0.91);
-  font-size: 16px;
 }
 
 #toast {

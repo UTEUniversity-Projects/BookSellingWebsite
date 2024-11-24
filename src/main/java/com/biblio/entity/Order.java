@@ -81,5 +81,25 @@ public class Order implements Serializable {
         return roundedTotal.doubleValue();
     }
 
+    public double calculateTotalDiscount() {
+        double remainingPrice = calTotalPrice();
+        double totalDiscount = 0;
+
+        for (Promotion promotion : promotions) {
+            double discount = promotion.calculateDiscount(remainingPrice);
+            totalDiscount += discount;
+            remainingPrice -= discount;
+        }
+
+        return totalDiscount;
+    }
+
+    public double getFinalPrice() {
+        double totalPrice = calTotalPrice() + shipping.getShippingFee();
+        double totalDiscount = calculateTotalDiscount();
+
+        return Math.max(0, totalPrice - totalDiscount);
+    }
+
     // endregion
 }

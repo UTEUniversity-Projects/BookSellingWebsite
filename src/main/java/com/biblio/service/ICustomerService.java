@@ -1,9 +1,7 @@
 package com.biblio.service;
 
 import com.biblio.dto.request.CustomerRegisterRequest;
-import com.biblio.dto.response.CustomerDetailResponse;
-import com.biblio.dto.response.CustomerGetListResponse;
-import com.biblio.dto.response.CustomerRegisterResponse;
+import com.biblio.dto.response.*;
 import com.biblio.entity.Customer;
 
 import java.time.LocalDateTime;
@@ -30,4 +28,5 @@ public interface ICustomerService {
     Long countCustomersJointAtTime(LocalDateTime start, LocalDateTime end);
 
     List<Customer> findAllCustomers();
+    List<CountCustomerJoinResponse>countNewCustomersAtTime(LocalDateTime start, LocalDateTime end);
 }

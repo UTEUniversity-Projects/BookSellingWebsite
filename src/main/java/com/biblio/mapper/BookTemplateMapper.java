@@ -1,5 +1,6 @@
 package com.biblio.mapper;
 
+import com.biblio.dao.impl.BookTemplateDAOImpl;
 import com.biblio.dto.response.*;
 import com.biblio.entity.*;
 import com.biblio.enumeration.EBookLanguage;
@@ -124,6 +125,20 @@ public class BookTemplateMapper {
                 .id(bookTemplate.getId())
                 .title(singlebook.getTitle())
                 .subCategoryId(singlebook.getSubCategory().getId())
+                .build();
+    }
+    public static BookSoldAllTimeResponse toBookSoldAllTimeResponse(BookTemplate bookTemplate) {
+        BookTemplateDAOImpl bookTemplateDAO = new BookTemplateDAOImpl();
+        Book singlebook = bookTemplate.getBooks().iterator().next();
+        return BookSoldAllTimeResponse.builder()
+                .id(bookTemplate.getId())
+                .srcImg(bookTemplate.getMediaFiles()
+                        .get(0)
+                        .getStoredCode())
+                .title(singlebook.getTitle())
+                .category(singlebook.getSubCategory().getCategory().getName())
+                .countSold(bookTemplateDAO.countSoldById(bookTemplate.getId()))
+                .countInStock(bookTemplateDAO.countInstockById(bookTemplate.getId()))
                 .build();
     }
     // endregion

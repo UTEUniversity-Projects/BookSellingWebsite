@@ -1,19 +1,15 @@
 package com.biblio.service.impl;
 
 import com.biblio.dao.ICustomerDAO;
-import com.biblio.dao.IOrderDAO;
-import com.biblio.dao.impl.CustomerDAOImpl;
 import com.biblio.dto.request.CustomerRegisterRequest;
-import com.biblio.dto.response.CustomerDetailResponse;
-import com.biblio.dto.response.CustomerGetListResponse;
-import com.biblio.dto.response.CustomerRegisterResponse;
-import com.biblio.dto.response.CustomerReportResponse;
+import com.biblio.dto.response.*;
 import com.biblio.entity.Customer;
 import com.biblio.enumeration.EAccountStatus;
 import com.biblio.mapper.CustomerMapper;
 import com.biblio.service.ICustomerService;
 
 import javax.inject.Inject;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -87,6 +83,35 @@ public class CustomerServiceImpl implements ICustomerService {
     @Override
     public List<Customer> findAllCustomers() {
         return customerDAO.findAll();
+    }
+
+    @Override
+    public List<CountCustomerJoinResponse> countNewCustomersAtTime(LocalDateTime start, LocalDateTime end) {
+        List<NewCustomerResponse> list = new ArrayList<>();
+        for (Customer customer : customerDAO.findAll()) {
+            list.add(CustomerMapper.toNewCustomerResponse(customer));
+        }
+        List<CountCustomerJoinResponse> countCustomerJoins = new ArrayList<>();
+        LocalDate currentDate = start.toLocalDate();
+        LocalDate endDate = end.toLocalDate();
+
+        while (!currentDate.isAfter(endDate)) {
+            CountCustomerJoinResponse countCustomerJoin = new CountCustomerJoinResponse();
+            countCustomerJoin.setJointAt(currentDate.atStartOfDay());
+            countCustomerJoin.setCount(0L);
+            countCustomerJoins.add(countCustomerJoin);
+            currentDate = currentDate.plusDays(1);
+        }
+
+        for (NewCustomerResponse newCustomer : list) {
+            for (CountCustomerJoinResponse countCustomerJoin : countCustomerJoins) {
+                if(newCustomer.getJointAt().isEqual(countCustomerJoin.getJointAt())) {
+                    countCustomerJoin.setCount(countCustomerJoin.getCount() + 1L);
+                    break;
+                }
+            }
+        }
+        return countCustomerJoins;
     }
 
 }

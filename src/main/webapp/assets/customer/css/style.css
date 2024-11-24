@@ -2862,7 +2862,12 @@ ul.navbar-nav .dropdown:hover .dropdown-menu {
 .cr-cart-view .cr-cart-inner .cr-cart-top ul.crcart-pro-items {
   margin: 0;
   padding-left: 0;
+  max-height: 430px;
+  overflow-y: auto;
   list-style: none;
+  scroll-behavior: smooth;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
 }
 .cr-cart-view .cr-cart-inner .cr-cart-top ul.crcart-pro-items li {
   margin-bottom: 20px;
@@ -2923,6 +2928,9 @@ ul.navbar-nav .dropdown:hover .dropdown-menu {
   line-height: 15px;
   background-color: #fff;
   color: #fb5555;
+}
+.cr-cart-view .cr-cart-inner .cr-cart-top ul.crcart-pro-items ul.crcart-pro-items::-webkit-scrollbar {
+  display: none;
 }
 .cr-cart-view .cr-cart-inner .cr-cart-bottom {
   position: relative;
@@ -7999,6 +8007,7 @@ p {
   align-items: center;
   justify-content: center;
   position: relative;
+  height: 198px;
 }
 .cr-product-card .cr-product-image .cr-side-view {
   transition: all 0.5s ease-in-out;
