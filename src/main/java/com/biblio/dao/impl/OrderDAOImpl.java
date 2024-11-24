@@ -106,7 +106,7 @@ public class OrderDAOImpl extends GenericDAOImpl<Order> implements IOrderDAO {
     @Override
     public OrderCustomerResponse findById(Long id) {
         // Query to fetch the order details
-        String query = "SELECT o FROM Order o LEFT JOIN FETCH o.customer c LEFT JOIN FETCH o.lineItems li LEFT JOIN FETCH o.shipping s WHERE o.id = :id";
+        String query = "SELECT o FROM Order o LEFT JOIN FETCH o.customer c LEFT JOIN FETCH o.orderItems oi LEFT JOIN FETCH o.shipping s WHERE o.id = :id";
 
         try {
             // Execute the query
@@ -125,7 +125,7 @@ public class OrderDAOImpl extends GenericDAOImpl<Order> implements IOrderDAO {
                     .customerId(order.getCustomer().getId())
                     .customerName(order.getCustomer().getFullName())
                     .shippingId(order.getShipping() != null ? order.getShipping().getId() : null)
-                    .lineItems(order.getLineItems())
+                    .lineItems(order.getOrderItems())
                     .address(order.getShipping().getAddress().getFullAddress())
                     .email(order.getCustomer().getEmailAddress())
                     .build();

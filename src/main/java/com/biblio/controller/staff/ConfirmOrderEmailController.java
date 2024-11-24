@@ -93,7 +93,7 @@ public class ConfirmOrderEmailController extends HttpServlet {
         // Tạo một Map để nhóm các cuốn sách giống nhau
         Map<String, Integer> bookCountMap = new HashMap<>();
         emailContent.append("Sản phẩm:\n");
-        for (OrderItem item : order.getOrderItems()) {
+        for (OrderItem item : order.getLineItems()) {
             for (Book book : item.getBooks()) {
                 String bookTitle = book.getTitle();  // Tên sách
                 bookCountMap.put(bookTitle, bookCountMap.getOrDefault(bookTitle, 0) + 1);
@@ -107,7 +107,7 @@ public class ConfirmOrderEmailController extends HttpServlet {
 
             // Lấy giá của sách
             int bookPrice = 0; // Định nghĩa kiểu int thay vì double
-            for (LineItem item : order.getLineItems()) {
+            for (OrderItem item : order.getLineItems()) {
                 for (Book book : item.getBooks()) {
                     if (book.getTitle().equals(bookTitle)) {
                         bookPrice = (int) book.getSellingPrice(); // Ép kiểu giá từ double sang int

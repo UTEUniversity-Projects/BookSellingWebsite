@@ -27,9 +27,12 @@ public class OrderCustomerResponse {
     private Long customerId;
     private Long shippingId;
     private String customerName;
-    private Set<LineItem> lineItems;
+    private Set<OrderItem> lineItems;
     private Set<Promotion> promotions = new HashSet<>();
     private Order order;
+    private String address;
+    private  String email;
+
     public OrderCustomerResponse(Long id, String note, LocalDateTime orderDate, String paymentType, String status, Double vat, Long customerId, Long shippingId) {
         this.id = id;
         this.note = note;
@@ -43,12 +46,13 @@ public class OrderCustomerResponse {
 
     public double calTotalPrice() {
         double totalPrice = 0.0;
-        for (LineItem item : lineItems) {
+        for (OrderItem item : lineItems) {
             totalPrice += item.calPriceItem();
         }
         BigDecimal roundedTotal = new BigDecimal(totalPrice).setScale(2, RoundingMode.HALF_UP);
         return roundedTotal.doubleValue();
     }
+
     public double calculateTotalDiscount() {
         double remainingPrice = calTotalPrice();
         double totalDiscount = 0;
@@ -68,6 +72,4 @@ public class OrderCustomerResponse {
 
         return Math.max(0, totalPrice - totalDiscount);
     }
-    private String address;
-    private  String email;
 }
