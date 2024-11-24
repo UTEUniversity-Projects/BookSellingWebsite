@@ -24,7 +24,7 @@ public class AuthorMapper {
                 .id(author.getId().toString())
                 .name(author.getName())
                 .avatar(author.getAvatar())
-                .introduction(author.getIntroduction())
+                 .introduction(author.getIntroduction())
                 .joinAt(author.getJoinAt().format(DateTimeFormatter.ofPattern("dd/MM/yyyy")))
                 .build();
     }

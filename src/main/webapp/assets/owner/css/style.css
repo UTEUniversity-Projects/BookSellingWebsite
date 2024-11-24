@@ -50,7 +50,7 @@ input,
   padding: 8px 15px;
   border: 1px solid #eee;
   line-height: 22px;
-  border-radius: 0;
+  border-radius: 0px;
   font-size: 13px;
   color: #999;
 }
@@ -3485,7 +3485,7 @@ table.dataTable td {
   font-size: 13px;
   font-weight: 400;
   vertical-align: middle;
-  text-transform: capitalize;
+  /*text-transform: capitalize;*/
 }
 table.dataTable td .btn-outline-success.dropdown-toggle.show:focus, table.dataTable td .btn-outline-success.dropdown-toggle.show:active,
 table.dataTable td .btn-group > :not(.btn-check) + .btn:focus,
