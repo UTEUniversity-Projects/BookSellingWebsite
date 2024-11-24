@@ -141,6 +141,7 @@ public class BookTemplateMapper {
                 .countInStock(bookTemplateDAO.countInstockById(bookTemplate.getId()))
                 .build();
     }
+
     // endregion
 
     // region DTO to Entity
