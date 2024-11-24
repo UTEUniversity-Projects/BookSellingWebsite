@@ -233,7 +233,7 @@
                             </c:forEach>
                             <div class="summary-row total-row">
                                 <div class="summary-label">Thành tiền</div>
-                                <div class="summary-value price-value total-value">${order.finalPrice}</div>
+                                <div class="summary-value price-value total-value" >${order.finalPrice}</div>
                             </div>
                             <div class="summary-row">
                                 <div class="summary-label">Phương thức thanh toán</div>
@@ -298,6 +298,7 @@
 <div class="modal fade" id="confirmOrderModal" tabindex="-1" aria-labelledby="confirmOrderModalLabel"
      aria-hidden="true">
     <input class="order-id" value="" hidden>
+    <%--<input class="finalPrice" value="${order.finalPrice}" hidden>--%>
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
@@ -306,12 +307,7 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Hủy</button>
-                <button
-                        type="button"
-                        class="btn cr-btn-primary"
-                        id="confirmOrder"
-                        data-action="confirm">Xác nhận
-                </button>
+                <button type="button" class="btn cr-btn-primary" id="confirmOrder">Xác nhận</button>
             </div>
         </div>
     </div>

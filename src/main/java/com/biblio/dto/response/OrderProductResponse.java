@@ -7,6 +7,8 @@ import lombok.*;
 @AllArgsConstructor
 @ToString
 @Builder
+@Getter
+@Setter
 public class OrderProductResponse {
     private String title;
     private String imagePath;

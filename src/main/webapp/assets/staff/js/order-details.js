@@ -83,12 +83,14 @@ document.querySelector("#btn-confirm").addEventListener('click', function (event
 document.getElementById("confirmOrder").addEventListener("click", function (event) {
     const orderId = document.getElementById("confirmOrderModal").querySelector(".order-id").value;
     console.log(orderId);
+    /*const finalPrice = document.getElementById("finalPrice").value;*/
 
     const requestData = {
         orderId: orderId,
+        /*finalPrice:finalPrice*/
     }
 
-    fetch('/staff/order/confirm-order', {
+    fetch('/BookSellingWebsite/staff/order/confirm-order', {
         method: 'POST', headers: {
             'Content-Type': 'application/json',
         }, body: JSON.stringify(requestData)
@@ -168,12 +170,12 @@ document.getElementById("sendReason").addEventListener('click', function (event)
 
         const requestData = {
             orderId: orderId,
-            content: cancelContent
+            content: cancelContent,
         };
 
         console.log(requestData.content)
 
-        fetch('/staff/order/cancel-order', {
+        fetch('/BookSellingWebsite/staff/order/cancel-order', {
             method: 'POST', headers: {
                 'Content-Type': 'application/json; charset=UTF-8',
             }, body: JSON.stringify(requestData)

@@ -22,7 +22,7 @@
                             </div>
 
                             <!-- Separator for better visibility -->
-                            <hr style="border-top: 3px solid #004437; margin: 20px 100;" />
+                            <hr style="border-top: 3px solid #004437; margin: 20px 100px;" />
 
                             <!-- Product Item 1 -->
                             <div class="product-item d-flex justify-content-between align-items-center border-bottom py-3">
@@ -65,58 +65,70 @@
 
                 <!-- Form Lý do hoàn trả -->
                 <div class="return-reason-form p-4 bg-white shadow rounded">
+                    <form action="${pageContext.request.contextPath}/return-order" method="post">
+                        <label for="reason">Lý do hoàn trả:</label>
+                        <select name="reason" id="reason" required>
+                            <option value="damaged">Sản phẩm bị hư hỏng</option>
+                            <option value="not-as-described">Sản phẩm không như mô tả</option>
+                            <option value="wrong-item">Giao sai sản phẩm</option>
+                        </select>
 
-                    <form class="cr-content-form mb-4">
-                        <!-- Return Form Details -->
-                        <div class="form-group mt-4">
-                            <label for="reason" class="form-label">Lý do hoàn trả:</label>
-                            <select id="reason" class="form-control rounded">
-                                <option value="">Chọn lý do</option>
-                                <option value="damaged">Sản phẩm bị hư hỏng</option>
-                                <option value="not-as-described">Sản phẩm không như mô tả</option>
-                                <option value="wrong-item">Giao sai sản phẩm</option>
-                            </select>
-                        </div>
+                        <label for="description">Mô tả chi tiết:</label>
+                        <textarea name="description" id="description" rows="4" required></textarea>
 
-                        <div class="form-group mt-4">
-                            <label for="description" class="form-label">Mô tả chi tiết:</label>
-                            <textarea id="description" rows="4" class="form-control rounded" placeholder="Mô tả chi tiết lý do hoàn trả..."></textarea>
-                        </div>
-                        <!-- Upload Image Section -->
-                        <div class="form-group mt-4">
-                            <label for="uploadImage" class="form-label">Thêm hình ảnh (tối đa 5):</label>
-                            <input type="file" id="uploadImage" class="form-control" accept="image/*" multiple>
-                        </div>
-
-                        <!-- Upload Video Section -->
-                        <div class="form-group mt-4">
-                            <label for="uploadVideo" class="form-label">Thêm video (tùy chọn):</label>
-                            <input type="file" id="uploadVideo" class="form-control" accept="video/*">
-                        </div>
-
-                        <!-- Submit Button -->
-                        <div class="row mt-5">
-                            <div class="col-12 col-sm-6">
-                                <form class="form-group mx-auto w-100">
-                                    <button
-                                            type="button"
-                                            class="px-4 py-2 rounded text-black border-1 border-solid border-gray-200 hover:bg-gray-100 transition duration-300 w-100"
-                                            onclick="window.location.href='order';"
-                                    >
-                                        Quay lại
-                                    </button>
-                                </form>
-                            </div>
-                            <div class="col-12 col-sm-6">
-                                <form class="form-group mx-auto w-100" method="post" action="#">
-                                    <button type="submit" class="cr-button w-100">
-                                        Yêu cầu hoàn trả
-                                    </button>
-                                </form>
-                            </div>
-                        </div>
-
+                        <button type="submit">Yêu cầu hoàn trả</button>
                     </form>
+<%--                    <form class="cr-content-form mb-4">--%>
+<%--                        <!-- Return Form Details -->--%>
+<%--                        <div class="form-group mt-4">--%>
+<%--                            <label for="reason" class="form-label">Lý do hoàn trả:</label>--%>
+<%--                            <select id="reason" class="form-control rounded">--%>
+<%--                                <option value="">Chọn lý do</option>--%>
+<%--                                <option value="damaged">Sản phẩm bị hư hỏng</option>--%>
+<%--                                <option value="not-as-described">Sản phẩm không như mô tả</option>--%>
+<%--                                <option value="wrong-item">Giao sai sản phẩm</option>--%>
+<%--                            </select>--%>
+<%--                        </div>--%>
+
+<%--                        <div class="form-group mt-4">--%>
+<%--                            <label for="description" class="form-label">Mô tả chi tiết:</label>--%>
+<%--                            <textarea id="description" rows="4" class="form-control rounded" placeholder="Mô tả chi tiết lý do hoàn trả..."></textarea>--%>
+<%--                        </div>--%>
+<%--                        <!-- Upload Image Section -->--%>
+<%--                        <div class="form-group mt-4">--%>
+<%--                            <label for="uploadImage" class="form-label">Thêm hình ảnh (tối đa 5):</label>--%>
+<%--                            <input type="file" id="uploadImage" class="form-control" accept="image/*" multiple>--%>
+<%--                        </div>--%>
+
+<%--                        <!-- Upload Video Section -->--%>
+<%--                        <div class="form-group mt-4">--%>
+<%--                            <label for="uploadVideo" class="form-label">Thêm video (tùy chọn):</label>--%>
+<%--                            <input type="file" id="uploadVideo" class="form-control" accept="video/*">--%>
+<%--                        </div>--%>
+
+<%--                        <!-- Submit Button -->--%>
+<%--                        <div class="row mt-5">--%>
+<%--                            <div class="col-12 col-sm-6">--%>
+<%--                                <form class="form-group mx-auto w-100">--%>
+<%--                                    <button--%>
+<%--                                            type="button"--%>
+<%--                                            class="px-4 py-2 rounded text-black border-1 border-solid border-gray-200 hover:bg-gray-100 transition duration-300 w-100"--%>
+<%--                                            onclick="window.location.href='order';"--%>
+<%--                                    >--%>
+<%--                                        Quay lại--%>
+<%--                                    </button>--%>
+<%--                                </form>--%>
+<%--                            </div>--%>
+<%--                            <div class="col-12 col-sm-6">--%>
+<%--                                <form class="form-group mx-auto w-100" method="post" action="#">--%>
+<%--                                    <button type="submit" class="cr-button w-100">--%>
+<%--                                        Yêu cầu hoàn trả--%>
+<%--                                    </button>--%>
+<%--                                </form>--%>
+<%--                            </div>--%>
+<%--                        </div>--%>
+
+<%--                    </form>--%>
                 </div>
 
             </div>
