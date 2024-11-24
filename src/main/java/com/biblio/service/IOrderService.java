@@ -24,8 +24,9 @@ public interface IOrderService {
     List<RevenueResponse> getListRevenueAtTime(LocalDateTime start, LocalDateTime end);
     List<CountBookSoldResponse> getListCountBookSoldAtTime(LocalDateTime start, LocalDateTime end);
 
-    public Order findOrderById(Long orderId);
+    public OrderCustomerResponse findOrderById(Long orderId);
     void confirmOrder(Long orderId);
     void rejectOrder(Long orderId, String reason);
+
 
 }

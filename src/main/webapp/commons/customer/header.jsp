@@ -12,8 +12,9 @@
                         <input
                                 class="search-input"
                                 type="text"
-                                placeholder="Tìm kiếm sản phẩm..."
-                                name="keyword"
+                                placeholder="Tìm kiếm sách..."
+                                name="title"
+                                value="${title}"
                         />
                         <button class="btn-search search-btn" type="submit">
                             <i class="ri-search-line"></i>

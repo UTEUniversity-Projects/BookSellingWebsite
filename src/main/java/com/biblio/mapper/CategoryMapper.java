@@ -1,6 +1,7 @@
 package com.biblio.mapper;
 
 import com.biblio.dto.request.CategoryRequest;
+import com.biblio.dto.response.CategoryBookCountResponse;
 import com.biblio.dto.response.CategoryResponse;
 import com.biblio.dto.response.CategorySidebarResponse;
 import com.biblio.entity.Category;
@@ -27,10 +28,12 @@ public class CategoryMapper {
                 .status(category.getStatus().toString())
                 .build();
     }
+
     public static CategorySidebarResponse toCategorySidebarResponse(Category category) {
         return CategorySidebarResponse.builder()
                 .id(category.getId())
                 .name(category.getName())
                 .build();
     }
+
 }

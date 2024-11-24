@@ -1,5 +1,6 @@
 package com.biblio.dao;
 
+import com.biblio.dto.response.OrderCustomerResponse;
 import com.biblio.entity.Order;
 import com.biblio.enumeration.EOrderStatus;
 
@@ -19,7 +20,7 @@ public interface IOrderDAO {
 
     boolean updateStatus(Long id, EOrderStatus status);
 
-    Order findById(Long id);
+    OrderCustomerResponse findById(Long id);
     void updateOrder(Order order);
 
 }

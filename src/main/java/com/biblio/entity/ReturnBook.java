@@ -1,6 +1,5 @@
 package com.biblio.entity;
 
-import com.biblio.enumeration.EBookTemplateStatus;
 import com.biblio.enumeration.EReasonReturn;
 import lombok.*;
 
@@ -41,8 +40,12 @@ public class ReturnBook implements Serializable {
 
     // region Relationships
 
+    @OneToOne
+    @JoinColumn(name = "order_id", nullable = false, unique = true)
+    private Order order;
+
     @OneToMany(mappedBy = "returnBook", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
-    private Set<LineItem> lineItems = new HashSet<>();
+    private Set<ReturnBookItem> returnBookItems = new HashSet<>();
 
     @OneToMany
     @JoinTable(

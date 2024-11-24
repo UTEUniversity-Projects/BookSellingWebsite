@@ -12,6 +12,12 @@ $(document).ready(function () {
     var chartTypeNewCustomer = "line";
     var newCustomerChart;
 
+    // top product sold
+    var startOfTopProductSold = moment().subtract(29, "days");
+    var endOfTopProductSold  = moment();
+    var topProductSoldChart;
+
+
 
     function animateNumber(element, startValue, endValue, duration, isCurrency = false) {
         $({ count: startValue }).animate(
@@ -110,6 +116,63 @@ $(document).ready(function () {
         newCustomerChart = new ApexCharts(document.querySelector(`#${chartId}`), options);
         newCustomerChart.render();
     }
+    function drawTopProductSoldChart(chartId, categories, seriesData) {
+        if (topProductSoldChart) {
+            topProductSoldChart.destroy(); // Hủy biểu đồ cũ nếu tồn tại
+        }
+
+        const options = {
+            series: seriesData, // Dữ liệu dạng series (danh sách các cột)
+            chart: {
+                type: 'bar', // Loại biểu đồ cột
+                height: 500, // Chiều cao biểu đồ
+                stacked: true, // Hiển thị cột dạng stacked
+            },
+            plotOptions: {
+                bar: {
+                    horizontal: false, // Cột dọc
+                    columnWidth: '30%', // Độ rộng của cột
+                    endingShape: 'rounded', // Đầu cột bo tròn
+                },
+            },
+            dataLabels: {
+                enabled: false, // Ẩn nhãn dữ liệu trên cột
+            },
+            colors: ['#5f6af5', '#ff4f7f', '#1ecab8', '#f9a12c', '#0fbcf9', '#8e44ad', '#2ecc71', '#e74c3c', '#34495e', '#f39c12'], // Màu sắc
+            xaxis: {
+                categories: categories, // Tên các danh mục
+                labels: {
+                    formatter: function (val) {
+                        return val.length > 20 ? val.slice(0, 20) + '...' : val; // Rút gọn tên nếu dài
+                    },
+                },
+            },
+            yaxis: {
+                labels: {
+                    formatter: function (val) {
+                        return val + ' sản phẩm'; // Đơn vị trục Y
+                    },
+                },
+            },
+            fill: {
+                opacity: 1, // Độ mờ của cột
+            },
+            tooltip: {
+                y: {
+                    formatter: function (val) {
+                        return val + ' sản phẩm'; // Hiển thị tooltip chi tiết
+                    },
+                },
+            },
+            legend: {
+                show: false, // Ẩn chú thích
+            },
+        };
+
+        // Khởi tạo biểu đồ mới
+        topProductSoldChart = new ApexCharts(document.querySelector(chartId), options);
+        topProductSoldChart.render(); // Vẽ biểu đồ
+    }
 
     // Hàm AJAX lấy dữ liệu
     function fetchData(url, start, end, callback) {
@@ -129,6 +192,20 @@ $(document).ready(function () {
             },
         });
     }
+    function fetchDataNoTime(url, callback) {
+        $.ajax({
+            url: url,
+            type: "GET",
+            success: function (response) {
+                callback(null, response);
+            },
+            error: function (xhr, status, error) {
+                console.error("Error fetching data:", error);
+                callback(error, null);
+            },
+        });
+    }
+
 
     // Hàm cập nhật dữ liệu biểu đồ
     function updateRevenueChart(start, end) {
@@ -214,8 +291,8 @@ $(document).ready(function () {
                     const group = countList.slice(currentIndex, currentIndex + groupSize);
                     const totalList = group.reduce((sum, item) => sum + item.count, 0);
                     processedData.push({
-                        joinAt: `${moment(group[0].date).format("DD-MM")} - ${
-                            moment(group[group.length - 1].date).format("DD-MM")
+                        joinAt: `${moment(group[0].joinAt).format("DD-MM")} - ${
+                            moment(group[group.length - 1].joinAt).format("DD-MM")
                         }`,
                         count: Math.round(totalList),
                     });
@@ -238,6 +315,89 @@ $(document).ready(function () {
         });
 
     }
+    function updateTopProductSoldChart(start, end) {
+        $("#date-top-product span").html(
+            start.format("YYYY-MM-DD") + " - " + end.format("YYYY-MM-DD")
+        );
+
+        fetchData("/owner/ecommerce/count-book-sold-at-time", start, end, function (error, response) {
+            if (error) {
+                console.error("Error fetching data:", error);
+                return;
+            }
+
+            const topProductSold = response.countBookSoldList;
+            let processedData = [];
+
+            if (topProductSold.size <= 10) {
+                processedData = topProductSold.map(item => ({
+                    title: item.title,
+                    count: item.count,
+                }));
+            } else {
+                // Lấy tối đa 10 sản phẩm
+                const limitedTopProductSold = topProductSold.slice(0, 10);
+                processedData = limitedTopProductSold.map(item => ({
+                    title: item.title,
+                    count: item.count,
+                }));
+            }
+
+            const categories = processedData.map(item => item.title);
+
+            const seriesData = processedData.map((item, index) => {
+                const data = Array(processedData.length).fill(0); // Mảng giá trị toàn 0
+                data[index] = item.count; // Đặt giá trị count tại đúng vị trí
+                return {
+                    name: 'lượt bán',
+                    data: data,
+                };
+            });
+
+            const totalCount = topProductSold.reduce((sum, item) => sum + item.count, 0);
+            const bestSeller = topProductSold.length > 0 ? topProductSold[0].title : null;
+            document.getElementById("bestSeller").innerText = bestSeller;
+            animateNumber("#countBookSold", parseInt($("#countBookSold").text()), totalCount || 0, 1000, false);
+            drawTopProductSoldChart("#topProductSoldBarChart", categories, seriesData);
+        });
+
+    }
+    function updateProductSoldTable() {
+        fetchDataNoTime("/owner/ecommerce/count-book-sold-all-time", function (error, response) {
+            if (error) {
+                console.error("Error fetching data:", error);
+                return;
+            }
+
+            // Lấy dữ liệu từ API
+            const listBookSoldAllTime = response.countBookSoldAllTime;
+
+            // Lấy đối tượng DataTable
+            const responsiveDataTable = $("#list_product_sold_in_stock_statistical").DataTable();
+
+            // Xóa dữ liệu cũ
+            responsiveDataTable.clear();
+
+            // Duyệt qua dữ liệu và thêm dòng mới
+            listBookSoldAllTime.forEach(book => {
+                responsiveDataTable.row.add([
+                    `<img class="cat-thumb" src="${book.img}" alt="Book Image">
+                 <span class="name">${book.title}</span>`,
+                    `<span class="cat">
+                    <a href="#">${book.category}</a>
+                 </span>`,
+                    book.countSold,
+                    book.countInStock
+                ]).node().setAttribute("data-href", `/owner/product-details?id=${book.id}`); // Thêm thuộc tính data-href
+            });
+
+            // Cập nhật DataTable
+            responsiveDataTable.draw();
+        });
+    }
+
+
+
 
     // Xử lý sự kiện thay đổi loại biểu đồ
     $(document).on("click", "#barChartRevenueIcon", function () {
@@ -273,6 +433,7 @@ $(document).ready(function () {
         updateNewCustomerChart(selectedStart, selectedEnd);
     });
 
+
     // Khởi tạo Daterangepicker
     function initializeDateRangePicker(elementId, start, end, callback) {
         $(`#${elementId}`).daterangepicker(
@@ -301,16 +462,62 @@ $(document).ready(function () {
         } if (elementId === "date-list-new-customer") {
             updateNewCustomerChart(start,end);
         }
+        if (elementId === "date-top-product") {
+            updateTopProductSoldChart(start,end);
+        }
         // Có thể thêm logic cho các `id` khác ở đây
     }
 
 // Khởi tạo `Daterangepicker` cho `#date-list-revenue`
     initializeDateRangePicker("date-list-revenue", startOfRevenue, endOfRevenue, onDateRangeChange);
     initializeDateRangePicker("date-list-new-customer", startOfNewCustomer, endOfNewCustomer, onDateRangeChange);
-
+    initializeDateRangePicker("date-top-product", startOfTopProductSold, endOfTopProductSold, onDateRangeChange);
 
     // Gọi lần đầu tiên khi trang tải
     updateRevenueChart(startOfRevenue, endOfRevenue);
     updateNewCustomerChart(startOfNewCustomer, endOfNewCustomer);
+    updateTopProductSoldChart(startOfTopProductSold, endOfTopProductSold);
+    updateProductSoldTable();
+});
+$(document).ready(function () {
+    var responsiveDataTable = $("#list_product_sold_in_stock_statistical");
+
+    if (responsiveDataTable.length !== 0) {
+        responsiveDataTable.DataTable({
+            "aLengthMenu": [[5, 20, 30, 50, 75, -1], [5, 20, 30, 50, 75, "All"]],
+            "pageLength": 5,
+            "paging": true,
+            "searching": true,
+            "info": true,
+            "responsive": true,
+            "autoWidth": false,
+            "dom": '<"row justify-content-between top-information"lf>rt<"row justify-content-between bottom-information"ip><"clear">',
+            "order": [[2, "desc"]], // Sắp xếp mặc định cột 2 (index 1) giảm dần
+            "columnDefs": [
+                {
+                    "orderable": true,  // Bật sắp xếp
+                    "targets": [2, 3]   // Chỉ bật sắp xếp cho cột 2 và 3
+                },
+                {
+                    "orderable": false, // Tắt sắp xếp
+                    "targets": [0, 2]   // Cột # và cột cuối
+                }
+            ],
+            "language": {
+                "lengthMenu": "Hiển thị _MENU_ dòng mỗi trang",
+                "zeroRecords": "Không tìm thấy dữ liệu",
+                "info": "Hiển thị từ _START_ đến _END_ của _TOTAL_ dòng",
+                "infoEmpty": "Không có dữ liệu để hiển thị",
+                "infoFiltered": "(lọc từ tổng số _MAX_ dòng)",
+                "search": "Tìm kiếm:",
+                "paginate": {
+                    "previous": "Trước",
+                    "next": "Sau"
+                }
+            }
+        });
+    }
 
 });
+
+

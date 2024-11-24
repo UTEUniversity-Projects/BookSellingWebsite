@@ -3,8 +3,8 @@ package com.biblio.service.impl;
 import com.biblio.dao.IOrderDAO;
 import com.biblio.dto.response.*;
 import com.biblio.entity.Book;
-import com.biblio.entity.LineItem;
 import com.biblio.entity.Order;
+import com.biblio.entity.OrderItem;
 import com.biblio.enumeration.EOrderStatus;
 import com.biblio.mapper.BookMapper;
 import com.biblio.mapper.OrderMapper;
@@ -14,9 +14,7 @@ import javax.inject.Inject;
 import javax.transaction.Transactional;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.Comparator;
-import java.util.List;
+import java.util.*;
 import java.util.stream.Collectors;
 
 public class OrderServiceImpl implements IOrderService {
@@ -87,16 +85,43 @@ public class OrderServiceImpl implements IOrderService {
 
         // Convert Order entities to OrderCustomerResponse DTOs
         return orders.stream()
-                .map(order -> new OrderCustomerResponse(
-                        order.getId(),
-                        order.getNote(),
-                        order.getOrderDate(),
-                        order.getPaymentType() != null ? order.getPaymentType().name() : null, // Convert enum to String
-                        order.getStatus() != null ? order.getStatus().name() : null, // Convert enum to String
-                        order.getVat(),
-                        order.getCustomer() != null ? order.getCustomer().getId() : null,
-                        order.getShipping() != null ? order.getShipping().getId() : null
-                ))
+                .map(order -> {
+                    // Initialize a set for books in the response
+                    Set<BookResponse> bookResponses = new HashSet<>();
+
+                    // Loop through each LineItem and its associated books
+                    for (OrderItem lineItem : order.getOrderItems()) {
+                        for (Book book : lineItem.getBooks()) {
+                            // Add the book to the set of bookResponses
+                            BookResponse bookResponse = BookResponse.builder()
+                                    .id(String.valueOf(book.getId()))
+                                    .title(book.getTitle())
+                                    .description(book.getDescription())
+                                    .sellingPrice(String.valueOf(book.getSellingPrice()))
+                                    .build();
+                            bookResponses.add(bookResponse);
+                        }
+                    }
+
+                    // Calculate the total price if necessary (sum of line items or other logic)
+                    Double totalPrice = order.getOrderItems().stream()
+                            .mapToDouble(OrderItem::calPriceItem)
+                            .sum();
+
+                    // Return the mapped OrderCustomerResponse with the list of books
+                    return new OrderCustomerResponse(
+                            order.getId() ,
+                            order.getNote(),
+                            order.getOrderDate() != null ? order.getOrderDate().toString() : null,  // Convert LocalDateTime to String
+                            order.getPaymentType() != null ? order.getPaymentType().name() : null,
+                            order.getStatus() != null ? order.getStatus().name() : null,
+                            order.getVat(),
+                            order.getCustomer() != null ? order.getCustomer().getId() : null,
+                            order.getShipping() != null ? order.getShipping().getId() : null,
+                            totalPrice,
+                            bookResponses  // Add the set of BookResponse objects
+                    );
+                })
                 .collect(Collectors.toList());
     }
 
@@ -143,35 +168,36 @@ public class OrderServiceImpl implements IOrderService {
     }
 
     @Override
+    public OrderCustomerResponse findOrderById(Long orderId) {
+        return orderDAO.findById(orderId);
+    }
+
     public List<CountBookSoldResponse> getListCountBookSoldAtTime(LocalDateTime start, LocalDateTime end) {
         List<BookSoldResponse> ListBookSold = new ArrayList<>();
         List<Order> list = orderDAO.findAllForManagement();
         for (Order order : list) {
-            LocalDateTime orderDate = order.getOrderDate();
+            Order orderTmp = orderDAO.findOneForDetailsManagement(order.getId());
+            LocalDateTime orderDate = orderTmp.getOrderDate();
             if ((orderDate.isEqual(start) || orderDate.isAfter(start)) &&
                     (orderDate.isEqual(end) || orderDate.isBefore(end)) &&
-                    EOrderStatus.COMPLETE_DELIVERY.equals(order.getStatus())) {
-                for (LineItem lineItem : order.getLineItems()) {
-                    for (Book book : lineItem.getBooks()) {
+                    EOrderStatus.COMPLETE_DELIVERY.equals(orderTmp.getStatus())) {
+                for (OrderItem orderItem : orderTmp.getOrderItems()) {
+                    for (Book book : orderItem.getBooks()) {
                         ListBookSold.add(BookMapper.toBookSoldResponse(book));
                     }
                 }
             }
         }
+        List<CountBookSoldResponse> countBookSoldResponse = BookMapper.toCountBookSoldResponse(ListBookSold);
+        countBookSoldResponse.sort(Comparator.comparingLong(CountBookSoldResponse::getCountSold).reversed());
+        return countBookSoldResponse;
 
-        return BookMapper.toCountBookSoldResponse(ListBookSold);
-    }
-
-
-    @Override
-    public Order findOrderById(Long orderId) {
-        return orderDAO.findOne(orderId);
     }
 
     @Override
     @Transactional
     public void confirmOrder(Long orderId) {
-        Order order = orderDAO.findById(orderId);
+        Order order = orderDAO.findOne(orderId);
         order.setStatus(EOrderStatus.PACKING);
         orderDAO.updateOrder(order);
     }
@@ -179,7 +205,7 @@ public class OrderServiceImpl implements IOrderService {
     @Override
     @Transactional
     public void rejectOrder(Long orderId, String reason) {
-        Order order = orderDAO.findById(orderId);
+        Order order = orderDAO.findOne(orderId);
         order.setStatus(EOrderStatus.CANCELED);
         orderDAO.updateOrder(order);
     }

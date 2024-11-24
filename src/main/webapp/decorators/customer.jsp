@@ -14,8 +14,8 @@
 
     <title>
         <c:choose>
-            <c:when test="${breadcumb != null}">
-                ${breadcumb}
+            <c:when test="${breadcrumb != null}">
+                ${breadcrumb}
             </c:when>
             <c:otherwise>
                 Biblio
@@ -144,11 +144,11 @@
                     <div class="cr-breadcrumb-title">
                         <span>
                             <a href="home">Trang chủ</a>
-                            <c:if test="${breadcumb != null}">
-                                / ${breadcumb}
+                            <c:if test="${breadcrumb != null}">
+                                / ${breadcrumb}
                             </c:if>
                         </span>
-                        <h2>${breadcumb}</h2>
+                        <h2>${breadcrumb}</h2>
                     </div>
                 </div>
             </div>

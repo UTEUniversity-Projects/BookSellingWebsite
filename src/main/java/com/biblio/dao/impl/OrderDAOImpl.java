@@ -1,14 +1,17 @@
 package com.biblio.dao.impl;
 
 import com.biblio.dao.IOrderDAO;
+import com.biblio.dto.response.OrderCustomerResponse;
 import com.biblio.entity.Book;
-import com.biblio.entity.LineItem;
 import com.biblio.entity.Order;
+import com.biblio.entity.OrderItem;
 import com.biblio.enumeration.EBookMetadataStatus;
 import com.biblio.enumeration.EOrderStatus;
 import com.biblio.jpaconfig.JpaConfig;
 
 import javax.persistence.EntityManager;
+import javax.persistence.EntityNotFoundException;
+import javax.persistence.NoResultException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -52,8 +55,8 @@ public class OrderDAOImpl extends GenericDAOImpl<Order> implements IOrderDAO {
                 .append("JOIN FETCH c.account ac ")
                 .append("JOIN FETCH o.shipping s ")
                 .append("JOIN FETCH s.address ad ")
-                .append("JOIN FETCH o.lineItems li ")
-                .append("JOIN FETCH li.books b ")
+                .append("JOIN FETCH o.orderItems oi ")
+                .append("JOIN FETCH oi.books b ")
                 .append("JOIN FETCH b.bookTemplate bt ")
                 .append("JOIN FETCH bt.mediaFiles m ")
                 .append("LEFT JOIN FETCH o.promotions p ")
@@ -72,11 +75,9 @@ public class OrderDAOImpl extends GenericDAOImpl<Order> implements IOrderDAO {
                 .append("FROM Order o ")
                 .append("WHERE o.customer.id = :customerId");
 
-        // Tạo map để chứa các tham số cần gán
         Map<String, Object> params = new HashMap<>();
         params.put("customerId", customerId);
 
-        // Truyền cả câu truy vấn và các tham số vào phương thức findAll
         return super.findByJPQL(jpql.toString(), params);
     }
 
@@ -89,8 +90,8 @@ public class OrderDAOImpl extends GenericDAOImpl<Order> implements IOrderDAO {
         order.setStatus(status);
 
         if (status == EOrderStatus.CANCELED) {
-            for (LineItem lineItem : order.getLineItems()) {
-                for (Book book : lineItem.getBooks()) {
+            for (OrderItem orderItem : order.getOrderItems()) {
+                for (Book book : orderItem.getBooks()) {
                     book.getBookMetadata().setStatus(EBookMetadataStatus.IN_STOCK);
                 }
             }
@@ -101,9 +102,38 @@ public class OrderDAOImpl extends GenericDAOImpl<Order> implements IOrderDAO {
     }
 
     @Override
-    public Order findById(Long id) {
-        return entityManager.find(Order.class, id);
+    public OrderCustomerResponse findById(Long id) {
+        // Query to fetch the order details
+        String query = "SELECT o FROM Order o LEFT JOIN FETCH o.customer c LEFT JOIN FETCH o.orderItems oi LEFT JOIN FETCH o.shipping s WHERE o.id = :id";
+
+        try {
+            // Execute the query
+            Order order = entityManager.createQuery(query, Order.class)
+                    .setParameter("id", id)
+                    .getSingleResult();
+
+            // Map Order entity to OrderCustomerResponse
+            return OrderCustomerResponse.builder()
+                    .id(order.getId())
+                    .note(order.getNote())
+                    .orderDate(String.valueOf(order.getOrderDate()))
+                    .paymentType(order.getPaymentType().toString())
+                    .status(order.getStatus().toString())
+                    .vat(order.getVat())
+                    .customerId(order.getCustomer().getId())
+                    .customerName(order.getCustomer().getFullName())
+                    .shippingId(order.getShipping() != null ? order.getShipping().getId() : null)
+                    .lineItems(order.getOrderItems())
+                    .address(order.getShipping().getAddress().getFullAddress())
+                    .email(order.getCustomer().getEmailAddress())
+                    .build();
+        } catch (NoResultException e) {
+            // Handle case when no order is found
+            throw new EntityNotFoundException("Order with ID " + id + " not found.");
+        }
     }
+
+
 
     @Override
     public void updateOrder(Order order) {

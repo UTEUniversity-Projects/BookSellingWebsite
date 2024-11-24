@@ -35,7 +35,7 @@ public class RegisterController extends HttpServlet {
      */
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         // TODO Auto-generated method stub
-        request.setAttribute("breadcumb", "Đăng ký tài khoản");
+        request.setAttribute("breadcrumb", "Đăng ký tài khoản");
         request.getRequestDispatcher("/views/customer/register.jsp").forward(request, response);
     }
 

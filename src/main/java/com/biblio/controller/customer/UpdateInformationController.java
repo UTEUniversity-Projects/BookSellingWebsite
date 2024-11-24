@@ -29,7 +29,7 @@ public class UpdateInformationController extends HttpServlet {
      */
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         // TODO Auto-generated method stub
-        request.setAttribute("breadcumb", "Cập nhật thông tin cá nhân");
+        request.setAttribute("breadcrumb", "Cập nhật thông tin cá nhân");
         request.getRequestDispatcher("/views/customer/update-information.jsp").forward(request, response);
     }
 
