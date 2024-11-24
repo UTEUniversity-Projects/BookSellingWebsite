@@ -1,16 +1,8 @@
 package com.biblio.service.impl;
 
 import com.biblio.dao.IOrderDAO;
-
-import com.biblio.dao.impl.OrderDAOImpl;
-import com.biblio.dto.response.OrderCustomerResponse;
-import com.biblio.dto.response.OrderDetailsManagementResponse;
-import com.biblio.dto.response.OrderManagementResponse;
-import com.biblio.dto.response.RevenueResponse;
-
 import com.biblio.dto.response.*;
 import com.biblio.entity.Book;
-
 import com.biblio.entity.Order;
 import com.biblio.entity.OrderItem;
 import com.biblio.enumeration.EOrderStatus;
@@ -98,7 +90,7 @@ public class OrderServiceImpl implements IOrderService {
                     Set<BookResponse> bookResponses = new HashSet<>();
 
                     // Loop through each LineItem and its associated books
-                    for (LineItem lineItem : order.getLineItems()) {
+                    for (OrderItem lineItem : order.getOrderItems()) {
                         for (Book book : lineItem.getBooks()) {
                             // Add the book to the set of bookResponses
                             BookResponse bookResponse = BookResponse.builder()
@@ -112,8 +104,8 @@ public class OrderServiceImpl implements IOrderService {
                     }
 
                     // Calculate the total price if necessary (sum of line items or other logic)
-                    Double totalPrice = order.getLineItems().stream()
-                            .mapToDouble(LineItem::calPriceItem)
+                    Double totalPrice = order.getOrderItems().stream()
+                            .mapToDouble(OrderItem::calPriceItem)
                             .sum();
 
                     // Return the mapped OrderCustomerResponse with the list of books

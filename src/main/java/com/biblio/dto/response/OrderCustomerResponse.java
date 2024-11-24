@@ -1,13 +1,13 @@
 package com.biblio.dto.response;
 
-import com.biblio.entity.*;
-import com.biblio.enumeration.EOrderStatus;
+import com.biblio.entity.Order;
+import com.biblio.entity.OrderItem;
+import com.biblio.entity.Promotion;
 import lombok.*;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.time.LocalDateTime;
-
 import java.util.HashSet;
 import java.util.Set;
 
@@ -39,12 +39,25 @@ public class OrderCustomerResponse {
     public OrderCustomerResponse(Long id, String note, LocalDateTime orderDate, String paymentType, String status, Double vat, Long customerId, Long shippingId) {
         this.id = id;
         this.note = note;
+        this.orderDate = String.valueOf(orderDate);
+        this.paymentType = paymentType;
+        this.status = status;
+        this.vat = vat;
+        this.customerId = customerId;
+        this.shippingId = shippingId;
+    }
+
+    public OrderCustomerResponse(long id, String note, String orderDate, String paymentType, String status, Double vat, Long customerId, Long shippingId, Double totalPrice, Set<BookResponse> book) {
+        this.id = id;
+        this.note = note;
         this.orderDate = orderDate;
         this.paymentType = paymentType;
         this.status = status;
         this.vat = vat;
         this.customerId = customerId;
         this.shippingId = shippingId;
+        this.totalPrice = totalPrice;
+        this.book = book;
     }
 
     public double calTotalPrice() {

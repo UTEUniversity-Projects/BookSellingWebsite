@@ -3,9 +3,8 @@ package com.biblio.controller.staff;
 import com.biblio.dto.response.OrderCustomerResponse;
 import com.biblio.entity.Book;
 import com.biblio.entity.MediaFile;
-import com.biblio.entity.Promotion;
-import com.biblio.entity.Order;
 import com.biblio.entity.OrderItem;
+import com.biblio.entity.Promotion;
 import com.biblio.service.IEmailService;
 import com.biblio.service.IOrderService;
 import com.biblio.service.impl.EmailServiceImpl;
@@ -16,6 +15,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.time.LocalDateTime;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
@@ -84,7 +84,7 @@ public class ConfirmOrderEmailController extends HttpServlet {
         emailContent.append("<p><b>Thông tin chi tiết đơn hàng:</b></p>");
         emailContent.append("<hr>");
         emailContent.append("<p>Mã đơn hàng: ").append(order.getId()).append("</p>");
-        emailContent.append("<p>Ngày đặt hàng: ").append(formatDateTime(order.getOrderDate(), "dd-MM-yyyy HH:mm")).append("</p>");
+        emailContent.append("<p>Ngày đặt hàng: ").append(formatDateTime(LocalDateTime.parse(order.getOrderDate()), "dd-MM-yyyy HH:mm")).append("</p>");
         emailContent.append("<p>Trạng thái: ").append(order.getStatus()).append("</p>");
 
         // Sản phẩm

@@ -2,12 +2,11 @@ package com.biblio.mapper;
 
 import com.biblio.dto.response.*;
 import com.biblio.entity.Book;
-import com.biblio.entity.LineItem;
 import com.biblio.entity.Order;
+import com.biblio.entity.OrderItem;
 import com.biblio.entity.Promotion;
 import com.biblio.enumeration.EPromotionTemplateType;
 
-import javax.validation.constraints.Max;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
@@ -93,7 +92,7 @@ public class OrderMapper {
                 .build();
 
         // Iterate over order items and add books to the response
-        for (LineItem lineItem : order.getLineItems()) {
+        for (OrderItem lineItem : order.getOrderItems()) {
             // Iterate over the books in the line item and convert each to a BookResponse
             for (Book book : lineItem.getBooks()) {
                 BookResponse bookResponse = BookResponse.builder()

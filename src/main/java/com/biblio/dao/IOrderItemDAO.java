@@ -1,9 +1,9 @@
 package com.biblio.dao;
 
-import com.biblio.entity.LineItem;
+import com.biblio.entity.OrderItem;
 
 import java.util.List;
 
 public interface IOrderItemDAO {
-    List<LineItem> findByOrderId(Long orderId);
+    List<OrderItem> findByOrderId(Long orderId);
 }
