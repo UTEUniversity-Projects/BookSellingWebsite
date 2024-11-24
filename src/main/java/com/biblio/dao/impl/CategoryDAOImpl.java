@@ -62,12 +62,6 @@ public class CategoryDAOImpl extends GenericDAOImpl<Category> implements ICatego
         return query.getResultList();
     }
 
-    @Override
-    public long countTotalDistinctBooks() {
-        String jpql = "SELECT COUNT(DISTINCT b.title) FROM Book b";
-        return super.countByJPQL(jpql);
-    }
-
     public static void main(String[] args) {
         CategoryDAOImpl dao = new CategoryDAOImpl();
 

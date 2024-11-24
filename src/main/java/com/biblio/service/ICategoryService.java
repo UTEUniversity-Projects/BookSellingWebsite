@@ -4,7 +4,6 @@ import com.biblio.dto.request.CategoryRequest;
 import com.biblio.dto.response.CategoryBookCountResponse;
 import com.biblio.dto.response.CategoryResponse;
 import com.biblio.dto.response.CategorySidebarResponse;
-import com.biblio.dto.response.CategoryTotalBookResponse;
 
 import java.util.List;
 
@@ -22,7 +21,6 @@ public interface ICategoryService {
 
     void deleteCategory(Long id);
 
-    List<CategoryBookCountResponse> getAllCategoryBookCount();
+    List<CategoryBookCountResponse> getBookQuantityPerCategory();
 
-    CategoryTotalBookResponse getAllBookCount();
 }

@@ -21,5 +21,4 @@ public interface ICategoryDAO {
 
     List<CategoryBookCountResponse> countBookPerCategory();
 
-    long countTotalDistinctBooks();
 }
