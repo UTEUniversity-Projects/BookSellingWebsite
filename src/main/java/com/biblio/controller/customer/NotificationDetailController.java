@@ -29,7 +29,7 @@ public class NotificationDetailController extends HttpServlet {
      */
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         // TODO Auto-generated method stub
-        request.setAttribute("breadcumb", "Chi tiết thông báo");
+        request.setAttribute("breadcrumb", "Chi tiết thông báo");
         request.getRequestDispatcher("/views/customer/notification-detail.jsp").forward(request, response);
     }
 

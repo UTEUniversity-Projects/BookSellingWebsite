@@ -1,5 +1,12 @@
 package com.biblio.apis.customer;
 
+import com.biblio.dto.request.SearchBookRequest;
+import com.biblio.dto.response.BookCardResponse;
+import com.biblio.service.IBookTemplateService;
+import com.biblio.utils.HttpUtil;
+import com.fasterxml.jackson.databind.ObjectMapper;
+
+import javax.inject.Inject;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -7,6 +14,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.Serial;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 /**
  * Servlet implementation class SearchBookAPI
@@ -15,6 +25,9 @@ import java.io.Serial;
 public class SearchBookAPI extends HttpServlet {
     @Serial
     private static final long serialVersionUID = 1L;
+
+    @Inject
+    private IBookTemplateService bookTemplateService;
 
     /**
      * @see HttpServlet#HttpServlet()
@@ -37,7 +50,20 @@ public class SearchBookAPI extends HttpServlet {
      */
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         // TODO Auto-generated method stub
-        doGet(request, response);
+        request.setCharacterEncoding("UTF-8");
+        response.setCharacterEncoding("UTF-8");
+        response.setContentType("application/json");
+        SearchBookRequest req = HttpUtil.of(request.getReader()).toModel(SearchBookRequest.class);
+
+        List<BookCardResponse> book = bookTemplateService.getBookTemplateByCriteria(req);
+        long bookCount = bookTemplateService.getBookTemplateQuantityByCriteria(req);
+
+        ObjectMapper mapper = new ObjectMapper();
+        Map<String, Object> map = new HashMap<>();
+
+        map.put("response", book);
+        map.put("quantity", bookCount);
+        response.getWriter().append(mapper.writeValueAsString(map));
     }
 
 }

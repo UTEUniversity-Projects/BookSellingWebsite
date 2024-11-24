@@ -30,6 +30,10 @@ public class MediaFile implements Serializable {
 
     // region Relationships
 
+    @ManyToOne
+    @JoinColumn(name="book_return_id")
+    private BookReturn bookReturn;
+
     // endregion
 
 }

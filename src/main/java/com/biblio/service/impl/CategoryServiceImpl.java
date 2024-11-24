@@ -1,12 +1,11 @@
 package com.biblio.service.impl;
 
 import com.biblio.dao.ICategoryDAO;
-
-import com.biblio.dto.response.CategoryGetListResponse;
-import com.biblio.dto.response.CategorySidebarResponse;
-import com.biblio.entity.Category;
 import com.biblio.dto.request.CategoryRequest;
+import com.biblio.dto.response.CategoryBookCountResponse;
 import com.biblio.dto.response.CategoryResponse;
+import com.biblio.dto.response.CategorySidebarResponse;
+import com.biblio.dto.response.CategoryTotalBookResponse;
 import com.biblio.entity.Category;
 import com.biblio.mapper.CategoryMapper;
 import com.biblio.service.ICategoryService;
@@ -56,5 +55,18 @@ public class CategoryServiceImpl implements ICategoryService {
     @Override
     public void deleteCategory(Long id) {
         categoryDAO.deleteCategory(id);
+    }
+
+    @Override
+    public List<CategoryBookCountResponse> getAllCategoryBookCount() {
+        return categoryDAO.countBookPerCategory();
+    }
+
+    @Override
+    public CategoryTotalBookResponse getAllBookCount() {
+        return CategoryTotalBookResponse.builder()
+                .totalBook(categoryDAO.countTotalDistinctBooks())
+                .build();
+
     }
 }

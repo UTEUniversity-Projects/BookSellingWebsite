@@ -448,37 +448,37 @@
     });
 
     /* Tab to top */
-    $(window).scroll(function () {
-        if ($(this).scrollTop() > 50) {
-            $('.back-to-top').fadeIn();
-        } else {
-            $('.back-to-top').fadeOut();
-        }
-
-    });
+    // $(window).scroll(function () {
+    //     if ($(this).scrollTop() > 50) {
+    //         $('.back-to-top').fadeIn();
+    //     } else {
+    //         $('.back-to-top').fadeOut();
+    //     }
+    //
+    // });
 
     /* mobaile menu slider */
-    $('.navbar-toggler').on('click', function () {
-        $('.cr-sidebar-overlay').fadeIn();
-        $('.cr-mobile-menu').addClass('cr-menu-open');
-    });
-
-    $('.cr-sidebar-overlay, .cr-close').on('click', function () {
-        $('.cr-sidebar-overlay').fadeOut();
-        $('.cr-mobile-menu').removeClass('cr-menu-open');
-    });
-
-    $('.drop-list > a').on('click', function () {
-        $('.sub-menu').slideUp(600);
-        if ($(this).parent().hasClass('active')) {
-            $('.drop-list').removeClass('active');
-            $(this).parent().removeClass('active');
-        } else {
-            $('.drop-list').removeClass('active');
-            $(this).next('.sub-menu').slideDown(600);
-            $(this).parent().addClass('active');
-        }
-    });
+    // $('.navbar-toggler').on('click', function () {
+    //     $('.cr-sidebar-overlay').fadeIn();
+    //     $('.cr-mobile-menu').addClass('cr-menu-open');
+    // });
+    //
+    // $('.cr-sidebar-overlay, .cr-close').on('click', function () {
+    //     $('.cr-sidebar-overlay').fadeOut();
+    //     $('.cr-mobile-menu').removeClass('cr-menu-open');
+    // });
+    //
+    // $('.drop-list > a').on('click', function () {
+    //     $('.sub-menu').slideUp(600);
+    //     if ($(this).parent().hasClass('active')) {
+    //         $('.drop-list').removeClass('active');
+    //         $(this).parent().removeClass('active');
+    //     } else {
+    //         $('.drop-list').removeClass('active');
+    //         $(this).next('.sub-menu').slideDown(600);
+    //         $(this).parent().addClass('active');
+    //     }
+    // });
 
     /* Footer Toggle  */
     $(document).ready(function () {

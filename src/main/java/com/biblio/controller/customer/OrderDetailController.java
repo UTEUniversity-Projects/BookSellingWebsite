@@ -29,7 +29,7 @@ public class OrderDetailController extends HttpServlet {
      */
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         // TODO Auto-generated method stub
-        request.setAttribute("breadcumb", "Chi tiết đơn hàng");
+        request.setAttribute("breadcrumb", "Chi tiết đơn hàng");
         request.getRequestDispatcher("/views/customer/order-detail.jsp").forward(request, response);
     }
 
