@@ -68,8 +68,11 @@ public class Order implements Serializable {
 //    @OneToOne(mappedBy = "order")
 //    private EWallet wallet;
 
+    @OneToOne(mappedBy = "order", cascade = CascadeType.ALL)
+    private ReturnBook returnBook;
+
     @OneToMany(mappedBy = "order", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
-    private Set<LineItem> lineItems = new HashSet<>();
+    private Set<OrderItem> orderItems = new HashSet<>();
 
     @ManyToMany(cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH}, fetch = FetchType.LAZY)
     @JoinTable(name = "order_promotion",
@@ -83,7 +86,7 @@ public class Order implements Serializable {
 
     public double calTotalPrice() {
         double totalPrice = 0.0;
-        for (LineItem item : lineItems) {
+        for (OrderItem item : orderItems) {
             totalPrice += item.calPriceItem();
         }
         BigDecimal roundedTotal = new BigDecimal(totalPrice).setScale(2, RoundingMode.HALF_UP);

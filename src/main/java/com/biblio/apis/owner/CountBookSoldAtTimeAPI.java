@@ -77,7 +77,7 @@ public class CountBookSoldAtTimeAPI extends HttpServlet {
                         Map<String, Object> map = new HashMap<>();
                         map.put("id", item.getId());
                         map.put("title", item.getTitle());
-                        map.put("count", item.getCount());
+                        map.put("count", item.getCountSold());
                         return map;
                     })
                     .toList();

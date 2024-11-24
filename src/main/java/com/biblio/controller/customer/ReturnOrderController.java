@@ -31,6 +31,7 @@ public class ReturnOrderController extends HttpServlet {
      */
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
         // Lấy thông tin từ session
         HttpSession session = request.getSession();
         //Long customerId = (Long) session.getAttribute("customerId");
@@ -42,6 +43,9 @@ public class ReturnOrderController extends HttpServlet {
         }
 
         // Hiển thị giao diện hoàn trả (JSP)
+
+        // TODO Auto-generated method stub
+        request.setAttribute("breadcrumb", "Hoàn trả sách");
         request.getRequestDispatcher("/views/customer/return-order.jsp").forward(request, response);
     }
 

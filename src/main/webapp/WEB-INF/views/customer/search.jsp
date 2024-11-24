@@ -3,7 +3,7 @@
 
 <!-- Shop -->
 <section class="section-shop padding-tb-100">
-    <div class="container">
+    <div class="container-xl">
         <div class="row d-none">
             <div class="col-lg-12">
                 <div
@@ -36,15 +36,15 @@
                         <h4 class="cr-shop-sub-title">Danh mục</h4>
                         <div class="cr-checkbox">
                             <div class="checkbox-group">
-                                <input type="checkbox" id="all-categories"/>
+                                <input type="checkbox" id="all-categories" checked/>
                                 <label for="all-categories">Tất cả</label>
-                                <span>[20]</span>
+                                <span>(${totalBook})</span>
                             </div>
                             <c:forEach var="category" items="${categories}">
-                                <div class="checkbox-group">
+                                <div class="checkbox-group gap-x-2">
                                     <input type="checkbox" id="${category.id}"/>
-                                    <label for="${category.id}">${category.name}</label>
-                                    <span>[20]</span>
+                                    <label for="${category.id}" class="pr-2">${category.categoryName}</label>
+                                    <span>(${category.bookCount})</span>
                                 </div>
                             </c:forEach>
                         </div>
@@ -211,19 +211,16 @@
                 <div class="row">
                     <div class="col-12">
                         <div class="cr-shop-bredekamp">
-                            <div class="cr-toggle">
-                                <a href="javascript:void(0)" class="gridCol active-grid">
-                                    <i class="ri-grid-line"></i>
-                                </a>
-                                <a href="javascript:void(0)" class="gridRow">
-                                    <i class="ri-list-check-2"></i>
-                                </a>
-                            </div>
                             <div class="flex items-center justify-between flex-1">
-                                <p class='font-bold'>
+                                <p class='font-bold px-5'>
                                     Kết quả tìm kiếm:
-                                    <span class="font-medium text-[#004838]"
-                                    >đắc nhân tâm (20 kết quả)</span
+                                    <span class="search-result-label font-medium text-[#004838]"
+                                    >
+                                        <c:if test="${title != ''}">
+                                            ${title} (${searchResult} kết quả)
+                                        </c:if>
+
+                                    </span
                                     >
                                 </p>
                             </div>
@@ -244,9 +241,9 @@
                         </div>
                     </div>
                 </div>
-                <div class="book-list row col-100 mb-minus-24">
+                <div class="book-list row mb-minus-24">
                     <c:forEach var="book" items="${books}">
-                        <div class="mix ${book.categoryName} col-xxl-3 col-xl-4 col-6 cr-product-box mb-24"
+                        <div data-book-id="${book.id}" class="mix col-xxl-3 col-xl-4 col-6 cr-product-box mb-5"
                         >
                             <div class="cr-product-card">
                                 <div class="cr-product-image">
@@ -291,29 +288,36 @@
                                     <a href="${pageContext.request.contextPath}/book?id=${book.id}"
                                        class="title">${book.title}</a>
                                     <p class="cr-price">
-                                        <span class="new-price price-value">${book.sellingPrice}</span>
-                                        <span class="old-price price-value">${book.sellingPrice}</span>
+                                        <span class="new-price price-value">${book.sellingPrice}<span> ₫</span></span>
+                                        <span class="old-price price-value">${book.sellingPrice}<span> ₫</span></span>
                                     </p>
                                 </div>
                             </div>
                         </div>
                     </c:forEach>
                 </div>
-                <nav aria-label="..." class="cr-pagination">
-                    <ul class="pagination">
-                        <li class="page-item disabled">
-                            <span class="page-link">Trang trước</span>
-                        </li>
-                        <li class="page-item active" aria-current="page">
-                            <span class="page-link">1</span>
-                        </li>
-                        <li class="page-item"><a class="page-link" href="#">2</a></li>
-                        <li class="page-item"><a class="page-link" href="#">3</a></li>
-                        <li class="page-item">
-                            <a class="page-link" href="#">Trang sau</a>
-                        </li>
-                    </ul>
-                </nav>
+                <c:choose>
+                    <c:when test="${searchResults == 0}">
+                        <p class="text-xl text-[#269a37] text-center">Không tìm thấy sản phẩm nào với từ khóa
+                            <b>${searchInput}</b>.</p>
+                    </c:when>
+                    <c:otherwise>
+                        <nav aria-label="..." class="cr-pagination">
+                            <ul class="pagination">
+                                <li class="page-item disabled">
+                                    <span class="page-link">Trang trước</span>
+                                </li>
+                                <c:forEach begin="1" end="${endPage}" var="i">
+                                    <li class="page-item ${index == i ? "active" : "" }" data-index="${i}" style="cursor: pointer; user-select: none;"><span
+                                            class="page-link">${i}</span></li>
+                                </c:forEach>
+                                <li class="page-item">
+                                    <span class="page-link">Trang sau</span>
+                                </li>
+                            </ul>
+                        </nav>
+                    </c:otherwise>
+                </c:choose>
             </div>
         </div>
     </div>

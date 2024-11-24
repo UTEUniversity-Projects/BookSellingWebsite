@@ -29,7 +29,7 @@ public class VerifyEmailController extends HttpServlet {
      */
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         // TODO Auto-generated method stub
-        request.setAttribute("breadcumb", "Xác thực email");
+        request.setAttribute("breadcrumb", "Xác thực email");
         request.getRequestDispatcher("/views/customer/verify-email.jsp").forward(request, response);
     }
 

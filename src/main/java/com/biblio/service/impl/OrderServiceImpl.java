@@ -1,10 +1,18 @@
 package com.biblio.service.impl;
 
 import com.biblio.dao.IOrderDAO;
+
+import com.biblio.dao.impl.OrderDAOImpl;
+import com.biblio.dto.response.OrderCustomerResponse;
+import com.biblio.dto.response.OrderDetailsManagementResponse;
+import com.biblio.dto.response.OrderManagementResponse;
+import com.biblio.dto.response.RevenueResponse;
+
 import com.biblio.dto.response.*;
 import com.biblio.entity.Book;
-import com.biblio.entity.LineItem;
+
 import com.biblio.entity.Order;
+import com.biblio.entity.OrderItem;
 import com.biblio.enumeration.EOrderStatus;
 import com.biblio.mapper.BookMapper;
 import com.biblio.mapper.OrderMapper;
@@ -168,35 +176,36 @@ public class OrderServiceImpl implements IOrderService {
     }
 
     @Override
+    public OrderCustomerResponse findOrderById(Long orderId) {
+        return orderDAO.findById(orderId);
+    }
+
     public List<CountBookSoldResponse> getListCountBookSoldAtTime(LocalDateTime start, LocalDateTime end) {
         List<BookSoldResponse> ListBookSold = new ArrayList<>();
         List<Order> list = orderDAO.findAllForManagement();
         for (Order order : list) {
-            LocalDateTime orderDate = order.getOrderDate();
+            Order orderTmp = orderDAO.findOneForDetailsManagement(order.getId());
+            LocalDateTime orderDate = orderTmp.getOrderDate();
             if ((orderDate.isEqual(start) || orderDate.isAfter(start)) &&
                     (orderDate.isEqual(end) || orderDate.isBefore(end)) &&
-                    EOrderStatus.COMPLETE_DELIVERY.equals(order.getStatus())) {
-                for (LineItem lineItem : order.getLineItems()) {
-                    for (Book book : lineItem.getBooks()) {
+                    EOrderStatus.COMPLETE_DELIVERY.equals(orderTmp.getStatus())) {
+                for (OrderItem orderItem : orderTmp.getOrderItems()) {
+                    for (Book book : orderItem.getBooks()) {
                         ListBookSold.add(BookMapper.toBookSoldResponse(book));
                     }
                 }
             }
         }
+        List<CountBookSoldResponse> countBookSoldResponse = BookMapper.toCountBookSoldResponse(ListBookSold);
+        countBookSoldResponse.sort(Comparator.comparingLong(CountBookSoldResponse::getCountSold).reversed());
+        return countBookSoldResponse;
 
-        return BookMapper.toCountBookSoldResponse(ListBookSold);
-    }
-
-
-    @Override
-    public Order findOrderById(Long orderId) {
-        return orderDAO.findOne(orderId);
     }
 
     @Override
     @Transactional
     public void confirmOrder(Long orderId) {
-        Order order = orderDAO.findById(orderId);
+        Order order = orderDAO.findOne(orderId);
         order.setStatus(EOrderStatus.PACKING);
         orderDAO.updateOrder(order);
     }
@@ -204,7 +213,7 @@ public class OrderServiceImpl implements IOrderService {
     @Override
     @Transactional
     public void rejectOrder(Long orderId, String reason) {
-        Order order = orderDAO.findById(orderId);
+        Order order = orderDAO.findOne(orderId);
         order.setStatus(EOrderStatus.CANCELED);
         orderDAO.updateOrder(order);
     }

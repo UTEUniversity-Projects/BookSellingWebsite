@@ -23,4 +23,6 @@ public interface IPromotionTemplateService {
 
     Boolean isCodeExisted(String code);
 
+    Double percentDiscountOfBook(Long bookTemplateId);
+
 }

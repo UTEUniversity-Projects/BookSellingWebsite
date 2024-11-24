@@ -12,6 +12,8 @@ public class CountBookSoldResponse {
     private String srcImg;
     private String title;
     private String category;
-    private Long count;
+    private Long countInStock;
+    private Long countSold;
+
 }
 

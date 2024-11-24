@@ -1,5 +1,6 @@
 package com.biblio.service.impl;
 
+import com.biblio.dao.IBookTemplateDAO;
 import com.biblio.dao.IPromotionDAO;
 import com.biblio.dao.IPromotionTemplateDAO;
 import com.biblio.dto.request.PromotionTemplateInsertRequest;
@@ -7,10 +8,10 @@ import com.biblio.dto.request.PromotionTemplateUpdateRequest;
 import com.biblio.dto.response.PromotionTemplateGetDetailsResponse;
 import com.biblio.dto.response.PromotionTemplateGetResponse;
 import com.biblio.dto.response.PromotionTemplateResponse;
-import com.biblio.entity.Promotion;
-import com.biblio.entity.PromotionTemplate;
+import com.biblio.entity.*;
 import com.biblio.enumeration.EPromotionStatus;
 import com.biblio.enumeration.EPromotionTemplateStatus;
+import com.biblio.enumeration.EPromotionTemplateType;
 import com.biblio.mapper.PromotionTemplateMapper;
 import com.biblio.service.IPromotionTemplateService;
 
@@ -18,11 +19,15 @@ import javax.inject.Inject;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
+
 public class PromotionTemplateServiceImpl implements IPromotionTemplateService {
     @Inject
     IPromotionDAO promotionDAO;
     @Inject
     IPromotionTemplateDAO promotionTemplateDAO;
+    @Inject
+    IBookTemplateDAO bookTemplateDAO;
 
     @Override
     public PromotionTemplateGetDetailsResponse getPromotionTemplateById(Long id) {
@@ -81,6 +86,49 @@ public class PromotionTemplateServiceImpl implements IPromotionTemplateService {
     @Override
     public Boolean isCodeExisted(String code) {
         return promotionTemplateDAO.existsByCode(code);
+    }
+
+    @Override
+    public Double percentDiscountOfBook(Long bookTemplateId) {
+        List<PromotionTemplate> promotionTemplates = promotionTemplateDAO.findAll();
+        Double percentDiscount = 0.0;
+        for (PromotionTemplate promotionTemplate : promotionTemplates) {
+            BookTemplate book = bookTemplateDAO.findOneForDetails(bookTemplateId);
+            Book singlebook = book.getBooks().iterator().next();
+
+            if (promotionTemplate.getType() == EPromotionTemplateType.DISCOUNT) {
+                for (Promotion promotion : promotionTemplate.getPromotions()) {
+                    if (promotion.getStatus() == EPromotionStatus.NOT_USE &&
+                            (promotion.getEffectiveDate().isBefore(LocalDateTime.now()) || promotion.getEffectiveDate().isEqual(LocalDateTime.now())) &&
+                            (promotion.getExpirationDate().isAfter(LocalDateTime.now()) || promotion.getExpirationDate().isEqual(LocalDateTime.now()))) {
+                        for (PromotionTarget promotionTarget : promotion.getPromotionTargets()) {
+                            switch (promotionTarget.getType()) {
+                                case SUBCATEGORY:
+                                    if (Objects.equals(singlebook.getSubCategory().getId(), promotionTarget.getApplicableObjectId())) {
+                                        percentDiscount = Math.max(percentDiscount, promotion.getPercentDiscount());
+                                    }
+                                    break;
+                                case CATEGORY:
+                                    if (Objects.equals(singlebook.getSubCategory().getCategory().getId(), promotionTarget.getApplicableObjectId())) {
+                                        percentDiscount = Math.max(percentDiscount, promotion.getPercentDiscount());
+                                    }
+                                    break;
+                                case BOOK:
+                                    if (Objects.equals(bookTemplateId, promotionTarget.getApplicableObjectId())) {
+                                        percentDiscount = Math.max(percentDiscount, promotion.getPercentDiscount());
+                                    }
+                                    break;
+
+                                    default:
+                                        percentDiscount = Math.max(percentDiscount, promotion.getPercentDiscount());
+                                        break;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        return percentDiscount;
     }
 
     private void updatePromotionTemplateStatus(PromotionTemplate promotionTemplate, List<Promotion> promotions) {

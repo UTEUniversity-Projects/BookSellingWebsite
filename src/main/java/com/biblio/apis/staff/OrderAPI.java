@@ -12,7 +12,10 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.io.OutputStream;
 import java.io.Serial;
+import java.net.HttpURLConnection;
+import java.net.URL;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -49,6 +52,10 @@ public class OrderAPI extends HttpServlet {
                     handleCancelOrder(request, response, result, mapper);
                     break;
 
+                case "/transport-order":
+                    handleTransportOrder(request, response, result, mapper);
+                    break;
+
 
                 default:
                     result.put("message", "Không tìm thấy hành động phù hợp!");
@@ -67,11 +74,14 @@ public class OrderAPI extends HttpServlet {
         Map<String, Object> jsonMap = mapper.readValue(request.getReader(), Map.class);
         long orderId = Long.parseLong(jsonMap.get("orderId").toString());
         boolean success = orderService.updateStatus(orderId, EOrderStatus.PACKING);
+        /*double finalPrice = Double.parseDouble(jsonMap.get("finalPrice").toString());*/
         if (success) {
             result.put("message", "Đơn hàng được xác nhận thành công!");
             result.put("type", "success");
+            result.put("statusType", EOrderStatus.PACKING.name());
             result.put("status", EOrderStatus.PACKING.getDescription());
             result.put("statusStyle", EOrderStatus.PACKING.getStatusStyle());
+            sendOrderConfirmationEmail(orderId/*, finalPrice*/);
         } else {
             result.put("message", "Không thể xác nhận đơn hàng. Vui lòng thử lại!");
             result.put("type", "info");
@@ -82,14 +92,97 @@ public class OrderAPI extends HttpServlet {
     private void handleCancelOrder(HttpServletRequest request, HttpServletResponse response, Map<String, String> result, ObjectMapper mapper) throws IOException {
         Map<String, Object> jsonMap = mapper.readValue(request.getReader(), Map.class);
         long orderId = Long.parseLong(jsonMap.get("orderId").toString());
+        String cancelContent = jsonMap.get("content").toString();
+
         boolean success = orderService.updateStatus(orderId, EOrderStatus.CANCELED);
         if (success) {
             result.put("message", "Đơn hàng được hủy thành công!");
             result.put("type", "success");
+            result.put("statusType", EOrderStatus.CANCELED.name());
             result.put("status", EOrderStatus.CANCELED.getDescription());
             result.put("statusStyle", EOrderStatus.CANCELED.getStatusStyle());
+            sendCancelOrderEmail(orderId,cancelContent);
         } else {
             result.put("message", "Không thể hủy đơn hàng. Vui lòng thử lại!");
+            result.put("type", "info");
+        }
+        response.getWriter().write(mapper.writeValueAsString(result));
+    }
+
+    private void sendOrderConfirmationEmail(Long orderId/*, Double finalPrice*/) throws IOException {
+        // URL của API gửi email
+        String apiUrl = "http://localhost:8080/BookSellingWebsite/api/order/send-email";
+        HttpURLConnection connection = null;
+
+        try {
+            URL url = new URL(apiUrl);
+            connection = (HttpURLConnection) url.openConnection();
+            connection.setRequestMethod("POST");
+            connection.setDoOutput(true);
+            connection.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");
+
+            // Gửi thông tin orderId qua body của request
+            String params = "orderId=" + orderId /*+ "&finalPrice=" + finalPrice*/;
+            try (OutputStream os = connection.getOutputStream()) {
+                os.write(params.getBytes());
+                os.flush();
+            }
+
+            // Kiểm tra phản hồi từ API
+            int responseCode = connection.getResponseCode();
+            if (responseCode != HttpServletResponse.SC_OK) {
+                throw new IOException("Gửi email thất bại! Mã lỗi: " + responseCode);
+            }
+        } finally {
+            if (connection != null) {
+                connection.disconnect();
+            }
+        }
+    }
+
+    private void sendCancelOrderEmail(Long orderId, String cancelContent) throws IOException {
+        // URL của API gửi email hủy đơn hàng
+        String apiUrl = "http://localhost:8080/BookSellingWebsite/api/order/cancel-email";
+        HttpURLConnection connection = null;
+
+        try {
+            URL url = new URL(apiUrl);
+            connection = (HttpURLConnection) url.openConnection();
+            connection.setRequestMethod("POST");
+            connection.setDoOutput(true);
+            connection.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");
+
+            // Gửi thông tin orderId qua body của request
+            String params = "orderId=" + orderId + "&cancelContent=" + cancelContent;
+            try (OutputStream os = connection.getOutputStream()) {
+                os.write(params.getBytes());
+                os.flush();
+            }
+
+            // Kiểm tra phản hồi từ API
+            int responseCode = connection.getResponseCode();
+            if (responseCode != HttpServletResponse.SC_OK) {
+                throw new IOException("Gửi email hủy đơn hàng thất bại! Mã lỗi: " + responseCode);
+            }
+        } finally {
+            if (connection != null) {
+                connection.disconnect();
+            }
+        }
+    }
+
+    private void handleTransportOrder(HttpServletRequest request, HttpServletResponse response, Map<String, String> result, ObjectMapper mapper) throws IOException {
+        Map<String, Object> jsonMap = mapper.readValue(request.getReader(), Map.class);
+        long orderId = Long.parseLong(jsonMap.get("orderId").toString());
+        boolean success = orderService.updateStatus(orderId, EOrderStatus.SHIPPING);
+        if (success) {
+            result.put("message", "Đơn hàng được chuyển đến đơn vị vận chuyển thành công!");
+            result.put("type", "success");
+            result.put("statusType", EOrderStatus.SHIPPING.name());
+            result.put("status", EOrderStatus.SHIPPING.getDescription());
+            result.put("statusStyle", EOrderStatus.SHIPPING.getStatusStyle());
+        } else {
+            result.put("message", "Không thể xác nhận đơn hàng. Vui lòng thử lại!");
             result.put("type", "info");
         }
         response.getWriter().write(mapper.writeValueAsString(result));

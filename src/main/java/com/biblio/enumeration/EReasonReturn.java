@@ -4,14 +4,15 @@ import lombok.Getter;
 
 @Getter
 public enum EReasonReturn {
-    DAMAGED("Sách bị hỏng"),
-    NOT_AS_DESCRIBED("Sách không đúng mô tả"),
-    FAKE("Sách giả"),
-    NO_NEEDED("Không còn cần thiết");
 
-    private final String description;
-
+    DAMAGED("Hư hỏng"),
+    NOT_AS_DESCRIBED("Không giống mô tả"),
+    FAKE("Hàng giả"),
+    NO_NEEDED("Không có nhu cầu nữa");
+    
+    private String value;
+    
     EReasonReturn(String value) {
-        this.description = value;
+        this.value = value;
     }
 }

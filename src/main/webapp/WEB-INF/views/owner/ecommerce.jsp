@@ -171,13 +171,41 @@
             </div>
         </div>
         <div class="row">
+            <div class="col-xl-4 col-md-12">
+                <div class="cr-card">
+                    <div class="cr-card-content label-card">
+                        <div class="title">
+                            <span class="icon icon-3"><i class="ri-product-hunt-line"></i></span>
+                            <div class="growth-numbers">
+                                <h4>Sách đã bán</h4>
+                                <h5 id="countBookSold">0</h5>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xl-4 col-md-12">
+                <div class="cr-card">
+                    <div class="cr-card-content label-card">
+                        <div class="title">
+                            <span class="icon icon-3"><i class="ri-shield-star-line"></i></span>
+                            <div class="growth-numbers">
+                                <h4>Sách bán chạy nhất</h4>
+                                <h5 id="bestSeller"></h5>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="row">
             <div class="col-xxl-12 col-xl-12">
                 <div class="cr-card revenue-overview">
                     <div class="cr-card-header header-575">
-                        <h4 class="cr-card-title">Thống kê đơn hàng</h4>
+                        <h4 class="cr-card-title"></h4>
                         <div class="header-tools" style="font-size: 24px">
-                            <a class="a-chart"><i class="ri-bar-chart-line"></i></a>
-                            <a class="a-chart"><i class="ri-line-chart-line"></i></a>
                             <a
                                     href="javascript:void(0)"
                                     class="m-r-10 cr-full-card"
@@ -185,7 +213,7 @@
                             ><i class="ri-fullscreen-line"></i
                             ></a>
                             <div class="cr-tools">
-                                <div class="daterange">
+                                <div class="daterange" id="date-top-product">
                                     <i class="fa fa-calendar"></i>&nbsp;
                                     <span></span>
                                     <i class="fa fa-caret-down"></i>
@@ -195,7 +223,40 @@
                     </div>
                     <div class="cr-card-content">
                         <div class="cr-chart-content">
-                            <div id="orderBarChart" class="mb-m-24"></div>
+                            <div id="topProductSoldBarChart" class="mb-m-24"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xxl-12 col-xl-12">
+                    <div class="cr-card" id="best_seller_tbl">
+                        <div class="cr-card-header">
+                            <h4 class="cr-card-title">Sản Phẩm</h4>
+                            <div class="header-tools">
+                                <a href="javascript:void(0)" class="m-r-10 cr-full-card" title="Full Screen"><i
+                                        class="ri-fullscreen-line"></i></a>
+                            </div>
+                        </div>
+                        <div class="cr-card-content card-default">
+                            <div class="best-seller-table">
+                                <div class="table-responsive">
+                                    <table id="list_product_sold_in_stock_statistical" class="table">
+                                        <thead>
+                                        <tr>
+                                            <th>#</th>
+                                            <th>Thể loại</th>
+                                            <th>Đã bán</th>
+                                            <th>Tồn kho</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        <!-- Các dòng dữ liệu sẽ được thêm vào đây -->
+                                        </tbody>
+                                    </table>
+                                </div>
+
+                            </div>
                         </div>
                     </div>
                 </div>
