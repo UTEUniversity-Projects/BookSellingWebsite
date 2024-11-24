@@ -3,10 +3,7 @@ package com.biblio.service.impl;
 import com.biblio.dao.IBookTemplateDAO;
 
 import com.biblio.dto.request.SearchBookRequest;
-import com.biblio.dto.response.BookCardResponse;
-import com.biblio.dto.response.BookDetailsResponse;
-import com.biblio.dto.response.BookManagementResponse;
-import com.biblio.dto.response.BookTemplatePromotionResponse;
+import com.biblio.dto.response.*;
 
 import com.biblio.entity.BookTemplate;
 import com.biblio.mapper.BookTemplateMapper;
