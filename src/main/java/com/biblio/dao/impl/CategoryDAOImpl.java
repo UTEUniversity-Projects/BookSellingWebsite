@@ -63,9 +63,6 @@ public class CategoryDAOImpl extends GenericDAOImpl<Category> implements ICatego
     }
 
     public static void main(String[] args) {
-        CategoryDAOImpl dao = new CategoryDAOImpl();
-
-        System.out.println(dao.countTotalDistinctBooks());
     }
 
 }
