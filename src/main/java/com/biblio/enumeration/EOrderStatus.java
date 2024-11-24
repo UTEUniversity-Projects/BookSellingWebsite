@@ -11,7 +11,7 @@ public enum EOrderStatus {
     SHIPPING("Đang giao hàng"),
     COMPLETE_DELIVERY("Đã hoàn thành"),
     CANCELED("Đã hủy"),
-    REQUEST_REFUND("Yêu cầu hoàn tiền"),
+    REQUEST_REFUND("Yêu cầu hoàn trả"),
     REFUNDED("Đã hoàn tiền");
 
     // Getter for description

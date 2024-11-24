@@ -3,8 +3,8 @@ package com.biblio.service.impl;
 import com.biblio.dao.IOrderDAO;
 import com.biblio.dto.response.*;
 import com.biblio.entity.Book;
-import com.biblio.entity.LineItem;
 import com.biblio.entity.Order;
+import com.biblio.entity.OrderItem;
 import com.biblio.enumeration.EOrderStatus;
 import com.biblio.mapper.BookMapper;
 import com.biblio.mapper.OrderMapper;
@@ -152,7 +152,7 @@ public class OrderServiceImpl implements IOrderService {
             if ((orderDate.isEqual(start) || orderDate.isAfter(start)) &&
                     (orderDate.isEqual(end) || orderDate.isBefore(end)) &&
                     EOrderStatus.COMPLETE_DELIVERY.equals(orderTmp.getStatus())) {
-                for (LineItem lineItem : orderTmp.getLineItems()) {
+                for (OrderItem lineItem : orderTmp.getOrderItems()) {
                     for (Book book : lineItem.getBooks()) {
                         ListBookSold.add(BookMapper.toBookSoldResponse(book));
                     }
