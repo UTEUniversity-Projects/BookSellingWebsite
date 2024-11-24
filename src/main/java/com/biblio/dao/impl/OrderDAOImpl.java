@@ -1,6 +1,9 @@
 package com.biblio.dao.impl;
 
 import com.biblio.dao.IOrderDAO;
+import com.biblio.dto.response.CustomerResponse;
+import com.biblio.dto.response.OrderCustomerResponse;
+import com.biblio.dto.response.ShippingResponse;
 import com.biblio.entity.Book;
 import com.biblio.entity.LineItem;
 import com.biblio.entity.Order;
@@ -9,6 +12,8 @@ import com.biblio.enumeration.EOrderStatus;
 import com.biblio.jpaconfig.JpaConfig;
 
 import javax.persistence.EntityManager;
+import javax.persistence.EntityNotFoundException;
+import javax.persistence.NoResultException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -101,9 +106,38 @@ public class OrderDAOImpl extends GenericDAOImpl<Order> implements IOrderDAO {
     }
 
     @Override
-    public Order findById(Long id) {
-        return entityManager.find(Order.class, id);
+    public OrderCustomerResponse findById(Long id) {
+        // Query to fetch the order details
+        String query = "SELECT o FROM Order o LEFT JOIN FETCH o.customer c LEFT JOIN FETCH o.lineItems li LEFT JOIN FETCH o.shipping s WHERE o.id = :id";
+
+        try {
+            // Execute the query
+            Order order = entityManager.createQuery(query, Order.class)
+                    .setParameter("id", id)
+                    .getSingleResult();
+
+            // Map Order entity to OrderCustomerResponse
+            return OrderCustomerResponse.builder()
+                    .id(order.getId())
+                    .note(order.getNote())
+                    .orderDate(order.getOrderDate())
+                    .paymentType(order.getPaymentType().toString())
+                    .status(order.getStatus().toString())
+                    .vat(order.getVat())
+                    .customerId(order.getCustomer().getId())
+                    .customerName(order.getCustomer().getFullName())
+                    .shippingId(order.getShipping() != null ? order.getShipping().getId() : null)
+                    .lineItems(order.getLineItems())
+                    .address(order.getShipping().getAddress().getFullAddress())
+                    .email(order.getCustomer().getEmailAddress())
+                    .build();
+        } catch (NoResultException e) {
+            // Handle case when no order is found
+            throw new EntityNotFoundException("Order with ID " + id + " not found.");
+        }
     }
+
+
 
     @Override
     public void updateOrder(Order order) {

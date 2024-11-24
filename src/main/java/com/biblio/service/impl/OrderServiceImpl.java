@@ -1,6 +1,7 @@
 package com.biblio.service.impl;
 
 import com.biblio.dao.IOrderDAO;
+import com.biblio.dao.impl.OrderDAOImpl;
 import com.biblio.dto.response.OrderCustomerResponse;
 import com.biblio.dto.response.OrderDetailsManagementResponse;
 import com.biblio.dto.response.OrderManagementResponse;
@@ -20,8 +21,7 @@ import java.util.stream.Collectors;
 import java.util.*;
 
 public class OrderServiceImpl implements IOrderService {
-    @Inject
-    IOrderDAO orderDAO;
+    IOrderDAO orderDAO = new OrderDAOImpl();
 
     @Override
     public OrderDetailsManagementResponse getOrderDetailsManagementResponse(Long id) {
@@ -134,14 +134,14 @@ public class OrderServiceImpl implements IOrderService {
     }
 
     @Override
-    public Order findOrderById(Long orderId) {
-        return orderDAO.findOne(orderId);
+    public OrderCustomerResponse findOrderById(Long orderId) {
+        return orderDAO.findById(orderId);
     }
 
     @Override
     @Transactional
     public void confirmOrder(Long orderId) {
-        Order order = orderDAO.findById(orderId);
+        Order order = orderDAO.findOne(orderId);
         order.setStatus(EOrderStatus.PACKING);
         orderDAO.updateOrder(order);
     }
@@ -149,9 +149,11 @@ public class OrderServiceImpl implements IOrderService {
     @Override
     @Transactional
     public void rejectOrder(Long orderId, String reason) {
-        Order order = orderDAO.findById(orderId);
+        Order order = orderDAO.findOne(orderId);
         order.setStatus(EOrderStatus.CANCELED);
         orderDAO.updateOrder(order);
     }
+
+
 
 }
