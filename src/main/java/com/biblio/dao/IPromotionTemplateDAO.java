@@ -6,6 +6,7 @@ import java.util.List;
 
 
 public interface IPromotionTemplateDAO {
+    List<PromotionTemplate> findAll();
     PromotionTemplate findById(Long id);
 
     List<PromotionTemplate> findByJPQL();

@@ -617,11 +617,7 @@
         responsiveDataTable.DataTable({
             "aLengthMenu": [[5, 20, 30, 50, 75, -1], [5, 20, 30, 50, 75, "All"]],
             "pageLength": 5,
-            "dom": '<"row justify-content-between top-information"lf>rt<"row justify-content-between bottom-information"ip><"clear">',
-            "columnDefs": [
-                { "orderable": false, "targets": [0, 1] }, // Không cho phép sắp xếp ở cột 0 (#) và 1 (Thể loại)
-                { "orderable": true, "targets": [2, 3] }   // Chỉ cho phép sắp xếp ở cột 2 (Đã bán) và 3 (Tồn kho)
-            ]
+            "dom": '<"row justify-content-between top-information"lf>rt<"row justify-content-between bottom-information"ip><"clear">'
         });
     }
     /*========== Todo DATA TABLE ===========*/

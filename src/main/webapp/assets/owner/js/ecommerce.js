@@ -291,8 +291,8 @@ $(document).ready(function () {
                     const group = countList.slice(currentIndex, currentIndex + groupSize);
                     const totalList = group.reduce((sum, item) => sum + item.count, 0);
                     processedData.push({
-                        joinAt: `${moment(group[0].date).format("DD-MM")} - ${
-                            moment(group[group.length - 1].date).format("DD-MM")
+                        joinAt: `${moment(group[0].joinAt).format("DD-MM")} - ${
+                            moment(group[group.length - 1].joinAt).format("DD-MM")
                         }`,
                         count: Math.round(totalList),
                     });
@@ -373,7 +373,7 @@ $(document).ready(function () {
             const listBookSoldAllTime = response.countBookSoldAllTime;
 
             // Lấy đối tượng DataTable
-            const responsiveDataTable = $("#best_seller_data_table").DataTable();
+            const responsiveDataTable = $("#list_product_sold_in_stock_statistical").DataTable();
 
             // Xóa dữ liệu cũ
             responsiveDataTable.clear();
@@ -384,17 +384,19 @@ $(document).ready(function () {
                     `<img class="cat-thumb" src="${book.img}" alt="Book Image">
                  <span class="name">${book.title}</span>`,
                     `<span class="cat">
-					    <a href="#">${book.category}</a>
-					</span>`,
+                    <a href="#">${book.category}</a>
+                 </span>`,
                     book.countSold,
                     book.countInStock
-                ]);
+                ]).node().setAttribute("data-href", `/owner/product-details?id=${book.id}`); // Thêm thuộc tính data-href
             });
 
             // Cập nhật DataTable
             responsiveDataTable.draw();
         });
     }
+
+
 
 
     // Xử lý sự kiện thay đổi loại biểu đồ
@@ -477,3 +479,45 @@ $(document).ready(function () {
     updateTopProductSoldChart(startOfTopProductSold, endOfTopProductSold);
     updateProductSoldTable();
 });
+$(document).ready(function () {
+    var responsiveDataTable = $("#list_product_sold_in_stock_statistical");
+
+    if (responsiveDataTable.length !== 0) {
+        responsiveDataTable.DataTable({
+            "aLengthMenu": [[5, 20, 30, 50, 75, -1], [5, 20, 30, 50, 75, "All"]],
+            "pageLength": 5,
+            "paging": true,
+            "searching": true,
+            "info": true,
+            "responsive": true,
+            "autoWidth": false,
+            "dom": '<"row justify-content-between top-information"lf>rt<"row justify-content-between bottom-information"ip><"clear">',
+            "order": [[2, "desc"]], // Sắp xếp mặc định cột 2 (index 1) giảm dần
+            "columnDefs": [
+                {
+                    "orderable": true,  // Bật sắp xếp
+                    "targets": [2, 3]   // Chỉ bật sắp xếp cho cột 2 và 3
+                },
+                {
+                    "orderable": false, // Tắt sắp xếp
+                    "targets": [0, 2]   // Cột # và cột cuối
+                }
+            ],
+            "language": {
+                "lengthMenu": "Hiển thị _MENU_ dòng mỗi trang",
+                "zeroRecords": "Không tìm thấy dữ liệu",
+                "info": "Hiển thị từ _START_ đến _END_ của _TOTAL_ dòng",
+                "infoEmpty": "Không có dữ liệu để hiển thị",
+                "infoFiltered": "(lọc từ tổng số _MAX_ dòng)",
+                "search": "Tìm kiếm:",
+                "paginate": {
+                    "previous": "Trước",
+                    "next": "Sau"
+                }
+            }
+        });
+    }
+
+});
+
+
