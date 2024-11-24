@@ -1,7 +1,13 @@
 package com.biblio.service.impl;
 
 import com.biblio.dao.IBookTemplateDAO;
-import com.biblio.dto.response.*;
+
+import com.biblio.dto.request.SearchBookRequest;
+import com.biblio.dto.response.BookCardResponse;
+import com.biblio.dto.response.BookDetailsResponse;
+import com.biblio.dto.response.BookManagementResponse;
+import com.biblio.dto.response.BookTemplatePromotionResponse;
+
 import com.biblio.entity.BookTemplate;
 import com.biblio.mapper.BookTemplateMapper;
 import com.biblio.service.IBookTemplateService;
@@ -53,11 +59,12 @@ public class BookTemplateServiceImpl implements IBookTemplateService {
     }
 
     @Override
-    public List<BookCardResponse> getBookTemplateByTitle(String title) {
-        List<BookTemplate> bookTemplates = bookTemplateDAO.findByTitle(title);
+    public List<BookCardResponse> getBookTemplateByCriteria(SearchBookRequest request) {
+
+        List<BookTemplate> bookTemplates = bookTemplateDAO.findByCriteria(request.getTitle().trim(), request.getCategoryId(), request.getSortBy(), 1);
         List<BookCardResponse> bookCardResponseList = new ArrayList<>();
-        for (BookTemplate bookTemplate : bookTemplates) {
-            bookCardResponseList.add(BookTemplateMapper.toBookCardResponse(bookTemplate));
+        for (BookTemplate bt : bookTemplates) {
+            bookCardResponseList.add(BookTemplateMapper.toBookCardResponse(bt));
         }
         return bookCardResponseList;
 
@@ -73,6 +80,11 @@ public class BookTemplateServiceImpl implements IBookTemplateService {
 
         listBookSold.sort(Comparator.comparingLong(BookSoldAllTimeResponse::getCountSold).reversed());
         return listBookSold;
+    }
+
+    @Override
+    public long getBookTemplateQuantityByCriteria(SearchBookRequest request) {
+        return bookTemplateDAO.countByCriteria(request.getTitle(), request.getCategoryId(), request.getSortBy());
     }
 
 }

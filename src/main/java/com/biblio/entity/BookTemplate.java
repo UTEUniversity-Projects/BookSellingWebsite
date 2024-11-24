@@ -3,6 +3,7 @@ package com.biblio.entity;
 import lombok.*;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
 import com.biblio.enumeration.EBookLanguage;
@@ -18,7 +19,7 @@ import java.util.*;
 @Getter
 @Setter
 @Builder
-public class BookTemplate {
+public class BookTemplate implements Serializable {
 
     // region Attributes
 
@@ -65,7 +66,7 @@ public class BookTemplate {
     @OneToMany(mappedBy = "bookTemplate", cascade = CascadeType.ALL)
     private Set<CartItem> cartItems = new HashSet<>();
 
-    @OneToMany(mappedBy = "bookTemplate", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "bookTemplate", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
     private Set<Review> reviews = new HashSet<>();
 
     // endregion

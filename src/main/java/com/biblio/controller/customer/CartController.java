@@ -44,8 +44,8 @@ public class CartController extends HttpServlet {
 
         CartResponse cart = cartService.getCartResponseByUsername(account.getUsername());
 
+        request.setAttribute("breadcrumb", "Giỏ hàng");
         request.setAttribute("cart", cart);
-        request.setAttribute("breadcumb", "Giỏ hàng");
         request.getRequestDispatcher("/views/customer/cart.jsp").forward(request, response);
     }
 

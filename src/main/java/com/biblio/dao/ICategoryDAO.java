@@ -1,5 +1,6 @@
 package com.biblio.dao;
 
+import com.biblio.dto.response.CategoryBookCountResponse;
 import com.biblio.entity.Category;
 
 import java.util.List;
@@ -18,4 +19,7 @@ public interface ICategoryDAO {
 
     void deleteCategory(Long id);
 
+    List<CategoryBookCountResponse> countBookPerCategory();
+
+    long countTotalDistinctBooks();
 }

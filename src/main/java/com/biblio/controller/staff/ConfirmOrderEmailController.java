@@ -1,8 +1,8 @@
 package com.biblio.controller.staff;
 
 import com.biblio.entity.Book;
-import com.biblio.entity.LineItem;
 import com.biblio.entity.Order;
+import com.biblio.entity.OrderItem;
 import com.biblio.service.IEmailService;
 import com.biblio.service.IOrderService;
 import com.biblio.service.impl.EmailServiceImpl;
@@ -72,7 +72,7 @@ public class ConfirmOrderEmailController extends HttpServlet {
         emailContent.append("Trạng thái: ").append(order.getStatus()).append("\n\n");
 
         emailContent.append("Sản phẩm:\n");
-        for (LineItem item : order.getLineItems()) {
+        for (OrderItem item : order.getOrderItems()) {
             for (Book book : item.getBooks()) {
                 emailContent.append("- ").append(book.getTitle())
                         .append(" (Giá: ").append(book.getSellingPrice()).append(" VND)\n");

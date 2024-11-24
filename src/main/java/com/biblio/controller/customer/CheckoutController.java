@@ -29,7 +29,7 @@ public class CheckoutController extends HttpServlet {
      */
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         // TODO Auto-generated method stub
-        request.setAttribute("breadcumb", "Thanh toán");
+        request.setAttribute("breadcrumb", "Thanh toán");
         request.getRequestDispatcher("/views/customer/checkout.jsp").forward(request, response);
     }
 

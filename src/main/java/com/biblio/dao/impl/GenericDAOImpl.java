@@ -206,6 +206,19 @@ public class GenericDAOImpl<T> implements IGenericDAO<T> {
     }
 
     @Override
+    public long countByJPQL(String jpql) {
+        EntityManager em = JpaConfig.getEntityManager();
+        try {
+            TypedQuery<Long> query = em.createQuery(jpql, Long.class);
+            return query.getSingleResult();
+        } catch (Exception e) {
+            throw new RuntimeException("Error while counting entities by JPQL", e);
+        } finally {
+            closeEntityManager(em);
+        }
+    }
+
+    @Override
     public long countByJPQL(String jpql, Map<String, Object> params) {
         EntityManager em = JpaConfig.getEntityManager();
         try {

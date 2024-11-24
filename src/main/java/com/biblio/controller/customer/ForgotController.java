@@ -29,7 +29,7 @@ public class ForgotController extends HttpServlet {
      */
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         // TODO Auto-generated method stub
-        request.setAttribute("breadcumb", "Quên mật khẩu");
+        request.setAttribute("breadcrumb", "Quên mật khẩu");
         request.getRequestDispatcher("/views/customer/forgot.jsp").forward(request, response);
     }
 

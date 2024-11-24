@@ -29,7 +29,7 @@ public class CompareController extends HttpServlet {
      */
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         // TODO Auto-generated method stub
-        request.setAttribute("breadcumb", "So sánh");
+        request.setAttribute("breadcrumb", "So sánh");
         request.getRequestDispatcher("/views/customer/compare.jsp").forward(request, response);
     }
 
