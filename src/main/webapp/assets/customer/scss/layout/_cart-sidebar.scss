@@ -88,14 +88,14 @@
                             width: 100%;
                             padding-right: 30px;
                             text-decoration: none;
-                            color: $text-777;
+                            color: $title-color;
                             white-space: nowrap;
                             overflow: hidden;
                             text-overflow: ellipsis;
                             display: block;
                             font-size: 15px;
                             line-height: 18px;
-                            font-weight: 400;
+                            font-weight: 500;
                         }
                         .cr-cart-qty {
                             margin-top: 5px;
@@ -107,10 +107,16 @@
                             margin-top: 5px;
                             font-size: 14px;
                             display: block;
-                            span {
-                                color: $text-777;
+                            .new-price {
+                                color: $main-primary-color;
                                 font-weight: 700;
-                                font-size: 16px;
+                            }
+
+                            .old-price {
+                                color: $text-777;
+                                margin-left: 5px;
+                                font-size: 13px;
+                                text-decoration: line-through;
                             }
                         }
                         .remove {
