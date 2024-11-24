@@ -17,29 +17,12 @@
                 <div class="cr-card product-list" id="ordertbl">
                     <div class="cr-card-header">
                         <h4 class="cr-card-title">Trung tâm hỗ trợ khách hàng</h4>
-                        <div class="header-tools">
-                            <!-- Dropdown Lọc Trạng Thái -->
-                            <div>
-                                <button
-                                        type="button"
-                                        class="btn btn-outline-success dropdown-toggle dropdown-toggle-split"
-                                        data-bs-toggle="dropdown"
-                                        aria-haspopup="true"
-                                        aria-expanded="false"
-                                >
-                                    <span id="selected-text">Tất cả</span>
-                                    <span class="sr-only">
-                                        <i class="ri-arrow-down-s-line"></i>
-                                    </span>
-                                </button>
-                            </div>
-                        </div>
                     </div>
 
                     <div class="cr-card-content card-default">
                         <!-- Bảng Yêu Cầu -->
                         <div class="table-responsive">
-                            <table id="support-cus-list" class="table">
+                            <table id="support-cus-list" class="table table-hover">
                                 <thead>
                                 <tr>
                                     <th>Khách hàng</th>
@@ -53,7 +36,7 @@
                                     <tr>
                                         <td><c:out value="${request.customer.fullName}" /></td>
                                         <td><c:out value="${request.title}" /></td>
-                                        <td>${request.createdAt}</td>
+                                        <td><c:out value="${request.createdAt}" /></td>
                                         <td>
                                             <a class="btn btn-outline-success"
                                                href="${pageContext.request.contextPath}/staff/support-customer-dashboard?action=detail&id=${request.id}">
@@ -65,24 +48,6 @@
                                 </tbody>
                             </table>
                         </div>
-                        <!-- Phân Trang -->
-                        <nav>
-                            <ul class="pagination">
-                                <li class="page-item">
-                                    <a class="page-link" href="?page=1" aria-label="Previous">
-                                        <span aria-hidden="true">&laquo;</span>
-                                    </a>
-                                </li>
-                                <!-- Render dynamic page numbers -->
-                                <li class="page-item"><a class="page-link" href="?page=1">1</a></li>
-                                <li class="page-item"><a class="page-link" href="?page=2">2</a></li>
-                                <li class="page-item">
-                                    <a class="page-link" href="?page=3" aria-label="Next">
-                                        <span aria-hidden="true">&raquo;</span>
-                                    </a>
-                                </li>
-                            </ul>
-                        </nav>
                     </div>
                 </div>
             </div>

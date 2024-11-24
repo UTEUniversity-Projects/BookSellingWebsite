@@ -36,7 +36,7 @@ public class EmailServiceImpl implements IEmailService {
         message.setFrom(new InternetAddress(USERNAME));
         message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(toEmail));
         message.setSubject(subject, "UTF-8");
-        message.setText(body, "UTF-8");
+        message.setContent(body, "text/html; charset=UTF-8");
 
         Transport.send(message);
     }
@@ -44,48 +44,71 @@ public class EmailServiceImpl implements IEmailService {
 
     @Override
     public String getPromotionEmail(String customerName, String promotionDetails) {
-        return "Kính gửi " + customerName + ",\n\n" +
-                "Chúng tôi vui mừng thông báo chương trình khuyến mãi mới:\n" +
-                promotionDetails + "\n\n" +
-                "Nhanh tay tham gia để nhận ưu đãi hấp dẫn!\n" +
-                "Trân trọng,\nBiblio BookShop";
+        return "<html>" +
+                "<body>" +
+                "<p>Kính gửi " + customerName + ",</p>" +
+                "<p>Chúng tôi vui mừng thông báo chương trình khuyến mãi mới:</p>" +
+                "<p><strong>" + promotionDetails + "</strong></p>" +
+                "<p>Nhanh tay tham gia để nhận ưu đãi hấp dẫn!</p>" +
+                "<p>Trân trọng,<br>Biblio BookShop</p>" +
+                "</body>" +
+                "</html>";
     }
-
-
 
     @Override
     public String getWelcomeEmail(String customerName) {
-        return "Chào mừng " + customerName + ",\n\n" +
-                "Cảm ơn bạn đã đăng ký tài khoản với chúng tôi.\n\n" +
-                "Trân trọng,\nBiblio BookShop";
+        return "<html>" +
+                "<body>" +
+                "<p>Chào mừng " + customerName + ",</p>" +
+                "<p>Cảm ơn bạn đã đăng ký tài khoản với chúng tôi.</p>" +
+                "<p>Trân trọng,<br>Biblio BookShop</p>" +
+                "</body>" +
+                "</html>";
     }
 
     @Override
     public String getAccountLockEmail(String customerName) {
-        return "Kính gửi " + customerName + ",\n\n" +
-                "Tài khoản của bạn đã bị khóa tạm thời.\n\n" +
-                "Trân trọng,\nBiblio BookShop";
+        return "<html>" +
+                "<body>" +
+                "<p>Kính gửi " + customerName + ",</p>" +
+                "<p>Tài khoản của bạn đã bị khóa tạm thời.</p>" +
+                "<p>Những phản hồi/khiếu nại vui lòng gửi đến email <a href=\"mailto:biblio@gmail.com\">biblio@gmail.com</a>.</p>" +
+                "<p>Trân trọng,<br>Biblio BookShop</p>" +
+                "</body>" +
+                "</html>";
     }
 
     @Override
     public String getAccountUnlockEmail(String customerName) {
-        return "Kính gửi " + customerName + ",\n\n" +
-                "Tài khoản của bạn đã được mở khóa.\n\n" +
-                "Trân trọng,\nBiblio BookShop";
+        return "<html>" +
+                "<body>" +
+                "<p>Kính gửi " + customerName + ",</p>" +
+                "<p>Tài khoản của bạn đã được mở khóa.</p>" +
+                "<p>Trân trọng,<br>Biblio BookShop</p>" +
+                "</body>" +
+                "</html>";
     }
 
     @Override
     public String getAccountDeleteEmail(String customerName) {
-        return "Kính gửi " + customerName + ",\n\n" +
-                "Tài khoản của bạn đã bị xóa khỏi hệ thống.\n\n" +
-                "Trân trọng,\nBiblio BookShop";
+        return "<html>" +
+                "<body>" +
+                "<p>Kính gửi " + customerName + ",</p>" +
+                "<p>Tài khoản của bạn đã bị xóa khỏi hệ thống.</p>" +
+                "<p>Trân trọng,<br>Biblio BookShop</p>" +
+                "</body>" +
+                "</html>";
     }
-
 
     @Override
     public String getReturnConfirmationEmail(String customerName, String orderId) {
-        return "Kính gửi " + customerName + ",\n\n" +
-                "Yêu cầu hoàn trả cho đơn hàng #" + orderId + " đã được chấp thuận.\n\n" +
-                "Trân trọng,\nBiblio BookShop";
+        return "<html>" +
+                "<body>" +
+                "<p>Kính gửi " + customerName + ",</p>" +
+                "<p>Yêu cầu hoàn trả cho đơn hàng <strong>#" + orderId + "</strong> đã được chấp thuận.</p>" +
+                "<p>Trân trọng,<br>Biblio BookShop</p>" +
+                "</body>" +
+                "</html>";
     }
+
 }

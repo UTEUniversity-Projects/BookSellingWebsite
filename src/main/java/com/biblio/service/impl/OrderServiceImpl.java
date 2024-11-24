@@ -1,8 +1,16 @@
 package com.biblio.service.impl;
 
 import com.biblio.dao.IOrderDAO;
+
+import com.biblio.dao.impl.OrderDAOImpl;
+import com.biblio.dto.response.OrderCustomerResponse;
+import com.biblio.dto.response.OrderDetailsManagementResponse;
+import com.biblio.dto.response.OrderManagementResponse;
+import com.biblio.dto.response.RevenueResponse;
+
 import com.biblio.dto.response.*;
 import com.biblio.entity.Book;
+
 import com.biblio.entity.Order;
 import com.biblio.entity.OrderItem;
 import com.biblio.enumeration.EOrderStatus;
@@ -143,6 +151,10 @@ public class OrderServiceImpl implements IOrderService {
     }
 
     @Override
+    public OrderCustomerResponse findOrderById(Long orderId) {
+        return orderDAO.findById(orderId);
+    }
+
     public List<CountBookSoldResponse> getListCountBookSoldAtTime(LocalDateTime start, LocalDateTime end) {
         List<BookSoldResponse> ListBookSold = new ArrayList<>();
         List<Order> list = orderDAO.findAllForManagement();
@@ -166,14 +178,9 @@ public class OrderServiceImpl implements IOrderService {
     }
 
     @Override
-    public Order findOrderById(Long orderId) {
-        return orderDAO.findOne(orderId);
-    }
-
-    @Override
     @Transactional
     public void confirmOrder(Long orderId) {
-        Order order = orderDAO.findById(orderId);
+        Order order = orderDAO.findOne(orderId);
         order.setStatus(EOrderStatus.PACKING);
         orderDAO.updateOrder(order);
     }
@@ -181,7 +188,7 @@ public class OrderServiceImpl implements IOrderService {
     @Override
     @Transactional
     public void rejectOrder(Long orderId, String reason) {
-        Order order = orderDAO.findById(orderId);
+        Order order = orderDAO.findOne(orderId);
         order.setStatus(EOrderStatus.CANCELED);
         orderDAO.updateOrder(order);
     }

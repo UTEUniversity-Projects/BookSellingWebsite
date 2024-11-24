@@ -1,5 +1,7 @@
 package com.biblio.controller.owner;
 
+import com.biblio.dto.response.CustomerGetListResponse;
+import com.biblio.dto.response.PromotionGetResponse;
 import com.biblio.entity.Customer;
 import com.biblio.entity.Promotion;
 import com.biblio.service.ICustomerService;
@@ -38,7 +40,7 @@ public class PromotionEmailController extends HttpServlet {
             long promotionId = Long.parseLong(promotionIdParam);
 
             // Lấy thông tin khuyến mãi từ PromotionService
-            Promotion promotion = promotionService.findPromotionById(promotionId);
+            PromotionGetResponse promotion = promotionService.getPromotionById(promotionId);
             if (promotion == null) {
                 response.setStatus(HttpServletResponse.SC_NOT_FOUND);
                 response.getWriter().write("{\"message\": \"Không tìm thấy khuyến mãi với ID: " + promotionId + "\"}");
@@ -46,13 +48,13 @@ public class PromotionEmailController extends HttpServlet {
             }
 
             // Lấy danh sách khách hàng sẽ nhận email
-            List<Customer> customers = customerService.findAllCustomers(); // Lấy tất cả khách hàng hoặc theo nhóm cụ thể
+            List<CustomerGetListResponse> customers = customerService.findAll(); // Lấy tất cả khách hàng hoặc theo nhóm cụ thể
 
             // Gửi email cho từng khách hàng
-            for (Customer customer : customers) {
+            for (CustomerGetListResponse customer : customers) {
                 String emailContent = generatePromotionEmail(promotion, customer);
                 String subject = "Chương trình khuyến mãi: " + promotion.getTitle();
-                emailService.sendEmail(customer.getEmailAddress(), subject, emailContent);
+                emailService.sendEmail(customer.getEmail(), subject, emailContent);
             }
 
             // Phản hồi lại client
@@ -70,7 +72,7 @@ public class PromotionEmailController extends HttpServlet {
     }
 
     // Hàm tạo nội dung email từ thông tin Promotion
-    private String generatePromotionEmail(Promotion promotion, Customer customer) {
+    private String generatePromotionEmail(PromotionGetResponse promotion, CustomerGetListResponse customer) {
         StringBuilder emailContent = new StringBuilder();
 
         emailContent.append("Kính gửi ").append(customer.getFullName()).append(",\n\n");

@@ -76,9 +76,6 @@ public class CustomerListController extends HttpServlet {
 
     }
     private void sendEmailRequest(String action, String customerEmail, String customerName) throws IOException {
-        System.out.println("Sending email with action: " + action); // Kiểm tra action gửi email
-        System.out.println("Email target: " + customerEmail); // Kiểm tra địa chỉ email
-        System.out.println("Email target name: " + customerName); // Kiểm tra tên khách hàng
 
         URL url = new URL("http://localhost:8080/BookSellingWebsite/email");
         HttpURLConnection connection = (HttpURLConnection) url.openConnection();
