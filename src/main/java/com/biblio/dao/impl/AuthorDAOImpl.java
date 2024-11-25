@@ -50,7 +50,6 @@ public class AuthorDAOImpl extends GenericDAOImpl<Author> implements IAuthorDAO 
 
     @Override
     public void deleteAuthor(Long id) {
-        System.out.println(id);
         super.delete(id);
     }
 

@@ -82,7 +82,7 @@
                 <ul>
                     <li><a href="${pageContext.request.contextPath}/owner/ecommerce"><b>Biblio</b></a></li>
                     <li><a href="${pageContext.request.contextPath}/owner/author-list"><b>Tác giả</b></a></li>
-                    <li><b>Cập nhật thông tin tác giả</b></li>
+                    <li><b>Thêm mới tác giả</b></li>
                 </ul>
             </div>
         </div>
@@ -108,7 +108,7 @@
                                                             <div class="avatar-preview cr-preview">
                                                                 <div class="imagePreview cr-div-preview">
                                                                     <img class="cr-image-preview image-shadow rounded-3"
-                                                                         src="${pageContext.request.contextPath}${author.avatar}"
+                                                                         src="${pageContext.request.contextPath}/assets/owner/img/other/3.jpg"
                                                                          alt="edit">
                                                                 </div>
                                                             </div>
@@ -120,8 +120,7 @@
                                         <br>
                                         <div class="form-group col-12">
                                             <label for="name">Họ và tên</label>
-                                            <input id="name" name="name" class="form-control here slug-title author-name" type="text"
-                                                   value="${author.name}" />
+                                            <input id="name" name="name" class="form-control here slug-title author-name" type="text" />
                                         </div>
                                         <br>
                                         <div class="cr-settings d-flex justify-content-center">
@@ -142,7 +141,7 @@
                                     <button id="review-btn" class="cr-btn default-btn color-primary">Xem trước</button>
                                 </div>
                                 <div id="editor" class="edit-introduction">
-                                    ${fn:trim(author.introduction)}
+                                    Mô tả về tác giả
                                 </div>
                                 <div class="review-area">
                                     <div id="review-container" style="display: none;">
@@ -158,7 +157,6 @@
         </div>
     </div>
 </div>
-
 <script>const contextPath = "<%=request.getContextPath() %>";</script>
 <script src="${pageContext.request.contextPath}/assets/owner/js/extension/quill-editor.js" defer></script>
 <script src="${pageContext.request.contextPath}/assets/owner/js/manage/manage-author.js" defer></script>

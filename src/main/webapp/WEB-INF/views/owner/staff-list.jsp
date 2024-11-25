@@ -73,4 +73,4 @@
     </div>
   </div>
 </div>
-<script src="${pageContext.request.contextPath}/assets/owner/js/manage-staff.js" defer></script>
+<script src="${pageContext.request.contextPath}/assets/owner/js/manage/manage-staff.js" defer></script>

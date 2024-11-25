@@ -62,26 +62,20 @@
                                         phẩm</a>
                                 </li>
                                 <li>
-                                    <a href="${pageContext.request.contextPath}/owner/add-product-tag" class="cr-page-link drop"
-                                    ><i class="ri-checkbox-blank-circle-line"></i>Thêm
-                                        nhãn</a
-                                    >
+                                    <a href="${pageContext.request.contextPath}/owner/tag-list" class="cr-page-link drop"
+                                    ><i class="ri-checkbox-blank-circle-line"></i>Danh sách nhãn</a>
                                 </li>
                                 <li>
                                     <a
-                                            href="${pageContext.request.contextPath}/owner/add-product-category"
+                                            href="${pageContext.request.contextPath}/owner/category-list"
                                             class="cr-page-link drop"
-                                    ><i class="ri-checkbox-blank-circle-line"></i>Thêm
-                                        phân loại</a
-                                    >
+                                    ><i class="ri-checkbox-blank-circle-line"></i>Danh sách phân loại</a>
                                 </li>
                                 <li>
                                     <a
-                                            href="${pageContext.request.contextPath}/owner/add-product-sub-category"
+                                            href="${pageContext.request.contextPath}/owner/sub-category-list"
                                             class="cr-page-link drop"
-                                    ><i class="ri-checkbox-blank-circle-line"></i>Thêm
-                                        phân loại con</a
-                                    >
+                                    ><i class="ri-checkbox-blank-circle-line"></i>Danh sách phân loại con</a>
                                 </li>
                             </ul>
                         </li>
@@ -142,12 +136,6 @@
                                         Danh sách nhân viên
                                     </a>
                                 </li>
-                                <li>
-                                    <a href="${pageContext.request.contextPath}/owner/add-staff" class="cr-page-link subdrop">
-                                        <i class="ri-checkbox-blank-circle-line"></i>
-                                        Thêm nhân viên
-                                    </a>
-                                </li>
                             </ul>
                         </li>
                         <li class="cr-sb-item sb-subdrop-item">
@@ -161,15 +149,7 @@
                             <ul class="cr-sb-subdrop condense">
                                 <li>
                                     <a href="${pageContext.request.contextPath}/owner/content-list" class="cr-page-link subdrop"
-                                    ><i class="ri-checkbox-blank-circle-line"></i>Danh
-                                        sách nội dung</a
-                                    >
-                                </li>
-                                <li>
-                                    <a href="${pageContext.request.contextPath}/owner/add-content" class="cr-page-link drop"
-                                    ><i class="ri-checkbox-blank-circle-line"></i>Thêm nội
-                                        dung</a
-                                    >
+                                    ><i class="ri-checkbox-blank-circle-line"></i>Danh sách nội dung</a>
                                 </li>
                             </ul>
                         </li>
