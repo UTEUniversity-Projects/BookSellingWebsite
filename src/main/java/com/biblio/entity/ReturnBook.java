@@ -44,13 +44,13 @@ public class ReturnBook implements Serializable {
     @JoinColumn(name = "order_id", nullable = false, unique = true)
     private Order order;
 
-    @OneToMany(mappedBy = "returnBook", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "returnBook", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
     private Set<ReturnBookItem> returnBookItems = new HashSet<>();
 
     @OneToMany
     @JoinTable(
-            name = "return_boook_media_file",
-            joinColumns = @JoinColumn(name = "book_template_id"),
+            name = "return_book_media_file",
+            joinColumns = @JoinColumn(name = "return_book_id"),
             inverseJoinColumns = @JoinColumn(name = "media_file_id")
     )
     private List<MediaFile> proof = new ArrayList<>();
