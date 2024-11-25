@@ -40,6 +40,6 @@ public class ReturnBookServiceImpl implements IReturnBookService {
         }
 
         // Save the entity using the DAO
-        returnBookDao.save(returnBook);
+        returnBookDAO.save(returnBook);
     }
 }
