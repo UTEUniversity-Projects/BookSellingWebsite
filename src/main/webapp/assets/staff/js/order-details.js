@@ -11,6 +11,9 @@ function showErrorToast() {
     });
 }
 
+/* Product Image Zoom */
+$('.zoom-image-hover').zoom();
+
 /* Slider room details */
 $('.slider-for').slick({
     slidesToShow: 1,

@@ -7,18 +7,18 @@ import com.biblio.entity.OrderItem;
 import com.biblio.entity.Promotion;
 import com.biblio.enumeration.EPromotionTemplateType;
 
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import static com.biblio.utils.DateTimeUtil.formatDateTime;
+
 public class OrderMapper {
     public static OrderManagementResponse mapToOrderManagementResponse(Order order) {
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm dd-MM-yyyy");
         return OrderManagementResponse.builder()
                 .id(order.getId())
                 .customerName(order.getCustomer().getFullName())
-                .orderDate(order.getOrderDate().format(formatter))
+                .orderDate(formatDateTime(order.getOrderDate(), "HH:mm dd-MM-yyyy"))
                 .totalPrice(order.calTotalPrice())
                 .paymentMethod(order.getPaymentType().getValue())
                 .status(order.getStatus())
@@ -28,8 +28,6 @@ public class OrderMapper {
     }
 
     public static OrderDetailsManagementResponse mapToOrderDetailsManagementResponse(Order order) {
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm dd-MM-yyyy");
-
         List<OrderProductResponse> products = order.getOrderItems().stream()
                 .map(OrderItemMapper::mapToOrderProductResponse)
                 .collect(Collectors.toList());
@@ -58,7 +56,7 @@ public class OrderMapper {
                 .id(order.getId())
                 .customer(customer)
                 .shipping(shipping)
-                .orderDate(order.getOrderDate().format(formatter))
+                .orderDate(formatDateTime(order.getOrderDate(), "HH:mm dd-MM-yyyy"))
                 .note(order.getNote())
                 .products(products)
                 .status(order.getStatus())
@@ -111,7 +109,6 @@ public class OrderMapper {
     }
 
     public static RevenueResponse toRevenueResponse(Order order) {
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm dd-MM-yyyy");
         return RevenueResponse.builder()
                 .date(order.getOrderDate())
                 .revenue(order.calTotalPrice())

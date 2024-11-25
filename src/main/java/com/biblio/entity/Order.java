@@ -68,7 +68,7 @@ public class Order implements Serializable {
 //    @OneToOne(mappedBy = "order")
 //    private EWallet wallet;
 
-    @OneToOne(mappedBy = "order", cascade = CascadeType.ALL)
+    @OneToOne(mappedBy = "order")
     private ReturnBook returnBook;
 
     @OneToMany(mappedBy = "order", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
