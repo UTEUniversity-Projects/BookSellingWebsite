@@ -791,5 +791,22 @@
   });
 
   // console.log($)
+
+  if(document.cookie.includes("username")) {
+    if (!window.location.href.includes("/login")) {
+      localStorage.setItem("previousUrl", window.location.href);
+    }
+
+    const previousUrl = localStorage.getItem("previousUrl");
+    if (previousUrl) {
+
+      if (window.location.href.includes("/login")) {
+        window.location.href = previousUrl;
+      }
+    } else if (window.location.href.includes("/login") && !previousUrl) {
+      window.location.href = "/home";
+    }
+  }
+
 })(jQuery);
 

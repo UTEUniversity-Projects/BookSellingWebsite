@@ -12,8 +12,8 @@ import javax.servlet.http.HttpSession;
 import java.io.BufferedReader;
 import java.io.IOException;
 
-@WebServlet("/owner/set-author-info")
-public class SetAuthorInfo extends HttpServlet {
+@WebServlet("/owner/session-author-info")
+public class AuthorSession extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         BufferedReader reader = request.getReader();

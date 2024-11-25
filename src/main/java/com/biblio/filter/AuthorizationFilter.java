@@ -1,6 +1,7 @@
 package com.biblio.filter;
 
 import com.biblio.dto.response.AccountGetResponse;
+import com.biblio.enumeration.EUserRole;
 
 import javax.servlet.*;
 import javax.servlet.annotation.WebFilter;
@@ -12,7 +13,7 @@ import java.io.IOException;
 /**
  * Servlet implementation class Filter
  */
-@WebFilter("/2321321/*")
+@WebFilter("/sss/*")
 public class AuthorizationFilter implements Filter {
 
     @Override
@@ -51,13 +52,13 @@ public class AuthorizationFilter implements Filter {
 
         String role = account.getRole();
 
-        if ("owner".equals(role) && !requestURI.startsWith(contextPath + "/owner/")) {
+        if (EUserRole.OWNER.toString().equals(role) && !requestURI.startsWith(contextPath + "/owner/")) {
             res.sendRedirect(contextPath + "/owner/ecommerce");
             return;
-        } else if ("staff".equals(role) && !requestURI.startsWith(contextPath + "/staff/")) {
+        } else if (EUserRole.STAFF.toString().equals(role) && !requestURI.startsWith(contextPath + "/staff/")) {
             res.sendRedirect(contextPath + "/staff/product-dashboard");
             return;
-        } else if ("customer".equals(role) && (requestURI.startsWith(contextPath + "/owner/") || requestURI.startsWith(contextPath + "/staff/"))) {
+        } else if (EUserRole.CUSTOMER.toString().equals(role) && (requestURI.startsWith(contextPath + "/owner/") || requestURI.startsWith(contextPath + "/staff/"))) {
             res.sendRedirect(contextPath + "/home");
             return;
         }

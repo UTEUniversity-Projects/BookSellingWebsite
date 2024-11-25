@@ -10,14 +10,12 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import javax.inject.Inject;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
+import javax.servlet.http.*;
 import java.io.IOException;
 import java.io.Serial;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 
 /**
  * Servlet implementation class LoginAPI
@@ -70,8 +68,23 @@ public class LoginAPI extends HttpServlet {
 			} else {
 				map.put("status", "success");
 				map.put("data", account);
+				map.put("remember", Objects.equals(loginRequest.getRememberMe(), "1"));
+
 				HttpSession session = request.getSession();
 				session.setAttribute("account", account);
+
+				if (Objects.equals(loginRequest.getRememberMe(), "1")) {
+					Cookie username = new Cookie("username", account.getUsername());
+
+					username.setMaxAge(60 * 60);
+
+					username.setHttpOnly(true);
+
+					username.setPath("/");
+
+					response.addCookie(username);
+				}
+
 			}
 		}
 		response.setContentType("application/json");
