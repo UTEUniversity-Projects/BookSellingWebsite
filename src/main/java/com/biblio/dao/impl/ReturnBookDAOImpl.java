@@ -25,6 +25,13 @@ public class ReturnBookDAOImpl extends GenericDAOImpl<ReturnBook> implements IRe
 
         return super.findSingleByJPQL(jpql.toString(), params);
     }
+  
+    @Override
+    public ReturnBook save(ReturnBook returnBook) {
+        // Call the save method from the GenericDAOImpl
+        super.save(returnBook);  // Using the inherited save method
+        return returnBook;
+    }
 
     public static void main(String[] args) {
         ReturnBookDAOImpl dao = new ReturnBookDAOImpl();

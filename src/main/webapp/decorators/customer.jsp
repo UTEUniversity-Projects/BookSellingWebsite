@@ -283,7 +283,10 @@
                             <a href="${pageContext.request.contextPath}/book?id=${cartItem.bookId}" class="cart_pro_title"
                             >${cartItem.title}</a
                             >
-                            <span class="cart-price"><span class="price-value">${cartItem.sellingPrice}</span></span>
+                            <span class="cart-price">
+                                <span class="new-price price-value">${cartItem.sellingPrice}</span>
+                                <span class="old-price price-value">${cartItem.sellingPrice}</span>
+                            </span>
                             <div class="cr-cart-qty">
                                 <div class="cart-qty-plus-minus">
                                     <button type="button" class="minus">-</button>

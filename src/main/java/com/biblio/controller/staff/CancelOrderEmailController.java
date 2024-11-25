@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.time.LocalDateTime;
 
 import static com.biblio.utils.DateTimeUtil.formatDateTime;
 
@@ -73,7 +74,7 @@ public class CancelOrderEmailController extends HttpServlet {
         emailContent.append("<p><strong>Thông tin chi tiết đơn hàng:</strong></p>");
         emailContent.append("<hr>");
         emailContent.append("<p><strong>Mã đơn hàng:</strong> ").append(order.getId()).append("</p>");
-        emailContent.append("<p><strong>Ngày đặt hàng:</strong> ").append(formatDateTime(order.getOrderDate(), "dd-MM-yyyy HH:mm")).append("</p>");
+        emailContent.append("<p><strong>Ngày đặt hàng:</strong> ").append(formatDateTime(LocalDateTime.parse(order.getOrderDate()), "dd-MM-yyyy HH:mm")).append("</p>");
         emailContent.append("<p><strong>Trạng thái:</strong> Đã hủy</p>");
         emailContent.append("<hr>");
         emailContent.append("<p>Chúng tôi sẽ hoàn tiền sớm nhất cho bạn.</p>");

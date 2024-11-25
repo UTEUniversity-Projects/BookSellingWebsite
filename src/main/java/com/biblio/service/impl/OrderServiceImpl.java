@@ -1,16 +1,8 @@
 package com.biblio.service.impl;
 
 import com.biblio.dao.IOrderDAO;
-
-import com.biblio.dao.impl.OrderDAOImpl;
-import com.biblio.dto.response.OrderCustomerResponse;
-import com.biblio.dto.response.OrderDetailsManagementResponse;
-import com.biblio.dto.response.OrderManagementResponse;
-import com.biblio.dto.response.RevenueResponse;
-
 import com.biblio.dto.response.*;
 import com.biblio.entity.Book;
-
 import com.biblio.entity.Order;
 import com.biblio.entity.OrderItem;
 import com.biblio.enumeration.EOrderStatus;
@@ -22,9 +14,7 @@ import javax.inject.Inject;
 import javax.transaction.Transactional;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.Comparator;
-import java.util.List;
+import java.util.*;
 import java.util.stream.Collectors;
 
 public class OrderServiceImpl implements IOrderService {
@@ -95,16 +85,43 @@ public class OrderServiceImpl implements IOrderService {
 
         // Convert Order entities to OrderCustomerResponse DTOs
         return orders.stream()
-                .map(order -> new OrderCustomerResponse(
-                        order.getId(),
-                        order.getNote(),
-                        order.getOrderDate(),
-                        order.getPaymentType() != null ? order.getPaymentType().name() : null, // Convert enum to String
-                        order.getStatus() != null ? order.getStatus().name() : null, // Convert enum to String
-                        order.getVat(),
-                        order.getCustomer() != null ? order.getCustomer().getId() : null,
-                        order.getShipping() != null ? order.getShipping().getId() : null
-                ))
+                .map(order -> {
+                    // Initialize a set for books in the response
+                    Set<BookResponse> bookResponses = new HashSet<>();
+
+                    // Loop through each LineItem and its associated books
+                    for (OrderItem lineItem : order.getOrderItems()) {
+                        for (Book book : lineItem.getBooks()) {
+                            // Add the book to the set of bookResponses
+                            BookResponse bookResponse = BookResponse.builder()
+                                    .id(String.valueOf(book.getId()))
+                                    .title(book.getTitle())
+                                    .description(book.getDescription())
+                                    .sellingPrice(String.valueOf(book.getSellingPrice()))
+                                    .build();
+                            bookResponses.add(bookResponse);
+                        }
+                    }
+
+                    // Calculate the total price if necessary (sum of line items or other logic)
+                    Double totalPrice = order.getOrderItems().stream()
+                            .mapToDouble(OrderItem::calPriceItem)
+                            .sum();
+
+                    // Return the mapped OrderCustomerResponse with the list of books
+                    return new OrderCustomerResponse(
+                            order.getId() ,
+                            order.getNote(),
+                            order.getOrderDate() != null ? order.getOrderDate().toString() : null,  // Convert LocalDateTime to String
+                            order.getPaymentType() != null ? order.getPaymentType().name() : null,
+                            order.getStatus() != null ? order.getStatus().name() : null,
+                            order.getVat(),
+                            order.getCustomer() != null ? order.getCustomer().getId() : null,
+                            order.getShipping() != null ? order.getShipping().getId() : null,
+                            totalPrice,
+                            bookResponses  // Add the set of BookResponse objects
+                    );
+                })
                 .collect(Collectors.toList());
     }
 
