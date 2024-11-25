@@ -41,6 +41,8 @@
                                             type="checkbox"
                                             class="peer h-5 w-5 cursor-pointer transition-all appearance-none rounded shadow hover:shadow-md border border-slate-200 checked:bg-[#26aa99] checked:border-[#26bb99]"
                                             id="check-with-link"
+                                            name="rememberMe"
+                                            value="1"
                                     />
                                     <span
                                             class="absolute text-white opacity-0 peer-checked:opacity-100 top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 flex items-center justify-center w-[12px] h-[12px]"

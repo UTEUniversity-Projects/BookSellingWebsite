@@ -34,20 +34,33 @@
                                 <ul
                                         class="account-list transition-all duration-300 z-[9] absolute top-[35px] right-[20px] bg-white shadow-[rgba(149,_157,_165,_0.5)_0px_-3px_24px] rounded w-[200px]"
                                 >
-                                    <li
-                                            class="hover:bg-gray-100 hover:text-black transition-all duration-200"
-                                    >
-                                        <a class="block px-5 py-2" href="register"
-                                        >Đăng ký</a
-                                        >
-                                    </li>
-                                    <li
-                                            class="hover:bg-gray-100 hover:text-black transition-all duration-200"
-                                    >
-                                        <a class="block px-5 py-2" href="login"
-                                        >Đăng nhập</a
-                                        >
-                                    </li>
+                                    <c:choose>
+                                        <c:when test="${account == null}">
+                                            <li
+                                                    class="hover:bg-gray-100 hover:text-black transition-all duration-200"
+                                            >
+                                                <a class="block px-5 py-2" href="register"
+                                                >Đăng ký</a
+                                                >
+                                            </li>
+                                            <li
+                                                    class="hover:bg-gray-100 hover:text-black transition-all duration-200"
+                                            >
+                                                <a class="block px-5 py-2" href="login"
+                                                >Đăng nhập</a
+                                                >
+                                            </li>
+                                        </c:when>
+                                        <c:otherwise>
+                                            <li
+                                                    class="hover:bg-gray-100 hover:text-black transition-all duration-200"
+                                            >
+                                                <a class="block px-5 py-2" href="logout"
+                                                >Đăng xuất</a
+                                                >
+                                            </li>
+                                        </c:otherwise>
+                                    </c:choose>
                                     <li
                                             class="hover:bg-gray-100 hover:text-black transition-all duration-200"
                                     >

@@ -56,7 +56,7 @@ public class SearchBookAPI extends HttpServlet {
         SearchBookRequest req = HttpUtil.of(request.getReader()).toModel(SearchBookRequest.class);
 
         List<BookCardResponse> book = bookTemplateService.getBookTemplateByCriteria(req);
-        long bookCount = bookTemplateService.getBookTemplateQuantityByCriteria(req);
+        Long bookCount = bookTemplateService.getBookTemplateQuantityByCriteria(req);
 
         ObjectMapper mapper = new ObjectMapper();
         Map<String, Object> map = new HashMap<>();
