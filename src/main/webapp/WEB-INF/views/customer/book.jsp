@@ -97,7 +97,6 @@
             <div class="cr-qty-main">
               <input
                       type="text"
-                      placeholder="."
                       value="1"
                       minlength="1"
                       maxlength="20"

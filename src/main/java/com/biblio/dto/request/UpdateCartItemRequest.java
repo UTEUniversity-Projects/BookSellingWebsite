@@ -7,7 +7,7 @@ import lombok.*;
 @Getter
 @Setter
 @Builder
-public class AddToCartRequest {
+public class UpdateCartItemRequest {
     private Long bookTemplateId;
     private Long accountId;
     private Long quantity;

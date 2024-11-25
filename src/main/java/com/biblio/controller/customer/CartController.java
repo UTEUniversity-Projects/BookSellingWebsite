@@ -42,7 +42,7 @@ public class CartController extends HttpServlet {
         HttpSession session = request.getSession();
         AccountGetResponse account = (AccountGetResponse) session.getAttribute("account");
 
-        CartResponse cart = cartService.getCartResponseByUsername(account.getUsername());
+        CartResponse cart = cartService.getCartResponseByAccountId(account.getId());
 
         request.setAttribute("breadcrumb", "Giỏ hàng");
         request.setAttribute("cart", cart);
