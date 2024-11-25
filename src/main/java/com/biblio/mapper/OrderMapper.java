@@ -117,5 +117,12 @@ public class OrderMapper {
                 .revenue(order.calTotalPrice())
                 .build();
     }
+    public static OrderOfCustomerResponse toOrderOfCustomerResponse(Order order) {
+        return OrderOfCustomerResponse.builder()
+                .orderId(order.getId())
+                .customerId(order.getCustomer().getId())
+                .customerName(order.getCustomer().getFullName())
+                .build();
+    }
 
 }

@@ -195,6 +195,45 @@ public class OrderServiceImpl implements IOrderService {
     }
 
     @Override
+    public List<CountOrderOfCustomerResponse> getCountOrderOfCustomerAtTime(LocalDateTime start, LocalDateTime end) {
+        List<OrderOfCustomerResponse> orderOfCustomerResponse = new ArrayList<>();
+        List<CountOrderOfCustomerResponse> countOrderOfCustomerResponses = new ArrayList<>();
+        List<Order> list = orderDAO.findAllForManagement();
+
+        for (Order order : list) {
+            Order orderTmp = orderDAO.findOneForDetailsManagement(order.getId());
+            LocalDateTime orderDate = orderTmp.getOrderDate();
+            if ((orderDate.isEqual(start) || orderDate.isAfter(start)) &&
+                    (orderDate.isEqual(end) || orderDate.isBefore(end)) &&
+                    EOrderStatus.COMPLETE_DELIVERY.equals(orderTmp.getStatus())) {
+                orderOfCustomerResponse.add(OrderMapper.toOrderOfCustomerResponse(orderTmp));
+            }
+        }
+
+        Map<Long, CountOrderOfCustomerResponse> customerOrderCountMap = new HashMap<>();
+        for (OrderOfCustomerResponse order : orderOfCustomerResponse) {
+            Long customerId = order.getCustomerId();
+            String customerName = order.getCustomerName();
+
+            if (customerOrderCountMap.containsKey(customerId)) {
+                CountOrderOfCustomerResponse response = customerOrderCountMap.get(customerId);
+                response.setCountOrders(response.getCountOrders() + 1);
+            } else {
+                customerOrderCountMap.put(customerId, CountOrderOfCustomerResponse.builder()
+                        .customerId(customerId)
+                        .customerName(customerName)
+                        .countOrders(1L)
+                        .build());
+            }
+        }
+
+        countOrderOfCustomerResponses.addAll(customerOrderCountMap.values());
+        return countOrderOfCustomerResponses;
+    }
+
+
+
+    @Override
     @Transactional
     public void confirmOrder(Long orderId) {
         Order order = orderDAO.findOne(orderId);
