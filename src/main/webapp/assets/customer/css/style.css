@@ -2941,10 +2941,6 @@ ul.navbar-nav .dropdown:hover .dropdown-menu {
   position: relative;
   top: -20px;
 }
-.cr-cart-view .cr-cart-inner .cr-cart-bottom .cart_btn {
-  display: flex;
-  justify-content: space-between;
-}
 .cr-cart-view .cr-cart-inner .cr-cart-bottom .cart-sub-total {
   margin: 20px 0 10px 0;
   padding-top: 0;
