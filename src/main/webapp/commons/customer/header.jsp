@@ -86,7 +86,7 @@
                                 <p class="notification-count absolute top-[-10px] left-[10px] rounded-full bg-black text-white inline-block w-4 h-4 text-[10px] text-center">
                                     0</p>
                             </a>
-                            <div class="notification-content transition-all duration-300">
+                            <div class="notification-content ${account == null ? "flex items-center justify-center flex-col py-5" : ""} transition-all duration-300">
                                 <c:choose>
                                     <c:when test="${account != null}">
                                         <div class="text-right px-4 py-2">
@@ -95,23 +95,24 @@
                                             </h3>
                                         </div>
                                         <ul class="notification-body">
-                                            <li class="px-4 py-2">
-                                                <a href="notification-detail">
-                                                    <div class="flex gap-2 items-center">
-                                                        <div class="h-20 basis-1/5 aspect-square">
-                                                            <img
-                                                                    class="w-full h-full aspect-square"
-                                                                    src="https://down-vn.img.susercontent.com/file/vn-11134207-7r98o-lwxpv4ydgxjt57.webp"
-                                                                    alt=""
-                                                            />
-                                                        </div>
-                                                        <div class="flex-1">
-                                                            <h4 class="w-full mb-1 font-medium">
-                                                                Đơn hàng đang giao đến bạn
-                                                            </h4>
-                                                            <p
-                                                                    class="text-left leading-normal"
-                                                                    style="
+                                            <c:forEach var="i" begin="1" end="3">
+                                                <li class="px-4 py-2">
+                                                    <a href="${pageContext.request.contextPath}notification-detail">
+                                                        <div class="flex gap-2 items-center">
+                                                            <div class="h-20 basis-1/5 aspect-square">
+                                                                <img
+                                                                        class="w-full h-full aspect-square"
+                                                                        src="https://down-vn.img.susercontent.com/file/vn-11134207-7r98o-lwxpv4ydgxjt57.webp"
+                                                                        alt=""
+                                                                />
+                                                            </div>
+                                                            <div class="flex-1">
+                                                                <h4 class="w-full mb-1 font-medium">
+                                                                    Đơn hàng đang giao đến bạn
+                                                                </h4>
+                                                                <p
+                                                                        class="text-left leading-normal"
+                                                                        style="
                                           display: -webkit-box;
                                           -webkit-line-clamp: 3;
                                           -webkit-box-orient: vertical;
@@ -119,87 +120,18 @@
                                           word-break: break-word;
                                           overflow: hidden;
                                           "
-                                                            >
-                                                                Trận bán kết thứ 2 giữa T1 và Gen.G ở kỳ Chung Kết Thế Giới
-                                                                (CKTG) 2024 đã kết thúc với chiến thắng 3-1 cho đương kim vô
-                                                                địch T1. Không chỉ giành được chiếc vé đến với trận chung kết,
-                                                                Faker và đồng đội đã chấm dứt mạch thua 11 trận đối đầu trước
-                                                                Gen.G
-                                                            </p>
+                                                                >
+                                                                    Trận bán kết thứ 2 giữa T1 và Gen.G ở kỳ Chung Kết Thế Giới
+                                                                    (CKTG) 2024 đã kết thúc với chiến thắng 3-1 cho đương kim vô
+                                                                    địch T1. Không chỉ giành được chiếc vé đến với trận chung kết,
+                                                                    Faker và đồng đội đã chấm dứt mạch thua 11 trận đối đầu trước
+                                                                    Gen.G
+                                                                </p>
+                                                            </div>
                                                         </div>
-                                                    </div>
-                                                </a>
-                                            </li>
-                                            <li class="px-4 py-2">
-                                                <a href="notification-detail">
-                                                    <div class="flex gap-2 items-center">
-                                                        <div class="h-20 basis-1/5 aspect-square">
-                                                            <img
-                                                                    class="w-full h-full aspect-square"
-                                                                    src="https://down-vn.img.susercontent.com/file/vn-11134207-7r98o-lwxpv4ydgxjt57.webp"
-                                                                    alt=""
-                                                            />
-                                                        </div>
-                                                        <div class="flex-1">
-                                                            <h4 class="w-full mb-1 font-medium">
-                                                                Đơn hàng đang giao đến bạn
-                                                            </h4>
-                                                            <p
-                                                                    class="text-left leading-normal"
-                                                                    style="
-                                          display: -webkit-box;
-                                          -webkit-line-clamp: 3;
-                                          -webkit-box-orient: vertical;
-                                          text-overflow: ellipsis;
-                                          word-break: break-word;
-                                          overflow: hidden;
-                                          "
-                                                            >
-                                                                Trận bán kết thứ 2 giữa T1 và Gen.G ở kỳ Chung Kết Thế Giới
-                                                                (CKTG) 2024 đã kết thúc với chiến thắng 3-1 cho đương kim vô
-                                                                địch T1. Không chỉ giành được chiếc vé đến với trận chung kết,
-                                                                Faker và đồng đội đã chấm dứt mạch thua 11 trận đối đầu trước
-                                                                Gen.G
-                                                            </p>
-                                                        </div>
-                                                    </div>
-                                                </a>
-                                            </li>
-                                            <li class="px-4 py-2">
-                                                <a href="notification-detail">
-                                                    <div class="flex gap-2 items-center">
-                                                        <div class="h-20 basis-1/5 aspect-square">
-                                                            <img
-                                                                    class="w-full h-full aspect-square"
-                                                                    src="https://down-vn.img.susercontent.com/file/vn-11134207-7r98o-lwxpv4ydgxjt57.webp"
-                                                                    alt=""
-                                                            />
-                                                        </div>
-                                                        <div class="flex-1">
-                                                            <h4 class="w-full mb-1 font-medium">
-                                                                Đơn hàng đang giao đến bạn
-                                                            </h4>
-                                                            <p
-                                                                    class="text-left leading-normal"
-                                                                    style="
-                                          display: -webkit-box;
-                                          -webkit-line-clamp: 3;
-                                          -webkit-box-orient: vertical;
-                                          text-overflow: ellipsis;
-                                          word-break: break-word;
-                                          overflow: hidden;
-                                          "
-                                                            >
-                                                                Trận bán kết thứ 2 giữa T1 và Gen.G ở kỳ Chung Kết Thế Giới
-                                                                (CKTG) 2024 đã kết thúc với chiến thắng 3-1 cho đương kim vô
-                                                                địch T1. Không chỉ giành được chiếc vé đến với trận chung kết,
-                                                                Faker và đồng đội đã chấm dứt mạch thua 11 trận đối đầu trước
-                                                                Gen.G
-                                                            </p>
-                                                        </div>
-                                                    </div>
-                                                </a>
-                                            </li>
+                                                    </a>
+                                                </li>
+                                            </c:forEach>
                                         </ul>
                                         <a
                                                 class="notification-view-all inline-block py-2"
@@ -208,6 +140,7 @@
                                         >
                                     </c:when>
                                     <c:otherwise>
+                                        <p>Đăng nhập để xem thông báo !</p>
                                         <div class="w-[200px] h-[200px]">
                                             <img class="w-full h-full object-cover" src="https://static.vecteezy.com/system/resources/previews/014/814/039/non_2x/a-well-designed-flat-icon-of-no-notification-yet-vector.jpg">
                                         </div>
