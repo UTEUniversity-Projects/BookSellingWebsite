@@ -1,7 +1,6 @@
 package com.biblio.service;
 
 import com.biblio.dto.response.*;
-import com.biblio.entity.Order;
 import com.biblio.enumeration.EOrderStatus;
 
 import java.time.LocalDateTime;
@@ -22,7 +21,10 @@ public interface IOrderService {
     Double revenueOrderAtTime(LocalDateTime start, LocalDateTime end);
   
     List<RevenueResponse> getListRevenueAtTime(LocalDateTime start, LocalDateTime end);
+
     List<CountBookSoldResponse> getListCountBookSoldAtTime(LocalDateTime start, LocalDateTime end);
+
+    List<CountOrderOfCustomerResponse> getCountOrderOfCustomerAtTime(LocalDateTime start, LocalDateTime end);
 
     public OrderCustomerResponse findOrderById(Long orderId);
 

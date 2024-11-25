@@ -14,14 +14,18 @@ $(document).ready(function () {
 
     // top product sold
     var startOfTopProductSold = moment().subtract(29, "days");
-    var endOfTopProductSold  = moment();
+    var endOfTopProductSold = moment();
     var topProductSoldChart;
 
-
+    // RateRepeatPurchase
+    var startOfRepeatPurchase = moment().subtract(29, "days");
+    var endOfRepeatPurchase = moment();
+    var topRepeatPurchaseChart;
+    var topRepeatPurchaseDonutChart;
 
     function animateNumber(element, startValue, endValue, duration, isCurrency = false) {
-        $({ count: startValue }).animate(
-            { count: endValue },
+        $({count: startValue}).animate(
+            {count: endValue},
             {
                 duration: duration,
                 easing: "swing",
@@ -40,7 +44,8 @@ $(document).ready(function () {
             }
         );
     }
- // Biến lưu instance biểu đồ
+
+    // Biến lưu instance biểu đồ
 
     // Hàm vẽ biểu đồ
     function drawRevenueChart(chartId, categories, revenues, type = "line") {
@@ -57,14 +62,14 @@ $(document).ready(function () {
             chart: {
                 height: 500,
                 type: type, // Sử dụng loại biểu đồ được truyền vào
-                toolbar: { show: false },
+                toolbar: {show: false},
             },
-            stroke: { width: [2], curve: "smooth" }, // Chỉ áp dụng cho line chart
+            stroke: {width: [2], curve: "smooth"}, // Chỉ áp dụng cho line chart
             colors: ["#8e44ad"],
             xaxis: {
                 categories: categories,
-                axisTicks: { show: false },
-                axisBorder: { show: false },
+                axisTicks: {show: false},
+                axisBorder: {show: false},
             },
             yaxis: {
                 labels: {
@@ -80,6 +85,7 @@ $(document).ready(function () {
         revenueChart = new ApexCharts(document.querySelector(`#${chartId}`), options);
         revenueChart.render();
     }
+
     function drawNewCustomerChart(chartId, categories, count, type = "line") {
         if (newCustomerChart) {
             newCustomerChart.destroy();
@@ -94,14 +100,14 @@ $(document).ready(function () {
             chart: {
                 height: 500,
                 type: type, // Sử dụng loại biểu đồ được truyền vào
-                toolbar: { show: false },
+                toolbar: {show: false},
             },
-            stroke: { width: [2], curve: "smooth" }, // Chỉ áp dụng cho line chart
+            stroke: {width: [2], curve: "smooth"}, // Chỉ áp dụng cho line chart
             colors: ["#f9a12c"],
             xaxis: {
                 categories: categories,
-                axisTicks: { show: false },
-                axisBorder: { show: false },
+                axisTicks: {show: false},
+                axisBorder: {show: false},
             },
             yaxis: {
                 labels: {
@@ -116,6 +122,7 @@ $(document).ready(function () {
         newCustomerChart = new ApexCharts(document.querySelector(`#${chartId}`), options);
         newCustomerChart.render();
     }
+
     function drawTopProductSoldChart(chartId, categories, seriesData) {
         if (topProductSoldChart) {
             topProductSoldChart.destroy(); // Hủy biểu đồ cũ nếu tồn tại
@@ -174,6 +181,113 @@ $(document).ready(function () {
         topProductSoldChart.render(); // Vẽ biểu đồ
     }
 
+    function drawRateRepeatPurchaseChart(chartId, categories, seriesData) {
+        if (topRepeatPurchaseChart) {
+            topRepeatPurchaseChart.destroy(); // Hủy biểu đồ cũ nếu tồn tại
+        }
+
+        var options = {
+            series: seriesData,
+            chart: {
+                type: 'bar',
+                height: 400,
+                stacked: true
+            },
+            plotOptions: {
+                bar: {
+                    horizontal: false,
+                    columnWidth: '20%',
+                    endingShape: 'rounded'
+                },
+            },
+            dataLabels: {
+                enabled: false,
+            },
+            stroke: {
+                show: true,
+                width: 2,
+                colors: ['transparent']
+            },
+            colors: ['#5f6af5', '#ff4f7f'], // Màu sắc
+            xaxis: {
+                categories: categories,
+                labels: {
+                    formatter: function (val) {
+                        return val + " khách hàng";
+                    }
+                }
+            },
+            yaxis: {
+                labels: {
+                    formatter: function (val) {
+                        return val; // Đơn vị cho trục Y
+                    }
+                }
+            },
+            fill: {
+                opacity: 1
+            },
+            tooltip: {
+                y: {
+                    formatter: function (val) {
+                        return val + " khách hàng"; // Hiển thị chi tiết trong tooltip
+                    }
+                }
+            },
+            legend: {
+                show: false // Tắt chú thích
+            }
+        };
+
+        topRepeatPurchaseChart = new ApexCharts(document.querySelector(chartId), options);
+        topRepeatPurchaseChart.render();
+    }
+
+    function drawRateRepeatPurchaseDonutChart(chartId, singleOrderRate, multipleOrderRate) {
+        if (topRepeatPurchaseDonutChart) {
+            topRepeatPurchaseDonutChart.destroy(); // Hủy biểu đồ cũ nếu tồn tại
+        }
+        var options = {
+            series: [39.51, 60.49],
+            chart: {
+                height: 280,
+                type: 'donut',
+            },
+            plotOptions: {
+                pie: {
+                    donut: {
+                        size: '40%',
+                    }
+                }
+            },
+            colors: ['#5f6af5', '#ff4f7f'],
+            labels: ['Khách hàng mua nhiều đơn', 'Khách hàng mua một đơn'],
+            legend: {
+                show: true,
+                position: 'bottom',
+                horizontalAlign: 'center',
+                fontSize: '14px',
+                fontFamily: 'Helvetica, Arial',
+                markers: {
+                    width: 30,
+                    height: 10,
+                    radius: 6
+                }
+            },
+            responsive: [{
+                breakpoint: 480,
+                options: {
+                    legend: {
+                        show: false
+                    }
+                }
+            }]
+        };
+        topRepeatPurchaseChart = new ApexCharts(document.querySelector(chartId), options);
+        topRepeatPurchaseChart.render();
+    }
+
+
     // Hàm AJAX lấy dữ liệu
     function fetchData(url, start, end, callback) {
         $.ajax({
@@ -192,6 +306,7 @@ $(document).ready(function () {
             },
         });
     }
+
     function fetchDataNoTime(url, callback) {
         $.ajax({
             url: url,
@@ -257,12 +372,12 @@ $(document).ready(function () {
             // Vẽ biểu đồ với loại hiện tại (line hoặc bar)
             if (chartTypeRevenue === "line") {
                 drawRevenueChart("revenueLineChart", categories, revenues, chartTypeRevenue)
-            }
-            else (
+            } else (
                 drawRevenueChart("revenueBarChart", categories, revenues, chartTypeRevenue)
             )
         });
     }
+
     function updateNewCustomerChart(start, end) {
         $("#date-list-new-customer span").html(
             start.format("YYYY-MM-DD") + " - " + end.format("YYYY-MM-DD")
@@ -308,13 +423,13 @@ $(document).ready(function () {
 
             if (chartTypeNewCustomer === "line") {
                 drawNewCustomerChart("newCustomerLineChart", categories, count, chartTypeNewCustomer)
-            }
-            else (
+            } else (
                 drawNewCustomerChart("newCustomerBarChart", categories, count, chartTypeNewCustomer)
             )
         });
 
     }
+
     function updateTopProductSoldChart(start, end) {
         $("#date-top-product span").html(
             start.format("YYYY-MM-DD") + " - " + end.format("YYYY-MM-DD")
@@ -362,6 +477,7 @@ $(document).ready(function () {
         });
 
     }
+
     function updateProductSoldTable() {
         fetchDataNoTime("/owner/ecommerce/count-book-sold-all-time", function (error, response) {
             if (error) {
@@ -380,15 +496,27 @@ $(document).ready(function () {
 
             // Duyệt qua dữ liệu và thêm dòng mới
             listBookSoldAllTime.forEach(book => {
-                responsiveDataTable.row.add([
+                const rowNode = responsiveDataTable.row.add([
                     `<img class="cat-thumb" src="${book.img}" alt="Book Image">
                  <span class="name">${book.title}</span>`,
                     `<span class="cat">
-                    <a href="#">${book.category}</a>
+                <a href="#">${book.category}</a>
                  </span>`,
                     book.countSold,
                     book.countInStock
-                ]).node().setAttribute("data-href", `/owner/product-details?id=${book.id}`); // Thêm thuộc tính data-href
+                ]).node(); // Lấy node của dòng vừa thêm
+
+                // rowNode.setAttribute("data-href", `/owner/product-details?id=${book.id}`); // Gán thuộc tính data-href
+                rowNode.addEventListener("click", function (event) {
+                    if (
+                        !event.target.closest("button") &&
+                        !event.target.closest(".dropdown-menu")
+                    ) {
+                        // const href = this.getAttribute("data-href");
+                        const href = `/owner/product-details?id=${book.id}`
+                        window.location.href = href;
+                    }
+                });
             });
 
             // Cập nhật DataTable
@@ -396,7 +524,60 @@ $(document).ready(function () {
         });
     }
 
+    function updateRateRepeatPurchaseChart(start, end) {
+        // Hiển thị khoảng thời gian đã chọn
+        $("#date-rate-repeat-purchase span").html(
+            start.format("YYYY-MM-DD") + " - " + end.format("YYYY-MM-DD")
+        );
 
+        // Gọi API để lấy dữ liệu
+        fetchData("/owner/ecommerce/count-order-of-customer-at-time", start, end, function (error, response) {
+            if (error) {
+                console.error("Error fetching data:", error);
+                return;
+            }
+
+            const countOrderOfCustomerList = response.countOrderOfCustomerList;
+            let singleOrderCount = 0; // Số khách hàng mua 1 đơn
+            let multipleOrderCount = 0; // Số khách hàng mua nhiều hơn 1 đơn
+            let totalOrders = 0; // Tổng số đơn hàng
+
+            // Tính toán từ dữ liệu API
+            countOrderOfCustomerList.forEach(item => {
+                totalOrders += item.count; // Tổng số đơn hàng
+                if (item.count === 1) {
+                    singleOrderCount++;
+                } else if (item.count > 1) {
+                    multipleOrderCount++;
+                }
+            });
+
+            const totalCustomers = singleOrderCount + multipleOrderCount; // Tổng số khách hàng
+
+            animateNumber("#countCustomerPurchaseAtTime", parseInt($("#countCustomerPurchaseAtTime").text()), totalCustomers || 0, 1000, false);
+            animateNumber("#countOrderAtTime", parseInt($("#countOrderAtTime").text()), totalOrders || 0, 1000, false);
+            animateNumber("#countCustomerPurchaseOneTimeAtTime", parseInt($("#countCustomerPurchaseOneTimeAtTime").text()), singleOrderCount || 0, 1000, false);
+            animateNumber("#countCustomerPurchaseThanOneTimeAtTime", parseInt($("#countCustomerPurchaseThanOneTimeAtTime").text()), multipleOrderCount || 0, 1000, false);
+
+            // Chuẩn bị dữ liệu cho biểu đồ
+            const categories = [
+                'Khách hàng mua nhiều đơn hàng',
+                'Khách hàng mua một đơn hàng'
+            ];
+            const seriesData = [
+                {name: 'Khách hàng mua 1 đơn', data: [0, singleOrderCount]},
+                {name: 'Khách hàng mua từ 2 đơn', data: [multipleOrderCount, 0]}
+            ];
+
+            // Vẽ biểu đồ
+            drawRateRepeatPurchaseChart("#countCustomerPurchaseBarChart", categories, seriesData);
+            drawRateRepeatPurchaseDonutChart(
+                "#donutChartRepeatPurchaseRate",
+                (singleOrderCount / totalCustomers) * 100,
+                (multipleOrderCount / totalCustomers) * 100
+            );
+        });
+    }
 
 
     // Xử lý sự kiện thay đổi loại biểu đồ
@@ -459,11 +640,15 @@ $(document).ready(function () {
         // Thực hiện logic theo từng `id` (ví dụ: cập nhật dữ liệu biểu đồ)
         if (elementId === "date-list-revenue") {
             updateRevenueChart(start, end);
-        } if (elementId === "date-list-new-customer") {
-            updateNewCustomerChart(start,end);
+        }
+        if (elementId === "date-list-new-customer") {
+            updateNewCustomerChart(start, end);
         }
         if (elementId === "date-top-product") {
-            updateTopProductSoldChart(start,end);
+            updateTopProductSoldChart(start, end);
+        }
+        if (elementId === "date-rate-repeat-purchase") {
+            updateRateRepeatPurchaseChart(start, end);
         }
         // Có thể thêm logic cho các `id` khác ở đây
     }
@@ -472,13 +657,19 @@ $(document).ready(function () {
     initializeDateRangePicker("date-list-revenue", startOfRevenue, endOfRevenue, onDateRangeChange);
     initializeDateRangePicker("date-list-new-customer", startOfNewCustomer, endOfNewCustomer, onDateRangeChange);
     initializeDateRangePicker("date-top-product", startOfTopProductSold, endOfTopProductSold, onDateRangeChange);
+    initializeDateRangePicker("date-rate-repeat-purchase", startOfRepeatPurchase, endOfRepeatPurchase, onDateRangeChange);
+
 
     // Gọi lần đầu tiên khi trang tải
     updateRevenueChart(startOfRevenue, endOfRevenue);
     updateNewCustomerChart(startOfNewCustomer, endOfNewCustomer);
     updateTopProductSoldChart(startOfTopProductSold, endOfTopProductSold);
     updateProductSoldTable();
+    updateRateRepeatPurchaseChart(startOfRepeatPurchase, endOfRepeatPurchase)
 });
+
+
+// table
 $(document).ready(function () {
     var responsiveDataTable = $("#list_product_sold_in_stock_statistical");
 
@@ -519,5 +710,7 @@ $(document).ready(function () {
     }
 
 });
+
+
 
 
