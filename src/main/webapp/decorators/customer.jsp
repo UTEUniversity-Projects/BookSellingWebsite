@@ -470,7 +470,7 @@
 
     <!-- Main Custom -->
     <script src="${pageContext.request.contextPath}/assets/customer/js/main.js"></script>
-    <script src="${pageContext.request.contextPath}/assets/customer/js/manage-cart.js"></script>
+    <script src="${pageContext.request.contextPath}/assets/customer/js/manage-cart.js" type="module"></script>
     <script src="${pageContext.request.contextPath}/assets/commons/js/remember-me.js"></script>
 
 </body>

@@ -1,4 +1,6 @@
 // Remove cart item
+import { debounce } from '../../commons/js/debounce.js';
+
 document.querySelectorAll('.remove-item').forEach((button) => {
     button.addEventListener('click', function () {
     const row = this.closest('tr');
@@ -119,7 +121,7 @@ $(document).ready(function () {
         });
     });
     // Update
-    $(".quantity").on("change", function () {
+    $(".quantity").on("change", debounce(function () {
         const newQuantity = $(this).val();
         const bookId = $(this).data("book-id");
         console.log(newQuantity);
@@ -137,8 +139,8 @@ $(document).ready(function () {
             error: function (xhr, status, error) {
                 console.error("Error: ", xhr.responseText);
             }
-        });
-    });
+        })
+    },1000));
 });
 
 function formatCurrency() {
