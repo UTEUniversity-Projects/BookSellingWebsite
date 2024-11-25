@@ -36,13 +36,13 @@
                         <h4 class="cr-shop-sub-title">Danh mục</h4>
                         <div class="cr-checkbox">
                             <div class="checkbox-group">
-                                <input type="checkbox" id="all-categories" checked/>
+                                <input type="checkbox" id="all-categories" class="category-item" checked/>
                                 <label for="all-categories">Tất cả</label>
                                 <span>(${totalBook})</span>
                             </div>
                             <c:forEach var="category" items="${categories}">
                                 <div class="checkbox-group gap-x-2">
-                                    <input type="checkbox" id="${category.id}"/>
+                                    <input type="checkbox" id="${category.id}" value="${category.id}" class="category-item"/>
                                     <label for="${category.id}" class="pr-2">${category.categoryName}</label>
                                     <span>(${category.bookCount})</span>
                                 </div>

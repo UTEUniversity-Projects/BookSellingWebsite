@@ -1,4 +1,6 @@
 // Remove cart item
+import { debounce } from '../../commons/js/debounce.js';
+
 document.querySelectorAll('.remove-item').forEach((button) => {
     button.addEventListener('click', function () {
     const row = this.closest('tr');
@@ -62,10 +64,10 @@ $(document).ready(function () {
     });
     // Load
     $('#view-cart-btn').on('click', function () {
+
         $.ajax({
             url: `${contextPath}/api/customer/load-cart-sidebar`,
             type: 'GET',
-            dataType: 'application/json',
             success: function (response) {
                 const cartItemsContainer = $('.crcart-pro-items');
                 const cartTotalBookPrice = $('.cart-sub-total .total-book-price');
@@ -114,19 +116,15 @@ $(document).ready(function () {
                 formatCurrency();
             },
             error: function (xhr, status, error) {
-                if (xhr.status === 401) {
-                    alert('Vui lòng đăng nhập để xem giỏ hàng.');
-                } else {
-                    console.error('Error fetching cart data:', error);
-                    alert('Lỗi khi tải dữ liệu giỏ hàng. Vui lòng thử lại sau.');
-                }
+
             }
         });
     });
     // Update
-    $(".quantity").on("blur", function () {
+    $(".quantity").on("change", debounce(function () {
         const newQuantity = $(this).val();
         const bookId = $(this).data("book-id");
+        console.log(newQuantity);
 
         $.ajax({
             url: `${contextPath}/api/customer/update-cart-item`,
@@ -141,8 +139,8 @@ $(document).ready(function () {
             error: function (xhr, status, error) {
                 console.error("Error: ", xhr.responseText);
             }
-        });
-    });
+        })
+    },1000));
 });
 
 function formatCurrency() {
