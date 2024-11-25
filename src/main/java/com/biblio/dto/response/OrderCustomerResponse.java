@@ -1,7 +1,8 @@
 package com.biblio.dto.response;
 
-import com.biblio.entity.*;
-import com.biblio.enumeration.EOrderStatus;
+import com.biblio.entity.Order;
+import com.biblio.entity.OrderItem;
+import com.biblio.entity.Promotion;
 import lombok.*;
 
 import java.math.BigDecimal;
@@ -18,14 +19,16 @@ import java.util.Set;
 @Getter
 @Setter
 public class OrderCustomerResponse {
-    private Long id;
+    private long id;
     private String note;
-    private LocalDateTime orderDate;
+    private String orderDate;
     private String paymentType;
     private String status;
     private Double vat;
     private Long customerId;
     private Long shippingId;
+    private Double totalPrice;
+    private Set<BookResponse> book = new HashSet<>();
     private String customerName;
     private Set<OrderItem> lineItems;
     private Set<Promotion> promotions = new HashSet<>();
@@ -36,12 +39,25 @@ public class OrderCustomerResponse {
     public OrderCustomerResponse(Long id, String note, LocalDateTime orderDate, String paymentType, String status, Double vat, Long customerId, Long shippingId) {
         this.id = id;
         this.note = note;
+        this.orderDate = String.valueOf(orderDate);
+        this.paymentType = paymentType;
+        this.status = status;
+        this.vat = vat;
+        this.customerId = customerId;
+        this.shippingId = shippingId;
+    }
+
+    public OrderCustomerResponse(long id, String note, String orderDate, String paymentType, String status, Double vat, Long customerId, Long shippingId, Double totalPrice, Set<BookResponse> book) {
+        this.id = id;
+        this.note = note;
         this.orderDate = orderDate;
         this.paymentType = paymentType;
         this.status = status;
         this.vat = vat;
         this.customerId = customerId;
         this.shippingId = shippingId;
+        this.totalPrice = totalPrice;
+        this.book = book;
     }
 
     public double calTotalPrice() {

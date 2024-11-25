@@ -1,9 +1,7 @@
 package com.biblio.dao.impl;
 
 import com.biblio.dao.IOrderDAO;
-import com.biblio.dto.response.CustomerResponse;
 import com.biblio.dto.response.OrderCustomerResponse;
-import com.biblio.dto.response.ShippingResponse;
 import com.biblio.entity.Book;
 import com.biblio.entity.Order;
 import com.biblio.entity.OrderItem;
@@ -118,7 +116,7 @@ public class OrderDAOImpl extends GenericDAOImpl<Order> implements IOrderDAO {
             return OrderCustomerResponse.builder()
                     .id(order.getId())
                     .note(order.getNote())
-                    .orderDate(order.getOrderDate())
+                    .orderDate(String.valueOf(order.getOrderDate()))
                     .paymentType(order.getPaymentType().toString())
                     .status(order.getStatus().toString())
                     .vat(order.getVat())

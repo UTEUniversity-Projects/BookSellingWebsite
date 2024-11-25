@@ -63,7 +63,8 @@
                                                     </a>
                                                 </td>
                                                 <td class="cr-cart-price">
-                                                    <span class="amount price-value" data-price="56">${cartItem.sellingPrice}</span>
+                                                    <span class="new-price price-value">${cartItem.sellingPrice}</span>
+                                                    <span class="old-price price-value">${cartItem.sellingPrice}</span>
                                                 </td>
                                                 <td class="cr-cart-qty">
                                                     <div class="cart-qty-plus-minus">
@@ -115,7 +116,7 @@
                                     <div class="cr-cart-update-bottom">
                                         <a href="home" class="cr-btn-secondary">Tiếp tục mua sách</a>
 
-                                        <a href="checkout" class="cr-button">Thanh toán</a>
+                                        <a href="${pageContext.request.contextPath}/checkout" class="cr-button">Thanh toán</a>
                                     </div>
                                 </div>
                             </div>

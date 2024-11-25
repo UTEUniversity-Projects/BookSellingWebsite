@@ -1,7 +1,10 @@
 package com.biblio.controller.staff;
 
 import com.biblio.dto.response.OrderDetailsManagementResponse;
+import com.biblio.dto.response.ReturnBookManagementResponse;
+import com.biblio.enumeration.EOrderStatus;
 import com.biblio.service.IOrderService;
+import com.biblio.service.IReturnBookService;
 
 import javax.inject.Inject;
 import javax.servlet.ServletException;
@@ -18,6 +21,8 @@ public class OrderDetailsController extends HttpServlet {
     private static final long serialVersionUID = 1L;
     @Inject
     IOrderService orderService;
+    @Inject
+    IReturnBookService returnBookService;
 
     /**
      * @see HttpServlet#HttpServlet()
@@ -34,6 +39,10 @@ public class OrderDetailsController extends HttpServlet {
         // TODO Auto-generated method stub
         Long orderId = Long.parseLong(request.getParameter("id"));
         OrderDetailsManagementResponse orderDetailsResponse = orderService.getOrderDetailsManagementResponse(orderId);
+        if (orderDetailsResponse.getStatus() == EOrderStatus.REQUEST_REFUND || orderDetailsResponse.getStatus() == EOrderStatus.REFUNDED) {
+            ReturnBookManagementResponse returnBook = returnBookService.findReturnBookByOrderId(orderId);
+            request.setAttribute("returnBook", returnBook);
+        }
         request.setAttribute("order", orderDetailsResponse);
         request.getRequestDispatcher("/views/staff/order-details.jsp").forward(request, response);
     }

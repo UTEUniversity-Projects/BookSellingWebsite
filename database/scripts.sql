@@ -4455,3 +4455,12 @@ INSERT INTO order_promotion values
 
 INSERT INTO return_book(created_at, description, reason, order_id) values
 ('2024-11-12 13:00:00', 'Sách bị gấp, bìa bị rách', 'DAMAGED', 2);
+
+INSERT INTO return_book_item(return_book_id) values
+(1);
+
+INSERT INTO return_item_books(return_book_item_id, book_id) values
+(1, 6), (1, 7), (1, 10);
+
+INSERT INTO return_book_media_file(return_book_id, media_file_id) values
+(1, 1), (1, 2), (1, 3), (1, 4), (1, 5);

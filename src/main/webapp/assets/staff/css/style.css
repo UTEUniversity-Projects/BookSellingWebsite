@@ -6874,10 +6874,9 @@ div.dataTables_wrapper div.dataTables_info {
   border: 1px solid #ddd;
   border-radius: 8px;
   padding: 16px;
-  background-color: #f9f9f9;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  margin: 20px 0;
-  font-family: Arial, sans-serif;
+  background-color: rgba(249, 249, 249, 0.3);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+  min-height: 365px;
 }
 .return-reason-container .return-reason-header {
   display: flex;

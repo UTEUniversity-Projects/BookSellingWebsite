@@ -5,14 +5,11 @@ import lombok.*;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@ToString
-@Builder
 @Getter
 @Setter
-public class OrderProductResponse {
+@Builder
+@ToString
+public class ReturnBookItemResponse {
     private String title;
-    private String imagePath;
     private int quantity;
-    private double sellingPrice;
-    private double totalPrice;
 }

@@ -96,7 +96,6 @@
 
         <!-- region Main Custom -->
         <script src="${pageContext.request.contextPath}/assets/owner/js/main.js"></script>
-        <script src="${pageContext.request.contextPath}/assets/owner/js/customer-profile.js"></script>
         <script src="${pageContext.request.contextPath}/assets/owner/js/data/ecommerce-chart-data.js"></script>
         <script src="${pageContext.request.contextPath}/assets/owner/js/toast.js"></script>
 </body>
