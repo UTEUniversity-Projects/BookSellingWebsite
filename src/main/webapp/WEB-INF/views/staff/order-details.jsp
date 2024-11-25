@@ -68,6 +68,9 @@
                                         <th>Sản phẩm</th>
                                         <th>Khuyến mãi</th>
                                         <th>Số lượng</th>
+                                        <c:if test="${order.status == 'REQUEST_REFUND' || order.status == 'REFUNDED'}">
+                                            <th>Số lượng hoàn trả</th>
+                                        </c:if>
                                         <th>Giá</th>
                                         <th>Tổng tiền</th>
                                     </tr>
@@ -89,6 +92,15 @@
                                                 </span>
                                             </td>
                                             <td>${product.quantity}</td>
+                                            <c:if test="${order.status == 'REQUEST_REFUND' || order.status == 'REFUNDED'}">
+                                                <td>
+                                                    <c:forEach var="returnItem" items="${returnBook.items}">
+                                                        <c:if test="${returnItem.title == product.title}">
+                                                            ${returnItem.quantity}
+                                                        </c:if>
+                                                    </c:forEach>
+                                                </td>
+                                            </c:if>
                                             <td class="price-value">${product.sellingPrice}</td>
                                             <td class="price-value">${product.totalPrice}</td>
                                         </tr>
@@ -98,118 +110,55 @@
                             </div>
                         </div>
                     </div>
-
-                    <div class="cr-card-content row">
-                        <div class="col-xxl-4 col-xl-5 col-md-6 col-12 mb-24">
-                            <div class="vehicle-detail-banner banner-content clearfix">
-                                <div class="banner-slider">
-                                    <div class="slider slider-for">
-                                        <div class="slider-banner-image">
-                                            <div class="zoom-image-hover">
-                                                <img
-                                                        src="${pageContext.request.contextPath}/assets/owner/img/book/DungLuaChonAnNhanKhiConTre/image1.jpg"
-                                                        alt="product-image"
-                                                        class="product-image"
-                                                />
-                                            </div>
+                    <c:if test="${order.status == 'REQUEST_REFUND' || order.status == 'REFUNDED'}">
+                        <div class="cr-card-content row">
+                            <div class="col-xxl-4 col-xl-5 col-md-6 col-12 mb-24">
+                                <div class="vehicle-detail-banner banner-content clearfix">
+                                    <div class="banner-slider">
+                                        <div class="slider slider-for">
+                                            <c:forEach var="imageUrl" items="${returnBook.proof}">
+                                                <div class="slider-banner-image">
+                                                    <div class="zoom-image-hover">
+                                                        <img
+                                                                src="${imageUrl}"
+                                                                alt="product-image"
+                                                                class="product-image"
+                                                        />
+                                                    </div>
+                                                </div>
+                                            </c:forEach>
                                         </div>
-                                        <div class="slider-banner-image">
-                                            <div class="zoom-image-hover">
-                                                <img
-                                                        src="${pageContext.request.contextPath}/assets/owner/img/book/DungLuaChonAnNhanKhiConTre/image1.jpg"
-                                                        alt="product-image"
-                                                        class="product-image"
-                                                />
-                                            </div>
-                                        </div>
-                                        <div class="slider-banner-image">
-                                            <div class="zoom-image-hover">
-                                                <img
-                                                        src="${pageContext.request.contextPath}/assets/owner/img/book/DungLuaChonAnNhanKhiConTre/image1.jpg"
-                                                        alt="product-image"
-                                                        class="product-image"
-                                                />
-                                            </div>
-                                        </div>
-                                        <div class="slider-banner-image">
-                                            <div class="zoom-image-hover">
-                                                <img
-                                                        src="${pageContext.request.contextPath}/assets/owner/img/book/DungLuaChonAnNhanKhiConTre/image1.jpg"
-                                                        alt="product-image"
-                                                        class="product-image"
-                                                />
-                                            </div>
-                                        </div>
-                                        <%--                                        <c:forEach var="imageUrl" items="${book.imageUrls}">--%>
-                                        <%--                                            <div class="slider-banner-image">--%>
-                                        <%--                                                <div class="zoom-image-hover">--%>
-                                        <%--                                                    <img--%>
-                                        <%--                                                            src="${imageUrl}"--%>
-                                        <%--                                                            alt="product-image"--%>
-                                        <%--                                                            class="product-image"--%>
-                                        <%--                                                    />--%>
-                                        <%--                                                </div>--%>
-                                        <%--                                            </div>--%>
-                                        <%--                                        </c:forEach>--%>
-                                    </div>
-                                    <div class="slider slider-nav thumb-image">
-                                        <div class="thumbnail-image">
-                                            <div class="thumbImg">
-                                                <img src="${pageContext.request.contextPath}/assets/owner/img/book/DungLuaChonAnNhanKhiConTre/image1.jpg"
-                                                     alt="product-thumbnail"/>
-                                            </div>
-                                        </div>
-                                        <div class="thumbnail-image">
-                                            <div class="thumbImg">
-                                                <img src="${pageContext.request.contextPath}/assets/owner/img/book/DungLuaChonAnNhanKhiConTre/image1.jpg"
-                                                     alt="product-thumbnail"/>
-                                            </div>
-                                        </div>
-                                        <div class="thumbnail-image">
-                                            <div class="thumbImg">
-                                                <img src="${pageContext.request.contextPath}/assets/owner/img/book/DungLuaChonAnNhanKhiConTre/image1.jpg"
-                                                     alt="product-thumbnail"/>
-                                            </div>
-                                        </div>
-                                        <div class="thumbnail-image">
-                                            <div class="thumbImg">
-                                                <img src="${pageContext.request.contextPath}/assets/owner/img/book/DungLuaChonAnNhanKhiConTre/image1.jpg"
-                                                     alt="product-thumbnail"/>
-                                            </div>
+                                        <div class="slider slider-nav thumb-image">
+                                            <c:forEach var="imageUrl" items="${returnBook.proof}">
+                                                <div class="thumbnail-image">
+                                                    <div class="thumbImg">
+                                                        <img src="${imageUrl}" alt="product-thumbnail"/>
+                                                    </div>
+                                                </div>
+                                            </c:forEach>
                                         </div>
                                     </div>
-                                    <%--                                    <div class="slider slider-nav thumb-image">--%>
-                                    <%--                                        <c:forEach var="imageUrl" items="${book.imageUrls}">--%>
-                                    <%--                                            <div class="thumbnail-image">--%>
-                                    <%--                                                <div class="thumbImg">--%>
-                                    <%--                                                    <img src="${imageUrl}" alt="product-thumbnail"/>--%>
-                                    <%--                                                </div>--%>
-                                    <%--                                            </div>--%>
-                                    <%--                                        </c:forEach>--%>
-                                    <%--                                    </div>--%>
-
+                                </div>
+                            </div>
+                            <div class="col-xxl-8 col-xl-7 col-md-6 col-12 mb-24">
+                                <div class="return-reason-container">
+                                    <div class="return-reason-header">
+                                        <p class="return-reason-title">Lý do trả hàng: ${returnBook.reason.value}</p>
+                                        <p class="cr-card-date">
+                                            <i class="ri-calendar-2-line"></i>
+                                                ${returnBook.createdAt}
+                                        </p>
+                                    </div>
+                                    <div class="return-reason-body">
+                                        <p class="return-reason-label">Mô tả chi tiết:</p>
+                                        <p class="return-reason-description">
+                                                ${returnBook.description}
+                                        </p>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                        <div class="col-xxl-8 col-xl-7 col-md-6 col-12 mb-24">
-                            <div class="return-reason-container">
-                                <div class="return-reason-header">
-                                    <p class="return-reason-title">Lý do trả hàng: Hư</p>
-                                    <p class="cr-card-date">
-                                        <i class="ri-calendar-2-line"></i>
-                                        2121
-                                    </p>
-                                </div>
-                                <div class="return-reason-body">
-                                    <p class="return-reason-label">Mô tả chi tiết:</p>
-                                    <p class="return-reason-description">
-                                        Loreâcsncasnckansckanskcnaskjcnaksjnckasncknjasnckansckjasnckjancccccccccccccccccccccccccccccccccccccccccccccccccm
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
+                    </c:if>
                     <div class="cr-card-content">
                         <div class="price-summary">
                             <div class="summary-row">
@@ -233,7 +182,7 @@
                             </c:forEach>
                             <div class="summary-row total-row">
                                 <div class="summary-label">Thành tiền</div>
-                                <div class="summary-value price-value total-value" >${order.finalPrice}</div>
+                                <div class="summary-value price-value total-value">${order.finalPrice}</div>
                             </div>
                             <div class="summary-row">
                                 <div class="summary-label">Phương thức thanh toán</div>

@@ -124,7 +124,7 @@ public class BookTemplateDAOImpl extends GenericDAOImpl<BookTemplate> implements
     }
 
     @Override
-    public long countByCriteria(String title, Long categoryId, String sortBy) {
+    public Long countByCriteria(String title, Long categoryId, String sortBy) {
         StringBuilder jpql = new StringBuilder("SELECT count(DISTINCT bt.id) FROM BookTemplate bt "
                 + "JOIN bt.books b "
                 + "WHERE b.title LIKE :title");
@@ -189,6 +189,11 @@ public class BookTemplateDAOImpl extends GenericDAOImpl<BookTemplate> implements
         params.put("status", EBookMetadataStatus.IN_STOCK);
 
         return super.countByJPQL(jpql, params);
+    }
+
+    @Override
+    public Long countAll() {
+        return super.count();
     }
 
     public static void main(String[] args) {

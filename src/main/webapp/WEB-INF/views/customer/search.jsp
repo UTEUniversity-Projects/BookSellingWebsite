@@ -217,7 +217,7 @@
                                     <span class="search-result-label font-medium text-[#004838]"
                                     >
                                         <c:if test="${title != ''}">
-                                            ${title} (${searchResult} kết quả)
+                                            ${title} (${bookCount} kết quả)
                                         </c:if>
 
                                     </span

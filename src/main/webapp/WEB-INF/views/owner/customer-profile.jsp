@@ -195,3 +195,4 @@
     </div>
   </div>
 </div>
+<script src="${pageContext.request.contextPath}/assets/owner/js/customer-profile.js"></script>

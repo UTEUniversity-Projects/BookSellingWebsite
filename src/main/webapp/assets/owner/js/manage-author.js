@@ -1,5 +1,5 @@
 function authorAction(authorId, action) {
-  fetch("/owner/set-author-info", {
+    fetch(`${contextPath}/owner/session-author-info`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json"
@@ -13,11 +13,11 @@ function authorAction(authorId, action) {
       .then(data => {
         if (data.status === "success") {
           if (action === "view") {
-            window.location.href = "/owner/author-profile";
+            window.location.href = `${contextPath}/owner/author-profile`;
           } else if (action === "update") {
-            window.location.href = "/owner/author-update";
+            window.location.href = `${contextPath}/owner/author-update`;
           } else if (action === "delete") {
-            window.location.href = "/owner/author-list";
+            window.location.href = `${contextPath}/owner/author-list`;
           }
         } else {
           alert("Có lỗi xảy ra khi chuyển hướng.");
@@ -27,7 +27,7 @@ function authorAction(authorId, action) {
 }
 
 document.addEventListener("DOMContentLoaded", function () {
-  const tableBody = document.querySelector("#author-data-table tbody");
+  const tableBody = document.querySelector(".author-data-table tbody");
 
   if (tableBody) {
     tableBody.addEventListener("click", function (event) {

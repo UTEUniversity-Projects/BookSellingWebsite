@@ -53,10 +53,19 @@ public class HomeController extends HttpServlet {
         HttpSession session = request.getSession();
         AccountGetResponse account = (AccountGetResponse) session.getAttribute("account");
 
+        if (account != null) {
+            CartResponse cart = cartService.getCartResponseByUsername(account.getUsername());
+            request.setAttribute("cart", cart);
+        }
+
+
         List<CategorySidebarResponse> categories = categoryService.getAllCategorySidebarResponse();
         List<BookCardResponse> books = bookTemplateService.getAllBookCardResponse();
         request.setAttribute("categories", categories);
         request.setAttribute("books", books);
+
+        request.setAttribute("account", account);
+
 
         request.getRequestDispatcher("/views/customer/home.jsp").forward(request, response);
     }
