@@ -5,6 +5,7 @@ import com.biblio.dao.ICartDAO;
 import com.biblio.dao.ICartItemDAO;
 import com.biblio.dao.ICustomerDAO;
 import com.biblio.dto.request.AddToCartRequest;
+import com.biblio.dto.request.UpdateCartItemRequest;
 import com.biblio.dto.response.CartResponse;
 import com.biblio.entity.BookTemplate;
 import com.biblio.entity.Cart;
@@ -27,15 +28,15 @@ public class CartServiceImpl implements ICartService {
     private ICartItemDAO cartItemDAO;
 
     @Override
-    public CartResponse getCartResponseByUsername(String username) {
+    public CartResponse getCartResponseByAccountId(Long accountId) {
 
-        Cart cart = cartDAO.findByUsername(username);
+        Cart cart = cartDAO.findByAccountId(accountId);
         return CartMapper.toCartResponse(cart);
     }
 
     @Override
-    public CartResponse addToCart(AddToCartRequest request) {
-        Cart cart = cartDAO.findById(request.getCartId());
+    public void addToCart(AddToCartRequest request) {
+        Cart cart = cartDAO.findByAccountId(request.getAccountId());
 
         BookTemplate bookTemplate = bookTemplateDAO.findById(request.getBookTemplateId());
 
@@ -54,6 +55,18 @@ public class CartServiceImpl implements ICartService {
             newItem.setQuantity(request.getQuantity());
             cartItemDAO.addCartItem(newItem);
         }
-        return CartMapper.toCartResponse(cart);
+    }
+
+    @Override
+    public void updateCart(UpdateCartItemRequest request) {
+        Cart cart = cartDAO.findByAccountId(request.getAccountId());
+        CartItem existingItem = cart.getCartItems().stream()
+                .filter(item -> item.getBookTemplate().getId().equals(request.getBookTemplateId()))
+                .findFirst()
+                .orElse(null);
+        if (existingItem != null) {
+            existingItem.setQuantity(request.getQuantity());
+            cartItemDAO.updateCartItem(existingItem);
+        }
     }
 }

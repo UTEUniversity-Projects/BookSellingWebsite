@@ -2862,7 +2862,7 @@ ul.navbar-nav .dropdown:hover .dropdown-menu {
 .cr-cart-view .cr-cart-inner .cr-cart-top ul.crcart-pro-items {
   margin: 0;
   padding-left: 0;
-  max-height: 430px;
+  max-height: 570px;
   overflow-y: auto;
   list-style: none;
   scroll-behavior: smooth;
@@ -9680,6 +9680,20 @@ p {
 
 .checkout.active .checkout-qr {
   transform: translate(-50%, -50%);
+}
+
+.content-container {
+  display: flex;
+  width: 100%;
+}
+.content-container .summary-sub-total {
+  margin-top: 20px;
+  margin-left: 20px;
+  width: 350px;
+  height: fit-content;
+}
+.content-container .summary-sub-total h3 {
+  text-align: center;
 }
 
 /* Bộ lọc trạng thái */

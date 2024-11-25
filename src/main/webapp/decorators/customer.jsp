@@ -236,7 +236,6 @@
                                     <div class="cr-qty-main">
                                         <input
                                                 type="text"
-                                                placeholder="."
                                                 value="1"
                                                 minlength="1"
                                                 maxlength="20"
@@ -246,7 +245,7 @@
                                         <button type="button" class="minus">-</button>
                                     </div>
                                     <div class="cr-add-button">
-                                        <button type="button" class="cr-button cr-btn-secondary cr-shopping-bag add-to-cart-btn" data-cart-id="${cart.id}" data-book-id="${book.id}">
+                                        <button type="button" class="cr-button cr-btn-secondary cr-shopping-bag add-to-cart-btn" data-book-id="${book.id}">
                                             Thêm vào giỏ hàng
                                         </button>
                                     </div>
@@ -347,51 +346,47 @@
                                 <span class="new-price price-value">${cartItem.sellingPrice}</span>
                                 <span class="old-price price-value">${cartItem.sellingPrice}</span>
                             </span>
-                                   <div class="cr-cart-qty">
-                                       <div class="cart-qty-plus-minus">
-                                           <button type="button" class="minus">-</button>
-                                           <input
-                                                   type="text"
-                                                   placeholder="."
-                                                   value="${cartItem.quantity}"
-                                                   minlength="1"
-                                                   maxlength="20"
-                                                   class="quantity"
-                                           />
-                                           <button type="button" class="plus">+</button>
-                                       </div>
-                                   </div>
-                                   <a href="javascript:void(0)" class="remove">×</a>
-                               </div>
-                           </li>
-                       </c:forEach>
-                   </ul>
-                   <div class="cr-cart-bottom">
-                       <div class="cart-sub-total">
-                           <table class="table cart-table">
-                               <tbody>
-                               <tr>
-                                   <td class="text-left">Tiền sách:</td>
-                                   <td class="text-right price-value">${cart.totalBookPrice}</td>
-                               </tr>
-                               <tr>
-                                   <td class="text-left">VAT (20%) :</td>
-                                   <td class="text-right">$60.00</td>
-                               </tr>
-                               <tr>
-                                   <td class="text-left">Thành tiền:</td>
-                                   <td class="text-right primary-color">$360.00</td>
-                               </tr>
-                               </tbody>
-                           </table>
-                       </div>
-                       <div class="cart_btn">
-                           <a href="${pageContext.request.contextPath}/cart" class="cr-btn-secondary">Xem giỏ hàng</a>
-                           <a href="checkout" class="cr-button">Thanh toán</a>
-                       </div>
-                   </div>
-               </c:otherwise>
-           </c:choose>
+                                 
+                            <div class="cr-cart-qty">
+                                <div class="cart-qty-plus-minus">
+                                    <button type="button" class="minus">-</button>
+                                    <input
+                                            type="text"
+                                            value="${cartItem.quantity}"
+                                            minlength="1"
+                                            maxlength="20"
+                                            class="quantity"
+                                            data-book-id="${cartItem.bookId}"
+                                    />
+                                    <button type="button" class="plus">+</button>
+                                </div>
+                            </div>
+                            <a href="javascript:void(0)" class="remove">×</a>
+                        </div>
+                    </li>
+                </c:forEach>
+            </ul>
+        </div>
+        <div class="cr-cart-bottom">
+            <div class="cart-sub-total">
+<%--                <table class="table cart-table">--%>
+<%--                    <tbody>--%>
+<%--                    <tr>--%>
+<%--                        <td class="text-left">Tiền sách:</td>--%>
+<%--                        <td class="text-right total-book-price price-value">${cart.totalBookPrice}</td>--%>
+<%--                    </tr>--%>
+<%--                    <tr>--%>
+<%--                        <td class="text-left">Thành tiền:</td>--%>
+<%--                        <td class="text-right primary-color">$360.00</td>--%>
+<%--                    </tr>--%>
+<%--                    </tbody>--%>
+<%--                </table>--%>
+            </div>
+            <div class="cart_btn">
+                <a href="${pageContext.request.contextPath}/cart" class="cr-button">Xem giỏ hàng</a>
+<%--                <a href="checkout.html" class="cr-button">Thanh toán</a>--%>
+            </div>
+          
         </div>
 
     </div>

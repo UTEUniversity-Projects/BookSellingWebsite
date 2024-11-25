@@ -1,6 +1,7 @@
 package com.biblio.apis.customer;
 
 import com.biblio.dto.request.AddToCartRequest;
+import com.biblio.dto.request.UpdateCartItemRequest;
 import com.biblio.dto.response.AccountGetResponse;
 import com.biblio.service.ICartService;
 import com.biblio.utils.HttpUtil;
@@ -18,12 +19,8 @@ import java.io.Serial;
 import java.util.HashMap;
 import java.util.Map;
 
-/**
- * Servlet implementation class SearchBookAPI
- */
-
-@WebServlet("/api/customer/add-cart-item")
-public class AddToCartAPI extends HttpServlet {
+@WebServlet("/api/customer/update-cart-item")
+public class UpdateCartItemAPI extends HttpServlet {
     @Serial
     private static final long serialVersionUID = 1L;
 
@@ -32,7 +29,7 @@ public class AddToCartAPI extends HttpServlet {
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public AddToCartAPI() {
+    public UpdateCartItemAPI() {
         super();
     }
 
@@ -53,16 +50,16 @@ public class AddToCartAPI extends HttpServlet {
         HttpSession session = request.getSession();
         AccountGetResponse account = (AccountGetResponse) session.getAttribute("account");
 
-        AddToCartRequest addToCartRequest = HttpUtil.of(request.getReader()).toModel(AddToCartRequest.class);
-        addToCartRequest.setAccountId(account.getId());
+        UpdateCartItemRequest updateCartItemRequest = HttpUtil.of(request.getReader()).toModel(UpdateCartItemRequest.class);
+        updateCartItemRequest.setAccountId(account.getId());
 
         Map<String, Object> result = new HashMap<>();
         ObjectMapper mapper = new ObjectMapper();
 
         try {
-            cartService.addToCart(addToCartRequest);
+            cartService.updateCart(updateCartItemRequest);
             result.put("status", "success");
-            result.put("message", "Sản phẩm đã được thêm vào giỏ hàng thành công!");
+            result.put("message", "Cập nhật số lượng sản phẩm thành công!");
         } catch (Exception e) {
             result.put("status", "error");
             result.put("message", e.getMessage());

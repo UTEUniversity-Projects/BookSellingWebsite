@@ -873,3 +873,18 @@
 .checkout.active .checkout-qr {
   transform: translate(-50%, -50%);
 }
+
+
+.content-container {
+  display: flex;
+  width: 100%;
+  .summary-sub-total {
+    margin-top: 20px;
+    margin-left: 20px;
+    width: 350px;
+    height: fit-content;
+    h3 {
+      text-align: center;
+    }
+  }
+}
