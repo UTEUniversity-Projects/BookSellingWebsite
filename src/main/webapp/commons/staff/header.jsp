@@ -69,7 +69,7 @@
                             </ul>
                             <ul class="border-top">
                                 <li>
-                                    <a href="signin.html"
+                                    <a href="${pageContext.request.contextPath}/logout"
                                     ><i class="ri-logout-circle-r-line"></i>Logout</a
                                     >
                                 </li>

@@ -27,8 +27,6 @@ public interface IOrderService {
     List<CountOrderOfCustomerResponse> getCountOrderOfCustomerAtTime(LocalDateTime start, LocalDateTime end);
 
     public OrderCustomerResponse findOrderById(Long orderId);
-    void confirmOrder(Long orderId);
-    void rejectOrder(Long orderId, String reason);
 
 
 }

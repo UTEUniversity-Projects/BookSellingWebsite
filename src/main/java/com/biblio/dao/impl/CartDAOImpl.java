@@ -12,7 +12,7 @@ public class CartDAOImpl extends GenericDAOImpl<Cart> implements ICartDAO {
     }
 
     @Override
-    public Cart findByUsername(String username) {
+    public Cart findByAccountId(Long accountId) {
         String jpql = "SELECT DISTINCT cart FROM Cart cart "
                 + "JOIN FETCH cart.customer customer "
                 + "JOIN FETCH customer.account account "
@@ -20,10 +20,10 @@ public class CartDAOImpl extends GenericDAOImpl<Cart> implements ICartDAO {
                 + "LEFT JOIN FETCH items.bookTemplate bookTemplate "
                 + "LEFT JOIN FETCH bookTemplate.books books "
                 + "LEFT JOIN FETCH bookTemplate.mediaFiles mediaFiles "
-                + "WHERE account.username = :username";
+                + "WHERE account.id = :accountId";
 
         Map<String, Object> params = new HashMap<>();
-        params.put("username", username);
+        params.put("accountId", accountId);
 
         return super.findSingleByJPQL(jpql, params);
     }

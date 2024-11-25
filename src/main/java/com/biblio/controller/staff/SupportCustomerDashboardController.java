@@ -36,6 +36,10 @@ public class SupportCustomerDashboardController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
         try {
+            request.setCharacterEncoding("UTF-8");
+            response.setCharacterEncoding("UTF-8");
+            response.setContentType("text/html;charset=UTF-8");
+
             String action = request.getParameter("action");
 
             if ("respond".equals(action)) {
@@ -57,6 +61,7 @@ public class SupportCustomerDashboardController extends HttpServlet {
             response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "An error occurred: " + e.getMessage());
         }
     }
+
 
 
 

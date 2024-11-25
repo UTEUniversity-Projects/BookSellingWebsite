@@ -9,7 +9,7 @@ $(document).ready(() => {
 
 		}
 
-		async search (searchInput) {
+		async search (title, categoryId, sortBy) {
 
 			const generateStars = (reviewRate) => {
 				let stars = '';
@@ -62,8 +62,8 @@ $(document).ready(() => {
                                 </div>
                             </div>
                         </div>
-						`
-			}
+						`;
+			};
 
 			const generateModal = (book) => {
 				return `
@@ -131,7 +131,9 @@ $(document).ready(() => {
 			};
 
 			const searchData = {
-				title: searchInput
+				title,
+				categoryId,
+				sortBy
 			};
 
 			$('.book-list').html('                    <div class="loading">\n' +
@@ -148,19 +150,19 @@ $(document).ready(() => {
 					const bookList = document.querySelector('.book-list');
 					console.log(result);
 					if (result.response.length === 0) {
-						bookList.innerHTML = `<p class="text-xl text-[#269a37] text-center">Không tìm thấy sản phẩm nào với từ khóa <b>${searchInput}</b>.</p>`;
+						bookList.innerHTML = `<p class="text-xl text-[#269a37] text-center">Không tìm thấy sản phẩm nào với từ khóa <b>${title}</b>.</p>`;
 						$('.cr-pagination').hide();
 					} else {
 						bookList.innerHTML = result.response.map(generateBook).join('');
 
-						$(".modal.fade.quickview-modal").remove();
-						document.querySelector("body").insertAdjacentHTML("beforeend", result.response.map(generateModal).join(''));
+						$('.modal.fade.quickview-modal').remove();
+						document.querySelector('body').insertAdjacentHTML('beforeend', result.response.map(generateModal).join(''));
 
 						$('.cr-pagination').show();
 						zoomImage('.image-zoom');
 					}
-					if (searchInput.trim() !== '') {
-						$('.search-result-label').text(` ${searchInput} (${result.quantity} kết quả)`);
+					if (title?.trim() !== '' || categoryId) {
+						$('.search-result-label').text(` ${title} (${result.quantity} kết quả)`);
 					} else {
 						$('.search-result-label').text('');
 					}
@@ -180,6 +182,10 @@ $(document).ready(() => {
 	const searchBook = new SearchBook();
 
 	const searchInput = $('.search-input');
+	const urlParams = new URLSearchParams(window.location.search);
+	let title = urlParams.get('title');
+	let categoryId = null;
+
 	$('.btn-search').click(function (event) {
 		if (!window.location.pathname.includes('/search'))
 			return;
@@ -204,16 +210,24 @@ $(document).ready(() => {
 			window.history.pushState({ path: newUrl }, '', newUrl);
 
 			const urlParams = new URLSearchParams(window.location.search);
-			const title = urlParams.get('title');
+			title = urlParams.get('title');
 
-			searchBook.search(title);
+			searchBook.search(title, categoryId);
 		}, 500));
 	}
 
-	const urlParams = new URLSearchParams(window.location.search);
-	const title = urlParams.get('title');
 	if (title) {
 		searchInput.val(title);
-		searchBook.search(title);
+		searchBook.search(title, categoryId);
 	}
+
+	$('.category-item').on('click', function() {
+		$('.category-item').each(function () {
+			$(this)[0].checked = false;
+		});
+		$(this)[0].checked = true;
+		categoryId = $(this).val() != "on" ? $(this).val() : null;
+		console.log(categoryId);
+		searchBook.search(title, categoryId)
+	});
 });

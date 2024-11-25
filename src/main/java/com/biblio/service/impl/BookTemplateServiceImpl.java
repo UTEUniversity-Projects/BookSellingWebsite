@@ -80,7 +80,12 @@ public class BookTemplateServiceImpl implements IBookTemplateService {
     }
 
     @Override
-    public long getBookTemplateQuantityByCriteria(SearchBookRequest request) {
+    public Long getTotalBookTemplateQuantity() {
+        return bookTemplateDAO.countAll();
+    }
+
+    @Override
+    public Long getBookTemplateQuantityByCriteria(SearchBookRequest request) {
         return bookTemplateDAO.countByCriteria(request.getTitle(), request.getCategoryId(), request.getSortBy());
     }
 
