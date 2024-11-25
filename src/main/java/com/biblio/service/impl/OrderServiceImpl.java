@@ -194,20 +194,5 @@ public class OrderServiceImpl implements IOrderService {
 
     }
 
-    @Override
-    @Transactional
-    public void confirmOrder(Long orderId) {
-        Order order = orderDAO.findOne(orderId);
-        order.setStatus(EOrderStatus.PACKING);
-        orderDAO.updateOrder(order);
-    }
-
-    @Override
-    @Transactional
-    public void rejectOrder(Long orderId, String reason) {
-        Order order = orderDAO.findOne(orderId);
-        order.setStatus(EOrderStatus.CANCELED);
-        orderDAO.updateOrder(order);
-    }
 
 }
