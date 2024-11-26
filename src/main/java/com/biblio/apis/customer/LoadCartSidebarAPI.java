@@ -38,7 +38,7 @@ public class LoadCartSidebarAPI extends HttpServlet {
         // TODO Auto-generated method stub
         HttpSession session = request.getSession();
         AccountGetResponse account = (AccountGetResponse) session.getAttribute("account");
-        System.out.println(account);
+        if (account == null) return;
 
         ObjectMapper mapper = new ObjectMapper();
         Map<String, Object> map = new HashMap<>();
