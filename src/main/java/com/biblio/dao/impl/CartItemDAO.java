@@ -9,6 +9,11 @@ public class CartItemDAO extends GenericDAOImpl<CartItem> implements ICartItemDA
     }
 
     @Override
+    public CartItem getCartItemById(Long id) {
+        return super.findById(id);
+    }
+
+    @Override
     public CartItem addCartItem(CartItem cartItem) {
         return super.save(cartItem);
     }
@@ -16,5 +21,10 @@ public class CartItemDAO extends GenericDAOImpl<CartItem> implements ICartItemDA
     @Override
     public CartItem updateCartItem(CartItem cartItem) {
         return super.update(cartItem);
+    }
+
+    @Override
+    public CartItem deleteCartItem(Long id) {
+        return super.delete(id);
     }
 }
