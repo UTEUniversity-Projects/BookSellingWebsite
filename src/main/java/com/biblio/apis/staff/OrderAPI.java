@@ -81,7 +81,7 @@ public class OrderAPI extends HttpServlet {
             result.put("statusType", EOrderStatus.PACKING.name());
             result.put("status", EOrderStatus.PACKING.getDescription());
             result.put("statusStyle", EOrderStatus.PACKING.getStatusStyle());
-            sendOrderConfirmationEmail(orderId/*, finalPrice*/);
+            sendOrderConfirmationEmail(request,orderId/*, finalPrice*/);
         } else {
             result.put("message", "Không thể xác nhận đơn hàng. Vui lòng thử lại!");
             result.put("type", "info");
@@ -101,7 +101,7 @@ public class OrderAPI extends HttpServlet {
             result.put("statusType", EOrderStatus.CANCELED.name());
             result.put("status", EOrderStatus.CANCELED.getDescription());
             result.put("statusStyle", EOrderStatus.CANCELED.getStatusStyle());
-            sendCancelOrderEmail(orderId,cancelContent);
+            sendCancelOrderEmail(request,orderId,cancelContent);
         } else {
             result.put("message", "Không thể hủy đơn hàng. Vui lòng thử lại!");
             result.put("type", "info");
@@ -109,9 +109,18 @@ public class OrderAPI extends HttpServlet {
         response.getWriter().write(mapper.writeValueAsString(result));
     }
 
-    private void sendOrderConfirmationEmail(Long orderId/*, Double finalPrice*/) throws IOException {
-        // URL của API gửi email
-        String apiUrl = "http://localhost:8080/BookSellingWebsite/api/order/send-email";
+    private void sendOrderConfirmationEmail(HttpServletRequest request ,Long orderId/*, Double finalPrice*/) throws IOException {
+        String scheme = request.getScheme();
+        String serverName = request.getServerName();
+        int serverPort = request.getServerPort();
+        String contextPath = request.getContextPath();
+
+        String apiUrl = scheme + "://" + serverName;
+        if ((scheme.equals("http") && serverPort != 80) || (scheme.equals("https") && serverPort != 443)) {
+            apiUrl += ":" + serverPort;
+        }
+        apiUrl += contextPath + "/staff/email/order-confirmation";
+
         HttpURLConnection connection = null;
 
         try {
@@ -140,9 +149,17 @@ public class OrderAPI extends HttpServlet {
         }
     }
 
-    private void sendCancelOrderEmail(Long orderId, String cancelContent) throws IOException {
-        // URL của API gửi email hủy đơn hàng
-        String apiUrl = "http://localhost:8080/BookSellingWebsite/api/order/cancel-email";
+    private void sendCancelOrderEmail(HttpServletRequest request,Long orderId, String cancelContent) throws IOException {
+        String scheme = request.getScheme();
+        String serverName = request.getServerName();
+        int serverPort = request.getServerPort();
+        String contextPath = request.getContextPath();
+
+        String apiUrl = scheme + "://" + serverName;
+        if ((scheme.equals("http") && serverPort != 80) || (scheme.equals("https") && serverPort != 443)) {
+            apiUrl += ":" + serverPort;
+        }
+        apiUrl += contextPath + "/staff/email/order-cancellation";
         HttpURLConnection connection = null;
 
         try {
