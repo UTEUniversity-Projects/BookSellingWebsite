@@ -1,15 +1,44 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<!-- Include stylesheet -->
-<link href="https://cdn.jsdelivr.net/npm/quill@2.0.2/dist/quill.snow.css" rel="stylesheet" />
+
 <link href='https://fonts.googleapis.com/css?family=Nunito' rel='stylesheet'>
 <style>
+    .editor-area {
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 30px
+    }
+    .review-area {
+        padding-top: 30px;
+        padding-bottom: 20px;
+    }
     .author-name {
         font-family: 'Nunito', sans-serif;
         font-size: 90%;
         font-weight: bold;
         color: #2b3647;
+    }
+    div .edit-introduction p{
+        width: 100%;
+        margin: 0;
+        text-align: justify;
+        box-sizing: border-box;
+        font-size: 110%;
+    }
+    h5 {
+        font-weight: bold;
+        color: #2b3647;
+    }
+    div.review-introduction p {
+        width: 100%;
+        margin: 0;
+        padding-left: 10px;
+        padding-right: 10px;
+        text-align: justify;
+        box-sizing: border-box;
+        font-size: 90%;
+        color: slategray;
     }
 
     .card-3d-deep {
@@ -58,7 +87,7 @@
             </div>
         </div>
         <div class="row">
-            <form class="d-flex">
+            <form class="d-flex" method="post">
                 <div class="col-xxl-3 col-xl-4 col-md-12">
                     <div class="vendor-sticky-bar">
                         <div class="col-xl-12">
@@ -105,21 +134,20 @@
                     </div>
                 </div>
                 <div class="col-xxl-9 col-xl-8 col-md-12" style="padding-left: 10px">
-                    <div class="cr-card vendor-profile card-3d-deep">
-                        <div class="cr-card-content vendor-details mb-m-30">
+                    <div class="cr-card card-3d-deep">
+                        <div class="cr-card-content">
                             <div class="row">
-                                <div class="d-flex col-sm-12" style="justify-content: space-between; align-items: center; margin-bottom: 30px">
-                                    <h3>Soạn thảo giới thiệu</h3>
-                                    <button id="review-btn" style="border-radius: 8px">Xem trước</button>
+                                <div class="d-flex col-sm-12 editor-area">
+                                    <h5>Soạn thảo giới thiệu</h5>
+                                    <button id="review-btn" class="cr-btn default-btn color-primary">Xem trước</button>
                                 </div>
-                                <!-- Create the editor container -->
-                                <div id="editor">
+                                <div id="editor" class="edit-introduction">
                                     ${fn:trim(author.introduction)}
                                 </div>
-                                <div style="margin-top: 30px; margin-bottom: 20px">
+                                <div class="review-area">
                                     <div id="review-container" style="display: none;">
-                                        <h3>Giới thiệu tác giả</h3>
-                                        <div id="review-content"></div>
+                                        <h5>Giới thiệu tác giả</h5>
+                                        <div id="review-content" class="review-introduction"></div>
                                     </div>
                                 </div>
                             </div>
@@ -130,6 +158,7 @@
         </div>
     </div>
 </div>
-<script src="https://cdn.jsdelivr.net/npm/quill@2.0.2/dist/quill.js"></script>
+
 <script>const contextPath = "<%=request.getContextPath() %>";</script>
-<script src="${pageContext.request.contextPath}/assets/owner/js/quill-editor.js" defer></script>
+<script src="${pageContext.request.contextPath}/assets/owner/js/extension/quill-editor.js" defer></script>
+<script src="${pageContext.request.contextPath}/assets/owner/js/manage/manage-author.js" defer></script>

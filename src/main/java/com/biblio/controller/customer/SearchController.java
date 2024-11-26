@@ -49,7 +49,8 @@ public class SearchController extends HttpServlet {
 
         List<CategoryBookCountResponse> categories = categoryService.getBookQuantityPerCategory();
         List<BookCardResponse> books = bookTemplateService.getBookTemplateByCriteria(searchBookRequest);
-        long bookCount = bookTemplateService.getBookTemplateQuantityByCriteria(searchBookRequest);
+        Long bookCount = bookTemplateService.getBookTemplateQuantityByCriteria(searchBookRequest);
+        Long totalBook = bookTemplateService.getTotalBookTemplateQuantity();
 
         int index = 1;
         int perPage = 8;
@@ -69,7 +70,8 @@ public class SearchController extends HttpServlet {
         request.setAttribute("books", books);
         request.setAttribute("breadcrumb", "Tìm kiếm sách");
         request.setAttribute("title", title);
-        request.setAttribute("searchResult", bookCount);
+        request.setAttribute("bookCount", bookCount);
+        request.setAttribute("totalBook", totalBook);
 
         request.getRequestDispatcher("/views/customer/search.jsp").forward(request, response);
     }

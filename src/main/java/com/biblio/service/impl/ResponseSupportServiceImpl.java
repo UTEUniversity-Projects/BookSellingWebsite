@@ -9,6 +9,7 @@ import com.biblio.jpaconfig.JpaConfig;
 import com.biblio.service.IResponseSupportService;
 
 import javax.persistence.EntityManager;
+import java.nio.charset.StandardCharsets;
 import java.time.LocalDateTime;
 import java.util.List;
 

@@ -9,6 +9,6 @@ import lombok.*;
 @Builder
 public class AddToCartRequest {
     private Long bookTemplateId;
-    private Long cartId;
+    private Long accountId;
     private Long quantity;
 }

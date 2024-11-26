@@ -1,6 +1,7 @@
 package com.biblio.apis.customer;
 
 import com.biblio.dto.request.AddToCartRequest;
+import com.biblio.dto.response.AccountGetResponse;
 import com.biblio.service.ICartService;
 import com.biblio.utils.HttpUtil;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -11,6 +12,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.io.Serial;
 import java.util.HashMap;
@@ -48,11 +50,12 @@ public class AddToCartAPI extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         request.setCharacterEncoding("UTF-8");
 
-        AddToCartRequest addToCartRequest = HttpUtil.of(request.getReader()).toModel(AddToCartRequest.class);
+        HttpSession session = request.getSession();
+        AccountGetResponse account = (AccountGetResponse) session.getAttribute("account");
 
-        System.out.println(addToCartRequest.getCartId());
-        System.out.println(addToCartRequest.getBookTemplateId());
-        System.out.println(addToCartRequest.getQuantity());
+        AddToCartRequest addToCartRequest = HttpUtil.of(request.getReader()).toModel(AddToCartRequest.class);
+        addToCartRequest.setAccountId(account.getId());
+
         Map<String, Object> result = new HashMap<>();
         ObjectMapper mapper = new ObjectMapper();
 

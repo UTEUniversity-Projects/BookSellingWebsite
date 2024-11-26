@@ -71,11 +71,11 @@
                                                         <button type="button" class="minus">-</button>
                                                         <input
                                                                 type="text"
-                                                                placeholder="."
                                                                 value="${cartItem.quantity}"
                                                                 minlength="1"
                                                                 maxlength="20"
                                                                 class="quantity"
+                                                                data-book-id="${cartItem.bookId}"
                                                         />
                                                         <button type="button" class="plus">+</button>
                                                     </div>
@@ -96,16 +96,8 @@
                                     <table class="table summary-table">
                                         <tbody>
                                         <tr>
-                                            <td>Tiền sách :</td>
+                                            <td>Tổng tiền :</td>
                                             <td class="price-value">${cart.totalBookPrice}</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Thuế (20%) :</td>
-                                            <td>$60.00</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Thành tiền :</td>
-                                            <td>$360.00</td>
                                         </tr>
                                         </tbody>
                                     </table>

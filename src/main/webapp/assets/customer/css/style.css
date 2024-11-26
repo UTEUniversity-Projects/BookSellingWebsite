@@ -2862,7 +2862,7 @@ ul.navbar-nav .dropdown:hover .dropdown-menu {
 .cr-cart-view .cr-cart-inner .cr-cart-top ul.crcart-pro-items {
   margin: 0;
   padding-left: 0;
-  max-height: 430px;
+  max-height: 570px;
   overflow-y: auto;
   list-style: none;
   scroll-behavior: smooth;
@@ -2940,10 +2940,6 @@ ul.navbar-nav .dropdown:hover .dropdown-menu {
 .cr-cart-view .cr-cart-inner .cr-cart-bottom {
   position: relative;
   top: -20px;
-}
-.cr-cart-view .cr-cart-inner .cr-cart-bottom .cart_btn {
-  display: flex;
-  justify-content: space-between;
 }
 .cr-cart-view .cr-cart-inner .cr-cart-bottom .cart-sub-total {
   margin: 20px 0 10px 0;
@@ -6161,6 +6157,83 @@ iframe {
 @media only screen and (max-width: 360px) {
   .cr-cart-view .cr-cart-inner {
     width: 280px;
+  }
+}
+.empty-cart {
+  width: 100%;
+  margin: 0 auto;
+  text-align: center;
+  font-weight: 300;
+}
+.empty-cart svg {
+  padding: 2rem 3rem;
+}
+.empty-cart svg #oval, .empty-cart svg #plus, .empty-cart svg #diamond, .empty-cart svg #bubble-rounded {
+  animation: plopp 4s ease-out infinite;
+}
+.empty-cart svg #oval:nth-child(1), .empty-cart svg #plus:nth-child(1), .empty-cart svg #diamond:nth-child(1), .empty-cart svg #bubble-rounded:nth-child(1) {
+  animation-delay: -240ms;
+}
+.empty-cart svg #oval:nth-child(2), .empty-cart svg #plus:nth-child(2), .empty-cart svg #diamond:nth-child(2), .empty-cart svg #bubble-rounded:nth-child(2) {
+  animation-delay: -480ms;
+}
+.empty-cart svg #oval:nth-child(3), .empty-cart svg #plus:nth-child(3), .empty-cart svg #diamond:nth-child(3), .empty-cart svg #bubble-rounded:nth-child(3) {
+  animation-delay: -720ms;
+}
+.empty-cart svg #oval:nth-child(4), .empty-cart svg #plus:nth-child(4), .empty-cart svg #diamond:nth-child(4), .empty-cart svg #bubble-rounded:nth-child(4) {
+  animation-delay: -960ms;
+}
+.empty-cart svg #oval:nth-child(5), .empty-cart svg #plus:nth-child(5), .empty-cart svg #diamond:nth-child(5), .empty-cart svg #bubble-rounded:nth-child(5) {
+  animation-delay: -1200ms;
+}
+.empty-cart svg #oval:nth-child(6), .empty-cart svg #plus:nth-child(6), .empty-cart svg #diamond:nth-child(6), .empty-cart svg #bubble-rounded:nth-child(6) {
+  animation-delay: -1440ms;
+}
+.empty-cart svg #oval:nth-child(7), .empty-cart svg #plus:nth-child(7), .empty-cart svg #diamond:nth-child(7), .empty-cart svg #bubble-rounded:nth-child(7) {
+  animation-delay: -1680ms;
+}
+.empty-cart svg #oval:nth-child(8), .empty-cart svg #plus:nth-child(8), .empty-cart svg #diamond:nth-child(8), .empty-cart svg #bubble-rounded:nth-child(8) {
+  animation-delay: -1920ms;
+}
+.empty-cart svg #oval:nth-child(9), .empty-cart svg #plus:nth-child(9), .empty-cart svg #diamond:nth-child(9), .empty-cart svg #bubble-rounded:nth-child(9) {
+  animation-delay: -2160ms;
+}
+.empty-cart svg #oval:nth-child(10), .empty-cart svg #plus:nth-child(10), .empty-cart svg #diamond:nth-child(10), .empty-cart svg #bubble-rounded:nth-child(10) {
+  animation-delay: -2400ms;
+}
+.empty-cart svg #oval:nth-child(11), .empty-cart svg #plus:nth-child(11), .empty-cart svg #diamond:nth-child(11), .empty-cart svg #bubble-rounded:nth-child(11) {
+  animation-delay: -2640ms;
+}
+.empty-cart svg #oval:nth-child(12), .empty-cart svg #plus:nth-child(12), .empty-cart svg #diamond:nth-child(12), .empty-cart svg #bubble-rounded:nth-child(12) {
+  animation-delay: -2880ms;
+}
+.empty-cart svg #oval:nth-child(13), .empty-cart svg #plus:nth-child(13), .empty-cart svg #diamond:nth-child(13), .empty-cart svg #bubble-rounded:nth-child(13) {
+  animation-delay: -3120ms;
+}
+.empty-cart svg #oval:nth-child(14), .empty-cart svg #plus:nth-child(14), .empty-cart svg #diamond:nth-child(14), .empty-cart svg #bubble-rounded:nth-child(14) {
+  animation-delay: -3360ms;
+}
+.empty-cart svg #oval:nth-child(15), .empty-cart svg #plus:nth-child(15), .empty-cart svg #diamond:nth-child(15), .empty-cart svg #bubble-rounded:nth-child(15) {
+  animation-delay: -3600ms;
+}
+.empty-cart svg #oval:nth-child(16), .empty-cart svg #plus:nth-child(16), .empty-cart svg #diamond:nth-child(16), .empty-cart svg #bubble-rounded:nth-child(16) {
+  animation-delay: -3840ms;
+}
+.empty-cart svg #bg-line:nth-child(2) {
+  fill-opacity: 0.3;
+}
+.empty-cart svg #bg-line:nth-child(3) {
+  fill-opacity: 0.4;
+}
+
+@keyframes plopp {
+  0% {
+    transform: translate(0, 0);
+    opacity: 1;
+  }
+  100% {
+    transform: translate(0, -10px);
+    opacity: 0;
   }
 }
 /* Login */
@@ -9603,6 +9676,87 @@ p {
 
 .checkout.active .checkout-qr {
   transform: translate(-50%, -50%);
+}
+
+.content-container {
+  display: flex;
+  width: 100%;
+}
+.content-container .summary-sub-total {
+  margin-top: 20px;
+  margin-left: 20px;
+  width: 350px;
+  height: fit-content;
+}
+.content-container .summary-sub-total h3 {
+  text-align: center;
+}
+
+/* Bộ lọc trạng thái */
+#order-filters .tag {
+  font-size: 16px;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+#order-filters .tag:hover {
+  color: #26aa99;
+}
+
+/* Đơn hàng */
+.order-item {
+  background: #ffffff;
+  border: 1px solid #e5e5e5;
+  border-radius: 8px;
+  padding: 16px;
+  margin-bottom: 20px;
+}
+
+.order-item img {
+  border-radius: 4px;
+}
+
+.my-hidden {
+  display: none;
+}
+
+.my-visible {
+  display: block; /* Hoặc inline-block tùy theo layout */
+}
+
+.order-item .book-item {
+  display: flex;
+  align-items: center; /* Căn giữa theo chiều dọc */
+  margin-bottom: 1rem;
+}
+
+.order-item .book-item img {
+  flex-shrink: 0; /* Đảm bảo hình ảnh không co lại */
+  width: 100px;
+  height: 100px;
+  border-radius: 8px;
+  object-fit: cover;
+}
+
+.order-item .book-info {
+  margin-left: 16px;
+  flex-grow: 1; /* Đẩy thông tin chiếm không gian còn lại */
+}
+
+.order-item .book-info h4 {
+  font-size: 1rem;
+  font-weight: bold;
+  margin-bottom: 4px;
+}
+
+.order-item .book-info p {
+  font-size: 1rem;
+  color: #333;
+}
+
+.status-container {
+  border-bottom: 2px solid #666666 !important; /* Dùng !important để đảm bảo nó được áp dụng */
+  padding-bottom: 20px;
 }
 
 .image-zoom {
