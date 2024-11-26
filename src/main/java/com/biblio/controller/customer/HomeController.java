@@ -59,7 +59,6 @@ public class HomeController extends HttpServlet {
 
         request.setAttribute("account", account);
 
-
         request.getRequestDispatcher("/views/customer/home.jsp").forward(request, response);
     }
 

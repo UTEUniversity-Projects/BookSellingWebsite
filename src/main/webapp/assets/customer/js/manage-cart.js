@@ -65,6 +65,8 @@ $(document).ready(function () {
     // Load
     $('#view-cart-btn').on('click', function () {
 
+
+
         $.ajax({
             url: `${contextPath}/api/customer/load-cart-sidebar`,
             type: 'GET',
@@ -112,7 +114,6 @@ $(document).ready(function () {
                 } else {
                     cartItemsContainer.html('<p class="text-center">Giỏ hàng của bạn đang trống.</p>');
                 }
-                cartTotalBookPrice.text(response.cart.totalBookPrice);
                 formatCurrency();
             },
             error: function (xhr, status, error) {

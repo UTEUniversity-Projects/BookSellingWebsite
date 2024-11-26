@@ -4,7 +4,7 @@
         <div class="row">
             <div class="col-lg-12">
                 <div class="top-header">
-                    <a href="home" class="cr-logo">
+                    <a href="${pageContext.request.contextPath}/home" class="cr-logo">
                         <img src="${pageContext.request.contextPath}/assets/customer/img/logo/biblio.png" alt="logo"
                              class="logo"/>
                     </a>
