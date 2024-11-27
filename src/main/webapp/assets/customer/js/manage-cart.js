@@ -1,15 +1,6 @@
 // Remove cart item
 import { debounce } from '../../commons/js/debounce.js';
 
-document.querySelectorAll('.remove-item').forEach((button) => {
-    button.addEventListener('click', function () {
-    const row = this.closest('tr');
-    if (row) {
-        row.remove();
-    }
-    });
-});
-
 // Click vao nut them gio hang
 // Lay id cua book template
 // Truyen len API
@@ -64,15 +55,11 @@ $(document).ready(function () {
     });
     // Load
     $('#view-cart-btn').on('click', function () {
-
-
-
         $.ajax({
             url: `${contextPath}/api/customer/load-cart-sidebar`,
             type: 'GET',
             success: function (response) {
                 const cartItemsContainer = $('.crcart-pro-items');
-                const cartTotalBookPrice = $('.cart-sub-total .total-book-price');
 
                 cartItemsContainer.empty();
 
@@ -124,7 +111,8 @@ $(document).ready(function () {
     // Update
     $(".quantity").on("change", debounce(function () {
         const newQuantity = $(this).val();
-        const bookId = $(this).data("book-id");
+        const cartItemId = $(this).closest('tr').data("cart-item-id");
+        console.log(cartItemId);
         console.log(newQuantity);
 
         $.ajax({
@@ -132,7 +120,7 @@ $(document).ready(function () {
             type: "POST",
             contentType: "application/json",
             data: JSON.stringify({
-                bookTemplateId: bookId,
+                cartItemId: cartItemId,
                 quantity: newQuantity
             }),
             success: function (response) {
@@ -142,6 +130,26 @@ $(document).ready(function () {
             }
         })
     },1000));
+    // Delete
+    $(".remove-item").on("click", function (){
+        const cartItemId = $(this).closest('tr').data("cart-item-id");
+        const item = this.closest('tr');
+        console.log(cartItemId);
+       $.ajax({
+           url: `${contextPath}/api/customer/delete-cart-item`,
+           type: "POST",
+           contentType: "application/json",
+           data: JSON.stringify({
+               cartItemId: cartItemId
+           }),
+           success: function (response) {
+               item.remove();
+           },
+           error: function (xhr, status, error) {
+               console.error("Error: ", xhr.responseText);
+           }
+       })
+    });
 });
 
 function formatCurrency() {

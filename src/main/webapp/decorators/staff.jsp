@@ -77,6 +77,8 @@
     <%@include file="/commons/staff/footer.jsp" %>
 </main>
 
+<script> const contextPath = "<%=request.getContextPath() %>";</script>
+
 <!-- region Vendor Custom JS -->
 <script src="${pageContext.request.contextPath}/assets/staff/js/vendor/jquery-3.6.4.min.js"></script>
 <script src="${pageContext.request.contextPath}/assets/staff/js/vendor/simplebar.min.js"></script>

@@ -3,6 +3,7 @@ package com.biblio.controller.staff;
 import com.biblio.dto.response.BookManagementResponse;
 import com.biblio.service.IBookService;
 import com.biblio.service.IBookTemplateService;
+import com.biblio.service.IPromotionTemplateService;
 
 import javax.inject.Inject;
 import javax.servlet.ServletException;
@@ -19,6 +20,10 @@ import java.util.List;
 public class ProductDashboardController extends HttpServlet {
     @Inject
     IBookTemplateService bookTemplateService;
+
+    @Inject
+    IPromotionTemplateService promotionTemplateService;
+
     @Serial
     private static final long serialVersionUID = 1L;
 

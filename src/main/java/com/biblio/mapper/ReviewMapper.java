@@ -26,6 +26,7 @@ public class ReviewMapper {
                 .responseContent(Optional.ofNullable(review.getResponseReview())
                         .map(ResponseReview::getContent)
                         .orElse(""))
+                .isHidden(review.isHidden())
                 .build();
     }
     public static Review toEntity(ReviewRequest reviewRequest, Customer customer, BookTemplate bookTemplate) {

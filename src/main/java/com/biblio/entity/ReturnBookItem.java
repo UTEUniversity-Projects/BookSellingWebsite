@@ -21,7 +21,7 @@ public class ReturnBookItem {
     @JoinColumn(name = "return_book_id", nullable = false)
     private ReturnBook returnBook;
 
-    @ManyToMany(fetch = FetchType.EAGER)
+    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.MERGE)
     @JoinTable(
             name = "return_item_books",
             joinColumns = @JoinColumn(name = "return_book_item_id"),

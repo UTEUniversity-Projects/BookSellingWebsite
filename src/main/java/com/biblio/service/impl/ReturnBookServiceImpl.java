@@ -2,7 +2,11 @@ package com.biblio.service.impl;
 
 import com.biblio.dao.IReturnBookDAO;
 import com.biblio.dto.response.ReturnBookManagementResponse;
+import com.biblio.entity.Book;
 import com.biblio.entity.ReturnBook;
+import com.biblio.entity.ReturnBookItem;
+import com.biblio.enumeration.EBookMetadataStatus;
+import com.biblio.enumeration.EReasonReturn;
 import com.biblio.mapper.ReturnBookMapper;
 import com.biblio.service.IReturnBookService;
 
@@ -39,7 +43,22 @@ public class ReturnBookServiceImpl implements IReturnBookService {
             throw new IllegalArgumentException("CreatedAt timestamp must be set.");
         }
 
-        // Save the entity using the DAO
         returnBookDAO.save(returnBook);
+    }
+
+    @Override
+    public boolean update(Long returnBookId) {
+        ReturnBook returnBook = returnBookDAO.findById(returnBookId);
+        if (returnBook == null) {
+            return false;
+        }
+        if (returnBook.getReason() != EReasonReturn.NO_NEEDED) {
+            for (ReturnBookItem returnBookItem : returnBook.getReturnBookItems()) {
+                for (Book book : returnBookItem.getBooks()) {
+                    book.getBookMetadata().setStatus(EBookMetadataStatus.BROKEN);
+                }
+            }
+        }
+        return returnBookDAO.update(returnBook) != null;
     }
 }

@@ -48,7 +48,7 @@
                                     </thead>
                                     <tbody>
                                         <c:forEach var="cartItem" items="${cart.cartItems}">
-                                            <tr>
+                                            <tr data-cart-item-id="${cartItem.id}">
                                                 <td class="cr-cart-checkbox">
                                                     <input type="checkbox" class="product-checkbox" />
                                                 </td>
@@ -75,7 +75,6 @@
                                                                 minlength="1"
                                                                 maxlength="20"
                                                                 class="quantity"
-                                                                data-book-id="${cartItem.bookId}"
                                                         />
                                                         <button type="button" class="plus">+</button>
                                                     </div>
