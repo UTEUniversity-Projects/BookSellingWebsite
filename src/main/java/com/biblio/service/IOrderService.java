@@ -16,15 +16,18 @@ public interface IOrderService {
     boolean updateStatus(Long id, EOrderStatus status);
 
     Long countOrderAtTime(LocalDateTime start, LocalDateTime end);
-  
-    List<OrderCustomerResponse> findOrdersByCustomerId(Long customerId);
 
     Double revenueOrderAtTime(LocalDateTime start, LocalDateTime end);
   
     List<RevenueResponse> getListRevenueAtTime(LocalDateTime start, LocalDateTime end);
+
+    List<OrderCustomerResponse> getOrderCustomerByStatus(Long customerId, String status);
+
     List<CountBookSoldResponse> getListCountBookSoldAtTime(LocalDateTime start, LocalDateTime end);
+    List<OrderCustomerResponse> getAllOrderCustomerResponse(Long customerId);
 
     public OrderCustomerResponse findOrderById(Long orderId);
+    OrderCustomerResponse findOrderByIdCustomer(Long orderId);
     void confirmOrder(Long orderId);
     void rejectOrder(Long orderId, String reason);
 
