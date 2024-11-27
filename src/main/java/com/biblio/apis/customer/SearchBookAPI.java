@@ -53,6 +53,7 @@ public class SearchBookAPI extends HttpServlet {
         request.setCharacterEncoding("UTF-8");
         response.setCharacterEncoding("UTF-8");
         response.setContentType("application/json");
+
         SearchBookRequest req = HttpUtil.of(request.getReader()).toModel(SearchBookRequest.class);
 
         List<BookCardResponse> book = bookTemplateService.getBookTemplateByCriteria(req);

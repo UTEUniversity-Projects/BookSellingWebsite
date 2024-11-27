@@ -4,12 +4,12 @@ import { zoomImage } from '../../commons/js/zoom-image.js';
 import { formatCurrencyVND } from '../../commons/js/format-currency.js';
 
 $(document).ready(() => {
+
 	class SearchBook {
 		constructor () {
-
 		}
 
-		async search (title, categoryId, sortBy) {
+		async search (searchData) {
 
 			const generateStars = (reviewRate) => {
 				let stars = '';
@@ -76,7 +76,7 @@ $(document).ready(() => {
 			                        <div class="col-md-5 col-sm-12 col-xs-12">
 			                            <div class="zoom-image-hover modal-border-image" style="position: relative; overflow: hidden;">
 			                                <img src="${contextPath}${book.imageUrl}" alt="product-tab-2" class="product-image">
-			                            <img role="presentation" alt="" src="${contextPath}${book.imageUrl}" class="zoomImg" style="position: absolute; top: 0px; left: 0px; opacity: 0; width: 750px; height: 750px; border: none; max-width: none; max-height: none;"></div>
+			                            <img role="presentation" alt="" src="${contextPath}${book.imageUrl}" class="zoomImg" style="position: absolute; top: 0; left: 0; opacity: 0; width: 750px; height: 750px; border: none; max-width: none; max-height: none;"></div>
 			                        </div>
 			                        <div class="col-md-7 col-sm-12 col-xs-12">
 			                            <div class="cr-size-and-weight-contain">
@@ -130,44 +130,46 @@ $(document).ready(() => {
 				`;
 			};
 
-			const searchData = {
-				title,
-				categoryId,
-				sortBy
-			};
-
-			$('.book-list').html('                    <div class="loading">\n' +
+			$('.book-list').html('                    <div class="loading h-[100vh] flex justify-center items-center">\n' +
 				'                        <div class="mx-auto w-[30px] h-[30px] rounded-full border-[4px] border-solid border-green-400 border-t-transparent animate-spin"></div>\n' +
 				'                    </div>');
 			$('.cr-pagination').hide();
+
+			const handleSuccess = (result) => {
+				const bookList = document.querySelector('.book-list');
+
+				if (result.response.length === 0) {
+					bookList.innerHTML = `<p class="text-xl text-[#269a37] text-center">Không tìm thấy sản phẩm.</p>`;
+					$('.cr-pagination').hide();
+				} else {
+					if (bookList)
+						bookList.innerHTML = result?.response?.map(generateBook).join('');
+
+					$('.modal.fade.quickview-modal').remove();
+					document.querySelector('body').insertAdjacentHTML('beforeend', result.response.map(generateModal).join(''));
+
+					$('.cr-pagination').show();
+					zoomImage('.image-zoom');
+					generatePagination(document.querySelector('.pagination'), Math.floor(result.quantity / searchData.perPage) + (result.quantity % searchData.perPage !== 0 ? 1 : 0), parseInt(getUrlParam('page')));
+				}
+
+				if (searchData.title?.trim() !== '' || searchData.categoryId) {
+					$('.search-result-label').text(` ${searchData.title} (${result.quantity} kết quả)`);
+				} else {
+					$('.search-result-label').text('');
+				}
+			};
+
 			await $.ajax({
 
 				url: `${contextPath}/api/customer/search-book`,
 				type: 'POST',
 				data: JSON.stringify(searchData),
 				contentType: 'application/json',
-				success: function (result) {
-					const bookList = document.querySelector('.book-list');
-					console.log(result);
-					if (result.response.length === 0) {
-						bookList.innerHTML = `<p class="text-xl text-[#269a37] text-center">Không tìm thấy sản phẩm nào với từ khóa <b>${title}</b>.</p>`;
-						$('.cr-pagination').hide();
-					} else {
-						bookList.innerHTML = result.response.map(generateBook).join('');
-
-						$('.modal.fade.quickview-modal').remove();
-						document.querySelector('body').insertAdjacentHTML('beforeend', result.response.map(generateModal).join(''));
-
-						$('.cr-pagination').show();
-						zoomImage('.image-zoom');
-					}
-					if (title?.trim() !== '' || categoryId) {
-						$('.search-result-label').text(` ${title} (${result.quantity} kết quả)`);
-					} else {
-						$('.search-result-label').text('');
-					}
+				success: async function (result) {
+					handleSuccess(result);
 				},
-				error: function (error) {
+				error: function (xhr, error) {
 					console.log(error);
 				},
 				complete: function () {
@@ -180,15 +182,25 @@ $(document).ready(() => {
 	}
 
 	const searchBook = new SearchBook();
-
 	const searchInput = $('.search-input');
 	const urlParams = new URLSearchParams(window.location.search);
-	let title = urlParams.get('title');
-	let categoryId = null;
+
+	const searchData = {
+		title: urlParams.get('title') || '',
+		categoryId: urlParams.get('categoryId') || null,
+		pageNumber: urlParams.get('page') || 1,
+		sortBy: null,
+		minPrice: 0,
+		maxPrice: 10000000000000000,
+		perPage: getItemQuantityPerPage()
+
+	};
+	console.log(searchData);
+
+	searchBook.search(searchData);
 
 	$('.btn-search').click(function (event) {
-		if (!window.location.pathname.includes('/search'))
-			return;
+		if (!window.location.pathname.includes('/search')) return;
 		event.preventDefault();
 
 		if (searchInput.val() === '') {
@@ -198,36 +210,234 @@ $(document).ready(() => {
 			});
 		} else {
 			if (window.location.pathname.includes('/search')) {
-				searchBook.search(searchInput.val());
+				searchBook.search(searchData);
 			}
 		}
 	});
 
 	if (window.location.pathname.includes('/search')) {
+		const urlParams = new URLSearchParams(window.location.search);
+
+		if (urlParams.get('page') == null) {
+			updateUrlParam('page', 1);
+		}
+
 		searchInput.on('input', debounce(function () {
+			const titleValue = searchInput.val();
 
-			const newUrl = `/search?title=${encodeURIComponent(searchInput.val())}`;
-			window.history.pushState({ path: newUrl }, '', newUrl);
+			updateUrlParam('title', titleValue);
+			updateObjectValue(searchData, 'title', titleValue);
+			searchBook.search(searchData);
 
-			const urlParams = new URLSearchParams(window.location.search);
-			title = urlParams.get('title');
-
-			searchBook.search(title, categoryId);
 		}, 500));
 	}
 
-	if (title) {
-		searchInput.val(title);
-		searchBook.search(title, categoryId);
-	}
-
-	$('.category-item').on('click', function() {
+	$('.category-item').on('click', function () {
 		$('.category-item').each(function () {
 			$(this)[0].checked = false;
+			$(this).parent().removeClass('select-none pointer-events-none');
 		});
 		$(this)[0].checked = true;
-		categoryId = $(this).val() != "on" ? $(this).val() : null;
-		console.log(categoryId);
-		searchBook.search(title, categoryId)
+		$(this).parent().addClass('select-none pointer-events-none');
+		const categoryId = $(this).val() !== 'on' ? $(this).val() : null;
+		updateUrlParam('categoryId', categoryId);
+		updateUrlParam('page', 1);
+		updateObjectValue(searchData, 'categoryId', categoryId);
+
+		if (categoryId) {
+			updateUrlParam('categoryId', categoryId);
+		} else {
+			const urlParams = new URLSearchParams(window.location.search);
+			urlParams.delete('categoryId');
+			const newUrl = `${window.location.pathname}?${urlParams.toString()}`;
+			window.history.pushState({ path: newUrl }, '', newUrl);
+		}
+		searchBook.search(searchData);
+
 	});
+
+	setValueFromParameter();
+
+	function setValueFromParameter () {
+
+		if (getUrlParam('title')) {
+			searchInput.val(getUrlParam('title'));
+		}
+
+		if (getUrlParam('categoryId')) {
+			$('.category-item').each(function () {
+				$(this)[0].checked = $(this).val() === getUrlParam('categoryId');
+			});
+		}
+
+	}
+
+	function getUrlParam (param) {
+		const urlParams = new URLSearchParams(window.location.search);
+		return urlParams.get(param);
+	}
+
+	function updateUrlParam (param, value) {
+		const urlParams = new URLSearchParams(window.location.search);
+		urlParams.set(param, value);
+		const newUrl = `${window.location.pathname}?${urlParams.toString()}`;
+		window.history.pushState({ path: newUrl }, '', newUrl);
+	}
+
+	function updateObjectValue (obj, key, value) {
+		if (obj && typeof obj === 'object' && key) {
+			obj[key] = value;
+		}
+	}
+
+	function generatePagination (element, totalPages, page) {
+
+		if (element) {
+			while (element.firstChild) {
+				element.removeChild(element.firstChild);
+			}
+		}
+
+		let liTag = '';
+		let active;
+		let beforePage = page - 2;
+		let afterPage = page + 2;
+
+		// Previous button
+		if (page > 1) {
+			liTag += `<li class="btn prev"><span><i class="fas fa-angle-left"></i></span></li>`;
+		}
+
+		// First page and dots before the current range
+		if (page > 3) {
+			liTag += `<li class="first numb"><span>1</span></li>`;
+			if (page > 3) {
+				liTag += `<li class="dots"><span>...</span></li>`;
+			}
+		}
+
+		// Page number buttons
+		for (let plength = Math.max(1, beforePage); plength <= Math.min(totalPages, afterPage); plength++) {
+			active = (page === plength) ? 'active select-none pointer-events-none' : '';
+			liTag += `<li class="numb ${active}" data-page="${plength}"><span>${plength}</span></li>`;
+		}
+
+		// Dots and last page after the current range
+		if (page < totalPages - 2) {
+			if (page < totalPages - 3) {
+				liTag += `<li class="dots"><span>...</span></li>`;
+			}
+			liTag += `<li class="last numb" data-page="${totalPages}"><span>${totalPages}</span></li>`;
+		}
+
+		// Next button
+		if (page < totalPages) {
+			liTag += `<li class="btn next"><span><i class="fas fa-angle-right"></i></span></li>`;
+		}
+
+		element.innerHTML = liTag;
+
+		// Attach events to pagination buttons
+		attachPaginationEvents(element, totalPages, page);
+
+		return liTag;
+	}
+
+	function attachPaginationEvents (element, totalPages, currentPage) {
+		const allButtons = element.querySelectorAll('.pagination li');
+		allButtons.forEach((btn) => {
+			if (btn.classList.contains('prev')) {
+				btn.addEventListener('click', () => updatePageInUrl(currentPage - 1, totalPages));
+			} else if (btn.classList.contains('next')) {
+				btn.addEventListener('click', () => updatePageInUrl(currentPage + 1, totalPages));
+			} else if (btn.classList.contains('first')) {
+				btn.addEventListener('click', () => updatePageInUrl(1, totalPages));
+			} else if (btn.classList.contains('last')) {
+				btn.addEventListener('click', () => updatePageInUrl(totalPages, totalPages));
+			} else if (btn.classList.contains('numb')) {
+				const pageNumber = parseInt(btn.textContent, 10);
+				btn.addEventListener('click', () => updatePageInUrl(pageNumber, totalPages));
+			}
+		});
+	}
+
+	function updatePageInUrl (page, totalPages) {
+		const urlParams = new URLSearchParams(window.location.search);
+		urlParams.set('page', page);
+		updateObjectValue(searchData, 'pageNumber', page);
+		const newUrl = `${window.location.pathname}?${urlParams.toString()}`;
+		window.history.pushState({ path: newUrl }, '', newUrl);
+
+		const paginationElement = document.querySelector('.pagination');
+		generatePagination(paginationElement, totalPages, page);
+		searchBook.search(searchData);
+	}
+
+	function scrollToTop () {
+		window.scrollTo({
+			top: 0,
+			behavior: 'smooth'
+		});
+	}
+
+	function getItemQuantityPerPage () {
+		const width = window.innerWidth;
+
+		if (width >= 992 && width < 1200) {
+			return 6;
+		} else {
+			return 8;
+		}
+	}
+
+	const onInput = (parent, e) => {
+		const slides = parent.querySelectorAll('input');
+		const min = parseFloat(slides[0].min);
+		const max = parseFloat(slides[0].max);
+
+		let slide1 = parseFloat(slides[0].value);
+		let slide2 = parseFloat(slides[1].value);
+
+		const percentageMin = (slide1 / (max - min)) * 100;
+		const percentageMax = (slide2 / (max - min)) * 100;
+
+		parent.style.setProperty('--range-slider-value-low', percentageMin);
+		parent.style.setProperty('--range-slider-value-high', percentageMax);
+
+		if (slide1 > slide2) {
+			const tmp = slide2;
+			slide2 = slide1;
+			slide1 = tmp;
+
+			if (e?.currentTarget === slides[0]) {
+				slides[0].insertAdjacentElement('beforebegin', slides[1]);
+			} else {
+				slides[1].insertAdjacentElement('afterend', slides[0]);
+			}
+		}
+
+		searchData.minPrice = slide1;
+		searchData.maxPrice = slide2;
+
+		console.log(searchData);
+		searchBook.search(searchData);
+
+		parent.querySelector('.range-slider__display').setAttribute('data-low', slide1);
+		parent.querySelector('.range-slider__display').setAttribute('data-high', slide2);
+		parent.querySelector('.min-price').innerText = slide1;
+		parent.querySelector('.max-price').innerText = slide2;
+	};
+
+	document.querySelectorAll('.range-slider')
+		.forEach(range => range.querySelectorAll('input')
+			.forEach((input) => {
+				if (input.type === 'range') {
+					onInput(range);
+					input.oninput = debounce((e) => onInput(range, e), 500);
+				}
+			}));
+
+
 });
+
+

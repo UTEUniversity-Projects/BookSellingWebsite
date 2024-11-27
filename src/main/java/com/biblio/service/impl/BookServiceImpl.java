@@ -39,4 +39,15 @@ public class BookServiceImpl implements IBookService {
     public void deleteBook(Long id) {
 
     }
+
+    @Override
+    public Long getMinBookPrice() {
+        return bookDAO.findMinBookPrice();
+    }
+
+    @Override
+    public Long getMaxBookPrice() {
+        return bookDAO.findMaxBookPrice();
+    }
+
 }
