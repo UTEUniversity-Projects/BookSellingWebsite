@@ -2894,14 +2894,14 @@ ul.navbar-nav .dropdown:hover .dropdown-menu {
   width: 100%;
   padding-right: 30px;
   text-decoration: none;
-  color: #777;
+  color: #2b2b2d;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
   display: block;
   font-size: 15px;
   line-height: 18px;
-  font-weight: 400;
+  font-weight: 500;
 }
 .cr-cart-view .cr-cart-inner .cr-cart-top ul.crcart-pro-items li .cr-pro-content .cr-cart-qty {
   margin-top: 5px;
@@ -2914,10 +2914,15 @@ ul.navbar-nav .dropdown:hover .dropdown-menu {
   font-size: 14px;
   display: block;
 }
-.cr-cart-view .cr-cart-inner .cr-cart-top ul.crcart-pro-items li .cr-pro-content .cart-price span {
-  color: #777;
+.cr-cart-view .cr-cart-inner .cr-cart-top ul.crcart-pro-items li .cr-pro-content .cart-price .new-price {
+  color: #64b496;
   font-weight: 700;
-  font-size: 16px;
+}
+.cr-cart-view .cr-cart-inner .cr-cart-top ul.crcart-pro-items li .cr-pro-content .cart-price .old-price {
+  color: #777;
+  margin-left: 5px;
+  font-size: 13px;
+  text-decoration: line-through;
 }
 .cr-cart-view .cr-cart-inner .cr-cart-top ul.crcart-pro-items li .cr-pro-content .remove {
   padding: 0 9px;
@@ -6017,6 +6022,16 @@ iframe {
   font-size: 15px;
   font-weight: 500;
   text-align: center;
+}
+.cr-table-content table tbody tr .cr-cart-price .new-price {
+  color: #64b496;
+  font-weight: 700;
+}
+.cr-table-content table tbody tr .cr-cart-price .old-price {
+  color: #777;
+  margin-left: 5px;
+  font-size: 13px;
+  text-decoration: line-through;
 }
 .cr-table-content table tbody tr .cr-cart-subtotal {
   color: #555;
@@ -9652,9 +9667,140 @@ p {
   color: #333;
 }
 
-.status-container {
-  border-bottom: 2px solid #666666 !important; /* Dùng !important để đảm bảo nó được áp dụng */
+.bottom-container {
+  border-bottom: 1px solid #666666 !important; /* Dùng !important để đảm bảo nó được áp dụng */
   padding-bottom: 20px;
+}
+
+.top-container {
+  border-top: 1px solid #30cb83 !important; /* Dùng !important để đảm bảo nó được áp dụng */
+  padding-top: 20px;
+}
+
+.image-zoom {
+  width: 100%;
+  height: 100%;
+  border: 1px solid #eee;
+  margin: 0 auto;
+  position: relative;
+}
+
+.image-zoom img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 0 0;
+}
+
+.image-zoom::after {
+  display: var(--display);
+  content: "";
+  width: 100%;
+  height: 100%;
+  background-image: var(--url);
+  background-size: 200%;
+  background-position: var(--zoom-x) var(--zoom-y);
+  position: absolute;
+  top: 0;
+  left: 0;
+  cursor: crosshair;
+}
+
+/* Bộ lọc trạng thái */
+#order-filters .tag {
+  font-size: 16px;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+#order-filters .tag:hover {
+  color: #26aa99;
+}
+
+/* Đơn hàng */
+.order-item {
+  background: #ffffff;
+  border: 1px solid #e5e5e5;
+  border-radius: 8px;
+  padding: 16px;
+  margin-bottom: 20px;
+}
+
+.order-item img {
+  border-radius: 4px;
+}
+
+.my-hidden {
+  display: none;
+}
+
+.my-visible {
+  display: block; /* Hoặc inline-block tùy theo layout */
+}
+
+.order-item .book-item {
+  display: flex;
+  align-items: center; /* Căn giữa theo chiều dọc */
+  margin-bottom: 1rem;
+}
+
+.order-item .book-item img {
+  flex-shrink: 0; /* Đảm bảo hình ảnh không co lại */
+  width: 100px;
+  height: 100px;
+  border-radius: 8px;
+  object-fit: cover;
+}
+
+.order-item .book-info {
+  margin-left: 16px;
+  flex-grow: 1; /* Đẩy thông tin chiếm không gian còn lại */
+}
+
+.order-item .book-info h4 {
+  font-size: 1rem;
+  font-weight: bold;
+  margin-bottom: 4px;
+}
+
+.order-item .book-info p {
+  font-size: 1rem;
+  color: #333;
+}
+
+.bottom-container {
+  border-bottom: 1px solid #666666 !important; /* Dùng !important để đảm bảo nó được áp dụng */
+  padding-bottom: 20px;
+}
+
+.top-container {
+  border-top: 1px solid #30cb83 !important; /* Dùng !important để đảm bảo nó được áp dụng */
+  padding-top: 20px;
+}
+
+.order-summary {
+  display: flex;
+  flex-direction: column; /* Xếp các phần tử theo chiều dọc */
+  gap: 10px; /* Khoảng cách giữa các dòng */
+}
+
+.summary-item {
+  display: flex; /* Sử dụng flexbox để xếp nhãn và số tiền trong mỗi dòng */
+  justify-content: space-between; /* Căn các phần tử ra 2 bên */
+  align-items: center; /* Căn các phần tử theo chiều dọc */
+  margin-left: 500px; /* Thêm khoảng cách bên trái cho label */
+}
+
+.label {
+  font-weight: bold;
+  text-align: left;
+  flex: 1; /* Mở rộng phần tử label để chiếm không gian bên trái */
+}
+
+.amount {
+  font-weight: normal;
+  text-align: right;
+  flex: 1; /* Mở rộng phần tử amount để chiếm không gian bên phải */
 }
 
 /*# sourceMappingURL=style.css.map */

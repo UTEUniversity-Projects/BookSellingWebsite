@@ -7,5 +7,4 @@ import com.biblio.dto.response.CartResponse;
 public interface ICartService {
     CartResponse getCartResponseByAccountId(Long accountId);
     void addToCart(AddToCartRequest addToCartRequest);
-    void updateCart(UpdateCartItemRequest updateCartItemRequest);
 }

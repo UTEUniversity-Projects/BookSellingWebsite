@@ -352,7 +352,7 @@
                                     <button type="button" class="plus">+</button>
                                 </div>
                             </div>
-                            <a href="javascript:void(0)" class="remove">×</a>
+                            <a href="javascript:void(0)" class="remove-item">×</a>
                         </div>
                     </li>
                 </c:forEach>

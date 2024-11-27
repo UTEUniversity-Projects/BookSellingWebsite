@@ -7,7 +7,6 @@ import lombok.*;
 @Getter
 @Setter
 @Builder
-public class UpdateCartItemRequest {
+public class DeleteCartItemRequest {
     private Long cartItemId;
-    private Long quantity;
 }
