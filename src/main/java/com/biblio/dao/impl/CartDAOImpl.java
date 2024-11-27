@@ -12,11 +12,15 @@ public class CartDAOImpl extends GenericDAOImpl<Cart> implements ICartDAO {
     }
 
     @Override
+    public Cart addCart(Cart cart) {
+        return super.save(cart);
+    }
+    @Override
     public Cart findByAccountId(Long accountId) {
-        String jpql = "SELECT DISTINCT cart FROM Cart cart "
+        String jpql = "SELECT cart FROM Cart cart "
+                + "LEFT JOIN FETCH cart.cartItems items "
                 + "JOIN FETCH cart.customer customer "
                 + "JOIN FETCH customer.account account "
-                + "JOIN FETCH cart.cartItems items "
                 + "LEFT JOIN FETCH items.bookTemplate bookTemplate "
                 + "LEFT JOIN FETCH bookTemplate.books books "
                 + "LEFT JOIN FETCH bookTemplate.mediaFiles mediaFiles "

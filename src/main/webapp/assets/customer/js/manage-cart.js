@@ -1,6 +1,5 @@
-// Remove cart item
 import { debounce } from '../../commons/js/debounce.js';
-
+import { toast } from "./toast.js";
 // Click vao nut them gio hang
 // Lay id cua book template
 // Truyen len API
@@ -46,7 +45,12 @@ $(document).ready(function () {
                 quantity: quantity
             }),
             success: function (response) {
-                console.log(response);
+                toast({
+                    title: "Thông báo",
+                    message: `Thêm ${quantity} sản phẩm thành công !`,
+                    type: "success",
+                    duration: 1000
+                });
             },
             error: function (xhr, status, error) {
                 console.error("Error: ", xhr.responseText);
@@ -60,11 +64,11 @@ $(document).ready(function () {
             type: 'GET',
             success: function (response) {
                 const cartItemsContainer = $('.crcart-pro-items');
+                const viewCartBtn = $('.cr-cart-bottom');
 
                 cartItemsContainer.empty();
 
                 if (response.cart && response.cart.cartItems && response.cart.cartItems.length > 0) {
-
                     response.cart.cartItems.forEach(cartItem => {
                         const itemHTML = `
                          <li>
@@ -92,14 +96,22 @@ $(document).ready(function () {
                                          <button type="button" class="plus">+</button>
                                      </div>
                                  </div>
-                                 <a href="javascript:void(0)" class="remove">×</a>
+                                 <a href="javascript:void(0)" class="remove-item">×</a>
                              </div>
                          </li>
                      `;
                         cartItemsContainer.append(itemHTML);
                     });
+                    viewCartBtn.show();
                 } else {
-                    cartItemsContainer.html('<p class="text-center">Giỏ hàng của bạn đang trống.</p>');
+                    cartItemsContainer.append(`<div class="message-container">
+                                    <img src="https://cdn-icons-png.flaticon.com/512/2762/2762885.png" alt="">
+                                    <p>Giỏ hàng của bạn đang trống</p>
+                                    <a href="home">
+                                        <button class="cr-button">Mua ngay</button>
+                                    </a>
+                                </div>`);
+                    viewCartBtn.hide();
                 }
                 formatCurrency();
             },
@@ -124,6 +136,7 @@ $(document).ready(function () {
                 quantity: newQuantity
             }),
             success: function (response) {
+
             },
             error: function (xhr, status, error) {
                 console.error("Error: ", xhr.responseText);
@@ -134,6 +147,7 @@ $(document).ready(function () {
     $(".remove-item").on("click", function (){
         const cartItemId = $(this).closest('tr').data("cart-item-id");
         const item = this.closest('tr');
+        const container = $(this).closest(".row")
         console.log(cartItemId);
        $.ajax({
            url: `${contextPath}/api/customer/delete-cart-item`,
@@ -143,7 +157,25 @@ $(document).ready(function () {
                cartItemId: cartItemId
            }),
            success: function (response) {
-               item.remove();
+               if (item.closest("tbody").children.length === 1) {
+                   container.empty();
+                   container.append('<div class="message-container">\n' +
+                       '                                    <img src="https://cdn-icons-png.flaticon.com/512/2762/2762885.png" alt="">\n' +
+                       '                                    <p>Giỏ hàng của bạn đang trống</p>\n' +
+                       '                                    <a href="home">\n' +
+                       '                                        <button class="cr-button">Mua ngay</button>\n' +
+                       '                                    </a>\n' +
+                       '                                </div>')
+               }
+               else {
+                   item.remove();
+               }
+               toast({
+                   title: "Thông báo",
+                   message: "Xoá sản phẩm thành công !",
+                   type: "success",
+                   duration: 1000
+               });
            },
            error: function (xhr, status, error) {
                console.error("Error: ", xhr.responseText);

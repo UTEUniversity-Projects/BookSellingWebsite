@@ -1,57 +1,56 @@
 import { toast } from "./toast.js";
 $(document).ready(() => {
 
-    class VerifyEmail {
+    class VerifyOTP {
         constructor(props) {
 
         }
 
-        verifyEmail() {
-
-            $(".btn-verify").click(function (e) {
+        verifyOTP() {
+            $(".btn-verify-otp").click(function (e) {
                 e.preventDefault();
 
-                const email = $("input[type='email']");
-                const emailValue = email.val().trim();
+                const otp = $("#otp");
+                const otpCode = otp.val().trim();
 
-                email.next(".error-message").remove();
+                otp.next(".error-message").remove();
 
-                if (emailValue.length === 0) {
-                    email.parent().append("<div class=\"error-message text-[16px] text-red-500\">Trường này không được để trống</div>");
+                if (otpCode.length === 0) {
+                    otp.parent().append(
+                        "<div class=\"error-message text-[16px] text-red-500\">Trường này không được để trống</div>"
+                    );
                     return;
                 }
 
-                const emailRegex = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/;
-                if (!emailRegex.test(emailValue)) {
-                    email.parent().append("<div class=\"error-message text-[16px] text-red-500\">Email không đúng định dạng</div>");
+                if (!/^\d{6}$/.test(otpCode)) {
+                    otp.parent().append(
+                        "<div class=\"error-message text-[16px] text-red-500\">Mã OTP phải là 6 chữ số</div>"
+                    );
                     return;
                 }
 
                 $.ajax({
-                    url: `${contextPath}/verify-email`,
+                    url: `${contextPath}/verify-otp`,
                     type: "POST",
                     contentType: "application/json",
-                    data: JSON.stringify({
-                        email: emailValue,
-                    }),
+                    data: JSON.stringify({ otpCode: otpCode }),
                     success: function (response) {
                         if (response.code === 200) {
                             toast({
                                 title: "Thông báo",
                                 message: response.message,
                                 type: "success",
-                                duration: 1000
+                                duration: 1000,
                             });
                             setTimeout(() => {
-                                window.location.href = `${contextPath}/verify-otp`;
+                                window.location.href = `${contextPath}/register`;
                             }, 1000);
-                        }
-                        else {
+                        } else {
                             toast({
                                 title: "Thông báo",
                                 message: response.message,
                                 type: "error",
-                                duration: 1000
+                                duration: 1000,
                             });
                         }
                     },
@@ -59,13 +58,12 @@ $(document).ready(() => {
                         console.error("Error: ", xhr.responseText);
                     }
                 });
-
             });
         }
 
     }
 
-    const verifyEmail = new VerifyEmail();
-    verifyEmail.verifyEmail();
+    const verifyOTP = new VerifyOTP();
+    verifyOTP.verifyOTP();
 
 });

@@ -377,11 +377,9 @@
                         <%--                <a href="${pageContext.request.contextPath}checkout" class="cr-button">Thanh toán</a>--%>
                 </div>
                 </c:otherwise>
-                </c:choose>
+            </c:choose>
             </div>
-
         </div>
-
     </div>
 </div>
 
