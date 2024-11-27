@@ -58,7 +58,7 @@ public class BookTemplateServiceImpl implements IBookTemplateService {
     @Override
     public List<BookCardResponse> getBookTemplateByCriteria(SearchBookRequest request) {
 
-        List<BookTemplate> bookTemplates = bookTemplateDAO.findByCriteria(request.getTitle().trim(), request.getCategoryId(), request.getSortBy(), 1);
+        List<BookTemplate> bookTemplates = bookTemplateDAO.findByCriteria(request);
         List<BookCardResponse> bookCardResponseList = new ArrayList<>();
         for (BookTemplate bt : bookTemplates) {
             bookCardResponseList.add(BookTemplateMapper.toBookCardResponse(bt));
@@ -86,8 +86,7 @@ public class BookTemplateServiceImpl implements IBookTemplateService {
 
     @Override
     public Long getBookTemplateQuantityByCriteria(SearchBookRequest request) {
-        return bookTemplateDAO.countByCriteria(request.getTitle(), request.getCategoryId(), request.getSortBy());
+        return bookTemplateDAO.countByCriteria(request);
     }
-
 
 }

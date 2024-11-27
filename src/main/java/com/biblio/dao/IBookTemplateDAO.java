@@ -1,5 +1,6 @@
 package com.biblio.dao;
 
+import com.biblio.dto.request.SearchBookRequest;
 import com.biblio.entity.BookTemplate;
 
 import java.util.List;
@@ -16,9 +17,9 @@ public interface IBookTemplateDAO {
 
     BookTemplate findOneForDetails(Long id);
 
-    List<BookTemplate> findByCriteria(String title, Long categoryId, String sortBy, int pageNumber);
+    List<BookTemplate> findByCriteria(SearchBookRequest request);
 
-    Long countByCriteria(String title, Long categoryId, String sortBy);
+    Long countByCriteria(SearchBookRequest request);
 
     Long countSoldById(Long id);
 

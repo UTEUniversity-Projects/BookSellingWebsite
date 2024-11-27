@@ -19,4 +19,8 @@ public interface IBookDAO {
 
     void deleteBook(Long id);
 
+    Long findMinBookPrice();
+
+    Long findMaxBookPrice();
+
 }
