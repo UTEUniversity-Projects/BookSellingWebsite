@@ -54,6 +54,23 @@ public class BookDAOImpl extends GenericDAOImpl<Book> implements IBookDAO {
         super.delete(id);
     }
 
+    @Override
+    public Long findMinBookPrice() {
+        String jpql = "SELECT b FROM Book b WHERE b.sellingPrice = (SELECT MIN(b2.sellingPrice) FROM Book b2)";
+        Book book = super.findSingleByJPQL(jpql);
+
+
+        return (long) book.getSellingPrice();
+    }
+
+    @Override
+    public Long findMaxBookPrice() {
+        String jpql = "SELECT b FROM Book b WHERE b.sellingPrice = (SELECT MAX(b2.sellingPrice) FROM Book b2)";
+
+        Book book = super.findSingleByJPQL(jpql);
+
+        return (long) book.getSellingPrice();
+    }
 
 
     public static void main(String[] args) {

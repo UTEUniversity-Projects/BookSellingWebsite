@@ -232,6 +232,18 @@ p {
   }
 }
 
+.discount-percent {
+  margin-left: 8px;
+  padding: 2px 4px;
+  border-radius: 4px;
+  -moz-border-radius: 4px;
+  -webkit-border-radius: 4px;
+  background-color: $main-fifth-color;
+  color: #fff;
+  font-size: 1em;
+  font-weight: 600;
+}
+
 .cr-product-info {
   margin-top: 15px;
   padding-top: 15px;
@@ -868,6 +880,10 @@ p {
             .ri-reply-line {
               color: #4a90e2;
             }
+
+            .ri-eye-line {
+              color: $main-fifth-color;
+            }
           }
 
           .name {
@@ -883,6 +899,18 @@ p {
               color: #ffcc00;
               font-size: 14px;
             }
+          }
+
+          .hidden-review-label {
+            margin: 2px 2px 2px 30px;
+            padding: 5px 10px;
+            font-family: $font-family-text;
+            font-size: 12px;
+            line-height: 1;
+            background-color: #ff6b6b;
+            color: #fff;
+            border-radius: 5px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
           }
         }
 

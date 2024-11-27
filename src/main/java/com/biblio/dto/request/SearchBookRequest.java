@@ -11,4 +11,8 @@ public class SearchBookRequest {
     String title;
     Long categoryId;
     String sortBy;
+    int perPage;
+    int pageNumber = 1;
+    long minPrice;
+    long maxPrice;
 }
