@@ -47,7 +47,7 @@
                                             <li
                                                     class="hover:bg-gray-100 hover:text-black transition-all duration-200"
                                             >
-                                                <a class="block px-5 py-2" href="register"
+                                                <a class="block px-5 py-2" href="verify-email"
                                                 >Đăng ký</a
                                                 >
                                             </li>
