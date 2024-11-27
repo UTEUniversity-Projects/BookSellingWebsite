@@ -33,8 +33,6 @@ public interface IOrderService {
 
     List<CountOrderOfCustomerResponse> getCountOrderOfCustomerAtTime(LocalDateTime start, LocalDateTime end);
 
-    OrderCustomerResponse findOrderById(Long orderId);
-
     @Transactional
     void confirmOrder(Long orderId);
 
