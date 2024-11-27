@@ -22,5 +22,6 @@ public interface IOrderDAO {
 
     OrderCustomerResponse findById(Long id);
     void updateOrder(Order order);
+    boolean cancelOrder(Long id);
 
 }

@@ -102,6 +102,26 @@ public class OrderDAOImpl extends GenericDAOImpl<Order> implements IOrderDAO {
     }
 
     @Override
+    public boolean cancelOrder(Long id) {
+        Order order = findOne(id);
+        if (order == null) {
+            return false;
+        }
+        if (!order.getStatus().equals(EOrderStatus.WAITING_CONFIRMATION)) {
+            return false;
+        }
+        order.setStatus(EOrderStatus.CANCELED);
+
+        for (OrderItem orderItem : order.getOrderItems()) {
+            for (Book book : orderItem.getBooks()) {
+                book.getBookMetadata().setStatus(EBookMetadataStatus.IN_STOCK);
+            }
+        }
+        super.update(order);
+        return true;
+    }
+
+    @Override
     public OrderCustomerResponse findById(Long id) {
         // Query to fetch the order details
         String query = "SELECT o FROM Order o LEFT JOIN FETCH o.customer c LEFT JOIN FETCH o.orderItems oi LEFT JOIN FETCH o.shipping s WHERE o.id = :id";
@@ -142,8 +162,10 @@ public class OrderDAOImpl extends GenericDAOImpl<Order> implements IOrderDAO {
         entityManager.getTransaction().commit();
     }
 
+
     public static void main(String[] args) {
         OrderDAOImpl dao = new OrderDAOImpl();
+//        dao.cancelOrder(3L);
 //        for (Order order : orders) {
 //            System.out.println(order.getId());
 //        }

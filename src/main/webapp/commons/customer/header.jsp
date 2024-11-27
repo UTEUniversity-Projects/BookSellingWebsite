@@ -74,6 +74,13 @@
                                                 >Đăng xuất</a
                                                 >
                                             </li>
+                                            <li
+                                                    class="hover:bg-gray-100 hover:text-black transition-all duration-200"
+                                            >
+                                                <a class="block px-5 py-2" href="contact-us"
+                                                >Liên hệ</a
+                                                >
+                                            </li>
                                         </c:otherwise>
                                     </c:choose>
                                 </ul>

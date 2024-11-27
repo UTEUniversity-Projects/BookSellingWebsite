@@ -1,6 +1,9 @@
 package com.biblio.controller.customer;
 
 import com.biblio.dto.request.SupportRequest;
+import com.biblio.dto.response.AccountGetResponse;
+import com.biblio.dto.response.CustomerDetailResponse;
+import com.biblio.service.ICustomerService;
 import com.biblio.service.ISupportService;
 
 import javax.inject.Inject;
@@ -22,6 +25,8 @@ public class ContactUsController extends HttpServlet {
     private static final long serialVersionUID = 1L;
     @Inject
     private ISupportService supportService;
+    @Inject
+    private ICustomerService customerService;
     /**
      * @see HttpServlet#HttpServlet()
      */
@@ -44,9 +49,11 @@ public class ContactUsController extends HttpServlet {
      */
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         // TODO Auto-generated method stub
-        HttpSession session = request.getSession(true); // true sẽ tạo session nếu không tồn tại
-        Long customerId = 1L; // Giả lập ID khách hàng, trong thực tế có thể lấy từ session thực tế
-
+        HttpSession session = request.getSession(false); // false means do not create a new session if it doesn't exist
+        AccountGetResponse account = (AccountGetResponse) session.getAttribute("account");
+        CustomerDetailResponse customer = customerService.getCustomerDetailByUsername(account.getUsername());
+        // Lấy customerId từ account
+        Long customerId = customer.getId();
         // Đặt thông tin vào session giả
         session.setAttribute("customerId", customerId);
 

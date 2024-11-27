@@ -78,7 +78,7 @@
                     <button class="px-4 py-2 bg-[#ff9800] rounded text-white hover:bg-[#e58900] transition" onclick="alert('Chức năng đang được phát triển!'); return false;">Hoàn trả</button>
                     <button class="px-4 py-2 bg-[#ffc107] rounded text-white hover:bg-[#e6ac00]" onclick="alert('Chức năng đang được phát triển!'); return false;">Đánh giá</button>
                     <% } else if ("WAITING_CONFIRMATION".equals(status)) { %>
-                    <button class="px-4 py-2 bg-[#e91e4c] rounded text-white hover:bg-[#d0173f]" onclick="alert('Chức năng đang được phát triển!'); return false;">Hủy đơn hàng</button>
+                    <button class="px-4 py-2 bg-[#e91e4c] rounded text-white hover:bg-[#d0173f]" onclick="cancelOrder('<%= orderId %>'); return false;">Hủy đơn hàng</button>
                     <% } else if ("CANCELED".equals(status)) { %>
                     <button class="px-4 py-2 bg-[#26aa99] rounded text-white hover:bg-[#158d7d]" onclick="alert('Chức năng đang được phát triển!'); return false;">Mua lại đơn hàng</button>
                     <% } %>
@@ -95,3 +95,5 @@
         </div>
     </div>
 </div>
+<script src="${pageContext.request.contextPath}/assets/customer/js/cancel-order.js"></script>
+
