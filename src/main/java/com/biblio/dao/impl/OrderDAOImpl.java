@@ -127,6 +127,7 @@ public class OrderDAOImpl extends GenericDAOImpl<Order> implements IOrderDAO {
     }
 
     @Override
+
     public OrderCustomerResponse findById(Long id) {
         // Query to fetch the order details
         String query = "SELECT o FROM Order o LEFT JOIN FETCH o.customer c LEFT JOIN FETCH o.orderItems oi LEFT JOIN FETCH o.shipping s WHERE o.id = :id";
@@ -159,6 +160,11 @@ public class OrderDAOImpl extends GenericDAOImpl<Order> implements IOrderDAO {
     }
 
     @Override
+
+    public Order update(Order order) {
+        return super.update(order);
+    }
+
     public Order findByIdCustomer(Long id) {
         // Query to fetch the order details
         String query = "SELECT o FROM Order o LEFT JOIN FETCH o.customer c LEFT JOIN FETCH o.orderItems oi LEFT JOIN FETCH o.shipping s WHERE o.id = :id";
@@ -177,7 +183,6 @@ public class OrderDAOImpl extends GenericDAOImpl<Order> implements IOrderDAO {
         }
     }
 
-
     @Override
     public void updateOrder(Order order) {
         entityManager.getTransaction().begin();
@@ -187,6 +192,8 @@ public class OrderDAOImpl extends GenericDAOImpl<Order> implements IOrderDAO {
 
     public static void main(String[] args) {
         OrderDAOImpl dao = new OrderDAOImpl();
+        Order order = dao.findOneForDetailsManagement(1L);
+        System.out.println(order);
 //        for (Order order : orders) {
 //            System.out.println(order.getId());
 //        }
