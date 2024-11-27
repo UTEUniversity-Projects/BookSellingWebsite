@@ -228,35 +228,134 @@
                     </div>
                 </div>
             </div>
-            <div class="row">
-                <div class="col-xxl-12 col-xl-12">
-                    <div class="cr-card" id="best_seller_tbl">
-                        <div class="cr-card-header">
-                            <h4 class="cr-card-title">Sản Phẩm</h4>
-                            <div class="header-tools">
-                                <a href="javascript:void(0)" class="m-r-10 cr-full-card" title="Full Screen"><i
-                                        class="ri-fullscreen-line"></i></a>
+            <div class="col-xxl-12 col-xl-12">
+                <div class="cr-card" id="best_seller_tbl">
+                    <div class="cr-card-header">
+                        <h4 class="cr-card-title">Sản Phẩm</h4>
+                        <div class="header-tools">
+                            <a href="javascript:void(0)" class="m-r-10 cr-full-card" title="Full Screen"><i
+                                    class="ri-fullscreen-line"></i></a>
+                        </div>
+                    </div>
+                    <div class="cr-card-content card-default">
+                        <div class="best-seller-table">
+                            <div class="table-responsive">
+                                <table id="list_product_sold_in_stock_statistical" class="table table-hover">
+                                    <thead>
+                                    <tr>
+                                        <th>#</th>
+                                        <th>Thể loại</th>
+                                        <th>Đã bán</th>
+                                        <th>Tồn kho</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <!-- Các dòng dữ liệu sẽ được thêm vào đây -->
+                                    </tbody>
+                                </table>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xl-12">
+                <div class="row">
+                    <div class="col-xl-3 col-md-6">
+                        <div class="cr-card">
+                            <div class="cr-card-content label-card">
+                                <div class="title">
+                                    <span class="icon icon-1"><i class="ri-shield-user-line"></i></span>
+                                    <div class="growth-numbers">
+                                        <h4 style="font-family: Arial, Helvetica, sans-serif">Số khách mua hàng</h4>
+                                        <h5 id="countCustomerPurchaseAtTime">0</h5>
+                                    </div>
+                                </div>
+                                <p class="card-groth up">
+                                </p>
                             </div>
                         </div>
-                        <div class="cr-card-content card-default">
-                            <div class="best-seller-table">
-                                <div class="table-responsive">
-                                    <table id="list_product_sold_in_stock_statistical" class="table">
-                                        <thead>
-                                        <tr>
-                                            <th>#</th>
-                                            <th>Thể loại</th>
-                                            <th>Đã bán</th>
-                                            <th>Tồn kho</th>
-                                        </tr>
-                                        </thead>
-                                        <tbody>
-                                        <!-- Các dòng dữ liệu sẽ được thêm vào đây -->
-                                        </tbody>
-                                    </table>
+                    </div>
+                    <div class="col-xl-3 col-md-6">
+                        <div class="cr-card">
+                            <div class="cr-card-content label-card">
+                                <div class="title">
+                                    <span class="icon icon-2"><i class="ri-shopping-bag-3-line"></i></span>
+                                    <div class="growth-numbers">
+                                        <h4 style="font-family: Arial, Helvetica, sans-serif">Đơn hàng</h4>
+                                        <h5 id="countOrderAtTime">0</h5>
+                                    </div>
                                 </div>
-
                             </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-3 col-md-6">
+                        <div class="cr-card">
+                            <div class="cr-card-content label-card">
+                                <div class="title">
+                                    <span class="icon icon-2"><i class="ri-handbag-line"></i></span>
+                                    <div class="growth-numbers">
+                                        <h4 style="font-family: Arial, Helvetica, sans-serif">Mua một đơn</h4>
+                                        <h5 id="countCustomerPurchaseOneTimeAtTime">0</h5>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-3 col-md-6">
+                        <div class="cr-card">
+                            <div class="cr-card-content label-card">
+                                <div class="title">
+                                    <span class="icon icon-4"><i class="ri-shopping-bag-line"></i></span>
+                                    <div class="growth-numbers">
+                                        <h4 style="font-family: Arial, Helvetica, sans-serif">Mua nhiều hơn một đơn</h4>
+                                        <h5 id="countCustomerPurchaseThanOneTimeAtTime">0</h5>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xxl-8 col-xl-12">
+                <div class="cr-card revenue-overview">
+                    <div class="cr-card-header header-575">
+                        <h4 class="cr-card-title" style="font-family: Arial, Helvetica, sans-serif">Khách mua hàng</h4>
+                        <div class="header-tools">
+                            <a href="javascript:void(0)" class="m-r-10 cr-full-card" title="Full Screen"><i
+                                    class="ri-fullscreen-line"></i></a>
+                            <div class="cr-tools">
+                                <div class="daterange" id="date-rate-repeat-purchase">
+                                    <i class="fa fa-calendar"></i>&nbsp;
+                                    <span></span>
+                                    <i class="fa fa-caret-down"></i>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="cr-chart-content">
+                        <div id="countCustomerPurchaseBarChart" class="mb-m-24"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xxl-4 col-xl-6 col-md-12">
+                <div class="cr-card" id="campaigns">
+                    <div class="cr-card-header">
+                        <h4 class="cr-card-title" style="font-family: Arial, Helvetica, sans-serif">Tỉ lệ quay lại mua hàng</h4>
+                        <!-- <div class="header-tools">
+                            <div class="cr-date-range dots">
+                                <span></span>
+                            </div>
+                        </div> -->
+                        <div class="header-tools">
+                            <a href="javascript:void(0)" class="m-r-10 cr-full-card" title="Full Screen"><i
+                                    class="ri-fullscreen-line"></i></a>
+                        </div>
+                    </div>
+                    <div class="cr-card-content">
+                        <div class="cr-chart-content">
+                            <div id="donutChartRepeatPurchaseRate"></div>
                         </div>
                     </div>
                 </div>

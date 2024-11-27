@@ -1,16 +1,28 @@
 package com.biblio.service.impl;
 
+import com.biblio.dao.IReturnBookDAO;
+import com.biblio.dto.response.ReturnBookManagementResponse;
+import com.biblio.entity.ReturnBook;
+import com.biblio.mapper.ReturnBookMapper;
+import com.biblio.service.IReturnBookService;
+
 import com.biblio.entity.ReturnBook;
 import com.biblio.service.IReturnBookService;
 import com.biblio.dao.IReturnBookDAO;
+
 
 import javax.inject.Inject;
 
 public class ReturnBookServiceImpl implements IReturnBookService {
 
-    // Use @Inject to inject the DAO layer, this assumes you're using CDI or a DI framework
     @Inject
-    private IReturnBookDAO returnBookDao;
+    IReturnBookDAO returnBookDAO;
+
+    @Override
+    public ReturnBookManagementResponse findReturnBookByOrderId(Long orderId) {
+        ReturnBook returnBook = returnBookDAO.findByOrderId(orderId);
+        return ReturnBookMapper.toReturnBookManagementResponse(returnBook);
+    }
 
     @Override
     public void save(ReturnBook returnBook) {
@@ -28,9 +40,6 @@ public class ReturnBookServiceImpl implements IReturnBookService {
         }
 
         // Save the entity using the DAO
-        returnBookDao.save(returnBook);
+        returnBookDAO.save(returnBook);
     }
-
-
-    // Optional: Add other methods for update, delete, or find if needed
 }

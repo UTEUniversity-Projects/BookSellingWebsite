@@ -48,7 +48,7 @@
                                     </thead>
                                     <tbody>
                                         <c:forEach var="cartItem" items="${cart.cartItems}">
-                                            <tr>
+                                            <tr data-cart-item-id="${cartItem.id}">
                                                 <td class="cr-cart-checkbox">
                                                     <input type="checkbox" class="product-checkbox" />
                                                 </td>
@@ -71,7 +71,6 @@
                                                         <button type="button" class="minus">-</button>
                                                         <input
                                                                 type="text"
-                                                                placeholder="."
                                                                 value="${cartItem.quantity}"
                                                                 minlength="1"
                                                                 maxlength="20"
@@ -96,16 +95,8 @@
                                     <table class="table summary-table">
                                         <tbody>
                                         <tr>
-                                            <td>Tiền sách :</td>
+                                            <td>Tổng tiền :</td>
                                             <td class="price-value">${cart.totalBookPrice}</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Thuế (20%) :</td>
-                                            <td>$60.00</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Thành tiền :</td>
-                                            <td>$360.00</td>
                                         </tr>
                                         </tbody>
                                     </table>

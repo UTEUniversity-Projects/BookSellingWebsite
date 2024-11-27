@@ -3,6 +3,15 @@
 
 <link href='https://fonts.googleapis.com/css?family=Nunito' rel='stylesheet'>
 <style>
+    div.introduction {
+        width: 100%;
+        margin: 0;
+        padding-left: 10px;
+        text-align: justify;
+        box-sizing: border-box;
+        font-size: 90%;
+        color: slategray;
+    }
     .card-3d-deep {
         background: #fff;
         border-radius: 10px;
@@ -17,7 +26,6 @@
         0 12px 20px rgba(0, 0, 0, 0.15),
         0 24px 32px rgba(0, 0, 0, 0.2);
     }
-
     .image-shadow {
         transition: transform 0.3s ease, box-shadow 0.3s ease;
         box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
@@ -59,7 +67,7 @@
                                 </div>
                                 <br>
                                 <div class="cr-settings">
-                                    <a href="#" onclick="authorAction(${author.id}, 'update'); return false;" class="cr-btn-primary m-r-10 rounded">Cập nhật</a>
+                                    <a href="#" onclick="rowAction(${author.id}, 'update'); return false;" class="cr-btn-primary m-r-10 rounded">Cập nhật</a>
                                 </div>
                             </div>
                             <div class="cr-vendor-info">
@@ -92,10 +100,8 @@
                                 <h3>Giới thiệu tác giả</h3>
                                 <br>
                             </div>
-                            <div class="col-12">
-                                <p id="description">
-                                    ${author.introduction}
-                                </p>
+                            <div class="col-12 introduction">
+                                ${author.introduction}
                             </div>
                         </div>
                     </div>
@@ -105,4 +111,4 @@
     </div>
 </div>
 <script>const contextPath = "<%=request.getContextPath() %>";</script>
-<script src="${pageContext.request.contextPath}/assets/owner/js/manage-author.js" defer></script>
+<script src="${pageContext.request.contextPath}/assets/owner/js/manage/manage-author.js" defer></script>

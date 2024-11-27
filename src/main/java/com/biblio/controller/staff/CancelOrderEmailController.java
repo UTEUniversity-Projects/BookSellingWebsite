@@ -6,6 +6,7 @@ import com.biblio.service.IOrderService;
 import com.biblio.service.impl.EmailServiceImpl;
 import com.biblio.service.impl.OrderServiceImpl;
 
+import javax.inject.Inject;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -19,7 +20,8 @@ import static com.biblio.utils.DateTimeUtil.formatDateTime;
 public class CancelOrderEmailController extends HttpServlet {
 
     private final IEmailService emailService = new EmailServiceImpl();
-    private final IOrderService orderService = new OrderServiceImpl();
+    @Inject
+    private OrderServiceImpl orderService;
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {

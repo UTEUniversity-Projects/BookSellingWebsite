@@ -1,6 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-
+<meta charset="UTF-8">
 <div class="cr-main-content">
     <div class="container-fluid">
         <div class="cr-page-title">
@@ -14,7 +14,7 @@
                         <h4 class="cr-card-title">Chi tiết yêu cầu khách hàng</h4>
                     </div>
                     <div class="cr-card-content">
-                        <form id="responseForm" action="${pageContext.request.contextPath}/staff/support-customer-dashboard" method="POST">
+                        <form id="responseForm" action="${pageContext.request.contextPath}/staff/support-customer-dashboard" method="POST" accept-charset="UTF-8">
                             <input type="hidden" name="action" value="respond">
                             <input type="hidden" name="id" value="${supportRequest.id}">
 

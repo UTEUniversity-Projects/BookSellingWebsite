@@ -15,19 +15,15 @@
         <link rel="shortcut icon" href="${pageContext.request.contextPath}/assets/owner/img/logo/collapse-logo.png"/>
 
         <!-- Icon CSS -->
-        <link
-                href="${pageContext.request.contextPath}/assets/owner/css/vendor/materialdesignicons.min.css"
-                rel="stylesheet"
-        />
+        <link href="${pageContext.request.contextPath}/assets/owner/css/vendor/materialdesignicons.min.css" rel="stylesheet"/>
         <link href="${pageContext.request.contextPath}/assets/owner/css/vendor/remixicon.css" rel="stylesheet"/>
         <link href="${pageContext.request.contextPath}/assets/owner/css/vendor/owl.carousel.min.css" rel="stylesheet"/>
 
         <!-- Font -->
         <link rel="preconnect" href="https://fonts.googleapis.com"/>
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
-        <link
-                href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
-                rel="stylesheet"
+        <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+              rel="stylesheet"
         />
 
         <!-- Vendor CSS -->
@@ -47,7 +43,6 @@
                 href="${pageContext.request.contextPath}/assets/owner/css/vendor/jquery-jvectormap-1.2.2.css"
                 rel="stylesheet"
         />
-
         <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/owner/css/vendor/animate.css" />
         <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/owner/css/vendor/bootstrap.min.css" />
         <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/owner/css/vendor/aos.min.css" />
@@ -55,8 +50,12 @@
         <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/owner/css/vendor/swiper-bundle.min.css" />
         <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/owner/css/vendor/jquery.slick.css" />
         <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/owner/css/vendor/slick-theme.css" />
-    <!-- Main CSS -->
-    <link id="main-css" href="${pageContext.request.contextPath}/assets/owner/css/style.css" rel="stylesheet"/>
+
+        <!-- Quill CSS -->
+        <link href="${pageContext.request.contextPath}/assets/owner/css/quill/quill-snow.css" rel="stylesheet"/>
+
+        <!-- Main CSS -->
+        <link id="main-css" href="${pageContext.request.contextPath}/assets/owner/css/style.css" rel="stylesheet"/>
 </head>
 <body>
 <div id="toast"></div>
@@ -91,8 +90,12 @@
         <script src="${pageContext.request.contextPath}/assets/owner/js/vendor/daterangepicker.js"></script>
         <script src="${pageContext.request.contextPath}/assets/owner/js/vendor/daterangepicker.min.js"></script>
         <script src="${pageContext.request.contextPath}/assets/owner/js/vendor/date-range.js"></script>
-        <script src="${pageContext.request.contextPath}/assets/owner/js/DateRange/daterange.js"></script>
+        <script src="${pageContext.request.contextPath}/assets/owner/js/date-range/daterange.js"></script>
+        <!-- Extension -->
+        <script src="${pageContext.request.contextPath}/assets/owner/js/extension/lib-lottie.js"></script>
+        <script src="${pageContext.request.contextPath}/assets/owner/js/extension/lib-quill.js"></script>
         <!-- endregion -->
+
 
         <!-- region Main Custom -->
         <script src="${pageContext.request.contextPath}/assets/owner/js/main.js"></script>

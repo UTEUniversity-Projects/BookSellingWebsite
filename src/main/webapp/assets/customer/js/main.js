@@ -46,6 +46,22 @@
       return false;
     });
 
+    $(".quantity").on("keydown change", function (e) {
+      const key = e.key;
+      let currentValue = $(this).val();
+
+      if (!/^[0-9]$/.test(key) && key !== "Backspace" && key !== "Delete" && key !== "Tab" && key !== "ArrowLeft" && key !== "ArrowRight") {
+        e.preventDefault();
+      }
+
+      if (currentValue === "" && key === "0") {
+        e.preventDefault();
+      }
+
+      if (e.type === "blur" && currentValue === "") {
+        $(this).val(1);
+      }
+    });
 
     /* Onclick Remove Products */
     $('.cr-remove-product').on('click', function () {
@@ -791,5 +807,36 @@
   });
 
   // console.log($)
+
+  if(document.cookie.includes("username")) {
+    if (!window.location.href.includes("/login")) {
+      localStorage.setItem("previousUrl", window.location.href);
+    }
+
+    const previousUrl = localStorage.getItem("previousUrl");
+    if (previousUrl) {
+
+      if (window.location.href.includes("/login")) {
+        window.location.href = previousUrl;
+      }
+    } else if (window.location.href.includes("/login") && !previousUrl) {
+      window.location.href = "/home";
+    }
+  }
+
 })(jQuery);
 
+document.querySelectorAll('.price-value').forEach(el => {
+  const rawValue = el.textContent.trim();
+
+  const value = parseFloat(rawValue);
+
+  if (!isNaN(value)) {
+    const formattedValue = value.toLocaleString('vi-VN');
+    if (el.classList.contains('minus-value')) {
+      el.innerHTML = `-${formattedValue}<span class="currency-symbol">₫</span>`;
+    } else {
+      el.innerHTML = `${formattedValue}<span class="currency-symbol">₫</span>`;
+    }
+  }
+});

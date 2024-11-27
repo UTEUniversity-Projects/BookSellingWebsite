@@ -7,12 +7,13 @@ $(document).ready(() => {
 		constructor () {
 		}
 
-		login ({ username, password }) {
+		login ({ username, password, rememberMe }) {
 			const loginButton = $('.btn-login');
 			const spinner = loginButton.find('.spinner');
 			const buttonText = loginButton.find('.button-text');
 
-			const loginData = { username, password };
+			const loginData = { username, password, rememberMe: rememberMe[0] };
+			console.log(loginData);
 
 			loginButton.prop('disabled', true);
 			buttonText.addClass('hidden');
@@ -32,6 +33,7 @@ $(document).ready(() => {
 							type: 'success',
 							duration: 3000
 						});
+
 						setTimeout(() => {
 							window.location.href = `${contextPath}/waiting`;
 						}, 1000);
@@ -66,20 +68,20 @@ $(document).ready(() => {
 			});
 		}
 
-		showRequiredInput() {
-			$(".btn-login").click(() => {
-				const formData = new FormData(document.getElementById("loginForm"));
+		showRequiredInput () {
+			$('.btn-login').click(() => {
+				const formData = new FormData(document.getElementById('loginForm'));
 
 				const userData = {
-					username: formData.get("username"),
-					password: formData.get("password"),
+					username: formData.get('username'),
+					password: formData.get('password')
 				};
 				for (const key in userData) {
-					if (userData[key] === null || userData[key] === "" || userData[key] === "0") {
+					if (userData[key] === null || userData[key] === '' || userData[key] === '0') {
 						toast({
-							title: "Thông tin",
-							message: "Vui lòng điền đầy đủ thông tin !",
-							type: "info",
+							title: 'Thông tin',
+							message: 'Vui lòng điền đầy đủ thông tin !',
+							type: 'info',
 							duration: 4000
 						});
 						break;

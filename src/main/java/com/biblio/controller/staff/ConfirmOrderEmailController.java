@@ -10,6 +10,7 @@ import com.biblio.service.IOrderService;
 import com.biblio.service.impl.EmailServiceImpl;
 import com.biblio.service.impl.OrderServiceImpl;
 
+import javax.inject.Inject;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -25,9 +26,9 @@ import static com.biblio.utils.DateTimeUtil.formatDateTime;
 
 @WebServlet(name = "ConfirmOrderEmailController", urlPatterns = {"/api/order/send-email"})
 public class ConfirmOrderEmailController extends HttpServlet {
-
+    @Inject
+    private OrderServiceImpl orderService;
     private final IEmailService emailService = new EmailServiceImpl();
-    private final IOrderService orderService = new OrderServiceImpl();
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
@@ -170,5 +171,5 @@ public class ConfirmOrderEmailController extends HttpServlet {
 
         return emailContent.toString();
     }
-  
+
 }
