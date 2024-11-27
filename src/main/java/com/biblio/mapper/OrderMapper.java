@@ -23,7 +23,6 @@ public class OrderMapper {
                 .totalPrice(order.calTotalPrice())
                 .paymentMethod(order.getPaymentType().getValue())
                 .status(order.getStatus())
-                .statusDisplay(order.getStatus().getDescription())
                 .statusStyle(order.getStatus().getStatusStyle())
                 .build();
     }
@@ -61,7 +60,6 @@ public class OrderMapper {
                 .note(order.getNote())
                 .products(products)
                 .status(order.getStatus())
-                .statusDisplay(order.getStatus().getDescription())
                 .statusStyle(order.getStatus().getStatusStyle())
                 .totalPrice(totalPrice)
                 .paymentMethod(order.getPaymentType().getValue())

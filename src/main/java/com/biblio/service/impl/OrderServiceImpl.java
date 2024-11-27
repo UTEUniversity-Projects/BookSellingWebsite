@@ -5,6 +5,7 @@ import com.biblio.dto.response.*;
 import com.biblio.entity.Book;
 import com.biblio.entity.Order;
 import com.biblio.entity.OrderItem;
+import com.biblio.enumeration.EBookMetadataStatus;
 import com.biblio.enumeration.EOrderStatus;
 import com.biblio.mapper.BookMapper;
 import com.biblio.mapper.OrderMapper;
@@ -39,7 +40,20 @@ public class OrderServiceImpl implements IOrderService {
 
     @Override
     public boolean updateStatus(Long id, EOrderStatus status) {
-        return orderDAO.updateStatus(id, status);
+        Order order = orderDAO.findOne(id);
+        if (order == null || order.getStatus().equals(status)) {
+            return false;
+        }
+        order.setStatus(status);
+
+        if (status == EOrderStatus.CANCELED) {
+            for (OrderItem orderItem : order.getOrderItems()) {
+                for (Book book : orderItem.getBooks()) {
+                    book.getBookMetadata().setStatus(EBookMetadataStatus.IN_STOCK);
+                }
+            }
+        }
+        return orderDAO.update(order) != null;
     }
 
     @Override
@@ -125,6 +139,7 @@ public class OrderServiceImpl implements IOrderService {
                 .collect(Collectors.toList());
     }
 
+    @Override
     public List<RevenueResponse> getListRevenueAtTime(LocalDateTime start, LocalDateTime end) {
         List<RevenueResponse> revenueResponse = new ArrayList<>();
         List<Order> orders = orderDAO.findAllForManagement();
@@ -172,6 +187,7 @@ public class OrderServiceImpl implements IOrderService {
         return orderDAO.findById(orderId);
     }
 
+    @Override
     public List<CountBookSoldResponse> getListCountBookSoldAtTime(LocalDateTime start, LocalDateTime end) {
         List<BookSoldResponse> ListBookSold = new ArrayList<>();
         List<Order> list = orderDAO.findAllForManagement();
@@ -230,24 +246,5 @@ public class OrderServiceImpl implements IOrderService {
         countOrderOfCustomerResponses.addAll(customerOrderCountMap.values());
         return countOrderOfCustomerResponses;
     }
-
-
-
-    @Transactional
-    @Override
-    public void confirmOrder(Long orderId) {
-        Order order = orderDAO.findOne(orderId);
-        order.setStatus(EOrderStatus.PACKING);
-        orderDAO.updateOrder(order);
-    }
-
-    @Transactional
-    @Override
-    public void rejectOrder(Long orderId, String reason) {
-        Order order = orderDAO.findOne(orderId);
-        order.setStatus(EOrderStatus.CANCELED);
-        orderDAO.updateOrder(order);
-    }
-
 
 }

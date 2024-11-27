@@ -7124,6 +7124,18 @@ p {
   text-decoration: line-through;
 }
 
+.discount-percent {
+  margin-left: 8px;
+  padding: 2px 4px;
+  border-radius: 4px;
+  -moz-border-radius: 4px;
+  -webkit-border-radius: 4px;
+  background-color: #64b496;
+  color: #fff;
+  font-size: 1em;
+  font-weight: 600;
+}
+
 .cr-product-info {
   margin-top: 15px;
   padding-top: 15px;
@@ -7664,6 +7676,9 @@ p {
 .cr-tab-content-from .review-list .review-item__content .header .action-btn .ri-reply-line {
   color: #4a90e2;
 }
+.cr-tab-content-from .review-list .review-item__content .header .action-btn .ri-eye-line {
+  color: #64b496;
+}
 .cr-tab-content-from .review-list .review-item__content .header .name {
   font-weight: bold;
   font-size: 16px;
@@ -7675,6 +7690,17 @@ p {
 .cr-tab-content-from .review-list .review-item__content .header .rating i {
   color: #ffcc00;
   font-size: 14px;
+}
+.cr-tab-content-from .review-list .review-item__content .header .hidden-review-label {
+  margin: 2px 2px 2px 30px;
+  padding: 5px 10px;
+  font-family: "Be Vietnam Pro", sans-serif;
+  font-size: 12px;
+  line-height: 1;
+  background-color: #ff6b6b;
+  color: #fff;
+  border-radius: 5px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 .cr-tab-content-from .review-list .review-item__content .date {
   font-size: 12px;

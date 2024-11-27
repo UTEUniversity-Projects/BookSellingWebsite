@@ -2844,7 +2844,6 @@ ul.navbar-nav .dropdown:hover .dropdown-menu {
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-  border-bottom: 1px solid #e9e9e9;
 }
 .cr-cart-view .cr-cart-inner .cr-cart-top .cr-cart-title h6 {
   margin: 0;
@@ -8233,6 +8232,18 @@ p {
   margin-left: 5px;
   font-size: 13px;
   text-decoration: line-through;
+}
+
+.discount-percent {
+  margin-left: 8px;
+  padding: 2px 4px;
+  border-radius: 4px;
+  -moz-border-radius: 4px;
+  -webkit-border-radius: 4px;
+  background-color: #64b496;
+  color: #fff;
+  font-size: 1em;
+  font-weight: 600;
 }
 
 .cr-product-info {

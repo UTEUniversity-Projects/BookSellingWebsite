@@ -18,9 +18,12 @@ public interface IOrderDAO {
 
     List<Order> findByJPQL(Long customerId);
 
-    boolean updateStatus(Long id, EOrderStatus status);
+//    boolean updateStatus(Long id, EOrderStatus status);
 
     OrderCustomerResponse findById(Long id);
+
+    Order update(Order order);
+
     void updateOrder(Order order);
 
 }
