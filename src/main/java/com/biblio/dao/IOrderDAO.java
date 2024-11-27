@@ -2,7 +2,6 @@ package com.biblio.dao;
 
 import com.biblio.dto.response.OrderCustomerResponse;
 import com.biblio.entity.Order;
-import com.biblio.enumeration.EOrderStatus;
 
 import java.util.List;
 
@@ -20,12 +19,10 @@ public interface IOrderDAO {
 
     OrderCustomerResponse findById(Long id);
 
-    Order update(Order order);
-
     List<Order> findAllOrderForCustomer(Long customerId);
 
     Order findByIdCustomer(Long id);
-  
-    void updateOrder(Order order);
+
+    Order update(Order order);
 
 }
