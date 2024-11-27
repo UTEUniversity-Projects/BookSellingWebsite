@@ -16,7 +16,6 @@ import javax.transaction.Transactional;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.*;
-import java.util.stream.Collectors;
 
 public class OrderServiceImpl implements IOrderService {
     @Inject
@@ -92,52 +91,7 @@ public class OrderServiceImpl implements IOrderService {
         return venue;
     }
 
-    @Override
-    public List<OrderCustomerResponse> findOrdersByCustomerId(Long customerId) {
-        // Fetch data from DAO
-        List<Order> orders = orderDAO.findByJPQL(customerId);
 
-        // Convert Order entities to OrderCustomerResponse DTOs
-        return orders.stream()
-                .map(order -> {
-                    // Initialize a set for books in the response
-                    Set<BookResponse> bookResponses = new HashSet<>();
-
-                    // Loop through each LineItem and its associated books
-                    for (OrderItem lineItem : order.getOrderItems()) {
-                        for (Book book : lineItem.getBooks()) {
-                            // Add the book to the set of bookResponses
-                            BookResponse bookResponse = BookResponse.builder()
-                                    .id(String.valueOf(book.getId()))
-                                    .title(book.getTitle())
-                                    .description(book.getDescription())
-                                    .sellingPrice(String.valueOf(book.getSellingPrice()))
-                                    .build();
-                            bookResponses.add(bookResponse);
-                        }
-                    }
-
-                    // Calculate the total price if necessary (sum of line items or other logic)
-                    Double totalPrice = order.getOrderItems().stream()
-                            .mapToDouble(OrderItem::calPriceItem)
-                            .sum();
-
-                    // Return the mapped OrderCustomerResponse with the list of books
-                    return new OrderCustomerResponse(
-                            order.getId() ,
-                            order.getNote(),
-                            order.getOrderDate() != null ? order.getOrderDate().toString() : null,  // Convert LocalDateTime to String
-                            order.getPaymentType() != null ? order.getPaymentType().name() : null,
-                            order.getStatus() != null ? order.getStatus().name() : null,
-                            order.getVat(),
-                            order.getCustomer() != null ? order.getCustomer().getId() : null,
-                            order.getShipping() != null ? order.getShipping().getId() : null,
-                            totalPrice,
-                            bookResponses  // Add the set of BookResponse objects
-                    );
-                })
-                .collect(Collectors.toList());
-    }
 
     @Override
     public List<RevenueResponse> getListRevenueAtTime(LocalDateTime start, LocalDateTime end) {
@@ -188,6 +142,89 @@ public class OrderServiceImpl implements IOrderService {
     }
 
     @Override
+    public OrderCustomerResponse findOrderByIdCustomer(Long orderId) {
+        Order order =  orderDAO.findByIdCustomer(orderId);
+        return OrderMapper.toOrderCustomerResponse(order);
+    }
+
+    @Override
+    public List<OrderCustomerResponse> getAllOrderCustomerResponse(Long customerId) {
+        List<Order> orders = orderDAO.findAllOrderForCustomer(customerId);
+        List<OrderCustomerResponse> orderCustomerResponse = new ArrayList<>();
+//        for (Order order : orders) {
+//            orderCustomerResponse.add(OrderMapper.toOrderCustomerResponse(order));
+//        }
+        for (Order order : orders) {
+            if (order == null) {
+                System.out.println("Null order found in orders list");
+                continue;
+            }
+            System.out.println("Mapping order with ID: " + order.getId());
+
+            OrderCustomerResponse response = OrderMapper.toOrderCustomerResponse(order);
+
+            if (response == null) {
+                System.out.println("Mapper returned null for order ID: " + order.getId());
+            } else {
+                System.out.println("Mapped response: " + response);
+                orderCustomerResponse.add(response);
+            }
+        }
+
+        return orderCustomerResponse;
+    }
+
+    @Override
+    public List<OrderCustomerResponse> getOrderCustomerByStatus(Long customerId, String status) {
+        // Lấy tất cả các đơn hàng cho khách hàng
+        List<Order> orders = orderDAO.findAllOrderForCustomer(customerId);
+        List<OrderCustomerResponse> filteredOrderResponses = new ArrayList<>();
+
+        // Kiểm tra nếu status là "all", lấy tất cả đơn hàng
+        if ("all".equalsIgnoreCase(status)) {
+            // Nếu trạng thái là "all", không lọc theo trạng thái, lấy tất cả
+            for (Order order : orders) {
+                if (order == null) {
+                    System.out.println("Null order found in orders list");
+                    continue;
+                }
+
+                OrderCustomerResponse response = OrderMapper.toOrderCustomerResponse(order);
+                if (response == null) {
+                    System.out.println("Mapper returned null for order ID: " + order.getId());
+                } else {
+                    filteredOrderResponses.add(response);
+                }
+            }
+        } else {
+            // Nếu trạng thái không phải "all", chuyển từ String sang EOrderStatus và lọc
+            try {
+                EOrderStatus orderStatus = EOrderStatus.valueOf(status); // Chuyển đổi String thành EOrderStatus
+                for (Order order : orders) {
+                    if (order == null) {
+                        System.out.println("Null order found in orders list");
+                        continue;
+                    }
+
+                    // Lọc đơn hàng theo trạng thái
+                    if (order.getStatus() != null && order.getStatus().equals(orderStatus)) {
+                        OrderCustomerResponse response = OrderMapper.toOrderCustomerResponse(order);
+                        if (response == null) {
+                            System.out.println("Mapper returned null for order ID: " + order.getId());
+                        } else {
+                            filteredOrderResponses.add(response);
+                        }
+                    }
+                }
+            } catch (IllegalArgumentException e) {
+                // Trường hợp status không hợp lệ
+                System.out.println("Invalid status: " + status);
+            }
+        }
+
+        return filteredOrderResponses;
+    }
+
     public List<CountBookSoldResponse> getListCountBookSoldAtTime(LocalDateTime start, LocalDateTime end) {
         List<BookSoldResponse> ListBookSold = new ArrayList<>();
         List<Order> list = orderDAO.findAllForManagement();

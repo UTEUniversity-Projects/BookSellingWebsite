@@ -1,8 +1,8 @@
 package com.biblio.apis.customer;
 
-import com.biblio.dto.request.SearchBookRequest;
-import com.biblio.dto.response.BookCardResponse;
-import com.biblio.service.IBookTemplateService;
+import com.biblio.dto.request.DeleteCartItemRequest;
+import com.biblio.dto.request.UpdateCartItemRequest;
+import com.biblio.service.ICartItemService;
 import com.biblio.utils.HttpUtil;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
@@ -15,26 +15,20 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.Serial;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
-/**
- * Servlet implementation class SearchBookAPI
- */
-@WebServlet("/api/customer/search-book")
-public class SearchBookAPI extends HttpServlet {
+@WebServlet("/api/customer/delete-cart-item")
+public class DeleteCartItemAPI extends HttpServlet {
     @Serial
     private static final long serialVersionUID = 1L;
 
     @Inject
-    private IBookTemplateService bookTemplateService;
-
+    private ICartItemService cartItemService;
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public SearchBookAPI() {
+    public DeleteCartItemAPI() {
         super();
-        // TODO Auto-generated constructor stub
     }
 
     /**
@@ -46,25 +40,27 @@ public class SearchBookAPI extends HttpServlet {
     }
 
     /**
-     * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+     * @see HttpServlet#doPost(HttpServletRequest, HttpServletResponse) (HttpServletRequest request, HttpServletResponse response)
      */
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        // TODO Auto-generated method stub
         request.setCharacterEncoding("UTF-8");
-        response.setCharacterEncoding("UTF-8");
-        response.setContentType("application/json");
 
-        SearchBookRequest req = HttpUtil.of(request.getReader()).toModel(SearchBookRequest.class);
+        DeleteCartItemRequest deleteCartItemRequest = HttpUtil.of(request.getReader()).toModel(DeleteCartItemRequest.class);
 
-        List<BookCardResponse> book = bookTemplateService.getBookTemplateByCriteria(req);
-        Long bookCount = bookTemplateService.getBookTemplateQuantityByCriteria(req);
-
+        Map<String, Object> result = new HashMap<>();
         ObjectMapper mapper = new ObjectMapper();
-        Map<String, Object> map = new HashMap<>();
 
-        map.put("response", book);
-        map.put("quantity", bookCount);
-        response.getWriter().append(mapper.writeValueAsString(map));
+        try {
+            cartItemService.deleteCartItem(deleteCartItemRequest);
+            result.put("status", "success");
+            result.put("message", "Xóa sản phẩm thành công!");
+        } catch (Exception e) {
+            result.put("status", "error");
+            result.put("message", e.getMessage());
+        }
+
+        response.setContentType("application/json");
+        response.setCharacterEncoding("UTF-8");
+        response.getWriter().write(mapper.writeValueAsString(result));
     }
-
 }
