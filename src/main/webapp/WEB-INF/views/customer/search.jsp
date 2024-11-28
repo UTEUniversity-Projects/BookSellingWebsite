@@ -14,7 +14,7 @@
                 <div class="cr-shop-sideview">
                     <div class="cr-shop-categories">
                         <h4 class="cr-shop-sub-title">Danh mục</h4>
-                        <div class="cr-checkbox">
+                        <div class="cr-checkbox category">
                             <div class="checkbox-group">
                                 <input type="checkbox" id="all-categories" class="category-item" checked/>
                                 <label for="all-categories">Tất cả</label>
