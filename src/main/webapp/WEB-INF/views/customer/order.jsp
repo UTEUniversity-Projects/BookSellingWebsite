@@ -1,8 +1,28 @@
-<script defer src="${pageContext.request.contextPath}/assets/customer/js/order-list.js"></script>
 <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/customer/scss/style.css">
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
+
+<!-- Modal -->
+<div class="modal fade" id="cancelOrderModal" tabindex="-1" aria-labelledby="cancelOrderModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="cancelOrderModalLabel">Xác nhận hủy đơn hàng</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                Bạn có chắc chắn muốn hủy đơn hàng này không?
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Hủy</button>
+                <button type="button" id="confirmCancelOrder" class="btn btn-success">Xác nhận</button>
+            </div>
+        </div>
+    </div>
+</div>
+
 
 <div class="bg-gray-100 py-5">
     <div class="max-w-[1024px] mx-auto">
@@ -11,6 +31,7 @@
             <c:set var="currentStatus" value="${param.status != null ? param.status : 'all'}" />
             <a href="?status=all" class="tag ${currentStatus == 'all' ? 'text-[#26aa99] font-bold' : 'text-gray-500'}">Tất cả</a>
             <a href="?status=WAITING_CONFIRMATION" class="tag ${currentStatus == 'WAITING_CONFIRMATION' ? 'text-[#26aa99] font-bold' : 'text-gray-500'}">Chờ xác nhận</a>
+            <a href="?status=SHIPPING" class="tag ${currentStatus == 'SHIPPING' ? 'text-[#26aa99] font-bold' : 'text-gray-500'}">Đang giao hàng</a>
             <a href="?status=COMPLETE_DELIVERY" class="tag ${currentStatus == 'COMPLETE_DELIVERY' ? 'text-[#26aa99] font-bold' : 'text-gray-500'}">Hoàn tất giao hàng</a>
             <a href="?status=CANCELED" class="tag ${currentStatus == 'CANCELED' ? 'text-[#26aa99] font-bold' : 'text-gray-500'}">Đã hủy</a>
         </div>
@@ -34,8 +55,6 @@
                                 ${order.status != null ? order.status.getDescription() : 'Trạng thái không xác định'}
                         </a>
                     </div>
-
-
 
                     <!-- Sản phẩm -->
                     <c:forEach var="orderProduct" items="${order.products}" varStatus="loopStatus">
@@ -84,7 +103,7 @@
                         </c:if>
 
                         <c:if test="${order.status == 'WAITING_CONFIRMATION'}">
-                            <button class="px-4 py-2 bg-[#e91e4c] rounded text-white hover:bg-[#d0173f]" onclick="alert('Chức năng đang được phát triển!'); return false;">Hủy đơn hàng</button>
+                            <button class="btn-cancel-order px-4 py-2 bg-[#e91e4c] rounded text-white hover:bg-[#d0173f]" data-order-id="${order.id}">Hủy đơn hàng</button>
                         </c:if>
 
                         <c:if test="${order.status == 'CANCELED'}">
@@ -92,7 +111,11 @@
                         </c:if>
 
                         <!-- Nút luôn hiển thị -->
-                        <button class="px-4 py-2 rounded text-black border border-gray-200 hover:bg-gray-100" onclick="alert('Chức năng đang được phát triển!'); return false;">Liên hệ người bán</button>
+                        <button
+                                class="px-4 py-2 rounded text-black border border-gray-200 hover:bg-gray-100"
+                                onclick="window.location.href='${pageContext.request.contextPath}/contact-us'">
+                            Liên hệ người bán
+                        </button>
                     </div>
                 </div>
             </c:forEach>
@@ -105,3 +128,5 @@
     </div>
 </div>
 
+<script src="${pageContext.request.contextPath}/assets/customer/js/cancel-order.js" type="module"></script>
+<script defer src="${pageContext.request.contextPath}/assets/customer/js/order-list.js"></script>

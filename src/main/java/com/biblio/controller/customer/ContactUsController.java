@@ -1,6 +1,9 @@
 package com.biblio.controller.customer;
 
 import com.biblio.dto.request.SupportRequest;
+import com.biblio.dto.response.AccountGetResponse;
+import com.biblio.dto.response.CustomerDetailResponse;
+import com.biblio.service.ICustomerService;
 import com.biblio.service.ISupportService;
 
 import javax.inject.Inject;
@@ -22,6 +25,9 @@ public class ContactUsController extends HttpServlet {
     private static final long serialVersionUID = 1L;
     @Inject
     private ISupportService supportService;
+
+    @Inject
+    private ICustomerService customerService;
     /**
      * @see HttpServlet#HttpServlet()
      */
@@ -44,11 +50,16 @@ public class ContactUsController extends HttpServlet {
      */
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         // TODO Auto-generated method stub
-        HttpSession session = request.getSession(true); // true sẽ tạo session nếu không tồn tại
-        Long customerId = 1L; // Giả lập ID khách hàng, trong thực tế có thể lấy từ session thực tế
+        HttpSession session = request.getSession(false);
+        AccountGetResponse account = (AccountGetResponse) session.getAttribute("account");
+        CustomerDetailResponse customer = customerService.getCustomerDetailByUsername(account.getUsername());
+        Long customerId = customer.getId();
 
-        // Đặt thông tin vào session giả
-        session.setAttribute("customerId", customerId);
+        // Check if the customer is authenticated
+        if (customerId == null) {
+            response.sendRedirect(request.getContextPath() + "/login");
+            return;
+        }
 
         String title = request.getParameter("title");
         String content = request.getParameter("content");
@@ -67,10 +78,9 @@ public class ContactUsController extends HttpServlet {
         try {
             supportService.createSupport(supportRequestDTO);
             request.setAttribute("message", "Đã gửi yêu cầu hỗ trợ!");
-            //response.sendRedirect(request.getContextPath() + "/contact-us?success=true");
+            response.sendRedirect(request.getContextPath() + "/order?message=success");
         } catch (Exception e) {
             e.printStackTrace();
-            // Nếu có lỗi trong xử lý, hiển thị thông báo lỗi
             request.setAttribute("errorMessage", "Đã có lỗi xảy ra, vui lòng thử lại sau.");
             request.getRequestDispatcher("/views/customer/contact-us.jsp").forward(request, response);
         }
