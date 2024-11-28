@@ -70,6 +70,7 @@
     <decorator:body/>
     <%@include file="/commons/owner/footer.jsp" %>
 </main>
+        <script> const contextPath = "<%=request.getContextPath() %>";</script>
 
         <!-- region Vendor Custom JS -->
         <script src="${pageContext.request.contextPath}/assets/owner/js/vendor/jquery-3.6.4.min.js"></script>
@@ -98,7 +99,7 @@
 
 
         <!-- region Main Custom -->
-        <script src="${pageContext.request.contextPath}/assets/owner/js/main.js"></script>
+        <script src="${pageContext.request.contextPath}/assets/owner/js/main.js" type="module" defer></script>
         <script src="${pageContext.request.contextPath}/assets/owner/js/data/ecommerce-chart-data.js"></script>
         <script src="${pageContext.request.contextPath}/assets/owner/js/toast.js"></script>
 </body>

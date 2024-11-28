@@ -2,15 +2,11 @@ package com.biblio.controller.owner;
 
 import com.biblio.dto.response.CustomerGetListResponse;
 import com.biblio.dto.response.PromotionGetResponse;
-import com.biblio.entity.Customer;
-import com.biblio.entity.Promotion;
 import com.biblio.service.ICustomerService;
 import com.biblio.service.IEmailService;
 import com.biblio.service.IPromotionService;
-import com.biblio.service.impl.CustomerServiceImpl;
-import com.biblio.service.impl.EmailServiceImpl;
-import com.biblio.service.impl.PromotionServiceImpl;
 
+import javax.inject.Inject;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -20,10 +16,15 @@ import java.util.List;
 
 @WebServlet(name = "PromotionEmailController", urlPatterns = {"/api/promotion/send-email"})
 public class PromotionEmailController extends HttpServlet {
+    @Inject
+    private IEmailService emailService;
 
-    private final IEmailService emailService = new EmailServiceImpl(); // Dịch vụ gửi email
-    private final IPromotionService promotionService = new PromotionServiceImpl(); // Dịch vụ xử lý khuyến mãi
-    private final ICustomerService customerService = new CustomerServiceImpl(); // Dịch vụ lấy thông tin khách hàng
+    @Inject
+    private IPromotionService promotionService;
+
+    @Inject
+    private ICustomerService customerService;
+
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
@@ -94,7 +95,7 @@ public class PromotionEmailController extends HttpServlet {
 
         emailContent.append("---------------------------------------------------\n");
         emailContent.append("Hãy nhanh tay tham gia chương trình khuyến mãi này trước khi hết hạn!\n\n");
-        emailContent.append("Trân trọng,\n");
+        emailContent.append("Xin cảm ơn,\n");
         emailContent.append("[Tên Shop]");
 
         return emailContent.toString();

@@ -27,10 +27,37 @@ $(document).ready(() => {
                     return;
                 }
 
-                toast({
-                    title: "Xác thực",
-                    message: "Tin nhắn xác thực đã được đến email của bạn !",
-                    type: "success",
+                $.ajax({
+                    url: `${contextPath}/verify-email`,
+                    type: "POST",
+                    contentType: "application/json",
+                    data: JSON.stringify({
+                        email: emailValue,
+                    }),
+                    success: function (response) {
+                        if (response.code === 200) {
+                            toast({
+                                title: "Thông báo",
+                                message: response.message,
+                                type: "success",
+                                duration: 1000
+                            });
+                            setTimeout(() => {
+                                window.location.href = `${contextPath}/verify-otp`;
+                            }, 1000);
+                        }
+                        else {
+                            toast({
+                                title: "Thông báo",
+                                message: response.message,
+                                type: "error",
+                                duration: 1000
+                            });
+                        }
+                    },
+                    error: function (xhr, status, error) {
+                        console.error("Error: ", xhr.responseText);
+                    }
                 });
 
             });

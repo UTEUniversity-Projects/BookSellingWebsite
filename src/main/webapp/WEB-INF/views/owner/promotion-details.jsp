@@ -42,7 +42,7 @@
             </div>
         </div>
         <c:if test="${promotion.type == 'DISCOUNT'}">
-            <form class="promotionForm">
+            <form action="${pageContext.request.contextPath}/owner/promotion-details" method="POST" class="promotionForm">
                 <input type="hidden" name="formType" value="editDiscount"/>
 
                 <div class="form-content d-flex">
@@ -53,14 +53,10 @@
                                 <div class="cr-cat-list cr-card card-default mb-24px">
                                     <div class="cr-card-content">
                                         <div class="cr-cat-form">
-                                            <img
-                                                    class="img-promotion"
-                                                    src="assets/img/product/1.jpg"
-                                            />
                                             <h3>Thêm Discount</h3>
 
                                             <!-- Mã -->
-                                            <div class="form-group">
+                                            <div class="form-group ip-padding">
                                                 <label>Mã</label>
                                                 <div class="col-12">
                                                     <input name="code" value="${promotion.code}" style="background-color: #f5f5f5;" class="form-control here slug-title" type="text" onblur="validateInput(this)" readonly />
@@ -69,21 +65,21 @@
                                             </div>
 
                                             <!-- Tiêu đề -->
-                                            <div class="form-group">
+                                            <div class="form-group ip-padding">
                                                 <label>Tiêu đề</label>
                                                 <div class="col-12">
                                                     <input name="title" value="${promotion.title}"  disabled class="form-control here slug-title" type="text" onblur="validateInput(this)" />
                                                     <span class="error-message titleError"></span>
                                                 </div>
                                             </div>
-                                            <div class="form-group">
+                                            <div class="form-group ip-padding">
                                                 <label>Phần trăm giảm (%)</label>
                                                 <div class="col-12">
                                                     <input name="percentDiscount" value="${promotion.percentDiscount}" disabled class="form-control here slug-title" type="number" onblur="validateInput(this)" />
                                                     <span class="error-message percentDiscountError"></span>
                                                 </div>
                                             </div>
-                                            <div class="form-group">
+                                            <div class="form-group ip-padding">
                                                 <label>Đối tượng áp dụng</label>
                                                 <div class="select-oject-use-voucher">
                                                     <select class="select-item" disabled name="selectOject" id="select-object-discount" onblur="validateInput(this)">
@@ -97,7 +93,7 @@
                                             </div>
 
                                             <!-- Mô tả -->
-                                            <div class="form-group">
+                                            <div class="form-group ip-padding">
                                                 <label>Mô tả</label>
                                                 <div class="col-12">
                                                     <textarea name="description" class="form-control" rows="4" disabled onblur="validateInput(this)">${promotion.description}</textarea>
@@ -106,7 +102,7 @@
                                             </div>
 
                                             <!-- Thời gian áp dụng -->
-                                            <div class="form-group row">
+                                            <div class="form-group row ip-padding">
                                                 <label>Thời gian áp dụng</label>
                                                 <div class="col-12">
                                                     <input type="text" name="dateeffective" disabled style="width: 100%;" onblur="validateInput(this)" />
@@ -161,9 +157,8 @@
                         <div class="cr-cat-list cr-card card-default mb-24px">
                             <div class="cr-card-content">
                                 <div class="cr-cat-form">
-                                    <img class="img-promotion" src="assets/img/product/1.jpg">
                                     <h5>Thông tin Voucher</h5>
-                                    <form action="/owner/promotion-details" method="POST" class="promotionForm">
+                                    <form action="${pageContext.request.contextPath}/owner/promotion-details" method="POST" class="promotionForm">
                                         <input type="hidden" name="formType" value="editVoucher"/>
 
                                         <!-- Mã -->
@@ -270,9 +265,8 @@
                             <div class="cr-cat-list cr-card card-default mb-24px">
                                 <div class="cr-card-content">
                                     <div class="cr-cat-form">
-                                        <img class="img-promotion" src="assets/img/product/1.jpg">
                                         <h3>Thông tin Freeship</h3>
-                                        <form action="/owner/promotion-details" method="POST" class="promotionForm">
+                                        <form action="${pageContext.request.contextPath}/owner/promotion-details" method="POST" class="promotionForm">
                                             <input type="hidden" name="formType" value="editFreeShip" />
                                             <div class="form-group ip-padding">
                                                 <label>Mã</label>
@@ -398,8 +392,6 @@
     const selectedIds = ${selectedIds != null ? selectedIds : '[]'};
 </script>
 
-
-<script>const contextPath = "<%= request.getContextPath()%>";</script>
 <script src="${pageContext.request.contextPath}/assets/owner/js/validator-promotion-details.js" defer></script>
 
 <script src="${pageContext.request.contextPath}/assets/owner/js/add-promotion.js" defer></script>

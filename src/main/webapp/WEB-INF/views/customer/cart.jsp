@@ -13,85 +13,98 @@
                         data-aos-delay="400"
                 >
                     <div class="row">
-                        <form action="#">
-                            <div class="cr-table-content">
-                                <table>
-                                    <thead>
-                                    <tr>
-                                        <th></th>
-                                        <th>Sách</th>
-                                        <th>Giá</th>
-                                        <th class="text-center">Số lượng</th>
-                                        <th>Tổng</th>
-                                        <th></th>
-                                    </tr>
-                                    </thead>
-                                    <tbody>
-                                        <c:forEach var="cartItem" items="${cart.cartItems}">
-                                            <tr data-cart-item-id="${cartItem.id}">
-                                                <td class="cr-cart-checkbox">
-                                                    <input type="checkbox" class="product-checkbox" />
-                                                </td>
-                                                <td class="cr-cart-name">
-                                                    <a href="${pageContext.request.contextPath}/book?id=${cartItem.bookId}">
-                                                        <img
-                                                                src="${pageContext.request.contextPath}${cartItem.imageUrl}"
-                                                                alt="product-1"
-                                                                class="cr-cart-img"
-                                                        />
-                                                        ${cartItem.title}
-                                                    </a>
-                                                </td>
-                                                <td class="cr-cart-price">
-                                                    <span class="new-price price-value">${cartItem.sellingPrice}</span>
-                                                    <span class="old-price price-value">${cartItem.sellingPrice}</span>
-                                                </td>
-                                                <td class="cr-cart-qty">
-                                                    <div class="cart-qty-plus-minus">
-                                                        <button type="button" class="minus">-</button>
-                                                        <input
-                                                                type="text"
-                                                                value="${cartItem.quantity}"
-                                                                minlength="1"
-                                                                maxlength="20"
-                                                                class="quantity"
-                                                        />
-                                                        <button type="button" class="plus">+</button>
-                                                    </div>
-                                                </td>
-                                                <td class="cr-cart-subtotal price-value">${cartItem.subTotal}</td>
-                                                <td class="cr-cart-remove">
-                                                    <a href="javascript:void(0)" class="remove-item">
-                                                        <i class="ri-delete-bin-line"></i>
-                                                    </a>
-                                                </td>
+                        <c:choose>
+                            <c:when test="${empty cart.cartItems}">
+                                <div class="message-container">
+                                    <img src="https://cdn-icons-png.flaticon.com/512/2762/2762885.png" alt="">
+                                    <p>Giỏ hàng của bạn đang trống</p>
+                                    <a href="home">
+                                        <button class="cr-button">Mua ngay</button>
+                                    </a>
+                                </div>
+                            </c:when>
+                            <c:otherwise>
+                                <form action="#">
+                                    <div class="cr-table-content">
+                                        <table>
+                                            <thead>
+                                            <tr>
+                                                <th></th>
+                                                <th>Sách</th>
+                                                <th>Giá</th>
+                                                <th class="text-center">Số lượng</th>
+                                                <th>Tổng</th>
+                                                <th></th>
                                             </tr>
-                                        </c:forEach>
-                                    </tbody>
-                                </table>
-                            </div>
-                            <div class="cr-cart-summary">
-                                <div class="summary-sub-total">
-                                    <table class="table summary-table">
-                                        <tbody>
-                                        <tr>
-                                            <td>Tổng tiền :</td>
-                                            <td class="price-value">${cart.totalBookPrice}</td>
-                                        </tr>
-                                        </tbody>
-                                    </table>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-lg-12">
-                                    <div class="cr-cart-update-bottom">
-                                        <a href="home" class="cr-btn-secondary">Tiếp tục mua sách</a>
-
-                                        <a href="${pageContext.request.contextPath}/checkout" class="cr-button">Thanh toán</a>
+                                            </thead>
+                                            <tbody>
+                                            <c:forEach var="cartItem" items="${cart.cartItems}">
+                                                <tr data-cart-item-id="${cartItem.id}">
+                                                    <td class="cr-cart-checkbox">
+                                                        <input type="checkbox" class="product-checkbox" />
+                                                    </td>
+                                                    <td class="cr-cart-name">
+                                                        <a href="${pageContext.request.contextPath}/book?id=${cartItem.bookId}">
+                                                            <img
+                                                                    src="${pageContext.request.contextPath}${cartItem.imageUrl}"
+                                                                    alt="product-1"
+                                                                    class="cr-cart-img"
+                                                            />
+                                                                ${cartItem.title}
+                                                        </a>
+                                                    </td>
+                                                    <td class="cr-cart-price">
+                                                        <span class="new-price price-value">${cartItem.sellingPrice}</span>
+                                                        <span class="old-price price-value">${cartItem.sellingPrice}</span>
+                                                    </td>
+                                                    <td class="cr-cart-qty">
+                                                        <div class="cart-qty-plus-minus">
+                                                            <button type="button" class="minus">-</button>
+                                                            <input
+                                                                    type="text"
+                                                                    value="${cartItem.quantity}"
+                                                                    minlength="1"
+                                                                    maxlength="20"
+                                                                    class="quantity"
+                                                            />
+                                                            <button type="button" class="plus">+</button>
+                                                        </div>
+                                                    </td>
+                                                    <td class="cr-cart-subtotal price-value">${cartItem.subTotal}</td>
+                                                    <td class="cr-cart-remove">
+                                                        <a href="javascript:void(0)" class="remove-item">
+                                                            <i class="ri-delete-bin-line"></i>
+                                                        </a>
+                                                    </td>
+                                                </tr>
+                                            </c:forEach>
+                                            </tbody>
+                                        </table>
                                     </div>
-                                </div>
-                            </div>
-                        </form>
+                                    <div class="cr-cart-summary">
+                                        <div class="summary-sub-total">
+                                            <table class="table summary-table">
+                                                <tbody>
+                                                <tr>
+                                                    <td>Tổng tiền :</td>
+                                                    <td class="price-value">${cart.totalBookPrice}</td>
+                                                </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-lg-12">
+                                            <div class="cr-cart-update-bottom">
+                                                <a href="home" class="cr-btn-secondary">Tiếp tục mua sách</a>
+
+                                                <a href="${pageContext.request.contextPath}/checkout" class="cr-button">Thanh toán</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </form>
+                            </c:otherwise>
+                        </c:choose>
                     </div>
                 </div>
             </div>

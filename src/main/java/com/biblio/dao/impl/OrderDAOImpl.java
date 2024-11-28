@@ -105,27 +105,6 @@ public class OrderDAOImpl extends GenericDAOImpl<Order> implements IOrderDAO {
         return super.findByJPQL(jpql.toString(), params);
     }
 
-
-    @Override
-    public boolean updateStatus(Long id, EOrderStatus status) {
-        Order order = findOne(id);
-        if (order == null || order.getStatus().equals(status)) {
-            return false;
-        }
-        order.setStatus(status);
-
-        if (status == EOrderStatus.CANCELED) {
-            for (OrderItem orderItem : order.getOrderItems()) {
-                for (Book book : orderItem.getBooks()) {
-                    book.getBookMetadata().setStatus(EBookMetadataStatus.IN_STOCK);
-                }
-            }
-        }
-
-        super.update(order);
-        return true;
-    }
-
     @Override
     public OrderCustomerResponse findById(Long id) {
         // Query to fetch the order details
@@ -177,16 +156,15 @@ public class OrderDAOImpl extends GenericDAOImpl<Order> implements IOrderDAO {
         }
     }
 
-
     @Override
-    public void updateOrder(Order order) {
-        entityManager.getTransaction().begin();
-        entityManager.merge(order);
-        entityManager.getTransaction().commit();
+    public Order update(Order order) {
+        return super.update(order);
     }
 
     public static void main(String[] args) {
         OrderDAOImpl dao = new OrderDAOImpl();
+        Order order = dao.findOneForDetailsManagement(1L);
+        System.out.println(order);
 //        for (Order order : orders) {
 //            System.out.println(order.getId());
 //        }

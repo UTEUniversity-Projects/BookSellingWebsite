@@ -22,7 +22,6 @@ public class OrderDetailsManagementResponse {
     private double totalPrice;
     private double finalPrice;
     private EOrderStatus status;
-    private String statusDisplay;
     private String statusStyle;
     private String paymentMethod;
     private List<PromotionOrderResponse> promotions;
