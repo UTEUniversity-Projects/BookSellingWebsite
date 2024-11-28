@@ -5,7 +5,6 @@ $(document).ready(() => {
 	const qr = ["https://api.viqr.net/vietqr/VietinBank/113366668888/10000/compact.jpg?FullName=Quy%20Vacxin%20Covid&NDck=UngHoCV",
 				"https://homepage.momocdn.net/blogscontents/momo-upload-api-220808102122-637955508824191258.png",
 				"https://kalite.vn/wp-content/uploads/2021/09/maqrkalite.jpg"];
-	const
 
 	btnCheckouts.forEach((btnCheckout, index) => {
 		btnCheckout.addEventListener("click", () => {
