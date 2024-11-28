@@ -74,7 +74,7 @@ public class OrderMapper {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm dd-MM-yyyy");
 
         List<OrderProductResponse> products = order.getOrderItems().stream()
-                .map(OrderItemMapper::mapToOrderProductResponse)
+                .map(OrderItemMapper::toOrderProductCustomerResponse)
                 .collect(Collectors.toList());
 
         CustomerResponse customer = CustomerMapper.toCustomerResponse(order.getCustomer());
@@ -100,31 +100,7 @@ public class OrderMapper {
         }
         finalPrice = Math.max(finalPrice, 0);
 
-        String publisherName = null;
-        if (lineItems != null && !lineItems.isEmpty()) {
-            // Duyệt qua các OrderItem để lấy thông tin sách
-            for (OrderItem lineItem : lineItems) {
-                // Lấy tên sách từ orderItem
-                Set<Book> books = lineItem.getBooks();
-                if (books != null && !books.isEmpty()) {
-                    // Duyệt qua danh sách sách để lấy thông tin Publisher
-                    for (Book book : books) {
-                        // Lấy BookTemplate từ Book
-                        BookTemplate bookTemplate = book.getBookTemplate();
-                        if (bookTemplate != null) {
-                            // Lấy Publisher từ BookTemplate
-                            Publisher publisher = bookTemplate.getPublisher();
-                            if (publisher != null) {
-                                // Lấy tên nhà xuất bản
-                                publisherName = publisher.getName();
-                                // Bạn có thể sử dụng publisherName tại đây
-                            }
-                        }
-                    }
-                }
-            }
 
-        }
 
         return OrderCustomerResponse.builder()
                 .id(order.getId())
@@ -141,7 +117,6 @@ public class OrderMapper {
                 .finalPrice(finalPrice)
                 .totalDiscount(totalDiscount)
                 .order(order)
-                .publisherName(publisherName)
                 .shipping(shipping)
                 .build();
     }
