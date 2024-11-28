@@ -725,7 +725,7 @@ document.getElementById("submitFeedback").addEventListener("click", function () 
 
         console.log(requestData.content)
 
-        fetch('/staff/response-review/add', {
+        fetch(`${contextPath}/staff/response-review/add`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json; charset=UTF-8'
@@ -785,7 +785,7 @@ document.getElementById("confirmHideReview").addEventListener("click", function 
         reviewId: reviewId
     };
 
-    fetch('/staff/review/update/hidden', {
+    fetch(`${contextPath}/staff/review/update/hidden`, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
