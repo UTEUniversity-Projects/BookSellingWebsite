@@ -289,6 +289,8 @@ $(document).ready(() => {
 			});
 		}
 
+
+
 	}
 
 	function getUrlParam (param) {
@@ -411,8 +413,6 @@ $(document).ready(() => {
 		}
 	}
 
-	console.log(getItemQuantityPerPage());
-
 	const onInput = (parent, e) => {
 		const slides = parent.querySelectorAll('input');
 		const min = parseFloat(slides[0].min);
@@ -442,6 +442,9 @@ $(document).ready(() => {
 		searchData.minPrice = slide1;
 		searchData.maxPrice = slide2;
 
+		addUrlParam("minPrice", searchData.minPrice);
+		addUrlParam("maxPrice", searchData.maxPrice);
+
 		console.log(searchData);
 		searchBook.search(searchData);
 
@@ -459,6 +462,16 @@ $(document).ready(() => {
 					input.oninput = debounce((e) => onInput(range, e), 500);
 				}
 			}));
+
+	function addUrlParam(key, value) {
+		const url = new URL(window.location.href);
+
+		if (value !== null && value !== undefined) {
+			url.searchParams.set(key, value);
+		}
+
+		window.history.pushState({}, '', url.toString());
+	}
 
 });
 

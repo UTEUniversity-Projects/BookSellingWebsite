@@ -58,11 +58,11 @@ public class CustomerListController extends HttpServlet {
                 CustomerDetailResponse customer = customerService.findById(customerId);
                 if ("deactivate".equals(action)) {
                     customerService.deactivateCustomer(customerId);
-                    sendEmailRequest(action, customer.getEmail(), customer.getFullName());
+                    sendEmailRequest(request,action, customer.getEmail(), customer.getFullName());
                     response.getWriter().write("success");
                 } else if ("activate".equals(action)) {
                     customerService.activateCustomer(customerId);
-                    sendEmailRequest(action, customer.getEmail(), customer.getFullName());
+                    sendEmailRequest(request,action, customer.getEmail(), customer.getFullName());
                     response.getWriter().write("success");
                 }
             } catch (NumberFormatException e) {
@@ -75,9 +75,18 @@ public class CustomerListController extends HttpServlet {
         doGet(request, response);
 
     }
-    private void sendEmailRequest(String action, String customerEmail, String customerName) throws IOException {
+    private void sendEmailRequest(HttpServletRequest request,String action, String customerEmail, String customerName) throws IOException {
+        String scheme = request.getScheme();
+        String serverName = request.getServerName();
+        int serverPort = request.getServerPort();
+        String contextPath = request.getContextPath();
 
-        URL url = new URL("http://localhost:8080/BookSellingWebsite/email");
+        String apiUrl = scheme + "://" + serverName;
+        if ((scheme.equals("http") && serverPort != 80) || (scheme.equals("https") && serverPort != 443)) {
+            apiUrl += ":" + serverPort; // Thêm cổng nếu cần
+        }
+        apiUrl += contextPath + "/email";
+        URL url = new URL(apiUrl);
         HttpURLConnection connection = (HttpURLConnection) url.openConnection();
         connection.setRequestMethod("POST");
         connection.setDoOutput(true);

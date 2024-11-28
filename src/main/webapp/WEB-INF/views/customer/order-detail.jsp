@@ -363,6 +363,11 @@
                                     <div class="text-right">
                                         <p>₫${orderProduct.sellingPrice}</p>
                                         <p>x${orderProduct.quantity}</p>
+                                        <button
+                                                class="cr-btn-secondary"
+                                                onclick="window.location.href='${pageContext.request.contextPath}/review-book';">
+                                            Đánh giá
+                                        </button>
                                     </div>
                                 </div>
                             </div>

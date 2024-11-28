@@ -102,6 +102,7 @@ $(document).ready(() => {
 						}
 					},
 					error: function (xhr, status, error) {
+						console.log(error);
 						toast({
 							title: "Lỗi",
 							message: "Có lỗi xảy ra",

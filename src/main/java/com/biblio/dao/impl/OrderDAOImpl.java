@@ -160,6 +160,25 @@ public class OrderDAOImpl extends GenericDAOImpl<Order> implements IOrderDAO {
     public Order update(Order order) {
         return super.update(order);
     }
+    @Override
+    public boolean cancelOrder(Long id) {
+        Order order = findOne(id);
+        if (order == null) {
+            return false;
+        }
+        if (!order.getStatus().equals(EOrderStatus.WAITING_CONFIRMATION)) {
+            return false;
+        }
+        order.setStatus(EOrderStatus.CANCELED);
+
+        for (OrderItem orderItem : order.getOrderItems()) {
+            for (Book book : orderItem.getBooks()) {
+                book.getBookMetadata().setStatus(EBookMetadataStatus.IN_STOCK);
+            }
+        }
+        super.update(order);
+        return true;
+    }
 
     public static void main(String[] args) {
         OrderDAOImpl dao = new OrderDAOImpl();
