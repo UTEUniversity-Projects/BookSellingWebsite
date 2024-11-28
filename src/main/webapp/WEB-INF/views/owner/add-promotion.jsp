@@ -48,10 +48,6 @@
                                     <div class="cr-cat-list cr-card card-default mb-24px">
                                         <div class="cr-card-content">
                                             <div class="cr-cat-form">
-                                                <img
-                                                        class="img-promotion"
-                                                        src="assets/img/product/1.jpg"
-                                                />
                                                 <h3>Thêm Discount</h3>
 
                                                 <!-- Mã -->
@@ -167,10 +163,6 @@
                             <div class="cr-cat-list cr-card card-default mb-24px">
                                 <div class="cr-card-content">
                                     <div class="cr-cat-form">
-                                        <img
-                                                class="img-promotion"
-                                                src="assets/img/product/1.jpg"
-                                        />
                                         <h3>Thêm Voucher</h3>
 
                                             <form class="promotionForm">
@@ -261,10 +253,6 @@
                             <div class="cr-cat-list cr-card card-default mb-24px">
                                 <div class="cr-card-content">
                                     <div class="cr-cat-form">
-                                        <img
-                                                class="img-promotion"
-                                                src="assets/img/product/1.jpg"
-                                        />
                                         <h3>Thêm Freeship</h3>
                                         <form class="promotionForm">
                                             <input type="hidden" name="formType" value="addFreeShip" />
@@ -333,7 +321,6 @@
 <script src="https://cdn.datatables.net/1.13.1/js/jquery.dataTables.js"></script>
 
 
-<script>const contextPath = "<%= request.getContextPath()%>";</script>
 <script src="${pageContext.request.contextPath}/assets/owner/js/add-promotion.js" defer></script>
 <script src="${pageContext.request.contextPath}/assets/owner/js/validator-add-promotion.js" defer></script>
 
