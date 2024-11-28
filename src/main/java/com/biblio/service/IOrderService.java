@@ -29,9 +29,4 @@ public interface IOrderService {
 
     OrderCustomerResponse findOrderById(Long orderId);
 
-    @Transactional
-    void confirmOrder(Long orderId);
-
-    @Transactional
-    void rejectOrder(Long orderId, String reason);
 }

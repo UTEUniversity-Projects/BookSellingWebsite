@@ -231,23 +231,4 @@ public class OrderServiceImpl implements IOrderService {
         return countOrderOfCustomerResponses;
     }
 
-
-
-    @Transactional
-    @Override
-    public void confirmOrder(Long orderId) {
-        Order order = orderDAO.findOne(orderId);
-        order.setStatus(EOrderStatus.PACKING);
-        orderDAO.updateOrder(order);
-    }
-
-    @Transactional
-    @Override
-    public void rejectOrder(Long orderId, String reason) {
-        Order order = orderDAO.findOne(orderId);
-        order.setStatus(EOrderStatus.CANCELED);
-        orderDAO.updateOrder(order);
-    }
-
-
 }

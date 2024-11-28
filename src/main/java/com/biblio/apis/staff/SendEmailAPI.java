@@ -2,9 +2,7 @@ package com.biblio.apis.staff;
 
 import com.biblio.dto.response.OrderCustomerResponse;
 import com.biblio.entity.Book;
-import com.biblio.entity.MediaFile;
 import com.biblio.entity.OrderItem;
-import com.biblio.entity.Promotion;
 import com.biblio.service.IEmailService;
 import com.biblio.service.impl.EmailServiceImpl;
 import com.biblio.service.impl.OrderServiceImpl;
@@ -92,7 +90,7 @@ public class SendEmailAPI extends HttpServlet {
                 return;
             }
             // Gửi email
-            String emailContent = generateOrderEmail(order/*,finalPrice*/);
+            String emailContent = generateOrderEmail(request,order/*,finalPrice*/);
             System.out.println(emailContent);
 
             emailService.sendEmail(order.getEmail(), "Xác nhận đơn hàng #" + order.getId(), emailContent);
@@ -111,104 +109,84 @@ public class SendEmailAPI extends HttpServlet {
     }
 
     // Hàm tạo nội dung email từ thông tin Order
-    private String generateOrderEmail(OrderCustomerResponse order) {
+    private String generateOrderEmail(HttpServletRequest request, OrderCustomerResponse order) {
         StringBuilder emailContent = new StringBuilder();
 
         // Bắt đầu HTML
-        emailContent.append("<html><body>");
-        emailContent.append("<p>Kính gửi ").append(order.getCustomerName()).append(",</p>");
-        emailContent.append("<p>Cảm ơn bạn đã đặt hàng tại <b>Biblio Bookshop</b>.</p>");
+        emailContent.append("<html><body style=\"font-family: Arial, sans-serif; color: #333; line-height: 1.6;\">");
+        emailContent.append("<div style=\"max-width: 600px; margin: auto; border: 1px solid #ddd; border-radius: 10px; padding: 20px; background-color: #f9f9f9;\">");
+
+        // Header
+        emailContent.append("<div style=\"text-align: center;\">");
+        emailContent.append("<img src=\"https://scontent.fsgn8-4.fna.fbcdn.net/v/t39.30808-6/468703611_1664827497410053_3942884439111183245_n.jpg?_nc_cat=107&ccb=1-7&_nc_sid=127cfc&_nc_ohc=zXw3uGs7ZsEQ7kNvgEXUmAZ&_nc_zt=23&_nc_ht=scontent.fsgn8-4.fna&_nc_gid=A2ITxhjZT2QDYgdmlw7QjNT&oh=00_AYBn-1ZCU7YRtTLovzTu7xEwxk-NF3FUYThFLp0dVmgKBg&oe=674DF1D9\" alt=\"logo\" style=\"width: 150px; height: auto;\"/>");
+        emailContent.append("<h1 style=\"color: #d35400;\">Biblio Bookshop</h1>");
+        emailContent.append("</div>");
+
+        emailContent.append("<p>Chào <b>").append(order.getCustomerName()).append("</b>,</p>");
+        emailContent.append("<p>Cảm ơn bạn đã mua sắm tại <b>Biblio Bookshop</b>! Dưới đây là thông tin chi tiết về đơn hàng của bạn:</p>");
 
         // Thông tin đơn hàng
-        emailContent.append("<p><b>Thông tin chi tiết đơn hàng:</b></p>");
-        emailContent.append("<hr>");
-        emailContent.append("<p>Mã đơn hàng: ").append(order.getId()).append("</p>");
-        emailContent.append("<p>Ngày đặt hàng: ").append(formatDateTime(LocalDateTime.parse(order.getOrderDate()), "dd-MM-yyyy HH:mm")).append("</p>");
-        emailContent.append("<p>Trạng thái: ").append(order.getStatus()).append("</p>");
+        emailContent.append("<table style=\"width: 100%; border-collapse: collapse; margin: 20px 0;\">");
+        emailContent.append("<tr><td style=\"padding: 10px; border: 1px solid #ddd;\"><b>Mã đơn hàng:</b></td><td style=\"padding: 10px; border: 1px solid #ddd;\">").append(order.getId()).append("</td></tr>");
+        emailContent.append("<tr><td style=\"padding: 10px; border: 1px solid #ddd;\"><b>Ngày đặt hàng:</b></td><td style=\"padding: 10px; border: 1px solid #ddd;\">").append(formatDateTime(LocalDateTime.parse(order.getOrderDate()), "dd-MM-yyyy HH:mm")).append("</td></tr>");
+        emailContent.append("<tr><td style=\"padding: 10px; border: 1px solid #ddd;\"><b>Trạng thái:</b></td><td style=\"padding: 10px; border: 1px solid #ddd;\">").append(order.getStatus()).append("</td></tr>");
+        emailContent.append("</table>");
 
-        // Sản phẩm
-        emailContent.append("<p><b>Sản phẩm:</b></p>");
+        // Danh sách sản phẩm
+        emailContent.append("<h3 style=\"color: #d35400;\">Sản phẩm trong đơn hàng:</h3>");
+        emailContent.append("<table style=\"width: 100%; border-collapse: collapse;\">");
+        emailContent.append("<tr style=\"background-color: #f2f2f2;\">");
+        emailContent.append("<th style=\"padding: 10px; border: 1px solid #ddd; text-align: left;\">Tên sách</th>");
+        emailContent.append("<th style=\"padding: 10px; border: 1px solid #ddd; text-align: left;\">Số lượng</th>");
+        emailContent.append("<th style=\"padding: 10px; border: 1px solid #ddd; text-align: left;\">Giá (VND)</th>");
+        emailContent.append("</tr>");
 
-        // Tạo một Map để nhóm các cuốn sách giống nhau
         Map<String, Integer> bookCountMap = new HashMap<>();
-        emailContent.append("Sản phẩm:\n");
         for (OrderItem item : order.getLineItems()) {
             for (Book book : item.getBooks()) {
-                String bookTitle = book.getTitle();  // Tên sách
+                String bookTitle = book.getTitle();
                 bookCountMap.put(bookTitle, bookCountMap.getOrDefault(bookTitle, 0) + 1);
             }
         }
 
-        // Hiển thị các sách với số lượng
         for (Map.Entry<String, Integer> entry : bookCountMap.entrySet()) {
             String bookTitle = entry.getKey();
             int quantity = entry.getValue();
+            int bookPrice = 0;
 
-            // Lấy giá của sách
-            int bookPrice = 0; // Định nghĩa kiểu int thay vì double
             for (OrderItem item : order.getLineItems()) {
                 for (Book book : item.getBooks()) {
                     if (book.getTitle().equals(bookTitle)) {
-                        bookPrice = (int) book.getSellingPrice(); // Ép kiểu giá từ double sang int
+                        bookPrice = (int) book.getSellingPrice();
                         break;
                     }
                 }
             }
 
-
-            // Lấy hình ảnh cho sách
-            List<MediaFile> mediaFiles = order.getLineItems().stream()
-                    .flatMap(item -> item.getBooks().stream())
-                    .filter(book -> book.getTitle().equals(bookTitle))
-                    .findFirst()
-                    .map(book -> book.getBookTemplate().getMediaFiles())
-                    .orElse(Collections.emptyList());
-
-            if (!mediaFiles.isEmpty()) {
-                MediaFile mediaFile = mediaFiles.get(0);
-                emailContent.append("<p>- ").append(bookTitle)
-                        .append(" (Giá: ").append(bookPrice).append(" VND) x ")
-                        .append(quantity).append("</p>");
-                emailContent.append("<img src=\"")
-                        .append(mediaFile.getImagePath())
-                        .append("\" alt=\"").append(bookTitle)
-                        .append("\" style=\"width: 100px; height: auto;\"/><br>");
-            }
+            emailContent.append("<tr>");
+            emailContent.append("<td style=\"padding: 10px; border: 1px solid #ddd;\">").append(bookTitle).append("</td>");
+            emailContent.append("<td style=\"padding: 10px; border: 1px solid #ddd;\">").append(quantity).append("</td>");
+            emailContent.append("<td style=\"padding: 10px; border: 1px solid #ddd;\">").append(bookPrice).append("</td>");
+            emailContent.append("</tr>");
         }
+        emailContent.append("</table>");
 
         // Tổng giá trị và VAT
-        emailContent.append("<p>Tổng tiền hàng: ").append((int)order.calTotalPrice()).append(" VND</p>");
-        emailContent.append("<p>Thuế VAT: ").append(order.getVat()).append("%</p>");
+        emailContent.append("<h3 style=\"color: #d35400;\">Tổng cộng:</h3>");
+        emailContent.append("<p><b>Tổng tiền hàng:</b> ").append((int) order.calTotalPrice()).append(" VND</p>");
+        emailContent.append("<p><b>Thuế VAT:</b> ").append(order.getVat()).append("%</p>");
 
-        // Khuyến mãi áp dụng
-        if (order.getPromotions() != null && !order.getPromotions().isEmpty()) {
-            emailContent.append("<p><b>Khuyến mãi áp dụng:</b></p>");
-            for (Promotion promo : order.getPromotions()) {
-                emailContent.append("<p>- ").append(promo.getDescription()).append("</p>");
-            }
-        }
-
-        // Phương thức thanh toán và địa chỉ giao hàng
-        emailContent.append("<p>Phương thức thanh toán: ").append(order.getPaymentType()).append("</p>");
-        if (order.getAddress() != null) {
-            emailContent.append("<p>Địa chỉ giao hàng: ").append(order.getAddress()).append("</p>");
-        }
-
-        // Ghi chú
-        if (order.getNote() != null && !order.getNote().isEmpty()) {
-            emailContent.append("<p>Ghi chú: ").append(order.getNote()).append("</p>");
-        }
-
+        // Footer
         emailContent.append("<hr>");
-        emailContent.append("<p>Nếu bạn có bất kỳ thắc mắc nào, vui lòng liên hệ với chúng tôi qua email: <b>biblio@gmail.com</b>.</p>");
-        emailContent.append("<p>Trân trọng,</p>");
-        emailContent.append("<p><b>Biblio Bookshop</b></p>");
+        emailContent.append("<p style=\"text-align: center;\">Cảm ơn bạn đã tin tưởng và ủng hộ <b>Biblio Bookshop</b>. Nếu có bất kỳ thắc mắc nào, vui lòng liên hệ qua email: <a href=\"mailto: support@biblio.com\">support@biblio.com</a>.</p>");
+        emailContent.append("</div>");
 
         // Kết thúc HTML
         emailContent.append("</body></html>");
 
         return emailContent.toString();
     }
+
 
     protected void doPost_CancelOrder(HttpServletRequest request, HttpServletResponse response) throws IOException {
         response.setContentType("application/json");
@@ -255,22 +233,44 @@ public class SendEmailAPI extends HttpServlet {
     private String generateCancelOrderEmail(OrderCustomerResponse order, String cancelContent) {
         StringBuilder emailContent = new StringBuilder();
 
-        emailContent.append("<html><body>");
-        emailContent.append("<p>Kính gửi <strong>").append(order.getCustomerName()).append("</strong>,</p>");
-        emailContent.append("<p>Chúng tôi rất tiếc phải thông báo rằng đơn hàng của bạn đã bị hủy.</p>");
-        emailContent.append("<p><strong>Lý do:</strong> ").append(cancelContent).append(".</p>");
-        emailContent.append("<p><strong>Thông tin chi tiết đơn hàng:</strong></p>");
-        emailContent.append("<hr>");
-        emailContent.append("<p><strong>Mã đơn hàng:</strong> ").append(order.getId()).append("</p>");
-        emailContent.append("<p><strong>Ngày đặt hàng:</strong> ").append(formatDateTime(LocalDateTime.parse(order.getOrderDate()), "dd-MM-yyyy HH:mm")).append("</p>");
-        emailContent.append("<p><strong>Trạng thái:</strong> Đã hủy</p>");
-        emailContent.append("<hr>");
-        emailContent.append("<p>Chúng tôi sẽ hoàn tiền sớm nhất cho bạn.</p>");
-        emailContent.append("<p>Nếu bạn cần hỗ trợ thêm, vui lòng liên hệ với chúng tôi qua email <a href=\"mailto:biblio@gmail.com\">biblio@gmail.com</a>.</p>");
-        emailContent.append("<p>Mong nhận được sự thông cảm từ quý khách, chúc quý khách mội ngày tốt lành,<br>Biblio Bookshop</p>");
+        // Bắt đầu HTML
+        emailContent.append("<html><body style=\"font-family: Arial, sans-serif; color: #333; line-height: 1.6;\">");
+        emailContent.append("<div style=\"max-width: 600px; margin: auto; border: 1px solid #ddd; border-radius: 10px; padding: 20px; background-color: #f9f9f9;\">");
+
+        // Header
+        emailContent.append("<div style=\"text-align: center;\">");
+        emailContent.append("<img src=\"https://scontent.fsgn8-4.fna.fbcdn.net/v/t39.30808-6/468703611_1664827497410053_3942884439111183245_n.jpg?_nc_cat=107&ccb=1-7&_nc_sid=127cfc&_nc_ohc=zXw3uGs7ZsEQ7kNvgEXUmAZ&_nc_zt=23&_nc_ht=scontent.fsgn8-4.fna&_nc_gid=A2ITxhjZT2QDYgdmlw7QjNT&oh=00_AYBn-1ZCU7YRtTLovzTu7xEwxk-NF3FUYThFLp0dVmgKBg&oe=674DF1D9\" alt=\"logo\" style=\"width: 150px; height: auto;\"/>");
+        emailContent.append("<h1 style=\"color: #d35400;\">Biblio Bookshop</h1>");
+        emailContent.append("</div>");
+
+        // Nội dung chính
+        emailContent.append("<p>Chào <strong>").append(order.getCustomerName()).append("</strong>,</p>");
+        emailContent.append("<p style=\"color: #e74c3c; font-size: 16px;\"><strong>Chúng tôi rất tiếc phải thông báo rằng đơn hàng của bạn đã bị hủy.</strong></p>");
+        emailContent.append("<p><strong>Lý do:</strong> ").append(cancelContent).append("</p>");
+
+        emailContent.append("<h3 style=\"color: #d35400;\">Thông tin chi tiết đơn hàng:</h3>");
+        emailContent.append("<table style=\"width: 100%; border-collapse: collapse; margin: 20px 0;\">");
+        emailContent.append("<tr><td style=\"padding: 10px; border: 1px solid #ddd;\">Mã đơn hàng:</td><td style=\"padding: 10px; border: 1px solid #ddd;\">").append(order.getId()).append("</td></tr>");
+        emailContent.append("<tr><td style=\"padding: 10px; border: 1px solid #ddd;\">Ngày đặt hàng:</td><td style=\"padding: 10px; border: 1px solid #ddd;\">").append(formatDateTime(LocalDateTime.parse(order.getOrderDate()), "dd-MM-yyyy HH:mm")).append("</td></tr>");
+        emailContent.append("<tr><td style=\"padding: 10px; border: 1px solid #ddd;\">Trạng thái:</td><td style=\"padding: 10px; border: 1px solid #ddd; color: #e74c3c;\"><strong>Đã hủy</strong></td></tr>");
+        emailContent.append("</table>");
+
+        // Thông báo hoàn tiền
+        emailContent.append("<p><strong>Chúng tôi sẽ hoàn tiền sớm nhất cho bạn.</strong></p>");
+        emailContent.append("<p>Nếu bạn cần hỗ trợ thêm, vui lòng liên hệ với chúng tôi qua email: <a href=\"mailto: support@biblio.com\" style=\"color: #3498db; text-decoration: none;\">support@biblio.com</a>.</p>");
+
+        // Footer
+        emailContent.append("<hr style=\"border: none; border-top: 1px solid #ddd; margin: 20px 0;\">");
+        emailContent.append("<p style=\"text-align: center;\">Cảm ơn bạn đã tin tưởng và đồng hành cùng <strong>Biblio Bookshop</strong>. Chúng tôi mong được phục vụ bạn trong tương lai.</p>");
+        emailContent.append("<p style=\"text-align: center;\">Chúc bạn một ngày tốt lành,</p>");
+        emailContent.append("<p style=\"text-align: center; font-weight: bold;\">Biblio Bookshop</p>");
+
+        // Kết thúc HTML
+        emailContent.append("</div>");
         emailContent.append("</body></html>");
 
         return emailContent.toString();
     }
+
 
 }
