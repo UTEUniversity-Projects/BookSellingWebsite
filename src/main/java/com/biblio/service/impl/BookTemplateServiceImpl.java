@@ -5,11 +5,14 @@ import com.biblio.dao.IBookTemplateDAO;
 import com.biblio.dto.request.SearchBookRequest;
 import com.biblio.dto.response.*;
 
+import com.biblio.entity.Book;
 import com.biblio.entity.BookTemplate;
+import com.biblio.enumeration.EBookTemplateStatus;
 import com.biblio.mapper.BookTemplateMapper;
 import com.biblio.service.IBookTemplateService;
 
 import javax.inject.Inject;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
@@ -89,5 +92,16 @@ public class BookTemplateServiceImpl implements IBookTemplateService {
         return bookTemplateDAO.countByCriteria(request.getTitle(), request.getCategoryId(), request.getSortBy());
     }
 
+    @Override
+    public List<BookLineResponse> getAllBookLineResponse() {
+        List<BookTemplate> bookTemplates = bookTemplateDAO.findAllForManagement();
+        List<BookLineResponse> bookLineResponseList = new ArrayList<>();
+        for (BookTemplate bookTemplate : bookTemplates) {
+            Double perValueBooksSold = 0.0D;
 
+            bookLineResponseList.add(BookTemplateMapper.toBookLineResponse(bookTemplate, perValueBooksSold));
+
+        }
+        return bookLineResponseList;
+    }
 }

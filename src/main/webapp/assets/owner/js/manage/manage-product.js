@@ -7,9 +7,9 @@ function initializeTableRowClickHandler() {
             const row = event.target.closest(".item-row");
 
             if (row && !event.target.closest("button") && !event.target.closest(".dropdown-menu")) {
-                const authorId = row.getAttribute("data-id");
+                const productId = row.getAttribute("data-id");
                 //  rowAction(authorId, "view"); // Trigger "view" action
-                window.location.href = `${contextPath}/owner/product-details?id=${authorId}`;
+                window.location.href = `${contextPath}/owner/product/view?action=view&id=${productId}`;
             }
         });
     }

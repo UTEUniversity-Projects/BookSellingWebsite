@@ -21,6 +21,8 @@ public interface IBookTemplateService {
   
     List<BookSoldAllTimeResponse> getListCountBookSoldAllTime();
 
+    List<BookLineResponse> getAllBookLineResponse();
+
     Long getTotalBookTemplateQuantity();
 
 }

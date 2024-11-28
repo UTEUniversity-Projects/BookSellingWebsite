@@ -10,8 +10,7 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 @NoArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE)
-public class AuthorRequest {
-    String id;
+public class AuthorCreateRequest {
     String name;
     String avatar;
     String introduction;

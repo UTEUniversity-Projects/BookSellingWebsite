@@ -2,6 +2,7 @@ package com.biblio.mapper;
 
 import com.biblio.dao.impl.BookTemplateDAOImpl;
 import com.biblio.dto.request.BookRequest;
+import com.biblio.dto.response.BookLineResponse;
 import com.biblio.dto.response.BookResponse;
 import com.biblio.dto.response.BookSoldResponse;
 import com.biblio.dto.response.CountBookSoldResponse;
@@ -9,14 +10,18 @@ import com.biblio.entity.Book;
 import com.biblio.enumeration.EBookAgeRecommend;
 import com.biblio.enumeration.EBookCondition;
 import com.biblio.enumeration.EBookFormat;
+import com.biblio.enumeration.EBookTemplateStatus;
 import com.biblio.utils.EnumUtil;
 
+import java.text.DecimalFormat;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
 public class BookMapper {
+
     // region EntityToDTO
 
     public static BookResponse toBookResponse(Book book) {

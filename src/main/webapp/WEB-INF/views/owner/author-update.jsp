@@ -2,8 +2,6 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
-<link href='https://fonts.googleapis.com/css?family=Nunito' rel='stylesheet'>
-
 <!-- main content -->
 <div class="cr-main-content">
     <div class="container-fluid">
@@ -19,7 +17,7 @@
             </div>
         </div>
         <div class="row">
-            <form id="authorUpdateForm" action="${pageContext.request.contextPath}/owner/author/update" method="post" class="d-flex">
+            <form id="authorUpdateForm" class="d-flex">
                 <div class="col-xxl-3 col-xl-4 col-md-12">
                     <div class="vendor-sticky-bar">
                         <div class="col-xl-12">

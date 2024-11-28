@@ -51,13 +51,13 @@
                             ></a>
                             <ul class="cr-sb-subdrop condense">
                                 <li>
-                                    <a href="${pageContext.request.contextPath}/owner/product-list" class="cr-page-link drop"
+                                    <a href="${pageContext.request.contextPath}/owner/product/list" class="cr-page-link drop"
                                     ><i class="ri-checkbox-blank-circle-line"></i>Danh
                                         sách sản phẩm</a
                                     >
                                 </li>
                                 <li>
-                                    <a href="${pageContext.request.contextPath}/owner/add-product" class="cr-page-link drop"
+                                    <a href="${pageContext.request.contextPath}/owner/product/create" class="cr-page-link drop"
                                     ><i class="ri-checkbox-blank-circle-line"></i>Thêm sản
                                         phẩm</a>
                                 </li>
@@ -89,13 +89,13 @@
                             ></a>
                             <ul class="cr-sb-subdrop condense">
                                 <li>
-                                    <a href="/owner/promotion-list" class="cr-page-link drop"
+                                    <a href="${pageContext.request.contextPath}/owner/promotion-list" class="cr-page-link drop"
                                     ><i class="ri-checkbox-blank-circle-line"></i>Danh
                                         sách khuyến mãi</a
                                     >
                                 </li>
                                 <li>
-                                    <a href="/owner/add-promotion" class="cr-page-link drop"
+                                    <a href="${pageContext.request.contextPath}/owner/add-promotion" class="cr-page-link drop"
                                     ><i class="ri-checkbox-blank-circle-line"></i>Thêm
                                         khuyến mãi</a
                                     >

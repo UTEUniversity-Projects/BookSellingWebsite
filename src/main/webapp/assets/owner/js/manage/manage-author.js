@@ -154,6 +154,7 @@ document.addEventListener("DOMContentLoaded", function () {
 document.addEventListener("DOMContentLoaded", () => {
     const avatarInput = document.querySelector("#avatar");
     const createButton = document.querySelector("#create");
+    const updateButton = document.querySelector("#update");
 
     const uploadImage = async (dir, inputSelector) => {
         try {
@@ -186,26 +187,28 @@ document.addEventListener("DOMContentLoaded", () => {
     };
 
     const handleCreateAuthor = async () => {
-        let avatar = await uploadImage("author", "#avatar");
-        if (!avatar) {
-            avatar = `/images/anonymous/author.jpg`;
-        }
-
-        const form = document.getElementById("authorForm");
-        const formData = new FormData(form);
-
-        const introduction = editor.root.innerHTML.trim();
-        if (!formData.get("name") || !introduction || introduction === "<p><br></p>") {
-            alert("Tên tác giả và giới thiệu không được để trống!");
-            return;
-        }
-
-        formData.append("avatar", avatar);
-        formData.append("introduction", introduction);
-
-        const authorData = Object.fromEntries(formData.entries());
-
         try {
+            // Lấy thông tin từ form
+            const form = document.getElementById("authorCreateForm");
+            const formData = new FormData(form);
+
+            // Kiểm tra dữ liệu cơ bản
+            const introduction = editor.root.innerHTML.trim();
+            if (!formData.get("name") || !introduction || introduction === "<p><br></p>") {
+                alert("Tên tác giả và giới thiệu không được để trống!");
+                return;
+            }
+
+            // Upload ảnh (hàm uploadImage là bất đồng bộ)
+            let avatar = await uploadImage("author", "#avatar");
+            avatar = avatar || "/images/anonymous/author.jpg";
+
+            // Chuẩn bị dữ liệu để gửi
+            formData.append("avatar", avatar);
+            formData.append("introduction", introduction);
+            const authorData = Object.fromEntries(formData.entries());
+
+            // Gửi request tạo mới tác giả
             const response = await fetch(`${contextPath}/owner/author/create`, {
                 method: "POST",
                 headers: {
@@ -216,6 +219,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
             const result = await response.json();
 
+            // Xử lý kết quả
             if (result.success) {
                 alert("Thêm mới thành công!");
                 window.location.href = `${contextPath}/owner/author/list`;
@@ -224,45 +228,45 @@ document.addEventListener("DOMContentLoaded", () => {
                 console.error("Create failed:", result.message || response.statusText);
             }
         } catch (error) {
-            console.error("Error creating:", error);
+            // Xử lý lỗi bất ngờ
+            console.error("Error during the author process:", error);
             alert("Đã xảy ra lỗi khi thêm mới!");
         }
     };
 
     const handleUpdateAuthor = async () => {
-        const formData = new FormData(document.getElementById("authorUpdateForm"));
+        try {
+            // Lấy dữ liệu từ form
+            const formData = new FormData(document.getElementById("authorUpdateForm"));
+            const name = formData.get("name");
+            const introduction = editor.root.innerHTML.trim();
+            let avatar = formData.get("originAvatar");
 
-        // Lấy giá trị từ input ẩn
-        let avatar = formData.get("originAvatar");
-
-        // Kiểm tra nếu người dùng upload avatar mới
-        const avatarInput = document.getElementById("avatar");
-        if (avatarInput.files && avatarInput.files.length > 0) {
-            avatar = await uploadImage("author", "#avatar");
-            if (!avatar) {
-                alert("Không thể upload hình ảnh, vui lòng thử lại.");
+            // Kiểm tra dữ liệu cơ bản
+            if (!name || !introduction || introduction === "<p><br></p>") {
+                alert("Tên tác giả và giới thiệu không được để trống!");
                 return;
             }
-        }
 
-        // Lấy nội dung từ Quill Editor
-        const introduction = editor.root.innerHTML.trim();
-        const name = formData.get("name");
+            // Xử lý upload ảnh nếu có thay đổi
+            const avatarInput = document.getElementById("avatar");
+            if (avatarInput.files && avatarInput.files.length > 0) {
+                avatar = await uploadImage("author", "#avatar");
+                if (!avatar) {
+                    alert("Không thể upload hình ảnh, vui lòng thử lại.");
+                    return;
+                }
+            }
 
-        if (!name || !introduction || introduction === "<p><br></p>") {
-            alert("Tên tác giả và giới thiệu không được để trống!");
-            return;
-        }
+            // Chuẩn bị dữ liệu để gửi
+            const authorData = {
+                id: formData.get("id"),
+                name: name,
+                avatar: avatar,
+                introduction: introduction
+            };
 
-        // Chuẩn bị dữ liệu gửi đi
-        const authorData = {
-            id: formData.get("id"),
-            name: name,
-            avatar: avatar,
-            introduction: introduction
-        };
-
-        try {
+            // Gửi yêu cầu cập nhật
             const response = await fetch(`${contextPath}/owner/author/update`, {
                 method: "POST",
                 headers: {
@@ -273,25 +277,28 @@ document.addEventListener("DOMContentLoaded", () => {
 
             const result = await response.json();
 
+            // Xử lý phản hồi từ server
             if (result.success) {
-                rowAction(authorData.id, "view");
+                alert("Cập nhật thành công!");
+                rowAction(authorData.id, "view"); // Chuyển đổi chế độ hiển thị nếu cập nhật thành công
             } else {
                 alert("Cập nhật thất bại!");
                 console.error("Update failed:", result.message || response.statusText);
             }
         } catch (error) {
-            console.error("Error updating:", error);
+            // Xử lý lỗi bất ngờ
+            console.error("Error during the author update process:", error);
             alert("Đã xảy ra lỗi khi cập nhật!");
         }
     };
 
     createButton.addEventListener("click", (e) => {
         e.preventDefault();
-        handleCreateAuthor();
+        handleCreateAuthor().then(r => {});
     });
-    document.getElementById("update").addEventListener("click", function (event) {
-        event.preventDefault(); // Ngăn hành vi mặc định khi bấm nút
-        handleUpdateAuthor();   // Gọi hàm cập nhật
+    document.getElementById("authorUpdateForm").addEventListener("submit", (e) => {
+        e.preventDefault(); // Ngăn form gửi yêu cầu đến controller
+        handleUpdateAuthor().then(r => {}); // Gọi hàm xử lý JavaScript
     });
 });
 

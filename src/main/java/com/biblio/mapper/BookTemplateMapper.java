@@ -5,8 +5,10 @@ import com.biblio.dto.response.*;
 import com.biblio.entity.*;
 import com.biblio.enumeration.EBookLanguage;
 import com.biblio.enumeration.EBookMetadataStatus;
+import com.biblio.enumeration.EBookTemplateStatus;
 
 import java.text.DecimalFormat;
+import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Comparator;
@@ -16,6 +18,35 @@ import java.util.stream.Collectors;
 import static com.biblio.utils.DateTimeUtil.formatDateTime;
 
 public class BookTemplateMapper {
+
+    public static BookLineResponse toBookLineResponse(
+            BookTemplate bookTemplate,
+            Double perValueBooksSold
+    ) {
+        DecimalFormat formatter = new DecimalFormat("#,###,###,###,###,###,###");
+        DecimalFormat percentFormatter = new DecimalFormat("#.0");
+
+        Book singleBook = bookTemplate.getBooks().iterator().next();
+        Double avgRate = bookTemplate.calculateReviewRate();
+
+        return BookLineResponse.builder()
+                .id(bookTemplate.getId())
+                .imageUrl(bookTemplate
+                        .getMediaFiles()
+                        .get(0)
+                        .getStoredCode())
+                .title(singleBook.getTitle())
+                .publisher(bookTemplate.getPublisher().getName())
+                .perValueBooksSold(perValueBooksSold != null ? Double.parseDouble(percentFormatter.format(perValueBooksSold)) : 0.0D)
+                .booksSold(String.valueOf(bookTemplate.getBooks().stream()
+                        .filter(book -> book.getBookMetadata().getStatus() == EBookMetadataStatus.SOLD).count()))
+                .avgRate(String.format("%.1f", avgRate))
+                .sellingPrice(formatter.format(singleBook.getSellingPrice()).replace(",", "."))
+                .statusStyle(bookTemplate.getStatus().getStatusStyle())
+                .statusDisplay(bookTemplate.getStatus().getDescription())
+                .build();
+    }
+
     // region Entity to DTO
 
     public static BookManagementResponse toBookManagementResponse(BookTemplate bookTemplate) {

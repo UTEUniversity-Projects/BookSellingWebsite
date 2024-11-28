@@ -1,6 +1,9 @@
 package com.biblio.dao.impl;
 
 import com.biblio.dao.IAuthorDAO;
+import com.biblio.dto.request.AuthorCreateRequest;
+import com.biblio.dto.request.AuthorDeleteRequest;
+import com.biblio.dto.request.AuthorUpdateRequest;
 import com.biblio.entity.Author;
 import com.biblio.entity.Book;
 import com.biblio.entity.BookTemplate;
@@ -73,19 +76,22 @@ public class AuthorDAOImpl extends GenericDAOImpl<Author> implements IAuthorDAO 
     }
 
     @Override
-    public void createAuthor(Author author) {
-        String sql = "INSERT INTO author (name, avatar, introduction, join_at) VALUES (:name, :avatar, :introduction, :joinAt)";
+    public void createAuthor(AuthorCreateRequest authorCreateRequest) {
+        String sql = "INSERT INTO author (name, avatar, introduction, join_at) " +
+                "VALUES (:name, :avatar, :introduction, :joinAt)";
+
         Map<String, Object> params = new HashMap<>();
-        params.put("name", author.getName());
-        params.put("avatar", author.getAvatar());
-        params.put("introduction", author.getIntroduction());
-        params.put("joinAt", author.getJoinAt().toString());
+        params.put("name", authorCreateRequest.getName());
+        params.put("avatar", authorCreateRequest.getAvatar());
+        params.put("introduction", authorCreateRequest.getIntroduction());
+        params.put("joinAt", authorCreateRequest.getJoinAt());
 
         super.executeNativeQuery(sql, params);
+
     }
 
     @Override
-    public void updateAuthor(Author author) {
+    public void updateAuthor(AuthorUpdateRequest authorUpdateRequest) {
         String sql = "UPDATE author SET " +
                 "name = :name, " +
                 "avatar = :avatar, " +
@@ -93,17 +99,22 @@ public class AuthorDAOImpl extends GenericDAOImpl<Author> implements IAuthorDAO 
                 "WHERE id = :id";
 
         Map<String, Object> params = new HashMap<>();
-        params.put("name", author.getName());
-        params.put("avatar", author.getAvatar());
-        params.put("introduction", author.getIntroduction());
-        params.put("id", author.getId());
+        params.put("name", authorUpdateRequest.getName());
+        params.put("avatar", authorUpdateRequest.getAvatar());
+        params.put("introduction", authorUpdateRequest.getIntroduction());
+        params.put("id", authorUpdateRequest.getId());
 
         super.executeNativeQuery(sql, params);
     }
 
     @Override
-    public void deleteAuthor(Long id) {
-        super.delete(id);
+    public void deleteAuthor(AuthorDeleteRequest authorDeleteRequest) {
+        String sql = "DELETE FROM author a WHERE a.id = :id";
+
+        Map<String, Object> params = new HashMap<>();
+        params.put("id", authorDeleteRequest.getId());
+
+        super.executeNativeQuery(sql, params);
     }
 
     @Override

@@ -12,7 +12,7 @@
                 </div>
                 <ul>
                     <li><a href="${pageContext.request.contextPath}/owner/ecommerce"><b>Biblio</b></a></li>
-                    <li><a href="${pageContext.request.contextPath}/owner/product-list"><b>Danh sách sản phẩm</b></a></li>
+                    <li><a href="${pageContext.request.contextPath}/owner/product/list"><b>Danh sách sản phẩm</b></a></li>
                     <li><b>Chi tiết sản phẩm</b></li>
                 </ul>
             </div>
@@ -60,7 +60,7 @@
                 <div style="font-size: 80%">
                     <p>
                         <c:forEach var="author" items="${book.authors}" varStatus="status">
-                            <span class="name author-name-inline">${author.name}</span>
+                            <span class="name name-inline">${author.name}</span>
                             <i>(tác giả)</i>
                             <c:if test="${status.last}">
                                 <c:if test="${not empty book.translators}">
@@ -72,7 +72,7 @@
                             </c:if>
                         </c:forEach>
                         <c:forEach var="translator" items="${book.translators}" varStatus="status">
-                            <span class="name">${translator.name}</span>
+                            <span class="name name-inline">${translator.name}</span>
                             <i>(dịch giả)</i>
                             <c:if test="${!status.last}">
                                 ,
@@ -106,9 +106,9 @@
                         <span class="new-price price-value">${book.sellingPrice} VNĐ</span>
                         <span class="old-price price-value">${book.sellingPrice} VNĐ</span>
                     </div>
-                    <div class="d-flex align-items-center">
-                        <i class="ri-community-line me-1" style="font-size: 20px"></i>
-                        <p>Nhà xuất bản Văn hóa và Nghệ thuật</p>
+                    <div class="d-flex align-items-center" style="color: #2b3647;">
+                        <i class="ri-community-line me-1" style="font-size: 20px;"></i>
+                        <p style="color: #2b3647;">${book.publisher}</p>
                     </div>
                     <div class="cr-size-weight">
                         <h5><span>Tình trạng</span> :</h5>
@@ -120,7 +120,7 @@
                     </div>
                 </div>
                 <hr class="my-4">
-                <div class="slider slider-nav thumb-image">
+                <div class="slider slider-nav">
                     <div>
                         <div class="slider-info-title text-center">
                             Số trang
@@ -137,7 +137,7 @@
                             Ngôn ngữ
                         </div>
                         <div class="slider-icon text-center">
-                            <i class="ri-file-copy-2-line"></i>
+                            <i class="ri-earth-line"></i>
                         </div>
                         <div class="slider-info-value text-center">
                             ${book.languages}
@@ -148,7 +148,7 @@
                             Nhà xuất bản
                         </div>
                         <div class="slider-icon text-center">
-                            <i class="ri-file-copy-2-line"></i>
+                            <i class="ri-community-line"></i>
                         </div>
                         <div class="slider-info-value text-center">
                             ${book.publisher}
@@ -159,7 +159,7 @@
                             Ngày xuất bản
                         </div>
                         <div class="slider-icon text-center">
-                            <i class="ri-file-copy-2-line"></i>
+                            <i class="ri-calendar-2-line"></i>
                         </div>
                         <div class="slider-info-value text-center">
                             ${book.publicationDate}
@@ -170,7 +170,7 @@
                             Kích thước
                         </div>
                         <div class="slider-icon text-center">
-                            <i class="ri-file-copy-2-line"></i>
+                            <i class="ri-git-repository-line"></i>
                         </div>
                         <div class="slider-info-value text-center">
                             ${book.size}
@@ -178,10 +178,21 @@
                     </div>
                     <div>
                         <div class="slider-info-title text-center">
+                            Trọng lượng
+                        </div>
+                        <div class="slider-icon text-center">
+                            <i class="ri-inbox-line"></i>
+                        </div>
+                        <div class="slider-info-value text-center">
+                            ${book.weight} kg
+                        </div>
+                    </div>
+                    <div>
+                        <div class="slider-info-title text-center">
                             ISBN-10
                         </div>
                         <div class="slider-icon text-center">
-                            <i class="ri-file-copy-2-line"></i>
+                            <i class="ri-barcode-line"></i>
                         </div>
                         <div class="slider-info-value text-center">
                             ${book.codeISBN10}
@@ -192,7 +203,7 @@
                             ISBN-13
                         </div>
                         <div class="slider-icon text-center">
-                            <i class="ri-file-copy-2-line"></i>
+                            <i class="ri-barcode-fill"></i>
                         </div>
                         <div class="slider-info-value text-center">
                             ${book.codeISBN10}
@@ -263,7 +274,7 @@
                                     aria-controls="author"
                                     aria-selected="false"
                             >
-                                Thông tin tác giả
+                                Tác giả, Dịch giả
                             </button>
                         </li>
                     </ul>
@@ -275,10 +286,8 @@
                                 aria-labelledby="description-tab"
                         >
                             <div class="cr-tab-content">
-                                <div class="cr-description">
-                                    <p>
-                                        ${book.description}
-                                    </p>
+                                <div class="description-content">
+                                    ${book.description}
                                 </div>
                             </div>
                         </div>
@@ -419,7 +428,9 @@
                                             </div>
                                             <div class="col-8">
                                                 <span class="name">${author.name} (Tác giả)</span>
-                                                <p>${author.introduction}</p>
+                                                <div class="description-content">
+                                                    ${author.introduction}
+                                                </div>
                                             </div>
                                         </div>
                                     </c:forEach>
@@ -440,7 +451,9 @@
                                             </div>
                                             <div class="col-8">
                                                 <span class="name">${translator.name} (Dịch giả)</span>
-                                                <p>${translator.introduction}</p>
+                                                <div class="description-content">
+                                                    ${translator.introduction}
+                                                </div>
                                             </div>
                                         </div>
                                     </c:forEach>
@@ -495,21 +508,40 @@
     }
     .slider-info-title {
         font-size: 12px;
+        color: #485568;
     }
     .slider-info-value {
         font-size: 12px;
         font-weight: bold;
+        color: #485568;
     }
     .slider-icon {
-        font-size: 20px;
+        font-size: 24px;
         margin-top: 10px;
         margin-bottom: 10px;
+        color: #485568;
+    }
+    .name-inline {
+        color: #64b496;
+        font-style: italic;
+        font-size: 105%;
+        font-weight: 600;
+        font-family: Nunito, sans-serif;
     }
     .new-price {
         font-family: "Be Vietnam Pro", sans-serif;
         font-size: 110%;
         font-weight: 600;
         color: #64b496;
+    }
+    .description-content {
+        width: 100%;
+        margin: 0;
+        padding: 20px;
+        text-align: justify;
+        box-sizing: border-box;
+        font-size: 90%;
+        color: #7a7a7a;
     }
     .card-3d-deep {
         background: #fff;

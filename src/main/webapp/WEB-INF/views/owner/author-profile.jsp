@@ -30,7 +30,7 @@
                                 </div>
                                 <br>
                                 <div class="cr-settings">
-                                    <a href="#" onclick="rowAction(${author.id}, 'update'); return false;" class="cr-btn-primary m-r-10 rounded">Cập nhật</a>
+                                    <a onclick="rowAction(${author.id}, 'update'); return false;" class="cr-btn-primary m-r-10 rounded">Cập nhật</a>
                                 </div>
                             </div>
                             <div class="cr-vendor-info">

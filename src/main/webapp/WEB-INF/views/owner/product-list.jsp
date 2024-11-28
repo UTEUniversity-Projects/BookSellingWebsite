@@ -54,41 +54,41 @@
                                             <td>
                                                 <div>
                                                     <span class="row-highlight">${item.title}</span><br>
-                                                    <span class="row-sub-content">Mở bán: ${item.publicationDate}</span>
+                                                    <span class="row-sub-content">Mở bán: ${item.publisher}</span>
                                                 </div>
                                             </td>
                                             <td>
                                                 <div class="label-card d-flex align-items-center">
                                                     <c:choose>
-                                                        <c:when test="${item.quantity >= 0}">
+                                                        <c:when test="${item.perValueBooksSold >= 0}">
                                                             <p class="card-groth up" style="margin-top: 0">
                                                                 <i class="ri-arrow-up-line"></i>
-                                                                    ${item.quantity}%
+                                                                    ${item.perValueBooksSold}%
                                                             </p>
                                                         </c:when>
                                                         <c:otherwise>
                                                             <p class="card-groth down" style="margin-top: 0">
                                                                 <i class="ri-arrow-down-line"></i>
-                                                                    ${-item.quantity}%
+                                                                    ${-item.perValueBooksSold}%
                                                             </p>
                                                         </c:otherwise>
                                                     </c:choose>
                                                 </div>
                                             </td>
-                                            <td><span class="badge bg-primary justify-content-center">${item.soldCount}</span></td>
+                                            <td><span class="badge bg-primary justify-content-center">${item.booksSold}</span></td>
                                             <td>
                                                 <div class="d-flex align-items-center">
-                                                    <h6 class="avg-rate">${item.soldCount}</h6>
+                                                    <h6 class="avg-rate">${item.avgRate}</h6>
                                                     <i class="ri-star-fill ps-2" style="color: #FFD43B; font-size: 20px;"></i>
                                                 </div>
                                             </td>
                                             <td>
                                                 <div class="cr-product-price">
-                                                <span class="new-price">${item.price} VNĐ</span>
+                                                <span class="new-price">${item.sellingPrice} VNĐ</span>
                                                 </div>
                                             </td>
-                                            <td data-status="ON_SALE">
-                                                <span class="status-coming-soon">Sắp mở bán</span>
+                                            <td>
+                                                <span class="status-${item.statusStyle}">${item.statusDisplay}</span>
                                             </td>
                                             <td>
                                                 <div class="d-flex justify-content-center">
@@ -213,7 +213,7 @@
     .dropdown-menu.show {
         display: block;
     }
-    .status-coming-soon {
+    .status-coming_soon {
         background-color: #edf1f7;
         color: gray;
         font-weight: bold;
@@ -221,7 +221,7 @@
         padding: 4px 10px 4px 10px;
         font-family: Nunito, sans-serif;
     }
-    .status-on-sale {
+    .status-on_sale {
         background-color: #dcfcee;
         color: #30cb83;
         font-weight: bold;
@@ -229,7 +229,7 @@
         padding: 4px 10px 4px 10px;
         font-family: Nunito, sans-serif;
     }
-    .status-out-of-stock {
+    .status-out_of_stock {
         background-color: #fcfbdc;
         color: #ffd43b;
         font-weight: bold;
@@ -237,7 +237,7 @@
         padding: 4px 10px 4px 10px;
         font-family: Nunito, sans-serif;
     }
-    .status-stop-selling {
+    .status-stop_selling {
         background-color: #fce3dc;
         color: #ff554f;
         font-weight: bold;

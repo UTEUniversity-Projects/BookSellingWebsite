@@ -1,35 +1,22 @@
 package com.biblio.mapper;
 
-import com.biblio.dto.request.AuthorRequest;
 import com.biblio.dto.response.AuthorAnalysisResponse;
 import com.biblio.dto.response.AuthorLineResponse;
 import com.biblio.dto.response.AuthorProfileResponse;
 import com.biblio.entity.Author;
 
 import java.text.DecimalFormat;
-import java.text.SimpleDateFormat;
-import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 public class AuthorMapper {
 
-    public static Author toAuthorEntity(AuthorRequest authorRequest) {
-        return Author.builder()
-                .id(Long.parseLong(authorRequest.getId() != null ? authorRequest.getId() : "1"))
-                .name(authorRequest.getName() != null ? authorRequest.getName() : "")
-                .avatar(authorRequest.getAvatar() != null ? authorRequest.getAvatar() : "")
-                .introduction(authorRequest.getIntroduction() != null ? authorRequest.getIntroduction() : "")
-                .joinAt(LocalDateTime.parse(authorRequest.getJoinAt() != null ? authorRequest.getJoinAt() : ""))
-                .build();
-    }
-
     public static AuthorProfileResponse toAuthorProfileResponse(Author author) {
         return AuthorProfileResponse.builder()
-                .id(author.getId().toString())
-                .name(author.getName())
-                .avatar(author.getAvatar())
-                .introduction(author.getIntroduction())
+                .id(author.getId() != null ? author.getId().toString() : "")
+                .name(author.getName() != null ? author.getName() : "")
+                .avatar(author.getAvatar() != null ? author.getAvatar() : "")
+                .introduction(author.getIntroduction() != null ? author.getIntroduction() : "")
                 .joinAt(author.getJoinAt().format(DateTimeFormatter.ofPattern("dd/MM/yyyy")))
                 .build();
     }
@@ -37,11 +24,16 @@ public class AuthorMapper {
     public static AuthorLineResponse toAuthorLineResponse(Author author, Integer works, Double avgRate, Double perValueBooksSold) {
         DecimalFormat percentFormatter = new DecimalFormat("#.0");
 
+        String introduction = author.getIntroduction();
+        if (introduction != null && introduction.length() > 150) {
+            introduction = introduction.substring(0, 150) + "...";
+        }
+
         return AuthorLineResponse.builder()
                 .id(author.getId().toString())
                 .name(author.getName())
                 .avatar(author.getAvatar())
-                .introduction(author.getIntroduction())
+                .introduction(introduction)
                 .joinAt(author.getJoinAt().format(DateTimeFormatter.ofPattern("dd/MM/yyyy")))
                 .works(works != null ? works.toString() : "0")
                 .avgRate(avgRate != null ? String.format("%.1f", avgRate) : "N/A")

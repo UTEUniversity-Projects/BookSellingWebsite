@@ -1,8 +1,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
-<link href='https://fonts.googleapis.com/css?family=Nunito' rel='stylesheet'>
-
 <!-- main content -->
 <div class="cr-main-content">
     <div class="container-fluid">
@@ -81,7 +79,7 @@
                                                     </c:choose>
                                                 </div>
                                             </td>
-                                            <td class="row-introduction" data-max-length="150">${item.introduction}</td>
+                                            <td class="row-introduction">${item.introduction}</td>
                                             <td>
                                                 <div class="d-flex justify-content-center">
                                                     <button type="button"

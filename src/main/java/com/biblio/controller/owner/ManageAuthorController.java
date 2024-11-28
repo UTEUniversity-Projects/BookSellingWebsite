@@ -1,6 +1,8 @@
 package com.biblio.controller.owner;
 
-import com.biblio.dto.request.AuthorRequest;
+import com.biblio.dto.request.AuthorCreateRequest;
+import com.biblio.dto.request.AuthorDeleteRequest;
+import com.biblio.dto.request.AuthorUpdateRequest;
 import com.biblio.dto.response.AuthorAnalysisResponse;
 import com.biblio.dto.response.AuthorLineResponse;
 import com.biblio.dto.response.AuthorProfileResponse;
@@ -45,16 +47,16 @@ public class ManageAuthorController extends HttpServlet {
 
         switch (action) {
             case "list":
-                listAuthors(request, response);
+                getList(request, response);
                 break;
             case "view":
-                viewAuthor(request, response);
+                viewHandler(request, response);
                 break;
             case "create":
-                createAuthorGet(request, response);
+                createHandlerGet(request, response);
                 break;
             case "update":
-                updateAuthorGet(request, response);
+                updateHandlerGet(request, response);
                 break;
             default:
                 response.sendError(HttpServletResponse.SC_BAD_REQUEST, "Invalid action");
@@ -69,10 +71,10 @@ public class ManageAuthorController extends HttpServlet {
 
         switch (action) {
             case "create":
-                createAuthorPost(request, response);
+                createHandlerPost(request, response);
                 break;
             case "update":
-                updateAuthorPost(request, response);
+                updateHandlerPost(request, response);
                 break;
             default:
                 response.sendError(HttpServletResponse.SC_BAD_REQUEST, "Invalid action");
@@ -87,7 +89,8 @@ public class ManageAuthorController extends HttpServlet {
 
         if (id != null) {
             try {
-                authorService.deleteAuthor(Long.parseLong(id));
+                AuthorDeleteRequest authorDeleteRequest = AuthorDeleteRequest.builder().id(id).build();
+                authorService.deleteAuthor(authorDeleteRequest);
                 response.setStatus(HttpServletResponse.SC_OK);
                 response.getWriter().write("{\"message\":\"Author deleted successfully\"}");
             } catch (Exception e) {
@@ -111,13 +114,13 @@ public class ManageAuthorController extends HttpServlet {
         return action;
     }
 
-    private void listAuthors(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    private void getList(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         List<AuthorLineResponse> list = authorService.findAll();
         request.setAttribute("authors", list);
         request.getRequestDispatcher("/views/owner/author-list.jsp").forward(request, response);
     }
 
-    private void viewAuthor(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    private void viewHandler(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         HttpSession session = request.getSession();
         String id = session.getAttribute("authorId").toString();
 
@@ -126,19 +129,20 @@ public class ManageAuthorController extends HttpServlet {
         request.getRequestDispatcher("/views/owner/author-profile.jsp").forward(request, response);
     }
 
-    private void createAuthorGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    private void createHandlerGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         request.getRequestDispatcher("/views/owner/author-create.jsp").forward(request, response);
     }
-    private void createAuthorPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+    private void createHandlerPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         try {
             request.setCharacterEncoding("UTF-8");
             response.setContentType("application/json; charset=UTF-8");
             response.setCharacterEncoding("UTF-8");
 
-            AuthorRequest authorRequest = HttpUtil.of(request.getReader()).toModel(AuthorRequest.class);
-            authorRequest.setJoinAt(LocalDateTime.now().toString());
+            AuthorCreateRequest authorCreateRequest = HttpUtil.of(request.getReader()).toModel(AuthorCreateRequest.class);
+            authorCreateRequest.setJoinAt(LocalDateTime.now().toString());
 
-            authorService.createAuthor(authorRequest);
+            authorService.createAuthor(authorCreateRequest);
 
             response.setStatus(HttpServletResponse.SC_OK);  // 200 OK
             response.getWriter().write("{\"success\": true, \"message\": \"Created successfully.\"}");
@@ -149,7 +153,7 @@ public class ManageAuthorController extends HttpServlet {
         }
     }
 
-    private void updateAuthorGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    private void updateHandlerGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         HttpSession session = request.getSession();
         String id = session.getAttribute("authorId").toString();
 
@@ -157,15 +161,16 @@ public class ManageAuthorController extends HttpServlet {
         request.setAttribute("author", authorResponse);
         request.getRequestDispatcher("/views/owner/author-update.jsp").forward(request, response);
     }
-    private void updateAuthorPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+    private void updateHandlerPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         try {
             request.setCharacterEncoding("UTF-8");
             response.setContentType("application/json; charset=UTF-8");
             response.setCharacterEncoding("UTF-8");
 
-            AuthorRequest authorRequest = HttpUtil.of(request.getReader()).toModel(AuthorRequest.class);
+            AuthorUpdateRequest authorUpdateRequest = HttpUtil.of(request.getReader()).toModel(AuthorUpdateRequest.class);
 
-            authorService.updateAuthor(authorRequest);
+            authorService.updateAuthor(authorUpdateRequest);
 
             response.setStatus(HttpServletResponse.SC_OK);  // 200 OK
             response.getWriter().write("{\"success\": true, \"message\": \"Updated successfully.\"}");

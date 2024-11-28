@@ -1,7 +1,9 @@
 package com.biblio.service.impl;
 
 import com.biblio.dao.IAuthorDAO;
-import com.biblio.dto.request.AuthorRequest;
+import com.biblio.dto.request.AuthorCreateRequest;
+import com.biblio.dto.request.AuthorDeleteRequest;
+import com.biblio.dto.request.AuthorUpdateRequest;
 import com.biblio.dto.response.AuthorAnalysisResponse;
 import com.biblio.dto.response.AuthorLineResponse;
 import com.biblio.dto.response.AuthorProfileResponse;
@@ -84,20 +86,18 @@ public class AuthorServiceImpl implements IAuthorService {
     }
 
     @Override
-    public void createAuthor(AuthorRequest authorRequest) {
-        Author author = AuthorMapper.toAuthorEntity(authorRequest);
-        authorDAO.createAuthor(author);
+    public void createAuthor(AuthorCreateRequest authorCreateRequest) {
+        authorDAO.createAuthor(authorCreateRequest);
     }
 
     @Override
-    public void updateAuthor(AuthorRequest authorRequest) {
-        Author author = AuthorMapper.toAuthorEntity(authorRequest);
-        authorDAO.updateAuthor(author);
+    public void updateAuthor(AuthorUpdateRequest authorUpdateRequest) {
+        authorDAO.updateAuthor(authorUpdateRequest);
     }
 
     @Override
-    public void deleteAuthor(Long id) {
-        authorDAO.deleteAuthor(id);
+    public void deleteAuthor(AuthorDeleteRequest authorDeleteRequest) {
+        authorDAO.deleteAuthor(authorDeleteRequest);
     }
 
     private Double calculateSaleGrowth(Long id) {

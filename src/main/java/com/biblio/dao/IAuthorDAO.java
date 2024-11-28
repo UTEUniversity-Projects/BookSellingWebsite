@@ -1,5 +1,8 @@
 package com.biblio.dao;
 
+import com.biblio.dto.request.AuthorCreateRequest;
+import com.biblio.dto.request.AuthorDeleteRequest;
+import com.biblio.dto.request.AuthorUpdateRequest;
 import com.biblio.entity.Author;
 import com.biblio.entity.Book;
 import com.biblio.entity.BookTemplate;
@@ -14,9 +17,9 @@ public interface IAuthorDAO {
     List<Author> findEntityAll();
     List<Author> findByBookTemplate(BookTemplate bookTemplate);
     List<String> findTopSubCategory(Long id);
-    void createAuthor(Author author);
-    void updateAuthor(Author author);
-    void deleteAuthor(Long id);
+    void createAuthor(AuthorCreateRequest authorCreateRequest);
+    void updateAuthor(AuthorUpdateRequest authorUpdateRequest);
+    void deleteAuthor(AuthorDeleteRequest authorDeleteRequest);
     Integer countBooksAll(Long id);
     Integer countBooksByStatus(Long id, EBookMetadataStatus status);
     Integer countBooksByOrderStatus(Long id, EOrderStatus orderStatus);
