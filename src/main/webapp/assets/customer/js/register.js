@@ -65,56 +65,56 @@ $(document).ready(() => {
 					avatar: avatar
 				};
 
-				//const registerButton = $('.btn-register');
-				//const spinner = registerButton.find('.spinner');
-				//const buttonText = registerButton.find('.button-text');
-				//
-				//registerButton.prop('disabled', true);
-				//buttonText.addClass('hidden');
-				//spinner.removeClass('hidden');
-				//
-				//$.ajax({
-				//	url: `${contextPath}/api/customer/register`,
-				//	type: 'POST',
-				//	contentType: 'application/json',
-				//	data: JSON.stringify(userData),
-				//	success: function (response, status, xhr) {
-				//		console.log(response);
-				//		if (response.code === 200) {
-				//			toast({
-				//				title: "Đăng ký",
-				//				message: "Đăng ký thành công",
-				//				type: "success",
-				//				duration: 3000,
-				//			});
-				//		} else {
-				//			toast({
-				//				title: "Đăng ký",
-				//				message: "Thông tin đã tồn tại !",
-				//				type: "error",
-				//				duration: 3000,
-				//			})
-				//			Object.keys(response).forEach(key => {
-				//				if (key !== "code") {
-				//					$(`#${key}`).next().text(response[key]);
-				//				}
-				//			});
-				//		}
-				//	},
-				//	error: function (xhr, status, error) {
-				//		toast({
-				//			title: "Lỗi",
-				//			message: "Có lỗi xảy ra",
-				//			type: "error",
-				//			duration: 3000
-				//		})
-				//	},
-				//	complete: function () {
-				//		registerButton.prop('disabled', false);
-				//		buttonText.removeClass('hidden');
-				//		spinner.addClass('hidden');
-				//	}
-				//});
+				const registerButton = $('.btn-register');
+				const spinner = registerButton.find('.spinner');
+				const buttonText = registerButton.find('.button-text');
+
+				registerButton.prop('disabled', true);
+				buttonText.addClass('hidden');
+				spinner.removeClass('hidden');
+
+				$.ajax({
+					url: `${contextPath}/api/customer/register`,
+					type: 'POST',
+					contentType: 'application/json',
+					data: JSON.stringify(userData),
+					success: function (response, status, xhr) {
+						console.log(response);
+						if (response.code === 200) {
+							toast({
+								title: "Đăng ký",
+								message: "Đăng ký thành công",
+								type: "success",
+								duration: 3000,
+							});
+						} else {
+							toast({
+								title: "Đăng ký",
+								message: "Thông tin đã tồn tại !",
+								type: "error",
+								duration: 3000,
+							})
+							Object.keys(response).forEach(key => {
+								if (key !== "code") {
+									$(`#${key}`).next().text(response[key]);
+								}
+							});
+						}
+					},
+					error: function (xhr, status, error) {
+						toast({
+							title: "Lỗi",
+							message: "Có lỗi xảy ra",
+							type: "error",
+							duration: 3000
+						})
+					},
+					complete: function () {
+						registerButton.prop('disabled', false);
+						buttonText.removeClass('hidden');
+						spinner.addClass('hidden');
+					}
+				});
 
 			};
 
@@ -210,33 +210,33 @@ $(document).ready(() => {
 	const register = new Register();
 	register.getAddress();
 
-	//register.showRequiredInput();
+	register.showRequiredInput();
 
 	Validator({
 		form: '#registerForm',
 		formGroupSelector: '.form-group',
 		errorSelector: '.form-message',
 		rules: [
-			//Validator.isRequired('#fullName'),
-			//Validator.isRequired('#email'),
-			//Validator.isRequired('#phoneNumber'),
-			//Validator.isRequired('#dob', 'Vui lòng chọn ngày sinh !'),
-			//Validator.isRequired("#username"),
-			//Validator.isRequired('#password'),
-			//Validator.isRequired('#re-password'),
-			//Validator.isConfirmed('#re-password', function () {
-			//	return document.querySelector('#registerForm #password').value;
-			//}, 'Mật khẩu nhập lại không chính xác !'),
-			//Validator.isRequiredSelected('#province', 'Vui lòng chọn Tỉnh thành phố !', 'Tỉnh thành phố'),
-			//Validator.isRequiredSelected('#district', 'Vui lòng chọn Quận Huyện !', 'Quận Huyện'),
-			//Validator.isRequiredSelected('#village', 'Vui lòng chọn Phường Xã !', 'Phường Xã'),
-			//Validator.isRequired('#detail'),
-			//Validator.isChecked('#check-with-link', 'Vui lòng đồng ý với điều khoản và chính sách của Biblio !'),
-			//Validator.isEmail('#email', 'Email không đúng định dạng !'),
-			//Validator.phoneNumber("#phoneNumber", 10, 'Số điện thoại phải bao gồm 10 số và chỉ bao gồm số !'),
-			//Validator.isAllLowercase("#username", 'Username chỉ bao gồm chữ thường và số !'),
-			//Validator.minLength('#username', 8),
-			//Validator.minLength('#password', 8),
+			Validator.isRequired('#fullName'),
+			Validator.isRequired('#email'),
+			Validator.isRequired('#phoneNumber'),
+			Validator.isRequired('#dob', 'Vui lòng chọn ngày sinh !'),
+			Validator.isRequired("#username"),
+			Validator.isRequired('#password'),
+			Validator.isRequired('#re-password'),
+			Validator.isConfirmed('#re-password', function () {
+				return document.querySelector('#registerForm #password').value;
+			}, 'Mật khẩu nhập lại không chính xác !'),
+			Validator.isRequiredSelected('#province', 'Vui lòng chọn Tỉnh thành phố !', 'Tỉnh thành phố'),
+			Validator.isRequiredSelected('#district', 'Vui lòng chọn Quận Huyện !', 'Quận Huyện'),
+			Validator.isRequiredSelected('#village', 'Vui lòng chọn Phường Xã !', 'Phường Xã'),
+			Validator.isRequired('#detail'),
+			Validator.isChecked('#check-with-link', 'Vui lòng đồng ý với điều khoản và chính sách của Biblio !'),
+			Validator.isEmail('#email', 'Email không đúng định dạng !'),
+			Validator.phoneNumber("#phoneNumber", 10, 'Số điện thoại phải bao gồm 10 số và chỉ bao gồm số !'),
+			Validator.isAllLowercase("#username", 'Username chỉ bao gồm chữ thường và số !'),
+			Validator.minLength('#username', 8),
+			Validator.minLength('#password', 8),
 		],
 		onSubmit: async function (data) {
 			await register.register();

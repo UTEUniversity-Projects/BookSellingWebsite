@@ -1,8 +1,10 @@
 package com.biblio.service.impl;
 
+import com.biblio.dao.ICartDAO;
 import com.biblio.dao.ICustomerDAO;
 import com.biblio.dto.request.CustomerRegisterRequest;
 import com.biblio.dto.response.*;
+import com.biblio.entity.Cart;
 import com.biblio.entity.Customer;
 import com.biblio.enumeration.EAccountStatus;
 import com.biblio.mapper.CustomerMapper;
@@ -18,6 +20,9 @@ public class CustomerServiceImpl implements ICustomerService {
 
     @Inject
     private ICustomerDAO customerDAO;
+
+    @Inject
+    private ICartDAO cartDAO;
 
     @Override
     public List<CustomerGetListResponse> findAll() {
@@ -50,6 +55,9 @@ public class CustomerServiceImpl implements ICustomerService {
     @Override
     public CustomerRegisterResponse addCustomer(CustomerRegisterRequest request) {
         Customer customer = CustomerMapper.toCustomer(request);
+        Cart cart = new Cart();
+        cart.setCustomer(customer);
+        cartDAO.addCart(cart);
         return CustomerMapper.toCustomerRegisterResponse(customerDAO.addCustomer(customer));
     }
 

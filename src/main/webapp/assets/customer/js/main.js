@@ -348,27 +348,27 @@
   });
 
   /*--------------------- Add to cart button notify js ---------------------- */
-  $('.cr-shopping-bag').on('click', function () {
-    $('.cr-wish-notify').remove();
-    $('.cr-compare-notify').remove();
-    $('.cr-cart-notify').remove();
-
-    var isAddtocart = $(this).hasClass('active');
-    if (isAddtocart) {
-      $(this).removeClass('active');
-      $('footer').after(
-        '<div class="cr-cart-notify"><p class="compare-note">Remove product in <a href="cart.html"> Cart</a> Successfully!</p></div>'
-      );
-    } else {
-      $(this).addClass('active');
-      $('footer').after(
-        '<div class="cr-cart-notify"><p class="compare-note">Add product in <a href="cart.html"> Cart</a> Successfully!</p></div>'
-      );
-    }
-    setTimeout(function () {
-      $('.cr-cart-notify').fadeOut();
-    }, 2000);
-  });
+  // $('.cr-shopping-bag').on('click', function () {
+  //   $('.cr-wish-notify').remove();
+  //   $('.cr-compare-notify').remove();
+  //   $('.cr-cart-notify').remove();
+  //
+  //   var isAddtocart = $(this).hasClass('active');
+  //   if (isAddtocart) {
+  //     $(this).removeClass('active');
+  //     $('footer').after(
+  //       '<div class="cr-cart-notify"><p class="compare-note">Remove product in <a href="cart.html"> Cart</a> Successfully!</p></div>'
+  //     );
+  //   } else {
+  //     $(this).addClass('active');
+  //     $('footer').after(
+  //       '<div class="cr-cart-notify"><p class="compare-note">Add product in <a href="cart.html"> Cart</a> Successfully!</p></div>'
+  //     );
+  //   }
+  //   setTimeout(function () {
+  //     $('.cr-cart-notify').fadeOut();
+  //   }, 2000);
+  // });
 
   /* Slider room details */
   $('.slider-for').slick({
@@ -825,18 +825,3 @@
   }
 
 })(jQuery);
-
-document.querySelectorAll('.price-value').forEach(el => {
-  const rawValue = el.textContent.trim();
-
-  const value = parseFloat(rawValue);
-
-  if (!isNaN(value)) {
-    const formattedValue = value.toLocaleString('vi-VN');
-    if (el.classList.contains('minus-value')) {
-      el.innerHTML = `-${formattedValue}<span class="currency-symbol">₫</span>`;
-    } else {
-      el.innerHTML = `${formattedValue}<span class="currency-symbol">₫</span>`;
-    }
-  }
-});

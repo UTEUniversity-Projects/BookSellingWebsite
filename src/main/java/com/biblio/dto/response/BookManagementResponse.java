@@ -1,5 +1,6 @@
 package com.biblio.dto.response;
 
+import com.biblio.enumeration.EBookTemplateStatus;
 import lombok.*;
 
 @Data
@@ -17,6 +18,6 @@ public class BookManagementResponse {
     long quantity;
     long soldCount;
     private String publicationDate;
-    private String statusDisplay;
+    private EBookTemplateStatus status;
     private String statusStyle;
 }

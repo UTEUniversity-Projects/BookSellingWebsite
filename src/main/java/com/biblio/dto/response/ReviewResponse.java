@@ -1,5 +1,6 @@
 package com.biblio.dto.response;
 
+import com.biblio.entity.Review;
 import lombok.*;
 
 @Data
@@ -17,4 +18,9 @@ public class ReviewResponse {
     private String createdAt;
     private String content;
     private String responseContent;
+    private boolean isHidden;
+
+    public boolean getIsHidden() {
+        return isHidden;
+    }
 }

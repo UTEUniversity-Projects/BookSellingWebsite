@@ -97,8 +97,9 @@
                         </ul>
                     </div>
                     <div class="cr-product-price">
-                        <span class="new-price price-value">${book.sellingPrice}</span>
+                        <span class="new-price price-value">${(1 - book.discount / 100) * book.sellingPrice}</span>
                         <span class="old-price price-value">${book.sellingPrice}</span>
+                        <span class="discount-percent">${book.discount}</span>
                     </div>
                     <div class="cr-size-weight">
                         <h5><span>Tình trạng</span> :</h5>
@@ -355,4 +356,7 @@
 <script src="${pageContext.request.contextPath}/assets/owner/js/vendor/slick.min.js" defer></script>
 <!-- endregion -->
 
+<script src="${pageContext.request.contextPath}/assets/commons/js/format-discount-percent.js"></script>
+
 <script src="${pageContext.request.contextPath}/assets/owner/js/product-details.js" defer></script>
+

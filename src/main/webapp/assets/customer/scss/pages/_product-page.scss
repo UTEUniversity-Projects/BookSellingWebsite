@@ -196,6 +196,19 @@ p {
     }
   }
 }
+
+.discount-percent {
+  margin-left: 8px;
+  padding: 2px 4px;
+  border-radius: 4px;
+  -moz-border-radius: 4px;
+  -webkit-border-radius: 4px;
+  background-color: $main-primary-color;
+  color: #fff;
+  font-size: 1em;
+  font-weight: 600;
+}
+
 .cr-product-info {
   margin-top: 15px;
   padding-top: 15px;
