@@ -50,7 +50,7 @@ public class UpdateReviewAPI extends HttpServlet {
                     break;
             }
         } catch (Exception e) {
-            result.put("message", "Có lỗi xảy ra trong quá trình xử lý yêu cầu.");
+            result.put("message", "Có lỗi xảy ra trong quá trình xử lý yêu cầu ascasca.");
             result.put("type", "error");
             response.getWriter().write(mapper.writeValueAsString(result));
         }
