@@ -72,9 +72,9 @@ public class BookTemplateMapper {
                 .map(MediaFile::getStoredCode)
                 .toList();
 
-        List<AuthorResponse> authors = new ArrayList<>();
+        List<AuthorProfileResponse> authors = new ArrayList<>();
         for (Author author : bookTemplate.getAuthors()) {
-            authors.add(AuthorMapper.toAuthorResponse(author));
+            authors.add(AuthorMapper.toAuthorProfileResponse(author));
         }
 
         List<TranslatorResponse> translators = new ArrayList<>();

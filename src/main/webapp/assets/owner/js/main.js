@@ -650,24 +650,6 @@
         });
     }
 
-    document.addEventListener("DOMContentLoaded", function () {
-        const rows = document.querySelectorAll(
-            "#product_list tbody .product-row"
-        );
-        console.log(rows);
-        rows.forEach((row) => {
-            row.addEventListener("click", function (event) {
-                if (
-                    !event.target.closest("button") &&
-                    !event.target.closest(".dropdown-menu")
-                ) {
-                    const href = this.getAttribute("data-href");
-                    window.location.href = href;
-                }
-            });
-        });
-    });
-
     /*======== Customer list DATA TABLE ========*/
     var responsiveDataTable = $("#customer-data-table");
     if (responsiveDataTable.length !== 0) {

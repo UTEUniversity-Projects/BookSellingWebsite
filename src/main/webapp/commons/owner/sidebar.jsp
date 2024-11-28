@@ -34,7 +34,7 @@
                             ></a>
                             <ul class="cr-sb-subdrop condense">
                                 <li>
-                                    <a href="/owner/ecommerce" class="cr-page-link drop"
+                                    <a href="${pageContext.request.contextPath}/owner/ecommerce" class="cr-page-link drop"
                                     ><i class="ri-checkbox-blank-circle-line"></i>Báo cáo
                                         tài chính</a
                                     >
@@ -163,7 +163,7 @@
                             ></a>
                             <ul class="cr-sb-subdrop condense">
                                 <li>
-                                    <a href="${pageContext.request.contextPath}/owner/author-list" class="cr-page-link subdrop"
+                                    <a href="${pageContext.request.contextPath}/owner/author/list" class="cr-page-link subdrop"
                                     ><i class="ri-checkbox-blank-circle-line"></i>Tác
                                         giả</a
                                     >

@@ -12,7 +12,7 @@ import javax.servlet.http.HttpSession;
 import java.io.BufferedReader;
 import java.io.IOException;
 
-@WebServlet("/owner/session-author-info")
+@WebServlet("/session/owner/author/set-info")
 public class AuthorSession extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

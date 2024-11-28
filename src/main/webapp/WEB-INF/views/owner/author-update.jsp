@@ -3,6 +3,103 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
 <link href='https://fonts.googleapis.com/css?family=Nunito' rel='stylesheet'>
+
+<!-- main content -->
+<div class="cr-main-content">
+    <div class="container-fluid">
+        <!-- Page title & breadcrumb -->
+        <div class="cr-page-title cr-page-title-2">
+            <div class="cr-breadcrumb">
+                <h5><b>Cập nhật thông tin tác giả</b></h5>
+                <ul>
+                    <li><a href="${pageContext.request.contextPath}/owner/ecommerce"><b>Biblio</b></a></li>
+                    <li><a href="${pageContext.request.contextPath}/owner/author/list"><b>Tác giả</b></a></li>
+                    <li><b>Cập nhật thông tin tác giả</b></li>
+                </ul>
+            </div>
+        </div>
+        <div class="row">
+            <form id="authorUpdateForm" action="${pageContext.request.contextPath}/owner/author/update" method="post" class="d-flex">
+                <div class="col-xxl-3 col-xl-4 col-md-12">
+                    <div class="vendor-sticky-bar">
+                        <div class="col-xl-12">
+                            <div class="cr-card card-3d-deep">
+                                <div class="cr-card-content">
+                                    <div class="cr-cat-form">
+                                        <div class="row cr-product-uploads">
+                                            <div class="col-lg-12 mb-991">
+                                                <div class="cr-vendor-img-upload">
+                                                    <div class="cr-vendor-main-img">
+                                                        <div class="avatar-upload">
+                                                            <div class="avatar-edit">
+                                                                <input type='file' id="avatar" name="avatar"
+                                                                       class="cr-image-upload"
+                                                                       accept=".png, .jpg, .jpeg"
+                                                                       value="${author.avatar}"
+                                                                >
+                                                                <label><i class="ri-pencil-line"></i></label>
+                                                            </div>
+                                                            <div class="avatar-preview cr-preview">
+                                                                <div class="imagePreview cr-div-preview">
+                                                                    <img class="cr-image-preview image-shadow rounded-3"
+                                                                         src="${pageContext.request.contextPath}${author.avatar}"
+                                                                         alt="edit">
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <br>
+                                        <input id="id" name="id" value="${author.id}" class="form-control" type="hidden" />
+                                        <input id="originAvatar" name="originAvatar" value="${author.avatar}" class="form-control" type="hidden" />
+                                        <div class="col-12">
+                                            <label for="name">Họ và tên</label>
+                                            <input id="name" name="name" class="form-control here slug-title author-name" type="text"
+                                                   value="${author.name}" />
+                                        </div>
+                                        <br>
+                                        <div class="cr-settings d-flex justify-content-center">
+                                            <button id="update" type="submit" class="cr-btn-primary rounded">Cập nhật</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xxl-9 col-xl-8 col-md-12" style="padding-left: 10px">
+                    <div class="cr-card card-3d-deep">
+                        <div class="cr-card-content">
+                            <div class="row">
+                                <div class="d-flex col-sm-12 editor-area">
+                                    <h5>Soạn thảo giới thiệu</h5>
+                                    <button id="review-btn" class="cr-btn default-btn color-primary">Xem trước</button>
+                                </div>
+                                <div id="editor" name="introduction" class="edit-introduction">
+                                    ${fn:trim(author.introduction)}
+                                </div>
+                                <div class="review-area">
+                                    <div id="review-container" style="display: none;">
+                                        <h5>Giới thiệu tác giả</h5>
+                                        <div id="review-content" class="review-introduction"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<script>const contextPath = "<%=request.getContextPath() %>";</script>
+<script src="${pageContext.request.contextPath}/assets/owner/js/manage/init-global-variables.js" defer></script>
+<script src="${pageContext.request.contextPath}/assets/owner/js/extension/quill-editor.js" defer></script>
+<script src="${pageContext.request.contextPath}/assets/owner/js/manage/manage-author.js" defer></script>
+
 <style>
     .editor-area {
         justify-content: space-between;
@@ -71,94 +168,3 @@
         word-wrap: break-word;
     }
 </style>
-
-<!-- main content -->
-<div class="cr-main-content">
-    <div class="container-fluid">
-        <!-- Page title & breadcrumb -->
-        <div class="cr-page-title cr-page-title-2">
-            <div class="cr-breadcrumb">
-                <h5><b>Cập nhật thông tin tác giả</b></h5>
-                <ul>
-                    <li><a href="${pageContext.request.contextPath}/owner/ecommerce"><b>Biblio</b></a></li>
-                    <li><a href="${pageContext.request.contextPath}/owner/author-list"><b>Tác giả</b></a></li>
-                    <li><b>Cập nhật thông tin tác giả</b></li>
-                </ul>
-            </div>
-        </div>
-        <div class="row">
-            <form class="d-flex" method="post">
-                <div class="col-xxl-3 col-xl-4 col-md-12">
-                    <div class="vendor-sticky-bar">
-                        <div class="col-xl-12">
-                            <div class="cr-card card-3d-deep">
-                                <div class="cr-card-content">
-                                    <div class="cr-cat-form">
-                                        <div class="row cr-product-uploads">
-                                            <div class="col-lg-12 mb-991">
-                                                <div class="cr-vendor-img-upload">
-                                                    <div class="cr-vendor-main-img">
-                                                        <div class="avatar-upload">
-                                                            <div class="avatar-edit">
-                                                                <input type='file' id="avatar"
-                                                                       class="cr-image-upload"
-                                                                       accept=".png, .jpg, .jpeg">
-                                                                <label><i class="ri-pencil-line"></i></label>
-                                                            </div>
-                                                            <div class="avatar-preview cr-preview">
-                                                                <div class="imagePreview cr-div-preview">
-                                                                    <img class="cr-image-preview image-shadow rounded-3"
-                                                                         src="${pageContext.request.contextPath}${author.avatar}"
-                                                                         alt="edit">
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <br>
-                                        <div class="form-group col-12">
-                                            <label for="name">Họ và tên</label>
-                                            <input id="name" name="name" class="form-control here slug-title author-name" type="text"
-                                                   value="${author.name}" />
-                                        </div>
-                                        <br>
-                                        <div class="cr-settings d-flex justify-content-center">
-                                            <button type="submit" class="cr-btn-primary rounded">Cập nhật</button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-xxl-9 col-xl-8 col-md-12" style="padding-left: 10px">
-                    <div class="cr-card card-3d-deep">
-                        <div class="cr-card-content">
-                            <div class="row">
-                                <div class="d-flex col-sm-12 editor-area">
-                                    <h5>Soạn thảo giới thiệu</h5>
-                                    <button id="review-btn" class="cr-btn default-btn color-primary">Xem trước</button>
-                                </div>
-                                <div id="editor" class="edit-introduction">
-                                    ${fn:trim(author.introduction)}
-                                </div>
-                                <div class="review-area">
-                                    <div id="review-container" style="display: none;">
-                                        <h5>Giới thiệu tác giả</h5>
-                                        <div id="review-content" class="review-introduction"></div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </form>
-        </div>
-    </div>
-</div>
-
-<script>const contextPath = "<%=request.getContextPath() %>";</script>
-<script src="${pageContext.request.contextPath}/assets/owner/js/extension/quill-editor.js" defer></script>
-<script src="${pageContext.request.contextPath}/assets/owner/js/manage/manage-author.js" defer></script>

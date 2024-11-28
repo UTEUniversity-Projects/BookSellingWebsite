@@ -1,5 +1,6 @@
 package com.biblio.dto.response;
 
+import com.biblio.entity.Author;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
 
@@ -8,10 +9,13 @@ import lombok.experimental.FieldDefaults;
 @AllArgsConstructor
 @NoArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE)
-public class AuthorResponse {
+public class AuthorLineResponse {
     String id;
     String name;
     String avatar;
     String introduction;
     String joinAt;
+    String works;
+    String avgRate;
+    Double perValueBooksSold;
 }
