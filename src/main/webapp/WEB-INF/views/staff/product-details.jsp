@@ -287,29 +287,34 @@
                                                                 </i>
                                                             </c:forEach>
                                                         </div>
-                                                        <c:if test="${review.isHidden}">
-                                                            <span class="hidden-review-label">Đánh giá bị ẩn</span>
-                                                        </c:if>
+
+                                                        <span class="hidden-review-label
+                                                                        <c:if test="${!review.isHidden}">d-none</c:if>">
+                                                                Đánh giá bị ẩn
+                                                            </span>
+
                                                     </div>
                                                     <div class="header__right">
-                                                        <c:choose>
-                                                            <c:when test="${review.isHidden}">
-                                                                <button class="action-btn action-btn__show">
-                                                                    <i class="ri-eye-line"></i>
-                                                                </button>
-                                                            </c:when>
-                                                            <c:otherwise>
-                                                                <button class="action-btn action-btn__hide">
-                                                                    <i class="ri-eye-off-line"></i>
-                                                                </button>
-                                                                <c:if test="${empty review.responseContent}">
-                                                                    <button type="button"
-                                                                            class="action-btn action-btn__response">
-                                                                        <i class="ri-reply-line"></i>
-                                                                    </button>
-                                                                </c:if>
-                                                            </c:otherwise>
-                                                        </c:choose>
+                                                        <button type="button"
+                                                                class="action-btn action-btn__show
+                                                                        <c:if test="${!review.isHidden}">d-none</c:if>"
+                                                        >
+                                                            <i class="ri-eye-line"></i>
+                                                        </button>
+
+                                                        <button type="button"
+                                                                class="action-btn action-btn__hide
+                                                                        <c:if test="${review.isHidden}">d-none</c:if>"
+                                                        >
+                                                            <i class="ri-eye-off-line"></i>
+                                                        </button>
+
+                                                        <button type="button"
+                                                                class="action-btn action-btn__response
+                                                                            <c:if test="${review.isHidden || !empty review.responseContent}">d-none</c:if>">
+                                                            <i class="ri-reply-line"></i>
+                                                        </button>
+
                                                     </div>
                                                 </div>
                                                 <span class="date">${review.createdAt}</span>
@@ -411,6 +416,23 @@
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Hủy</button>
                 <button type="button" class="btn btn-primary" id="confirmHideReview">Ẩn đánh giá</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<%--ShowModal--%>
+<div class="modal fade" id="showReviewModal" tabindex="-1" aria-labelledby="showReviewModalLabel" aria-hidden="true">
+    <input class="review-id" value="" hidden>
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="showReviewModalLabel">Bạn có chắc muốn hiển thị đánh giá này không?</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Hủy</button>
+                <button type="button" class="btn btn-primary" id="confirmShowReview">Hiện đánh giá</button>
             </div>
         </div>
     </div>

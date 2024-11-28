@@ -13,11 +13,9 @@ public class ResponseReviewMapper {
 
     public static ResponseReview toResponseReview(ResponseReviewRequest responseReviewRequest) {
         ResponseReview responseReview = new ResponseReview();
-        Review review = reviewDAO.findById(responseReviewRequest.getReviewId());
         responseReview.setContent(responseReviewRequest.getContent());
         responseReview.setCreatedAt(LocalDateTime.now());
         responseReview.setCreatedBy("Staff");
-        responseReview.setReview(review);
         return responseReview;
     }
 

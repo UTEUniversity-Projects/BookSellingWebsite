@@ -6,9 +6,12 @@ import com.biblio.dao.impl.CustomerDAOImpl;
 import com.biblio.dao.impl.NotificationDAOImpl;
 import com.biblio.dao.impl.ReviewDAOImpl;
 import com.biblio.dto.request.ReviewRequest;
+import com.biblio.dto.response.ReviewResponse;
 import com.biblio.entity.BookTemplate;
 import com.biblio.entity.Customer;
+import com.biblio.entity.ResponseReview;
 import com.biblio.entity.Review;
+import com.biblio.mapper.ResponseReviewMapper;
 import com.biblio.mapper.ReviewMapper;
 import com.biblio.service.IReviewService;
 
@@ -42,14 +45,15 @@ public class ReviewServiceImpl implements IReviewService {
         this.bookTemplateDAO = new BookTemplateDAOImpl();
     }
     @Override
-    public boolean updateReviewHidden(long reviewId, boolean isHidden) {
+    public ReviewResponse updateReviewHidden(long reviewId, boolean isHidden) {
         Review review = reviewDAO.findById(reviewId);
         if (review != null) {
             review.setHidden(isHidden);
-            reviewDAO.update(review);
-            return true;
+            review = reviewDAO.update(review);
+            ReviewResponse reviewResponse = ReviewMapper.toReviewResponse(review);
+            return reviewResponse;
         }
-        return false;
+        return null;
     }
 
     @Transactional
