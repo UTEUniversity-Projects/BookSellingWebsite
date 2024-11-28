@@ -3,10 +3,10 @@
 <div class="cr-sidebar-overlay"></div>
 <div class="cr-sidebar" data-mode="light">
     <div class="cr-sb-logo">
-        <a href="/staff/product-dashboard" class="sb-full">
+        <a href="${pageContext.request.contextPath}/staff/product-dashboard" class="sb-full">
             <img src="${pageContext.request.contextPath}/assets/staff/img/logo/full-logo.png" alt="logo"/>
         </a>
-        <a href="/staff/product-dashboard" class="sb-collapse">
+        <a href="${pageContext.request.contextPath}/staff/product-dashboard" class="sb-collapse">
             <img src="${pageContext.request.contextPath}/assets/staff/img/logo/collapse-logo.png" alt="logo"/>
         </a>
     </div>
@@ -23,19 +23,19 @@
                     </a>
                     <ul class="cr-sb-drop condense">
                         <li>
-                            <a href="/staff/product-dashboard" class="cr-page-link drop">
+                            <a href="${pageContext.request.contextPath}/staff/product-dashboard" class="cr-page-link drop">
                                 <i class="ri-checkbox-blank-circle-line"></i>
                                 Danh sách sản phẩm
                             </a>
                         </li>
                         <li>
-                            <a href="/staff/order-dashboard" class="cr-page-link drop">
+                            <a href="${pageContext.request.contextPath}/staff/order-dashboard" class="cr-page-link drop">
                                 <i class="ri-checkbox-blank-circle-line"></i>
                                 Danh sách đơn hàng
                             </a>
                         </li>
                         <li>
-                            <a href="/staff/support-customer-dashboard" class="cr-page-link drop">
+                            <a href="${pageContext.request.contextPath}/staff/support-customer-dashboard" class="cr-page-link drop">
                                 <i class="ri-checkbox-blank-circle-line"></i>
                                 Trung tâm hỗ trợ
                             </a>

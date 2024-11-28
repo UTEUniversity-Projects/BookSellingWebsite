@@ -19,7 +19,7 @@ public interface IPromotionTemplateService {
 
     void updatePromotionTemplate(PromotionTemplateUpdateRequest promotionTemplateUpdateRequest);
 
-    void insertPromotionTemplate(PromotionTemplateInsertRequest promotionTemplateInsertRequest);
+    PromotionTemplateResponse insertPromotionTemplate(PromotionTemplateInsertRequest promotionTemplateInsertRequest);
 
     Boolean isCodeExisted(String code);
 
