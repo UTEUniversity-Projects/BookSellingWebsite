@@ -9,6 +9,7 @@
         <entry key="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/views/customer/order-detail.jsp" value="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/views/customer" />
         <entry key="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/views/customer/order.jsp" value="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/views/customer" />
         <entry key="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/views/customer/register.jsp" value="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/views/customer" />
+        <entry key="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/views/customer/return-order.jsp" value="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/views/customer" />
         <entry key="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/views/customer/search.jsp" value="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/views/customer" />
         <entry key="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/views/owner/add-promotion.jsp" value="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/views/owner" />
         <entry key="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/views/owner/ecommerce.jsp" value="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/views/owner" />
