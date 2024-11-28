@@ -5,5 +5,6 @@ import com.biblio.entity.ResponseReview;
 
 public interface IResponseReviewDAO extends IGenericDAO<ResponseReview> {
     ResponseReview save(ResponseReview responseReview);
+
     boolean isExist(Long reviewId);
 }

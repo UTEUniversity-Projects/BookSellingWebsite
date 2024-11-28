@@ -1,6 +1,7 @@
 package com.biblio.apis.staff;
 
-import com.biblio.dto.request.ResponseReviewRequest;
+import com.biblio.dto.response.ReviewResponse;
+import com.biblio.entity.Review;
 import com.biblio.service.IReviewService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
@@ -15,14 +16,15 @@ import java.io.Serial;
 import java.util.HashMap;
 import java.util.Map;
 
-@WebServlet(urlPatterns = {"/staff/review/update/*"})
-public class UpdateReviewAPI extends HttpServlet {
-    @Inject
-    IReviewService reviewService;
+@WebServlet(urlPatterns = {"/api/staff/review/*"})
+public class ReviewAPI extends HttpServlet {
     @Serial
     private static final long serialVersionUID = 1L;
 
-    public UpdateReviewAPI() {
+    @Inject
+    IReviewService reviewService;
+
+    public ReviewAPI() {
         super();
     }
 
@@ -35,12 +37,16 @@ public class UpdateReviewAPI extends HttpServlet {
         String action = request.getPathInfo();
 
         ObjectMapper mapper = new ObjectMapper();
-        Map<String, String> result = new HashMap<>();
+        Map<String, Object> result = new HashMap<>();
 
         try {
             switch (action) {
                 case "/hidden":
                     handleHideReview(request, response, result, mapper);
+                    break;
+
+                case "/show":
+                    handleShowReview(request, response, result, mapper);
                     break;
 
                 default:
@@ -50,22 +56,39 @@ public class UpdateReviewAPI extends HttpServlet {
                     break;
             }
         } catch (Exception e) {
-            result.put("message", "Có lỗi xảy ra trong quá trình xử lý yêu cầu ascasca.");
+            result.put("message", "Có lỗi xảy ra trong quá trình xử lý yêu cầu.");
             result.put("type", "error");
             response.getWriter().write(mapper.writeValueAsString(result));
         }
     }
 
-    private void handleHideReview(HttpServletRequest request, HttpServletResponse response, Map<String, String> result, ObjectMapper mapper) throws IOException {
+    private void handleHideReview(HttpServletRequest request, HttpServletResponse response, Map<String, Object> result, ObjectMapper mapper) throws IOException {
         Map<String, Object> jsonMap = mapper.readValue(request.getReader(), Map.class);
         long reviewId = Long.parseLong(jsonMap.get("reviewId").toString());
 
-        boolean success = reviewService.updateReviewHidden(reviewId, true);
-        if (success) {
+        ReviewResponse review = reviewService.updateReviewHidden(reviewId, true);
+        if (review != null) {
             result.put("message", "Đánh giá đã được ẩn thành công!");
             result.put("type", "success");
         } else {
             result.put("message", "Không thể ẩn đánh giá. Vui lòng thử lại!");
+            result.put("type", "info");
+        }
+        response.getWriter().write(mapper.writeValueAsString(result));
+    }
+
+    private void handleShowReview(HttpServletRequest request, HttpServletResponse response, Map<String, Object> result, ObjectMapper mapper) throws IOException {
+        Map<String, Object> jsonMap = mapper.readValue(request.getReader(), Map.class);
+        long reviewId = Long.parseLong(jsonMap.get("reviewId").toString());
+
+        ReviewResponse review = reviewService.updateReviewHidden(reviewId, false);
+        if (review != null) {
+            result.put("message", "Đánh giá đã được hiển thị thành công!");
+            result.put("type", "success");
+            result.put("isHidden", review.getIsHidden());
+            result.put("responseContent", review.getResponseContent());
+        } else {
+            result.put("message", "Không thể hiển thị đánh giá. Vui lòng thử lại!");
             result.put("type", "info");
         }
         response.getWriter().write(mapper.writeValueAsString(result));
