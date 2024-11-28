@@ -289,7 +289,10 @@ $(document).ready(() => {
 			});
 		}
 
+		$(".range-slider").attr("--range-slider-value-low", )
 
+		document.querySelector(".range-slider__display").setAttribute("data-low", getUrlParam("minPrice"));
+		document.querySelector(".range-slider__display").setAttribute("data-high", getUrlParam("maxPrice"));
 
 	}
 
@@ -404,7 +407,6 @@ $(document).ready(() => {
 	function getItemQuantityPerPage () {
 
 		const width = window.innerWidth;
-		console.log(width);
 
 		if (width < 1400) {
 			return 6;
@@ -442,10 +444,9 @@ $(document).ready(() => {
 		searchData.minPrice = slide1;
 		searchData.maxPrice = slide2;
 
-		addUrlParam("minPrice", searchData.minPrice);
-		addUrlParam("maxPrice", searchData.maxPrice);
+		addUrlParam('minPrice', searchData.minPrice);
+		addUrlParam('maxPrice', searchData.maxPrice);
 
-		console.log(searchData);
 		searchBook.search(searchData);
 
 		parent.querySelector('.range-slider__display').setAttribute('data-low', slide1);
@@ -463,7 +464,7 @@ $(document).ready(() => {
 				}
 			}));
 
-	function addUrlParam(key, value) {
+	function addUrlParam (key, value) {
 		const url = new URL(window.location.href);
 
 		if (value !== null && value !== undefined) {
