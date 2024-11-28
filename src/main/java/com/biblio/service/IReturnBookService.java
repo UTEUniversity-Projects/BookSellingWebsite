@@ -9,7 +9,8 @@ public interface IReturnBookService {
   
     ReturnBookManagementResponse findReturnBookByOrderId(Long orderId);
 
-
-
     void save(ReturnBookRequest request);
+
+    boolean update(Long returnBookId);
+  
 }

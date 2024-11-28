@@ -33,9 +33,4 @@ public interface IOrderService {
 
     List<CountOrderOfCustomerResponse> getCountOrderOfCustomerAtTime(LocalDateTime start, LocalDateTime end);
 
-    @Transactional
-    void confirmOrder(Long orderId);
-
-    @Transactional
-    void rejectOrder(Long orderId, String reason);
 }

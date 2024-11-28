@@ -147,10 +147,13 @@ document.querySelectorAll('.promotionForm').forEach(form => {
 // Hàm toggleForm để xử lý chuyển trạng thái nút và form
 function toggleForm(editButton) {
     const form = editButton.closest("form");
+
+    const cancelButton = form.querySelector(".cancel-btn");
+
     const isEditing = editButton.dataset.editing === "true";
 
     const inputs = form.querySelectorAll("input, textarea, select");
-    const cancelButton = form.querySelector(".cancel-btn");
+    const table = form.querySelector(".table_item_to_discount"); // Tìm table trong form (nếu có)
 
     if (isEditing) {
         // Khóa form
@@ -160,11 +163,13 @@ function toggleForm(editButton) {
             }
         });
 
-        editButton.innerText = "Chỉnh sửa";
-        editButton.dataset.editing = "false";
+        // Vô hiệu hóa bảng nếu có
+        if (table) {
+            table.classList.add("table-disabled");
+        }
 
-        // Ẩn nút "Hủy"
-        cancelButton.style.display = "none";
+        editButton.innerText = "Chỉnh sửa";
+        // editButton.dataset.editing = "false";
     } else {
         // Mở khóa form
         inputs.forEach(input => {
@@ -176,13 +181,17 @@ function toggleForm(editButton) {
             }
         });
 
+        // Mở khóa bảng nếu có
+        if (table) {
+            table.classList.remove("table-disabled");
+        }
+
         editButton.innerText = "Lưu";
         editButton.dataset.editing = "true";
-
-        // Hiển thị nút "Hủy"
         cancelButton.style.display = "inline-block";
     }
 }
+
 
 function cancelEdit(cancelButton) {
     // Reload lại trang
@@ -226,19 +235,19 @@ $(document).ready(function () {
     }
 
     function handleCase1() {
-        fetchData('/owner/promotion/get-book', {}, books => {
+        fetchData(`${contextPath}/owner/promotion/get-book`, {}, books => {
             populateTable(books, 'Không có sách nào!');
         }, 'Không thể tải danh sách sách!');
     }
 
     function handleCase2() {
-        fetchData('/owner/promotion/get-categories', {}, categories => {
+        fetchData(`${contextPath}/owner/promotion/get-categories`, {}, categories => {
             populateTable(categories, 'Không có danh mục nào!');
         }, 'Không thể tải danh sách danh mục!');
     }
 
     function handleCase3() {
-        fetchData('/owner/promotion/get-subcategories', {}, subcategories => {
+        fetchData(`${contextPath}/owner/promotion/get-subcategories`, {}, subcategories => {
             populateTable(subcategories, 'Không có danh mục con nào!');
         }, 'Không thể tải danh mục con!');
     }
@@ -250,7 +259,7 @@ $(document).ready(function () {
             data.forEach(item => {
                 const isChecked = selectedIds.includes(parseInt(item.id)) ? 'checked' : '';
                 table.row.add([
-                    `<input type="checkbox" class="row-checkbox" name="selectedItems_${item.id}" value="${item.id}" ${isChecked} />`,
+                    `<input type="checkbox" class="row-checkbox" name="selectedItems" value="${item.id}" ${isChecked} />`,
                     `#${item.id}`,
                     `${item.name || item.title}`
                 ]);

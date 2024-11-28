@@ -32,6 +32,7 @@
                                                 src="${imageUrl}"
                                                 alt="product-image"
                                                 class="product-image"
+                                                loading="lazy"
                                         />
                                     </div>
                                 </div>
@@ -41,7 +42,7 @@
                             <c:forEach var="imageUrl" items="${book.imageUrls}">
                                 <div class="thumbnail-image">
                                     <div class="thumbImg">
-                                        <img src="${imageUrl}" alt="product-thumbnail"/>
+                                        <img src="${imageUrl}" alt="product-thumbnail" loading="lazy"/>
                                     </div>
                                 </div>
                             </c:forEach>
@@ -72,7 +73,7 @@
                                 </c:choose>
                             </c:forEach>
                         </div>
-                        <p>( ${book.reviewCount} Review )</p>
+                        <p>( ${book.reviewCount} đánh giá )</p>
                     </div>
                     <div class="list">
                         <ul>
@@ -95,8 +96,9 @@
                         </ul>
                     </div>
                     <div class="cr-product-price">
-                        <span class="new-price price-value">${book.sellingPrice}</span>
+                        <span class="new-price price-value">${(1 - book.discount / 100) * book.sellingPrice}</span>
                         <span class="old-price price-value">${book.sellingPrice}</span>
+                        <span class="discount-percent">${book.discount}</span>
                     </div>
                     <div class="cr-size-weight">
                         <h5><span>Tình trạng</span> :</h5>
@@ -269,7 +271,8 @@
                                         <li class="review-item" data-review-id="${review.id}">
                                             <div class="review-item__image">
                                                 <img src="${pageContext.request.contextPath}${review.imageUrl}"
-                                                     alt="review"/>
+                                                     alt="review"
+                                                     loading="lazy"/>
                                             </div>
                                             <div class="review-item__content">
                                                 <div class="header">
@@ -284,17 +287,34 @@
                                                                 </i>
                                                             </c:forEach>
                                                         </div>
+
+                                                        <span class="hidden-review-label
+                                                                        <c:if test="${!review.isHidden}">d-none</c:if>">
+                                                                Đánh giá bị ẩn
+                                                            </span>
+
                                                     </div>
                                                     <div class="header__right">
-                                                        <button class="action-btn action-btn__hide">
+                                                        <button type="button"
+                                                                class="action-btn action-btn__show
+                                                                        <c:if test="${!review.isHidden}">d-none</c:if>"
+                                                        >
+                                                            <i class="ri-eye-line"></i>
+                                                        </button>
+
+                                                        <button type="button"
+                                                                class="action-btn action-btn__hide
+                                                                        <c:if test="${review.isHidden}">d-none</c:if>"
+                                                        >
                                                             <i class="ri-eye-off-line"></i>
                                                         </button>
-                                                        <c:if test="${empty review.responseContent}">
-                                                            <button type="button"
-                                                                    class="action-btn action-btn__response">
-                                                                <i class="ri-reply-line"></i>
-                                                            </button>
-                                                        </c:if>
+
+                                                        <button type="button"
+                                                                class="action-btn action-btn__response
+                                                                            <c:if test="${review.isHidden || !empty review.responseContent}">d-none</c:if>">
+                                                            <i class="ri-reply-line"></i>
+                                                        </button>
+
                                                     </div>
                                                 </div>
                                                 <span class="date">${review.createdAt}</span>
@@ -326,7 +346,7 @@
                                     <c:forEach var="author" items="${book.authors}">
                                         <div class="author-item">
                                             <div class="author-item--avatar">
-                                                <img src="${author.avatar}" alt="">
+                                                <img src="${author.avatar}" alt="${author.name}" loading="lazy">
                                             </div>
                                             <div class="author-item--info">
                                                 <span class="name">${author.name} (Tác giả)</span>
@@ -337,7 +357,7 @@
                                     <c:forEach var="translator" items="${book.translators}">
                                         <div class="author-item">
                                             <div class="author-item--avatar">
-                                                <img src="${translator.avatar}" alt="">
+                                                <img src="${translator.avatar}" alt="${translator.name}" loading="lazy">
                                             </div>
                                             <div class="author-item--info">
                                                 <span class="name">${translator.name} (Dịch giả)</span>
@@ -400,6 +420,23 @@
         </div>
     </div>
 </div>
+
+<%--ShowModal--%>
+<div class="modal fade" id="showReviewModal" tabindex="-1" aria-labelledby="showReviewModalLabel" aria-hidden="true">
+    <input class="review-id" value="" hidden>
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="showReviewModalLabel">Bạn có chắc muốn hiển thị đánh giá này không?</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Hủy</button>
+                <button type="button" class="btn btn-primary" id="confirmShowReview">Hiện đánh giá</button>
+            </div>
+        </div>
+    </div>
+</div>
 <!-- endregion -->
 
 <!-- region VENDOR JS -->
@@ -410,5 +447,6 @@
 <script src="${pageContext.request.contextPath}/assets/staff/js/vendor/swiper-bundle.min.js" defer></script>
 <script src="${pageContext.request.contextPath}/assets/staff/js/vendor/slick.min.js" defer></script>
 <!-- endregion -->
+<script src="${pageContext.request.contextPath}/assets/commons/js/format-discount-percent.js"></script>
 
 <script src="${pageContext.request.contextPath}/assets/staff/js/product-details.js" defer></script>

@@ -3,13 +3,13 @@ $(document).ready(function () {
     // revenue
     var startOfRevenue = moment().subtract(29, "days");
     var endOfRevenue = moment();
-    var chartTypeRevenue = "line"; // Biến lưu loại biểu đồ mặc định
+    var chartTypeRevenue = "area"; // Biến lưu loại biểu đồ mặc định
     var revenueChart;
 
     // new customer
     var startOfNewCustomer = moment().subtract(29, "days");
     var endOfNewCustomer = moment();
-    var chartTypeNewCustomer = "line";
+    var chartTypeNewCustomer = "area";
     var newCustomerChart;
 
     // top product sold
@@ -48,7 +48,45 @@ $(document).ready(function () {
     // Biến lưu instance biểu đồ
 
     // Hàm vẽ biểu đồ
-    function drawRevenueChart(chartId, categories, revenues, type = "line") {
+
+    // function drawRevenueChart(chartId, categories, revenues, type) {
+    //     if (revenueChart) {
+    //         revenueChart.destroy();
+    //     }
+    //     const options = {
+    //         series: [
+    //             {
+    //                 name: "Doanh thu",
+    //                 data: revenues,
+    //             },
+    //         ],
+    //         chart: {
+    //             height: 500,
+    //             type: type, // Sử dụng loại biểu đồ được truyền vào
+    //             toolbar: {show: false},
+    //         },
+    //         stroke: {width: [2], curve: "smooth"}, // Chỉ áp dụng cho line chart
+    //         colors: ["#8e44ad"],
+    //         xaxis: {
+    //             categories: categories,
+    //             axisTicks: {show: false},
+    //             axisBorder: {show: false},
+    //         },
+    //         yaxis: {
+    //             labels: {
+    //                 formatter: value =>
+    //                     value.toLocaleString("vi-VN") + " vnđ",
+    //             },
+    //         },
+    //         dataLabels: {
+    //             enabled: false, // Không hiển thị số trong cột nếu là bar chart
+    //         },
+    //     };
+    //
+    //     revenueChart = new ApexCharts(document.querySelector(`#${chartId}`), options);
+    //     revenueChart.render();
+    // }
+    function drawRevenueChart(chartId, categories, revenues, type) {
         if (revenueChart) {
             revenueChart.destroy();
         }
@@ -61,11 +99,23 @@ $(document).ready(function () {
             ],
             chart: {
                 height: 500,
-                type: type, // Sử dụng loại biểu đồ được truyền vào
+                type: type, // Thay đổi từ 'line' thành 'area'
                 toolbar: {show: false},
             },
-            stroke: {width: [2], curve: "smooth"}, // Chỉ áp dụng cho line chart
+            stroke: {
+                width: [2],
+                curve: "smooth", // Chỉ áp dụng cho biểu đồ area
+            },
             colors: ["#8e44ad"],
+            fill: {
+                type: 'gradient', // Sử dụng gradient
+                gradient: {
+                    shade: 'light', // Đặt gradient sáng
+                    type: 'vertical', // Gradient theo chiều dọc
+                    gradientToColors: ['#8e44ad'], // Màu chuyển tiếp
+                    stops: [0, 90, 100], // Điều chỉnh độ dốc của gradient
+                },
+            },
             xaxis: {
                 categories: categories,
                 axisTicks: {show: false},
@@ -86,6 +136,8 @@ $(document).ready(function () {
         revenueChart.render();
     }
 
+
+
     function drawNewCustomerChart(chartId, categories, count, type = "line") {
         if (newCustomerChart) {
             newCustomerChart.destroy();
@@ -102,8 +154,17 @@ $(document).ready(function () {
                 type: type, // Sử dụng loại biểu đồ được truyền vào
                 toolbar: {show: false},
             },
-            stroke: {width: [2], curve: "smooth"}, // Chỉ áp dụng cho line chart
+            stroke: {width: [2], curve: "smooth"}, // Chỉ áp dụng cho area chart
             colors: ["#f9a12c"],
+            fill: {
+                type: 'gradient', // Sử dụng gradient
+                gradient: {
+                    shade: 'light', // Đặt gradient sáng
+                    type: 'vertical', // Gradient theo chiều dọc
+                    gradientToColors: ['#f9a12c'], // Màu chuyển tiếp
+                    stops: [0, 90, 100], // Điều chỉnh độ dốc của gradient
+                },
+            },
             xaxis: {
                 categories: categories,
                 axisTicks: {show: false},
@@ -182,8 +243,9 @@ $(document).ready(function () {
     }
 
     function drawRateRepeatPurchaseChart(chartId, categories, seriesData) {
+        // Hủy biểu đồ cũ nếu tồn tại
         if (topRepeatPurchaseChart) {
-            topRepeatPurchaseChart.destroy(); // Hủy biểu đồ cũ nếu tồn tại
+            topRepeatPurchaseChart.destroy();
         }
 
         var options = {
@@ -244,11 +306,13 @@ $(document).ready(function () {
     }
 
     function drawRateRepeatPurchaseDonutChart(chartId, singleOrderRate, multipleOrderRate) {
+        // Hủy biểu đồ donut cũ nếu tồn tại
         if (topRepeatPurchaseDonutChart) {
-            topRepeatPurchaseDonutChart.destroy(); // Hủy biểu đồ cũ nếu tồn tại
+            topRepeatPurchaseDonutChart.destroy();
         }
+
         var options = {
-            series: [39.51, 60.49],
+            series: [singleOrderRate, multipleOrderRate],
             chart: {
                 height: 280,
                 type: 'donut',
@@ -283,8 +347,9 @@ $(document).ready(function () {
                 }
             }]
         };
-        topRepeatPurchaseChart = new ApexCharts(document.querySelector(chartId), options);
-        topRepeatPurchaseChart.render();
+
+        topRepeatPurchaseDonutChart = new ApexCharts(document.querySelector(chartId), options);
+        topRepeatPurchaseDonutChart.render();
     }
 
 
@@ -370,7 +435,7 @@ $(document).ready(function () {
             animateNumber("#chartSumRevenue", parseFloat($("#chartSumRevenue").text().replace(/\D/g, "")), totalRevenue || 0, 1000, true); // Định dạng vnđ
 
             // Vẽ biểu đồ với loại hiện tại (line hoặc bar)
-            if (chartTypeRevenue === "line") {
+            if (chartTypeRevenue === "area") {
                 drawRevenueChart("revenueLineChart", categories, revenues, chartTypeRevenue)
             } else (
                 drawRevenueChart("revenueBarChart", categories, revenues, chartTypeRevenue)
@@ -569,8 +634,9 @@ $(document).ready(function () {
                 {name: 'Khách hàng mua từ 2 đơn', data: [multipleOrderCount, 0]}
             ];
 
-            // Vẽ biểu đồ
+            // Vẽ biểu đồ cột
             drawRateRepeatPurchaseChart("#countCustomerPurchaseBarChart", categories, seriesData);
+            // Vẽ biểu đồ donut
             drawRateRepeatPurchaseDonutChart(
                 "#donutChartRepeatPurchaseRate",
                 (singleOrderCount / totalCustomers) * 100,
@@ -590,7 +656,7 @@ $(document).ready(function () {
     });
 
     $(document).on("click", "#lineChartRevenueIcon", function () {
-        chartTypeRevenue = "line";
+        chartTypeRevenue = "area";
         const dateRangePicker = $("#date-list-revenue").data("daterangepicker");
         const selectedStart = dateRangePicker.startDate; // Lấy thời gian bắt đầu đã chọn
         const selectedEnd = dateRangePicker.endDate; // Lấy thời gian kết thúc đã chọn
@@ -607,7 +673,7 @@ $(document).ready(function () {
     });
 
     $(document).on("click", "#lineChartNewCustomerIcon", function () {
-        chartTypeNewCustomer = "line";
+        chartTypeNewCustomer = "area";
         const dateRangePicker = $("#date-list-new-customer").data("daterangepicker");
         const selectedStart = dateRangePicker.startDate; // Lấy thời gian bắt đầu đã chọn
         const selectedEnd = dateRangePicker.endDate; // Lấy thời gian kết thúc đã chọn

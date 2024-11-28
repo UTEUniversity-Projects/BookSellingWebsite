@@ -4,6 +4,8 @@ import javax.mail.MessagingException;
 
 public interface IEmailService {
     void sendEmail(String toEmail, String subject, String body) throws MessagingException;
+    void sendEmailNoRePlay(String toEmail, String subject, String body) throws MessagingException;
+
     public String getPromotionEmail(String customerName, String promotionDetails);//PromotionController
     String getWelcomeEmail(String customerName);//RegisterController
     String getAccountLockEmail(String customerName);//CustomerListController

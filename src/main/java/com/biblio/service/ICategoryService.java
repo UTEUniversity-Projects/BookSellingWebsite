@@ -1,6 +1,7 @@
 package com.biblio.service;
 
 import com.biblio.dto.request.CategoryRequest;
+import com.biblio.dto.request.SearchBookRequest;
 import com.biblio.dto.response.CategoryBookCountResponse;
 import com.biblio.dto.response.CategoryResponse;
 import com.biblio.dto.response.CategorySidebarResponse;
@@ -21,6 +22,6 @@ public interface ICategoryService {
 
     void deleteCategory(Long id);
 
-    List<CategoryBookCountResponse> getBookQuantityPerCategory();
+    List<CategoryBookCountResponse> getBookQuantityPerCategory(SearchBookRequest request);
 
 }

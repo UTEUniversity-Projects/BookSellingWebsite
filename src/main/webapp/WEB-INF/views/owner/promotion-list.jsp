@@ -38,7 +38,7 @@
                             <tbody>
                             <c:forEach var="promotion" items="${promotions}">
                                 <c:if test="${promotion.type == 'DISCOUNT'}">
-                                    <tr class="promotion-row" data-href="/owner/promotion-details?id=${promotion.id}">
+                                    <tr class="promotion-row" data-href="${pageContext.request.contextPath}/owner/promotion-details?id=${promotion.id}">
                                     <td>
                                         <img class="tbl-thumb" src="/assets/owner/img/product/1.jpg" alt="Product Image">
                                     </td>
@@ -68,7 +68,7 @@
                             <tbody>
                             <c:forEach var="promotion" items="${promotions}">
                                 <c:if test="${promotion.type == 'VOUCHER'}">
-                                    <tr class="promotion-row" data-href="/owner/promotion-details?id=${promotion.id}">
+                                    <tr class="promotion-row" data-href="${pageContext.request.contextPath}/owner/promotion-details?id=${promotion.id}">
                                         <td>
                                             <img class="tbl-thumb" src="/assets/owner/img/product/1.jpg" alt="Product Image">
                                         </td>
@@ -109,7 +109,7 @@
                             <tbody>
                             <c:forEach var="promotion" items="${promotions}">
                                 <c:if test="${promotion.type == 'FREESHIP'}">
-                                    <tr class="promotion-row" data-href="/owner/promotion-details?id=${promotion.id}">
+                                    <tr class="promotion-row" data-href="${pageContext.request.contextPath}/owner/promotion-details?id=${promotion.id}">
                                         <td>
                                             <img class="tbl-thumb" src="/assets/owner/img/product/1.jpg" alt="Product Image">
                                         </td>

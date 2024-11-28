@@ -1,6 +1,5 @@
 package com.biblio.controller.owner;
 
-import com.biblio.dto.request.PromotionTargetInsertRequest;
 import com.biblio.dto.request.PromotionTargetUpdateRequest;
 import com.biblio.dto.request.PromotionTemplateUpdateRequest;
 import com.biblio.dto.request.PromotionUpdateRequest;
@@ -85,6 +84,9 @@ public class PromotionDetailsController extends HttpServlet {
         } else if ("editFreeShip".equals(formType)) {
             handleEditFreeShip(request, response);
         }
+        else if ("editDiscount".equals(formType)) {
+            handleEditDiscount(request, response);
+        }
     }
 
 
@@ -95,8 +97,6 @@ public class PromotionDetailsController extends HttpServlet {
         String discountLimit = request.getParameter("discountLimit");
         String time = request.getParameter("dateeffective");
         String quantity = request.getParameter("quantity");
-        Boolean F = false;
-        Boolean T = true;
 
         try {
             PromotionTemplateGetDetailsResponse promotionTemplateGetDetailsResponse = promotionTemplateService.getPromotionTemplateByCode(code);
@@ -156,13 +156,10 @@ public class PromotionDetailsController extends HttpServlet {
 
     public static String convertToIsoFormat(String input) {
         try {
-            // Định dạng chuỗi đầu vào
             DateTimeFormatter inputFormatter = DateTimeFormatter.ofPattern("M/dd/yyyy hh:mm a");
 
-            // Chuyển chuỗi đầu vào sang LocalDateTime
             LocalDateTime parsedDateTime = LocalDateTime.parse(input, inputFormatter);
 
-            // Định dạng lại kết quả theo ISO 8601 (yyyy-MM-dd'T'HH:mm)
             DateTimeFormatter isoFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm");
             return parsedDateTime.format(isoFormatter);
 
@@ -172,26 +169,6 @@ public class PromotionDetailsController extends HttpServlet {
     }
 
 
-
-
-
-    private PromotionTargetInsertRequest createPromotionTargetRequest(HttpServletRequest request) {
-        PromotionTargetInsertRequest promotionTargetInsertRequest = new PromotionTargetInsertRequest();
-       // promotionTargetInsertRequest.setApplicableObjectId(EPromotionTargetType.WHOLE.toString());
-        promotionTargetInsertRequest.setType(EPromotionTargetType.WHOLE);
-
-        int quantity = getQuantity(request);
-       // promotionTargetInsertRequest.setQuantity(quantity);
-
-        return promotionTargetInsertRequest;
-    }
-
-    private int getQuantity(HttpServletRequest request) {
-        String unlimited = request.getParameter("unlimited");
-        return "true".equals(unlimited) ? -1 : Integer.parseInt(request.getParameter("quantity"));
-    }
-
-    // Các phương thức gọi chung
     private void handleEditVoucher(HttpServletRequest request, HttpServletResponse response) {
         String minValueApplied = request.getParameter("minValueApplied");
         handleEditPromotion(request, response, EPromotionTemplateType.VOUCHER,  100.0, Double.parseDouble(minValueApplied));
@@ -201,6 +178,89 @@ public class PromotionDetailsController extends HttpServlet {
         handleEditPromotion(request, response, EPromotionTemplateType.FREESHIP, 100.0, 0.0); // percentDiscount 100, minValueApplied 0
     }
 
+    private void handleEditDiscount(HttpServletRequest request, HttpServletResponse response) {
+        String code = request.getParameter("code");
+        String title = request.getParameter("title");
+        String description = request.getParameter("description");
+        String percentDiscount = request.getParameter("percentDiscount");
+        String time = request.getParameter("dateeffective");
+        String minValueApplied = "0";
+        String discountLimit = "0";
+        String typeEffective = request.getParameter("selectOject");
+        String[] selectedItemIds = request.getParameterValues("selectedItems");
+
+
+        try {
+            PromotionTemplateGetDetailsResponse promotionTemplateGetDetailsResponse = promotionTemplateService.getPromotionTemplateByCode(code);
+
+            if (Objects.equals(promotionTemplateGetDetailsResponse.getStatus(), EPromotionTemplateStatus.EFFECTIVE.toString())
+                    || Objects.equals(promotionTemplateGetDetailsResponse.getStatus(), EPromotionTemplateStatus.COMING_SOON.toString())) {
+
+                PromotionTemplateResponse promotionTemplateResponse = promotionTemplateService.getPromotionTemplateDetailsById(promotionTemplateGetDetailsResponse.getId());
+
+                PromotionTemplateUpdateRequest promotionTemplateUpdateRequest = convertToUpdateRequest(promotionTemplateResponse, null);
+
+                Optional<String> optionalStartDate = promotionTemplateUpdateRequest
+                        .getPromotionUpdates()
+                        .stream()
+                        .map(PromotionUpdateRequest::getEffectiveDate)
+                        .findFirst();
+
+                String startDate = optionalStartDate.orElse(null);
+                PromotionUpdateRequest promotionUpdateRequest = new PromotionUpdateRequest();
+
+                promotionUpdateRequest.setTitle(title);
+                promotionUpdateRequest.setDescription(description);
+                promotionUpdateRequest.setPercentDiscount(Double.parseDouble(percentDiscount));
+                promotionUpdateRequest.setMinValueApplied(Double.parseDouble(minValueApplied));
+                promotionUpdateRequest.setDiscountLimit(Double.parseDouble(discountLimit));
+                promotionUpdateRequest.setStatus(EPromotionStatus.NOT_USE);
+
+                if (promotionTemplateResponse.getStatus() == EPromotionTemplateStatus.EFFECTIVE || promotionTemplateResponse.getStatus() == EPromotionTemplateStatus.USED_OUT) {
+                    promotionUpdateRequest.setEffectiveDate(startDate);
+                    promotionUpdateRequest.setExpirationDate(convertToIsoFormat(request.getParameter("dateeffective")));
+                } else {
+                    String[] parts = time.split(" - ");
+                    promotionUpdateRequest.setEffectiveDate(convertToIsoFormat(parts[0]));
+                    promotionUpdateRequest.setExpirationDate(convertToIsoFormat(parts[1]));
+                }
+
+                if ("1".equals(typeEffective)) {
+                    for (String itemId : selectedItemIds) {
+                        PromotionTargetUpdateRequest promotionTargetUpdate_add = new PromotionTargetUpdateRequest();
+                        promotionTargetUpdate_add.setType(EPromotionTargetType.BOOK);
+                        promotionTargetUpdate_add.setApplicableObjectId(Long.parseLong(itemId));
+                        promotionUpdateRequest.getPromotionTargets().add(promotionTargetUpdate_add);
+                    }
+                } else if ("2".equals(typeEffective)) {
+                    for (String itemId : selectedItemIds) {
+                        PromotionTargetUpdateRequest promotionTargetUpdate_add = new PromotionTargetUpdateRequest();
+                        promotionTargetUpdate_add.setType(EPromotionTargetType.CATEGORY);
+                        promotionTargetUpdate_add.setApplicableObjectId(Long.parseLong(itemId));
+                        promotionUpdateRequest.getPromotionTargets().add(promotionTargetUpdate_add);
+                    }
+                } else if ("3".equals(typeEffective)) {
+                    for (String itemId : selectedItemIds) {
+                        PromotionTargetUpdateRequest promotionTargetUpdate_add = new PromotionTargetUpdateRequest();
+                        promotionTargetUpdate_add.setType(EPromotionTargetType.SUBCATEGORY);
+                        promotionTargetUpdate_add.setApplicableObjectId(Long.parseLong(itemId));
+                        promotionUpdateRequest.getPromotionTargets().add(promotionTargetUpdate_add);
+                    }
+                } else if ("4".equals(typeEffective)) {
+                    PromotionTargetUpdateRequest promotionTargetUpdate_add = new PromotionTargetUpdateRequest();
+                    promotionTargetUpdate_add.setType(EPromotionTargetType.WHOLE);
+                    promotionTargetUpdate_add.setApplicableObjectId(-1L);
+                    promotionUpdateRequest.getPromotionTargets().add(promotionTargetUpdate_add);
+                }
+                promotionTemplateUpdateRequest.getPromotionUpdates().add(promotionUpdateRequest);
+                promotionTemplateService.updatePromotionTemplate(promotionTemplateUpdateRequest);
+                response.sendRedirect("/owner/promotion-details?id=" + promotionTemplateUpdateRequest.getId());
+
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 
 
     public PromotionTemplateUpdateRequest convertToUpdateRequest(PromotionTemplateResponse promotionTemplateResponse, String quantity) {
@@ -236,7 +296,7 @@ public class PromotionDetailsController extends HttpServlet {
                 PromotionTargetUpdateRequest promotionTargetUpdateRequest = new PromotionTargetUpdateRequest();
 
                 promotionTargetUpdateRequest.setId(promotionTargetResponse.getId());
-                promotionTargetUpdateRequest.setType(EPromotionTargetType.WHOLE);
+                promotionTargetUpdateRequest.setType(EPromotionTargetType.valueOf(promotionTargetResponse.getType()));
                 promotionTargetUpdateRequest.setApplicableObjectId(promotionTargetResponse.getApplicableObjectId());
                 promotionUpdateRequest.getPromotionTargets().add(promotionTargetUpdateRequest);
             }

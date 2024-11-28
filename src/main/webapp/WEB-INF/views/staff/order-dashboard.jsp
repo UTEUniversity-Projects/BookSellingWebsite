@@ -103,7 +103,7 @@
                                         <td>${order.paymentMethod}</td>
                                         <td data-status="${order.status}">
                                             <span class="status status__${order.statusStyle}">
-                                                    ${order.statusDisplay}
+                                                    ${order.status.description}
                                             </span>
                                         </td>
                                     </tr>
