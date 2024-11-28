@@ -87,9 +87,7 @@ public class OrderAPI extends HttpServlet {
             result.put("statusType", EOrderStatus.PACKING.name());
             result.put("status", EOrderStatus.PACKING.getDescription());
             result.put("statusStyle", EOrderStatus.PACKING.getStatusStyle());
-            
-          
-          (request,orderId/*, finalPrice*/);
+            sendOrderConfirmationEmail(request,orderId/*, finalPrice*/);
         } else {
             result.put("message", "Không thể xác nhận đơn hàng. Vui lòng thử lại!");
             result.put("type", "info");
@@ -233,3 +231,5 @@ public class OrderAPI extends HttpServlet {
     }
 
 }
+
+
