@@ -49,17 +49,23 @@ public class SearchController extends HttpServlet {
         // TODO Auto-generated method stub
         String title = request.getParameter("title");
 
-        SearchBookRequest searchBookRequest = SearchBookRequest.builder().title(title).pageNumber(1).build();
+        SearchBookRequest searchBookRequest = SearchBookRequest.builder()
+                .title(title)
+                .categoryId(null)
+                .sortBy(null)
+                .perPage(6)
+                .minPrice(0)
+                .maxPrice(10000000000L)
+                .categoryId(null)
+                .pageNumber(1).build();
 
-        List<CategoryBookCountResponse> categories = categoryService.getBookQuantityPerCategory();
+        List<CategoryBookCountResponse> categories = categoryService.getBookQuantityPerCategory(searchBookRequest);
+        System.out.println(categories);
         List<BookCardResponse> books = bookTemplateService.getBookTemplateByCriteria(searchBookRequest);
         Long bookCount = bookTemplateService.getBookTemplateQuantityByCriteria(searchBookRequest);
         Long totalBook = bookTemplateService.getTotalBookTemplateQuantity();
         Long minPrice = bookService.getMinBookPrice();
         Long maxPrice = bookService.getMaxBookPrice();
-
-        System.out.println(minPrice);
-        System.out.println(maxPrice);
 
         int page = 1;
         int perPage = 6;

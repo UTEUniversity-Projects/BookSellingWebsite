@@ -2,6 +2,7 @@ package com.biblio.service.impl;
 
 import com.biblio.dao.ICategoryDAO;
 import com.biblio.dto.request.CategoryRequest;
+import com.biblio.dto.request.SearchBookRequest;
 import com.biblio.dto.response.CategoryBookCountResponse;
 import com.biblio.dto.response.CategoryResponse;
 import com.biblio.dto.response.CategorySidebarResponse;
@@ -57,8 +58,8 @@ public class CategoryServiceImpl implements ICategoryService {
     }
 
     @Override
-    public List<CategoryBookCountResponse> getBookQuantityPerCategory() {
-        return categoryDAO.countBookPerCategory();
+    public List<CategoryBookCountResponse> getBookQuantityPerCategory(SearchBookRequest request) {
+        return categoryDAO.countBookPerCategory(request);
     }
 
 }

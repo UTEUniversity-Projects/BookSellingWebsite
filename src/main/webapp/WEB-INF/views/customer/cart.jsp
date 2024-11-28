@@ -4,27 +4,6 @@
 <!-- Cart -->
 <section class="section-cart padding-t-100">
     <div class="container-xl">
-        <div class="row d-none">
-            <div class="col-lg-12">
-                <div
-                        class="mb-30"
-                        data-aos="fade-up"
-                        data-aos-duration="2000"
-                        data-aos-delay="400"
-                >
-                    <div class="cr-banner">
-                        <h2>Giỏ hàng</h2>
-                    </div>
-                    <div class="cr-banner-sub-title">
-                        <p>
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
-                            do eiusmod tempor incididunt ut labore lacus vel facilisis.
-                        </p>
-                    </div>
-                </div>
-            </div>
-        </div>
-
         <div class="row">
             <div class="col-12">
                 <div
