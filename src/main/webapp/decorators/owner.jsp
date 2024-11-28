@@ -70,6 +70,7 @@
     <decorator:body/>
     <%@include file="/commons/owner/footer.jsp" %>
 </main>
+        <script> const contextPath = "<%=request.getContextPath() %>";</script>
 
         <!-- region Vendor Custom JS -->
         <script src="${pageContext.request.contextPath}/assets/owner/js/vendor/jquery-3.6.4.min.js"></script>

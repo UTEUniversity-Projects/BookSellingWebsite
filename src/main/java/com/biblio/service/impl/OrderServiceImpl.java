@@ -11,7 +11,6 @@ import com.biblio.mapper.OrderMapper;
 import com.biblio.service.IOrderService;
 
 import javax.inject.Inject;
-import javax.transaction.Transactional;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.*;
@@ -231,23 +230,23 @@ public class OrderServiceImpl implements IOrderService {
         return countOrderOfCustomerResponses;
     }
 
-
-
-    @Override
-    @Transactional
-    public void confirmOrder(Long orderId) {
-        Order order = orderDAO.findOne(orderId);
-        order.setStatus(EOrderStatus.PACKING);
-        orderDAO.updateOrder(order);
-    }
-
-    @Override
-    @Transactional
-    public void rejectOrder(Long orderId, String reason) {
-        Order order = orderDAO.findOne(orderId);
-        order.setStatus(EOrderStatus.CANCELED);
-        orderDAO.updateOrder(order);
-    }
+//
+//
+//    @Override
+//    @Transactional
+//    public void confirmOrder(Long orderId) {
+//        Order order = orderDAO.findOne(orderId);
+//        order.setStatus(EOrderStatus.PACKING);
+//        orderDAO.updateOrder(order);
+//    }
+//
+//    @Override
+//    @Transactional
+//    public void rejectOrder(Long orderId, String reason) {
+//        Order order = orderDAO.findOne(orderId);
+//        order.setStatus(EOrderStatus.CANCELED);
+//        orderDAO.updateOrder(order);
+//    }
 
 
 }
