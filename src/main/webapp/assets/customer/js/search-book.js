@@ -130,6 +130,14 @@ $(document).ready(() => {
 				`;
 			};
 
+			const generateCategory = (category) => {
+				return `<div class="checkbox-group gap-x-2">
+                                    <input type="checkbox" id="${category.id}" value="${category.id}" class="category-item">
+                                    <label for="${category.id}" class="pr-2">${category.categoryName}</label>
+                                    <span>(${category.bookCount})</span>
+                                </div>`;
+			};
+
 			$('.book-list').html('                    <div class="loading h-[100vh] flex justify-center items-center">\n' +
 				'                        <div class="mx-auto w-[30px] h-[30px] rounded-full border-[4px] border-solid border-green-400 border-t-transparent animate-spin"></div>\n' +
 				'                    </div>');
@@ -137,27 +145,38 @@ $(document).ready(() => {
 
 			const handleSuccess = (result) => {
 				const bookList = document.querySelector('.book-list');
+				const categoryList = document.querySelector('.category');
+				const { books, quantity, category } = result;
 
-				if (result.response.length === 0) {
+				console.log(books);
+
+				if (categoryList) {
+					if (isCategoryClicked === false) {
+						categoryList.innerHTML = `<div class="checkbox-group">
+                                <input type="checkbox" id="all-categories" class="category-item" checked/>
+                                <label for="all-categories">Tất cả</label>
+                                <span>(${quantity})</span>
+                            </div>` + category?.map(generateCategory).join('');
+					}
+					isCategoryClicked = false;
+				}
+
+				if (books.length === 0) {
 					bookList.innerHTML = `<p class="text-xl text-[#269a37] text-center">Không tìm thấy sản phẩm.</p>`;
 					$('.cr-pagination').hide();
 				} else {
 					if (bookList)
-						bookList.innerHTML = result?.response?.map(generateBook).join('');
+						bookList.innerHTML = books?.map(generateBook).join('');
 
 					$('.modal.fade.quickview-modal').remove();
-					document.querySelector('body').insertAdjacentHTML('beforeend', result.response.map(generateModal).join(''));
+					document.querySelector('body').insertAdjacentHTML('beforeend', books.map(generateModal).join(''));
 
 					$('.cr-pagination').show();
 					zoomImage('.image-zoom');
-					generatePagination(document.querySelector('.pagination'), Math.floor(result.quantity / searchData.perPage) + (result.quantity % searchData.perPage !== 0 ? 1 : 0), parseInt(getUrlParam('page')));
+					generatePagination(document.querySelector('.pagination'), Math.floor(quantity / searchData.perPage) + (quantity % searchData.perPage !== 0 ? 1 : 0), parseInt(getUrlParam('page')));
 				}
 
-				if (searchData.title?.trim() !== '' || searchData.categoryId) {
-					$('.search-result-label').text(` ${searchData.title} (${result.quantity} kết quả)`);
-				} else {
-					$('.search-result-label').text('');
-				}
+				$('.search-result-label').text(` ${searchData.title?.trim()} (${result.quantity} kết quả)`);
 			};
 
 			await $.ajax({
@@ -184,6 +203,7 @@ $(document).ready(() => {
 	const searchBook = new SearchBook();
 	const searchInput = $('.search-input');
 	const urlParams = new URLSearchParams(window.location.search);
+	var isCategoryClicked = false;
 
 	const searchData = {
 		title: urlParams.get('title') || '',
@@ -193,8 +213,8 @@ $(document).ready(() => {
 		minPrice: 0,
 		maxPrice: 10000000000000000,
 		perPage: getItemQuantityPerPage()
-
 	};
+
 	console.log(searchData);
 
 	searchBook.search(searchData);
@@ -232,18 +252,18 @@ $(document).ready(() => {
 		}, 500));
 	}
 
-	$('.category-item').on('click', function () {
+	$(document).on('click', '.category-item', function () {
 		$('.category-item').each(function () {
 			$(this)[0].checked = false;
-			$(this).parent().removeClass('select-none pointer-events-none');
+			$(this).addClass('select-none pointer-events-none');
 		});
 		$(this)[0].checked = true;
-		$(this).parent().addClass('select-none pointer-events-none');
+		$(this).removeClass('select-none pointer-events-none');
 		const categoryId = $(this).val() !== 'on' ? $(this).val() : null;
 		updateUrlParam('categoryId', categoryId);
 		updateUrlParam('page', 1);
 		updateObjectValue(searchData, 'categoryId', categoryId);
-
+		isCategoryClicked = true;
 		if (categoryId) {
 			updateUrlParam('categoryId', categoryId);
 		} else {
@@ -253,7 +273,6 @@ $(document).ready(() => {
 			window.history.pushState({ path: newUrl }, '', newUrl);
 		}
 		searchBook.search(searchData);
-
 	});
 
 	setValueFromParameter();
@@ -269,6 +288,8 @@ $(document).ready(() => {
 				$(this)[0].checked = $(this).val() === getUrlParam('categoryId');
 			});
 		}
+
+
 
 	}
 
@@ -335,16 +356,16 @@ $(document).ready(() => {
 			liTag += `<li class="btn next"><span><i class="fas fa-angle-right"></i></span></li>`;
 		}
 
-		element.innerHTML = liTag;
+		if (element)
+			element.innerHTML = liTag;
 
-		// Attach events to pagination buttons
 		attachPaginationEvents(element, totalPages, page);
 
 		return liTag;
 	}
 
 	function attachPaginationEvents (element, totalPages, currentPage) {
-		const allButtons = element.querySelectorAll('.pagination li');
+		const allButtons = element?.querySelectorAll('.pagination li') || [];
 		allButtons.forEach((btn) => {
 			if (btn.classList.contains('prev')) {
 				btn.addEventListener('click', () => updatePageInUrl(currentPage - 1, totalPages));
@@ -381,9 +402,11 @@ $(document).ready(() => {
 	}
 
 	function getItemQuantityPerPage () {
-		const width = window.innerWidth;
 
-		if (width >= 992 && width < 1200) {
+		const width = window.innerWidth;
+		console.log(width);
+
+		if (width < 1400) {
 			return 6;
 		} else {
 			return 8;
@@ -419,6 +442,9 @@ $(document).ready(() => {
 		searchData.minPrice = slide1;
 		searchData.maxPrice = slide2;
 
+		addUrlParam("minPrice", searchData.minPrice);
+		addUrlParam("maxPrice", searchData.maxPrice);
+
 		console.log(searchData);
 		searchBook.search(searchData);
 
@@ -437,6 +463,15 @@ $(document).ready(() => {
 				}
 			}));
 
+	function addUrlParam(key, value) {
+		const url = new URL(window.location.href);
+
+		if (value !== null && value !== undefined) {
+			url.searchParams.set(key, value);
+		}
+
+		window.history.pushState({}, '', url.toString());
+	}
 
 });
 

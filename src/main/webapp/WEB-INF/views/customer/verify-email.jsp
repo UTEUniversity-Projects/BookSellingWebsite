@@ -17,7 +17,8 @@
                         </div>
                         <button type="button"
                                 class="btn-verify px-8 py-2 rounded text-white bg-[#64b595] hover:bg-[#64b595]/90 transition-all duration-300">
-                            Gửi
+                            <p class="button-text text-white text-[16px]">Gửi</p>
+                            <div class="spinner hidden w-[20px] h-[20px] border-[4px] border-solid border-[#fff] rounded-full border-t-transparent animate-spin mx-auto"></div>
                         </button>
                     </form>
                 </div>

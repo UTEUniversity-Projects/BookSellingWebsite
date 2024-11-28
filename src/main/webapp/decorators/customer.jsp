@@ -199,7 +199,12 @@
 <!-- Cart -->
 <div class="cr-cart-overlay"></div>
 <div class="cr-cart-view">
+
     <div class="cr-cart-inner">
+<%--        <div class="cart-loading">--%>
+<%--            <div class="w-[25px] h-[25px] rounded-full border-[4px] border-solid border-[#26a347] border-t-transparent animate-spin"></div>--%>
+<%--        </div>--%>
+
         <div class="cr-cart-top">
             <div class="cr-cart-title">
                 <h6>Giỏ hàng của tôi</h6>
@@ -357,29 +362,18 @@
                     </li>
                 </c:forEach>
             </ul>
-            <div class="cr-cart-bottom">
-                <div class="cart-sub-total">
-                        <%--                <table class="table cart-table">--%>
-                        <%--                    <tbody>--%>
-                        <%--                    <tr>--%>
-                        <%--                        <td class="text-left">Tiền sách:</td>--%>
-                        <%--                        <td class="text-right total-book-price price-value">${cart.totalBookPrice}</td>--%>
-                        <%--                    </tr>--%>
-                        <%--                    <tr>--%>
-                        <%--                        <td class="text-left">Thành tiền:</td>--%>
-                        <%--                        <td class="text-right primary-color">$360.00</td>--%>
-                        <%--                    </tr>--%>
-                        <%--                    </tbody>--%>
-                        <%--                </table>--%>
-                </div>
-                <div class="cart_btn flex items-center justify-center">
-                    <a href="${pageContext.request.contextPath}/cart" class="cr-button">Xem giỏ hàng</a>
-                        <%--                <a href="${pageContext.request.contextPath}checkout" class="cr-button">Thanh toán</a>--%>
-                </div>
-                </c:otherwise>
-            </c:choose>
-            </div>
+
         </div>
+
+        <div class="cr-cart-bottom mt-auto flex items-center justify-center">
+
+            <div class="cart_btn flex items-center justify-center">
+                <a href="${pageContext.request.contextPath}/cart" class="cr-button">Xem giỏ hàng</a>
+            </div>
+            </c:otherwise>
+            </c:choose>
+        </div>
+          
     </div>
 </div>
 

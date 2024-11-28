@@ -317,7 +317,7 @@ function createPromotionRequestTypeDiscount(data, tableSelector) {
 // Hàm gửi request AJAX
 function sendPromotionRequest(responseData, form) {
     $.ajax({
-        url: '/owner/promotion/add',
+        url: `${contextPath}/owner/promotion/add`,
         type: 'POST',
         contentType: 'application/json; charset=UTF-8',
         data: JSON.stringify(responseData),
@@ -378,19 +378,19 @@ $(document).ready(function () {
     }
 
     function handleCase1() {
-        fetchData('/owner/promotion/get-book', {}, books => {
+        fetchData(`${contextPath}/owner/promotion/get-book`, {}, books => {
             populateTable(books, 'Không có sách nào!');
         }, 'Không thể tải danh sách sách!');
     }
 
     function handleCase2() {
-        fetchData('/owner/promotion/get-categories', {}, categories => {
+        fetchData(`${contextPath}/owner/promotion/get-categories`, {}, categories => {
             populateTable(categories, 'Không có danh mục nào!');
         }, 'Không thể tải danh sách danh mục!');
     }
 
     function handleCase3() {
-        fetchData('/owner/promotion/get-subcategories', {}, subcategories => {
+        fetchData(`${contextPath}/owner/promotion/get-subcategories`, {}, subcategories => {
             populateTable(subcategories, 'Không có danh mục con nào!');
         }, 'Không thể tải danh mục con!');
     }
