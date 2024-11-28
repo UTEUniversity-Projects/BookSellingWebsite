@@ -44,7 +44,7 @@ public class Review implements Serializable {
     @JoinColumn(name = "book_template_id", nullable = false)
     private BookTemplate bookTemplate;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "customer_id", nullable = false)
     private Customer customer;
 

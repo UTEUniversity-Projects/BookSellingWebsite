@@ -10,6 +10,7 @@ import lombok.*;
 @Getter
 @Setter
 public class OrderProductResponse {
+    private Long bookId;
     private String title;
     private String imagePath;
     private int quantity;

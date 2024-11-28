@@ -709,6 +709,16 @@ document.querySelectorAll(".action-btn__hide").forEach(item => {
     });
 });
 
+document.querySelectorAll(".action-btn__show").forEach(item => {
+    item.addEventListener('click', function (event) {
+        const reviewItem = this.closest('.review-item');
+        const reviewId = reviewItem.dataset.reviewId;
+        const showReviewModal = new bootstrap.Modal(document.getElementById('showReviewModal'));
+        document.getElementById('showReviewModal').querySelector(".review-id").value = reviewId;
+        showReviewModal.show();
+    });
+});
+
 document.getElementById("submitFeedback").addEventListener("click", function () {
     const feedbackContent = document.getElementById("feedbackContent").value;
     const errorMessage = document.getElementById("error-message");
@@ -755,9 +765,11 @@ document.getElementById("submitFeedback").addEventListener("click", function () 
                                 </div>`;
                     reviewElement.insertAdjacentHTML("beforeend", responseHTML);
 
-                    const responseButton = reviewElement.querySelector(".action-btn__response");
-                    if (responseButton) {
-                        responseButton.style.display = "none";
+                    const actionBtnResponse = reviewElement.querySelector(".action-btn__response");
+
+                    if (actionBtnResponse) {
+                        actionBtnResponse.classList.remove('d-flex');
+                        actionBtnResponse.classList.add('d-none');
                     }
 
                     const modal = bootstrap.Modal.getInstance(document.getElementById('feedbackModal'));
@@ -785,7 +797,7 @@ document.getElementById("confirmHideReview").addEventListener("click", function 
         reviewId: reviewId
     };
 
-    fetch(`${contextPath}/staff/review/update/hidden`, {
+    fetch(`${contextPath}/api/staff/review/hidden`, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
@@ -806,12 +818,35 @@ document.getElementById("confirmHideReview").addEventListener("click", function 
                 type: data.type,
                 duration: 3000,
             });
-
+            console.log(data);
             if (data.type === "success") {
                 const reviewElement = document.querySelector(`[data-review-id="${reviewId}"]`);
                 console.log(reviewElement);
                 if (reviewElement) {
-                    reviewElement.style.display = "none";
+                    const hiddenLabel = reviewElement.querySelector('.hidden-review-label');
+                    const actionBtnHide = reviewElement.querySelector('.action-btn__hide');
+                    const actionBtnResponse = reviewElement.querySelector('.action-btn__response');
+                    const actionBtnShow = reviewElement.querySelector('.action-btn__show');
+
+                    if (hiddenLabel) {
+                        hiddenLabel.classList.remove('d-none');
+                        hiddenLabel.classList.add('d-flex');
+                    }
+
+                    if (actionBtnHide) {
+                        actionBtnHide.classList.remove('d-flex');
+                        actionBtnHide.classList.add('d-none');
+                    }
+
+                    if (actionBtnResponse) {
+                        actionBtnResponse.classList.remove('d-flex');
+                        actionBtnResponse.classList.add('d-none');
+                    }
+
+                    if (actionBtnShow) {
+                        actionBtnShow.classList.remove('d-none');
+                        actionBtnShow.classList.add('d-flex');
+                    }
                 }
 
                 const modal = bootstrap.Modal.getInstance(document.getElementById('hideReviewModal'));
@@ -828,3 +863,93 @@ document.getElementById("confirmHideReview").addEventListener("click", function 
             });
         });
 });
+
+document.getElementById("confirmShowReview").addEventListener("click", function () {
+    const reviewId = document.getElementById('showReviewModal').querySelector(".review-id").value;
+
+    const requestData = {
+        reviewId: reviewId
+    };
+
+    fetch(`${contextPath}/api/staff/review/show`, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(requestData)
+    })
+        .then(response => {
+            if (response.ok) {
+                return response.json();
+            } else {
+                throw new Error("Có lỗi xảy ra khi gửi phản hồi.");
+            }
+        })
+        .then(data => {
+            toast({
+                title: data.type === "success" ? "Thành công" : "Cảnh báo",
+                message: data.message,
+                type: data.type,
+                duration: 3000,
+            });
+            console.log(data);
+            if (data.type === "success") {
+                const reviewElement = document.querySelector(`[data-review-id="${reviewId}"]`);
+                console.log(reviewElement);
+                if (reviewElement) {
+                    const hiddenLabel = reviewElement.querySelector('.hidden-review-label');
+                    const actionBtnHide = reviewElement.querySelector('.action-btn__hide');
+                    const actionBtnResponse = reviewElement.querySelector('.action-btn__response');
+                    const actionBtnShow = reviewElement.querySelector('.action-btn__show');
+
+                    if (hiddenLabel) {
+                        if (data.isHidden) {
+                            hiddenLabel.classList.remove('d-none');
+                            hiddenLabel.classList.add('d-flex');
+                        } else {
+                            hiddenLabel.classList.remove('d-flex');
+                            hiddenLabel.classList.add('d-none');
+                        }
+                    }
+
+                    if (actionBtnHide) {
+                        actionBtnHide.classList.remove('d-none');
+                        actionBtnHide.classList.add('d-flex');
+                    }
+
+                    if (actionBtnResponse) {
+                        if (!data.responseContent || data.responseContent.trim() === "") {
+                            actionBtnResponse.classList.remove('d-none');
+                            actionBtnResponse.classList.add('d-flex');
+                        } else {
+                            actionBtnResponse.classList.remove('d-flex');
+                            actionBtnResponse.classList.add('d-none');
+                        }
+                    }
+
+                    if (actionBtnShow) {
+                        if (data.isHidden) {
+                            actionBtnShow.classList.remove('d-none');
+                            actionBtnShow.classList.add('d-flex');
+                        } else {
+                            actionBtnShow.classList.remove('d-flex');
+                            actionBtnShow.classList.add('d-none');
+                        }
+                    }
+                }
+
+                const modal = bootstrap.Modal.getInstance(document.getElementById('showReviewModal'));
+                modal.hide();
+            }
+        })
+        .catch(error => {
+            console.error("Error:", error);
+            toast({
+                title: "Thất bại",
+                message: "Có lỗi xảy ra khi gửi phản hồi. Vui lòng thử lại!",
+                type: "error",
+                duration: 3000,
+            });
+        });
+});
+

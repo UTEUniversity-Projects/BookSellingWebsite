@@ -1,6 +1,9 @@
 package com.biblio.controller.customer;
 
 import com.biblio.dto.request.ReviewRequest;
+import com.biblio.dto.response.AccountGetResponse;
+import com.biblio.dto.response.CustomerDetailResponse;
+import com.biblio.service.ICustomerService;
 import com.biblio.service.IReviewService;
 
 import javax.inject.Inject;
@@ -22,6 +25,9 @@ public class ReviewBookController extends HttpServlet {
     private static final long serialVersionUID = 1L;
     @Inject
     private IReviewService reviewService;
+
+    @Inject
+    private ICustomerService customerService;
     /**
      * @see HttpServlet#HttpServlet()
      */
@@ -43,13 +49,16 @@ public class ReviewBookController extends HttpServlet {
      */
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         // TODO Auto-generated method stub
-        HttpSession session = request.getSession();
-        Long customerId = 1L;
-//        Long customerId = (Long) session.getAttribute("customerId");
-//        if (customerId == null) {
-//            response.sendRedirect(request.getContextPath() + "/login");
-//            return;
-//        }
+        HttpSession session = request.getSession(false);
+        AccountGetResponse account = (AccountGetResponse) session.getAttribute("account");
+        CustomerDetailResponse customer = customerService.getCustomerDetailByUsername(account.getUsername());
+        Long customerId = customer.getId();
+
+        // Check if the customer is authenticated
+        if (customerId == null) {
+            response.sendRedirect(request.getContextPath() + "/login");
+            return;
+        }
         String content = request.getParameter("content");
         Long bookTemplateId = 1L;
         //int rate = Integer.parseInt(request.getParameter("rating") != null ? request.getParameter("rating") : "0");

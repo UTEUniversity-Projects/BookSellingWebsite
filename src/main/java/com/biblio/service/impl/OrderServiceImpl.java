@@ -282,6 +282,7 @@ public class OrderServiceImpl implements IOrderService {
         countOrderOfCustomerResponses.addAll(customerOrderCountMap.values());
         return countOrderOfCustomerResponses;
     }
+
 //
 //
 //    @Override
@@ -299,4 +300,5 @@ public class OrderServiceImpl implements IOrderService {
 //        order.setStatus(EOrderStatus.CANCELED);
 //        orderDAO.updateOrder(order);
 //    }
+
 }
