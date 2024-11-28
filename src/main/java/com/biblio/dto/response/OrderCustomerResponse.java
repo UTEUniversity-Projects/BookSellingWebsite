@@ -3,12 +3,15 @@ package com.biblio.dto.response;
 import com.biblio.entity.Order;
 import com.biblio.entity.OrderItem;
 import com.biblio.entity.Promotion;
+import com.biblio.enumeration.EOrderStatus;
 import lombok.*;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.time.LocalDateTime;
+import java.util.Collections;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 @Data
@@ -23,7 +26,7 @@ public class OrderCustomerResponse {
     private String note;
     private String orderDate;
     private String paymentType;
-    private String status;
+    private EOrderStatus status;
     private Double vat;
     private Long customerId;
     private Long shippingId;
@@ -34,9 +37,24 @@ public class OrderCustomerResponse {
     private Set<Promotion> promotions = new HashSet<>();
     private Order order;
     private String address;
-    private  String email;
+    private String email;
+    private List<OrderProductResponse> products;
+    private Double finalPrice;
+    private Double totalDiscount;
+    private String publisherName;
+    private ShippingResponse shipping;
 
-    public OrderCustomerResponse(Long id, String note, LocalDateTime orderDate, String paymentType, String status, Double vat, Long customerId, Long shippingId) {
+    public OrderCustomerResponse(Long id, String note, LocalDateTime orderDate, String publisherName, EOrderStatus status, OrderProductResponse products, Double totalPrice, Double finalPrice ) {
+        this.id = id;
+        this.note = note;
+        this.orderDate = String.valueOf(orderDate);
+        this.status = status;
+        this.totalPrice = totalPrice;
+        this.products = Collections.singletonList(products);
+        this.finalPrice = finalPrice;
+        this.publisherName = publisherName;
+    }
+    public OrderCustomerResponse(Long id, String note, LocalDateTime orderDate, String paymentType, EOrderStatus status, Double vat, Long customerId, Long shippingId) {
         this.id = id;
         this.note = note;
         this.orderDate = String.valueOf(orderDate);
@@ -47,7 +65,7 @@ public class OrderCustomerResponse {
         this.shippingId = shippingId;
     }
 
-    public OrderCustomerResponse(long id, String note, String orderDate, String paymentType, String status, Double vat, Long customerId, Long shippingId, Double totalPrice, Set<BookResponse> book) {
+    public OrderCustomerResponse(long id, String note, String orderDate, String paymentType, EOrderStatus status, Double vat, Long customerId, Long shippingId, Double totalPrice, Set<BookResponse> book) {
         this.id = id;
         this.note = note;
         this.orderDate = orderDate;

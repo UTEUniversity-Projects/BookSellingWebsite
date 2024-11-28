@@ -6,8 +6,16 @@ import com.biblio.dto.response.BookResponse;
 import java.util.List;
 
 public interface IBookService {
+
     List<BookResponse> findAll();
+
     void addBook(BookRequest bookRequest);
+
     void updateBook(BookRequest bookRequest);
+
     void deleteBook(Long id);
+
+    Long getMinBookPrice();
+
+    Long getMaxBookPrice();
 }

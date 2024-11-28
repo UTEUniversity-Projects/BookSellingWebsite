@@ -32,6 +32,7 @@ public class PromotionServiceImpl implements IPromotionService {
     @Override
     public void insertPromotion(PromotionInsertRequest promotionInsertRequest) {
         Promotion promotion = promotionDAO.save(PromotionMapper.toPromotion(promotionInsertRequest));
+
     }
 
     @Override

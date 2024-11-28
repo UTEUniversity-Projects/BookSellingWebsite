@@ -43,9 +43,9 @@
                                         Tất cả
                                     </a>
                                     <a
-                                        class="dropdown-item"
-                                        href="#"
-                                        data-value="COMING_SOON"
+                                            class="dropdown-item"
+                                            href="#"
+                                            data-value="COMING_SOON"
                                     >
                                         Sắp mở bán
                                     </a>
@@ -53,16 +53,16 @@
                                         Đang bán
                                     </a>
                                     <a
-                                        class="dropdown-item"
-                                        href="#"
-                                        data-value="OUT_OF_STOCK"
+                                            class="dropdown-item"
+                                            href="#"
+                                            data-value="OUT_OF_STOCK"
                                     >
                                         Hết hàng
                                     </a>
                                     <a
-                                        class="dropdown-item"
-                                        href="#"
-                                        data-value="STOP_SELLING"
+                                            class="dropdown-item"
+                                            href="#"
+                                            data-value="STOP_SELLING"
                                     >
                                         Ngừng kinh doanh
                                     </a>
@@ -78,7 +78,6 @@
                                     <th width="5%"></th>
                                     <th width="20%">Tiêu đề</th>
                                     <th>Giá bán</th>
-                                    <th>Khuyến mãi</th>
                                     <th>Tồn kho</th>
                                     <th>Đã bán</th>
                                     <th>Ngày mở bán</th>
@@ -89,24 +88,23 @@
                                 </thead>
                                 <tbody>
                                 <c:forEach var="book" items="${books}">
-                                <tr class="product-row" data-href="/staff/product-details?id=${book.id}">
-                                    <td>
-                                        <img
-                                            class="tbl-thumb"
-                                            src="${pageContext.request.contextPath}${book.imageUrl}"
-                                            alt="Product Image"
-                                        />
-                                    </td>
-                                    <td>${book.title}</td>
-                                    <td class="price-value">${book.price}</td>
-                                    <td>20%</td>
-                                    <td>${book.quantity}</td>
-                                    <td>${book.soldCount}</td>
-                                    <td>${book.publicationDate}</td>
-                                    <td data-status="ON_SALE">
-                                        <span class="status status__on_sale">Đang mở bán</span>
-                                    </td>
-                                </tr>
+                                    <tr class="product-row" data-href="/staff/product-details?id=${book.id}">
+                                        <td>
+                                            <img
+                                                    class="tbl-thumb"
+                                                    src="${pageContext.request.contextPath}${book.imageUrl}"
+                                                    alt="Product Image"
+                                            />
+                                        </td>
+                                        <td>${book.title}</td>
+                                        <td class="price-value">${book.price}</td>
+                                        <td>${book.quantity}</td>
+                                        <td>${book.soldCount}</td>
+                                        <td>${book.publicationDate}</td>
+                                        <td data-status="${book.status}">
+                                            <span class="status status__${book.statusStyle}">${book.status.description}</span>
+                                        </td>
+                                    </tr>
                                 </c:forEach>
                                 </tbody>
                             </table>

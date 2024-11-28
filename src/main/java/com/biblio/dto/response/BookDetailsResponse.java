@@ -35,4 +35,6 @@ public class BookDetailsResponse {
     private List<TranslatorResponse> translators;
     private List<ReviewResponse> reviews;
     private int reviewCount;
+
+    private double discount;
 }

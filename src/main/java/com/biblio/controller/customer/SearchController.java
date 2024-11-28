@@ -3,6 +3,7 @@ package com.biblio.controller.customer;
 import com.biblio.dto.request.SearchBookRequest;
 import com.biblio.dto.response.BookCardResponse;
 import com.biblio.dto.response.CategoryBookCountResponse;
+import com.biblio.service.IBookService;
 import com.biblio.service.IBookTemplateService;
 import com.biblio.service.ICategoryService;
 
@@ -25,6 +26,9 @@ public class SearchController extends HttpServlet {
     private static final long serialVersionUID = 1L;
 
     @Inject
+    private IBookService bookService;
+
+    @Inject
     private IBookTemplateService bookTemplateService;
 
     @Inject
@@ -45,26 +49,34 @@ public class SearchController extends HttpServlet {
         // TODO Auto-generated method stub
         String title = request.getParameter("title");
 
-        SearchBookRequest searchBookRequest = SearchBookRequest.builder().title(title).build();
+        SearchBookRequest searchBookRequest = SearchBookRequest.builder()
+                .title(title)
+                .categoryId(null)
+                .sortBy(null)
+                .perPage(6)
+                .minPrice(0)
+                .maxPrice(10000000000L)
+                .categoryId(null)
+                .pageNumber(1).build();
 
-        List<CategoryBookCountResponse> categories = categoryService.getBookQuantityPerCategory();
+        List<CategoryBookCountResponse> categories = categoryService.getBookQuantityPerCategory(searchBookRequest);
+        System.out.println(categories);
         List<BookCardResponse> books = bookTemplateService.getBookTemplateByCriteria(searchBookRequest);
         Long bookCount = bookTemplateService.getBookTemplateQuantityByCriteria(searchBookRequest);
         Long totalBook = bookTemplateService.getTotalBookTemplateQuantity();
+        Long minPrice = bookService.getMinBookPrice();
+        Long maxPrice = bookService.getMaxBookPrice();
 
-        int index = 1;
-        int perPage = 8;
-        int endPage = (int) (bookCount / perPage);
+        int page = 1;
+        int perPage = 6;
+        int totalPages = (int) (bookCount / perPage);
         int leftPage = (int) (bookCount % perPage);
 
-        System.out.println("endPage: " + endPage);
-        System.out.println("leftPage: " + leftPage);
-
         if (leftPage > 0)
-            endPage++;
+            totalPages++;
 
-        request.setAttribute("index", index);
-        request.setAttribute("endPage", endPage);
+        request.setAttribute("page", page);
+        request.setAttribute("totalPages", totalPages);
 
         request.setAttribute("categories", categories);
         request.setAttribute("books", books);
@@ -72,6 +84,8 @@ public class SearchController extends HttpServlet {
         request.setAttribute("title", title);
         request.setAttribute("bookCount", bookCount);
         request.setAttribute("totalBook", totalBook);
+        request.setAttribute("minPrice", minPrice);
+        request.setAttribute("maxPrice", maxPrice);
 
         request.getRequestDispatcher("/views/customer/search.jsp").forward(request, response);
     }

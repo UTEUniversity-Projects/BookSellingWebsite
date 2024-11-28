@@ -23,7 +23,7 @@ public class SubCategory extends Classification implements Serializable {
     // region Relationships
 
     @OneToMany(mappedBy = "subCategory")
-    private Set<Book> books = new HashSet<Book>();
+    private Set<Book> books = new HashSet<>();
 
     @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinColumn(name = "category_id", nullable = false)

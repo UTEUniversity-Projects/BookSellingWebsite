@@ -41,6 +41,22 @@ public class EmailServiceImpl implements IEmailService {
         Transport.send(message);
     }
 
+    @Override
+    public void sendEmailNoRePlay(String toEmail, String subject, String body) throws MessagingException {
+        Session session = createEmailSession();
+        MimeMessage message = new MimeMessage(session);
+        message.setFrom(new InternetAddress(USERNAME));
+        message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(toEmail));
+
+
+        message.setFrom(new InternetAddress("noreply@biblio.com"));
+        message.setReplyTo(new Address[] { new InternetAddress("noreply@biblio.com") });
+        message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(toEmail));
+        message.setSubject(subject, "UTF-8");
+        message.setContent(body, "text/html; charset=UTF-8");
+        Transport.send(message);
+    }
+
 
     @Override
     public String getPromotionEmail(String customerName, String promotionDetails) {

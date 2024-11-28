@@ -132,7 +132,7 @@
                         </div>
                         <div class="login-buttons">
                             <a
-                                    href="register"
+                                    href="verify-email"
                                     class="py-2 border border-solid px-4 inline-block rounded-md hover:bg-gray-100 transition-all duration-300"
                             >
                                 Đăng ký

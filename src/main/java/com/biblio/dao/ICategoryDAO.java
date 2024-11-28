@@ -1,5 +1,6 @@
 package com.biblio.dao;
 
+import com.biblio.dto.request.SearchBookRequest;
 import com.biblio.dto.response.CategoryBookCountResponse;
 import com.biblio.entity.Category;
 
@@ -19,6 +20,6 @@ public interface ICategoryDAO {
 
     void deleteCategory(Long id);
 
-    List<CategoryBookCountResponse> countBookPerCategory();
+    List<CategoryBookCountResponse> countBookPerCategory(SearchBookRequest request);
 
 }

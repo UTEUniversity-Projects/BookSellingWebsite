@@ -79,8 +79,9 @@ public class PromotionTemplateServiceImpl implements IPromotionTemplateService {
 
 
     @Override
-    public void insertPromotionTemplate(PromotionTemplateInsertRequest promotionTemplateInsertRequest) {
+    public PromotionTemplateResponse insertPromotionTemplate(PromotionTemplateInsertRequest promotionTemplateInsertRequest) {
         PromotionTemplate promotionTemplate = promotionTemplateDAO.save(PromotionTemplateMapper.toPromotionTemplate(promotionTemplateInsertRequest));
+        return PromotionTemplateMapper.toPromotionTemplateResponse(promotionTemplate);
     }
 
     @Override

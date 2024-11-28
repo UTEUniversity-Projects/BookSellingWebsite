@@ -63,76 +63,6 @@
 </div>
 
 <div class="cr-sidebar-overlay"></div>
-<div id="cr_mobile_menu" class="cr-side-cart cr-mobile-menu">
-    <div class="cr-menu-title">
-        <span class="menu-title">My Menu</span>
-        <button type="button" class="cr-close">×</button>
-    </div>
-    <div class="cr-menu-inner">
-        <div class="cr-menu-content">
-            <ul>
-                <li class="dropdown drop-list">
-                    <a href="index.html">Home</a>
-                </li>
-                <li class="dropdown drop-list">
-                    <span class="menu-toggle"></span>
-                    <a href="javascript:void(0)" class="dropdown-list">Category</a>
-                    <ul class="sub-menu">
-                        <li><a href="shop-left-sidebar.html">Shop Left sidebar</a></li>
-                        <li><a href="shop-right-sidebar.html">Shop Right sidebar</a></li>
-                        <li><a href="shop-full-width.html">Full Width</a></li>
-                    </ul>
-                </li>
-                <li class="dropdown drop-list">
-                    <span class="menu-toggle"></span>
-                    <a href="javascript:void(0)" class="dropdown-list">product</a>
-                    <ul class="sub-menu">
-                        <li><a href="product-left-sidebar.html">product Left sidebar</a></li>
-                        <li><a href="product-right-sidebar.html">product Right sidebar</a></li>
-                        <li><a href="product-full-width.html">Product Full Width </a></li>
-                    </ul>
-                </li>
-                <li class="dropdown drop-list">
-                    <span class="menu-toggle"></span>
-                    <a href="javascript:void(0)" class="dropdown-list">Pages</a>
-                    <ul class="sub-menu">
-                        <li><a href="about.html">About Us</a></li>
-                        <li><a href="contact-us.html">Contact Us</a></li>
-                        <li><a href="cart.html">Cart</a></li>
-                        <li><a href="checkout.html">Checkout</a></li>
-                        <li><a href="track-order.html">Track Order</a></li>
-                        <li><a href="wishlist.html">Wishlist</a></li>
-                        <li><a href="faq.html">Faq</a></li>
-                        <li><a href="login.html">Login</a></li>
-                        <li><a href="register.html">Register</a></li>
-                        <li><a href="policy.html">Policy</a></li>
-                    </ul>
-                </li>
-                <li class="dropdown drop-list">
-                    <span class="menu-toggle"></span>
-                    <a href="javascript:void(0)" class="dropdown-list">Blog</a>
-                    <ul class="sub-menu">
-                        <li><a href="blog-left-sidebar.html">Left Sidebar</a></li>
-                        <li><a href="blog-right-sidebar.html">Right Sidebar</a></li>
-                        <li><a href="blog-full-width.html">Full Width</a></li>
-                        <li><a href="blog-detail-left-sidebar.html">Detail Left Sidebar</a></li>
-                        <li><a href="blog-detail-right-sidebar.html">Detail Right Sidebar</a></li>
-                        <li><a href="blog-detail-full-width.html">Detail Full Width</a></li>
-                    </ul>
-                </li>
-                <li class="dropdown drop-list">
-                    <span class="menu-toggle"></span>
-                    <a href="javascript:void(0)">Element</a>
-                    <ul class="sub-menu">
-                        <li><a href="elements-products.html">Products</a></li>
-                        <li><a href="elements-typography.html">Typography</a></li>
-                        <li><a href="elements-buttons.html">Buttons</a></li>
-                    </ul>
-                </li>
-            </ul>
-        </div>
-    </div>
-</div>
 
 <%@include file="/commons/customer/header.jsp" %>
 
@@ -269,7 +199,12 @@
 <!-- Cart -->
 <div class="cr-cart-overlay"></div>
 <div class="cr-cart-view">
+
     <div class="cr-cart-inner">
+<%--        <div class="cart-loading">--%>
+<%--            <div class="w-[25px] h-[25px] rounded-full border-[4px] border-solid border-[#26a347] border-t-transparent animate-spin"></div>--%>
+<%--        </div>--%>
+
         <div class="cr-cart-top">
             <div class="cr-cart-title">
                 <h6>Giỏ hàng của tôi</h6>
@@ -422,56 +357,43 @@
                                     <button type="button" class="plus">+</button>
                                 </div>
                             </div>
-                            <a href="javascript:void(0)" class="remove">×</a>
+                            <a href="javascript:void(0)" class="remove-item">×</a>
                         </div>
                     </li>
                 </c:forEach>
             </ul>
-            <div class="cr-cart-bottom">
-                <div class="cart-sub-total">
-                        <%--                <table class="table cart-table">--%>
-                        <%--                    <tbody>--%>
-                        <%--                    <tr>--%>
-                        <%--                        <td class="text-left">Tiền sách:</td>--%>
-                        <%--                        <td class="text-right total-book-price price-value">${cart.totalBookPrice}</td>--%>
-                        <%--                    </tr>--%>
-                        <%--                    <tr>--%>
-                        <%--                        <td class="text-left">Thành tiền:</td>--%>
-                        <%--                        <td class="text-right primary-color">$360.00</td>--%>
-                        <%--                    </tr>--%>
-                        <%--                    </tbody>--%>
-                        <%--                </table>--%>
-                </div>
-                <div class="cart_btn flex items-center justify-center">
-                    <a href="${pageContext.request.contextPath}/cart" class="cr-button">Xem giỏ hàng</a>
-                        <%--                <a href="${pageContext.request.contextPath}checkout" class="cr-button">Thanh toán</a>--%>
-                </div>
-                </c:otherwise>
-                </c:choose>
-            </div>
 
         </div>
 
+        <div class="cr-cart-bottom mt-auto flex items-center justify-center">
+
+            <div class="cart_btn flex items-center justify-center">
+                <a href="${pageContext.request.contextPath}/cart" class="cr-button">Xem giỏ hàng</a>
+            </div>
+            </c:otherwise>
+            </c:choose>
+        </div>
+          
     </div>
 </div>
 
-    <script> const contextPath = "<%=request.getContextPath() %>";</script>
-    <!-- Vendor Custom -->
-    <script src="${pageContext.request.contextPath}/assets/customer/js/vendor/jquery-3.6.4.min.js"></script>
-    <script src="${pageContext.request.contextPath}/assets/customer/js/vendor/jquery.zoom.min.js"></script>
-    <script src="${pageContext.request.contextPath}/assets/customer/js/vendor/bootstrap.bundle.min.js"></script>
-    <script src="${pageContext.request.contextPath}/assets/customer/js/vendor/mixitup.min.js"></script>
+<script> const contextPath = "<%=request.getContextPath() %>";</script>
+<!-- Vendor Custom -->
+<script src="${pageContext.request.contextPath}/assets/customer/js/vendor/jquery-3.6.4.min.js"></script>
+<script src="${pageContext.request.contextPath}/assets/customer/js/vendor/jquery.zoom.min.js"></script>
+<script src="${pageContext.request.contextPath}/assets/customer/js/vendor/bootstrap.bundle.min.js"></script>
+<script src="${pageContext.request.contextPath}/assets/customer/js/vendor/mixitup.min.js"></script>
 
-    <script src="${pageContext.request.contextPath}/assets/customer/js/vendor/range-slider.js"></script>
-    <script src="${pageContext.request.contextPath}/assets/customer/js/vendor/aos.min.js"></script>
-    <script src="${pageContext.request.contextPath}/assets/customer/js/vendor/swiper-bundle.min.js"></script>
-    <script src="${pageContext.request.contextPath}/assets/customer/js/vendor/slick.min.js"></script>
-    <script src="${pageContext.request.contextPath}/assets/customer/js/vendor/tailwind.min.js"></script>
+<script src="${pageContext.request.contextPath}/assets/customer/js/vendor/range-slider.js"></script>
+<script src="${pageContext.request.contextPath}/assets/customer/js/vendor/aos.min.js"></script>
+<script src="${pageContext.request.contextPath}/assets/customer/js/vendor/swiper-bundle.min.js"></script>
+<script src="${pageContext.request.contextPath}/assets/customer/js/vendor/slick.min.js"></script>
+<script src="${pageContext.request.contextPath}/assets/customer/js/vendor/tailwind.min.js"></script>
 
-    <!-- Main Custom -->
-    <script src="${pageContext.request.contextPath}/assets/customer/js/main.js"></script>
-    <script src="${pageContext.request.contextPath}/assets/customer/js/manage-cart.js" type="module"></script>
-    <script src="${pageContext.request.contextPath}/assets/commons/js/remember-me.js"></script>
+<!-- Main Custom -->
+<script src="${pageContext.request.contextPath}/assets/customer/js/main.js"></script>
+<script src="${pageContext.request.contextPath}/assets/customer/js/manage-cart.js" type="module"></script>
+<script src="${pageContext.request.contextPath}/assets/commons/js/remember-me.js"></script>
 
 </body>
 <div id="toast"></div>

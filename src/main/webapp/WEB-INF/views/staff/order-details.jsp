@@ -46,8 +46,10 @@
                             </p>
                         </div>
                         <div>
-                            <p id="order-status" class="cr-card-status cr-card-status--${order.statusStyle}">
-                                ${order.statusDisplay}
+                            <p id="order-status"
+                               class="cr-card-status cr-card-status--${order.statusStyle}"
+                               data-status="${order.status}">
+                                ${order.status.description}
                             </p>
                         </div>
                     </div>
@@ -112,6 +114,7 @@
                     </div>
                     <c:if test="${order.status == 'REQUEST_REFUND' || order.status == 'REFUNDED'}">
                         <div class="cr-card-content row">
+                            <input id="return-book-id" value="${returnBook.id}" hidden>
                             <div class="col-xxl-4 col-xl-5 col-md-6 col-12 mb-24">
                                 <div class="vehicle-detail-banner banner-content clearfix">
                                     <div class="banner-slider">
@@ -193,9 +196,9 @@
 
 
                     <div class="btn-container cr-card-content d-grid gap-3 d-md-flex justify-content-md-end
-                                <c:if
-                                    test="${order.status != 'REQUEST_REFUND' && order.status != 'WAITING_CONFIRMATION'}">d-none
-                                </c:if>"
+                        <c:if
+                            test="${order.status != 'REQUEST_REFUND' && order.status != 'WAITING_CONFIRMATION'}">d-none
+                        </c:if>"
                     >
                         <button id="btn-cancel" class="btn btn-outline-danger">Từ chối</button>
                         <button id="btn-confirm" class="cr-btn-primary">Xác nhận</button>
@@ -214,7 +217,7 @@
 </div>
 
 <!-- region Modal -->
-<%--FeedbackModal--%>
+<%--CancelOrderModal--%>
 <div class="modal fade" id="cancelOrderModal" tabindex="-1" aria-labelledby="cancelOrderModalLabel" aria-hidden="true">
     <input class="order-id" value="" hidden>
     <div class="modal-dialog">
@@ -247,7 +250,6 @@
 <div class="modal fade" id="confirmOrderModal" tabindex="-1" aria-labelledby="confirmOrderModalLabel"
      aria-hidden="true">
     <input class="order-id" value="" hidden>
-    <%--<input class="finalPrice" value="${order.finalPrice}" hidden>--%>
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
