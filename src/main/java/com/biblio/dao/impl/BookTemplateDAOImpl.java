@@ -4,7 +4,9 @@ import com.biblio.dao.IBookTemplateDAO;
 import com.biblio.entity.Book;
 import com.biblio.entity.BookTemplate;
 import com.biblio.enumeration.EBookMetadataStatus;
+import com.biblio.enumeration.EOrderStatus;
 
+import java.time.LocalDateTime;
 import java.util.*;
 
 public class BookTemplateDAOImpl extends GenericDAOImpl<BookTemplate> implements IBookTemplateDAO {
@@ -194,6 +196,43 @@ public class BookTemplateDAOImpl extends GenericDAOImpl<BookTemplate> implements
     @Override
     public Long countAll() {
         return super.count();
+    }
+
+    @Override
+    public Long calculateValueBooksSoldInRange(Long id, EOrderStatus status, LocalDateTime from, LocalDateTime to) {
+        String sql = """
+                    SELECT SUM(value_books) revenue
+                    FROM (
+                        SELECT oi.order_id, SUM(value_order_item) value_books
+                        FROM (
+                            SELECT oib.order_item_id, SUM(books.selling_price) value_order_item
+                            FROM (
+                                SELECT b.id, b.selling_price
+                                FROM book_template bt
+                                LEFT JOIN book b
+                                ON bt.id = b.book_template_id
+                                WHERE bt.id = :bookTemplateId
+                            ) books
+                            JOIN order_item_books oib
+                            ON books.id = oib.book_id
+                            GROUP BY oib.order_item_id
+                        ) order_bi
+                        JOIN order_item oi
+                        ON order_bi.order_item_id = oi.id
+                        GROUP BY oi.order_id
+                    ) orders
+                    JOIN `order` o
+                    ON orders.order_id = o.id
+                    WHERE o.status = :orderStatus AND (o.order_date BETWEEN :startDate AND :endDate);
+                 """;
+
+        Map<String, Object> params = new HashMap<>();
+        params.put("bookTemplateId", id);
+        params.put("orderStatus", status.name());
+        params.put("startDate", from.toString());
+        params.put("endDate", to.toString());
+
+        return (long) Math.toIntExact(super.countByNativeQuery(sql, params));
     }
 
     public static void main(String[] args) {

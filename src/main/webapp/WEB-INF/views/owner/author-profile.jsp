@@ -49,7 +49,7 @@
                                         <h4>Trung bình đánh giá</h4>
                                         <div class="d-flex align-items-center">
                                             <h5>${author.avgRate}</h5>
-                                            <i class="ri-star-fill ps-2" style="color: #FFD43B; font-size: 20px;"></i>
+                                            <i class="ri-star-fill ps-2 start-rate"></i>
                                         </div>
                                     </div>
                                 </div>
@@ -71,7 +71,14 @@
                                     </div>
                                 </div>
                                 <c:choose>
-                                    <c:when test="${author.perSales >= 0}">
+                                    <c:when test="${author.perSales == 0}">
+                                        <p class="card-groth up">
+                                            <i class="ri-arrow-up-line non-growth"></i>
+                                            <span class="non-growth m-0">${author.perSales}%</span>
+                                            <span>tháng trước</span>
+                                        </p>
+                                    </c:when>
+                                    <c:when test="${author.perSales > 0}">
                                         <p class="card-groth up">
                                             <i class="ri-arrow-up-line"></i>
                                                 ${author.perSales}%
@@ -100,7 +107,14 @@
                                     </div>
                                 </div>
                                 <c:choose>
-                                    <c:when test="${author.perBooksSold >= 0}">
+                                    <c:when test="${author.perBooksSold == 0}">
+                                        <p class="card-groth up">
+                                            <i class="ri-arrow-up-line non-growth"></i>
+                                            <span class="non-growth m-0">${author.perBooksSold}%</span>
+                                            <span>tháng trước</span>
+                                        </p>
+                                    </c:when>
+                                    <c:when test="${author.perBooksSold > 0}">
                                         <p class="card-groth up">
                                             <i class="ri-arrow-up-line"></i>
                                                 ${author.perBooksSold}%
@@ -129,7 +143,14 @@
                                     </div>
                                 </div>
                                 <c:choose>
-                                    <c:when test="${author.perValueBooksSold >= 0}">
+                                    <c:when test="${author.perValueBooksSold == 0}">
+                                        <p class="card-groth up">
+                                            <i class="ri-arrow-up-line non-growth"></i>
+                                            <span class="non-growth m-0">${author.perValueBooksSold}%</span>
+                                            <span>tháng trước</span>
+                                        </p>
+                                    </c:when>
+                                    <c:when test="${author.perValueBooksSold > 0}">
                                         <p class="card-groth up">
                                             <i class="ri-arrow-up-line"></i>
                                                 ${author.perValueBooksSold}%
@@ -206,27 +227,27 @@
                     <div class="col-md-8 pe-md-0">
                         <div class="cr-card vendor-profile card-3d-deep">
                             <div class="cr-card-content">
-                                <h3><b>Thống kê tổng quan</b></h3>
+                                <h3><b>Thống kê tháng này</b></h3>
                                 <div class="cr-vendor-info">
                                     <ul>
                                         <div class="d-flex align-items-center">
                                             <li>
-                                                <i class="ri-shopping-basket-line color-primary ps-1 pe-1" style="font-size: 20px"></i>
-                                                <span class="label">Lượt bán tháng này (theo đơn) :</span>&nbsp;
+                                                <i class="ri-shopping-basket-line color-primary ps-1 pe-1 icon-large"></i>
+                                                <span class="label">Lượt bán (theo đơn) :</span>&nbsp;
                                                 <b>${author.salesThisMonth}</b> lượt
                                             </li>
                                         </div>
                                         <div class="d-flex align-items-center">
                                             <li>
-                                                <i class="ri-book-mark-line color-success ps-1 pe-1" style="font-size: 20px"></i>
-                                                <span class="label">Sách đã bán tháng này :</span>&nbsp;
+                                                <i class="ri-book-mark-line color-success ps-1 pe-1 icon-large"></i>
+                                                <span class="label">Đã bán :</span>&nbsp;
                                                 <b>${author.booksThisMonth}</b> quyển
                                             </li>
                                         </div>
                                         <div class="d-flex align-items-center">
                                             <li>
-                                                <i class="ri-money-dollar-circle-line color-warning ps-1 pe-1" style="font-size: 20px"></i>
-                                                <span class="label">Doanh thu tháng này :</span>&nbsp;
+                                                <i class="ri-money-dollar-circle-line color-warning ps-1 pe-1 icon-large"></i>
+                                                <span class="label">Doanh thu :</span>&nbsp;
                                                 <b class="value-books-sold-this-month">${author.revenueThisMonth} VNĐ</b>
                                             </li>
                                         </div>
@@ -237,25 +258,25 @@
                                 <div class="cr-vendor-info">
                                     <ul class="custom-char-list">
                                         <li><span class="label">Đã hoàn tất :</span>&nbsp;
-                                            <b>${author.ordersCompleted}</b> đơn, giá trị sách <b class="value-books-sold">${author.valueOrdersCompleted} VNĐ</b>
+                                            <b>${author.ordersCompleted}</b> đơn, giá trị sách <b class="value-books-sold">${author.valueOrdersCompleted}₫</b>
                                         </li>
                                         <li><span class="label">Đang chờ duyệt :</span>&nbsp;
-                                            <b>${author.ordersWaiting}</b> đơn, giá trị sách <b>${author.valueOrdersWaiting} VNĐ</b>
+                                            <b>${author.ordersWaiting}</b> đơn, giá trị sách <b>${author.valueOrdersWaiting}₫</b>
                                         </li>
                                         <li><span class="label">Đang gói hàng :</span>&nbsp;
-                                            <b>${author.orderPacking}</b> đơn, giá trị sách <b>${author.valueOrderPacking} VNĐ</b>
+                                            <b>${author.orderPacking}</b> đơn, giá trị sách <b>${author.valueOrderPacking}₫</b>
                                         </li>
                                         <li><span class="label">Đang vận chuyển :</span>&nbsp;
-                                            <b>${author.orderShipping}</b> đơn, giá trị sách <b>${author.valueOrderShipping} VNĐ</b>
+                                            <b>${author.orderShipping}</b> đơn, giá trị sách <b>${author.valueOrderShipping}₫</b>
                                         </li>
                                         <li><span class="label">Bị hủy :</span>&nbsp;
-                                            <b>${author.ordersCancelled}</b> đơn, giá trị sách <b>${author.valueOrdersCancelled} VNĐ</b>
+                                            <b>${author.ordersCancelled}</b> đơn, giá trị sách <b>${author.valueOrdersCancelled}₫</b>
                                         </li>
                                         <li><span class="label">Yêu cầu hoàn trả :</span>&nbsp;
-                                            <b>${author.ordersRequestRefund}</b> đơn, giá trị sách <b>${author.valueOrdersRequestRefund} VNĐ</b>
+                                            <b>${author.ordersRequestRefund}</b> đơn, giá trị sách <b>${author.valueOrdersRequestRefund}₫</b>
                                         </li>
                                         <li><span class="label">Đã hoàn trả :</span>&nbsp;
-                                            <b>${author.ordersRefunded}</b> đơn, giá trị sách <b>${author.valueOrdersRefunded} VNĐ</b>
+                                            <b>${author.ordersRefunded}</b> đơn, giá trị sách <b>${author.valueOrdersRefunded}₫</b>
                                         </li>
                                     </ul>
                                 </div>
@@ -264,14 +285,15 @@
                     </div>
                 </div>
                 <div class="row">
-                    <div class="cr-card vendor-profile card-3d-deep">
-                        <div class="cr-card-content vendor-details mb-m-30">
-                            <div class="col-sm-12">
-                                <h3><b>Giới thiệu tác giả</b></h3>
-                                <br>
+                    <div class="cr-card card-3d-deep">
+                        <div class="cr-card-content mb-10">
+                            <div class="row title-introduction">
+                                Giới thiệu tác giả
                             </div>
-                            <div class="col-12 introduction">
-                                ${author.introduction}
+                            <div class="row">
+                                <div class="introduction">
+                                    ${author.introduction}
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -293,15 +315,15 @@
         padding: 5px;
         margin: 5px 0 5px 0;
     }
-    .custom-char-list {
-        list-style: none;
-        margin-left: 10px;
-    }
-    .custom-char-list li::before {
-        content: "●";
+    .non-growth {
         color: slategray;
-        font-size: 16px;
-        margin-right: 10px;
+    }
+    .start-rate {
+        color: #FFD43B;
+        font-size: 20px;
+    }
+    .icon-large {
+        font-size: 20px;
     }
     .value-books-sold-this-month {
         background-color: #ffedde;
@@ -317,15 +339,30 @@
         border-radius: 7px;
         padding: 2px;
     }
-    .introduction {
-        width: 100%;
-        margin: 0;
-        padding-left: 10px;
+    .title-introduction {
+        font-size: 18px;
         padding-bottom: 20px;
+        font-family: 'Be Vietnam Pro', sans-serif;
+        font-weight: 800;
+        color: #484d54;
+    }
+    div.introduction, div.introduction p {
+        width: 100%;
+        padding: 10px;
+        font-size: 15px;
+        color: slategray;
         text-align: justify;
         box-sizing: border-box;
-        font-size: 90%;
+    }
+    .custom-char-list {
+        list-style: none;
+        margin-left: 10px;
+    }
+    .custom-char-list li::before {
+        content: "●";
         color: slategray;
+        font-size: 16px;
+        margin-right: 10px;
     }
     .card-3d-deep {
         background: #fff;

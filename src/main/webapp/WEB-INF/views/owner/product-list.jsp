@@ -13,13 +13,13 @@
                     <div class="page-title">
                         <h5>Danh sách sản phẩm</h5>
                     </div>
-                    <a href="${pageContext.request.contextPath}/owner/add-product" class="cr-btn default-btn color-primary">
+                    <a href="${pageContext.request.contextPath}/owner/product/create" class="cr-btn default-btn color-primary">
                         Thêm sản phẩm
                     </a>
                 </div>
                 <ul>
                     <li><a href="${pageContext.request.contextPath}/owner/ecommerce"><b>Biblio</b></a></li>
-                    <li><b>Danh sách sản phẩm</b></li>
+                    <li><a href="${pageContext.request.contextPath}/owner/product/list"><b>Danh sách sản phẩm</b></a></li>
                 </ul>
             </div>
         </div>
@@ -33,12 +33,12 @@
                                     <tr>
                                         <th style="width: 7%">#</th>
                                         <th style="width: 27%">Tên sản phẩm</th>
-                                        <th style="width: 8%">Doanh số</th>
                                         <th style="width: 8%">Đã bán</th>
                                         <th style="width: 8%">Đánh giá</th>
+                                        <th style="width: 12%">Doanh số</th>
                                         <th style="width: 15%">Giá bán</th>
                                         <th style="width: 12%">Trạng thái</th>
-                                        <th style="width: 10%">Thao tác</th>
+                                        <th style="width: 6%">Thao tác</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -54,25 +54,7 @@
                                             <td>
                                                 <div>
                                                     <span class="row-highlight">${item.title}</span><br>
-                                                    <span class="row-sub-content">Mở bán: ${item.publisher}</span>
-                                                </div>
-                                            </td>
-                                            <td>
-                                                <div class="label-card d-flex align-items-center">
-                                                    <c:choose>
-                                                        <c:when test="${item.perValueBooksSold >= 0}">
-                                                            <p class="card-groth up" style="margin-top: 0">
-                                                                <i class="ri-arrow-up-line"></i>
-                                                                    ${item.perValueBooksSold}%
-                                                            </p>
-                                                        </c:when>
-                                                        <c:otherwise>
-                                                            <p class="card-groth down" style="margin-top: 0">
-                                                                <i class="ri-arrow-down-line"></i>
-                                                                    ${-item.perValueBooksSold}%
-                                                            </p>
-                                                        </c:otherwise>
-                                                    </c:choose>
+                                                    <span class="row-sub-content">${item.publisher}</span>
                                                 </div>
                                             </td>
                                             <td><span class="badge bg-primary justify-content-center">${item.booksSold}</span></td>
@@ -83,8 +65,34 @@
                                                 </div>
                                             </td>
                                             <td>
+                                                <div class="label-card d-flex align-items-center">
+                                                    <c:choose>
+                                                        <c:when test="${item.perValueBooksSold == 0}">
+                                                            <div class="up mt-0 d-flex">
+                                                                <i class="ri-arrow-up-line me-1 icon-growth non-growth"></i>
+                                                                <p class="non-growth">${item.perValueBooksSold}%</p>
+                                                            </div>
+                                                        </c:when>
+                                                        <c:when test="${item.perValueBooksSold > 0}">
+                                                            <div class="up mt-0 d-flex">
+                                                                <i class="ri-arrow-up-line me-1 icon-growth"></i>
+                                                                <p class="up-growth">${item.perValueBooksSold}%</p>
+                                                            </div>
+                                                        </c:when>
+                                                        <c:otherwise>
+                                                            <div class="down mt-0 d-flex">
+                                                                <i class="ri-arrow-down-line me-1 icon-growth"></i>
+                                                                <p class="down-growth">${-item.perValueBooksSold}%</p>
+                                                            </div>
+                                                        </c:otherwise>
+                                                    </c:choose>
+                                                </div>
+                                            </td>
+                                            <td>
                                                 <div class="cr-product-price">
-                                                <span class="new-price">${item.sellingPrice} VNĐ</span>
+                                                    <span class="new-price">
+                                                        ${item.sellingPrice} ₫
+                                                    </span>
                                                 </div>
                                             </td>
                                             <td>
@@ -127,6 +135,18 @@
 <style>
     .page-title {
         margin-right: 20px;
+    }
+    .non-growth {
+        color: slategray;
+    }
+    .up-growth {
+        color: #2bbb93;
+    }
+    .down-growth {
+        color: #f90c4c;
+    }
+    .icon-growth {
+        font-size: 120%;
     }
     .avg-rate {
         margin: 0;

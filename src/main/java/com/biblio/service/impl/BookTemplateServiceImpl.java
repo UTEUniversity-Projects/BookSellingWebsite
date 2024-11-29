@@ -8,6 +8,7 @@ import com.biblio.dto.response.*;
 import com.biblio.entity.Book;
 import com.biblio.entity.BookTemplate;
 import com.biblio.enumeration.EBookTemplateStatus;
+import com.biblio.enumeration.EOrderStatus;
 import com.biblio.mapper.BookTemplateMapper;
 import com.biblio.service.IBookTemplateService;
 
@@ -96,12 +97,38 @@ public class BookTemplateServiceImpl implements IBookTemplateService {
     public List<BookLineResponse> getAllBookLineResponse() {
         List<BookTemplate> bookTemplates = bookTemplateDAO.findAllForManagement();
         List<BookLineResponse> bookLineResponseList = new ArrayList<>();
+
         for (BookTemplate bookTemplate : bookTemplates) {
-            Double perValueBooksSold = 0.0D;
-
+            Double perValueBooksSold = calculateValueBooksSoldGrowth(bookTemplate.getId());
             bookLineResponseList.add(BookTemplateMapper.toBookLineResponse(bookTemplate, perValueBooksSold));
-
         }
+
         return bookLineResponseList;
+    }
+
+    private Double calculateValueBooksSoldGrowth(Long id) {
+        LocalDateTime now = LocalDateTime.now();
+        LocalDateTime startOfThisMonth = now.withDayOfMonth(1).toLocalDate().atStartOfDay();
+        LocalDateTime endOfThisMonth = now.withDayOfMonth(now.toLocalDate().lengthOfMonth()).toLocalDate().atTime(23, 59, 59);
+
+        LocalDateTime startOfLastMonth = startOfThisMonth.minusMonths(1);
+        LocalDateTime endOfLastMonth = endOfThisMonth.minusMonths(1);
+
+        Long currentMonth = calculateRevenueThisMonth(id);
+        Long lastMonth = bookTemplateDAO.calculateValueBooksSoldInRange(id, EOrderStatus.COMPLETE_DELIVERY, startOfLastMonth, endOfLastMonth);
+
+        if (lastMonth != 0) {
+            return ((double) (currentMonth - lastMonth) / lastMonth) * 100.0D;
+        } else {
+            if (currentMonth != 0) return 100.0D;
+            else return 0.0D;
+        }
+    }
+    private Long calculateRevenueThisMonth(Long id) {
+        LocalDateTime now = LocalDateTime.now();
+        LocalDateTime startOfThisMonth = now.withDayOfMonth(1).toLocalDate().atStartOfDay();
+        LocalDateTime endOfThisMonth = now.withDayOfMonth(now.toLocalDate().lengthOfMonth()).toLocalDate().atTime(23, 59, 59);
+
+        return bookTemplateDAO.calculateValueBooksSoldInRange(id, EOrderStatus.COMPLETE_DELIVERY, startOfThisMonth, endOfThisMonth);
     }
 }

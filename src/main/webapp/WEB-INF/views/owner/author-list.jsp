@@ -40,7 +40,7 @@
                                 </thead>
                                 <tbody>
                                     <c:forEach var="item" items="${authors}">
-                                        <tr class="item-row" data-id="${item.id}">
+                                        <tr class="item-row" id="row-${item.id}" data-id="${item.id}">
                                             <td>
                                                 <img
                                                         class="tbl-thumb image-shadow rounded-3"
@@ -58,28 +58,36 @@
                                             <td>
                                                 <div class="d-flex align-items-center">
                                                     <h6 class="avg-rate">${item.avgRate}</h6>
-                                                    <i class="ri-star-fill ps-2" style="color: #FFD43B; font-size: 20px;"></i>
+                                                    <i class="ri-star-fill ps-2 start-rate"></i>
                                                 </div>
                                             </td>
                                             <td>
                                                 <div class="label-card d-flex align-items-center">
                                                     <c:choose>
-                                                        <c:when test="${item.perValueBooksSold >= 0}">
-                                                            <p class="card-groth up" style="margin-top: 0">
-                                                                <i class="ri-arrow-up-line"></i>
-                                                                    ${item.perValueBooksSold}%
-                                                            </p>
+                                                        <c:when test="${item.perValueBooksSold == 0}">
+                                                            <div class="up mt-0 d-flex">
+                                                                <i class="ri-arrow-up-line me-1 icon-growth non-growth"></i>
+                                                                <p class="non-growth">${item.perValueBooksSold}%</p>
+                                                            </div>
+                                                        </c:when>
+                                                        <c:when test="${item.perValueBooksSold > 0}">
+                                                            <div class="up mt-0 d-flex">
+                                                                <i class="ri-arrow-up-line me-1 icon-growth"></i>
+                                                                <p class="up-growth">${item.perValueBooksSold}%</p>
+                                                            </div>
                                                         </c:when>
                                                         <c:otherwise>
-                                                            <p class="card-groth down" style="margin-top: 0">
-                                                                <i class="ri-arrow-down-line"></i>
-                                                                    ${-item.perValueBooksSold}%
-                                                            </p>
+                                                            <div class="down mt-0 d-flex">
+                                                                <i class="ri-arrow-down-line me-1 icon-growth"></i>
+                                                                <p class="down-growth">${-item.perValueBooksSold}%</p>
+                                                            </div>
                                                         </c:otherwise>
                                                     </c:choose>
                                                 </div>
                                             </td>
-                                            <td class="row-introduction">${item.introduction}</td>
+                                            <td>
+                                                <span class="row-introduction">${item.introduction}</span>
+                                            </td>
                                             <td>
                                                 <div class="d-flex justify-content-center">
                                                     <button type="button"
@@ -90,7 +98,7 @@
                                                     </button>
                                                     <div class="dropdown-menu">
                                                         <a class="dropdown-item" href="#" onclick="rowAction(${item.id}, 'view'); return false;" data-value="view">Chi tiết</a>
-                                                        <a class="dropdown-item" href="#" onclick="rowAction(${item.id}, 'update'); return false;" data-value="update">Chỉnh sửa</a>
+                                                        <a class="dropdown-item" href="#" onclick="rowAction(${item.id}, 'update'); return false;" data-value="update">Cập nhật</a>
                                                         <a class="dropdown-item" href="#" onclick="rowAction(${item.id}, 'delete'); return false;" data-value="delete">Xóa</a>
                                                     </div>
                                                 </div>
@@ -152,6 +160,26 @@
         font-weight: bold;
         color: #2b3647;
         font-family: Nunito, sans-serif
+    }
+    .start-rate {
+        color: #FFD43B;
+        font-size: 20px;
+    }
+    .non-growth {
+        color: slategray;
+    }
+    .up-growth {
+        color: #2bbb93;
+    }
+    .down-growth {
+        color: #f90c4c;
+    }
+    .icon-growth {
+        font-size: 120%;
+    }
+    .row-introduction {
+        font-size: 14px;
+        color: #7a7a7a;
     }
     table.rounded-table {
         border-radius: 1.5%;

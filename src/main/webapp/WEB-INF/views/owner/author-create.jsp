@@ -55,7 +55,7 @@
                                         </div>
                                         <br>
                                         <div class="cr-settings d-flex justify-content-center">
-                                            <button id="create" type="submit" class="cr-btn-primary rounded">Thêm mới</button>
+                                            <button id="createButton" type="button" class="cr-btn-primary rounded">Thêm mới</button>
                                         </div>
                                     </div>
                                 </div>
@@ -75,7 +75,7 @@
                                     Mô tả về tác giả
                                 </div>
                                 <div class="review-area">
-                                    <div id="review-container" style="display: none;">
+                                    <div id="review-container d-none">
                                         <h5>Giới thiệu tác giả</h5>
                                         <div id="review-content" class="review-introduction"></div>
                                     </div>
@@ -88,6 +88,9 @@
         </div>
     </div>
 </div>
+
+<!-- Toast container -->
+<div id="toast" class="toast-container position-fixed top-0 end-0 p-3" style="z-index: 1055;"></div>
 
 <script>const contextPath = "<%=request.getContextPath() %>";</script>
 <script src="${pageContext.request.contextPath}/assets/owner/js/manage/init-global-variables.js" defer></script>
@@ -146,7 +149,6 @@
         0 12px 20px rgba(0, 0, 0, 0.15),
         0 24px 32px rgba(0, 0, 0, 0.2);
     }
-
     .image-shadow {
         transition: transform 0.3s ease, box-shadow 0.3s ease;
         box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);

@@ -8,6 +8,7 @@ import com.biblio.dto.response.AuthorLineResponse;
 import com.biblio.dto.response.AuthorProfileResponse;
 import com.biblio.service.IAuthorService;
 import com.biblio.utils.HttpUtil;
+import com.biblio.utils.ManageFileUtil;
 import lombok.extern.slf4j.Slf4j;
 
 import javax.inject.Inject;
@@ -43,6 +44,10 @@ public class ManageAuthorController extends HttpServlet {
      * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
      */
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        request.setCharacterEncoding("UTF-8");
+        response.setContentType("application/json; charset=UTF-8");
+        response.setCharacterEncoding("UTF-8");
+
         String action = getAction(request);
 
         switch (action) {
@@ -67,6 +72,10 @@ public class ManageAuthorController extends HttpServlet {
      * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
      */
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        request.setCharacterEncoding("UTF-8");
+        response.setContentType("application/json; charset=UTF-8");
+        response.setCharacterEncoding("UTF-8");
+
         String action = getAction(request);
 
         switch (action) {
@@ -85,20 +94,21 @@ public class ManageAuthorController extends HttpServlet {
      * @see HttpServlet#doDelete(HttpServletRequest request, HttpServletResponse response)
      */
     protected void doDelete(HttpServletRequest request, HttpServletResponse response) throws IOException {
-        String id = request.getParameter("id");
+        try {
+            AuthorDeleteRequest authorDeleteRequest = HttpUtil.of(request.getReader()).toModel(AuthorDeleteRequest.class);
+            AuthorProfileResponse authorProfileResponse = authorService.getProfileById(Long.valueOf(authorDeleteRequest.getId()));
 
-        if (id != null) {
-            try {
-                AuthorDeleteRequest authorDeleteRequest = AuthorDeleteRequest.builder().id(id).build();
-                authorService.deleteAuthor(authorDeleteRequest);
-                response.setStatus(HttpServletResponse.SC_OK);
-                response.getWriter().write("{\"message\":\"Author deleted successfully\"}");
-            } catch (Exception e) {
-                response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
-                response.getWriter().write("{\"message\":\"Error deleting author: " + e.getMessage() + "\"}");
+            authorService.deleteAuthor(authorDeleteRequest);
+            Boolean isImageDeleted = ManageFileUtil.deleteAuthorAvatar(request.getServletContext(), authorProfileResponse.getAvatar());
+
+            if (isImageDeleted) {
+                response.getWriter().write("{\"status\": \"success\", \"message\": \"Deleted successfully.\"}");
+            } else {
+                response.getWriter().write("{\"status\": \"fail\", \"message\": \"Failed to delete author.\"}");
             }
-        } else {
-            response.sendError(HttpServletResponse.SC_BAD_REQUEST, "Missing ID for deletion");
+        } catch (Exception e) {
+            response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+            response.getWriter().write("{\"status\": \"fail\", \"message\": \"Error deleting: " + e.getMessage() + "\"}");
         }
     }
 
@@ -115,7 +125,7 @@ public class ManageAuthorController extends HttpServlet {
     }
 
     private void getList(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        List<AuthorLineResponse> list = authorService.findAll();
+        List<AuthorLineResponse> list = authorService.getAll();
         request.setAttribute("authors", list);
         request.getRequestDispatcher("/views/owner/author-list.jsp").forward(request, response);
     }
@@ -124,7 +134,7 @@ public class ManageAuthorController extends HttpServlet {
         HttpSession session = request.getSession();
         String id = session.getAttribute("authorId").toString();
 
-        AuthorAnalysisResponse authorResponse = authorService.findAnalysisById(Long.parseLong(id));
+        AuthorAnalysisResponse authorResponse = authorService.getAnalysisById(Long.parseLong(id));
         request.setAttribute("author", authorResponse);
         request.getRequestDispatcher("/views/owner/author-profile.jsp").forward(request, response);
     }
@@ -135,20 +145,16 @@ public class ManageAuthorController extends HttpServlet {
 
     private void createHandlerPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         try {
-            request.setCharacterEncoding("UTF-8");
-            response.setContentType("application/json; charset=UTF-8");
-            response.setCharacterEncoding("UTF-8");
-
             AuthorCreateRequest authorCreateRequest = HttpUtil.of(request.getReader()).toModel(AuthorCreateRequest.class);
             authorCreateRequest.setJoinAt(LocalDateTime.now().toString());
 
             authorService.createAuthor(authorCreateRequest);
 
             response.setStatus(HttpServletResponse.SC_OK);  // 200 OK
-            response.getWriter().write("{\"success\": true, \"message\": \"Created successfully.\"}");
+            response.getWriter().write("{\"status\": \"success\", \"message\": \"Created successfully.\"}");
         } catch (Exception e) {
             response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);  // 500 Internal Server Error
-            response.getWriter().write("{\"success\": false, \"message\": \"An error occurred while creating.\"}");
+            response.getWriter().write("{\"status\": \"fail\", \"message\": \"Error creating: " + e.getMessage() + "\"}");
             log.error("e: ", e);
         }
     }
@@ -157,26 +163,22 @@ public class ManageAuthorController extends HttpServlet {
         HttpSession session = request.getSession();
         String id = session.getAttribute("authorId").toString();
 
-        AuthorProfileResponse authorResponse = authorService.findProfileById(Long.parseLong(id));
+        AuthorProfileResponse authorResponse = authorService.getProfileById(Long.parseLong(id));
         request.setAttribute("author", authorResponse);
         request.getRequestDispatcher("/views/owner/author-update.jsp").forward(request, response);
     }
 
     private void updateHandlerPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         try {
-            request.setCharacterEncoding("UTF-8");
-            response.setContentType("application/json; charset=UTF-8");
-            response.setCharacterEncoding("UTF-8");
-
             AuthorUpdateRequest authorUpdateRequest = HttpUtil.of(request.getReader()).toModel(AuthorUpdateRequest.class);
 
             authorService.updateAuthor(authorUpdateRequest);
 
             response.setStatus(HttpServletResponse.SC_OK);  // 200 OK
-            response.getWriter().write("{\"success\": true, \"message\": \"Updated successfully.\"}");
+            response.getWriter().write("{\"status\": \"success\", \"message\": \"Updated successfully.\"}");
         } catch (Exception e) {
             response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);  // 500 Internal Server Error
-            response.getWriter().write("{\"success\": false, \"message\": \"An error occurred while updating.\"}");
+            response.getWriter().write("{\"status\": \"fail\", \"message\": \"Error updating: " + e.getMessage() + "\"}");
             log.error("e: ", e);
         }
     }

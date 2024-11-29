@@ -59,7 +59,7 @@
                                         </div>
                                         <br>
                                         <div class="cr-settings d-flex justify-content-center">
-                                            <button id="update" type="submit" class="cr-btn-primary rounded">Cập nhật</button>
+                                            <button id="updateButton" type="button" class="cr-btn-primary rounded">Cập nhật</button>
                                         </div>
                                     </div>
                                 </div>
@@ -67,7 +67,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-xxl-9 col-xl-8 col-md-12" style="padding-left: 10px">
+                <div class="col-xxl-9 col-xl-8 col-md-12 ps-3">
                     <div class="cr-card card-3d-deep">
                         <div class="cr-card-content">
                             <div class="row">
@@ -76,11 +76,11 @@
                                     <button id="review-btn" class="cr-btn default-btn color-primary">Xem trước</button>
                                 </div>
                                 <div id="editor" name="introduction" class="edit-introduction">
-                                    ${fn:trim(author.introduction)}
+                                    ${author.introduction}
                                 </div>
                                 <div class="review-area">
-                                    <div id="review-container" style="display: none;">
-                                        <h5>Giới thiệu tác giả</h5>
+                                    <div id="review-container d-none">
+                                        <h5 class="mb-30">Giới thiệu tác giả</h5>
                                         <div id="review-content" class="review-introduction"></div>
                                     </div>
                                 </div>
@@ -99,6 +99,10 @@
 <script src="${pageContext.request.contextPath}/assets/owner/js/manage/manage-author.js" defer></script>
 
 <style>
+    h5 {
+        font-weight: bold;
+        color: #2b3647;
+    }
     .editor-area {
         justify-content: space-between;
         align-items: center;
@@ -114,28 +118,30 @@
         font-weight: bold;
         color: #2b3647;
     }
-    div .edit-introduction p{
+    div.ql-editor p {
+        white-space: pre-wrap;
+        word-wrap: break-word;
+        color: #7a7a7a;
+    }
+    #review-content {
+        white-space: pre-wrap;
+        word-wrap: break-word;
+    }
+    div.edit-introduction p{
         width: 100%;
         margin: 0;
         text-align: justify;
         box-sizing: border-box;
         font-size: 110%;
     }
-    h5 {
-        font-weight: bold;
-        color: #2b3647;
-    }
     div.review-introduction p {
         width: 100%;
-        margin: 0;
-        padding-left: 10px;
-        padding-right: 10px;
+        font-size: 15px;
+        padding: 10px;
+        color: slategray;
         text-align: justify;
         box-sizing: border-box;
-        font-size: 90%;
-        color: slategray;
     }
-
     .card-3d-deep {
         background: #fff;
         border-radius: 10px;
@@ -150,7 +156,6 @@
         0 12px 20px rgba(0, 0, 0, 0.15),
         0 24px 32px rgba(0, 0, 0, 0.2);
     }
-
     .image-shadow {
         transition: transform 0.3s ease, box-shadow 0.3s ease;
         box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
@@ -160,9 +165,5 @@
         transform: translateY(-5px);
         box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
         object-fit: cover;
-    }
-    #review-content {
-        white-space: pre-wrap;
-        word-wrap: break-word;
     }
 </style>

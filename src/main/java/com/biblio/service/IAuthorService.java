@@ -10,10 +10,11 @@ import com.biblio.dto.response.AuthorProfileResponse;
 import java.util.List;
 
 public interface IAuthorService {
-    List<AuthorLineResponse> findAll();
-    AuthorProfileResponse findProfileById(Long id);
-    AuthorAnalysisResponse findAnalysisById(Long id);
+    List<AuthorLineResponse> getAll();
+    AuthorProfileResponse getProfileById(Long id);
+    AuthorAnalysisResponse getAnalysisById(Long id);
     void createAuthor(AuthorCreateRequest authorRequest);
     void updateAuthor(AuthorUpdateRequest authorRequest);
     void deleteAuthor(AuthorDeleteRequest id);
+    Integer countBookTemplate(AuthorDeleteRequest id);
 }

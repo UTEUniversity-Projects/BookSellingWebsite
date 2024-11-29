@@ -1,7 +1,9 @@
 package com.biblio.dao;
 
 import com.biblio.entity.BookTemplate;
+import com.biblio.enumeration.EOrderStatus;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 public interface IBookTemplateDAO {
@@ -25,5 +27,7 @@ public interface IBookTemplateDAO {
     Long countInstockById(Long id);
 
     Long countAll();
+
+    Long calculateValueBooksSoldInRange(Long id, EOrderStatus status, LocalDateTime from, LocalDateTime to);
 
 }

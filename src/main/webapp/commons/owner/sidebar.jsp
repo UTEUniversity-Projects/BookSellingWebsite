@@ -52,30 +52,24 @@
                             <ul class="cr-sb-subdrop condense">
                                 <li>
                                     <a href="${pageContext.request.contextPath}/owner/product/list" class="cr-page-link drop"
-                                    ><i class="ri-checkbox-blank-circle-line"></i>Danh
-                                        sách sản phẩm</a
+                                    ><i class="ri-checkbox-blank-circle-line"></i>Sản phẩm</a
                                     >
                                 </li>
                                 <li>
-                                    <a href="${pageContext.request.contextPath}/owner/product/create" class="cr-page-link drop"
-                                    ><i class="ri-checkbox-blank-circle-line"></i>Thêm sản
-                                        phẩm</a>
-                                </li>
-                                <li>
                                     <a href="${pageContext.request.contextPath}/owner/tag-list" class="cr-page-link drop"
-                                    ><i class="ri-checkbox-blank-circle-line"></i>Danh sách nhãn</a>
+                                    ><i class="ri-checkbox-blank-circle-line"></i>Nhãn</a>
                                 </li>
                                 <li>
                                     <a
                                             href="${pageContext.request.contextPath}/owner/category-list"
                                             class="cr-page-link drop"
-                                    ><i class="ri-checkbox-blank-circle-line"></i>Danh sách phân loại</a>
+                                    ><i class="ri-checkbox-blank-circle-line"></i>Danh mục</a>
                                 </li>
                                 <li>
                                     <a
                                             href="${pageContext.request.contextPath}/owner/sub-category-list"
                                             class="cr-page-link drop"
-                                    ><i class="ri-checkbox-blank-circle-line"></i>Danh sách phân loại con</a>
+                                    ><i class="ri-checkbox-blank-circle-line"></i>Phân loại</a>
                                 </li>
                             </ul>
                         </li>

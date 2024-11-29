@@ -1,4 +1,42 @@
 
+
+-- bookTemplate - calculateValueBooksSoldInRange
+SELECT SUM(value_books) revenue
+FROM (
+	SELECT oi.order_id, SUM(value_order_item) value_books
+	FROM (
+		SELECT oib.order_item_id, SUM(books.selling_price) value_order_item
+		FROM (
+			SELECT b.id, b.selling_price
+			FROM book_template bt
+			LEFT JOIN book b
+			ON bt.id = b.book_template_id
+            WHERE bt.id = 1
+		) books
+		JOIN order_item_books oib
+		ON books.id = oib.book_id
+		GROUP BY oib.order_item_id
+	) order_bi
+	JOIN order_item oi
+	ON order_bi.order_item_id = oi.id
+    GROUP BY oi.order_id
+) orders
+JOIN `order` o
+ON orders.order_id = o.id
+WHERE o.status = 'COMPLETE_DELIVERY' AND (o.order_date BETWEEN '2024-11-03' AND '2024-11-10');
+
+
+SELECT COUNT(*) amount 
+FROM (
+		(SELECT book_template_id 
+		FROM author_book_template abt 
+		WHERE abt.author_id = 1
+	) ab_template 
+    LEFT JOIN book_template bt
+    ON ab_template.book_template_id = bt.id
+) WHERE bt.status = 'ON_SALE';
+
+
 -- countBooksByOrderStatus
 SELECT SUM(books_count) amount
 FROM (

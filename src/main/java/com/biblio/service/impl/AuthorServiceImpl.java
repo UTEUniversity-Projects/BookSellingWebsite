@@ -9,6 +9,7 @@ import com.biblio.dto.response.AuthorLineResponse;
 import com.biblio.dto.response.AuthorProfileResponse;
 import com.biblio.entity.Author;
 import com.biblio.enumeration.EBookMetadataStatus;
+import com.biblio.enumeration.EBookTemplateStatus;
 import com.biblio.enumeration.EOrderStatus;
 import com.biblio.mapper.AuthorMapper;
 import com.biblio.service.IAuthorService;
@@ -23,10 +24,10 @@ public class AuthorServiceImpl implements IAuthorService {
     IAuthorDAO authorDAO;
 
     @Override
-    public List<AuthorLineResponse> findAll() {
+    public List<AuthorLineResponse> getAll() {
         List<AuthorLineResponse> list = new ArrayList<AuthorLineResponse>();
-        for (Author author : authorDAO.findEntityAll()) {
-            Integer works = authorDAO.countBooksAll(author.getId());
+        for (Author author : authorDAO.getEntityAll()) {
+            Integer works = authorDAO.countBooksTemplateAll(author.getId());
             Double avgRate = authorDAO.calculateAverageRating(author.getId());
             Double perValueBooksSold = calculateValueBooksSoldGrowth(author.getId());
 
@@ -36,15 +37,15 @@ public class AuthorServiceImpl implements IAuthorService {
     }
 
     @Override
-    public AuthorProfileResponse findProfileById(Long id) {
-        Author author = authorDAO.findEntityById(id);
+    public AuthorProfileResponse getProfileById(Long id) {
+        Author author = authorDAO.getEntityById(id);
         return AuthorMapper.toAuthorProfileResponse(author);
     }
 
     @Override
-    public AuthorAnalysisResponse findAnalysisById(Long id) {
-        Author author = authorDAO.findEntityById(id);
-        Integer works = authorDAO.countBooksAll(id);
+    public AuthorAnalysisResponse getAnalysisById(Long id) {
+        Author author = authorDAO.getEntityById(id);
+        Integer works = authorDAO.countBooksTemplateAll(id);
         Double avgRate = authorDAO.calculateAverageRating(id);
         Integer sales = authorDAO.countOrdersAll(id);
         Double perSales = calculateSaleGrowth(id);
@@ -100,6 +101,13 @@ public class AuthorServiceImpl implements IAuthorService {
         authorDAO.deleteAuthor(authorDeleteRequest);
     }
 
+    @Override
+    public Integer countBookTemplate(AuthorDeleteRequest authorDeleteRequest) {
+        return authorDAO.countBooksTemplateByStatus(Long.valueOf(authorDeleteRequest.getId()), EBookTemplateStatus.COMING_SOON)
+                + authorDAO.countBooksTemplateByStatus(Long.valueOf(authorDeleteRequest.getId()), EBookTemplateStatus.ON_SALE)
+                + authorDAO.countBooksTemplateByStatus(Long.valueOf(authorDeleteRequest.getId()), EBookTemplateStatus.OUT_OF_STOCK);
+    }
+
     private Double calculateSaleGrowth(Long id) {
         LocalDateTime now = LocalDateTime.now();
         LocalDateTime startOfThisMonth = now.withDayOfMonth(1).toLocalDate().atStartOfDay();
@@ -114,7 +122,8 @@ public class AuthorServiceImpl implements IAuthorService {
         if (lastMonth != 0) {
             return ((double) (currentMonth - lastMonth) / lastMonth) * 100.0D;
         } else {
-            return 100.0D;
+            if (currentMonth != 0) return 100.0D;
+            else return 0.0D;
         }
     }
     private Integer countSaleThisMonth(Long id) {
@@ -139,7 +148,8 @@ public class AuthorServiceImpl implements IAuthorService {
         if (lastMonth != 0) {
             return ((double) (currentMonth - lastMonth) / lastMonth) * 100.0D;
         } else {
-            return 100.0D;
+            if (currentMonth != 0) return 100.0D;
+            else return 0.0D;
         }
     }
     private Integer countBooksSoldThisMonth(Long id) {
@@ -164,7 +174,8 @@ public class AuthorServiceImpl implements IAuthorService {
         if (lastMonth != 0) {
             return ((double) (currentMonth - lastMonth) / lastMonth) * 100.0D;
         } else {
-            return 100.0D;
+            if (currentMonth != 0) return 100.0D;
+            else return 0.0D;
         }
     }
     private Long calculateRevenueThisMonth(Long id) {
@@ -176,7 +187,7 @@ public class AuthorServiceImpl implements IAuthorService {
     }
 
     private List<String> findTopSubCategory(Long id, Integer numberElements) {
-        List<String> list = authorDAO.findTopSubCategory(id);
+        List<String> list = authorDAO.getTopSubCategory(id);
 
         while (list.size() < numberElements) {
             list.add("");

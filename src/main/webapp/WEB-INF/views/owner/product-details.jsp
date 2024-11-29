@@ -12,7 +12,7 @@
                 </div>
                 <ul>
                     <li><a href="${pageContext.request.contextPath}/owner/ecommerce"><b>Biblio</b></a></li>
-                    <li><a href="${pageContext.request.contextPath}/owner/product/list"><b>Danh sách sản phẩm</b></a></li>
+                    <li><a href="${pageContext.request.contextPath}/owner/product/list"><b>Sản phẩm</b></a></li>
                     <li><b>Chi tiết sản phẩm</b></li>
                 </ul>
             </div>
@@ -43,7 +43,7 @@
                         </div>
                         <div class="slider slider-nav thumb-image">
                             <c:forEach var="imageUrl" items="${book.imageUrls}">
-                                <div class="thumbnail-image" style="margin: 10px 5px 20px 0px">
+                                <div class="thumbnail-image thumbnail-sub-image">
                                     <div class="thumbImg">
                                         <img src="${pageContext.request.contextPath}${imageUrl}" class="mini-image-shadow" alt="product-thumbnail"/>
                                     </div>
@@ -57,65 +57,210 @@
                 <h2 class="product-title">
                     ${book.title}
                 </h2>
-                <div style="font-size: 80%">
-                    <p>
-                        <c:forEach var="author" items="${book.authors}" varStatus="status">
-                            <span class="name name-inline">${author.name}</span>
-                            <i>(tác giả)</i>
-                            <c:if test="${status.last}">
-                                <c:if test="${not empty book.translators}">
-                                    ,
-                                </c:if>
-                            </c:if>
-                            <c:if test="${!status.last}">
-                                ,
-                            </c:if>
-                        </c:forEach>
-                        <c:forEach var="translator" items="${book.translators}" varStatus="status">
-                            <span class="name name-inline">${translator.name}</span>
-                            <i>(dịch giả)</i>
-                            <c:if test="${!status.last}">
-                                ,
-                            </c:if>
-                        </c:forEach>
-                    </p>
-                </div>
-                <div class="d-flex align-items-center">
-                    <p class="book-avg-rate">${book.avgRating}</p>
-                    <div class="cr-star book-review-star">
-                        <c:forEach var="i" begin="1" end="5" step="1">
-                            <c:choose>
-                                <c:when test="${book.avgRating >= i}">
-                                    <i class="ri-star-fill" style="color: #FFD43B"></i>
-                                </c:when>
-                                <c:when test="${book.avgRating > i - 1 && book.avgRating < i}">
-                                    <i class="ri-star-half-line" style="color: #FFD43B"></i>
-                                </c:when>
-                                <c:otherwise>
-                                    <i class="ri-star-line" style="color: slategray"></i>
-                                </c:otherwise>
-                            </c:choose>
-                        </c:forEach>
+                <div class="row">
+                    <div class="col-6">
+                        <div class="author-translator-line">
+                            <p>
+                                <c:forEach var="author" items="${book.authors}" varStatus="status">
+                                    <span class="name name-inline">${author.name}</span>
+                                    <i>(tác giả)</i>
+                                    <c:if test="${status.last}">
+                                        <c:if test="${not empty book.translators}">
+                                            ,
+                                        </c:if>
+                                    </c:if>
+                                    <c:if test="${!status.last}">
+                                        ,
+                                    </c:if>
+                                </c:forEach>
+                                <c:forEach var="translator" items="${book.translators}" varStatus="status">
+                                    <span class="name name-inline">${translator.name}</span>
+                                    <i>(dịch giả)</i>
+                                    <c:if test="${!status.last}">
+                                        ,
+                                    </c:if>
+                                </c:forEach>
+                            </p>
+                        </div>
+                        <div class="d-flex align-items-center">
+                            <p class="book-avg-rate">${book.avgRating}</p>
+                            <div class="cr-star book-review-star">
+                                <c:forEach var="i" begin="1" end="5" step="1">
+                                    <c:choose>
+                                        <c:when test="${book.avgRating >= i}">
+                                            <i class="ri-star-fill" style="color: #FFD43B"></i>
+                                        </c:when>
+                                        <c:when test="${book.avgRating > i - 1 && book.avgRating < i}">
+                                            <i class="ri-star-half-line" style="color: #FFD43B"></i>
+                                        </c:when>
+                                        <c:otherwise>
+                                            <i class="ri-star-line" style="color: slategray"></i>
+                                        </c:otherwise>
+                                    </c:choose>
+                                </c:forEach>
+                            </div>
+                            <p>(${book.reviewCount} đánh giá)</p>
+                            <p class="ms-2 me-2">|</p>
+                            <p class="book-sold-count">10 lượt bán</p>
+                        </div>
+                        <div class="cr-card-customer mini-card-3d-deep" style="margin-top: 20px;">
+                            <div class="cr-size-and-weight mt-0 pt-0">
+                                <div class="book-format">
+                                    Bìa cứng
+                                </div>
+                                <div class="cr-product-price pt-0">
+                                    <span class="current-price">
+                                        ${book.sellingPrice}
+                                            <sup>₫</sup>
+                                    </span>
+                                </div>
+                                <div class="d-flex align-items-center">
+                                    <div class="old-price">${book.sellingPrice * 1.2}₫</div>
+                                    <p class="ms-2 me-2">|</p>
+                                    <div class="d-flex align-items-center" style="color: #2b3647;">
+                                        <i class="ri-community-line me-1" style="font-size: 20px;"></i>
+                                        <p style="color: #2b3647;">${book.publisher}</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="cr-size-and-weight">
+                            <div class="cr-size-weight">
+                                <h5><span>Tình trạng</span> :</h5>
+                                <div class="cr-kg">
+                                    <ul>
+                                        <li class="active-color">${book.condition}</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                    <p>(${book.reviewCount})</p>
-                    <p class="ms-2 me-2">|</p>
-                    <p class="book-sold-count">10 lượt bán</p>
-                </div>
-                <div class="cr-size-and-weight">
-                    <div class="cr-product-price" style="padding-top: 0">
-                        <span class="new-price price-value">${book.sellingPrice} VNĐ</span>
-                        <span class="old-price price-value">${book.sellingPrice} VNĐ</span>
-                    </div>
-                    <div class="d-flex align-items-center" style="color: #2b3647;">
-                        <i class="ri-community-line me-1" style="font-size: 20px;"></i>
-                        <p style="color: #2b3647;">${book.publisher}</p>
-                    </div>
-                    <div class="cr-size-weight">
-                        <h5><span>Tình trạng</span> :</h5>
-                        <div class="cr-kg">
-                            <ul>
-                                <li class="active-color">${book.condition}</li>
-                            </ul>
+                    <div class="col-6">
+                        <div class="cr-card vendor-profile rounded-3 ms-3">
+                            <div class="cr-card-content">
+                                <div>
+                                    <h3><b>Thống kê tổng quan</b></h3>
+                                    <div class="cr-vendor-info">
+                                        <ul>
+                                            <div class="d-flex align-items-center">
+                                                <li>
+                                                    <i class="ri-shopping-basket-line color-primary ps-1 pe-1 icon-large"></i>
+                                                    <span class="label">Số đơn :</span>&nbsp;
+                                                    <b>10</b> đơn
+                                                </li>
+                                            </div>
+                                            <div class="d-flex align-items-center">
+                                                <li>
+                                                    <i class="ri-book-mark-line color-success ps-1 pe-1 icon-large"></i>
+                                                    <span class="label">Đã bán :</span>&nbsp;
+                                                    <b>10</b> quyển
+                                                </li>
+                                            </div>
+                                            <div class="d-flex align-items-center">
+                                                <li>
+                                                    <i class="ri-money-dollar-circle-line color-warning ps-1 pe-1 icon-large"></i>
+                                                    <span class="label">Doanh thu :</span>&nbsp;
+                                                    <b class="value-books-sold-this-month">10 VNĐ</b>
+                                                </li>
+                                            </div>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class="mt-3">
+                                    <h3><b>Thống kê tháng này</b></h3>
+                                    <div class="cr-vendor-info">
+                                        <ul>
+                                            <div class="d-flex align-items-center">
+                                                <li class="d-flex">
+                                                    <i class="ri-shopping-basket-line color-primary ps-1 pe-1 icon-large"></i>
+                                                    <span class="label">Số đơn :</span>&nbsp;
+                                                    <p><b>10</b> đơn</p>
+                                                    <div class="label-card align-items-center ms-3">
+                                                        <c:choose>
+                                                            <c:when test="${book.quantity == 0}">
+                                                                <div class="up mt-0 d-flex">
+                                                                    <i class="ri-arrow-up-line me-1 icon-growth non-growth"></i>
+                                                                    <p class="non-growth">${book.quantity}%</p>
+                                                                </div>
+                                                            </c:when>
+                                                            <c:when test="${book.quantity > 0}">
+                                                                <div class="up mt-0 d-flex">
+                                                                    <i class="ri-arrow-up-line me-1 icon-growth"></i>
+                                                                    <p class="up-growth">${book.quantity}%</p>
+                                                                </div>
+                                                            </c:when>
+                                                            <c:otherwise>
+                                                                <div class="down mt-0 d-flex">
+                                                                    <i class="ri-arrow-down-line me-1 icon-growth"></i>
+                                                                    <p class="down-growth">${-book.quantity}%</p>
+                                                                </div>
+                                                            </c:otherwise>
+                                                        </c:choose>
+                                                    </div>
+                                                </li>
+                                            </div>
+                                            <div class="d-flex align-items-center">
+                                                <li class="d-flex">
+                                                    <i class="ri-book-mark-line color-success ps-1 pe-1 icon-large"></i>
+                                                    <span class="label">Đã bán :</span>&nbsp;
+                                                    <p><b>10</b> quyển</p>
+                                                    <div class="label-card align-items-center ms-3">
+                                                        <c:choose>
+                                                            <c:when test="${book.quantity == 0}">
+                                                                <div class="up mt-0 d-flex">
+                                                                    <i class="ri-arrow-up-line me-1 icon-growth non-growth"></i>
+                                                                    <p class="non-growth">${book.quantity}%</p>
+                                                                </div>
+                                                            </c:when>
+                                                            <c:when test="${book.quantity > 0}">
+                                                                <div class="up mt-0 d-flex">
+                                                                    <i class="ri-arrow-up-line me-1 icon-growth"></i>
+                                                                    <p class="up-growth">${book.quantity}%</p>
+                                                                </div>
+                                                            </c:when>
+                                                            <c:otherwise>
+                                                                <div class="down mt-0 d-flex">
+                                                                    <i class="ri-arrow-down-line me-1 icon-growth"></i>
+                                                                    <p class="down-growth">${-book.quantity}%</p>
+                                                                </div>
+                                                            </c:otherwise>
+                                                        </c:choose>
+                                                    </div>
+                                                </li>
+                                            </div>
+                                            <div class="d-flex align-items-center">
+                                                <li class="d-flex">
+                                                    <i class="ri-money-dollar-circle-line color-warning ps-1 pe-1 icon-large"></i>
+                                                    <span class="label">Doanh thu :</span>&nbsp;
+                                                    <b class="value-books-sold-this-month">100.000.000Đ</b>
+                                                    <div class="label-card align-items-center ms-3">
+                                                        <c:choose>
+                                                            <c:when test="${book.quantity == 0}">
+                                                                <div class="up mt-0 d-flex">
+                                                                    <i class="ri-arrow-up-line me-1 icon-growth non-growth"></i>
+                                                                    <p class="non-growth">${book.quantity}%</p>
+                                                                </div>
+                                                            </c:when>
+                                                            <c:when test="${book.quantity > 0}">
+                                                                <div class="up mt-0 d-flex">
+                                                                    <i class="ri-arrow-up-line me-1 icon-growth"></i>
+                                                                    <p class="up-growth">${book.quantity}%</p>
+                                                                </div>
+                                                            </c:when>
+                                                            <c:otherwise>
+                                                                <div class="down mt-0 d-flex">
+                                                                    <i class="ri-arrow-down-line me-1 icon-growth"></i>
+                                                                    <p class="down-growth">${-book.quantity}%</p>
+                                                                </div>
+                                                            </c:otherwise>
+                                                        </c:choose>
+                                                    </div>
+                                                </li>
+                                            </div>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -297,19 +442,23 @@
                                 role="tabpanel"
                                 aria-labelledby="additional-tab"
                         >
-                            <div class="cr-tab-content">
-                                <div class="list">
-                                    <ul>
+                            <div class="row cr-tab-content">
+                                <div class="list info-details col-5 col-md-offset">
+                                    <ul class="custom-char-list">
                                         <li>
                                             <label>Danh mục <span>:</span></label>
                                             ${book.category}
                                         </li>
                                         <li>
-                                            <label>Kho <span>:</span></label>
+                                            <label>Số lượng <span>:</span></label>
                                             ${book.quantity}
                                         </li>
                                         <li>
                                             <label>Tác giả <span>:</span></label>
+                                            ${book.authors[0].name}
+                                        </li>
+                                        <li>
+                                            <label>Dịch giả <span>:</span></label>
                                             ${book.authors[0].name}
                                         </li>
                                         <li>
@@ -321,9 +470,13 @@
                                             ${book.publicationDate}
                                         </li>
                                         <li>
-                                            <label>Ngôn ngữ <span>:</span></label>
-                                            ${book.languages}
+                                            <label>Tái bản <span>:</span></label>
+                                            ${book.quantity}
                                         </li>
+                                    </ul>
+                                </div>
+                                <div class="list info-details col-5">
+                                    <ul class="custom-char-list">
                                         <li>
                                             <label>Trọng lượng <span>:</span></label>
                                             ${book.weight} gram
@@ -367,13 +520,13 @@
                                     <c:forEach var="review" items="${book.reviews}">
                                         <li class="review-item" data-review-id="${review.id}">
                                             <div class="review-item__image">
-                                                <img src="${pageContext.request.contextPath}${review.imageUrl}"
+                                                <img src="${review.imageUrl}"
                                                      alt="review"/>
                                             </div>
                                             <div class="review-item__content">
                                                 <div class="header">
                                                     <div class="header__left">
-                                                        <span class="name">${review.customerName}</span>
+                                                        <span class="customer-name name">${review.customerName}</span>
                                                         <div class="rating">
                                                             <c:forEach var="i" begin="1" end="5">
                                                                 <i class="<c:choose>
@@ -388,7 +541,7 @@
                                                 <span class="date">${review.createdAt}</span>
 
                                                 <div class="review-content">
-                                                        ${review.content}
+                                                    <span>${review.content}</span>
                                                 </div>
 
                                                 <c:if test="${not empty review.responseContent}">
@@ -410,9 +563,9 @@
                                 aria-labelledby="author-tab"
                         >
                             <div class="cr-tab-content">
-                                <div class="cr-description">
+                                <div class="description">
                                     <c:forEach var="author" items="${book.authors}">
-                                        <div class="row d-flex author-item">
+                                        <div class="row d-flex author-item introduction-area">
                                             <div class="col-3">
                                                 <div class="col-xl-12">
                                                     <div class="cr-vendor-block-detail">
@@ -427,15 +580,15 @@
                                                 </div>
                                             </div>
                                             <div class="col-8">
-                                                <span class="name">${author.name} (Tác giả)</span>
-                                                <div class="description-content">
-                                                    ${author.introduction}
+                                                <span class="name"><b>${author.name}</b> (<i>Tác giả</i>)</span>
+                                                <div class="introduction-content">
+                                                    <span>${author.introduction}</span>
                                                 </div>
                                             </div>
                                         </div>
                                     </c:forEach>
                                     <c:forEach var="translator" items="${book.translators}">
-                                        <div class="row d-flex author-item">
+                                        <div class="row d-flex author-item introduction-area">
                                             <div class="col-3">
                                                 <div class="col-xl-12">
                                                     <div class="cr-vendor-block-detail">
@@ -450,9 +603,9 @@
                                                 </div>
                                             </div>
                                             <div class="col-8">
-                                                <span class="name">${translator.name} (Dịch giả)</span>
-                                                <div class="description-content">
-                                                    ${translator.introduction}
+                                                <span class="name"><b>${translator.name}</b> (<i>Dịch giả</i>)</span>
+                                                <div class="introduction-content">
+                                                    <span>${translator.introduction}</span>
                                                 </div>
                                             </div>
                                         </div>
@@ -479,6 +632,38 @@
 <script src="${pageContext.request.contextPath}/assets/owner/js/product-details.js" defer></script>
 
 <style>
+    .non-growth {
+        color: slategray;
+    }
+    .up-growth {
+        color: #2bbb93;
+    }
+    .down-growth {
+        color: #f90c4c;
+    }
+    .icon-growth {
+        font-size: 120%;
+    }
+    .icon-large {
+        font-size: 20px;
+    }
+    .value-books-sold-this-month {
+        background-color: #ffedde;
+        color: #ffa04f;
+        font-weight: bold;
+        border-radius: 7px;
+        padding: 2px;
+    }
+    .book-format {
+        font-size: 14px;
+        font-weight: bold;
+    }
+    .thumbnail-sub-image {
+        margin: 10px 5px 20px 0;
+    }
+    .author-translator-line {
+        font-size: 80%;
+    }
     .product-title {
         font-family:  'Nunito Sans', sans-serif;
         font-weight: bold;
@@ -506,6 +691,9 @@
         padding: 3px 5px 3px 5px;
         font-family: Nunito, sans-serif;
     }
+    .customer-name {
+        color: #484d54;
+    }
     .slider-info-title {
         font-size: 12px;
         color: #485568;
@@ -528,20 +716,51 @@
         font-weight: 600;
         font-family: Nunito, sans-serif;
     }
-    .new-price {
+    .current-price {
         font-family: "Be Vietnam Pro", sans-serif;
-        font-size: 110%;
+        font-size: 32px;
         font-weight: 600;
         color: #64b496;
     }
-    .description-content {
+    .old-price {
+        text-decoration: line-through;
+        font-size: 14px;
+        color: #7a7a7a;
+    }
+    .introduction-area {
+        margin-top: 20px;
+    }
+    .introduction-content, .introduction-content p {
         width: 100%;
-        margin: 0;
-        padding: 20px;
+        padding: 10px;
+        font-size: 15px;
+        color: slategray;
         text-align: justify;
         box-sizing: border-box;
-        font-size: 90%;
-        color: #7a7a7a;
+    }
+    .description-content {
+        width: 100%;
+        padding: 30px;
+        text-align: justify;
+        box-sizing: border-box;
+        font-size: 15px;
+        color: slategray;
+    }
+    .info-details {
+        margin: 0 0 30px 30px;
+    }
+    .custom-char-list {
+        list-style: none;
+        margin-left: 10px;
+    }
+    .custom-char-list li::before {
+        content: "●";
+        color: slategray;
+        font-size: 16px;
+        margin-right: 10px;
+    }
+    ul.custom-char-list li label{
+        font-size: 14px;
     }
     .card-3d-deep {
         background: #fff;

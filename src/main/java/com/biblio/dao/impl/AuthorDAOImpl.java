@@ -8,6 +8,7 @@ import com.biblio.entity.Author;
 import com.biblio.entity.Book;
 import com.biblio.entity.BookTemplate;
 import com.biblio.enumeration.EBookMetadataStatus;
+import com.biblio.enumeration.EBookTemplateStatus;
 import com.biblio.enumeration.EOrderStatus;
 import lombok.extern.slf4j.Slf4j;
 
@@ -28,12 +29,12 @@ public class AuthorDAOImpl extends GenericDAOImpl<Author> implements IAuthorDAO 
     }
 
     @Override
-    public Author findEntityById(Long id) {
+    public Author getEntityById(Long id) {
         return super.findById(id);
     }
 
     @Override
-    public List<Author> findEntityAll() {
+    public List<Author> getEntityAll() {
         return super.findAll();
     }
 
@@ -51,7 +52,7 @@ public class AuthorDAOImpl extends GenericDAOImpl<Author> implements IAuthorDAO 
     }
 
     @Override
-    public List<String> findTopSubCategory(Long id) {
+    public List<String> getTopSubCategory(Long id) {
         String sql = """
                     SELECT sc.name
                     FROM (
@@ -109,7 +110,7 @@ public class AuthorDAOImpl extends GenericDAOImpl<Author> implements IAuthorDAO 
 
     @Override
     public void deleteAuthor(AuthorDeleteRequest authorDeleteRequest) {
-        String sql = "DELETE FROM author a WHERE a.id = :id";
+        String sql = "DELETE FROM author WHERE id = :id";
 
         Map<String, Object> params = new HashMap<>();
         params.put("id", authorDeleteRequest.getId());
@@ -118,11 +119,34 @@ public class AuthorDAOImpl extends GenericDAOImpl<Author> implements IAuthorDAO 
     }
 
     @Override
-    public Integer countBooksAll(Long id) {
-        String jpql = "SELECT COUNT(*) author_works FROM author_book_template abt WHERE abt.author_id = :authorId";
+    public Integer countBooksTemplateAll(Long id) {
+        String jpql = "SELECT COUNT(*) author_works " +
+                "FROM author_book_template abt " +
+                "WHERE abt.author_id = :authorId";
 
         Map<String, Object> params = new HashMap<>();
         params.put("authorId", id);
+
+        return Math.toIntExact(super.countByNativeQuery(jpql, params));
+    }
+
+    @Override
+    public Integer countBooksTemplateByStatus(Long id, EBookTemplateStatus status) {
+        String jpql = """
+                    SELECT COUNT(*) amount
+                    FROM (
+                            (SELECT book_template_id
+                            FROM author_book_template abt
+                            WHERE abt.author_id = :authorId
+                        ) ab_template
+                        LEFT JOIN book_template bt
+                        ON ab_template.book_template_id = bt.id
+                    ) WHERE bt.status = :templateStatus
+                 """;
+
+        Map<String, Object> params = new HashMap<>();
+        params.put("authorId", id);
+        params.put("templateStatus", status.name());
 
         return Math.toIntExact(super.countByNativeQuery(jpql, params));
     }

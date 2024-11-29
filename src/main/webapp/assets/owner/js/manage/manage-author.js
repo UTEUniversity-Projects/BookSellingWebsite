@@ -23,13 +23,38 @@ function confirmDelete(itemId) {
     // Confirm delete
     document.getElementById("confirm-delete").onclick = () => {
         popup.style.display = "none";
-        executeDeleteAction(itemId);
+        deleteActionProcess(itemId);
     };
 
     // Cancel delete
     document.getElementById("cancel-delete").onclick = () => {
         popup.style.display = "none";
     };
+}
+
+// Check before executes delete action using APIs
+function deleteActionProcess(itemId) {
+    fetch(`${contextPath}/api/owner/author/delete`, {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+            id: itemId
+        }),
+    })
+        .then((response) => response.json())
+        .then((data) => {
+            if (data.can === "true") {
+                executeDeleteAction(itemId);
+            } else {
+                showToast("Không thể xóa vì có " + data.amount + " sản phẩm cùng tác giả", "Cảnh báo", "warning");
+            }
+        })
+        .catch((error) => {
+            console.error("Error:", error);
+            showToast("Có lỗi xảy ra khi xóa!", "Lỗi", "error");
+        });
 }
 
 // Executes delete action using HTTP DELETE
@@ -39,20 +64,25 @@ function executeDeleteAction(itemId) {
         headers: {
             "Content-Type": "application/json",
         },
-        body: JSON.stringify({ authorId: itemId }),
+        body: JSON.stringify({
+            id: itemId
+        }),
     })
         .then((response) => response.json())
         .then((data) => {
-            // Show success or failure popup based on server response
             if (data.status === "success") {
-                showPopup("success-popup", 2000);
+                const row = document.getElementById(`row-${itemId}`);
+                if (row) {
+                    row.remove();
+                }
+                showToast("Xóa thành công!", "Thành công", "success");
             } else {
-                showPopup("fail-popup", 3000);
+                showToast("Xóa thất bại!", "Lỗi", "error");
             }
         })
         .catch((error) => {
             console.error("Error:", error);
-            showPopup("fail-popup", 3000);
+            showToast("Có lỗi xảy ra khi xóa!", "Lỗi", "error");
         });
 }
 
@@ -71,10 +101,9 @@ function executeViewOrUpdateAction(itemId, action) {
         .then((response) => response.json())
         .then((data) => {
             if (data.status === "success") {
-                // Redirect to the appropriate URL based on the action
                 window.location.href = `${contextPath}/owner/author/${action}`;
             } else {
-                alert("Error occurred during redirection.");
+                showToast("Đã xảy ra lỗi khi chuyển hướng!", "Lỗi", "error");
             }
         })
         .catch((error) => console.error("Error:", error));
@@ -107,7 +136,15 @@ function fadeOutPopup(popupElement, callback) {
         popupElement.style.display = "none";
         popupElement.classList.remove("fade-out");
         if (callback) callback();
-    }, 500); // Matches CSS transition duration
+    }, 500);
+}
+function showToast(message, title = "Thông báo", type = "info", duration = 3000) {
+    toast({
+        title: title,
+        message: message,
+        type: type,
+        duration: duration
+    });
 }
 
 // Function to handle table row click events
@@ -120,7 +157,7 @@ function initializeTableRowClickHandler() {
 
             if (row && !event.target.closest("button") && !event.target.closest(".dropdown-menu")) {
                 const authorId = row.getAttribute("data-id");
-                rowAction(authorId, "view"); // Trigger "view" action
+                rowAction(authorId, "view");
             }
         });
     }
@@ -153,8 +190,6 @@ document.addEventListener("DOMContentLoaded", function () {
 
 document.addEventListener("DOMContentLoaded", () => {
     const avatarInput = document.querySelector("#avatar");
-    const createButton = document.querySelector("#create");
-    const updateButton = document.querySelector("#update");
 
     const uploadImage = async (dir, inputSelector) => {
         try {
@@ -186,29 +221,26 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     };
 
-    const handleCreateAuthor = async () => {
+    const handleCreateAuthor = async (event) => {
+        event.preventDefault();
+
         try {
-            // Lấy thông tin từ form
             const form = document.getElementById("authorCreateForm");
             const formData = new FormData(form);
 
-            // Kiểm tra dữ liệu cơ bản
             const introduction = editor.root.innerHTML.trim();
             if (!formData.get("name") || !introduction || introduction === "<p><br></p>") {
-                alert("Tên tác giả và giới thiệu không được để trống!");
+                showToast("Tên tác giả và giới thiệu không được để trống!", "Lỗi", "error");
                 return;
             }
 
-            // Upload ảnh (hàm uploadImage là bất đồng bộ)
             let avatar = await uploadImage("author", "#avatar");
             avatar = avatar || "/images/anonymous/author.jpg";
 
-            // Chuẩn bị dữ liệu để gửi
             formData.append("avatar", avatar);
             formData.append("introduction", introduction);
             const authorData = Object.fromEntries(formData.entries());
 
-            // Gửi request tạo mới tác giả
             const response = await fetch(`${contextPath}/owner/author/create`, {
                 method: "POST",
                 headers: {
@@ -219,46 +251,44 @@ document.addEventListener("DOMContentLoaded", () => {
 
             const result = await response.json();
 
-            // Xử lý kết quả
-            if (result.success) {
-                alert("Thêm mới thành công!");
-                window.location.href = `${contextPath}/owner/author/list`;
+            if (result.status === "success") {
+                showToast("Thêm mới thành công!", "Thành công", "success", 2000);
+                setTimeout(() => {
+                    window.location.href = `${contextPath}/owner/author/list`;
+                }, 2000);
             } else {
-                alert("Thêm mới thất bại!");
+                showToast("Thêm mới thất bại!", "Lỗi", "error");
                 console.error("Create failed:", result.message || response.statusText);
             }
         } catch (error) {
-            // Xử lý lỗi bất ngờ
+            showToast("Đã xảy ra lỗi khi thêm mới!", "Lỗi", "error");
             console.error("Error during the author process:", error);
-            alert("Đã xảy ra lỗi khi thêm mới!");
         }
     };
 
-    const handleUpdateAuthor = async () => {
+    const handleUpdateAuthor = async (event) => {
+        event.preventDefault();
+
         try {
-            // Lấy dữ liệu từ form
             const formData = new FormData(document.getElementById("authorUpdateForm"));
             const name = formData.get("name");
             const introduction = editor.root.innerHTML.trim();
             let avatar = formData.get("originAvatar");
 
-            // Kiểm tra dữ liệu cơ bản
             if (!name || !introduction || introduction === "<p><br></p>") {
-                alert("Tên tác giả và giới thiệu không được để trống!");
+                showToast("Tên tác giả và giới thiệu không được để trống!", "Lỗi", "error");
                 return;
             }
 
-            // Xử lý upload ảnh nếu có thay đổi
             const avatarInput = document.getElementById("avatar");
             if (avatarInput.files && avatarInput.files.length > 0) {
                 avatar = await uploadImage("author", "#avatar");
                 if (!avatar) {
-                    alert("Không thể upload hình ảnh, vui lòng thử lại.");
+                    showToast("Không thể upload hình ảnh, vui lòng thử lại!", "Lỗi", "error");
                     return;
                 }
             }
 
-            // Chuẩn bị dữ liệu để gửi
             const authorData = {
                 id: formData.get("id"),
                 name: name,
@@ -266,7 +296,6 @@ document.addEventListener("DOMContentLoaded", () => {
                 introduction: introduction
             };
 
-            // Gửi yêu cầu cập nhật
             const response = await fetch(`${contextPath}/owner/author/update`, {
                 method: "POST",
                 headers: {
@@ -277,28 +306,23 @@ document.addEventListener("DOMContentLoaded", () => {
 
             const result = await response.json();
 
-            // Xử lý phản hồi từ server
-            if (result.success) {
-                alert("Cập nhật thành công!");
-                rowAction(authorData.id, "view"); // Chuyển đổi chế độ hiển thị nếu cập nhật thành công
+            if (result.status === "success") {
+                showToast("Cập nhật thành công!", "Thành công", "success");
+                setTimeout(() => {rowAction(authorData.id, "view"); }, 1000);
             } else {
-                alert("Cập nhật thất bại!");
+                showToast("Cập nhật thất bại!", "Lỗi", "error");
                 console.error("Update failed:", result.message || response.statusText);
             }
         } catch (error) {
-            // Xử lý lỗi bất ngờ
             console.error("Error during the author update process:", error);
-            alert("Đã xảy ra lỗi khi cập nhật!");
+            showToast("Đã xảy ra lỗi khi cập nhật!", "Lỗi", "error");
         }
     };
 
-    createButton.addEventListener("click", (e) => {
-        e.preventDefault();
-        handleCreateAuthor().then(r => {});
-    });
-    document.getElementById("authorUpdateForm").addEventListener("submit", (e) => {
-        e.preventDefault(); // Ngăn form gửi yêu cầu đến controller
-        handleUpdateAuthor().then(r => {}); // Gọi hàm xử lý JavaScript
-    });
+    const createButton = document.getElementById("createButton");
+    if (createButton != null) createButton.addEventListener("click", handleCreateAuthor);
+
+    const updateButton = document.getElementById("updateButton");
+    if (updateButton != null) updateButton.addEventListener("click", handleUpdateAuthor);
 });
 
