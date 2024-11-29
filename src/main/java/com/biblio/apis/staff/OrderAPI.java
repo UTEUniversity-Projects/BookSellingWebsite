@@ -1,8 +1,10 @@
 package com.biblio.apis.staff;
 
 
+import com.biblio.dto.response.OrderStatusHistoryResponse;
 import com.biblio.enumeration.EOrderStatus;
 import com.biblio.service.IOrderService;
+import com.biblio.service.IOrderStatusHistoryService;
 import com.biblio.service.IReturnBookService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
@@ -17,13 +19,18 @@ import java.io.OutputStream;
 import java.io.Serial;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @WebServlet(urlPatterns = {"/api/staff/order/*"})
 public class OrderAPI extends HttpServlet {
     @Inject
     IOrderService orderService;
+
+    @Inject
+    IOrderStatusHistoryService orderStatusHistoryService;
 
     @Inject
     IReturnBookService returnBookService;
@@ -33,6 +40,34 @@ public class OrderAPI extends HttpServlet {
 
     public OrderAPI() {
         super();
+    }
+
+    @Override
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        response.setContentType("application/json; charset=UTF-8");
+        response.setCharacterEncoding("UTF-8");
+
+        String action = request.getPathInfo();
+        ObjectMapper mapper = new ObjectMapper();
+        Map<String, String> result = new HashMap<>();
+
+        try {
+            switch (action) {
+                    case "/get-order-history":
+                    handleGetOrderHistory(request, response, mapper);
+                    break;
+
+                default:
+                    result.put("message", "Không tìm thấy hành động phù hợp!");
+                    result.put("type", "error");
+                    response.getWriter().write(mapper.writeValueAsString(result));
+                    break;
+            }
+        } catch (Exception e) {
+            result.put("message", "Có lỗi xảy ra trong quá trình xử lý yêu cầu.");
+            result.put("type", "error");
+            response.getWriter().write(mapper.writeValueAsString(result));
+        }
     }
 
     @Override
@@ -77,6 +112,8 @@ public class OrderAPI extends HttpServlet {
         }
     }
 
+    // region Order
+
     private void handleConfirmOrder(HttpServletRequest request, HttpServletResponse response, Map<String, String> result, ObjectMapper mapper) throws IOException {
         Map<String, Object> jsonMap = mapper.readValue(request.getReader(), Map.class);
         long orderId = Long.parseLong(jsonMap.get("orderId").toString());
@@ -87,7 +124,7 @@ public class OrderAPI extends HttpServlet {
             result.put("statusType", EOrderStatus.PACKING.name());
             result.put("status", EOrderStatus.PACKING.getDescription());
             result.put("statusStyle", EOrderStatus.PACKING.getStatusStyle());
-            sendOrderConfirmationEmail(request,orderId/*, finalPrice*/);
+            sendOrderConfirmationEmail(request, orderId);
         } else {
             result.put("message", "Không thể xác nhận đơn hàng. Vui lòng thử lại!");
             result.put("type", "info");
@@ -151,6 +188,10 @@ public class OrderAPI extends HttpServlet {
         }
         response.getWriter().write(mapper.writeValueAsString(result));
     }
+
+    // endregion
+
+    // region Email
 
     private void sendOrderConfirmationEmail(HttpServletRequest request ,Long orderId/*, Double finalPrice*/) throws IOException {
         String scheme = request.getScheme();
@@ -228,6 +269,41 @@ public class OrderAPI extends HttpServlet {
                 connection.disconnect();
             }
         }
+    }
+
+    // endregion
+
+    private void handleGetOrderHistory(HttpServletRequest request, HttpServletResponse response, ObjectMapper mapper) throws IOException {
+        String orderIdStr = request.getParameter("orderId");
+
+        if (orderIdStr == null || orderIdStr.isEmpty()) {
+            response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
+            response.getWriter().write("{\"error\": \"Missing orderId parameter\"}");
+            return;
+        }
+
+        Long orderId = null;
+        try {
+            orderId = Long.parseLong(orderIdStr);
+        } catch (NumberFormatException e) {
+            response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
+            response.getWriter().write("{\"error\": \"Invalid orderId format\"}");
+            return;
+        }
+
+        List<OrderStatusHistoryResponse> orderHistories = orderStatusHistoryService.getByOrderId(orderId);
+
+        List<Map<String, Object>> steps = new ArrayList<>();
+        for (OrderStatusHistoryResponse history : orderHistories) {
+            Map<String, Object> step = new HashMap<>();
+            step.put("status", history.getStatus());
+            step.put("date", history.getDate());
+            steps.add(step);
+        }
+
+        Map<String, Object> responseMap = new HashMap<>();
+        responseMap.put("steps", steps);
+        response.getWriter().write(mapper.writeValueAsString(responseMap));
     }
 
 }

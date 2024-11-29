@@ -182,7 +182,7 @@ public class OrderDAOImpl extends GenericDAOImpl<Order> implements IOrderDAO {
 
     public static void main(String[] args) {
         OrderDAOImpl dao = new OrderDAOImpl();
-        Order order = dao.findOneForDetailsManagement(1L);
+        Order order = dao.findOne(1L);
         System.out.println(order);
 //        for (Order order : orders) {
 //            System.out.println(order.getId());

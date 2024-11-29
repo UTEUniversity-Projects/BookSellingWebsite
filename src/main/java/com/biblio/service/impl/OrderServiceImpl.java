@@ -1,11 +1,14 @@
 package com.biblio.service.impl;
 
 import com.biblio.dao.IOrderDAO;
+import com.biblio.dao.impl.OrderDAOImpl;
 import com.biblio.dto.response.*;
 import com.biblio.entity.Book;
 import com.biblio.entity.Order;
 import com.biblio.entity.OrderItem;
+import com.biblio.entity.OrderStatusHistory;
 import com.biblio.enumeration.EBookMetadataStatus;
+import com.biblio.enumeration.EOrderHistory;
 import com.biblio.enumeration.EOrderStatus;
 import com.biblio.mapper.BookMapper;
 import com.biblio.mapper.OrderMapper;
@@ -44,6 +47,18 @@ public class OrderServiceImpl implements IOrderService {
         }
         order.setStatus(status);
 
+        OrderStatusHistory orderStatusHistory = new OrderStatusHistory();
+        orderStatusHistory.setOrder(order);
+        orderStatusHistory.setStatusChangeDate(LocalDateTime.now());
+
+        if (status == EOrderStatus.PACKING) {
+            orderStatusHistory.setStatus(EOrderHistory.CONFIRMED);
+        } else if (status == EOrderStatus.SHIPPING) {
+            orderStatusHistory.setStatus(EOrderHistory.WAITING_FOR_SHIPPING);
+        }
+
+        order.getStatusHistory().add(orderStatusHistory);
+
         if (status == EOrderStatus.CANCELED) {
             for (OrderItem orderItem : order.getOrderItems()) {
                 for (Book book : orderItem.getBooks()) {
@@ -51,6 +66,7 @@ public class OrderServiceImpl implements IOrderService {
                 }
             }
         }
+
         return orderDAO.update(order) != null;
     }
 
@@ -89,8 +105,6 @@ public class OrderServiceImpl implements IOrderService {
         }
         return venue;
     }
-
-
 
     @Override
     public List<RevenueResponse> getListRevenueAtTime(LocalDateTime start, LocalDateTime end) {
@@ -300,5 +314,11 @@ public class OrderServiceImpl implements IOrderService {
 //        order.setStatus(EOrderStatus.CANCELED);
 //        orderDAO.updateOrder(order);
 //    }
+
+    public static void main(String[] args) {
+        OrderServiceImpl orderService = new OrderServiceImpl();
+        boolean res = orderService.updateStatus(3L, EOrderStatus.PACKING);
+        System.out.println(res);
+    }
 
 }
