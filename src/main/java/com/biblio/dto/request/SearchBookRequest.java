@@ -18,4 +18,6 @@ public class SearchBookRequest {
     long minPrice;
     long maxPrice;
     String condition;
+    String format;
+    double reviewRate = 0;
 }

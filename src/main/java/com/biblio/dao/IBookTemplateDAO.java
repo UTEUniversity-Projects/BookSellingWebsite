@@ -27,4 +27,6 @@ public interface IBookTemplateDAO {
 
     Long countAll();
 
+    List<BookTemplate> findTop20();
+
 }
