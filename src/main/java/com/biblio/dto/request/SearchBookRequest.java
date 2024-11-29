@@ -17,4 +17,5 @@ public class SearchBookRequest {
     int pageNumber = 1;
     long minPrice;
     long maxPrice;
+    String condition;
 }

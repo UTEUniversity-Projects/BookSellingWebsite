@@ -111,33 +111,42 @@ public class AddPromotionAPI extends HttpServlet {
             String discountLimit = currencyFormat.format(promotionTemplateResponse.getPromotions().iterator().next().getDiscountLimit()) + " VND";
             String minValueApplied = currencyFormat.format(promotionTemplateResponse.getPromotions().iterator().next().getMinValueApplied()) + " VND";
 
-            emailContent.append("<html><body>");
+            emailContent.append("<html><body style=\"font-family: Arial, sans-serif; color: #333; line-height: 1.6;\">");
+            emailContent.append("<div style=\"max-width: 600px; margin: auto; border: 1px solid #ddd; border-radius: 10px; padding: 20px; background-color: #f9f9f9;\">");
 
-            emailContent.append("<p>Kính gửi ").append(customer.getFullName()).append(",</p>");
-            emailContent.append("<p>Chúng tôi vui mừng giới thiệu chương trình khuyến mãi mới:</p>");
+// Header với logo
+            emailContent.append("<div style=\"text-align: center; margin-bottom: 20px;\">");
+            emailContent.append("<img src=\"https://scontent.fsgn8-4.fna.fbcdn.net/v/t39.30808-6/468703611_1664827497410053_3942884439111183245_n.jpg?_nc_cat=107&ccb=1-7&_nc_sid=127cfc&_nc_ohc=zXw3uGs7ZsEQ7kNvgEXUmAZ&_nc_zt=23&_nc_ht=scontent.fsgn8-4.fna&_nc_gid=A2ITxhjZT2QDYgdmlw7QjNT&oh=00_AYBn-1ZCU7YRtTLovzTu7xEwxk-NF3FUYThFLp0dVmgKBg&oe=674DF1D9\" alt=\"Biblio Logo\" style=\"width: 150px; height: auto; margin-bottom: 10px;\"/>");
+            emailContent.append("<h1 style=\"color: #d35400; margin: 0;\">🎉 Chương Trình Khuyến Mãi 🎉</h1>");
+            emailContent.append("</div>");
 
-            emailContent.append("<hr>");
+// Nội dung chính
+            emailContent.append("<p>Chào <strong>").append(customer.getFullName()).append("</strong>,</p>");
+            emailContent.append("<p>Chúng tôi rất vui được giới thiệu chương trình khuyến mãi mới đặc biệt dành cho bạn!</p>");
+
+// Khuyến mãi chi tiết
+            emailContent.append("<div style=\"background-color: #fff3cd; padding: 15px; border-radius: 5px; border-left: 5px solid #ffc107;\">");
             emailContent.append("<p><b>Tiêu đề:</b> ").append(promotionTemplateResponse.getPromotions().iterator().next().getTitle()).append("</p>");
             emailContent.append("<p><b>Loại:</b> ").append(promotionTemplateResponse.getType()).append("</p>");
-            emailContent.append("<p><b>Mã:</b> ").append(promotionTemplateResponse.getCode()).append("</p>");
+            emailContent.append("<p><b>Mã khuyến mãi:</b> <span style=\"color: #e74c3c; font-size: 18px;\">").append(promotionTemplateResponse.getCode()).append("</span></p>");
             emailContent.append("<p><b>Mô tả:</b> ").append(promotionTemplateResponse.getPromotions().iterator().next().getDescription()).append("</p>");
-            emailContent.append("<p><b>Thời gian hiệu lực:</b> từ ").append(effectiveDateFormatted)
-                    .append(" đến ").append(expirationDateFormatted).append("</p>");
-
+            emailContent.append("<p><b>Thời gian hiệu lực:</b> từ <span style=\"color: #27ae60;\">").append(effectiveDateFormatted)
+                    .append("</span> đến <span style=\"color: #e74c3c;\">").append(expirationDateFormatted).append("</span></p>");
             if (promotionTemplateResponse.getPromotions().iterator().next().getDiscountLimit() > 0) {
-                emailContent.append("<p><b>Giảm:</b> ").append(discountLimit).append("</p>");
+                emailContent.append("<p><b>Giảm tối đa:</b> ").append(discountLimit).append("</p>");
             }
-
             if (promotionTemplateResponse.getPromotions().iterator().next().getMinValueApplied() > 0) {
                 emailContent.append("<p><b>Áp dụng cho đơn hàng từ:</b> ").append(minValueApplied).append("</p>");
             }
+            emailContent.append("</div>");
 
-            emailContent.append("<hr>");
-            emailContent.append("<p>Hãy nhanh tay tham gia chương trình khuyến mãi này trước khi hết hạn!</p>");
+// Lời kết
+            emailContent.append("<p style=\"text-align: center; margin-top: 20px;\">Hãy nhanh tay sử dụng mã khuyến mãi này trước khi hết hạn!</p>");
+            emailContent.append("<hr style=\"border: none; border-top: 1px solid #ddd; margin: 20px 0;\">");
+            emailContent.append("<p style=\"text-align: center;\">Cảm ơn quý khách đã luôn tin tưởng và đồng hành cùng <strong>Biblio Bookshop</strong>.</p>");
+            emailContent.append("<p style=\"text-align: center; font-weight: bold; color: #d35400;\">Biblio Bookshop</p>");
 
-            emailContent.append("<p>Cảm ơn quý khách!,</p>");
-            emailContent.append("<p><b>Biblio</b></p>");
-
+            emailContent.append("</div>");
             emailContent.append("</body></html>");
 
         } catch (Exception e) {
@@ -147,6 +156,8 @@ public class AddPromotionAPI extends HttpServlet {
 
         return emailContent.toString();
     }
+
+
 
 
 }

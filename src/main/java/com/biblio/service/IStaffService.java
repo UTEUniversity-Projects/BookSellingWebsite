@@ -1,6 +1,7 @@
 package com.biblio.service;
 
 import com.biblio.dto.request.StaffRequest;
+import com.biblio.dto.response.NotificationGetResponse;
 import com.biblio.dto.response.StaffResponse;
 
 import java.util.List;
@@ -13,4 +14,6 @@ public interface IStaffService {
     void deleteStaff(Long id);
     void activateStaff(Long id);
     void deactivateStaff(Long id);
+
+    List<NotificationGetResponse> getAllNotificationByStaffId(Long id);
 }

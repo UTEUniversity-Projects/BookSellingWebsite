@@ -24,5 +24,7 @@ public interface IOrderDAO {
     Order findByIdCustomer(Long id);
 
     Order update(Order order);
+
     boolean cancelOrder(Long id);
+
 }

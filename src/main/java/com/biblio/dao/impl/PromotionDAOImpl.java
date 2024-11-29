@@ -13,8 +13,6 @@ import java.util.Map;
 
 public class PromotionDAOImpl extends GenericDAOImpl<Promotion> implements IPromotionDAO {
 
-    @PersistenceContext
-    private EntityManager entityManager;
     public PromotionDAOImpl() {
         super(Promotion.class);
     }

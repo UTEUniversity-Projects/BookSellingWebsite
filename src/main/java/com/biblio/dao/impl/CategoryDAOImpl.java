@@ -4,6 +4,7 @@ import com.biblio.dao.ICategoryDAO;
 import com.biblio.dto.request.SearchBookRequest;
 import com.biblio.dto.response.CategoryBookCountResponse;
 import com.biblio.entity.Category;
+import com.biblio.enumeration.EBookCondition;
 import com.biblio.jpaconfig.JpaConfig;
 
 import javax.persistence.TypedQuery;
@@ -57,8 +58,9 @@ public class CategoryDAOImpl extends GenericDAOImpl<Category> implements ICatego
                 + "LEFT JOIN c.subCategories sc "
                 + "LEFT JOIN sc.books b "
                 + "LEFT JOIN b.bookTemplate bt "
-                + "ON b.id = (SELECT MIN(b2.id) FROM Book b2 WHERE b2.bookTemplate.id = bt.id AND bt.status = 'ON_SALE') "
-                + "WHERE (b.sellingPrice IS NULL OR (b.sellingPrice >= :minPrice AND b.sellingPrice <= :maxPrice)) ");
+                + "ON b.id = (SELECT MIN(b2.id) FROM Book b2 WHERE b2.bookTemplate.id = bt.id AND bt.status = 'ON_SALE' "
+                + "AND (b2.sellingPrice >= :minPrice AND b2.sellingPrice <= :maxPrice)) "
+                + "WHERE (b.id IS NULL OR (b.sellingPrice >= :minPrice AND b.sellingPrice <= :maxPrice)) ");
 
         Map<String, Object> params = new HashMap<>();
         params.put("minPrice", Double.valueOf(request.getMinPrice()));
@@ -77,6 +79,11 @@ public class CategoryDAOImpl extends GenericDAOImpl<Category> implements ICatego
             jpql.append(") ");
         }
 
+        if (request.getCondition() != null) {
+            jpql.append( "AND (b.condition is NULL OR  b.condition = :condition) ");
+            params.put("condition", EBookCondition.valueOf(request.getCondition()));
+        }
+
         jpql.append("GROUP BY c.id, c.name ");
         jpql.append("ORDER BY COUNT(DISTINCT bt.id) DESC");
 
@@ -87,6 +94,5 @@ public class CategoryDAOImpl extends GenericDAOImpl<Category> implements ICatego
 
         return query.getResultList();
     }
-
 
 }
