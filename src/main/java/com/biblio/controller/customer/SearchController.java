@@ -57,7 +57,12 @@ public class SearchController extends HttpServlet {
                 .minPrice(0)
                 .maxPrice(10000000000L)
                 .categoryId(null)
-                .pageNumber(1).build();
+                .condition(null)
+                .format(null)
+                .reviewRate(0)
+                .pageNumber(1)
+                .sortBy(null)
+                .build();
 
         List<CategoryBookCountResponse> categories = categoryService.getBookQuantityPerCategory(searchBookRequest);
         System.out.println(categories);
