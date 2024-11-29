@@ -57,7 +57,8 @@ public class CustomerServiceImpl implements ICustomerService {
         Customer customer = CustomerMapper.toCustomer(request);
         Cart cart = new Cart();
         cart.setCustomer(customer);
-        cartDAO.addCart(cart);
+        customer.setCart(cart);
+
         return CustomerMapper.toCustomerRegisterResponse(customerDAO.addCustomer(customer));
     }
 

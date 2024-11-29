@@ -9777,9 +9777,14 @@ p {
   color: #333;
 }
 
-.status-container {
-  border-bottom: 2px solid #666666 !important; /* Dùng !important để đảm bảo nó được áp dụng */
+.bottom-container {
+  border-bottom: 1px solid #666666 !important; /* Dùng !important để đảm bảo nó được áp dụng */
   padding-bottom: 20px;
+}
+
+.top-container {
+  border-top: 1px solid #30cb83 !important; /* Dùng !important để đảm bảo nó được áp dụng */
+  padding-top: 20px;
 }
 
 .image-zoom {
@@ -9835,7 +9840,7 @@ p {
   margin-top: -2px;
   border-radius: 100vmax;
   background-color: #ebebeb;
-  background-image: linear-gradient(to right, transparent var(--range-slider-value-low-fallback), #000 var(--range-slider-value-low-fallback), #000 var(--range-slider-value-high-fallback), transparent var(--range-slider-value-high-fallback));
+  background-image: linear-gradient(to right, transparent var(--range-slider-value-low-fallback), #26a497 var(--range-slider-value-low-fallback), #26a497 var(--range-slider-value-high-fallback), transparent var(--range-slider-value-high-fallback));
   pointer-events: none;
 }
 .range-slider__display {
@@ -9844,7 +9849,7 @@ p {
 .range-slider__display::before, .range-slider__display::after {
   content: attr(data-span);
   position: absolute;
-  color: #000;
+  color: #26a497;
   font-size: 1.5rem;
   font-family: sans-serif;
   white-space: nowrap;
@@ -9922,7 +9927,7 @@ p {
   position: relative;
   width: var(--range-slider-thumb-size);
   height: var(--range-slider-thumb-size);
-  background-color: #000;
+  background-color: #26a497;
   border-radius: 50%;
   border: none;
   box-shadow: none;
@@ -9937,7 +9942,7 @@ p {
   position: relative;
   width: var(--range-slider-thumb-size);
   height: var(--range-slider-thumb-size);
-  background-color: #000;
+  background-color: #26a497;
   border-radius: 50%;
   border: none;
   box-shadow: none;
@@ -10001,6 +10006,103 @@ p {
 .pagination li:last-child:hover {
   color: #fff;
   background: #20B2AA;
+}
+
+/* Bộ lọc trạng thái */
+#order-filters .tag {
+  font-size: 16px;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+#order-filters .tag:hover {
+  color: #26aa99;
+}
+
+/* Đơn hàng */
+.order-item {
+  background: #ffffff;
+  border: 1px solid #e5e5e5;
+  border-radius: 8px;
+  padding: 16px;
+  margin-bottom: 20px;
+}
+
+.order-item img {
+  border-radius: 4px;
+}
+
+.my-hidden {
+  display: none;
+}
+
+.my-visible {
+  display: block; /* Hoặc inline-block tùy theo layout */
+}
+
+.order-item .book-item {
+  display: flex;
+  align-items: center; /* Căn giữa theo chiều dọc */
+  margin-bottom: 1rem;
+}
+
+.order-item .book-item img {
+  flex-shrink: 0; /* Đảm bảo hình ảnh không co lại */
+  width: 100px;
+  height: 100px;
+  border-radius: 8px;
+  object-fit: cover;
+}
+
+.order-item .book-info {
+  margin-left: 16px;
+  flex-grow: 1; /* Đẩy thông tin chiếm không gian còn lại */
+}
+
+.order-item .book-info h4 {
+  font-size: 1rem;
+  font-weight: bold;
+  margin-bottom: 4px;
+}
+
+.order-item .book-info p {
+  font-size: 1rem;
+  color: #333;
+}
+
+.bottom-container {
+  border-bottom: 1px solid #666666 !important; /* Dùng !important để đảm bảo nó được áp dụng */
+  padding-bottom: 20px;
+}
+
+.top-container {
+  border-top: 1px solid #30cb83 !important; /* Dùng !important để đảm bảo nó được áp dụng */
+  padding-top: 20px;
+}
+
+.order-summary {
+  display: flex;
+  flex-direction: column; /* Xếp các phần tử theo chiều dọc */
+  gap: 10px; /* Khoảng cách giữa các dòng */
+}
+
+.summary-item {
+  display: flex; /* Sử dụng flexbox để xếp nhãn và số tiền trong mỗi dòng */
+  justify-content: space-between; /* Căn các phần tử ra 2 bên */
+  align-items: center; /* Căn các phần tử theo chiều dọc */
+  margin-left: 500px; /* Thêm khoảng cách bên trái cho label */
+}
+
+.label {
+  font-weight: bold;
+  text-align: left;
+  flex: 1; /* Mở rộng phần tử label để chiếm không gian bên trái */
+}
+
+.amount {
+  font-weight: normal;
+  text-align: right;
+  flex: 1; /* Mở rộng phần tử amount để chiếm không gian bên phải */
 }
 
 /*# sourceMappingURL=style.css.map */

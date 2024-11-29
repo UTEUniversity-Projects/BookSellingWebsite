@@ -138,7 +138,7 @@ $(document).ready(() => {
                                 </div>`;
 			};
 
-			$('.book-list').html('                    <div class="loading h-[100vh] flex justify-center items-center">\n' +
+			$('.book-list').html('                    <div class="loading">\n' +
 				'                        <div class="mx-auto w-[30px] h-[30px] rounded-full border-[4px] border-solid border-green-400 border-t-transparent animate-spin"></div>\n' +
 				'                    </div>');
 			$('.cr-pagination').hide();
@@ -148,11 +148,9 @@ $(document).ready(() => {
 				const categoryList = document.querySelector('.category');
 				const { books, quantity, category } = result;
 
-				console.log(books);
-
 				if (categoryList) {
 					if (isCategoryClicked === false) {
-						categoryList.innerHTML = `<div class="checkbox-group">
+						categoryList.innerHTML = `<div class="checkbox-group gap-x-2 select-none pointer-events-none">
                                 <input type="checkbox" id="all-categories" class="category-item" checked/>
                                 <label for="all-categories">Tất cả</label>
                                 <span>(${quantity})</span>
@@ -177,6 +175,7 @@ $(document).ready(() => {
 				}
 
 				$('.search-result-label').text(` ${searchData.title?.trim()} (${result.quantity} kết quả)`);
+
 			};
 
 			await $.ajax({
@@ -212,12 +211,9 @@ $(document).ready(() => {
 		sortBy: null,
 		minPrice: 0,
 		maxPrice: 10000000000000000,
-		perPage: getItemQuantityPerPage()
+		perPage: getItemQuantityPerPage(),
+		condition: null
 	};
-
-	console.log(searchData);
-
-	searchBook.search(searchData);
 
 	$('.btn-search').click(function (event) {
 		if (!window.location.pathname.includes('/search')) return;
@@ -255,10 +251,10 @@ $(document).ready(() => {
 	$(document).on('click', '.category-item', function () {
 		$('.category-item').each(function () {
 			$(this)[0].checked = false;
-			$(this).addClass('select-none pointer-events-none');
+			$(this).parent().removeClass('select-none pointer-events-none');
 		});
 		$(this)[0].checked = true;
-		$(this).removeClass('select-none pointer-events-none');
+		$(this).parent().addClass('select-none pointer-events-none');
 		const categoryId = $(this).val() !== 'on' ? $(this).val() : null;
 		updateUrlParam('categoryId', categoryId);
 		updateUrlParam('page', 1);
@@ -275,6 +271,26 @@ $(document).ready(() => {
 		searchBook.search(searchData);
 	});
 
+	$(".condition-item").click(function () {
+		$('.condition-item').each(function () {
+			$(this)[0].checked = false;
+			$(this).parent().removeClass("select-none pointer-events-none");
+		});
+		$(this)[0].checked = true;
+		$(this).parent().addClass("select-none pointer-events-none");
+		updateObjectValue(searchData, "condition", $(this).val() == 'on' ? null : $(this).val());
+
+		console.log($(this).val());
+
+		searchBook.search(searchData);
+
+	});
+
+	document.querySelectorAll('.range-slider input[type=\'range\']').forEach(input => {
+		onInput(document.querySelector('.range-slider'));
+		input.oninput = debounce((e) => onInput(document.querySelector('.range-slider'), e), 500);
+	});
+
 	setValueFromParameter();
 
 	function setValueFromParameter () {
@@ -288,11 +304,6 @@ $(document).ready(() => {
 				$(this)[0].checked = $(this).val() === getUrlParam('categoryId');
 			});
 		}
-
-		$(".range-slider").attr("--range-slider-value-low", )
-
-		document.querySelector(".range-slider__display").setAttribute("data-low", getUrlParam("minPrice"));
-		document.querySelector(".range-slider__display").setAttribute("data-high", getUrlParam("maxPrice"));
 
 	}
 
@@ -335,7 +346,7 @@ $(document).ready(() => {
 		// First page and dots before the current range
 		if (page > 3) {
 			liTag += `<li class="first numb"><span>1</span></li>`;
-			if (page > 3) {
+			if (page > 4) {
 				liTag += `<li class="dots"><span>...</span></li>`;
 			}
 		}
@@ -386,6 +397,7 @@ $(document).ready(() => {
 	}
 
 	function updatePageInUrl (page, totalPages) {
+		scrollToTop();
 		const urlParams = new URLSearchParams(window.location.search);
 		urlParams.set('page', page);
 		updateObjectValue(searchData, 'pageNumber', page);
@@ -409,13 +421,13 @@ $(document).ready(() => {
 		const width = window.innerWidth;
 
 		if (width < 1400) {
-			return 6;
+			return 12;
 		} else {
-			return 8;
+			return 16;
 		}
 	}
 
-	const onInput = (parent, e) => {
+	function onInput (parent, e) {
 		const slides = parent.querySelectorAll('input');
 		const min = parseFloat(slides[0].min);
 		const max = parseFloat(slides[0].max);
@@ -441,11 +453,8 @@ $(document).ready(() => {
 			}
 		}
 
-		searchData.minPrice = slide1;
-		searchData.maxPrice = slide2;
-
-		addUrlParam('minPrice', searchData.minPrice);
-		addUrlParam('maxPrice', searchData.maxPrice);
+		updateObjectValue(searchData, "minPrice", slide1);
+		updateObjectValue(searchData, "maxPrice", slide2);
 
 		searchBook.search(searchData);
 
@@ -454,25 +463,6 @@ $(document).ready(() => {
 		parent.querySelector('.min-price').innerText = slide1;
 		parent.querySelector('.max-price').innerText = slide2;
 	};
-
-	document.querySelectorAll('.range-slider')
-		.forEach(range => range.querySelectorAll('input')
-			.forEach((input) => {
-				if (input.type === 'range') {
-					onInput(range);
-					input.oninput = debounce((e) => onInput(range, e), 500);
-				}
-			}));
-
-	function addUrlParam (key, value) {
-		const url = new URL(window.location.href);
-
-		if (value !== null && value !== undefined) {
-			url.searchParams.set(key, value);
-		}
-
-		window.history.pushState({}, '', url.toString());
-	}
 
 });
 

@@ -20,5 +20,6 @@ public class ResponseSupportDAOImpl implements IResponseSupportDAO {
         em.getTransaction().begin();
         em.persist(responseSupport);
         em.getTransaction().commit();
+        em.close();
     }
 }
