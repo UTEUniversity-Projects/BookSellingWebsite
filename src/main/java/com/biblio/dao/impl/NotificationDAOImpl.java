@@ -6,7 +6,11 @@ import com.biblio.jpaconfig.JpaConfig;
 
 import javax.persistence.EntityManager;
 
-public class NotificationDAOImpl implements INotificationDAO {
+public class NotificationDAOImpl extends GenericDAOImpl<Notification> implements INotificationDAO {
+
+    public NotificationDAOImpl() {
+        super(Notification.class);
+    }
 
     @Override
     public void saveSupport_Notification(Notification notification) {

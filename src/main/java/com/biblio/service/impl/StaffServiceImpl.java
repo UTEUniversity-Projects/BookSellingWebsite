@@ -2,9 +2,12 @@ package com.biblio.service.impl;
 
 import com.biblio.dao.IStaffDAO;
 import com.biblio.dto.request.StaffRequest;
+import com.biblio.dto.response.NotificationGetResponse;
 import com.biblio.dto.response.StaffResponse;
+import com.biblio.entity.Notification;
 import com.biblio.entity.Staff;
 import com.biblio.enumeration.EAccountStatus;
+import com.biblio.mapper.NotificationMapper;
 import com.biblio.mapper.StaffMapper;
 import com.biblio.service.IStaffService;
 
@@ -59,5 +62,16 @@ public class StaffServiceImpl implements IStaffService {
         Staff staff = staffDAO.findById(id);
         staff.getAccount().setStatus(EAccountStatus.INACTIVE);
         staffDAO.deactivateStaff(staff);
+    }
+
+    @Override
+    public List<NotificationGetResponse> getAllNotificationByStaffId(Long id) {
+        Staff staff = staffDAO.findById(id);
+        List<NotificationGetResponse> notifications = new ArrayList<>();
+
+        for (Notification notification : staff.getNotifications()) {
+            notifications.add(NotificationMapper.toNotificationGetResponse(notification));
+        }
+        return notifications;
     }
 }

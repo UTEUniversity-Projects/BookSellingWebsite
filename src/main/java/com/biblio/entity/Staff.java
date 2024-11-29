@@ -31,7 +31,6 @@ public class Staff extends User implements Serializable {
 
     @OneToMany(mappedBy = "staff", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private Set<Address> addresses;
-
     // endregion
 
 }
