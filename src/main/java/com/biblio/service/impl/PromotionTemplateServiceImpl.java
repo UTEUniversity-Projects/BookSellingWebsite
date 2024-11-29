@@ -5,6 +5,7 @@ import com.biblio.dao.IPromotionDAO;
 import com.biblio.dao.IPromotionTemplateDAO;
 import com.biblio.dto.request.PromotionTemplateInsertRequest;
 import com.biblio.dto.request.PromotionTemplateUpdateRequest;
+import com.biblio.dto.response.ApplyCodePromotionResponse;
 import com.biblio.dto.response.PromotionTemplateGetDetailsResponse;
 import com.biblio.dto.response.PromotionTemplateGetResponse;
 import com.biblio.dto.response.PromotionTemplateResponse;
@@ -131,6 +132,48 @@ public class PromotionTemplateServiceImpl implements IPromotionTemplateService {
         }
         return percentDiscount;
     }
+
+    @Override
+    public ApplyCodePromotionResponse applyCodePromotion(String code) {
+        ApplyCodePromotionResponse applyCodePromotionResponse = new ApplyCodePromotionResponse();
+        PromotionTemplate promotionTemplateNonUpdate = promotionTemplateDAO.findSingleByJPQL(code);
+
+
+        if (promotionTemplateNonUpdate == null || promotionTemplateNonUpdate.getType() == EPromotionTemplateType.DISCOUNT) {
+            applyCodePromotionResponse.setMessage("Mã khuyến mãi không tồn tại!");
+        }
+        else {
+            List<Promotion> promotions = promotionDAO.findAllById(promotionTemplateNonUpdate.getId());
+            updatePromotionTemplateStatus(promotionTemplateNonUpdate, promotions);
+
+            PromotionTemplate promotionTemplate = promotionTemplateDAO.findSingleByJPQL(code);
+
+            if (promotionTemplate.getStatus() == EPromotionTemplateStatus.COMING_SOON) {
+                applyCodePromotionResponse.setMessage("Chương trình khuyến mãi chưa diễn ra!");
+            } else if (promotionTemplate.getStatus() == EPromotionTemplateStatus.EXPIRED) {
+                applyCodePromotionResponse.setMessage("Mã khuyến mãi đã hết hạn");
+            } else if (promotionTemplate.getStatus() == EPromotionTemplateStatus.USED_OUT) {
+                applyCodePromotionResponse.setMessage("Mã khuyến mãi đã hết lượt sử dụng!");
+            } else {
+                for (Promotion promotion : promotionTemplate.getPromotions()) {
+                    if (promotion.getStatus() == EPromotionStatus.NOT_USE) {
+                        applyCodePromotionResponse.setPromotionId(promotion.getId());
+                        applyCodePromotionResponse.setMinValueToBeApplied(promotion.getMinValueToBeApplied());
+                        applyCodePromotionResponse.setDiscountLimit(promotion.getDiscountLimit());
+                        applyCodePromotionResponse.setType(promotionTemplate.getType());
+                        applyCodePromotionResponse.setMessage("Áp dụng mã khuyến mãi thàng công!");
+
+                        Promotion promotionUpdate = promotionDAO.findById(promotion.getId());
+                        promotionUpdate.setStatus(EPromotionStatus.USED);
+                        promotionDAO.update(promotionUpdate);
+                        break;
+                    }
+                }
+            }
+        }
+        return applyCodePromotionResponse;
+    }
+
 
     private void updatePromotionTemplateStatus(PromotionTemplate promotionTemplate, List<Promotion> promotions) {
         long countUsed = promotions.stream()

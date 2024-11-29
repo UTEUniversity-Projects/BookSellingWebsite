@@ -3,7 +3,9 @@ package com.biblio.dao.impl;
 import com.biblio.dao.IStaffDAO;
 import com.biblio.entity.Staff;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class StaffDAOImpl extends GenericDAOImpl<Staff> implements IStaffDAO {
 
@@ -18,8 +20,12 @@ public class StaffDAOImpl extends GenericDAOImpl<Staff> implements IStaffDAO {
 
     @Override
     public Staff findById(Long id) {
-        return super.findById(id);
+        String jpql = "SELECT s FROM Staff s LEFT JOIN FETCH s.notifications WHERE s.id = :id";
+        Map<String, Object> params = new HashMap<>();
+        params.put("id", id);
+        return super.findSingleByJPQL(jpql, params);
     }
+
 
     @Override
     public void addStaff(Staff staff) {
