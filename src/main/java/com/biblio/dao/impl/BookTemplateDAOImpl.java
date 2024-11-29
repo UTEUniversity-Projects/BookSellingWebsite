@@ -4,6 +4,7 @@ import com.biblio.dao.IBookTemplateDAO;
 import com.biblio.dto.request.SearchBookRequest;
 import com.biblio.entity.Book;
 import com.biblio.entity.BookTemplate;
+import com.biblio.enumeration.EBookCondition;
 import com.biblio.enumeration.EBookMetadataStatus;
 
 import java.util.*;
@@ -88,7 +89,8 @@ public class BookTemplateDAOImpl extends GenericDAOImpl<BookTemplate> implements
         StringBuilder jpql = new StringBuilder("SELECT bt FROM BookTemplate bt "
                 + "JOIN FETCH bt.books b "
                 + "LEFT JOIN FETCH bt.mediaFiles "
-                + "WHERE b.id = (SELECT MIN(b2.id) FROM Book b2 WHERE b2.bookTemplate.id = bt.id) AND bt.status = 'ON_SALE' AND b.sellingPrice >= :minPrice AND b.sellingPrice <= :maxPrice ");
+                + "WHERE b.id = (SELECT MIN(b2.id) FROM Book b2 WHERE b2.bookTemplate.id = bt.id) AND bt.status = 'ON_SALE' "
+                + "AND b.sellingPrice >= :minPrice AND b.sellingPrice <= :maxPrice ");
 
         Map<String, Object> params = new HashMap<>();
         params.put("minPrice", Double.valueOf(request.getMinPrice()));
@@ -108,6 +110,11 @@ public class BookTemplateDAOImpl extends GenericDAOImpl<BookTemplate> implements
         if (request.getCategoryId() != null) {
             jpql.append(" AND b.subCategory.category.id = :categoryId");
             params.put("categoryId", request.getCategoryId());
+        }
+
+        if (request.getCondition() != null) {
+            jpql.append(" AND b.condition = :condition");
+            params.put("condition", EBookCondition.valueOf(request.getCondition()));
         }
 
         String orderByClause = null;
@@ -162,6 +169,11 @@ public class BookTemplateDAOImpl extends GenericDAOImpl<BookTemplate> implements
         if (request.getCategoryId() != null) {
             jpql.append(" AND b.subCategory.category.id = :categoryId");
             params.put("categoryId", request.getCategoryId());
+        }
+
+        if (request.getCondition() != null) {
+            jpql.append(" AND b.condition = :condition");
+            params.put("condition", EBookCondition.valueOf(request.getCondition()));
         }
 
         return super.countByJPQL(jpql.toString(), params);

@@ -34,8 +34,10 @@
                         <h4 class="cr-shop-sub-title">Khoảng giá</h4>
                         <div class="mt-5">
                             <div class="range-slider">
-                                <input type="range" min="0" max="${maxPrice}" step="10000" value="0" class="range-slider__input"/>
-                                <input type="range" min="0" max="${maxPrice}" step="10000" value="${maxPrice}" class="range-slider__input"/>
+                                <input type="range" min="0" max="${maxPrice}" step="10000" value="0"
+                                       class="range-slider__input"/>
+                                <input type="range" min="0" max="${maxPrice}" step="10000" value="${maxPrice}"
+                                       class="range-slider__input"/>
                                 <div class="range-slider__display flex items-center justify-between mt-5">
                                     <p class="min-price text-[16px] font-bold mt-2"></p>
                                     <p class="max-price text-[16px] font-bold mt-2"></p>
@@ -79,16 +81,16 @@
                     <div class="cr-shop-condition">
                         <h4 class="cr-shop-sub-title">Tình trạng</h4>
                         <div class="cr-checkbox">
-                            <div class="checkbox-group">
-                                <input type="checkbox" id="all-condition"/>
+                            <div class="checkbox-group select-none pointer-events-none">
+                                <input type="checkbox" checked id="all-condition" class="condition-item"/>
                                 <label for="all-condition">Tất cả</label>
                             </div>
                             <div class="checkbox-group">
-                                <input type="checkbox" id="new"/>
+                                <input type="checkbox" id="new" value="NEW" class="condition-item"/>
                                 <label for="new">Mới</label>
                             </div>
                             <div class="checkbox-group">
-                                <input type="checkbox" id="old"/>
+                                <input type="checkbox" id="old" value="USED" class="condition-item"/>
                                 <label for="old">Cũ</label>
                             </div>
                         </div>
