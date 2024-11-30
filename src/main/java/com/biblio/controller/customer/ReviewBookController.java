@@ -40,6 +40,7 @@ public class ReviewBookController extends HttpServlet {
      */
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         // TODO Auto-generated method stub
+        request.setAttribute("breadcrumb", "Đánh giá");
         request.getRequestDispatcher("/views/customer/review-book.jsp").forward(request, response);
 
     }
@@ -54,26 +55,14 @@ public class ReviewBookController extends HttpServlet {
         CustomerDetailResponse customer = customerService.getCustomerDetailByUsername(account.getUsername());
         Long customerId = customer.getId();
 
-        // Check if the customer is authenticated
         if (customerId == null) {
             response.sendRedirect(request.getContextPath() + "/login");
             return;
         }
         String content = request.getParameter("content");
-        Long bookTemplateId = 1L;
-        //int rate = Integer.parseInt(request.getParameter("rating") != null ? request.getParameter("rating") : "0");
+        String bookTemplateIdParam = request.getParameter("bookTemplateId");
+        Long bookTemplateId = Long.parseLong(bookTemplateIdParam);
         String ratingStr = request.getParameter("rating");
-        if (content == null || content.isEmpty()) {
-            request.setAttribute("errorMessage", "Nội dung không được để trống.");
-            request.getRequestDispatcher("/views/customer/review-book.jsp").forward(request, response);
-            return;
-        }
-        if (ratingStr == null || ratingStr.isEmpty()) {
-            request.setAttribute("errorMessage", "Bạn phải chọn một mức đánh giá.");
-            request.getRequestDispatcher("/views/customer/review-book.jsp").forward(request, response);
-            return;
-        }
-
         int rate = Integer.parseInt(ratingStr);
         ReviewRequest reviewRequest = new ReviewRequest();
         reviewRequest.setCustomerId(customerId);
@@ -81,18 +70,17 @@ public class ReviewBookController extends HttpServlet {
         reviewRequest.setBookTemplateId(bookTemplateId);
         reviewRequest.setRate(rate);
 
-        boolean readyToIntroduce = request.getParameter("ten-dang-nhap") != null;
-        reviewRequest.setReady_to_introduce(readyToIntroduce);
+        boolean readyToIntroduce = "true".equalsIgnoreCase(request.getParameter("is-ready"));
+        reviewRequest.setReadyToIntroduce(readyToIntroduce);
 
         try {
             reviewService.createReview(reviewRequest);
-            response.sendRedirect(request.getContextPath() + "/review-book?success=true");
+            response.sendRedirect(request.getContextPath() + "/review-book?message=success");
         } catch (Exception e) {
             e.printStackTrace();
-            // Nếu có lỗi trong xử lý, hiển thị thông báo lỗi
-            request.setAttribute("errorMessage", "Đã có lỗi xảy ra, vui lòng thử lại sau.");
-            request.getRequestDispatcher("/views/customer/review-book.jsp").forward(request, response);
+            response.sendRedirect(request.getContextPath() + "/review-book?message=error");
         }
+
     }
 
 }

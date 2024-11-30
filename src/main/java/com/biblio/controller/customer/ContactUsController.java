@@ -49,13 +49,11 @@ public class ContactUsController extends HttpServlet {
      * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
      */
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        // TODO Auto-generated method stub
         HttpSession session = request.getSession(false);
         AccountGetResponse account = (AccountGetResponse) session.getAttribute("account");
         CustomerDetailResponse customer = customerService.getCustomerDetailByUsername(account.getUsername());
         Long customerId = customer.getId();
 
-        // Check if the customer is authenticated
         if (customerId == null) {
             response.sendRedirect(request.getContextPath() + "/login");
             return;
@@ -63,27 +61,20 @@ public class ContactUsController extends HttpServlet {
 
         String title = request.getParameter("title");
         String content = request.getParameter("content");
-
-        // Kiểm tra đầu vào
-        if (title == null || title.isEmpty() || content == null || content.isEmpty()) {
-            request.setAttribute("errorMessage", "Tiêu đề và nội dung không được để trống.");
-            request.getRequestDispatcher("/views/customer/contact-us.jsp").forward(request, response);
-            return;
-        }
-
         SupportRequest supportRequestDTO = new SupportRequest();
         supportRequestDTO.setTitle(title);
         supportRequestDTO.setFeedbackContent(content);
         supportRequestDTO.setCustomerId(customerId);
+
         try {
             supportService.createSupport(supportRequestDTO);
-            request.setAttribute("message", "Đã gửi yêu cầu hỗ trợ!");
-            response.sendRedirect(request.getContextPath() + "/order?message=success");
+            response.sendRedirect(request.getContextPath() + "/contact-us?message=success");
         } catch (Exception e) {
             e.printStackTrace();
-            request.setAttribute("errorMessage", "Đã có lỗi xảy ra, vui lòng thử lại sau.");
-            request.getRequestDispatcher("/views/customer/contact-us.jsp").forward(request, response);
+            response.sendRedirect(request.getContextPath() + "/contact-us?message=error");
         }
     }
+
+
 
 }

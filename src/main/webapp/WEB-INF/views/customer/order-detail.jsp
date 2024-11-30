@@ -364,7 +364,7 @@
                                         <p>x${orderProduct.quantity}</p>
                                         <button
                                                 class="cr-btn-secondary"
-                                                onclick="window.location.href='${pageContext.request.contextPath}/review-book';">
+                                                onclick="window.location.href='${pageContext.request.contextPath}/review-book?bookTemplateId=${orderProduct.bookTemplateId}';">
                                             Đánh giá
                                         </button>
                                     </div>
