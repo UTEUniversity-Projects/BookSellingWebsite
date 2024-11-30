@@ -1,7 +1,6 @@
 package com.biblio.controller.customer;
 
 import com.biblio.dto.response.AccountGetResponse;
-import com.biblio.dto.response.CategorySidebarResponse;
 import com.biblio.service.IBookTemplateService;
 import com.biblio.service.ICartService;
 import com.biblio.service.ICategoryService;
@@ -15,7 +14,6 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.io.Serial;
-import java.util.List;
 
 /**
  * Servlet implementation class HomeController
@@ -51,9 +49,9 @@ public class HomeController extends HttpServlet {
         HttpSession session = request.getSession();
         AccountGetResponse account = (AccountGetResponse) session.getAttribute("account");
 
-        List<CategorySidebarResponse> categories = categoryService.getAllCategorySidebarResponse();
+//        List<CategorySidebarResponse> categories = categoryService.getAllCategorySidebarResponse();
 //        List<BookCardResponse> books = bookTemplateService.getAllBookCardResponse();
-        request.setAttribute("categories", categories);
+//        request.setAttribute("categories", categories);
 //        request.setAttribute("books", books);
 
         request.setAttribute("account", account);

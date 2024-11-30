@@ -1,6 +1,7 @@
 -- Dữ liệu ảo
 -- CREATE DATABASE `bsw-biblio`;
-USE `bsw-biblio`;
+USE `bsw-biblio`;      
+
 -- 1. Table Account:
 INSERT INTO account (password, status, role, username) VALUES
 ('$2y$10$lHBtDRcnnTUMClaM9.BIleOK7sgnHUgUCSr6qcGo8GfqygI5E.3VO', 'ACTIVE', 'OWNER', 'owner_1'),
