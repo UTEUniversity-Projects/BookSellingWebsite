@@ -12,6 +12,8 @@ public interface IBookTemplateService {
 
     List<BookCardResponse> getAllBookCardResponse();
 
+    List<BookCardResponse> getPopularBookCard();
+
     BookDetailsResponse getBookDetailsResponse(Long bookTemplateId);
 
     List<BookTemplatePromotionResponse> getAllBookBookTemplatePromotionResponse();

@@ -29,4 +29,24 @@ public class NotificationDAOImpl extends GenericDAOImpl<Notification> implements
         }
     }
 
+    @Override
+    public Notification update(Notification notification) {
+        return super.update(notification);
+    }
+
+    @Override
+    public Notification findNotificationById(Long id) {
+        return super.findById(id);
+    }
+
+    @Override
+    public Notification insert(Notification notification) {
+       return super.save(notification);
+    }
+
+    public static void main(String[] args) {
+        NotificationDAOImpl dao = new NotificationDAOImpl();
+        Notification notification = dao.findNotificationById(1L);
+        System.out.println(notification);
+    }
 }

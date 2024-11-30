@@ -490,92 +490,92 @@
             </div>
         </div>
         <div class="product-content row mb-minus-24" id="MixItUpDA2FB7">
-            <div class="col-xl-3 col-lg-4 col-12 mb-24">
-                <div class="row mb-minus-24 sticky">
-                    <div class="col-lg-12 col-sm-6 col-6 cr-product-box mb-24">
-                        <div class="cr-product-tabs">
-                            <ul>
-                                <li class="active" data-filter="all">Tất cả</li>
-                                <c:forEach var="category" items="${categories}">
-                                    <li data-filter=".${category.name}">${category.name}</li>
-                                </c:forEach>
-                            </ul>
-                        </div>
-                    </div>
-                    <div
-                            class="col-lg-12 col-sm-6 col-6 cr-product-box banner-480 mb-24"
-                    >
-                        <div class="cr-ice-cubes">
-                            <img
-                                    src="${pageContext.request.contextPath}/assets/customer/img/product/product-banner.jpg"
-                                    alt="product banner"
-                            />
-                            <div class="cr-ice-cubes-contain">
-                                <h4 class="title">Juicy</h4>
-                                <h5 class="sub-title">Fruits</h5>
-                                <span>100% Natural</span>
-                                <a href="shop-left-sidebar.html" class="cr-button"
-                                >Shop Now</a
-                                >
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-xl-9 col-lg-8 col-12 mb-24">
-                <div class="row mb-minus-24">
-                    <c:forEach var="book" items="${books}">
-                        <div data-book-id="${book.id}"
-                             class="mix col-xxl-3 col-xl-4 col-6 cr-product-box mb-5"
-                        >
-                            <div class="cr-product-card">
-                                <div class="cr-product-image">
-                                    <div class="cr-image-inner zoom-image-hover">
-                                        <img src="${pageContext.request.contextPath}${book.imageUrl}" alt="${book.title}"/>
-                                    </div>
-                                    <div class="cr-side-view">
-                                        <a
-                                                class="model-oraganic-product"
-                                                data-bs-toggle="modal"
-                                                href="#quickview-${book.id}"
-                                                role="button"
-                                        >
-                                            <i class="ri-eye-line"></i>
-                                        </a>
-                                    </div>
-                                    <a class="cr-shopping-bag add-to-cart-btn" href="javascript:void(0)" data-book-id="${book.id}" data-quantity="1">
-                                        <i class="ri-shopping-bag-line"></i>
-                                    </a>
-                                </div>
-                                <div class="cr-product-details">
-                                    <div class="cr-brand">
-                                        <p>${book.categoryName}</p>
-                                        <div class="cr-star">
-                                            <c:forEach var="i" begin="1" end="5" step="1">
-                                                <c:choose>
-                                                    <c:when test="${book.reviewRate >= i}">
-                                                        <i class="ri-star-fill"></i>
-                                                    </c:when>
-                                                    <c:when test="${book.reviewRate > i - 1 && book.reviewRate < i}">
-                                                        <i class="ri-star-half-line"></i>
-                                                    </c:when>
-                                                    <c:otherwise>
-                                                        <i class="ri-star-line"></i>
-                                                    </c:otherwise>
-                                                </c:choose>
-                                            </c:forEach>
-                                            <p>(${book.reviewRate})</p>
-                                        </div>
-                                    </div>
-                                    <a href="${pageContext.request.contextPath}/book?id=${book.id}" class="title">${book.title}</a>
-                                    <p class="cr-price">
-                                        <span class="new-price price-value">${book.sellingPrice}</span>
-                                        <span class="old-price price-value">${book.sellingPrice}</span>
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
-                    </c:forEach>
+<%--            <div class="col-xl-3 col-lg-4 col-12 mb-24">--%>
+<%--                <div class="row mb-minus-24 sticky">--%>
+<%--                    <div class="col-lg-12 col-sm-6 col-6 cr-product-box mb-24">--%>
+<%--                        <div class="cr-product-tabs">--%>
+<%--                            <ul>--%>
+<%--                                <li class="active" data-filter="all">Tất cả</li>--%>
+<%--                                <c:forEach var="category" items="${categories}">--%>
+<%--                                    <li data-filter=".${category.name}">${category.name}</li>--%>
+<%--                                </c:forEach>--%>
+<%--                            </ul>--%>
+<%--                        </div>--%>
+<%--                    </div>--%>
+<%--                    <div--%>
+<%--                            class="col-lg-12 col-sm-6 col-6 cr-product-box banner-480 mb-24"--%>
+<%--                    >--%>
+<%--                        <div class="cr-ice-cubes">--%>
+<%--                            <img--%>
+<%--                                    src="${pageContext.request.contextPath}/assets/customer/img/product/product-banner.jpg"--%>
+<%--                                    alt="product banner"--%>
+<%--                            />--%>
+<%--                            <div class="cr-ice-cubes-contain">--%>
+<%--                                <h4 class="title">Juicy</h4>--%>
+<%--                                <h5 class="sub-title">Fruits</h5>--%>
+<%--                                <span>100% Natural</span>--%>
+<%--                                <a href="shop-left-sidebar.html" class="cr-button"--%>
+<%--                                >Shop Now</a--%>
+<%--                                >--%>
+<%--                            </div>--%>
+<%--                        </div>--%>
+<%--                    </div>--%>
+<%--                </div>--%>
+<%--            </div>--%>
+            <div class="col-xl-12 col-lg-12 col-12 mb-24">
+                <div class="home-book-list row mb-minus-24">
+<%--                    <c:forEach var="book" items="${books}">--%>
+<%--                        <div data-book-id="${book.id}"--%>
+<%--                             class="mix col-xxl-3 col-xl-4 col-6 cr-product-box mb-5"--%>
+<%--                        >--%>
+<%--                            <div class="cr-product-card">--%>
+<%--                                <div class="cr-product-image">--%>
+<%--                                    <div class="cr-image-inner zoom-image-hover">--%>
+<%--                                        <img src="${pageContext.request.contextPath}${book.imageUrl}" alt="${book.title}"/>--%>
+<%--                                    </div>--%>
+<%--                                    <div class="cr-side-view">--%>
+<%--                                        <a--%>
+<%--                                                class="model-oraganic-product"--%>
+<%--                                                data-bs-toggle="modal"--%>
+<%--                                                href="#quickview-${book.id}"--%>
+<%--                                                role="button"--%>
+<%--                                        >--%>
+<%--                                            <i class="ri-eye-line"></i>--%>
+<%--                                        </a>--%>
+<%--                                    </div>--%>
+<%--                                    <a class="cr-shopping-bag add-to-cart-btn" href="javascript:void(0)" data-book-id="${book.id}" data-quantity="1">--%>
+<%--                                        <i class="ri-shopping-bag-line"></i>--%>
+<%--                                    </a>--%>
+<%--                                </div>--%>
+<%--                                <div class="cr-product-details">--%>
+<%--                                    <div class="cr-brand">--%>
+<%--                                        <p>${book.categoryName}</p>--%>
+<%--                                        <div class="cr-star">--%>
+<%--                                            <c:forEach var="i" begin="1" end="5" step="1">--%>
+<%--                                                <c:choose>--%>
+<%--                                                    <c:when test="${book.reviewRate >= i}">--%>
+<%--                                                        <i class="ri-star-fill"></i>--%>
+<%--                                                    </c:when>--%>
+<%--                                                    <c:when test="${book.reviewRate > i - 1 && book.reviewRate < i}">--%>
+<%--                                                        <i class="ri-star-half-line"></i>--%>
+<%--                                                    </c:when>--%>
+<%--                                                    <c:otherwise>--%>
+<%--                                                        <i class="ri-star-line"></i>--%>
+<%--                                                    </c:otherwise>--%>
+<%--                                                </c:choose>--%>
+<%--                                            </c:forEach>--%>
+<%--                                            <p>(${book.reviewRate})</p>--%>
+<%--                                        </div>--%>
+<%--                                    </div>--%>
+<%--                                    <a href="${pageContext.request.contextPath}/book?id=${book.id}" class="title">${book.title}</a>--%>
+<%--                                    <p class="cr-price">--%>
+<%--                                        <span class="new-price price-value">${book.sellingPrice}</span>--%>
+<%--                                        <span class="old-price price-value">${book.sellingPrice}</span>--%>
+<%--                                    </p>--%>
+<%--                                </div>--%>
+<%--                            </div>--%>
+<%--                        </div>--%>
+<%--                    </c:forEach>--%>
                 </div>
             </div>
         </div>
@@ -1316,3 +1316,4 @@
     </div>
 </section>
 
+<script src="${pageContext.request.contextPath}/assets/customer/js/book.js" type="module"></script>

@@ -1,9 +1,12 @@
 package com.biblio.service.impl;
 
 import com.biblio.dao.IOrderDAO;
+
 import com.biblio.dao.impl.OrderDAOImpl;
+import com.biblio.dao.impl.EWalletDAOImpl;
 import com.biblio.dto.response.*;
 import com.biblio.entity.Book;
+import com.biblio.entity.EWallet;
 import com.biblio.entity.Order;
 import com.biblio.entity.OrderItem;
 import com.biblio.entity.OrderStatusHistory;
@@ -26,6 +29,9 @@ public class OrderServiceImpl implements IOrderService {
 
     @Inject
     IPromotionTemplateService promotionTemplateService;
+  
+    @Inject
+    EWalletDAOImpl walletDAO;
 
     @Override
     public OrderDetailsManagementResponse getOrderDetailsManagementResponse(Long id) {
@@ -103,13 +109,13 @@ public class OrderServiceImpl implements IOrderService {
         List<Order> list = orderDAO.findAllForManagement();
         for (Order order : list) {
             LocalDateTime orderDate = order.getOrderDate();
-            if ((orderDate.isEqual(start) || orderDate.isAfter(start)) && (orderDate.isEqual(end) || orderDate.isBefore(end)) && EOrderStatus.COMPLETE_DELIVERY.equals(order.getStatus())) {
-//                for (OrderItem orderItem : order.getOrderItems()) {
-//                    for (Book book : orderItem.getBooks()) {
-//                        venue += book.getSellingPrice();
-//                    }
-//                }
-                venue += order.calTotalPrice();
+            if ((orderDate.isEqual(start) || orderDate.isAfter(start)) &&
+                    (orderDate.isEqual(end) || orderDate.isBefore(end)) &&
+                    EOrderStatus.COMPLETE_DELIVERY.equals(order.getStatus())) {
+
+                EWallet ew = walletDAO.findByOrderId(order.getId());
+
+                venue += ew.getAmount();
             }
         }
         return venue;

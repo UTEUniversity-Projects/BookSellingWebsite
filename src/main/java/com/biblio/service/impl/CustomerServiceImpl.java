@@ -55,6 +55,7 @@ public class CustomerServiceImpl implements ICustomerService {
     @Override
     public CustomerRegisterResponse addCustomer(CustomerRegisterRequest request) {
         Customer customer = CustomerMapper.toCustomer(request);
+
         Cart cart = new Cart();
         cart.setCustomer(customer);
         customer.setCart(cart);

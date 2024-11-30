@@ -250,5 +250,6 @@
         </div>
     </div>
 </section>
+
 <script src="${pageContext.request.contextPath}/assets/commons/js/format-discount-percent.js"></script>
 <script src="${pageContext.request.contextPath}/assets/customer/js/checkout.js" type="module"></script>

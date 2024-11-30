@@ -14,7 +14,7 @@
                                 class="w-full h-full object-cover"/>
                     </div>
                     <div class="row">
-                        <form id="registerForm" action="${pageContext.request.contextPath}/register"
+                        <form id="registerForm"
                               class="cr-content-form" method="post"
                               enctype="multipart/form-data">
                             <div class="col-sm-12 col-md-12">

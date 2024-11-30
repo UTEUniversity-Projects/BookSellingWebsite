@@ -80,7 +80,7 @@
                             </li>
                         </ul>
                         <div class="notification">
-                            <a href="${pageContext.request.contextPath}/notification" class="cr-right-bar-item relative">
+                            <a href="${pageContext.request.contextPath}/notifications" class="cr-right-bar-item relative">
                                 <i class="ri-notification-3-line"></i>
                                 <span>Thông báo</span>
                                 <p class="notification-count absolute top-[-10px] left-[10px] rounded-full bg-black text-white inline-block w-4 h-4 text-[10px] text-center">

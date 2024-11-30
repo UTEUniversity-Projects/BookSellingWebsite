@@ -104,4 +104,14 @@ public class BookTemplateServiceImpl implements IBookTemplateService {
         return bookTemplateDAO.countByCriteria(request);
     }
 
+    @Override
+    public List<BookCardResponse> getPopularBookCard() {
+        List<BookTemplate> bookTemplates = bookTemplateDAO.findTop20();
+        List<BookCardResponse> bookCardResponseList = new ArrayList<>();
+        for (BookTemplate bookTemplate : bookTemplates) {
+            bookCardResponseList.add(BookTemplateMapper.toBookCardResponse(bookTemplate));
+        }
+        return bookCardResponseList;
+    }
+
 }
