@@ -42,9 +42,10 @@ public class ProductDashboardController extends HttpServlet {
         System.out.println(session.getAttribute("account"));
 
         List<BookManagementResponse> books = bookTemplateService.getAllBookManagementResponse();
-        request.setAttribute("books", books);
 
+        request.setAttribute("books", books);
         request.getRequestDispatcher("/views/staff/product-dashboard.jsp").forward(request, response);
+
     }
 
     /**

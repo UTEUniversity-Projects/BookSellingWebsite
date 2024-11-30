@@ -12,7 +12,7 @@
         <title>Owner</title>
 
         <!-- App favicon -->
-        <link rel="shortcut icon" href="${pageContext.request.contextPath}/assets/owner/img/logo/collapse-logo.png"/>
+        <link rel="shortcut icon" href="${pageContext.request.contextPath}/assets/commons/img/logo/collapse-logo.png"/>
 
         <!-- Icon CSS -->
         <link href="${pageContext.request.contextPath}/assets/owner/css/vendor/materialdesignicons.min.css" rel="stylesheet"/>

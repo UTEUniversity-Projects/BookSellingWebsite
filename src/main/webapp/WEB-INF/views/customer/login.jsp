@@ -12,7 +12,7 @@
                         data-aos-delay="400"
                 >
                     <div class="form-logo">
-                        <img src="${pageContext.request.contextPath}/assets/customer/img/logo/logo.png" alt="logo"/>
+                        <img src="${pageContext.request.contextPath}/assets/commons/img/logo/logo.png" alt="logo"/>
                     </div>
                     <form class="cr-content-form" action="login" method="POST" id="loginForm">
                         <div class="form-group mb-2">

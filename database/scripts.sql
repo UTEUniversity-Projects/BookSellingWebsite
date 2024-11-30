@@ -530,16 +530,16 @@ INSERT INTO publisher (avatar, introduction, join_at, name) VALUES
 
 
 INSERT INTO book_template (status, publisher_id) VALUES
-('ON_SALE', 1),
+('OUT_OF_STOCK', 1),
 ('ON_SALE', 2),
 ('ON_SALE', 3),
 ('ON_SALE', 4),
 ('ON_SALE', 5),
 ('ON_SALE', 6),
-('ON_SALE', 7),
-('ON_SALE', 8),
-('ON_SALE', 9),
-('ON_SALE', 10);
+('OUT_OF_STOCK', 7),
+('OUT_OF_STOCK', 8),
+('OUT_OF_STOCK', 9),
+('OUT_OF_STOCK', 10);
 
 INSERT INTO book_template (status, publisher_id)
 VALUES
@@ -656,8 +656,8 @@ INSERT INTO book_metadata (created_at, import_price, opening_date, status) VALUE
 ('2024-10-10 12:00:00', 100000, '2024-10-11 13:00:00', 'IN_STOCK'),
 
 -- 10 dòng với created_at từ `opening_date` của id = 6
-('2024-10-15 15:30:45', 100000, '2024-10-16 09:00:00', 'SOLD'),
-('2024-10-15 15:30:45', 100000, '2024-10-16 09:00:00', 'SOLD'),
+('2024-10-15 15:30:45', 100000, '2024-10-16 09:00:00', 'BROKEN'),
+('2024-10-15 15:30:45', 100000, '2024-10-16 09:00:00', 'BROKEN'),
 ('2024-10-15 15:30:45', 100000, '2024-10-16 09:00:00', 'SOLD'),
 ('2024-10-15 15:30:45', 100000, '2024-10-16 09:00:00', 'SOLD'),
 ('2024-10-15 15:30:45', 100000, '2024-10-16 09:00:00', 'SOLD'),
@@ -4003,14 +4003,15 @@ INSERT INTO translator_book_template (translator_id, book_template_id) VALUES
 -- 12. Table Review
 INSERT INTO review (content, created_at, is_hidden, rate, ready_to_introduce, book_template_id, customer_id) VALUES
 -- Đánh giá của customer_id = 1 cho 5 cuốn sách đầu
-('Cuốn sách rất hay và bổ ích, đáng để đọc.', '2023-01-05 09:30:00', 0, 5, 1, 1, 1),
+('Cuốn sách rất hay và bổ ích, đáng để đọc.', '2024-11-7 9:30:00', 0, 5, 1, 1, 1),
 ('Rất hài lòng với nội dung, nhiều kiến thức bổ ích.', '2023-01-15 10:00:00', 0, 4, 1, 2, 1),
 ('Một tác phẩm tuyệt vời, cung cấp góc nhìn mới.', '2023-01-25 14:30:00', 0, 5, 1, 3, 1),
-('Sách rất thú vị và truyền cảm hứng, tôi thích điều đó.', '2023-02-05 11:45:00', 0, 4, 1, 4, 1),
+('Sách rất thú vị và truyền cảm hứng, tôi thích điều đó.', '2024-11-10 9:30:00', 0, 4, 1, 4, 1),
 ('Một cuốn sách đáng để giới thiệu cho mọi người.', '2023-02-15 13:20:00', 0, 5, 1, 5, 1),
 
 -- Đánh giá của customer_id = 2 cho 5 cuốn sách đầu
-('Nội dung rất sâu sắc và dễ hiểu, rất thích cuốn này.', '2023-01-10 08:45:00', 0, 5, 1, 1, 2),
+('Sách bị rách, tôi thất vọng vì điều đó.', '2024-11-10 15:00:00', 0, 1, 1, 6, 2),
+('Sách bị rách, tôi thất vọng vì điều đó.', '2024-10-21 16:15:00', 0, 2, 1, 6, 2),
 ('Sách có nhiều thông tin hữu ích cho người đọc.', '2023-01-20 09:15:00', 0, 4, 1, 2, 2),
 ('Tôi học được nhiều điều mới qua cuốn sách này.', '2023-01-30 15:10:00', 0, 5, 1, 3, 2),
 ('Rất hài lòng với cuốn sách, dễ đọc và thực tế.', '2023-02-10 10:25:00', 0, 4, 1, 4, 2),
@@ -4165,8 +4166,8 @@ INSERT INTO `order` (note, order_date, payment_type, status, vat, customer_id, s
 ('Order note 8', '2024-11-08 13:55:00', 'BANKING','CANCELED', 0.1, 2, 8);
 
 INSERT INTO `order` (note, order_date, payment_type, status, vat, customer_id, shipping_id) VALUES
-('Order note 9', '2024-11-06 12:48:23', 'BANKING', 'COMPLETE_DELIVERY', 0.1, 1, 9),
-('Order note 10', '2024-10-20 16:25:58', 'BANKING', 'COMPLETE_DELIVERY', 0.1, 2, 10),
+('Order note 9', '2024-11-06 12:48:23', 'BANKING', 'REFUNDED', 0.1, 1, 9),
+('Order note 10', '2024-10-20 16:25:58', 'BANKING', 'REFUNDED', 0.1, 2, 10),
 ('Order note 11', '2024-10-27 10:45:29', 'BANKING', 'COMPLETE_DELIVERY', 0.1, 3, 11),
 ('Order note 12', '2024-10-18 08:55:06', 'BANKING', 'COMPLETE_DELIVERY', 0.1, 4, 12),
 ('Order note 13', '2024-10-04 12:34:04', 'BANKING', 'COMPLETE_DELIVERY', 0.1, 5, 13),
@@ -4373,14 +4374,14 @@ INSERT INTO order_item_books (order_item_id, book_id) VALUES
 
 
 INSERT INTO ewallet (amount, created_at, currency, status, provider, transaction_id, wallet_id, order_id) VALUES
-(300000, '2024-11-03 10:30:00', 'VND', 'COMPLETED', 'MOMO', 'TXN1234567', 'WALLET001', 1),
-(400000, '2024-11-11 14:00:00', 'VND', 'COMPLETED', 'MOMO', 'TXN1234568', 'WALLET002', 2),
-(350000, '2024-11-20 09:15:00', 'VND', 'COMPLETED', 'MOMO', 'TXN1234569', 'WALLET003', 3),
-(250000, '2024-11-04 16:45:00', 'VND', 'COMPLETED', 'MOMO', 'TXN1234570', 'WALLET004', 4),
-(300000, '2024-11-05 11:20:00', 'VND', 'COMPLETED', 'MOMO', 'TXN1234571', 'WALLET005', 5),
-(400000, '2024-11-06 15:30:00', 'VND', 'COMPLETED', 'MOMO', 'TXN1234572', 'WALLET006', 6),
-(350000, '2024-11-07 08:00:00', 'VND', 'COMPLETED', 'MOMO', 'TXN1234573', 'WALLET007', 7),
-(250000, '2024-11-08 13:55:00', 'VND', 'COMPLETED', 'MOMO', 'TXN1234574', 'WALLET008', 8),
+(650000, '2024-11-03 10:30:00', 'VND', 'COMPLETED', 'MOMO', 'TXN1234567', 'WALLET001', 1),
+(635000, '2024-11-11 14:00:00', 'VND', 'COMPLETED', 'MOMO', 'TXN1234568', 'WALLET002', 2),
+(775000, '2024-11-20 09:15:00', 'VND', 'COMPLETED', 'MOMO', 'TXN1234569', 'WALLET003', 3),
+(770000, '2024-11-04 16:45:00', 'VND', 'COMPLETED', 'MOMO', 'TXN1234570', 'WALLET004', 4),
+(715000, '2024-11-05 11:20:00', 'VND', 'COMPLETED', 'MOMO', 'TXN1234571', 'WALLET005', 5),
+(725000, '2024-11-06 15:30:00', 'VND', 'COMPLETED', 'MOMO', 'TXN1234572', 'WALLET006', 6),
+(845000, '2024-11-07 08:00:00', 'VND', 'COMPLETED', 'MOMO', 'TXN1234573', 'WALLET007', 7),
+(860000, '2024-11-08 13:55:00', 'VND', 'COMPLETED', 'MOMO', 'TXN1234574', 'WALLET008', 8),
 (300000, '2024-11-06 12:48:23', 'VND', 'COMPLETED', 'MOMO', 'TXN1234575', 'WALLET009', 9),
 (400000, '2024-10-20 16:25:58', 'VND', 'COMPLETED', 'MOMO', 'TXN1234576', 'WALLET010', 10),
 (350000, '2024-10-27 10:45:29', 'VND', 'COMPLETED', 'MOMO', 'TXN1234577', 'WALLET011', 11),
@@ -4842,8 +4843,9 @@ INSERT INTO order_promotion values
 (8, 8),
 (8, 57);
 
+-- Order 2 request return 
 INSERT INTO return_book(created_at, description, reason, order_id) values
-('2024-11-12 13:00:00', 'Sách bị gấp, bìa bị rách', 'DAMAGED', 2);
+('2024-11-14 08:00:00', 'Sách bị gấp, bìa bị rách', 'DAMAGED', 2);
 
 INSERT INTO return_book_item(return_book_id) values
 (1);
@@ -4853,6 +4855,32 @@ INSERT INTO return_item_books(return_book_item_id, book_id) values
 
 INSERT INTO return_book_media_file(return_book_id, media_file_id) values
 (1, 1), (1, 2), (1, 3), (1, 4), (1, 5);
+
+-- Order 9 return 
+INSERT INTO return_book(created_at, description, reason, order_id) values
+('2024-11-10 08:00:00', 'Sách bị gấp, bìa bị rách', 'DAMAGED', 9);
+
+INSERT INTO return_book_item(return_book_id) values
+(2);
+
+INSERT INTO return_item_books(return_book_item_id, book_id) values
+(2, 51);
+
+INSERT INTO return_book_media_file(return_book_id, media_file_id) values
+(2, 6), (2, 7), (2, 8), (2, 9), (2, 10);
+
+-- Order 10 return 
+INSERT INTO return_book(created_at, description, reason, order_id) values
+('2024-11-10 08:00:00', 'Sách bị gấp, bìa bị rách', 'DAMAGED', 10);
+
+INSERT INTO return_book_item(return_book_id) values
+(3);
+
+INSERT INTO return_item_books(return_book_item_id, book_id) values
+(3, 52);
+
+INSERT INTO return_book_media_file(return_book_id, media_file_id) values
+(3, 11), (3, 12), (3, 13), (3, 14), (3, 15);
 
 INSERT INTO notification (content, created_at, hyper_link, sent_time, status, title, type, customer_id, owner_id, staff_id)
 VALUES
@@ -4871,10 +4899,25 @@ INSERT INTO order_status_history(status, status_change_date, order_id) values
 ('REVIEWED', '2024-11-7 9:30:00', 1);
 
 INSERT INTO order_status_history(status, status_change_date, order_id) values
+('PLACED', '2024-11-11 14:00:00', 2),
+('CONFIRMED', '2024-11-11 14:10:00', 2),
+('WAITING_FOR_SHIPPING', '2024-11-11 15:00:00', 2),
+('COMPLETED', '2024-11-13 15:00:00', 2);
+
+INSERT INTO order_status_history(status, status_change_date, order_id) values
 ('PLACED', '2024-11-20 09:15:00', 3);
 
 INSERT INTO order_status_history(status, status_change_date, order_id) values
+('PLACED', '2024-11-04 16:45:00', 4),
+('CONFIRMED', '2024-11-11 15:10:00', 4);
+
+INSERT INTO order_status_history(status, status_change_date, order_id) values
 ('PLACED', '2024-11-5 11:20:00', 5);
+
+INSERT INTO order_status_history(status, status_change_date, order_id) values
+('PLACED', '2024-11-06 15:30:00', 6),
+('CONFIRMED', '2024-11-06 16:00:00', 6),
+('WAITING_FOR_SHIPPING', '2024-11-06 16:30:00', 6);
 
 INSERT INTO order_status_history(status, status_change_date, order_id) values
 ('PLACED', '2024-11-07 8:00:00', 7),
@@ -4883,3 +4926,21 @@ INSERT INTO order_status_history(status, status_change_date, order_id) values
 ('COMPLETED', '2024-11-09 9:30:00', 7),
 ('REVIEWED', '2024-11-10 9:30:00', 7);
 
+INSERT INTO order_status_history(status, status_change_date, order_id) values
+('PLACED', '2024-11-08 13:55:00', 8),
+('CONFIRMED', '2024-11-08 14:00:00', 8),
+('WAITING_FOR_SHIPPING', '2024-11-08 15:00:00', 8);
+
+INSERT INTO order_status_history(status, status_change_date, order_id) values
+('PLACED', '2024-11-06 12:48:00', 9),
+('CONFIRMED', '2024-11-06 13:00:00', 9),
+('WAITING_FOR_SHIPPING', '2024-11-06 14:00:00', 9),
+('COMPLETED', '2024-11-08 9:30:00', 9),
+('REVIEWED', '2024-11-10 15:00:00', 9);
+
+INSERT INTO order_status_history(status, status_change_date, order_id) values
+('PLACED', '2024-10-20 16:25:00', 10),
+('CONFIRMED', '2024-10-20 16:30:00', 10),
+('WAITING_FOR_SHIPPING', '2024-10-20 17:00:00', 10),
+('COMPLETED', '2024-10-21 13:22:00', 10),
+('REVIEWED', '2024-10-21 16:15:00', 10);
