@@ -21,9 +21,6 @@ public class ProductDashboardController extends HttpServlet {
     @Inject
     IBookTemplateService bookTemplateService;
 
-    @Inject
-    IPromotionTemplateService promotionTemplateService;
-
     @Serial
     private static final long serialVersionUID = 1L;
 

@@ -8,7 +8,7 @@
         <div class="cr-page-title cr-page-title-2">
             <div class="cr-breadcrumb">
                 <ul>
-                    <li><a href="/staff/product-dashboard">Carrot</a></li>
+                    <li><a href="${pageContext.request.contextPath}/staff/product-dashboard">Carrot</a></li>
                     <li>Danh sách đơn hàng</li>
                 </ul>
             </div>
@@ -94,9 +94,9 @@
                                 </tr>
                                 </thead>
                                 <tbody>
-                                <c:forEach var="order" items="${orders}">
+                                <c:forEach var="order" items="${orders}" varStatus="status">
                                     <tr class="order-row" data-href="${pageContext.request.contextPath}/staff/order-details?id=${order.id}">
-                                        <td class="token">${order.id}</td>
+                                        <td class="token">${status.index + 1}</td>
                                         <td>${order.customerName}</td>
                                         <td>${order.orderDate}</td>
                                         <td class="price-value">${order.totalPrice}</td>

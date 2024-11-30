@@ -4751,7 +4751,7 @@ INSERT INTO order_status_history(status, status_change_date, order_id) values
 ('PLACED', '2024-11-20 09:15:00', 3);
 
 INSERT INTO order_status_history(status, status_change_date, order_id) values
-('PLACED', '2024-11-5 11:30:00', 5);
+('PLACED', '2024-11-5 11:20:00', 5);
 
 INSERT INTO order_status_history(status, status_change_date, order_id) values
 ('PLACED', '2024-11-07 8:00:00', 7),

@@ -38,11 +38,13 @@ public class ReturnBookServiceImpl implements IReturnBookService {
         if (returnBook == null) {
             return false;
         }
-        if (returnBook.getReason() != EReasonReturn.NO_NEEDED) {
-            for (ReturnBookItem returnBookItem : returnBook.getReturnBookItems()) {
-                for (Book book : returnBookItem.getBooks()) {
-                    book.getBookMetadata().setStatus(EBookMetadataStatus.BROKEN);
-                }
+        EBookMetadataStatus newStatus = (returnBook.getReason() != EReasonReturn.NO_NEEDED)
+                ? EBookMetadataStatus.BROKEN
+                : EBookMetadataStatus.IN_STOCK;
+
+        for (ReturnBookItem returnBookItem : returnBook.getReturnBookItems()) {
+            for (Book book : returnBookItem.getBooks()) {
+                book.getBookMetadata().setStatus(newStatus);
             }
         }
         return returnBookDAO.update(returnBook) != null;

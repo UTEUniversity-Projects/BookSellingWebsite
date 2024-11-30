@@ -36,20 +36,15 @@ public class OrderMapper {
         ShippingResponse shipping = ShippingMapper.toShippingResponse(order.getShipping());
 
         List<PromotionOrderResponse> promotions = new ArrayList<>();
-        double totalPrice = order.calTotalPrice();
-        double finalPrice = totalPrice + shipping.getShippingFee();
 
         for (Promotion promotion : order.getPromotions()) {
             if (promotion.getPromotionTemplate().getType() != EPromotionTemplateType.DISCOUNT) {
-                double discount = promotion.calculateDiscount(finalPrice);
                 promotions.add(PromotionOrderResponse.builder()
                         .promotionType(promotion.getPromotionTemplate().getType())
-                        .discountAmount(discount)
+                        .discountAmount(promotion.getDiscountLimit())
                         .build());
-                finalPrice -= discount;
             }
         }
-        finalPrice = Math.max(finalPrice, 0);
 
         return OrderDetailsManagementResponse.builder()
                 .id(order.getId())
@@ -60,10 +55,8 @@ public class OrderMapper {
                 .products(products)
                 .status(order.getStatus())
                 .statusStyle(order.getStatus().getStatusStyle())
-                .totalPrice(totalPrice)
                 .paymentMethod(order.getPaymentType().getValue())
                 .promotions(promotions)
-                .finalPrice(finalPrice)
                 .build();
     }
 
@@ -124,6 +117,7 @@ public class OrderMapper {
                 .revenue(order.calTotalPrice())
                 .build();
     }
+
     public static OrderOfCustomerResponse toOrderOfCustomerResponse(Order order) {
         return OrderOfCustomerResponse.builder()
                 .orderId(order.getId())

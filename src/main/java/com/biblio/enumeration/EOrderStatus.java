@@ -49,4 +49,27 @@ public enum EOrderStatus {
                 return "";
         }
     }
+
+    public int getPriority() {
+        switch (this) {
+            case WAITING_PAYMENT:
+            case WAITING_CONFIRMATION:
+                return 6;
+            case REQUEST_REFUND:
+                return 5;
+            case PAID:
+            case COMPLETE_DELIVERY:
+                return 4;
+            case PACKING:
+                return 3;
+            case SHIPPING:
+                return 2;
+            case CANCELED:
+                return 1;
+            case REFUNDED:
+                return 0;
+            default:
+                return -1;
+        }
+    }
 }

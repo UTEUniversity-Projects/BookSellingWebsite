@@ -5,14 +5,12 @@ import com.biblio.dao.IPromotionDAO;
 import com.biblio.dao.IPromotionTemplateDAO;
 import com.biblio.dto.request.PromotionTemplateInsertRequest;
 import com.biblio.dto.request.PromotionTemplateUpdateRequest;
-import com.biblio.dto.response.ApplyCodePromotionResponse;
-import com.biblio.dto.response.PromotionTemplateGetDetailsResponse;
-import com.biblio.dto.response.PromotionTemplateGetResponse;
-import com.biblio.dto.response.PromotionTemplateResponse;
+import com.biblio.dto.response.*;
 import com.biblio.entity.*;
 import com.biblio.enumeration.EPromotionStatus;
 import com.biblio.enumeration.EPromotionTemplateStatus;
 import com.biblio.enumeration.EPromotionTemplateType;
+import com.biblio.mapper.OrderItemMapper;
 import com.biblio.mapper.PromotionTemplateMapper;
 import com.biblio.service.IPromotionTemplateService;
 
@@ -173,7 +171,6 @@ public class PromotionTemplateServiceImpl implements IPromotionTemplateService {
         }
         return applyCodePromotionResponse;
     }
-
 
     private void updatePromotionTemplateStatus(PromotionTemplate promotionTemplate, List<Promotion> promotions) {
         long countUsed = promotions.stream()
