@@ -5,12 +5,14 @@ import com.biblio.dao.IPromotionDAO;
 import com.biblio.dao.IPromotionTemplateDAO;
 import com.biblio.dto.request.PromotionTemplateInsertRequest;
 import com.biblio.dto.request.PromotionTemplateUpdateRequest;
-import com.biblio.dto.response.*;
+import com.biblio.dto.response.ApplyCodePromotionResponse;
+import com.biblio.dto.response.PromotionTemplateGetDetailsResponse;
+import com.biblio.dto.response.PromotionTemplateGetResponse;
+import com.biblio.dto.response.PromotionTemplateResponse;
 import com.biblio.entity.*;
 import com.biblio.enumeration.EPromotionStatus;
 import com.biblio.enumeration.EPromotionTemplateStatus;
 import com.biblio.enumeration.EPromotionTemplateType;
-import com.biblio.mapper.OrderItemMapper;
 import com.biblio.mapper.PromotionTemplateMapper;
 import com.biblio.service.IPromotionTemplateService;
 
@@ -132,7 +134,7 @@ public class PromotionTemplateServiceImpl implements IPromotionTemplateService {
     }
 
     @Override
-    public ApplyCodePromotionResponse applyCodePromotion(String code) {
+    public ApplyCodePromotionResponse applyCodePromotion(String code, Double amount) {
         ApplyCodePromotionResponse applyCodePromotionResponse = new ApplyCodePromotionResponse();
         PromotionTemplate promotionTemplateNonUpdate = promotionTemplateDAO.findSingleByJPQL(code);
 
@@ -154,6 +156,12 @@ public class PromotionTemplateServiceImpl implements IPromotionTemplateService {
                 applyCodePromotionResponse.setMessage("Mã khuyến mãi đã hết lượt sử dụng!");
             } else {
                 for (Promotion promotion : promotionTemplate.getPromotions()) {
+
+                    if (amount < promotion.getMinValueToBeApplied()) {
+                        applyCodePromotionResponse.setMessage("Hóa đơn không đạt yêu cầu!");
+                        break;
+                    }
+
                     if (promotion.getStatus() == EPromotionStatus.NOT_USE) {
                         applyCodePromotionResponse.setPromotionId(promotion.getId());
                         applyCodePromotionResponse.setMinValueToBeApplied(promotion.getMinValueToBeApplied());
@@ -162,7 +170,11 @@ public class PromotionTemplateServiceImpl implements IPromotionTemplateService {
                         applyCodePromotionResponse.setMessage("Áp dụng mã khuyến mãi thàng công!");
 
                         Promotion promotionUpdate = promotionDAO.findById(promotion.getId());
-                        promotionUpdate.setStatus(EPromotionStatus.USED);
+                        if (!promotionTemplate.isInfinite()) {
+                            promotionUpdate.setStatus(EPromotionStatus.USED);
+                        } else {
+                            promotionUpdate.setStatus(EPromotionStatus.NOT_USE);
+                        }
                         promotionDAO.update(promotionUpdate);
                         break;
                     }
