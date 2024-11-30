@@ -102,7 +102,9 @@
 @import 'pages/_order';
 @import 'pages/_search-book';
 @import '../../commons/scss/_pagination';
-@import '../../commons/scss/_loading';
+@import '../../commons/scss/hamster-loading';
+@import '../../commons/scss/page-loading';
+@import '../../commons/scss/checkout-loading';
 @import 'pages/_order-detail';
 
 
