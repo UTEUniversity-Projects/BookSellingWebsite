@@ -11,6 +11,7 @@ import lombok.*;
 @Builder
 public class ApplyCodePromotionResponse {
     private Long promotionId;
+    private String promotionCode;
     private Double discountLimit;
     private Double minValueToBeApplied;
     private EPromotionTemplateType type;

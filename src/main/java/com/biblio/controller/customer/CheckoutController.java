@@ -53,40 +53,43 @@ public class CheckoutController extends HttpServlet {
         // TODO Auto-generated method stub
         request.setAttribute("breadcrumb", "Thanh toán");
 
-        AccountGetResponse account = (AccountGetResponse) request.getSession().getAttribute("account");
-        if (account == null) {
-            response.sendRedirect("/login");
-            return;
+        CheckOutResponse checkOutResponse = (CheckOutResponse) request.getSession().getAttribute("checkoutResponse");
+        if (checkOutResponse == null) {
+            checkOutResponse = new CheckOutResponse();
+            AccountGetResponse account = (AccountGetResponse) request.getSession().getAttribute("account");
+            if (account == null) {
+                response.sendRedirect("/login");
+                return;
+            }
+
+            CustomerDetailResponse customer = customerService.getCustomerDetailByUsername(account.getUsername());
+
+            CheckoutRequest checkoutRequest = (CheckoutRequest) request.getSession().getAttribute("checkoutRequest");
+
+            if (checkoutRequest == null) {
+                response.sendRedirect("/cart");
+                return;
+            }
+
+            checkOutResponse.setCustomer(customer);
+
+            checkOutResponse.updateShipping();
+
+            List<CheckoutItemResponse> items = new ArrayList<>();
+            for (CheckoutItemRequest item : checkoutRequest.getItems()) {
+                CheckoutItemResponse itemResponse = bookTemplateService.getCheckoutItemResponse(item);
+                double discount = promotionTemplateService.percentDiscountOfBook(item.getProductId());
+                itemResponse.setDiscountPercent(discount);
+                itemResponse.calTotalPrice();
+                items.add(itemResponse);
+            }
+
+            checkOutResponse.setItems(items);
+            checkOutResponse.setPromotions(new ArrayList<>());
+            checkOutResponse.updateTotalPrice();
         }
-
-        CustomerDetailResponse customer = customerService.getCustomerDetailByUsername(account.getUsername());
-
-        CheckoutRequest checkoutRequest = (CheckoutRequest) request.getSession().getAttribute("checkoutRequest");
-
-        if (checkoutRequest == null) {
-            response.sendRedirect("/cart");
-            return;
-        }
-
-        CheckOutResponse checkOutResponse = new CheckOutResponse();
-
-        checkOutResponse.setCustomer(customer);
-        AddressResponse firstAddress = customer.getAddresses().stream().findFirst().orElse(null);
-
-        checkOutResponse.setAddress(firstAddress.getFullAddress());
-
-        List<CheckoutItemResponse> items = new ArrayList<>();
-        for (CheckoutItemRequest item : checkoutRequest.getItems()) {
-            CheckoutItemResponse itemResponse = bookTemplateService.getCheckoutItemResponse(item);
-            double discount = promotionTemplateService.percentDiscountOfBook(item.getProductId());
-            itemResponse.setDiscountPercent(discount);
-            itemResponse.calTotalPrice();
-            items.add(itemResponse);
-        }
-
-        checkOutResponse.setItems(items);
-        checkOutResponse.updateTotalPrice();
-
+        checkOutResponse.updateFinalPrice();
+        request.getSession().setAttribute("checkoutResponse", checkOutResponse);
         request.setAttribute("checkoutResponse", checkOutResponse);
         request.getRequestDispatcher("/views/customer/checkout.jsp").forward(request, response);
     }

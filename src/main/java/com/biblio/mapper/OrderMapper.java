@@ -45,6 +45,7 @@ public class OrderMapper {
         for (Promotion promotion : order.getPromotions()) {
             if (promotion.getPromotionTemplate().getType() != EPromotionTemplateType.DISCOUNT) {
                 promotions.add(PromotionOrderResponse.builder()
+                        .id(promotion.getId())
                         .promotionType(promotion.getPromotionTemplate().getType())
                         .discountAmount(promotion.getDiscountLimit())
                         .build());
@@ -87,6 +88,8 @@ public class OrderMapper {
             if (promotion.getPromotionTemplate().getType() != EPromotionTemplateType.DISCOUNT) {
                 double discount = promotion.calculateDiscount(finalPrice);
                 promotions.add(PromotionOrderResponse.builder()
+                        .id(promotion.getId())
+                        .code(promotion.getPromotionTemplate().getCode())
                         .promotionType(promotion.getPromotionTemplate().getType())
                         .discountAmount(discount)
                         .build());
@@ -94,7 +97,6 @@ public class OrderMapper {
             }
         }
         finalPrice = Math.max(finalPrice, 0);
-
 
 
         return OrderCustomerResponse.builder()

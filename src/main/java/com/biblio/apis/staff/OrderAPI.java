@@ -190,7 +190,6 @@ public class OrderAPI extends HttpServlet {
     private void handleConfirmRefundOrder(HttpServletRequest request, HttpServletResponse response, Map<String, String> result, ObjectMapper mapper) throws IOException {
         Map<String, Object> jsonMap = mapper.readValue(request.getReader(), Map.class);
         long orderId = Long.parseLong(jsonMap.get("orderId").toString());
-        String content = jsonMap.get("content").toString();
         long returnBookId = Long.parseLong(jsonMap.get("returnBookId").toString());
         boolean success = orderService.updateStatus(orderId, EOrderStatus.REFUNDED) &&
                           returnBookService.update(returnBookId);
