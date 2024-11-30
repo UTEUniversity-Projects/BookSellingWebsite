@@ -136,8 +136,6 @@ $(document).ready(function () {
         revenueChart.render();
     }
 
-
-
     function drawNewCustomerChart(chartId, categories, count, type = "line") {
         if (newCustomerChart) {
             newCustomerChart.destroy();

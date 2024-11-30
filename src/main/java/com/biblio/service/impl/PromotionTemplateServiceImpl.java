@@ -184,6 +184,21 @@ public class PromotionTemplateServiceImpl implements IPromotionTemplateService {
         return applyCodePromotionResponse;
     }
 
+    @Override
+    public Boolean stopPromotionByCode(String code) {
+        PromotionTemplate promotionTemplate = promotionTemplateDAO.findSingleByJPQL(code);
+        for (Promotion promotion : promotionTemplate.getPromotions()) {
+            promotion.setStatus(EPromotionStatus.USED);
+            String currentDateTime = LocalDateTime.now().toString();
+            promotion.setExpirationDate(LocalDateTime.parse(currentDateTime));
+        }
+
+        promotionTemplate.setStatus(EPromotionTemplateStatus.EXPIRED);
+        return promotionTemplateDAO.update(promotionTemplate) != null;
+    }
+
+
+
     private void updatePromotionTemplateStatus(PromotionTemplate promotionTemplate, List<Promotion> promotions) {
         long countUsed = promotions.stream()
                 .filter(promotion -> promotion.getStatus() == EPromotionStatus.USED)

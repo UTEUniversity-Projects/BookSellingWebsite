@@ -287,6 +287,48 @@ $(document).ready(function () {
 });
 
 
+function stopPromotion() {
+    // Lấy giá trị mã khuyến mãi từ input có name="code"
+    var code = document.querySelector('input[name="code"]').value;
+    console.log(code)
+    if (!code) {
+        alert('Mã khuyến mãi không hợp lệ.');
+        return;
+    }
+
+    // Gửi yêu cầu AJAX đến API
+    $.ajax({
+        url: `${contextPath}/api/owner/promotion/stop-promotion`,
+        type: 'POST',
+        contentType: 'application/json',
+        data: JSON.stringify({ code: code }),  // Dữ liệu gửi đi là mã khuyến mãi
+        success: function(response) {
+            toast({
+                title: "Thành Công!",
+                message: 'Dừng khuyến mãi thành công',
+                type: "success",
+                duration: 3000,
+            });
+            if (response.message.includes("thành công")) {
+                $('.stop-promotion-btn').hide();
+                $('.cr-btn-primary').hide();
+
+            }
+        },
+        error: function(xhr, status, error) {
+            var errMsg = xhr.responseJSON ? xhr.responseJSON.message : "Đã có lỗi xảy ra, vui lòng thử lại.";
+            alert(errMsg);
+            toast({
+                title: "Thất bại",
+                message: 'Đã có lỗi xảy ra, vui lòng thử lại.',
+                type: "warning",
+                duration: 3000,
+            });
+        }
+    });
+}
+
+
 
 
 

@@ -28,4 +28,6 @@ public interface IPromotionTemplateService {
 
     ApplyCodePromotionResponse applyCodePromotion(String code, Double amount);
 
+    Boolean stopPromotionByCode(String code);
+
 }

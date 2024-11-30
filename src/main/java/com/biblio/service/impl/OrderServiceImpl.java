@@ -1,15 +1,10 @@
 package com.biblio.service.impl;
 
 import com.biblio.dao.IOrderDAO;
-
-import com.biblio.dao.impl.OrderDAOImpl;
+import com.biblio.dao.IReturnBookDAO;
 import com.biblio.dao.impl.EWalletDAOImpl;
 import com.biblio.dto.response.*;
-import com.biblio.entity.Book;
-import com.biblio.entity.EWallet;
-import com.biblio.entity.Order;
-import com.biblio.entity.OrderItem;
-import com.biblio.entity.OrderStatusHistory;
+import com.biblio.entity.*;
 import com.biblio.enumeration.EBookMetadataStatus;
 import com.biblio.enumeration.EOrderHistory;
 import com.biblio.enumeration.EOrderStatus;
@@ -32,6 +27,9 @@ public class OrderServiceImpl implements IOrderService {
   
     @Inject
     EWalletDAOImpl walletDAO;
+
+    @Inject
+    IReturnBookDAO returnBookDAO;
 
     @Override
     public OrderDetailsManagementResponse getOrderDetailsManagementResponse(Long id) {
@@ -299,6 +297,29 @@ public class OrderServiceImpl implements IOrderService {
 
         countOrderOfCustomerResponses.addAll(customerOrderCountMap.values());
         return countOrderOfCustomerResponses;
+    }
+
+    @Override
+    public List<OrderReturnAtTimeResponse> getListOrderReturnAtTime(LocalDateTime start, LocalDateTime end) {
+        List<OrderReturnAtTimeResponse> orderReturnAtTimeResponses = new ArrayList<>();
+        List<Order> list = orderDAO.findAllForManagement();
+
+        for (Order order : list) {
+            Order orderTmp = orderDAO.findOneForDetailsManagement(order.getId());
+            LocalDateTime orderDate = orderTmp.getOrderDate();
+
+            if ((orderDate.isEqual(start) || orderDate.isAfter(start)) && (orderDate.isEqual(end) || orderDate.isBefore(end)) && (EOrderStatus.COMPLETE_DELIVERY.equals(orderTmp.getStatus()) || EOrderStatus.REQUEST_REFUND.equals(orderTmp.getStatus())) || EOrderStatus.REFUNDED.equals(orderTmp.getStatus())) {
+                OrderReturnAtTimeResponse orderReturnAtTimeResponse = new OrderReturnAtTimeResponse();
+                orderReturnAtTimeResponse.setOrderId(order.getId());
+                ReturnBook returnBook = returnBookDAO.findByOrderId(order.getId());
+                if (returnBook != null) {
+                    orderReturnAtTimeResponse.setIsReturned(true);
+                    orderReturnAtTimeResponse.setReturnReason(returnBook.getReason());
+                }
+                orderReturnAtTimeResponses.add(orderReturnAtTimeResponse);
+            }
+        }
+        return orderReturnAtTimeResponses;
     }
 
 //

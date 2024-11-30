@@ -3,7 +3,6 @@ package com.biblio.service;
 import com.biblio.dto.response.*;
 import com.biblio.enumeration.EOrderStatus;
 
-import javax.transaction.Transactional;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -33,4 +32,5 @@ public interface IOrderService {
 
     List<CountOrderOfCustomerResponse> getCountOrderOfCustomerAtTime(LocalDateTime start, LocalDateTime end);
 
+    List<OrderReturnAtTimeResponse> getListOrderReturnAtTime(LocalDateTime start, LocalDateTime end);
 }
