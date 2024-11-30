@@ -1,4 +1,14 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<style>
+    .end-row {
+        border-bottom: 2px solid #EEEEEE;
+        margin-bottom: 20px;
+        width: 84%;  /* Điều chỉnh chiều dài đường kẻ */
+        margin-left: auto;  /* Căn giữa đường kẻ */
+        margin-right: auto; /* Căn giữa đường kẻ */
+    }
+
+</style>
 <!-- Main content -->
 <div class="cr-main-content">
     <div class="container-fluid">
@@ -32,7 +42,7 @@
                                 <div class="title">
                                     <span class="icon icon-1"><i class="ri-shield-user-line"></i></span>
                                     <div class="growth-numbers">
-                                        <h4>Khách Hàng</h4>
+                                        <h4>Khách Hàng Mới</h4>
                                         <h5 id="customer-count">0</h5> <!-- ID riêng để load data -->
                                     </div>
                                 </div>
@@ -70,6 +80,7 @@
                 </div>
             </div>
         </div>
+        <div class="end-row"></div>
         <div class="row">
             <div class="col-xl-4 col-md-12">
                 <div class="cr-card">
@@ -122,6 +133,7 @@
                 </div>
             </div>
         </div>
+        <div class="end-row"></div>
         <div class="row">
             <div class="col-xl-4 col-md-12">
                 <div class="cr-card">
@@ -170,6 +182,7 @@
                 </div>
             </div>
         </div>
+        <div class="end-row"></div>
         <div class="row">
             <div class="col-xl-4 col-md-12">
                 <div class="cr-card">
@@ -198,8 +211,6 @@
                 </div>
             </div>
         </div>
-
-
         <div class="row">
             <div class="col-xxl-12 col-xl-12">
                 <div class="cr-card revenue-overview">
@@ -259,6 +270,8 @@
                     </div>
                 </div>
             </div>
+            <div class="end-row"></div>
+            
             <div class="col-xl-12">
                 <div class="row">
                     <div class="col-xl-3 col-md-6">

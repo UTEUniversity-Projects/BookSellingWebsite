@@ -156,9 +156,5 @@ public class AddPromotionAPI extends HttpServlet {
 
         return emailContent.toString();
     }
-
-
-
-
-}
+                                                                                                }
 

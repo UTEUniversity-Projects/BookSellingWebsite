@@ -4,8 +4,6 @@ import com.biblio.enumeration.ENotificationStatus;
 import com.biblio.enumeration.ENotificationType;
 import lombok.*;
 
-import java.time.LocalDateTime;
-
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter
@@ -19,6 +17,6 @@ public class NotificationGetResponse {
     private ENotificationType type;
     private ENotificationStatus status;
     private String hyperLink;
-    private LocalDateTime createdAt;
-    private LocalDateTime sentTime;
+    private String createdAt;
+    private String sentTime;
 }
