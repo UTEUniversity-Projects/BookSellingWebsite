@@ -219,12 +219,12 @@
                 <h3 class="text-2xl font-bold text-[#26a397]">Tóm tắt đơn hàng</h3>
                 <tbody>
                 <tr>
-                    <td>Tổng tiền sách :</td>
+                    <td>Tổng tiền sách:</td>
                     <td class="price-value" data-price="${checkoutResponse.totalPrice}">${checkoutResponse.totalPrice}</td>
                 </tr>
                 <tr>
                     <td>Phí vận chuyển:</td>
-                    <td id="price-freeship" class="price-value minus-value" data-price="0">0</td>3
+                    <td id="price-freeship" class="price-value minus-value" data-price="0">0</td>
                 </tr>
                 <tr>
                     <td>Voucher giảm giá:</td>
