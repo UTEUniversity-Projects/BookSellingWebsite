@@ -11,6 +11,8 @@ import lombok.*;
 @Builder
 @ToString
 public class PromotionOrderResponse {
+    private Long id;
+    private String code;
     private EPromotionTemplateType promotionType;
     private double discountAmount;
 }

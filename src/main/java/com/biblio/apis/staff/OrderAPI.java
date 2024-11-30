@@ -23,9 +23,12 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 @WebServlet(urlPatterns = {"/api/staff/order/*"})
 public class OrderAPI extends HttpServlet {
+    private final ExecutorService executorService = Executors.newSingleThreadExecutor();
     @Inject
     IOrderService orderService;
 
@@ -122,17 +125,28 @@ public class OrderAPI extends HttpServlet {
         Map<String, Object> jsonMap = mapper.readValue(request.getReader(), Map.class);
         long orderId = Long.parseLong(jsonMap.get("orderId").toString());
         boolean success = orderService.updateStatus(orderId, EOrderStatus.PACKING);
+
         if (success) {
             result.put("message", "Đơn hàng được xác nhận thành công!");
             result.put("type", "success");
             result.put("statusType", EOrderStatus.PACKING.name());
             result.put("status", EOrderStatus.PACKING.getDescription());
             result.put("statusStyle", EOrderStatus.PACKING.getStatusStyle());
-            sendOrderConfirmationEmail(request, orderId);
+
+            // Gửi email trong luồng riêng biệt
+            executorService.submit(() -> {
+                try {
+                    sendOrderConfirmationEmail(request, orderId); // Gọi phương thức gửi email
+                } catch (IOException e) {
+                    e.printStackTrace(); // Log lỗi khi gửi email
+                }
+            });
+
         } else {
             result.put("message", "Không thể xác nhận đơn hàng. Vui lòng thử lại!");
             result.put("type", "info");
         }
+
         response.getWriter().write(mapper.writeValueAsString(result));
     }
 
@@ -176,7 +190,6 @@ public class OrderAPI extends HttpServlet {
     private void handleConfirmRefundOrder(HttpServletRequest request, HttpServletResponse response, Map<String, String> result, ObjectMapper mapper) throws IOException {
         Map<String, Object> jsonMap = mapper.readValue(request.getReader(), Map.class);
         long orderId = Long.parseLong(jsonMap.get("orderId").toString());
-        String content = jsonMap.get("content").toString();
         long returnBookId = Long.parseLong(jsonMap.get("returnBookId").toString());
         boolean success = orderService.updateStatus(orderId, EOrderStatus.REFUNDED) &&
                           returnBookService.update(returnBookId);
