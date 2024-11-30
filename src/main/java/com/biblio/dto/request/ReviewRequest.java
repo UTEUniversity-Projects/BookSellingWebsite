@@ -11,5 +11,5 @@ public class ReviewRequest {
     private int rate;
     private Long customerId;
     private Long bookTemplateId;
-    private boolean ready_to_introduce;
+    private boolean readyToIntroduce;
 }

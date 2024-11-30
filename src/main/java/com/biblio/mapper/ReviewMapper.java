@@ -37,7 +37,7 @@ public class ReviewMapper {
         review.setBookTemplate(bookTemplate);
         review.setHidden(false);
         review.setRate(reviewRequest.getRate());
-        review.setReadyToIntroduce(reviewRequest.isReady_to_introduce());
+        review.setReadyToIntroduce(reviewRequest.isReadyToIntroduce());
         return review;
     }
 }
