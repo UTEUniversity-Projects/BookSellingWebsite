@@ -26,6 +26,14 @@ public class StaffDAOImpl extends GenericDAOImpl<Staff> implements IStaffDAO {
         return super.findSingleByJPQL(jpql, params);
     }
 
+    @Override
+    public Staff findByAccountId(Long id) {
+        String jpql = "SELECT s FROM Staff s LEFT JOIN FETCH s.account WHERE s.account.id = :account_id";
+        Map<String, Object> params = new HashMap<>();
+        params.put("account_id", id);
+        return super.findSingleByJPQL(jpql, params);
+    }
+
 
     @Override
     public void addStaff(Staff staff) {
@@ -54,9 +62,12 @@ public class StaffDAOImpl extends GenericDAOImpl<Staff> implements IStaffDAO {
 
     public static void main(String[] args){
         StaffDAOImpl dao = new StaffDAOImpl();
-        List<Staff> list = dao.findAll();
-        for (Staff staff : list){
-            System.out.println(staff.getFullName());
-        }
+//        List<Staff> list = dao.findAll();
+//        for (Staff staff : list){
+//            System.out.println(staff.getFullName());
+//        }
+        Staff staff = dao.findByAccountId(2L);
+        System.out.println(staff);
+
     }
 }

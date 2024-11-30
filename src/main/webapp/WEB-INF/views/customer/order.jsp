@@ -63,7 +63,7 @@
                             <div class="flex items-center book-item w-full">
                                 <!-- Hình ảnh sản phẩm -->
                                 <div class="flex-shrink-0">
-                                    <img src="${pageContext.request.contextPath}/${orderProduct.imagePath}" alt="${orderProduct.title}" >
+                                    <img src="${pageContext.request.contextPath}${orderProduct.imagePath}" alt="${orderProduct.title}" >
                                 </div>
 
                                 <!-- Thông tin sản phẩm -->

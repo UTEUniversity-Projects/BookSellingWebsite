@@ -1,9 +1,12 @@
 package com.biblio.service.impl;
 
 import com.biblio.dao.IOrderDAO;
+
 import com.biblio.dao.impl.OrderDAOImpl;
+import com.biblio.dao.impl.EWalletDAOImpl;
 import com.biblio.dto.response.*;
 import com.biblio.entity.Book;
+import com.biblio.entity.EWallet;
 import com.biblio.entity.Order;
 import com.biblio.entity.OrderItem;
 import com.biblio.entity.OrderStatusHistory;
@@ -13,6 +16,7 @@ import com.biblio.enumeration.EOrderStatus;
 import com.biblio.mapper.BookMapper;
 import com.biblio.mapper.OrderMapper;
 import com.biblio.service.IOrderService;
+import com.biblio.service.IPromotionTemplateService;
 
 import javax.inject.Inject;
 import java.time.LocalDate;
@@ -23,6 +27,12 @@ public class OrderServiceImpl implements IOrderService {
     @Inject
     IOrderDAO orderDAO;
 
+    @Inject
+    IPromotionTemplateService promotionTemplateService;
+  
+    @Inject
+    EWalletDAOImpl walletDAO;
+
     @Override
     public OrderDetailsManagementResponse getOrderDetailsManagementResponse(Long id) {
         Order order = orderDAO.findOneForDetailsManagement(id);
@@ -32,6 +42,7 @@ public class OrderServiceImpl implements IOrderService {
     @Override
     public List<OrderManagementResponse> getAllOrderManagementResponse() {
         List<Order> orders = orderDAO.findAllForManagement();
+        orders.sort(Comparator.comparing((Order o) -> o.getStatus().getPriority()).reversed().thenComparing(Order::getOrderDate, Comparator.reverseOrder()));
         List<OrderManagementResponse> orderManagementResponse = new ArrayList<>();
         for (Order order : orders) {
             orderManagementResponse.add(OrderMapper.mapToOrderManagementResponse(order));
@@ -45,8 +56,24 @@ public class OrderServiceImpl implements IOrderService {
         if (order == null || order.getStatus().equals(status)) {
             return false;
         }
+        if (status == EOrderStatus.CANCELED) {
+            for (OrderItem orderItem : order.getOrderItems()) {
+                for (Book book : orderItem.getBooks()) {
+                    book.getBookMetadata().setStatus(EBookMetadataStatus.IN_STOCK);
+                }
+            }
+        }
+        else if (order.getStatus() == EOrderStatus.WAITING_CONFIRMATION ||
+                order.getStatus() == EOrderStatus.PACKING ||
+                order.getStatus() == EOrderStatus.SHIPPING){
+            order.getStatusHistory().add(updateOrderHistory(order, status));
+        }
         order.setStatus(status);
 
+        return orderDAO.update(order) != null;
+    }
+
+    public OrderStatusHistory updateOrderHistory(Order order, EOrderStatus status) {
         OrderStatusHistory orderStatusHistory = new OrderStatusHistory();
         orderStatusHistory.setOrder(order);
         orderStatusHistory.setStatusChangeDate(LocalDateTime.now());
@@ -55,19 +82,11 @@ public class OrderServiceImpl implements IOrderService {
             orderStatusHistory.setStatus(EOrderHistory.CONFIRMED);
         } else if (status == EOrderStatus.SHIPPING) {
             orderStatusHistory.setStatus(EOrderHistory.WAITING_FOR_SHIPPING);
+        } else if (status == EOrderStatus.COMPLETE_DELIVERY) {
+            orderStatusHistory.setStatus(EOrderHistory.COMPLETED);
         }
 
-        order.getStatusHistory().add(orderStatusHistory);
-
-        if (status == EOrderStatus.CANCELED) {
-            for (OrderItem orderItem : order.getOrderItems()) {
-                for (Book book : orderItem.getBooks()) {
-                    book.getBookMetadata().setStatus(EBookMetadataStatus.IN_STOCK);
-                }
-            }
-        }
-
-        return orderDAO.update(order) != null;
+        return orderStatusHistory;
     }
 
     @Override
@@ -77,9 +96,7 @@ public class OrderServiceImpl implements IOrderService {
 
         for (Order order : list) {
             LocalDateTime orderDate = order.getOrderDate();
-            if ((orderDate.isEqual(start) || orderDate.isAfter(start)) &&
-                    (orderDate.isEqual(end) || orderDate.isBefore(end)) &&
-                    EOrderStatus.COMPLETE_DELIVERY.equals(order.getStatus())) {
+            if ((orderDate.isEqual(start) || orderDate.isAfter(start)) && (orderDate.isEqual(end) || orderDate.isBefore(end)) && EOrderStatus.COMPLETE_DELIVERY.equals(order.getStatus())) {
                 count++;
             }
         }
@@ -95,12 +112,10 @@ public class OrderServiceImpl implements IOrderService {
             if ((orderDate.isEqual(start) || orderDate.isAfter(start)) &&
                     (orderDate.isEqual(end) || orderDate.isBefore(end)) &&
                     EOrderStatus.COMPLETE_DELIVERY.equals(order.getStatus())) {
-//                for (OrderItem orderItem : order.getOrderItems()) {
-//                    for (Book book : orderItem.getBooks()) {
-//                        venue += book.getSellingPrice();
-//                    }
-//                }
-                venue += order.calTotalPrice();
+
+                EWallet ew = walletDAO.findByOrderId(order.getId());
+
+                venue += ew.getAmount();
             }
         }
         return venue;
@@ -113,9 +128,7 @@ public class OrderServiceImpl implements IOrderService {
 
         for (Order order : orders) {
             LocalDateTime orderDate = order.getOrderDate();
-            if ((orderDate.isEqual(start) || orderDate.isAfter(start)) &&
-                    (orderDate.isEqual(end) || orderDate.isBefore(end)) &&
-                    EOrderStatus.COMPLETE_DELIVERY.equals(order.getStatus())) {
+            if ((orderDate.isEqual(start) || orderDate.isAfter(start)) && (orderDate.isEqual(end) || orderDate.isBefore(end)) && EOrderStatus.COMPLETE_DELIVERY.equals(order.getStatus())) {
                 revenueResponse.add(OrderMapper.toRevenueResponse(order));
             }
         }
@@ -142,7 +155,6 @@ public class OrderServiceImpl implements IOrderService {
             }
         }
 
-
         // Sắp xếp danh sách theo ngày (nếu cần, nhưng thực tế danh sách đã theo thứ tự ngày ban đầu)
         consolidatedRevenue.sort(Comparator.comparing(RevenueResponse::getDate));
 
@@ -156,7 +168,7 @@ public class OrderServiceImpl implements IOrderService {
 
     @Override
     public OrderCustomerResponse findOrderByIdCustomer(Long orderId) {
-        Order order =  orderDAO.findByIdCustomer(orderId);
+        Order order = orderDAO.findByIdCustomer(orderId);
         return OrderMapper.toOrderCustomerResponse(order);
     }
 
@@ -244,9 +256,7 @@ public class OrderServiceImpl implements IOrderService {
         for (Order order : list) {
             Order orderTmp = orderDAO.findOneForDetailsManagement(order.getId());
             LocalDateTime orderDate = orderTmp.getOrderDate();
-            if ((orderDate.isEqual(start) || orderDate.isAfter(start)) &&
-                    (orderDate.isEqual(end) || orderDate.isBefore(end)) &&
-                    EOrderStatus.COMPLETE_DELIVERY.equals(orderTmp.getStatus())) {
+            if ((orderDate.isEqual(start) || orderDate.isAfter(start)) && (orderDate.isEqual(end) || orderDate.isBefore(end)) && EOrderStatus.COMPLETE_DELIVERY.equals(orderTmp.getStatus())) {
                 for (OrderItem orderItem : orderTmp.getOrderItems()) {
                     for (Book book : orderItem.getBooks()) {
                         ListBookSold.add(BookMapper.toBookSoldResponse(book));
@@ -269,9 +279,7 @@ public class OrderServiceImpl implements IOrderService {
         for (Order order : list) {
             Order orderTmp = orderDAO.findOneForDetailsManagement(order.getId());
             LocalDateTime orderDate = orderTmp.getOrderDate();
-            if ((orderDate.isEqual(start) || orderDate.isAfter(start)) &&
-                    (orderDate.isEqual(end) || orderDate.isBefore(end)) &&
-                    EOrderStatus.COMPLETE_DELIVERY.equals(orderTmp.getStatus())) {
+            if ((orderDate.isEqual(start) || orderDate.isAfter(start)) && (orderDate.isEqual(end) || orderDate.isBefore(end)) && EOrderStatus.COMPLETE_DELIVERY.equals(orderTmp.getStatus())) {
                 orderOfCustomerResponse.add(OrderMapper.toOrderOfCustomerResponse(orderTmp));
             }
         }
@@ -285,11 +293,7 @@ public class OrderServiceImpl implements IOrderService {
                 CountOrderOfCustomerResponse response = customerOrderCountMap.get(customerId);
                 response.setCountOrders(response.getCountOrders() + 1);
             } else {
-                customerOrderCountMap.put(customerId, CountOrderOfCustomerResponse.builder()
-                        .customerId(customerId)
-                        .customerName(customerName)
-                        .countOrders(1L)
-                        .build());
+                customerOrderCountMap.put(customerId, CountOrderOfCustomerResponse.builder().customerId(customerId).customerName(customerName).countOrders(1L).build());
             }
         }
 

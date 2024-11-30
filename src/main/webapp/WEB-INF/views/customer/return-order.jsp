@@ -13,7 +13,7 @@
                 <!-- Form Sản phẩm -->
                 <div class="product-return-form p-4 bg-white shadow rounded mb-4">
                     <div class="form-logo text-center mb-4">
-                        <img src="${pageContext.request.contextPath}/assets/img/logo/mebook-2.png" alt="logo" class="img-fluid" style="max-width: 150px;" />
+                        <img src="${pageContext.request.contextPath}/assets/customer/img/logo/biblio.png" alt="logo" class="img-fluid" style="max-width: 150px;" />
                     </div>
 
                     <div id="product-list" class="return-product-box p-4 rounded-lg shadow-sm bg-white">
@@ -31,7 +31,7 @@
                                 <div class="d-flex align-items-center">
                                     <input type="checkbox" class="product-checkbox me-3" />
                                     <div class="product-image me-3">
-                                        <img src="${pageContext.request.contextPath}/${product.imagePath}" alt="${product.title}" class="img-fluid" style="width: 150px;" />
+                                        <img src="${pageContext.request.contextPath}${product.imagePath}" alt="${product.title}" class="img-fluid" style="width: 150px;" />
                                     </div>
                                     <div>
                                         <h4 style="margin-bottom: 20px; font-size: 24px;">${product.title}</h4>

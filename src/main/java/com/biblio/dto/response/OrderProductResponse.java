@@ -17,4 +17,9 @@ public class OrderProductResponse {
     private double sellingPrice;
     private double totalPrice;
     private String publisherName;
+    private double discountPercent;
+
+    public void calTotalPrice() {
+        this.totalPrice = sellingPrice * quantity * (1 - discountPercent / 100);
+    }
 }

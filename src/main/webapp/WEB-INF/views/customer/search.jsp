@@ -99,15 +99,15 @@
                         <h4 class="cr-shop-sub-title">Định dạng</h4>
                         <div class="cr-checkbox">
                             <div class="checkbox-group">
-                                <input type="checkbox" id="all-binding"/>
+                                <input type="checkbox" id="all-binding" checked class="format-item"/>
                                 <label for="all-binding">Tất cả</label>
                             </div>
                             <div class="checkbox-group">
-                                <input type="checkbox" id="hard"/>
+                                <input type="checkbox" id="hard" VALUE="HARDCOVER" class="format-item"/>
                                 <label for="hard">Bìa cứng</label>
                             </div>
                             <div class="checkbox-group">
-                                <input type="checkbox" id="soft"/>
+                                <input type="checkbox" id="soft" value="PAPERBACK" class="format-item"/>
                                 <label for="soft">Bìa mềm</label>
                             </div>
                         </div>
@@ -116,11 +116,11 @@
                         <h4 class="cr-shop-sub-title">Đánh giá</h4>
                         <div class="cr-checkbox">
                             <div class="checkbox-group">
-                                <input type="checkbox" id="all-star"/>
+                                <input type="checkbox" id="all-star" class="review-item" checked/>
                                 <label for="all-star">Tất cả</label>
                             </div>
                             <div class="checkbox-group">
-                                <input type="checkbox" id="2-star"/>
+                                <input type="checkbox" id="2-star" value="2" class="review-item"/>
                                 <label for="2-star">2+ sao</label>
                                 <span
                                 ><div class="cr-star">
@@ -132,7 +132,7 @@
                                 ></span>
                             </div>
                             <div class="checkbox-group">
-                                <input type="checkbox" id="3-star"/>
+                                <input type="checkbox" id="3-star" value="3" class="review-item"/>
                                 <label for="3-star">3+ sao</label>
                                 <span>
                       <div class="cr-star">
@@ -145,7 +145,7 @@
                     </span>
                             </div>
                             <div class="checkbox-group">
-                                <input type="checkbox" id="4-star"/>
+                                <input type="checkbox" id="4-star" value="4" class="review-item"/>
                                 <label for="4-star">4+ sao</label>
                                 <span>
                       <div class="cr-star">
@@ -158,7 +158,7 @@
                     </span>
                             </div>
                             <div class="checkbox-group">
-                                <input type="checkbox" id="5-star"/>
+                                <input type="checkbox" id="5-star" value="5" class="review-item"/>
                                 <label for="5-star">5 sao</label>
                                 <span>
                       <div class="cr-star">
@@ -212,10 +212,10 @@
                             <div class="cr-select">
                                 <label>Sắp xếp theo :</label>
                                 <select
-                                        class="form-select"
+                                        class="form-select sort-by"
                                         aria-label="Default select example"
                                 >
-                                    <option selected>Bán chạy</option>
+                                    <option value="0" selected>Bán chạy</option>
                                     <option value="1">Nổi bật</option>
                                     <option value="2">Khuyến mãi</option>
                                     <option value="3">Giá tăng dần</option>

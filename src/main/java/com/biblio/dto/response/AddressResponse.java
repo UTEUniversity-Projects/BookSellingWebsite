@@ -16,5 +16,9 @@ public class AddressResponse {
     private String district;
     private String village;
     private String detail;
+
+    public String getFullAddress() {
+        return String.format("%s, %s, %s, %s", detail, village, district, province);
+    }
 }
 

@@ -5,6 +5,7 @@ import com.biblio.dto.request.SearchBookRequest;
 import com.biblio.dto.response.CategoryBookCountResponse;
 import com.biblio.entity.Category;
 import com.biblio.enumeration.EBookCondition;
+import com.biblio.enumeration.EBookFormat;
 import com.biblio.jpaconfig.JpaConfig;
 
 import javax.persistence.TypedQuery;
@@ -53,18 +54,20 @@ public class CategoryDAOImpl extends GenericDAOImpl<Category> implements ICatego
 
     @Override
     public List<CategoryBookCountResponse> countBookPerCategory(SearchBookRequest request) {
-        StringBuilder jpql = new StringBuilder("SELECT new com.biblio.dto.response.CategoryBookCountResponse(c.id, c.name, COALESCE(COUNT(DISTINCT bt.id), 0)) "
+        StringBuilder jpql = new StringBuilder("SELECT new com.biblio.dto.response.CategoryBookCountResponse(c.id, c.name, COUNT(DISTINCT bt.id)) "
                 + "FROM Category c "
                 + "LEFT JOIN c.subCategories sc "
                 + "LEFT JOIN sc.books b "
                 + "LEFT JOIN b.bookTemplate bt "
                 + "ON b.id = (SELECT MIN(b2.id) FROM Book b2 WHERE b2.bookTemplate.id = bt.id AND bt.status = 'ON_SALE' "
                 + "AND (b2.sellingPrice >= :minPrice AND b2.sellingPrice <= :maxPrice)) "
-                + "WHERE (b.id IS NULL OR (b.sellingPrice >= :minPrice AND b.sellingPrice <= :maxPrice)) ");
+                + "WHERE (b.id IS NULL OR (b.sellingPrice >= :minPrice AND b.sellingPrice <= :maxPrice)) "
+                + "AND (SELECT COALESCE(AVG(r2.rate), 0) FROM bt.reviews r2 WHERE r2.bookTemplate.id = bt.id) >= :reviewRate ");
 
         Map<String, Object> params = new HashMap<>();
         params.put("minPrice", Double.valueOf(request.getMinPrice()));
         params.put("maxPrice", Double.valueOf(request.getMaxPrice()));
+        params.put("reviewRate", Double.valueOf(request.getReviewRate()));
 
         if (request.getTitle() != null && !request.getTitle().isEmpty()) {
             String[] searchTerms = request.getTitle().split("\\s+");
@@ -80,11 +83,17 @@ public class CategoryDAOImpl extends GenericDAOImpl<Category> implements ICatego
         }
 
         if (request.getCondition() != null) {
-            jpql.append( "AND (b.condition is NULL OR  b.condition = :condition) ");
+            jpql.append("AND (b.condition is NULL OR b.condition = :condition) ");
             params.put("condition", EBookCondition.valueOf(request.getCondition()));
         }
 
+        if (request.getFormat() != null) {
+            jpql.append(" AND b.format = :format ");
+            params.put("format", EBookFormat.valueOf(request.getFormat()));
+        }
+
         jpql.append("GROUP BY c.id, c.name ");
+        jpql.append("HAVING COUNT(DISTINCT bt.id) > 0 ");
         jpql.append("ORDER BY COUNT(DISTINCT bt.id) DESC");
 
         System.out.println(jpql.toString());
@@ -94,5 +103,6 @@ public class CategoryDAOImpl extends GenericDAOImpl<Category> implements ICatego
 
         return query.getResultList();
     }
+
 
 }
