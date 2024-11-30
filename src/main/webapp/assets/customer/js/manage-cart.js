@@ -210,3 +210,36 @@ function formatCurrency () {
 	});
 }
 
+$(document).ready(function() {
+    $("#btn-checkout").click(function() {
+        const selectedItems = [];
+        $(".product-checkbox:checked").each(function() {
+            const productId = $(this).closest("tr").data("product-id");
+            const quantity = $(this).closest("tr").find(".quantity").val();
+
+            selectedItems.push({
+                productId: productId,
+                quantity: quantity
+            });
+        });
+
+        if (selectedItems.length > 0) {
+            console.log(selectedItems);
+            $.ajax({
+                url: `${contextPath}/api/customer/checkout`,
+                type: "POST",
+                contentType: "application/json",
+                data: JSON.stringify({ items: selectedItems }),
+                success: function(response) {
+                    // Xử lý khi thanh toán thành công
+                    window.location.href = "/checkout";
+                },
+                error: function(xhr, status, error) {
+                    alert("Có lỗi xảy ra. Vui lòng thử lại!");
+                }
+            });
+        } else {
+            alert("Vui lòng chọn ít nhất một sản phẩm để thanh toán!");
+        }
+    });
+});

@@ -2,9 +2,11 @@ package com.biblio.service.impl;
 
 import com.biblio.dao.IBookTemplateDAO;
 
+import com.biblio.dto.request.CheckoutItemRequest;
 import com.biblio.dto.request.SearchBookRequest;
 import com.biblio.dto.response.*;
 
+import com.biblio.entity.Book;
 import com.biblio.entity.BookTemplate;
 import com.biblio.mapper.BookTemplateMapper;
 import com.biblio.service.IBookTemplateService;
@@ -82,6 +84,19 @@ public class BookTemplateServiceImpl implements IBookTemplateService {
     @Override
     public Long getTotalBookTemplateQuantity() {
         return bookTemplateDAO.countAll();
+    }
+
+    @Override
+    public CheckoutItemResponse getCheckoutItemResponse(CheckoutItemRequest request) {
+        BookTemplate bookTemplate = bookTemplateDAO.findOneForDetails(request.getProductId());
+        Book book = bookTemplate.getBooks().iterator().next();
+        return CheckoutItemResponse.builder()
+                .bookTemplateId(bookTemplate.getId())
+                .title(book.getTitle())
+                .imagePath(bookTemplate.getMediaFiles().get(0).getStoredCode())
+                .quantity(request.getQuantity())
+                .sellingPrice(book.getSellingPrice())
+                .build();
     }
 
     @Override

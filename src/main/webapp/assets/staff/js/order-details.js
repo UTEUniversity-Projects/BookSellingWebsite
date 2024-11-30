@@ -245,7 +245,7 @@ document.getElementById("confirmOrder").addEventListener("click", function (even
     const orderStatus = orderStatusElement.dataset.status;
     console.log(orderStatus);
 
-    if (orderStatus == "WAITING_CONFIRMATION") {
+    if (orderStatus === "WAITING_CONFIRMATION") {
         const requestData = {
             orderId: orderId,
         }
@@ -294,6 +294,10 @@ document.getElementById("sendReason").addEventListener('click', function (event)
     const cancelContent = document.getElementById("cancelContent").value;
     const errorMessage = document.getElementById("error-message");
 
+    const orderStatusElement = document.getElementById("order-status");
+    const orderStatus = orderStatusElement.dataset.status;
+    console.log(orderStatus);
+
     if (!cancelContent.trim()) {
         errorMessage.style.display = "block";
     } else {
@@ -306,14 +310,26 @@ document.getElementById("sendReason").addEventListener('click', function (event)
         };
 
         console.log(requestData.content)
-        sendRequest(`${contextPath}/api/staff/order/cancel-order`, requestData)
-            .then(data => {
-                updateStatus(data, 'cancelOrderModal');
-            })
-            .catch(error => {
-                console.error("Error:", error);
-                showErrorToast();
-            });
+
+        if (orderStatus === "WAITING_CONFIRMATION") {
+            sendRequest(`${contextPath}/api/staff/order/cancel-order`, requestData)
+                .then(data => {
+                    updateStatus(data, 'cancelOrderModal');
+                })
+                .catch(error => {
+                    console.error("Error:", error);
+                    showErrorToast();
+                });
+        } else if (orderStatus === "REQUEST_REFUND") {
+            sendRequest(`${contextPath}/api/staff/order/cancel-refund-order`, requestData)
+                .then(data => {
+                    updateStatus(data, 'cancelOrderModal');
+                })
+                .catch(error => {
+                    console.error("Error:", error);
+                    showErrorToast();
+                });
+        }
     }
 })
 

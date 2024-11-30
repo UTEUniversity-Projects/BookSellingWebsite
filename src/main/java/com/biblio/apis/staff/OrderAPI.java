@@ -99,6 +99,10 @@ public class OrderAPI extends HttpServlet {
                     handleConfirmRefundOrder(request, response, result, mapper);
                     break;
 
+                case "/cancel-refund-order":
+                    handleCancelRefundOrder(request, response, result, mapper);
+                    break;
+
                 default:
                     result.put("message", "Không tìm thấy hành động phù hợp!");
                     result.put("type", "error");
@@ -172,6 +176,7 @@ public class OrderAPI extends HttpServlet {
     private void handleConfirmRefundOrder(HttpServletRequest request, HttpServletResponse response, Map<String, String> result, ObjectMapper mapper) throws IOException {
         Map<String, Object> jsonMap = mapper.readValue(request.getReader(), Map.class);
         long orderId = Long.parseLong(jsonMap.get("orderId").toString());
+        String content = jsonMap.get("content").toString();
         long returnBookId = Long.parseLong(jsonMap.get("returnBookId").toString());
         boolean success = orderService.updateStatus(orderId, EOrderStatus.REFUNDED) &&
                           returnBookService.update(returnBookId);
@@ -181,7 +186,6 @@ public class OrderAPI extends HttpServlet {
             result.put("statusType", EOrderStatus.REFUNDED.name());
             result.put("status", EOrderStatus.REFUNDED.getDescription());
             result.put("statusStyle", EOrderStatus.REFUNDED.getStatusStyle());
-//            sendOrderConfirmationEmail(request, orderId);
         } else {
             result.put("message", "Không thể xác nhận hoàn trả đơn hàng. Vui lòng thử lại!");
             result.put("type", "info");
@@ -189,6 +193,23 @@ public class OrderAPI extends HttpServlet {
         response.getWriter().write(mapper.writeValueAsString(result));
     }
 
+    private void handleCancelRefundOrder(HttpServletRequest request, HttpServletResponse response, Map<String, String> result, ObjectMapper mapper) throws IOException {
+        Map<String, Object> jsonMap = mapper.readValue(request.getReader(), Map.class);
+        long orderId = Long.parseLong(jsonMap.get("orderId").toString());
+        String content = jsonMap.get("content").toString();
+        boolean success = orderService.updateStatus(orderId, EOrderStatus.COMPLETE_DELIVERY);
+        if (success) {
+            result.put("message", "Từ chối hoàn trả thành công!");
+            result.put("type", "success");
+            result.put("statusType", EOrderStatus.COMPLETE_DELIVERY.name());
+            result.put("status", EOrderStatus.COMPLETE_DELIVERY.getDescription());
+            result.put("statusStyle", EOrderStatus.COMPLETE_DELIVERY.getStatusStyle());
+        } else {
+            result.put("message", "Không thể từ chối hoàn trả. Vui lòng thử lại!");
+            result.put("type", "info");
+        }
+        response.getWriter().write(mapper.writeValueAsString(result));
+    }
     // endregion
 
     // region Email

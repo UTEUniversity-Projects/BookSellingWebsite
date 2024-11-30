@@ -1,4 +1,22 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+
+<style>
+    .disabled-input {
+        background-color: #f0f0f0;
+        border: 1px solid #ccc;
+        color: #999;
+        cursor: not-allowed;
+    }
+
+    .disabled-button {
+        background-color: #ddd;
+        border: 1px solid #ccc;
+        color: #999;
+        cursor: not-allowed;
+    }
+</style>
+
 <section class="max-w-[1200px] mx-auto mt-5">
     <h3
             class="text-3xl uppercase font-bold bg-[#f5f5f5] px-4 py-2 rounded text-[#26a397]"
@@ -22,53 +40,37 @@
                 </div>
             </div>
             <div class="bg-[#f5f5f5] rounded">
-                <a
-                        class="flex rounded items-center hover:bg-gray-200 p-2 transition-all duration-300"
-                        href="product"
-                >
-                    <div class="col-sm-6">
-                        <div class="flex items-center gap-x-5 mr-5">
-                            <div class="w-[100px] h-[100px] flex-shrink-0">
-                                <img
-                                        class="w-full h-full object-cover"
-                                        src="${pageContext.request.contextPath}/assets/customer/img/product/10.jpg"
-                                        alt="Product"
-                                />
+                <c:forEach var="item" items="${checkoutResponse.items}">
+                    <a
+                            class="flex rounded items-center hover:bg-gray-200 p-2 transition-all duration-300"
+                            href="product"
+                    >
+                        <div class="col-sm-6">
+                            <div class="flex items-center gap-x-5 mr-5">
+                                <div class="w-[100px] h-[100px] flex-shrink-0">
+                                    <img
+                                            class="w-full h-full object-cover"
+                                            src="${pageContext.request.contextPath}${item.imagePath}"
+                                            alt="Product"
+                                    />
+                                </div>
+                                <div style="margin-left: 25px">
+                                    <span style="font-weight: 500">${item.title}</span>
+                                    <p class="discount-percent w-fit my-[5px]">${item.discountPercent}</p>
+                                </div>
                             </div>
-                            <div style="margin-left: 25px">
-                                <span style="font-weight: 500">Tầm nhìn giáo dục</span>
-                                <p>Thầy Trần Thế Công</p>
-                                <p>Bìa cứng</p>
-                            </div>
-
-                            <%--              <p--%>
-                            <%--                      class="text-justify"--%>
-                            <%--                      style="--%>
-                            <%--                      display: -webkit-box;--%>
-                            <%--                      -webkit-line-clamp: 2;--%>
-                            <%--                      -webkit-box-orient: vertical;--%>
-                            <%--                      text-overflow: ellipsis;--%>
-                            <%--                      word-break: break-word;--%>
-                            <%--                      overflow: hidden;--%>
-                            <%--                    "--%>
-                            <%--              >--%>
-                            <%--                Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsam--%>
-                            <%--                exercitationem impedit voluptatum ducimus tempore aperiam--%>
-                            <%--                consequuntur voluptates quaerat repellat minus adipisci dolor,--%>
-                            <%--                velit iste molestiae quasi ut cumque? Commodi, deserunt?--%>
-                            <%--              </p>--%>
                         </div>
-                    </div>
-                    <div class="col-sm-2 text-center">
-                        <p>₫<span class="price">52.000</span></p>
-                    </div>
-                    <div class="col-sm-2 text-center">
-                        <span class="quantity">1</span>
-                    </div>
-                    <div class="col-sm-2 text-center">
-                        <p>₫<span class="total">52.000</span></p>
-                    </div>
-                </a>
+                        <div class="col-sm-2 text-center">
+                            <p class="price price-value">${item.sellingPrice}</p>
+                        </div>
+                        <div class="col-sm-2 text-center">
+                            <span class="quantity">${item.quantity}</span>
+                        </div>
+                        <div class="col-sm-2 text-center">
+                            <p class="total price-value">${item.totalPrice}</p>
+                        </div>
+                    </a>
+                </c:forEach>
             </div>
             <div class="mt-5 bg-[#f5f5f5] px-4 py-2 rounded">
                 <div class="w-full">
@@ -76,12 +78,13 @@
                 </div>
                 <div class="w-full flex justify-between items-center">
                     <div style="margin-top: 10px" class="information">
-                <span class="fullname font-bold text-[16px] mr-2">
-                Lê Văn Hùng | 09090990999</span>
+                        <span class="fullname font-bold text-[16px] mr-2">
+                            ${checkoutResponse.customer.fullName} | ${checkoutResponse.customer.phoneNumber}
+                        </span>
                         <div>
-              <span class="address">
-              Hẻm 201/10, Đường Lê Văn Việt, Phường Hiệp Phú, Thành Phố Thủ
-                    Đức, TP. Hồ Chí Minh</span>
+                            <span class="address">
+                                ${checkoutResponse.address}
+                            </span>
                         </div>
                     </div>
                     <button
@@ -161,6 +164,7 @@
                         <input type="text" id="freeship" placeholder="Nhập mã freeship...."
                                class="px-2 py-2 rounded bg-white focus:ring-blue-500 focus:border-blue-500 border-1 border-gray-300 transition-all ease-linear bg-white focus:shadow-lg focus:shadow-[rgba(3,_102,_214,_0.3)_0px_0px_0px_3px]">
                         <button
+                                id="applyFreeship"
                                 class="px-4 py-2 rounded bg-[#26a397] hover:bg-[#63b597] transition-all duration-300 text-white text-md"
                         >
                             Áp dụng
@@ -170,6 +174,7 @@
                         <input type="text" id="voucher" placeholder="Nhập mã voucher...."
                                class="px-2 py-2 rounded bg-white focus:ring-blue-500 focus:border-blue-500 border-1 border-gray-300 transition-all ease-linear bg-white focus:shadow-lg focus:shadow-[rgba(3,_102,_214,_0.3)_0px_0px_0px_3px]">
                         <button
+                                id="applyVoucher"
                                 class="px-4 py-2 rounded bg-[#26a397] hover:bg-[#63b597] transition-all duration-300 text-white text-md"
                         >
                             Áp dụng
@@ -207,37 +212,6 @@
                         />
                     </div>
                 </div>
-                <%--        <div class="w-full h-[1px] bg-gray-200"></div>--%>
-                <%--        <div class="flex flex-col items-end mt-5">--%>
-                <%--          <div class="col-sm-3">--%>
-                <%--            <div class="flex justify-between text-md text-[#63b597]">--%>
-                <%--                  <span class=""--%>
-                <%--                  >Tổng tiền <span class="total-quantity">(2): </span></span--%>
-                <%--                  >--%>
-                <%--              <span class="total-all text-xl text-[#219075]">50.000</span>--%>
-                <%--            </div>--%>
-                <%--          </div>--%>
-                <%--          <div class="col-sm-3">--%>
-                <%--            <div class="flex justify-between text-md text-[#63b597]">--%>
-                <%--              <span class="">Tổng phí vận chuyển: </span>--%>
-                <%--              <span class="total-all text-xl text-[#219075]">50.000</span>--%>
-                <%--            </div>--%>
-                <%--          </div>--%>
-                <%--          <div class="col-sm-3">--%>
-                <%--            <div class="flex justify-between text-md text-[#63b597]">--%>
-                <%--              <span class="">Tổng tiền</span>--%>
-                <%--              <span class="total-all text-xl text-[#219075]">50.000</span>--%>
-                <%--            </div>--%>
-                <%--          </div>--%>
-                <%--        </div>--%>
-                <%--        <div class="w-full h-[1px] bg-gray-200"></div>--%>
-                <%--        <div class="mt-5 text-right">--%>
-                <%--          <button--%>
-                <%--                  class="px-4 py-2 rounded bg-[#26a397] hover:bg-[#63b597] transition-all duration-300 text-white text-md"--%>
-                <%--          >--%>
-                <%--            Đặt hàng--%>
-                <%--          </button>--%>
-                <%--        </div>--%>
             </div>
         </div>
         <div class="summary-sub-total">
@@ -246,15 +220,15 @@
                 <tbody>
                 <tr>
                     <td>Tổng tiền sách :</td>
-                    <td class="price-value">180.000</td>
+                    <td class="price-value" data-price="${checkoutResponse.totalPrice}">${checkoutResponse.totalPrice}</td>
                 </tr>
                 <tr>
-                    <td>Phí vận chuyển :</td>
-                    <td class="price-value">15.000</td>
+                    <td>Phí vận chuyển:</td>
+                    <td id="price-freeship" class="price-value minus-value" data-price="0">0</td>3
                 </tr>
                 <tr>
-                    <td>Voucher giảm giá :</td>
-                    <td class="price-value">0</td>
+                    <td>Voucher giảm giá:</td>
+                    <td id="price-voucher" class="price-value minus-value" data-price="0">0</td>
                 </tr>
                 <tr>
                     <td colspan="2">
@@ -263,7 +237,7 @@
                 </tr>
                 <tr>
                     <td>Tổng tiền :</td>
-                    <td class="price-value">195.000</td>
+                    <td id="price-total" class="price-value" data-price="${checkoutResponse.totalPrice}">${checkoutResponse.totalPrice}</td>
                 </tr>
                 </tbody>
             </table>
@@ -276,4 +250,6 @@
         </div>
     </div>
 </section>
+
+<script src="${pageContext.request.contextPath}/assets/commons/js/format-discount-percent.js"></script>
 <script src="${pageContext.request.contextPath}/assets/customer/js/checkout.js" type="module"></script>

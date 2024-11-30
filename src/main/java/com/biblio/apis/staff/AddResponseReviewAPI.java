@@ -17,7 +17,7 @@ import java.io.Serial;
 import java.util.HashMap;
 import java.util.Map;
 
-@WebServlet(urlPatterns = {"/staff/response-review/add"})
+@WebServlet(urlPatterns = {"/api/staff/response-review/add"})
 public class AddResponseReviewAPI extends HttpServlet {
     @Inject
     private IResponseReviewService responseReviewService;

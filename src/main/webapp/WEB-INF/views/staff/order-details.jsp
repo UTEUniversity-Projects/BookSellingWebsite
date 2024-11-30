@@ -32,10 +32,6 @@
                                 <i class="ri-map-pin-line"></i>
                                 ${order.shipping.address}
                             </p>
-                            <p class="cr-card-date">
-                                <i class="ri-calendar-2-line"></i>
-                                ${order.orderDate}
-                            </p>
                             <p class="cr-card-note">
                                 <i class="ri-sticky-note-line"></i>
                                 ${order.note}
@@ -158,8 +154,8 @@
                                             </td>
                                             <td>${product.title}</td>
                                             <td>
-                                                <span class="status status__pending">
-                                                    -20%
+                                                <span class="discount-percent status status__complete_delivery">
+                                                    ${product.discountPercent}
                                                 </span>
                                             </td>
                                             <td>${product.quantity}</td>
@@ -366,5 +362,5 @@
 <script src="${pageContext.request.contextPath}/assets/owner/js/vendor/swiper-bundle.min.js" defer></script>
 <script src="${pageContext.request.contextPath}/assets/owner/js/vendor/slick.min.js" defer></script>
 <!-- endregion -->
-
+<script src="${pageContext.request.contextPath}/assets/commons/js/format-discount-percent.js"></script>
 <script src="${pageContext.request.contextPath}/assets/staff/js/order-details.js" defer></script>

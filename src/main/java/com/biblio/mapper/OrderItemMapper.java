@@ -5,6 +5,7 @@ import com.biblio.entity.Book;
 import com.biblio.entity.BookTemplate;
 import com.biblio.entity.OrderItem;
 import com.biblio.entity.Publisher;
+import com.biblio.service.impl.PromotionTemplateServiceImpl;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -14,13 +15,13 @@ public class OrderItemMapper {
     public static OrderProductResponse mapToOrderProductResponse(OrderItem orderItem) {
         Book book = orderItem.getBooks().iterator().next();
         return OrderProductResponse.builder()
+                .bookTemplateId(book.getBookTemplate().getId())
                 .title(book.getTitle())
                 .imagePath(book.getBookTemplate()
                         .getMediaFiles().get(0)
                         .getStoredCode())
                 .quantity(orderItem.getBooks().size())
                 .sellingPrice(book.getSellingPrice())
-                .totalPrice(orderItem.calPriceItem())
                 .build();
     }
 
