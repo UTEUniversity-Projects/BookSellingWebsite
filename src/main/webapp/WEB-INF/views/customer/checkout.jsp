@@ -83,7 +83,7 @@
                         </span>
                         <div>
                             <span class="address">
-                                ${checkoutResponse.address}
+                                ${checkoutResponse.shipping.address.fullAddress}
                             </span>
                         </div>
                     </div>
@@ -161,24 +161,66 @@
                 </div>
                 <div class="col-sm-6">
                     <div class="flex items-center ml-[50px] justify-between mt-5">
-                        <input type="text" id="freeship" placeholder="Nhập mã freeship...."
-                               class="px-2 py-2 rounded bg-white focus:ring-blue-500 focus:border-blue-500 border-1 border-gray-300 transition-all ease-linear bg-white focus:shadow-lg focus:shadow-[rgba(3,_102,_214,_0.3)_0px_0px_0px_3px]">
-                        <button
-                                id="applyFreeship"
-                                class="px-4 py-2 rounded bg-[#26a397] hover:bg-[#63b597] transition-all duration-300 text-white text-md"
-                        >
-                            Áp dụng
-                        </button>
+                        <c:set var="hasFreestip" value="false"/>
+                        <c:set var="freeshipCode" value=""/>
+
+                        <c:forEach var="promotion" items="${checkoutResponse.promotions}">
+                            <c:if test="${promotion.promotionType == 'FREESHIP'}">
+                                <c:set var="hasFreestip" value="true"/>
+                                <c:set var="freeshipCode" value="${promotion}"/>
+                            </c:if>
+                        </c:forEach>
+
+                        <c:if test="${not hasFreestip}">
+                            <input type="text" id="freeship" placeholder="Nhập mã freeship...."
+                                   class="px-2 py-2 rounded bg-white focus:ring-blue-500 focus:border-blue-500 border-1 border-gray-300 transition-all ease-linear bg-white focus:shadow-lg focus:shadow-[rgba(3,_102,_214,_0.3)_0px_0px_0px_3px]">
+                            <button id="applyFreeship"
+                                    class="px-4 py-2 rounded bg-[#26a397] hover:bg-[#63b597] transition-all duration-300 text-white text-md">
+                                Áp dụng
+                            </button>
+                        </c:if>
+
+                        <c:if test="${hasFreestip}">
+                            <input type="text" id="freeship" placeholder="Nhập mã freeship...."
+                                   class="px-2 py-2 rounded bg-white focus:ring-blue-500 focus:border-blue-500 border-1 border-gray-300 transition-all ease-linear bg-white focus:shadow-lg focus:shadow-[rgba(3,_102,_214,_0.3)_0px_0px_0px_3px] disabled-input"
+                                   value="${freeshipCode.code}" readonly/>
+                            <button id="applyFreeship"
+                                    class="px-4 py-2 rounded bg-[#26a397] hover:bg-[#63b597] transition-all duration-300 text-white text-md disabled-button"
+                                    disabled>
+                                Áp dụng
+                            </button>
+                        </c:if>
                     </div>
                     <div class="flex items-center ml-[50px] justify-between mt-5">
-                        <input type="text" id="voucher" placeholder="Nhập mã voucher...."
-                               class="px-2 py-2 rounded bg-white focus:ring-blue-500 focus:border-blue-500 border-1 border-gray-300 transition-all ease-linear bg-white focus:shadow-lg focus:shadow-[rgba(3,_102,_214,_0.3)_0px_0px_0px_3px]">
-                        <button
-                                id="applyVoucher"
-                                class="px-4 py-2 rounded bg-[#26a397] hover:bg-[#63b597] transition-all duration-300 text-white text-md"
-                        >
-                            Áp dụng
-                        </button>
+                        <c:set var="hasVoucher" value="false"/>
+                        <c:set var="voucherCode" value=""/>
+
+                        <c:forEach var="promotion" items="${checkoutResponse.promotions}">
+                            <c:if test="${promotion.promotionType == 'VOUCHER'}">
+                                <c:set var="hasVoucher" value="true"/>
+                                <c:set var="voucherCode" value="${promotion}"/>
+                            </c:if>
+                        </c:forEach>
+
+                        <c:if test="${not hasVoucher}">
+                            <input type="text" id="voucher" placeholder="Nhập mã voucher...."
+                                   class="px-2 py-2 rounded bg-white focus:ring-blue-500 focus:border-blue-500 border-1 border-gray-300 transition-all ease-linear bg-white focus:shadow-lg focus:shadow-[rgba(3,_102,_214,_0.3)_0px_0px_0px_3px]">
+                            <button id="applyVoucher"
+                                    class="px-4 py-2 rounded bg-[#26a397] hover:bg-[#63b597] transition-all duration-300 text-white text-md">
+                                Áp dụng
+                            </button>
+                        </c:if>
+
+                        <c:if test="${hasVoucher}">
+                            <input type="text" id="voucher" placeholder="Nhập mã voucher...."
+                                   class="px-2 py-2 rounded bg-white focus:ring-blue-500 focus:border-blue-500 border-1 border-gray-300 transition-all ease-linear bg-white focus:shadow-lg focus:shadow-[rgba(3,_102,_214,_0.3)_0px_0px_0px_3px] disabled-input"
+                                   value="${voucherCode.code}" readonly/>
+                            <button id="applyVoucher"
+                                    class="px-4 py-2 rounded bg-[#26a397] hover:bg-[#63b597] transition-all duration-300 text-white text-md disabled-button"
+                                    disabled>
+                                Áp dụng
+                            </button>
+                        </c:if>
                     </div>
                 </div>
             </div>
@@ -220,15 +262,45 @@
                 <tbody>
                 <tr>
                     <td>Tổng tiền sách:</td>
-                    <td class="price-value" data-price="${checkoutResponse.totalPrice}">${checkoutResponse.totalPrice}</td>
+                    <td class="price-value"
+                        data-price="${checkoutResponse.totalPrice}">${checkoutResponse.totalPrice}</td>
                 </tr>
                 <tr>
                     <td>Phí vận chuyển:</td>
-                    <td id="price-freeship" class="price-value minus-value" data-price="0">0</td>
+                    <td id="price-freeship-amount" class="price-value"
+                        data-price="${checkoutResponse.shipping.shippingFee}">${checkoutResponse.shipping.shippingFee}</td>
+                </tr>
+
+                <tr>
+                    <td>Giảm giá phí vận chuyển:</td>
+                    <c:if test="${hasFreestip}">
+                        <td id="price-freeship" class="price-value minus-value"
+                            data-price="${freeshipCode.discountAmount}">
+                                ${freeshipCode.discountAmount}
+                        </td>
+                    </c:if>
+                    <c:if test="${not hasFreestip}">
+                        <td id="price-freeship" class="price-value minus-value"
+                            data-price="0">
+                            0
+                        </td>
+                    </c:if>
                 </tr>
                 <tr>
+                <tr>
                     <td>Voucher giảm giá:</td>
-                    <td id="price-voucher" class="price-value minus-value" data-price="0">0</td>
+                    <c:if test="${hasVoucher}">
+                        <td id="price-voucher" class="price-value minus-value"
+                            data-price="${voucherCode.discountAmount}">
+                                ${voucherCode.discountAmount}
+                        </td>
+                    </c:if>
+                    <c:if test="${not hasVoucher}">
+                        <td id="price-voucher" class="price-value minus-value"
+                            data-price="0">
+                            0
+                        </td>
+                    </c:if>
                 </tr>
                 <tr>
                     <td colspan="2">
@@ -236,8 +308,9 @@
                     </td>
                 </tr>
                 <tr>
-                    <td>Tổng tiền :</td>
-                    <td id="price-total" class="price-value" data-price="${checkoutResponse.totalPrice}">${checkoutResponse.totalPrice}</td>
+                    <td>Tổng tiền:</td>
+                    <td id="price-total" class="price-value"
+                        data-price="${checkoutResponse.finalPrice}">${checkoutResponse.finalPrice}</td>
                 </tr>
                 </tbody>
             </table>

@@ -30,7 +30,7 @@
                             </p>
                             <p class="cr-card-location">
                                 <i class="ri-map-pin-line"></i>
-                                ${order.shipping.address}
+                                ${order.shipping.address.fullAddress}
                             </p>
                             <p class="cr-card-note">
                                 <i class="ri-sticky-note-line"></i>

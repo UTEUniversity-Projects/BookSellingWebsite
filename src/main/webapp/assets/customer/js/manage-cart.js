@@ -231,8 +231,7 @@ $(document).ready(function() {
                 contentType: "application/json",
                 data: JSON.stringify({ items: selectedItems }),
                 success: function(response) {
-                    // Xử lý khi thanh toán thành công
-                    window.location.href = "/checkout";
+                    window.location.href = `${contextPath}/checkout`;
                 },
                 error: function(xhr, status, error) {
                     alert("Có lỗi xảy ra. Vui lòng thử lại!");

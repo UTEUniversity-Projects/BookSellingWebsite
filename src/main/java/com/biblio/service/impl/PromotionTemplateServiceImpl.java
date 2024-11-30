@@ -134,12 +134,12 @@ public class PromotionTemplateServiceImpl implements IPromotionTemplateService {
     }
 
     @Override
-    public ApplyCodePromotionResponse applyCodePromotion(String code, Double amount) {
+    public ApplyCodePromotionResponse applyCodePromotion(String code, Double amount, EPromotionTemplateType type) {
         ApplyCodePromotionResponse applyCodePromotionResponse = new ApplyCodePromotionResponse();
         PromotionTemplate promotionTemplateNonUpdate = promotionTemplateDAO.findSingleByJPQL(code);
 
 
-        if (promotionTemplateNonUpdate == null || promotionTemplateNonUpdate.getType() == EPromotionTemplateType.DISCOUNT) {
+        if (promotionTemplateNonUpdate == null || promotionTemplateNonUpdate.getType() != type) {
             applyCodePromotionResponse.setMessage("Mã khuyến mãi không tồn tại!");
         }
         else {
@@ -164,6 +164,7 @@ public class PromotionTemplateServiceImpl implements IPromotionTemplateService {
 
                     if (promotion.getStatus() == EPromotionStatus.NOT_USE) {
                         applyCodePromotionResponse.setPromotionId(promotion.getId());
+                        applyCodePromotionResponse.setPromotionCode(promotion.getPromotionTemplate().getCode());
                         applyCodePromotionResponse.setMinValueToBeApplied(promotion.getMinValueToBeApplied());
                         applyCodePromotionResponse.setDiscountLimit(promotion.getDiscountLimit());
                         applyCodePromotionResponse.setType(promotionTemplate.getType());
