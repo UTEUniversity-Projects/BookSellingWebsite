@@ -12,7 +12,6 @@ import com.biblio.mapper.BookMapper;
 import com.biblio.mapper.OrderMapper;
 import com.biblio.service.IBookTemplateService;
 import com.biblio.service.IOrderService;
-import com.biblio.service.IPromotionTemplateService;
 
 import javax.inject.Inject;
 import java.time.LocalDate;
@@ -314,7 +313,7 @@ public class OrderServiceImpl implements IOrderService {
             Order orderTmp = orderDAO.findOneForDetailsManagement(order.getId());
             LocalDateTime orderDate = orderTmp.getOrderDate();
 
-            if ((orderDate.isEqual(start) || orderDate.isAfter(start)) && (orderDate.isEqual(end) || orderDate.isBefore(end)) && (EOrderStatus.COMPLETE_DELIVERY.equals(orderTmp.getStatus()) || EOrderStatus.REQUEST_REFUND.equals(orderTmp.getStatus())) || EOrderStatus.REFUNDED.equals(orderTmp.getStatus())) {
+            if ((orderDate.isEqual(start) || orderDate.isAfter(start)) && (orderDate.isEqual(end) || orderDate.isBefore(end)) && (EOrderStatus.COMPLETE_DELIVERY.equals(orderTmp.getStatus()) || EOrderStatus.REQUEST_REFUND.equals(orderTmp.getStatus()) || EOrderStatus.REFUNDED.equals(orderTmp.getStatus()))) {
                 OrderReturnAtTimeResponse orderReturnAtTimeResponse = new OrderReturnAtTimeResponse();
                 orderReturnAtTimeResponse.setOrderId(order.getId());
                 ReturnBook returnBook = returnBookDAO.findByOrderId(order.getId());

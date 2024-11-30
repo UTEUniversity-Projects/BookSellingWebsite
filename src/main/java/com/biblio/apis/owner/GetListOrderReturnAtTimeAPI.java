@@ -1,6 +1,7 @@
 package com.biblio.apis.owner;
 
 import com.biblio.dto.response.OrderReturnAtTimeResponse;
+import com.biblio.enumeration.EReasonReturn;
 import com.biblio.service.IOrderService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
@@ -44,11 +45,9 @@ public class GetListOrderReturnAtTimeAPI extends HttpServlet {
         response.setCharacterEncoding("UTF-8");
 
         try {
-            // Parse request parameters
             String startParam = request.getParameter("startTime");
             String endParam = request.getParameter("endTime");
 
-            // Validate and convert to LocalDateTime
             if (startParam == null || endParam == null) {
                 response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
                 response.getWriter().write("{\"error\":\"Missing required parameters: startTime or endTime\"}");
@@ -60,7 +59,6 @@ public class GetListOrderReturnAtTimeAPI extends HttpServlet {
             startTime = startTime.toLocalDate().atStartOfDay();
             endTime = endTime.toLocalDate().atTime(LocalTime.MAX);
 
-            // Validate date range
             if (startTime.isAfter(endTime)) {
                 response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
                 response.getWriter().write("{\"error\":\"startTime must be before or equal to endTime\"}");
@@ -69,33 +67,45 @@ public class GetListOrderReturnAtTimeAPI extends HttpServlet {
 
             List<OrderReturnAtTimeResponse> orderReturnAtTimeResponses = orderService.getListOrderReturnAtTime(startTime, endTime);
 
+            Map<EReasonReturn, Integer> reasonCounts = new HashMap<>();
+            for (EReasonReturn reason : EReasonReturn.values()) {
+                reasonCounts.put(reason, 0);
+            }
+
+            orderReturnAtTimeResponses.forEach(item -> {
+                if (item.getReturnReason() != null) {
+                    reasonCounts.put(item.getReturnReason(), reasonCounts.get(item.getReturnReason()) + 1);
+                }
+            });
+
             List<Map<String, Object>> orderReturnAtTimeJsonList = orderReturnAtTimeResponses.stream()
                     .map(item -> {
                         Map<String, Object> map = new HashMap<>();
                         map.put("idOrder", item.getOrderId());
                         map.put("isReturn", item.getIsReturned());
-                        map.put("reasonReturn", item.getReturnReason());
+                        map.put("reasonReturn", item.getReturnReason() != null ? item.getReturnReason().toString() : null);
                         return map;
                     })
                     .toList();
 
-            // Create a map to represent the JSON response
             Map<String, Object> responseMap = new HashMap<>();
             responseMap.put("orderReturnAtTimeList", orderReturnAtTimeJsonList);
+            responseMap.put("reasonCounts", reasonCounts);
 
-            // Serialize and send the response
             ObjectMapper objectMapper = new ObjectMapper();
             response.setStatus(HttpServletResponse.SC_OK);
             response.getWriter().write(objectMapper.writeValueAsString(responseMap));
+
         } catch (DateTimeParseException e) {
             response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
             response.getWriter().write("{\"error\":\"Invalid date format. Use 'yyyy-MM-dd'T'HH:mm:ss'\"}");
         } catch (Exception e) {
-            e.printStackTrace(); // Log lỗi chi tiết trong console
+            e.printStackTrace();
             response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
             response.getWriter().write("{\"error\":\"An error occurred while processing the request\"}");
         }
     }
+
 
 
     /**
