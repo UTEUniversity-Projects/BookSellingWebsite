@@ -56,18 +56,14 @@
                                     >
                                 </li>
                                 <li>
-                                    <a href="${pageContext.request.contextPath}/owner/tag-list" class="cr-page-link drop"
-                                    ><i class="ri-checkbox-blank-circle-line"></i>Nhãn</a>
-                                </li>
-                                <li>
                                     <a
-                                            href="${pageContext.request.contextPath}/owner/category-list"
+                                            href="${pageContext.request.contextPath}/owner/category/list"
                                             class="cr-page-link drop"
                                     ><i class="ri-checkbox-blank-circle-line"></i>Danh mục</a>
                                 </li>
                                 <li>
                                     <a
-                                            href="${pageContext.request.contextPath}/owner/sub-category-list"
+                                            href="${pageContext.request.contextPath}/owner/sub-category/list"
                                             class="cr-page-link drop"
                                     ><i class="ri-checkbox-blank-circle-line"></i>Phân loại</a>
                                 </li>
@@ -125,28 +121,13 @@
                             </a>
                             <ul class="cr-sb-subdrop condense">
                                 <li>
-                                    <a href="${pageContext.request.contextPath}/owner/staff-list" class="cr-page-link subdrop">
+                                    <a href="${pageContext.request.contextPath}/owner/staff/list" class="cr-page-link subdrop">
                                         <i class="ri-checkbox-blank-circle-line"></i>
                                         Danh sách nhân viên
                                     </a>
                                 </li>
                             </ul>
                         </li>
-<%--                        <li class="cr-sb-item sb-subdrop-item">--%>
-<%--                            <a href="javascript:void(0)" class="cr-sub-drop-toggle">--%>
-<%--                                <i class="ri-file-list-2-line"></i--%>
-<%--                                ><span class="condense"--%>
-<%--                            >Nội dung trang<i--%>
-<%--                                    class="drop-arrow ri-arrow-down-s-line"--%>
-<%--                            ></i></span--%>
-<%--                            ></a>--%>
-<%--                            <ul class="cr-sb-subdrop condense">--%>
-<%--                                <li>--%>
-<%--                                    <a href="${pageContext.request.contextPath}/owner/content-list" class="cr-page-link subdrop"--%>
-<%--                                    ><i class="ri-checkbox-blank-circle-line"></i>Danh sách nội dung</a>--%>
-<%--                                </li>--%>
-<%--                            </ul>--%>
-<%--                        </li>--%>
                         <li class="cr-sb-item sb-subdrop-item">
                             <a href="javascript:void(0)" class="cr-sub-drop-toggle">
                                 <i class="ri-airplay-line"></i
