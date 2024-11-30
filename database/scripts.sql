@@ -4802,7 +4802,6 @@ INSERT INTO return_item_books(return_book_item_id, book_id) values
 INSERT INTO return_book_media_file(return_book_id, media_file_id) values
 (1, 1), (1, 2), (1, 3), (1, 4), (1, 5);
 
-
 INSERT INTO notification (content, created_at, hyper_link, sent_time, status, title, type, customer_id, owner_id, staff_id)
 VALUES
 ('Bạn có một đơn hàng mới đang chờ xác nhận', '2024-11-01 12:00:00', '/staff/order-dashboard', '2024-11-01 12:00:00', 'NOT_SEEN', 'Đơn hàng mới 1', 'ORDER', NULL, NULL, 2),
@@ -4811,4 +4810,24 @@ VALUES
 ('Bạn có một đơn hàng mới đang chờ xác nhận', '2024-11-15 10:00:00', '/staff/order-dashboard', '2024-11-15 10:00:00', 'NOT_SEEN', 'Đơn hàng mới 4', 'ORDER', NULL, NULL, 2),
 ('Bạn có một đơn hàng mới đang chờ xác nhận', '2024-11-20 16:30:00', '/staff/order-dashboard', '2024-11-20 16:30:00', 'NOT_SEEN', 'Đơn hàng mới 5', 'ORDER', NULL, NULL, 2);
 
+
+INSERT INTO order_status_history(status, status_change_date, order_id) values
+('PLACED', '2024-11-03 10:30:00', 1),
+('CONFIRMED', '2024-11-03 11:00:00', 1),
+('WAITING_FOR_SHIPPING', '2024-11-03 17:30:00', 1),
+('COMPLETED', '2024-11-05 9:30:00', 1),
+('REVIEWED', '2024-11-7 9:30:00', 1);
+
+INSERT INTO order_status_history(status, status_change_date, order_id) values
+('PLACED', '2024-11-20 09:15:00', 3);
+
+INSERT INTO order_status_history(status, status_change_date, order_id) values
+('PLACED', '2024-11-5 11:30:00', 5);
+
+INSERT INTO order_status_history(status, status_change_date, order_id) values
+('PLACED', '2024-11-07 8:00:00', 7),
+('CONFIRMED', '2024-11-07 11:00:00', 7),
+('WAITING_FOR_SHIPPING', '2024-11-07 11:30:00', 7),
+('COMPLETED', '2024-11-09 9:30:00', 7),
+('REVIEWED', '2024-11-10 9:30:00', 7);
 

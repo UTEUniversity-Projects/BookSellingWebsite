@@ -138,15 +138,15 @@ $(document).ready(() => {
                                 </div>`;
 			};
 
-			$('.book-list').html('                    <div class="loading">\n' +
-				'                        <div class="mx-auto w-[30px] h-[30px] rounded-full border-[4px] border-solid border-green-400 border-t-transparent animate-spin"></div>\n' +
-				'                    </div>');
+			$('.book-list').html('                    <div class="loading">\n' + '                        <div class="mx-auto w-[30px] h-[30px] rounded-full border-[4px] border-solid border-green-400 border-t-transparent animate-spin"></div>\n' + '                    </div>');
 			$('.cr-pagination').hide();
 
 			const handleSuccess = (result) => {
 				const bookList = document.querySelector('.book-list');
 				const categoryList = document.querySelector('.category');
 				const { books, quantity, category } = result;
+
+				console.log({ quantity });
 
 				if (categoryList) {
 					if (isCategoryClicked === false) {
@@ -163,8 +163,7 @@ $(document).ready(() => {
 					bookList.innerHTML = `<p class="text-xl text-[#269a37] text-center">Không tìm thấy sản phẩm.</p>`;
 					$('.cr-pagination').hide();
 				} else {
-					if (bookList)
-						bookList.innerHTML = books?.map(generateBook).join('');
+					if (bookList) bookList.innerHTML = books?.map(generateBook).join('');
 
 					$('.modal.fade.quickview-modal').remove();
 					document.querySelector('body').insertAdjacentHTML('beforeend', books.map(generateModal).join(''));
@@ -212,7 +211,9 @@ $(document).ready(() => {
 		minPrice: 0,
 		maxPrice: 10000000000000000,
 		perPage: getItemQuantityPerPage(),
-		condition: null
+		condition: null,
+		format: null,
+		reviewRate: null
 	};
 
 	$('.btn-search').click(function (event) {
@@ -221,8 +222,7 @@ $(document).ready(() => {
 
 		if (searchInput.val() === '') {
 			toast({
-				title: 'Tìm kiếm',
-				message: 'Vui lòng nhập thông tin tìm kiếm!'
+				title: 'Tìm kiếm', message: 'Vui lòng nhập thông tin tìm kiếm!'
 			});
 		} else {
 			if (window.location.pathname.includes('/search')) {
@@ -271,19 +271,90 @@ $(document).ready(() => {
 		searchBook.search(searchData);
 	});
 
-	$(".condition-item").click(function () {
+	$('.condition-item').click(function () {
 		$('.condition-item').each(function () {
 			$(this)[0].checked = false;
-			$(this).parent().removeClass("select-none pointer-events-none");
+			$(this).parent().removeClass('select-none pointer-events-none');
 		});
 		$(this)[0].checked = true;
-		$(this).parent().addClass("select-none pointer-events-none");
-		updateObjectValue(searchData, "condition", $(this).val() == 'on' ? null : $(this).val());
+		$(this).parent().addClass('select-none pointer-events-none');
 
-		console.log($(this).val());
+		const condition = $(this).val() !== 'on' ? $(this).val() : null;
+		updateUrlParam('condition', condition);
+		updateUrlParam('page', 1);
+		updateObjectValue(searchData, 'condition', condition);
+
+		if (condition) {
+			updateUrlParam('condition', condition);
+		} else {
+			const urlParams = new URLSearchParams(window.location.search);
+			urlParams.delete('condition');
+			const newUrl = `${window.location.pathname}?${urlParams.toString()}`;
+			window.history.pushState({ path: newUrl }, '', newUrl);
+		}
 
 		searchBook.search(searchData);
 
+	});
+
+	$('.format-item').click(function () {
+		$('.format-item').each(function () {
+			$(this)[0].checked = false;
+			$(this).parent().removeClass('select-none pointer-events-none');
+		});
+		$(this)[0].checked = true;
+		$(this).parent().addClass('select-none pointer-events-none');
+		updateObjectValue(searchData, 'format', $(this).val() == 'on' ? null : $(this).val());
+
+		const format = $(this).val() !== 'on' ? $(this).val() : null;
+		updateUrlParam('format', format);
+		updateUrlParam('page', 1);
+		updateObjectValue(searchData, 'format', format);
+
+		if (format) {
+			updateUrlParam('format', format);
+		} else {
+			const urlParams = new URLSearchParams(window.location.search);
+			urlParams.delete('format');
+			const newUrl = `${window.location.pathname}?${urlParams.toString()}`;
+			window.history.pushState({ path: newUrl }, '', newUrl);
+		}
+
+		searchBook.search(searchData);
+
+	});
+
+	$('.review-item').click(function () {
+		$('.review-item').each(function () {
+			$(this)[0].checked = false;
+			$(this).parent().removeClass('select-none pointer-events-none');
+		});
+		$(this)[0].checked = true;
+		$(this).parent().addClass('select-none pointer-events-none');
+
+		updateObjectValue(searchData, 'reviewRate', $(this).val() == 'on' ? null : $(this).val());
+
+		const reviewRate = $(this).val() !== 'on' ? $(this).val() : null;
+		updateUrlParam('reviewRate', reviewRate);
+		updateUrlParam('page', 1);
+		updateObjectValue(searchData, 'reviewRate', reviewRate);
+
+		if (reviewRate) {
+			updateUrlParam('reviewRate', reviewRate);
+		} else {
+			const urlParams = new URLSearchParams(window.location.search);
+			urlParams.delete('reviewRate');
+			const newUrl = `${window.location.pathname}?${urlParams.toString()}`;
+			window.history.pushState({ path: newUrl }, '', newUrl);
+		}
+
+		searchBook.search(searchData);
+
+	});
+
+	$('.sort-by').change(function () {
+		updateObjectValue(searchData, 'sortBy', $(this).val());
+		searchBook.search(searchData);
 	});
 
 	document.querySelectorAll('.range-slider input[type=\'range\']').forEach(input => {
@@ -294,6 +365,8 @@ $(document).ready(() => {
 	setValueFromParameter();
 
 	function setValueFromParameter () {
+		if (!window.location.href.includes("/search"))
+			return;
 
 		if (getUrlParam('title')) {
 			searchInput.val(getUrlParam('title'));
@@ -304,6 +377,26 @@ $(document).ready(() => {
 				$(this)[0].checked = $(this).val() === getUrlParam('categoryId');
 			});
 		}
+
+		if (getUrlParam('condition')) {
+			$('.condition-item').each(function () {
+				$(this)[0].checked = $(this).val() === getUrlParam('condition');
+			});
+		}
+
+		if (getUrlParam('format')) {
+			$('.format-item').each(function () {
+				$(this)[0].checked = $(this).val() === getUrlParam('format');
+			});
+		}
+
+		if (getUrlParam('reviewRate')) {
+			$('.review-item').each(function () {
+				$(this)[0].checked = $(this).val() === getUrlParam('reviewRate');
+			});
+		}
+
+		searchBook.search(searchData);
 
 	}
 
@@ -370,8 +463,7 @@ $(document).ready(() => {
 			liTag += `<li class="btn next"><span><i class="fas fa-angle-right"></i></span></li>`;
 		}
 
-		if (element)
-			element.innerHTML = liTag;
+		if (element) element.innerHTML = liTag;
 
 		attachPaginationEvents(element, totalPages, page);
 
@@ -411,8 +503,7 @@ $(document).ready(() => {
 
 	function scrollToTop () {
 		window.scrollTo({
-			top: 0,
-			behavior: 'smooth'
+			top: 0, behavior: 'smooth'
 		});
 	}
 
@@ -453,8 +544,8 @@ $(document).ready(() => {
 			}
 		}
 
-		updateObjectValue(searchData, "minPrice", slide1);
-		updateObjectValue(searchData, "maxPrice", slide2);
+		updateObjectValue(searchData, 'minPrice', slide1);
+		updateObjectValue(searchData, 'maxPrice', slide2);
 
 		searchBook.search(searchData);
 

@@ -27,6 +27,8 @@ public interface IGenericDAO<T> {
 
     List<T> findAll(String jpql);
 
+    List<T> findAll(String jpql, int limit);
+
     long count();
 
     long countByJPQL(String jpql);

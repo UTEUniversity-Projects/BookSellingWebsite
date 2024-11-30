@@ -80,6 +80,9 @@ public class Order implements Serializable {
             inverseJoinColumns = @JoinColumn(name = "promotion_id", nullable = false))
     private Set<Promotion> promotions = new HashSet<>();
 
+    @OneToMany(mappedBy = "order", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
+    private Set<OrderStatusHistory> statusHistory = new HashSet<>();
+
     // endregion
 
     // region Methods

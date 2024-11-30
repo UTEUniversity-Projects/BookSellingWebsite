@@ -55,6 +55,75 @@
                     </div>
 
                     <div class="cr-card-content">
+                        <div class="stepper">
+                            <div class="stepper__step">
+                                <div class="stepper__step-icon">
+                                    <i class="ri-survey-line"></i>
+                                </div>
+                                <div class="stepper__step-text">
+                                    Đơn hàng đã đặt
+                                </div>
+                                <div class="stepper__step-date">
+                                </div>
+                            </div>
+
+                            <div class="stepper__step">
+                                <div class="stepper__step-icon">
+                                    <i class="ri-pencil-line"></i>
+                                </div>
+                                <div class="stepper__step-text">
+                                    Xác nhận đơn hàng
+                                </div>
+                                <div class="stepper__step-date">
+                                </div>
+                            </div>
+
+                            <div class="stepper__step">
+                                <div class="stepper__step-icon">
+                                    <i class="ri-truck-line"></i>
+                                </div>
+                                <div class="stepper__step-text">
+                                    Chờ giao hàng
+                                </div>
+                                <div class="stepper__step-date">
+                                </div>
+                            </div>
+
+                            <div class="stepper__step">
+                                <div class="stepper__step-icon">
+                                    <i class="ri-check-line"></i>
+                                </div>
+                                <div class="stepper__step-text">
+                                    Hoàn tất đơn hàng
+                                </div>
+                                <div class="stepper__step-date">
+                                </div>
+                            </div>
+
+                            <div class="stepper__step">
+                                <div class="stepper__step-icon">
+                                    <i class="ri-star-line"></i>
+                                </div>
+                                <div class="stepper__step-text">
+                                    Đánh giá
+                                </div>
+                                <div class="stepper__step-date">
+
+                                </div>
+                            </div>
+
+                            <div class="stepper__line">
+                                <div class="stepper__line-background">
+
+                                </div>
+                                <div class="stepper__line-foreground">
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="cr-card-content">
                         <div class="cr-card-content-header">
                             <p class="heading">Danh sách sản phẩm</p>
                         </div>
@@ -193,7 +262,6 @@
                             </div>
                         </div>
                     </div>
-
 
                     <div class="btn-container cr-card-content d-grid gap-3 d-md-flex justify-content-md-end
                         <c:if

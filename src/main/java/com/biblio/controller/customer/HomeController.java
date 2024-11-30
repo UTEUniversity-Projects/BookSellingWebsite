@@ -1,7 +1,6 @@
 package com.biblio.controller.customer;
 
 import com.biblio.dto.response.AccountGetResponse;
-import com.biblio.dto.response.BookCardResponse;
 import com.biblio.dto.response.CategorySidebarResponse;
 import com.biblio.service.IBookTemplateService;
 import com.biblio.service.ICartService;
@@ -53,9 +52,9 @@ public class HomeController extends HttpServlet {
         AccountGetResponse account = (AccountGetResponse) session.getAttribute("account");
 
         List<CategorySidebarResponse> categories = categoryService.getAllCategorySidebarResponse();
-        List<BookCardResponse> books = bookTemplateService.getAllBookCardResponse();
+//        List<BookCardResponse> books = bookTemplateService.getAllBookCardResponse();
         request.setAttribute("categories", categories);
-        request.setAttribute("books", books);
+//        request.setAttribute("books", books);
 
         request.setAttribute("account", account);
 
