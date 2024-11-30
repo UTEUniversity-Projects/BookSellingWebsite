@@ -70,7 +70,7 @@ public class OrderMapper {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm dd-MM-yyyy");
 
         List<OrderProductResponse> products = order.getOrderItems().stream()
-                .map(OrderItemMapper::toOrderProductCustomerResponse)
+                .flatMap(orderItem -> OrderItemMapper.toOrderProductCustomerResponse(orderItem).stream())
                 .collect(Collectors.toList());
 
         CustomerResponse customer = CustomerMapper.toCustomerResponse(order.getCustomer());

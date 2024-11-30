@@ -86,4 +86,8 @@ public class CustomerDAOImpl extends GenericDAOImpl<Customer> implements ICustom
         return super.findSingleByJPQL(jpql, params);
     }
 
+    @Override
+    public Customer updateCustomer(Customer customer) {
+        return super.update(customer);
+    }
 }

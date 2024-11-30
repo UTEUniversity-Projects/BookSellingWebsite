@@ -3,7 +3,6 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 
 <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/customer/scss/style.css">
-<script defer src="${pageContext.request.contextPath}/assets/customer/js/order-list.js"></script>
 
 <section class="section-return py-5 bg-light">
     <div class="container">
@@ -341,10 +340,10 @@
             <div class="col-lg-8">
 
                 <!-- Form Sản phẩm -->
-                <div class="product-return-form p-4 bg-white shadow rounded mb-4">
+                <div class="order-item mb-5 p-4 bg-white border border-gray-200 rounded relative" data-order-id="${orderDetail.id}">
 
                     <c:forEach var="orderProduct" items="${orderDetail.products}" varStatus="loopStatus">
-                        <div class="${loopStatus.index > 0 ? 'my-hidden' : ''} flex items-center mb-3">
+                        <div class="${loopStatus.index > 0 ? 'my-hidden' : ''} flex items-center mb-3 border-bottom">
                             <div class="flex items-center book-item w-full">
                                 <!-- Hình ảnh sản phẩm -->
                                 <div class="flex-shrink-0">
@@ -376,13 +375,14 @@
 
                     <!-- Nút Xem thêm/Thu gọn -->
                     <c:if test="${fn:length(orderDetail.products) > 1}">
-                        <div class="status-container flex justify-start w-full cursor-pointer text-[#26aa99]" onclick="toggleItems('${order.id}')">
-                            <span id="toggle-text-${orderDetail.id}">Xem thêm ▼</span>
+                        <div class="flex justify-start w-full cursor-pointer text-[#26aa99]" onclick="toggleItems()">
+                            <span id="toggle-text">Xem thêm ▼</span>
                         </div>
                     </c:if>
 
+
                     <!-- Tổng tiền -->
-                    <div class="order-summary top-container">
+                    <div class="order-summary">
                         <div class="summary-item">
                             <div class="label">Tổng tiền hàng:</div>
                             <div class="amount">${orderDetail.totalPrice}₫</div>
@@ -412,5 +412,5 @@
 
         </div>
     </div>
-    </div>
 </section>
+<script defer src="${pageContext.request.contextPath}/assets/customer/js/order-list.js"></script>
