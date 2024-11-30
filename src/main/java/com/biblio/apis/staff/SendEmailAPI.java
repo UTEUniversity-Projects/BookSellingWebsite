@@ -358,14 +358,12 @@ public class SendEmailAPI extends HttpServlet {
             request.setCharacterEncoding("UTF-8");
 
             String orderIdParam = request.getParameter("orderId");
-            String refundAmountParam = request.getParameter("refundAmount");
 
             if (orderIdParam == null || orderIdParam.isEmpty()) {
                 throw new IllegalArgumentException("Order ID không được để trống.");
             }
 
             long orderId = Long.parseLong(orderIdParam);
-            double refundAmount = Double.parseDouble(refundAmountParam);
 
             // Lấy thông tin đơn hàng
             OrderCustomerResponse order = orderService.findOrderById(orderId);
@@ -376,7 +374,7 @@ public class SendEmailAPI extends HttpServlet {
             }
 
             // Gửi email xác nhận hoàn tiền
-            String emailContent = generateConfirmRefundOrderEmail(order, refundAmount);
+            String emailContent = generateConfirmRefundOrderEmail(order);
             emailService.sendEmail(order.getEmail(), "Xác nhận hoàn tiền #" + order.getId(), emailContent);
 
             response.setStatus(HttpServletResponse.SC_OK);
@@ -393,7 +391,7 @@ public class SendEmailAPI extends HttpServlet {
     }
 
 
-    private String generateConfirmRefundOrderEmail(OrderCustomerResponse order, double refundAmount) {
+    private String generateConfirmRefundOrderEmail(OrderCustomerResponse order) {
         StringBuilder emailContent = new StringBuilder();
 
         emailContent.append("<html><body style=\"font-family: Arial, sans-serif; color: #333; line-height: 1.6;\">");
@@ -406,7 +404,6 @@ public class SendEmailAPI extends HttpServlet {
 
         emailContent.append("<p>Chào <strong>").append(order.getCustomerName()).append("</strong>,</p>");
         emailContent.append("<p style=\"color: #27ae60; font-size: 16px;\"><strong>Chúng tôi đã xử lý yêu cầu hoàn tiền của bạn.</strong></p>");
-        emailContent.append("<p><strong>Số tiền được hoàn:</strong> ").append(refundAmount).append(" VND</p>");
 
         emailContent.append("<table style=\"width: 100%; border-collapse: collapse; margin: 20px 0;\">");
         emailContent.append("<tr><td style=\"padding: 10px; border: 1px solid #ddd;\">Mã đơn hàng:</td><td style=\"padding: 10px; border: 1px solid #ddd;\">").append(order.getId()).append("</td></tr>");
