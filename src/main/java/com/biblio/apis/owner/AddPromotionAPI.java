@@ -75,7 +75,7 @@ public class AddPromotionAPI extends HttpServlet {
                     executorService.submit(() -> {
                         try {
                             CustomerDetailResponse customer = customerService.findById(customerId);
-                            String emailContent = generatePromotionEmail(promotionTemplateResponse, customer);
+                            String emailContent = generatePromotionEmail(promotionTemplateResponse, customer, request);
                             String subject = "Chương trình khuyến mãi: " + promotionTemplateResponse.getPromotions().iterator().next().getTitle();
                             emailService.sendEmailNoRePlay(customer.getEmail(), subject, emailContent);
                         } catch (Exception e) {
@@ -102,7 +102,7 @@ public class AddPromotionAPI extends HttpServlet {
         super.destroy();
     }
 
-    public String generatePromotionEmail(PromotionTemplateResponse promotionTemplateResponse, CustomerDetailResponse customer) {
+    public String generatePromotionEmail(PromotionTemplateResponse promotionTemplateResponse, CustomerDetailResponse customer, HttpServletRequest request) {
         // ... Mã sinh email (không thay đổi)
         StringBuilder emailContent = new StringBuilder();
 
@@ -136,7 +136,7 @@ public class AddPromotionAPI extends HttpServlet {
 
             // Header với logo
             emailContent.append("<div style=\"text-align: center; margin-bottom: 20px;\">");
-            emailContent.append("<img src=\"https://example.com/logo.jpg\" alt=\"Biblio Logo\" style=\"width: 150px; height: auto; margin-bottom: 10px;\"/>");
+            emailContent.append("<img src=\"https://lh3.googleusercontent.com/d/1L2YtT3oH7TjTfyPhXVkx3XGJccTrfnQ1\" alt=\"Biblio Logo\" style=\"width: 150px; height: auto; margin-bottom: 10px;\"/>");
             emailContent.append("<h1 style=\"color: #d35400; margin: 0;\">🎉 Chương Trình Khuyến Mãi 🎉</h1>");
             emailContent.append("</div>");
 
