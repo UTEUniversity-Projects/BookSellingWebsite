@@ -18,6 +18,27 @@
         </div>
       </div>
     </div>
+    <!-- Google Map -->
+    <div class="row padding-t-100 mb-minus-24">
+      <div class="col-md-6 col-12 mb-24" data-aos="fade-up" data-aos-duration="2000" data-aos-delay="400">
+        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3270.5058479043046!2d106.77029843906374!3d10.850714932044081!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31752763f23816ab%3A0x282f711441b6916f!2zVHLGsOG7nW5nIMSQ4bqhaSBo4buNYyBTxrAgcGjhuqFtIEvhu7kgdGh14bqtdCBUaMOgbmggcGjhu5EgSOG7kyBDaMOtIE1pbmg!5e1!3m2!1svi!2s!4v1727073359759!5m2!1svi!2s" width="600" height="450" style="border: 0" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+      </div>
+
+      <!-- Contact Form -->
+      <div class="col-md-6 col-12 mb-24" data-aos="fade-up" data-aos-duration="2000" data-aos-delay="800">
+        <form class="cr-content-form" method="POST" action="${pageContext.request.contextPath}/contact-us">
+          <div class="form-group">
+            <input type="text" name="title" placeholder="Tiêu đề..." class="cr-form-control" required />
+          </div>
+          <br>
+          <div class="form-group">
+            <textarea name="content" class="cr-form-control" id="exampleFormControlTextarea1" rows="4" placeholder="Thông điệp..." required></textarea>
+          </div>
+          <br>
+          <button type="submit" class="cr-button">Gửi</button>
+        </form>
+      </div>
+    </div>
 
     <!-- Contact Information -->
     <div class="row mb-minus-24">
@@ -57,34 +78,10 @@
         </div>
       </div>
     </div>
-
-    <!-- Google Map -->
-    <div class="row padding-t-100 mb-minus-24">
-      <div class="col-md-6 col-12 mb-24" data-aos="fade-up" data-aos-duration="2000" data-aos-delay="400">
-        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3270.5058479043046!2d106.77029843906374!3d10.850714932044081!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31752763f23816ab%3A0x282f711441b6916f!2zVHLGsOG7nW5nIMSQ4bqhaSBo4buNYyBTxrAgcGjhuqFtIEvhu7kgdGh14bqtdCBUaMOgbmggcGjhu5EgSOG7kyBDaMOtIE1pbmg!5e1!3m2!1svi!2s!4v1727073359759!5m2!1svi!2s" width="600" height="450" style="border: 0" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
-      </div>
-
-      <!-- Contact Form -->
-      <div class="col-md-6 col-12 mb-24" data-aos="fade-up" data-aos-duration="2000" data-aos-delay="800">
-        <!-- Show success or error messages -->
-        <c:if test="${not empty message}">
-          <div class="alert alert-success">${message}</div>
-        </c:if>
-
-        <c:if test="${not empty errorMessage}">
-          <div class="alert alert-danger">${errorMessage}</div>
-        </c:if>
-
-        <form class="cr-content-form" method="POST" action="${pageContext.request.contextPath}/contact-us">
-          <div class="form-group">
-            <input type="text" name="title" placeholder="Tiêu đề..." class="cr-form-control" required />
-          </div>
-          <div class="form-group">
-            <textarea name="content" class="cr-form-control" id="exampleFormControlTextarea1" rows="4" placeholder="Thông điệp..." required></textarea>
-          </div>
-          <button type="submit" class="cr-button">Gửi</button>
-        </form>
-      </div>
-    </div>
   </div>
+
 </section>
+<script type="module" src="${pageContext.request.contextPath}/assets/customer/js/contact-us.js"></script>
+
+
+

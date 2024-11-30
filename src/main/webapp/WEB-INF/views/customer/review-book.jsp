@@ -4,19 +4,8 @@
 <!-- Review Section -->
 <section class="review-section">
     <h1>Đánh giá sản phẩm</h1>
-
-    <%--    <div class="product-display">--%>
-    <%--        <div class="product-image">--%>
-    <%--            <img src="${pageContext.request.contextPath}/customer/img/review/1.jpg" alt="Tên sách và tác giả"/>--%>
-    <%--        </div>--%>
-
-    <%--        <div class="product-info">--%>
-    <%--            <p><strong>Tên Sách: Sức Mạnh Của Thói Quen</strong></p>--%>
-    <%--            <p>Tác giả: Charles Duhigg</p>--%>
-    <%--            <p>Phân loại: Bìa mềm, Phiên bản tiếng Việt</p>--%>
-    <%--        </div>--%>
-    <%--    </div>--%>
     <form class="review-book" method="POST" action="${pageContext.request.contextPath}/review-book">
+        <input type="hidden" name="bookTemplateId" value="${param.bookTemplateId}" />
         <div class="star-rating">
             <div class="feedback">
                 <label>Chất lượng sản phẩm</label>
@@ -162,53 +151,22 @@
                 <span class="rating-text">Chọn sao để đánh giá</span>
             </div>
         </div>
-
-        <%--    <div class="upload-wrapper">--%>
-        <%--        <label for="upload-image" class="upload-label"--%>
-        <%--        >Thêm Hình ảnh/Video:</label--%>
-        <%--        >--%>
-        <%--        <div class="upload-section">--%>
-        <%--            <button class="upload-btn" id="upload-image-btn">--%>
-        <%--                <span class="icon-camera"></span>--%>
-        <%--                <span class="btn-text">Thêm Hình ảnh</span>--%>
-        <%--            </button>--%>
-        <%--            <input--%>
-        <%--                    type="file"--%>
-        <%--                    id="upload-image"--%>
-        <%--                    accept="image/*"--%>
-        <%--                    style="display: none"--%>
-        <%--                    multiple--%>
-        <%--            />--%>
-
-        <%--            <button class="upload-btn" id="upload-video-btn">--%>
-        <%--                <span class="icon-video"></span>--%>
-        <%--                <span class="btn-text">Thêm Video</span>--%>
-        <%--            </button>--%>
-        <%--            <input--%>
-        <%--                    type="file"--%>
-        <%--                    id="upload-video"--%>
-        <%--                    accept="video/*"--%>
-        <%--                    style="display: none"--%>
-        <%--            />--%>
-        <%--        </div>--%>
-        <%--        <p class="upload-hint">Tối đa 9 hình ảnh hoặc video</p>--%>
-        <%--    </div>--%>
-        <c:if test="${not empty message}">
-            <div class="alert alert-success">${message}</div>
-        </c:if>
-
-        <c:if test="${not empty errorMessage}">
-            <div class="alert alert-danger">${errorMessage}</div>
-        </c:if>
+        <br>
         <div class="review-input">
             <textarea name="content" class="cr-form-control" id="exampleFormControlTextarea1" rows="4" placeholder="Hãy chia sẻ cảm nhận về sản phẩm này bạn nhé!" required></textarea>
         </div>
         <div class="display-name">
-            <label for="ten-dang-nhap"
-            >Bạn sẽ giới thiệu cuốn sách này tới mọi người chứ?</label
-            >
-            <input type="checkbox" id="ten-dang-nhap" checked/>
+            <label for="is-ready">
+                Bạn sẽ giới thiệu cuốn sách này tới mọi người chứ?
+            </label>
+            <input
+                    type="checkbox"
+                    id="is-ready"
+                    name="is-ready"
+                    value="true"
+            />
         </div>
+
 
         <div class="submit-review">
             <button class="submit-btn">Gửi Đánh Giá</button>
@@ -216,4 +174,4 @@
     </form>
 </section>
 
-<script src="${pageContext.request.contextPath}/assets/customer/js/review-book.js" type="module"></script>
+<script type="module" src="${pageContext.request.contextPath}/assets/customer/js/review-book.js" ></script>
