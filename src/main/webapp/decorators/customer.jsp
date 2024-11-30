@@ -449,8 +449,87 @@
 <div id="toast"></div>
 <div class="checkout">
     <div class="checkout-overlay bg-black/20"></div>
-    <div class="checkout-qr h-[400px] rounded-lg overflow-hidden transition-all ease-linear duration-300">
-        <img class="w-full h-full object-cover" src="" alt="vietqr">
+    <div class="checkout-qr h-[600px] rounded-lg overflow-hidden transition-all ease-linear duration-300">
+        <img class="w-full h-full object-cover" src="" alt="">
+    </div>
+    <div class="checkout-loading hidden absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-[1000]">
+        <div class="checkout-loading">
+            <div class="book-wrapper">
+                <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        fill="white"
+                        viewBox="0 0 126 75"
+                        class="book"
+                >
+                    <rect
+                            stroke-width="5"
+                            stroke="#e05452"
+                            rx="7.5"
+                            height="70"
+                            width="121"
+                            y="2.5"
+                            x="2.5"
+                    ></rect>
+                    <line
+                            stroke-width="5"
+                            stroke="#e05452"
+                            y2="75"
+                            x2="63.5"
+                            x1="63.5"
+                    ></line>
+                    <path
+                            stroke-linecap="round"
+                            stroke-width="4"
+                            stroke="#c18949"
+                            d="M25 20H50"
+                    ></path>
+                    <path
+                            stroke-linecap="round"
+                            stroke-width="4"
+                            stroke="#c18949"
+                            d="M101 20H76"
+                    ></path>
+                    <path
+                            stroke-linecap="round"
+                            stroke-width="4"
+                            stroke="#c18949"
+                            d="M16 30L50 30"
+                    ></path>
+                    <path
+                            stroke-linecap="round"
+                            stroke-width="4"
+                            stroke="#c18949"
+                            d="M110 30L76 30"
+                    ></path>
+                </svg>
+
+                <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        fill="#ffffff74"
+                        viewBox="0 0 65 75"
+                        class="book-page"
+                >
+                    <path
+                            stroke-linecap="round"
+                            stroke-width="4"
+                            stroke="#c18949"
+                            d="M40 20H15"
+                    ></path>
+                    <path
+                            stroke-linecap="round"
+                            stroke-width="4"
+                            stroke="#c18949"
+                            d="M49 30L15 30"
+                    ></path>
+                    <path
+                            stroke-width="5"
+                            stroke="#e05452"
+                            d="M2.5 2.5H55C59.1421 2.5 62.5 5.85786 62.5 10V65C62.5 69.1421 59.1421 72.5 55 72.5H2.5V2.5Z"
+                    ></path>
+                </svg>
+            </div>
+        </div>
+
     </div>
 </div>
 </html>
