@@ -96,8 +96,6 @@ public class CategoryDAOImpl extends GenericDAOImpl<Category> implements ICatego
         jpql.append("HAVING COUNT(DISTINCT bt.id) > 0 ");
         jpql.append("ORDER BY COUNT(DISTINCT bt.id) DESC");
 
-        System.out.println(jpql.toString());
-
         TypedQuery<CategoryBookCountResponse> query = JpaConfig.getEntityManager().createQuery(jpql.toString(), CategoryBookCountResponse.class);
         params.forEach(query::setParameter);
 
