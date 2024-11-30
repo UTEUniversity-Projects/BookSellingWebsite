@@ -8,11 +8,11 @@
         <!-- Page title & breadcrumb -->
         <div class="cr-page-title cr-page-title-2">
             <div class="cr-breadcrumb">
-                <h5><b>Cập nhật thông tin tác giả</b></h5>
+                <h5><b>Thêm tác giả</b></h5>
                 <ul>
                     <li><a href="${pageContext.request.contextPath}/owner/ecommerce"><b>Biblio</b></a></li>
                     <li><a href="${pageContext.request.contextPath}/owner/author/list"><b>Tác giả</b></a></li>
-                    <li><b>Thêm mới tác giả</b></li>
+                    <li><b>Thêm tác giả</b></li>
                 </ul>
             </div>
         </div>

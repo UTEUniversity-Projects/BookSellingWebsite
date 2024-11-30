@@ -39,54 +39,54 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <c:forEach var="item" items="${authors}">
-                                        <tr class="item-row" id="row-${item.id}" data-id="${item.id}">
+                                    <c:forEach var="author" items="${authors}">
+                                        <tr class="item-row" id="row-${author.id}" data-id="${author.id}">
                                             <td>
                                                 <img
                                                         class="tbl-thumb image-shadow rounded-3"
-                                                        src="${pageContext.request.contextPath}${item.avatar}"
+                                                        src="${pageContext.request.contextPath}${author.avatar}"
                                                         alt="Author Image"
                                                 />
                                             </td>
                                             <td>
                                                 <div>
-                                                    <span class="row-highlight">${item.name}</span><br>
-                                                    <span class="row-sub-content">Tham gia: ${item.joinAt}</span>
+                                                    <span class="row-highlight">${author.name}</span><br>
+                                                    <span class="row-sub-content">Tham gia: ${author.joinAt}</span>
                                                 </div>
                                             </td>
-                                            <td><span class="badge bg-primary">${item.works}</span></td>
+                                            <td><span class="badge bg-primary">${author.works}</span></td>
                                             <td>
                                                 <div class="d-flex align-items-center">
-                                                    <h6 class="avg-rate">${item.avgRate}</h6>
+                                                    <h6 class="avg-rate">${author.avgRate}</h6>
                                                     <i class="ri-star-fill ps-2 start-rate"></i>
                                                 </div>
                                             </td>
                                             <td>
                                                 <div class="label-card d-flex align-items-center">
                                                     <c:choose>
-                                                        <c:when test="${item.perValueBooksSold == 0}">
+                                                        <c:when test="${author.perValueBooksSold == 0}">
                                                             <div class="up mt-0 d-flex">
                                                                 <i class="ri-arrow-up-line me-1 icon-growth non-growth"></i>
-                                                                <p class="non-growth">${item.perValueBooksSold}%</p>
+                                                                <p class="non-growth">${author.perValueBooksSold}%</p>
                                                             </div>
                                                         </c:when>
-                                                        <c:when test="${item.perValueBooksSold > 0}">
+                                                        <c:when test="${author.perValueBooksSold > 0}">
                                                             <div class="up mt-0 d-flex">
                                                                 <i class="ri-arrow-up-line me-1 icon-growth"></i>
-                                                                <p class="up-growth">${item.perValueBooksSold}%</p>
+                                                                <p class="up-growth">${author.perValueBooksSold}%</p>
                                                             </div>
                                                         </c:when>
                                                         <c:otherwise>
                                                             <div class="down mt-0 d-flex">
                                                                 <i class="ri-arrow-down-line me-1 icon-growth"></i>
-                                                                <p class="down-growth">${-item.perValueBooksSold}%</p>
+                                                                <p class="down-growth">${-author.perValueBooksSold}%</p>
                                                             </div>
                                                         </c:otherwise>
                                                     </c:choose>
                                                 </div>
                                             </td>
                                             <td>
-                                                <span class="row-introduction">${item.introduction}</span>
+                                                <span class="row-introduction">${author.introduction}</span>
                                             </td>
                                             <td>
                                                 <div class="d-flex justify-content-center">
@@ -97,9 +97,9 @@
                                                         <span class="sr-only"><i class="ri-settings-3-line"></i></span>
                                                     </button>
                                                     <div class="dropdown-menu">
-                                                        <a class="dropdown-item" href="#" onclick="rowAction(${item.id}, 'view'); return false;" data-value="view">Chi tiết</a>
-                                                        <a class="dropdown-item" href="#" onclick="rowAction(${item.id}, 'update'); return false;" data-value="update">Cập nhật</a>
-                                                        <a class="dropdown-item" href="#" onclick="rowAction(${item.id}, 'delete'); return false;" data-value="delete">Xóa</a>
+                                                        <a class="dropdown-item" href="#" onclick="rowAction(${author.id}, 'view'); return false;" data-value="view">Chi tiết</a>
+                                                        <a class="dropdown-item" href="#" onclick="rowAction(${author.id}, 'update'); return false;" data-value="update">Cập nhật</a>
+                                                        <a class="dropdown-item" href="#" onclick="rowAction(${author.id}, 'delete'); return false;" data-value="delete">Xóa</a>
                                                     </div>
                                                 </div>
                                             </td>

@@ -132,21 +132,21 @@
                                 </li>
                             </ul>
                         </li>
-                        <li class="cr-sb-item sb-subdrop-item">
-                            <a href="javascript:void(0)" class="cr-sub-drop-toggle">
-                                <i class="ri-file-list-2-line"></i
-                                ><span class="condense"
-                            >Nội dung trang<i
-                                    class="drop-arrow ri-arrow-down-s-line"
-                            ></i></span
-                            ></a>
-                            <ul class="cr-sb-subdrop condense">
-                                <li>
-                                    <a href="${pageContext.request.contextPath}/owner/content-list" class="cr-page-link subdrop"
-                                    ><i class="ri-checkbox-blank-circle-line"></i>Danh sách nội dung</a>
-                                </li>
-                            </ul>
-                        </li>
+<%--                        <li class="cr-sb-item sb-subdrop-item">--%>
+<%--                            <a href="javascript:void(0)" class="cr-sub-drop-toggle">--%>
+<%--                                <i class="ri-file-list-2-line"></i--%>
+<%--                                ><span class="condense"--%>
+<%--                            >Nội dung trang<i--%>
+<%--                                    class="drop-arrow ri-arrow-down-s-line"--%>
+<%--                            ></i></span--%>
+<%--                            ></a>--%>
+<%--                            <ul class="cr-sb-subdrop condense">--%>
+<%--                                <li>--%>
+<%--                                    <a href="${pageContext.request.contextPath}/owner/content-list" class="cr-page-link subdrop"--%>
+<%--                                    ><i class="ri-checkbox-blank-circle-line"></i>Danh sách nội dung</a>--%>
+<%--                                </li>--%>
+<%--                            </ul>--%>
+<%--                        </li>--%>
                         <li class="cr-sb-item sb-subdrop-item">
                             <a href="javascript:void(0)" class="cr-sub-drop-toggle">
                                 <i class="ri-airplay-line"></i
@@ -163,14 +163,14 @@
                                     >
                                 </li>
                                 <li>
-                                    <a href="${pageContext.request.contextPath}/owner/translator-list" class="cr-page-link drop"
+                                    <a href="${pageContext.request.contextPath}/owner/translator/list" class="cr-page-link drop"
                                     ><i class="ri-checkbox-blank-circle-line"></i>Dịch
                                         giả</a
                                     >
                                 </li>
                                 <li>
                                     <a
-                                            href="${pageContext.request.contextPath}/owner/publisher-list"
+                                            href="${pageContext.request.contextPath}/owner/publisher/list"
                                             class="cr-page-link subdrop"
                                     ><i class="ri-checkbox-blank-circle-line"></i>Nhà xuất
                                         bản</a

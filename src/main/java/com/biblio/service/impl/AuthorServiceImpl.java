@@ -87,18 +87,18 @@ public class AuthorServiceImpl implements IAuthorService {
     }
 
     @Override
-    public void createAuthor(AuthorCreateRequest authorCreateRequest) {
-        authorDAO.createAuthor(authorCreateRequest);
+    public void create(AuthorCreateRequest authorCreateRequest) {
+        authorDAO.create(authorCreateRequest);
     }
 
     @Override
-    public void updateAuthor(AuthorUpdateRequest authorUpdateRequest) {
-        authorDAO.updateAuthor(authorUpdateRequest);
+    public void update(AuthorUpdateRequest authorUpdateRequest) {
+        authorDAO.update(authorUpdateRequest);
     }
 
     @Override
-    public void deleteAuthor(AuthorDeleteRequest authorDeleteRequest) {
-        authorDAO.deleteAuthor(authorDeleteRequest);
+    public void delete(AuthorDeleteRequest authorDeleteRequest) {
+        authorDAO.delete(authorDeleteRequest);
     }
 
     @Override

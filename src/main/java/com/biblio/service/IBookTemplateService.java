@@ -23,6 +23,8 @@ public interface IBookTemplateService {
 
     List<BookLineResponse> getAllBookLineResponse();
 
+    BookAnalysisResponse getBookAnalysisResponse(Long bookTemplateId);
+
     Long getTotalBookTemplateQuantity();
 
 }

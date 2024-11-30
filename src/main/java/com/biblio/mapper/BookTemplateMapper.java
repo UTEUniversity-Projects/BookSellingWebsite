@@ -6,6 +6,7 @@ import com.biblio.entity.*;
 import com.biblio.enumeration.EBookLanguage;
 import com.biblio.enumeration.EBookMetadataStatus;
 import com.biblio.enumeration.EBookTemplateStatus;
+import com.biblio.utils.FormatterUtil;
 
 import java.text.DecimalFormat;
 import java.time.LocalDateTime;
@@ -23,9 +24,6 @@ public class BookTemplateMapper {
             BookTemplate bookTemplate,
             Double perValueBooksSold
     ) {
-        DecimalFormat formatter = new DecimalFormat("#,###,###,###,###,###,###");
-        DecimalFormat percentFormatter = new DecimalFormat("#.0");
-
         Book singleBook = bookTemplate.getBooks().iterator().next();
         Double avgRate = bookTemplate.calculateReviewRate();
 
@@ -37,13 +35,92 @@ public class BookTemplateMapper {
                         .getStoredCode())
                 .title(singleBook.getTitle())
                 .publisher(bookTemplate.getPublisher().getName())
-                .perValueBooksSold(perValueBooksSold != null ? Double.parseDouble(percentFormatter.format(perValueBooksSold)) : 0.0D)
+                .perValueBooksSold(perValueBooksSold != null ? Double.parseDouble(FormatterUtil.percent(perValueBooksSold)) : 0.0D)
                 .booksSold(String.valueOf(bookTemplate.getBooks().stream()
                         .filter(book -> book.getBookMetadata().getStatus() == EBookMetadataStatus.SOLD).count()))
-                .avgRate(String.format("%.1f", avgRate))
-                .sellingPrice(formatter.format(singleBook.getSellingPrice()).replace(",", "."))
+                .avgRate(FormatterUtil.rating(avgRate))
+                .sellingPrice(FormatterUtil.commaNumber((long) singleBook.getSellingPrice()))
                 .statusStyle(bookTemplate.getStatus().getStatusStyle())
                 .statusDisplay(bookTemplate.getStatus().getDescription())
+                .build();
+    }
+    public static BookAnalysisResponse toBookAnalysisResponse(
+            BookTemplate bookTemplate,
+            Integer salesCount,
+            Integer booksCount,
+            Long revenue,
+            Integer salesCountThisMonth,
+            Double perSalesCountThisMonth,
+            Integer booksCountThisMonth,
+            Double perBooksCountThisMonth,
+            Long revenueThisMonth,
+            Double perRevenueThisMonth
+    ) {
+        Book singleBook = bookTemplate.getBooks().iterator().next();
+
+        String languages = bookTemplate.getLanguages() != null
+                ? bookTemplate.getLanguages().stream()
+                .map(EBookLanguage::getDescription)
+                .collect(Collectors.joining(", ")) : "N/A";
+
+        List<String> fileNames = bookTemplate.getMediaFiles().stream()
+                .sorted(Comparator.comparing(MediaFile::getId))
+                .map(MediaFile::getStoredCode)
+                .toList();
+
+        List<AuthorProfileResponse> authors = new ArrayList<>();
+        for (Author author : bookTemplate.getAuthors()) {
+            authors.add(AuthorMapper.toAuthorProfileResponse(author));
+        }
+
+        List<TranslatorProfileResponse> translators = new ArrayList<>();
+        for (Translator translator : bookTemplate.getTranslators()) {
+            translators.add(TranslatorMapper.toTranslatorProfileResponse(translator));
+        }
+
+        List<ReviewResponse> reviews = bookTemplate.getReviews().stream()
+                .filter(review -> !review.isHidden())
+                .sorted(Comparator.comparingInt(Review::getRate).reversed()
+                        .thenComparing(Review::getCreatedAt, Comparator.reverseOrder()))
+                .map(ReviewMapper::toReviewResponse)
+                .toList();
+
+        return BookAnalysisResponse.builder()
+                .id(bookTemplate.getId())
+                .title(singleBook.getTitle())
+                .avgRating(Double.parseDouble(FormatterUtil.rating(bookTemplate.calculateReviewRate())))
+                .reviewCount(reviews.size())
+                .format(singleBook.getFormat().getBookFormat())
+                .sellingPrice(FormatterUtil.commaNumber((long) singleBook.getSellingPrice()))
+                .originPrice(FormatterUtil.commaNumber((long) ((long) singleBook.getSellingPrice() * 1.2)))
+                .condition(singleBook.getCondition().getBookCondition())
+                .hardcover(singleBook.getHandcover())
+                .publisher(bookTemplate.getPublisher().getName())
+                .publicationDate(FormatterUtil.toDateTimeString(singleBook.getPublicationDate()))
+                .size(String.format("%.1f x %.1f x %.1f cm", singleBook.getHeight(), singleBook.getLength(), singleBook.getWidth()))
+                .weight(singleBook.getWeight())
+                .languages(languages)
+                .codeISBN10(singleBook.getCodeISBN10())
+                .codeISBN13(singleBook.getCodeISBN13())
+                .description(singleBook.getDescription())
+                .category(singleBook.getSubCategory().getCategory().getName())
+                .edition(singleBook.getEdition())
+                .recommendedAge(singleBook.getRecommendedAge().getBookAgeRecommend())
+                .quantity(bookTemplate.getBooks().stream().
+                        filter(book -> book.getBookMetadata().getStatus() == EBookMetadataStatus.IN_STOCK).count())
+                .salesCount(FormatterUtil.dotNumber(Long.valueOf(salesCount)))
+                .booksCount(FormatterUtil.dotNumber(Long.valueOf(booksCount)))
+                .revenue(FormatterUtil.commaNumber(revenue))
+                .salesCountThisMonth(FormatterUtil.dotNumber(Long.valueOf(salesCountThisMonth)))
+                .perSalesCountThisMonth(Double.parseDouble(FormatterUtil.percent(perSalesCountThisMonth)))
+                .booksCountThisMonth(FormatterUtil.dotNumber(Long.valueOf(booksCountThisMonth)))
+                .perBooksCountThisMonth(Double.parseDouble(FormatterUtil.percent(perBooksCountThisMonth)))
+                .revenueThisMonth(FormatterUtil.commaNumber(revenueThisMonth))
+                .perRevenueThisMonth(Double.parseDouble(FormatterUtil.percent(perRevenueThisMonth)))
+                .imageUrls(fileNames)
+                .authors(authors)
+                .translators(translators)
+                .reviews(reviews)
                 .build();
     }
 
@@ -108,9 +185,9 @@ public class BookTemplateMapper {
             authors.add(AuthorMapper.toAuthorProfileResponse(author));
         }
 
-        List<TranslatorResponse> translators = new ArrayList<>();
+        List<TranslatorProfileResponse> translators = new ArrayList<>();
         for (Translator translator : bookTemplate.getTranslators()) {
-            translators.add(TranslatorMapper.toTranslatorResponse(translator));
+            translators.add(TranslatorMapper.toTranslatorProfileResponse(translator));
         }
 
         List<ReviewResponse> reviews = bookTemplate.getReviews().stream()

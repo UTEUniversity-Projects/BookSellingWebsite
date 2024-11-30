@@ -98,13 +98,13 @@ public class ManageAuthorController extends HttpServlet {
             AuthorDeleteRequest authorDeleteRequest = HttpUtil.of(request.getReader()).toModel(AuthorDeleteRequest.class);
             AuthorProfileResponse authorProfileResponse = authorService.getProfileById(Long.valueOf(authorDeleteRequest.getId()));
 
-            authorService.deleteAuthor(authorDeleteRequest);
-            Boolean isImageDeleted = ManageFileUtil.deleteAuthorAvatar(request.getServletContext(), authorProfileResponse.getAvatar());
+            authorService.delete(authorDeleteRequest);
+            Boolean isImageDeleted = ManageFileUtil.deleteFileAvatar(authorProfileResponse.getAvatar(), "author");
 
             if (isImageDeleted) {
                 response.getWriter().write("{\"status\": \"success\", \"message\": \"Deleted successfully.\"}");
             } else {
-                response.getWriter().write("{\"status\": \"fail\", \"message\": \"Failed to delete author.\"}");
+                response.getWriter().write("{\"status\": \"fail\", \"message\": \"Failed to delete.\"}");
             }
         } catch (Exception e) {
             response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
@@ -143,12 +143,12 @@ public class ManageAuthorController extends HttpServlet {
         request.getRequestDispatcher("/views/owner/author-create.jsp").forward(request, response);
     }
 
-    private void createHandlerPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    private void createHandlerPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
         try {
             AuthorCreateRequest authorCreateRequest = HttpUtil.of(request.getReader()).toModel(AuthorCreateRequest.class);
             authorCreateRequest.setJoinAt(LocalDateTime.now().toString());
 
-            authorService.createAuthor(authorCreateRequest);
+            authorService.create(authorCreateRequest);
 
             response.setStatus(HttpServletResponse.SC_OK);  // 200 OK
             response.getWriter().write("{\"status\": \"success\", \"message\": \"Created successfully.\"}");
@@ -168,11 +168,11 @@ public class ManageAuthorController extends HttpServlet {
         request.getRequestDispatcher("/views/owner/author-update.jsp").forward(request, response);
     }
 
-    private void updateHandlerPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    private void updateHandlerPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
         try {
             AuthorUpdateRequest authorUpdateRequest = HttpUtil.of(request.getReader()).toModel(AuthorUpdateRequest.class);
 
-            authorService.updateAuthor(authorUpdateRequest);
+            authorService.update(authorUpdateRequest);
 
             response.setStatus(HttpServletResponse.SC_OK);  // 200 OK
             response.getWriter().write("{\"status\": \"success\", \"message\": \"Updated successfully.\"}");

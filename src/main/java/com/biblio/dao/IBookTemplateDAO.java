@@ -1,6 +1,7 @@
 package com.biblio.dao;
 
 import com.biblio.entity.BookTemplate;
+import com.biblio.enumeration.EBookMetadataStatus;
 import com.biblio.enumeration.EOrderStatus;
 
 import java.time.LocalDateTime;
@@ -28,6 +29,16 @@ public interface IBookTemplateDAO {
 
     Long countAll();
 
-    Long calculateValueBooksSoldInRange(Long id, EOrderStatus status, LocalDateTime from, LocalDateTime to);
+    Integer countOrdersByStatus(Long id, EOrderStatus status);
+
+    Integer countOrdersInRangeByStatus(Long id, LocalDateTime from, LocalDateTime to, EOrderStatus status);
+
+    Integer countBooksInOrderByStatus(Long id, EBookMetadataStatus bookStatus, EOrderStatus orderStatus);
+
+    Integer countBooksInRangeByStatus(Long id, LocalDateTime from, LocalDateTime to, EBookMetadataStatus bookStatus, EOrderStatus orderStatus);
+
+    Long calculateValueBooksSoldInRange(Long id, LocalDateTime from, LocalDateTime to, EOrderStatus status);
+
+    Long calculateValueBooksSold(Long id, EOrderStatus status);
 
 }

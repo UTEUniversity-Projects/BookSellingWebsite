@@ -13,8 +13,8 @@ public interface IAuthorService {
     List<AuthorLineResponse> getAll();
     AuthorProfileResponse getProfileById(Long id);
     AuthorAnalysisResponse getAnalysisById(Long id);
-    void createAuthor(AuthorCreateRequest authorRequest);
-    void updateAuthor(AuthorUpdateRequest authorRequest);
-    void deleteAuthor(AuthorDeleteRequest id);
+    void create(AuthorCreateRequest authorRequest);
+    void update(AuthorUpdateRequest authorRequest);
+    void delete(AuthorDeleteRequest authorDeleteRequest);
     Integer countBookTemplate(AuthorDeleteRequest id);
 }

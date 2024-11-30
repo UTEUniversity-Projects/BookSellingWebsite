@@ -75,14 +75,14 @@ function executeDeleteAction(itemId) {
                 if (row) {
                     row.remove();
                 }
-                showToast("Xóa thành công!", "Thành công", "success");
+                showToast("Xóa tác giả thành công!", "Thành công", "success");
             } else {
-                showToast("Xóa thất bại!", "Lỗi", "error");
+                showToast("Xóa tác giả thất bại!", "Lỗi", "error");
             }
         })
         .catch((error) => {
             console.error("Error:", error);
-            showToast("Có lỗi xảy ra khi xóa!", "Lỗi", "error");
+            showToast("Có lỗi xảy ra khi xóa tác giả!", "Lỗi", "error");
         });
 }
 
@@ -252,16 +252,16 @@ document.addEventListener("DOMContentLoaded", () => {
             const result = await response.json();
 
             if (result.status === "success") {
-                showToast("Thêm mới thành công!", "Thành công", "success", 2000);
+                showToast("Thêm tác giả thành công!", "Thành công", "success", 2000);
                 setTimeout(() => {
                     window.location.href = `${contextPath}/owner/author/list`;
-                }, 2000);
+                }, 1000);
             } else {
-                showToast("Thêm mới thất bại!", "Lỗi", "error");
+                showToast("Thêm tác giả thất bại!", "Lỗi", "error");
                 console.error("Create failed:", result.message || response.statusText);
             }
         } catch (error) {
-            showToast("Đã xảy ra lỗi khi thêm mới!", "Lỗi", "error");
+            showToast("Đã xảy ra lỗi khi thêm tác giả!", "Lỗi", "error");
             console.error("Error during the author process:", error);
         }
     };
@@ -293,7 +293,8 @@ document.addEventListener("DOMContentLoaded", () => {
                 id: formData.get("id"),
                 name: name,
                 avatar: avatar,
-                introduction: introduction
+                introduction: introduction,
+                joinAt: formData.get("joinAt")
             };
 
             const response = await fetch(`${contextPath}/owner/author/update`, {
@@ -307,15 +308,17 @@ document.addEventListener("DOMContentLoaded", () => {
             const result = await response.json();
 
             if (result.status === "success") {
-                showToast("Cập nhật thành công!", "Thành công", "success");
-                setTimeout(() => {rowAction(authorData.id, "view"); }, 1000);
+                showToast("Cập nhật tác giả thành công!", "Thành công", "success");
+                setTimeout(() => {
+                    rowAction(authorData.id, "view");
+                }, 1000);
             } else {
-                showToast("Cập nhật thất bại!", "Lỗi", "error");
+                showToast("Cập nhật tác giả thất bại!", "Lỗi", "error");
                 console.error("Update failed:", result.message || response.statusText);
             }
         } catch (error) {
             console.error("Error during the author update process:", error);
-            showToast("Đã xảy ra lỗi khi cập nhật!", "Lỗi", "error");
+            showToast("Đã xảy ra lỗi khi cập nhật tác giả!", "Lỗi", "error");
         }
     };
 

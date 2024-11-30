@@ -50,14 +50,15 @@
                                             </div>
                                         </div>
                                         <br>
-                                        <input id="id" name="id" value="${author.id}" class="form-control" type="hidden" />
-                                        <input id="originAvatar" name="originAvatar" value="${author.avatar}" class="form-control" type="hidden" />
                                         <div class="col-12">
                                             <label for="name">Họ và tên</label>
                                             <input id="name" name="name" class="form-control here slug-title author-name" type="text"
                                                    value="${author.name}" />
                                         </div>
                                         <br>
+                                        <input id="id" name="id" value="${author.id}" class="form-control" type="hidden" />
+                                        <input id="joinAt" name="joinAt" value="${author.joinAt}" class="form-control" type="hidden" />
+                                        <input id="originAvatar" name="originAvatar" value="${author.avatar}" class="form-control" type="hidden" />
                                         <div class="cr-settings d-flex justify-content-center">
                                             <button id="updateButton" type="button" class="cr-btn-primary rounded">Cập nhật</button>
                                         </div>

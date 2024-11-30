@@ -13,4 +13,5 @@ public class AuthorUpdateRequest {
     String name;
     String avatar;
     String introduction;
+    String joinAt;
 }

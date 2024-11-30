@@ -1,17 +1,14 @@
-package com.biblio.dto.response;
+package com.biblio.dto.request;
 
 import lombok.*;
 import lombok.experimental.FieldDefaults;
 
-import java.time.LocalDateTime;
-
 @Data
 @Builder
-@NoArgsConstructor
 @AllArgsConstructor
+@NoArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE)
-public class TranslatorResponse {
-    String id;
+public class TranslatorCreateRequest {
     String name;
     String avatar;
     String introduction;

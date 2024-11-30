@@ -1,5 +1,6 @@
 package com.biblio.controller.owner;
 
+import com.biblio.dto.response.BookAnalysisResponse;
 import com.biblio.dto.response.BookDetailsResponse;
 import com.biblio.dto.response.BookLineResponse;
 import com.biblio.service.IBookTemplateService;
@@ -106,7 +107,7 @@ public class ManageProductController extends HttpServlet {
 
     private void viewHandler(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         Long bookId = Long.parseLong(request.getParameter("id"));
-        BookDetailsResponse book = bookTemplateService.getBookDetailsResponse(bookId);
+        BookAnalysisResponse book = bookTemplateService.getBookAnalysisResponse(bookId);
 
         request.setAttribute("book", book);
         request.getRequestDispatcher("/views/owner/product-details.jsp").forward(request, response);

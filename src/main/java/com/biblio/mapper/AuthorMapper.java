@@ -1,43 +1,63 @@
 package com.biblio.mapper;
 
+import com.biblio.dto.request.AuthorCreateRequest;
+import com.biblio.dto.request.AuthorUpdateRequest;
 import com.biblio.dto.response.AuthorAnalysisResponse;
 import com.biblio.dto.response.AuthorLineResponse;
 import com.biblio.dto.response.AuthorProfileResponse;
 import com.biblio.entity.Author;
+import com.biblio.utils.FormatterUtil;
 
-import java.text.DecimalFormat;
-import java.time.format.DateTimeFormatter;
+import java.time.LocalDateTime;
 import java.util.List;
 
 public class AuthorMapper {
 
+    // Before DTO Request to Entity
+
+    public static Author toAuthor(AuthorCreateRequest authorCreateRequest) {
+        return Author.builder()
+                .name(authorCreateRequest.getName())
+                .avatar(authorCreateRequest.getAvatar())
+                .introduction(authorCreateRequest.getIntroduction())
+                .joinAt(LocalDateTime.now())
+                .build();
+    }
+
+    public static Author toAuthor(AuthorUpdateRequest authorUpdateRequest) {
+        return Author.builder()
+                .id(Long.valueOf(authorUpdateRequest.getId()))
+                .name(authorUpdateRequest.getName())
+                .avatar(authorUpdateRequest.getAvatar())
+                .introduction(authorUpdateRequest.getIntroduction())
+                .joinAt(FormatterUtil.toLocalDateTime(authorUpdateRequest.getJoinAt()))
+                .build();
+    }
+
+    // End DTO Request to Entity
+
+    // Before Entity to DTO Response
+
     public static AuthorProfileResponse toAuthorProfileResponse(Author author) {
         return AuthorProfileResponse.builder()
-                .id(author.getId() != null ? author.getId().toString() : "")
-                .name(author.getName() != null ? author.getName() : "")
-                .avatar(author.getAvatar() != null ? author.getAvatar() : "")
-                .introduction(author.getIntroduction() != null ? author.getIntroduction() : "")
-                .joinAt(author.getJoinAt().format(DateTimeFormatter.ofPattern("dd/MM/yyyy")))
+                .id(author.getId().toString())
+                .name(author.getName())
+                .avatar(author.getAvatar())
+                .introduction(author.getIntroduction())
+                .joinAt(FormatterUtil.toDateTimeString(author.getJoinAt()))
                 .build();
     }
 
     public static AuthorLineResponse toAuthorLineResponse(Author author, Integer works, Double avgRate, Double perValueBooksSold) {
-        DecimalFormat percentFormatter = new DecimalFormat("#.0");
-
-        String introduction = author.getIntroduction();
-        if (introduction != null && introduction.length() > 150) {
-            introduction = introduction.substring(0, 150) + "...";
-        }
-
         return AuthorLineResponse.builder()
                 .id(author.getId().toString())
                 .name(author.getName())
                 .avatar(author.getAvatar())
-                .introduction(introduction)
-                .joinAt(author.getJoinAt().format(DateTimeFormatter.ofPattern("dd/MM/yyyy")))
-                .works(works != null ? works.toString() : "0")
-                .avgRate(avgRate != null ? String.format("%.1f", avgRate) : "N/A")
-                .perValueBooksSold(perValueBooksSold != null ? Double.parseDouble(percentFormatter.format(perValueBooksSold)) : 0.0D)
+                .introduction(FormatterUtil.description(author.getIntroduction(), 150))
+                .joinAt(FormatterUtil.toDateTimeString(author.getJoinAt()))
+                .works(works.toString())
+                .avgRate(FormatterUtil.rating(avgRate))
+                .perValueBooksSold(Double.parseDouble(FormatterUtil.percent(perValueBooksSold)))
                 .build();
     }
 
@@ -73,44 +93,44 @@ public class AuthorMapper {
             Long valueOrdersRefunded,
             List<String> topSubCategory
     ) {
-        DecimalFormat formatter = new DecimalFormat("#,###,###,###,###,###,###");
-        DecimalFormat percentFormatter = new DecimalFormat("#.0");
-
         return AuthorAnalysisResponse.builder()
                 .id(author.getId().toString())
                 .name(author.getName())
                 .avatar(author.getAvatar())
                 .introduction(author.getIntroduction())
-                .joinAt(author.getJoinAt().format(DateTimeFormatter.ofPattern("dd/MM/yyyy")))
-                .works(works != null ? works.toString() : "0")
-                .avgRate(avgRate != null ? String.format("%.1f", avgRate) : "N/A")
-                .sales(sales != null ? sales.toString() : "0")
-                .perSales(perSales != null ? Double.parseDouble(percentFormatter.format(perSales)) : 0.0D)
-                .booksSold(booksSold != null ? String.format("%,d", booksSold) : "0")
-                .perBooksSold(perBooksSold != null ? Double.parseDouble(percentFormatter.format(perBooksSold)) : 0.0D)
-                .valueBooksSold(valueBooksSold != null ? formatter.format(valueBooksSold).replace(",", ".") : "0")
-                .perValueBooksSold(perValueBooksSold != null ? Double.parseDouble(percentFormatter.format(perValueBooksSold)) : 0.0D)
-                .booksInStock(booksInStock != null ? booksInStock.toString() : "0")
-                .booksCancelled(booksCancelled != null ? booksCancelled.toString() : "0")
-                .booksReturned(booksReturned != null ? booksReturned.toString() : "0")
-                .salesThisMonth(salesThisMonth != null ? salesThisMonth.toString() : "0")
-                .booksThisMonth(booksThisMonth != null ? booksThisMonth.toString() : "0")
-                .revenueThisMonth(revenueThisMonth != null ? formatter.format(revenueThisMonth).replace(",", ".") : "0")
-                .ordersCompleted(ordersCompleted != null ? ordersCompleted.toString() : "0")
-                .valueOrdersCompleted(valueOrdersCompleted != null ? formatter.format(valueOrdersCompleted).replace(",", ".") : "0")
-                .ordersWaiting(ordersWaiting != null ? ordersWaiting.toString() : "0")
-                .valueOrdersWaiting(valueOrdersWaiting != null ? formatter.format(valueOrdersWaiting).replace(",", ".") : "0")
-                .orderPacking(orderPacking != null ? orderPacking.toString() : "0")
-                .valueOrderPacking(valueOrderPacking != null ? formatter.format(valueOrderPacking).replace(",", ".") : "0")
-                .orderShipping(orderShipping != null ? orderShipping.toString() : "0")
-                .valueOrderShipping(valueOrderShipping != null ? formatter.format(valueOrderShipping).replace(",", ".") : "0")
-                .ordersCancelled(ordersCancelled != null ? ordersCancelled.toString() : "0")
-                .valueOrdersCancelled(valueOrdersCancelled != null ? formatter.format(valueOrdersCancelled).replace(",", ".") : "0")
-                .ordersRequestRefund(ordersRequestRefund != null ? ordersRequestRefund.toString() : "0")
-                .valueOrdersRequestRefund(valueOrdersRequestRefund != null ? formatter.format(valueOrdersRequestRefund).replace(",", ".") : "0")
-                .ordersRefunded(ordersRefunded != null ? ordersRefunded.toString() : "0")
-                .valueOrdersRefunded(valueOrdersRefunded != null ? formatter.format(valueOrdersRefunded).replace(",", ".") : "0")
-                .topSubCategory(topSubCategory != null ? topSubCategory : List.of())
+                .joinAt(FormatterUtil.toDateTimeString(author.getJoinAt()))
+                .works(works.toString())
+                .avgRate(FormatterUtil.rating(avgRate))
+                .sales(sales.toString())
+                .perSales(Double.parseDouble(FormatterUtil.percent(perSales)))
+                .booksSold(FormatterUtil.dotNumber(Long.valueOf(booksSold)))
+                .perBooksSold(Double.parseDouble(FormatterUtil.percent(perBooksSold)))
+                .valueBooksSold(FormatterUtil.commaNumber(valueBooksSold))
+                .perValueBooksSold(Double.parseDouble(FormatterUtil.percent(perValueBooksSold)))
+                .booksInStock(booksInStock.toString())
+                .booksCancelled(booksCancelled.toString())
+                .booksReturned(booksReturned.toString())
+                .salesThisMonth(salesThisMonth.toString())
+                .booksThisMonth(booksThisMonth.toString())
+                .revenueThisMonth(FormatterUtil.commaNumber(revenueThisMonth))
+                .ordersCompleted(ordersCompleted.toString())
+                .valueOrdersCompleted(FormatterUtil.commaNumber(valueOrdersCompleted))
+                .ordersWaiting(ordersWaiting.toString())
+                .valueOrdersWaiting(FormatterUtil.commaNumber(valueOrdersWaiting))
+                .orderPacking(orderPacking.toString())
+                .valueOrderPacking(FormatterUtil.commaNumber(valueOrderPacking))
+                .orderShipping(orderShipping.toString())
+                .valueOrderShipping(FormatterUtil.commaNumber(valueOrderShipping))
+                .ordersCancelled(ordersCancelled.toString())
+                .valueOrdersCancelled(FormatterUtil.commaNumber(valueOrdersCancelled))
+                .ordersRequestRefund(ordersRequestRefund.toString())
+                .valueOrdersRequestRefund(FormatterUtil.commaNumber(valueOrdersRequestRefund))
+                .ordersRefunded(ordersRefunded.toString())
+                .valueOrdersRefunded(FormatterUtil.commaNumber(valueOrdersRefunded))
+                .topSubCategory(topSubCategory)
                 .build();
     }
+
+    // End Entity to DTO Response
+
 }

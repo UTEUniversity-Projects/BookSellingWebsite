@@ -32,7 +32,7 @@ public class BookDetailsResponse {
     private List<String> imageUrls;
     private String publisher;
     private List<AuthorProfileResponse> authors;
-    private List<TranslatorResponse> translators;
+    private List<TranslatorProfileResponse> translators;
     private List<ReviewResponse> reviews;
     private int reviewCount;
 }

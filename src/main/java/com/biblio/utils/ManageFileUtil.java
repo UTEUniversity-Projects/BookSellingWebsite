@@ -10,9 +10,9 @@ import java.util.Objects;
 
 public class ManageFileUtil {
 
-    public static Boolean deleteAuthorAvatar(ServletContext servletContext, String filePath) {
+    public static Boolean deleteFileAvatar(String filePath, String type) {
         try {
-            if (Objects.equals(filePath, StoredFileConstants.AUTHOR_DEFAULT_AVA)) {
+            if (Objects.equals(filePath, getDefaultAvatar(type))) {
                 return true;
             }
 
@@ -25,5 +25,14 @@ public class ManageFileUtil {
             e.printStackTrace();
             return false;
         }
+    }
+
+    private static String getDefaultAvatar(String type) {
+        return switch (type) {
+            case "author" -> StoredFileConstants.AUTHOR_DEFAULT_AVA;
+            case "translator" -> StoredFileConstants.TRANSLATOR_DEFAULT_AVA;
+            case "publisher" -> StoredFileConstants.PUBLISHER_DEFAULT_AVA;
+            default -> "";
+        };
     }
 }

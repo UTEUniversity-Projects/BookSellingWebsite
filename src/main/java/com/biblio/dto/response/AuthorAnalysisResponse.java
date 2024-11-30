@@ -1,6 +1,5 @@
 package com.biblio.dto.response;
 
-import com.biblio.entity.Author;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
 

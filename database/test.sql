@@ -1,4 +1,59 @@
 
+SELECT sc.name
+FROM (
+	SELECT b.sub_category_id, COUNT(DISTINCT ab_template.book_template_id) unique_book_template
+	FROM (
+		SELECT bt.id book_template_id
+		FROM book_template bt
+		WHERE bt.publisher_id = 1
+	) ab_template
+	JOIN book b
+	ON ab_template.book_template_id = b.book_template_id
+	GROUP BY b.sub_category_id
+	ORDER BY unique_book_template DESC
+) sc_book_template
+JOIN sub_category sc
+ON sc_book_template.sub_category_id = sc.id;
+
+SELECT COUNT(*) amount
+FROM book_template bt
+WHERE bt.publisher_id = 1 AND bt.status = 'ON_SALE';
+
+
+SELECT COUNT(*) amount
+FROM (
+		(SELECT book_template_id
+		FROM publisher_book_template abt
+		WHERE abt.publisher_id = 1
+	) ab_template
+	LEFT JOIN book_template bt
+	ON ab_template.book_template_id = bt.id
+) WHERE bt.status = 'ON_SALE'
+
+-- bookTemplate - countBooksInRangeByStatus
+SELECT SUM(oi_books) amount
+FROM (
+	SELECT oi.order_id, SUM(i_books) oi_books
+	FROM (
+		SELECT oib.order_item_id, COUNT(book_id) i_books
+		FROM (
+			SELECT b.id
+			FROM book_template bt
+			LEFT JOIN book b
+			ON bt.id = b.book_template_id
+			WHERE bt.id = 1
+		) books
+		JOIN order_item_books oib
+		ON books.id = oib.book_id
+		GROUP BY oib.order_item_id
+	) order_bi
+	JOIN order_item oi
+	ON order_bi.order_item_id = oi.id
+    GROUP BY oi.order_id
+) orders
+JOIN `order` o
+ON orders.order_id = o.id
+WHERE o.status = 'COMPLETE_DELIVERY' AND (o.order_date BETWEEN '2024-11-03' AND '2024-11-10');
 
 -- bookTemplate - calculateValueBooksSoldInRange
 SELECT SUM(value_books) revenue

@@ -101,12 +101,12 @@
                             </div>
                             <p>(${book.reviewCount} đánh giá)</p>
                             <p class="ms-2 me-2">|</p>
-                            <p class="book-sold-count">10 lượt bán</p>
+                            <p class="book-sold-count">${book.booksCount} lượt bán</p>
                         </div>
                         <div class="cr-card-customer mini-card-3d-deep" style="margin-top: 20px;">
                             <div class="cr-size-and-weight mt-0 pt-0">
                                 <div class="book-format">
-                                    Bìa cứng
+                                    ${book.format}
                                 </div>
                                 <div class="cr-product-price pt-0">
                                     <span class="current-price">
@@ -115,7 +115,7 @@
                                     </span>
                                 </div>
                                 <div class="d-flex align-items-center">
-                                    <div class="old-price">${book.sellingPrice * 1.2}₫</div>
+                                    <div class="old-price">${book.originPrice}₫</div>
                                     <p class="ms-2 me-2">|</p>
                                     <div class="d-flex align-items-center" style="color: #2b3647;">
                                         <i class="ri-community-line me-1" style="font-size: 20px;"></i>
@@ -146,21 +146,21 @@
                                                 <li>
                                                     <i class="ri-shopping-basket-line color-primary ps-1 pe-1 icon-large"></i>
                                                     <span class="label">Số đơn :</span>&nbsp;
-                                                    <b>10</b> đơn
+                                                    <b>${book.salesCount}</b> đơn
                                                 </li>
                                             </div>
                                             <div class="d-flex align-items-center">
                                                 <li>
                                                     <i class="ri-book-mark-line color-success ps-1 pe-1 icon-large"></i>
                                                     <span class="label">Đã bán :</span>&nbsp;
-                                                    <b>10</b> quyển
+                                                    <b>${book.booksCount}</b> quyển
                                                 </li>
                                             </div>
                                             <div class="d-flex align-items-center">
                                                 <li>
                                                     <i class="ri-money-dollar-circle-line color-warning ps-1 pe-1 icon-large"></i>
                                                     <span class="label">Doanh thu :</span>&nbsp;
-                                                    <b class="value-books-sold-this-month">10 VNĐ</b>
+                                                    <b class="value-books-sold-this-month">${book.revenue}₫</b>
                                                 </li>
                                             </div>
                                         </ul>
@@ -174,25 +174,25 @@
                                                 <li class="d-flex">
                                                     <i class="ri-shopping-basket-line color-primary ps-1 pe-1 icon-large"></i>
                                                     <span class="label">Số đơn :</span>&nbsp;
-                                                    <p><b>10</b> đơn</p>
+                                                    <p><b>${book.salesCountThisMonth}</b> đơn</p>
                                                     <div class="label-card align-items-center ms-3">
                                                         <c:choose>
-                                                            <c:when test="${book.quantity == 0}">
+                                                            <c:when test="${book.perSalesCountThisMonth == 0}">
                                                                 <div class="up mt-0 d-flex">
                                                                     <i class="ri-arrow-up-line me-1 icon-growth non-growth"></i>
-                                                                    <p class="non-growth">${book.quantity}%</p>
+                                                                    <p class="non-growth">${book.perSalesCountThisMonth}%</p>
                                                                 </div>
                                                             </c:when>
-                                                            <c:when test="${book.quantity > 0}">
+                                                            <c:when test="${book.perSalesCountThisMonth > 0}">
                                                                 <div class="up mt-0 d-flex">
                                                                     <i class="ri-arrow-up-line me-1 icon-growth"></i>
-                                                                    <p class="up-growth">${book.quantity}%</p>
+                                                                    <p class="up-growth">${book.perSalesCountThisMonth}%</p>
                                                                 </div>
                                                             </c:when>
                                                             <c:otherwise>
                                                                 <div class="down mt-0 d-flex">
                                                                     <i class="ri-arrow-down-line me-1 icon-growth"></i>
-                                                                    <p class="down-growth">${-book.quantity}%</p>
+                                                                    <p class="down-growth">${-book.perSalesCountThisMonth}%</p>
                                                                 </div>
                                                             </c:otherwise>
                                                         </c:choose>
@@ -203,25 +203,25 @@
                                                 <li class="d-flex">
                                                     <i class="ri-book-mark-line color-success ps-1 pe-1 icon-large"></i>
                                                     <span class="label">Đã bán :</span>&nbsp;
-                                                    <p><b>10</b> quyển</p>
+                                                    <p><b>${book.booksCountThisMonth}</b> quyển</p>
                                                     <div class="label-card align-items-center ms-3">
                                                         <c:choose>
-                                                            <c:when test="${book.quantity == 0}">
+                                                            <c:when test="${book.perBooksCountThisMonth == 0}">
                                                                 <div class="up mt-0 d-flex">
                                                                     <i class="ri-arrow-up-line me-1 icon-growth non-growth"></i>
-                                                                    <p class="non-growth">${book.quantity}%</p>
+                                                                    <p class="non-growth">${book.perBooksCountThisMonth}%</p>
                                                                 </div>
                                                             </c:when>
-                                                            <c:when test="${book.quantity > 0}">
+                                                            <c:when test="${book.perBooksCountThisMonth > 0}">
                                                                 <div class="up mt-0 d-flex">
                                                                     <i class="ri-arrow-up-line me-1 icon-growth"></i>
-                                                                    <p class="up-growth">${book.quantity}%</p>
+                                                                    <p class="up-growth">${book.perBooksCountThisMonth}%</p>
                                                                 </div>
                                                             </c:when>
                                                             <c:otherwise>
                                                                 <div class="down mt-0 d-flex">
                                                                     <i class="ri-arrow-down-line me-1 icon-growth"></i>
-                                                                    <p class="down-growth">${-book.quantity}%</p>
+                                                                    <p class="down-growth">${-book.perBooksCountThisMonth}%</p>
                                                                 </div>
                                                             </c:otherwise>
                                                         </c:choose>
@@ -232,25 +232,25 @@
                                                 <li class="d-flex">
                                                     <i class="ri-money-dollar-circle-line color-warning ps-1 pe-1 icon-large"></i>
                                                     <span class="label">Doanh thu :</span>&nbsp;
-                                                    <b class="value-books-sold-this-month">100.000.000Đ</b>
+                                                    <b class="value-books-sold-this-month">${book.revenueThisMonth}₫</b>
                                                     <div class="label-card align-items-center ms-3">
                                                         <c:choose>
-                                                            <c:when test="${book.quantity == 0}">
+                                                            <c:when test="${book.perRevenueThisMonth == 0}">
                                                                 <div class="up mt-0 d-flex">
                                                                     <i class="ri-arrow-up-line me-1 icon-growth non-growth"></i>
-                                                                    <p class="non-growth">${book.quantity}%</p>
+                                                                    <p class="non-growth">${book.perRevenueThisMonth}%</p>
                                                                 </div>
                                                             </c:when>
-                                                            <c:when test="${book.quantity > 0}">
+                                                            <c:when test="${book.perRevenueThisMonth > 0}">
                                                                 <div class="up mt-0 d-flex">
                                                                     <i class="ri-arrow-up-line me-1 icon-growth"></i>
-                                                                    <p class="up-growth">${book.quantity}%</p>
+                                                                    <p class="up-growth">${book.perRevenueThisMonth}%</p>
                                                                 </div>
                                                             </c:when>
                                                             <c:otherwise>
                                                                 <div class="down mt-0 d-flex">
                                                                     <i class="ri-arrow-down-line me-1 icon-growth"></i>
-                                                                    <p class="down-growth">${-book.quantity}%</p>
+                                                                    <p class="down-growth">${-book.perRevenueThisMonth}%</p>
                                                                 </div>
                                                             </c:otherwise>
                                                         </c:choose>
@@ -275,17 +275,6 @@
                         </div>
                         <div class="slider-info-value text-center">
                             ${book.hardcover} trang
-                        </div>
-                    </div>
-                    <div>
-                        <div class="slider-info-title text-center">
-                            Ngôn ngữ
-                        </div>
-                        <div class="slider-icon text-center">
-                            <i class="ri-earth-line"></i>
-                        </div>
-                        <div class="slider-info-value text-center">
-                            ${book.languages}
                         </div>
                     </div>
                     <div>
@@ -334,6 +323,17 @@
                     </div>
                     <div>
                         <div class="slider-info-title text-center">
+                            Ngôn ngữ
+                        </div>
+                        <div class="slider-icon text-center">
+                            <i class="ri-earth-line"></i>
+                        </div>
+                        <div class="slider-info-value text-center">
+                            ${book.languages}
+                        </div>
+                    </div>
+                    <div>
+                        <div class="slider-info-title text-center">
                             ISBN-10
                         </div>
                         <div class="slider-icon text-center">
@@ -351,7 +351,7 @@
                             <i class="ri-barcode-fill"></i>
                         </div>
                         <div class="slider-info-value text-center">
-                            ${book.codeISBN10}
+                            ${book.codeISBN13}
                         </div>
                     </div>
                 </div>
@@ -451,15 +451,25 @@
                                         </li>
                                         <li>
                                             <label>Số lượng <span>:</span></label>
-                                            ${book.quantity}
+                                            ${book.quantity} quyển
                                         </li>
                                         <li>
                                             <label>Tác giả <span>:</span></label>
-                                            ${book.authors[0].name}
+                                            <c:forEach var="author" items="${book.authors}" varStatus="status">
+                                                <span class="name name-inline">${author.name}</span>
+                                                <c:if test="${!status.last}">
+                                                    ,
+                                                </c:if>
+                                            </c:forEach>
                                         </li>
                                         <li>
                                             <label>Dịch giả <span>:</span></label>
-                                            ${book.authors[0].name}
+                                            <c:forEach var="translator" items="${book.translators}" varStatus="status">
+                                                <span class="name name-inline">${translator.name}</span>
+                                                <c:if test="${!status.last}">
+                                                    ,
+                                                </c:if>
+                                            </c:forEach>
                                         </li>
                                         <li>
                                             <label>NXB <span>:</span></label>
@@ -471,7 +481,7 @@
                                         </li>
                                         <li>
                                             <label>Tái bản <span>:</span></label>
-                                            ${book.quantity}
+                                            lần thứ ${book.edition}
                                         </li>
                                     </ul>
                                 </div>
@@ -479,7 +489,7 @@
                                     <ul class="custom-char-list">
                                         <li>
                                             <label>Trọng lượng <span>:</span></label>
-                                            ${book.weight} gram
+                                            ${book.weight} kg
                                         </li>
                                         <li>
                                             <label>Kích thước <span>:</span></label>
@@ -487,7 +497,7 @@
                                         </li>
                                         <li>
                                             <label>Số trang <span>:</span></label>
-                                            ${book.hardcover}
+                                            ${book.hardcover} trang
                                         </li>
                                         <li>
                                             <label>Định dạng <span>:</span></label>

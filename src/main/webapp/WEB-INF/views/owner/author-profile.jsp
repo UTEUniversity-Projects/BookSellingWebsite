@@ -139,7 +139,7 @@
                                     <span class="icon icon-4"><i class="ri-exchange-dollar-line"></i></span>
                                     <div class="growth-numbers">
                                         <h4>Giá trị sách đã bán (VNĐ)</h4>
-                                        <h5>${author.valueBooksSold}</h5>
+                                        <h5>${author.valueBooksSold}₫</h5>
                                     </div>
                                 </div>
                                 <c:choose>
@@ -261,7 +261,7 @@
                                             <b>${author.ordersCompleted}</b> đơn, giá trị sách <b class="value-books-sold">${author.valueOrdersCompleted}₫</b>
                                         </li>
                                         <li><span class="label">Đang chờ duyệt :</span>&nbsp;
-                                            <b>${author.ordersWaiting}</b> đơn, giá trị sách <b>${author.valueOrdersWaiting}₫</b>
+                                            <b>${author.ordersWaiting}</b> đơn, giá trị sách <b>${author.valueOrdersWaiting} VNĐ</b>
                                         </li>
                                         <li><span class="label">Đang gói hàng :</span>&nbsp;
                                             <b>${author.orderPacking}</b> đơn, giá trị sách <b>${author.valueOrderPacking}₫</b>

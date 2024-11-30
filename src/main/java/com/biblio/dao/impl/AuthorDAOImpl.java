@@ -5,19 +5,15 @@ import com.biblio.dto.request.AuthorCreateRequest;
 import com.biblio.dto.request.AuthorDeleteRequest;
 import com.biblio.dto.request.AuthorUpdateRequest;
 import com.biblio.entity.Author;
-import com.biblio.entity.Book;
 import com.biblio.entity.BookTemplate;
 import com.biblio.enumeration.EBookMetadataStatus;
 import com.biblio.enumeration.EBookTemplateStatus;
 import com.biblio.enumeration.EOrderStatus;
+import com.biblio.mapper.AuthorMapper;
 import lombok.extern.slf4j.Slf4j;
 
-import java.sql.Timestamp;
 import java.time.LocalDateTime;
-import java.time.ZonedDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 
@@ -29,8 +25,8 @@ public class AuthorDAOImpl extends GenericDAOImpl<Author> implements IAuthorDAO 
     }
 
     @Override
-    public Author getEntityById(Long id) {
-        return super.findById(id);
+    public Author getEntityById(Long authorId) {
+        return super.findById(authorId);
     }
 
     @Override
@@ -52,7 +48,7 @@ public class AuthorDAOImpl extends GenericDAOImpl<Author> implements IAuthorDAO 
     }
 
     @Override
-    public List<String> getTopSubCategory(Long id) {
+    public List<String> getTopSubCategory(Long authorId) {
         String sql = """
                     SELECT sc.name
                     FROM (
@@ -65,74 +61,53 @@ public class AuthorDAOImpl extends GenericDAOImpl<Author> implements IAuthorDAO 
                         JOIN book b
                         ON ab_template.book_template_id = b.book_template_id
                         GROUP BY b.sub_category_id
-                        ORDER BY unique_book_template DESC) sc_book_template
+                        ORDER BY unique_book_template DESC
+                    ) sc_book_template
                     JOIN sub_category sc
                     ON sc_book_template.sub_category_id = sc.id
                  """;
 
         Map<String, Object> params = new HashMap<>();
-        params.put("authorId", id);
+        params.put("authorId", authorId);
 
         return super.findByNativeQuery(sql, params, String.class);
     }
 
     @Override
-    public void createAuthor(AuthorCreateRequest authorCreateRequest) {
-        String sql = "INSERT INTO author (name, avatar, introduction, join_at) " +
-                "VALUES (:name, :avatar, :introduction, :joinAt)";
-
-        Map<String, Object> params = new HashMap<>();
-        params.put("name", authorCreateRequest.getName());
-        params.put("avatar", authorCreateRequest.getAvatar());
-        params.put("introduction", authorCreateRequest.getIntroduction());
-        params.put("joinAt", authorCreateRequest.getJoinAt());
-
-        super.executeNativeQuery(sql, params);
-
+    public void create(AuthorCreateRequest authorCreateRequest) {
+        super.save(AuthorMapper.toAuthor(authorCreateRequest));
     }
 
     @Override
-    public void updateAuthor(AuthorUpdateRequest authorUpdateRequest) {
-        String sql = "UPDATE author SET " +
-                "name = :name, " +
-                "avatar = :avatar, " +
-                "introduction = :introduction " +
-                "WHERE id = :id";
+    public void update(AuthorUpdateRequest authorUpdateRequest) {
+        super.update(AuthorMapper.toAuthor(authorUpdateRequest));
+    }
+
+    @Override
+    public void delete(AuthorDeleteRequest authorDeleteRequest) {
+        String sql = "DELETE FROM author WHERE id = :authorId";
 
         Map<String, Object> params = new HashMap<>();
-        params.put("name", authorUpdateRequest.getName());
-        params.put("avatar", authorUpdateRequest.getAvatar());
-        params.put("introduction", authorUpdateRequest.getIntroduction());
-        params.put("id", authorUpdateRequest.getId());
+        params.put("authorId", authorDeleteRequest.getId());
 
         super.executeNativeQuery(sql, params);
     }
 
     @Override
-    public void deleteAuthor(AuthorDeleteRequest authorDeleteRequest) {
-        String sql = "DELETE FROM author WHERE id = :id";
-
-        Map<String, Object> params = new HashMap<>();
-        params.put("id", authorDeleteRequest.getId());
-
-        super.executeNativeQuery(sql, params);
-    }
-
-    @Override
-    public Integer countBooksTemplateAll(Long id) {
-        String jpql = "SELECT COUNT(*) author_works " +
+    public Integer countBooksTemplateAll(Long authorId) {
+        String sql = "SELECT COUNT(*) author_works " +
                 "FROM author_book_template abt " +
                 "WHERE abt.author_id = :authorId";
 
         Map<String, Object> params = new HashMap<>();
-        params.put("authorId", id);
+        params.put("authorId", authorId);
 
-        return Math.toIntExact(super.countByNativeQuery(jpql, params));
+        return Math.toIntExact(super.countByNativeQuery(sql, params));
     }
 
     @Override
-    public Integer countBooksTemplateByStatus(Long id, EBookTemplateStatus status) {
-        String jpql = """
+    public Integer countBooksTemplateByStatus(Long authorId, EBookTemplateStatus status) {
+        String sql = """
                     SELECT COUNT(*) amount
                     FROM (
                             (SELECT book_template_id
@@ -141,18 +116,18 @@ public class AuthorDAOImpl extends GenericDAOImpl<Author> implements IAuthorDAO 
                         ) ab_template
                         LEFT JOIN book_template bt
                         ON ab_template.book_template_id = bt.id
-                    ) WHERE bt.status = :templateStatus
+                    ) WHERE bt.status = :bookTemplateStatus
                  """;
 
         Map<String, Object> params = new HashMap<>();
-        params.put("authorId", id);
-        params.put("templateStatus", status.name());
+        params.put("authorId", authorId);
+        params.put("bookTemplateStatus", status.name());
 
-        return Math.toIntExact(super.countByNativeQuery(jpql, params));
+        return Math.toIntExact(super.countByNativeQuery(sql, params));
     }
 
     @Override
-    public Integer countBooksInRangeByStatus(Long id, LocalDateTime from, LocalDateTime to, EBookMetadataStatus bookStatus, EOrderStatus orderStatus) {
+    public Integer countBooksInRangeByStatus(Long authorId, LocalDateTime from, LocalDateTime to, EBookMetadataStatus bookStatus, EOrderStatus orderStatus) {
         String sql = """
                     SELECT SUM(books_count) amount
                     FROM (
@@ -188,7 +163,7 @@ public class AuthorDAOImpl extends GenericDAOImpl<Author> implements IAuthorDAO 
                  """;
 
         Map<String, Object> params = new HashMap<>();
-        params.put("authorId", id);
+        params.put("authorId", authorId);
         params.put("bookStatus", bookStatus.name());
         params.put("orderStatus", orderStatus.name());
         params.put("startDate", from.toString());
@@ -198,7 +173,7 @@ public class AuthorDAOImpl extends GenericDAOImpl<Author> implements IAuthorDAO 
     }
 
     @Override
-    public Integer countBooksByStatus(Long id, EBookMetadataStatus status) {
+    public Integer countBooksByStatus(Long authorId, EBookMetadataStatus status) {
         String sql = """
                     SELECT COUNT(*) author_books
                     FROM (
@@ -217,14 +192,14 @@ public class AuthorDAOImpl extends GenericDAOImpl<Author> implements IAuthorDAO 
                  """;
 
         Map<String, Object> params = new HashMap<>();
-        params.put("authorId", id);
+        params.put("authorId", authorId);
         params.put("bookStatus", status.name());
 
         return Math.toIntExact(super.countByNativeQuery(sql, params));
     }
 
     @Override
-    public Integer countBooksByOrderStatus(Long id, EOrderStatus status) {
+    public Integer countBooksByOrderStatus(Long authorId, EOrderStatus status) {
         String sql = """
                     SELECT SUM(books_count) amount
                     FROM (
@@ -259,14 +234,14 @@ public class AuthorDAOImpl extends GenericDAOImpl<Author> implements IAuthorDAO 
                  """;
 
         Map<String, Object> params = new HashMap<>();
-        params.put("authorId", id);
+        params.put("authorId", authorId);
         params.put("orderStatus", status.name());
 
         return Math.toIntExact(super.countByNativeQuery(sql, params));
     }
 
     @Override
-    public Integer countOrdersAll(Long id) {
+    public Integer countOrdersAll(Long authorId) {
         String sql = """
                     SELECT COUNT(*) amount
                     FROM (
@@ -294,13 +269,13 @@ public class AuthorDAOImpl extends GenericDAOImpl<Author> implements IAuthorDAO 
                  """;
 
         Map<String, Object> params = new HashMap<>();
-        params.put("authorId", id);
+        params.put("authorId", authorId);
 
         return Math.toIntExact(super.countByNativeQuery(sql, params));
     }
 
     @Override
-    public Integer countOrdersInRangeByStatus(Long id, LocalDateTime from, LocalDateTime to, EOrderStatus status) {
+    public Integer countOrdersInRangeByStatus(Long authorId, LocalDateTime from, LocalDateTime to, EOrderStatus status) {
         String sql = """
                     SELECT COUNT(*) amount
                     FROM (
@@ -329,7 +304,7 @@ public class AuthorDAOImpl extends GenericDAOImpl<Author> implements IAuthorDAO 
                  """;
 
         Map<String, Object> params = new HashMap<>();
-        params.put("authorId", id);
+        params.put("authorId", authorId);
         params.put("orderStatus", status.name());
         params.put("startDate", from.toString());
         params.put("endDate", to.toString());
@@ -338,7 +313,7 @@ public class AuthorDAOImpl extends GenericDAOImpl<Author> implements IAuthorDAO 
     }
 
     @Override
-    public Integer countOrdersByStatus(Long id, EOrderStatus status) {
+    public Integer countOrdersByStatus(Long authorId, EOrderStatus status) {
         String sql = """
                     SELECT COUNT(*) amount
                     FROM (
@@ -367,14 +342,14 @@ public class AuthorDAOImpl extends GenericDAOImpl<Author> implements IAuthorDAO 
                  """;
 
         Map<String, Object> params = new HashMap<>();
-        params.put("authorId", id);
+        params.put("authorId", authorId);
         params.put("orderStatus", status.name());
 
         return Math.toIntExact(super.countByNativeQuery(sql, params));
     }
 
     @Override
-    public Long calculateValueBooksSold(Long id) {
+    public Long calculateValueBooksSold(Long authorId) {
         String sql = """
                     SELECT SUM(selling_price) price
                     FROM (
@@ -393,14 +368,14 @@ public class AuthorDAOImpl extends GenericDAOImpl<Author> implements IAuthorDAO 
                  """;
 
         Map<String, Object> params = new HashMap<>();
-        params.put("authorId", id);
+        params.put("authorId", authorId);
         params.put("bookStatus", EBookMetadataStatus.SOLD.name());
 
         return (long) Math.toIntExact(super.countByNativeQuery(sql, params));
     }
 
     @Override
-    public Long calculateValueBooksSoldInRange(Long id, LocalDateTime from, LocalDateTime to) {
+    public Long calculateValueBooksSoldInRange(Long authorId, LocalDateTime from, LocalDateTime to) {
         String sql = """
                     SELECT SUM(sum_books) amount
                     FROM (
@@ -430,7 +405,7 @@ public class AuthorDAOImpl extends GenericDAOImpl<Author> implements IAuthorDAO 
                  """;
 
         Map<String, Object> params = new HashMap<>();
-        params.put("authorId", id);
+        params.put("authorId", authorId);
         params.put("orderStatus", EOrderStatus.COMPLETE_DELIVERY.name());
         params.put("startDate", from.toString());
         params.put("endDate", to.toString());
@@ -439,7 +414,7 @@ public class AuthorDAOImpl extends GenericDAOImpl<Author> implements IAuthorDAO 
     }
 
     @Override
-    public Long calculateValueOrdersSoldByStatus(Long id, EOrderStatus status) {
+    public Long calculateValueOrdersSoldByStatus(Long authorId, EOrderStatus status) {
         String sql = """
                     SELECT SUM(sum_books) amount
                     FROM (
@@ -469,14 +444,14 @@ public class AuthorDAOImpl extends GenericDAOImpl<Author> implements IAuthorDAO 
                  """;
 
         Map<String, Object> params = new HashMap<>();
-        params.put("authorId", id);
+        params.put("authorId", authorId);
         params.put("orderStatus", status.name());
 
         return (long) Math.toIntExact(super.countByNativeQuery(sql, params));
     }
 
     @Override
-    public Double calculateAverageRating(Long id) {
+    public Double calculateAverageRating(Long authorId) {
         String sql = """
                     SELECT COALESCE(AVG(review.rate), 0) AS average_amount
                     FROM (
@@ -489,7 +464,7 @@ public class AuthorDAOImpl extends GenericDAOImpl<Author> implements IAuthorDAO 
                  """;
 
         Map<String, Object> params = new HashMap<>();
-        params.put("authorId", id);
+        params.put("authorId", authorId);
 
         return (double) Math.toIntExact(super.countByNativeQuery(sql, params));
     }
