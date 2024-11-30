@@ -7653,6 +7653,18 @@ table {
   background-color: #e65c00;
 }
 
+.gender-options {
+  display: flex; /* Đặt các phần tử bên trong thành hàng ngang */
+  align-items: center; /* Căn giữa theo chiều dọc */
+}
+
+.gender-options label {
+  margin-right: 200px; /* Khoảng cách giữa 2 label */
+  display: flex; /* Đảm bảo các phần tử trong label nằm ngang */
+  align-items: center; /* Căn chỉnh radio button và text theo chiều dọc */
+  gap: 5px; /* Khoảng cách giữa radio button và text */
+}
+
 .review-section {
   background-color: #fff;
   padding: 25px;
@@ -9782,7 +9794,7 @@ p {
   padding-bottom: 20px;
 }
 
-.top-container {
+.book-container {
   border-top: 1px solid #30cb83 !important; /* Dùng !important để đảm bảo nó được áp dụng */
   padding-top: 20px;
 }
@@ -9840,7 +9852,7 @@ p {
   margin-top: -2px;
   border-radius: 100vmax;
   background-color: #ebebeb;
-  background-image: linear-gradient(to right, transparent var(--range-slider-value-low-fallback), #000 var(--range-slider-value-low-fallback), #000 var(--range-slider-value-high-fallback), transparent var(--range-slider-value-high-fallback));
+  background-image: linear-gradient(to right, transparent var(--range-slider-value-low-fallback), #26a497 var(--range-slider-value-low-fallback), #26a497 var(--range-slider-value-high-fallback), transparent var(--range-slider-value-high-fallback));
   pointer-events: none;
 }
 .range-slider__display {
@@ -9849,7 +9861,7 @@ p {
 .range-slider__display::before, .range-slider__display::after {
   content: attr(data-span);
   position: absolute;
-  color: #000;
+  color: #26a497;
   font-size: 1.5rem;
   font-family: sans-serif;
   white-space: nowrap;
@@ -9927,7 +9939,7 @@ p {
   position: relative;
   width: var(--range-slider-thumb-size);
   height: var(--range-slider-thumb-size);
-  background-color: #000;
+  background-color: #26a497;
   border-radius: 50%;
   border: none;
   box-shadow: none;
@@ -9942,7 +9954,7 @@ p {
   position: relative;
   width: var(--range-slider-thumb-size);
   height: var(--range-slider-thumb-size);
-  background-color: #000;
+  background-color: #26a497;
   border-radius: 50%;
   border: none;
   box-shadow: none;

@@ -1,19 +1,23 @@
-function toggleItems(orderId) {
-    // Lấy phần tử nút toggle (Xem thêm / Thu gọn)
-    const toggleText = document.getElementById(`toggle-text-${orderId}`);
-    // Lấy tất cả các mục trong đơn hàng có class "my-hidden" hoặc "my-visible"
-    const items = document.querySelectorAll(`.order-item[data-order-id='${orderId}'] .my-hidden, .order-item[data-order-id='${orderId}'] .my-visible`);
+function toggleItems(orderId = null) {
+    // Lấy phần tử nút toggle
+    const toggleText = orderId
+        ? document.getElementById(`toggle-text-${orderId}`)
+        : document.getElementById("toggle-text");
 
-    // Kiểm tra xem tất cả các mục có đang bị ẩn không
-    const isHidden = Array.from(items).every(item => item.classList.contains('my-hidden'));
+    // Lấy tất cả các mục cần hiển thị/ẩn
+    const items = orderId
+        ? document.querySelectorAll(`.order-item[data-order-id='${orderId}'] .my-hidden, .order-item[data-order-id='${orderId}'] .my-visible`)
+        : document.querySelectorAll(".my-hidden, .my-visible");
 
-    // Duyệt qua tất cả các mục
+    // Kiểm tra trạng thái ẩn/hiện
+    const isHidden = Array.from(items).every(item => item.classList.contains("my-hidden"));
+
+    // Thay đổi trạng thái của các mục
     items.forEach(item => {
-        // Nếu tất cả các mục đều đang ẩn thì hiển thị, ngược lại thì ẩn
-        item.classList.toggle('my-hidden', !isHidden);
-        item.classList.toggle('my-visible', isHidden); // Đánh dấu đã toggle để quay lại trạng thái ban đầu
+        item.classList.toggle("my-hidden", !isHidden);
+        item.classList.toggle("my-visible", isHidden);
     });
 
-    // Cập nhật nội dung nút "Xem thêm ▼" hoặc "Thu gọn ▲" tùy theo trạng thái hiện tại
+    // Cập nhật nội dung nút toggle
     toggleText.textContent = isHidden ? "Thu gọn ▲" : "Xem thêm ▼";
 }

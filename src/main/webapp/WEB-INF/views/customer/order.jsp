@@ -59,7 +59,7 @@
 
                     <!-- Sản phẩm -->
                     <c:forEach var="orderProduct" items="${order.products}" varStatus="loopStatus">
-                        <div class="${loopStatus.index > 0 ? 'my-hidden' : ''} flex items-center mb-3">
+                        <div class="${loopStatus.index > 0 ? 'my-hidden' : ''} flex items-center mb-3 border-bottom">
                             <div class="flex items-center book-item w-full">
                                 <!-- Hình ảnh sản phẩm -->
                                 <div class="flex-shrink-0">
@@ -86,14 +86,14 @@
 
                     <!-- Nút Xem thêm/Thu gọn -->
                     <c:if test="${fn:length(order.products) > 1}">
-                        <div class="status-container flex justify-start w-full cursor-pointer text-[#26aa99]" onclick="toggleItems('${order.id}')">
+                        <div class="flex justify-start w-full cursor-pointer text-[#26aa99]" onclick="toggleItems('${order.id}')">
                             <span id="toggle-text-${order.id}">Xem thêm ▼</span>
                         </div>
                     </c:if>
 
                     <!-- Tổng tiền -->
                     <div class="text-right">
-                        <h3 class="text-lg font-bold top-container">Thành tiền: ₫${order.finalPrice}</h3>
+                        <h3 class="text-lg font-bold">Thành tiền: ₫${order.finalPrice}</h3>
                     </div>
 
                     <div class="button-container mt-5 text-right">

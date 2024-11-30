@@ -2,6 +2,7 @@ package com.biblio.service.impl;
 
 import com.biblio.dao.ICartDAO;
 import com.biblio.dao.ICustomerDAO;
+import com.biblio.dto.request.CustomerInformationRequest;
 import com.biblio.dto.request.CustomerRegisterRequest;
 import com.biblio.dto.response.*;
 import com.biblio.entity.Cart;
@@ -121,6 +122,10 @@ public class CustomerServiceImpl implements ICustomerService {
             }
         }
         return countCustomerJoins;
+    }
+    public Customer updateCustomer(CustomerInformationRequest request) {
+        Customer customer = CustomerMapper.toCustomerInformationRequest(request);
+        return customerDAO.updateCustomer(customer);
     }
 
 }

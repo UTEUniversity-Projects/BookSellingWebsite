@@ -24,4 +24,6 @@ public interface ICustomerDAO {
 
     Customer findByUsername(String username);
 
+    Customer updateCustomer(Customer customer);
+
 }

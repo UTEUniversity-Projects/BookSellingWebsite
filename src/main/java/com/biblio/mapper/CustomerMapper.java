@@ -1,10 +1,12 @@
 package com.biblio.mapper;
 
+import com.biblio.dto.request.CustomerInformationRequest;
 import com.biblio.dto.request.CustomerRegisterRequest;
 import com.biblio.dto.response.*;
 import com.biblio.entity.Account;
 import com.biblio.entity.Address;
 import com.biblio.entity.Customer;
+import com.biblio.entity.User;
 import com.biblio.enumeration.EAccountStatus;
 import com.biblio.enumeration.EGender;
 import com.biblio.enumeration.EMembership;
@@ -124,5 +126,21 @@ public class CustomerMapper {
                 .id(customer.getId())
                 .jointAt(customer.getJoinAt())
                 .build();
+    }
+
+    public static Customer toCustomerInformationRequest(CustomerInformationRequest request) {
+        Customer customer = Customer.builder()
+                .id(request.getId())
+                .avatar(request.getAvatar())
+                .dateOfBirth(String.valueOf(request.getDateOfBirth()))
+                .emailAddress(request.getEmail())
+                .fullName(request.getFullName())
+                .gender(request.getGender())
+                .joinAt(LocalDateTime.parse(request.getJoinAt()))
+                .phoneNumber(request.getPhoneNumber())
+                .membership(EMembership.valueOf(request.getMemberShip()))
+                .build();
+
+        return customer;
     }
 }
