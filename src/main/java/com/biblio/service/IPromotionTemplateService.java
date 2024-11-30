@@ -2,8 +2,10 @@ package com.biblio.service;
 
 import com.biblio.dto.request.PromotionTemplateInsertRequest;
 import com.biblio.dto.request.PromotionTemplateUpdateRequest;
-import com.biblio.dto.response.*;
-import com.biblio.entity.OrderItem;
+import com.biblio.dto.response.ApplyCodePromotionResponse;
+import com.biblio.dto.response.PromotionTemplateGetDetailsResponse;
+import com.biblio.dto.response.PromotionTemplateGetResponse;
+import com.biblio.dto.response.PromotionTemplateResponse;
 
 import java.util.List;
 
@@ -24,6 +26,6 @@ public interface IPromotionTemplateService {
 
     Double percentDiscountOfBook(Long bookTemplateId);
 
-    ApplyCodePromotionResponse applyCodePromotion(String code);
+    ApplyCodePromotionResponse applyCodePromotion(String code, Double amount);
 
 }
