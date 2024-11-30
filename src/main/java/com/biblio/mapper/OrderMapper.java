@@ -1,8 +1,10 @@
 package com.biblio.mapper;
 
+import com.biblio.dao.impl.EWalletDAOImpl;
 import com.biblio.dto.response.*;
-import com.biblio.entity.*;
-import com.biblio.enumeration.EOrderStatus;
+import com.biblio.entity.Order;
+import com.biblio.entity.OrderItem;
+import com.biblio.entity.Promotion;
 import com.biblio.enumeration.EPromotionTemplateType;
 
 import java.time.format.DateTimeFormatter;
@@ -120,9 +122,10 @@ public class OrderMapper {
     }
 
     public static RevenueResponse toRevenueResponse(Order order) {
+        EWalletDAOImpl walletDao = new EWalletDAOImpl();
         return RevenueResponse.builder()
                 .date(order.getOrderDate())
-                .revenue(order.calTotalPrice())
+                .revenue(walletDao.findByOrderId(order.getId()).getAmount())
                 .build();
     }
     public static OrderOfCustomerResponse toOrderOfCustomerResponse(Order order) {

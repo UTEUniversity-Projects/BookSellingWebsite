@@ -1,8 +1,10 @@
 package com.biblio.service.impl;
 
 import com.biblio.dao.IOrderDAO;
+import com.biblio.dao.impl.EWalletDAOImpl;
 import com.biblio.dto.response.*;
 import com.biblio.entity.Book;
+import com.biblio.entity.EWallet;
 import com.biblio.entity.Order;
 import com.biblio.entity.OrderItem;
 import com.biblio.enumeration.EBookMetadataStatus;
@@ -19,6 +21,9 @@ import java.util.*;
 public class OrderServiceImpl implements IOrderService {
     @Inject
     IOrderDAO orderDAO;
+
+    @Inject
+    EWalletDAOImpl walletDAO;
 
     @Override
     public OrderDetailsManagementResponse getOrderDetailsManagementResponse(Long id) {
@@ -79,12 +84,10 @@ public class OrderServiceImpl implements IOrderService {
             if ((orderDate.isEqual(start) || orderDate.isAfter(start)) &&
                     (orderDate.isEqual(end) || orderDate.isBefore(end)) &&
                     EOrderStatus.COMPLETE_DELIVERY.equals(order.getStatus())) {
-//                for (OrderItem orderItem : order.getOrderItems()) {
-//                    for (Book book : orderItem.getBooks()) {
-//                        venue += book.getSellingPrice();
-//                    }
-//                }
-                venue += order.calTotalPrice();
+
+                EWallet ew = walletDAO.findByOrderId(order.getId());
+
+                venue += ew.getAmount();
             }
         }
         return venue;

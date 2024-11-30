@@ -65,8 +65,8 @@ public class Order implements Serializable {
 //    @OneToOne(mappedBy = "order")
 //    private Cash cash;
 //
-//    @OneToOne(mappedBy = "order")
-//    private EWallet wallet;
+    @OneToOne(mappedBy = "order")
+    private EWallet wallet;
 
     @OneToOne(mappedBy = "order")
     private ReturnBook returnBook;

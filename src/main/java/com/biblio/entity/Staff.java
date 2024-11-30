@@ -5,7 +5,9 @@ import lombok.experimental.SuperBuilder;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -23,8 +25,8 @@ public class Staff extends User implements Serializable {
     @JoinColumn(name = "account_id")
     private Account account;
 
-    @OneToMany(mappedBy = "owner")
-    private Set<Notification> notifications = new HashSet<>();
+    @OneToMany(mappedBy = "staff", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    private List<Notification> notifications = new ArrayList<>();
 
     @OneToMany(mappedBy = "staff")
     private Set<ResponseSupport> responseSupports = new HashSet<>();

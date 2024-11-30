@@ -395,7 +395,7 @@ $(document).ready(function () {
 
         const totalDays = end.diff(start, "days") + 1;
 
-        fetchData("/owner/ecommerce/list-revenue", start, end, function (error, response) {
+        fetchData(`${contextPath}/owner/ecommerce/list-revenue`, start, end, function (error, response) {
             if (error) {
                 console.error("Error fetching data:", error);
                 return;
@@ -449,7 +449,7 @@ $(document).ready(function () {
         );
         const totalDays = end.diff(start, "days") + 1;
 
-        fetchData("/owner/ecommerce/list-count-new-customer", start, end, function (error, response) {
+        fetchData(`${contextPath}/owner/ecommerce/list-count-new-customer`, start, end, function (error, response) {
             if (error) {
                 console.error("Error fetching data:", error);
                 return;
@@ -500,7 +500,7 @@ $(document).ready(function () {
             start.format("YYYY-MM-DD") + " - " + end.format("YYYY-MM-DD")
         );
 
-        fetchData("/owner/ecommerce/count-book-sold-at-time", start, end, function (error, response) {
+        fetchData(`${contextPath}/owner/ecommerce/count-book-sold-at-time`, start, end, function (error, response) {
             if (error) {
                 console.error("Error fetching data:", error);
                 return;
@@ -544,7 +544,7 @@ $(document).ready(function () {
     }
 
     function updateProductSoldTable() {
-        fetchDataNoTime("/owner/ecommerce/count-book-sold-all-time", function (error, response) {
+        fetchDataNoTime(`${contextPath}/owner/ecommerce/count-book-sold-all-time`, function (error, response) {
             if (error) {
                 console.error("Error fetching data:", error);
                 return;
@@ -596,7 +596,7 @@ $(document).ready(function () {
         );
 
         // Gọi API để lấy dữ liệu
-        fetchData("/owner/ecommerce/count-order-of-customer-at-time", start, end, function (error, response) {
+        fetchData(`${contextPath}/owner/ecommerce/count-order-of-customer-at-time`, start, end, function (error, response) {
             if (error) {
                 console.error("Error fetching data:", error);
                 return;
