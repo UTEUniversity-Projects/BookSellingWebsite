@@ -129,6 +129,18 @@ public class CustomerMapper {
     }
 
     public static Customer toCustomerInformationRequest(CustomerInformationRequest request) {
+
+        // Chuyển đổi từ chuỗi thành EAccountStatus
+        EAccountStatus accountStatus = fromValue(request.getAccount().getStatus());
+
+        Account account = Account.builder()
+                .id(request.getAccount().getId())
+                .username(request.getAccount().getUsername())
+                .password(request.getAccount().getPassword())
+                .userRole(EUserRole.valueOf(request.getAccount().getRole()))
+                .status(accountStatus)  // Sử dụng giá trị đã chuyển đổi
+                .build();
+
         Customer customer = Customer.builder()
                 .id(request.getId())
                 .avatar(request.getAvatar())
@@ -139,8 +151,19 @@ public class CustomerMapper {
                 .joinAt(LocalDateTime.parse(request.getJoinAt()))
                 .phoneNumber(request.getPhoneNumber())
                 .membership(EMembership.valueOf(request.getMemberShip()))
+                .account(account)
                 .build();
 
         return customer;
+    }
+
+    // Phương thức chuyển đổi chuỗi thành EAccountStatus
+    public static EAccountStatus fromValue(String value) {
+        for (EAccountStatus status : EAccountStatus.values()) {
+            if (status.getValue().equals(value)) {
+                return status;
+            }
+        }
+        throw new IllegalArgumentException("Unknown value: " + value);
     }
 }

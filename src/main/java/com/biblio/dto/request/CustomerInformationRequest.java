@@ -1,6 +1,7 @@
 package com.biblio.dto.request;
 
 
+import com.biblio.dto.response.AccountGetResponse;
 import com.biblio.entity.Account;
 import com.biblio.enumeration.EGender;
 import com.biblio.enumeration.EReasonReturn;
@@ -23,5 +24,5 @@ public class CustomerInformationRequest {
     private String joinAt;
     private String phoneNumber;
     private String memberShip;
-    private Long accountId;
+    private AccountGetResponse account;
 }

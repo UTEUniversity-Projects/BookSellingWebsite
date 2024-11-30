@@ -51,6 +51,8 @@ public class UpdateInformationController extends HttpServlet {
      */
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
+        request.setCharacterEncoding("UTF-8");
+
         HttpSession session = request.getSession(false);
         AccountGetResponse account = (AccountGetResponse) session.getAttribute("account");
         CustomerDetailResponse customer = customerService.getCustomerDetailByUsername(account.getUsername());
@@ -58,7 +60,6 @@ public class UpdateInformationController extends HttpServlet {
         String gender = request.getParameter("gender");
         String fullName = request.getParameter("fullName");
         String dateOfBirth = request.getParameter("dateOfBirth");
-        Long accountId = account.getId();
 
         // Lấy khách hàng hiện tại (từ session hoặc database)
         CustomerInformationRequest customerInformationRequest = new CustomerInformationRequest();
@@ -73,7 +74,7 @@ public class UpdateInformationController extends HttpServlet {
         customerInformationRequest.setJoinAt(customer.getJoinAt());
         customerInformationRequest.setPhoneNumber(customer.getPhoneNumber());
         customerInformationRequest.setMemberShip(customer.getMemberShip());
-        customerInformationRequest.setAccountId(accountId);
+        customerInformationRequest.setAccount(account);
 
 
         // Lưu thông tin vào cơ sở dữ liệu
@@ -90,6 +91,7 @@ public class UpdateInformationController extends HttpServlet {
 //            request.setAttribute("error", "Cập nhật thông tin thất bại. Vui lòng thử lại.");
 //            request.getRequestDispatcher("profile.jsp").forward(request, response);
 //        }
+        response.sendRedirect(request.getContextPath() + "/user-information");
     }
 
 
