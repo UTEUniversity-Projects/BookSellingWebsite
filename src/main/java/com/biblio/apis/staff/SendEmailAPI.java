@@ -53,6 +53,13 @@ public class SendEmailAPI extends HttpServlet {
                 case "/order-cancellation":
                     doPost_CancelOrder(request, response);
                     break;
+                case "/refund-cancellation":
+                    doPost_SendCancelRefundOrderEmail(request, response);
+                    break;
+
+                case "/refund-confirmation":
+                    doPost_SendConfirmRefundOrderEmail(request, response);
+                    break;
 
                 default:
                     result.put("message", "Hành động không được hỗ trợ!");
@@ -272,5 +279,145 @@ public class SendEmailAPI extends HttpServlet {
         return emailContent.toString();
     }
 
+    protected void doPost_SendCancelRefundOrderEmail(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        response.setContentType("application/json");
+        response.setCharacterEncoding("UTF-8");
+
+        try {
+            request.setCharacterEncoding("UTF-8");
+
+            String orderIdParam = request.getParameter("orderId");
+            String cancelContent = request.getParameter("cancelContent");
+
+            if (orderIdParam == null || orderIdParam.isEmpty()) {
+                throw new IllegalArgumentException("Order ID không được để trống.");
+            }
+
+            long orderId = Long.parseLong(orderIdParam);
+
+            // Lấy thông tin đơn hàng
+            OrderCustomerResponse order = orderService.findOrderById(orderId);
+            if (order == null) {
+                response.setStatus(HttpServletResponse.SC_NOT_FOUND);
+                response.getWriter().write("{\"message\": \"Không tìm thấy đơn hàng với ID: " + orderId + "\"}");
+                return;
+            }
+
+            // Gửi email thông báo hủy yêu cầu hoàn tiền
+            String emailContent = generateCancelRefundOrderEmail(order, cancelContent);
+            emailService.sendEmail(order.getEmail(), "Hủy yêu cầu hoàn tiền #" + order.getId(), emailContent);
+
+            response.setStatus(HttpServletResponse.SC_OK);
+            response.getWriter().write("{\"message\": \"Hủy yêu cầu hoàn tiền thành công và email đã được gửi.\"}");
+
+        } catch (IllegalArgumentException e) {
+            response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
+            response.getWriter().write("{\"message\": \"" + e.getMessage() + "\"}");
+        } catch (Exception e) {
+            e.printStackTrace();
+            response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+            response.getWriter().write("{\"message\": \"Đã xảy ra lỗi: " + e.getMessage() + "\"}");
+        }
+    }
+
+    private String generateCancelRefundOrderEmail(OrderCustomerResponse order, String cancelContent) {
+        StringBuilder emailContent = new StringBuilder();
+
+        emailContent.append("<html><body style=\"font-family: Arial, sans-serif; color: #333; line-height: 1.6;\">");
+        emailContent.append("<div style=\"max-width: 600px; margin: auto; border: 1px solid #ddd; border-radius: 10px; padding: 20px; background-color: #f9f9f9;\">");
+
+        emailContent.append("<div style=\"text-align: center;\">");
+        emailContent.append("<img src=\"https://scontent.fsgn8-4.fna.fbcdn.net/v/t39.30808-6/468703611_1664827497410053_3942884439111183245_n.jpg?_nc_cat=107&ccb=1-7&_nc_sid=127cfc&_nc_ohc=zXw3uGs7ZsEQ7kNvgEXUmAZ&_nc_zt=23&_nc_ht=scontent.fsgn8-4.fna&_nc_gid=A2ITxhjZT2QDYgdmlw7QjNT&oh=00_AYBn-1ZCU7YRtTLovzTu7xEwxk-NF3FUYThFLp0dVmgKBg&oe=674DF1D9\" alt=\"logo\" style=\"width: 150px; height: auto;\"/>");
+        emailContent.append("<h1 style=\"color: #d35400;\">Biblio Bookshop</h1>");
+        emailContent.append("</div>");
+
+        emailContent.append("<p>Chào <strong>").append(order.getCustomerName()).append("</strong>,</p>");
+        emailContent.append("<p style=\"color: #e74c3c; font-size: 16px;\"><strong>Yêu cầu hoàn tiền của bạn đã bị hủy.</strong></p>");
+        emailContent.append("<p><strong>Lý do:</strong> ").append(cancelContent).append("</p>");
+
+        emailContent.append("<table style=\"width: 100%; border-collapse: collapse; margin: 20px 0;\">");
+        emailContent.append("<tr><td style=\"padding: 10px; border: 1px solid #ddd;\">Mã đơn hàng:</td><td style=\"padding: 10px; border: 1px solid #ddd;\">").append(order.getId()).append("</td></tr>");
+        emailContent.append("<tr><td style=\"padding: 10px; border: 1px solid #ddd;\">Ngày đặt hàng:</td><td style=\"padding: 10px; border: 1px solid #ddd;\">").append(formatDateTime(LocalDateTime.parse(order.getOrderDate()), "dd-MM-yyyy HH:mm")).append("</td></tr>");
+        emailContent.append("</table>");
+
+        emailContent.append("<p>Nếu bạn cần hỗ trợ thêm, vui lòng liên hệ với chúng tôi qua email: <a href=\"mailto: support@biblio.com\">support@biblio.com</a>.</p>");
+
+        emailContent.append("<hr style=\"border: none; border-top: 1px solid #ddd; margin: 20px 0;\">");
+        emailContent.append("<p style=\"text-align: center;\">Cảm ơn bạn đã đồng hành cùng <strong>Biblio Bookshop</strong>.</p>");
+        emailContent.append("</div>");
+        emailContent.append("</body></html>");
+
+        return emailContent.toString();
+    }
+
+    protected void doPost_SendConfirmRefundOrderEmail(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        response.setContentType("application/json");
+        response.setCharacterEncoding("UTF-8");
+
+        try {
+            request.setCharacterEncoding("UTF-8");
+
+            String orderIdParam = request.getParameter("orderId");
+
+            if (orderIdParam == null || orderIdParam.isEmpty()) {
+                throw new IllegalArgumentException("Order ID không được để trống.");
+            }
+
+            long orderId = Long.parseLong(orderIdParam);
+
+            // Lấy thông tin đơn hàng
+            OrderCustomerResponse order = orderService.findOrderById(orderId);
+            if (order == null) {
+                response.setStatus(HttpServletResponse.SC_NOT_FOUND);
+                response.getWriter().write("{\"message\": \"Không tìm thấy đơn hàng với ID: " + orderId + "\"}");
+                return;
+            }
+
+            // Gửi email xác nhận hoàn tiền
+            String emailContent = generateConfirmRefundOrderEmail(order);
+            emailService.sendEmail(order.getEmail(), "Xác nhận hoàn tiền #" + order.getId(), emailContent);
+
+            response.setStatus(HttpServletResponse.SC_OK);
+            response.getWriter().write("{\"message\": \"Xác nhận hoàn tiền thành công và email đã được gửi.\"}");
+
+        } catch (IllegalArgumentException e) {
+            response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
+            response.getWriter().write("{\"message\": \"" + e.getMessage() + "\"}");
+        } catch (Exception e) {
+            e.printStackTrace();
+            response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+            response.getWriter().write("{\"message\": \"Đã xảy ra lỗi: " + e.getMessage() + "\"}");
+        }
+    }
+
+
+    private String generateConfirmRefundOrderEmail(OrderCustomerResponse order) {
+        StringBuilder emailContent = new StringBuilder();
+
+        emailContent.append("<html><body style=\"font-family: Arial, sans-serif; color: #333; line-height: 1.6;\">");
+        emailContent.append("<div style=\"max-width: 600px; margin: auto; border: 1px solid #ddd; border-radius: 10px; padding: 20px; background-color: #f9f9f9;\">");
+
+        emailContent.append("<div style=\"text-align: center;\">");
+        emailContent.append("<img src=\"https://scontent.fsgn8-4.fna.fbcdn.net/v/t39.30808-6/468703611_1664827497410053_3942884439111183245_n.jpg?_nc_cat=107&ccb=1-7&_nc_sid=127cfc&_nc_ohc=zXw3uGs7ZsEQ7kNvgEXUmAZ&_nc_zt=23&_nc_ht=scontent.fsgn8-4.fna&_nc_gid=A2ITxhjZT2QDYgdmlw7QjNT&oh=00_AYBn-1ZCU7YRtTLovzTu7xEwxk-NF3FUYThFLp0dVmgKBg&oe=674DF1D9\" alt=\"logo\" style=\"width: 150px; height: auto;\"/>");
+        emailContent.append("<h1 style=\"color: #d35400;\">Biblio Bookshop</h1>");
+        emailContent.append("</div>");
+
+        emailContent.append("<p>Chào <strong>").append(order.getCustomerName()).append("</strong>,</p>");
+        emailContent.append("<p style=\"color: #27ae60; font-size: 16px;\"><strong>Chúng tôi đã xử lý yêu cầu hoàn tiền của bạn.</strong></p>");
+
+        emailContent.append("<table style=\"width: 100%; border-collapse: collapse; margin: 20px 0;\">");
+        emailContent.append("<tr><td style=\"padding: 10px; border: 1px solid #ddd;\">Mã đơn hàng:</td><td style=\"padding: 10px; border: 1px solid #ddd;\">").append(order.getId()).append("</td></tr>");
+        emailContent.append("<tr><td style=\"padding: 10px; border: 1px solid #ddd;\">Ngày đặt hàng:</td><td style=\"padding: 10px; border: 1px solid #ddd;\">").append(formatDateTime(LocalDateTime.parse(order.getOrderDate()), "dd-MM-yyyy HH:mm")).append("</td></tr>");
+        emailContent.append("</table>");
+
+        emailContent.append("<p>Nếu bạn có bất kỳ thắc mắc nào, vui lòng liên hệ với chúng tôi qua email: <a href=\"mailto: support@biblio.com\">support@biblio.com</a>.</p>");
+
+        emailContent.append("<hr style=\"border: none; border-top: 1px solid #ddd; margin: 20px 0;\">");
+        emailContent.append("<p style=\"text-align: center;\">Cảm ơn bạn đã tin tưởng <strong>Biblio Bookshop</strong>.</p>");
+        emailContent.append("</div>");
+        emailContent.append("</body></html>");
+
+        return emailContent.toString();
+    }
 
 }
