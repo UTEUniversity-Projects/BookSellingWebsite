@@ -5,16 +5,13 @@ import com.biblio.dao.IOrderDAO;
 import com.biblio.dao.impl.OrderDAOImpl;
 import com.biblio.dao.impl.EWalletDAOImpl;
 import com.biblio.dto.response.*;
-import com.biblio.entity.Book;
-import com.biblio.entity.EWallet;
-import com.biblio.entity.Order;
-import com.biblio.entity.OrderItem;
-import com.biblio.entity.OrderStatusHistory;
+import com.biblio.entity.*;
 import com.biblio.enumeration.EBookMetadataStatus;
 import com.biblio.enumeration.EOrderHistory;
 import com.biblio.enumeration.EOrderStatus;
 import com.biblio.mapper.BookMapper;
 import com.biblio.mapper.OrderMapper;
+import com.biblio.service.IBookTemplateService;
 import com.biblio.service.IOrderService;
 import com.biblio.service.IPromotionTemplateService;
 
@@ -28,7 +25,7 @@ public class OrderServiceImpl implements IOrderService {
     IOrderDAO orderDAO;
 
     @Inject
-    IPromotionTemplateService promotionTemplateService;
+    IBookTemplateService bookTemplateService;
   
     @Inject
     EWalletDAOImpl walletDAO;
@@ -60,6 +57,11 @@ public class OrderServiceImpl implements IOrderService {
             for (OrderItem orderItem : order.getOrderItems()) {
                 for (Book book : orderItem.getBooks()) {
                     book.getBookMetadata().setStatus(EBookMetadataStatus.IN_STOCK);
+                }
+                Book book = orderItem.getBooks().iterator().next();
+                boolean success = bookTemplateService.verifyBookTemplateQuantity(book.getBookTemplate().getId());
+                if (!success) {
+                    return false;
                 }
             }
         }
