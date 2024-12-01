@@ -25,8 +25,30 @@
         //background: rgba(255, 255, 255, 0.6); /* Lớp phủ trắng */
         z-index: 1;
     }
+    .cr-btn-stop {
+        /*@include ease3;*/
+        height: 35px;
+        padding: 6px 12px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background-color: #f90c4c;
+        color: #ffffff;
+        font-size: 16px;
+        border: 1px solid #64b496;
+        cursor: pointer;
 
+        &:hover {
+            background-color: #ffffff;
+            color: #25a984;
+            border: 1px solid #25a984;
+        }
 
+        &:focus {
+            outline: none;
+            box-shadow: none;
+        }
+    }
 
 </style>
 <div class="cr-main-content">
@@ -141,9 +163,12 @@
                 <!-- Nút Thêm -->
                 <div class="row mt-4">
                     <div class="col-12 d-flex justify-content-center" style="padding-bottom: 20px">
-                        <button type="submit" class="btn-voucher cr-btn-primary" data-editing="false">Chỉnh sửa</button>
-                        <button type="button" class="btn-voucher cr-btn-secondary cancel-btn" style="display: none; margin-left: 10px;" onclick="cancelEdit(this)">Hủy</button>
-                    </div>
+                        <c:if test="${isBeforeExpiration}">
+                            <button type="submit" class="btn-voucher cr-btn-primary" data-editing="false">Chỉnh sửa</button>
+                            <button type="button" class="btn-voucher cr-btn-secondary cancel-btn" style="display: none; margin-left: 10px;" onclick="cancelEdit(this)">Hủy</button>
+                            <button type="button" class="btn-voucher cr-btn-stop stop-promotion-btn" style="margin-left: 10px;" onclick="stopPromotion()">Ngừng khuyến mãi</button>
+
+                        </c:if>
                     </div>
                 </div>
 
@@ -244,8 +269,12 @@
 
                                         <div class="row ip-padding">
                                             <div class="col-12 d-flex">
-                                                <button type="submit" class="btn-voucher cr-btn-primary" data-editing="false">Chỉnh sửa</button>
-                                                <button type="button" class="btn-voucher cr-btn-secondary cancel-btn" style="display: none; margin-left: 10px;" onclick="cancelEdit(this)">Hủy</button>
+                                               <c:if test="${isBeforeExpiration}">
+                                                   <button type="submit" class="btn-voucher cr-btn-primary" data-editing="false">Chỉnh sửa</button>
+                                                   <button type="button" class="btn-voucher cr-btn-secondary cancel-btn" style="display: none; margin-left: 10px;" onclick="cancelEdit(this)">Hủy</button>
+                                                   <button type="button" class="btn-voucher cr-btn-stop stop-promotion-btn" style="margin-left: 10px;" onclick="stopPromotion()">Ngừng khuyến mãi</button>
+
+                                               </c:if>
                                             </div>
                                         </div>
                                     </form>
@@ -329,8 +358,12 @@
 
                                                 <div class="row ip-padding">
                                                     <div class="col-12 d-flex">
-                                                        <button type="button" class="btn-voucher cr-btn-primary" data-editing="false" onclick="toggleForm(this)">Chỉnh sửa</button>
-                                                        <button type="button" class="btn-voucher cr-btn-secondary cancel-btn" style="display: none; margin-left: 10px;" onclick="cancelEdit(this)">Hủy</button>
+                                                        <c:if test="${isBeforeExpiration}">
+                                                            <button type="submit" class="btn-voucher cr-btn-primary" data-editing="false">Chỉnh sửa</button>
+                                                            <button type="button" class="btn-voucher cr-btn-secondary cancel-btn" style="display: none; margin-left: 10px;" onclick="cancelEdit(this)">Hủy</button>
+                                                            <button type="button" class="btn-voucher cr-btn-stop stop-promotion-btn" style="margin-left: 10px;" onclick="stopPromotion()">Ngừng khuyến mãi</button>
+                                                        </c:if>
+
                                                     </div>
                                                 </div>
 

@@ -89,6 +89,9 @@ public class Book implements Serializable {
     @JoinColumn(name = "sub_category_id", nullable = false)
     private SubCategory subCategory;
 
+//    @ManyToMany(cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH}, fetch = FetchType.EAGER)
+//    private Set<OrderItem> orderItems = new HashSet<>();
+
     // endregion
 
     // region Methods

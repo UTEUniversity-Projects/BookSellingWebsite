@@ -48,7 +48,7 @@ public class Order implements Serializable {
 
     // region Relationships
 
-    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @ManyToOne(cascade = {CascadeType.MERGE}, fetch = FetchType.LAZY)
     @JoinColumn(name = "customer_id", nullable = false, referencedColumnName = "id")
     private Customer customer;
 
@@ -56,11 +56,8 @@ public class Order implements Serializable {
     @JoinColumn(name = "shipping_id", referencedColumnName = "id")
     private Shipping shipping;
 
-//    @OneToOne(mappedBy = "order")
-//    private BankTransfer bankTransfer;
-//
-//    @OneToOne(mappedBy = "order")
-//    private CreditCard creditCard;
+    @OneToOne(mappedBy = "order", cascade = CascadeType.ALL)
+    private BankTransfer bankTransfer;
 //
 //    @OneToOne(mappedBy = "order")
 //    private Cash cash;
@@ -71,7 +68,7 @@ public class Order implements Serializable {
     @OneToOne(mappedBy = "order")
     private ReturnBook returnBook;
 
-    @OneToMany(mappedBy = "order", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "order", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private Set<OrderItem> orderItems = new HashSet<>();
 
     @ManyToMany(cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH}, fetch = FetchType.LAZY)

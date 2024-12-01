@@ -27,4 +27,9 @@ public class AccountDAOImpl extends GenericDAOImpl<Account> implements IAccountD
         params.put("username", username);
         return super.findSingleByJPQL(jpql, params);
     }
+
+    @Override
+    public Account resetPassword(Account account) {
+        return super.update(account);
+    }
 }

@@ -1,4 +1,9 @@
 package com.biblio.dao;
 
+import com.biblio.entity.BookMetadata;
+
 public interface IBookMetadataDAO {
+
+    BookMetadata update(BookMetadata bookMetadata);
+
 }

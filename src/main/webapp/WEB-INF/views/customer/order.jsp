@@ -1,4 +1,4 @@
-<link rel="stylesheet" href="${pageContext.request.contextPath}/assets/customer/scss/style.css">
+  <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/customer/scss/style.css">
 
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>

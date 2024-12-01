@@ -58,7 +58,7 @@ public class VerifyOTPController extends HttpServlet {
             long currentTime = System.currentTimeMillis();
             long elapsedTime = currentTime - otpTimestamp;
 
-            if (elapsedTime > 2 * 60 * 1000) {
+            if (elapsedTime > 5 * 60 * 1000) {
                 map.put("code", 400);
                 map.put("message", "Mã OTP đã hết hạn. Vui lòng yêu cầu mã OTP mới.");
             } else {

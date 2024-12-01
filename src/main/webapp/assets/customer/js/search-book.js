@@ -27,8 +27,8 @@ $(document).ready(() => {
 
 			const generateBook = (book) => {
 				return `
-							<div data-book-id="${book.id}" class="mix col-xxl-3 col-xl-4 col-6 cr-product-box mb-5">
-                            <div class="cr-product-card">
+							<div class="mix col-xxl-3 col-xl-4 col-6 cr-product-box mb-5">
+                            <div class="cr-product-card" data-book-id="${book.id}">
                                 <div class="cr-product-image">
                                     <div class="cr-image-inner image-zoom"
 								         style="--url: url(${book.imageUrl.replace(/\\/g, '/')});
@@ -42,7 +42,7 @@ $(document).ready(() => {
                                             <i class="ri-eye-line"></i>
                                         </a>
                                     </div>
-                                    <a class="cr-shopping-bag" href="javascript:void(0)">
+                                    <a class="cr-shopping-bag add-to-cart-btn" href="javascript:void(0)" data-quantity="1">
                                         <i class="ri-shopping-bag-line"></i>
                                     </a>
                                 </div>

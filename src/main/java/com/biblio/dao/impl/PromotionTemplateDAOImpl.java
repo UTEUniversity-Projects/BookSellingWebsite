@@ -54,4 +54,10 @@ public class PromotionTemplateDAOImpl extends GenericDAOImpl<PromotionTemplate> 
         params.put("code", code);
         return super.findSingleByJPQL(jpql, params) != null;
     }
+
+    public static void main(String[] args) {
+        PromotionTemplateDAOImpl dao = new PromotionTemplateDAOImpl();
+        PromotionTemplate promotionTemplate = dao.findSingleByJPQL("VOUCHER_1");
+        System.out.println(promotionTemplate);
+    }
 }

@@ -1,7 +1,23 @@
 package com.biblio.controller.customer;
 
+import com.biblio.dto.request.ForgotPasswordRequest;
+import com.biblio.dto.request.VerifyEmailRequest;
+import com.biblio.dto.response.CustomerDetailResponse;
+import com.biblio.dto.response.CustomerResponse;
+import com.biblio.service.IAccountService;
+import com.biblio.service.IAddressService;
+import com.biblio.service.ICustomerService;
+import com.biblio.service.IEmailService;
+import com.biblio.utils.HttpUtil;
+import com.biblio.utils.SendMailUtil;
+import com.fasterxml.jackson.databind.ObjectMapper;
+
 import java.io.IOException;
 import java.io.Serial;
+import java.util.HashMap;
+import java.util.Map;
+import javax.inject.Inject;
+import javax.mail.MessagingException;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -15,6 +31,15 @@ import javax.servlet.http.HttpServletResponse;
 public class ForgotController extends HttpServlet {
     @Serial
     private static final long serialVersionUID = 1L;
+
+    @Inject
+    private ICustomerService customerService;
+
+    @Inject
+    private IEmailService emailService;
+
+    @Inject
+    private IAccountService accountService;
 
     /**
      * @see HttpServlet#HttpServlet()
@@ -38,7 +63,52 @@ public class ForgotController extends HttpServlet {
      */
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         // TODO Auto-generated method stub
-        doGet(request, response);
+        request.setCharacterEncoding("UTF-8");
+
+        ForgotPasswordRequest forgotPasswordRequest = HttpUtil.of(request.getReader()).toModel(ForgotPasswordRequest.class);
+
+        Map<String, Object> map = new HashMap<>();
+
+        boolean isUsernameExisted = accountService.isUsernameExisted(forgotPasswordRequest.getUsername());
+        if (!isUsernameExisted) {
+            map.put("code", 400);
+            map.put("message", "Username không tồn tại !");
+        } else {
+            String optCode = SendMailUtil.generateOTP();
+            long otpTimestamp = System.currentTimeMillis();
+            request.getSession().setAttribute("otpCode", optCode);
+            request.getSession().setAttribute("otpTimestamp", otpTimestamp);
+            request.getSession().setAttribute("username", forgotPasswordRequest.getUsername());
+            CustomerDetailResponse customerDetailResponse = customerService.getCustomerDetailByUsername(forgotPasswordRequest.getUsername());
+            String emailContent = generateOtpVerificationEmail(optCode);
+            try {
+                emailService.sendEmail(customerDetailResponse.getEmail(), "Xác thực email của bạn", emailContent);
+            } catch (MessagingException e) {
+                throw new RuntimeException(e);
+            }
+            map.put("code", 200);
+            map.put("message", "Mã OTP đã được gửi đến email " + customerDetailResponse.getEmail() +" của bạn!");
+        }
+        ObjectMapper mapper = new ObjectMapper();
+        response.setContentType("application/json");
+        response.setCharacterEncoding("UTF-8");
+        response.getWriter().write(mapper.writeValueAsString(map));
     }
 
+    private String generateOtpVerificationEmail(String otpCode) {
+        StringBuilder emailContent = new StringBuilder();
+
+        emailContent.append("<html><body>");
+        emailContent.append("<p>Chào bạn,</p>");
+        emailContent.append("<p>Chúng tôi đã nhận được yêu cầu đặt lại mật khẩu cho tài khoản của bạn tại <strong>Biblio Bookshop</strong>.</p>");
+        emailContent.append("<p><strong>Mã OTP của bạn là:</strong> <span style=\"font-size: 18px; font-weight: bold; color: #4CAF50;\">")
+                .append(otpCode).append("</span></p>");
+        emailContent.append("<p>Mã này có hiệu lực trong <strong>2 phút</strong>. Vui lòng không chia sẻ mã này với bất kỳ ai.</p>");
+        emailContent.append("<hr>");
+        emailContent.append("<p>Nếu cần hỗ trợ thêm, vui lòng liên hệ với chúng tôi qua email <a href=\"mailto:support@biblio.com\">support@biblio.com</a>.</p>");
+        emailContent.append("<p>Trân trọng,<br>Biblio Bookshop</p>");
+        emailContent.append("</body></html>");
+
+        return emailContent.toString();
+    }
 }

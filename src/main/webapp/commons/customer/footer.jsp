@@ -3,14 +3,13 @@
 <footer class="footer padding-t-100 bg-off-white">
     <div class="container-md">
         <div class="row footer-top padding-b-100">
-            <div class="col-xl-4 col-lg-6 col-sm-12 col-12 cr-footer-border">
+            <div class="col-xl-6 col-lg-8 col-sm-12 col-12 cr-footer-border">
                 <div class="cr-footer-logo">
                     <div class="image">
-                        <img src="${pageContext.request.contextPath}/assets/customer/img/logo/biblio.png" alt="logo" class="logo" />
+                        <img src="${pageContext.request.contextPath}/assets/commons/img/logo/biblio.png" alt="logo" class="logo" />
                     </div>
-                    <p>
-                        Carrot is the biggest market of grocery products. Get your daily
-                        needs from our store.
+                    <p class="text-justify">
+                        Chào mừng bạn đến với <b>Biblio</b> – cửa hàng sách trực tuyến dành cho những người yêu sách! Chúng tôi cung cấp một kho tàng sách phong phú từ nhiều thể loại khác nhau như văn học, kinh tế, khoa học, tự truyện, sách thiếu nhi và nhiều hơn nữa, từ các tác giả trong nước và quốc tế.
                     </p>
                 </div>
                 <div class="cr-footer">
@@ -39,51 +38,51 @@
                         <span class="cr-heading-res"></span>
                     </h4>
                     <ul class="cr-footer-links cr-footer-dropdown">
-                        <li><a href="about.html">About Us</a></li>
+                        <li><a href="about">Giới thiệu Biblio</a></li>
                         <li>
                             <a href="track-order.html">Delivery Information</a>
                         </li>
                         <li>
-                            <a href="policy.html">Privacy Policy</a>
+                            <a href="policy">Chính sách bảo mật</a>
                         </li>
                         <li>
-                            <a href="terms.html">Terms & Conditions</a>
+                            <a href="terms">Điều khoản và điều kiện</a>
                         </li>
                         <li>
-                            <a href="contact-us.html">contact Us</a>
+                            <a href="contact-us">Liên hệ</a>
                         </li>
-                        <li><a href="faq.html">Support Center</a></li>
+                        <li><a href="faq">Thắc mắc và giải đáp</a></li>
                     </ul>
                 </div>
             </div>
-            <div class="col-xl-2 col-lg-3 col-sm-12 col-12 cr-footer-border">
-                <div class="cr-footer">
-                    <h4 class="cr-sub-title">
-                        Category
-                        <span class="cr-heading-res"></span>
-                    </h4>
-                    <ul class="cr-footer-links cr-footer-dropdown">
-                        <li>
-                            <a href="shop-left-sidebar.html">Dairy & Bakery</a>
-                        </li>
-                        <li>
-                            <a href="shop-left-sidebar.html">Fruits & Vegetable</a>
-                        </li>
-                        <li>
-                            <a href="shop-left-sidebar.html">Snack & Spice</a>
-                        </li>
-                        <li>
-                            <a href="shop-left-sidebar.html">Juice & Drinks</a>
-                        </li>
-                        <li>
-                            <a href="shop-left-sidebar.html">Chicken & Meat</a>
-                        </li>
-                        <li>
-                            <a href="shop-left-sidebar.html">Fast Food</a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
+<%--            <div class="col-xl-2 col-lg-3 col-sm-12 col-12 cr-footer-border">--%>
+<%--                <div class="cr-footer">--%>
+<%--                    <h4 class="cr-sub-title">--%>
+<%--                        Category--%>
+<%--                        <span class="cr-heading-res"></span>--%>
+<%--                    </h4>--%>
+<%--                    <ul class="cr-footer-links cr-footer-dropdown">--%>
+<%--                        <li>--%>
+<%--                            <a href="shop-left-sidebar.html">Dairy & Bakery</a>--%>
+<%--                        </li>--%>
+<%--                        <li>--%>
+<%--                            <a href="shop-left-sidebar.html">Fruits & Vegetable</a>--%>
+<%--                        </li>--%>
+<%--                        <li>--%>
+<%--                            <a href="shop-left-sidebar.html">Snack & Spice</a>--%>
+<%--                        </li>--%>
+<%--                        <li>--%>
+<%--                            <a href="shop-left-sidebar.html">Juice & Drinks</a>--%>
+<%--                        </li>--%>
+<%--                        <li>--%>
+<%--                            <a href="shop-left-sidebar.html">Chicken & Meat</a>--%>
+<%--                        </li>--%>
+<%--                        <li>--%>
+<%--                            <a href="shop-left-sidebar.html">Fast Food</a>--%>
+<%--                        </li>--%>
+<%--                    </ul>--%>
+<%--                </div>--%>
+<%--            </div>--%>
             <div class="col-xl-4 col-lg-12 col-sm-12 col-12 cr-footer-border">
                 <div class="cr-footer cr-newsletter">
                     <h4 class="cr-sub-title">
@@ -180,7 +179,7 @@
         <div class="cr-last-footer">
             <p>
                 &copy; <span id="copyright_year"></span>
-                <a href="home">Biblio</a>, All rights reserved.
+                <a href="${pageContext.request.contextPath}/home">Biblio</a>, All rights reserved.
             </p>
         </div>
     </div>
