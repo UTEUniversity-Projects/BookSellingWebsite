@@ -172,7 +172,6 @@ $(document).ready(() => {
 	};
 
 	const text = `TEST ${Math.floor(Math.random() * 1000)}`;
-
 	let timeOut;
 	let interval;
 	let isSuccess = false;
@@ -272,7 +271,7 @@ $(document).ready(() => {
 						bankName: bankName,
 						transactionId: transactionId,
 						createdAt: createdAt,
-						shippingFee: +$('#price-freeship-amount')[0].dataset.price - (+$('#price-freeship-amount')[0].dataset.price)
+						shippingFee: parseInt($('#price-freeship-amount')[0].dataset.price)
 					};
 
 					$.ajax({

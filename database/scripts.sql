@@ -4952,3 +4952,9 @@ INSERT INTO order_status_history(status, status_change_date, order_id) values
 ('CONFIRMED', '2024-10-28 11:30:00', 24),
 ('WAITING_FOR_SHIPPING', '2024-10-28 12:00:00', 24),
 ('COMPLETED', '2024-10-29 13:22:00', 24);
+
+
+INSERT INTO notification (content, created_at, hyper_link, sent_time, status, title, type, customer_id, owner_id, staff_id)
+VALUES
+('Đơn hàng 1 đã được giao đến bạn', '2024-11-01 12:00:00', '/order-detail?orderId=64', '2024-11-01 12:00:00', 'NOT_SEEN', 'Giao hàng thành công đơn hàng 1', 'ORDER', 2, NULL, NULL),
+('Đơn hàng 2 đã được giao đến bạn', '2024-11-05 08:30:00', '/order-detail?orderId=64', '2024-11-05 08:30:00', 'NOT_SEEN', 'Giao hàng thành công đơn hàng 2', 'ORDER', 2, NULL, NULL);

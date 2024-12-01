@@ -27,7 +27,7 @@ public class CreateOrderRequest {
     private String bankName;
     private String transactionId;
     private String createdAt;
-    private double shippingFee;
+    private double shippingFee = 30000;
     private List<Long> promotions = new ArrayList<>();
 
 }
