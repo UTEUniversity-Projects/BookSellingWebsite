@@ -2,7 +2,9 @@ package com.biblio.apis.customer;
 
 import com.biblio.dto.request.CreateOrderRequest;
 import com.biblio.dto.response.AccountGetResponse;
+import com.biblio.dto.response.CheckOutResponse;
 import com.biblio.dto.response.CustomerDetailResponse;
+import com.biblio.dto.response.PromotionOrderResponse;
 import com.biblio.service.ICustomerService;
 import com.biblio.service.IOrderService;
 import com.biblio.utils.HttpUtil;
@@ -19,7 +21,9 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.Serial;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -61,6 +65,16 @@ public class CreateOrderAPI extends HttpServlet {
         CreateOrderRequest createOrderRequest = HttpUtil.of(request.getReader()).toModel(CreateOrderRequest.class);
 
         AccountGetResponse account = (AccountGetResponse) request.getSession(false).getAttribute("account");
+
+        CheckOutResponse checkout = (CheckOutResponse) request.getSession().getAttribute("checkoutResponse");
+
+        List<Long> promotions = new ArrayList<>();
+
+        for (PromotionOrderResponse p : checkout.getPromotions()) {
+            promotions.add(p.getId());
+        }
+
+        createOrderRequest.setPromotions(promotions);
 
         if (account == null) {
             response.sendRedirect(request.getContextPath() + "/login");

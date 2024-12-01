@@ -33,9 +33,11 @@ public class AutoLoginFilter implements Filter {
                 if (Objects.equals(cookie.getName(), "username")) {
                     String username = cookie.getValue();
                     AccountGetResponse account = accountService.getAccountByUsername(username);
-                    HttpSession session = httpRequest.getSession();
-                    session.setAttribute("account", account);
-                    session.setMaxInactiveInterval(Math.toIntExact(Constant.SESSION_LIVE_TIME));
+                    if (account != null) {
+                        HttpSession session = httpRequest.getSession();
+                        session.setAttribute("account", account);
+                        session.setMaxInactiveInterval(Math.toIntExact(Constant.SESSION_LIVE_TIME));
+                    }
                 }
             }
         }

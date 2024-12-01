@@ -6,6 +6,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -27,5 +28,6 @@ public class CreateOrderRequest {
     private String transactionId;
     private String createdAt;
     private double shippingFee;
+    private List<Long> promotions = new ArrayList<>();
 
 }
