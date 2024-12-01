@@ -30,11 +30,12 @@ public class JpaConfig {
 //        map.put(SHOW_SQL, "true");
         map.put(FORMAT_SQL, "true");
         map.put(QUERY_STARTUP_CHECKING, "true");
-        map.put(GENERATE_STATISTICS, "false");
-        map.put(USE_REFLECTION_OPTIMIZER, "false");
-        map.put(USE_SECOND_LEVEL_CACHE, "false");
-        map.put(USE_QUERY_CACHE, "false");
-        map.put(USE_STRUCTURED_CACHE, "false");
+        map.put(GENERATE_STATISTICS, "true");
+        map.put(USE_REFLECTION_OPTIMIZER, "true");
+        map.put(USE_SECOND_LEVEL_CACHE, "true");
+        map.put(CACHE_REGION_FACTORY, "org.hibernate.cache.ehcache.EhCacheRegionFactory");
+        map.put(USE_QUERY_CACHE, "true");
+        map.put(USE_STRUCTURED_CACHE, "true");
         map.put(STATEMENT_BATCH_SIZE, "20");
         map.put(AUTOCOMMIT, "false");
 
