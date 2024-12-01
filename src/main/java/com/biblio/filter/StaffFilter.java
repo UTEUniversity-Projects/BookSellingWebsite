@@ -39,6 +39,7 @@ public class StaffFilter extends HttpServlet {
             return;
 
         AccountGetResponse account = (AccountGetResponse) session.getAttribute("account");
+        System.out.println(account);
         String role = account.getRole();
 
         if (EUserRole.CUSTOMER.toString().equals(role)) {
