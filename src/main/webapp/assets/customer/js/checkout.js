@@ -268,28 +268,48 @@ $(document).ready(() => {
 							shippingFee: +$('#price-freeship-amount')[0].dataset.price - (+$('#price-freeship-amount')[0].dataset.price)
 						};
 
-						$.ajax({
-							url: `${contextPath}/api/customer/order/create`,
-							type: 'POST',
-							contentType: 'application/json',
-							data: JSON.stringify(data),
-							success: function (response) {
-								toast({
-									title: 'Thanh toán',
-									message: 'Thanh toán thành công',
-									type: 'success',
-									duration: 2000,
+					$.ajax({
+						url: `${contextPath}/api/customer/order/create`,
+						type: 'POST',
+						contentType: 'application/json',
+						data: JSON.stringify(data),
+						success: function (response) {
+							toast({
+								title: 'Thanh toán',
+								message: 'Thanh toán thành công',
+								type: 'success',
+								duration: 2000,
+							});
+
+							setTimeout(() => {
+								window.location.href = `${contextPath}/order-detail?orderId=${response.orderId}`;
+
+								const notificationData = {
+									title: "Đơn hàng mới",
+									content: `Có một đơn hàng mới đang chờ xác nhận. order id là ${response.orderId}`,
+									type: "ORDER",
+									hyperLink: `/staff/order-details?id=${response.orderId}`
+								};
+
+								$.ajax({
+									url: `${contextPath}/api/staff/notification/add`,
+									type: 'POST',
+									contentType: 'application/json',
+									data: JSON.stringify(notificationData),
+									success: function (notificationResponse) {
+										console.log('Thông báo đã được thêm thành công:', notificationResponse);
+									},
+									error: function (xhr, error) {
+										console.log('Lỗi khi thêm thông báo:', error);
+									}
 								});
+							}, 1000);
+						},
+						error: function (xhr, error) {
+							console.log(error);
+						}
+					});
 
-								setTimeout(() => {
-									window.location.href=`${contextPath}/order-detail?orderId=${response.orderId}`
-								}, 1000)
-							},
-							error: function (xhr, error) {
-								console.log(error);
-							}
-
-						});
 
 				} else {
 						toast({
