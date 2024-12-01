@@ -50,12 +50,14 @@ function applyPromotionCode (code, type, input, applyButton) {
 						}
 						freeshipElement.text(`-${formatCurrencyVND(promotionData.discountLimit)}`);
 						freeshipElement.attr('data-price', promotionData.discountLimit);
+						freeshipElement.attr('data-promotion-id', promotionData.promotionId);
 					}
 
 					if (data.type === 'VOUCHER') {
 						const voucherElement = $('#price-voucher');
 						voucherElement.text(`-${formatCurrencyVND(promotionData.discountLimit)}`);
 						voucherElement.attr('data-price', promotionData.discountLimit);
+						voucherElement.attr('data-promotion-id', promotionData.promotionId);
 					}
 
 					totalPrice -= promotionData.discountLimit;
@@ -113,7 +115,7 @@ $(document).ready(() => {
 	const applyVoucherButton = document.getElementById('applyVoucher');
 	const btnOrder = document.querySelector('.btn-create-order');
 
-	applyFreeshipButton.addEventListener('click', function () {
+	const applyFreeship = () => {
 		const freeshipCode = freeshipInput.value.trim();
 		if (freeshipCode) {
 			console.log(freeshipCode);
@@ -126,9 +128,9 @@ $(document).ready(() => {
 				duration: 3000
 			});
 		}
-	});
+	}
 
-	applyVoucherButton.addEventListener('click', function () {
+	const applyVoucher = () => {
 		const voucherCode = voucherInput.value.trim();
 		if (voucherCode) {
 			applyPromotionCode(voucherCode, 'VOUCHER', voucherInput, applyVoucherButton);
@@ -140,7 +142,11 @@ $(document).ready(() => {
 				duration: 3000
 			});
 		}
-	});
+	}
+
+	applyFreeshipButton.addEventListener('click', applyFreeship);
+
+	applyVoucherButton.addEventListener('click', applyVoucher);
 
 	btnChangeAddress.addEventListener('click', function () {
 		$('.modal-address').addClass('fixed inset-0').removeClass('hidden');
@@ -167,7 +173,7 @@ $(document).ready(() => {
 
 	//const amount = document.querySelector('#price-total').dataset.price;
 	const amount = 10000;
-	const text = `TEST ${Math.floor(Math.random() * 1000)}`;
+	const text = `TEST 760`;
 
 	let timeOut;
 	let interval;
@@ -255,18 +261,18 @@ $(document).ready(() => {
 					isSuccess = true;
 					clearTimeout(timeOut);
 					clearInterval(interval);
-						const data = {
-							addressId: $('.address')[0].dataset.addressId,
-							note: $('#note').val().trim(),
-							paymentType: $('.payment-type')[0].dataset.paymentType,
-							items: getProductInfor(),
-							amount: amount,
-							bankAccountNumber: bankAccountNumber,
-							bankName: bankName,
-							transactionId: transactionId,
-							createdAt: createdAt,
-							shippingFee: +$('#price-freeship-amount')[0].dataset.price - (+$('#price-freeship-amount')[0].dataset.price)
-						};
+					const data = {
+						addressId: $('.address')[0].dataset.addressId,
+						note: $('#note').val().trim(),
+						paymentType: $('.payment-type')[0].dataset.paymentType,
+						items: getProductInfor(),
+						amount: amount,
+						bankAccountNumber: bankAccountNumber,
+						bankName: bankName,
+						transactionId: transactionId,
+						createdAt: createdAt,
+						shippingFee: +$('#price-freeship-amount')[0].dataset.price - (+$('#price-freeship-amount')[0].dataset.price)
+					};
 
 					$.ajax({
 						url: `${contextPath}/api/customer/order/create`,
@@ -278,16 +284,16 @@ $(document).ready(() => {
 								title: 'Thanh toán',
 								message: 'Thanh toán thành công',
 								type: 'success',
-								duration: 2000,
+								duration: 2000
 							});
 
 							setTimeout(() => {
 								window.location.href = `${contextPath}/order-detail?orderId=${response.orderId}`;
 
 								const notificationData = {
-									title: "Đơn hàng mới",
+									title: 'Đơn hàng mới',
 									content: `Có một đơn hàng mới đang chờ xác nhận. order id là ${response.orderId}`,
-									type: "ORDER",
+									type: 'ORDER',
 									hyperLink: `/staff/order-details?id=${response.orderId}`
 								};
 
@@ -312,9 +318,9 @@ $(document).ready(() => {
 
 
 				} else {
-						toast({
-							message: 'Đang chờ thanh toán'
-						});
+					toast({
+						message: 'Đang chờ thanh toán'
+					});
 				}
 			} catch (error) {
 				console.log(error);

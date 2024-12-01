@@ -173,7 +173,7 @@
 
                         <c:if test="${not hasFreestip}">
                             <input type="text" id="freeship" placeholder="Nhập mã freeship...."
-                                   class="px-2 py-2 rounded bg-white focus:ring-blue-500 focus:border-blue-500 border-1 border-gray-300 transition-all ease-linear bg-white focus:shadow-lg focus:shadow-[rgba(3,_102,_214,_0.3)_0px_0px_0px_3px]">
+                                  class="px-2 py-2 rounded bg-white focus:ring-blue-500 focus:border-blue-500 border-1 border-gray-300 transition-all ease-linear bg-white focus:shadow-lg focus:shadow-[rgba(3,_102,_214,_0.3)_0px_0px_0px_3px]">
                             <button id="applyFreeship"
                                     class="px-4 py-2 rounded bg-[#26a397] hover:bg-[#63b597] transition-all duration-300 text-white text-md">
                                 Áp dụng

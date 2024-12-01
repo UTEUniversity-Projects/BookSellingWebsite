@@ -199,6 +199,13 @@ public class OrderDAOImpl extends GenericDAOImpl<Order> implements IOrderDAO {
 
         Customer customer = new CustomerDAOImpl().findById(request.getCustomer().getId());
 
+        Set<Promotion> promotions = new HashSet<>();
+
+        for (Long id : request.getPromotions()) {
+            Promotion promotion = new PromotionDAOImpl().findById(id);
+            promotions.add(promotion);
+        }
+
         BankTransfer bankTransfer = BankTransfer.builder()
                 .createdAt(dateTime)
                 .amount(request.getAmount())
@@ -227,6 +234,13 @@ public class OrderDAOImpl extends GenericDAOImpl<Order> implements IOrderDAO {
                 .status(EOrderStatus.WAITING_CONFIRMATION)
                 .paymentType(EPaymentType.valueOf(request.getPaymentType()))
                 .build();
+
+        for (Promotion p : promotions) {
+            p.getOrders().add(order);
+        }
+
+        order.setPromotions(promotions);
+
         bankTransfer.setOrder(order);
         shipping.setOrder(order);
         orderStatusHistory.setOrder(order);
