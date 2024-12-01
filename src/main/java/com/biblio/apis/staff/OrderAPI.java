@@ -1,8 +1,11 @@
 package com.biblio.apis.staff;
 
 
+import com.biblio.dto.request.NotificationInsertRequest;
 import com.biblio.dto.response.OrderStatusHistoryResponse;
+import com.biblio.enumeration.ENotificationType;
 import com.biblio.enumeration.EOrderStatus;
+import com.biblio.service.ICustomerService;
 import com.biblio.service.IOrderService;
 import com.biblio.service.IOrderStatusHistoryService;
 import com.biblio.service.IReturnBookService;
@@ -37,6 +40,9 @@ public class OrderAPI extends HttpServlet {
 
     @Inject
     IReturnBookService returnBookService;
+
+    @Inject
+    ICustomerService customerService;
 
     @Serial
     private static final long serialVersionUID = 1L;
@@ -131,6 +137,15 @@ public class OrderAPI extends HttpServlet {
         boolean success = orderService.updateStatus(orderId, EOrderStatus.PACKING);
 
         if (success) {
+
+            NotificationInsertRequest notificationInsertRequest = new NotificationInsertRequest();
+            notificationInsertRequest.setContent("Đơn hàng " + orderId + " đã được xác nhận, sản phẩm sẽ được gửi đến bạn.");
+            notificationInsertRequest.setTitle("Đơn hàng đã được xác nhận");
+            notificationInsertRequest.setType(ENotificationType.ORDER);
+            notificationInsertRequest.setHyperLink("/order-detail?orderId=" + orderId);
+
+            customerService.addNewNotification(notificationInsertRequest, orderId);
+
             result.put("message", "Đơn hàng được xác nhận thành công!");
             result.put("type", "success");
             result.put("statusType", EOrderStatus.PACKING.name());
@@ -161,6 +176,14 @@ public class OrderAPI extends HttpServlet {
 
         boolean success = orderService.updateStatus(orderId, EOrderStatus.CANCELED);
         if (success) {
+            NotificationInsertRequest notificationInsertRequest = new NotificationInsertRequest();
+            notificationInsertRequest.setContent("Đơn hàng " + orderId + " của bạn đã bị hủy, shop sẽ hoàn tiền lại nhanh nhất đến bạn.");
+            notificationInsertRequest.setTitle("Đơn hàng bị hủy");
+            notificationInsertRequest.setType(ENotificationType.ORDER);
+            notificationInsertRequest.setHyperLink("/order-detail?orderId=" + orderId);
+
+            customerService.addNewNotification(notificationInsertRequest, orderId);
+
             result.put("message", "Đơn hàng được hủy thành công!");
             result.put("type", "success");
             result.put("statusType", EOrderStatus.CANCELED.name());
@@ -185,6 +208,15 @@ public class OrderAPI extends HttpServlet {
         long orderId = Long.parseLong(jsonMap.get("orderId").toString());
         boolean success = orderService.updateStatus(orderId, EOrderStatus.SHIPPING);
         if (success) {
+
+            NotificationInsertRequest notificationInsertRequest = new NotificationInsertRequest();
+            notificationInsertRequest.setContent("Đơn hàng " + orderId + " đã giao đến bạn");
+            notificationInsertRequest.setTitle("Giao hàng thành công");
+            notificationInsertRequest.setType(ENotificationType.ORDER);
+            notificationInsertRequest.setHyperLink("/order-detail?orderId=" + orderId);
+
+            customerService.addNewNotification(notificationInsertRequest, orderId);
+
             result.put("message", "Đơn hàng được chuyển đến đơn vị vận chuyển thành công!");
             result.put("type", "success");
             result.put("statusType", EOrderStatus.SHIPPING.name());
@@ -204,6 +236,15 @@ public class OrderAPI extends HttpServlet {
         boolean success = orderService.updateStatus(orderId, EOrderStatus.REFUNDED) &&
                 returnBookService.update(returnBookId);
         if (success) {
+
+            NotificationInsertRequest notificationInsertRequest = new NotificationInsertRequest();
+            notificationInsertRequest.setContent("Đơn hàng " + orderId + " đủ điều kiện để hoàn trả");
+            notificationInsertRequest.setTitle("Hoàn trả đơn hàng thành công");
+            notificationInsertRequest.setType(ENotificationType.ORDER);
+            notificationInsertRequest.setHyperLink("/order-detail?orderId=" + orderId);
+
+            customerService.addNewNotification(notificationInsertRequest, orderId);
+
             result.put("message", "Đơn hàng được xác nhận thành công!");
             result.put("type", "success");
             result.put("statusType", EOrderStatus.REFUNDED.name());
@@ -231,6 +272,14 @@ public class OrderAPI extends HttpServlet {
         String content = jsonMap.get("content").toString();
         boolean success = orderService.updateStatus(orderId, EOrderStatus.COMPLETE_DELIVERY);
         if (success) {
+            NotificationInsertRequest notificationInsertRequest = new NotificationInsertRequest();
+            notificationInsertRequest.setContent("Đơn hàng " + orderId + " không đủ điều kiện hoàn trả.");
+            notificationInsertRequest.setTitle("Từ chối hoàn trả");
+            notificationInsertRequest.setType(ENotificationType.ORDER);
+            notificationInsertRequest.setHyperLink("/order-detail?orderId=" + orderId);
+
+            customerService.addNewNotification(notificationInsertRequest, orderId);
+
             result.put("message", "Từ chối hoàn trả thành công!");
             result.put("type", "success");
             result.put("statusType", EOrderStatus.COMPLETE_DELIVERY.name());

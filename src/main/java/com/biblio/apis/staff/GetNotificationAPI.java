@@ -36,20 +36,13 @@ public class GetNotificationAPI extends HttpServlet {
         response.setContentType("application/json");
         response.setCharacterEncoding("UTF-8");
 
-        // Lấy session hiện tại
-        HttpSession session = request.getSession(false); // false để không tạo mới session nếu chưa tồn tại
+        HttpSession session = request.getSession(false);
 
-        // Kiểm tra xem session có chứa "account" hay không
         AccountGetResponse account = (session != null) ? (AccountGetResponse) session.getAttribute("account") : null;
 
         System.out.println(account.getId());
         if (account == null) {
-            // Nếu không có account trong session, trả về lỗi hoặc yêu cầu đăng nhập
-            response.setStatus(HttpServletResponse.SC_UNAUTHORIZED); // HTTP 401 Unauthorized
-            Map<String, String> errorMap = new HashMap<>();
-            errorMap.put("status", "error");
-            errorMap.put("message", "Bạn cần đăng nhập để thực hiện hành động này.");
-            writeResponse(response, errorMap);
+            response.sendRedirect(request.getContextPath() + "/login");
             return;
         }
 
@@ -64,11 +57,8 @@ public class GetNotificationAPI extends HttpServlet {
     }
 
     public void writeResponse(HttpServletResponse response, Object responseObject) throws IOException {
-        // Tạo đối tượng ObjectMapper để chuyển đối tượng Java thành JSON
         ObjectMapper objectMapper = new ObjectMapper();
-        // Chuyển đối tượng responseObject thành chuỗi JSON
         String jsonResponse = objectMapper.writeValueAsString(responseObject);
-        // Gửi chuỗi JSON về phía client
         response.getWriter().write(jsonResponse);
     }
 }

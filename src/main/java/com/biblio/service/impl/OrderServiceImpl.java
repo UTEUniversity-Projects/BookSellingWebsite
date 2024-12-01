@@ -2,6 +2,7 @@ package com.biblio.service.impl;
 
 import com.biblio.dao.IOrderDAO;
 import com.biblio.dao.IReturnBookDAO;
+import com.biblio.dao.impl.BankTransferDAOImpl;
 import com.biblio.dao.impl.EWalletDAOImpl;
 import com.biblio.dto.request.CreateOrderRequest;
 import com.biblio.dto.response.*;
@@ -28,6 +29,9 @@ public class OrderServiceImpl implements IOrderService {
 
     @Inject
     EWalletDAOImpl walletDAO;
+
+    @Inject
+    BankTransferDAOImpl bankTransferDAO;
 
     @Inject
     IReturnBookDAO returnBookDAO;
@@ -116,9 +120,9 @@ public class OrderServiceImpl implements IOrderService {
                     (orderDate.isEqual(end) || orderDate.isBefore(end)) &&
                     EOrderStatus.COMPLETE_DELIVERY.equals(order.getStatus())) {
 
-                EWallet ew = walletDAO.findByOrderId(order.getId());
+                BankTransfer bankTransfer = bankTransferDAO.findByOrderId(order.getId());
 
-                venue += ew.getAmount();
+                venue += bankTransfer.getAmount();
             }
         }
         return venue;

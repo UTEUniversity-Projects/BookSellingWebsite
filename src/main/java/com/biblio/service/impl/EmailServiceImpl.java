@@ -121,7 +121,7 @@ public class EmailServiceImpl implements IEmailService {
                 "<div style=\"max-width: 600px; margin: 20px auto; border: 1px solid #ddd; border-radius: 10px; overflow: hidden;\">" +
                 // Header với logo và tiêu đề
                 "<div style=\"background-color: #f7f7f7; padding: 20px; text-align: center;\">" +
-                "<img src=\"https://scontent.fsgn8-4.fna.fbcdn.net/v/t39.30808-6/468703611_1664827497410053_3942884439111183245_n.jpg?_nc_cat=107&ccb=1-7&_nc_sid=127cfc&_nc_ohc=zXw3uGs7ZsEQ7kNvgEXUmAZ&_nc_zt=23&_nc_ht=scontent.fsgn8-4.fna&_nc_gid=A2ITxhjZT2QDYgdmlw7QjNT&oh=00_AYBn-1ZCU7YRtTLovzTu7xEwxk-NF3FUYThFLp0dVmgKBg&oe=674DF1D9\" " +
+                "<img src=\"https://lh3.googleusercontent.com/d/1L2YtT3oH7TjTfyPhXVkx3XGJccTrfnQ1\" " +
                 "alt=\"Biblio Logo\" style=\"width: 120px; height: auto; margin-bottom: 10px;\"/>" +
                 "<h2 style=\"color: #d35400; margin: 0;\">" + title + "</h2>" +
                 "</div>" +
