@@ -4945,3 +4945,9 @@ INSERT INTO order_status_history(status, status_change_date, order_id) values
 ('WAITING_FOR_SHIPPING', '2024-10-20 17:00:00', 10),
 ('COMPLETED', '2024-10-21 13:22:00', 10),
 ('REVIEWED', '2024-10-21 16:15:00', 10);
+
+INSERT INTO order_status_history(status, status_change_date, order_id) values
+('PLACED', '2024-10-28 11:16:00', 24),
+('CONFIRMED', '2024-10-28 11:30:00', 24),
+('WAITING_FOR_SHIPPING', '2024-10-28 12:00:00', 24),
+('COMPLETED', '2024-10-29 13:22:00', 24);

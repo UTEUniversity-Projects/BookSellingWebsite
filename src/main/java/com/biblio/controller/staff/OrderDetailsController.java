@@ -21,10 +21,13 @@ import java.io.Serial;
 public class OrderDetailsController extends HttpServlet {
     @Serial
     private static final long serialVersionUID = 1L;
+
     @Inject
     IOrderService orderService;
+
     @Inject
     IReturnBookService returnBookService;
+
     @Inject
     IPromotionTemplateService promotionTemplateService;
 

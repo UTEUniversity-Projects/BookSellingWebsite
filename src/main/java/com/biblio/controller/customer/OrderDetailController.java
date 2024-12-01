@@ -1,8 +1,11 @@
 package com.biblio.controller.customer;
 
-import com.biblio.dto.response.OrderCustomerResponse;
+import com.biblio.dto.response.*;
+import com.biblio.enumeration.EOrderStatus;
 import com.biblio.service.ICustomerService;
 import com.biblio.service.IOrderService;
+import com.biblio.service.IPromotionTemplateService;
+import com.biblio.service.IReturnBookService;
 
 import javax.inject.Inject;
 import javax.servlet.ServletException;
@@ -21,10 +24,17 @@ public class OrderDetailController extends HttpServlet {
     @Serial
     private static final long serialVersionUID = 1L;
     @Inject
-    private IOrderService orderService;
+    IOrderService orderService;
+
+    @Inject
+    IReturnBookService returnBookService;
+
+    @Inject
+    IPromotionTemplateService promotionTemplateService;
 
     @Inject
     private ICustomerService customerService;
+
     /**
      * @see HttpServlet#HttpServlet()
      */
@@ -37,31 +47,55 @@ public class OrderDetailController extends HttpServlet {
      * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
      */
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        AccountGetResponse account = (AccountGetResponse) request.getSession().getAttribute("account");
+        if (account == null) {
+            response.sendRedirect("/login");
+            return;
+        }
+
         String orderIdParam = request.getParameter("orderId");
         if (orderIdParam == null || orderIdParam.isEmpty()) {
-            // Nếu không có orderId, redirect về trang danh sách đơn hàng
             response.sendRedirect(request.getContextPath() + "/order");
             return;
         }
 
-        // Chuyển đổi orderId từ String sang Long
         Long orderId = Long.parseLong(orderIdParam);
-
-        // Lấy chi tiết đơn hàng dựa trên orderId
-        OrderCustomerResponse orderDetail = orderService.findOrderByIdCustomer(orderId);
-
+        OrderDetailsManagementResponse orderDetail = orderService.getOrderDetailsManagementResponse(orderId);
         if (orderDetail == null) {
             System.out.println("Order not found for ID: " + orderId);
             response.sendRedirect(request.getContextPath() + "/order");
             return;
         }
 
+        for (OrderProductResponse product : orderDetail.getProducts()) {
+            double discount = promotionTemplateService.percentDiscountOfBook(product.getBookTemplateId());
+            product.setDiscountPercent(discount);
+            product.calTotalPrice();
+        }
+        orderDetail.updateTotalPrice();
+        orderDetail.updateFinalPrice();
 
-        // Truyền thông tin đơn hàng vào JSP
+        if (orderDetail.getStatus() == EOrderStatus.REQUEST_REFUND || orderDetail.getStatus() == EOrderStatus.REFUNDED) {
+            ReturnBookManagementResponse returnBook = returnBookService.findReturnBookByOrderId(orderId);
+            request.setAttribute("returnBook", returnBook);
+        }
         request.setAttribute("orderDetail", orderDetail);
-
-        // Forward request to JSP view
         request.getRequestDispatcher("/views/customer/order-detail.jsp").forward(request, response);
+
+//        OrderCustomerResponse orderDetail = orderService.findOrderByIdCustomer(orderId);
+//
+//        if (orderDetail == null) {
+//            System.out.println("Order not found for ID: " + orderId);
+//            response.sendRedirect(request.getContextPath() + "/order");
+//            return;
+//        }
+//
+//
+//        // Truyền thông tin đơn hàng vào JSP
+//        request.setAttribute("orderDetail", orderDetail);
+//
+//        // Forward request to JSP view
+//        request.getRequestDispatcher("/views/customer/order-detail.jsp").forward(request, response);
     }
 
     /**

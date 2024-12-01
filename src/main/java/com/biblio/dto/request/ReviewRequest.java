@@ -9,7 +9,7 @@ import lombok.*;
 public class ReviewRequest {
     private String content;
     private int rate;
-    private Long customerId;
     private Long bookTemplateId;
     private boolean readyToIntroduce;
+    private Long orderId;
 }
