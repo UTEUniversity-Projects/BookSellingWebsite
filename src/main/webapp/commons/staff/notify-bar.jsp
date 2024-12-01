@@ -85,12 +85,11 @@
                     const hyperlink = "${pageContext.request.contextPath}" + notification.hyperLink || "#"; // Đảm bảo rằng có link
                     const isRead = notification.status === "VIEWED";
 
-                    console.log("Title:", title);  // Kiểm tra giá trị của title
-                    console.log("Content:", content);  // Kiểm tra giá trị của content
-                    console.log("SentTime:", sentTime);  // Kiểm tra giá trị của sentTime
+                    console.log("Title:", title);
+                    console.log("Content:", content);
+                    console.log("SentTime:", sentTime);
 
-                    // Tạo HTML cho mỗi thông báo
-                    const li = $("<li>").attr("data-id", notification.id); // Gán data-id vào thẻ <li>
+                    const li = $("<li>").attr("data-id", notification.id);
                     li.html(`
                     <a href="#" class="notification-link">
                         <div class="icon cr-alert">
@@ -109,35 +108,31 @@
                     li.find(".time").text(content);
                     li.find(".message").text(sentTime);
 
-                    // Thay đổi màu nền và font-weight cho thông báo chưa đọc
                     if (!isRead) {
-                        li.css("background-color", "#f0f8ff"); // Màu nền cho thông báo chưa đọc (sử dụng màu xanh nhạt, có thể thay đổi theo ý bạn)
-                        li.css("font-weight", "bold");  // Để đậm văn bản cho thông báo chưa đọc
+                        li.css("background-color", "#f0f8ff");
+                        li.css("font-weight", "bold");
                     }
 
                     // Gán giá trị vào các thẻ cụ thể
                     li.find(".notification-link").attr("href", hyperlink);
 
-                    // Thêm thông báo vào danh sách
                     notificationList.append(li);
                 });
 
                 // Thêm sự kiện click cho từng thông báo
                 $("li[data-id]").click(function(e) {
-                    e.preventDefault();  // Ngừng hành động mặc định của thẻ <a>
+                    e.preventDefault();
 
-                    const notificationId = $(this).attr("data-id");  // Lấy ID của thông báo từ data-id của thẻ <li>
-                    const link = $(this).find(".notification-link").attr("href"); // Lấy liên kết từ thẻ <a>
+                    const notificationId = $(this).attr("data-id");
+                    const link = $(this).find(".notification-link").attr("href");
 
-                    // Gọi API để cập nhật trạng thái thông báo khi người dùng nhấn vào
                     $.ajax({
                         url: `${contextPath}/api/staff/notification/update`,
                         method: "POST",
                         data: { notificationId: notificationId },
                         success: function(response) {
                             console.log("Notification status updated successfully.");
-                            // Sau khi cập nhật thành công, chuyển hướng tới trang thông báo
-                            window.location.href = link; // Chuyển hướng đến trang đã được gắn trong thẻ <a>
+                            window.location.href = link;
                         },
                         error: function(xhr, status, error) {
                             console.error("Error updating notification status: ", error);
@@ -153,7 +148,6 @@
         });
     }
 
-    // Gọi API khi trang được tải
     $(document).ready(function () {
         console.log("Page loaded. Calling fetchNotifications()");
         fetchNotifications();
