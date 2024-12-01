@@ -42,6 +42,10 @@ public class CartController extends HttpServlet {
         HttpSession session = request.getSession();
         AccountGetResponse account = (AccountGetResponse) session.getAttribute("account");
 
+        if (account == null) {
+            response.sendRedirect("login");
+            return;
+        }
         CartResponse cart = cartService.getCartResponseByAccountId(account.getId());
 
         request.setAttribute("breadcrumb", "Giỏ hàng");

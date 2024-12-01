@@ -2,7 +2,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
 <!-- Product -->
-<section class="section-product padding-t-100">
+<section class="section-product padding-t-100" data-book-id="${book.id}">
   <div class="container-xl">
     <div
             class="row mb-minus-24"
@@ -107,7 +107,7 @@
               <button type="button" class="minus">-</button>
             </div>
             <div class="cr-add-button">
-              <button type="button" class="cr-button cr-btn-secondary cr-shopping-bag add-to-cart-btn" data-cart-id="${cart.id}" data-book-id="${book.id}">
+              <button type="button" class="cr-button cr-btn-secondary cr-shopping-bag add-to-cart-btn" data-book-id="${book.id}">
                 Thêm vào giỏ hàng
               </button>
             </div>
@@ -277,42 +277,44 @@
               <div class="cr-tab-content-from">
                 <ul class="review-list">
                   <c:forEach var="review" items="${book.reviews}">
-                    <li class="review-item">
-                      <div class="review-item__image">
-                        <img src="${pageContext.request.contextPath}${review.imageUrl}"
-                             alt="review"/>
-                      </div>
-                      <div class="review-item__content">
-                        <div class="header">
-                          <div class="header__left">
-                            <span>${review.customerName}</span>
-                            <div class="rating">
-                              <c:forEach var="i" begin="1" end="5" step="1">
-                                <c:choose>
-                                  <c:when test="${i <= review.rating}">
-                                    <i class="ri-star-fill"></i>
-                                  </c:when>
-                                  <c:otherwise>
-                                    <i class="ri-star-line"></i>
-                                  </c:otherwise>
-                                </c:choose>
-                              </c:forEach>
+                    <c:if test="${not review.isHidden}">
+                      <li class="review-item">
+                        <div class="review-item__image">
+                          <img src="${pageContext.request.contextPath}${review.imageUrl}"
+                               alt="review"/>
+                        </div>
+                        <div class="review-item__content">
+                          <div class="header">
+                            <div class="header__left">
+                              <span>${review.customerName}</span>
+                              <div class="rating">
+                                <c:forEach var="i" begin="1" end="5" step="1">
+                                  <c:choose>
+                                    <c:when test="${i <= review.rating}">
+                                      <i class="ri-star-fill"></i>
+                                    </c:when>
+                                    <c:otherwise>
+                                      <i class="ri-star-line"></i>
+                                    </c:otherwise>
+                                  </c:choose>
+                                </c:forEach>
+                              </div>
                             </div>
                           </div>
-                        </div>
-                        <span class="date">${review.createdAt}</span>
+                          <span class="date">${review.createdAt}</span>
 
-                        <div class="review-content">
-                          ${review.content}
-                        </div>
-                        <c:if test="${not empty review.responseContent}">
-                          <div class="response-review">
-                            <div class="response-title">Phản Hồi Của Người Bán</div>
-                            <div class="response-text">${review.responseContent}</div>
+                          <div class="review-content">
+                              ${review.content}
                           </div>
-                        </c:if>
-                      </div>
-                    </li>
+                          <c:if test="${not empty review.responseContent}">
+                            <div class="response-review">
+                              <div class="response-title">Phản Hồi Của Người Bán</div>
+                              <div class="response-text">${review.responseContent}</div>
+                            </div>
+                          </c:if>
+                        </div>
+                      </li>
+                    </c:if>
                   </c:forEach>
                 </ul>
               </div>
@@ -371,13 +373,13 @@
           <div class="cr-banner">
             <h2>Các sản phẩm liên quan</h2>
           </div>
-          <div class="cr-banner-sub-title">
-            <p>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
-              do eiusmod tempor incididunt ut labore et viverra maecenas
-              accumsan lacus vel facilisis.
-            </p>
-          </div>
+<%--          <div class="cr-banner-sub-title">--%>
+<%--            <p>--%>
+<%--              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed--%>
+<%--              do eiusmod tempor incididunt ut labore et viverra maecenas--%>
+<%--              accumsan lacus vel facilisis.--%>
+<%--            </p>--%>
+<%--          </div>--%>
         </div>
       </div>
     </div>

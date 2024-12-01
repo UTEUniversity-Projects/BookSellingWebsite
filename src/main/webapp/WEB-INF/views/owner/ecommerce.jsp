@@ -271,7 +271,7 @@
                 </div>
             </div>
             <div class="end-row"></div>
-            
+
             <div class="col-xl-12">
                 <div class="row">
                     <div class="col-xl-3 col-md-6">
@@ -373,33 +373,55 @@
                     </div>
                 </div>
             </div>
+        </div>
+        <div class="end-row"></div>
+        <div class="row">
+            <div class="col-xl-4 col-md-12">
+                <div class="cr-card">
+                    <div class="cr-card-content label-card">
+                        <div class="title">
+                            <span class="icon icon-3"><i class="ri-product-hunt-line"></i></span>
+                            <div class="growth-numbers">
+                                <h4>Đơn hàng thành công</h4>
+                                <h5 id="countOrderSuccess">0</h5>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xl-4 col-md-12">
+                <div class="cr-card">
+                    <div class="cr-card-content label-card">
+                        <div class="title">
+                            <span class="icon icon-3"><i class="ri-shield-star-line"></i></span>
+                            <div class="growth-numbers">
+                                <h4>Đơn hàng hoàn trả</h4>
+                                <h5 id="countOrderReturn"></h5>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xl-4 col-md-12">
+                <div class="cr-card">
+                    <div class="cr-card-content label-card">
+                        <div class="title">
+                            <span class="icon icon-3"><i class="ri-shield-star-line"></i></span>
+                            <div class="growth-numbers">
+                                <h4>Tỷ lệ đơn hàng bị trả</h4>
+                                <h5 id="rateOrderReturn"></h5>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
             <div class="col-xxl-12 col-xl-12">
                 <div class="cr-card revenue-overview">
                     <div class="cr-card-header header-575">
-                        <h4 class="cr-card-title">
-                            Thống kê đơn hàng theo từng mục sách
-                        </h4>
+                        <h4 class="cr-card-title"></h4>
                         <div class="header-tools" style="font-size: 24px">
-                            <div class="select-category" style="margin-bottom: 3px">
-                                <select class="select-item">
-                                    <option selected disabled>Danh mục</option>
-                                    <option value="1">Truyện cổ tích</option>
-                                    <option value="2">Kỹ năng sống</option>
-                                    <option value="3">Kinh tế</option>
-                                    <option value="4">Công nghệ thông tin</option>
-                                    <option value="1">Truyện cổ tích</option>
-                                    <option value="2">Kỹ năng sống</option>
-                                    <option value="3">Kinh tế</option>
-                                    <option value="4">Công nghệ thông tin</option>
-                                    <option value="1">Truyện cổ tích</option>
-                                    <option value="2">Kỹ năng sống</option>
-                                    <option value="3">Kinh tế</option>
-                                    <option value="4">Công nghệ thông tin là môn gì</option>
-                                </select>
-                            </div>
-                            <a class="a-chart"><i class="ri-bar-chart-line"></i></a>
-                            <a class="a-chart"><i class="ri-line-chart-line"></i></a>
-
                             <a
                                     href="javascript:void(0)"
                                     class="m-r-10 cr-full-card"
@@ -407,7 +429,7 @@
                             ><i class="ri-fullscreen-line"></i
                             ></a>
                             <div class="cr-tools">
-                                <div class="daterange">
+                                <div class="daterange" id="date-return-order">
                                     <i class="fa fa-calendar"></i>&nbsp;
                                     <span></span>
                                     <i class="fa fa-caret-down"></i>
@@ -417,12 +439,18 @@
                     </div>
                     <div class="cr-card-content">
                         <div class="cr-chart-content">
-                            <div id="categoryOderBarChart" class="mb-m-24"></div>
+                            <div id="reasonReturnOrderBarChart" class="mb-m-24"></div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
+
+
+
+
+
+
         <div class="row">
             <div class="col-xxl-12 col-xl-12">
                 <div class="cr-card revenue-overview">
@@ -453,33 +481,6 @@
                     <div class="cr-card-content">
                         <div class="cr-chart-content">
                             <div id="topTenBookSellingBarChart" class="mb-m-24"></div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-xxl-12 col-xl-12">
-                <div class="cr-card revenue-overview">
-                    <div class="cr-card-header header-575">
-                        <h4 class="cr-card-title">Thống kê khách hàng mới</h4>
-                        <div class="header-tools" style="font-size: 24px">
-                            <a class="a-chart"><i class="ri-bar-chart-line"></i></a>
-                            <a class="a-chart"><i class="ri-line-chart-line"></i></a>
-                            <a
-                                    href="javascript:void(0)"
-                                    class="m-r-10 cr-full-card"
-                                    title="Full Screen"
-                            ><i class="ri-fullscreen-line"></i
-                            ></a>
-                            <div class="cr-date-range date">
-                                <span></span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="cr-card-content">
-                        <div class="cr-chart-content">
-                            <div id="" class="mb-m-24"></div>
                         </div>
                     </div>
                 </div>

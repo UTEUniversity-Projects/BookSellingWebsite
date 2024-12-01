@@ -27,4 +27,6 @@ public interface IStaffService {
     List<NotificationGetResponse> getAllNotificationByStaffId(Long id);
 
     void addNewNotification(NotificationInsertRequest notificationInsertRequest);
+
+    StaffResponse getStaffByUsername(String username);
 }

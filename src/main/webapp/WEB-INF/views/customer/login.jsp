@@ -127,7 +127,7 @@
                             <div>
                                 <a href="forgot"
                                    class="text-md text-[#26a397] hover:opacity-80 transition-all duration-300">Quên mật
-                                    khẩu</a>
+                                    khẩu?</a>
                             </div>
                         </div>
                         <div class="login-buttons">

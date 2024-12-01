@@ -1,6 +1,7 @@
 package com.biblio.service.impl;
 
 import com.biblio.dao.IAccountDAO;
+import com.biblio.dto.request.ResetPasswordRequest;
 import com.biblio.dto.response.AccountGetResponse;
 import com.biblio.entity.Account;
 import com.biblio.mapper.AccountMapper;
@@ -22,5 +23,12 @@ public class AccountServiceImpl implements IAccountService {
     public AccountGetResponse getAccountByUsername(String username) {
         Account account = accountDAO.getAccountByUsername(username);
         return AccountMapper.toAccountGetResponse(account);
+    }
+
+    @Override
+    public void resetPassword(ResetPasswordRequest request) {
+        Account account = accountDAO.getAccountByUsername(request.getUsername());
+        account.setPassword(request.getNewPassword());
+        accountDAO.resetPassword(account);
     }
 }

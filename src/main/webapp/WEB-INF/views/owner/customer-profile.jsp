@@ -8,7 +8,7 @@
       <div class="cr-breadcrumb">
         <h5>Thông tin khách hàng</h5>
         <ul>
-          <li><a href="index.html">Biblio</a></li>
+          <li><a href="${pageContext.request.contextPath}/owner/ecommerce">Biblio</a></li>
           <li>Thông tin khách hàng</li>
         </ul>
       </div>
@@ -106,8 +106,8 @@
               <div class="col-md-6 col-sm-12">
                 <div class="form-group">
                   <label>Giới tính</label>
-                  <div class="select-oject-customer">
-                    <input type="text" class="form-control"  value="${customer.gender}" style="width: 100%; background-color: white" disabled">
+                  <div class="select-object-customer">
+                    <input type="text" class="form-control"  value="${customer.gender}" style="width: 100%; background-color: white" disabled>
                   </div>
                 </div>
               </div>
@@ -117,15 +117,6 @@
                   <div class="col-12">
                     <input id="username-customer-edit"
                            class="form-control here slug-title" type="text" value="${customer.username}" disabled style="background-color: white">
-                  </div>
-                </div>
-              </div>
-              <div class="col-md-6 col-sm-12 ">
-                <div class="form-group">
-                  <label>Mật khẩu</label>
-                  <div class="col-12">
-                    <input id="password-customer-edit"
-                           class="form-control here slug-title" type="text" value="${customer.password}" disabled style="background-color: white">
                   </div>
                 </div>
               </div>
@@ -150,36 +141,36 @@
 
               <c:forEach var="address" items="${customer.addresses}" varStatus="status">
                 <label>Địa chỉ ${status.index + 1}:</label>
-                <div class="col-md-4 col-sm-12 ">
-                  <div class="form-group">
-                    <label>Tỉnh / Thành Phố</label>
-                    <div class="col-12">
-                      <input id="cost-customer-edit"
-                             class="form-control" type="text" value="${address.province}" disabled style="background-color: white">
-                    </div>
-                  </div>
-                </div>
-                <div class="col-md-4 col-sm-12 ">
-                  <div class="form-group">
-                    <label>Quận / Huyện</label>
-                    <div class="col-12">
-                      <input id="cost-customer-edit"
-                             class="form-control" type="text" value="${address.district}" disabled style="background-color: white">
-                    </div>
-                  </div>
-                </div>
-                <div class="col-md-4 col-sm-12 ">
-                  <div class="form-group">
-                    <label>Phường / Xã</label>
-                    <div class="col-12">
-                      <input id="cost-customer-edit"
-                             class="form-control" type="text" value="${address.village}" disabled style="background-color: white">
-                    </div>
-                  </div>
-                </div>
+<%--                <div class="col-md-4 col-sm-12 ">--%>
+<%--                  <div class="form-group">--%>
+<%--                    <label>Tỉnh / Thành Phố</label>--%>
+<%--                    <div class="col-12">--%>
+<%--                      <input id="cost-customer-edit"--%>
+<%--                             class="form-control" type="text" value="${address.province}" disabled style="background-color: white">--%>
+<%--                    </div>--%>
+<%--                  </div>--%>
+<%--                </div>--%>
+<%--                <div class="col-md-4 col-sm-12 ">--%>
+<%--                  <div class="form-group">--%>
+<%--                    <label>Quận / Huyện</label>--%>
+<%--                    <div class="col-12">--%>
+<%--                      <input id="cost-customer-edit"--%>
+<%--                             class="form-control" type="text" value="${address.district}" disabled style="background-color: white">--%>
+<%--                    </div>--%>
+<%--                  </div>--%>
+<%--                </div>--%>
+<%--                <div class="col-md-4 col-sm-12 ">--%>
+<%--                  <div class="form-group">--%>
+<%--                    <label>Phường / Xã</label>--%>
+<%--                    <div class="col-12">--%>
+<%--                      <input id="cost-customer-edit"--%>
+<%--                             class="form-control" type="text" value="${address.village}" disabled style="background-color: white">--%>
+<%--                    </div>--%>
+<%--                  </div>--%>
+<%--                </div>--%>
                 <div class="col-md-12 col-sm-12">
                   <div class="form-group">
-                    <label>Địa chỉ cụ thể</label>
+<%--                    <label>Địa chỉ cụ thể</label>--%>
                     <div class="col-12">
                       <input name="text" id="address-customer-edit" class="form-control here slug-title" type="text" value="${address.detail}, ${address.village}, ${address.district}, ${address.province}" disabled style="background-color: white">
                     </div>

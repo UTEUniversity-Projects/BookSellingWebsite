@@ -86,6 +86,7 @@ public class PromotionMapper {
     }
 
     public static Promotion toPromotion(PromotionUpdateRequest promotionUpdateRequest) {
+
         Promotion promotion = new Promotion();
 
         promotion.setId(promotionUpdateRequest.getId());

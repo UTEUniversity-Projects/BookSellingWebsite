@@ -23,6 +23,11 @@ $(document).ready(function () {
     var topRepeatPurchaseChart;
     var topRepeatPurchaseDonutChart;
 
+    //Reason return order
+    var startOfReturnOrder = moment().subtract(29, "days");
+    var endOfReturnOrder = moment();
+    var reasonReturnBarChart;
+
     function animateNumber(element, startValue, endValue, duration, isCurrency = false) {
         $({count: startValue}).animate(
             {count: endValue},
@@ -135,8 +140,6 @@ $(document).ready(function () {
         revenueChart = new ApexCharts(document.querySelector(`#${chartId}`), options);
         revenueChart.render();
     }
-
-
 
     function drawNewCustomerChart(chartId, categories, count, type = "line") {
         if (newCustomerChart) {
@@ -350,6 +353,63 @@ $(document).ready(function () {
 
         topRepeatPurchaseDonutChart = new ApexCharts(document.querySelector(chartId), options);
         topRepeatPurchaseDonutChart.render();
+    }
+
+    function drawReasonReturnOrderChart(chartId, categories, seriesData) {
+        if (reasonReturnBarChart) {
+            reasonReturnBarChart.destroy();
+        }
+
+        const options = {
+            series: seriesData,
+            chart: {
+                type: 'bar',
+                height: 500,
+                stacked: false,
+            },
+            plotOptions: {
+                bar: {
+                    horizontal: false,
+                    columnWidth: '30%',
+                    endingShape: 'rounded',
+                },
+            },
+            dataLabels: {
+                enabled: false,
+            },
+            colors: ['#5f6af5', '#ff4f7f', '#1ecab8', '#f9a12c'],
+            xaxis: {
+                categories: categories,
+                labels: {
+                    formatter: function (val) {
+                        return val.length > 20 ? val.slice(0, 20) + '...' : val;
+                    },
+                },
+            },
+            yaxis: {
+                labels: {
+                    formatter: function (val) {
+                        return val;
+                    },
+                },
+            },
+            fill: {
+                opacity: 1,
+            },
+            tooltip: {
+                y: {
+                    formatter: function (val) {
+                        return val;
+                    },
+                },
+            },
+            legend: {
+                show: false,
+            },
+        };
+
+        reasonReturnBarChart = new ApexCharts(document.querySelector(chartId), options);
+        reasonReturnBarChart.render();
     }
 
 
@@ -590,7 +650,6 @@ $(document).ready(function () {
     }
 
     function updateRateRepeatPurchaseChart(start, end) {
-        // Hiển thị khoảng thời gian đã chọn
         $("#date-rate-repeat-purchase span").html(
             start.format("YYYY-MM-DD") + " - " + end.format("YYYY-MM-DD")
         );
@@ -642,6 +701,57 @@ $(document).ready(function () {
                 (singleOrderCount / totalCustomers) * 100,
                 (multipleOrderCount / totalCustomers) * 100
             );
+        });
+    }
+
+    function updateReasonReturnOrderBarChart(start, end) {
+        $("#date-return-order span").html(
+            start.format("YYYY-MM-DD") + " - " + end.format("YYYY-MM-DD")
+        );
+        fetchData(`${contextPath}/api/owner/ecommerce/get-list-return-order-at-time`, start, end, function (error, response) {
+            if (error) {
+                console.error("Error fetching data:", error);
+                return;
+            }
+
+            const orderReturnAtTimeList = response.orderReturnAtTimeList;
+            const reasonCounts = response.reasonCounts;
+
+            let successOrderCount = 0;
+            let returnOrderCount = 0;
+            let total = 0;
+
+            // Tính toán từ dữ liệu API
+            orderReturnAtTimeList.forEach(item => {
+                total++;
+                if (item.reasonReturn !== null) {
+                    returnOrderCount++;
+                }
+            });
+            successOrderCount = total - returnOrderCount;
+
+            const rateReturn = (returnOrderCount / total) * 100;
+            const roundedRateReturn = isNaN(rateReturn) || rateReturn == null ? 0 : Math.round(rateReturn * 100) / 100;
+
+
+
+            animateNumber("#countOrderSuccess", parseInt($("#countOrderSuccess").text()), successOrderCount || 0, 1000, false);
+            animateNumber("#countOrderReturn", parseInt($("#countOrderReturn").text()), returnOrderCount || 0, 1000, false);
+            animateNumber("#rateOrderReturn", parseInt($("#rateOrderReturn").text()), roundedRateReturn + " %" || 0 + " %", 1000, false);
+
+            const categories = ['Hư hỏng', 'Không giống mô tả', 'Hàng giả', 'Không có nhu cầu nữa'];
+            const seriesData = [{
+                name: 'Số đơn hàng trả lại',
+                data: [
+                    reasonCounts.DAMAGED || 0,
+                    reasonCounts.NOT_AS_DESCRIBED || 0,
+                    reasonCounts.FAKE || 0,
+                    reasonCounts.NO_NEEDED || 0
+                ]
+            }];
+
+            // Vẽ biểu đồ
+            drawReasonReturnOrderChart("#reasonReturnOrderBarChart", categories, seriesData);
         });
     }
 
@@ -716,6 +826,9 @@ $(document).ready(function () {
         if (elementId === "date-rate-repeat-purchase") {
             updateRateRepeatPurchaseChart(start, end);
         }
+        if (elementId === "date-return-order") {
+            updateReasonReturnOrderBarChart(start, end)
+        }
         // Có thể thêm logic cho các `id` khác ở đây
     }
 
@@ -724,6 +837,7 @@ $(document).ready(function () {
     initializeDateRangePicker("date-list-new-customer", startOfNewCustomer, endOfNewCustomer, onDateRangeChange);
     initializeDateRangePicker("date-top-product", startOfTopProductSold, endOfTopProductSold, onDateRangeChange);
     initializeDateRangePicker("date-rate-repeat-purchase", startOfRepeatPurchase, endOfRepeatPurchase, onDateRangeChange);
+    initializeDateRangePicker("date-return-order", startOfReturnOrder, endOfReturnOrder, onDateRangeChange);
 
 
     // Gọi lần đầu tiên khi trang tải
@@ -732,6 +846,7 @@ $(document).ready(function () {
     updateTopProductSoldChart(startOfTopProductSold, endOfTopProductSold);
     updateProductSoldTable();
     updateRateRepeatPurchaseChart(startOfRepeatPurchase, endOfRepeatPurchase)
+    updateReasonReturnOrderBarChart(startOfReturnOrder, endOfReturnOrder)
 });
 
 

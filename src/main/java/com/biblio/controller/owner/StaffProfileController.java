@@ -33,7 +33,7 @@ public class StaffProfileController extends HttpServlet {
         String id = request.getParameter("id");
         StaffResponse staffResponse = staffService.findById(Long.parseLong(id));
         request.setAttribute("staff", staffResponse);
-        request.getRequestDispatcher("/views/owner/staff-profile.jsp").forward(request, response);
+        request.getRequestDispatcher("/views/owner/profile.jsp").forward(request, response);
     }
 
     /**
