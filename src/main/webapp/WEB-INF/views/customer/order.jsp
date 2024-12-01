@@ -24,7 +24,6 @@
     </div>
 </div>
 
-
 <div class="bg-gray-100 py-5">
     <div class="max-w-[1024px] mx-auto">
         <!-- Thanh bộ lọc trạng thái -->
@@ -51,10 +50,9 @@
                     <!-- Trạng thái -->
                     <div class="flex justify-end mb-3 bottom-container">
                         <a href="${pageContext.request.contextPath}/order-detail?orderId=${order.id}"
-                           class="text-sm font-bold cursor-pointer
-                          ${order.status == 'COMPLETE_DELIVERY' ? 'text-green-500' :
-                           order.status == 'CANCELED' ? 'text-red-500' : 'text-yellow-500'}">
-                                ${order.status != null ? order.status.getDescription() : 'Trạng thái không xác định'}
+                           class="text-sm cursor-pointer status status--${order.statusStyle}"
+                           data-status="${order.status}">
+                                ${order.status.description}
                         </a>
                     </div>
 

@@ -168,7 +168,7 @@ public class PromotionTemplateServiceImpl implements IPromotionTemplateService {
                         applyCodePromotionResponse.setMinValueToBeApplied(promotion.getMinValueToBeApplied());
                         applyCodePromotionResponse.setDiscountLimit(promotion.getDiscountLimit());
                         applyCodePromotionResponse.setType(promotionTemplate.getType());
-                        applyCodePromotionResponse.setMessage("Áp dụng mã khuyến mãi thàng công!");
+                        applyCodePromotionResponse.setMessage("Áp dụng mã khuyến mãi thành công!");
 
                         Promotion promotionUpdate = promotionDAO.findById(promotion.getId());
                         if (!promotionTemplate.isInfinite()) {
