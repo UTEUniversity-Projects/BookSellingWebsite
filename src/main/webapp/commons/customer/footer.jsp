@@ -6,7 +6,7 @@
             <div class="col-xl-4 col-lg-6 col-sm-12 col-12 cr-footer-border">
                 <div class="cr-footer-logo">
                     <div class="image">
-                        <img src="${pageContext.request.contextPath}/assets/customer/img/logo/biblio.png" alt="logo" class="logo" />
+                        <img src="${pageContext.request.contextPath}/assets/commons/img/logo/biblio.png" alt="logo" class="logo" />
                     </div>
                     <p>
                         Carrot is the biggest market of grocery products. Get your daily
@@ -180,7 +180,7 @@
         <div class="cr-last-footer">
             <p>
                 &copy; <span id="copyright_year"></span>
-                <a href="home">Biblio</a>, All rights reserved.
+                <a href="${pageContext.request.contextPath}/home">Biblio</a>, All rights reserved.
             </p>
         </div>
     </div>

@@ -167,7 +167,7 @@ $(document).ready(() => {
 
 	//const amount = document.querySelector('#price-total').dataset.price;
 	const amount = 10000;
-	const text = `TEST 534`;
+	const text = `TEST ${Math.floor(Math.random() * 1000)}`;
 
 	let timeOut;
 	let interval;
