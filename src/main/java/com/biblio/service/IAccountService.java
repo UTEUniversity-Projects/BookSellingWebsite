@@ -1,5 +1,6 @@
 package com.biblio.service;
 
+import com.biblio.dto.request.ResetPasswordRequest;
 import com.biblio.dto.response.AccountGetResponse;
 
 public interface IAccountService {
@@ -8,4 +9,5 @@ public interface IAccountService {
 
     AccountGetResponse getAccountByUsername(String username);
 
+    void resetPassword(ResetPasswordRequest request);
 }

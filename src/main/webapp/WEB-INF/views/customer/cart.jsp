@@ -87,7 +87,7 @@
                                                 <tbody>
                                                 <tr>
                                                     <td>Tổng tiền :</td>
-                                                    <td class="price-value">${cart.totalBookPrice}</td>
+                                                    <td class="total pice-value">0</td>
                                                 </tr>
                                                 </tbody>
                                             </table>

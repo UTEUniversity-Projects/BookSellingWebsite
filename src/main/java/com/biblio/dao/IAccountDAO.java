@@ -8,4 +8,6 @@ public interface IAccountDAO {
 
     Account getAccountByUsername(String username);
 
+    Account resetPassword(Account account);
+
 }

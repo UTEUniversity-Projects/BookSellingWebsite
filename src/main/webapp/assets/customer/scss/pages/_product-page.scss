@@ -34,7 +34,6 @@ p {
     align-items: center;
     justify-content: center;
     position: relative;
-    height: 198px;
 
     .cr-side-view {
       @include ease5;
@@ -107,7 +106,7 @@ p {
       }
     }
 
-    .cr-shopping-bag.active {
+    .cr-shopping-bag:hover {
       background-color: $main-primary-color;
       border: 1px solid $main-primary-color;
 

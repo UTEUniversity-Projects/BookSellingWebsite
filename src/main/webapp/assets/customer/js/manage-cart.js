@@ -1,36 +1,12 @@
 import { debounce } from '../../commons/js/debounce.js';
 import { toast } from './toast.js';
-// Click vao nut them gio hang
-// Lay id cua book template
-// Truyen len API
-// Lay ra bookTemplate tuong ung
-// set bookTemplate do' cho cartItem
-
-/*
-* AddCartItemRequest
-* cartId
-* cartItemId
-* bookTemplate
-* */
-
-/*
-* Cac truong gui len trong ajax phai tuong ung voi cac truong trong dto request
-* AddCartItemRequest addCartItemRequest = HttpUtil.of(request.getReader()).toModel(AddCartItemRequest.class);
-* */
-
-/*
-* Xu ly them cartItem
-* */
-
-/*
-* Tra ve ket qua thanh cong hay that bai
-* */
+import { formatCurrencyVND } from '../../commons/js/format-currency.js';
 
 $(document).ready(function () {
 	// Add
-	$('.add-to-cart-btn').on('click', function () {
-		const bookId = $(this).data('book-id');
-		const quantity = $(this).data('quantity') || $(this).closest('.modal-body, .cr-product-card').find('.quantity').val();
+	$(document).on('click', '.add-to-cart-btn', function () {
+		const bookId = $(this).closest('.cr-product-card, .modal, .section-product').data("book-id");
+		const quantity = $(this).data("quantity") || $(this).closest(".cr-add-card").find(".cr-qty-main .quantity").val();
 
 		console.log({
 			bookId: bookId,
@@ -45,12 +21,21 @@ $(document).ready(function () {
 				quantity: quantity
 			}),
 			success: function (response) {
-				toast({
-					title: 'Thông báo',
-					message: `Thêm ${quantity} sản phẩm thành công !`,
-					type: 'success',
-					duration: 1000
-				});
+				if (response.code === 200) {
+					toast({
+						title: 'Thông báo',
+						message: `Thêm ${quantity} sản phẩm thành công !`,
+						type: 'success',
+						duration: 1000
+					});
+					addTooCartAnimation();
+					countCartItem();
+				}
+				else {
+					setTimeout(() => {
+						window.location.href = `${contextPath}/login`;
+					})
+				}
 			},
 			error: function (xhr, status, error) {
 				console.error('Error: ', xhr.responseText);
@@ -76,7 +61,7 @@ $(document).ready(function () {
 				if (response.cart && response.cart.cartItems && response.cart.cartItems.length > 0) {
 					response.cart.cartItems.forEach(cartItem => {
 						const itemHTML = `
-                         <li>
+                         <li data-cart-item-id="${cartItem.id}">
                              <a href="${contextPath}/book?id=${cartItem.bookId}" class="crside_pro_img">
                                  <img src="${contextPath}${cartItem.imageUrl}" alt="${cartItem.title}" />
                              </a>
@@ -85,8 +70,8 @@ $(document).ready(function () {
                                      ${cartItem.title}
                                  </a>
                                  <span class="cart-price">
-                                    <span class="new-price price-value">${cartItem.sellingPrice}</span>
-                                    <span class="old-price price-value">${cartItem.sellingPrice}</span>
+                                    <span class="new-price price-value">${formatCurrencyVND(cartItem.sellingPrice)}</span>
+                                    <span class="old-price price-value">${formatCurrencyVND(cartItem.sellingPrice)}</span>
                                  </span>
                                  <div class="cr-cart-qty">
                                      <div class="cart-qty-plus-minus">
@@ -118,7 +103,6 @@ $(document).ready(function () {
                                 </div>`);
 					viewCartBtn.hide();
 				}
-				formatCurrency();
 			},
 			error: function (xhr, status, error) {
 
@@ -131,9 +115,11 @@ $(document).ready(function () {
 		});
 	});
 	// Update
-	$('.quantity').on('change', debounce(function () {
-		const newQuantity = $(this).val();
-		const cartItemId = $(this).closest('tr').data('cart-item-id');
+	$(document).on('change', '.cr-cart-qty .quantity', debounce(function () {
+		const $input = $(this);
+		const newQuantity = $input.val();
+		const $row = $input.closest('tr, li');
+		const cartItemId = $row.data('cart-item-id');
 		console.log(cartItemId);
 		console.log(newQuantity);
 
@@ -146,7 +132,7 @@ $(document).ready(function () {
 				quantity: newQuantity
 			}),
 			success: function (response) {
-
+				$row.find('.cr-cart-subtotal').text(formatCurrencyVND(response.cartItem.subTotal));
 			},
 			error: function (xhr, status, error) {
 				console.error('Error: ', xhr.responseText);
@@ -154,10 +140,11 @@ $(document).ready(function () {
 		});
 	}, 1000));
 	// Delete
-	$('.remove-item').on('click', function () {
-		const cartItemId = $(this).closest('tr').data('cart-item-id');
-		const item = this.closest('tr');
-		const container = $(this).closest('.row');
+	$(document).on('click',  '.remove-item',function () {
+		const cartItemId = $(this).closest("li, tr").data('cart-item-id');
+		const item = $(this).closest("li, tr");
+		const container = $(this).closest(".crcart-pro-items, .row");
+		const parent = item.closest("tbody, ul");
 		console.log(cartItemId);
 		$.ajax({
 			url: `${contextPath}/api/customer/delete-cart-item`,
@@ -167,7 +154,7 @@ $(document).ready(function () {
 				cartItemId: cartItemId
 			}),
 			success: function (response) {
-				if (item.closest('tbody').children.length === 1) {
+				if (parent.children().length === 1) {
 					container.empty();
 					container.append('<div class="message-container">\n' +
 						'                                    <img src="https://cdn-icons-png.flaticon.com/512/2762/2762885.png" alt="">\n' +
@@ -185,29 +172,52 @@ $(document).ready(function () {
 					type: 'success',
 					duration: 1000
 				});
+				countCartItem();
 			},
 			error: function (xhr, status, error) {
 				console.error('Error: ', xhr.responseText);
 			}
 		});
 	});
+	$(document).on('change', '.product-checkbox', function () {
+		const $checkBox = $(this);
+		const $row = $checkBox.closest('tr');
+		const $totalElement = $row.closest('form').find('.cr-cart-summary .total');
+		let currentTotal = parseFloat($totalElement.text().replace(/[^0-9.-]+/g, '')) || 0;
+		const subTotal = parseFloat($row.find('.cr-cart-subtotal').text().replace(/[^0-9.-]+/g, '')) || 0;
+
+		if ($checkBox.is(':checked')) {
+			currentTotal += subTotal;
+		} else {
+			currentTotal -= subTotal;
+		}
+		$totalElement.text(formatCurrencyVND(currentTotal));
+	});
+	countCartItem();
 });
 
-function formatCurrency () {
-	document.querySelectorAll('.cr-cart-view .price-value').forEach(el => {
-		const rawValue = el.textContent.trim();
-
-		const value = parseFloat(rawValue);
-
-		if (!isNaN(value)) {
-			const formattedValue = value.toLocaleString('vi-VN');
-			if (el.classList.contains('minus-value')) {
-				el.innerHTML = `-${formattedValue}<span class="currency-symbol">₫</span>`;
-			} else {
-				el.innerHTML = `${formattedValue}<span class="currency-symbol">₫</span>`;
-			}
+function countCartItem() {
+	$.ajax({
+		url: `${contextPath}/api/customer/count-cart-item`,
+		type: 'GET',
+		success: function (response) {
+			const $cart = $(".cart");
+			$cart.find(".cart-item-count").text(response.count);
+		},
+		error: function (xhr, status, error) {
+			console.error('Error: ', xhr.responseText);
 		}
-	});
+	})
+}
+
+function addTooCartAnimation() {
+	const cart = $('.cart i');
+	setTimeout(() => {
+		cart.addClass('shake');
+		setTimeout(() => {
+			cart.removeClass('shake');
+		}, 1000);
+	}, 1000);
 }
 
 $(document).ready(function() {
@@ -242,3 +252,4 @@ $(document).ready(function() {
         }
     });
 });
+

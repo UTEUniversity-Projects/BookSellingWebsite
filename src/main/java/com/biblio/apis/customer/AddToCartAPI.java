@@ -2,6 +2,7 @@ package com.biblio.apis.customer;
 
 import com.biblio.dto.request.AddToCartRequest;
 import com.biblio.dto.response.AccountGetResponse;
+import com.biblio.dto.response.CartItemResponse;
 import com.biblio.service.ICartService;
 import com.biblio.utils.HttpUtil;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -50,22 +51,19 @@ public class AddToCartAPI extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         request.setCharacterEncoding("UTF-8");
 
-        HttpSession session = request.getSession();
-        AccountGetResponse account = (AccountGetResponse) session.getAttribute("account");
-
-        AddToCartRequest addToCartRequest = HttpUtil.of(request.getReader()).toModel(AddToCartRequest.class);
-        addToCartRequest.setAccountId(account.getId());
+        AccountGetResponse account = (AccountGetResponse) request.getSession().getAttribute("account");
 
         Map<String, Object> result = new HashMap<>();
         ObjectMapper mapper = new ObjectMapper();
 
-        try {
-            cartService.addToCart(addToCartRequest);
-            result.put("status", "success");
-            result.put("message", "Sản phẩm đã được thêm vào giỏ hàng thành công!");
-        } catch (Exception e) {
-            result.put("status", "error");
-            result.put("message", e.getMessage());
+        if (account == null) {
+            result.put("code", 400);
+        } else {
+            AddToCartRequest addToCartRequest = HttpUtil.of(request.getReader()).toModel(AddToCartRequest.class);
+            addToCartRequest.setAccountId(account.getId());
+            CartItemResponse cartItem = cartService.addToCart(addToCartRequest);
+            result.put("code", 200);
+            result.put("cartItem", cartItem);
         }
 
         response.setContentType("application/json");
