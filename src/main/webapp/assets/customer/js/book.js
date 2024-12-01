@@ -1,5 +1,6 @@
 import { toast } from './toast.js';
 import { formatCurrencyVND } from '../../commons/js/format-currency.js';
+import {zoomImage} from "../../commons/js/zoom-image.js";
 
 export function addToCart () {
 	toast({
@@ -37,22 +38,22 @@ $(document).ready(() => {
 
 	const generateBook = (book) => {
 		return `
-							<div data-book-id="${book.id}" class="mix col-xxl-2 col-xl-3 col-4 cr-product-box mb-5">
-                            <div class="cr-product-card">
-                                <div class="cr-product-image">
-                                    <div class="cr-image-inner image-zoom"
+							<div class="mix col-xxl-2 col-xl-3 col-4 cr-product-box mb-5">
+                            <div class="cr-product-card" data-book-id="${book.id}" >
+                                <div class="cr-product-image h-[auto]">
+                                    <div class="image-zoom"
 								         style="--url: url(${book.imageUrl.replace(/\\/g, '/')});
 								            --zoom-x: 0%;
 								            --zoom-y: 0%;
 								            --display: none;">
                                     <img src="${book.imageUrl}" alt="${book.title}">
-                                    <img role="presentation" alt="" src="http://localhost:8080/assets/owner/img/book/TrenDuongBang/image1.jpg" class="zoomImg" style="position: absolute; top: -2141.2px; left: -1465.35px; opacity: 0; width: 2560px; height: 2560px; border: none; max-width: none; max-height: none;"></div>
+                                    <img role="presentation" alt="" class="w-0 h-0" src="http://localhost:8080/assets/owner/img/book/TrenDuongBang/image1.jpg" class="zoomImg" style="position: absolute; top: -2141.2px; left: -1465.35px; opacity: 0; width: 2560px; height: 2560px; border: none; max-width: none; max-height: none;"></div>
                                     <div class="cr-side-view">
                                         <a class="model-oraganic-product" data-bs-toggle="modal" href="#quickview-${book.id}" role="button">
                                             <i class="ri-eye-line"></i>
                                         </a>
                                     </div>
-                                    <a class="cr-shopping-bag" href="javascript:void(0)">
+                                    <a class="cr-shopping-bag add-to-cart-btn" href="javascript:void(0)" data-quantity="1">
                                         <i class="ri-shopping-bag-line"></i>
                                     </a>
                                 </div>
@@ -77,7 +78,7 @@ $(document).ready(() => {
 
 	const generateModal = (book) => {
 		return `
-				<div class="modal fade quickview-modal" id="quickview-${book.id}" aria-hidden="true" tabindex="-1">
+				<div class="modal fade quickview-modal" id="quickview-${book.id}" aria-hidden="true" tabindex="-1" data-book-id="${book.id}">
 			        <div class="modal-dialog modal-dialog-centered cr-modal-dialog">
 			            <div class="modal-content">
 			                <button type="button" class="cr-close-model btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
@@ -115,12 +116,12 @@ $(document).ready(() => {
 			                                </div>
 			                                <div class="cr-add-card">
 			                                    <div class="cr-qty-main">
-			                                        <input type="text" placeholder="." value="1" minlength="1" maxlength="20" class="quantity">
+			                                        <input type="text" value="1" minlength="1" maxlength="20" class="quantity">
 			                                        <button type="button" class="plus">+</button>
 			                                        <button type="button" class="minus">-</button>
 			                                    </div>
 			                                    <div class="cr-add-button">
-			                                        <button type="button" class="cr-button cr-btn-secondary cr-shopping-bag">
+			                                        <button type="button" class="cr-button cr-btn-secondary cr-shopping-bag add-to-cart-btn">
 			                                            Thêm vào giỏ hàng
 			                                        </button>
 			                                    </div>
@@ -152,6 +153,7 @@ $(document).ready(() => {
 				if (bookList) bookList.innerHTML = books?.map(generateBook).join('');
 
 				$('.modal.fade.quickview-modal').remove();
+				zoomImage('.image-zoom')
 				document.querySelector('body').insertAdjacentHTML('beforeend', books.map(generateModal).join(''));
 			}, error: function (xhr, error) {
 				console.log(error);

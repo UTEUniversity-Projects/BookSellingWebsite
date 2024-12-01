@@ -376,41 +376,41 @@
             </c:when>
             <c:otherwise>
             <ul class="crcart-pro-items">
-                <c:forEach var="cartItem" items="${cart.cartItems}">
-                    <li>
-                        <a href="${pageContext.request.contextPath}/book?id=${cartItem.bookId}"
-                           class="crside_pro_img"
-                        ><img src="${pageContext.request.contextPath}${cartItem.imageUrl}"
-                              alt="${cartItem.title}"
-                        /></a>
-                        <div class="cr-pro-content">
-                            <a href="${pageContext.request.contextPath}/book?id=${cartItem.bookId}"
-                               class="cart_pro_title"
-                            >${cartItem.title}</a
-                            >
-                            <span class="cart-price">
-                                <span class="new-price price-value">${cartItem.sellingPrice}</span>
-                                <span class="old-price price-value">${cartItem.sellingPrice}</span>
-                            </span>
+<%--                <c:forEach var="cartItem" items="${cart.cartItems}">--%>
+<%--                    <li>--%>
+<%--                        <a href="${pageContext.request.contextPath}/book?id=${cartItem.bookId}"--%>
+<%--                           class="crside_pro_img"--%>
+<%--                        ><img src="${pageContext.request.contextPath}${cartItem.imageUrl}"--%>
+<%--                              alt="${cartItem.title}"--%>
+<%--                        /></a>--%>
+<%--                        <div class="cr-pro-content">--%>
+<%--                            <a href="${pageContext.request.contextPath}/book?id=${cartItem.bookId}"--%>
+<%--                               class="cart_pro_title"--%>
+<%--                            >${cartItem.title}</a--%>
+<%--                            >--%>
+<%--                            <span class="cart-price">--%>
+<%--                                <span class="new-price price-value">${cartItem.sellingPrice}</span>--%>
+<%--                                <span class="old-price price-value">${cartItem.sellingPrice}</span>--%>
+<%--                            </span>--%>
 
-                            <div class="cr-cart-qty">
-                                <div class="cart-qty-plus-minus">
-                                    <button type="button" class="minus">-</button>
-                                    <input
-                                            type="text"
-                                            value="${cartItem.quantity}"
-                                            minlength="1"
-                                            maxlength="20"
-                                            class="quantity"
-                                            data-book-id="${cartItem.bookId}"
-                                    />
-                                    <button type="button" class="plus">+</button>
-                                </div>
-                            </div>
-                            <a href="javascript:void(0)" class="remove-item">×</a>
-                        </div>
-                    </li>
-                </c:forEach>
+<%--                            <div class="cr-cart-qty">--%>
+<%--                                <div class="cart-qty-plus-minus">--%>
+<%--                                    <button type="button" class="minus">-</button>--%>
+<%--                                    <input--%>
+<%--                                            type="text"--%>
+<%--                                            value="${cartItem.quantity}"--%>
+<%--                                            minlength="1"--%>
+<%--                                            maxlength="20"--%>
+<%--                                            class="quantity"--%>
+<%--                                            data-book-id="${cartItem.bookId}"--%>
+<%--                                    />--%>
+<%--                                    <button type="button" class="plus">+</button>--%>
+<%--                                </div>--%>
+<%--                            </div>--%>
+<%--                            <a href="javascript:void(0)" class="remove-item">×</a>--%>
+<%--                        </div>--%>
+<%--                    </li>--%>
+<%--                </c:forEach>--%>
             </ul>
 
         </div>
@@ -423,7 +423,7 @@
             </c:otherwise>
             </c:choose>
         </div>
-          
+
     </div>
 </div>
 

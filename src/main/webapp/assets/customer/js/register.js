@@ -87,6 +87,9 @@ $(document).ready(() => {
 								type: "success",
 								duration: 3000,
 							});
+							setTimeout(() => {
+								window.location.href = `${contextPath}/login`;
+							}, 1000);
 						} else {
 							toast({
 								title: "Đăng ký",

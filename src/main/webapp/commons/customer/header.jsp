@@ -148,14 +148,18 @@
                                 </c:choose>
                             </div>
                         </div>
-                        <a
-                                href="javascript:void(0)"
-                                class="cr-right-bar-item Shopping-toggle"
-                                id="view-cart-btn"
-                        >
-                            <i class="ri-shopping-cart-line"></i>
-                            <span>Xem giỏ hàng</span>
-                        </a>
+                        <div class="cart">
+                            <a
+                                    href="javascript:void(0)"
+                                    class="cr-right-bar-item Shopping-toggle relative"
+                                    id="view-cart-btn"
+                            >
+                                <i class="ri-shopping-cart-line"></i>
+                                <span>Giỏ hàng</span>
+                                <p class="cart-item-count absolute top-[-10px] left-[10px] rounded-full bg-black text-white inline-block w-4 h-4 text-[10px] text-center">
+                                    0</p>
+                            </a>
+                        </div>
                     </div>
                 </div>
             </div>

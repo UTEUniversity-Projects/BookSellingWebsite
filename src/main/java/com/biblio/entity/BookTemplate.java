@@ -52,7 +52,7 @@ public class BookTemplate implements Serializable {
     @JoinColumn(name = "publisher_id", nullable = false)
     private Publisher publisher;
 
-    @OneToMany
+    @OneToMany(fetch = FetchType.EAGER)
     @JoinTable(
             name = "book_template_media_file",
             joinColumns = @JoinColumn(name = "book_template_id"),

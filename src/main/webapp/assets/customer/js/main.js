@@ -28,37 +28,44 @@
     });
 
     /* Minus and Plus Quantity */
-    $('.minus').on('click', function () {
-      var $input = $(this).parent().find('input');
+    $(document).on("click", ".minus", function () {
+      var $input = $(this).siblings("input.quantity");
       var count = parseInt($input.val()) - 1;
       count = count < 1 ? 1 : count;
-      $input.val(count);
-
-      $input.change();
+      $input.val(count).change();
       return false;
     });
 
-
-    $('.plus').on('click', function () {
-      var $input = $(this).parent().find('input');
-      $input.val(parseInt($input.val()) + 1);
-      $input.change();
+    $(document).on("click", ".plus", function () {
+      var $input = $(this).siblings("input.quantity");
+      $input.val(parseInt($input.val()) + 1).change();
       return false;
     });
 
-    $(".quantity").on("keydown change", function (e) {
+    $(document).on("keydown change", "input.quantity", function (e) {
       const key = e.key;
       let currentValue = $(this).val();
 
-      if (!/^[0-9]$/.test(key) && key !== "Backspace" && key !== "Delete" && key !== "Tab" && key !== "ArrowLeft" && key !== "ArrowRight") {
+      // Prevent invalid key inputs
+      if (
+          e.type === "keydown" &&
+          !/^[0-9]$/.test(key) &&
+          key !== "Backspace" &&
+          key !== "Delete" &&
+          key !== "Tab" &&
+          key !== "ArrowLeft" &&
+          key !== "ArrowRight"
+      ) {
         e.preventDefault();
       }
 
-      if (currentValue === "" && key === "0") {
+      // Prevent initial "0" input
+      if (e.type === "keydown" && currentValue === "" && key === "0") {
         e.preventDefault();
       }
 
-      if (e.type === "blur" && currentValue === "") {
+      // Ensure valid value on "change" event
+      if (e.type === "change" && (currentValue === "" || parseInt(currentValue) < 1)) {
         $(this).val(1);
       }
     });

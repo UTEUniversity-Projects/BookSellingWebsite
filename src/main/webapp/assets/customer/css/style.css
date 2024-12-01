@@ -2241,6 +2241,24 @@ ul.navbar-nav .dropdown:hover .dropdown-menu {
   transform: scale(1);
 }
 
+.cart i.shake {
+  animation: shakeCart 0.4s ease-in-out forwards;
+}
+
+@keyframes shakeCart {
+  25% {
+    transform: translateX(6px);
+  }
+  50% {
+    transform: translateX(-4px);
+  }
+  75% {
+    transform: translateX(2px);
+  }
+  100% {
+    transform: translateX(0);
+  }
+}
 /* layout */
 /* Hero */
 .cr-hero-banner {
@@ -2361,7 +2379,7 @@ ul.navbar-nav .dropdown:hover .dropdown-menu {
 
 .cr-banner-image-one {
   width: 100%;
-  background-image: url("../img/banner/banner.jpg");
+  background-image: url("../img/banner/1.jpg");
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center;
@@ -2369,7 +2387,7 @@ ul.navbar-nav .dropdown:hover .dropdown-menu {
 
 .cr-banner-image-two {
   width: 100%;
-  background-image: url("../img/banner/banner-2.jpg");
+  background-image: url("../img/banner/2.jpg");
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center;
@@ -8106,7 +8124,6 @@ p {
   align-items: center;
   justify-content: center;
   position: relative;
-  height: 198px;
 }
 .cr-product-card .cr-product-image .cr-side-view {
   transition: all 0.5s ease-in-out;
@@ -8171,11 +8188,11 @@ p {
 .cr-product-card .cr-product-image .cr-shopping-bag i {
   color: #64b496;
 }
-.cr-product-card .cr-product-image .cr-shopping-bag.active {
+.cr-product-card .cr-product-image .cr-shopping-bag:hover {
   background-color: #64b496;
   border: 1px solid #64b496;
 }
-.cr-product-card .cr-product-image .cr-shopping-bag.active i {
+.cr-product-card .cr-product-image .cr-shopping-bag:hover i {
   color: #fff;
 }
 .cr-product-card .cr-product-image .cr-remove-product {
@@ -9797,8 +9814,7 @@ p {
 
 .image-zoom img {
   width: 100%;
-  height: 100%;
-  object-fit: cover;
+  object-fit: contain;
   object-position: 0 0;
 }
 
