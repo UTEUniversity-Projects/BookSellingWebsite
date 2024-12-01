@@ -20,9 +20,12 @@
 
 .order-item img {
   border-radius: 4px;
-}.my-hidden {
-   display: none;
- }
+}
+
+.my-hidden {
+  display: none;
+}
+
 .my-visible {
   display: block; /* Hoặc inline-block tùy theo layout */
 }
@@ -65,5 +68,46 @@
 .book-container {
   border-top: 1px solid #30cb83 !important; /* Dùng !important để đảm bảo nó được áp dụng */
   padding-top: 20px;
+}
+
+.status {
+  font-size: 14px;
+  font-weight: bold;
+
+  &--completed {
+    color: $complete-color;
+  }
+
+  &--canceled,
+  &--out_of_stock {
+    color: $canceled-color;
+  }
+
+  &--pending,
+  &--coming_soon {
+    color: $waiting-confirmation-color;
+  }
+
+  &--packing {
+    color: $packing-color;
+  }
+
+  &--shipping {
+    color: $shipping-color;
+  }
+
+  &--complete_delivery,
+  &--on_sale {
+    color: $complete-color;
+  }
+
+  &--request_refund {
+    color: $request-refund-color;
+  }
+
+  &--refunded,
+  &--stop_selling {
+    color: $refunded-color;
+  }
 }
 

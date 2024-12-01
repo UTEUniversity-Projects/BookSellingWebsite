@@ -29,6 +29,7 @@ public class OrderController extends HttpServlet {
     private IOrderService orderService;
     @Inject
     private ICustomerService customerService;
+
     /**
      * @see HttpServlet#HttpServlet()
      */
@@ -44,6 +45,11 @@ public class OrderController extends HttpServlet {
         // Get session
         HttpSession session = request.getSession(false);
         AccountGetResponse account = (AccountGetResponse) session.getAttribute("account");
+        if (account == null) {
+            response.sendRedirect(request.getContextPath() + "/login");
+            return;
+        }
+
         CustomerDetailResponse customer = customerService.getCustomerDetailByUsername(account.getUsername());
 
         // Lấy customerId từ account
@@ -80,9 +86,6 @@ public class OrderController extends HttpServlet {
         // Forward request to JSP view
         request.getRequestDispatcher("/views/customer/order.jsp").forward(request, response);
     }
-
-
-
 
     /**
      * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
