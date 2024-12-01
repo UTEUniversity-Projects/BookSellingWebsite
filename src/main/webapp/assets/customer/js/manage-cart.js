@@ -94,7 +94,7 @@ $(document).ready(function () {
 					});
 					viewCartBtn.show();
 				} else {
-					cartItemsContainer.append(`<div class="message-container">
+					cartItemsContainer.append(`<div class="message-container mt-[50%]">
                                     <img src="https://cdn-icons-png.flaticon.com/512/2762/2762885.png" alt="">
                                     <p>Giỏ hàng của bạn đang trống</p>
                                     <a href="home">
@@ -138,7 +138,7 @@ $(document).ready(function () {
 				console.error('Error: ', xhr.responseText);
 			}
 		});
-	}, 1000));
+	}, 500));
 	// Delete
 	$(document).on('click',  '.remove-item',function () {
 		const cartItemId = $(this).closest("li, tr").data('cart-item-id');

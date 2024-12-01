@@ -135,7 +135,7 @@
                                         </ul>
                                         <a
                                                 class="notification-view-all inline-block py-2"
-                                                href="notifications"
+                                                href="${pageContext.request.contextPath}/notifications"
                                         >Xem tất cả</a
                                         >
                                     </c:when>

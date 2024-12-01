@@ -1,5 +1,6 @@
 package com.biblio.apis.customer;
 
+import com.biblio.constants.Constant;
 import com.biblio.dto.request.LoginRequest;
 import com.biblio.dto.response.AccountGetResponse;
 import com.biblio.service.IAccountService;
@@ -72,12 +73,12 @@ public class LoginAPI extends HttpServlet {
 
                 HttpSession session = request.getSession();
                 session.setAttribute("account", account);
-                session.setMaxInactiveInterval(60 * 60);
+                session.setMaxInactiveInterval(Math.toIntExact(Constant.SESSION_LIVE_TIME));
 
                 if (Objects.equals(loginRequest.getRememberMe(), "1")) {
                     Cookie username = new Cookie("username", account.getUsername());
 
-                    username.setMaxAge(60 * 60);
+                    username.setMaxAge(Math.toIntExact(Constant.COOKIE_LIVE_TIME));
 
                     username.setHttpOnly(true);
 
