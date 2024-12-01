@@ -22,6 +22,8 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.Serial;
 import java.time.LocalDateTime;
+import java.time.ZoneId;
+import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Objects;
 import java.util.Optional;
@@ -48,28 +50,55 @@ public class PromotionDetailsController extends HttpServlet {
     /**
      * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
      */
+
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String id = request.getParameter("id");
         PromotionTemplateGetDetailsResponse promotionTemplateGetDetailsResponse = promotionTemplateService.getPromotionTemplateById(Long.parseLong(id));
 
-        // Lấy danh sách id từ PromotionTargetResponse
         Set<Long> selectedIds = promotionTemplateGetDetailsResponse.getPromotionTargetResponse()
                 .stream()
                 .map(PromotionTargetResponse::getApplicableObjectId)
                 .collect(Collectors.toSet());
 
-        // Lấy giá trị type đầu tiên
         String firstType = promotionTemplateGetDetailsResponse.getPromotionTargetResponse()
                 .stream()
                 .findFirst()
                 .map(PromotionTargetResponse::getType)
                 .orElse(null);
 
+        // Lấy thời gian hiện tại tại múi giờ VN
+        ZonedDateTime currentDateTime = ZonedDateTime.now(ZoneId.of("Asia/Ho_Chi_Minh"));
+
+        // Lấy thời gian hết hạn từ response
+        String expirationDateStr = promotionTemplateGetDetailsResponse.getExpirationDate();
+
+        // Cắt phần giây nếu có (ví dụ: '2024-11-30T23:59:59' -> '2024-11-30T23:59')
+        if (expirationDateStr.length() > 16) {
+            expirationDateStr = expirationDateStr.substring(0, 16);  // Cắt chuỗi đến 16 ký tự (yyyy-MM-dd'T'HH:mm)
+        }
+
+        // Định dạng ngày giờ không có giây
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm");
+        LocalDateTime expirationDateTime = LocalDateTime.parse(expirationDateStr, formatter);
+
+        // Chuyển đổi expirationDateTime thành ZonedDateTime ở múi giờ VN
+        ZonedDateTime expirationDateTimeVN = expirationDateTime.atZone(ZoneId.of("Asia/Ho_Chi_Minh"));
+
+        System.out.println(expirationDateTimeVN);
+
+        // Kiểm tra nếu thời gian hiện tại trước thời gian hết hạn
+        boolean isBeforeExpiration = currentDateTime.isBefore(expirationDateTimeVN);
+
         request.setAttribute("promotion", promotionTemplateGetDetailsResponse);
-        request.setAttribute("selectedType", firstType); // Gửi type đầu tiên đến JSP
-        request.setAttribute("selectedIds", selectedIds); // Gửi danh sách id về JSP
+        request.setAttribute("selectedType", firstType);
+        request.setAttribute("selectedIds", selectedIds);
+        request.setAttribute("isBeforeExpiration", isBeforeExpiration);
+
         request.getRequestDispatcher("/views/owner/promotion-details.jsp").forward(request, response);
     }
+
+
+
 
 
 

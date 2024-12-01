@@ -1,6 +1,7 @@
 package com.biblio.service.impl;
 
 import com.biblio.dao.IOrderDAO;
+import com.biblio.dao.IReturnBookDAO;
 import com.biblio.dao.impl.EWalletDAOImpl;
 import com.biblio.dto.request.CreateOrderRequest;
 import com.biblio.dto.response.*;
@@ -10,8 +11,8 @@ import com.biblio.enumeration.EOrderHistory;
 import com.biblio.enumeration.EOrderStatus;
 import com.biblio.mapper.BookMapper;
 import com.biblio.mapper.OrderMapper;
+import com.biblio.service.IBookTemplateService;
 import com.biblio.service.IOrderService;
-import com.biblio.service.IPromotionTemplateService;
 
 import javax.inject.Inject;
 import java.time.LocalDate;
@@ -23,10 +24,13 @@ public class OrderServiceImpl implements IOrderService {
     IOrderDAO orderDAO;
 
     @Inject
-    IPromotionTemplateService promotionTemplateService;
+    IBookTemplateService bookTemplateService;
   
     @Inject
     EWalletDAOImpl walletDAO;
+
+    @Inject
+    IReturnBookDAO returnBookDAO;
 
     @Override
     public OrderDetailsManagementResponse getOrderDetailsManagementResponse(Long id) {
@@ -55,6 +59,11 @@ public class OrderServiceImpl implements IOrderService {
             for (OrderItem orderItem : order.getOrderItems()) {
                 for (Book book : orderItem.getBooks()) {
                     book.getBookMetadata().setStatus(EBookMetadataStatus.IN_STOCK);
+                }
+                Book book = orderItem.getBooks().iterator().next();
+                boolean success = bookTemplateService.verifyBookTemplateQuantity(book.getBookTemplate().getId());
+                if (!success) {
+                    return false;
                 }
             }
         }
@@ -299,6 +308,29 @@ public class OrderServiceImpl implements IOrderService {
     @Override
     public Long createOrder(CreateOrderRequest request) {
         return orderDAO.save(request).getId();
+    }
+  
+    @Override
+    public List<OrderReturnAtTimeResponse> getListOrderReturnAtTime(LocalDateTime start, LocalDateTime end) {
+        List<OrderReturnAtTimeResponse> orderReturnAtTimeResponses = new ArrayList<>();
+        List<Order> list = orderDAO.findAllForManagement();
+
+        for (Order order : list) {
+            Order orderTmp = orderDAO.findOneForDetailsManagement(order.getId());
+            LocalDateTime orderDate = orderTmp.getOrderDate();
+
+            if ((orderDate.isEqual(start) || orderDate.isAfter(start)) && (orderDate.isEqual(end) || orderDate.isBefore(end)) && (EOrderStatus.COMPLETE_DELIVERY.equals(orderTmp.getStatus()) || EOrderStatus.REQUEST_REFUND.equals(orderTmp.getStatus()) || EOrderStatus.REFUNDED.equals(orderTmp.getStatus()))) {
+                OrderReturnAtTimeResponse orderReturnAtTimeResponse = new OrderReturnAtTimeResponse();
+                orderReturnAtTimeResponse.setOrderId(order.getId());
+                ReturnBook returnBook = returnBookDAO.findByOrderId(order.getId());
+                if (returnBook != null) {
+                    orderReturnAtTimeResponse.setIsReturned(true);
+                    orderReturnAtTimeResponse.setReturnReason(returnBook.getReason());
+                }
+                orderReturnAtTimeResponses.add(orderReturnAtTimeResponse);
+            }
+        }
+        return orderReturnAtTimeResponses;
     }
 
 //

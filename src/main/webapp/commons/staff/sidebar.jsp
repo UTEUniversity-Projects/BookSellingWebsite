@@ -4,10 +4,10 @@
 <div class="cr-sidebar" data-mode="light">
     <div class="cr-sb-logo">
         <a href="${pageContext.request.contextPath}/staff/product-dashboard" class="sb-full">
-            <img src="${pageContext.request.contextPath}/assets/staff/img/logo/full-logo.png" alt="logo"/>
+            <img src="${pageContext.request.contextPath}/assets/commons/img/logo/biblio.png" alt="logo"/>
         </a>
         <a href="${pageContext.request.contextPath}/staff/product-dashboard" class="sb-collapse">
-            <img src="${pageContext.request.contextPath}/assets/staff/img/logo/collapse-logo.png" alt="logo"/>
+            <img src="${pageContext.request.contextPath}/assets/commons/img/logo/collapse-logo.png" alt="logo"/>
         </a>
     </div>
     <div class="cr-sb-wrapper">

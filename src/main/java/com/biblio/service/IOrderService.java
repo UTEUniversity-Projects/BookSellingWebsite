@@ -35,4 +35,6 @@ public interface IOrderService {
 
     Long createOrder(CreateOrderRequest request);
 
+    List<OrderReturnAtTimeResponse> getListOrderReturnAtTime(LocalDateTime start, LocalDateTime end);
+
 }

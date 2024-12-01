@@ -253,6 +253,11 @@ public class BookTemplateDAOImpl extends GenericDAOImpl<BookTemplate> implements
         return bookTemplates;
     }
 
+    @Override
+    public BookTemplate update(BookTemplate bookTemplate) {
+        return super.update(bookTemplate);
+    }
+
     public static void main(String[] args) {
         BookTemplateDAOImpl dao = new BookTemplateDAOImpl();
         System.out.println(dao.findTop20());
