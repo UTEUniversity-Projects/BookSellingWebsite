@@ -45,16 +45,16 @@
                 <div class="cr-right-tool cr-user-drop">
                     <div class="cr-hover-drop">
                         <div class="cr-hover-tool">
-                            <img class="user" src="${pageContext.request.contextPath}/assets/staff/img/user/1.jpg" alt="user"/>
+                            <img class="user" src="${pageContext.request.contextPath}${staff.avatar}" alt="user"/>
                         </div>
                         <div class="cr-hover-drop-panel right">
                             <div class="details">
-                                <h6>Wiley Waites</h6>
-                                <p>wiley@example.com</p>
+                                <h6>${staff.fullName}</h6>
+                                <p>${staff.emailAddress}</p>
                             </div>
                             <ul class="border-top">
                                 <li>
-                                    <a href="team-profile.html">Profile</a>
+                                    <a href="${pageContext.request.contextPath}/staff/profile">Thông tin cá nhân</a>
                                 </li>
                                 <li><a href="faq.html">Help</a></li>
                                 <li>
@@ -70,7 +70,7 @@
                             <ul class="border-top">
                                 <li>
                                     <a href="${pageContext.request.contextPath}/logout"
-                                    ><i class="ri-logout-circle-r-line"></i>Logout</a
+                                    ><i class="ri-logout-circle-r-line"></i>Đăng xuất</a
                                     >
                                 </li>
                             </ul>

@@ -8,6 +8,7 @@ import com.biblio.dto.response.*;
 
 import com.biblio.entity.Book;
 import com.biblio.entity.BookTemplate;
+import com.biblio.enumeration.EBookTemplateStatus;
 import com.biblio.mapper.BookTemplateMapper;
 import com.biblio.service.IBookTemplateService;
 
@@ -68,6 +69,7 @@ public class BookTemplateServiceImpl implements IBookTemplateService {
         return bookCardResponseList;
 
     }
+
     @Override
     public List<BookSoldAllTimeResponse> getListCountBookSoldAllTime() {
         List<BookSoldAllTimeResponse> listBookSold = new ArrayList<>();
@@ -90,13 +92,26 @@ public class BookTemplateServiceImpl implements IBookTemplateService {
     public CheckoutItemResponse getCheckoutItemResponse(CheckoutItemRequest request) {
         BookTemplate bookTemplate = bookTemplateDAO.findOneForDetails(request.getProductId());
         Book book = bookTemplate.getBooks().iterator().next();
-        return CheckoutItemResponse.builder()
-                .bookTemplateId(bookTemplate.getId())
-                .title(book.getTitle())
-                .imagePath(bookTemplate.getMediaFiles().get(0).getStoredCode())
-                .quantity(request.getQuantity())
-                .sellingPrice(book.getSellingPrice())
-                .build();
+        return CheckoutItemResponse.builder().bookTemplateId(bookTemplate.getId()).title(book.getTitle()).imagePath(bookTemplate.getMediaFiles().get(0).getStoredCode()).quantity(request.getQuantity()).sellingPrice(book.getSellingPrice()).build();
+    }
+
+    @Override
+    public boolean verifyBookTemplateQuantity(Long bookTemplateId) {
+        Long quantity = bookTemplateDAO.countInstockById(bookTemplateId);
+        BookTemplate bookTemplate = bookTemplateDAO.findById(bookTemplateId);
+        if (bookTemplate == null) {
+            return false;
+        }
+        if (quantity > 0 && bookTemplate.getStatus().equals(EBookTemplateStatus.OUT_OF_STOCK)) {
+            bookTemplate.setStatus(EBookTemplateStatus.ON_SALE);
+            return bookTemplateDAO.update(bookTemplate) != null;
+        }
+        if (quantity == 0 && bookTemplate.getStatus().equals(EBookTemplateStatus.ON_SALE)) {
+            bookTemplate.setStatus(EBookTemplateStatus.OUT_OF_STOCK);
+            return bookTemplateDAO.update(bookTemplate) != null;
+        }
+        return true;
+
     }
 
     @Override

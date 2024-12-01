@@ -1,22 +1,18 @@
 package com.biblio.service.impl;
 
 import com.biblio.dao.IOrderDAO;
-
-import com.biblio.dao.impl.OrderDAOImpl;
+import com.biblio.dao.IReturnBookDAO;
 import com.biblio.dao.impl.EWalletDAOImpl;
+import com.biblio.dto.request.CreateOrderRequest;
 import com.biblio.dto.response.*;
-import com.biblio.entity.Book;
-import com.biblio.entity.EWallet;
-import com.biblio.entity.Order;
-import com.biblio.entity.OrderItem;
-import com.biblio.entity.OrderStatusHistory;
+import com.biblio.entity.*;
 import com.biblio.enumeration.EBookMetadataStatus;
 import com.biblio.enumeration.EOrderHistory;
 import com.biblio.enumeration.EOrderStatus;
 import com.biblio.mapper.BookMapper;
 import com.biblio.mapper.OrderMapper;
+import com.biblio.service.IBookTemplateService;
 import com.biblio.service.IOrderService;
-import com.biblio.service.IPromotionTemplateService;
 
 import javax.inject.Inject;
 import java.time.LocalDate;
@@ -28,10 +24,13 @@ public class OrderServiceImpl implements IOrderService {
     IOrderDAO orderDAO;
 
     @Inject
-    IPromotionTemplateService promotionTemplateService;
-  
+    IBookTemplateService bookTemplateService;
+
     @Inject
     EWalletDAOImpl walletDAO;
+
+    @Inject
+    IReturnBookDAO returnBookDAO;
 
     @Override
     public OrderDetailsManagementResponse getOrderDetailsManagementResponse(Long id) {
@@ -61,11 +60,15 @@ public class OrderServiceImpl implements IOrderService {
                 for (Book book : orderItem.getBooks()) {
                     book.getBookMetadata().setStatus(EBookMetadataStatus.IN_STOCK);
                 }
+                Book book = orderItem.getBooks().iterator().next();
+                boolean success = bookTemplateService.verifyBookTemplateQuantity(book.getBookTemplate().getId());
+                if (!success) {
+                    return false;
+                }
             }
-        }
-        else if (order.getStatus() == EOrderStatus.WAITING_CONFIRMATION ||
+        } else if (order.getStatus() == EOrderStatus.WAITING_CONFIRMATION ||
                 order.getStatus() == EOrderStatus.PACKING ||
-                order.getStatus() == EOrderStatus.SHIPPING){
+                order.getStatus() == EOrderStatus.SHIPPING) {
             order.getStatusHistory().add(updateOrderHistory(order, status));
         }
         order.setStatus(status);
@@ -175,10 +178,8 @@ public class OrderServiceImpl implements IOrderService {
     @Override
     public List<OrderCustomerResponse> getAllOrderCustomerResponse(Long customerId) {
         List<Order> orders = orderDAO.findAllOrderForCustomer(customerId);
+        orders.sort(Comparator.comparing(Order::getOrderDate).reversed());
         List<OrderCustomerResponse> orderCustomerResponse = new ArrayList<>();
-//        for (Order order : orders) {
-//            orderCustomerResponse.add(OrderMapper.toOrderCustomerResponse(order));
-//        }
         for (Order order : orders) {
             if (order == null) {
                 System.out.println("Null order found in orders list");
@@ -225,14 +226,24 @@ public class OrderServiceImpl implements IOrderService {
             // Nếu trạng thái không phải "all", chuyển từ String sang EOrderStatus và lọc
             try {
                 EOrderStatus orderStatus = EOrderStatus.valueOf(status); // Chuyển đổi String thành EOrderStatus
+                Set<EOrderStatus> statusesToFilter = new HashSet<>();
+                if (orderStatus == EOrderStatus.WAITING_CONFIRMATION) {
+                    statusesToFilter.add(EOrderStatus.WAITING_CONFIRMATION);
+                    statusesToFilter.add(EOrderStatus.REQUEST_REFUND);
+                    statusesToFilter.add(EOrderStatus.PACKING);
+                } else if (orderStatus == EOrderStatus.CANCELED) {
+                    statusesToFilter.add(EOrderStatus.CANCELED);
+                    statusesToFilter.add(EOrderStatus.REFUNDED);
+                } else {
+                    statusesToFilter.add(orderStatus);
+                }
                 for (Order order : orders) {
                     if (order == null) {
                         System.out.println("Null order found in orders list");
                         continue;
                     }
 
-                    // Lọc đơn hàng theo trạng thái
-                    if (order.getStatus() != null && order.getStatus().equals(orderStatus)) {
+                    if (order.getStatus() != null && statusesToFilter.contains(order.getStatus())) {
                         OrderCustomerResponse response = OrderMapper.toOrderCustomerResponse(order);
                         if (response == null) {
                             System.out.println("Mapper returned null for order ID: " + order.getId());
@@ -301,28 +312,39 @@ public class OrderServiceImpl implements IOrderService {
         return countOrderOfCustomerResponses;
     }
 
-//
-//
-//    @Override
-//    @Transactional
-//    public void confirmOrder(Long orderId) {
-//        Order order = orderDAO.findOne(orderId);
-//        order.setStatus(EOrderStatus.PACKING);
-//        orderDAO.updateOrder(order);
-//    }
-//
-//    @Override
-//    @Transactional
-//    public void rejectOrder(Long orderId, String reason) {
-//        Order order = orderDAO.findOne(orderId);
-//        order.setStatus(EOrderStatus.CANCELED);
-//        orderDAO.updateOrder(order);
-//    }
+    @Override
+    public Long createOrder(CreateOrderRequest request) {
+        return orderDAO.save(request).getId();
+    }
+  
+    @Override
+    public List<OrderReturnAtTimeResponse> getListOrderReturnAtTime(LocalDateTime start, LocalDateTime end) {
+        List<OrderReturnAtTimeResponse> orderReturnAtTimeResponses = new ArrayList<>();
+        List<Order> list = orderDAO.findAllForManagement();
+
+        for (Order order : list) {
+            Order orderTmp = orderDAO.findOneForDetailsManagement(order.getId());
+            LocalDateTime orderDate = orderTmp.getOrderDate();
+
+            if ((orderDate.isEqual(start) || orderDate.isAfter(start)) && (orderDate.isEqual(end) || orderDate.isBefore(end)) && (EOrderStatus.COMPLETE_DELIVERY.equals(orderTmp.getStatus()) || EOrderStatus.REQUEST_REFUND.equals(orderTmp.getStatus()) || EOrderStatus.REFUNDED.equals(orderTmp.getStatus()))) {
+                OrderReturnAtTimeResponse orderReturnAtTimeResponse = new OrderReturnAtTimeResponse();
+                orderReturnAtTimeResponse.setOrderId(order.getId());
+                ReturnBook returnBook = returnBookDAO.findByOrderId(order.getId());
+                if (returnBook != null) {
+                    orderReturnAtTimeResponse.setIsReturned(true);
+                    orderReturnAtTimeResponse.setReturnReason(returnBook.getReason());
+                }
+                orderReturnAtTimeResponses.add(orderReturnAtTimeResponse);
+            }
+        }
+        return orderReturnAtTimeResponses;
+    }
 
     public static void main(String[] args) {
-        OrderServiceImpl orderService = new OrderServiceImpl();
-        boolean res = orderService.updateStatus(3L, EOrderStatus.PACKING);
-        System.out.println(res);
+//        OrderServiceImpl orderService = new OrderServiceImpl();
+//        boolean res = orderService.updateStatus(3L, EOrderStatus.PACKING);
+//        System.out.println(res);
+
     }
 
 }

@@ -11,8 +11,9 @@
           </div>
           <form class="cr-content-form">
             <div class="form-group mb-2">
-              <label class="text-md mb-1 ml-2">Địa chỉ email:</label>
-              <input type="email" autocomplete="on" placeholder="Nhập email..."
+              <label class="text-md mb-1 ml-2">Username:</label>
+              <input type="text" autocomplete="on" placeholder="Nhập username..."
+                     id="username"
                      class="block w-full py-2 px-4 text-gray-900 border-1 border-gray-300 rounded-lg text-[16px] focus:ring-blue-500 focus:border-blue-500 transition-all ease-linear bg-white focus:shadow-lg focus:shadow-[rgba(3,_102,_214,_0.3)_0px_0px_0px_3px]">
             </div>
             <div class="flex justify-between items-center">

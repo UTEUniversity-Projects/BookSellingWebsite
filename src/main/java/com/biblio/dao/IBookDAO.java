@@ -1,5 +1,6 @@
 package com.biblio.dao;
 
+import com.biblio.dto.request.CheckoutItemRequest;
 import com.biblio.entity.Book;
 import com.biblio.entity.BookTemplate;
 
@@ -24,5 +25,7 @@ public interface IBookDAO {
     Long findMinBookPrice();
 
     Long findMaxBookPrice();
+
+    List<Book> findByBookTemplateIdAndQuantity(CheckoutItemRequest request);
 
 }

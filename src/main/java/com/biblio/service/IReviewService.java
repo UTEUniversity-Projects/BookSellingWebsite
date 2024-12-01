@@ -7,5 +7,5 @@ import com.biblio.entity.Review;
 public interface IReviewService {
     ReviewResponse updateReviewHidden(long reviewId, boolean isHidden);
 
-    void createReview(ReviewRequest review);
+    boolean createReview(ReviewRequest review, Long customerId);
 }

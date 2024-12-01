@@ -1,16 +1,15 @@
 package com.biblio.entity;
 
+import com.biblio.enumeration.EBookLanguage;
+import com.biblio.enumeration.EBookTemplateStatus;
 import lombok.*;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
-import com.biblio.enumeration.EBookLanguage;
-import com.biblio.enumeration.EBookTemplateStatus;
-
-import javax.persistence.*;
-import java.util.*;
 
 @Entity
 @Table(name = "book_template")
@@ -52,7 +51,7 @@ public class BookTemplate implements Serializable {
     @JoinColumn(name = "publisher_id", nullable = false)
     private Publisher publisher;
 
-    @OneToMany
+    @OneToMany(fetch = FetchType.EAGER)
     @JoinTable(
             name = "book_template_media_file",
             joinColumns = @JoinColumn(name = "book_template_id"),

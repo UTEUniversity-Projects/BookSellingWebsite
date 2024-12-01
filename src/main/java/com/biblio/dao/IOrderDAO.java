@@ -1,5 +1,6 @@
 package com.biblio.dao;
 
+import com.biblio.dto.request.CreateOrderRequest;
 import com.biblio.dto.response.OrderCustomerResponse;
 import com.biblio.entity.Order;
 
@@ -27,5 +28,6 @@ public interface IOrderDAO {
 
     boolean cancelOrder(Long id);
 
+    Order save(CreateOrderRequest request);
 
 }

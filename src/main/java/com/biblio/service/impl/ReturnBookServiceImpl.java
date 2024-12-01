@@ -13,6 +13,7 @@ import com.biblio.entity.ReturnBookItem;
 import com.biblio.enumeration.EBookMetadataStatus;
 import com.biblio.enumeration.EReasonReturn;
 import com.biblio.mapper.ReturnBookMapper;
+import com.biblio.service.IBookTemplateService;
 import com.biblio.service.IReturnBookService;
 
 
@@ -36,6 +37,9 @@ public class ReturnBookServiceImpl implements IReturnBookService {
 
     @Inject
     IOrderDAO orderDAO;
+  
+    @Inject
+    IBookTemplateService bookTemplateService;
 
     @Override
     public ReturnBookManagementResponse findReturnBookByOrderId(Long orderId) {
@@ -63,6 +67,11 @@ public class ReturnBookServiceImpl implements IReturnBookService {
         for (ReturnBookItem returnBookItem : returnBook.getReturnBookItems()) {
             for (Book book : returnBookItem.getBooks()) {
                 book.getBookMetadata().setStatus(newStatus);
+            }
+            Book book = returnBookItem.getBooks().iterator().next();
+            boolean success = bookTemplateService.verifyBookTemplateQuantity(book.getBookTemplate().getId());
+            if (!success) {
+                return false;
             }
         }
         return returnBookDAO.update(returnBook) != null;

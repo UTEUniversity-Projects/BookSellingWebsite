@@ -5,7 +5,7 @@
             <div class="col-lg-12">
                 <div class="top-header">
                     <a href="${pageContext.request.contextPath}/home" class="cr-logo">
-                        <img src="${pageContext.request.contextPath}/assets/customer/img/logo/biblio.png" alt="logo"
+                        <img src="${pageContext.request.contextPath}/assets/commons/img/logo/biblio.png" alt="logo"
                              class="logo"/>
                     </a>
                     <form class="cr-search" action="search" method="GET" id="search-book">
@@ -135,7 +135,7 @@
                                         </ul>
                                         <a
                                                 class="notification-view-all inline-block py-2"
-                                                href="notifications"
+                                                href="${pageContext.request.contextPath}/notifications"
                                         >Xem tất cả</a
                                         >
                                     </c:when>
@@ -148,14 +148,18 @@
                                 </c:choose>
                             </div>
                         </div>
-                        <a
-                                href="javascript:void(0)"
-                                class="cr-right-bar-item Shopping-toggle"
-                                id="view-cart-btn"
-                        >
-                            <i class="ri-shopping-cart-line"></i>
-                            <span>Xem giỏ hàng</span>
-                        </a>
+                        <div class="cart">
+                            <a
+                                    href="javascript:void(0)"
+                                    class="cr-right-bar-item Shopping-toggle relative"
+                                    id="view-cart-btn"
+                            >
+                                <i class="ri-shopping-cart-line"></i>
+                                <span>Giỏ hàng</span>
+                                <p class="cart-item-count absolute top-[-10px] left-[10px] rounded-full bg-black text-white inline-block w-4 h-4 text-[10px] text-center">
+                                    0</p>
+                            </a>
+                        </div>
                     </div>
                 </div>
             </div>

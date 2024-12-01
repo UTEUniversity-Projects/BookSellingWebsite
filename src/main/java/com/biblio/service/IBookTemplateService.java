@@ -3,6 +3,7 @@ package com.biblio.service;
 import com.biblio.dto.request.CheckoutItemRequest;
 import com.biblio.dto.request.SearchBookRequest;
 import com.biblio.dto.response.*;
+import com.biblio.enumeration.EBookTemplateStatus;
 
 import java.util.List;
 
@@ -27,5 +28,7 @@ public interface IBookTemplateService {
     Long getTotalBookTemplateQuantity();
 
     CheckoutItemResponse getCheckoutItemResponse(CheckoutItemRequest request);
+
+    boolean verifyBookTemplateQuantity(Long bookTemplateId);
 
 }

@@ -1,13 +1,13 @@
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+`<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!-- sidebar -->
 <div class="cr-sidebar-overlay"></div>
 <div class="cr-sidebar" data-mode="light">
     <div class="cr-sb-logo">
-        <a href="index.html" class="sb-full"
-        ><img src="${pageContext.request.contextPath}/assets/owner/img/logo/full-logo.png" alt="logo"
+        <a href="${pageContext.request.contextPath}/owner/ecommerce" class="sb-full"
+        ><img src="${pageContext.request.contextPath}/assets/commons/img/logo/biblio.png" alt="logo"
         /></a>
-        <a href="index.html" class="sb-collapse"
-        ><img src="${pageContext.request.contextPath}/assets/owner/img/logo/collapse-logo.png" alt="logo"
+        <a href="${pageContext.request.contextPath}/owner/ecommerce" class="sb-collapse"
+        ><img src="${pageContext.request.contextPath}/assets/commons/img/logo/collapse-logo.png" alt="logo"
         /></a>
     </div>
     <div class="cr-sb-wrapper">

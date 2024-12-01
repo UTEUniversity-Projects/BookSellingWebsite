@@ -18,7 +18,7 @@
                                 <div class="message-container">
                                     <img src="https://cdn-icons-png.flaticon.com/512/2762/2762885.png" alt="">
                                     <p>Giỏ hàng của bạn đang trống</p>
-                                    <a href="home">
+                                    <a href="${pageContext.request.contextPath}/home">
                                         <button class="cr-button">Mua ngay</button>
                                     </a>
                                 </div>
@@ -87,7 +87,7 @@
                                                 <tbody>
                                                 <tr>
                                                     <td>Tổng tiền :</td>
-                                                    <td class="price-value">${cart.totalBookPrice}</td>
+                                                    <td class="total pice-value">0</td>
                                                 </tr>
                                                 </tbody>
                                             </table>
@@ -96,9 +96,9 @@
                                     <div class="row">
                                         <div class="col-lg-12">
                                             <div class="cr-cart-update-bottom">
-                                                <a href="home" class="cr-btn-secondary">Tiếp tục mua sách</a>
+                                                <a href="${pageContext.request.contextPath}/home" class="cr-btn-secondary">Tiếp tục mua sách</a>
 
-                                                <a id="btn-checkout" class="cr-button">Thanh toán</a>
+                                                <a id="btn-checkout" class="cr-button cursor-pointer">Thanh toán</a>
                                             </div>
                                         </div>
                                     </div>

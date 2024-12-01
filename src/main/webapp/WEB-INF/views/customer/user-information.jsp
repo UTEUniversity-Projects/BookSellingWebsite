@@ -9,7 +9,7 @@
                 <div class="profile-card" data-aos="fade-up" data-aos-duration="2000" data-aos-delay="400">
                     <!-- Logo ở trên -->
                     <div class="logo-container">
-                        <img src="${pageContext.request.contextPath}/assets/customer/img/logo/biblio.png" alt="logo"
+                        <img src="${pageContext.request.contextPath}/assets/commons/img/logo/biblio.png" alt="logo"
                              class="logo"/>
                     </div>
 

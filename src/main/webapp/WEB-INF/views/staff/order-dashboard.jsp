@@ -86,6 +86,7 @@
                                 <thead>
                                 <tr>
                                     <th>#</th>
+                                    <th>Mã</th>
                                     <th>Khách hàng</th>
                                     <th>Ngày lập đơn</th>
                                     <th>Tổng tiền</th>
@@ -97,6 +98,7 @@
                                 <c:forEach var="order" items="${orders}" varStatus="status">
                                     <tr class="order-row" data-href="${pageContext.request.contextPath}/staff/order-details?id=${order.id}">
                                         <td class="token">${status.index + 1}</td>
+                                        <td>${order.id}</td>
                                         <td>${order.customerName}</td>
                                         <td>${order.orderDate}</td>
                                         <td class="price-value">${order.totalPrice}</td>

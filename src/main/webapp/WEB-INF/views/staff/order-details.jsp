@@ -144,7 +144,7 @@
                                     </thead>
                                     <tbody>
                                     <c:forEach var="product" items="${order.products}">
-                                        <tr>
+                                        <tr class="product-row" data-href="${pageContext.request.contextPath}/staff/product-details?id=${product.bookTemplateId}">
                                             <td>
                                                 <img
                                                         class="tbl-thumb"

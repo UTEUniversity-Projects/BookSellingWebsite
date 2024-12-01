@@ -39,7 +39,7 @@ public class Customer extends User implements Serializable {
     @Singular
     private Set<Address> addresses = new HashSet<>();
 
-    @OneToMany(mappedBy = "customer", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "customer", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private Set<Order> orders = new HashSet<>();
 
     @OneToOne(mappedBy = "customer", cascade = CascadeType.ALL)
