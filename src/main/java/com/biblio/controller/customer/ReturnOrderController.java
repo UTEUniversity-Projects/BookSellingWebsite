@@ -19,7 +19,9 @@ import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.io.Serial;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -42,17 +44,15 @@ public class ReturnOrderController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-//        String orderIdParam = request.getParameter("orderId");
-//        if (orderIdParam == null || orderIdParam.isEmpty()) {
-//            // Nếu không có orderId, redirect về trang danh sách đơn hàng
-//            response.sendRedirect(request.getContextPath() + "/order");
-//            return;
-//        }
+        String orderIdParam = request.getParameter("orderId");
+        if (orderIdParam == null || orderIdParam.isEmpty()) {
+            // Nếu không có orderId, redirect về trang danh sách đơn hàng
+            response.sendRedirect(request.getContextPath() + "/order");
+            return;
+        }
 
-        // Chuyển đổi orderId từ String sang Long
-        //Long orderId = Long.parseLong(orderIdParam);
-        Long orderId = 1L;
-// Lấy chi tiết đơn hàng dựa trên orderId
+        Long orderId = Long.parseLong(orderIdParam);
+        // Lấy chi tiết đơn hàng dựa trên orderId
         OrderCustomerResponse orderDetail = orderService.findOrderByIdCustomer(orderId);
 
         if (orderDetail == null) {
@@ -93,7 +93,7 @@ public class ReturnOrderController extends HttpServlet {
         // Chuyển đổi lý do hoàn trả từ chuỗi thành Enum
         EReasonReturn reason = null;
         try {
-            reason = EReasonReturn.valueOf(reasonStr); // Chuyển đổi thành Enum
+            reason = EReasonReturn.valueOf(reasonStr);
         } catch (IllegalArgumentException e) {
             request.setAttribute("errorMessage", "Lý do hoàn trả không hợp lệ.");
             request.getRequestDispatcher("/views/customer/return-order.jsp").forward(request, response);
@@ -106,18 +106,42 @@ public class ReturnOrderController extends HttpServlet {
             request.getRequestDispatcher("/views/customer/return-order.jsp").forward(request, response);
             return;
         }
-        Long orderId = 1L;
 
+        HttpSession session = request.getSession();
+        Long orderId = (Long) session.getAttribute("orderId");
 
-        // Tạo đối tượng ReturnBook
-        ReturnBookRequest returnBook = new ReturnBookRequest(reason, description, orderId);
+        // Lấy thông tin các sản phẩm và số lượng hoàn trả từ form
+        List<ReturnBookRequest> productList = new ArrayList<>();
+        Map<Long, Integer> returnQuantitiesMap = new HashMap<>();
 
-        // Lưu vào cơ sở dữ liệu
-        returnBookService.save(returnBook);
+        for (String paramName : request.getParameterMap().keySet()) {
+            if (paramName.startsWith("returnQuantities[")) {
+                String productIdStr = paramName.replace("returnQuantities[", "").replace("]", "");
+                Long productId = Long.parseLong(productIdStr);
+                String returnQuantityStr = request.getParameter(paramName);
+                Integer returnQuantity = Integer.parseInt(returnQuantityStr);
+                returnQuantitiesMap.put(productId, returnQuantity);
+            }
+        }
 
+        // Tạo danh sách các ReturnBookRequest từ Map
+        for (Map.Entry<Long, Integer> entry : returnQuantitiesMap.entrySet()) {
+            Long productId = entry.getKey();
+            Integer returnQuantity = entry.getValue();
+            if (returnQuantity > 0) {
+                ReturnBookRequest productRequest = new ReturnBookRequest(productId, returnQuantity);
+                productList.add(productRequest);
+            }
+        }
+
+        // Lưu vào bảng ReturnBook
+        ReturnOrderRequest returnOrder = new ReturnOrderRequest(reason, description, orderId, productList);
+        // Gọi service để lưu dữ liệu
+        returnBookService.saveReturnOrder(returnOrder, productList);
 
         // Chuyển hướng hoặc trả về thông báo
         request.setAttribute("message", "Yêu cầu hoàn trả đã được xử lý.");
-        request.getRequestDispatcher("/return-confirmation.jsp").forward(request, response);
+        response.sendRedirect(request.getContextPath() + "/order");
     }
+
 }
