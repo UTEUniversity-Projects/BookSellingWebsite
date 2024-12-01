@@ -171,9 +171,7 @@ $(document).ready(() => {
 		ACCOUNT_NAME: 'TRANG KIM LOI'
 	};
 
-	//const amount = document.querySelector('#price-total').dataset.price;
-	const amount = 10000;
-	const text = `TEST 760`;
+	const text = `TEST ${Math.floor(Math.random() * 1000)}`;
 
 	let timeOut;
 	let interval;
@@ -221,6 +219,8 @@ $(document).ready(() => {
 			return;
 		}
 
+		const amount = document.querySelector('#price-total').dataset.price;
+
 		checkout.classList.add('active');
 		checkoutQR.src = '';
 		const qrImageSrc = generateQR(amount, text);
@@ -228,10 +228,11 @@ $(document).ready(() => {
 		checkoutQR.onload = () => $('.checkout-loading').addClass('hidden');
 		checkoutQR.src = qrImageSrc;
 		isSuccess = false;
+
 		timeOut = setTimeout(() => {
 			interval = setInterval(() => {
 				checkPaid(amount, text);
-			}, 2000);
+			}, 3000);
 		}, 3000);
 
 	});

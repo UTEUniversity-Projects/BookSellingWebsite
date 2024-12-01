@@ -3,6 +3,7 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 
 <script defer src="${pageContext.request.contextPath}/assets/customer/js/return-book.js"></script>
+<link rel="stylesheet" href="${pageContext.request.contextPath}/assets/customer/scss/style.css">
 
 <!-- Return Order Form -->
 <section class="section-return py-5 bg-light">
@@ -11,62 +12,65 @@
             <div class="col-lg-8">
 
                 <!-- Form Sản phẩm -->
-                <div class="product-return-form p-4 bg-white shadow rounded mb-4">
-                    <div class="form-logo text-center mb-4">
-                        <img src="${pageContext.request.contextPath}/assets/customer/img/logo/biblio.png" alt="logo" class="img-fluid" style="max-width: 150px;" />
-                    </div>
-
-                    <div id="product-list" class="return-product-box p-4 rounded-lg shadow-sm bg-white">
-                        <!-- Hiển thị danh sách sản phẩm -->
-                        <div class="form-group mb-4">
-                            <label class="d-flex align-items-center">
-                                <input type="checkbox" id="select-all" class="me-2" />
-                                Chọn tất cả (<c:out value="${fn:length(orderDetail.products)}" />)
-                            </label>
+                <form action="${pageContext.request.contextPath}/return-order" method="POST" enctype="multipart/form-data">
+                    <div class="order-item mb-5 p-4 bg-white border border-gray-200 rounded relative" data-order-id="${orderDetail.id}">
+                        <div class="form-logo text-center mb-4">
+                            <h2 style="font-size: 32px; font-weight: bold; ">Chọn sách hoàn trả</h2> <!-- Tiêu đề đã được làm nổi bật -->
                         </div>
-                        <hr style="border-top: 3px solid #004437; width: 100%; margin: 10px 0;" />
 
-                        <c:forEach var="product" items="${orderDetail.products}">
-                            <div class="product-item d-flex justify-content-between align-items-center border-bottom py-3">
-                                <div class="d-flex align-items-center">
-                                    <input type="checkbox" class="product-checkbox me-3" />
-                                    <div class="product-image me-3">
-                                        <img src="${pageContext.request.contextPath}${product.imagePath}" alt="${product.title}" class="img-fluid" style="width: 150px;" />
-                                    </div>
-                                    <div>
-                                        <h4 style="margin-bottom: 20px; font-size: 24px;">${product.title}</h4>
-                                        <p>${product.publisherName}</p>
+
+                        <div id="product-list" class="return-product-box p-4 rounded-lg shadow-sm bg-white ">
+
+                            <hr style="border-top: 3px solid #004437; width: 100%; margin: 10px 0;" />
+
+                            <c:forEach var="product" items="${orderDetail.products}" varStatus="loopStatus">
+                                <div class="${loopStatus.index > 0 ? 'my-hidden' : ''} flex items-center mb-3 border-bottom">
+                                    <div class="product-item d-flex justify-content-between align-items-center py-3 w-full" style="margin-bottom: 20px;">
+                                        <div class="d-flex align-items-center">
+                                            <div class="product-image me-3">
+                                                <img src="${pageContext.request.contextPath}${product.imagePath}" alt="${product.title}" class="img-fluid" style="width: 150px;" />
+                                            </div>
+                                            <div>
+                                                <h4 style="margin-bottom: 20px; font-size: 24px;">${product.title}</h4>
+                                                <p>${product.publisherName}</p>
+                                            </div>
+                                        </div>
+                                        <div class="product-price text-right d-flex flex-column">
+                                            <span class="mt-5 quantity text-muted">x${product.quantity}</span>
+                                            <span class="new-price text-success fw-bold">${product.sellingPrice}₫</span>
+
+                                            <!-- Input số lượng hoàn trả -->
+                                            <div class="mt-10 d-flex align-items-center">
+                                                <label for="return-quantity-${product.bookTemplateId}" class="form-label text-muted me-2">
+                                                    Số lượng hoàn trả:
+                                                </label>
+                                                <input
+                                                        type="number"
+                                                        id="return-quantity-${product.bookTemplateId}"
+                                                        class="form-control return-quantity"
+                                                        name="returnQuantities[${product.bookTemplateId}]"
+                                                        value="0"
+                                                        min="0"
+                                                        max="${product.quantity}"
+                                                        style="width: 60px;" />
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
-                                <div class="product-price text-end d-flex flex-column">
-                                    <span class="quantity text-muted">x${product.quantity}</span>
-                                    <span class="new-price text-success fw-bold">${product.sellingPrice}₫</span>
-                                    <!-- Thêm nút số lượng hoàn trả -->
-                                    <div class="mt-10 d-flex align-items-center">
-                                        <label for="return-quantity-${orderDetail.id}" class="form-label text-muted me-2">
-                                            Số lượng hoàn trả:
-                                        </label>
-                                        <input
-                                                type="number"
-                                                id="return-quantity-${orderDetail.id}"
-                                                class="form-control return-quantity"
-                                                name="returnQuantity[${orderDetail.id}]"
-                                                value="1"
-                                                min="1"
-                                                max="5"
-                                                style="width: 60px;" />
-                                    </div>
-
+                            </c:forEach>
+                            <!-- Nút Xem thêm/Thu gọn -->
+                            <c:if test="${fn:length(orderDetail.products) > 1}">
+                                <div class="flex justify-start w-full cursor-pointer text-[#26aa99]" onclick="toggleItems()">
+                                    <span id="toggle-text">Xem thêm ▼</span>
                                 </div>
-                            </div>
-                        </c:forEach>
+                            </c:if>
+
+                        </div>
+
                     </div>
 
-                </div>
-                <!-- Form Lý do hoàn trả -->
-                <div class="return-reason-form p-4 bg-white shadow rounded" >
-
-                    <form class="cr-content-form mb-4 " action="${pageContext.request.contextPath}/return-order" method="POST" enctype="multipart/form-data">
+                    <!-- Form Lý do hoàn trả -->
+                    <div class="return-reason-form p-4 bg-white shadow rounded">
                         <!-- Return Form Details -->
                         <div class="form-group mt-4">
                             <label for="reason" class="form-label">Lý do hoàn trả:</label>
@@ -91,36 +95,18 @@
                             <input type="file" id="uploadImage" class="form-control" accept="image/*" multiple>
                         </div>
 
-                        <!-- Upload Video Section -->
-                        <div class="form-group mt-4">
-                            <label for="uploadVideo" class="form-label">Thêm video (tùy chọn):</label>
-                            <input type="file" id="uploadVideo" class="form-control" accept="video/*">
-                        </div>
-
                         <!-- Submit Button -->
-                        <div class="row">
-                            <div class="col-12 col-sm-6">
-                                <form class="form-group mx-auto w-100">
-                                    <button
-                                            type="button"
-                                            class="px-4 py-2 rounded text-black border-1 border-solid border-gray-200 hover:bg-gray-100 transition duration-300 w-100"
-                                            onclick="window.location.href='order.html';"
-                                    >
-                                        Quay lại
-                                    </button>
-                                </form>
-                            </div>
-                            <div class="col-12 col-sm-6">
-                                <button type="submit" class="cr-button w-100">
-                                    Yêu cầu hoàn trả
-                                </button>
-                            </div>
-
+                        <div class="row mt-10 d-flex justify-content-center">
+                            <button type="submit" class="cr-button w-25">
+                                Yêu cầu hoàn trả
+                            </button>
                         </div>
 
-                    </form>
-                </div>
+                    </div>
+                </form>
             </div>
         </div>
     </div>
 </section>
+
+<script defer src="${pageContext.request.contextPath}/assets/customer/js/order-list.js"></script>

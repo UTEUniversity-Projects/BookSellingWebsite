@@ -1,6 +1,10 @@
 package com.biblio.dao;
 
+import com.biblio.entity.Book;
 import com.biblio.entity.ReturnBook;
+import com.biblio.entity.ReturnBookItem;
+
+import java.util.List;
 
 public interface IReturnBookDAO {
 

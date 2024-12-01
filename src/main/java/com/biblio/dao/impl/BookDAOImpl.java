@@ -41,6 +41,23 @@ public class BookDAOImpl extends GenericDAOImpl<Book> implements IBookDAO {
     }
 
     @Override
+    public List<Book> findBooksByTemplateId(Long bookTemplateId) {
+        // Truy vấn JPQL với tham số bookTemplateId
+        String jpql = "SELECT b FROM Book b WHERE b.bookTemplate.id = :bookTemplateId";
+
+        // Sử dụng phương thức findByJPQL của lớp cha để thực thi truy vấn
+        Map<String, Object> params = new HashMap<>();
+        params.put("bookTemplateId", bookTemplateId);
+
+        // Trả về kết quả dưới dạng danh sách Book
+        return super.findByJPQL(jpql, params);
+    }
+
+
+
+
+
+    @Override
     public void addBook(Book book) {
         super.save(book);
     }

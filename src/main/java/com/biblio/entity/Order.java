@@ -1,5 +1,6 @@
 package com.biblio.entity;
 
+import com.biblio.enumeration.EOrderHistory;
 import com.biblio.enumeration.EOrderStatus;
 import com.biblio.enumeration.EPaymentType;
 import lombok.*;
@@ -111,6 +112,11 @@ public class Order implements Serializable {
         double totalDiscount = calculateTotalDiscount();
 
         return Math.max(0, totalPrice - totalDiscount);
+    }
+
+    public boolean isStatusHistoryExist(EOrderHistory status) {
+        return statusHistory.stream()
+                .anyMatch(statusHistoryItem -> statusHistoryItem.getStatus() == status);
     }
 
     // endregion

@@ -180,8 +180,8 @@ public class SendEmailAPI extends HttpServlet {
 
         // Tổng giá trị và VAT
         emailContent.append("<h3 style=\"color: #d35400;\">Tổng cộng:</h3>");
-        emailContent.append("<p><b>Tổng tiền hàng:</b> ").append((int) order.calTotalPrice()).append(" VND</p>");
         emailContent.append("<p><b>Thuế VAT:</b> ").append(order.getVat()).append("%</p>");
+        emailContent.append("<p><b>Tổng tiền hàng (Đã bao gồm thuế VAT):</b> ").append((int) order.calTotalPrice()).append(" VND</p>");
 
         // Footer
         emailContent.append("<hr>");

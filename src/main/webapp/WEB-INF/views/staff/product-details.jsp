@@ -291,7 +291,7 @@
                                                         <span class="hidden-review-label
                                                                         <c:if test="${!review.isHidden}">d-none</c:if>">
                                                                 Đánh giá bị ẩn
-                                                            </span>
+                                                        </span>
 
                                                     </div>
                                                     <div class="header__right">
@@ -311,7 +311,7 @@
 
                                                         <button type="button"
                                                                 class="action-btn action-btn__response
-                                                                            <c:if test="${review.isHidden || !empty review.responseContent}">d-none</c:if>">
+                                                                     <c:if test="${review.isHidden || !empty review.responseContent}">d-none</c:if>">
                                                             <i class="ri-reply-line"></i>
                                                         </button>
 
