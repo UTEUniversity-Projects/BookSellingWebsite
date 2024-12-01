@@ -71,7 +71,6 @@ public class CreateOrderAPI extends HttpServlet {
         createOrderRequest.setCustomer(customer);
         Long orderId = orderService.createOrder(createOrderRequest);
 
-
         ObjectMapper mapper = new ObjectMapper();
         Map<String, Object> map = new HashMap<>();
 
