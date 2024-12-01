@@ -2,10 +2,10 @@ package com.biblio.controller.customer;
 
 import com.biblio.dto.request.CheckoutItemRequest;
 import com.biblio.dto.request.CheckoutRequest;
-import com.biblio.dto.response.*;
-import com.biblio.entity.Account;
-import com.biblio.entity.Customer;
-import com.biblio.service.IBookService;
+import com.biblio.dto.response.AccountGetResponse;
+import com.biblio.dto.response.CheckOutResponse;
+import com.biblio.dto.response.CheckoutItemResponse;
+import com.biblio.dto.response.CustomerDetailResponse;
 import com.biblio.service.IBookTemplateService;
 import com.biblio.service.ICustomerService;
 import com.biblio.service.IPromotionTemplateService;
@@ -58,7 +58,7 @@ public class CheckoutController extends HttpServlet {
             checkOutResponse = new CheckOutResponse();
             AccountGetResponse account = (AccountGetResponse) request.getSession().getAttribute("account");
             if (account == null) {
-                response.sendRedirect("/login");
+                response.sendRedirect(request.getContextPath() + "/login");
                 return;
             }
 
@@ -67,7 +67,7 @@ public class CheckoutController extends HttpServlet {
             CheckoutRequest checkoutRequest = (CheckoutRequest) request.getSession().getAttribute("checkoutRequest");
 
             if (checkoutRequest == null) {
-                response.sendRedirect("/cart");
+                response.sendRedirect(request.getContextPath() + "/cart");
                 return;
             }
 

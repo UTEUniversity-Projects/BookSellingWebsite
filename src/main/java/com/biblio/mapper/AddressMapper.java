@@ -16,4 +16,15 @@ public class AddressMapper {
         return addressResponse;
     }
 
+    public static Address toAddress(AddressResponse addressResponse) {
+        return Address.builder()
+                .id(addressResponse.getId())
+                .nation(addressResponse.getNation())
+                .province(addressResponse.getProvince())
+                .district(addressResponse.getDistrict())
+                .village(addressResponse.getVillage())
+                .detail(addressResponse.getDetail())
+                .build();
+    }
+
 }

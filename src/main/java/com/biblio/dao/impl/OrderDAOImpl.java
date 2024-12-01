@@ -1,20 +1,22 @@
 package com.biblio.dao.impl;
 
+import com.biblio.dao.IBookDAO;
 import com.biblio.dao.IOrderDAO;
+import com.biblio.dto.request.CheckoutItemRequest;
+import com.biblio.dto.request.CreateOrderRequest;
+import com.biblio.dto.response.AddressResponse;
 import com.biblio.dto.response.OrderCustomerResponse;
-import com.biblio.entity.Book;
-import com.biblio.entity.Order;
-import com.biblio.entity.OrderItem;
-import com.biblio.enumeration.EBookMetadataStatus;
-import com.biblio.enumeration.EOrderStatus;
+import com.biblio.entity.*;
+import com.biblio.enumeration.*;
 import com.biblio.jpaconfig.JpaConfig;
+import com.biblio.mapper.AddressMapper;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityNotFoundException;
 import javax.persistence.NoResultException;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.*;
 
 public class OrderDAOImpl extends GenericDAOImpl<Order> implements IOrderDAO {
     private final EntityManager entityManager = JpaConfig.getEntityManager();
@@ -160,6 +162,7 @@ public class OrderDAOImpl extends GenericDAOImpl<Order> implements IOrderDAO {
     public Order update(Order order) {
         return super.update(order);
     }
+
     @Override
     public boolean cancelOrder(Long id) {
         Order order = findOne(id);
@@ -180,6 +183,91 @@ public class OrderDAOImpl extends GenericDAOImpl<Order> implements IOrderDAO {
         return true;
     }
 
+    @Override
+    public Order save(CreateOrderRequest request) {
+        DateTimeFormatter inputFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+        LocalDateTime dateTime = LocalDateTime.parse(request.getCreatedAt(), inputFormatter);
+
+        Set<AddressResponse> addresses = request.getCustomer().getAddresses();
+        Optional<AddressResponse> addressOpt = addresses.stream()
+                .filter(address -> address.getId().equals(request.getAddressId()))
+                .findFirst();
+
+        Address address = addressOpt
+                .map(AddressMapper::toAddress)
+                .orElse(null);
+
+        Customer customer = new CustomerDAOImpl().findById(request.getCustomer().getId());
+
+        BankTransfer bankTransfer = BankTransfer.builder()
+                .createdAt(dateTime)
+                .amount(request.getAmount())
+                .status(EPaymentStatus.COMPLETED)
+                .currency(EPaymentCurrency.VND)
+                .bankAccountNumber(request.getBankAccountNumber())
+                .bankName(request.getBankName())
+                .transactionId(request.getTransactionId())
+                .build();
+
+        Shipping shipping = Shipping.builder()
+                .address(address)
+                .shippingFee(request.getShippingFee())
+                .shippingUnit("Giao hàng tiết kiệm")
+                .build();
+
+        OrderStatusHistory orderStatusHistory = OrderStatusHistory.builder()
+                .status(EOrderHistory.PLACED)
+                .statusChangeDate(LocalDateTime.now())
+                .build();
+
+        Order order = Order.builder()
+                .note(request.getNote())
+                .vat(request.getVat())
+                .orderDate(LocalDateTime.now())
+                .status(EOrderStatus.WAITING_CONFIRMATION)
+                .paymentType(EPaymentType.valueOf(request.getPaymentType()))
+                .build();
+        bankTransfer.setOrder(order);
+        shipping.setOrder(order);
+        orderStatusHistory.setOrder(order);
+
+        Set<OrderStatusHistory> orderStatusHistories = new HashSet<>();
+        orderStatusHistories.add(orderStatusHistory);
+
+        order.setStatusHistory(orderStatusHistories);
+        order.setBankTransfer(bankTransfer);
+        order.setShipping(shipping);
+        order.setCustomer(customer);
+
+        Set<OrderItem> orderItems = new HashSet<>();
+        IBookDAO bookDAO = new BookDAOImpl();
+
+        List<CheckoutItemRequest> checkoutItemRequests = request.getItems();
+
+        for (CheckoutItemRequest item : checkoutItemRequests) {
+            List<Book> books = bookDAO.findByBookTemplateIdAndQuantity(item);
+
+            for (Book book : books) {
+                BookMetadata bookMetadata = book.getBookMetadata();
+                bookMetadata.setBook(book);
+                bookMetadata.setStatus(EBookMetadataStatus.SOLD);
+                new BookMetadataDAOImpl().update(bookMetadata);
+            }
+
+            OrderItem orderItem = OrderItem.builder()
+                    .books(new HashSet<>(books))
+                    .order(order)
+                    .build();
+
+            orderItems.add(orderItem);
+        }
+
+        order.setOrderItems(orderItems);
+
+        return super.save(order);
+    }
+
+
     public static void main(String[] args) {
         OrderDAOImpl dao = new OrderDAOImpl();
         Order order = dao.findOne(1L);
@@ -198,5 +286,6 @@ public class OrderDAOImpl extends GenericDAOImpl<Order> implements IOrderDAO {
 //                System.out.println("  - No books in this OrderItem");
 //            }
 //        }
+
     }
 }

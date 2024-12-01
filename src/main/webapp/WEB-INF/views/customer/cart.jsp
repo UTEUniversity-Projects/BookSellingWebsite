@@ -96,9 +96,9 @@
                                     <div class="row">
                                         <div class="col-lg-12">
                                             <div class="cr-cart-update-bottom">
-                                                <a href="home" class="cr-btn-secondary">Tiếp tục mua sách</a>
+                                                <a href="${pageContext.request.contextPath}/home" class="cr-btn-secondary">Tiếp tục mua sách</a>
 
-                                                <a id="btn-checkout" class="cr-button">Thanh toán</a>
+                                                <a id="btn-checkout" class="cr-button cursor-pointer">Thanh toán</a>
                                             </div>
                                         </div>
                                     </div>

@@ -23,10 +23,10 @@ import java.util.Objects;
 @WebServlet("/api/login")
 public class LoginAPI extends HttpServlet {
     @Serial
-	private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 1L;
 
-	@Inject
-	private IAccountService accountService;
+    @Inject
+    private IAccountService accountService;
 
     /**
      * @see HttpServlet#HttpServlet()
@@ -36,60 +36,61 @@ public class LoginAPI extends HttpServlet {
         // TODO Auto-generated constructor stub
     }
 
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-	}
+    /**
+     * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+     */
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        // TODO Auto-generated method stub
+    }
 
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		request.setCharacterEncoding("UTF-8");
+    /**
+     * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+     */
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        // TODO Auto-generated method stub
+        request.setCharacterEncoding("UTF-8");
 
-		LoginRequest loginRequest = HttpUtil.of(request.getReader()).toModel(LoginRequest.class);
+        LoginRequest loginRequest = HttpUtil.of(request.getReader()).toModel(LoginRequest.class);
 
-		boolean isUsernameExisted = accountService.isUsernameExisted(loginRequest.getUsername().trim());
+        boolean isUsernameExisted = accountService.isUsernameExisted(loginRequest.getUsername().trim());
 
-		Map<String, Object> map = new HashMap<>();
-		ObjectMapper mapper = new ObjectMapper();
+        Map<String, Object> map = new HashMap<>();
+        ObjectMapper mapper = new ObjectMapper();
 
-		if(!isUsernameExisted) {
-			map.put("status", "error");
-			map.put("username", "Username không tồn tại !");
-		} else {
-			AccountGetResponse account = accountService.getAccountByUsername(loginRequest.getUsername().trim());
-			if (!BCryptUtil.CheckPassword(loginRequest.getPassword(), account.getPassword())) {
-				map.put("status", "error");
-				map.put("password", "Password không chính xác !");
-			} else {
-				map.put("status", "success");
-				map.put("data", account);
-				map.put("remember", Objects.equals(loginRequest.getRememberMe(), "1"));
+        if (!isUsernameExisted) {
+            map.put("status", "error");
+            map.put("username", "Username không tồn tại !");
+        } else {
+            AccountGetResponse account = accountService.getAccountByUsername(loginRequest.getUsername().trim());
+            if (!BCryptUtil.CheckPassword(loginRequest.getPassword(), account.getPassword())) {
+                map.put("status", "error");
+                map.put("password", "Password không chính xác !");
+            } else {
+                map.put("status", "success");
+                map.put("data", account);
+                map.put("remember", Objects.equals(loginRequest.getRememberMe(), "1"));
 
-				HttpSession session = request.getSession();
-				session.setAttribute("account", account);
+                HttpSession session = request.getSession();
+                session.setAttribute("account", account);
+                session.setMaxInactiveInterval(60 * 60);
 
-				if (Objects.equals(loginRequest.getRememberMe(), "1")) {
-					Cookie username = new Cookie("username", account.getUsername());
+                if (Objects.equals(loginRequest.getRememberMe(), "1")) {
+                    Cookie username = new Cookie("username", account.getUsername());
 
-					username.setMaxAge(60 * 60);
+                    username.setMaxAge(60 * 60);
 
-					username.setHttpOnly(true);
+                    username.setHttpOnly(true);
 
-					username.setPath("/");
+                    username.setPath("/");
 
-					response.addCookie(username);
-				}
+                    response.addCookie(username);
+                }
 
-			}
-		}
-		response.setContentType("application/json");
-		response.setCharacterEncoding("UTF-8");
-		response.getWriter().write(mapper.writeValueAsString(map));
-	}
+            }
+        }
+        response.setContentType("application/json");
+        response.setCharacterEncoding("UTF-8");
+        response.getWriter().write(mapper.writeValueAsString(map));
+    }
 
 }

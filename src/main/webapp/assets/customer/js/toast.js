@@ -27,7 +27,7 @@ export function toast({
 			error: `<i class="fa-solid fa-circle-exclamation"></i>`,
 		};
 
-		toast.style.animation = `slideInLeft ease .3s, fadeOut linear 1s ${delay}s`;
+		toast.style.animation = `slideInLeft ease .3s, fadeOut linear 1s ${delay}s forwards`;
 
 		toast.classList.add("toast", `toast--${type}`);
 		toast.innerHTML = `<div class="toast__icon">
