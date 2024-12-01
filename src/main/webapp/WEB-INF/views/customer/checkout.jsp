@@ -258,81 +258,83 @@
         </div>
 
     </div>
-    <div class="mb-2">
-        <label for="note" class="block text-md font-medium text-gray-900 ml-2">Lời nhắn: </label>
-        <textarea id="note" rows="4"
-                  class="block p-2.5 w-full text-md text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500"
-                  placeholder="Nhập lời nhắn..."></textarea>
-    </div>
-    <div class="summary-sub-total w-[30%] ml-auto mb-5">
-        <table class="table summary-table">
-            <h3 class="text-2xl font-bold text-[#26a397]">Tóm tắt đơn hàng</h3>
-            <tbody>
-            <tr>
-                <td>Tổng tiền sách:</td>
-                <td class="price-value"
-                    data-price="${checkoutResponse.totalPrice}">${checkoutResponse.totalPrice}</td>
-            </tr>
-            <tr>
-                <td>Phí vận chuyển:</td>
-                <td id="price-freeship-amount" class="price-value"
-                    data-price="${checkoutResponse.shipping.shippingFee}">${checkoutResponse.shipping.shippingFee}</td>
-            </tr>
+    <div>
+        <div class="mb-2 w-[30%] ml-auto">
+            <label for="note" class="block text-md font-medium text-gray-900 ml-2">Lời nhắn: </label>
+            <textarea id="note" rows="4"
+                      class="block p-2.5 w-full text-md text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500"
+                      placeholder="Nhập lời nhắn..."></textarea>
+        </div>
+        <div class="summary-sub-total w-[30%] ml-auto mb-5">
+            <table class="table summary-table">
+                <h3 class="text-2xl font-bold text-[#26a397]">Tóm tắt đơn hàng</h3>
+                <tbody>
+                <tr>
+                    <td>Tổng tiền sách:</td>
+                    <td class="price-value"
+                        data-price="${checkoutResponse.totalPrice}">${checkoutResponse.totalPrice}</td>
+                </tr>
+                <tr>
+                    <td>Phí vận chuyển:</td>
+                    <td id="price-freeship-amount" class="price-value"
+                        data-price="${checkoutResponse.shipping.shippingFee}">${checkoutResponse.shipping.shippingFee}</td>
+                </tr>
 
-            <tr>
-                <td>Giảm giá phí vận chuyển:</td>
-                <c:if test="${hasFreestip}">
-                    <td id="price-freeship" class="price-value minus-value"
-                        data-price="${freeshipCode.discountAmount}">
-                            ${freeshipCode.discountAmount}
+                <tr>
+                    <td>Giảm giá phí vận chuyển:</td>
+                    <c:if test="${hasFreestip}">
+                        <td id="price-freeship" class="price-value minus-value"
+                            data-price="${freeshipCode.discountAmount}">
+                                ${freeshipCode.discountAmount}
+                        </td>
+                    </c:if>
+                    <c:if test="${not hasFreestip}">
+                        <td id="price-freeship" class="price-value minus-value"
+                            data-price="0">
+                            0
+                        </td>
+                    </c:if>
+                </tr>
+                <tr>
+                <tr>
+                    <td>Voucher giảm giá:</td>
+                    <c:if test="${hasVoucher}">
+                        <td id="price-voucher" class="price-value minus-value"
+                            data-price="${voucherCode.discountAmount}">
+                                ${voucherCode.discountAmount}
+                        </td>
+                    </c:if>
+                    <c:if test="${not hasVoucher}">
+                        <td id="price-voucher" class="price-value minus-value"
+                            data-price="0">
+                            0
+                        </td>
+                    </c:if>
+                </tr>
+                <tr>
+                    <td>Phương thức thanh toán:</td>
+                    <td><span class="payment-type"></span></td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        <div style="width: 100%; height: 1px; background-color: #ccc; margin-top: 10px;"></div>
                     </td>
-                </c:if>
-                <c:if test="${not hasFreestip}">
-                    <td id="price-freeship" class="price-value minus-value"
-                        data-price="0">
-                        0
-                    </td>
-                </c:if>
-            </tr>
-            <tr>
-            <tr>
-                <td>Voucher giảm giá:</td>
-                <c:if test="${hasVoucher}">
-                    <td id="price-voucher" class="price-value minus-value"
-                        data-price="${voucherCode.discountAmount}">
-                            ${voucherCode.discountAmount}
-                    </td>
-                </c:if>
-                <c:if test="${not hasVoucher}">
-                    <td id="price-voucher" class="price-value minus-value"
-                        data-price="0">
-                        0
-                    </td>
-                </c:if>
-            </tr>
-            <tr>
-                <td>Phương thức thanh toán:</td>
-                <td><span class="payment-type"></span></td>
-            </tr>
-            <tr>
-                <td colspan="2">
-                    <div style="width: 100%; height: 1px; background-color: #ccc; margin-top: 10px;"></div>
-                </td>
-            </tr>
-            <tr>
-                <td>Tổng tiền:</td>
-                <td id="price-total" class="price-value"
-                    data-price="${checkoutResponse.finalPrice}">${checkoutResponse.finalPrice}</td>
-            </tr>
-            </tbody>
-        </table>
-        <div class="flex justify-end">
-            <button
-                    style="margin: 10px 0;"
-                    class="btn-create-order px-4 py-2 rounded bg-[#26a397] hover:bg-[#63b597] transition-all duration-300 text-white text-md w-[50%]"
-            >
-                Đặt hàng
-            </button>
+                </tr>
+                <tr>
+                    <td>Tổng tiền:</td>
+                    <td id="price-total" class="price-value"
+                        data-price="${checkoutResponse.finalPrice}">${checkoutResponse.finalPrice}</td>
+                </tr>
+                </tbody>
+            </table>
+            <div class="flex justify-end">
+                <button
+                        style="margin: 10px 0;"
+                        class="btn-create-order px-4 py-2 rounded bg-[#26a397] hover:bg-[#63b597] transition-all duration-300 text-white text-md w-[50%]"
+                >
+                    Đặt hàng
+                </button>
+            </div>
         </div>
     </div>
 </section>

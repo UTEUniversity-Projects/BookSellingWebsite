@@ -18,7 +18,7 @@
                                 <div class="message-container">
                                     <img src="https://cdn-icons-png.flaticon.com/512/2762/2762885.png" alt="">
                                     <p>Giỏ hàng của bạn đang trống</p>
-                                    <a href="home">
+                                    <a href="${pageContext.request.contextPath}/home">
                                         <button class="cr-button">Mua ngay</button>
                                     </a>
                                 </div>

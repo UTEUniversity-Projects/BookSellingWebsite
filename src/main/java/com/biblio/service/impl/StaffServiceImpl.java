@@ -93,4 +93,9 @@ public class StaffServiceImpl implements IStaffService {
             staffDAO.updateStaff(staff);
         }
     }
+
+    @Override
+    public StaffResponse getStaffByUsername(String username) {
+        return StaffMapper.toStaffResponse(staffDAO.findByUsername(username));
+    }
 }

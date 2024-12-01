@@ -34,7 +34,6 @@ public class StaffDAOImpl extends GenericDAOImpl<Staff> implements IStaffDAO {
         return super.findSingleByJPQL(jpql, params);
     }
 
-
     @Override
     public void addStaff(Staff staff) {
         super.save(staff);
@@ -58,6 +57,14 @@ public class StaffDAOImpl extends GenericDAOImpl<Staff> implements IStaffDAO {
     @Override
     public void deactivateStaff(Staff staff) {
         super.update(staff);
+    }
+
+    @Override
+    public Staff findByUsername(String username) {
+        String jpql = "SELECT c FROM Staff c JOIN FETCH c.addresses WHERE c.account.username = :username";
+        Map<String, Object> params = new HashMap<>();
+        params.put("username", username);
+        return super.findSingleByJPQL(jpql, params);
     }
 
     public static void main(String[] args){

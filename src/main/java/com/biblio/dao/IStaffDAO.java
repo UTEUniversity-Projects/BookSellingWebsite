@@ -9,6 +9,7 @@ public interface IStaffDAO {
     List<Staff> findAll();
 
     Staff findById(Long id);
+
     Staff findByAccountId(Long id);
 
     void addStaff(Staff staff);
@@ -20,5 +21,7 @@ public interface IStaffDAO {
     void activateStaff(Staff staff);
 
     void deactivateStaff(Staff staff);
+
+    Staff findByUsername(String username);
 
 }
