@@ -26,7 +26,7 @@ public class OrderServiceImpl implements IOrderService {
 
     @Inject
     IBookTemplateService bookTemplateService;
-  
+
     @Inject
     EWalletDAOImpl walletDAO;
 
@@ -64,10 +64,9 @@ public class OrderServiceImpl implements IOrderService {
                     return false;
                 }
             }
-        }
-        else if (order.getStatus() == EOrderStatus.WAITING_CONFIRMATION ||
+        } else if (order.getStatus() == EOrderStatus.WAITING_CONFIRMATION ||
                 order.getStatus() == EOrderStatus.PACKING ||
-                order.getStatus() == EOrderStatus.SHIPPING){
+                order.getStatus() == EOrderStatus.SHIPPING) {
             order.getStatusHistory().add(updateOrderHistory(order, status));
         }
         order.setStatus(status);
@@ -177,10 +176,8 @@ public class OrderServiceImpl implements IOrderService {
     @Override
     public List<OrderCustomerResponse> getAllOrderCustomerResponse(Long customerId) {
         List<Order> orders = orderDAO.findAllOrderForCustomer(customerId);
+        orders.sort(Comparator.comparing(Order::getOrderDate).reversed());
         List<OrderCustomerResponse> orderCustomerResponse = new ArrayList<>();
-//        for (Order order : orders) {
-//            orderCustomerResponse.add(OrderMapper.toOrderCustomerResponse(order));
-//        }
         for (Order order : orders) {
             if (order == null) {
                 System.out.println("Null order found in orders list");
@@ -227,14 +224,24 @@ public class OrderServiceImpl implements IOrderService {
             // Nếu trạng thái không phải "all", chuyển từ String sang EOrderStatus và lọc
             try {
                 EOrderStatus orderStatus = EOrderStatus.valueOf(status); // Chuyển đổi String thành EOrderStatus
+                Set<EOrderStatus> statusesToFilter = new HashSet<>();
+                if (orderStatus == EOrderStatus.WAITING_CONFIRMATION) {
+                    statusesToFilter.add(EOrderStatus.WAITING_CONFIRMATION);
+                    statusesToFilter.add(EOrderStatus.REQUEST_REFUND);
+                    statusesToFilter.add(EOrderStatus.PACKING);
+                } else if (orderStatus == EOrderStatus.CANCELED) {
+                    statusesToFilter.add(EOrderStatus.CANCELED);
+                    statusesToFilter.add(EOrderStatus.REFUNDED);
+                } else {
+                    statusesToFilter.add(orderStatus);
+                }
                 for (Order order : orders) {
                     if (order == null) {
                         System.out.println("Null order found in orders list");
                         continue;
                     }
 
-                    // Lọc đơn hàng theo trạng thái
-                    if (order.getStatus() != null && order.getStatus().equals(orderStatus)) {
+                    if (order.getStatus() != null && statusesToFilter.contains(order.getStatus())) {
                         OrderCustomerResponse response = OrderMapper.toOrderCustomerResponse(order);
                         if (response == null) {
                             System.out.println("Mapper returned null for order ID: " + order.getId());
@@ -302,24 +309,6 @@ public class OrderServiceImpl implements IOrderService {
         countOrderOfCustomerResponses.addAll(customerOrderCountMap.values());
         return countOrderOfCustomerResponses;
     }
-
-//
-//
-//    @Override
-//    @Transactional
-//    public void confirmOrder(Long orderId) {
-//        Order order = orderDAO.findOne(orderId);
-//        order.setStatus(EOrderStatus.PACKING);
-//        orderDAO.updateOrder(order);
-//    }
-//
-//    @Override
-//    @Transactional
-//    public void rejectOrder(Long orderId, String reason) {
-//        Order order = orderDAO.findOne(orderId);
-//        order.setStatus(EOrderStatus.CANCELED);
-//        orderDAO.updateOrder(order);
-//    }
 
     public static void main(String[] args) {
         OrderServiceImpl orderService = new OrderServiceImpl();
