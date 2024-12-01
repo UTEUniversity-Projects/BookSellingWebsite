@@ -43,6 +43,7 @@
                                             id="check-with-link"
                                             name="rememberMe"
                                             value="1"
+                                            checked
                                     />
                                     <span
                                             class="absolute text-white opacity-0 peer-checked:opacity-100 top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 flex items-center justify-center w-[12px] h-[12px]"
@@ -125,14 +126,14 @@
                                 </label>
                             </div>
                             <div>
-                                <a href="forgot"
+                                <a href="${pageContext.request.contextPath}/forgot"
                                    class="text-md text-[#26a397] hover:opacity-80 transition-all duration-300">Quên mật
                                     khẩu?</a>
                             </div>
                         </div>
                         <div class="login-buttons">
                             <a
-                                    href="verify-email"
+                                    href=${pageContext.request.contextPath}/ "verify-email"
                                     class="py-2 border border-solid px-4 inline-block rounded-md hover:bg-gray-100 transition-all duration-300"
                             >
                                 Đăng ký

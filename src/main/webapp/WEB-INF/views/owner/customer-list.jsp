@@ -51,10 +51,12 @@
                                                     <div class="dropdown-menu">
                                                         <c:choose>
                                                             <c:when test="${customer.status == 'ACTIVE'}">
-                                                                <a class="dropdown-item pop-positioned-timeout" href="#" onclick="changeStatus(${customer.id}, 'deactivate'); return false;">Vô hiệu hóa tài khoản</a>
+                                                                <a class="dropdown-item pop-positioned-timeout" href="#"
+                                                                   onclick="showConfirmationModal(${customer.id}, 'deactivate'); return false;">Vô hiệu hóa tài khoản</a>
                                                             </c:when>
                                                             <c:otherwise>
-                                                                <a class="dropdown-item pop-positioned-timeout" href="#" onclick="changeStatus(${customer.id}, 'activate'); return false;">Mở khóa tài khoản</a>
+                                                                <a class="dropdown-item pop-positioned-timeout" href="#"
+                                                                   onclick="showConfirmationModal(${customer.id}, 'activate'); return false;">Mở khóa tài khoản</a>
                                                             </c:otherwise>
                                                         </c:choose>
                                                     </div>
@@ -71,4 +73,22 @@
         </div>
     </div>
 </div>
+
+<div class="modal fade" id="hideReviewModal" tabindex="-1" aria-labelledby="hideReviewModalLabel" aria-hidden="true">
+    <input class="review-id" value="" hidden>
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="hideReviewModalLabel">Bạn có chắc muốn khóa tài khoản này không?</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Không</button>
+                <button type="button" class="btn btn-primary" id="confirmHideReview">Có</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
 <script src="${pageContext.request.contextPath}/assets/owner/js/manage-customer.js" defer></script>

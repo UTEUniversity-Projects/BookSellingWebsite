@@ -324,7 +324,6 @@ a {
 }
 
 .cr-button {
-  height: 40px;
   transition: all 0.3s ease-in-out;
   padding: 8px 22px;
   font-size: 14px;
@@ -877,6 +876,14 @@ ul {
 
 .btn--error {
   --bg-color: #f14668;
+}
+
+.d-none {
+  display: none;
+}
+
+.d-flex {
+  display: inline-flex;
 }
 
 /* Footer */
@@ -10576,6 +10583,7 @@ p {
   position: relative;
   margin-top: 40px;
   width: 100%;
+  min-width: 690px;
 }
 .stepper__step {
   cursor: default;

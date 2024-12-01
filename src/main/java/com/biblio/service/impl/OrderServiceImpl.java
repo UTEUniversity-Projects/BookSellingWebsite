@@ -2,6 +2,7 @@ package com.biblio.service.impl;
 
 import com.biblio.dao.IOrderDAO;
 import com.biblio.dao.IReturnBookDAO;
+import com.biblio.dao.impl.BankTransferDAOImpl;
 import com.biblio.dao.impl.EWalletDAOImpl;
 import com.biblio.dto.request.CreateOrderRequest;
 import com.biblio.dto.response.*;
@@ -28,6 +29,9 @@ public class OrderServiceImpl implements IOrderService {
 
     @Inject
     EWalletDAOImpl walletDAO;
+
+    @Inject
+    BankTransferDAOImpl bankTransferDAO;
 
     @Inject
     IReturnBookDAO returnBookDAO;
@@ -116,9 +120,9 @@ public class OrderServiceImpl implements IOrderService {
                     (orderDate.isEqual(end) || orderDate.isBefore(end)) &&
                     EOrderStatus.COMPLETE_DELIVERY.equals(order.getStatus())) {
 
-                EWallet ew = walletDAO.findByOrderId(order.getId());
+                BankTransfer bankTransfer = bankTransferDAO.findByOrderId(order.getId());
 
-                venue += ew.getAmount();
+                venue += bankTransfer.getAmount();
             }
         }
         return venue;
@@ -176,10 +180,10 @@ public class OrderServiceImpl implements IOrderService {
     }
 
     @Override
-    public List<OrderCustomerResponse> getAllOrderCustomerResponse(Long customerId) {
+    public List<OrderDetailsManagementResponse> getAllOrderCustomerResponse(Long customerId) {
         List<Order> orders = orderDAO.findAllOrderForCustomer(customerId);
         orders.sort(Comparator.comparing(Order::getOrderDate).reversed());
-        List<OrderCustomerResponse> orderCustomerResponse = new ArrayList<>();
+        List<OrderDetailsManagementResponse> orderCustomerResponse = new ArrayList<>();
         for (Order order : orders) {
             if (order == null) {
                 System.out.println("Null order found in orders list");
@@ -187,12 +191,13 @@ public class OrderServiceImpl implements IOrderService {
             }
             System.out.println("Mapping order with ID: " + order.getId());
 
-            OrderCustomerResponse response = OrderMapper.toOrderCustomerResponse(order);
+            OrderDetailsManagementResponse response = OrderMapper.mapToOrderDetailsManagementResponse(order);
 
             if (response == null) {
                 System.out.println("Mapper returned null for order ID: " + order.getId());
             } else {
                 System.out.println("Mapped response: " + response);
+                response.setFinalPrice(order.getBankTransfer().getAmount());
                 orderCustomerResponse.add(response);
             }
         }
@@ -201,10 +206,10 @@ public class OrderServiceImpl implements IOrderService {
     }
 
     @Override
-    public List<OrderCustomerResponse> getOrderCustomerByStatus(Long customerId, String status) {
+    public List<OrderDetailsManagementResponse> getOrderCustomerByStatus(Long customerId, String status) {
         // Lấy tất cả các đơn hàng cho khách hàng
         List<Order> orders = orderDAO.findAllOrderForCustomer(customerId);
-        List<OrderCustomerResponse> filteredOrderResponses = new ArrayList<>();
+        List<OrderDetailsManagementResponse> filteredOrderResponses = new ArrayList<>();
 
         // Kiểm tra nếu status là "all", lấy tất cả đơn hàng
         if ("all".equalsIgnoreCase(status)) {
@@ -215,7 +220,7 @@ public class OrderServiceImpl implements IOrderService {
                     continue;
                 }
 
-                OrderCustomerResponse response = OrderMapper.toOrderCustomerResponse(order);
+                OrderDetailsManagementResponse response = OrderMapper.mapToOrderDetailsManagementResponse(order);
                 if (response == null) {
                     System.out.println("Mapper returned null for order ID: " + order.getId());
                 } else {
@@ -244,7 +249,7 @@ public class OrderServiceImpl implements IOrderService {
                     }
 
                     if (order.getStatus() != null && statusesToFilter.contains(order.getStatus())) {
-                        OrderCustomerResponse response = OrderMapper.toOrderCustomerResponse(order);
+                        OrderDetailsManagementResponse response = OrderMapper.mapToOrderDetailsManagementResponse(order);
                         if (response == null) {
                             System.out.println("Mapper returned null for order ID: " + order.getId());
                         } else {

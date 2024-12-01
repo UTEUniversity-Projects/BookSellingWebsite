@@ -5,8 +5,8 @@ import { formatCurrencyVND } from '../../commons/js/format-currency.js';
 $(document).ready(function () {
 	// Add
 	$(document).on('click', '.add-to-cart-btn', function () {
-		const bookId = $(this).closest('.cr-product-card, .modal, .section-product').data("book-id");
-		const quantity = $(this).data("quantity") || $(this).closest(".cr-add-card").find(".cr-qty-main .quantity").val();
+		const bookId = $(this).closest('.cr-product-card, .modal, .section-product').data('book-id');
+		const quantity = $(this).data('quantity') || $(this).closest('.cr-add-card').find('.cr-qty-main .quantity').val();
 
 		console.log({
 			bookId: bookId,
@@ -30,11 +30,10 @@ $(document).ready(function () {
 					});
 					addTooCartAnimation();
 					countCartItem();
-				}
-				else {
+				} else {
 					setTimeout(() => {
 						window.location.href = `${contextPath}/login`;
-					})
+					});
 				}
 			},
 			error: function (xhr, status, error) {
@@ -140,11 +139,11 @@ $(document).ready(function () {
 		});
 	}, 500));
 	// Delete
-	$(document).on('click',  '.remove-item',function () {
-		const cartItemId = $(this).closest("li, tr").data('cart-item-id');
-		const item = $(this).closest("li, tr");
-		const container = $(this).closest(".crcart-pro-items, .row");
-		const parent = item.closest("tbody, ul");
+	$(document).on('click', '.remove-item', function () {
+		const cartItemId = $(this).closest('li, tr').data('cart-item-id');
+		const item = $(this).closest('li, tr');
+		const container = $(this).closest('.crcart-pro-items, .row');
+		const parent = item.closest('tbody, ul');
 		console.log(cartItemId);
 		$.ajax({
 			url: `${contextPath}/api/customer/delete-cart-item`,
@@ -183,34 +182,48 @@ $(document).ready(function () {
 		const $checkBox = $(this);
 		const $row = $checkBox.closest('tr');
 		const $totalElement = $row.closest('form').find('.cr-cart-summary .total');
-		let currentTotal = parseFloat($totalElement.text().replace(/[^0-9.-]+/g, '')) || 0;
-		const subTotal = parseFloat($row.find('.cr-cart-subtotal').text().replace(/[^0-9.-]+/g, '')) || 0;
 
+		// Lấy giá trị hiện tại của tổng và chuyển đổi thành số, chỉ xóa ký tự "₫" và dấu phân cách
+		let currentTotal = parseFloat($totalElement.text().replace(/[₫,.]/g, '').trim());
+
+		// Lấy giá trị của subtotal và chuyển đổi thành số, chỉ xóa ký tự "₫" và dấu phân cách
+		const subTotal = parseFloat($row.find('.cr-cart-subtotal').text().replace(/[₫,.]/g, '').trim());
+
+		// Cập nhật tổng giá trị dựa trên checkbox được chọn hay không
 		if ($checkBox.is(':checked')) {
 			currentTotal += subTotal;
 		} else {
 			currentTotal -= subTotal;
 		}
+
+		// Cập nhật giá trị mới cho phần tử tổng
 		$totalElement.text(formatCurrencyVND(currentTotal));
+
+		console.log(subTotal);
 	});
+
+	function formatCurrencyVND(value) {
+		return value.toLocaleString('vi-VN', { style: 'currency', currency: 'VND' });
+	}
+
 	countCartItem();
 });
 
-function countCartItem() {
+function countCartItem () {
 	$.ajax({
 		url: `${contextPath}/api/customer/count-cart-item`,
 		type: 'GET',
 		success: function (response) {
-			const $cart = $(".cart");
-			$cart.find(".cart-item-count").text(response.count);
+			const $cart = $('.cart');
+			$cart.find('.cart-item-count').text(response.count);
 		},
 		error: function (xhr, status, error) {
 			console.error('Error: ', xhr.responseText);
 		}
-	})
+	});
 }
 
-function addTooCartAnimation() {
+function addTooCartAnimation () {
 	const cart = $('.cart i');
 	setTimeout(() => {
 		cart.addClass('shake');
@@ -220,36 +233,36 @@ function addTooCartAnimation() {
 	}, 1000);
 }
 
-$(document).ready(function() {
-    $("#btn-checkout").click(function() {
-        const selectedItems = [];
-        $(".product-checkbox:checked").each(function() {
-            const productId = $(this).closest("tr").data("product-id");
-            const quantity = $(this).closest("tr").find(".quantity").val();
+$(document).ready(function () {
+	$('#btn-checkout').click(function () {
+		const selectedItems = [];
+		$('.product-checkbox:checked').each(function () {
+			const productId = $(this).closest('tr').data('product-id');
+			const quantity = $(this).closest('tr').find('.quantity').val();
 
-            selectedItems.push({
-                productId: productId,
-                quantity: quantity
-            });
-        });
+			selectedItems.push({
+				productId: productId,
+				quantity: quantity
+			});
+		});
 
-        if (selectedItems.length > 0) {
-            console.log(selectedItems);
-            $.ajax({
-                url: `${contextPath}/api/customer/checkout`,
-                type: "POST",
-                contentType: "application/json",
-                data: JSON.stringify({ items: selectedItems }),
-                success: function(response) {
-                    window.location.href = `${contextPath}/checkout`;
-                },
-                error: function(xhr, status, error) {
-                    alert("Có lỗi xảy ra. Vui lòng thử lại!");
-                }
-            });
-        } else {
-            alert("Vui lòng chọn ít nhất một sản phẩm để thanh toán!");
-        }
-    });
+		if (selectedItems.length > 0) {
+			console.log(selectedItems);
+			$.ajax({
+				url: `${contextPath}/api/customer/checkout`,
+				type: 'POST',
+				contentType: 'application/json',
+				data: JSON.stringify({ items: selectedItems }),
+				success: function (response) {
+					window.location.href = `${contextPath}/checkout`;
+				},
+				error: function (xhr, status, error) {
+					alert('Có lỗi xảy ra. Vui lòng thử lại!');
+				}
+			});
+		} else {
+			alert('Vui lòng chọn ít nhất một sản phẩm để thanh toán!');
+		}
+	});
 });
 

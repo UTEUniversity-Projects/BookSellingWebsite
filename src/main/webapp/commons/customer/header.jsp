@@ -83,61 +83,18 @@
                             <a href="${pageContext.request.contextPath}/notifications" class="cr-right-bar-item relative">
                                 <i class="ri-notification-3-line"></i>
                                 <span>Thông báo</span>
-                                <p class="notification-count absolute top-[-10px] left-[10px] rounded-full bg-black text-white inline-block w-4 h-4 text-[10px] text-center">
-                                    0</p>
+                                <p class="notification-count absolute top-[-10px] left-[10px] rounded-full bg-black text-white inline-block w-4 h-4 text-[10px] text-center">0</p>
                             </a>
-                            <div class="notification-content ${account == null ? "flex items-center justify-center flex-col py-5" : ""} transition-all duration-300">
+                            <div class="notification-content ${account == null ? 'flex items-center justify-center flex-col py-5' : ''} transition-all duration-300">
                                 <c:choose>
                                     <c:when test="${account != null}">
-                                        <div class="text-right px-4 py-2">
-                                            <h3 class="notification-header text-gray-500">
-                                                Thông báo mới nhận
-                                            </h3>
-                                        </div>
+<%--                                        <div class="text-right px-4 py-2">--%>
+<%--                                            <h3 class="notification-header text-gray-500">Thông báo mới nhận</h3>--%>
+<%--                                        </div>--%>
                                         <ul class="notification-body">
-                                            <c:forEach var="i" begin="1" end="3">
-                                                <li class="px-4 py-2">
-                                                    <a href="${pageContext.request.contextPath}notification-detail">
-                                                        <div class="flex gap-2 items-center">
-                                                            <div class="h-20 basis-1/5 aspect-square">
-                                                                <img
-                                                                        class="w-full h-full aspect-square"
-                                                                        src="https://down-vn.img.susercontent.com/file/vn-11134207-7r98o-lwxpv4ydgxjt57.webp"
-                                                                        alt=""
-                                                                />
-                                                            </div>
-                                                            <div class="flex-1">
-                                                                <h4 class="w-full mb-1 font-medium">
-                                                                    Đơn hàng đang giao đến bạn
-                                                                </h4>
-                                                                <p
-                                                                        class="text-left leading-normal"
-                                                                        style="
-                                          display: -webkit-box;
-                                          -webkit-line-clamp: 3;
-                                          -webkit-box-orient: vertical;
-                                          text-overflow: ellipsis;
-                                          word-break: break-word;
-                                          overflow: hidden;
-                                          "
-                                                                >
-                                                                    Trận bán kết thứ 2 giữa T1 và Gen.G ở kỳ Chung Kết Thế Giới
-                                                                    (CKTG) 2024 đã kết thúc với chiến thắng 3-1 cho đương kim vô
-                                                                    địch T1. Không chỉ giành được chiếc vé đến với trận chung kết,
-                                                                    Faker và đồng đội đã chấm dứt mạch thua 11 trận đối đầu trước
-                                                                    Gen.G
-                                                                </p>
-                                                            </div>
-                                                        </div>
-                                                    </a>
-                                                </li>
-                                            </c:forEach>
+
                                         </ul>
-                                        <a
-                                                class="notification-view-all inline-block py-2"
-                                                href="${pageContext.request.contextPath}/notifications"
-                                        >Xem tất cả</a
-                                        >
+                                        <a class="notification-view-all inline-block py-2" href="${pageContext.request.contextPath}/notifications">Xem tất cả</a>
                                     </c:when>
                                     <c:otherwise>
                                         <p>Đăng nhập để xem thông báo !</p>
@@ -148,6 +105,8 @@
                                 </c:choose>
                             </div>
                         </div>
+
+
                         <div class="cart">
                             <a
                                     href="javascript:void(0)"
@@ -172,3 +131,88 @@
         crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 <script src="${pageContext.request.contextPath}/assets/customer/js/search-book.js" type="module"></script>
 <script src="${pageContext.request.contextPath}/assets/customer/js/notifications.js" type="module"></script>
+
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+<script>
+    $(document).ready(function() {
+        $.ajax({
+            url: `${pageContext.request.contextPath}/api/customer/notification/get`,
+            type: 'GET',
+            dataType: 'json',
+            success: function(response) {
+                if (response && response.length > 0) {
+                    let notificationList = '';
+
+                    $.each(response, function(index, notification) {
+                        const title = notification.title || "No title";
+                        const content = notification.content || "No content";
+                        const sentTime = notification.sentTime || "N/A";
+                        const hyperlink = "${pageContext.request.contextPath}" + notification.hyperLink || "#";
+                        const isRead = notification.status === "VIEWED";
+
+                        const li = $("<li>").attr("data-id", notification.id).addClass("px-4 py-2 notification-item");
+                        li.html(`
+                            <a href="#" class="notification-link">
+                                <div class="flex gap-2 items-center">
+                                    <div class="flex-1">
+                                        <h4 class="w-full mb-1 font-medium title"></h4>
+                                        <p class="time"></p>
+                                        <p class="message"></p>
+                                    </div>
+                                </div>
+                            </a>
+                        `);
+
+                        li.find(".title").text(title);
+                        li.find(".time").text(sentTime);
+                        li.find(".message").text(content);
+
+                        if (!isRead) {
+                            li.css("background-color", "#f0f8ff");
+                            li.css("font-weight", "bold");
+                        }
+
+                        li.find(".notification-link").attr("href", hyperlink);
+
+                        $('.notification-body').append(li);
+                    });
+
+                    $('.notification-count').text(response.length);
+                } else {
+                    $('.notification-body').html('<li>Không có thông báo nào.</li>');
+                }
+            },
+            error: function(xhr, status, error) {
+                console.error("Lỗi khi tải thông báo:", error);
+            }
+        });
+
+        // Click event for notification item
+        $(".notification-body").on("click", ".notification-item", function(e) {
+            const notificationId = $(this).data("id");
+            const link = $(this).find(".notification-link").attr("href");
+            console.log("h");
+
+            console.log(notificationId);
+
+            // Send AJAX request to update notification status
+            $.ajax({
+                url: `${pageContext.request.contextPath}/api/customer/notification/update`,
+                type: "POST",
+                data: { notificationId: notificationId },
+                success: function(response) {
+                    console.log("Trạng thái thông báo đã được cập nhật!");
+                    window.location.href = link;  // Redirect to the notification link after updating the status
+                },
+                error: function(xhr, status, error) {
+                    console.error("Lỗi khi cập nhật trạng thái thông báo:", error);
+                }
+            });
+        });
+    });
+</script>
+
+
+

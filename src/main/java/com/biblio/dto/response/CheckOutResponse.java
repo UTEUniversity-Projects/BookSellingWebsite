@@ -35,7 +35,7 @@ public class CheckOutResponse {
     public void updateShipping() {
         this.shipping = new ShippingResponse();
         this.shipping.setShippingUnit("Giao hàng tiết kiệm");
-        this.shipping.setShippingFee(10000);
+        this.shipping.setShippingFee(30000);
         AddressResponse firstAddress = customer.getAddresses().stream().findFirst().orElse(null);
         this.shipping.setAddress(firstAddress);
     }
