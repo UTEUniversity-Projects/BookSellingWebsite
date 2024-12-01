@@ -1,5 +1,6 @@
 package com.biblio.mapper;
 
+import com.biblio.dao.impl.BankTransferDAOImpl;
 import com.biblio.dao.impl.EWalletDAOImpl;
 import com.biblio.dto.response.*;
 import com.biblio.entity.Order;
@@ -117,10 +118,10 @@ public class OrderMapper {
     }
 
     public static RevenueResponse toRevenueResponse(Order order) {
-        EWalletDAOImpl walletDao = new EWalletDAOImpl();
+        BankTransferDAOImpl bankTransferDAO = new BankTransferDAOImpl();
         return RevenueResponse.builder()
                 .date(order.getOrderDate())
-                .revenue(walletDao.findByOrderId(order.getId()).getAmount())
+                .revenue(bankTransferDAO.findByOrderId(order.getId()).getAmount())
                 .build();
     }
 
