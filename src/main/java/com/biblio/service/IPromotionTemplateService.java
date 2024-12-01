@@ -6,6 +6,7 @@ import com.biblio.dto.response.ApplyCodePromotionResponse;
 import com.biblio.dto.response.PromotionTemplateGetDetailsResponse;
 import com.biblio.dto.response.PromotionTemplateGetResponse;
 import com.biblio.dto.response.PromotionTemplateResponse;
+import com.biblio.enumeration.EPromotionTemplateType;
 
 import java.util.List;
 
@@ -26,6 +27,8 @@ public interface IPromotionTemplateService {
 
     Double percentDiscountOfBook(Long bookTemplateId);
 
-    ApplyCodePromotionResponse applyCodePromotion(String code);
+    ApplyCodePromotionResponse applyCodePromotion(String code, Double amount, EPromotionTemplateType type);
+
+    Boolean stopPromotionByCode(String code);
 
 }

@@ -14,7 +14,7 @@
     <title>Staff</title>
 
     <!-- Logo -->
-    <link rel="shortcut icon" href="${pageContext.request.contextPath}/assets/staff/img/logo/collapse-logo.png"/>
+    <link rel="shortcut icon" href="${pageContext.request.contextPath}/assets/commons/img/logo/collapse-logo.png"/>
 
     <!-- region Icon CSS -->
     <link

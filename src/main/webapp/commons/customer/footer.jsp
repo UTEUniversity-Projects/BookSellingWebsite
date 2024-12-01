@@ -6,7 +6,7 @@
             <div class="col-xl-6 col-lg-8 col-sm-12 col-12 cr-footer-border">
                 <div class="cr-footer-logo">
                     <div class="image">
-                        <img src="${pageContext.request.contextPath}/assets/customer/img/logo/biblio.png" alt="logo" class="logo" />
+                        <img src="${pageContext.request.contextPath}/assets/commons/img/logo/biblio.png" alt="logo" class="logo" />
                     </div>
                     <p class="text-justify">
                         Chào mừng bạn đến với <b>Biblio</b> – cửa hàng sách trực tuyến dành cho những người yêu sách! Chúng tôi cung cấp một kho tàng sách phong phú từ nhiều thể loại khác nhau như văn học, kinh tế, khoa học, tự truyện, sách thiếu nhi và nhiều hơn nữa, từ các tác giả trong nước và quốc tế.
@@ -179,7 +179,7 @@
         <div class="cr-last-footer">
             <p>
                 &copy; <span id="copyright_year"></span>
-                <a href="home">Biblio</a>, All rights reserved.
+                <a href="${pageContext.request.contextPath}/home">Biblio</a>, All rights reserved.
             </p>
         </div>
     </div>

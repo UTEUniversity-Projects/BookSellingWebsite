@@ -1,16 +1,15 @@
 package com.biblio.entity;
 
+import com.biblio.enumeration.EBookLanguage;
+import com.biblio.enumeration.EBookTemplateStatus;
 import lombok.*;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
-import com.biblio.enumeration.EBookLanguage;
-import com.biblio.enumeration.EBookTemplateStatus;
-
-import javax.persistence.*;
-import java.util.*;
 
 @Entity
 @Table(name = "book_template")

@@ -1,7 +1,10 @@
 package com.biblio.mapper;
 
+import com.biblio.dao.impl.EWalletDAOImpl;
 import com.biblio.dto.response.*;
-import com.biblio.entity.*;
+import com.biblio.entity.Order;
+import com.biblio.entity.OrderItem;
+import com.biblio.entity.Promotion;
 import com.biblio.enumeration.EPromotionTemplateType;
 
 import java.time.format.DateTimeFormatter;
@@ -36,20 +39,16 @@ public class OrderMapper {
         ShippingResponse shipping = ShippingMapper.toShippingResponse(order.getShipping());
 
         List<PromotionOrderResponse> promotions = new ArrayList<>();
-        double totalPrice = order.calTotalPrice();
-        double finalPrice = totalPrice + shipping.getShippingFee();
 
         for (Promotion promotion : order.getPromotions()) {
             if (promotion.getPromotionTemplate().getType() != EPromotionTemplateType.DISCOUNT) {
-                double discount = promotion.calculateDiscount(finalPrice);
                 promotions.add(PromotionOrderResponse.builder()
+                        .id(promotion.getId())
                         .promotionType(promotion.getPromotionTemplate().getType())
-                        .discountAmount(discount)
+                        .discountAmount(promotion.getDiscountLimit())
                         .build());
-                finalPrice -= discount;
             }
         }
-        finalPrice = Math.max(finalPrice, 0);
 
         return OrderDetailsManagementResponse.builder()
                 .id(order.getId())
@@ -60,10 +59,8 @@ public class OrderMapper {
                 .products(products)
                 .status(order.getStatus())
                 .statusStyle(order.getStatus().getStatusStyle())
-                .totalPrice(totalPrice)
                 .paymentMethod(order.getPaymentType().getValue())
                 .promotions(promotions)
-                .finalPrice(finalPrice)
                 .build();
     }
 
@@ -71,7 +68,7 @@ public class OrderMapper {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm dd-MM-yyyy");
 
         List<OrderProductResponse> products = order.getOrderItems().stream()
-                .map(OrderItemMapper::toOrderProductCustomerResponse)
+                .flatMap(orderItem -> OrderItemMapper.toOrderProductCustomerResponse(orderItem).stream())
                 .collect(Collectors.toList());
 
         CustomerResponse customer = CustomerMapper.toCustomerResponse(order.getCustomer());
@@ -89,6 +86,8 @@ public class OrderMapper {
             if (promotion.getPromotionTemplate().getType() != EPromotionTemplateType.DISCOUNT) {
                 double discount = promotion.calculateDiscount(finalPrice);
                 promotions.add(PromotionOrderResponse.builder()
+                        .id(promotion.getId())
+                        .code(promotion.getPromotionTemplate().getCode())
                         .promotionType(promotion.getPromotionTemplate().getType())
                         .discountAmount(discount)
                         .build());
@@ -96,7 +95,6 @@ public class OrderMapper {
             }
         }
         finalPrice = Math.max(finalPrice, 0);
-
 
 
         return OrderCustomerResponse.builder()
@@ -119,11 +117,13 @@ public class OrderMapper {
     }
 
     public static RevenueResponse toRevenueResponse(Order order) {
+        EWalletDAOImpl walletDao = new EWalletDAOImpl();
         return RevenueResponse.builder()
                 .date(order.getOrderDate())
-                .revenue(order.calTotalPrice())
+                .revenue(walletDao.findByOrderId(order.getId()).getAmount())
                 .build();
     }
+
     public static OrderOfCustomerResponse toOrderOfCustomerResponse(Order order) {
         return OrderOfCustomerResponse.builder()
                 .orderId(order.getId())

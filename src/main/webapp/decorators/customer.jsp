@@ -25,7 +25,7 @@
     </title>
 
     <!-- App favicon -->
-    <link rel="shortcut icon" href="${pageContext.request.contextPath}/assets/customer/img/logo/collapse-logo.png"/>
+    <link rel="shortcut icon" href="${pageContext.request.contextPath}/assets/commons/img/logo/collapse-logo.png"/>
 
     <!-- Icon CSS -->
     <link
@@ -447,10 +447,5 @@
 
 </body>
 <div id="toast"></div>
-<div class="checkout">
-    <div class="checkout-overlay bg-black/20"></div>
-    <div class="checkout-qr h-[400px] rounded-lg overflow-hidden transition-all ease-linear duration-300">
-        <img class="w-full h-full object-cover" src="" alt="vietqr">
-    </div>
-</div>
+
 </html>

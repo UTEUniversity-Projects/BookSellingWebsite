@@ -1,6 +1,7 @@
 package com.biblio.apis.owner;
 
 import com.biblio.dto.response.ApplyCodePromotionResponse;
+import com.biblio.enumeration.EPromotionTemplateType;
 import com.biblio.service.IPromotionTemplateService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
@@ -46,6 +47,8 @@ public class ApplyCodePromotionAPI extends HttpServlet {
         try {
             // Lấy mã khuyến mãi từ request thông qua query string
             String code = request.getParameter("code");
+            String amount = request.getParameter("amount");
+            String type = request.getParameter("type");
 
             if (code == null || code.isEmpty()) {
                 applyCodePromotionResponse.setMessage("Mã khuyến mãi không hợp lệ!");
@@ -53,8 +56,12 @@ public class ApplyCodePromotionAPI extends HttpServlet {
                 return;
             }
 
+            EPromotionTemplateType promotionTemplateType = "FREESHIP".equals(type) ?
+                                                            EPromotionTemplateType.FREESHIP :
+                                                            EPromotionTemplateType.VOUCHER;
+
             // Áp dụng mã khuyến mãi
-            applyCodePromotionResponse = promotionTemplateService.applyCodePromotion(code);
+            applyCodePromotionResponse = promotionTemplateService.applyCodePromotion(code, Double.parseDouble(amount), promotionTemplateType);
 
         } catch (Exception e) {
             // Ghi log lỗi (có thể thêm Log nếu cần)

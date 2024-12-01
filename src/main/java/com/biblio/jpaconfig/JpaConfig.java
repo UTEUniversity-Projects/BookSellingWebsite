@@ -29,7 +29,7 @@ public class JpaConfig {
         map.put(HBM2DDL_AUTO, "update");
 //        map.put(SHOW_SQL, "true");
         map.put(FORMAT_SQL, "true");
-        map.put(QUERY_STARTUP_CHECKING, "false");
+        map.put(QUERY_STARTUP_CHECKING, "true");
         map.put(GENERATE_STATISTICS, "false");
         map.put(USE_REFLECTION_OPTIMIZER, "false");
         map.put(USE_SECOND_LEVEL_CACHE, "false");

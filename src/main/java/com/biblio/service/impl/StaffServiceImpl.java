@@ -1,6 +1,7 @@
 package com.biblio.service.impl;
 
 import com.biblio.dao.IStaffDAO;
+import com.biblio.dto.request.NotificationInsertRequest;
 import com.biblio.dto.request.StaffRequest;
 import com.biblio.dto.response.NotificationGetResponse;
 import com.biblio.dto.response.StaffResponse;
@@ -14,6 +15,7 @@ import com.biblio.service.IStaffService;
 import javax.inject.Inject;
 import javax.transaction.Transactional;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class StaffServiceImpl implements IStaffService {
@@ -65,6 +67,11 @@ public class StaffServiceImpl implements IStaffService {
     }
 
     @Override
+    public Long findIdStaffByAccountId(Long accountId) {
+        return staffDAO.findByAccountId(accountId).getId();
+    }
+
+    @Override
     public List<NotificationGetResponse> getAllNotificationByStaffId(Long id) {
         Staff staff = staffDAO.findById(id);
         List<NotificationGetResponse> notifications = new ArrayList<>();
@@ -72,6 +79,18 @@ public class StaffServiceImpl implements IStaffService {
         for (Notification notification : staff.getNotifications()) {
             notifications.add(NotificationMapper.toNotificationGetResponse(notification));
         }
+        Collections.reverse(notifications);
         return notifications;
+    }
+
+    @Override
+    public void addNewNotification(NotificationInsertRequest notificationInsertRequest) {
+        List<Staff> staffs = staffDAO.findAll();
+        for (Staff staff : staffs) {
+            Notification notification = NotificationMapper.toNotification(notificationInsertRequest);
+            notification.setStaff(staff);
+            staff.getNotifications().add(notification);
+            staffDAO.updateStaff(staff);
+        }
     }
 }

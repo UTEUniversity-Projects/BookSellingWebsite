@@ -23,9 +23,12 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 @WebServlet(urlPatterns = {"/api/staff/order/*"})
 public class OrderAPI extends HttpServlet {
+    private final ExecutorService executorService = Executors.newSingleThreadExecutor();
     @Inject
     IOrderService orderService;
 
@@ -53,7 +56,7 @@ public class OrderAPI extends HttpServlet {
 
         try {
             switch (action) {
-                    case "/get-order-history":
+                case "/get-order-history":
                     handleGetOrderHistory(request, response, mapper);
                     break;
 
@@ -99,6 +102,10 @@ public class OrderAPI extends HttpServlet {
                     handleConfirmRefundOrder(request, response, result, mapper);
                     break;
 
+                case "/cancel-refund-order":
+                    handleCancelRefundOrder(request, response, result, mapper);
+                    break;
+
                 default:
                     result.put("message", "Không tìm thấy hành động phù hợp!");
                     result.put("type", "error");
@@ -118,17 +125,28 @@ public class OrderAPI extends HttpServlet {
         Map<String, Object> jsonMap = mapper.readValue(request.getReader(), Map.class);
         long orderId = Long.parseLong(jsonMap.get("orderId").toString());
         boolean success = orderService.updateStatus(orderId, EOrderStatus.PACKING);
+
         if (success) {
             result.put("message", "Đơn hàng được xác nhận thành công!");
             result.put("type", "success");
             result.put("statusType", EOrderStatus.PACKING.name());
             result.put("status", EOrderStatus.PACKING.getDescription());
             result.put("statusStyle", EOrderStatus.PACKING.getStatusStyle());
-            sendOrderConfirmationEmail(request, orderId);
+
+            // Gửi email trong luồng riêng biệt
+            executorService.submit(() -> {
+                try {
+                    sendOrderConfirmationEmail(request, orderId); // Gọi phương thức gửi email
+                } catch (IOException e) {
+                    e.printStackTrace(); // Log lỗi khi gửi email
+                }
+            });
+
         } else {
             result.put("message", "Không thể xác nhận đơn hàng. Vui lòng thử lại!");
             result.put("type", "info");
         }
+
         response.getWriter().write(mapper.writeValueAsString(result));
     }
 
@@ -144,7 +162,13 @@ public class OrderAPI extends HttpServlet {
             result.put("statusType", EOrderStatus.CANCELED.name());
             result.put("status", EOrderStatus.CANCELED.getDescription());
             result.put("statusStyle", EOrderStatus.CANCELED.getStatusStyle());
-            sendCancelOrderEmail(request,orderId,cancelContent);
+            executorService.submit(() -> {
+                try {
+                    sendCancelOrderEmail(request,orderId,cancelContent);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            });
         } else {
             result.put("message", "Không thể hủy đơn hàng. Vui lòng thử lại!");
             result.put("type", "info");
@@ -174,14 +198,22 @@ public class OrderAPI extends HttpServlet {
         long orderId = Long.parseLong(jsonMap.get("orderId").toString());
         long returnBookId = Long.parseLong(jsonMap.get("returnBookId").toString());
         boolean success = orderService.updateStatus(orderId, EOrderStatus.REFUNDED) &&
-                          returnBookService.update(returnBookId);
+                returnBookService.update(returnBookId);
         if (success) {
             result.put("message", "Đơn hàng được xác nhận thành công!");
             result.put("type", "success");
             result.put("statusType", EOrderStatus.REFUNDED.name());
             result.put("status", EOrderStatus.REFUNDED.getDescription());
             result.put("statusStyle", EOrderStatus.REFUNDED.getStatusStyle());
-//            sendOrderConfirmationEmail(request, orderId);
+            executorService.submit(() -> {
+                try {
+                    sendConfirmRefundOrderEmail(request,orderId);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            });
+
+
         } else {
             result.put("message", "Không thể xác nhận hoàn trả đơn hàng. Vui lòng thử lại!");
             result.put("type", "info");
@@ -189,6 +221,32 @@ public class OrderAPI extends HttpServlet {
         response.getWriter().write(mapper.writeValueAsString(result));
     }
 
+    private void handleCancelRefundOrder(HttpServletRequest request, HttpServletResponse response, Map<String, String> result, ObjectMapper mapper) throws IOException {
+        Map<String, Object> jsonMap = mapper.readValue(request.getReader(), Map.class);
+        long orderId = Long.parseLong(jsonMap.get("orderId").toString());
+        String content = jsonMap.get("content").toString();
+        boolean success = orderService.updateStatus(orderId, EOrderStatus.COMPLETE_DELIVERY);
+        if (success) {
+            result.put("message", "Từ chối hoàn trả thành công!");
+            result.put("type", "success");
+            result.put("statusType", EOrderStatus.COMPLETE_DELIVERY.name());
+            result.put("status", EOrderStatus.COMPLETE_DELIVERY.getDescription());
+            result.put("statusStyle", EOrderStatus.COMPLETE_DELIVERY.getStatusStyle());
+
+            executorService.submit(() -> {
+                try {
+                    sendCancelRefundOrderEmail(request, orderId, content);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            });
+
+        } else {
+            result.put("message", "Không thể từ chối hoàn trả. Vui lòng thử lại!");
+            result.put("type", "info");
+        }
+        response.getWriter().write(mapper.writeValueAsString(result));
+    }
     // endregion
 
     // region Email
@@ -305,6 +363,84 @@ public class OrderAPI extends HttpServlet {
         responseMap.put("steps", steps);
         response.getWriter().write(mapper.writeValueAsString(responseMap));
     }
+    private void sendConfirmRefundOrderEmail(HttpServletRequest request, Long orderId) throws IOException {
+        String scheme = request.getScheme();
+        String serverName = request.getServerName();
+        int serverPort = request.getServerPort();
+        String contextPath = request.getContextPath();
+
+        String apiUrl = scheme + "://" + serverName;
+        if ((scheme.equals("http") && serverPort != 80) || (scheme.equals("https") && serverPort != 443)) {
+            apiUrl += ":" + serverPort;
+        }
+        apiUrl += contextPath + "/staff/email/refund-confirmation";
+        HttpURLConnection connection = null;
+
+        try {
+            URL url = new URL(apiUrl);
+            connection = (HttpURLConnection) url.openConnection();
+            connection.setRequestMethod("POST");
+            connection.setDoOutput(true);
+            connection.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");
+
+            // Gửi thông tin orderId qua body của request
+            String params = "orderId=" + orderId;
+            try (OutputStream os = connection.getOutputStream()) {
+                os.write(params.getBytes());
+                os.flush();
+            }
+
+            // Kiểm tra phản hồi từ API
+            int responseCode = connection.getResponseCode();
+            if (responseCode != HttpServletResponse.SC_OK) {
+                throw new IOException("Gửi email xác nhận hoàn trả thất bại! Mã lỗi: " + responseCode);
+            }
+        } finally {
+            if (connection != null) {
+                connection.disconnect();
+            }
+        }
+    }
+
+    private void sendCancelRefundOrderEmail(HttpServletRequest request, Long orderId, String cancelContent) throws IOException {
+        String scheme = request.getScheme();
+        String serverName = request.getServerName();
+        int serverPort = request.getServerPort();
+        String contextPath = request.getContextPath();
+
+        String apiUrl = scheme + "://" + serverName;
+        if ((scheme.equals("http") && serverPort != 80) || (scheme.equals("https") && serverPort != 443)) {
+            apiUrl += ":" + serverPort;
+        }
+        apiUrl += contextPath + "/staff/email/refund-cancellation";
+        HttpURLConnection connection = null;
+
+        try {
+            URL url = new URL(apiUrl);
+            connection = (HttpURLConnection) url.openConnection();
+            connection.setRequestMethod("POST");
+            connection.setDoOutput(true);
+            connection.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");
+
+            // Gửi thông tin orderId và nội dung hủy qua body của request
+            String params = "orderId=" + orderId + "&cancelContent=" + cancelContent;
+            try (OutputStream os = connection.getOutputStream()) {
+                os.write(params.getBytes());
+                os.flush();
+            }
+
+            // Kiểm tra phản hồi từ API
+            int responseCode = connection.getResponseCode();
+            if (responseCode != HttpServletResponse.SC_OK) {
+                throw new IOException("Gửi email từ chối hoàn trả thất bại! Mã lỗi: " + responseCode);
+            }
+        } finally {
+            if (connection != null) {
+                connection.disconnect();
+            }
+        }
+    }
+
 
 }
 

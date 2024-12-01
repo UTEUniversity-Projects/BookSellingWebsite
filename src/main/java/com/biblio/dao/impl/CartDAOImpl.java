@@ -16,6 +16,7 @@ public class CartDAOImpl extends GenericDAOImpl<Cart> implements ICartDAO {
     public Cart addCart(Cart cart) {
         return super.save(cart);
     }
+
     @Override
     public Cart findByAccountId(Long accountId) {
         String jpql = "SELECT cart FROM Cart cart "

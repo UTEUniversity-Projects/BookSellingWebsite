@@ -29,4 +29,6 @@ public interface IBookTemplateDAO {
 
     List<BookTemplate> findTop20();
 
+    BookTemplate update(BookTemplate bookTemplate);
+
 }

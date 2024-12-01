@@ -1,6 +1,7 @@
 -- Dữ liệu ảo
 -- CREATE DATABASE `bsw-biblio`;
-USE `bsw-biblio`;
+USE `bsw-biblio`;      
+
 -- 1. Table Account:
 INSERT INTO account (password, status, role, username) VALUES
 ('$2y$10$lHBtDRcnnTUMClaM9.BIleOK7sgnHUgUCSr6qcGo8GfqygI5E.3VO', 'ACTIVE', 'OWNER', 'owner_1'),
@@ -24,144 +25,144 @@ INSERT INTO account (password, status, role, username) VALUES
 
 
 INSERT INTO account (password, status, role, username) VALUES
-('abc', 'ACTIVE', 'CUSTOMER', 'customer_16'),
-('abc', 'ACTIVE', 'CUSTOMER', 'customer_17'),
-('abc', 'ACTIVE', 'CUSTOMER', 'customer_18'),
-('abc', 'ACTIVE', 'CUSTOMER', 'customer_19'),
-('abc', 'ACTIVE', 'CUSTOMER', 'customer_20'),
-('abc', 'ACTIVE', 'CUSTOMER', 'customer_21'),
-('abc', 'ACTIVE', 'CUSTOMER', 'customer_22'),
-('abc', 'ACTIVE', 'CUSTOMER', 'customer_23'),
-('abc', 'ACTIVE', 'CUSTOMER', 'customer_24'),
-('abc', 'ACTIVE', 'CUSTOMER', 'customer_25'),
-('abc', 'ACTIVE', 'CUSTOMER', 'customer_26'),
-('abc', 'ACTIVE', 'CUSTOMER', 'customer_27'),
-('abc', 'ACTIVE', 'CUSTOMER', 'customer_28'),
-('abc', 'ACTIVE', 'CUSTOMER', 'customer_29'),
-('abc', 'ACTIVE', 'CUSTOMER', 'customer_30'),
-('abc', 'ACTIVE', 'CUSTOMER', 'customer_31'),
-('abc', 'ACTIVE', 'CUSTOMER', 'customer_32'),
-('abc', 'ACTIVE', 'CUSTOMER', 'customer_33'),
-('abc', 'ACTIVE', 'CUSTOMER', 'customer_34'),
-('abc', 'ACTIVE', 'CUSTOMER', 'customer_35'),
-('abc', 'ACTIVE', 'CUSTOMER', 'customer_36'),
-('abc', 'ACTIVE', 'CUSTOMER', 'customer_37'),
-('abc', 'ACTIVE', 'CUSTOMER', 'customer_38'),
-('abc', 'ACTIVE', 'CUSTOMER', 'customer_39'),
-('abc', 'ACTIVE', 'CUSTOMER', 'customer_40'),
-('abc', 'ACTIVE', 'CUSTOMER', 'customer_41'),
-('abc', 'ACTIVE', 'CUSTOMER', 'customer_42'),
-('abc', 'ACTIVE', 'CUSTOMER', 'customer_43'),
-('abc', 'ACTIVE', 'CUSTOMER', 'customer_44'),
-('abc', 'ACTIVE', 'CUSTOMER', 'customer_45'),
-('abc', 'ACTIVE', 'CUSTOMER', 'customer_46'),
-('abc', 'ACTIVE', 'CUSTOMER', 'customer_47'),
-('abc', 'ACTIVE', 'CUSTOMER', 'customer_48'),
-('abc', 'ACTIVE', 'CUSTOMER', 'customer_49'),
-('abc', 'ACTIVE', 'CUSTOMER', 'customer_50');
+('$2y$10$lHBtDRcnnTUMClaM9.BIleOK7sgnHUgUCSr6qcGo8GfqygI5E.3VO', 'ACTIVE', 'CUSTOMER', 'customer_16'),
+('$2y$10$lHBtDRcnnTUMClaM9.BIleOK7sgnHUgUCSr6qcGo8GfqygI5E.3VO', 'ACTIVE', 'CUSTOMER', 'customer_17'),
+('$2y$10$lHBtDRcnnTUMClaM9.BIleOK7sgnHUgUCSr6qcGo8GfqygI5E.3VO', 'ACTIVE', 'CUSTOMER', 'customer_18'),
+('$2y$10$lHBtDRcnnTUMClaM9.BIleOK7sgnHUgUCSr6qcGo8GfqygI5E.3VO', 'ACTIVE', 'CUSTOMER', 'customer_19'),
+('$2y$10$lHBtDRcnnTUMClaM9.BIleOK7sgnHUgUCSr6qcGo8GfqygI5E.3VO', 'ACTIVE', 'CUSTOMER', 'customer_20'),
+('$2y$10$lHBtDRcnnTUMClaM9.BIleOK7sgnHUgUCSr6qcGo8GfqygI5E.3VO', 'ACTIVE', 'CUSTOMER', 'customer_21'),
+('$2y$10$lHBtDRcnnTUMClaM9.BIleOK7sgnHUgUCSr6qcGo8GfqygI5E.3VO', 'ACTIVE', 'CUSTOMER', 'customer_22'),
+('$2y$10$lHBtDRcnnTUMClaM9.BIleOK7sgnHUgUCSr6qcGo8GfqygI5E.3VO', 'ACTIVE', 'CUSTOMER', 'customer_23'),
+('$2y$10$lHBtDRcnnTUMClaM9.BIleOK7sgnHUgUCSr6qcGo8GfqygI5E.3VO', 'ACTIVE', 'CUSTOMER', 'customer_24'),
+('$2y$10$lHBtDRcnnTUMClaM9.BIleOK7sgnHUgUCSr6qcGo8GfqygI5E.3VO', 'ACTIVE', 'CUSTOMER', 'customer_25'),
+('$2y$10$lHBtDRcnnTUMClaM9.BIleOK7sgnHUgUCSr6qcGo8GfqygI5E.3VO', 'ACTIVE', 'CUSTOMER', 'customer_26'),
+('$2y$10$lHBtDRcnnTUMClaM9.BIleOK7sgnHUgUCSr6qcGo8GfqygI5E.3VO', 'ACTIVE', 'CUSTOMER', 'customer_27'),
+('$2y$10$lHBtDRcnnTUMClaM9.BIleOK7sgnHUgUCSr6qcGo8GfqygI5E.3VO', 'ACTIVE', 'CUSTOMER', 'customer_28'),
+('$2y$10$lHBtDRcnnTUMClaM9.BIleOK7sgnHUgUCSr6qcGo8GfqygI5E.3VO', 'ACTIVE', 'CUSTOMER', 'customer_29'),
+('$2y$10$lHBtDRcnnTUMClaM9.BIleOK7sgnHUgUCSr6qcGo8GfqygI5E.3VO', 'ACTIVE', 'CUSTOMER', 'customer_30'),
+('$2y$10$lHBtDRcnnTUMClaM9.BIleOK7sgnHUgUCSr6qcGo8GfqygI5E.3VO', 'ACTIVE', 'CUSTOMER', 'customer_31'),
+('$2y$10$lHBtDRcnnTUMClaM9.BIleOK7sgnHUgUCSr6qcGo8GfqygI5E.3VO', 'ACTIVE', 'CUSTOMER', 'customer_32'),
+('$2y$10$lHBtDRcnnTUMClaM9.BIleOK7sgnHUgUCSr6qcGo8GfqygI5E.3VO', 'ACTIVE', 'CUSTOMER', 'customer_33'),
+('$2y$10$lHBtDRcnnTUMClaM9.BIleOK7sgnHUgUCSr6qcGo8GfqygI5E.3VO', 'ACTIVE', 'CUSTOMER', 'customer_34'),
+('$2y$10$lHBtDRcnnTUMClaM9.BIleOK7sgnHUgUCSr6qcGo8GfqygI5E.3VO', 'ACTIVE', 'CUSTOMER', 'customer_35'),
+('$2y$10$lHBtDRcnnTUMClaM9.BIleOK7sgnHUgUCSr6qcGo8GfqygI5E.3VO', 'ACTIVE', 'CUSTOMER', 'customer_36'),
+('$2y$10$lHBtDRcnnTUMClaM9.BIleOK7sgnHUgUCSr6qcGo8GfqygI5E.3VO', 'ACTIVE', 'CUSTOMER', 'customer_37'),
+('$2y$10$lHBtDRcnnTUMClaM9.BIleOK7sgnHUgUCSr6qcGo8GfqygI5E.3VO', 'ACTIVE', 'CUSTOMER', 'customer_38'),
+('$2y$10$lHBtDRcnnTUMClaM9.BIleOK7sgnHUgUCSr6qcGo8GfqygI5E.3VO', 'ACTIVE', 'CUSTOMER', 'customer_39'),
+('$2y$10$lHBtDRcnnTUMClaM9.BIleOK7sgnHUgUCSr6qcGo8GfqygI5E.3VO', 'ACTIVE', 'CUSTOMER', 'customer_40'),
+('$2y$10$lHBtDRcnnTUMClaM9.BIleOK7sgnHUgUCSr6qcGo8GfqygI5E.3VO', 'ACTIVE', 'CUSTOMER', 'customer_41'),
+('$2y$10$lHBtDRcnnTUMClaM9.BIleOK7sgnHUgUCSr6qcGo8GfqygI5E.3VO', 'ACTIVE', 'CUSTOMER', 'customer_42'),
+('$2y$10$lHBtDRcnnTUMClaM9.BIleOK7sgnHUgUCSr6qcGo8GfqygI5E.3VO', 'ACTIVE', 'CUSTOMER', 'customer_43'),
+('$2y$10$lHBtDRcnnTUMClaM9.BIleOK7sgnHUgUCSr6qcGo8GfqygI5E.3VO', 'ACTIVE', 'CUSTOMER', 'customer_44'),
+('$2y$10$lHBtDRcnnTUMClaM9.BIleOK7sgnHUgUCSr6qcGo8GfqygI5E.3VO', 'ACTIVE', 'CUSTOMER', 'customer_45'),
+('$2y$10$lHBtDRcnnTUMClaM9.BIleOK7sgnHUgUCSr6qcGo8GfqygI5E.3VO', 'ACTIVE', 'CUSTOMER', 'customer_46'),
+('$2y$10$lHBtDRcnnTUMClaM9.BIleOK7sgnHUgUCSr6qcGo8GfqygI5E.3VO', 'ACTIVE', 'CUSTOMER', 'customer_47'),
+('$2y$10$lHBtDRcnnTUMClaM9.BIleOK7sgnHUgUCSr6qcGo8GfqygI5E.3VO', 'ACTIVE', 'CUSTOMER', 'customer_48'),
+('$2y$10$lHBtDRcnnTUMClaM9.BIleOK7sgnHUgUCSr6qcGo8GfqygI5E.3VO', 'ACTIVE', 'CUSTOMER', 'customer_49'),
+('$2y$10$lHBtDRcnnTUMClaM9.BIleOK7sgnHUgUCSr6qcGo8GfqygI5E.3VO', 'ACTIVE', 'CUSTOMER', 'customer_50');
 
 
 INSERT INTO account (password, status, role, username) VALUES
-('abc', 'ACTIVE', 'CUSTOMER', 'customer_51'),
-('abc', 'ACTIVE', 'CUSTOMER', 'customer_52'),
-('abc', 'ACTIVE', 'CUSTOMER', 'customer_53'),
-('abc', 'ACTIVE', 'CUSTOMER', 'customer_54'),
-('abc', 'ACTIVE', 'CUSTOMER', 'customer_55'),
-('abc', 'ACTIVE', 'CUSTOMER', 'customer_56'),
-('abc', 'ACTIVE', 'CUSTOMER', 'customer_57'),
-('abc', 'ACTIVE', 'CUSTOMER', 'customer_58'),
-('abc', 'ACTIVE', 'CUSTOMER', 'customer_59'),
-('abc', 'ACTIVE', 'CUSTOMER', 'customer_60'),
-('abc', 'ACTIVE', 'CUSTOMER', 'customer_61'),
-('abc', 'ACTIVE', 'CUSTOMER', 'customer_62'),
-('abc', 'ACTIVE', 'CUSTOMER', 'customer_63'),
-('abc', 'ACTIVE', 'CUSTOMER', 'customer_64'),
-('abc', 'ACTIVE', 'CUSTOMER', 'customer_65'),
-('abc', 'ACTIVE', 'CUSTOMER', 'customer_66'),
-('abc', 'ACTIVE', 'CUSTOMER', 'customer_67'),
-('abc', 'ACTIVE', 'CUSTOMER', 'customer_68'),
-('abc', 'ACTIVE', 'CUSTOMER', 'customer_69'),
-('abc', 'ACTIVE', 'CUSTOMER', 'customer_70'),
-('abc', 'ACTIVE', 'CUSTOMER', 'customer_71'),
-('abc', 'ACTIVE', 'CUSTOMER', 'customer_72'),
-('abc', 'ACTIVE', 'CUSTOMER', 'customer_73'),
-('abc', 'ACTIVE', 'CUSTOMER', 'customer_74'),
-('abc', 'ACTIVE', 'CUSTOMER', 'customer_75'),
-('abc', 'ACTIVE', 'CUSTOMER', 'customer_76'),
-('abc', 'ACTIVE', 'CUSTOMER', 'customer_77'),
-('abc', 'ACTIVE', 'CUSTOMER', 'customer_78'),
-('abc', 'ACTIVE', 'CUSTOMER', 'customer_79'),
-('abc', 'ACTIVE', 'CUSTOMER', 'customer_80'),
-('abc', 'ACTIVE', 'CUSTOMER', 'customer_81'),
-('abc', 'ACTIVE', 'CUSTOMER', 'customer_82'),
-('abc', 'ACTIVE', 'CUSTOMER', 'customer_83'),
-('abc', 'ACTIVE', 'CUSTOMER', 'customer_84'),
-('abc', 'ACTIVE', 'CUSTOMER', 'customer_85'),
-('abc', 'ACTIVE', 'CUSTOMER', 'customer_86'),
-('abc', 'ACTIVE', 'CUSTOMER', 'customer_87'),
-('abc', 'ACTIVE', 'CUSTOMER', 'customer_88'),
-('abc', 'ACTIVE', 'CUSTOMER', 'customer_89'),
-('abc', 'ACTIVE', 'CUSTOMER', 'customer_90'),
-('abc', 'ACTIVE', 'CUSTOMER', 'customer_91'),
-('abc', 'ACTIVE', 'CUSTOMER', 'customer_92'),
-('abc', 'ACTIVE', 'CUSTOMER', 'customer_93'),
-('abc', 'ACTIVE', 'CUSTOMER', 'customer_94'),
-('abc', 'ACTIVE', 'CUSTOMER', 'customer_95'),
-('abc', 'ACTIVE', 'CUSTOMER', 'customer_96'),
-('abc', 'ACTIVE', 'CUSTOMER', 'customer_97'),
-('abc', 'ACTIVE', 'CUSTOMER', 'customer_98'),
-('abc', 'ACTIVE', 'CUSTOMER', 'customer_99'),
-('abc', 'ACTIVE', 'CUSTOMER', 'customer_100'),
-('abc', 'ACTIVE', 'CUSTOMER', 'customer_101'),
-('abc', 'ACTIVE', 'CUSTOMER', 'customer_102'),
-('abc', 'ACTIVE', 'CUSTOMER', 'customer_103'),
-('abc', 'ACTIVE', 'CUSTOMER', 'customer_104'),
-('abc', 'ACTIVE', 'CUSTOMER', 'customer_105'),
-('abc', 'ACTIVE', 'CUSTOMER', 'customer_106'),
-('abc', 'ACTIVE', 'CUSTOMER', 'customer_107'),
-('abc', 'ACTIVE', 'CUSTOMER', 'customer_108'),
-('abc', 'ACTIVE', 'CUSTOMER', 'customer_109'),
-('abc', 'ACTIVE', 'CUSTOMER', 'customer_110'),
-('abc', 'ACTIVE', 'CUSTOMER', 'customer_111'),
-('abc', 'ACTIVE', 'CUSTOMER', 'customer_112'),
-('abc', 'ACTIVE', 'CUSTOMER', 'customer_113'),
-('abc', 'ACTIVE', 'CUSTOMER', 'customer_114'),
-('abc', 'ACTIVE', 'CUSTOMER', 'customer_115'),
-('abc', 'ACTIVE', 'CUSTOMER', 'customer_116'),
-('abc', 'ACTIVE', 'CUSTOMER', 'customer_117'),
-('abc', 'ACTIVE', 'CUSTOMER', 'customer_118'),
-('abc', 'ACTIVE', 'CUSTOMER', 'customer_119'),
-('abc', 'ACTIVE', 'CUSTOMER', 'customer_120'),
-('abc', 'ACTIVE', 'CUSTOMER', 'customer_121'),
-('abc', 'ACTIVE', 'CUSTOMER', 'customer_122'),
-('abc', 'ACTIVE', 'CUSTOMER', 'customer_123'),
-('abc', 'ACTIVE', 'CUSTOMER', 'customer_124'),
-('abc', 'ACTIVE', 'CUSTOMER', 'customer_125'),
-('abc', 'ACTIVE', 'CUSTOMER', 'customer_126'),
-('abc', 'ACTIVE', 'CUSTOMER', 'customer_127'),
-('abc', 'ACTIVE', 'CUSTOMER', 'customer_128'),
-('abc', 'ACTIVE', 'CUSTOMER', 'customer_129'),
-('abc', 'ACTIVE', 'CUSTOMER', 'customer_130'),
-('abc', 'ACTIVE', 'CUSTOMER', 'customer_131'),
-('abc', 'ACTIVE', 'CUSTOMER', 'customer_132'),
-('abc', 'ACTIVE', 'CUSTOMER', 'customer_133'),
-('abc', 'ACTIVE', 'CUSTOMER', 'customer_134'),
-('abc', 'ACTIVE', 'CUSTOMER', 'customer_135'),
-('abc', 'ACTIVE', 'CUSTOMER', 'customer_136'),
-('abc', 'ACTIVE', 'CUSTOMER', 'customer_137'),
-('abc', 'ACTIVE', 'CUSTOMER', 'customer_138'),
-('abc', 'ACTIVE', 'CUSTOMER', 'customer_139'),
-('abc', 'ACTIVE', 'CUSTOMER', 'customer_140'),
-('abc', 'ACTIVE', 'CUSTOMER', 'customer_141'),
-('abc', 'ACTIVE', 'CUSTOMER', 'customer_142'),
-('abc', 'ACTIVE', 'CUSTOMER', 'customer_143'),
-('abc', 'ACTIVE', 'CUSTOMER', 'customer_144'),
-('abc', 'ACTIVE', 'CUSTOMER', 'customer_145'),
-('abc', 'ACTIVE', 'CUSTOMER', 'customer_146'),
-('abc', 'ACTIVE', 'CUSTOMER', 'customer_147'),
-('abc', 'ACTIVE', 'CUSTOMER', 'customer_148'),
-('abc', 'ACTIVE', 'CUSTOMER', 'customer_149'),
-('abc', 'ACTIVE', 'CUSTOMER', 'customer_150');
+('$2y$10$lHBtDRcnnTUMClaM9.BIleOK7sgnHUgUCSr6qcGo8GfqygI5E.3VO', 'ACTIVE', 'CUSTOMER', 'customer_51'),
+('$2y$10$lHBtDRcnnTUMClaM9.BIleOK7sgnHUgUCSr6qcGo8GfqygI5E.3VO', 'ACTIVE', 'CUSTOMER', 'customer_52'),
+('$2y$10$lHBtDRcnnTUMClaM9.BIleOK7sgnHUgUCSr6qcGo8GfqygI5E.3VO', 'ACTIVE', 'CUSTOMER', 'customer_53'),
+('$2y$10$lHBtDRcnnTUMClaM9.BIleOK7sgnHUgUCSr6qcGo8GfqygI5E.3VO', 'ACTIVE', 'CUSTOMER', 'customer_54'),
+('$2y$10$lHBtDRcnnTUMClaM9.BIleOK7sgnHUgUCSr6qcGo8GfqygI5E.3VO', 'ACTIVE', 'CUSTOMER', 'customer_55'),
+('$2y$10$lHBtDRcnnTUMClaM9.BIleOK7sgnHUgUCSr6qcGo8GfqygI5E.3VO', 'ACTIVE', 'CUSTOMER', 'customer_56'),
+('$2y$10$lHBtDRcnnTUMClaM9.BIleOK7sgnHUgUCSr6qcGo8GfqygI5E.3VO', 'ACTIVE', 'CUSTOMER', 'customer_57'),
+('$2y$10$lHBtDRcnnTUMClaM9.BIleOK7sgnHUgUCSr6qcGo8GfqygI5E.3VO', 'ACTIVE', 'CUSTOMER', 'customer_58'),
+('$2y$10$lHBtDRcnnTUMClaM9.BIleOK7sgnHUgUCSr6qcGo8GfqygI5E.3VO', 'ACTIVE', 'CUSTOMER', 'customer_59'),
+('$2y$10$lHBtDRcnnTUMClaM9.BIleOK7sgnHUgUCSr6qcGo8GfqygI5E.3VO', 'ACTIVE', 'CUSTOMER', 'customer_60'),
+('$2y$10$lHBtDRcnnTUMClaM9.BIleOK7sgnHUgUCSr6qcGo8GfqygI5E.3VO', 'ACTIVE', 'CUSTOMER', 'customer_61'),
+('$2y$10$lHBtDRcnnTUMClaM9.BIleOK7sgnHUgUCSr6qcGo8GfqygI5E.3VO', 'ACTIVE', 'CUSTOMER', 'customer_62'),
+('$2y$10$lHBtDRcnnTUMClaM9.BIleOK7sgnHUgUCSr6qcGo8GfqygI5E.3VO', 'ACTIVE', 'CUSTOMER', 'customer_63'),
+('$2y$10$lHBtDRcnnTUMClaM9.BIleOK7sgnHUgUCSr6qcGo8GfqygI5E.3VO', 'ACTIVE', 'CUSTOMER', 'customer_64'),
+('$2y$10$lHBtDRcnnTUMClaM9.BIleOK7sgnHUgUCSr6qcGo8GfqygI5E.3VO', 'ACTIVE', 'CUSTOMER', 'customer_65'),
+('$2y$10$lHBtDRcnnTUMClaM9.BIleOK7sgnHUgUCSr6qcGo8GfqygI5E.3VO', 'ACTIVE', 'CUSTOMER', 'customer_66'),
+('$2y$10$lHBtDRcnnTUMClaM9.BIleOK7sgnHUgUCSr6qcGo8GfqygI5E.3VO', 'ACTIVE', 'CUSTOMER', 'customer_67'),
+('$2y$10$lHBtDRcnnTUMClaM9.BIleOK7sgnHUgUCSr6qcGo8GfqygI5E.3VO', 'ACTIVE', 'CUSTOMER', 'customer_68'),
+('$2y$10$lHBtDRcnnTUMClaM9.BIleOK7sgnHUgUCSr6qcGo8GfqygI5E.3VO', 'ACTIVE', 'CUSTOMER', 'customer_69'),
+('$2y$10$lHBtDRcnnTUMClaM9.BIleOK7sgnHUgUCSr6qcGo8GfqygI5E.3VO', 'ACTIVE', 'CUSTOMER', 'customer_70'),
+('$2y$10$lHBtDRcnnTUMClaM9.BIleOK7sgnHUgUCSr6qcGo8GfqygI5E.3VO', 'ACTIVE', 'CUSTOMER', 'customer_71'),
+('$2y$10$lHBtDRcnnTUMClaM9.BIleOK7sgnHUgUCSr6qcGo8GfqygI5E.3VO', 'ACTIVE', 'CUSTOMER', 'customer_72'),
+('$2y$10$lHBtDRcnnTUMClaM9.BIleOK7sgnHUgUCSr6qcGo8GfqygI5E.3VO', 'ACTIVE', 'CUSTOMER', 'customer_73'),
+('$2y$10$lHBtDRcnnTUMClaM9.BIleOK7sgnHUgUCSr6qcGo8GfqygI5E.3VO', 'ACTIVE', 'CUSTOMER', 'customer_74'),
+('$2y$10$lHBtDRcnnTUMClaM9.BIleOK7sgnHUgUCSr6qcGo8GfqygI5E.3VO', 'ACTIVE', 'CUSTOMER', 'customer_75'),
+('$2y$10$lHBtDRcnnTUMClaM9.BIleOK7sgnHUgUCSr6qcGo8GfqygI5E.3VO', 'ACTIVE', 'CUSTOMER', 'customer_76'),
+('$2y$10$lHBtDRcnnTUMClaM9.BIleOK7sgnHUgUCSr6qcGo8GfqygI5E.3VO', 'ACTIVE', 'CUSTOMER', 'customer_77'),
+('$2y$10$lHBtDRcnnTUMClaM9.BIleOK7sgnHUgUCSr6qcGo8GfqygI5E.3VO', 'ACTIVE', 'CUSTOMER', 'customer_78'),
+('$2y$10$lHBtDRcnnTUMClaM9.BIleOK7sgnHUgUCSr6qcGo8GfqygI5E.3VO', 'ACTIVE', 'CUSTOMER', 'customer_79'),
+('$2y$10$lHBtDRcnnTUMClaM9.BIleOK7sgnHUgUCSr6qcGo8GfqygI5E.3VO', 'ACTIVE', 'CUSTOMER', 'customer_80'),
+('$2y$10$lHBtDRcnnTUMClaM9.BIleOK7sgnHUgUCSr6qcGo8GfqygI5E.3VO', 'ACTIVE', 'CUSTOMER', 'customer_81'),
+('$2y$10$lHBtDRcnnTUMClaM9.BIleOK7sgnHUgUCSr6qcGo8GfqygI5E.3VO', 'ACTIVE', 'CUSTOMER', 'customer_82'),
+('$2y$10$lHBtDRcnnTUMClaM9.BIleOK7sgnHUgUCSr6qcGo8GfqygI5E.3VO', 'ACTIVE', 'CUSTOMER', 'customer_83'),
+('$2y$10$lHBtDRcnnTUMClaM9.BIleOK7sgnHUgUCSr6qcGo8GfqygI5E.3VO', 'ACTIVE', 'CUSTOMER', 'customer_84'),
+('$2y$10$lHBtDRcnnTUMClaM9.BIleOK7sgnHUgUCSr6qcGo8GfqygI5E.3VO', 'ACTIVE', 'CUSTOMER', 'customer_85'),
+('$2y$10$lHBtDRcnnTUMClaM9.BIleOK7sgnHUgUCSr6qcGo8GfqygI5E.3VO', 'ACTIVE', 'CUSTOMER', 'customer_86'),
+('$2y$10$lHBtDRcnnTUMClaM9.BIleOK7sgnHUgUCSr6qcGo8GfqygI5E.3VO', 'ACTIVE', 'CUSTOMER', 'customer_87'),
+('$2y$10$lHBtDRcnnTUMClaM9.BIleOK7sgnHUgUCSr6qcGo8GfqygI5E.3VO', 'ACTIVE', 'CUSTOMER', 'customer_88'),
+('$2y$10$lHBtDRcnnTUMClaM9.BIleOK7sgnHUgUCSr6qcGo8GfqygI5E.3VO', 'ACTIVE', 'CUSTOMER', 'customer_89'),
+('$2y$10$lHBtDRcnnTUMClaM9.BIleOK7sgnHUgUCSr6qcGo8GfqygI5E.3VO', 'ACTIVE', 'CUSTOMER', 'customer_90'),
+('$2y$10$lHBtDRcnnTUMClaM9.BIleOK7sgnHUgUCSr6qcGo8GfqygI5E.3VO', 'ACTIVE', 'CUSTOMER', 'customer_91'),
+('$2y$10$lHBtDRcnnTUMClaM9.BIleOK7sgnHUgUCSr6qcGo8GfqygI5E.3VO', 'ACTIVE', 'CUSTOMER', 'customer_92'),
+('$2y$10$lHBtDRcnnTUMClaM9.BIleOK7sgnHUgUCSr6qcGo8GfqygI5E.3VO', 'ACTIVE', 'CUSTOMER', 'customer_93'),
+('$2y$10$lHBtDRcnnTUMClaM9.BIleOK7sgnHUgUCSr6qcGo8GfqygI5E.3VO', 'ACTIVE', 'CUSTOMER', 'customer_94'),
+('$2y$10$lHBtDRcnnTUMClaM9.BIleOK7sgnHUgUCSr6qcGo8GfqygI5E.3VO', 'ACTIVE', 'CUSTOMER', 'customer_95'),
+('$2y$10$lHBtDRcnnTUMClaM9.BIleOK7sgnHUgUCSr6qcGo8GfqygI5E.3VO', 'ACTIVE', 'CUSTOMER', 'customer_96'),
+('$2y$10$lHBtDRcnnTUMClaM9.BIleOK7sgnHUgUCSr6qcGo8GfqygI5E.3VO', 'ACTIVE', 'CUSTOMER', 'customer_97'),
+('$2y$10$lHBtDRcnnTUMClaM9.BIleOK7sgnHUgUCSr6qcGo8GfqygI5E.3VO', 'ACTIVE', 'CUSTOMER', 'customer_98'),
+('$2y$10$lHBtDRcnnTUMClaM9.BIleOK7sgnHUgUCSr6qcGo8GfqygI5E.3VO', 'ACTIVE', 'CUSTOMER', 'customer_99'),
+('$2y$10$lHBtDRcnnTUMClaM9.BIleOK7sgnHUgUCSr6qcGo8GfqygI5E.3VO', 'ACTIVE', 'CUSTOMER', 'customer_100'),
+('$2y$10$lHBtDRcnnTUMClaM9.BIleOK7sgnHUgUCSr6qcGo8GfqygI5E.3VO', 'ACTIVE', 'CUSTOMER', 'customer_101'),
+('$2y$10$lHBtDRcnnTUMClaM9.BIleOK7sgnHUgUCSr6qcGo8GfqygI5E.3VO', 'ACTIVE', 'CUSTOMER', 'customer_102'),
+('$2y$10$lHBtDRcnnTUMClaM9.BIleOK7sgnHUgUCSr6qcGo8GfqygI5E.3VO', 'ACTIVE', 'CUSTOMER', 'customer_103'),
+('$2y$10$lHBtDRcnnTUMClaM9.BIleOK7sgnHUgUCSr6qcGo8GfqygI5E.3VO', 'ACTIVE', 'CUSTOMER', 'customer_104'),
+('$2y$10$lHBtDRcnnTUMClaM9.BIleOK7sgnHUgUCSr6qcGo8GfqygI5E.3VO', 'ACTIVE', 'CUSTOMER', 'customer_105'),
+('$2y$10$lHBtDRcnnTUMClaM9.BIleOK7sgnHUgUCSr6qcGo8GfqygI5E.3VO', 'ACTIVE', 'CUSTOMER', 'customer_106'),
+('$2y$10$lHBtDRcnnTUMClaM9.BIleOK7sgnHUgUCSr6qcGo8GfqygI5E.3VO', 'ACTIVE', 'CUSTOMER', 'customer_107'),
+('$2y$10$lHBtDRcnnTUMClaM9.BIleOK7sgnHUgUCSr6qcGo8GfqygI5E.3VO', 'ACTIVE', 'CUSTOMER', 'customer_108'),
+('$2y$10$lHBtDRcnnTUMClaM9.BIleOK7sgnHUgUCSr6qcGo8GfqygI5E.3VO', 'ACTIVE', 'CUSTOMER', 'customer_109'),
+('$2y$10$lHBtDRcnnTUMClaM9.BIleOK7sgnHUgUCSr6qcGo8GfqygI5E.3VO', 'ACTIVE', 'CUSTOMER', 'customer_110'),
+('$2y$10$lHBtDRcnnTUMClaM9.BIleOK7sgnHUgUCSr6qcGo8GfqygI5E.3VO', 'ACTIVE', 'CUSTOMER', 'customer_111'),
+('$2y$10$lHBtDRcnnTUMClaM9.BIleOK7sgnHUgUCSr6qcGo8GfqygI5E.3VO', 'ACTIVE', 'CUSTOMER', 'customer_112'),
+('$2y$10$lHBtDRcnnTUMClaM9.BIleOK7sgnHUgUCSr6qcGo8GfqygI5E.3VO', 'ACTIVE', 'CUSTOMER', 'customer_113'),
+('$2y$10$lHBtDRcnnTUMClaM9.BIleOK7sgnHUgUCSr6qcGo8GfqygI5E.3VO', 'ACTIVE', 'CUSTOMER', 'customer_114'),
+('$2y$10$lHBtDRcnnTUMClaM9.BIleOK7sgnHUgUCSr6qcGo8GfqygI5E.3VO', 'ACTIVE', 'CUSTOMER', 'customer_115'),
+('$2y$10$lHBtDRcnnTUMClaM9.BIleOK7sgnHUgUCSr6qcGo8GfqygI5E.3VO', 'ACTIVE', 'CUSTOMER', 'customer_116'),
+('$2y$10$lHBtDRcnnTUMClaM9.BIleOK7sgnHUgUCSr6qcGo8GfqygI5E.3VO', 'ACTIVE', 'CUSTOMER', 'customer_117'),
+('$2y$10$lHBtDRcnnTUMClaM9.BIleOK7sgnHUgUCSr6qcGo8GfqygI5E.3VO', 'ACTIVE', 'CUSTOMER', 'customer_118'),
+('$2y$10$lHBtDRcnnTUMClaM9.BIleOK7sgnHUgUCSr6qcGo8GfqygI5E.3VO', 'ACTIVE', 'CUSTOMER', 'customer_119'),
+('$2y$10$lHBtDRcnnTUMClaM9.BIleOK7sgnHUgUCSr6qcGo8GfqygI5E.3VO', 'ACTIVE', 'CUSTOMER', 'customer_120'),
+('$2y$10$lHBtDRcnnTUMClaM9.BIleOK7sgnHUgUCSr6qcGo8GfqygI5E.3VO', 'ACTIVE', 'CUSTOMER', 'customer_121'),
+('$2y$10$lHBtDRcnnTUMClaM9.BIleOK7sgnHUgUCSr6qcGo8GfqygI5E.3VO', 'ACTIVE', 'CUSTOMER', 'customer_122'),
+('$2y$10$lHBtDRcnnTUMClaM9.BIleOK7sgnHUgUCSr6qcGo8GfqygI5E.3VO', 'ACTIVE', 'CUSTOMER', 'customer_123'),
+('$2y$10$lHBtDRcnnTUMClaM9.BIleOK7sgnHUgUCSr6qcGo8GfqygI5E.3VO', 'ACTIVE', 'CUSTOMER', 'customer_124'),
+('$2y$10$lHBtDRcnnTUMClaM9.BIleOK7sgnHUgUCSr6qcGo8GfqygI5E.3VO', 'ACTIVE', 'CUSTOMER', 'customer_125'),
+('$2y$10$lHBtDRcnnTUMClaM9.BIleOK7sgnHUgUCSr6qcGo8GfqygI5E.3VO', 'ACTIVE', 'CUSTOMER', 'customer_126'),
+('$2y$10$lHBtDRcnnTUMClaM9.BIleOK7sgnHUgUCSr6qcGo8GfqygI5E.3VO', 'ACTIVE', 'CUSTOMER', 'customer_127'),
+('$2y$10$lHBtDRcnnTUMClaM9.BIleOK7sgnHUgUCSr6qcGo8GfqygI5E.3VO', 'ACTIVE', 'CUSTOMER', 'customer_128'),
+('$2y$10$lHBtDRcnnTUMClaM9.BIleOK7sgnHUgUCSr6qcGo8GfqygI5E.3VO', 'ACTIVE', 'CUSTOMER', 'customer_129'),
+('$2y$10$lHBtDRcnnTUMClaM9.BIleOK7sgnHUgUCSr6qcGo8GfqygI5E.3VO', 'ACTIVE', 'CUSTOMER', 'customer_130'),
+('$2y$10$lHBtDRcnnTUMClaM9.BIleOK7sgnHUgUCSr6qcGo8GfqygI5E.3VO', 'ACTIVE', 'CUSTOMER', 'customer_131'),
+('$2y$10$lHBtDRcnnTUMClaM9.BIleOK7sgnHUgUCSr6qcGo8GfqygI5E.3VO', 'ACTIVE', 'CUSTOMER', 'customer_132'),
+('$2y$10$lHBtDRcnnTUMClaM9.BIleOK7sgnHUgUCSr6qcGo8GfqygI5E.3VO', 'ACTIVE', 'CUSTOMER', 'customer_133'),
+('$2y$10$lHBtDRcnnTUMClaM9.BIleOK7sgnHUgUCSr6qcGo8GfqygI5E.3VO', 'ACTIVE', 'CUSTOMER', 'customer_134'),
+('$2y$10$lHBtDRcnnTUMClaM9.BIleOK7sgnHUgUCSr6qcGo8GfqygI5E.3VO', 'ACTIVE', 'CUSTOMER', 'customer_135'),
+('$2y$10$lHBtDRcnnTUMClaM9.BIleOK7sgnHUgUCSr6qcGo8GfqygI5E.3VO', 'ACTIVE', 'CUSTOMER', 'customer_136'),
+('$2y$10$lHBtDRcnnTUMClaM9.BIleOK7sgnHUgUCSr6qcGo8GfqygI5E.3VO', 'ACTIVE', 'CUSTOMER', 'customer_137'),
+('$2y$10$lHBtDRcnnTUMClaM9.BIleOK7sgnHUgUCSr6qcGo8GfqygI5E.3VO', 'ACTIVE', 'CUSTOMER', 'customer_138'),
+('$2y$10$lHBtDRcnnTUMClaM9.BIleOK7sgnHUgUCSr6qcGo8GfqygI5E.3VO', 'ACTIVE', 'CUSTOMER', 'customer_139'),
+('$2y$10$lHBtDRcnnTUMClaM9.BIleOK7sgnHUgUCSr6qcGo8GfqygI5E.3VO', 'ACTIVE', 'CUSTOMER', 'customer_140'),
+('$2y$10$lHBtDRcnnTUMClaM9.BIleOK7sgnHUgUCSr6qcGo8GfqygI5E.3VO', 'ACTIVE', 'CUSTOMER', 'customer_141'),
+('$2y$10$lHBtDRcnnTUMClaM9.BIleOK7sgnHUgUCSr6qcGo8GfqygI5E.3VO', 'ACTIVE', 'CUSTOMER', 'customer_142'),
+('$2y$10$lHBtDRcnnTUMClaM9.BIleOK7sgnHUgUCSr6qcGo8GfqygI5E.3VO', 'ACTIVE', 'CUSTOMER', 'customer_143'),
+('$2y$10$lHBtDRcnnTUMClaM9.BIleOK7sgnHUgUCSr6qcGo8GfqygI5E.3VO', 'ACTIVE', 'CUSTOMER', 'customer_144'),
+('$2y$10$lHBtDRcnnTUMClaM9.BIleOK7sgnHUgUCSr6qcGo8GfqygI5E.3VO', 'ACTIVE', 'CUSTOMER', 'customer_145'),
+('$2y$10$lHBtDRcnnTUMClaM9.BIleOK7sgnHUgUCSr6qcGo8GfqygI5E.3VO', 'ACTIVE', 'CUSTOMER', 'customer_146'),
+('$2y$10$lHBtDRcnnTUMClaM9.BIleOK7sgnHUgUCSr6qcGo8GfqygI5E.3VO', 'ACTIVE', 'CUSTOMER', 'customer_147'),
+('$2y$10$lHBtDRcnnTUMClaM9.BIleOK7sgnHUgUCSr6qcGo8GfqygI5E.3VO', 'ACTIVE', 'CUSTOMER', 'customer_148'),
+('$2y$10$lHBtDRcnnTUMClaM9.BIleOK7sgnHUgUCSr6qcGo8GfqygI5E.3VO', 'ACTIVE', 'CUSTOMER', 'customer_149'),
+('$2y$10$lHBtDRcnnTUMClaM9.BIleOK7sgnHUgUCSr6qcGo8GfqygI5E.3VO', 'ACTIVE', 'CUSTOMER', 'customer_150');
 
 
 
@@ -530,16 +531,16 @@ INSERT INTO publisher (avatar, introduction, join_at, name) VALUES
 
 
 INSERT INTO book_template (status, publisher_id) VALUES
-('ON_SALE', 1),
+('OUT_OF_STOCK', 1),
 ('ON_SALE', 2),
 ('ON_SALE', 3),
 ('ON_SALE', 4),
 ('ON_SALE', 5),
 ('ON_SALE', 6),
-('ON_SALE', 7),
-('ON_SALE', 8),
-('ON_SALE', 9),
-('ON_SALE', 10);
+('OUT_OF_STOCK', 7),
+('OUT_OF_STOCK', 8),
+('OUT_OF_STOCK', 9),
+('OUT_OF_STOCK', 10);
 
 INSERT INTO book_template (status, publisher_id)
 VALUES
@@ -656,8 +657,8 @@ INSERT INTO book_metadata (created_at, import_price, opening_date, status) VALUE
 ('2024-10-10 12:00:00', 100000, '2024-10-11 13:00:00', 'IN_STOCK'),
 
 -- 10 dòng với created_at từ `opening_date` của id = 6
-('2024-10-15 15:30:45', 100000, '2024-10-16 09:00:00', 'SOLD'),
-('2024-10-15 15:30:45', 100000, '2024-10-16 09:00:00', 'SOLD'),
+('2024-10-15 15:30:45', 100000, '2024-10-16 09:00:00', 'BROKEN'),
+('2024-10-15 15:30:45', 100000, '2024-10-16 09:00:00', 'BROKEN'),
 ('2024-10-15 15:30:45', 100000, '2024-10-16 09:00:00', 'SOLD'),
 ('2024-10-15 15:30:45', 100000, '2024-10-16 09:00:00', 'SOLD'),
 ('2024-10-15 15:30:45', 100000, '2024-10-16 09:00:00', 'SOLD'),
@@ -4003,14 +4004,15 @@ INSERT INTO translator_book_template (translator_id, book_template_id) VALUES
 -- 12. Table Review
 INSERT INTO review (content, created_at, is_hidden, rate, ready_to_introduce, book_template_id, customer_id) VALUES
 -- Đánh giá của customer_id = 1 cho 5 cuốn sách đầu
-('Cuốn sách rất hay và bổ ích, đáng để đọc.', '2023-01-05 09:30:00', 0, 5, 1, 1, 1),
+('Cuốn sách rất hay và bổ ích, đáng để đọc.', '2024-11-7 9:30:00', 0, 5, 1, 1, 1),
 ('Rất hài lòng với nội dung, nhiều kiến thức bổ ích.', '2023-01-15 10:00:00', 0, 4, 1, 2, 1),
 ('Một tác phẩm tuyệt vời, cung cấp góc nhìn mới.', '2023-01-25 14:30:00', 0, 5, 1, 3, 1),
-('Sách rất thú vị và truyền cảm hứng, tôi thích điều đó.', '2023-02-05 11:45:00', 0, 4, 1, 4, 1),
+('Sách rất thú vị và truyền cảm hứng, tôi thích điều đó.', '2024-11-10 9:30:00', 0, 4, 1, 4, 1),
 ('Một cuốn sách đáng để giới thiệu cho mọi người.', '2023-02-15 13:20:00', 0, 5, 1, 5, 1),
 
 -- Đánh giá của customer_id = 2 cho 5 cuốn sách đầu
-('Nội dung rất sâu sắc và dễ hiểu, rất thích cuốn này.', '2023-01-10 08:45:00', 0, 5, 1, 1, 2),
+('Sách bị rách, tôi thất vọng vì điều đó.', '2024-11-10 15:00:00', 0, 1, 1, 6, 2),
+('Sách bị rách, tôi thất vọng vì điều đó.', '2024-10-21 16:15:00', 0, 2, 1, 6, 2),
 ('Sách có nhiều thông tin hữu ích cho người đọc.', '2023-01-20 09:15:00', 0, 4, 1, 2, 2),
 ('Tôi học được nhiều điều mới qua cuốn sách này.', '2023-01-30 15:10:00', 0, 5, 1, 3, 2),
 ('Rất hài lòng với cuốn sách, dễ đọc và thực tế.', '2023-02-10 10:25:00', 0, 4, 1, 4, 2),
@@ -4157,16 +4159,16 @@ INSERT INTO shipping (shipping_fee, shipping_unit, address_id) VALUES
 INSERT INTO `order` (note, order_date, payment_type, status, vat, customer_id, shipping_id) VALUES
 ('Order note 1', '2024-11-03 10:30:00', 'BANKING', 'COMPLETE_DELIVERY', 0.1, 1, 1),
 ('Order note 2', '2024-11-11 14:00:00', 'BANKING','REQUEST_REFUND', 0.1, 2, 2),
-('Order note 3', '2024-11-20 09:15:00', 'BANKING','WAITING_CONFIRMATION', 0.1, 1, 3),
+('Order note 3', '2024-11-20 09:15:00', 'BANKING','WAITING_CONFIRMATION', 0.1, 2, 3),
 ('Order note 4', '2024-11-04 16:45:00', 'BANKING','CANCELED', 0.1, 2, 4),
-('Order note 5', '2024-11-05 11:20:00', 'BANKING','WAITING_CONFIRMATION', 0.1, 1, 5),
+('Order note 5', '2024-11-05 11:20:00', 'BANKING','WAITING_CONFIRMATION', 0.1, 2, 5),
 ('Order note 6', '2024-11-06 15:30:00', 'BANKING','CANCELED', 0.1, 2, 6),
 ('Order note 7', '2024-11-07 08:00:00', 'BANKING','COMPLETE_DELIVERY', 0.1, 1, 7),
 ('Order note 8', '2024-11-08 13:55:00', 'BANKING','CANCELED', 0.1, 2, 8);
 
 INSERT INTO `order` (note, order_date, payment_type, status, vat, customer_id, shipping_id) VALUES
-('Order note 9', '2024-11-06 12:48:23', 'BANKING', 'COMPLETE_DELIVERY', 0.1, 1, 9),
-('Order note 10', '2024-10-20 16:25:58', 'BANKING', 'COMPLETE_DELIVERY', 0.1, 2, 10),
+('Order note 9', '2024-11-06 12:48:23', 'BANKING', 'REFUNDED', 0.1, 1, 9),
+('Order note 10', '2024-10-20 16:25:58', 'BANKING', 'REFUNDED', 0.1, 2, 10),
 ('Order note 11', '2024-10-27 10:45:29', 'BANKING', 'COMPLETE_DELIVERY', 0.1, 3, 11),
 ('Order note 12', '2024-10-18 08:55:06', 'BANKING', 'COMPLETE_DELIVERY', 0.1, 4, 12),
 ('Order note 13', '2024-10-04 12:34:04', 'BANKING', 'COMPLETE_DELIVERY', 0.1, 5, 13),
@@ -4371,6 +4373,68 @@ INSERT INTO order_item_books (order_item_id, book_id) VALUES
 (57, 99),
 (58, 100);
 
+
+INSERT INTO ewallet (amount, created_at, currency, status, provider, transaction_id, wallet_id, order_id) VALUES
+(650000, '2024-11-03 10:30:00', 'VND', 'COMPLETED', 'MOMO', 'TXN1234567', 'WALLET001', 1),
+(635000, '2024-11-11 14:00:00', 'VND', 'COMPLETED', 'MOMO', 'TXN1234568', 'WALLET002', 2),
+(775000, '2024-11-20 09:15:00', 'VND', 'COMPLETED', 'MOMO', 'TXN1234569', 'WALLET003', 3),
+(770000, '2024-11-04 16:45:00', 'VND', 'COMPLETED', 'MOMO', 'TXN1234570', 'WALLET004', 4),
+(715000, '2024-11-05 11:20:00', 'VND', 'COMPLETED', 'MOMO', 'TXN1234571', 'WALLET005', 5),
+(725000, '2024-11-06 15:30:00', 'VND', 'COMPLETED', 'MOMO', 'TXN1234572', 'WALLET006', 6),
+(845000, '2024-11-07 08:00:00', 'VND', 'COMPLETED', 'MOMO', 'TXN1234573', 'WALLET007', 7),
+(860000, '2024-11-08 13:55:00', 'VND', 'COMPLETED', 'MOMO', 'TXN1234574', 'WALLET008', 8),
+(300000, '2024-11-06 12:48:23', 'VND', 'COMPLETED', 'MOMO', 'TXN1234575', 'WALLET009', 9),
+(400000, '2024-10-20 16:25:58', 'VND', 'COMPLETED', 'MOMO', 'TXN1234576', 'WALLET010', 10),
+(350000, '2024-10-27 10:45:29', 'VND', 'COMPLETED', 'MOMO', 'TXN1234577', 'WALLET011', 11),
+(250000, '2024-10-18 08:55:06', 'VND', 'COMPLETED', 'MOMO', 'TXN1234578', 'WALLET012', 12),
+(300000, '2024-10-04 12:34:04', 'VND', 'COMPLETED', 'MOMO', 'TXN1234579', 'WALLET013', 13),
+(400000, '2024-10-31 08:07:12', 'VND', 'COMPLETED', 'MOMO', 'TXN1234580', 'WALLET014', 14),
+(350000, '2024-10-13 14:25:44', 'VND', 'COMPLETED', 'MOMO', 'TXN1234581', 'WALLET015', 15),
+(250000, '2024-10-04 12:09:04', 'VND', 'COMPLETED', 'MOMO', 'TXN1234582', 'WALLET016', 16),
+(300000, '2024-10-31 17:20:39', 'VND', 'COMPLETED', 'MOMO', 'TXN1234583', 'WALLET017', 17),
+(400000, '2024-10-26 10:31:38', 'VND', 'COMPLETED', 'MOMO', 'TXN1234584', 'WALLET018', 18),
+(350000, '2024-10-10 18:37:45', 'VND', 'COMPLETED', 'MOMO', 'TXN1234585', 'WALLET019', 19),
+(250000, '2024-10-27 17:28:49', 'VND', 'COMPLETED', 'MOMO', 'TXN1234586', 'WALLET020', 20),
+(300000, '2024-10-27 12:24:16', 'VND', 'COMPLETED', 'MOMO', 'TXN1234587', 'WALLET021', 21),
+(400000, '2024-10-13 12:28:22', 'VND', 'COMPLETED', 'MOMO', 'TXN1234588', 'WALLET022', 22),
+(350000, '2024-10-12 09:38:13', 'VND', 'COMPLETED', 'MOMO', 'TXN1234589', 'WALLET023', 23),
+(250000, '2024-10-28 11:16:31', 'VND', 'COMPLETED', 'MOMO', 'TXN1234590', 'WALLET024', 24),
+(300000, '2024-10-02 16:42:24', 'VND', 'COMPLETED', 'MOMO', 'TXN1234591', 'WALLET025', 25),
+(400000, '2024-10-14 09:08:41', 'VND', 'COMPLETED', 'MOMO', 'TXN1234592', 'WALLET026', 26),
+(350000, '2024-10-09 17:01:29', 'VND', 'COMPLETED', 'MOMO', 'TXN1234593', 'WALLET027', 27),
+(250000, '2024-10-14 18:08:54', 'VND', 'COMPLETED', 'MOMO', 'TXN1234594', 'WALLET028', 28),
+(300000, '2024-10-05 14:22:47', 'VND', 'COMPLETED', 'MOMO', 'TXN1234595', 'WALLET029', 29),
+(400000, '2024-10-14 12:38:58', 'VND', 'COMPLETED', 'MOMO', 'TXN1234596', 'WALLET030', 30),
+(350000, '2024-10-19 14:12:24', 'VND', 'COMPLETED', 'MOMO', 'TXN1234597', 'WALLET031', 31),
+(250000, '2024-11-04 10:52:43', 'VND', 'COMPLETED', 'MOMO', 'TXN1234598', 'WALLET032', 32),
+(300000, '2024-11-01 12:24:44', 'VND', 'COMPLETED', 'MOMO', 'TXN1234599', 'WALLET033', 33),
+(400000, '2024-10-21 15:23:48', 'VND', 'COMPLETED', 'MOMO', 'TXN1234600', 'WALLET034', 34),
+(350000, '2024-11-16 10:00:10', 'VND', 'COMPLETED', 'MOMO', 'TXN1234601', 'WALLET035', 35),
+(250000, '2024-11-05 18:09:27', 'VND', 'COMPLETED', 'MOMO', 'TXN1234602', 'WALLET036', 36),
+(300000, '2024-10-24 18:51:02', 'VND', 'COMPLETED', 'MOMO', 'TXN1234603', 'WALLET037', 37),
+(400000, '2024-10-08 14:34:23', 'VND', 'COMPLETED', 'MOMO', 'TXN1234604', 'WALLET038', 38),
+(350000, '2024-11-12 08:13:49', 'VND', 'COMPLETED', 'MOMO', 'TXN1234605', 'WALLET039', 39),
+(250000, '2024-10-03 13:31:13', 'VND', 'COMPLETED', 'MOMO', 'TXN1234606', 'WALLET040', 40),
+(300000, '2024-10-22 16:11:05', 'VND', 'COMPLETED', 'MOMO', 'TXN1234607', 'WALLET041', 41),
+(400000, '2024-11-10 08:05:14', 'VND', 'COMPLETED', 'MOMO', 'TXN1234608', 'WALLET042', 42),
+(350000, '2024-11-17 11:41:02', 'VND', 'COMPLETED', 'MOMO', 'TXN1234609', 'WALLET043', 43),
+(250000, '2024-11-02 17:56:10', 'VND', 'COMPLETED', 'MOMO', 'TXN1234610', 'WALLET044', 44),
+(300000, '2024-11-13 11:48:28', 'VND', 'COMPLETED', 'MOMO', 'TXN1234611', 'WALLET045', 45),
+(400000, '2024-10-26 09:47:40', 'VND', 'COMPLETED', 'MOMO', 'TXN1234612', 'WALLET046', 46),
+(350000, '2024-10-23 09:20:02', 'VND', 'COMPLETED', 'MOMO', 'TXN1234613', 'WALLET047', 47),
+(250000, '2024-11-14 09:39:27', 'VND', 'COMPLETED', 'MOMO', 'TXN1234614', 'WALLET048', 48),
+(300000, '2024-11-04 08:25:09', 'VND', 'COMPLETED', 'MOMO', 'TXN1234615', 'WALLET049', 49),
+(400000, '2024-11-13 18:34:57', 'VND', 'COMPLETED', 'MOMO', 'TXN1234616', 'WALLET050', 50),
+(350000, '2024-10-28 17:20:32', 'VND', 'COMPLETED', 'MOMO', 'TXN1234617', 'WALLET051', 51),
+(250000, '2024-10-16 13:30:42', 'VND', 'COMPLETED', 'MOMO', 'TXN1234618', 'WALLET052', 52),
+(300000, '2024-10-28 18:10:14', 'VND', 'COMPLETED', 'MOMO', 'TXN1234619', 'WALLET053', 53),
+(400000, '2024-10-24 09:36:30', 'VND', 'COMPLETED', 'MOMO', 'TXN1234620', 'WALLET054', 54),
+(350000, '2024-10-14 11:55:49', 'VND', 'COMPLETED', 'MOMO', 'TXN1234621', 'WALLET055', 55),
+(250000, '2024-10-29 08:20:01', 'VND', 'COMPLETED', 'MOMO', 'TXN1234622', 'WALLET056', 56),
+(300000, '2024-10-10 17:02:23', 'VND', 'COMPLETED', 'MOMO', 'TXN1234623', 'WALLET057', 57),
+(400000, '2024-11-03 11:19:54', 'VND', 'COMPLETED', 'MOMO', 'TXN1234624', 'WALLET058', 58);
+
+
 -- Book Languages
 INSERT INTO book_template_languages (book_template_id, language) VALUES
 -- Book 1
@@ -4414,6 +4478,58 @@ INSERT INTO book_template_languages (book_template_id, language) VALUES
 (10, 'VIETNAMESE'),
 (10, 'FRENCH'),
 (10, 'ARABIC');
+
+INSERT INTO book_template_languages (book_template_id, language) 
+VALUES
+(11, 'VIETNAMESE'),
+(12, 'VIETNAMESE'),
+(13, 'VIETNAMESE'),
+(14, 'VIETNAMESE'),
+(15, 'VIETNAMESE'),
+(16, 'VIETNAMESE'),
+(17, 'VIETNAMESE'),
+(18, 'VIETNAMESE'),
+(19, 'VIETNAMESE'),
+(20, 'VIETNAMESE'),
+(21, 'VIETNAMESE'),
+(22, 'VIETNAMESE'),
+(23, 'VIETNAMESE'),
+(24, 'VIETNAMESE'),
+(25, 'VIETNAMESE'),
+(26, 'VIETNAMESE'),
+(27, 'VIETNAMESE'),
+(28, 'VIETNAMESE'),
+(29, 'VIETNAMESE'),
+(30, 'VIETNAMESE'),
+(31, 'VIETNAMESE'),
+(32, 'VIETNAMESE'),
+(33, 'VIETNAMESE'),
+(34, 'VIETNAMESE'),
+(35, 'VIETNAMESE'),
+(36, 'VIETNAMESE'),
+(37, 'VIETNAMESE'),
+(38, 'VIETNAMESE'),
+(39, 'VIETNAMESE'),
+(40, 'VIETNAMESE'),
+(41, 'VIETNAMESE'),
+(42, 'VIETNAMESE'),
+(43, 'VIETNAMESE'),
+(44, 'VIETNAMESE'),
+(45, 'VIETNAMESE'),
+(46, 'VIETNAMESE'),
+(47, 'VIETNAMESE'),
+(48, 'VIETNAMESE'),
+(49, 'VIETNAMESE'),
+(50, 'VIETNAMESE'),
+(51, 'VIETNAMESE'),
+(52, 'VIETNAMESE'),
+(53, 'VIETNAMESE'),
+(54, 'VIETNAMESE'),
+(55, 'VIETNAMESE'),
+(56, 'VIETNAMESE'),
+(57, 'VIETNAMESE'),
+(58, 'VIETNAMESE'),
+(59, 'VIETNAMESE');
 
 
 -- PROMOTION
@@ -4728,8 +4844,9 @@ INSERT INTO order_promotion values
 (8, 8),
 (8, 57);
 
+-- Order 2 request return 
 INSERT INTO return_book(created_at, description, reason, order_id) values
-('2024-11-12 13:00:00', 'Sách bị gấp, bìa bị rách', 'DAMAGED', 2);
+('2024-11-14 08:00:00', 'Sách bị gấp, bìa bị rách', 'DAMAGED', 2);
 
 INSERT INTO return_book_item(return_book_id) values
 (1);
@@ -4740,6 +4857,41 @@ INSERT INTO return_item_books(return_book_item_id, book_id) values
 INSERT INTO return_book_media_file(return_book_id, media_file_id) values
 (1, 1), (1, 2), (1, 3), (1, 4), (1, 5);
 
+-- Order 9 return 
+INSERT INTO return_book(created_at, description, reason, order_id) values
+('2024-11-10 08:00:00', 'Sách bị gấp, bìa bị rách', 'DAMAGED', 9);
+
+INSERT INTO return_book_item(return_book_id) values
+(2);
+
+INSERT INTO return_item_books(return_book_item_id, book_id) values
+(2, 51);
+
+INSERT INTO return_book_media_file(return_book_id, media_file_id) values
+(2, 6), (2, 7), (2, 8), (2, 9), (2, 10);
+
+-- Order 10 return 
+INSERT INTO return_book(created_at, description, reason, order_id) values
+('2024-11-10 08:00:00', 'Sách bị gấp, bìa bị rách', 'DAMAGED', 10);
+
+INSERT INTO return_book_item(return_book_id) values
+(3);
+
+INSERT INTO return_item_books(return_book_item_id, book_id) values
+(3, 52);
+
+INSERT INTO return_book_media_file(return_book_id, media_file_id) values
+(3, 11), (3, 12), (3, 13), (3, 14), (3, 15);
+
+INSERT INTO notification (content, created_at, hyper_link, sent_time, status, title, type, customer_id, owner_id, staff_id)
+VALUES
+('Bạn có một đơn hàng mới đang chờ xác nhận', '2024-11-01 12:00:00', '/staff/order-dashboard', '2024-11-01 12:00:00', 'NOT_SEEN', 'Đơn hàng mới 1', 'ORDER', NULL, NULL, 2),
+('Bạn có một đơn hàng mới đang chờ xác nhận', '2024-11-05 08:30:00', '/staff/order-dashboard', '2024-11-05 08:30:00', 'NOT_SEEN', 'Đơn hàng mới 2', 'ORDER', NULL, NULL, 2),
+('Bạn có một đơn hàng mới đang chờ xác nhận', '2024-11-10 14:45:00', '/staff/order-dashboard', '2024-11-10 14:45:00', 'NOT_SEEN', 'Đơn hàng mới 3', 'ORDER', NULL, NULL, 2),
+('Bạn có một đơn hàng mới đang chờ xác nhận', '2024-11-15 10:00:00', '/staff/order-dashboard', '2024-11-15 10:00:00', 'NOT_SEEN', 'Đơn hàng mới 4', 'ORDER', NULL, NULL, 2),
+('Bạn có một đơn hàng mới đang chờ xác nhận', '2024-11-20 16:30:00', '/staff/order-dashboard', '2024-11-20 16:30:00', 'NOT_SEEN', 'Đơn hàng mới 5', 'ORDER', NULL, NULL, 2);
+
+
 INSERT INTO order_status_history(status, status_change_date, order_id) values
 ('PLACED', '2024-11-03 10:30:00', 1),
 ('CONFIRMED', '2024-11-03 11:00:00', 1),
@@ -4748,10 +4900,25 @@ INSERT INTO order_status_history(status, status_change_date, order_id) values
 ('REVIEWED', '2024-11-7 9:30:00', 1);
 
 INSERT INTO order_status_history(status, status_change_date, order_id) values
+('PLACED', '2024-11-11 14:00:00', 2),
+('CONFIRMED', '2024-11-11 14:10:00', 2),
+('WAITING_FOR_SHIPPING', '2024-11-11 15:00:00', 2),
+('COMPLETED', '2024-11-13 15:00:00', 2);
+
+INSERT INTO order_status_history(status, status_change_date, order_id) values
 ('PLACED', '2024-11-20 09:15:00', 3);
 
 INSERT INTO order_status_history(status, status_change_date, order_id) values
-('PLACED', '2024-11-5 11:30:00', 5);
+('PLACED', '2024-11-04 16:45:00', 4),
+('CONFIRMED', '2024-11-11 15:10:00', 4);
+
+INSERT INTO order_status_history(status, status_change_date, order_id) values
+('PLACED', '2024-11-5 11:20:00', 5);
+
+INSERT INTO order_status_history(status, status_change_date, order_id) values
+('PLACED', '2024-11-06 15:30:00', 6),
+('CONFIRMED', '2024-11-06 16:00:00', 6),
+('WAITING_FOR_SHIPPING', '2024-11-06 16:30:00', 6);
 
 INSERT INTO order_status_history(status, status_change_date, order_id) values
 ('PLACED', '2024-11-07 8:00:00', 7),
@@ -4759,3 +4926,22 @@ INSERT INTO order_status_history(status, status_change_date, order_id) values
 ('WAITING_FOR_SHIPPING', '2024-11-07 11:30:00', 7),
 ('COMPLETED', '2024-11-09 9:30:00', 7),
 ('REVIEWED', '2024-11-10 9:30:00', 7);
+
+INSERT INTO order_status_history(status, status_change_date, order_id) values
+('PLACED', '2024-11-08 13:55:00', 8),
+('CONFIRMED', '2024-11-08 14:00:00', 8),
+('WAITING_FOR_SHIPPING', '2024-11-08 15:00:00', 8);
+
+INSERT INTO order_status_history(status, status_change_date, order_id) values
+('PLACED', '2024-11-06 12:48:00', 9),
+('CONFIRMED', '2024-11-06 13:00:00', 9),
+('WAITING_FOR_SHIPPING', '2024-11-06 14:00:00', 9),
+('COMPLETED', '2024-11-08 9:30:00', 9),
+('REVIEWED', '2024-11-10 15:00:00', 9);
+
+INSERT INTO order_status_history(status, status_change_date, order_id) values
+('PLACED', '2024-10-20 16:25:00', 10),
+('CONFIRMED', '2024-10-20 16:30:00', 10),
+('WAITING_FOR_SHIPPING', '2024-10-20 17:00:00', 10),
+('COMPLETED', '2024-10-21 13:22:00', 10),
+('REVIEWED', '2024-10-21 16:15:00', 10);

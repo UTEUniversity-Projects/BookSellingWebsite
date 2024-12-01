@@ -3,6 +3,7 @@ package com.biblio.entity;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.experimental.SuperBuilder;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -12,6 +13,7 @@ import java.io.Serializable;
 @NoArgsConstructor
 @Getter
 @Setter
+@SuperBuilder
 public class BankTransfer extends Payment implements Serializable {
 
     // region Attributes

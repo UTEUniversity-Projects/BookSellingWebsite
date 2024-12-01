@@ -818,9 +818,10 @@ ul {
   border-radius: 2px;
   border-left: 4px solid;
   box-shadow: 0 5px 8px rgba(0, 0, 0, 0.08);
-  padding: 20px 0;
+  padding-block: 20px;
   min-width: 200px;
   transition: all 0.2s linear;
+  padding-right: 20px;
 }
 
 @keyframes slideInLeft {
@@ -845,6 +846,7 @@ ul {
 
 .toast__body {
   flex-grow: 1;
+  margin-right: 8px;
 }
 
 .toast__title {
@@ -861,7 +863,6 @@ ul {
 }
 
 .toast__close {
-  padding: 0 16px;
   font-size: 20px;
   color: rgba(0, 0, 0, 0.3);
   cursor: pointer;
@@ -7648,7 +7649,6 @@ table {
   padding: 10px 20px;
   font-size: 14px; /* Giảm kích thước font để thu nhỏ lại */
   border-radius: 5px;
-  width: 22%; /* Chiếm 48% chiều rộng của container */
   text-align: center;
   transition: background-color 0.3s;
 }
@@ -7669,6 +7669,18 @@ table {
 
 .change-password-button:hover {
   background-color: #e65c00;
+}
+
+.gender-options {
+  display: flex; /* Đặt các phần tử bên trong thành hàng ngang */
+  align-items: center; /* Căn giữa theo chiều dọc */
+}
+
+.gender-options label {
+  margin-right: 200px; /* Khoảng cách giữa 2 label */
+  display: flex; /* Đảm bảo các phần tử trong label nằm ngang */
+  align-items: center; /* Căn chỉnh radio button và text theo chiều dọc */
+  gap: 5px; /* Khoảng cách giữa radio button và text */
 }
 
 .review-section {
@@ -9711,11 +9723,14 @@ p {
   position: absolute;
   top: 50%;
   left: 50%;
-  transform: translate(-50%, -250%);
+  transform: translate(-50%, -50%) scale(0);
+  transform-origin: center center;
 }
 
 .checkout.active .checkout-qr {
-  transform: translate(-50%, -50%);
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(1);
 }
 
 .content-container {
@@ -9799,7 +9814,7 @@ p {
   padding-bottom: 20px;
 }
 
-.top-container {
+.book-container {
   border-top: 1px solid #30cb83 !important; /* Dùng !important để đảm bảo nó được áp dụng */
   padding-top: 20px;
 }
@@ -10436,6 +10451,46 @@ p {
   }
   95%, 100% {
     transform: rotateY(0deg);
+  }
+}
+.checkout-loading {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.book-wrapper {
+  width: 150px;
+  height: fit-content;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  position: relative;
+}
+
+.book {
+  width: 100%;
+  height: auto;
+  filter: drop-shadow(10px 10px 5px rgba(0, 0, 0, 0.137));
+}
+
+.book-wrapper .book-page {
+  width: 50%;
+  height: auto;
+  position: absolute;
+  animation: paging 0.15s linear infinite;
+  transform-origin: left;
+}
+
+@keyframes paging {
+  0% {
+    transform: rotateY(0deg) skewY(0deg);
+  }
+  50% {
+    transform: rotateY(90deg) skewY(-20deg);
+  }
+  100% {
+    transform: rotateY(180deg) skewY(0deg);
   }
 }
 /* Bộ lọc trạng thái */

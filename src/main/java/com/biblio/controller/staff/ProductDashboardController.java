@@ -21,9 +21,6 @@ public class ProductDashboardController extends HttpServlet {
     @Inject
     IBookTemplateService bookTemplateService;
 
-    @Inject
-    IPromotionTemplateService promotionTemplateService;
-
     @Serial
     private static final long serialVersionUID = 1L;
 
@@ -45,9 +42,10 @@ public class ProductDashboardController extends HttpServlet {
         System.out.println(session.getAttribute("account"));
 
         List<BookManagementResponse> books = bookTemplateService.getAllBookManagementResponse();
-        request.setAttribute("books", books);
 
+        request.setAttribute("books", books);
         request.getRequestDispatcher("/views/staff/product-dashboard.jsp").forward(request, response);
+
     }
 
     /**

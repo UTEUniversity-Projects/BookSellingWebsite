@@ -10,7 +10,8 @@ import lombok.*;
 @Builder
 @ToString
 public class ShippingResponse {
-    private String address;
+    private Long id;
+    private AddressResponse address;
     private String shippingUnit;
     private double shippingFee;
 }
