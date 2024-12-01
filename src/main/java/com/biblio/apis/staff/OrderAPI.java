@@ -106,6 +106,10 @@ public class OrderAPI extends HttpServlet {
                     handleCancelRefundOrder(request, response, result, mapper);
                     break;
 
+                case "/received-order":
+                    handleReceivedOrder(request, response, result, mapper);
+                    break;
+
                 default:
                     result.put("message", "Không tìm thấy hành động phù hợp!");
                     result.put("type", "error");
@@ -247,11 +251,63 @@ public class OrderAPI extends HttpServlet {
         }
         response.getWriter().write(mapper.writeValueAsString(result));
     }
+
+    private void handleReceivedOrder(HttpServletRequest request, HttpServletResponse response, Map<String, String> result, ObjectMapper mapper) throws IOException {
+        Map<String, Object> jsonMap = mapper.readValue(request.getReader(), Map.class);
+        long orderId = Long.parseLong(jsonMap.get("orderId").toString());
+        boolean success = orderService.updateStatus(orderId, EOrderStatus.COMPLETE_DELIVERY);
+        if (success) {
+            result.put("message", "Đơn hàng được nhận thành công!");
+            result.put("type", "success");
+            result.put("statusType", EOrderStatus.COMPLETE_DELIVERY.name());
+            result.put("status", EOrderStatus.COMPLETE_DELIVERY.getDescription());
+            result.put("statusStyle", EOrderStatus.COMPLETE_DELIVERY.getStatusStyle());
+        } else {
+            result.put("message", "Không thể xác nhận đơn hàng. Vui lòng thử lại!");
+            result.put("type", "info");
+        }
+
+        response.getWriter().write(mapper.writeValueAsString(result));
+    }
+
+    private void handleGetOrderHistory(HttpServletRequest request, HttpServletResponse response, ObjectMapper mapper) throws IOException {
+        String orderIdStr = request.getParameter("orderId");
+
+        if (orderIdStr == null || orderIdStr.isEmpty()) {
+            response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
+            response.getWriter().write("{\"error\": \"Missing orderId parameter\"}");
+            return;
+        }
+
+        Long orderId = null;
+        try {
+            orderId = Long.parseLong(orderIdStr);
+        } catch (NumberFormatException e) {
+            response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
+            response.getWriter().write("{\"error\": \"Invalid orderId format\"}");
+            return;
+        }
+
+        List<OrderStatusHistoryResponse> orderHistories = orderStatusHistoryService.getByOrderId(orderId);
+
+        List<Map<String, Object>> steps = new ArrayList<>();
+        for (OrderStatusHistoryResponse history : orderHistories) {
+            Map<String, Object> step = new HashMap<>();
+            step.put("status", history.getStatus());
+            step.put("date", history.getDate());
+            steps.add(step);
+        }
+
+        Map<String, Object> responseMap = new HashMap<>();
+        responseMap.put("steps", steps);
+        response.getWriter().write(mapper.writeValueAsString(responseMap));
+    }
+
     // endregion
 
     // region Email
 
-    private void sendOrderConfirmationEmail(HttpServletRequest request ,Long orderId/*, Double finalPrice*/) throws IOException {
+    private void sendOrderConfirmationEmail(HttpServletRequest request, Long orderId) throws IOException {
         String scheme = request.getScheme();
         String serverName = request.getServerName();
         int serverPort = request.getServerPort();
@@ -290,7 +346,7 @@ public class OrderAPI extends HttpServlet {
         }
     }
 
-    private void sendCancelOrderEmail(HttpServletRequest request,Long orderId, String cancelContent) throws IOException {
+    private void sendCancelOrderEmail(HttpServletRequest request, Long orderId, String cancelContent) throws IOException {
         String scheme = request.getScheme();
         String serverName = request.getServerName();
         int serverPort = request.getServerPort();
@@ -329,40 +385,6 @@ public class OrderAPI extends HttpServlet {
         }
     }
 
-    // endregion
-
-    private void handleGetOrderHistory(HttpServletRequest request, HttpServletResponse response, ObjectMapper mapper) throws IOException {
-        String orderIdStr = request.getParameter("orderId");
-
-        if (orderIdStr == null || orderIdStr.isEmpty()) {
-            response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
-            response.getWriter().write("{\"error\": \"Missing orderId parameter\"}");
-            return;
-        }
-
-        Long orderId = null;
-        try {
-            orderId = Long.parseLong(orderIdStr);
-        } catch (NumberFormatException e) {
-            response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
-            response.getWriter().write("{\"error\": \"Invalid orderId format\"}");
-            return;
-        }
-
-        List<OrderStatusHistoryResponse> orderHistories = orderStatusHistoryService.getByOrderId(orderId);
-
-        List<Map<String, Object>> steps = new ArrayList<>();
-        for (OrderStatusHistoryResponse history : orderHistories) {
-            Map<String, Object> step = new HashMap<>();
-            step.put("status", history.getStatus());
-            step.put("date", history.getDate());
-            steps.add(step);
-        }
-
-        Map<String, Object> responseMap = new HashMap<>();
-        responseMap.put("steps", steps);
-        response.getWriter().write(mapper.writeValueAsString(responseMap));
-    }
     private void sendConfirmRefundOrderEmail(HttpServletRequest request, Long orderId) throws IOException {
         String scheme = request.getScheme();
         String serverName = request.getServerName();
@@ -440,7 +462,8 @@ public class OrderAPI extends HttpServlet {
             }
         }
     }
-
+    
+    // endregion
 
 }
 

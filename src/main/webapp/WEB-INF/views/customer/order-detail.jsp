@@ -85,10 +85,11 @@
                 <!-- Phần địa chỉ vận chuyển -->
                 <div class="address-container mt-5 px-4 py-3"
                      style="background-color: white; border: 1px solid rgba(0, 0, 0, 0.1); border-radius: 8px;">
-                    <div class="d-flex justify-content-between">
+                    <div class="d-flex justify-content-between w-100">
                         <h5 style="margin-bottom: 10px;">Địa chỉ vận chuyển</h5>
-                        <h5 id="order-id" data-order-id="${orderDetail.id}" style="margin-bottom: 10px;">Mã đơn hàng
-                            #${orderDetail.id}</h5>
+                        <h5 id="order-id" data-order-id="${orderDetail.id}" style="margin-bottom: 10px;">
+                            Mã đơn hàng #${orderDetail.id}
+                        </h5>
                     </div>
                     <p class="top-container"
                        style="margin: 0; margin-bottom: 10px;">${orderDetail.shipping.shippingUnit}</p>
@@ -96,9 +97,7 @@
                 </div>
             </div>
         </div>
-
     </div>
-
 </section>
 
 <section class="section-return py-5 bg-light">
@@ -135,7 +134,10 @@
                                     <div class="text-right">
                                         <p class="price-value">${orderProduct.sellingPrice}</p>
                                         <p>x${orderProduct.quantity}</p>
-                                        <button class="cr-btn-secondary btn-review">
+                                        <button class="cr-btn-secondary btn-review
+                                                <c:if test="${orderDetail.status != 'COMPLETE_DELIVERY'}">
+                                                    d-none
+                                                </c:if>">
                                             Đánh giá
                                         </button>
                                     </div>
@@ -150,8 +152,6 @@
                             <span id="toggle-text">Xem thêm ▼</span>
                         </div>
                     </c:if>
-
-
                     <!-- Tổng tiền -->
                     <div class="order-summary">
                         <div class="summary-item">
@@ -179,11 +179,21 @@
                                  style="font-size: 20px; font-weight: bold;">${orderDetail.finalPrice}</div>
                         </div>
                     </div>
+
+                    <c:if test="${orderDetail.status == 'SHIPPING'}">
+                        <div class="w-100 d-flex justify-content-end mt-30">
+                            <button class="cr-button btn-received">
+                                Đã nhận hàng
+                            </button>
+                        </div>
+                    </c:if>
                 </div>
             </div>
         </div>
     </div>
 </section>
+
+<!-- region Modal -->
 
 <div class="modal fade" id="reviewModal" tabindex="-1" aria-labelledby="reviewModalLabel" aria-hidden="true">
     <div class="modal-dialog">
@@ -374,8 +384,27 @@
     </div>
 </div>
 
+<div class="modal fade" id="receivedModal" tabindex="-1" aria-labelledby="receivedModalLabel"
+     aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="receivedModalLabel">Bạn có chắc muốn xác nhận nhận hàng không?</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="cr-btn-secondary" data-bs-dismiss="modal">Hủy</button>
+                <button type="button" class="cr-button" id="confirmReceived">Xác nhận</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- endregion -->
+
 <script src="${pageContext.request.contextPath}/assets/customer/js/stepper.js"></script>
 <script src="${pageContext.request.contextPath}/assets/commons/js/format-currency.js"></script>
 <script src="${pageContext.request.contextPath}/assets/commons/js/format-discount-percent.js"></script>
 <script src="${pageContext.request.contextPath}/assets/customer/js/review-book.js" type="module"></script>
+<script src="${pageContext.request.contextPath}/assets/customer/js/order-details.js" type="module"></script>
 <script defer src="${pageContext.request.contextPath}/assets/customer/js/order-list.js"></script>

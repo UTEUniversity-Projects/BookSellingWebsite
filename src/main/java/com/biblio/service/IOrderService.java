@@ -21,11 +21,11 @@ public interface IOrderService {
   
     List<RevenueResponse> getListRevenueAtTime(LocalDateTime start, LocalDateTime end);
 
-    List<OrderCustomerResponse> getOrderCustomerByStatus(Long customerId, String status);
+    List<OrderDetailsManagementResponse> getOrderCustomerByStatus(Long customerId, String status);
 
     List<CountBookSoldResponse> getListCountBookSoldAtTime(LocalDateTime start, LocalDateTime end);
   
-    List<OrderCustomerResponse> getAllOrderCustomerResponse(Long customerId);
+    List<OrderDetailsManagementResponse> getAllOrderCustomerResponse(Long customerId);
 
     OrderCustomerResponse findOrderById(Long orderId);
   
