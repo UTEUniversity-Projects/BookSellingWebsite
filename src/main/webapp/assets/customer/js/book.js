@@ -147,8 +147,6 @@ $(document).ready(() => {
 			url: `${contextPath}/api/customer/load-book-home`, type: 'GET', success: function (result) {
 				const books = result.books;
 
-				console.log({books, bookList});
-
 				if (bookList) bookList.innerHTML = books?.map(generateBook).join('');
 
 				$('.modal.fade.quickview-modal').remove();
@@ -163,10 +161,6 @@ $(document).ready(() => {
 	const lazyLoad = () => {
 		lazyLoadElements.forEach(element => {
 			if (isElementInViewport(element)) {
-				toast({
-					title: 'OK'
-				});
-
 				getBooks();
 
 				window.removeEventListener('scroll', onScroll);

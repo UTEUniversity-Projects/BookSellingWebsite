@@ -14,5 +14,4 @@ public class ShippingResponse {
     private AddressResponse address;
     private String shippingUnit;
     private double shippingFee;
-
 }

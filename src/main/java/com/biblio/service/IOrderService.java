@@ -1,5 +1,6 @@
 package com.biblio.service;
 
+import com.biblio.dto.request.CreateOrderRequest;
 import com.biblio.dto.response.*;
 import com.biblio.enumeration.EOrderStatus;
 
@@ -32,5 +33,8 @@ public interface IOrderService {
 
     List<CountOrderOfCustomerResponse> getCountOrderOfCustomerAtTime(LocalDateTime start, LocalDateTime end);
 
+    Long createOrder(CreateOrderRequest request);
+
     List<OrderReturnAtTimeResponse> getListOrderReturnAtTime(LocalDateTime start, LocalDateTime end);
+
 }
