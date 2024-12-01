@@ -31,10 +31,11 @@
         <div id="order-filters" class="flex justify-evenly items-center bg-white py-3 mb-5 border border-gray-200">
             <c:set var="currentStatus" value="${param.status != null ? param.status : 'all'}" />
             <a href="?status=all" class="tag ${currentStatus == 'all' ? 'text-[#26aa99] font-bold' : 'text-gray-500'}">Tất cả</a>
-            <a href="?status=WAITING_CONFIRMATION" class="tag ${currentStatus == 'WAITING_CONFIRMATION' ? 'text-[#26aa99] font-bold' : 'text-gray-500'}">Chờ xác nhận</a>
-            <a href="?status=SHIPPING" class="tag ${currentStatus == 'SHIPPING' ? 'text-[#26aa99] font-bold' : 'text-gray-500'}">Đang giao hàng</a>
+            <a href="?status=WAITING_PAYMENT,PAID" class="tag ${currentStatus == 'WAITING_PAYMENT,PAID' ? 'text-[#26aa99] font-bold' : 'text-gray-500'}">Thanh toán</a>
+            <a href="?status=WAITING_CONFIRMATION, PACKING, SHIPPING" class="tag ${currentStatus == 'WAITING_CONFIRMATION, PACKING, SHIPPING' ? 'text-[#26aa99] font-bold' : 'text-gray-500'}">Đang xử lý</a>
             <a href="?status=COMPLETE_DELIVERY" class="tag ${currentStatus == 'COMPLETE_DELIVERY' ? 'text-[#26aa99] font-bold' : 'text-gray-500'}">Hoàn tất giao hàng</a>
             <a href="?status=CANCELED" class="tag ${currentStatus == 'CANCELED' ? 'text-[#26aa99] font-bold' : 'text-gray-500'}">Đã hủy</a>
+            <a href="?status=REQUEST_REFUND, REFUNDED" class="tag ${currentStatus == 'REQUEST_REFUND, REFUNDED' ? 'text-[#26aa99] font-bold' : 'text-gray-500'}">Yêu cầu hoàn tiền</a>
         </div>
 
         <!-- Danh sách đơn hàng -->

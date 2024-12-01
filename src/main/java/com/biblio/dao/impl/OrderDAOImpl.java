@@ -180,6 +180,7 @@ public class OrderDAOImpl extends GenericDAOImpl<Order> implements IOrderDAO {
         return true;
     }
 
+
     public static void main(String[] args) {
         OrderDAOImpl dao = new OrderDAOImpl();
         Order order = dao.findOne(1L);

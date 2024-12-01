@@ -1,9 +1,12 @@
 package com.biblio.dao.impl;
 
 import com.biblio.dao.IReturnBookDAO;
+import com.biblio.entity.Book;
 import com.biblio.entity.ReturnBook;
+import com.biblio.entity.ReturnBookItem;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class ReturnBookDAOImpl extends GenericDAOImpl<ReturnBook> implements IReturnBookDAO {

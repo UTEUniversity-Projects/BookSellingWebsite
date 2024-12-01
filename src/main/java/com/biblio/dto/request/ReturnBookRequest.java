@@ -11,7 +11,6 @@ import java.time.LocalDate;
 @Setter
 @Builder
 public class ReturnBookRequest {
-    private EReasonReturn reason;
-    private String description;
-    private Long orderId;
+    private Long idTemplate;
+    private Integer returnQuantity;
 }
