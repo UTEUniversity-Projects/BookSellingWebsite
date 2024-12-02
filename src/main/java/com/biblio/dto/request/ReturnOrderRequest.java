@@ -12,9 +12,9 @@ import java.util.List;
 @Setter
 @Builder
 public class ReturnOrderRequest {
+    private Long orderId;
     private EReasonReturn reason;
     private String description;
-    private Long orderId;
-    private List<ReturnBookRequest> returnBookItems; // Thêm trường này để chứa các item trả lại
+    private List<ReturnBookRequest> returnBookItems;
 
 }

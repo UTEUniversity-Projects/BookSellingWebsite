@@ -77,7 +77,7 @@ public class Book implements Serializable {
 
     // region Relationships
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "book_template_id", nullable = false)
     private BookTemplate bookTemplate;
 

@@ -44,3 +44,7 @@ $('#confirmReceived').on('click', function () {
         }
     });
 })
+
+$('.product-title').on('click', function () {
+    window.location.href = $(this).data('href');
+});

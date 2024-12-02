@@ -17,7 +17,7 @@ public class ReturnBookItem {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "return_book_id", nullable = false)
     private ReturnBook returnBook;
 
@@ -28,11 +28,5 @@ public class ReturnBookItem {
             inverseJoinColumns = @JoinColumn(name = "book_id")
     )
     private Set<Book> books = new HashSet<>();
-
-    public double calPriceItem() {
-        return books.stream()
-                .mapToDouble(Book::getSellingPrice)
-                .sum();
-    }
 
 }

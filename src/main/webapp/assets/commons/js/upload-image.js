@@ -84,5 +84,3 @@ export async function uploadImageToDrive(postData) {
 		alert("Vui lòng thử lại");
 	}
 }
-
-
