@@ -1,6 +1,7 @@
 package com.biblio.controller.owner;
 
 import com.biblio.dto.response.BookDetailsResponse;
+import com.biblio.dto.response.DiscountResponse;
 import com.biblio.service.IBookTemplateService;
 import com.biblio.service.IPromotionTemplateService;
 
@@ -13,6 +14,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.Serial;
+import java.util.List;
 
 @WebServlet("/owner/product-details")
 public class ProductDetailsController extends HttpServlet {
@@ -40,7 +42,11 @@ public class ProductDetailsController extends HttpServlet {
         // TODO Auto-generated method stub
         Long bookId = Long.parseLong(request.getParameter("id"));
         BookDetailsResponse book = bookTemplateService.getBookDetailsResponse(bookId);
-        book.setDiscount(promotionTemplateService.percentDiscountOfBook(book.getId()));
+
+        List<DiscountResponse> discounts = promotionTemplateService.getAllDiscounts();
+        book.setDiscount(promotionTemplateService.percentDiscount(book.getId(), discounts));
+
+//        book.setDiscount(promotionTemplateService.percentDiscountOfBook(book.getId()));
         request.setAttribute("book", book);
         request.getRequestDispatcher("/views/owner/product-details.jsp").forward(request, response);
     }

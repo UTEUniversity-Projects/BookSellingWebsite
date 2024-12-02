@@ -5,12 +5,10 @@ import com.biblio.dao.IPromotionDAO;
 import com.biblio.dao.IPromotionTemplateDAO;
 import com.biblio.dto.request.PromotionTemplateInsertRequest;
 import com.biblio.dto.request.PromotionTemplateUpdateRequest;
-import com.biblio.dto.response.ApplyCodePromotionResponse;
-import com.biblio.dto.response.PromotionTemplateGetDetailsResponse;
-import com.biblio.dto.response.PromotionTemplateGetResponse;
-import com.biblio.dto.response.PromotionTemplateResponse;
+import com.biblio.dto.response.*;
 import com.biblio.entity.*;
 import com.biblio.enumeration.EPromotionStatus;
+import com.biblio.enumeration.EPromotionTargetType;
 import com.biblio.enumeration.EPromotionTemplateStatus;
 import com.biblio.enumeration.EPromotionTemplateType;
 import com.biblio.mapper.PromotionTemplateMapper;
@@ -21,6 +19,7 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
+import java.util.stream.Collectors;
 
 public class PromotionTemplateServiceImpl implements IPromotionTemplateService {
     @Inject
@@ -134,6 +133,71 @@ public class PromotionTemplateServiceImpl implements IPromotionTemplateService {
     }
 
     @Override
+    public List<DiscountResponse> getAllDiscounts() {
+        List<PromotionTemplate> promotionTemplates = promotionTemplateDAO.findAll();
+        List<DiscountResponse> discountResponses = new ArrayList<>();
+        for (PromotionTemplate promotionTemplate : promotionTemplates) {
+            if (promotionTemplate.getType() == EPromotionTemplateType.DISCOUNT) {
+                for (Promotion promotion : promotionTemplate.getPromotions()) {
+                    if (promotion.getStatus() == EPromotionStatus.NOT_USE &&
+                            (promotion.getEffectiveDate().isBefore(LocalDateTime.now()) || promotion.getEffectiveDate().isEqual(LocalDateTime.now())) &&
+                            (promotion.getExpirationDate().isAfter(LocalDateTime.now()) || promotion.getExpirationDate().isEqual(LocalDateTime.now()))) {
+
+                        for (PromotionTarget promotionTarget : promotion.getPromotionTargets()) {
+
+                            DiscountResponse discountResponse = new DiscountResponse();
+                            discountResponse.setPercentDiscount(promotion.getPercentDiscount());
+                            discountResponse.setIdApplied(promotionTarget.getApplicableObjectId());
+                            discountResponse.setPromotionTargetType(promotionTarget.getType());
+
+                            discountResponses.add(discountResponse);
+                        }
+                    }
+                }
+            }
+        }
+
+        return discountResponses.stream()
+                .sorted((o1, o2) -> Double.compare(o2.getPercentDiscount(), o1.getPercentDiscount()))
+                .collect(Collectors.toList());
+    }
+
+    @Override
+    public Double percentDiscount(Long bookTemplateId, List<DiscountResponse> discounts) {
+        Double percentDiscount = 0.0;
+
+        BookTemplate book = bookTemplateDAO.findOneForDetails(bookTemplateId);
+        Book singlebook = book.getBooks().iterator().next();
+
+
+        for (DiscountResponse discountResponse : discounts) {
+
+            if (discountResponse.getPromotionTargetType() == EPromotionTargetType.SUBCATEGORY) {
+                if (Objects.equals(singlebook.getSubCategory().getId(), discountResponse.getIdApplied())) {
+                    percentDiscount = Math.max(percentDiscount,discountResponse.getPercentDiscount());
+                    break;
+                }
+            } else if (discountResponse.getPromotionTargetType() == EPromotionTargetType.CATEGORY) {
+                if (Objects.equals(singlebook.getSubCategory().getCategory().getId(), discountResponse.getIdApplied())) {
+                    percentDiscount = Math.max(percentDiscount,discountResponse.getPercentDiscount());
+                    break;
+                }
+            } else if (discountResponse.getPromotionTargetType() == EPromotionTargetType.BOOK) {
+                if (Objects.equals(bookTemplateId, discountResponse.getIdApplied())) {
+                    percentDiscount = Math.max(percentDiscount, discountResponse.getPercentDiscount());
+                    break;
+                }
+            }
+            else {
+                percentDiscount = Math.max(percentDiscount, discountResponse.getPercentDiscount());
+                break;
+            }
+        }
+
+        return percentDiscount;
+    }
+
+    @Override
     public ApplyCodePromotionResponse applyCodePromotion(String code, Double amount, EPromotionTemplateType type) {
         ApplyCodePromotionResponse applyCodePromotionResponse = new ApplyCodePromotionResponse();
         PromotionTemplate promotionTemplateNonUpdate = promotionTemplateDAO.findSingleByJPQL(code);
@@ -197,6 +261,7 @@ public class PromotionTemplateServiceImpl implements IPromotionTemplateService {
         promotionTemplate.setStatus(EPromotionTemplateStatus.EXPIRED);
         return promotionTemplateDAO.update(promotionTemplate) != null;
     }
+
 
 
 

@@ -2,10 +2,7 @@ package com.biblio.controller.customer;
 
 import com.biblio.dto.request.CheckoutItemRequest;
 import com.biblio.dto.request.CheckoutRequest;
-import com.biblio.dto.response.AccountGetResponse;
-import com.biblio.dto.response.CheckOutResponse;
-import com.biblio.dto.response.CheckoutItemResponse;
-import com.biblio.dto.response.CustomerDetailResponse;
+import com.biblio.dto.response.*;
 import com.biblio.service.IBookTemplateService;
 import com.biblio.service.ICustomerService;
 import com.biblio.service.IPromotionTemplateService;
@@ -76,13 +73,23 @@ public class CheckoutController extends HttpServlet {
             checkOutResponse.updateShipping();
 
             List<CheckoutItemResponse> items = new ArrayList<>();
+            List<DiscountResponse> discounts = promotionTemplateService.getAllDiscounts();
+
             for (CheckoutItemRequest item : checkoutRequest.getItems()) {
                 CheckoutItemResponse itemResponse = bookTemplateService.getCheckoutItemResponse(item);
-                double discount = promotionTemplateService.percentDiscountOfBook(item.getProductId());
+                double discount = promotionTemplateService.percentDiscount(item.getProductId(), discounts);
                 itemResponse.setDiscountPercent(discount);
                 itemResponse.calTotalPrice();
                 items.add(itemResponse);
             }
+
+//            for (CheckoutItemRequest item : checkoutRequest.getItems()) {
+//                CheckoutItemResponse itemResponse = bookTemplateService.getCheckoutItemResponse(item);
+//                double discount = promotionTemplateService.percentDiscountOfBook(item.getProductId());
+//                itemResponse.setDiscountPercent(discount);
+//                itemResponse.calTotalPrice();
+//                items.add(itemResponse);
+//            }
 
             checkOutResponse.setItems(items);
             checkOutResponse.setPromotions(new ArrayList<>());

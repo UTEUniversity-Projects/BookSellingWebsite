@@ -1,5 +1,7 @@
 package com.biblio.apis.staff;
 
+import com.biblio.dto.response.BookCardResponse;
+import com.biblio.dto.response.DiscountResponse;
 import com.biblio.dto.response.OrderDetailsManagementResponse;
 import com.biblio.dto.response.OrderProductResponse;
 import com.biblio.service.IEmailService;
@@ -16,6 +18,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.Serial;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 
@@ -96,12 +99,18 @@ public class SendEmailAPI extends HttpServlet {
                 response.getWriter().write("{\"message\": \"Không tìm thấy đơn hàng với ID: " + orderId + "\"}");
                 return;
             }
-
+            List<DiscountResponse> discounts = promotionTemplateService.getAllDiscounts();
             for (OrderProductResponse product : order.getProducts()) {
-                double discount = promotionTemplateService.percentDiscountOfBook(product.getBookTemplateId());
+                double discount = promotionTemplateService.percentDiscount(product.getBookTemplateId(), discounts);
                 product.setDiscountPercent(discount);
                 product.calTotalPrice();
             }
+
+//            for (OrderProductResponse product : order.getProducts()) {
+//                double discount = promotionTemplateService.percentDiscountOfBook(product.getBookTemplateId());
+//                product.setDiscountPercent(discount);
+//                product.calTotalPrice();
+//            }
             order.updateTotalPrice();
             order.updateFinalPrice();
 
@@ -206,12 +215,18 @@ public class SendEmailAPI extends HttpServlet {
                 response.getWriter().write("{\"message\": \"Không tìm thấy đơn hàng với ID: " + orderId + "\"}");
                 return;
             }
+            List<DiscountResponse> discounts = promotionTemplateService.getAllDiscounts();
 
             for (OrderProductResponse product : order.getProducts()) {
-                double discount = promotionTemplateService.percentDiscountOfBook(product.getBookTemplateId());
+                double discount = promotionTemplateService.percentDiscount(product.getBookTemplateId(), discounts);
                 product.setDiscountPercent(discount);
                 product.calTotalPrice();
             }
+//            for (OrderProductResponse product : order.getProducts()) {
+//                double discount = promotionTemplateService.percentDiscountOfBook(product.getBookTemplateId());
+//                product.setDiscountPercent(discount);
+//                product.calTotalPrice();
+//            }
             order.updateTotalPrice();
             order.updateFinalPrice();
 
@@ -299,11 +314,18 @@ public class SendEmailAPI extends HttpServlet {
                 return;
             }
 
+            List<DiscountResponse> discounts = promotionTemplateService.getAllDiscounts();
+
             for (OrderProductResponse product : order.getProducts()) {
-                double discount = promotionTemplateService.percentDiscountOfBook(product.getBookTemplateId());
+                double discount = promotionTemplateService.percentDiscount(product.getBookTemplateId(), discounts);
                 product.setDiscountPercent(discount);
                 product.calTotalPrice();
             }
+//            for (OrderProductResponse product : order.getProducts()) {
+//                double discount = promotionTemplateService.percentDiscountOfBook(product.getBookTemplateId());
+//                product.setDiscountPercent(discount);
+//                product.calTotalPrice();
+//            }
             order.updateTotalPrice();
             order.updateFinalPrice();
 
@@ -376,12 +398,18 @@ public class SendEmailAPI extends HttpServlet {
                 response.getWriter().write("{\"message\": \"Không tìm thấy đơn hàng với ID: " + orderId + "\"}");
                 return;
             }
+            List<DiscountResponse> discounts = promotionTemplateService.getAllDiscounts();
 
             for (OrderProductResponse product : order.getProducts()) {
-                double discount = promotionTemplateService.percentDiscountOfBook(product.getBookTemplateId());
+                double discount = promotionTemplateService.percentDiscount(product.getBookTemplateId(), discounts);
                 product.setDiscountPercent(discount);
                 product.calTotalPrice();
             }
+//            for (OrderProductResponse product : order.getProducts()) {
+//                double discount = promotionTemplateService.percentDiscountOfBook(product.getBookTemplateId());
+//                product.setDiscountPercent(discount);
+//                product.calTotalPrice();
+//            }
             order.updateTotalPrice();
             order.updateFinalPrice();
 

@@ -1,8 +1,6 @@
 package com.biblio.apis.customer;
 
-import com.biblio.dto.response.AccountGetResponse;
-import com.biblio.dto.response.CartItemResponse;
-import com.biblio.dto.response.CartResponse;
+import com.biblio.dto.response.*;
 import com.biblio.entity.Cart;
 import com.biblio.entity.CartItem;
 import com.biblio.service.ICartService;
@@ -20,6 +18,7 @@ import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.io.Serial;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @WebServlet("/api/customer/load-cart-sidebar")
@@ -51,10 +50,15 @@ public class LoadCartSidebarAPI extends HttpServlet {
         ObjectMapper mapper = new ObjectMapper();
         Map<String, Object> map = new HashMap<>();
 
+        List<DiscountResponse> discounts = promotionTemplateService.getAllDiscounts();
+
         CartResponse cart = cartService.getCartResponseByAccountId(account.getId());
         for (CartItemResponse cartItem : cart.getCartItems()) {
-            cartItem.setSalePrice(cartItem.getSellingPrice() - (promotionTemplateService.percentDiscountOfBook(cartItem.getBookId()) / 100) * cartItem.getSellingPrice());
+            cartItem.setSalePrice(cartItem.getSellingPrice() - (promotionTemplateService.percentDiscount(cartItem.getBookId(), discounts) / 100) * cartItem.getSellingPrice());
         }
+//        for (CartItemResponse cartItem : cart.getCartItems()) {
+//            cartItem.setSalePrice(cartItem.getSellingPrice() - (promotionTemplateService.percentDiscountOfBook(cartItem.getBookId()) / 100) * cartItem.getSellingPrice());
+//        }
 
         map.put("cart", cart);
         response.setContentType("application/json");

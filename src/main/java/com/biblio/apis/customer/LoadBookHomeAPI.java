@@ -3,6 +3,7 @@ package com.biblio.apis.customer;
 import com.biblio.dto.response.BookCardResponse;
 import com.biblio.dto.response.CartItemResponse;
 import com.biblio.dto.response.CartResponse;
+import com.biblio.dto.response.DiscountResponse;
 import com.biblio.service.IBookTemplateService;
 import com.biblio.service.IPromotionTemplateService;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -15,6 +16,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.Serial;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -52,9 +54,14 @@ public class LoadBookHomeAPI extends HttpServlet {
 		ObjectMapper mapper = new ObjectMapper();
 		Map<String, Object> map = new HashMap<>();
 
+		List<DiscountResponse> discounts = promotionTemplateService.getAllDiscounts();
+
 		for (BookCardResponse book : books) {
-			book.setSalePrice((book.getSellingPrice() - (promotionTemplateService.percentDiscountOfBook(book.getId()) / 100) * book.getSellingPrice()));
+			book.setSalePrice((book.getSellingPrice() - (promotionTemplateService.percentDiscount(book.getId(),discounts) / 100) * book.getSellingPrice()));
 		}
+//		for (BookCardResponse book : books) {
+//			book.setSalePrice((book.getSellingPrice() - (promotionTemplateService.percentDiscountOfBook(book.getId()) / 100) * book.getSellingPrice()));
+//		}
 
 		map.put("books", books);
 
