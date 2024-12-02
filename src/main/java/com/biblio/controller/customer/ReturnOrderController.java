@@ -104,11 +104,11 @@ public class ReturnOrderController extends HttpServlet {
         boolean success = returnBookService.saveReturnOrder(returnOrderRequest);
 
         if (success) {
-            message = "Đánh giá của bạn đã được gửi thành công!";
+            message = "Yêu cầu của bạn đã được gửi thành công!";
             type = "success";
         } else {
-            message = "Có lỗi xảy ra khi gửi phản hồi. Vui lòng thử lại!";
-            type = "error";
+            message = "Đơn hàng đã quá thời gian hoàn trả!";
+            type = "info";
         }
         ObjectMapper mapper = new ObjectMapper();
         Map<String, String> result = new HashMap<>();
