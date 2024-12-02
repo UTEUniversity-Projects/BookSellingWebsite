@@ -16,3 +16,4 @@ public class Constant {
     public static final Long SESSION_LIVE_TIME = 7 * 24 * 60 * 60L;
     public static final Long COOKIE_LIVE_TIME = 3 * 24 * 60 * 60L;
 }
+
