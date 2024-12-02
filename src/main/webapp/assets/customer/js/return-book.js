@@ -39,18 +39,21 @@ $('#btn-confirm').on('click', function () {
     const reason = $('#reason').val();
     if (!reason) {
         $('#reason-error').show();
+        return;
     } else {
         $('#reason-error').hide();
     }
     const description = $('#description').val();
     if (!description) {
         $('#description-error').show();
+        return;
     } else {
         $('#description-error').hide();
     }
     const files = $('#uploadImage')[0].files;
     if (files.length === 0) {
         $('#file-error').show();
+        return;
     } else {
         $('#file-error').hide();
     }
@@ -66,13 +69,13 @@ $('#btn-confirm').on('click', function () {
         data: JSON.stringify(data),
         success: function (data) {
             toast({
-                title: "Thành công", message: data.message, type: 'success', duration: 3000
+                title: data.type, message: data.message, type: data.type, duration: 3000
             });
             console.log(data);
         },
         error: function (xhr, status, error) {
             toast({
-                title: "Thất bại", message: data.message, type: 'error', duration: 3000
+                title: "Thất bại", message: "Kiểm tra lại thông tin!", type: 'error', duration: 3000
             })
         }
     });
