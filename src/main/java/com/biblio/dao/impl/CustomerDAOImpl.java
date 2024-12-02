@@ -29,6 +29,13 @@ public class CustomerDAOImpl extends GenericDAOImpl<Customer> implements ICustom
         return super.findSingleByJPQL(jpql, params);
     }
 
+    public Customer findByIdForNotification(Long id) {
+        String jpql = "SELECT DISTINCT c FROM Customer c JOIN FETCH c.notifications WHERE c.id = :id";
+        Map<String, Object> params = new HashMap<>();
+        params.put("id", id);
+        return super.findSingleByJPQL(jpql, params);
+    }
+
     @Override
     public void deactivateCustomer(Customer customer) {
         super.update(customer);
@@ -90,4 +97,5 @@ public class CustomerDAOImpl extends GenericDAOImpl<Customer> implements ICustom
     public Customer updateCustomer(Customer customer) {
         return super.update(customer);
     }
+
 }
