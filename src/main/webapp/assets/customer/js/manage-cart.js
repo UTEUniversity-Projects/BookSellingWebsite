@@ -229,36 +229,37 @@ $(document).on('change', '.cr-table-content .cr-cart-checkbox, .cr-table-content
 });
 
 $(document).ready(function() {
-    $("#btn-checkout").click(function() {
-        const selectedItems = [];
-        $(".product-checkbox:checked").each(function() {
-            const productId = $(this).closest("tr").data("product-id");
-            const quantity = $(this).closest("tr").find(".quantity").val();
+	$("#btn-checkout").click(function () {
+		const selectedItems = [];
+		$(".product-checkbox:checked").each(function () {
+			const productId = $(this).closest("tr").data("product-id");
+			const quantity = $(this).closest("tr").find(".quantity").val();
 
-            selectedItems.push({
-                productId: productId,
-                quantity: quantity
-            });
-        });
+			selectedItems.push({
+				productId: productId,
+				quantity: quantity
+			});
+		});
 
-        if (selectedItems.length > 0) {
-            console.log(selectedItems);
-            $.ajax({
-                url: `${contextPath}/api/customer/checkout`,
-                type: "POST",
-                contentType: "application/json",
-                data: JSON.stringify({ items: selectedItems }),
-                success: function(response) {
-                    window.location.href = `${contextPath}/checkout`;
-                },
-                error: function(xhr, status, error) {
-                    alert("Có lỗi xảy ra. Vui lòng thử lại!");
-                }
-            });
-        } else {
-            alert("Vui lòng chọn ít nhất một sản phẩm để thanh toán!");
-        }
-    });
+		if (selectedItems.length > 0) {
+			console.log(selectedItems);
+			$.ajax({
+				url: `${contextPath}/api/customer/checkout`,
+				type: "POST",
+				contentType: "application/json",
+				data: JSON.stringify({ items: selectedItems }),
+				success: function (response) {
+					window.location.href = `${contextPath}/checkout`;
+				},
+				error: function (xhr, status, error) {
+					alert("Có lỗi xảy ra. Vui lòng thử lại!");
+				}
+			});
+		} else {
+			alert("Vui lòng chọn ít nhất một sản phẩm để thanh toán!");
+		}
+	});
+});
 
 $(document).ready(function () {
 	$('#btn-checkout').click(function () {
