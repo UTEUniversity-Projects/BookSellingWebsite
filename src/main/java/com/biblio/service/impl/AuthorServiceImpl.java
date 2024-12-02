@@ -87,8 +87,8 @@ public class AuthorServiceImpl implements IAuthorService {
     }
 
     @Override
-    public void create(AuthorCreateRequest authorCreateRequest) {
-        authorDAO.create(authorCreateRequest);
+    public Author create(AuthorCreateRequest authorCreateRequest) {
+        return authorDAO.create(authorCreateRequest);
     }
 
     @Override

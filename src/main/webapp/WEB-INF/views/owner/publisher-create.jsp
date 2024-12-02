@@ -50,7 +50,7 @@
                     </div>
                     <br>
                     <div class="col-12">
-                      <label for="name">Họ và tên</label>
+                      <label for="name">Nhà xuất bản<sup class="color-secondary" style="font-size: 100%">*</sup></label>
                       <input id="name" name="name" class="form-control here slug-title publisher.name" type="text" />
                     </div>
                     <br>
@@ -98,6 +98,16 @@
 <script src="${pageContext.request.contextPath}/assets/owner/js/manage/manage-publisher.js" defer></script>
 
 <style>
+  .form-control {
+    border-radius: 10px;
+    color: #2b3647;
+  }
+  .form-control:focus {
+    border-color: #007bff;
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+    outline: none;
+    color: #2b3647;
+  }
   .editor-area {
     justify-content: space-between;
     align-items: center;
@@ -106,12 +116,6 @@
   .review-area {
     padding-top: 30px;
     padding-bottom: 20px;
-  }
-  .publisher.name {
-    font-family: 'Nunito', sans-serif;
-    font-size: 90%;
-    font-weight: bold;
-    color: #2b3647;
   }
   div .edit-introduction p{
     width: 100%;

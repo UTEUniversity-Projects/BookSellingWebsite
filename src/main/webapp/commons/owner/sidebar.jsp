@@ -65,7 +65,7 @@
                                     <a
                                             href="${pageContext.request.contextPath}/owner/sub-category/list"
                                             class="cr-page-link drop"
-                                    ><i class="ri-checkbox-blank-circle-line"></i>Phân loại</a>
+                                    ><i class="ri-checkbox-blank-circle-line"></i>Thể loại</a>
                                 </li>
                             </ul>
                         </li>

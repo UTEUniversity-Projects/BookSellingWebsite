@@ -1,17 +1,18 @@
 package com.biblio.entity;
 
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
+import lombok.experimental.FieldDefaults;
 
 import javax.persistence.*;
 import java.io.Serializable;
 
 @Entity
 @Table(name = "media_file")
+@Data
+@Builder
+@AllArgsConstructor
 @NoArgsConstructor
-@Getter
-@Setter
+@FieldDefaults(level = AccessLevel.PRIVATE)
 public class MediaFile implements Serializable {
 
     // region Attributes

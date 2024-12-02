@@ -6,6 +6,7 @@ import com.biblio.dto.request.TranslatorUpdateRequest;
 import com.biblio.dto.response.TranslatorAnalysisResponse;
 import com.biblio.dto.response.TranslatorLineResponse;
 import com.biblio.dto.response.TranslatorProfileResponse;
+import com.biblio.entity.Translator;
 import com.biblio.service.ITranslatorService;
 import com.biblio.utils.HttpUtil;
 import com.biblio.utils.ManageFileUtil;
@@ -148,10 +149,10 @@ public class ManageTranslatorController extends HttpServlet {
             TranslatorCreateRequest translatorCreateRequest = HttpUtil.of(request.getReader()).toModel(TranslatorCreateRequest.class);
             translatorCreateRequest.setJoinAt(LocalDateTime.now().toString());
 
-            translatorService.create(translatorCreateRequest);
+            Translator translator = translatorService.create(translatorCreateRequest);
 
             response.setStatus(HttpServletResponse.SC_OK);  // 200 OK
-            response.getWriter().write("{\"status\": \"success\", \"message\": \"Created successfully.\"}");
+            response.getWriter().write("{\"status\": \"success\", \"id\": " + translator.getId() + ", \"message\": \"Created successfully.\"}");
         } catch (Exception e) {
             response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);  // 500 Internal Server Error
             response.getWriter().write("{\"status\": \"fail\", \"message\": \"Error creating: " + e.getMessage() + "\"}");

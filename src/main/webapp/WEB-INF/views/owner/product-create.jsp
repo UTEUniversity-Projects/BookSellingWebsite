@@ -1,4 +1,10 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
 
 <!-- main content -->
 <div class="cr-main-content">
@@ -17,303 +23,329 @@
             </div>
         </div>
         <div class="row">
-            <div class="col-md-12">
-                <div class="cr-card card-default card-3d-deep">
-                    <div class="cr-card-content">
-                        <div class="row cr-product-uploads">
-                            <div class="col-lg-4 mb-991">
-                                <div class="cr-vendor-img-upload">
-                                    <div class="cr-vendor-main-img">
-                                        <div class="avatar-upload">
-                                            <div class="avatar-edit">
-                                                <input type='file' id="product_main" class="cr-image-upload"
-                                                       accept=".png, .jpg, .jpeg">
-                                                <label><i class="ri-pencil-line"></i></label>
-                                            </div>
-                                            <div class="avatar-preview cr-preview">
-                                                <div class="imagePreview cr-div-preview">
-                                                    <img class="cr-image-preview"
-                                                         src="${pageContext.request.contextPath}/assets/owner/img/product/preview.jpg"
-                                                         alt="edit">
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="thumb-upload-set colo-md-12">
-                                            <div class="thumb-upload">
-                                                <div class="thumb-edit">
-                                                    <input type='file' id="thumbUpload01"
-                                                           class="cr-image-upload"
+            <form id="productCreateForm">
+                <div class="col-md-12">
+                    <div class="cr-card card-default card-3d-deep">
+                        <div class="cr-card-content">
+                            <div class="row cr-product-uploads">
+                                <div class="col-lg-4 mb-991">
+                                    <div class="cr-vendor-img-upload">
+                                        <div class="cr-vendor-main-img">
+                                            <div class="avatar-upload">
+                                                <div class="avatar-edit">
+                                                    <input type='file' id="imgMain" name="imgMain" class="cr-image-upload"
                                                            accept=".png, .jpg, .jpeg">
                                                     <label><i class="ri-pencil-line"></i></label>
                                                 </div>
-                                                <div class="thumb-preview cr-preview">
-                                                    <div class="image-thumb-preview">
-                                                        <img class="image-thumb-preview cr-image-preview"
-                                                             src="${pageContext.request.contextPath}/assets/owner/img/product/preview-2.jpg"
+                                                <div class="avatar-preview cr-preview">
+                                                    <div class="imagePreview cr-div-preview">
+                                                        <img class="cr-image-preview image-shadow rounded-2"
+                                                             src="${pageContext.request.contextPath}/assets/owner/img/product/preview.jpg"
                                                              alt="edit">
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div class="thumb-upload">
-                                                <div class="thumb-edit">
-                                                    <input type='file' id="thumbUpload02"
-                                                           class="cr-image-upload"
-                                                           accept=".png, .jpg, .jpeg">
-                                                    <label><i class="ri-pencil-line"></i></label>
-                                                </div>
-                                                <div class="thumb-preview cr-preview">
-                                                    <div class="image-thumb-preview">
-                                                        <img class="image-thumb-preview cr-image-preview"
-                                                             src="${pageContext.request.contextPath}/assets/owner/img/product/preview-2.jpg"
-                                                             alt="edit">
+                                            <div class="thumb-upload-set colo-md-12">
+                                                <div class="thumb-upload">
+                                                    <div class="thumb-edit">
+                                                        <input type='file' id="thumbUpload01" name="thumb01"
+                                                               class="cr-image-upload"
+                                                               accept=".png, .jpg, .jpeg">
+                                                        <label><i class="ri-pencil-line"></i></label>
+                                                    </div>
+                                                    <div class="thumb-preview cr-preview">
+                                                        <div class="image-thumb-preview">
+                                                            <img class="image-thumb-preview cr-image-preview"
+                                                                 src="${pageContext.request.contextPath}/assets/owner/img/product/preview-2.jpg"
+                                                                 alt="edit">
+                                                        </div>
                                                     </div>
                                                 </div>
-                                            </div>
-                                            <div class="thumb-upload">
-                                                <div class="thumb-edit">
-                                                    <input type='file' id="thumbUpload03"
-                                                           class="cr-image-upload"
-                                                           accept=".png, .jpg, .jpeg">
-                                                    <label><i class="ri-pencil-line"></i></label>
-                                                </div>
-                                                <div class="thumb-preview cr-preview">
-                                                    <div class="image-thumb-preview">
-                                                        <img class="image-thumb-preview cr-image-preview"
-                                                             src="${pageContext.request.contextPath}/assets/owner/img/product/preview-2.jpg"
-                                                             alt="edit">
+                                                <div class="thumb-upload">
+                                                    <div class="thumb-edit">
+                                                        <input type='file' id="thumbUpload02" name="thumb02"
+                                                               class="cr-image-upload"
+                                                               accept=".png, .jpg, .jpeg">
+                                                        <label><i class="ri-pencil-line"></i></label>
+                                                    </div>
+                                                    <div class="thumb-preview cr-preview">
+                                                        <div class="image-thumb-preview">
+                                                            <img class="image-thumb-preview cr-image-preview"
+                                                                 src="${pageContext.request.contextPath}/assets/owner/img/product/preview-2.jpg"
+                                                                 alt="edit">
+                                                        </div>
                                                     </div>
                                                 </div>
-                                            </div>
-                                            <div class="thumb-upload">
-                                                <div class="thumb-edit">
-                                                    <input type='file' id="thumbUpload04"
-                                                           class="cr-image-upload"
-                                                           accept=".png, .jpg, .jpeg">
-                                                    <label><i class="ri-pencil-line"></i></label>
-                                                </div>
-                                                <div class="thumb-preview cr-preview">
-                                                    <div class="image-thumb-preview">
-                                                        <img class="image-thumb-preview cr-image-preview"
-                                                             src="${pageContext.request.contextPath}/assets/owner/img/product/preview-2.jpg"
-                                                             alt="edit">
+                                                <div class="thumb-upload">
+                                                    <div class="thumb-edit">
+                                                        <input type='file' id="thumbUpload03" name="thumb03"
+                                                               class="cr-image-upload"
+                                                               accept=".png, .jpg, .jpeg">
+                                                        <label><i class="ri-pencil-line"></i></label>
+                                                    </div>
+                                                    <div class="thumb-preview cr-preview">
+                                                        <div class="image-thumb-preview">
+                                                            <img class="image-thumb-preview cr-image-preview"
+                                                                 src="${pageContext.request.contextPath}/assets/owner/img/product/preview-2.jpg"
+                                                                 alt="edit">
+                                                        </div>
                                                     </div>
                                                 </div>
-                                            </div>
-                                            <div class="thumb-upload">
-                                                <div class="thumb-edit">
-                                                    <input type='file' id="thumbUpload05"
-                                                           class="cr-image-upload"
-                                                           accept=".png, .jpg, .jpeg">
-                                                    <label><i class="ri-pencil-line"></i></label>
-                                                </div>
-                                                <div class="thumb-preview cr-preview">
-                                                    <div class="image-thumb-preview">
-                                                        <img class="image-thumb-preview cr-image-preview"
-                                                             src="${pageContext.request.contextPath}/assets/owner/img/product/preview-2.jpg"
-                                                             alt="edit">
+                                                <div class="thumb-upload">
+                                                    <div class="thumb-edit">
+                                                        <input type='file' id="thumbUpload04" name="thumb04"
+                                                               class="cr-image-upload"
+                                                               accept=".png, .jpg, .jpeg">
+                                                        <label><i class="ri-pencil-line"></i></label>
+                                                    </div>
+                                                    <div class="thumb-preview cr-preview">
+                                                        <div class="image-thumb-preview">
+                                                            <img class="image-thumb-preview cr-image-preview"
+                                                                 src="${pageContext.request.contextPath}/assets/owner/img/product/preview-2.jpg"
+                                                                 alt="edit">
+                                                        </div>
                                                     </div>
                                                 </div>
-                                            </div>
-                                            <div class="thumb-upload">
-                                                <div class="thumb-edit">
-                                                    <input type='file' id="thumbUpload06"
-                                                           class="cr-image-upload"
-                                                           accept=".png, .jpg, .jpeg">
-                                                    <label><i class="ri-pencil-line"></i></label>
+                                                <div class="thumb-upload">
+                                                    <div class="thumb-edit">
+                                                        <input type='file' id="thumbUpload05" name="thumb05"
+                                                               class="cr-image-upload"
+                                                               accept=".png, .jpg, .jpeg">
+                                                        <label><i class="ri-pencil-line"></i></label>
+                                                    </div>
+                                                    <div class="thumb-preview cr-preview">
+                                                        <div class="image-thumb-preview">
+                                                            <img class="image-thumb-preview cr-image-preview"
+                                                                 src="${pageContext.request.contextPath}/assets/owner/img/product/preview-2.jpg"
+                                                                 alt="edit">
+                                                        </div>
+                                                    </div>
                                                 </div>
-                                                <div class="thumb-preview cr-preview">
-                                                    <div class="image-thumb-preview">
-                                                        <img class="image-thumb-preview cr-image-preview"
-                                                             src="${pageContext.request.contextPath}/assets/owner/img/product/preview-2.jpg"
-                                                             alt="edit">
+                                                <div class="thumb-upload">
+                                                    <div class="thumb-edit">
+                                                        <input type='file' id="thumbUpload06" name="thumb06"
+                                                               class="cr-image-upload"
+                                                               accept=".png, .jpg, .jpeg">
+                                                        <label><i class="ri-pencil-line"></i></label>
+                                                    </div>
+                                                    <div class="thumb-preview cr-preview">
+                                                        <div class="image-thumb-preview">
+                                                            <img class="image-thumb-preview cr-image-preview"
+                                                                 src="${pageContext.request.contextPath}/assets/owner/img/product/preview-2.jpg"
+                                                                 alt="edit">
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="col-lg-8">
-                                <div class="cr-vendor-upload-detail">
-                                    <form class="row g-3">
+                                <div class="col-lg-8">
+                                    <div class="row g-3 ps-3">
                                         <div class="col-md-12">
-                                            <label for="book-title" class="form-label">Tên sản phẩm</label>
-                                            <input type="text" class="form-control slug-title" id="book-title">
+                                            <label for="title" class="form-label">Tên sản phẩm<sup class="color-secondary" style="font-size: 100%">*</sup></label>
+                                            <input id="title" name="title" type="text" class="form-control slug-title">
                                         </div>
                                         <div class="col-md-4">
-                                            <label for="selling-price" class="form-label">Giá bán</label>
-                                            <input type="text" class="form-control slug-title" id="selling-price"
+                                            <label for="sellingPrice" class="form-label">Giá bán<sup class="color-secondary" style="font-size: 100%">*</sup></label>
+                                            <input  id="sellingPrice" name="sellingPrice" type="text" class="form-control slug-title"
                                                    placeholder="Đơn vị: VNĐ">
                                         </div>
                                         <div class="col-md-2">
-                                            <label class="form-label">Số lượng</label>
-                                            <input type="number" class="form-control" id="quantity1">
+                                            <label for="quantity" class="form-label">Số lượng<sup class="color-secondary" style="font-size: 100%">*</sup></label>
+                                            <input id="quantity" name="quantity" type="number" class="form-control" placeholder="100">
                                         </div>
                                         <div class="col-md-6">
-                                            <label class="form-label">Tác giả</label>
-                                            <select class="form-control form-select">
-                                                <option value="a">Nguyễn Nhật Ánh</option>
-                                                <option value="b">B</option>
-                                                <option value="c">C</option>
+                                            <label for="authorIds" class="form-label">Tác giả<sup class="color-secondary" style="font-size: 100%">*</sup></label>
+                                            <select id="authorIds" name="authorIds" class="form-control form-select select2" multiple="multiple">
+                                                <c:forEach var="author" items="${init.authors}">
+                                                    <option class="option-value" value="${author.id}">${author.name}</option>
+                                                </c:forEach>
                                             </select>
                                         </div>
                                         <div class="col-md-6">
-                                            <label class="form-label">Thể loại</label>
-                                            <select class="form-control form-select">
-                                                <optgroup label="Truyện ngắn">
-                                                    <option value="t-shirt">Tự truyện</option>
-                                                    <option value="dress">B</option>
-                                                </optgroup>
-                                                <optgroup label="Tiểu thuyết">
-                                                    <option value="table">A</option>
-                                                    <option value="sofa">B</option>
-                                                </optgroup>
-                                                <optgroup label="Khoa học">
-                                                    <option value="phone">A</option>
-                                                    <option value="laptop">B</option>
-                                                </optgroup>
+                                            <label for="subCategoryId" class="form-label">Thể loại<sup class="color-secondary" style="font-size: 100%">*</sup></label>
+                                            <select id="subCategoryId" name="subCategoryId" class="form-control form-select select2">
+                                                <c:forEach var="category" items="${init.categories}">
+                                                    <optgroup label="${category.name}">
+                                                        <c:forEach var="subCategory" items="${category.subCategories}">
+                                                            <option class="option-value" value="${subCategory.id}">${subCategory.name}</option>
+                                                        </c:forEach>
+                                                    </optgroup>
+                                                </c:forEach>
                                             </select>
                                         </div>
                                         <div class="col-md-6">
-                                            <label class="form-label">Dịch giả</label>
-                                            <select class="form-control form-select">
-                                                <option value="a">Thái Phạm</option>
-                                                <option value="b">B</option>
-                                                <option value="c">C</option>
+                                            <label for="translatorIds" class="form-label">Dịch giả</label>
+                                            <select id="translatorIds" name="translatorIds" class="form-control form-select select2"  multiple="multiple">
+                                                <c:forEach var="translator" items="${init.translators}">
+                                                    <option class="option-value" value="${translator.id}">${translator.name}</option>
+                                                </c:forEach>
                                             </select>
                                         </div>
                                         <div class="col-md-6">
-                                            <label class="form-label">Tình trạng</label>
-                                            <select class="form-control form-select">
-                                                <option value="a">Còn mới</option>
-                                                <option value="b">Đã qua sử dụng</option>
+                                            <label for="conditionCode" class="form-label">Tình trạng<sup class="color-secondary" style="font-size: 100%">*</sup></label>
+                                            <select id="conditionCode" name="conditionCode" class="form-control form-select select2">
+                                                <c:forEach var="condition" items="${init.conditions}">
+                                                    <option class="option-value" value="${condition.key}">${condition.value}</option>
+                                                </c:forEach>
                                             </select>
                                         </div>
                                         <div class="col-md-6">
-                                            <label class="form-label">Nhà xuất bản</label>
-                                            <select class="form-control form-select">
-                                                <option value="a">NXB Phương Đông</option>
-                                                <option value="b">B</option>
-                                                <option value="c">C</option>
+                                            <label for="publisherId" class="form-label">Nhà xuất bản<sup class="color-secondary" style="font-size: 100%">*</sup></label>
+                                            <select id="publisherId" name="publisherId" class="form-control form-select select2">
+                                                <c:forEach var="publisher" items="${init.publishers}">
+                                                    <option class="option-value" value="${publisher.id}">${publisher.name}</option>
+                                                </c:forEach>
                                             </select>
                                         </div>
                                         <div class="col-md-6">
-                                            <label class="form-label">Định dạng</label>
-                                            <select class="form-control form-select">
-                                                <option value="a">Bìa cứng</option>
-                                                <option value="b">Bìa mềm</option>
+                                            <label for="formatCode" class="form-label">Định dạng<sup class="color-secondary" style="font-size: 100%">*</sup></label>
+                                            <select id="formatCode" name="formatCode" class="form-control form-select select2">
+                                                <c:forEach var="format" items="${init.formats}">
+                                                    <option class="option-value" value="${format.key}">${format.value}</option>
+                                                </c:forEach>
                                             </select>
                                         </div>
                                         <div class="col-md-6">
-                                            <label>Ngày xuất bản</label>
-                                            <div class="input-group date" id="datepicker">
-                                                <input type="text" class="form-control" id="date"
-                                                       placeholder="DD/MM/YYYY"/>
-                                                <span class="input-group-text bg-light d-block"
-                                                      style="cursor: pointer;">
-														  <i class="ri-calendar-2-line"></i>
-													  </span>
-                                            </div>
+                                            <label for="publicationDate" class="form-label">Ngày xuất bản<sup class="color-secondary" style="font-size: 100%">*</sup></label>
+                                            <input id="publicationDate" name="publicationDate" type="date" class="form-control"
+                                                   placeholder="dd/mm/yyyy"/>
                                         </div>
                                         <div class="col-md-6">
-                                            <label class="form-label">Ngôn ngữ</label>
-                                            <select class="form-control form-select">
-                                                <option value="a">Tiếng Việt</option>
-                                                <option value="b">Tiếng Anh</option>
-                                                <option value="c">Song ngữ</option>
+                                            <label for="languageCodes" class="form-label">Ngôn ngữ<sup class="color-secondary" style="font-size: 100%">*</sup></label>
+                                            <select id="languageCodes" name="languageCodes" class="form-control form-select select2" multiple="multiple">
+                                                <c:forEach var="language" items="${init.languages}">
+                                                    <option class="option-value" value="${language.key}">${language.value}</option>
+                                                </c:forEach>
                                             </select>
                                         </div>
                                         <div class="col-md-6">
-                                            <label for="selling-price" class="form-label">Độ tuổi khuyến nghị</label>
-                                            <select class="form-control form-select">
-                                                <option value="a">Từ 3 - 5 tuổi</option>
-                                                <option value="b">Tiếng Anh</option>
-                                                <option value="c">Song ngữ</option>
+                                            <label for="ageRecommendCode" class="form-label">Độ tuổi khuyến nghị<sup class="color-secondary" style="font-size: 100%">*</sup></label>
+                                            <select id="ageRecommendCode" name="ageRecommendCode" class="form-control form-select select2">
+                                                <c:forEach var="ageRecommend" items="${init.ageRecommends}">
+                                                    <option class="option-value" value="${ageRecommend.key}">${ageRecommend.value}</option>
+                                                </c:forEach>
                                             </select>
                                         </div>
                                         <div class="col-md-3">
-                                            <label for="selling-price" class="form-label">ISBN10</label>
-                                            <input type="text" class="form-control slug-title">
+                                            <label for="codeISBN10" class="form-label">ISBN10<sup class="color-secondary" style="font-size: 100%">*</sup></label>
+                                            <input id="codeISBN10" name="codeISBN10" type="text" class="form-control slug-title">
                                         </div>
                                         <div class="col-md-3">
-                                            <label for="selling-price" class="form-label">ISBN13</label>
-                                            <input type="text" class="form-control slug-title" >
+                                            <label for="codeISBN13" class="form-label">ISBN13<sup class="color-secondary" style="font-size: 100%">*</sup></label>
+                                            <input id="codeISBN13" name="codeISBN13" type="text" class="form-control slug-title" >
                                         </div>
                                         <div class="col-md-3">
-                                            <label for="selling-price" class="form-label">Tái bản</label>
-                                            <input type="text" class="form-control slug-title"
-                                                   placeholder="Lần thứ 3">
+                                            <label for="edition" class="form-label">Tái bản<sup class="color-secondary" style="font-size: 100%">*</sup></label>
+                                            <input id="edition" name="edition" type="text" class="form-control slug-title"
+                                                   placeholder="3">
                                         </div>
                                         <div class="col-md-3">
-                                            <label for="selling-price" class="form-label">Số trang</label>
-                                            <input type="text" class="form-control slug-title" id="handcover"
+                                            <label for="hardcover" class="form-label">Số trang<sup class="color-secondary" style="font-size: 100%">*</sup></label>
+                                            <input id="hardcover" name="hardcover" type="text" class="form-control slug-title"
                                                    placeholder="125">
                                         </div>
                                         <div class="col-md-3">
-                                            <label for="selling-price" class="form-label">Chiều dài</label>
-                                            <input type="text" class="form-control slug-title"
-                                                   placeholder="Đơn vị: mm">
+                                            <label for="length" class="form-label">Chiều dài<sup class="color-secondary" style="font-size: 100%">*</sup></label>
+                                            <input id="length" name="length" type="text" class="form-control slug-title"
+                                                   placeholder="Đơn vị: cm">
                                         </div>
                                         <div class="col-md-3">
-                                            <label for="selling-price" class="form-label">Chiều rộng</label>
-                                            <input type="text" class="form-control slug-title"
-                                                   placeholder="Đơn vị: mm">
+                                            <label for="width" class="form-label">Chiều rộng<sup class="color-secondary" style="font-size: 100%">*</sup></label>
+                                            <input id="width" name="width" type="text" class="form-control slug-title"
+                                                   placeholder="Đơn vị: cm">
                                         </div>
                                         <div class="col-md-3">
-                                            <label for="selling-price" class="form-label">Chiều cao</label>
-                                            <input type="text" class="form-control slug-title"
-                                                   placeholder="Đơn vị: mm">
+                                            <label for="height" class="form-label">Chiều cao<sup class="color-secondary" style="font-size: 100%">*</sup></label>
+                                            <input id="height" name="height" type="text" class="form-control slug-title"
+                                                   placeholder="Đơn vị: cm">
                                         </div>
                                         <div class="col-md-3">
-                                            <label for="selling-price" class="form-label">Khối lượng</label>
-                                            <input type="text" class="form-control slug-title"
-                                                   placeholder="Đơn vị: gam">
+                                            <label for="weight" class="form-label">Khối lượng<sup class="color-secondary" style="font-size: 100%">*</sup></label>
+                                            <input id="weight" name="weight" type="text" class="form-control slug-title"
+                                                   placeholder="Đơn vị: kg">
                                         </div>
-                                        <div class="col-md-6">
-                                            <label>Ngày mở bán</label>
-                                            <div class="input-group date">
-                                                <input type="text" class="form-control"
-                                                       placeholder="DD/MM/YYYY"/>
-                                                <span class="input-group-text bg-light d-block"
-                                                      style="cursor: pointer;">
-														  <i class="ri-calendar-2-line"></i>
-													  </span>
+                                        <hr>
+                                        <div class="col-md-12">
+                                            <div class="row ps-3">
+                                                <div class="d-flex col-sm-12 editor-area">
+                                                    <h5>Soạn thảo mô tả</h5>
+                                                    <button id="review-btn" class="cr-btn default-btn color-primary">Xem trước</button>
+                                                </div>
+                                                <div id="editor" name="description" class="edit-description">
+                                                    Mô tả sản phẩm
+                                                </div>
+                                                <div class="review-area">
+                                                    <div id="review-container d-none">
+                                                        <h5>Mô tả sản phẩm</h5>
+                                                        <div id="review-content" class="review-description"></div>
+                                                    </div>
+                                                </div>
                                             </div>
                                         </div>
                                         <hr>
                                         <div class="col-md-12">
-                                            <label class="form-label">
-                                                <h6><b>Mô tả sách</b></h6>
-                                            </label>
-                                            <textarea class="form-control" rows="10"></textarea>
+                                            <div class="row ps-3">
+                                                <div class="d-flex col-sm-12 editor-area justify-content-end">
+                                                    <button id="createButton" type="button" class="cr-btn default-btn color-primary">Thêm sách</button>
+                                                </div>
+                                            </div>
                                         </div>
-                                        <div class="col-md-12">
-                                            <label class="form-label">Nhãn sách</label>
-                                            <input type="text" class="form-control"
-                                                   name="group_tag" value="" placeholder=""
-                                                   data-role="tagsinput">
-                                        </div>
-                                        <div class="col-md-12">
-                                            <label class="form-label">Khuyến mãi sách</label>
-                                            <input type="text" class="form-control"
-                                                   name="group_tag" value="" placeholder=""
-                                                   data-role="tagsinput">
-                                        </div>
-                                        <div class="col-md-12">
-                                            <button type="submit" class="btn cr-btn-primary">Thêm sách</button>
-                                        </div>
-                                    </form>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
+            </form>
         </div>
     </div>
 </div>
 
+<!-- Toast container -->
+<div id="toast" class="toast-container position-fixed top-0 end-0 p-3" style="z-index: 1055;"></div>
+
+<script>const contextPath = "<%=request.getContextPath() %>";</script>
+<script src="${pageContext.request.contextPath}/assets/owner/js/manage/init-global-variables.js" defer></script>
+<script src="${pageContext.request.contextPath}/assets/owner/js/extension/quill-editor.js" defer></script>
+<script src="${pageContext.request.contextPath}/assets/owner/js/manage/manage-product.js" defer></script>
+
+<script>
+    $(document).ready(function() {
+        $('.select2').select2();
+    });
+</script>
+
 <style>
+    .select2-selection__rendered {
+        color: #2b3647;
+        font-family: 'Nunito', sans-serif;
+        font-size: 90%;
+        font-weight: bold;
+    }
+    .select2-results__option {
+        color: #7a7a7a;
+        font-family: 'Nunito', sans-serif;
+        font-size: 90%;
+        font-weight: 500;
+    }
+    .form-label {
+        color: #484d54;
+        font-size: 13px;
+        font-weight: bold;
+    }
+    .form-control {
+        border-radius: 10px;
+        border: 1px solid #aaa;
+        color: #2b3647;
+    }
+    .form-control:focus {
+        border-color: #007bff;
+        box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+        outline: none;
+        color: #2b3647;
+    }
     .page-title {
         margin-right: 20px;
     }
@@ -332,7 +364,7 @@
         font-weight: bold;
         color: #2b3647;
     }
-    div .edit-introduction p{
+    div .edit-description p{
         width: 100%;
         margin: 0;
         text-align: justify;
@@ -343,7 +375,7 @@
         font-weight: bold;
         color: #2b3647;
     }
-    div.review-introduction p {
+    .review-description p {
         width: 100%;
         margin: 0;
         padding-left: 10px;

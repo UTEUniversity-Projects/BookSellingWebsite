@@ -1,9 +1,14 @@
 package com.biblio.controller.owner;
 
-import com.biblio.dto.response.BookAnalysisResponse;
-import com.biblio.dto.response.BookDetailsResponse;
-import com.biblio.dto.response.BookLineResponse;
+import com.biblio.dto.request.AuthorCreateRequest;
+import com.biblio.dto.request.BookCreateGlobalRequest;
+import com.biblio.dto.request.BookUpdateGlobalRequest;
+import com.biblio.dto.response.*;
+import com.biblio.entity.Author;
+import com.biblio.entity.BookTemplate;
+import com.biblio.service.IBookService;
 import com.biblio.service.IBookTemplateService;
+import com.biblio.utils.HttpUtil;
 import lombok.extern.slf4j.Slf4j;
 
 import javax.inject.Inject;
@@ -15,6 +20,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.io.Serial;
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Slf4j
@@ -25,6 +31,8 @@ public class ManageProductController extends HttpServlet {
     private static final long serialVersionUID = 1L;
     @Inject
     IBookTemplateService bookTemplateService;
+    @Inject
+    IBookService bookService;
 
     /**
      * @see HttpServlet#HttpServlet()
@@ -38,6 +46,10 @@ public class ManageProductController extends HttpServlet {
      * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
      */
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        request.setCharacterEncoding("UTF-8");
+        response.setContentType("application/json; charset=UTF-8");
+        response.setCharacterEncoding("UTF-8");
+
         String action = getAction(request);
 
         switch (action) {
@@ -62,6 +74,10 @@ public class ManageProductController extends HttpServlet {
      * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
      */
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        request.setCharacterEncoding("UTF-8");
+        response.setContentType("application/json; charset=UTF-8");
+        response.setCharacterEncoding("UTF-8");
+
         String action = getAction(request);
 
         switch (action) {
@@ -106,26 +122,61 @@ public class ManageProductController extends HttpServlet {
     }
 
     private void viewHandler(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        Long bookId = Long.parseLong(request.getParameter("id"));
-        BookAnalysisResponse book = bookTemplateService.getBookAnalysisResponse(bookId);
+        HttpSession session = request.getSession();
+        String id = session.getAttribute("productId").toString();
+
+        BookAnalysisResponse book = bookTemplateService.getBookAnalysisResponse(Long.parseLong(id));
 
         request.setAttribute("book", book);
         request.getRequestDispatcher("/views/owner/product-details.jsp").forward(request, response);
     }
 
     private void createHandlerGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        BookCreateResponse bookCreateResponse = bookTemplateService.initCreateBook();
+
+        request.setAttribute("init", bookCreateResponse);
         request.getRequestDispatcher("/views/owner/product-create.jsp").forward(request, response);
     }
 
     private void createHandlerPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        try {
+            BookCreateGlobalRequest bookCreateGlobalRequest = HttpUtil.of(request.getReader()).toModelUnknown(BookCreateGlobalRequest.class);
 
+            BookTemplate bookTemplate = bookService.createBookSeries(bookCreateGlobalRequest);
+
+            response.setStatus(HttpServletResponse.SC_OK);  // 200 OK
+            response.getWriter().write("{\"status\": \"success\", \"id\": " + bookTemplate.getId() + ", \"message\": \"Created successfully.\"}");
+        } catch (Exception e) {
+            response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);  // 500 Internal Server Error
+            response.getWriter().write("{\"status\": \"fail\", \"message\": \"Error creating: " + e.getMessage() + "\"}");
+            log.error("e: ", e);
+        }
     }
 
     private void updateHandlerGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        HttpSession session = request.getSession();
+        String id = session.getAttribute("productId").toString();
 
+        BookProfileResponse book = bookTemplateService.getBookProfileResponse(Long.parseLong(id));
+        BookUpdateResponse bookUpdateResponse = bookTemplateService.initUpdateBook();
+
+        request.setAttribute("book", book);
+        request.setAttribute("init", bookUpdateResponse);
+        request.getRequestDispatcher("/views/owner/product-update.jsp").forward(request, response);
     }
 
     private void updateHandlerPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        try {
+            BookUpdateGlobalRequest bookUpdateGlobalRequest = HttpUtil.of(request.getReader()).toModelUnknown(BookUpdateGlobalRequest.class);
 
+            BookTemplate bookTemplate = bookService.updateBookSeries(bookUpdateGlobalRequest);
+
+            response.setStatus(HttpServletResponse.SC_OK);  // 200 OK
+            response.getWriter().write("{\"status\": \"success\", \"id\": " + bookTemplate.getId() + ", \"message\": \"Updated successfully.\"}");
+        } catch (Exception e) {
+            response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);  // 500 Internal Server Error
+            response.getWriter().write("{\"status\": \"fail\", \"message\": \"Error updating: " + e.getMessage() + "\"}");
+            log.error("e: ", e);
+        }
     }
 }

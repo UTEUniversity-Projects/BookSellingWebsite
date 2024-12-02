@@ -1,5 +1,7 @@
 package com.biblio.apis.owner;
 import com.biblio.dto.response.CategoryResponse;
+import com.biblio.dto.response.SubCategoryLineResponse;
+import com.biblio.dto.response.SubCategoryProfileResponse;
 import com.biblio.dto.response.SubCategoryResponse;
 import com.biblio.service.ICategoryService;
 import com.biblio.service.ISubCategoryService;
@@ -41,14 +43,14 @@ public class GetSubCategoriesAPI extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         //String categoryId = request.getParameter("categoryId");
         //List<SubCategoryResponse> subCategoryResponse = subCategoryService.getAllSubCategoriesById(Long.parseLong(categoryId));
-        List<SubCategoryResponse> subCategoryResponse = subCategoryService.findAll();
+        List<SubCategoryProfileResponse> subCategoryProfileResponse = subCategoryService.findAll();
         // Thiết lập kiểu nội dung là JSON
         response.setContentType("application/json");
         response.setCharacterEncoding("UTF-8");
 
         // Trả về JSON
         ObjectMapper objectMapper = new ObjectMapper();
-        response.getWriter().write(objectMapper.writeValueAsString(subCategoryResponse));
+        response.getWriter().write(objectMapper.writeValueAsString(subCategoryProfileResponse));
     }
 
 

@@ -41,4 +41,8 @@ public interface IBookTemplateDAO {
 
     Long calculateValueBooksSold(Long id, EOrderStatus status);
 
+    BookTemplate createBookTemplate(BookTemplate bookTemplate);
+
+    void updateBookTemplate(BookTemplate bookTemplate);
+
 }

@@ -40,8 +40,8 @@ public class BookDAOImpl extends GenericDAOImpl<Book> implements IBookDAO {
     }
 
     @Override
-    public void addBook(Book book) {
-        super.save(book);
+    public void createBook(Book book) {
+        super.insert(book);
     }
 
     @Override

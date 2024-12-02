@@ -13,7 +13,7 @@ public interface IBookDAO {
 
     List<Book> findByBookTemplate(BookTemplate bookTemplate);
 
-    void addBook(Book book);
+    void createBook(Book book);
 
     void updateBook(Book book);
 

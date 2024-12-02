@@ -31,7 +31,7 @@
                                     <tr>
                                         <th style="width: 7%">#</th>
                                         <th style="width: 20%;">Họ và tên</th>
-                                        <th style="width: 8%;">Tác phẩm</th>
+                                        <th style="width: 8%;">Sản phẩm</th>
                                         <th style="width: 8%;">Đánh giá</th>
                                         <th style="width: 10%;">Doanh thu</th>
                                         <th style="width: 37%;">Giới thiệu</th>

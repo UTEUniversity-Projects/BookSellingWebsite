@@ -51,8 +51,9 @@
         <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/owner/css/vendor/jquery.slick.css" />
         <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/owner/css/vendor/slick-theme.css" />
 
-        <!-- Quill CSS -->
-        <link href="${pageContext.request.contextPath}/assets/owner/css/quill/quill-snow.css" rel="stylesheet"/>
+        <!-- Extension CSS -->
+        <link href="${pageContext.request.contextPath}/assets/owner/css/extension/quill-snow.css" rel="stylesheet"/>
+        <link href="${pageContext.request.contextPath}/assets/owner/css/extension/select2.css" rel="stylesheet"/>
 
         <!-- Main CSS -->
         <link id="main-css" href="${pageContext.request.contextPath}/assets/owner/css/style.css" rel="stylesheet"/>
@@ -94,6 +95,7 @@
         <!-- Extension -->
         <script src="${pageContext.request.contextPath}/assets/owner/js/extension/lib-lottie.js"></script>
         <script src="${pageContext.request.contextPath}/assets/owner/js/extension/lib-quill.js"></script>
+        <script src="${pageContext.request.contextPath}/assets/owner/js/extension/lib-select2.js"></script>
         <!-- endregion -->
 
         <!-- region Main Custom -->

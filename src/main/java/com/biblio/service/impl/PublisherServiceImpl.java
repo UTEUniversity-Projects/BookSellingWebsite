@@ -87,8 +87,8 @@ public class PublisherServiceImpl implements IPublisherService {
     }
 
     @Override
-    public void create(PublisherCreateRequest publisherCreateRequest) {
-        publisherDAO.create(publisherCreateRequest);
+    public Publisher create(PublisherCreateRequest publisherCreateRequest) {
+        return publisherDAO.create(publisherCreateRequest);
     }
 
     @Override

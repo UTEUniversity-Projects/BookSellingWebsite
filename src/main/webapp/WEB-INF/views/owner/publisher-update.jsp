@@ -8,11 +8,11 @@
     <!-- Page title & breadcrumb -->
     <div class="cr-page-title cr-page-title-2">
       <div class="cr-breadcrumb">
-        <h5><b>Cập nhật nhà xuất bản</b></h5>
+        <h5><b>Cập nhật thông tin nhà xuất bản</b></h5>
         <ul>
           <li><a href="${pageContext.request.contextPath}/owner/ecommerce"><b>Biblio</b></a></li>
           <li><a href="${pageContext.request.contextPath}/owner/publisher/list"><b>Nhà xuất bản</b></a></li>
-          <li><b>Cập nhật nhà xuất bản</b></li>
+          <li><b>Cập nhật thông tin nhà xuất bản</b></li>
         </ul>
       </div>
     </div>
@@ -51,7 +51,7 @@
                     </div>
                     <br>
                     <div class="col-12">
-                      <label for="name">Họ và tên</label>
+                      <label for="name">Nhà xuất bản<sup class="color-secondary" style="font-size: 100%">*</sup></label>
                       <input id="name" name="name" class="form-control here slug-title publisher-name" type="text"
                              value="${publisher.name}" />
                     </div>
@@ -102,6 +102,16 @@
 <style>
   h5 {
     font-weight: bold;
+    color: #2b3647;
+  }
+  .form-control {
+    border-radius: 10px;
+    color: #2b3647;
+  }
+  .form-control:focus {
+    border-color: #007bff;
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+    outline: none;
     color: #2b3647;
   }
   .editor-area {

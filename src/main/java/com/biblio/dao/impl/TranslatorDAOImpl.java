@@ -26,7 +26,13 @@ public class TranslatorDAOImpl extends GenericDAOImpl<Translator> implements ITr
 
     @Override
     public Translator getEntityById(Long translatorId) {
-        return super.findById(translatorId);
+        String jpql = "SELECT t " +
+                "FROM Translator t " +
+                "WHERE t.id = :id";
+
+        Map<String, Object> params = new HashMap<>();
+        params.put("id", translatorId);
+        return super.findSingleByJPQL(jpql, params);
     }
 
     @Override
@@ -74,13 +80,18 @@ public class TranslatorDAOImpl extends GenericDAOImpl<Translator> implements ITr
     }
 
     @Override
-    public void create(TranslatorCreateRequest translatorCreateRequest) {
-        super.save(TranslatorMapper.toTranslator(translatorCreateRequest));
+    public Translator create(TranslatorCreateRequest translatorCreateRequest) {
+        return super.insert(TranslatorMapper.toTranslator(translatorCreateRequest));
     }
 
     @Override
     public void update(TranslatorUpdateRequest translatorUpdateRequest) {
         super.update(TranslatorMapper.toTranslator(translatorUpdateRequest));
+    }
+
+    @Override
+    public void updateTranslator(Translator translator) {
+        super.update(translator);
     }
 
     @Override

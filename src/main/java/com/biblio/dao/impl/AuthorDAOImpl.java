@@ -26,7 +26,13 @@ public class AuthorDAOImpl extends GenericDAOImpl<Author> implements IAuthorDAO 
 
     @Override
     public Author getEntityById(Long authorId) {
-        return super.findById(authorId);
+        String jpql = "SELECT a " +
+                "FROM Author a " +
+                "WHERE a.id = :id";
+
+        Map<String, Object> params = new HashMap<>();
+        params.put("id", authorId);
+        return super.findSingleByJPQL(jpql, params);
     }
 
     @Override
@@ -74,13 +80,18 @@ public class AuthorDAOImpl extends GenericDAOImpl<Author> implements IAuthorDAO 
     }
 
     @Override
-    public void create(AuthorCreateRequest authorCreateRequest) {
-        super.save(AuthorMapper.toAuthor(authorCreateRequest));
+    public Author create(AuthorCreateRequest authorCreateRequest) {
+        return super.insert(AuthorMapper.toAuthor(authorCreateRequest));
     }
 
     @Override
     public void update(AuthorUpdateRequest authorUpdateRequest) {
         super.update(AuthorMapper.toAuthor(authorUpdateRequest));
+    }
+
+    @Override
+    public void updateAuthor(Author author) {
+        super.update(author);
     }
 
     @Override

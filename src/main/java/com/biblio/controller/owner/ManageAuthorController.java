@@ -6,6 +6,7 @@ import com.biblio.dto.request.AuthorUpdateRequest;
 import com.biblio.dto.response.AuthorAnalysisResponse;
 import com.biblio.dto.response.AuthorLineResponse;
 import com.biblio.dto.response.AuthorProfileResponse;
+import com.biblio.entity.Author;
 import com.biblio.service.IAuthorService;
 import com.biblio.utils.HttpUtil;
 import com.biblio.utils.ManageFileUtil;
@@ -148,10 +149,10 @@ public class ManageAuthorController extends HttpServlet {
             AuthorCreateRequest authorCreateRequest = HttpUtil.of(request.getReader()).toModel(AuthorCreateRequest.class);
             authorCreateRequest.setJoinAt(LocalDateTime.now().toString());
 
-            authorService.create(authorCreateRequest);
+            Author author = authorService.create(authorCreateRequest);
 
             response.setStatus(HttpServletResponse.SC_OK);  // 200 OK
-            response.getWriter().write("{\"status\": \"success\", \"message\": \"Created successfully.\"}");
+            response.getWriter().write("{\"status\": \"success\", \"id\": " + author.getId() + ", \"message\": \"Created successfully.\"}");
         } catch (Exception e) {
             response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);  // 500 Internal Server Error
             response.getWriter().write("{\"status\": \"fail\", \"message\": \"Error creating: " + e.getMessage() + "\"}");

@@ -17,8 +17,9 @@ public interface ITranslatorDAO {
     List<Translator> getEntityAll();
     List<Translator> findByBookTemplate(BookTemplate bookTemplate);
     List<String> getTopSubCategory(Long translatorId);
-    void create(TranslatorCreateRequest translatorCreateRequest);
+    Translator create(TranslatorCreateRequest translatorCreateRequest);
     void update(TranslatorUpdateRequest translatorUpdateRequest);
+    void updateTranslator(Translator translator);
     void delete(TranslatorDeleteRequest translatorDeleteRequest);
     Integer countBooksTemplateAll(Long translatorId);
     Integer countBooksTemplateByStatus(Long translatorId, EBookTemplateStatus status);

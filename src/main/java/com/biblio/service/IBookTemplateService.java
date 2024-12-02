@@ -1,7 +1,10 @@
 package com.biblio.service;
 
+import com.biblio.dto.request.BookCreateGlobalRequest;
+import com.biblio.dto.request.BookUpdateGlobalRequest;
 import com.biblio.dto.request.SearchBookRequest;
 import com.biblio.dto.response.*;
+import com.biblio.entity.BookTemplate;
 
 import java.util.List;
 
@@ -26,5 +29,15 @@ public interface IBookTemplateService {
     BookAnalysisResponse getBookAnalysisResponse(Long bookTemplateId);
 
     Long getTotalBookTemplateQuantity();
+
+    BookCreateResponse initCreateBook();
+
+    BookUpdateResponse initUpdateBook();
+
+    BookTemplate createBookTemplate(BookCreateGlobalRequest request);
+
+    BookTemplate updateBookTemplate(BookUpdateGlobalRequest request);
+
+    BookProfileResponse getBookProfileResponse(Long bookTemplateId);
 
 }

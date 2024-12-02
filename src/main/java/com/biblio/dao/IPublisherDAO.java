@@ -15,9 +15,8 @@ import java.util.List;
 public interface IPublisherDAO {
     Publisher getEntityById(Long publisherId);
     List<Publisher> getEntityAll();
-    List<Publisher> findByBookTemplate(BookTemplate bookTemplate);
     List<String> getTopSubCategory(Long publisherId);
-    void create(PublisherCreateRequest publisherCreateRequest);
+    Publisher create(PublisherCreateRequest publisherCreateRequest);
     void update(PublisherUpdateRequest publisherUpdateRequest);
     void delete(PublisherDeleteRequest publisherDeleteRequest);
     Integer countBooksTemplateAll(Long publisherId);

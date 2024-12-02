@@ -35,19 +35,6 @@ public class PublisherDAOImpl extends GenericDAOImpl<Publisher> implements IPubl
     }
 
     @Override
-    public List<Publisher> findByBookTemplate(BookTemplate bookTemplate) {
-        StringBuilder jpql = new StringBuilder();
-        jpql.append("SELECT DISTINCT a ")
-                .append("FROM Publisher a ")
-                .append("JOIN a.bookTemplates bt ")
-                .append("WHERE bt = :bookTemplate");
-
-        Map<String, Object> params = new HashMap<>();
-        params.put("bookTemplate", bookTemplate);
-        return super.findByJPQL(jpql.toString(), params);
-    }
-
-    @Override
     public List<String> getTopSubCategory(Long publisherId) {
         String sql = """
                     SELECT sc.name
@@ -74,8 +61,8 @@ public class PublisherDAOImpl extends GenericDAOImpl<Publisher> implements IPubl
     }
 
     @Override
-    public void create(PublisherCreateRequest publisherCreateRequest) {
-        super.save(PublisherMapper.toPublisher(publisherCreateRequest));
+    public Publisher create(PublisherCreateRequest publisherCreateRequest) {
+        return super.insert(PublisherMapper.toPublisher(publisherCreateRequest));
     }
 
     @Override

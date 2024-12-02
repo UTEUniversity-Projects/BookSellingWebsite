@@ -221,7 +221,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   };
 
-  const handleCreateAuthor = async (event) => {
+  const handleCreateTranslator = async (event) => {
     event.preventDefault();
 
     try {
@@ -254,7 +254,7 @@ document.addEventListener("DOMContentLoaded", () => {
       if (result.status === "success") {
         showToast("Thêm dịch giả thành công!", "Thành công", "success", 2000);
         setTimeout(() => {
-          window.location.href = `${contextPath}/owner/translator/list`;
+          rowAction(result.id, 'view');
         }, 1000);
       } else {
         showToast("Thêm dịch giả thất bại!", "Lỗi", "error");
@@ -266,7 +266,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   };
 
-  const handleUpdateAuthor = async (event) => {
+  const handleUpdateTranslator = async (event) => {
     event.preventDefault();
 
     try {
@@ -323,9 +323,9 @@ document.addEventListener("DOMContentLoaded", () => {
   };
 
   const createButton = document.getElementById("createButton");
-  if (createButton != null) createButton.addEventListener("click", handleCreateAuthor);
+  if (createButton != null) createButton.addEventListener("click", handleCreateTranslator);
 
   const updateButton = document.getElementById("updateButton");
-  if (updateButton != null) updateButton.addEventListener("click", handleUpdateAuthor);
+  if (updateButton != null) updateButton.addEventListener("click", handleUpdateTranslator);
 });
 

@@ -1,29 +1,42 @@
 package com.biblio.service.impl;
 
-import com.biblio.dao.IBookTemplateDAO;
+import com.biblio.dao.*;
 
+import com.biblio.dto.request.BookCreateGlobalRequest;
+import com.biblio.dto.request.BookUpdateGlobalRequest;
+import com.biblio.dto.request.MediaFileCreateRequest;
 import com.biblio.dto.request.SearchBookRequest;
 import com.biblio.dto.response.*;
 
-import com.biblio.entity.Book;
-import com.biblio.entity.BookTemplate;
+import com.biblio.entity.*;
 import com.biblio.enumeration.EBookMetadataStatus;
-import com.biblio.enumeration.EBookTemplateStatus;
 import com.biblio.enumeration.EOrderStatus;
+import com.biblio.mapper.BookMapper;
 import com.biblio.mapper.BookTemplateMapper;
 import com.biblio.service.IBookTemplateService;
-import net.bytebuddy.asm.Advice;
+import com.biblio.service.IMediaFileService;
+import com.biblio.utils.ManageFileUtil;
 
 import javax.inject.Inject;
+import javax.servlet.http.HttpServlet;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.Comparator;
-import java.util.List;
+import java.util.*;
 
 public class BookTemplateServiceImpl implements IBookTemplateService {
 
     @Inject
     IBookTemplateDAO bookTemplateDAO;
+
+    @Inject
+    ICategoryDAO categoryDAO;
+    @Inject
+    IAuthorDAO authorDAO;
+    @Inject
+    ITranslatorDAO translatorDAO;
+    @Inject
+    IPublisherDAO publisherDAO;
+    @Inject
+    IMediaFileService mediaFileService;
 
     @Override
     public List<BookManagementResponse> getAllBookManagementResponse() {
@@ -91,6 +104,173 @@ public class BookTemplateServiceImpl implements IBookTemplateService {
     }
 
     @Override
+    public BookCreateResponse initCreateBook() {
+        return BookTemplateMapper.toBookCreateResponse(categoryDAO.getEntityAll(),
+                authorDAO.getEntityAll(), translatorDAO.getEntityAll(), publisherDAO.getEntityAll());
+    }
+
+    @Override
+    public BookUpdateResponse initUpdateBook() {
+        return BookTemplateMapper.toBookUpdateResponse(categoryDAO.getEntityAll(),
+                authorDAO.getEntityAll(), translatorDAO.getEntityAll(), publisherDAO.getEntityAll());
+    }
+
+    @Override
+    public BookTemplate createBookTemplate(BookCreateGlobalRequest request) {
+        Publisher publisher = publisherDAO.getEntityById(Long.valueOf(request.getPublisherId()));
+
+        List<MediaFile> mediaFiles = new ArrayList<>();
+        MediaFile mainImage = mediaFileService.createMediaFile(
+                MediaFileCreateRequest.builder()
+                        .fileName("main")
+                        .storedCode(request.getMainImage())
+                        .build()
+        );
+        mediaFiles.add(mainImage);
+
+        for (String thumb : request.getThumbnails()) {
+            mediaFiles.add(
+                    mediaFileService.createMediaFile(
+                            MediaFileCreateRequest.builder()
+                                    .fileName("thumb")
+                                    .storedCode(thumb)
+                                    .build()
+                    )
+            );
+        }
+
+        BookTemplate bookTemplate = bookTemplateDAO.createBookTemplate(BookTemplateMapper.toBookTemplate(request, publisher, mediaFiles));
+
+        for (String authorId : request.getAuthorIds()) {
+            Author author = authorDAO.getEntityById(Long.valueOf(authorId));
+            if (author.getBookTemplates() == null) {
+                author.setBookTemplates(new HashSet<>());
+            }
+            author.getBookTemplates().add(bookTemplate);
+            if (bookTemplate.getAuthors() == null) {
+                bookTemplate.setAuthors(new HashSet<>());
+            }
+            bookTemplate.getAuthors().add(author);
+
+            authorDAO.updateAuthor(author);
+        }
+
+        for (String translatorId : request.getTranslatorIds()) {
+            Translator translator = translatorDAO.getEntityById(Long.valueOf(translatorId));
+            if (translator.getBookTemplates() == null) {
+                translator.setBookTemplates(new HashSet<>());
+            }
+            translator.getBookTemplates().add(bookTemplate);
+            if (bookTemplate.getTranslators() == null) {
+                bookTemplate.setTranslators(new HashSet<>());
+            }
+            bookTemplate.getTranslators().add(translator);
+
+            translatorDAO.updateTranslator(translator);
+        }
+
+        return bookTemplate;
+    }
+
+    @Override
+    public BookTemplate updateBookTemplate(BookUpdateGlobalRequest request) {
+        BookTemplate bookTemplate = bookTemplateDAO.findOneForDetails(Long.valueOf(request.getId()));
+
+        // update for Publisher
+        Publisher publisher = publisherDAO.getEntityById(Long.valueOf(request.getPublisherId()));
+        bookTemplate.setPublisher(publisher);
+
+        // old media file
+        List<MediaFile> oldMediaFiles = bookTemplate.getMediaFiles();
+
+        // add media file
+        List<MediaFile> mediaFiles = new ArrayList<>();
+        MediaFile mainImage = mediaFileService.createMediaFile(
+                MediaFileCreateRequest.builder()
+                        .fileName("main")
+                        .storedCode(request.getMainImage())
+                        .build()
+        );
+        mediaFiles.add(mainImage);
+
+        for (String thumb : request.getThumbnails()) {
+            mediaFiles.add(
+                    mediaFileService.createMediaFile(
+                            MediaFileCreateRequest.builder()
+                                    .fileName("thumb")
+                                    .storedCode(thumb)
+                                    .build()
+                    )
+            );
+        }
+        bookTemplate.setMediaFiles(mediaFiles);
+
+        // UPDATE
+        bookTemplateDAO.updateBookTemplate(bookTemplate);
+
+        // update for Author
+        Set<Author> currentAuthors = bookTemplate.getAuthors();
+
+        for (Author author : currentAuthors) {
+            author.getBookTemplates().remove(bookTemplate);
+            authorDAO.updateAuthor(author);
+        }
+        bookTemplate.setAuthors(new HashSet<>());
+
+        for (String authorId : request.getAuthorIds()) {
+            Author author = authorDAO.getEntityById(Long.valueOf(authorId));
+            if (author.getBookTemplates() == null) {
+                author.setBookTemplates(new HashSet<>());
+            }
+            author.getBookTemplates().add(bookTemplate);
+
+            if (bookTemplate.getAuthors() == null) {
+                bookTemplate.setAuthors(new HashSet<>());
+            }
+            bookTemplate.getAuthors().add(author);
+
+            authorDAO.updateAuthor(author);
+        }
+
+        // update for Translator
+        Set<Translator> currentTranslators = bookTemplate.getTranslators();
+
+        for (Translator translator : currentTranslators) {
+            translator.getBookTemplates().remove(bookTemplate);
+            translatorDAO.updateTranslator(translator);
+        }
+        bookTemplate.setTranslators(new HashSet<>());
+
+        for (String translatorId : request.getTranslatorIds()) {
+            Translator translator = translatorDAO.getEntityById(Long.valueOf(translatorId));
+            if (translator.getBookTemplates() == null) {
+                translator.setBookTemplates(new HashSet<>());
+            }
+            translator.getBookTemplates().add(bookTemplate);
+
+            if (bookTemplate.getTranslators() == null) {
+                bookTemplate.setTranslators(new HashSet<>());
+            }
+            bookTemplate.getTranslators().add(translator);
+
+            translatorDAO.updateTranslator(translator);
+        }
+
+        // delete media file
+        for (MediaFile mediaFile : oldMediaFiles) {
+            ManageFileUtil.deleteFileAvatar(mediaFile.getStoredCode(), "product");
+        }
+
+        return bookTemplate;
+    }
+
+    @Override
+    public BookProfileResponse getBookProfileResponse(Long bookTemplateId) {
+        BookTemplate bookTemplate = bookTemplateDAO.findOneForDetails(bookTemplateId);
+        return BookMapper.toBookProfileResponse(bookTemplate);
+    }
+
+    @Override
     public Long getBookTemplateQuantityByCriteria(SearchBookRequest request) {
         return bookTemplateDAO.countByCriteria(request.getTitle(), request.getCategoryId(), request.getSortBy());
     }
@@ -102,7 +282,8 @@ public class BookTemplateServiceImpl implements IBookTemplateService {
 
         for (BookTemplate bookTemplate : bookTemplates) {
             Double perValueBooksSold = calculateValueBooksSoldGrowth(bookTemplate.getId());
-            bookLineResponseList.add(BookTemplateMapper.toBookLineResponse(bookTemplate, perValueBooksSold));
+            BookLineResponse bookLineResponse = BookTemplateMapper.toBookLineResponse(bookTemplate, perValueBooksSold);
+            if (bookLineResponse != null) bookLineResponseList.add(bookLineResponse);
         }
 
         return bookLineResponseList;

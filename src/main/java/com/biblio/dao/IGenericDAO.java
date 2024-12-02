@@ -41,4 +41,6 @@ public interface IGenericDAO<T> {
 
     <T> List<T> findByNativeQuery(String sql, Map<String, Object> params, Class<T> resultType);
 
+    T insert(T entity);
+
 }

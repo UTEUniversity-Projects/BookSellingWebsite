@@ -125,12 +125,17 @@
                             </div>
                         </div>
                         <div class="cr-size-and-weight">
-                            <div class="cr-size-weight">
-                                <h5><span>Tình trạng</span> :</h5>
-                                <div class="cr-kg">
-                                    <ul>
-                                        <li class="active-color">${book.condition}</li>
-                                    </ul>
+                            <div class="row cr-size-weight">
+                                <div class="d-flex col-8">
+                                    <h5><span>Tình trạng</span> :</h5>
+                                    <div class="cr-kg">
+                                        <ul>
+                                            <li class="active-color">${book.condition}</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class="col-4 cr-settings">
+                                    <a onclick="rowAction(${book.id}, 'update'); return false;" class="cr-btn-primary m-r-10 rounded">Cập nhật</a>
                                 </div>
                             </div>
                         </div>
@@ -629,6 +634,9 @@
         </div>
     </div>
 </div>
+
+<script>const contextPath = "<%=request.getContextPath() %>";</script>
+<script src="${pageContext.request.contextPath}/assets/owner/js/manage/manage-product.js" defer></script>
 
 <!-- region VENDOR JS -->
 <script src="${pageContext.request.contextPath}/assets/owner/js/vendor/jquery.zoom.min.js" defer></script>

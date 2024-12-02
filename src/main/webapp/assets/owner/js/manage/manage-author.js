@@ -254,7 +254,7 @@ document.addEventListener("DOMContentLoaded", () => {
             if (result.status === "success") {
                 showToast("Thêm tác giả thành công!", "Thành công", "success", 2000);
                 setTimeout(() => {
-                    window.location.href = `${contextPath}/owner/author/list`;
+                    rowAction(result.id, 'view');
                 }, 1000);
             } else {
                 showToast("Thêm tác giả thất bại!", "Lỗi", "error");

@@ -338,6 +338,22 @@ public class GenericDAOImpl<T> implements IGenericDAO<T> {
         }
     }
 
+    @Override
+    public T insert(T entity) {
+        EntityManager em = JpaConfig.getEntityManager();
+        try {
+            em.getTransaction().begin();
+            T managedEntity = em.merge(entity);
+            em.getTransaction().commit();
+            return managedEntity;
+        } catch (Exception e) {
+            em.getTransaction().rollback();
+            throw new RuntimeException("Error while inserting entity", e);
+        } finally {
+            closeEntityManager(em);
+        }
+    }
+
     private void setQueryParameters(TypedQuery<?> query, Map<String, Object> params) {
         for (Map.Entry<String, Object> entry : params.entrySet()) {
             query.setParameter(entry.getKey(), entry.getValue());

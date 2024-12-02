@@ -1,19 +1,17 @@
 package com.biblio.mapper;
 
 import com.biblio.dao.impl.BookTemplateDAOImpl;
+import com.biblio.dto.request.BookCreateGlobalRequest;
+import com.biblio.dto.request.BookUpdateGlobalRequest;
 import com.biblio.dto.response.*;
 import com.biblio.entity.*;
-import com.biblio.enumeration.EBookLanguage;
-import com.biblio.enumeration.EBookMetadataStatus;
-import com.biblio.enumeration.EBookTemplateStatus;
+import com.biblio.enumeration.*;
+import com.biblio.utils.EnumUtil;
 import com.biblio.utils.FormatterUtil;
 
 import java.text.DecimalFormat;
-import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
-import java.util.Comparator;
-import java.util.List;
+import java.util.*;
 import java.util.stream.Collectors;
 
 import static com.biblio.utils.DateTimeUtil.formatDateTime;
@@ -24,6 +22,9 @@ public class BookTemplateMapper {
             BookTemplate bookTemplate,
             Double perValueBooksSold
     ) {
+        if (bookTemplate.getBooks().iterator().next() == null) {
+            return null;
+        }
         Book singleBook = bookTemplate.getBooks().iterator().next();
         Double avgRate = bookTemplate.calculateReviewRate();
 
@@ -44,6 +45,7 @@ public class BookTemplateMapper {
                 .statusDisplay(bookTemplate.getStatus().getDescription())
                 .build();
     }
+
     public static BookAnalysisResponse toBookAnalysisResponse(
             BookTemplate bookTemplate,
             Integer salesCount,
@@ -121,6 +123,78 @@ public class BookTemplateMapper {
                 .authors(authors)
                 .translators(translators)
                 .reviews(reviews)
+                .build();
+    }
+
+    public static BookCreateResponse toBookCreateResponse(
+            List<Category> categories,
+            List<Author> authors,
+            List<Translator> translators,
+            List<Publisher> publishers
+    ) {
+        return BookCreateResponse.builder()
+                .categories(categories)
+                .authors(authors)
+                .translators(translators)
+                .publishers(publishers)
+                .conditions(EnumUtil.mapEnumToPairUtil(EBookCondition.class))
+                .formats(EnumUtil.mapEnumToPairUtil(EBookFormat.class))
+                .languages(EnumUtil.mapEnumToPairUtil(EBookLanguage.class))
+                .ageRecommends(EnumUtil.mapEnumToPairUtil(EBookAgeRecommend.class))
+                .build();
+    }
+
+    public static BookUpdateResponse toBookUpdateResponse(
+            List<Category> categories,
+            List<Author> authors,
+            List<Translator> translators,
+            List<Publisher> publishers
+    ) {
+        return BookUpdateResponse.builder()
+                .categories(categories)
+                .authors(authors)
+                .translators(translators)
+                .publishers(publishers)
+                .conditions(EnumUtil.mapEnumToPairUtil(EBookCondition.class))
+                .formats(EnumUtil.mapEnumToPairUtil(EBookFormat.class))
+                .languages(EnumUtil.mapEnumToPairUtil(EBookLanguage.class))
+                .ageRecommends(EnumUtil.mapEnumToPairUtil(EBookAgeRecommend.class))
+                .build();
+    }
+
+    public static BookTemplate toBookTemplate(
+            BookCreateGlobalRequest request,
+            Publisher publisher,
+            List<MediaFile> mediaFiles
+    ) {
+        Set<EBookLanguage> languages = new HashSet<>();
+        for (String language : request.getLanguageCodes()) {
+            languages.add(EBookLanguage.valueOf(language));
+        }
+
+        return BookTemplate.builder()
+                .status(EBookTemplateStatus.ON_SALE)
+                .languages(languages)
+                .publisher(publisher)
+                .mediaFiles(mediaFiles)
+                .build();
+    }
+
+    public static BookTemplate toBookTemplate(
+            BookUpdateGlobalRequest request,
+            Publisher publisher,
+            List<MediaFile> mediaFiles
+    ) {
+        Set<EBookLanguage> languages = new HashSet<>();
+        for (String language : request.getLanguageCodes()) {
+            languages.add(EBookLanguage.valueOf(language));
+        }
+
+        return BookTemplate.builder()
+                .status(EBookTemplateStatus.ON_SALE)
+                .languages(languages)
+                .publisher(publisher)
+                .mediaFiles(mediaFiles)
                 .build();
     }
 

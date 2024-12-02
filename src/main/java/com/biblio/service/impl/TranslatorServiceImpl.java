@@ -87,8 +87,8 @@ public class TranslatorServiceImpl implements ITranslatorService {
     }
 
     @Override
-    public void create(TranslatorCreateRequest translatorCreateRequest) {
-        translatorDAO.create(translatorCreateRequest);
+    public Translator create(TranslatorCreateRequest translatorCreateRequest) {
+        return translatorDAO.create(translatorCreateRequest);
     }
 
     @Override

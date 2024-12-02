@@ -32,6 +32,9 @@ public class ManageFileUtil {
             case "author" -> StoredFileConstants.AUTHOR_DEFAULT_AVA;
             case "translator" -> StoredFileConstants.TRANSLATOR_DEFAULT_AVA;
             case "publisher" -> StoredFileConstants.PUBLISHER_DEFAULT_AVA;
+            case "category" -> StoredFileConstants.CATEGORY_DEFAULT_AVA;
+            case "subCategory" -> StoredFileConstants.SUB_CATEGORY_DEFAULT_AVA;
+            case "product" -> StoredFileConstants.PRODUCT_DEFAULT_AVA;
             default -> "";
         };
     }

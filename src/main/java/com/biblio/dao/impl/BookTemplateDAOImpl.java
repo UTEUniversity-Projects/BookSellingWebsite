@@ -426,6 +426,16 @@ public class BookTemplateDAOImpl extends GenericDAOImpl<BookTemplate> implements
         return (long) Math.toIntExact(super.countByNativeQuery(sql, params));
     }
 
+    @Override
+    public BookTemplate createBookTemplate(BookTemplate bookTemplate) {
+        return super.insert(bookTemplate);
+    }
+
+    @Override
+    public void updateBookTemplate(BookTemplate bookTemplate) {
+        super.update(bookTemplate);
+    }
+
     public static void main(String[] args) {
         BookTemplateDAOImpl dao = new BookTemplateDAOImpl();
         System.out.println(dao.countInstockById(33L));

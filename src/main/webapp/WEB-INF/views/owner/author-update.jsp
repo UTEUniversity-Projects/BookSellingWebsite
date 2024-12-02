@@ -51,7 +51,7 @@
                                         </div>
                                         <br>
                                         <div class="col-12">
-                                            <label for="name">Họ và tên</label>
+                                            <label for="name">Họ và tên<sup class="color-secondary" style="font-size: 100%">*</sup></label>
                                             <input id="name" name="name" class="form-control here slug-title author-name" type="text"
                                                    value="${author.name}" />
                                         </div>
@@ -102,6 +102,16 @@
 <style>
     h5 {
         font-weight: bold;
+        color: #2b3647;
+    }
+    .form-control {
+        border-radius: 10px;
+        color: #2b3647;
+    }
+    .form-control:focus {
+        border-color: #007bff;
+        box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+        outline: none;
         color: #2b3647;
     }
     .editor-area {

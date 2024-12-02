@@ -9,7 +9,7 @@
         <!-- Page title & breadcrumb -->
         <div class="cr-page-title cr-page-title-2">
             <div class="cr-breadcrumb">
-                <div class="d-flex align-items-center">
+                <div class="d-flex align-products-center">
                     <div class="page-title">
                         <h5>Danh sách sản phẩm</h5>
                     </div>
@@ -42,47 +42,47 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <c:forEach var="item" items="${books}">
-                                        <tr class="item-row" data-id="${item.id}">
+                                    <c:forEach var="product" items="${books}">
+                                        <tr class="item-row" data-id="${product.id}">
                                             <td>
                                                 <img
                                                         class="tbl-thumb image-shadow rounded-3"
-                                                        src="${pageContext.request.contextPath}${item.imageUrl}"
+                                                        src="${pageContext.request.contextPath}${product.imageUrl}"
                                                         alt="Product Image"
                                                 />
                                             </td>
                                             <td>
                                                 <div>
-                                                    <span class="row-highlight">${item.title}</span><br>
-                                                    <span class="row-sub-content">${item.publisher}</span>
+                                                    <span class="row-highlight">${product.title}</span><br>
+                                                    <span class="row-sub-content">${product.publisher}</span>
                                                 </div>
                                             </td>
-                                            <td><span class="badge bg-primary justify-content-center">${item.booksSold}</span></td>
+                                            <td><span class="badge bg-primary justify-content-center">${product.booksSold}</span></td>
                                             <td>
-                                                <div class="d-flex align-items-center">
-                                                    <h6 class="avg-rate">${item.avgRate}</h6>
+                                                <div class="d-flex align-products-center">
+                                                    <h6 class="avg-rate">${product.avgRate}</h6>
                                                     <i class="ri-star-fill ps-2" style="color: #FFD43B; font-size: 20px;"></i>
                                                 </div>
                                             </td>
                                             <td>
-                                                <div class="label-card d-flex align-items-center">
+                                                <div class="label-card d-flex align-products-center">
                                                     <c:choose>
-                                                        <c:when test="${item.perValueBooksSold == 0}">
+                                                        <c:when test="${product.perValueBooksSold == 0}">
                                                             <div class="up mt-0 d-flex">
                                                                 <i class="ri-arrow-up-line me-1 icon-growth non-growth"></i>
-                                                                <p class="non-growth">${item.perValueBooksSold}%</p>
+                                                                <p class="non-growth">${product.perValueBooksSold}%</p>
                                                             </div>
                                                         </c:when>
-                                                        <c:when test="${item.perValueBooksSold > 0}">
+                                                        <c:when test="${product.perValueBooksSold > 0}">
                                                             <div class="up mt-0 d-flex">
                                                                 <i class="ri-arrow-up-line me-1 icon-growth"></i>
-                                                                <p class="up-growth">${item.perValueBooksSold}%</p>
+                                                                <p class="up-growth">${product.perValueBooksSold}%</p>
                                                             </div>
                                                         </c:when>
                                                         <c:otherwise>
                                                             <div class="down mt-0 d-flex">
                                                                 <i class="ri-arrow-down-line me-1 icon-growth"></i>
-                                                                <p class="down-growth">${-item.perValueBooksSold}%</p>
+                                                                <p class="down-growth">${-product.perValueBooksSold}%</p>
                                                             </div>
                                                         </c:otherwise>
                                                     </c:choose>
@@ -91,12 +91,12 @@
                                             <td>
                                                 <div class="cr-product-price">
                                                     <span class="new-price">
-                                                        ${item.sellingPrice} ₫
+                                                        ${product.sellingPrice} ₫
                                                     </span>
                                                 </div>
                                             </td>
                                             <td>
-                                                <span class="status-${item.statusStyle}">${item.statusDisplay}</span>
+                                                <span class="status-${product.statusStyle}">${product.statusDisplay}</span>
                                             </td>
                                             <td>
                                                 <div class="d-flex justify-content-center">
@@ -109,9 +109,9 @@
                                                             </span>
                                                     </button>
                                                     <div class="dropdown-menu">
-                                                        <a class="dropdown-item" href="#">Xem chi tiết</a>
-                                                        <a class="dropdown-item" href="#">Chỉnh sửa</a>
-                                                        <a class="dropdown-item" href="#">Xóa sản phẩm</a>
+                                                        <a class="dropdown-item" href="#" onclick="rowAction(${product.id}, 'view'); return false;" data-value="view">Chi tiết</a>
+                                                        <a class="dropdown-item" href="#" onclick="rowAction(${product.id}, 'update'); return false;" data-value="update">Cập nhật</a>
+                                                        <a class="dropdown-item" href="#" onclick="rowAction(${product.id}, 'delete'); return false;" data-value="delete">Ngừng bán</a>
                                                     </div>
                                                 </div>
                                             </td>

@@ -1,5 +1,6 @@
 package com.biblio.mapper;
 
+import com.biblio.constants.StoredFileConstants;
 import com.biblio.dto.request.PublisherCreateRequest;
 import com.biblio.dto.request.PublisherUpdateRequest;
 import com.biblio.dto.response.PublisherAnalysisResponse;
@@ -52,7 +53,7 @@ public class PublisherMapper {
         return PublisherLineResponse.builder()
                 .id(publisher.getId().toString())
                 .name(publisher.getName())
-                .avatar(publisher.getAvatar())
+                .avatar(StoredFileConstants.PUBLISHER_DEFAULT_AVA)
                 .introduction(FormatterUtil.description(publisher.getIntroduction(), 150))
                 .joinAt(FormatterUtil.toDateTimeString(publisher.getJoinAt()))
                 .works(works.toString())

@@ -1,4 +1,5 @@
 package com.biblio.apis.owner;
+import com.biblio.dto.response.CategoryProfileResponse;
 import com.biblio.dto.response.CategoryResponse;
 import com.biblio.service.ICategoryService;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -36,7 +37,7 @@ public class GetCategoriesAPI extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		List<CategoryResponse> categoryResponse = categoryService.getAllCategories();
+		List<CategoryProfileResponse> categoryResponse = categoryService.getAllCategories();
 
 		response.setContentType("application/json");
 		response.setCharacterEncoding("UTF-8");
