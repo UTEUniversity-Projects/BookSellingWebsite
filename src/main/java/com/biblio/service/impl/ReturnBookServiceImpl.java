@@ -9,6 +9,7 @@ import com.biblio.dto.request.ReturnOrderRequest;
 import com.biblio.dto.response.ReturnBookManagementResponse;
 import com.biblio.entity.*;
 import com.biblio.enumeration.EBookMetadataStatus;
+import com.biblio.enumeration.EOrderHistory;
 import com.biblio.enumeration.EOrderStatus;
 import com.biblio.enumeration.EReasonReturn;
 import com.biblio.mapper.ReturnBookMapper;
@@ -17,11 +18,14 @@ import com.biblio.service.IReturnBookService;
 
 
 import javax.inject.Inject;
+import java.time.LocalDateTime;
+import java.time.temporal.ChronoUnit;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 import java.sql.Timestamp; // Import thêm nếu chưa có
+import java.util.stream.Collectors;
 
 
 public class ReturnBookServiceImpl implements IReturnBookService {
@@ -79,6 +83,36 @@ public class ReturnBookServiceImpl implements IReturnBookService {
     public boolean saveReturnOrder(ReturnOrderRequest returnOrderRequest) {
         ReturnBook returnBook = ReturnBookMapper.toEntity(returnOrderRequest);
         Order order = orderDAO.findOne(returnOrderRequest.getOrderId());
+
+        OrderStatusHistory completedStatusHistory = order.getStatusHistory().stream()
+                .filter(statusHistory -> statusHistory.getStatus() == EOrderHistory.COMPLETED)
+                .findFirst()
+                .orElse(null);
+
+        if (completedStatusHistory == null) {
+            return false;
+        }
+
+        LocalDateTime returnBookCreatedAt = returnBook.getCreatedAt();
+        LocalDateTime statusChangeDate = completedStatusHistory.getStatusChangeDate();
+
+        if (returnBookCreatedAt == null || statusChangeDate == null) {
+            return false;
+        }
+
+        long daysDifference = ChronoUnit.DAYS.between(statusChangeDate, returnBookCreatedAt);
+
+        long dayAffect;
+        if (returnBook.getReason() != EReasonReturn.NO_NEEDED) {
+            dayAffect = 5;
+        } else {
+            dayAffect = 3;
+        }
+
+        if (daysDifference > dayAffect) {
+            return false;
+        }
+
         Set<ReturnBookItem> returnBookItems = new HashSet<>();
 
         for (ReturnBookRequest returnBookRequestItem : returnOrderRequest.getReturnBookItems()) {

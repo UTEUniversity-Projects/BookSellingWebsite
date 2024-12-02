@@ -46,7 +46,7 @@ $(document).ready(() => {
 								            --zoom-x: 0%;
 								            --zoom-y: 0%;
 								            --display: none;">
-                                    <img src="${book.imageUrl}" alt="${book.title}">
+                                    <img src="${contextPath}${book.imageUrl}" alt="${book.title}">
                                     <img role="presentation" alt="" style="width: 0 !important; height: 0!important;" src="http://localhost:8080/assets/owner/img/book/TrenDuongBang/image1.jpg" class="zoomImg" style="position: absolute; top: -2141.2px; left: -1465.35px; opacity: 0; width: 2560px; height: 2560px; border: none; max-width: none; max-height: none;"></div>
                                     <div class="cr-side-view">
                                         <a class="model-oraganic-product" data-bs-toggle="modal" href="#quickview-${book.id}" role="button">
