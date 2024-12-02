@@ -107,9 +107,9 @@
                     <div class="button-container mt-5 text-right">
                         <!-- Buttons for orders with specific statuses -->
                         <c:if test="${order.status == 'COMPLETE_DELIVERY'}">
-                            <button class="px-4 py-2 bg-[#26aa99] rounded text-white hover:bg-[#158d7d]"
-                                    onclick="alert('Chức năng đang được phát triển!'); return false;">Đặt lại đơn hàng
-                            </button>
+<%--                            <button class="px-4 py-2 bg-[#26aa99] rounded text-white hover:bg-[#158d7d]"--%>
+<%--                                    onclick="alert('Chức năng đang được phát triển!'); return false;">Đặt lại đơn hàng--%>
+<%--                            </button>--%>
                             <button class="px-4 py-2 bg-[#ff9800] rounded text-white hover:bg-[#e58900] transition"
                                     onclick="window.location.href='${pageContext.request.contextPath}/return-order?orderId=${order.id}'">
                                 Hoàn trả
@@ -122,11 +122,11 @@
                             </button>
                         </c:if>
 
-                        <c:if test="${order.status == 'CANCELED'}">
-                            <button class="px-4 py-2 bg-[#26aa99] rounded text-white hover:bg-[#158d7d]"
-                                    onclick="alert('Chức năng đang được phát triển!'); return false;">Mua lại đơn hàng
-                            </button>
-                        </c:if>
+<%--                        <c:if test="${order.status == 'CANCELED'}">--%>
+<%--                            <button class="px-4 py-2 bg-[#26aa99] rounded text-white hover:bg-[#158d7d]"--%>
+<%--                                    onclick="alert('Chức năng đang được phát triển!'); return false;">Mua lại đơn hàng--%>
+<%--                            </button>--%>
+<%--                        </c:if>--%>
 
                         <!-- Nút luôn hiển thị -->
                         <button
