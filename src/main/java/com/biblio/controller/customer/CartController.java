@@ -1,8 +1,10 @@
 package com.biblio.controller.customer;
 
 import com.biblio.dto.response.AccountGetResponse;
+import com.biblio.dto.response.CartItemResponse;
 import com.biblio.dto.response.CartResponse;
 import com.biblio.service.ICartService;
+import com.biblio.service.IPromotionTemplateService;
 
 import javax.inject.Inject;
 import javax.servlet.ServletException;
@@ -25,6 +27,9 @@ public class CartController extends HttpServlet {
     @Inject
     private ICartService cartService;
 
+    @Inject
+    private IPromotionTemplateService promotionTemplateService;
+
     /**
      * @see HttpServlet#HttpServlet()
      */
@@ -46,7 +51,11 @@ public class CartController extends HttpServlet {
             response.sendRedirect("login");
             return;
         }
+
         CartResponse cart = cartService.getCartResponseByAccountId(account.getId());
+        for (CartItemResponse cartItem : cart.getCartItems()) {
+            cartItem.setSalePrice(cartItem.getSellingPrice() - (promotionTemplateService.percentDiscountOfBook(cartItem.getBookId()) / 100) * cartItem.getSellingPrice());
+        }
 
         request.setAttribute("breadcrumb", "Giỏ hàng");
         request.setAttribute("cart", cart);

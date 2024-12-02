@@ -1,6 +1,7 @@
 package com.biblio.dao.impl;
 
 import com.biblio.dao.IBookTemplateDAO;
+import com.biblio.dto.request.LoadRelatedBooksRequest;
 import com.biblio.dto.request.SearchBookRequest;
 import com.biblio.entity.Book;
 import com.biblio.entity.BookTemplate;
@@ -245,6 +246,31 @@ public class BookTemplateDAOImpl extends GenericDAOImpl<BookTemplate> implements
                 .append("AND b.bookMetadata.status = 'IN_STOCK' ");
 
         List<BookTemplate> bookTemplates = super.findAll(jpql.toString(), 20);
+
+        for (BookTemplate bookTemplate : bookTemplates) {
+            Set<Book> books = new HashSet<>(bookDAO.findByBookTemplate(bookTemplate));
+            bookTemplate.setBooks(books);
+        }
+        return bookTemplates;
+    }
+
+    @Override
+    public List<BookTemplate> findRelatedBooks(LoadRelatedBooksRequest request) {
+        StringBuilder jpql = new StringBuilder();
+        jpql.append("SELECT DISTINCT bt ")
+                .append("FROM BookTemplate bt ")
+                .append("JOIN FETCH bt.books b ")
+                .append("LEFT JOIN FETCH bt.reviews r ")
+                .append("LEFT JOIN FETCH bt.mediaFiles m ")
+                .append("WHERE bt.id != :bookTemplateId ")
+                .append("AND b.subCategory.category.id = (SELECT DISTINCT b1.subCategory.category.id FROM Book b1 WHERE b1.bookTemplate.id = :bookTemplateId) ")
+                .append("AND bt.status = 'ON_SALE' ")
+                .append("AND b.bookMetadata.status = 'IN_STOCK' ");
+
+        Map<String, Object> params = new HashMap<>();
+        params.put("bookTemplateId", request.getBookTemplateId());
+
+        List<BookTemplate> bookTemplates = super.findByJPQL(jpql.toString(), params);
 
         for (BookTemplate bookTemplate : bookTemplates) {
             Set<Book> books = new HashSet<>(bookDAO.findByBookTemplate(bookTemplate));

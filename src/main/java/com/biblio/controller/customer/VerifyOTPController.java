@@ -58,9 +58,9 @@ public class VerifyOTPController extends HttpServlet {
             long currentTime = System.currentTimeMillis();
             long elapsedTime = currentTime - otpTimestamp;
 
-            if (elapsedTime > 5 * 60 * 1000) {
+            if (elapsedTime > 2.5 * 60 * 1000 ) {
                 map.put("code", 400);
-                map.put("message", "Mã OTP đã hết hạn. Vui lòng yêu cầu mã OTP mới.");
+                map.put("message", "Mã OTP đã hết hạn. Vui lòng yêu cầu gửi lại mã OTP mới.");
             } else {
                 if (sessionOtpCode.equals(enteredCode)) {
                     map.put("code", 200);
@@ -69,7 +69,7 @@ public class VerifyOTPController extends HttpServlet {
                     request.getSession().removeAttribute("otpTimestamp");
                 } else {
                     map.put("code", 400);
-                    map.put("message", "Mã OTP không chính xác.");
+                    map.put("message", "Mã OTP không chính xác. Vui lòng thử lại");
                 }
             }
         }

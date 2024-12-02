@@ -1,5 +1,6 @@
 package com.biblio.dao;
 
+import com.biblio.dto.request.LoadRelatedBooksRequest;
 import com.biblio.dto.request.SearchBookRequest;
 import com.biblio.entity.BookTemplate;
 
@@ -30,5 +31,7 @@ public interface IBookTemplateDAO {
     List<BookTemplate> findTop20();
 
     BookTemplate update(BookTemplate bookTemplate);
+
+    List<BookTemplate> findRelatedBooks(LoadRelatedBooksRequest request);
 
 }

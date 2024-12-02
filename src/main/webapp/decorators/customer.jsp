@@ -420,10 +420,9 @@
             <div class="cart_btn flex items-center justify-center">
                 <a href="${pageContext.request.contextPath}/cart" class="cr-button">Xem giỏ hàng</a>
             </div>
-            </c:otherwise>
-            </c:choose>
         </div>
-
+        </c:otherwise>
+        </c:choose>
     </div>
 </div>
 

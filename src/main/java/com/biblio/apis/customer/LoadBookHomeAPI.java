@@ -1,7 +1,10 @@
 package com.biblio.apis.customer;
 
 import com.biblio.dto.response.BookCardResponse;
+import com.biblio.dto.response.CartItemResponse;
+import com.biblio.dto.response.CartResponse;
 import com.biblio.service.IBookTemplateService;
+import com.biblio.service.IPromotionTemplateService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import javax.inject.Inject;
@@ -25,6 +28,9 @@ public class LoadBookHomeAPI extends HttpServlet {
 	@Inject
 	private IBookTemplateService bookTemplateService;
 
+	@Inject
+	private IPromotionTemplateService promotionTemplateService;
+
     @Serial
 	private static final long serialVersionUID = 1L;
        
@@ -45,6 +51,10 @@ public class LoadBookHomeAPI extends HttpServlet {
 
 		ObjectMapper mapper = new ObjectMapper();
 		Map<String, Object> map = new HashMap<>();
+
+		for (BookCardResponse book : books) {
+			book.setSalePrice((book.getSellingPrice() - (promotionTemplateService.percentDiscountOfBook(book.getId()) / 100) * book.getSellingPrice()));
+		}
 
 		map.put("books", books);
 

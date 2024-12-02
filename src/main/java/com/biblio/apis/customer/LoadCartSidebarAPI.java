@@ -1,8 +1,13 @@
 package com.biblio.apis.customer;
 
 import com.biblio.dto.response.AccountGetResponse;
+import com.biblio.dto.response.CartItemResponse;
 import com.biblio.dto.response.CartResponse;
+import com.biblio.entity.Cart;
+import com.biblio.entity.CartItem;
 import com.biblio.service.ICartService;
+import com.biblio.service.IPromotionService;
+import com.biblio.service.IPromotionTemplateService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import javax.inject.Inject;
@@ -24,6 +29,9 @@ public class LoadCartSidebarAPI extends HttpServlet {
 
     @Inject
     private ICartService cartService;
+
+    @Inject
+    private IPromotionTemplateService promotionTemplateService;
     /**
      * @see HttpServlet#HttpServlet()
      */
@@ -44,6 +52,10 @@ public class LoadCartSidebarAPI extends HttpServlet {
         Map<String, Object> map = new HashMap<>();
 
         CartResponse cart = cartService.getCartResponseByAccountId(account.getId());
+        for (CartItemResponse cartItem : cart.getCartItems()) {
+            cartItem.setSalePrice(cartItem.getSellingPrice() - (promotionTemplateService.percentDiscountOfBook(cartItem.getBookId()) / 100) * cartItem.getSellingPrice());
+        }
+
         map.put("cart", cart);
         response.setContentType("application/json");
         response.setCharacterEncoding("UTF-8");

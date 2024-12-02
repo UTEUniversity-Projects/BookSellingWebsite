@@ -3,6 +3,7 @@ package com.biblio.service.impl;
 import com.biblio.dao.IBookTemplateDAO;
 
 import com.biblio.dto.request.CheckoutItemRequest;
+import com.biblio.dto.request.LoadRelatedBooksRequest;
 import com.biblio.dto.request.SearchBookRequest;
 import com.biblio.dto.response.*;
 
@@ -129,4 +130,13 @@ public class BookTemplateServiceImpl implements IBookTemplateService {
         return bookCardResponseList;
     }
 
+    @Override
+    public List<BookCardResponse> getRelatedBooks(LoadRelatedBooksRequest request) {
+        List<BookTemplate> bookTemplates = bookTemplateDAO.findRelatedBooks(request);
+        List<BookCardResponse> bookCardResponseList = new ArrayList<>();
+        for (BookTemplate bookTemplate : bookTemplates) {
+            bookCardResponseList.add(BookTemplateMapper.toBookCardResponse(bookTemplate));
+        }
+        return bookCardResponseList;
+    }
 }
