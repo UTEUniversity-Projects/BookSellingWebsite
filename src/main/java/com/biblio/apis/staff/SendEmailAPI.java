@@ -42,7 +42,7 @@ public class SendEmailAPI extends HttpServlet {
         response.setContentType("application/json; charset=UTF-8");
         response.setCharacterEncoding("UTF-8");
 
-        String action = request.getPathInfo(); // Lấy action từ URL
+        String action = request.getPathInfo();
         ObjectMapper mapper = new ObjectMapper();
         Map<String, String> result = new HashMap<>();
 

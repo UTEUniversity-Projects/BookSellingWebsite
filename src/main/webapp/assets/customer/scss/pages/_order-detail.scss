@@ -95,3 +95,12 @@
   flex: 1; /* Mở rộng phần tử amount để chiếm không gian bên phải */
 }
 
+.product-title {
+  margin-bottom: 20px; font-size: 24px;
+  transition: color 0.2s ease;
+}
+
+.product-title:hover {
+  color: $main-primary-color;
+}
+

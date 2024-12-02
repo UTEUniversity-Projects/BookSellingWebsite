@@ -15,6 +15,6 @@ public interface IReturnBookService {
 
     boolean update(Long returnBookId);
 
-    void saveReturnOrder(ReturnOrderRequest returnOrderRequest, List<ReturnBookRequest> returnBookRequests);
+    boolean saveReturnOrder(ReturnOrderRequest returnOrderRequest);
   
 }

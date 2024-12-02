@@ -207,13 +207,15 @@ public class OrderServiceImpl implements IOrderService {
 
     @Override
     public List<OrderDetailsManagementResponse> getOrderCustomerByStatus(Long customerId, String status) {
-        // Lấy tất cả các đơn hàng cho khách hàng
         List<Order> orders = orderDAO.findAllOrderForCustomer(customerId);
+        orders.sort(Comparator.comparing(Order::getOrderDate).reversed());
+        if (orders.isEmpty()) {
+            System.out.println("Null order found in orders list");
+            return null;
+        }
         List<OrderDetailsManagementResponse> filteredOrderResponses = new ArrayList<>();
 
-        // Kiểm tra nếu status là "all", lấy tất cả đơn hàng
         if ("all".equalsIgnoreCase(status)) {
-            // Nếu trạng thái là "all", không lọc theo trạng thái, lấy tất cả
             for (Order order : orders) {
                 if (order == null) {
                     System.out.println("Null order found in orders list");
@@ -221,6 +223,7 @@ public class OrderServiceImpl implements IOrderService {
                 }
 
                 OrderDetailsManagementResponse response = OrderMapper.mapToOrderDetailsManagementResponse(order);
+                response.setFinalPrice(order.getBankTransfer().getAmount());
                 if (response == null) {
                     System.out.println("Mapper returned null for order ID: " + order.getId());
                 } else {
@@ -228,9 +231,8 @@ public class OrderServiceImpl implements IOrderService {
                 }
             }
         } else {
-            // Nếu trạng thái không phải "all", chuyển từ String sang EOrderStatus và lọc
             try {
-                EOrderStatus orderStatus = EOrderStatus.valueOf(status); // Chuyển đổi String thành EOrderStatus
+                EOrderStatus orderStatus = EOrderStatus.valueOf(status);
                 Set<EOrderStatus> statusesToFilter = new HashSet<>();
                 if (orderStatus == EOrderStatus.WAITING_CONFIRMATION) {
                     statusesToFilter.add(EOrderStatus.WAITING_CONFIRMATION);
@@ -250,6 +252,7 @@ public class OrderServiceImpl implements IOrderService {
 
                     if (order.getStatus() != null && statusesToFilter.contains(order.getStatus())) {
                         OrderDetailsManagementResponse response = OrderMapper.mapToOrderDetailsManagementResponse(order);
+                        response.setFinalPrice(order.getBankTransfer().getAmount());
                         if (response == null) {
                             System.out.println("Mapper returned null for order ID: " + order.getId());
                         } else {
@@ -258,7 +261,6 @@ public class OrderServiceImpl implements IOrderService {
                     }
                 }
             } catch (IllegalArgumentException e) {
-                // Trường hợp status không hợp lệ
                 System.out.println("Invalid status: " + status);
             }
         }
