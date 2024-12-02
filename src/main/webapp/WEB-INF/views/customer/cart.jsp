@@ -54,8 +54,15 @@
                                                         </a>
                                                     </td>
                                                     <td class="cr-cart-price">
-                                                        <span class="new-price price-value">${cartItem.sellingPrice}</span>
-                                                        <span class="old-price price-value">${cartItem.sellingPrice}</span>
+                                                        <c:choose>
+                                                            <c:when test="${cartItem.sellingPrice == cartItem.salePrice}">
+                                                                <span class="new-price price-value">${cartItem.sellingPrice}</span>
+                                                            </c:when>
+                                                            <c:otherwise>
+                                                                <span class="new-price price-value">${cartItem.salePrice}</span>
+                                                                <span class="old-price price-value">${cartItem.sellingPrice}</span>
+                                                            </c:otherwise>
+                                                        </c:choose>
                                                     </td>
                                                     <td class="cr-cart-qty">
                                                         <div class="cart-qty-plus-minus">

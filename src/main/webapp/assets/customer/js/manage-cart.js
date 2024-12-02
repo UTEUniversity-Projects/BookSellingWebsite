@@ -5,8 +5,10 @@ import { formatCurrencyVND } from '../../commons/js/format-currency.js';
 $(document).ready(function () {
 	// Add
 	$(document).on('click', '.add-to-cart-btn', function () {
-		const bookId = $(this).closest('.cr-product-card, .modal, .section-product').data('book-id');
-		const quantity = $(this).data('quantity') || $(this).closest('.cr-add-card').find('.cr-qty-main .quantity').val();
+		var $this = $(this);
+		$this.prop('disabled', true);
+		const bookId = $(this).closest('.cr-product-card, .modal, .section-product').data("book-id");
+		const quantity = $(this).data("quantity") || $(this).closest(".cr-add-card").find(".cr-qty-main .quantity").val();
 
 		console.log({
 			bookId: bookId,
@@ -38,6 +40,9 @@ $(document).ready(function () {
 			},
 			error: function (xhr, status, error) {
 				console.error('Error: ', xhr.responseText);
+			},
+			complete: function () {
+				$this.prop('disabled', false);
 			}
 		});
 	});
@@ -45,7 +50,6 @@ $(document).ready(function () {
 	$('#view-cart-btn').on('click', function () {
 
 		const cartItemsContainer = $('.crcart-pro-items');
-		const viewCartBtn = $('.cr-cart-bottom');
 		$('.cart-loading').removeClass('hidden');
 		$('.cr-cart-top').addClass('hidden');
 		$('.view-cart').addClass('hidden');
@@ -69,8 +73,10 @@ $(document).ready(function () {
                                      ${cartItem.title}
                                  </a>
                                  <span class="cart-price">
-                                    <span class="new-price price-value">${formatCurrencyVND(cartItem.sellingPrice)}</span>
-                                    <span class="old-price price-value">${formatCurrencyVND(cartItem.sellingPrice)}</span>
+                               		${cartItem.salePrice === cartItem.sellingPrice
+									? `<span class="new-price price-value">${formatCurrencyVND(cartItem.sellingPrice)}</span>`
+									: `<span class="new-price price-value">${formatCurrencyVND(cartItem.salePrice)}</span>
+			   						<span class="old-price price-value">${formatCurrencyVND(cartItem.sellingPrice)}</span>`}
                                  </span>
                                  <div class="cr-cart-qty">
                                      <div class="cart-qty-plus-minus">
@@ -91,7 +97,7 @@ $(document).ready(function () {
                      `;
 						cartItemsContainer.append(itemHTML);
 					});
-					viewCartBtn.show();
+					$('.view-cart').removeClass('hidden');
 				} else {
 					cartItemsContainer.append(`<div class="message-container mt-[50%]">
                                     <img src="https://cdn-icons-png.flaticon.com/512/2762/2762885.png" alt="">
@@ -100,7 +106,6 @@ $(document).ready(function () {
                                         <button class="cr-button">Mua ngay</button>
                                     </a>
                                 </div>`);
-					viewCartBtn.hide();
 				}
 			},
 			error: function (xhr, status, error) {
@@ -109,7 +114,6 @@ $(document).ready(function () {
 			complete: function () {
 				$('.cart-loading').addClass('hidden');
 				$('.cr-cart-top').removeClass('hidden');
-				$('.view-cart').removeClass('hidden');
 			}
 		});
 	});
@@ -132,6 +136,7 @@ $(document).ready(function () {
 			}),
 			success: function (response) {
 				$row.find('.cr-cart-subtotal').text(formatCurrencyVND(response.cartItem.subTotal));
+				calTotal();
 			},
 			error: function (xhr, status, error) {
 				console.error('Error: ', xhr.responseText);
@@ -155,13 +160,14 @@ $(document).ready(function () {
 			success: function (response) {
 				if (parent.children().length === 1) {
 					container.empty();
-					container.append('<div class="message-container">\n' +
+					container.append('<div class="message-container mt-[50%]">\n' +
 						'                                    <img src="https://cdn-icons-png.flaticon.com/512/2762/2762885.png" alt="">\n' +
 						'                                    <p>Giỏ hàng của bạn đang trống</p>\n' +
 						'                                    <a href="home">\n' +
 						'                                        <button class="cr-button">Mua ngay</button>\n' +
 						'                                    </a>\n' +
 						'                                </div>');
+					$('.view-cart').addClass('hidden');
 				} else {
 					item.remove();
 				}
@@ -178,34 +184,6 @@ $(document).ready(function () {
 			}
 		});
 	});
-	$(document).on('change', '.product-checkbox', function () {
-		const $checkBox = $(this);
-		const $row = $checkBox.closest('tr');
-		const $totalElement = $row.closest('form').find('.cr-cart-summary .total');
-
-		// Lấy giá trị hiện tại của tổng và chuyển đổi thành số, chỉ xóa ký tự "₫" và dấu phân cách
-		let currentTotal = parseFloat($totalElement.text().replace(/[₫,.]/g, '').trim());
-
-		// Lấy giá trị của subtotal và chuyển đổi thành số, chỉ xóa ký tự "₫" và dấu phân cách
-		const subTotal = parseFloat($row.find('.cr-cart-subtotal').text().replace(/[₫,.]/g, '').trim());
-
-		// Cập nhật tổng giá trị dựa trên checkbox được chọn hay không
-		if ($checkBox.is(':checked')) {
-			currentTotal += subTotal;
-		} else {
-			currentTotal -= subTotal;
-		}
-
-		// Cập nhật giá trị mới cho phần tử tổng
-		$totalElement.text(formatCurrencyVND(currentTotal));
-
-		console.log(subTotal);
-	});
-
-	function formatCurrencyVND(value) {
-		return value.toLocaleString('vi-VN', { style: 'currency', currency: 'VND' });
-	}
-
 	countCartItem();
 });
 
@@ -232,6 +210,55 @@ function addTooCartAnimation () {
 		}, 1000);
 	}, 1000);
 }
+
+$(document).on('change', '.cr-table-content .cr-cart-checkbox, .cr-table-content .quantity', function() {
+	let total = 0;
+	$('.cr-table-content tbody tr').each(function() {
+		const $checkBox = $(this).find('.cr-cart-checkbox input[type="checkbox"]');
+		const $priceElement = $(this).find('.new-price');
+		const price = parseFloat($priceElement.text().replace(/[^\d]/g, ''));
+		const $quantityElement = $(this).find('.quantity');
+		const quantity = parseInt($quantityElement.val(), 10);
+		const subTotal = price * quantity;
+		if ($checkBox.is(':checked')) {
+			total += subTotal;
+		}
+	});
+
+	$('.cr-cart-summary .total').text(formatCurrencyVND(total));
+});
+
+$(document).ready(function() {
+    $("#btn-checkout").click(function() {
+        const selectedItems = [];
+        $(".product-checkbox:checked").each(function() {
+            const productId = $(this).closest("tr").data("product-id");
+            const quantity = $(this).closest("tr").find(".quantity").val();
+
+            selectedItems.push({
+                productId: productId,
+                quantity: quantity
+            });
+        });
+
+        if (selectedItems.length > 0) {
+            console.log(selectedItems);
+            $.ajax({
+                url: `${contextPath}/api/customer/checkout`,
+                type: "POST",
+                contentType: "application/json",
+                data: JSON.stringify({ items: selectedItems }),
+                success: function(response) {
+                    window.location.href = `${contextPath}/checkout`;
+                },
+                error: function(xhr, status, error) {
+                    alert("Có lỗi xảy ra. Vui lòng thử lại!");
+                }
+            });
+        } else {
+            alert("Vui lòng chọn ít nhất một sản phẩm để thanh toán!");
+        }
+    });
 
 $(document).ready(function () {
 	$('#btn-checkout').click(function () {

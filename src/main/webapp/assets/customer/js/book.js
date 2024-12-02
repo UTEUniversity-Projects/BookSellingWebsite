@@ -67,8 +67,10 @@ $(document).ready(() => {
                                     </div>
                                     <a href="${contextPath}/book?id=${book.id}" class="title">${book.title}</a>
                                     <p class="cr-price">
-                                        <span class="new-price price-value">${formatCurrencyVND(book.sellingPrice)}</span>
-                                        <span class="old-price price-value">${formatCurrencyVND(book.sellingPrice)}</span>
+                                        ${book.salePrice === book.sellingPrice
+										? `<span class="new-price price-value">${formatCurrencyVND(book.sellingPrice)}</span>`
+										: `<span class="new-price price-value">${formatCurrencyVND(book.salePrice)}</span>
+			   							<span class="old-price price-value">${formatCurrencyVND(book.sellingPrice)}</span>`}
                                     </p>
                                 </div>
                             </div>

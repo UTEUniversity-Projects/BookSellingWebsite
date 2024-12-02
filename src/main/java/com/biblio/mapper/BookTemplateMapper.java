@@ -51,7 +51,7 @@ public class BookTemplateMapper {
         return BookCardResponse.builder()
                 .id(bookTemplate.getId())
                 .title(singlebook.getTitle())
-                .sellingPrice(formatter.format((int) singlebook.getSellingPrice()))
+                .sellingPrice(singlebook.getSellingPrice())
                 .condition(singlebook.getCondition().getBookCondition())
                 .categoryName(singlebook.getSubCategory().getCategory().getName())
                 .imageUrl(bookTemplate

@@ -12,7 +12,7 @@ public class CartItemMapper {
                 .id(cartItem.getId())
                 .bookId(cartItem.getBookTemplate().getId())
                 .title(book.getTitle())
-                .imageUrl(cartItem.getBookTemplate().getMediaFiles().iterator().next().getStoredCode().replaceAll("image\\d+\\.jpg", "image1.jpg"))
+                .imageUrl(cartItem.getBookTemplate().getMediaFiles().get(0).getStoredCode())
                 .sellingPrice(book.getSellingPrice())
                 .quantity(cartItem.getQuantity())
                 .subTotal(cartItem.calculateSubTotal())
