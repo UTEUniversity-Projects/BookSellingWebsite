@@ -23,7 +23,7 @@ public class OrderMapper {
                 .id(order.getId())
                 .customerName(order.getCustomer().getFullName())
                 .orderDate(formatDateTime(order.getOrderDate(), "HH:mm dd-MM-yyyy"))
-                .totalPrice(order.calTotalPrice())
+                .totalPrice(order.getBankTransfer().getAmount())
                 .paymentMethod(order.getPaymentType().getValue())
                 .status(order.getStatus())
                 .statusStyle(order.getStatus().getStatusStyle())
@@ -32,7 +32,7 @@ public class OrderMapper {
 
     public static OrderDetailsManagementResponse mapToOrderDetailsManagementResponse(Order order) {
         List<OrderProductResponse> products = order.getOrderItems().stream()
-                .map(OrderItemMapper::mapToOrderProductResponse)
+                .flatMap(orderItem -> OrderItemMapper.toOrderProductCustomerResponse(orderItem).stream())
                 .collect(Collectors.toList());
 
         CustomerResponse customer = CustomerMapper.toCustomerResponse(order.getCustomer());
