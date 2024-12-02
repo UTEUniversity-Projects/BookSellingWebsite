@@ -151,7 +151,7 @@ public class PromotionTemplateServiceImpl implements IPromotionTemplateService {
             if (promotionTemplate.getStatus() == EPromotionTemplateStatus.COMING_SOON) {
                 applyCodePromotionResponse.setMessage("Chương trình khuyến mãi chưa diễn ra!");
             } else if (promotionTemplate.getStatus() == EPromotionTemplateStatus.EXPIRED) {
-                applyCodePromotionResponse.setMessage("Mã khuyến mãi đã hết hạn");
+                applyCodePromotionResponse.setMessage("Mã khuyến mãi đã hết hạn!");
             } else if (promotionTemplate.getStatus() == EPromotionTemplateStatus.USED_OUT) {
                 applyCodePromotionResponse.setMessage("Mã khuyến mãi đã hết lượt sử dụng!");
             } else {
