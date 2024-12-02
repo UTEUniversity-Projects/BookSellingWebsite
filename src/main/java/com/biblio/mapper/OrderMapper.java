@@ -32,7 +32,7 @@ public class OrderMapper {
 
     public static OrderDetailsManagementResponse mapToOrderDetailsManagementResponse(Order order) {
         List<OrderProductResponse> products = order.getOrderItems().stream()
-                .map(OrderItemMapper::mapToOrderProductResponse)
+                .flatMap(orderItem -> OrderItemMapper.toOrderProductCustomerResponse(orderItem).stream())
                 .collect(Collectors.toList());
 
         CustomerResponse customer = CustomerMapper.toCustomerResponse(order.getCustomer());
