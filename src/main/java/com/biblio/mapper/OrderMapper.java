@@ -23,7 +23,7 @@ public class OrderMapper {
                 .id(order.getId())
                 .customerName(order.getCustomer().getFullName())
                 .orderDate(formatDateTime(order.getOrderDate(), "HH:mm dd-MM-yyyy"))
-                .totalPrice(order.calTotalPrice())
+                .totalPrice(order.getBankTransfer().getAmount())
                 .paymentMethod(order.getPaymentType().getValue())
                 .status(order.getStatus())
                 .statusStyle(order.getStatus().getStatusStyle())
