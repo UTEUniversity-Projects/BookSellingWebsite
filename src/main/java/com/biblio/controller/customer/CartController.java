@@ -3,6 +3,7 @@ package com.biblio.controller.customer;
 import com.biblio.dto.response.AccountGetResponse;
 import com.biblio.dto.response.CartItemResponse;
 import com.biblio.dto.response.CartResponse;
+import com.biblio.dto.response.DiscountResponse;
 import com.biblio.service.ICartService;
 import com.biblio.service.IPromotionTemplateService;
 
@@ -15,6 +16,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.io.Serial;
+import java.util.List;
 
 /**
  * Servlet implementation class HomeController
@@ -53,9 +55,14 @@ public class CartController extends HttpServlet {
         }
 
         CartResponse cart = cartService.getCartResponseByAccountId(account.getId());
+        List<DiscountResponse> discounts = promotionTemplateService.getAllDiscounts();
         for (CartItemResponse cartItem : cart.getCartItems()) {
-            cartItem.setSalePrice(cartItem.getSellingPrice() - (promotionTemplateService.percentDiscountOfBook(cartItem.getBookId()) / 100) * cartItem.getSellingPrice());
+            cartItem.setSalePrice(cartItem.getSellingPrice() - (promotionTemplateService.percentDiscount(cartItem.getBookId(), discounts) / 100) * cartItem.getSellingPrice());
         }
+
+//        for (CartItemResponse cartItem : cart.getCartItems()) {
+//            cartItem.setSalePrice(cartItem.getSellingPrice() - (promotionTemplateService.percentDiscountOfBook(cartItem.getBookId()) / 100) * cartItem.getSellingPrice());
+//        }
 
         request.setAttribute("breadcrumb", "Giỏ hàng");
         request.setAttribute("cart", cart);

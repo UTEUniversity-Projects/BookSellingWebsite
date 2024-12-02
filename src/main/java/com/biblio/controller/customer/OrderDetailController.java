@@ -15,6 +15,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.Serial;
+import java.util.List;
 
 /**
  * Servlet implementation class HomeController
@@ -67,11 +68,18 @@ public class OrderDetailController extends HttpServlet {
             return;
         }
 
+        List<DiscountResponse> discounts = promotionTemplateService.getAllDiscounts();
         for (OrderProductResponse product : orderDetail.getProducts()) {
-            double discount = promotionTemplateService.percentDiscountOfBook(product.getBookTemplateId());
+            double discount = promotionTemplateService.percentDiscount(product.getBookTemplateId(), discounts);
             product.setDiscountPercent(discount);
             product.calTotalPrice();
         }
+
+//        for (OrderProductResponse product : orderDetail.getProducts()) {
+//            double discount = promotionTemplateService.percentDiscountOfBook(product.getBookTemplateId());
+//            product.setDiscountPercent(discount);
+//            product.calTotalPrice();
+//        }
         orderDetail.updateTotalPrice();
         orderDetail.updateFinalPrice();
 

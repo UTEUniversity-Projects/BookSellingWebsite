@@ -2,6 +2,7 @@ package com.biblio.apis.customer;
 
 import com.biblio.dto.request.LoadRelatedBooksRequest;
 import com.biblio.dto.response.BookCardResponse;
+import com.biblio.dto.response.DiscountResponse;
 import com.biblio.service.IBookService;
 import com.biblio.service.IBookTemplateService;
 import com.biblio.service.IPromotionTemplateService;
@@ -62,9 +63,16 @@ public class LoadRelatedBooksAPI extends HttpServlet {
         ObjectMapper mapper = new ObjectMapper();
 
         List<BookCardResponse> books = bookTemplateService.getRelatedBooks(loadRelatedBooksRequest);
+
+        List<DiscountResponse> discounts = promotionTemplateService.getAllDiscounts();
+
         for (BookCardResponse book : books) {
-            book.setSalePrice((book.getSellingPrice() - (promotionTemplateService.percentDiscountOfBook(book.getId()) / 100) * book.getSellingPrice()));
+            book.setSalePrice((book.getSellingPrice() - (promotionTemplateService.percentDiscount(book.getId(), discounts) / 100) * book.getSellingPrice()));
         }
+
+//        for (BookCardResponse book : books) {
+//            book.setSalePrice((book.getSellingPrice() - (promotionTemplateService.percentDiscountOfBook(book.getId()) / 100) * book.getSellingPrice()));
+//        }
 
         result.put("books", books);
 
