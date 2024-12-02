@@ -7,10 +7,10 @@ import com.biblio.dao.IReturnBookItemDAO;
 import com.biblio.dto.request.ReturnBookRequest;
 import com.biblio.dto.request.ReturnOrderRequest;
 import com.biblio.dto.response.ReturnBookManagementResponse;
-import com.biblio.entity.Book;
-import com.biblio.entity.ReturnBook;
-import com.biblio.entity.ReturnBookItem;
+import com.biblio.entity.*;
 import com.biblio.enumeration.EBookMetadataStatus;
+import com.biblio.enumeration.EOrderHistory;
+import com.biblio.enumeration.EOrderStatus;
 import com.biblio.enumeration.EReasonReturn;
 import com.biblio.mapper.ReturnBookMapper;
 import com.biblio.service.IBookTemplateService;
@@ -18,10 +18,14 @@ import com.biblio.service.IReturnBookService;
 
 
 import javax.inject.Inject;
+import java.time.LocalDateTime;
+import java.time.temporal.ChronoUnit;
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 import java.sql.Timestamp; // Import thêm nếu chưa có
+import java.util.stream.Collectors;
 
 
 public class ReturnBookServiceImpl implements IReturnBookService {
@@ -37,7 +41,7 @@ public class ReturnBookServiceImpl implements IReturnBookService {
 
     @Inject
     IOrderDAO orderDAO;
-  
+
     @Inject
     IBookTemplateService bookTemplateService;
 
@@ -60,9 +64,7 @@ public class ReturnBookServiceImpl implements IReturnBookService {
         if (returnBook == null) {
             return false;
         }
-        EBookMetadataStatus newStatus = (returnBook.getReason() != EReasonReturn.NO_NEEDED)
-                ? EBookMetadataStatus.BROKEN
-                : EBookMetadataStatus.IN_STOCK;
+        EBookMetadataStatus newStatus = (returnBook.getReason() != EReasonReturn.NO_NEEDED) ? EBookMetadataStatus.BROKEN : EBookMetadataStatus.IN_STOCK;
 
         for (ReturnBookItem returnBookItem : returnBook.getReturnBookItems()) {
             for (Book book : returnBookItem.getBooks()) {
@@ -78,41 +80,138 @@ public class ReturnBookServiceImpl implements IReturnBookService {
     }
 
     @Override
-    public void saveReturnOrder(ReturnOrderRequest returnOrderRequest, List<ReturnBookRequest> returnBookRequests) {
-        // Tạo đối tượng ReturnBook từ yêu cầu ReturnOrderRequest
+    public boolean saveReturnOrder(ReturnOrderRequest returnOrderRequest) {
         ReturnBook returnBook = ReturnBookMapper.toEntity(returnOrderRequest);
+        Order order = orderDAO.findOne(returnOrderRequest.getOrderId());
 
-        // Lưu ReturnBook vào cơ sở dữ liệu
-        returnBookDAO.save(returnBook);
+        OrderStatusHistory completedStatusHistory = order.getStatusHistory().stream()
+                .filter(statusHistory -> statusHistory.getStatus() == EOrderHistory.COMPLETED)
+                .findFirst()
+                .orElse(null);
 
-        // Lưu các ReturnBookItems
-        for (ReturnBookRequest returnBookRequestItem : returnBookRequests) {
-            // Tạo đối tượng ReturnBookItem từ ReturnBookRequest
-            ReturnBookItem returnBookItem = new ReturnBookItem();
-
-            Long idTemplate = returnBookRequestItem.getIdTemplate();
-
-            // Truy vấn các sách từ database theo bookTemplateId
-            List<Book> books = bookDAO.findBooksByTemplateId(idTemplate);
-
-            // Lọc ra số lượng sách theo yêu cầu
-            Set<Book> booksToReturn = new HashSet<>();
-            for (int i = 0; i < returnBookRequestItem.getReturnQuantity(); i++) {
-                if (i < books.size()) {
-                    booksToReturn.add(books.get(i));
-                }
-            }
-
-            // Gán các sách vào ReturnBookItem
-            returnBookItem.setBooks(booksToReturn);
-
-            // Gán ReturnBook vào ReturnBookItem
-            returnBookItem.setReturnBook(returnBook);
-
-            // Lưu ReturnBookItem vào cơ sở dữ liệu
-            returnBookItemDAO.save(returnBookItem);
+        if (completedStatusHistory == null) {
+            return false;
         }
 
-    }
+        LocalDateTime returnBookCreatedAt = returnBook.getCreatedAt();
+        LocalDateTime statusChangeDate = completedStatusHistory.getStatusChangeDate();
 
+        if (returnBookCreatedAt == null || statusChangeDate == null) {
+            return false;
+        }
+
+        long daysDifference = ChronoUnit.DAYS.between(statusChangeDate, returnBookCreatedAt);
+
+        long dayAffect;
+        if (returnBook.getReason() != EReasonReturn.NO_NEEDED) {
+            dayAffect = 5;
+        } else {
+            dayAffect = 3;
+        }
+
+        if (daysDifference > dayAffect) {
+            return false;
+        }
+
+        Set<ReturnBookItem> returnBookItems = new HashSet<>();
+
+        for (ReturnBookRequest returnBookRequestItem : returnOrderRequest.getReturnBookItems()) {
+            for (OrderItem orderItem : order.getOrderItems()) {
+                if (orderItem.getBooks().iterator().next().getBookTemplate().getId() == returnBookRequestItem.getBookTemplateId()) {
+                    Set<Book> books = new HashSet<>();
+                    int quantityToReturn = returnBookRequestItem.getQuantity();
+                    Iterator<Book> bookIterator = orderItem.getBooks().iterator();
+                    while (bookIterator.hasNext() && quantityToReturn > 0) {
+                        Book book = bookIterator.next();
+                        if (book.getBookTemplate().getId() == returnBookRequestItem.getBookTemplateId()) {
+                            books.add(book);
+                            quantityToReturn--;
+                        }
+                    }
+
+                    // Chỉ tạo ReturnBookItem khi có sách
+                    if (!books.isEmpty()) {
+                        ReturnBookItem returnBookItem = new ReturnBookItem();
+                        returnBookItem.setBooks(books);
+                        returnBookItem.setReturnBook(returnBook); // Gán ReturnBook vào ReturnBookItem
+                        returnBookItems.add(returnBookItem);
+                    }
+                }
+            }
+        }
+
+        returnBook.setReturnBookItems(returnBookItems);
+
+        order.setStatus(EOrderStatus.REQUEST_REFUND);
+        returnBook.setOrder(order);
+
+        boolean success;
+        try {
+            returnBook = returnBookDAO.save(returnBook);
+            if (returnBook == null) {
+                throw new Exception("Failed to save ReturnBook");
+            }
+
+            order.setReturnBook(returnBook);
+            order = orderDAO.update(order);
+            if (order == null) {
+                throw new Exception("Failed to update Order");
+            }
+
+            success = true;
+        } catch (Exception e) {
+            success = false;
+            e.printStackTrace();
+        }
+
+        return success;
+
+//        ReturnBook returnBook = ReturnBookMapper.toEntity(returnOrderRequest);
+//        Order order = orderDAO.findOne(returnOrderRequest.getOrderId());
+//        Set<ReturnBookItem> returnBookItems = new HashSet<>();
+//
+//        for (ReturnBookRequest returnBookRequestItem : returnOrderRequest.getReturnBookItems()) {
+//            for (OrderItem orderItem : order.getOrderItems()) {
+//                if (orderItem.getBooks().iterator().next().getBookTemplate().getId() == returnBookRequestItem.getBookTemplateId()) {
+//                    Set<Book> books = new HashSet<>();
+//                    int quantityToReturn = returnBookRequestItem.getQuantity();
+//                    Iterator<Book> bookIterator = orderItem.getBooks().iterator();
+//                    while (bookIterator.hasNext() && quantityToReturn > 0) {
+//                        Book book = bookIterator.next();
+//                        if (book.getBookTemplate().getId() == returnBookRequestItem.getBookTemplateId()) {
+//                            books.add(book);
+//                            quantityToReturn--;
+//                        }
+//                    }
+//                    if (!books.isEmpty()) {
+//                        ReturnBookItem returnBookItem = new ReturnBookItem();
+//                        returnBookItem.setBooks(books);
+//                        returnBookItem.setReturnBook(returnBook);
+//                        returnBookItems.add(returnBookItem);
+//                    }
+//                }
+//            }
+//        }
+//        returnBook.setReturnBookItems(returnBookItems);
+//        order.setStatus(EOrderStatus.REQUEST_REFUND);
+//        returnBook.setOrder(order);
+//        boolean success;
+//        try {
+//            returnBook = returnBookDAO.save(returnBook);
+//            if (returnBook == null) {
+//                throw new Exception("Failed to save ReturnBook");
+//            }
+//            order.setReturnBook(returnBook);
+//            order = orderDAO.update(order);
+//            if (order == null) {
+//                throw new Exception("Failed to update Order");
+//            }
+//            success = true;
+//        } catch (Exception e) {
+//            success = false;
+//            e.printStackTrace();
+//        }
+//
+//        return success;
+    }
 }

@@ -1,3 +1,30 @@
+// Function to show confirmation modal and set customer ID
+function showConfirmationModal(customerId, action) {
+    // Set the customer ID to the hidden input field
+    document.querySelector('.review-id').value = customerId;
+
+    // Modify the modal message based on the action (activate or deactivate)
+    const modalTitle = document.querySelector('#hideReviewModalLabel');
+    const confirmButton = document.querySelector('#confirmHideReview');
+
+    if (action === 'deactivate') {
+        modalTitle.textContent = "Bạn có chắc muốn khóa tài khoản này không?";
+    } else {
+        modalTitle.textContent = "Bạn có chắc muốn mở khóa tài khoản này không?";
+    }
+
+    // Set the action to be performed when the confirm button is clicked
+    confirmButton.onclick = function() {
+        // Call the changeStatus function
+        changeStatus(customerId, action);
+        $('#hideReviewModal').modal('hide');
+    };
+
+    // Show the modal
+    $('#hideReviewModal').modal('show');
+}
+
+// Function to handle status change via AJAX
 function changeStatus(customerId, action) {
     const url = `${contextPath}/owner/customer-list`;
 
@@ -17,7 +44,7 @@ function changeStatus(customerId, action) {
                     type: "success",
                     duration: 1000,
                 });
-                console.log(message);
+
                 // Cập nhật trạng thái hiển thị
                 const statusElement = document.getElementById(`status-${customerId}`);
                 if (statusElement) {
@@ -28,9 +55,9 @@ function changeStatus(customerId, action) {
                 const dropdownMenu = statusElement.closest('tr').querySelector('.dropdown-menu');
                 if (dropdownMenu) {
                     if (action === 'deactivate') {
-                        dropdownMenu.innerHTML = `<a class="dropdown-item pop-positioned-timeout" href="#" onclick="changeStatus(${customerId}, 'activate'); return false;">Mở khóa tài khoản</a>`;
+                        dropdownMenu.innerHTML = `<a class="dropdown-item pop-positioned-timeout" href="#" onclick="showConfirmationModal(${customerId}, 'activate'); return false;">Mở khóa tài khoản</a>`;
                     } else {
-                        dropdownMenu.innerHTML = `<a class="dropdown-item pop-positioned-timeout" href="#" onclick="changeStatus(${customerId}, 'deactivate'); return false;">Vô hiệu hóa tài khoản</a>`;
+                        dropdownMenu.innerHTML = `<a class="dropdown-item pop-positioned-timeout" href="#" onclick="showConfirmationModal(${customerId}, 'deactivate'); return false;">Vô hiệu hóa tài khoản</a>`;
                     }
                 }
             } else {
@@ -54,13 +81,11 @@ function changeStatus(customerId, action) {
     });
 }
 
+
 document.addEventListener("DOMContentLoaded", function () {
     const tableBody = document.querySelector("#customer-data-table tbody");
-
-    // Đảm bảo `tableBody` không phải là null
     if (tableBody) {
         tableBody.addEventListener("click", function (event) {
-            // Kiểm tra xem phần tử được nhấp có phải là .customer-row hay không
             const row = event.target.closest(".customer-row");
 
             if (
@@ -74,3 +99,5 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     }
 });
+
+

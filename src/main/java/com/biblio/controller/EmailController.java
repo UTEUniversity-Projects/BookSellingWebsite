@@ -60,7 +60,6 @@ public class EmailController extends HttpServlet {
                     emailBody = emailService.getAccountDeleteEmail(customerName);
                     break;
 
-
                 case "returnConfirmation":
                     String orderId = request.getParameter("orderId");
                     if (orderId == null) {

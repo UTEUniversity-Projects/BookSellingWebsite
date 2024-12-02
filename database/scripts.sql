@@ -168,24 +168,24 @@ INSERT INTO account (password, status, role, username) VALUES
 
 -- 2. Table Owner:customer_notificationnotification
 INSERT INTO owner (avatar, date_of_birth, email_address, full_name, gender, join_at, phone_number, account_id)
-VALUES 
+VALUES
 ('https://kenh14cdn.com/203336854389633024/2022/4/9/1732920193150637133093626329146106221360649n-164947443607057196887.jpeg', '1985-07-15', 'translator_book_templateowner_1@gmail.com', 'Nguyễn Văn An', 'MALE', '2023-03-15', '0123456789', 1);
 
 -- 3. Table Staff:
 INSERT INTO staff (avatar, date_of_birth, email_address, full_name, gender, join_at, phone_number, account_id)
-VALUES 
+VALUES
 ('https://kenh14cdn.com/203336854389633024/2022/4/9/1732920193150637133093626329146106221360649n-164947443607057196887.jpeg', '1990-05-20', 'staff_1@gmail.com', 'Trần Minh Hoàng', 'MALE', '2022-08-12', '0987654321', 2),
 ('https://kenh14cdn.com/203336854389633024/2022/4/9/1732920193150637133093626329146106221360649n-164947443607057196887.jpeg', '1992-09-14', 'staff_2@gmail.com', 'Nguyễn Ngọc Anh', 'FEMALE', '2023-04-20', '0912345678', 3);
 -- 4. Table Customer:
 INSERT INTO customer (avatar, date_of_birth, email_address, full_name, gender, join_at, phone_number, membership, account_id)
-VALUES 
-('https://kenh14cdn.com/203336854389633024/2022/4/9/1732920193150637133093626329146106221360649n-164947443607057196887.jpeg', '1990-04-10', '22110399@student.hcmute.edu.vn', 'Lê Văn Hùng', 'MALE', '2022-05-15', '0901234561', 'GOLD', 4),
+VALUES
+('https://kenh14cdn.com/203336854389633024/2022/4/9/1732920193150637133093626329146106221360649n-164947443607057196887.jpeg', '1990-04-10', '22110391@student.hcmute.edu.vn', 'Hồng Nhung', 'FEMALE', '2022-05-15', '0901234561', 'GOLD', 4),
 ('https://kenh14cdn.com/203336854389633024/2022/4/9/1732920193150637133093626329146106221360649n-164947443607057196887.jpeg', '1991-06-12', '22110371@student.hcmute.edu.vn', 'Trang Kim Lợi', 'MALE', '2023-03-10', '0901234562', 'GOLD', 5),
-('https://kenh14cdn.com/203336854389633024/2022/4/9/1732920193150637133093626329146106221360649n-164947443607057196887.jpeg', '1992-09-20', '22110279@student.hcmute.edu.vn', 'Phạm Minh Tuấn', 'MALE', '2022-12-01', '0901234563', 'GOLD', 6),
-('https://kenh14cdn.com/203336854389633024/2022/4/9/1732920193150637133093626329146106221360649n-164947443607057196887.jpeg', '1993-11-11', '22110336@student.hcmute.edu.vn', 'Trần Thị Hồng', 'FEMALE', '2023-07-15', '0901234564', 'GOLD', 7),
-('https://kenh14cdn.com/203336854389633024/2022/4/9/1732920193150637133093626329146106221360649n-164947443607057196887.jpeg', '1989-03-18', '22110447@student.hcmute.edu.vn', 'Đỗ Quang Khải', 'MALE', '2022-06-20', '0901234565', 'GOLD', 8),
-('https://kenh14cdn.com/203336854389633024/2022/4/9/1732920193150637133093626329146106221360649n-164947443607057196887.jpeg', '1994-05-09', 'customer_6@gmail.com', 'Vũ Thanh Tùng', 'MALE', '2023-08-05', '0901234566', 'GOLD', 9),
-('https://kenh14cdn.com/203336854389633024/2022/4/9/1732920193150637133093626329146106221360649n-164947443607057196887.jpeg', '1990-07-15', 'customer_7@gmail.com', 'Bùi Thị Mai', 'FEMALE', '2022-10-10', '0901234567', 'GOLD', 10),
+('https://kenh14cdn.com/203336854389633024/2022/4/9/1732920193150637133093626329146106221360649n-164947443607057196887.jpeg', '1992-09-20', '22110279@student.hcmute.edu.vn', 'Lê Nhựt Anh', 'MALE', '2022-12-01', '0901234563', 'GOLD', 6),
+('https://kenh14cdn.com/203336854389633024/2022/4/9/1732920193150637133093626329146106221360649n-164947443607057196887.jpeg', '1993-11-11', '22110336@student.hcmute.edu.vn', 'Phạm Bé Huy', 'FEMALE', '2023-07-15', '0901234564', 'GOLD', 7),
+('https://kenh14cdn.com/203336854389633024/2022/4/9/1732920193150637133093626329146106221360649n-164947443607057196887.jpeg', '1989-03-18', '22110447@student.hcmute.edu.vn', 'Lê Tấn Trụ', 'MALE', '2022-06-20', '0901234565', 'GOLD', 8),
+('https://kenh14cdn.com/203336854389633024/2022/4/9/1732920193150637133093626329146106221360649n-164947443607057196887.jpeg', '1994-05-09', '22110438@student.hcmute.edu.vn', 'Huệ Tiên', 'FEMALE', '2023-08-05', '0901234566', 'GOLD', 9),
+('https://kenh14cdn.com/203336854389633024/2022/4/9/1732920193150637133093626329146106221360649n-164947443607057196887.jpeg', '1990-07-15', '22110443@student.hcmute.edu.vn', 'Thùy Trang', 'FEMALE', '2022-10-10', '0901234567', 'GOLD', 10),
 ('https://kenh14cdn.com/203336854389633024/2022/4/9/1732920193150637133093626329146106221360649n-164947443607057196887.jpeg', '1995-08-21', 'customer_8@gmail.com', 'Lê Ngọc Thanh', 'MALE', '2023-01-22', '0901234568', 'GOLD', 11),
 ('https://kenh14cdn.com/203336854389633024/2022/4/9/1732920193150637133093626329146106221360649n-164947443607057196887.jpeg', '1991-04-11', 'customer_9@gmail.com', 'Phan Hữu Nam', 'MALE', '2022-11-10', '0901234569', 'GOLD', 12),
 ('https://kenh14cdn.com/203336854389633024/2022/4/9/1732920193150637133093626329146106221360649n-164947443607057196887.jpeg', '1992-12-17', 'customer_10@gmail.com', 'Trịnh Quang Minh', 'MALE', '2023-04-14', '0901234570', 'GOLD', 13),
@@ -196,7 +196,7 @@ VALUES
 ('https://kenh14cdn.com/203336854389633024/2022/4/9/1732920193150637133093626329146106221360649n-164947443607057196887.jpeg', '1989-03-16', 'customer_15@gmail.com', 'Trần Thị Bích', 'FEMALE', '2023-06-05', '0901234575', 'GOLD', 18);
 
 INSERT INTO customer (avatar, date_of_birth, email_address, full_name, gender, join_at, phone_number, membership, account_id)
-VALUES 
+VALUES
 -- Từ customer_16 đến customer_50
 ('https://kenh14cdn.com/203336854389633024/2022/4/9/1732920193150637133093626329146106221360649n-164947443607057196887.jpeg', '1992-05-10', 'customer_16@gmail.com', 'Lê Minh Hoàng', 'MALE', '2023-06-12', '0901234576', 'GOLD', 19),
 ('https://kenh14cdn.com/203336854389633024/2022/4/9/1732920193150637133093626329146106221360649n-164947443607057196887.jpeg', '1994-07-22', 'customer_17@gmail.com', 'Nguyễn Hồng Ngọc', 'FEMALE', '2023-02-23', '0901234577', 'GOLD', 20),
@@ -339,7 +339,7 @@ INSERT INTO customer (avatar, date_of_birth, email_address, full_name, gender, j
 
 
 -- 5. Table Category:
-INSERT INTO category (full_script, name, short_script, status) VALUES 
+INSERT INTO category (full_script, name, short_script, status) VALUES
 ('Các thể loại: Tiểu thuyết, Văn học cổ điển, Văn học hiện đại, Tác phẩm nổi tiếng.', 'Tiểu thuyết & Văn học', 'Sách về tiểu thuyết và văn học.', 'ACTIVE'),
 ('Các thể loại: Truyện cổ tích, Truyện tranh, Tiểu thuyết thiếu nhi, Hướng dẫn phát triển ngôn ngữ cho trẻ.', 'Sách thiếu nhi', 'Sách dành cho thiếu nhi.', 'ACTIVE'),
 ('Các thể loại: Kinh tế học, Quản trị kinh doanh, Đầu tư, Tài chính cá nhân, Kinh tế vĩ mô.', 'Sách kinh tế', 'Sách về các lĩnh vực kinh tế.', 'ACTIVE'),
@@ -1720,10 +1720,10 @@ INSERT INTO book_metadata (created_at, import_price, opening_date, status) VALUE
 ('2023-02-19 10:15:30', 120000, '2023-02-20 10:15:30', 'IN_STOCK');
 
 INSERT INTO book (
-    code_ISBN10, code_ISBN13, `condition`, description, edition, format, 
-    hand_cover, height, length, publication_date, recommended_age, 
-    selling_price, title, weight, width, book_template_id, book_metadata_id, 
-    sub_category_id
+code_ISBN10, code_ISBN13, `condition`, description, edition, format,
+hand_cover, height, length, publication_date, recommended_age,
+selling_price, title, weight, width, book_template_id, book_metadata_id,
+sub_category_id
 ) VALUES
 ('1234567890', '9781234567897', 'NEW', 'TRÊN ĐƯỜNG BĂNG là cuốn sách tập hợp những bài viết truyền cảm hứng và hướng dẫn kỹ năng cho các bạn trẻ khi chuẩn bị bước vào đời.', 1, 'PAPERBACK', 308, 20.0, 13.0, '2022-01-15 10:00:00', 'ALL_AGES', 150000, 'Trên đường băng', 0.5, 1.2, 1, 1, 44),
 ('1234567890', '9781234567897', 'NEW', 'TRÊN ĐƯỜNG BĂNG là cuốn sách tập hợp những bài viết truyền cảm hứng và hướng dẫn kỹ năng cho các bạn trẻ khi chuẩn bị bước vào đời.', 1, 'PAPERBACK', 308, 20.0, 13.0, '2022-01-15 10:00:00', 'ALL_AGES', 150000, 'Trên đường băng', 0.5, 1.2, 1, 2, 44),
@@ -1737,10 +1737,10 @@ INSERT INTO book (
 ('1234567890', '9781234567897', 'NEW', 'TRÊN ĐƯỜNG BĂNG là cuốn sách tập hợp những bài viết truyền cảm hứng và hướng dẫn kỹ năng cho các bạn trẻ khi chuẩn bị bước vào đời.', 1, 'PAPERBACK', 308, 20.0, 13.0, '2022-01-15 10:00:00', 'ALL_AGES', 150000, 'Trên đường băng', 0.5, 1.2, 1, 10, 44);
 
 INSERT INTO book (
-    code_ISBN10, code_ISBN13, `condition`, description, edition, format, 
-    hand_cover, height, length, publication_date, recommended_age, 
-    selling_price, title, weight, width, book_template_id, book_metadata_id, 
-    sub_category_id
+code_ISBN10, code_ISBN13, `condition`, description, edition, format,
+hand_cover, height, length, publication_date, recommended_age,
+selling_price, title, weight, width, book_template_id, book_metadata_id,
+sub_category_id
 ) VALUES
 ('0987654321', '9780987654321', 'NEW', 'Sách - Tầm Nhìn Giáo Dục\nCó những người luôn đau đáu tìm hướng đi cho nền giáo dục hiện tại, có những người đi tìm định hướng cho việc phát triển các năng lực và giá trị bản thân, có người lại đi tìm cách thức/phương pháp đúng đắn để giáo dục con em hay thế hệ sau. Tất cả những nhân duyên quý báu đó có thể dẫn chúng ta đến một giao điểm: tìm hiểu, nghiên cứu và thực hành giáo dục.\nNhìn lại thực trạng của nền giáo dục Việt Nam hiện nay, điều đáng mừng là chưa bao giờ chúng ta lại dành nhiều thời gian, tiền bạc, của cải, nỗ lực và tâm huyết cho Giáo dục & Phát triển con người đến thế. Rất nhiều ngôi trường lớn đã mọc lên, rất nhiều trường phái và phương pháp giáo dục mới ra đời hoặc được du nhập từ nước ngoài, để truyền dạy kiến thức, kỹ năng, huấn luyện và đào tạo. Nhưng thực tế là nhiều người làm giáo dục và cả người nhận sự giáo dục đều chưa chạm được đến bản chất cốt lõi của giáo dục, chủ thể của giáo dục, phương tiện thực sự của giáo dục và cái đích chân chính mà giáo dục hướng tới. Điều này dẫn đến sự manh mún, hình thức, chắp vá, giáo điều và không có một mục đích nhất quán, xuyên suốt trong giáo dục ở nhiều nơi.\nĐã đến lúc chúng ta cần có một con đường Giáo dục mới với tinh thần mới – “Giáo Dục Đích Thực”: khai phóng những tiềm năng thực sự đẹp đẽ, kỳ diệu bên trong mỗi con người; đồng thời giúp họ gột rửa, chuyển hóa được những thứ xấu xí đang cản trở những tiềm năng ấy phát lộ, nảy nở và bung tỏa. Từ sự khai mở ấy, con người có đủ sức mạnh để giải quyết những vấn đề mâu thuẫn nội tại và dựng xây một cuộc sống viên mãn, hạnh phúc đích thực.\nCuốn sách Tầm Nhìn Giáo Dục không những khơi gợi cho bạn đọc những tầm nhìn và giải pháp mới mang tính triệt để, rốt ráo để giải quyết những vấn đề đang tồn tại, mà còn mở ra một tầm nhìn và giải pháp đột phá để kiến tạo một nền Giáo dục Đích thực cho nhiều con người. Cuốn sách cũng như một món quà quý giá trao gửi tới độc giả là những người thực sự tâm huyết với giáo dục, sự nghiệp giáo dục, với phát triển bản thân, con người và xã hội.', 1, 'HARDCOVER', 224, 24.0, 16.0, '2021-06-20 11:30:00', 'ALL_AGES', 180000, 'Tầm nhìn giáo dục', 0.6, 1.3, 2, 11, 14),
 ('0987654321', '9780987654321', 'NEW', 'Sách - Tầm Nhìn Giáo Dục\nCó những người luôn đau đáu tìm hướng đi cho nền giáo dục hiện tại, có những người đi tìm định hướng cho việc phát triển các năng lực và giá trị bản thân, có người lại đi tìm cách thức/phương pháp đúng đắn để giáo dục con em hay thế hệ sau. Tất cả những nhân duyên quý báu đó có thể dẫn chúng ta đến một giao điểm: tìm hiểu, nghiên cứu và thực hành giáo dục.\nNhìn lại thực trạng của nền giáo dục Việt Nam hiện nay, điều đáng mừng là chưa bao giờ chúng ta lại dành nhiều thời gian, tiền bạc, của cải, nỗ lực và tâm huyết cho Giáo dục & Phát triển con người đến thế. Rất nhiều ngôi trường lớn đã mọc lên, rất nhiều trường phái và phương pháp giáo dục mới ra đời hoặc được du nhập từ nước ngoài, để truyền dạy kiến thức, kỹ năng, huấn luyện và đào tạo. Nhưng thực tế là nhiều người làm giáo dục và cả người nhận sự giáo dục đều chưa chạm được đến bản chất cốt lõi của giáo dục, chủ thể của giáo dục, phương tiện thực sự của giáo dục và cái đích chân chính mà giáo dục hướng tới. Điều này dẫn đến sự manh mún, hình thức, chắp vá, giáo điều và không có một mục đích nhất quán, xuyên suốt trong giáo dục ở nhiều nơi.\nĐã đến lúc chúng ta cần có một con đường Giáo dục mới với tinh thần mới – “Giáo Dục Đích Thực”: khai phóng những tiềm năng thực sự đẹp đẽ, kỳ diệu bên trong mỗi con người; đồng thời giúp họ gột rửa, chuyển hóa được những thứ xấu xí đang cản trở những tiềm năng ấy phát lộ, nảy nở và bung tỏa. Từ sự khai mở ấy, con người có đủ sức mạnh để giải quyết những vấn đề mâu thuẫn nội tại và dựng xây một cuộc sống viên mãn, hạnh phúc đích thực.\nCuốn sách Tầm Nhìn Giáo Dục không những khơi gợi cho bạn đọc những tầm nhìn và giải pháp mới mang tính triệt để, rốt ráo để giải quyết những vấn đề đang tồn tại, mà còn mở ra một tầm nhìn và giải pháp đột phá để kiến tạo một nền Giáo dục Đích thực cho nhiều con người. Cuốn sách cũng như một món quà quý giá trao gửi tới độc giả là những người thực sự tâm huyết với giáo dục, sự nghiệp giáo dục, với phát triển bản thân, con người và xã hội.', 1, 'HARDCOVER', 224, 24.0, 16.0, '2021-06-20 11:30:00', 'ALL_AGES', 180000, 'Tầm nhìn giáo dục', 0.6, 1.3, 2, 12, 14),
@@ -1754,10 +1754,10 @@ INSERT INTO book (
 ('0987654321', '9780987654321', 'NEW', 'Sách - Tầm Nhìn Giáo Dục\nCó những người luôn đau đáu tìm hướng đi cho nền giáo dục hiện tại, có những người đi tìm định hướng cho việc phát triển các năng lực và giá trị bản thân, có người lại đi tìm cách thức/phương pháp đúng đắn để giáo dục con em hay thế hệ sau. Tất cả những nhân duyên quý báu đó có thể dẫn chúng ta đến một giao điểm: tìm hiểu, nghiên cứu và thực hành giáo dục.\nNhìn lại thực trạng của nền giáo dục Việt Nam hiện nay, điều đáng mừng là chưa bao giờ chúng ta lại dành nhiều thời gian, tiền bạc, của cải, nỗ lực và tâm huyết cho Giáo dục & Phát triển con người đến thế. Rất nhiều ngôi trường lớn đã mọc lên, rất nhiều trường phái và phương pháp giáo dục mới ra đời hoặc được du nhập từ nước ngoài, để truyền dạy kiến thức, kỹ năng, huấn luyện và đào tạo. Nhưng thực tế là nhiều người làm giáo dục và cả người nhận sự giáo dục đều chưa chạm được đến bản chất cốt lõi của giáo dục, chủ thể của giáo dục, phương tiện thực sự của giáo dục và cái đích chân chính mà giáo dục hướng tới. Điều này dẫn đến sự manh mún, hình thức, chắp vá, giáo điều và không có một mục đích nhất quán, xuyên suốt trong giáo dục ở nhiều nơi.\nĐã đến lúc chúng ta cần có một con đường Giáo dục mới với tinh thần mới – “Giáo Dục Đích Thực”: khai phóng những tiềm năng thực sự đẹp đẽ, kỳ diệu bên trong mỗi con người; đồng thời giúp họ gột rửa, chuyển hóa được những thứ xấu xí đang cản trở những tiềm năng ấy phát lộ, nảy nở và bung tỏa. Từ sự khai mở ấy, con người có đủ sức mạnh để giải quyết những vấn đề mâu thuẫn nội tại và dựng xây một cuộc sống viên mãn, hạnh phúc đích thực.\nCuốn sách Tầm Nhìn Giáo Dục không những khơi gợi cho bạn đọc những tầm nhìn và giải pháp mới mang tính triệt để, rốt ráo để giải quyết những vấn đề đang tồn tại, mà còn mở ra một tầm nhìn và giải pháp đột phá để kiến tạo một nền Giáo dục Đích thực cho nhiều con người. Cuốn sách cũng như một món quà quý giá trao gửi tới độc giả là những người thực sự tâm huyết với giáo dục, sự nghiệp giáo dục, với phát triển bản thân, con người và xã hội.', 1, 'HARDCOVER', 224, 24.0, 16.0, '2021-06-20 11:30:00', 'ALL_AGES', 180000, 'Tầm nhìn giáo dục', 0.6, 1.3, 2, 20, 14);
 
 INSERT INTO book (
-    code_ISBN10, code_ISBN13, `condition`, description, edition, format, 
-    hand_cover, height, length, publication_date, recommended_age, 
-    selling_price, title, weight, width, book_template_id, book_metadata_id, 
-    sub_category_id
+code_ISBN10, code_ISBN13, `condition`, description, edition, format,
+hand_cover, height, length, publication_date, recommended_age,
+selling_price, title, weight, width, book_template_id, book_metadata_id,
+sub_category_id
 ) VALUES
 ('1122334455', '9781122334455', 'NEW', 'Đừng Lựa Chọn An Nhàn Khi Còn Trẻ\nTrong độ xuân xanh phơi phới ngày ấy, bạn không dám mạo hiểm, không dám nỗ lực để kiếm học bổng, không chịu tìm tòi những thử thách trong công việc, không phấn đấu hướng đến ước mơ của mình. Bạn mơ mộng rằng làm việc xong sẽ vào làm ở một công ty nổi tiếng, làm một thời gian sẽ thăng quan tiến chức. Mơ mộng rằng khởi nghiệp xong sẽ lập tức nhận được tiền đầu tư, cầm được tiền đầu tư là sẽ niêm yết trên sàn chứng khoán. Mơ mộng rằng muốn gì sẽ có đó, không thiếu tiền cũng chẳng thiếu tình, an hưởng những năm tháng êm đềm trong cuộc đời mình.\nNhưng vì sao bạn lại nghĩ rằng bạn chẳng cần bỏ ra chút công sức nào, cuộc sống sẽ dâng đến tận miệng những thứ bạn muốn? Bạn cần phải hiểu rằng: Hấp tấp muốn mau chóng thành công rất dễ khiến chúng ta đi vào mê lộ. Thanh xuân là khoảng thời gian đẹp đẽ nhất trong đời, cũng là những năm tháng then chốt có thể quyết định tương lai của một người. Nếu bạn lựa chọn an nhàn trong 10 năm, tương lai sẽ buộc bạn phải vất vả trong 50 năm để bù đắp lại. Nếu bạn bươn chải vất vả trong 10 năm, thứ mà bạn chắc chắn có được là 50 năm hạnh phúc. Điều quý giá nhất không phải là tiền mà là tiền bạc.\nThế nên, bạn à, đừng lựa chọn an nhàn khi còn trẻ.', 2, 'PAPERBACK', 316, 20.0, 13.0, '2019-08-10 09:45:00', 'SIXTEEN_TO_EIGHTEEN_YEARS_OLD', 170000, 'Đừng lựa chọn an nhàn khi còn trẻ', 0.45, 1.1, 3, 21, 44),
 ('1122334455', '9781122334455', 'NEW', 'Đừng Lựa Chọn An Nhàn Khi Còn Trẻ
@@ -1800,45 +1800,45 @@ Thế nên, bạn à, đừng lựa chọn an nhàn khi còn trẻ.', 2, 'PAPERB
 
 
 INSERT INTO book (
-    code_ISBN10, code_ISBN13, `condition`, description, edition, format, 
-    hand_cover, height, length, publication_date, recommended_age, 
-    selling_price, title, weight, width, book_template_id, book_metadata_id, 
-    sub_category_id
+code_ISBN10, code_ISBN13, `condition`, description, edition, format,
+hand_cover, height, length, publication_date, recommended_age,
+selling_price, title, weight, width, book_template_id, book_metadata_id,
+sub_category_id
 ) VALUES
 ('6677889900', '9786677889900', 'USED', 'Hai cuốn sách trước của Giáo sư Phan Văn Trường, Một đời thương thuyết và Một đời quản trị, là sự chắt lọc từ những trải nghiệm trong suốt nhiều năm tháng nghề nghiệp của bản thân. Tuy nhiên, đến với cuốn sách này, tác giả lại muốn dành một khoảng không gian riêng để có thể phản ảnh những cảm nhận cá nhân về cuộc sống, với góc nhìn từ những năm tháng tuổi trẻ cho đến độ tuổi xế chiều này.\nKhoảnh khắc khó chịu nhất có lẽ là khi mình đã lỡ chọn một hướng đi, nhưng ngộ được rằng con đường này nhiều chông gai, lắm rào cản và lại còn không phù hợp. Trong lòng, lúc ấy chỉ muốn được quay trở lại để bắt đầu, để lựa chọn lại một hướng khôn ngoan hơn.\nViệc lựa chọn tất nhiên đòi hỏi nhiều sáng suốt, nhưng trên hết người lựa chọn phải hiểu rõ thế giới mà mình đang sống và biết rõ chính mình muốn gì, và một mặt khác phải sẵn sàng cáng đáng lấy trách nhiệm trong sự lựa chọn. Nói một cách hoa mỹ hơn, mình chỉ tìm ra hướng đi đúng đắn và phù hợp cho bản thân nếu thấu hiểu rõ bản năng, bản ngã và cả tiềm thức của chính mình. Cùng một tinh thần luôn sẵn sàng đối mặt với những hệ quả tốt và xấu từ sự lựa chọn ấy.', 1, 'HARDCOVER', 414, 22.5, 14.5, '2018-05-18 13:20:00', 'OVER_18_YEARS_OLD', 200000, 'Một đời như kẻ tìm đường', 0.55, 1.3, 4, 31, 44),
 ('6677889900', '9786677889900', 'USED', 'Hai cuốn sách trước của Giáo sư Phan Văn Trường, Một đời thương thuyết và Một đời quản trị, là sự chắt lọc từ những trải nghiệm trong suốt nhiều năm tháng nghề nghiệp của bản thân. Tuy nhiên, đến với cuốn sách này, tác giả lại muốn dành một khoảng không gian riêng để có thể phản ảnh những cảm nhận cá nhân về cuộc sống, với góc nhìn từ những năm tháng tuổi trẻ cho đến độ tuổi xế chiều này.
-Khoảnh khắc khó chịu nhất có lẽ là khi mình đã lỡ chọn một hướng đi, nhưng ngộ được rằng con đường này nhiều chông gai, lắm rào cản và lại còn không phù hợp. Trong lòng, lúc ấy chỉ muốn được quay trở lại để bắt đầu, để lựa chọn lại một hướng khôn ngoan hơn. 
+Khoảnh khắc khó chịu nhất có lẽ là khi mình đã lỡ chọn một hướng đi, nhưng ngộ được rằng con đường này nhiều chông gai, lắm rào cản và lại còn không phù hợp. Trong lòng, lúc ấy chỉ muốn được quay trở lại để bắt đầu, để lựa chọn lại một hướng khôn ngoan hơn.
 Việc lựa chọn tất nhiên đòi hỏi nhiều sáng suốt, nhưng trên hết người lựa chọn phải hiểu rõ thế giới mà mình đang sống và biết rõ chính mình muốn gì, và một mặt khác phải sẵn sàng cáng đáng lấy trách nhiệm trong sự lựa chọn. Nói một cách hoa mỹ hơn, mình chỉ tìm ra hướng đi đúng đắn và phù hợp cho bản thân nếu thấu hiểu rõ bản năng, bản ngã và cả tiềm thức của chính mình. Cùng một tinh thần luôn sẵn sàng đối mặt với những hệ quả tốt và xấu từ sự lựa chọn ấy.', 1, 'HARDCOVER', 414, 22.5, 14.5, '2018-05-18 13:20:00', 'OVER_18_YEARS_OLD', 200000, 'Một đời như kẻ tìm đường', 0.55, 1.3, 4, 32, 44),
 ('6677889900', '9786677889900', 'USED', 'Hai cuốn sách trước của Giáo sư Phan Văn Trường, Một đời thương thuyết và Một đời quản trị, là sự chắt lọc từ những trải nghiệm trong suốt nhiều năm tháng nghề nghiệp của bản thân. Tuy nhiên, đến với cuốn sách này, tác giả lại muốn dành một khoảng không gian riêng để có thể phản ảnh những cảm nhận cá nhân về cuộc sống, với góc nhìn từ những năm tháng tuổi trẻ cho đến độ tuổi xế chiều này.
-Khoảnh khắc khó chịu nhất có lẽ là khi mình đã lỡ chọn một hướng đi, nhưng ngộ được rằng con đường này nhiều chông gai, lắm rào cản và lại còn không phù hợp. Trong lòng, lúc ấy chỉ muốn được quay trở lại để bắt đầu, để lựa chọn lại một hướng khôn ngoan hơn. 
+Khoảnh khắc khó chịu nhất có lẽ là khi mình đã lỡ chọn một hướng đi, nhưng ngộ được rằng con đường này nhiều chông gai, lắm rào cản và lại còn không phù hợp. Trong lòng, lúc ấy chỉ muốn được quay trở lại để bắt đầu, để lựa chọn lại một hướng khôn ngoan hơn.
 Việc lựa chọn tất nhiên đòi hỏi nhiều sáng suốt, nhưng trên hết người lựa chọn phải hiểu rõ thế giới mà mình đang sống và biết rõ chính mình muốn gì, và một mặt khác phải sẵn sàng cáng đáng lấy trách nhiệm trong sự lựa chọn. Nói một cách hoa mỹ hơn, mình chỉ tìm ra hướng đi đúng đắn và phù hợp cho bản thân nếu thấu hiểu rõ bản năng, bản ngã và cả tiềm thức của chính mình. Cùng một tinh thần luôn sẵn sàng đối mặt với những hệ quả tốt và xấu từ sự lựa chọn ấy.', 1, 'HARDCOVER', 414, 22.5, 14.5, '2018-05-18 13:20:00', 'OVER_18_YEARS_OLD', 200000, 'Một đời như kẻ tìm đường', 0.55, 1.3, 4, 33, 44),
 ('6677889900', '9786677889900', 'USED', 'Hai cuốn sách trước của Giáo sư Phan Văn Trường, Một đời thương thuyết và Một đời quản trị, là sự chắt lọc từ những trải nghiệm trong suốt nhiều năm tháng nghề nghiệp của bản thân. Tuy nhiên, đến với cuốn sách này, tác giả lại muốn dành một khoảng không gian riêng để có thể phản ảnh những cảm nhận cá nhân về cuộc sống, với góc nhìn từ những năm tháng tuổi trẻ cho đến độ tuổi xế chiều này.
-Khoảnh khắc khó chịu nhất có lẽ là khi mình đã lỡ chọn một hướng đi, nhưng ngộ được rằng con đường này nhiều chông gai, lắm rào cản và lại còn không phù hợp. Trong lòng, lúc ấy chỉ muốn được quay trở lại để bắt đầu, để lựa chọn lại một hướng khôn ngoan hơn. 
+Khoảnh khắc khó chịu nhất có lẽ là khi mình đã lỡ chọn một hướng đi, nhưng ngộ được rằng con đường này nhiều chông gai, lắm rào cản và lại còn không phù hợp. Trong lòng, lúc ấy chỉ muốn được quay trở lại để bắt đầu, để lựa chọn lại một hướng khôn ngoan hơn.
 Việc lựa chọn tất nhiên đòi hỏi nhiều sáng suốt, nhưng trên hết người lựa chọn phải hiểu rõ thế giới mà mình đang sống và biết rõ chính mình muốn gì, và một mặt khác phải sẵn sàng cáng đáng lấy trách nhiệm trong sự lựa chọn. Nói một cách hoa mỹ hơn, mình chỉ tìm ra hướng đi đúng đắn và phù hợp cho bản thân nếu thấu hiểu rõ bản năng, bản ngã và cả tiềm thức của chính mình. Cùng một tinh thần luôn sẵn sàng đối mặt với những hệ quả tốt và xấu từ sự lựa chọn ấy.', 1, 'HARDCOVER', 414, 22.5, 14.5, '2018-05-18 13:20:00', 'OVER_18_YEARS_OLD', 200000, 'Một đời như kẻ tìm đường', 0.55, 1.3, 4, 34, 44),
 ('6677889900', '9786677889900', 'USED', 'Hai cuốn sách trước của Giáo sư Phan Văn Trường, Một đời thương thuyết và Một đời quản trị, là sự chắt lọc từ những trải nghiệm trong suốt nhiều năm tháng nghề nghiệp của bản thân. Tuy nhiên, đến với cuốn sách này, tác giả lại muốn dành một khoảng không gian riêng để có thể phản ảnh những cảm nhận cá nhân về cuộc sống, với góc nhìn từ những năm tháng tuổi trẻ cho đến độ tuổi xế chiều này.
-Khoảnh khắc khó chịu nhất có lẽ là khi mình đã lỡ chọn một hướng đi, nhưng ngộ được rằng con đường này nhiều chông gai, lắm rào cản và lại còn không phù hợp. Trong lòng, lúc ấy chỉ muốn được quay trở lại để bắt đầu, để lựa chọn lại một hướng khôn ngoan hơn. 
+Khoảnh khắc khó chịu nhất có lẽ là khi mình đã lỡ chọn một hướng đi, nhưng ngộ được rằng con đường này nhiều chông gai, lắm rào cản và lại còn không phù hợp. Trong lòng, lúc ấy chỉ muốn được quay trở lại để bắt đầu, để lựa chọn lại một hướng khôn ngoan hơn.
 Việc lựa chọn tất nhiên đòi hỏi nhiều sáng suốt, nhưng trên hết người lựa chọn phải hiểu rõ thế giới mà mình đang sống và biết rõ chính mình muốn gì, và một mặt khác phải sẵn sàng cáng đáng lấy trách nhiệm trong sự lựa chọn. Nói một cách hoa mỹ hơn, mình chỉ tìm ra hướng đi đúng đắn và phù hợp cho bản thân nếu thấu hiểu rõ bản năng, bản ngã và cả tiềm thức của chính mình. Cùng một tinh thần luôn sẵn sàng đối mặt với những hệ quả tốt và xấu từ sự lựa chọn ấy.', 1, 'HARDCOVER', 414, 22.5, 14.5, '2018-05-18 13:20:00', 'OVER_18_YEARS_OLD', 200000, 'Một đời như kẻ tìm đường', 0.55, 1.3, 4, 35, 44),
 ('6677889900', '9786677889900', 'USED', 'Hai cuốn sách trước của Giáo sư Phan Văn Trường, Một đời thương thuyết và Một đời quản trị, là sự chắt lọc từ những trải nghiệm trong suốt nhiều năm tháng nghề nghiệp của bản thân. Tuy nhiên, đến với cuốn sách này, tác giả lại muốn dành một khoảng không gian riêng để có thể phản ảnh những cảm nhận cá nhân về cuộc sống, với góc nhìn từ những năm tháng tuổi trẻ cho đến độ tuổi xế chiều này.
-Khoảnh khắc khó chịu nhất có lẽ là khi mình đã lỡ chọn một hướng đi, nhưng ngộ được rằng con đường này nhiều chông gai, lắm rào cản và lại còn không phù hợp. Trong lòng, lúc ấy chỉ muốn được quay trở lại để bắt đầu, để lựa chọn lại một hướng khôn ngoan hơn. 
+Khoảnh khắc khó chịu nhất có lẽ là khi mình đã lỡ chọn một hướng đi, nhưng ngộ được rằng con đường này nhiều chông gai, lắm rào cản và lại còn không phù hợp. Trong lòng, lúc ấy chỉ muốn được quay trở lại để bắt đầu, để lựa chọn lại một hướng khôn ngoan hơn.
 Việc lựa chọn tất nhiên đòi hỏi nhiều sáng suốt, nhưng trên hết người lựa chọn phải hiểu rõ thế giới mà mình đang sống và biết rõ chính mình muốn gì, và một mặt khác phải sẵn sàng cáng đáng lấy trách nhiệm trong sự lựa chọn. Nói một cách hoa mỹ hơn, mình chỉ tìm ra hướng đi đúng đắn và phù hợp cho bản thân nếu thấu hiểu rõ bản năng, bản ngã và cả tiềm thức của chính mình. Cùng một tinh thần luôn sẵn sàng đối mặt với những hệ quả tốt và xấu từ sự lựa chọn ấy.', 1, 'HARDCOVER', 414, 22.5, 14.5, '2018-05-18 13:20:00', 'OVER_18_YEARS_OLD', 200000, 'Một đời như kẻ tìm đường', 0.55, 1.3, 4, 36, 44),
 ('6677889900', '9786677889900', 'USED', 'Hai cuốn sách trước của Giáo sư Phan Văn Trường, Một đời thương thuyết và Một đời quản trị, là sự chắt lọc từ những trải nghiệm trong suốt nhiều năm tháng nghề nghiệp của bản thân. Tuy nhiên, đến với cuốn sách này, tác giả lại muốn dành một khoảng không gian riêng để có thể phản ảnh những cảm nhận cá nhân về cuộc sống, với góc nhìn từ những năm tháng tuổi trẻ cho đến độ tuổi xế chiều này.
-Khoảnh khắc khó chịu nhất có lẽ là khi mình đã lỡ chọn một hướng đi, nhưng ngộ được rằng con đường này nhiều chông gai, lắm rào cản và lại còn không phù hợp. Trong lòng, lúc ấy chỉ muốn được quay trở lại để bắt đầu, để lựa chọn lại một hướng khôn ngoan hơn. 
+Khoảnh khắc khó chịu nhất có lẽ là khi mình đã lỡ chọn một hướng đi, nhưng ngộ được rằng con đường này nhiều chông gai, lắm rào cản và lại còn không phù hợp. Trong lòng, lúc ấy chỉ muốn được quay trở lại để bắt đầu, để lựa chọn lại một hướng khôn ngoan hơn.
 Việc lựa chọn tất nhiên đòi hỏi nhiều sáng suốt, nhưng trên hết người lựa chọn phải hiểu rõ thế giới mà mình đang sống và biết rõ chính mình muốn gì, và một mặt khác phải sẵn sàng cáng đáng lấy trách nhiệm trong sự lựa chọn. Nói một cách hoa mỹ hơn, mình chỉ tìm ra hướng đi đúng đắn và phù hợp cho bản thân nếu thấu hiểu rõ bản năng, bản ngã và cả tiềm thức của chính mình. Cùng một tinh thần luôn sẵn sàng đối mặt với những hệ quả tốt và xấu từ sự lựa chọn ấy.', 1, 'HARDCOVER', 414, 22.5, 14.5, '2018-05-18 13:20:00', 'OVER_18_YEARS_OLD', 200000, 'Một đời như kẻ tìm đường', 0.55, 1.3, 4, 37, 44),
 ('6677889900', '9786677889900', 'USED', 'Hai cuốn sách trước của Giáo sư Phan Văn Trường, Một đời thương thuyết và Một đời quản trị, là sự chắt lọc từ những trải nghiệm trong suốt nhiều năm tháng nghề nghiệp của bản thân. Tuy nhiên, đến với cuốn sách này, tác giả lại muốn dành một khoảng không gian riêng để có thể phản ảnh những cảm nhận cá nhân về cuộc sống, với góc nhìn từ những năm tháng tuổi trẻ cho đến độ tuổi xế chiều này.
-Khoảnh khắc khó chịu nhất có lẽ là khi mình đã lỡ chọn một hướng đi, nhưng ngộ được rằng con đường này nhiều chông gai, lắm rào cản và lại còn không phù hợp. Trong lòng, lúc ấy chỉ muốn được quay trở lại để bắt đầu, để lựa chọn lại một hướng khôn ngoan hơn. 
+Khoảnh khắc khó chịu nhất có lẽ là khi mình đã lỡ chọn một hướng đi, nhưng ngộ được rằng con đường này nhiều chông gai, lắm rào cản và lại còn không phù hợp. Trong lòng, lúc ấy chỉ muốn được quay trở lại để bắt đầu, để lựa chọn lại một hướng khôn ngoan hơn.
 Việc lựa chọn tất nhiên đòi hỏi nhiều sáng suốt, nhưng trên hết người lựa chọn phải hiểu rõ thế giới mà mình đang sống và biết rõ chính mình muốn gì, và một mặt khác phải sẵn sàng cáng đáng lấy trách nhiệm trong sự lựa chọn. Nói một cách hoa mỹ hơn, mình chỉ tìm ra hướng đi đúng đắn và phù hợp cho bản thân nếu thấu hiểu rõ bản năng, bản ngã và cả tiềm thức của chính mình. Cùng một tinh thần luôn sẵn sàng đối mặt với những hệ quả tốt và xấu từ sự lựa chọn ấy.', 1, 'HARDCOVER', 414, 22.5, 14.5, '2018-05-18 13:20:00', 'OVER_18_YEARS_OLD', 200000, 'Một đời như kẻ tìm đường', 0.55, 1.3, 4, 38, 44),
 ('6677889900', '9786677889900', 'USED', 'Hai cuốn sách trước của Giáo sư Phan Văn Trường, Một đời thương thuyết và Một đời quản trị, là sự chắt lọc từ những trải nghiệm trong suốt nhiều năm tháng nghề nghiệp của bản thân. Tuy nhiên, đến với cuốn sách này, tác giả lại muốn dành một khoảng không gian riêng để có thể phản ảnh những cảm nhận cá nhân về cuộc sống, với góc nhìn từ những năm tháng tuổi trẻ cho đến độ tuổi xế chiều này.
-Khoảnh khắc khó chịu nhất có lẽ là khi mình đã lỡ chọn một hướng đi, nhưng ngộ được rằng con đường này nhiều chông gai, lắm rào cản và lại còn không phù hợp. Trong lòng, lúc ấy chỉ muốn được quay trở lại để bắt đầu, để lựa chọn lại một hướng khôn ngoan hơn. 
+Khoảnh khắc khó chịu nhất có lẽ là khi mình đã lỡ chọn một hướng đi, nhưng ngộ được rằng con đường này nhiều chông gai, lắm rào cản và lại còn không phù hợp. Trong lòng, lúc ấy chỉ muốn được quay trở lại để bắt đầu, để lựa chọn lại một hướng khôn ngoan hơn.
 Việc lựa chọn tất nhiên đòi hỏi nhiều sáng suốt, nhưng trên hết người lựa chọn phải hiểu rõ thế giới mà mình đang sống và biết rõ chính mình muốn gì, và một mặt khác phải sẵn sàng cáng đáng lấy trách nhiệm trong sự lựa chọn. Nói một cách hoa mỹ hơn, mình chỉ tìm ra hướng đi đúng đắn và phù hợp cho bản thân nếu thấu hiểu rõ bản năng, bản ngã và cả tiềm thức của chính mình. Cùng một tinh thần luôn sẵn sàng đối mặt với những hệ quả tốt và xấu từ sự lựa chọn ấy.', 1, 'HARDCOVER', 414, 22.5, 14.5, '2018-05-18 13:20:00', 'OVER_18_YEARS_OLD', 200000, 'Một đời như kẻ tìm đường', 0.55, 1.3, 4, 39, 44),
 ('6677889900', '9786677889900', 'USED', 'Hai cuốn sách trước của Giáo sư Phan Văn Trường, Một đời thương thuyết và Một đời quản trị, là sự chắt lọc từ những trải nghiệm trong suốt nhiều năm tháng nghề nghiệp của bản thân. Tuy nhiên, đến với cuốn sách này, tác giả lại muốn dành một khoảng không gian riêng để có thể phản ảnh những cảm nhận cá nhân về cuộc sống, với góc nhìn từ những năm tháng tuổi trẻ cho đến độ tuổi xế chiều này.
-Khoảnh khắc khó chịu nhất có lẽ là khi mình đã lỡ chọn một hướng đi, nhưng ngộ được rằng con đường này nhiều chông gai, lắm rào cản và lại còn không phù hợp. Trong lòng, lúc ấy chỉ muốn được quay trở lại để bắt đầu, để lựa chọn lại một hướng khôn ngoan hơn. 
+Khoảnh khắc khó chịu nhất có lẽ là khi mình đã lỡ chọn một hướng đi, nhưng ngộ được rằng con đường này nhiều chông gai, lắm rào cản và lại còn không phù hợp. Trong lòng, lúc ấy chỉ muốn được quay trở lại để bắt đầu, để lựa chọn lại một hướng khôn ngoan hơn.
 Việc lựa chọn tất nhiên đòi hỏi nhiều sáng suốt, nhưng trên hết người lựa chọn phải hiểu rõ thế giới mà mình đang sống và biết rõ chính mình muốn gì, và một mặt khác phải sẵn sàng cáng đáng lấy trách nhiệm trong sự lựa chọn. Nói một cách hoa mỹ hơn, mình chỉ tìm ra hướng đi đúng đắn và phù hợp cho bản thân nếu thấu hiểu rõ bản năng, bản ngã và cả tiềm thức của chính mình. Cùng một tinh thần luôn sẵn sàng đối mặt với những hệ quả tốt và xấu từ sự lựa chọn ấy.', 1, 'HARDCOVER', 414, 22.5, 14.5, '2018-05-18 13:20:00', 'OVER_18_YEARS_OLD', 200000, 'Một đời như kẻ tìm đường', 0.55, 1.3, 4, 40, 44);
 
 INSERT INTO book (
-    code_ISBN10, code_ISBN13, `condition`, description, edition, format, 
-    hand_cover, height, length, publication_date, recommended_age, 
-    selling_price, title, weight, width, book_template_id, book_metadata_id, 
-    sub_category_id
+code_ISBN10, code_ISBN13, `condition`, description, edition, format,
+hand_cover, height, length, publication_date, recommended_age,
+selling_price, title, weight, width, book_template_id, book_metadata_id,
+sub_category_id
 ) VALUES
 ('5566778899', '9785566778899', 'NEW', '“Bạn hối tiếc vì không nắm bắt lấy một cơ hội nào đó, chẳng có ai phải mất ngủ.\nBạn trải qua những ngày tháng nhạt nhẽo với công việc bạn căm ghét, người ta chẳng hề bận lòng.\nBạn có chết mòn nơi xó tường với những ước mơ dang dở, đó không phải là việc của họ.\nSuy cho cùng, quyết định là ở bạn. Muốn có điều gì hay không là tùy bạn.\nNên hãy làm những điều bạn thích. Hãy đi theo tiếng nói trái tim. Hãy sống theo cách bạn cho là mình nên sống.\nVì sau tất cả, chẳng ai quan tâm.”\n“Tôi đã đọc quyển sách này một cách thích thú. Có nhiều kiến thức và kinh nghiệm hữu ích, những điều mới mẻ ngay cả với người gần trung niên như tôi.\nTuổi trẻ đáng giá bao nhiêu? được tác giả chia làm 3 phần: HỌC, LÀM, ĐI.\nNhưng tôi thấy cuốn sách còn thể hiện một phần thứ tư nữa, đó là ĐỌC.\nHãy đọc sách, nếu bạn đọc sách một cách bền bỉ, sẽ đến lúc bạn bị thôi thúc không ngừng bởi ý muốn viết nên cuốn sách của riêng mình.\nNếu tôi còn ở tuổi đôi mươi, hẳn là tôi sẽ đọc Tuổi trẻ đáng giá bao nhiêu? nhiều hơn một lần.”', 1, 'PAPERBACK', 370, 21.0, 14.0, '2020-09-25 15:00:00', 'SIXTEEN_TO_EIGHTEEN_YEARS_OLD', 130000, 'Tuổi trẻ đáng giá bao nhiêu', 0.4, 1.1, 5, 41, 44),
 ('5566778899', '9785566778899', 'NEW', '“Bạn hối tiếc vì không nắm bắt lấy một cơ hội nào đó, chẳng có ai phải mất ngủ.
@@ -1942,10 +1942,10 @@ Hãy đọc sách, nếu bạn đọc sách một cách bền bỉ, sẽ đến 
 Nếu tôi còn ở tuổi đôi mươi, hẳn là tôi sẽ đọc Tuổi trẻ đáng giá bao nhiêu? nhiều hơn một lần.”', 1, 'PAPERBACK', 370, 21.0, 14.0, '2020-09-25 15:00:00', 'SIXTEEN_TO_EIGHTEEN_YEARS_OLD', 130000, 'Tuổi trẻ đáng giá bao nhiêu', 0.4, 1.1, 5, 50, 44);
 
 INSERT INTO book (
-    code_ISBN10, code_ISBN13, `condition`, description, edition, format, 
-    hand_cover, height, length, publication_date, recommended_age, 
-    selling_price, title, weight, width, book_template_id, book_metadata_id, 
-	sub_category_id
+code_ISBN10, code_ISBN13, `condition`, description, edition, format,
+hand_cover, height, length, publication_date, recommended_age,
+selling_price, title, weight, width, book_template_id, book_metadata_id,
+sub_category_id
 ) VALUES
 ('3344556677', '9783344556677', 'NEW', 'Đắc Nhân Tâm\nĐắc nhân tâm (tên tiếng Anh là How to Win Friends and Influence People) là một trong những cuốn sách về chủ đề nghệ thuật ứng xử và giao tiếp thành công nhất, bán chạy nhất và được biết đến nhiều nhất cho đến tận ngày nay, đưa tên tuổi của Dale Carnegie vang danh khắp thế giới.\nDale Carnegie từng nói, việc kiếm được một triệu đô la vẫn dễ hơn thêm một cụm từ vào từ điển tiếng Anh. Vậy mà Đắc nhân tâm đã trở thành một cụm từ như thế: được trích dẫn, diễn giải, tái chế; được sử dụng trong vô số bối cảnh, từ phim hoạt hình, chính trị cho tới tiểu thuyết. Bản thân cuốn sách cũng được dịch sang hầu hết các ngôn ngữ được biết đến trên thế giới. Mỗi thế hệ lại khám phá tác phẩm theo một cách hoàn toàn mới và tìm ra những giá trị vẫn hữu dụng trong thời đại của họ.\nCho đến ngày nay, cuốn sách vẫn đang từng bước hoàn thiện để trở nên hoàn hảo hơn, phù hợp với nhu cầu ngày một phát triển. Bản tu chỉnh mới này sẽ không có một sự thay đổi nào ngoại trừ cắt tỉa một vài chi tiết, thêm vào một số ví dụ gần gũi hơn với bối cảnh đương thời. Phong cách viết như diễn thuyết, lối trò chuyện bình dị, gần gũi mà không kém phần hoa lệ của tác giả Dale Carnegie sẽ làm rõ hơn những ý nghĩa của cuốn sách đối với độc giả hiện đại, mà không làm xáo trộn nội dung của tác phẩm.\nHàng nghìn người đang đọc và học hỏi từ Đắc nhân tâm, tìm thấy cảm hứng trong việc áp dụng các nguyên tắc trong đó để có cuộc sống tốt đẹp hơn.\nĐắc nhân tâm sẽ giúp bạn:\n- Thoát khỏi tư duy lối mòn, hình thành các suy nghĩ mới, có được tầm nhìn mới và khám phá được những tham vọng mới.\n- Gia tăng sự mến mộ và tín nhiệm của mọi người đối với bạn.\n- Xử lý những ý kiến trái chiều, tránh những bất đồng và giữ các quan hệ luôn suôn sẻ, dễ chịu.\n- Kết bạn nhanh chóng và dễ dàng hơn.\n- Thuyết phục mọi người đồng tình với ý kiến của mình.\n- Gia tăng sức ảnh hưởng và uy danh trong công việc.\n- Trở thành diễn giả tốt hơn và là một người giao tiếp thú vị hơn.\n- Khơi dậy lòng nhiệt huyết của các đồng sự.', 2, 'HARDCOVER', 360, 24.0, 16.0, '2015-10-10 14:30:00', 'ALL_AGES', 250000, 'Đắc nhân tâm', 0.7, 1.4, 6, 51, 44),
 ('3344556677', '9783344556677', 'NEW', 'Đắc Nhân Tâm
@@ -2076,10 +2076,10 @@ Hàng nghìn người đang đọc và học hỏi từ Đắc nhân tâm, tìm 
 - Khơi dậy lòng nhiệt huyết của các đồng sự.', 2, 'HARDCOVER', 360, 24.0, 16.0, '2015-10-10 14:30:00', 'ALL_AGES', 250000, 'Đắc nhân tâm', 0.7, 1.4, 6, 60, 44);
 
 INSERT INTO book (
-    code_ISBN10, code_ISBN13, `condition`, description, edition, format, 
-    hand_cover, height, length, publication_date, recommended_age, 
-    selling_price, title, weight, width, book_template_id, book_metadata_id, 
-	sub_category_id
+code_ISBN10, code_ISBN13, `condition`, description, edition, format,
+hand_cover, height, length, publication_date, recommended_age,
+selling_price, title, weight, width, book_template_id, book_metadata_id,
+sub_category_id
 ) VALUES
 ('4455667788', '9784455667788', 'USED', 'Tư Duy Ngược\nChúng ta thực sự có hạnh phúc không? Chúng ta có đang sống cuộc đời mình không? Chúng ta có dám dũng cảm chiến thắng mọi khuôn mẫu, định kiến, đi ngược đám đông để khẳng định bản sắc riêng của mình không?. Có bao giờ bạn tự hỏi như thế, rồi có câu trả lời cho chính mình?\nTôi biết biết, không phải ai cũng đang sống cuộc đời của mình, không phải ai cũng dám vượt qua mọi lối mòn để sáng tạo và thành công… Dựa trên việc nghiên cứu, tìm hiểu, chắt lọc, tìm kiếm, ghi chép từ các câu chuyện trong đời sống, cũng như trải nghiệm của bản thân, tôi viết cuốn sách này.\nCuốn sách sẽ giải mã bạn là ai, bạn cần Tư duy ngược để thành công và hạnh phúc như thế nào và các phương pháp giúp bạn dũng cảm sống cuộc đời mà bạn muốn.', 1, 'PAPERBACK', 214, 19.0, 12.5, '2021-02-22 12:10:00', 'ALL_AGES', 140000, 'Tư duy ngược', 0.35, 1.0, 7, 61, 44),
 ('4455667788', '9784455667788', 'USED', 'Tư Duy Ngược
@@ -2120,10 +2120,10 @@ Tôi biết biết, không phải ai cũng đang sống cuộc đời của mìn
 Cuốn sách sẽ giải mã bạn là ai, bạn cần Tư duy ngược để thành công và hạnh phúc như thế nào và các phương pháp giúp bạn dũng cảm sống cuộc đời mà bạn muốn.', 1, 'PAPERBACK', 214, 19.0, 12.5, '2021-02-22 12:10:00', 'ALL_AGES', 140000, 'Tư duy ngược', 0.35, 1.0, 7, 70, 44);
 
 INSERT INTO book (
-    code_ISBN10, code_ISBN13, `condition`, description, edition, format, 
-    hand_cover, height, length, publication_date, recommended_age, 
-    selling_price, title, weight, width, book_template_id, book_metadata_id, 
-    sub_category_id
+code_ISBN10, code_ISBN13, `condition`, description, edition, format,
+hand_cover, height, length, publication_date, recommended_age,
+selling_price, title, weight, width, book_template_id, book_metadata_id,
+sub_category_id
 ) VALUES
 ('2233445566', '9782233445566', 'NEW', 'Cuốn sách này thực sự đã giúp đỡ cho hàng triệu độc giả, trong đó có tôi và chắc chắn cũng sẽ có bạn. Nếu không có những ý niệm mới mẻ này thì chưa chắc tôi đã có được cuộc hôn nhân hạnh phúc như hiện nay hay có thể trở thành một người cha giàu đức hy sinh đối với các con của mình như vậy...', 1, 'HARDCOVER', 419, 22.0, 14.0, '2019-07-15 16:40:00', 'OVER_18_YEARS_OLD', 190000, 'Đàn ông sao hỏa đàn bà sao kim', 0.5, 1.2, 8, 71, 44),
 ('2233445566', '9782233445566', 'NEW', 'Cuốn sách này thực sự đã giúp đỡ cho hàng triệu độc giả, trong đó có tôi và chắc chắn cũng sẽ có bạn. Nếu không có những ý niệm mới mẻ này thì chưa chắc tôi đã có được cuộc hôn nhân hạnh phúc như hiện nay hay có thể trở thành một người cha giàu đức hy sinh đối với các con của mình như vậy. Những vướng mắc trong mối quan hệ với vợ cách đây hai mươi năm đã từng làm tôi tức điên lên, hiện giờ thi thoảng nó vẫn thường xảy ra. Nhưng điều khác biệt là tôi đã biết khoan dung hơn, chấp nhận và thấu hiểu hơn. Tôi có thể hiểu những lời lẽ và phản ứng của vợ tôi theo cách khách quan hơn, đồng thời tôi biết cách nên đáp lại như thế nào. Có thể tôi là một chuyên gia trong lĩnh vực giao tiếp và sự khác biệt về giới tính, tuy nhiên, đối với Bonnie và các cô con gái của tôi thì việc để hiều được họ vẫn còn là những bí ẩn. Dù vậy, cuốn sách này có thể giúp chúng ta trở nên khoan dung và biết tha thứ khi ai đó không đáp lại theo cách mà ta mong đợi. May mắn thay, để xây dựng những mối quan hệ bền đẹp, tính hoàn hảo không phải là điều kiện bắt buộc.
@@ -2182,10 +2182,10 @@ Trên những hành trình của mình, trong lúc đợi máy bay hoặc khi k�
 Hầu hết những ai đọc cuốn sách này đều có thể cải thiện chất lượng mối quan hệ mà họ đang có. Chắc chắn bạn sẽ khám phá ra những ý niệm mới mẻ để cải thiện việc giao tiếp và đạt được những mục đích của riêng mình. Thậm chí nếu một ý tưởng nào đó có thể giúp bạn thấu hiểu cũng như hỗ trợ cho bạn đời, bạn bè, đồng nghiệp, cha mẹ hoặc con cái, thì điều đó cũng xứng đáng với sự quan tâm và thời gian mà bạn đã đầu tư cho nó rồi. Một thay đổi dù nhỏ nhưng có tầm quan trọng có thể mang lại những ảnh hưởng sâu sắc và lâu dài. Thật bất ngờ, một ý tưởng giúp mối quan hệ trở nên bền vững hơn cũng có thể hỗ trợ các cặp đôi vượt qua những trở ngại đầy thách thức của họ. Cuốn sách này không đề cập trực tiếp tới những thách thức của “một mối quan hệ rối loạn” nhưng nó mang lại hướng tiếp cận mới với người khác giới. Khi thấu hiểu, việc giao tiếp sẽ tự động được cải thiện. Khi sự hợp tác giữa hai người tốt hơn, hy vọng sẽ nhiều hơn và tình yêu sẽ ngự trị. Chỉ cần có tình yêu và cách thức giao tiếp tốt, hầu hết mọi vấn đề, thậm chí cả “những vấn đề lớn” đều có thể giải quyết. Đầu tiên hãy đề cập đến những vấn đề nhỏ, từ đó những vấn đề lớn sẽ dần biến mất hoặc được giải quyết một cách dễ dàng.', 1, 'HARDCOVER', 419, 22.0, 14.0, '2019-07-15 16:40:00', 'OVER_18_YEARS_OLD', 190000, 'Đàn ông sao hỏa đàn bà sao kim', 0.5, 1.2, 8, 80, 44);
 
 INSERT INTO book (
-    code_ISBN10, code_ISBN13, `condition`, description, edition, format, 
-    hand_cover, height, length, publication_date, recommended_age, 
-    selling_price, title, weight, width, book_template_id, book_metadata_id, 
-    sub_category_id
+code_ISBN10, code_ISBN13, `condition`, description, edition, format,
+hand_cover, height, length, publication_date, recommended_age,
+selling_price, title, weight, width, book_template_id, book_metadata_id,
+sub_category_id
 ) VALUES
 ('4455332211', '9784455332211', 'NEW', '“Vị chua chát của cái nghèo hòa trộn với vị ngọt ngào khi khám phá ra những điều khiến cuộc đời này đáng sống... một tác phẩm kinh điển của Brazil.” - Booklist\n“Một cách nhìn cuộc sống gần như hoàn chỉnh từ con mắt trẻ thơ… có sức mạnh sưởi ấm và làm tan nát cõi lòng, dù người đọc ở lứa tuổi nào.” - The National\nHãy làm quen với Zezé, cậu bé tinh nghịch siêu hạng đồng thời cũng đáng yêu bậc nhất, với ước mơ lớn lên trở thành nhà thơ cổ thắt nơ bướm...', 1, 'PAPERBACK', 244, 23.0, 15.0, '2020-12-12 10:00:00', 'SIXTEEN_TO_EIGHTEEN_YEARS_OLD', 120000, 'Cây cam ngọt của tôi', 0.6, 1.3, 9, 81, 9),
 ('4455332211', '9784455332211', 'NEW', '“Vị chua chát của cái nghèo hòa trộn với vị ngọt ngào khi khám phá ra những điều khiến cuộc đời này đáng sống... một tác phẩm kinh điển của Brazil.” - Booklist
@@ -2236,10 +2236,10 @@ Mở đầu bằng những thanh âm trong sáng và kết thúc lắng lại tr
 
 
 INSERT INTO book (
-    code_ISBN10, code_ISBN13, `condition`, description, edition, format, 
-    hand_cover, height, length, publication_date, recommended_age, 
-    selling_price, title, weight, width, book_template_id, book_metadata_id, 
-    sub_category_id
+code_ISBN10, code_ISBN13, `condition`, description, edition, format,
+hand_cover, height, length, publication_date, recommended_age,
+selling_price, title, weight, width, book_template_id, book_metadata_id,
+sub_category_id
 ) VALUES
 ('5544332211', '9785544332211', 'NEW', 'Khi hơi thở hóa thinh không là tự truyện của một bác sĩ bị mắc bệnh ung thư phổi. Trong cuốn sách này, tác giả đã chia sẻ những trải nghiệm từ khi mới bắt đầu học ngành y, tiếp xúc với bệnh nhân cho tới khi phát hiện ra mình bị ung thư và phải điều trị lâu dài. Kalanithi rất yêu thích văn chương nên câu chuyện của anh đã được thuật lại theo một phong cách mượt mà, dung dị và đầy cảm xúc...', 1, 'HARDCOVER', 236, 24.0, 16.0, '2017-11-25 11:15:00', 'OVER_18_YEARS_OLD', 180000, 'Khi hơi thở hóa thinh không', 0.65, 1.4, 10, 91, 16),
 ('5544332211', '9785544332211', 'NEW', 'Khi hơi thở hóa thinh không là tự truyện của một bác sĩ bị mắc bệnh ung thư phổi. Trong cuốn sách này, tác giả đã chia sẻ những trải nghiệm từ khi mới bắt đầu học ngành y, tiếp xúc với bệnh nhân cho tới khi phát hiện ra mình bị ung thư và phải điều trị lâu dài.
@@ -3276,7 +3276,7 @@ INSERT INTO book (code_ISBN10, code_ISBN13,  `condition`, description, edition, 
 -- Table Media-file:
 INSERT INTO media_file (file_name, stored_code)
 VALUES
- -- Trên Đường Băng
+-- Trên Đường Băng
 ('image1', '/assets/owner/img/book/TrenDuongBang/image1.jpg'),
 ('image2', '/assets/owner/img/book/TrenDuongBang/image2.jpg'),
 ('image3', '/assets/owner/img/book/TrenDuongBang/image3.jpg'),
@@ -3511,32 +3511,32 @@ INSERT INTO book_template_media_file (book_template_id, media_file_id) VALUES
 -- 8. Table Author:
 -- Thêm dữ liệu vào bảng author
 INSERT INTO author (avatar, introduction, join_at, name) VALUES
-('/assets/owner/img/author_book/image1.jpg', 
-'Tony Buổi Sáng là một tác giả nổi tiếng với những tác phẩm truyền cảm hứng, đặc biệt tập trung vào kỹ năng sống, tinh thần khởi nghiệp và định hướng tuổi trẻ. Ông không chỉ là một cây bút sắc sảo mà còn là một người thầy dẫn lối, giúp thế hệ trẻ tự tin đối mặt với khó khăn và phát triển bản thân. Các tác phẩm của ông mang phong cách viết vừa dí dỏm, chân thực vừa sâu sắc, truyền tải thông điệp mạnh mẽ về giá trị cuộc sống. Ông luôn khuyến khích độc giả theo đuổi đam mê, bền bỉ và không ngừng học hỏi.', 
- '2019-01-15 10:00:00', 
- 'Tony Buổi Sáng');
+('/assets/owner/img/author_book/image1.jpg',
+'Tony Buổi Sáng là một tác giả nổi tiếng với những tác phẩm truyền cảm hứng, đặc biệt tập trung vào kỹ năng sống, tinh thần khởi nghiệp và định hướng tuổi trẻ. Ông không chỉ là một cây bút sắc sảo mà còn là một người thầy dẫn lối, giúp thế hệ trẻ tự tin đối mặt với khó khăn và phát triển bản thân. Các tác phẩm của ông mang phong cách viết vừa dí dỏm, chân thực vừa sâu sắc, truyền tải thông điệp mạnh mẽ về giá trị cuộc sống. Ông luôn khuyến khích độc giả theo đuổi đam mê, bền bỉ và không ngừng học hỏi.',
+'2019-01-15 10:00:00',
+'Tony Buổi Sáng');
 
 
 INSERT INTO author (avatar, introduction, join_at, name) VALUES
-('/assets/owner/img/author_book/image2.jpg', 
+('/assets/owner/img/author_book/image2.jpg',
 'Thầy TRẦN THẾ CÔNG
 Người đã có hơn 10 năm chuyên tâm nghiên cứu, thực hành các phương pháp phát triển Tư duy, Đạo đức, Giáo dục, Tâm linh và đã TỰ mình chứng nghiệm được sự GIÁC NGỘ.
 Người sáng lập, đồng thời là Cố vấn Chiến lược cho Công ty Cổ phần Tâm Khai Sáng và Công ty Cổ phần Giáo dục Đích thực.
-Tác giả của chương trình Sự học Đích thực, bộ khóa học Khai Tâm, Thiền Linh Giác và nhiều chương trình giáo dục chuyên sâu khác.', 
-'2018-05-25 09:30:00', 
+Tác giả của chương trình Sự học Đích thực, bộ khóa học Khai Tâm, Thiền Linh Giác và nhiều chương trình giáo dục chuyên sâu khác.',
+'2018-05-25 09:30:00',
 'Thầy Trần Thế Công');
 
 
 INSERT INTO author (avatar, introduction, join_at, name) VALUES
-('/assets/owner/img/author_book/image3.jpg', 
+('/assets/owner/img/author_book/image3.jpg',
 'Cảnh Thiên là một nhà văn trẻ đầy triển vọng, nổi bật với các tác phẩm khắc họa sống động những trải nghiệm tuổi trẻ, ước mơ và hành trình xây dựng sự nghiệp. Với giọng văn chân thực và giàu cảm xúc, các tác phẩm của anh đã chạm đến trái tim của nhiều độc giả trẻ, giúp họ nhìn nhận lại giá trị cuộc sống và động viên họ kiên định theo đuổi đam mê. Không chỉ viết về thành công, anh còn chia sẻ những góc khuất, thất bại và bài học trưởng thành, giúp độc giả tìm thấy sự đồng cảm và cảm hứng để vượt qua thử thách.
-Cảnh Thiên: thông tin của tác giả không được tiết lộ nhiều chỉ biết đây là tác giả người Trung Quốc, từng nhiều năm làm vị trí biên tập và truyền thông, cung Sư Tử, thích văn chương, mỹ thực và những niềm hạnh phúc nhỏ bé trong cuộc sống. Sách tiêu biểu của tác giả: Phụ nữ cần độc lập về tài chính, Đừng lựa chọn an nhàn khi còn trẻ,…', 
-'2020-07-10 14:20:00', 
+Cảnh Thiên: thông tin của tác giả không được tiết lộ nhiều chỉ biết đây là tác giả người Trung Quốc, từng nhiều năm làm vị trí biên tập và truyền thông, cung Sư Tử, thích văn chương, mỹ thực và những niềm hạnh phúc nhỏ bé trong cuộc sống. Sách tiêu biểu của tác giả: Phụ nữ cần độc lập về tài chính, Đừng lựa chọn an nhàn khi còn trẻ,…',
+'2020-07-10 14:20:00',
 'Cảnh Thiên');
 
 
 INSERT INTO author (avatar, introduction, join_at, name) VALUES
-('/assets/owner/img/author_book/image4.jpg', 
+('/assets/owner/img/author_book/image4.jpg',
 'Ông Phan Văn Trường là cố vấn thường trực của Chính phủ Cộng hòa Pháp về thương mại quốc tế từ thập niên 1990. Ông hai lần được Tổng thống Pháp phong Hiệp Sĩ (Đa, và được chủ tịch nước CHXHCN Việt Nam tặng huy chương “Vì sự nghiệp giáo dục” (2010).
 
 Giáo sư giảng dạy Quy hoạch vùng và Kinh tế đô thị, Đại học Paris 1-Panthéton-Sorbonne (1973 - 1975)
@@ -3565,103 +3565,103 @@ Không có đỉnh quá cao
 
 Không có sông quá dài
 
-Trong đó tác phẩm Một đời thương thuyết từng được vinh danh với Giải thưởng Sách Hay 2016, hạng mục Sách quản trị.', 
-'2016-03-14 11:45:00', 
+Trong đó tác phẩm Một đời thương thuyết từng được vinh danh với Giải thưởng Sách Hay 2016, hạng mục Sách quản trị.',
+'2016-03-14 11:45:00',
 'Phan Văn Trường');
 
 
 INSERT INTO author (avatar, introduction, join_at, name) VALUES
-('/assets/owner/img/author_book/image5.jpg', 
+('/assets/owner/img/author_book/image5.jpg',
 'Rosie Nguyễn, còn được biết đến với tên thật là Nguyễn Hoàng Nguyên, đã xây dựng cho mình một sự nghiệp đa dạng và phong phú. Với danh hiệu nhà văn, blogger du lịch, huấn luyện viên Yoga, giáo viên và tác giả, Rosie đã ghi dấu ấn trong lòng người qua việc du lịch khắp nơi trên thế giới và chia sẻ những trải nghiệm đó thông qua viết blog và sách.
 
 Với vị trí số 55404 trên bảng xếp hạng thế giới và xếp hạng 189 trong danh sách các blogger nổi tiếng, Rosie Nguyễn là một trong những nữ phượt thủ Việt Nam gây ngưỡng mộ. Mặc dù công việc chính của cô được định danh là "một người viết lách," Rosie luôn mang trong mình đam mê viết từ khi còn nhỏ. Dù áp lực học văn ở trường gây cho cô mệt mỏi, Rosie đã tìm con đường khác bằng việc chọn học Đại học Ngoại thương và trở thành sinh viên chuyên ngành Kinh tế đối ngoại.
 
 Sau 6 năm đi làm từ khi tốt nghiệp, Rosie Nguyễn nhận ra rằng cuộc sống còn nhiều điều thú vị hơn việc chỉ gắn bó với những bức tường hẹp. Cô đã dành thời gian để khám phá những miền đất mới và ghi chép lại chặng đường đi qua, khác biệt với những blogger khác chỉ chia sẻ hình ảnh đẹp. Những bài viết Rosie chia sẻ sau mỗi chuyến đi đã mang lại giá trị thông tin cho độc giả và giúp cô tìm lại niềm vui viết lách nhờ sự ủng hộ nhiệt tình từ cộng đồng. Tuy nhiên, chỉ khi cuốn sách "Ta ba lô trên đất Á" được xuất bản và được đón nhận, Rosie Nguyễn mới thực sự nhận ra đam mê viết và quyết định quay trở lại.
 
-Vượt qua sự phản đối kịch liệt từ gia đình, Rosie Nguyễn đã dũng cảm bỏ lại mọi thứ phía sau để theo đuổi công việc mới - trở thành một tác giả đích thực. Mọi thứ diễn ra bất ngờ thuận lợi và những ước mơ của Rosie Nguyễn dần trở thành hiện thực, là một lần rẽ ngang trong cuộc đời cô, nhưng lần này cô đã biết chắc cuộc sống mà cô muốn.', 
-'2017-08-22 15:30:00', 
+Vượt qua sự phản đối kịch liệt từ gia đình, Rosie Nguyễn đã dũng cảm bỏ lại mọi thứ phía sau để theo đuổi công việc mới - trở thành một tác giả đích thực. Mọi thứ diễn ra bất ngờ thuận lợi và những ước mơ của Rosie Nguyễn dần trở thành hiện thực, là một lần rẽ ngang trong cuộc đời cô, nhưng lần này cô đã biết chắc cuộc sống mà cô muốn.',
+'2017-08-22 15:30:00',
 'Rosie Nguyễn');
 
 INSERT INTO author (avatar, introduction, join_at, name) VALUES
-('/assets/owner/img/author_book/image6.jpg', 
+('/assets/owner/img/author_book/image6.jpg',
 'Dale Breckenridge Carnegie (trước kia là Carnagey cho tới năm 1922 và có thể một thời gian muộn hơn) (24 tháng 11 năm 1888 – 1 tháng 11 năm 1955) là một nhà văn và nhà thuyết trình Mỹ và là người phát triển các lớp tự giáo dục, nghệ thuật bán hàng, huấn luyện đoàn thể, nói trước công chúng và các kỹ năng giao tiếp giữa mọi người. Ra đời trong cảnh nghèo đói tại một trang trại ở Missouri, ông là tác giả cuốn Đắc Nhân Tâm, được xuất bản lần đầu năm 1936, một cuốn sách hàng bán chạy nhất và được biết đến nhiều nhất cho đến tận ngày nay, nội dung nói về cách ứng xử, cư xử trong cuộc sống. Ông cũng viết một cuốn tiểu sử Abraham Lincoln, với tựa đề Lincoln con người chưa biết, và nhiều cuốn sách khác.
 
-Carnegie là một trong những người đầu tiên đề xuất cái ngày nay được gọi là đảm đương trách nhiệm, dù nó chỉ được đề cập tỉ mỉ trong tác phẩm viết của ông. Một trong những ý tưởng chủ chốt trong những cuốn sách của ông là có thể thay đổi thái độ của người khác khi thay đổi sự đối xử của ta với họ.', 
-'2015-09-05 13:50:00', 
+Carnegie là một trong những người đầu tiên đề xuất cái ngày nay được gọi là đảm đương trách nhiệm, dù nó chỉ được đề cập tỉ mỉ trong tác phẩm viết của ông. Một trong những ý tưởng chủ chốt trong những cuốn sách của ông là có thể thay đổi thái độ của người khác khi thay đổi sự đối xử của ta với họ.',
+'2015-09-05 13:50:00',
 'Dale Carnegie');
 
 
 INSERT INTO author (avatar, introduction, join_at, name) VALUES
-('/assets/owner/img/author_book/image7.jpg', 
+('/assets/owner/img/author_book/image7.jpg',
 'Grant was born in the township of West Bloomfield, Michigan, on August 13, 1981, to a lawyer father and a teacher mother.[1][2] He grew up in the suburbs of Detroit, Michigan. Grant participated in springboard diving and aspired to be a professional basketball player growing up.[2] During high school, he was named an All-American in 1999 in diving.[3]
-He received a B.A. from Harvard College, and M.S. and Ph.D. degrees from the University of Michigan in organizational psychology.[4][5] He worked as a professional magician during college.[6]', 
-'2019-12-01 10:10:00', 
+He received a B.A. from Harvard College, and M.S. and Ph.D. degrees from the University of Michigan in organizational psychology.[4][5] He worked as a professional magician during college.[6]',
+'2019-12-01 10:10:00',
 'Adam Grant');
 
 
 INSERT INTO author (avatar, introduction, join_at, name) VALUES
-('/assets/owner/img/author_book/image8.jpg', 
-'John Gray (sinh ngày 28 tháng 12 năm 1951) là một cố vấn, giảng viên và tác giả người Mỹ. Năm 1969, ông bắt đầu một liên hệ kéo dài 9 năm với Maharishi Mahesh Yogi trước khi bắt đầu sự nghiệp với tư cách là một tác giả và cố vấn quan hệ cá nhân. Năm 1992, ông xuất bản cuốn sách Men Are from Mars, Women Are from Venus, trở thành cuốn sách bán chạy nhất trong thời gian dài và hình thành chủ đề trung tâm của tất cả các cuốn sách và hoạt động nghề nghiệp tiếp theo của ông. Sách của ông đã bán được hàng triệu bản.', 
-'2021-03-17 09:20:00', 
+('/assets/owner/img/author_book/image8.jpg',
+'John Gray (sinh ngày 28 tháng 12 năm 1951) là một cố vấn, giảng viên và tác giả người Mỹ. Năm 1969, ông bắt đầu một liên hệ kéo dài 9 năm với Maharishi Mahesh Yogi trước khi bắt đầu sự nghiệp với tư cách là một tác giả và cố vấn quan hệ cá nhân. Năm 1992, ông xuất bản cuốn sách Men Are from Mars, Women Are from Venus, trở thành cuốn sách bán chạy nhất trong thời gian dài và hình thành chủ đề trung tâm của tất cả các cuốn sách và hoạt động nghề nghiệp tiếp theo của ông. Sách của ông đã bán được hàng triệu bản.',
+'2021-03-17 09:20:00',
 'John Gray');
 
 INSERT INTO author (avatar, introduction, join_at, name) VALUES
-('/assets/owner/img/author_book/image9.jpg', 
+('/assets/owner/img/author_book/image9.jpg',
 'Sinh (1920-1984) là nhà văn người Brazil. Sinh ra trong một gia đình nghèo ở ngoại ô Rio de Janeiro, lớn lên ông phải làm đủ nghề để kiếm sống. Nhưng với tài kể chuyện thiên bẩm, trí nhớ phi thường, trí tưởng tượng tuyệt vời cùng vốn sống phong phú, José cảm thấy trong mình thôi thúc phải trở thành nhà văn nên đã bắt đầu sáng tác năm 22 tuổi. Tác phẩm nổi tiếng nhất của ông là tiểu thuyết mang màu sắc tự truyện Cây cam ngọt của tôi.
 
-Cuốn sách được đưa vào chương trình tiểu học của Brazil, được bán bản quyền cho hai mươi quốc gia và chuyển thể thành phim điện ảnh. Ngoài ra, José còn rất thành công trong vai trò diễn viên điện ảnh và biên kịch.', 
-'2018-11-29 12:30:00', 
+Cuốn sách được đưa vào chương trình tiểu học của Brazil, được bán bản quyền cho hai mươi quốc gia và chuyển thể thành phim điện ảnh. Ngoài ra, José còn rất thành công trong vai trò diễn viên điện ảnh và biên kịch.',
+'2018-11-29 12:30:00',
 'José Mauro de Vasconcelos');
 
 
 INSERT INTO author (avatar, introduction, join_at, name) VALUES
-('/assets/owner/img/author_book/image10.jpg', 
-'Paul Sudhir Arul Kalanithi (1 tháng 4 năm 1977 – 9 tháng 3 năm 2015) là một nhà giải phẫu thần kinh và nhà văn người Mỹ gốc Ấn Độ. Cuốn sách When Breath Becomes Air của anh là một cuốn hồi ký về cuộc đời và cuộc chiến đấu với bệnh ung thư phổi di căn giai đoạn IV của anh. Nó được xuất bản sau khi anh qua đời bởi Random House vào tháng 1 năm 2016.[1] Cuốn sách đã lọt vào danh sách những cuốn sách phi hư cấu bán chạy nhất của The New York Times trong nhiều tuần liên tiếp.[2] Tại Việt Nam, cuốn sách này đã được Nhà xuất bản Lao Động dịch và xuất bản vào tháng 7 năm 2017 với tên gọi Khi hơi thở hoá thinh không.', 
-'2020-02-24 14:45:00', 
+('/assets/owner/img/author_book/image10.jpg',
+'Paul Sudhir Arul Kalanithi (1 tháng 4 năm 1977 – 9 tháng 3 năm 2015) là một nhà giải phẫu thần kinh và nhà văn người Mỹ gốc Ấn Độ. Cuốn sách When Breath Becomes Air của anh là một cuốn hồi ký về cuộc đời và cuộc chiến đấu với bệnh ung thư phổi di căn giai đoạn IV của anh. Nó được xuất bản sau khi anh qua đời bởi Random House vào tháng 1 năm 2016.[1] Cuốn sách đã lọt vào danh sách những cuốn sách phi hư cấu bán chạy nhất của The New York Times trong nhiều tuần liên tiếp.[2] Tại Việt Nam, cuốn sách này đã được Nhà xuất bản Lao Động dịch và xuất bản vào tháng 7 năm 2017 với tên gọi Khi hơi thở hoá thinh không.',
+'2020-02-24 14:45:00',
 'Paul Kalanithi');
 
 INSERT INTO author (avatar, introduction, join_at, name) VALUES
-('/assets/owner/img/author_book/image11.jpg', 
+('/assets/owner/img/author_book/image11.jpg',
 'Theo một bản gia phả của dòng họ Nguyễn ở huyện Nghi Xuân, Nguyễn Du sinh ngày 23 tháng 11 năm Ất Dậu (tức ngày 3 tháng 1 năm 1766 theo lịch Gregory; một số tài liệu ghi 1765[ghi chú 1][1]) tại làng Tiên Điền, Nghi Xuân, Hà Tĩnh.
 Cha của Nguyễn Du là Nguyễn Nghiễm (1708 – 1775), sinh ở làng Tiên Điền, huyện Nghi Xuân, Hà Tĩnh, tên tự Hy Tư, hiệu Nghị Hiên, biệt hiệu là Hồng Ngự cư sĩ, đậu Nhị giáp tiến sĩ, làm quan đến chức Đại Tư đồ (Tể tướng), tước Xuân Quận công. Mẹ là bà Trần Thị Tần[4] (24/8/1740 – 27/8/1778), con gái một người làm chức Câu kế. Bà Tần quê ở làng Hoa Thiều, xã Minh Đạo, huyện Tiên Du (Đông Ngàn), xứ Kinh Bắc, nay thuộc tỉnh Bắc Ninh. Bà Tần là vợ thứ ba của Nguyễn Nghiễm (kém chồng 32 tuổi, sinh được 5 con, bốn trai và một gái).[5][6]
-Tổ tiên của Nguyễn Du, quê nội ở làng Tảo Dương, quê ngoại ở làng Canh Hoạch, huyện Thanh Oai, trấn Sơn Nam (nay thuộc Hà Nội), nổi tiếng với câu chuyện Trạng Cậu, Trạng Cháu (Trạng nguyên Nguyễn Đức Lượng và Trạng nguyên Nguyễn Thiến). Về sau, Nam Dương công Nguyễn Doãn Miện (tức Nguyễn Nhiệm, là cháu của Trạng nguyên Nguyễn Thiến) di cư vào Hà Tĩnh, trở thành vị tổ phụ của dòng họ Nguyễn Tiên Điền.', 
-'2020-02-24 14:45:00', 
+Tổ tiên của Nguyễn Du, quê nội ở làng Tảo Dương, quê ngoại ở làng Canh Hoạch, huyện Thanh Oai, trấn Sơn Nam (nay thuộc Hà Nội), nổi tiếng với câu chuyện Trạng Cậu, Trạng Cháu (Trạng nguyên Nguyễn Đức Lượng và Trạng nguyên Nguyễn Thiến). Về sau, Nam Dương công Nguyễn Doãn Miện (tức Nguyễn Nhiệm, là cháu của Trạng nguyên Nguyễn Thiến) di cư vào Hà Tĩnh, trở thành vị tổ phụ của dòng họ Nguyễn Tiên Điền.',
+'2020-02-24 14:45:00',
 'Nguyễn Du');
 
 INSERT INTO author (avatar, introduction, join_at, name) VALUES
-('/assets/owner/img/author_book/image12.jpg', 
+('/assets/owner/img/author_book/image12.jpg',
 'Nam Cao tên khai sinh là Trần Hữu Tri (có nguồn ghi là Trần Hữu Trí[3]), sinh ngày 29 tháng 10 năm 1915 nhưng giấy khai sinh ghi là 1917.[4] Quê ông tại làng Đại Hoàng, tổng Cao Đà, huyện Nam Sang, phủ Lý Nhân (nay là xã Hòa Hậu, huyện Lý Nhân, tỉnh Hà Nam). Ông đã ghép hai chữ đầu tiên của tên tổng và huyện làm bút danh: Nam Cao.[5]
 Ông xuất thân từ một gia đình Công giáo ở nông thôn. Cha ông là ông Trần Hữu Huệ, làm và kinh doanh nghề mộc, có thời gian làm nghề thầy lang trong làng. Mẹ ông là bà Trần Thị Minh, vừa là nội trợ, làm vườn, làm ruộng và dệt vải.
-Thuở nhỏ, Nam Cao học sơ học ở trường làng. Đến cấp tiểu học và bậc trung học, gia đình gửi ông xuống Nam Định học ở trường Cửa Bắc rồi trường Thành Chung (nay là trường Trung học phổ thông chuyên Lê Hồng Phong, Nam Định). Năm 1934 học xong bậc trung học, nhưng bị ngã và đau ốm nên chưa thi lấy bằng Thành chung. Đầu năm 1935 cưới vợ, Trần Thị Sen (tên thánh Maria Sen), người cùng làng. Tháng 11/1935 Nam Cao vào Sài Gòn, ở lại đây 30 tháng, sống bằng nghề làm thư ký hiệu may Ba Lễ, đồng thời bắt đầu viết văn, gửi cho các báo. Năm 1936 được đăng các truyện ngắn "Cảnh cuối cùng" và "Hai cái xác" dưới bút danh Thúy Rư trên tuần báo Tiểu thuyết thứ bảy (Hà Nội). Năm 1937 được đăng các truyện ngắn "Một bà hào hiệp", "Nghèo", "Đui mù" dưới bút danh Thúy Rư trên Tiểu thuyết thứ bảy, Truyện "Những cánh hoa tàn" trên báo Ích Hữu (Hà Nội). Tháng 5 năm 1938, vì lí do sức khoẻ, Nam Cao trở ra Bắc, về quê.', 
-'2020-02-24 14:45:00', 
+Thuở nhỏ, Nam Cao học sơ học ở trường làng. Đến cấp tiểu học và bậc trung học, gia đình gửi ông xuống Nam Định học ở trường Cửa Bắc rồi trường Thành Chung (nay là trường Trung học phổ thông chuyên Lê Hồng Phong, Nam Định). Năm 1934 học xong bậc trung học, nhưng bị ngã và đau ốm nên chưa thi lấy bằng Thành chung. Đầu năm 1935 cưới vợ, Trần Thị Sen (tên thánh Maria Sen), người cùng làng. Tháng 11/1935 Nam Cao vào Sài Gòn, ở lại đây 30 tháng, sống bằng nghề làm thư ký hiệu may Ba Lễ, đồng thời bắt đầu viết văn, gửi cho các báo. Năm 1936 được đăng các truyện ngắn "Cảnh cuối cùng" và "Hai cái xác" dưới bút danh Thúy Rư trên tuần báo Tiểu thuyết thứ bảy (Hà Nội). Năm 1937 được đăng các truyện ngắn "Một bà hào hiệp", "Nghèo", "Đui mù" dưới bút danh Thúy Rư trên Tiểu thuyết thứ bảy, Truyện "Những cánh hoa tàn" trên báo Ích Hữu (Hà Nội). Tháng 5 năm 1938, vì lí do sức khoẻ, Nam Cao trở ra Bắc, về quê.',
+'2020-02-24 14:45:00',
 'Nam Cao');
 
 INSERT INTO author (avatar, introduction, join_at, name) VALUES
-('/assets/owner/img/author_book/image13.jpg', 
+('/assets/owner/img/author_book/image13.jpg',
 'Vũ Trọng Phụng (1912-1939) là một nhà văn, nhà báo nổi tiếng của Việt Nam vào đầu thế kỷ 20. Tuy thời gian cầm bút rất ngắn ngủi, với tác phẩm đầu tay là truyện ngắn Chống nạng lên đường đăng trên Ngọ báo vào năm 1930, ông đã để lại một kho tác phẩm đáng kinh ngạc: hơn 30 truyện ngắn, 9 tập tiểu thuyết, 9 tập phóng sự, 7 vở kịch, cùng một bản dịch vở kịch từ tiếng Pháp, một số bài viết phê bình, tranh luận văn học và hàng trăm bài báo viết về các vấn đề chính trị, xã hội, văn hóa[1]. Một số trích đoạn tác phẩm của ông trong các tác phẩm Số đỏ và Giông Tố đã được đưa vào sách giáo khoa môn Ngữ văn của Việt Nam.[2][3]
-Nổi tiếng với giọng văn trào phúng châm biếm xã hội của mình, một số người đã so sánh ông như Balzac của Việt Nam[4]. Tuy nhiên, cũng vì phong cách "tả chân" và yếu tố tình dục trong tác phẩm mà khi sinh thời ông đã bị chính quyền bảo hộ Pháp tại Hà Nội gọi ra tòa vì "tội tổn thương phong hóa" (outrage aux bonnes moeurs)[5]. Về sau này, tác phẩm của ông lại bị cấm xuất bản vì là "tác phẩm suy đồi" tại miền Bắc Việt Nam từ năm 1954 và cả nước từ ngày 30 tháng 4 năm 1975 cho đến tận cuối những năm 1980 mới được chính quyền cho lưu hành[4][6].', 
-'2020-02-24 14:45:00', 
+Nổi tiếng với giọng văn trào phúng châm biếm xã hội của mình, một số người đã so sánh ông như Balzac của Việt Nam[4]. Tuy nhiên, cũng vì phong cách "tả chân" và yếu tố tình dục trong tác phẩm mà khi sinh thời ông đã bị chính quyền bảo hộ Pháp tại Hà Nội gọi ra tòa vì "tội tổn thương phong hóa" (outrage aux bonnes moeurs)[5]. Về sau này, tác phẩm của ông lại bị cấm xuất bản vì là "tác phẩm suy đồi" tại miền Bắc Việt Nam từ năm 1954 và cả nước từ ngày 30 tháng 4 năm 1975 cho đến tận cuối những năm 1980 mới được chính quyền cho lưu hành[4][6].',
+'2020-02-24 14:45:00',
 'Vũ Trọng Phụng');
 
 INSERT INTO author (avatar, introduction, join_at, name) VALUES
-('/assets/owner/img/author_book/image14.jpg', 
+('/assets/owner/img/author_book/image14.jpg',
 'Ngô Tất Tố sinh năm 1893 (mất năm 1954) ở làng Lộc Hà, tổng Hội Phụ, phủ Từ Sơn, Bắc Ninh (nay là thôn Lộc Hà, xã Mai Lâm, huyện Đông Anh, Hà Nội). Ông là con thứ hai, nhưng là trưởng nam trong một gia đình có bảy anh chị em, ba trai, bốn gái. Lúc còn nhỏ Ngô Tất Tố được thụ hưởng một nền giáo dục Nho học. Từ năm 1898, Ngô Tất Tố được ông nội dạy vỡ lòng chữ Hán ở quê, sau đó ông theo học ở nhiều làng quê trong vùng. Năm 1912, Ngô Tất Tố học tư chữ Pháp một thời gian ngắn và bắt đầu tham dự các kỳ thi truyền thống lúc bấy giờ vẫn còn được triều đình nhà Nguyễn tổ chức. Ông đỗ kỳ sát hạch, nhưng thi hương bị hỏng ở kỳ đệ nhất. Đến năm 1915, ông đỗ đầu kỳ khảo hạch toàn tỉnh Bắc Ninh, nên được gọi là đầu xứ Tố, rồi thi hương lần thứ hai, khoa Ất Mão, cũng là khoa thi hương cuối cùng ở Bắc Kì. Ông qua được kỳ đệ nhất, nhưng bị hỏng ở kỳ đệ nhị.
-Năm 1926, Ngô Tất Tố ra Hà Nội làm báo. Ông viết cho tờ An Nam tạp chí. Nhưng vì thiếu tiền, tờ báo này phải tự đình bản, Ngô Tất Tố cùng với Tản Đà đã vào Sài Gòn. Mặc dù không thật sự thành công trong cuộc thử sức ở Nam Kì, nhưng tại đây, Ngô Tất Tố đã có cơ hội tiếp cận với tri thức và văn hóa thế giới ở vùng đất khi đó là thuộc địa chính thức của Pháp cũng như theo đuổi nghề báo để chuẩn bị sau này trở thành một nhà báo chuyên nghiệp. Trong thời kỳ này, ông viết với các bút danh Bắc Hà, Thiết Khẩu Nhi, Lộc Hà, Tân Thôn Dân...', 
-'2020-02-24 14:45:00', 
+Năm 1926, Ngô Tất Tố ra Hà Nội làm báo. Ông viết cho tờ An Nam tạp chí. Nhưng vì thiếu tiền, tờ báo này phải tự đình bản, Ngô Tất Tố cùng với Tản Đà đã vào Sài Gòn. Mặc dù không thật sự thành công trong cuộc thử sức ở Nam Kì, nhưng tại đây, Ngô Tất Tố đã có cơ hội tiếp cận với tri thức và văn hóa thế giới ở vùng đất khi đó là thuộc địa chính thức của Pháp cũng như theo đuổi nghề báo để chuẩn bị sau này trở thành một nhà báo chuyên nghiệp. Trong thời kỳ này, ông viết với các bút danh Bắc Hà, Thiết Khẩu Nhi, Lộc Hà, Tân Thôn Dân...',
+'2020-02-24 14:45:00',
 'Ngô Tất Tố');
 
 INSERT INTO author (avatar, introduction, join_at, name) VALUES
-('/assets/owner/img/author_book/image15.jpg', 
+('/assets/owner/img/author_book/image15.jpg',
 'Đoàn Giỏi còn có tên Đoàn Văn Hòa, quê quán tại xã Tân Hiệp, huyện Châu Thành, tỉnh Mỹ Tho (ngày nay là xã Tân Hiệp, huyện Châu Thành, tỉnh Tiền Giang). Ông xuất thân trong một gia đình địa chủ lớn, có hàng trăm mẫu ruộng màu mỡ ven sông Tiền.
 Cha ông là Đoàn Vàng, còn gọi là Cò Vàng, có ba người vợ và 18 người con, trong đó mẹ Đoàn Giỏi là vợ cả. Ông là con thứ tư, nên được gọi là Anh Năm.
 Ông từng theo học tại trường Mỹ thuật Gia Định trong những năm 1939-1940.[2] Khi cách mạng tháng Tám thành công và toàn quốc kháng chiến bùng nổ, gia đình ông đã tự nguyện hiến toàn bộ nhà cửa, ruộng đất cho chính quyền Việt Minh trong đó có tòa nhà trụ sở Ủy ban nhân dân huyện Châu Thành ngày nay.
 Ông tham gia cách mạng năm 1945, đến năm 1947 làm Trưởng công an phụ trách 10 xã của huyện Châu Thành rồi Phó trưởng Ty thông tin Rạch Giá năm 1949.[2] Giai đoạn 1949 - 1954, ông công tác tại Chi hội Văn nghệ Nam Bộ, viết bài cho tạp chí Lá Lúa, rồi tạp chí Văn nghệ Miền Nam.
-Sau 1954, ông tập kết ra Bắc, đến năm 1955 thì chuyển sang sáng tác và biên tập sách báo, công tác tại Đài Tiếng nói Việt Nam, rồi Hội Văn nghệ Việt Nam. Ông cũng tham gia Ban chấp hành Hội Nhà văn Việt Nam các khóa I, II, III và là Đảng viên Đảng Cộng sản Việt Nam. Đoàn Giỏi còn có các bút danh khác là Nguyễn Hoài, Nguyễn Phú Lễ, Huyền Tư.', 
-'2020-02-24 14:45:00', 
+Sau 1954, ông tập kết ra Bắc, đến năm 1955 thì chuyển sang sáng tác và biên tập sách báo, công tác tại Đài Tiếng nói Việt Nam, rồi Hội Văn nghệ Việt Nam. Ông cũng tham gia Ban chấp hành Hội Nhà văn Việt Nam các khóa I, II, III và là Đảng viên Đảng Cộng sản Việt Nam. Đoàn Giỏi còn có các bút danh khác là Nguyễn Hoài, Nguyễn Phú Lễ, Huyền Tư.',
+'2020-02-24 14:45:00',
 'Đoàn Giỏi');
 
 INSERT INTO author (avatar, introduction, join_at, name) VALUES
-('/assets/owner/img/author_book/image16.jpg', 
+('/assets/owner/img/author_book/image16.jpg',
 'Nguyễn Nhật Ánh sinh ngày 7 tháng 5 năm 1955 tại làng Đo Đo, xã Bình Quế, huyện Thăng Bình, tỉnh Quảng Nam. Thuở nhỏ ông theo học tại các trường THPT Tiểu La, THPT chuyên ban Trần Cao Vân và THCS Phan Châu Trinh (Đà Nẵng). Từ năm 1973, ông chuyển vào sống tại Sài Gòn, theo học ngành sư phạm. Ông đã từng tham gia Thanh niên xung phong, dạy học môn Văn tại trường THCS Bình Tây (Quận 6) từ năm 1983-1985.
 
 Năm 13 tuổi, ông đăng báo bài thơ đầu tiên. Tác phẩm đầu tiên được in thành sách là một tập thơ tên Thành phố tháng tư (Nhà xuất bản Tác phẩm mới, 1984, in chung với Lê Thị Kim). Truyện dài đầu tiên của ông là tác phẩm Trước vòng chung kết (Nhà xuất bản Măng Non, 1984).[2] Hơn hai mươi năm trở lại đây, ông tập trung viết văn xuôi, chuyên sáng tác về đề tài thanh thiếu niên.
@@ -3678,72 +3678,72 @@ Năm 2008, ông cho ra đời tác phẩm Cho tôi xin một vé đi tuổi thơ
 
 Năm 2012, Nguyễn Nhật Ánh cho ra mắt truyện dài Có hai con mèo ngồi bên cửa sổ. Các tác phẩm ra đời gần đây nhất là Ngồi khóc trên cây (tháng 6 năm 2013), Chúc một ngày tốt lành (tháng 3 năm 2014), Bảy bước tới mùa hè (tháng 3 năm 2015), Con chó nhỏ mang giỏ hoa hồng (28 tháng 2 năm 2016), Cây chuối non đi giày xanh (7 tháng 1 năm 2018) và Làm bạn với bầu trời (tháng 9 năm 2019), Con chim xanh biếc bay về (2020). Tháng 1 năm 2022, ông tiếp tục cho xuất bản tác phẩm Ra bờ suối ngắm hoa kèn hồng, được viết trong thời gian Sài Gòn giãn cách dịch COVID-19, chủ đề nhẹ nhàng gần gũi về các loài động vật, với lời văn đầy màu sắc. Đây được xem là "tác phẩm chữa lành mùa dịch".
 
-Ông hiện đã kết hôn và đang sống cùng vợ là bà Trần Thị Tiếng Thu. Ông có con gái tên Nguyễn Nhật Quỳnh Anh và còn có một người em ruột. Theo ông, vợ con và em ruột chính là hậu phương vững chắc và luôn hỗ trợ ông mỗi khi sáng tác các tác phẩm. Thành công lớn nhất của ông là sau khi đất nước thống nhất, sách của ông được độc giả cả 3 miền Bắc - Trung - Nam đón nhận nhiệt tình, trong đó đón nhận nhiệt tình nhất là ở Hà Nội (thủ đô của đất nước), Thành phố Hồ Chí Minh (thành phố lớn nhất, nơi ông sinh sống) và Quảng Nam (quê hương ông).', 
-'2020-02-24 14:45:00', 
+Ông hiện đã kết hôn và đang sống cùng vợ là bà Trần Thị Tiếng Thu. Ông có con gái tên Nguyễn Nhật Quỳnh Anh và còn có một người em ruột. Theo ông, vợ con và em ruột chính là hậu phương vững chắc và luôn hỗ trợ ông mỗi khi sáng tác các tác phẩm. Thành công lớn nhất của ông là sau khi đất nước thống nhất, sách của ông được độc giả cả 3 miền Bắc - Trung - Nam đón nhận nhiệt tình, trong đó đón nhận nhiệt tình nhất là ở Hà Nội (thủ đô của đất nước), Thành phố Hồ Chí Minh (thành phố lớn nhất, nơi ông sinh sống) và Quảng Nam (quê hương ông).',
+'2020-02-24 14:45:00',
 'Nguyễn Nhật Ánh');
 
 
 
 INSERT INTO author (avatar, introduction, join_at, name) VALUES
-('/assets/owner/img/author_book/image17.jpg', 
+('/assets/owner/img/author_book/image17.jpg',
 'Nguyễn Ngọc Tư (sinh năm 1976 tại xã Tân Duyệt, huyện Đầm Dơi, tỉnh Cà Mau) là một nhà văn, thành viên Hội nhà văn Việt Nam. Năm 2018, cô được trao Giải thưởng Văn học Liberaturpreis 2018 do Litprom (Hiệp hội quảng bá văn học châu Á, châu Phi, Mỹ Latin ở Đức) bình chọn, dựa trên việc xem xét các bản dịch tiếng Đức tác phẩm nổi bật của các tác giả nữ đương đại tiêu biểu trong khu vực. Giải thưởng được trao hàng năm nhằm vinh danh các tác giả nữ đến từ châu Á, Phi, Mỹ Latin, Các tiểu vương quốc Ả Rập thống nhất (UAE) và vùng Caribe.
 
-Cô được biết đến với tập truyện mang tên Cánh đồng bất tận. Tập truyện nhận giải thưởng của Hội nhà văn Việt Nam năm 2006 và truyện ngắn cùng tên đã được chuyển thể thành phim điện ảnh năm 2010.', 
-'2020-02-24 14:45:00', 
+Cô được biết đến với tập truyện mang tên Cánh đồng bất tận. Tập truyện nhận giải thưởng của Hội nhà văn Việt Nam năm 2006 và truyện ngắn cùng tên đã được chuyển thể thành phim điện ảnh năm 2010.',
+'2020-02-24 14:45:00',
 'Nguyễn Ngọc Tư');
 
 INSERT INTO author (avatar, introduction, join_at, name) VALUES
-('/assets/owner/img/author_book/image18.jpg', 
+('/assets/owner/img/author_book/image18.jpg',
 'Võ Quảng (1 tháng 3 năm 1920 - 15 tháng 6 năm 2007), là một nhà văn nổi tiếng của Việt Nam. Sự nghiệp văn chương của ông chủ yếu tập trung về đề tài thiếu nhi. Ông cũng là người đầu tiên dịch tác phẩm Đôn Kihôtê sang tiếng Việt dưới bút danh Hoàng Huy từ năm 1959. Ông được nhà nước Việt Nam trao tặng Giải thưởng Nhà nước về Văn học nghệ thuật năm 2007.
 
-Ngoài sáng tác thơ và truyện, Võ Quảng còn viết kịch bản cho phim hoạt hình như Sơn Tinh Thủy Tinh và Những chiếc áo ấm. Ông cũng đã dịch một số tác phẩm kinh điển của thế giới sang tiếng Việt, bao gồm Truyện Đông Ky-sốt và Người anh hùng rừng Séc Vút.[1]', 
-'2020-02-24 14:45:00', 
+Ngoài sáng tác thơ và truyện, Võ Quảng còn viết kịch bản cho phim hoạt hình như Sơn Tinh Thủy Tinh và Những chiếc áo ấm. Ông cũng đã dịch một số tác phẩm kinh điển của thế giới sang tiếng Việt, bao gồm Truyện Đông Ky-sốt và Người anh hùng rừng Séc Vút.[1]',
+'2020-02-24 14:45:00',
 'Võ Quảng');
 
 INSERT INTO author (avatar, introduction, join_at, name) VALUES
-('/assets/owner/img/author_book/image19.jpg', 
+('/assets/owner/img/author_book/image19.jpg',
 'Ông sinh ngày 5 tháng 11 năm 1918 tại phố Hàng Cau, nay thuộc phường Trần Hưng Đạo, thành phố Nam Định, tỉnh Nam Định[2]. Cha ông làm cai đề lao, sau thất nghiệp, cảnh nhà sa sút, lại nghiện ngập và mắc bệnh lao, phải sống nghèo túng trong tâm trạng kẻ bất đắc chí. Mẹ ông là người ngoan đạo, tần tảo, hiền hậu, giàu đức hy sinh nhưng sống không có hạnh phúc trong gia đình nhà chồng.
 
-Mới lên bảy, tám tuổi, Nguyên Hồng đã cảm nhận được một cách hồn nhiên và nhớ rất kỹ trong ký ức tuổi thơ của mình rằng "thầy mẹ tôi lấy nhau không phải vì thương yêu nhau" và bản thân mình là kết quả của cuộc hôn nhân gượng gạo ấy.', 
-'2020-02-24 14:45:00', 
-'Nguyên Hồng'); 
+Mới lên bảy, tám tuổi, Nguyên Hồng đã cảm nhận được một cách hồn nhiên và nhớ rất kỹ trong ký ức tuổi thơ của mình rằng "thầy mẹ tôi lấy nhau không phải vì thương yêu nhau" và bản thân mình là kết quả của cuộc hôn nhân gượng gạo ấy.',
+'2020-02-24 14:45:00',
+'Nguyên Hồng');
 
 INSERT INTO author (avatar, introduction, join_at, name) VALUES
-('/assets/owner/img/author_book/image20.jpg', 
-'Ông đã viết các tác phẩm của mình bằng tiếng Nga và cả tiếng Kyrgyzstan, nổi tiếng với những sáng tác văn học về quê hương của ông. Đề tài chủ yếu trong các truyện ngắn của Aitmatov là về cuộc sống khắc nghiệt nhưng cũng đầy chất lãng mạn của người dân vùng đồi núi Kyrgyzstan, tình yêu, tình bạn, tinh thần dũng cảm vượt qua những thử thách hi sinh thời chiến tranh, thái độ tích cực đấu tranh của tầng lớp thanh niên, đầu tiên là các nữ thanh niên để thoát khỏi sự ràng buộc của những tập tục lạc hậu. Ông là người gốc Thổ Nhĩ Kỳ (Turkic) Tatar và Kyrgyz. Đóng góp của ông cho sự phát triển của văn học Thổ Nhĩ Kì là rất lớn.', 
-'2020-02-24 14:45:00', 
+('/assets/owner/img/author_book/image20.jpg',
+'Ông đã viết các tác phẩm của mình bằng tiếng Nga và cả tiếng Kyrgyzstan, nổi tiếng với những sáng tác văn học về quê hương của ông. Đề tài chủ yếu trong các truyện ngắn của Aitmatov là về cuộc sống khắc nghiệt nhưng cũng đầy chất lãng mạn của người dân vùng đồi núi Kyrgyzstan, tình yêu, tình bạn, tinh thần dũng cảm vượt qua những thử thách hi sinh thời chiến tranh, thái độ tích cực đấu tranh của tầng lớp thanh niên, đầu tiên là các nữ thanh niên để thoát khỏi sự ràng buộc của những tập tục lạc hậu. Ông là người gốc Thổ Nhĩ Kỳ (Turkic) Tatar và Kyrgyz. Đóng góp của ông cho sự phát triển của văn học Thổ Nhĩ Kì là rất lớn.',
+'2020-02-24 14:45:00',
 'Chingiz Aitmatov');
 
 INSERT INTO author (avatar, introduction, join_at, name) VALUES
-('/assets/owner/img/author_book/image21.jpg', 
+('/assets/owner/img/author_book/image21.jpg',
 'Bảo Ninh tên thật là Hoàng Ấu Phương, sinh tại huyện Diễn Châu, tỉnh Nghệ An, quê ở xã Bảo Ninh, huyện Quảng Ninh (nay thuộc thành phố Đồng Hới), tỉnh Quảng Bình, Việt Nam. Ông là con trai của Giáo sư Hoàng Tuệ (1922 - 1999), nguyên Viện trưởng Viện Ngôn ngữ học. Ông từng là học sinh trường Bưởi - Chu Văn An.
 
-Ông vào bộ đội năm 1969. Thời chiến tranh, ông chiến đấu ở mặt trận B-3 Tây Nguyên, tại tiểu đoàn 5, trung đoàn 24, sư đoàn 10. Năm 1975, ông giải ngũ. Từ 1976-1981 học đại học ở Hà Nội, sau đó làm việc ở Viện Khoa học Việt Nam. Từ 1984-1986 học khoá 2 Trường viết văn Nguyễn Du. Làm việc tại báo Văn nghệ Trẻ. Là hội viên Hội Nhà văn Việt Nam từ 1997.', 
-'2020-02-24 14:45:00', 
+Ông vào bộ đội năm 1969. Thời chiến tranh, ông chiến đấu ở mặt trận B-3 Tây Nguyên, tại tiểu đoàn 5, trung đoàn 24, sư đoàn 10. Năm 1975, ông giải ngũ. Từ 1976-1981 học đại học ở Hà Nội, sau đó làm việc ở Viện Khoa học Việt Nam. Từ 1984-1986 học khoá 2 Trường viết văn Nguyễn Du. Làm việc tại báo Văn nghệ Trẻ. Là hội viên Hội Nhà văn Việt Nam từ 1997.',
+'2020-02-24 14:45:00',
 'Bảo Ninh');
 
 
 INSERT INTO author (avatar, introduction, join_at, name) VALUES
-('/assets/owner/img/author_book/image22.jpg', 
+('/assets/owner/img/author_book/image22.jpg',
 'Phùng Quán sinh tháng 1 năm 1932, quê tại xã Thủy Dương, huyện Hương Thủy (nay là phường Thủy Dương, thị xã Hương Thủy), tỉnh Thừa Thiên Huế. Cha ông là Phùng Văn Nguyện (còn có tên là Phùng Quý Đông) là con trai cả của Phùng Kiểm (nhà nho, mất 1957) và Lê Thị Me. Ông còn có hai người chú ruột là Phùng Lưu (tức Nguyễn Vạn, Tư Bốn, sinh 1916, nguyên Bí thư Tỉnh ủy Thừa Thiên Huế) và Phùng Thị.
 
 Năm 1945, ông tham gia Vệ quốc quân, là chiến sĩ trinh sát Trung đoàn 101 (tiền thân là Trung đoàn Trần Cao Vân). Sau đó ông tham gia Thiếu sinh quân Liên khu IV, đoàn Văn công Liên khu IV.
 
 Đầu năm 1954, ông làm việc tại Cơ quan sinh hoạt Văn nghệ quân đội thuộc Tổng cục Chính trị Quân đội Nhân dân Việt Nam (tiền thân của Tạp chí Văn nghệ Quân đội).
 
-Tác phẩm đầu tay Vượt Côn Đảo của ông được giải thưởng của Hội Văn nghệ Việt Nam năm 1955. Về quá trình viết tác phẩm này, trong di cảo hồi ký "Tôi đã trở thành nhà văn như thế nào" do Nhà xuất bản Văn Nghệ Thành phố Hồ Chí Minh xuất bản năm 2007, ông kể nhiều chi tiết rất thú vị về sự ngẫu nhiên và tình cờ đưa ông từ một người lính trở thành một nhà văn và những biến cố phải gánh chịu nhưng với giọng kể rất hóm hỉnh, không một chút trách móc hay thù hận. Không lâu sau đó, Phùng Quán tham gia phong trào Nhân Văn - Giai Phẩm bằng hai bài thơ "Lời mẹ dặn" và "Chống tham ô lãng phí" (1957). Khi phong trào này chấm dứt dưới tác động của nhà nước Việt Nam Dân chủ Cộng hòa, Phùng Quán bị kỷ luật, ra khỏi quân đội, sau đó mất đi tư cách hội viên Hội Nhà văn Việt Nam và phải đi lao động thực tế ở nhiều nơi.', 
-'2020-02-24 14:45:00', 
+Tác phẩm đầu tay Vượt Côn Đảo của ông được giải thưởng của Hội Văn nghệ Việt Nam năm 1955. Về quá trình viết tác phẩm này, trong di cảo hồi ký "Tôi đã trở thành nhà văn như thế nào" do Nhà xuất bản Văn Nghệ Thành phố Hồ Chí Minh xuất bản năm 2007, ông kể nhiều chi tiết rất thú vị về sự ngẫu nhiên và tình cờ đưa ông từ một người lính trở thành một nhà văn và những biến cố phải gánh chịu nhưng với giọng kể rất hóm hỉnh, không một chút trách móc hay thù hận. Không lâu sau đó, Phùng Quán tham gia phong trào Nhân Văn - Giai Phẩm bằng hai bài thơ "Lời mẹ dặn" và "Chống tham ô lãng phí" (1957). Khi phong trào này chấm dứt dưới tác động của nhà nước Việt Nam Dân chủ Cộng hòa, Phùng Quán bị kỷ luật, ra khỏi quân đội, sau đó mất đi tư cách hội viên Hội Nhà văn Việt Nam và phải đi lao động thực tế ở nhiều nơi.',
+'2020-02-24 14:45:00',
 'Phùng Quán');
 
 INSERT INTO author (avatar, introduction, join_at, name) VALUES
-('/assets/owner/img/author_book/image23.jpg', 
+('/assets/owner/img/author_book/image23.jpg',
 'Năm 1946, ông tản cư tới vùng núi Lương Sơn (Hòa Bình) và gặp được một cụ già Mường, người đã kể ông nghe câu chuyện tình có thật giữa chàng Đinh Lăng và nàng Quách Mỵ Dung, đôi trẻ người Mường, thuộc họ nhà Lang xứ Mường, đã được truyền miệng qua nhiều đời. Đặc biệt, mộ của đôi trai gái yêu nhau tha thiết mà không lấy được nhau này vẫn còn nằm trên đồi, nơi có con đường mòn vắt qua rừng, mà người dân thường đi chợ từ Kim Bôi sang Chợ Đồn ở Lương Sơn. Cảm động trước mối tình sắt son mà bi thảm của đôi trai tài gái sắc xứ Mường, ông đã lập tức viết truyện thơ “Đồi thông hai mộ”, một tuyệt tác thi phẩm dài tới 1044 câu thơ, theo thể song thất lục bát trong quãng thời gian năm 1947-1948.
-Đến khi hồi cư về lại Hà Nội thì Vũ Đình Trung làm nghề dạy học, dạy trẻ em tiếng Việt và dạy người lớn tiếng Quan Hỏa (ngôn ngữ tỉnh Quảng Đông, Trung Quốc). Ông còn để lại một cuốn sách nhỏ Nói, nghe, viết tiếng Quan Hỏa. Những năm sau này, ông Vũ Đình Trung sống nghèo, vất vả với nghề hàn nồi xoong nhôm, hàn quai dép nhựa bên hè đường thị xã Hà Đông, nay là quận Hà Đông thành phố Hà Nội. ', 
-'2020-02-24 14:45:00', 
+Đến khi hồi cư về lại Hà Nội thì Vũ Đình Trung làm nghề dạy học, dạy trẻ em tiếng Việt và dạy người lớn tiếng Quan Hỏa (ngôn ngữ tỉnh Quảng Đông, Trung Quốc). Ông còn để lại một cuốn sách nhỏ Nói, nghe, viết tiếng Quan Hỏa. Những năm sau này, ông Vũ Đình Trung sống nghèo, vất vả với nghề hàn nồi xoong nhôm, hàn quai dép nhựa bên hè đường thị xã Hà Đông, nay là quận Hà Đông thành phố Hà Nội. ',
+'2020-02-24 14:45:00',
 'Văn sĩ Tùng Giang - Vũ Đình Trung');
 
 INSERT INTO author (avatar, introduction, join_at, name) VALUES
-('/assets/owner/img/author_book/image24.jpg', 
+('/assets/owner/img/author_book/image24.jpg',
 'Ông quê ở làng Phù Lưu, xã Tân Hồng, huyện Từ Sơn (nay thuộc phường Đông Ngàn, thành phố Từ Sơn), tỉnh Bắc Ninh. Do hoàn cảnh gia đình khó khăn, ông chỉ được học hết bậc tiểu học rồi phải đi làm. Kim Lân bắt đầu viết truyện ngắn từ năm 1941. Tác phẩm của ông được đăng trên các báo Tiểu thuyết thứ bảy và Trung Bắc chủ nhật. Một số truyện (Vợ nhặt, Đứa con người vợ lẽ, Đứa con người cô đầu và Cô Vịa) mang tính chất tự truyện nhưng đã thể hiện được không khí tiêu điều, ảm đạm của nông thôn Việt Nam và cuộc sống lam lũ, vất vả của người nông dân thời kỳ đó.[1]
 
 Bút danh Kim Lân của ông được lấy từ tên của nhân vật Đổng Kim Lân trong Tuồng Sơn Hậu, một vai ông đã từng diễn.
@@ -3752,130 +3752,130 @@ Bút danh Kim Lân của ông được lấy từ tên của nhân vật Đổng
 
 Sau Cách mạng tháng Tám, Kim Lân tiếp tục làm báo, viết văn. Ông vẫn chuyên về truyện ngắn và vẫn viết về làng quê Việt Nam - mảng hiện thực mà từ lâu ông đã hiểu biết sâu sắc. Những tác phẩm chính: Nên vợ nên chồng (tập truyện ngắn, 1955), Con chó xấu xí (tập truyện ngắn, 1962).[1]
 
-Sinh thời ông sống tại Hà Nội. Nǎm 2001, Kim Lân được trao tặng Giải thưởng Nhà nước về văn học nghệ thuật. Ông từ trần năm 2007 tại Bệnh viện Hữu Nghị Hà Nội, sau một thời gian dài chống chọi với căn bệnh hen suyễn, hưởng thọ 86 tuổi.[1]', 
-'2020-02-24 14:45:00', 
+Sinh thời ông sống tại Hà Nội. Nǎm 2001, Kim Lân được trao tặng Giải thưởng Nhà nước về văn học nghệ thuật. Ông từ trần năm 2007 tại Bệnh viện Hữu Nghị Hà Nội, sau một thời gian dài chống chọi với căn bệnh hen suyễn, hưởng thọ 86 tuổi.[1]',
+'2020-02-24 14:45:00',
 'Kim Lân');
 
 INSERT INTO author (avatar, introduction, join_at, name) VALUES
-('/assets/owner/img/author_book/image25.jpg', 
-'Mô tả', 
-'2020-02-24 14:45:00', 
+('/assets/owner/img/author_book/image25.jpg',
+'Mô tả',
+'2020-02-24 14:45:00',
 'First News');
 
 INSERT INTO author (avatar, introduction, join_at, name) VALUES
-('/assets/owner/img/author_book/image26.jpg', 
+('/assets/owner/img/author_book/image26.jpg',
 'Paulo Coelho sinh tại Rio de Janeiro (Brasil). Ông học đại học trường luật, nhưng đã bỏ học năm 1970 để du lịch qua México, Peru, Bolivia và Chile, cũng như châu Âu và Bắc Phi. Hai năm sau, ông trở về Brasil và bắt đầu soạn lời nhạc pop. Ông cộng tác với những nhạc sĩ pop như Raul Seixas. Năm 1974, ông bị bắt giam một thời gian ngắn vì những hoạt động chống lại chế độ độc tài thời đó ở Brazil.
 
 Sách của ông đã bán ra hơn 86 triệu bản trên 150 nước và được dịch ra 56 thứ tiếng. Ông đã nhận được nhiều giải thưởng của nhiều nước, trong đó tác phẩm Veronika quyết chết (Veronika decide morrer) được đề cử cho Giải Văn chương Dublin IMPAC Quốc tế.
 
 Tiểu thuyết Nhà giả kim (O Alquimista) của ông, một câu chuyện thấm đẫm chất thơ, đã bán được hơn 65 triệu bản trên thế giới và dịch ra 56 thứ tiếng, trong đó có tiếng Việt.[1] Tác phẩm sau đó được dựng thành phim do Lawrence Fishburne sản xuất, vì diễn viên này rất hâm mộ Coelho. Các tác phẩm khác của ông bao gồm Hành hương (O diário de um mago) (được công ty Arxel Tribe lấy ý tưởng xây dựng một trò chơi vi tính), Bên sông Piedra tôi ngồi xuống và khóc (Na margem do rio Piedra eu sentei e chorei) và Những nữ chiến binh (As Valkírias). Cuốn tiểu thuyết năm 2005 - O Zahir - của ông bị cấm ở Iran, 1000 bản sách bị tịch thu [1] Lưu trữ 2005-05-19 tại Wayback Machine, nhưng sau đó lại được phát hành.
 
-Tác phẩm của Paulo Coelho được xếp vào danh sách những sách bán chạy nhất ở nhiều nước, bao gồm Brasil, Anh, Hoa Kỳ, Pháp, Đức, Canada, Ý, Israel và Hy Lạp. Ông được xem là tác giả viết tiếng Bồ Đào Nha bán chạy nhất mọi thời đại.', 
-'2020-02-24 14:45:00', 
+Tác phẩm của Paulo Coelho được xếp vào danh sách những sách bán chạy nhất ở nhiều nước, bao gồm Brasil, Anh, Hoa Kỳ, Pháp, Đức, Canada, Ý, Israel và Hy Lạp. Ông được xem là tác giả viết tiếng Bồ Đào Nha bán chạy nhất mọi thời đại.',
+'2020-02-24 14:45:00',
 'Paulo Coelho');
 
 INSERT INTO author (avatar, introduction, join_at, name) VALUES
-('/assets/owner/img/author_book/image27.jpg', 
+('/assets/owner/img/author_book/image27.jpg',
 'Hector Malot (20/05/1830 - 17/07/1907) là nhà văn nổi tiếng người Pháp, các tiểu thuyết của ông được nhiều thế hệ độc giả trên thế giới yêu mến.
 
-Ông sinh tại La Bouille, miền Tây nước Pháp. Tác phẩm đầu tay "Những người tình" của ông xuất bản năm 1859 đã gây được tiếng vang lớn. Trong sự nghiệp của mình ông đã viết trên 70 tác phẩm. Tác phẩm Trong gia đình (1893) và đặc biệt là Không gia đình (1878) được các bạn nhỏ tuổi yêu thích.', 
-'2020-02-24 14:45:00', 
-'Hector Malot');	
+Ông sinh tại La Bouille, miền Tây nước Pháp. Tác phẩm đầu tay "Những người tình" của ông xuất bản năm 1859 đã gây được tiếng vang lớn. Trong sự nghiệp của mình ông đã viết trên 70 tác phẩm. Tác phẩm Trong gia đình (1893) và đặc biệt là Không gia đình (1878) được các bạn nhỏ tuổi yêu thích.',
+'2020-02-24 14:45:00',
+'Hector Malot');
 
 INSERT INTO author (avatar, introduction, join_at, name) VALUES
-('/assets/owner/img/author_book/image28.jpg', 
+('/assets/owner/img/author_book/image28.jpg',
 'Tô Hoài sinh ra tại quê nội ở thôn Cát Động, Thị trấn Kim Bài, huyện Thanh Oai, tỉnh Hà Đông cũ trong một gia đình thợ thủ công. Tuy nhiên, ông lớn lên ở quê ngoại là làng Nghĩa Đô, huyện Từ Liêm, phủ Hoài Đức, tỉnh Hà Đông (nay thuộc phường Nghĩa Đô, quận Cầu Giấy, Hà Nội, Việt Nam[2]). Bút danh Tô Hoài gắn với hai địa danh: sông Tô Lịch và phủ Hoài Đức.
 
 Bước vào tuổi thanh niên, ông đã phải làm nhiều công việc để kiếm sống như dạy trẻ, bán hàng, kế toán hiệu buôn,... nhưng có những lúc thất nghiệp. Khi đến với văn chương, ông nhanh chóng được người đọc chú ý, nhất là qua truyện Dế Mèn phiêu lưu ký. Năm 1943, Tô Hoài gia nhập Hội Văn hóa cứu quốc. Trong chiến tranh Đông Dương, ông chủ yếu hoạt động trong lĩnh vực báo chí, nhưng vẫn có một số thành tựu quan trọng như Truyện Tây Bắc.
 
-Từ năm 1954 trở đi, ông có điều kiện tập trung vào sáng tác. Tính đến nay, sau hơn sáu mươi năm lao động nghệ thuật, ông đã có hơn 100 tác phẩm thuộc nhiều thể loại khác nhau: truyện ngắn, truyện dài kỳ, hồi ký, kịch bản phim, tiểu luận và kinh nghiệm sáng tác.', 
-'2020-02-24 14:45:00', 
+Từ năm 1954 trở đi, ông có điều kiện tập trung vào sáng tác. Tính đến nay, sau hơn sáu mươi năm lao động nghệ thuật, ông đã có hơn 100 tác phẩm thuộc nhiều thể loại khác nhau: truyện ngắn, truyện dài kỳ, hồi ký, kịch bản phim, tiểu luận và kinh nghiệm sáng tác.',
+'2020-02-24 14:45:00',
 'Tô Hoài');
 
 INSERT INTO author (avatar, introduction, join_at, name) VALUES
-('/assets/owner/img/author_book/image29.jpg', 
+('/assets/owner/img/author_book/image29.jpg',
 'Nguyễn Thi tên khai sinh là Nguyễn Hoàng Ca (bút danh khác là Nguyễn Ngọc Tấn), quê ở xã Quần Phương Thượng (nay là xã Hải Anh), huyện Hải Hậu, tỉnh Nam Định.[2] Sớm mồ côi cha từ năm mười tuổi, mẹ đi bước nữa, Nguyễn Thi phải chịu vất vả, tủi cực từ nhỏ. Năm 1943, một người anh đưa Nguyễn Thi vào Sài Gòn. Năm 1945, Nguyễn Thi tham gia cách mạng và sau đó gia nhập lực lượng vũ trang Việt Minh. Nguyễn Thi vừa cầm súng chiến đấu, vừa hăng hái tham gia hoạt động văn nghệ (vẽ tranh, soạn bài hát, sáng tác điệu múa,...).
 
 Năm 1954, ông tập kết ra Bắc, công tác ở Tạp chí Văn nghệ Quân Đội. Thời gian này ông viết truyện ngắn với bút danh Nguyễn Ngọc Tấn. Năm 1962, ông tình nguyện trở về miền Nam tham chiến. Nguyễn Thi hy sinh ở mặt trận Sài Gòn, trong cuộc Tổng tấn công Tết Mậu Thân năm 1968.
 
-Năm 2000, ông được truy tặng Giải thưởng Hồ Chí Minh về Văn học - Nghệ thuật.[3]', 
-'2020-02-24 14:45:00', 
+Năm 2000, ông được truy tặng Giải thưởng Hồ Chí Minh về Văn học - Nghệ thuật.[3]',
+'2020-02-24 14:45:00',
 'Nguyễn Thi');
 
 INSERT INTO author (avatar, introduction, join_at, name) VALUES
-('/assets/owner/img/author_book/image30.jpg', 
+('/assets/owner/img/author_book/image30.jpg',
 'Bùi Đức Ái rời gia đình, vào chiến khu của lực lượng kháng chiến ở miền Nam Việt Nam hoạt động từ khi còn trẻ. Năm 1953, ông được điều về làm ở báo Cứu quốc Nam Bộ. Ông được trao giải thưởng văn nghệ Cửu Long trong giai đoạn này. Người đầu tiên được coi là đã phát hiện ra năng khiếu văn học của Bùi Đức Ái là nhà văn Đoàn Giỏi. Vào những năm 20 tuổi, khi mới bắt đầu nghề văn, Anh Đức từng đề nghị Đoàn Giỏi, một nhà văn đàn anh, xem và nhận xét những tác phẩm của mình [1].
 
 Sau đó, Bùi Đức Ái tập kết ra miền Bắc. Trong thời gian ở miền Bắc, ông viết với bút danh Bùi Đức Ái. Thời gian này ông được gặp và tiếp xúc với nhiều nhà văn lớn cùng thời tại Hà Nội. Theo phân công của Hội nhà văn Việt Nam, mỗi nhà văn có kinh nghiệm giúp đỡ, truyền đạt kinh nghiệm, đọc và góp ý bản thảo cho một cây bút trẻ tập kết. Người được giao kèm cặp Bùi Đức Ái là nhà văn Nguyễn Huy Tưởng [1].
 
-Ngoài ra, Bùi Đức Ái đi thực tế nhiều nơi, viết một số truyện ngắn nhưng không thật nổi bật cho đến khi ông gặp bà Nguyễn Thị Huỳnh, một phụ nữ từng hoạt động trong lực lượng kháng chiến ở miền Nam Việt Nam. Nhờ cuộc gặp gỡ này, ông viết Một truyện chép ở bệnh viện. Tập truyện được đón nhận rộng rãi và trở thành một trong những tác phẩm làm nên tên tuổi của ông sau này.', 
-'2020-02-24 14:45:00', 
+Ngoài ra, Bùi Đức Ái đi thực tế nhiều nơi, viết một số truyện ngắn nhưng không thật nổi bật cho đến khi ông gặp bà Nguyễn Thị Huỳnh, một phụ nữ từng hoạt động trong lực lượng kháng chiến ở miền Nam Việt Nam. Nhờ cuộc gặp gỡ này, ông viết Một truyện chép ở bệnh viện. Tập truyện được đón nhận rộng rãi và trở thành một trong những tác phẩm làm nên tên tuổi của ông sau này.',
+'2020-02-24 14:45:00',
 'Anh Đức');
 
 INSERT INTO author (avatar, introduction, join_at, name) VALUES
-('/assets/owner/img/author_book/image31.jpg', 
+('/assets/owner/img/author_book/image31.jpg',
 'Ma Văn Kháng (sinh ngày 01 tháng 12 năm 1936, tên khai sinh là Đinh Trọng Đoàn) là một nhà văn nổi bật của nền văn học đương đại Việt Nam nửa năm sau thế kỷ XX, đặc biệt từ khi bắt đầu thời kỳ Đổi Mới. Các tác phẩm của ông đã đạt được nhiều giải thưởng văn học và được đông đảo công chúng biết đến do được trích dẫn trong chương trình giảng dạy phổ thông môn Văn.
 
-Ông đã sáng tác hơn 20 tiểu thuyết, gần 200 truyện ngắn, phần lớn lấy cảm hứng từ sử thi và thế sự đời tư, đề cập phần nhiều đến cuộc sống và con người vùng Tây Bắc. Tác phẩm mới nhất và theo dự kiến cũng là tác phẩm cuối cùng của ông vừa được xuất bản vào tháng 9 năm 2017, chính là tiểu thuyết Chim én liệng trời cao.', 
-'2020-02-24 14:45:00', 
+Ông đã sáng tác hơn 20 tiểu thuyết, gần 200 truyện ngắn, phần lớn lấy cảm hứng từ sử thi và thế sự đời tư, đề cập phần nhiều đến cuộc sống và con người vùng Tây Bắc. Tác phẩm mới nhất và theo dự kiến cũng là tác phẩm cuối cùng của ông vừa được xuất bản vào tháng 9 năm 2017, chính là tiểu thuyết Chim én liệng trời cao.',
+'2020-02-24 14:45:00',
 'Ma Văn Kháng');
 
 INSERT INTO author (avatar, introduction, join_at, name) VALUES
-('/assets/owner/img/author_book/image32.jpg', 
+('/assets/owner/img/author_book/image32.jpg',
 'Bùi Ngọc Tấn sinh năm 1934. Quê ông ở làng Câu Tử Ngoại, nay thuộc xã Quang Trung, thành phố Thủy Nguyên, thành phố Hải Phòng. Ông bắt đầu viết văn, viết báo từ 1954. Bùi Ngọc Tấn có sáng tác in ở các nhà xuất bản: Văn học, Lao động, Thanh niên, Phổ thông,… khi mới ngoài hai mươi tuổi.[2]
 
 Trước khi viết văn, ông là phóng viên báo Tiền Phong ở Hà Nội, viết với bút danh Tân Sắc.
 
 Sau đó, năm 1959, ông trở về quê và làm biên tập viên báo Hải Phòng Kiến thiết. Để có thể nuôi gia đình 6 người, ông tập trung viết báo. Ông có mối quan hệ thân thiết với nhà văn Nguyên Hồng và Bí thư Thành ủy Hoàng Hữu Nhân, người quan tâm đến giới văn nghệ sĩ và đã giúp đỡ ông lúc khó khăn sau này.
 
-Bùi Ngọc Tấn từng bị tập trung cải tạo 5 năm (1968 – 1973)[3] theo đài RFA về tội "Xét lại, chống Đảng", mà không được xét xử[4]. Theo ông thì người hạ lệnh bắt ông, cũng như đuổi vợ ông khỏi trường Đại học trong thời gian ông bị cải tạo, ngăn chặn ông đi làm sau khi ra tù là giám đốc công an thành phố Hải Phòng Trần Đông.[5] Khi bị bắt giữ, ông cũng bị tịch thu hơn nghìn trang bản thảo và sau này không được trả lại.[2] Theo nhà văn Vũ Thư Hiên viết tưởng niệm thì ông không dính líu gì đến chính trị, nhưng bị bắt chỉ vì chơi với ông Hồng Sĩ.[6] Từ khi được xóa án, sau hai năm thất nghiệp, Bùi Ngọc Tấn được tổng cục trưởng Tổng cục Thủy sản Hoàng Hữu Nhân xếp vào làm nhân viên theo dõi thi đua khen thưởng ở Liên hiệp Xí nghiệp Đánh cá Hạ Long.[7] Trong khoảng thời gian làm công việc này từ 1974 đến 1994, ông trở thành một "người ẩn dật" với văn chương,[8] ngừng viết trong khoảng thời gian 20 năm này.[2] Theo đài RFA, trong thời gian đó "ông không được phép viết lách gì, ngay cả nhật ký cũng thường xuyên bị công an văn hóa xét nhà, lục lọi tịch thu..."[4]', 
-'2020-02-24 14:45:00', 
+Bùi Ngọc Tấn từng bị tập trung cải tạo 5 năm (1968 – 1973)[3] theo đài RFA về tội "Xét lại, chống Đảng", mà không được xét xử[4]. Theo ông thì người hạ lệnh bắt ông, cũng như đuổi vợ ông khỏi trường Đại học trong thời gian ông bị cải tạo, ngăn chặn ông đi làm sau khi ra tù là giám đốc công an thành phố Hải Phòng Trần Đông.[5] Khi bị bắt giữ, ông cũng bị tịch thu hơn nghìn trang bản thảo và sau này không được trả lại.[2] Theo nhà văn Vũ Thư Hiên viết tưởng niệm thì ông không dính líu gì đến chính trị, nhưng bị bắt chỉ vì chơi với ông Hồng Sĩ.[6] Từ khi được xóa án, sau hai năm thất nghiệp, Bùi Ngọc Tấn được tổng cục trưởng Tổng cục Thủy sản Hoàng Hữu Nhân xếp vào làm nhân viên theo dõi thi đua khen thưởng ở Liên hiệp Xí nghiệp Đánh cá Hạ Long.[7] Trong khoảng thời gian làm công việc này từ 1974 đến 1994, ông trở thành một "người ẩn dật" với văn chương,[8] ngừng viết trong khoảng thời gian 20 năm này.[2] Theo đài RFA, trong thời gian đó "ông không được phép viết lách gì, ngay cả nhật ký cũng thường xuyên bị công an văn hóa xét nhà, lục lọi tịch thu..."[4]',
+'2020-02-24 14:45:00',
 'Bùi Ngọc Tấn');
 
 INSERT INTO author (avatar, introduction, join_at, name) VALUES
-('/assets/owner/img/author_book/image33.jpg', 
-'Thạch Lam sinh ra tại Hà Nội trong một gia đình công chức gốc quan lại, thuở nhỏ chủ yếu sống ở quê ngoại, phố huyện Cẩm Giàng, tỉnh Hải Dương. Thạch Lam là người con thứ 6 trong gia đình 7 người con (6 trai, 1 gái).[2] Nguyên tên ban đầu của ông do cha mẹ đặt là Nguyễn Tường Vinh. Đến năm Thạch Lam 15 tuổi, thấy mình học chậm, cần tăng thêm tuổi để học "nhảy" 4 năm, ông làm lại khai sinh thành Nguyễn Tường Lân.', 
-'2020-02-24 14:45:00', 
+('/assets/owner/img/author_book/image33.jpg',
+'Thạch Lam sinh ra tại Hà Nội trong một gia đình công chức gốc quan lại, thuở nhỏ chủ yếu sống ở quê ngoại, phố huyện Cẩm Giàng, tỉnh Hải Dương. Thạch Lam là người con thứ 6 trong gia đình 7 người con (6 trai, 1 gái).[2] Nguyên tên ban đầu của ông do cha mẹ đặt là Nguyễn Tường Vinh. Đến năm Thạch Lam 15 tuổi, thấy mình học chậm, cần tăng thêm tuổi để học "nhảy" 4 năm, ông làm lại khai sinh thành Nguyễn Tường Lân.',
+'2020-02-24 14:45:00',
 'Thạch Lam');
 
 INSERT INTO author (avatar, introduction, join_at, name) VALUES
-('/assets/owner/img/author_book/image34.jpg', 
-'Bác sĩ Đặng Thùy Trâm sinh tại Huế nhưng lớn lên tại Hà Nội trong một gia đình giàu tri thức. Bố chị là ông Đặng Ngọc Khuê, bác sĩ ngoại khoa; mẹ chị là bà Doãn Ngọc Trâm, giảng viên trường Đại học Dược Hà Nội.[1] Đặng Thùy Trâm là chị cả, dưới còn ba em gái và một em trai, cả chị và ba người em đều mang tên giống mẹ và chỉ khác nhau tên đệm (Đặng Phương Trâm, Đặng Hiền Trâm, Đặng Kim Trâm), cho nên bạn bè và người thân đều gọi Thùy Trâm là "Thùy" để phân biệt.', 
-'2020-02-24 14:45:00', 
+('/assets/owner/img/author_book/image34.jpg',
+'Bác sĩ Đặng Thùy Trâm sinh tại Huế nhưng lớn lên tại Hà Nội trong một gia đình giàu tri thức. Bố chị là ông Đặng Ngọc Khuê, bác sĩ ngoại khoa; mẹ chị là bà Doãn Ngọc Trâm, giảng viên trường Đại học Dược Hà Nội.[1] Đặng Thùy Trâm là chị cả, dưới còn ba em gái và một em trai, cả chị và ba người em đều mang tên giống mẹ và chỉ khác nhau tên đệm (Đặng Phương Trâm, Đặng Hiền Trâm, Đặng Kim Trâm), cho nên bạn bè và người thân đều gọi Thùy Trâm là "Thùy" để phân biệt.',
+'2020-02-24 14:45:00',
 'Đặng Thùy Trâm');
 
 INSERT INTO author (avatar, introduction, join_at, name) VALUES
-('/assets/owner/img/author_book/image35.jpg', 
-'Galland sinh ra tại Rollot ở Picardy (nay thuộc tỉnh Somme). Sau khi hoàn thành chương trình học tại Noyon, ông học tiếng Hy Lạp và tiếng Latin ở Paris, nơi ông cũng có được một số tiếng Ả Rập. Năm 1670, ông gắn bó với đại sứ quán Pháp tại Istanbul vì kiến thức tuyệt vời về tiếng Hy Lạp và năm 1673, ông đi du lịch ở Syria và Levant, nơi ông sao chép một số lượng lớn chữ khắc, phác thảo và - trong một số trường hợp - loại bỏ các di tích lịch sử.', 
-'2020-02-24 14:45:00', 
+('/assets/owner/img/author_book/image35.jpg',
+'Galland sinh ra tại Rollot ở Picardy (nay thuộc tỉnh Somme). Sau khi hoàn thành chương trình học tại Noyon, ông học tiếng Hy Lạp và tiếng Latin ở Paris, nơi ông cũng có được một số tiếng Ả Rập. Năm 1670, ông gắn bó với đại sứ quán Pháp tại Istanbul vì kiến thức tuyệt vời về tiếng Hy Lạp và năm 1673, ông đi du lịch ở Syria và Levant, nơi ông sao chép một số lượng lớn chữ khắc, phác thảo và - trong một số trường hợp - loại bỏ các di tích lịch sử.',
+'2020-02-24 14:45:00',
 'Antoine Galland');
 
 INSERT INTO author (avatar, introduction, join_at, name) VALUES
-('/assets/owner/img/author_book/image36.jpg', 
+('/assets/owner/img/author_book/image36.jpg',
 'Sơn Tùng sinh ngày 8 tháng 8 Âm lịch năm Mậu Thìn (tức ngày 21 tháng 9 năm 1928), tại làng Hoa Lũy (nay là Kim Lũy), Diễn Kim, Diễn Châu, Nghệ An. Làng Hoa Lũy là vùng bãi ngang nằm sát biển. Gia đình Sơn Tùng là một gia đình nhà nho nghèo nhưng trọng chữ[1], có quan hệ họ hàng với Hồ Chí Minh. Bà nội Sơn Tùng (cụ Hà Thị Tự) là cháu họ bà nội Hồ Chí Minh (Cụ Hà Thị Hy), và em trai ông nội của Sơn Tùng đỗ tú tài cùng khoa với em trai ông ngoại của Hồ Chí Minh.
 
-Từ 1944 đến 1971, trước khi trở thành nhà văn, là 27 năm Sơn Tùng tham gia hai cuộc kháng chiến chống Pháp và chống Mỹ, hoạt động trên các lĩnh vực tuyên huấn, tuyên truyền, huấn luyện, quân sự, phóng viên. Năm 1944, khi mới 16 tuổi Sơn Tùng đã sớm tham gia cách mạng[2], hoạt động trong phong trào thanh niên, sinh viên thủ đô. Sau khi Hà Nội giải phóng, Sơn Tùng vào học tại trường Đại học nhân dân và sau đó trở thành cán bộ tuyên truyền của Đảng. Năm 1961 ông về viết cho báo Nông nghiệp và từ cuối năm 1962 là phóng viên của báo Tiền phong.', 
-'2020-02-24 14:45:00', 
+Từ 1944 đến 1971, trước khi trở thành nhà văn, là 27 năm Sơn Tùng tham gia hai cuộc kháng chiến chống Pháp và chống Mỹ, hoạt động trên các lĩnh vực tuyên huấn, tuyên truyền, huấn luyện, quân sự, phóng viên. Năm 1944, khi mới 16 tuổi Sơn Tùng đã sớm tham gia cách mạng[2], hoạt động trong phong trào thanh niên, sinh viên thủ đô. Sau khi Hà Nội giải phóng, Sơn Tùng vào học tại trường Đại học nhân dân và sau đó trở thành cán bộ tuyên truyền của Đảng. Năm 1961 ông về viết cho báo Nông nghiệp và từ cuối năm 1962 là phóng viên của báo Tiền phong.',
+'2020-02-24 14:45:00',
 'Sơn Tùng');
 
 INSERT INTO author (avatar, introduction, join_at, name) VALUES
-('/assets/owner/img/author_book/image37.jpg', 
+('/assets/owner/img/author_book/image37.jpg',
 'De Amicis sinh tại Oneglia, thành phố biển Imperia của xứ Liguria, Italia. Ông vào trường quân đội ở Modena và trở thành sĩ quan trong quân đội của Vương quốc Ý.
 
 Ông chiến đấu trong trận Custoza trong cuộc chiến giành độc lập lần thứ 3 trong hàng ngũ quân đội Ý chống lại đế quốc Áo. Nước nhà độc lập, ông rời bỏ quân ngũ. Sau khi rời quân ngũ ông viết về các trải nghiệm chiến trường trong quyển La vita militare ("Cuộc đời quân ngũ", 1868) tại Florence, đăng lần đầu trong tạp chí của Bộ quốc phòng Ý. Năm 1870 ông làm cho tạp chí La Nazione ở Roma, những trải nghiệm làm báo là cơ sở cho ông viết những tác phẩm du ký sau này như: Spagna (1873), Olanda (1874), Ricordi di Londra (1874), Marocco (1876), Costantinopoli (1878), Ricordi di Parigi (1879), Madome Akoroba (1883).
 
-Các tác phẩm của De Amicis mang dấu ấn chủ nghĩa quốc gia yêu nước sâu sắc, về sau lại trộn lẫn với xu hướng dân chủ xã hội. Năm 1896 ông gia nhập Đảng Xã hội Ý.', 
-'2020-02-24 14:45:00', 
+Các tác phẩm của De Amicis mang dấu ấn chủ nghĩa quốc gia yêu nước sâu sắc, về sau lại trộn lẫn với xu hướng dân chủ xã hội. Năm 1896 ông gia nhập Đảng Xã hội Ý.',
+'2020-02-24 14:45:00',
 'Edmondo de Amicis');
 
 INSERT INTO author (avatar, introduction, join_at, name) VALUES
-('/assets/owner/img/author_book/image38.jpg', 
-'Victor Hugo chiếm một vị trí trang trọng trong lịch sử văn học Pháp. Các tác phẩm của ông đa dạng về thể loại và trải rộng trên nhiều lĩnh vực khác nhau. Với tư cách là nhà thơ trữ tình, Hugo đã xuất bản tập Odes et Ballades (1826), Les feuilles dautomne (1831) hay Les Contemplations (1856). Nhưng ông cũng thể hiện vai trò của một nhà thơ dấn thân chống Napoléon III bằng tập thơ Les Châtiments (1853) và vai trò một nhà sử thi với tập La Légende des siècles (1859 và 1877). Thành công vang dội của hai tác phẩm Nhà thờ Đức Bà Paris và Những người khốn khổ đã đưa Victor Hugo trở thành tiểu thuyết gia của công chúng. Về kịch, ông đã trình bày thuyết kịch lãng mạn trong bài tựa của vở kịch Cromwell (1827) và minh họa rõ nét thể loại này ở hai vở kịch nổi tiếng Hernani (1830) và Ruy Blas (1838).', 
-'2020-02-24 14:45:00', 
+('/assets/owner/img/author_book/image38.jpg',
+'Victor Hugo chiếm một vị trí trang trọng trong lịch sử văn học Pháp. Các tác phẩm của ông đa dạng về thể loại và trải rộng trên nhiều lĩnh vực khác nhau. Với tư cách là nhà thơ trữ tình, Hugo đã xuất bản tập Odes et Ballades (1826), Les feuilles dautomne (1831) hay Les Contemplations (1856). Nhưng ông cũng thể hiện vai trò của một nhà thơ dấn thân chống Napoléon III bằng tập thơ Les Châtiments (1853) và vai trò một nhà sử thi với tập La Légende des siècles (1859 và 1877). Thành công vang dội của hai tác phẩm Nhà thờ Đức Bà Paris và Những người khốn khổ đã đưa Victor Hugo trở thành tiểu thuyết gia của công chúng. Về kịch, ông đã trình bày thuyết kịch lãng mạn trong bài tựa của vở kịch Cromwell (1827) và minh họa rõ nét thể loại này ở hai vở kịch nổi tiếng Hernani (1830) và Ruy Blas (1838).',
+'2020-02-24 14:45:00',
 'Victor Hugo');
 
 INSERT INTO author (avatar, introduction, join_at, name) VALUES
-('/assets/owner/img/author_book/image39.jpg', 
+('/assets/owner/img/author_book/image39.jpg',
 'Nguyễn Quang Sáng, còn có bút danh là Nguyễn Sáng, sinh ngày 12 tháng 1 năm 1932 tại xã Mỹ Luông (nay là thị trấn Mỹ Luông), huyện Chợ Mới, tỉnh An Giang.
 
 Từ tháng 4 năm 1946, ông xung phong vào bộ đội, làm liên lạc viên cho đơn vị Liên Chi 2. Đến năm 1948, được bộ đội cho đi học thêm văn hóa ở Trường trung học kháng chiến Nguyễn Văn Tố. Năm 1950, về công tác tại Phòng Chính trị Bộ Tư lệnh phân khu miền Tây Nam Bộ, làm cán bộ nghiên cứu tôn giáo (chủ yếu là Phật giáo và Hòa Hảo).
@@ -3892,8 +3892,8 @@ Không lâu sau sinh nhật lần thứ 82, ông đột ngột qua đời tại 
 
 Nguyễn Quang Sáng là Đảng viên Đảng Cộng sản Việt Nam và hội viên Hội Nhà văn Việt Nam (1957).
 
-Ông là cha ruột của đạo diễn Nguyễn Quang Dũng (sinh 1978)[2] (người đã thay mặt gia đình đọc lời cảm tạ trong lễ truy điệu) và kiến trúc sư Nguyễn Viết Quang (sinh 1972)', 
-'2020-02-24 14:45:00', 
+Ông là cha ruột của đạo diễn Nguyễn Quang Dũng (sinh 1978)[2] (người đã thay mặt gia đình đọc lời cảm tạ trong lễ truy điệu) và kiến trúc sư Nguyễn Viết Quang (sinh 1972)',
+'2020-02-24 14:45:00',
 'Nguyễn Quang Sáng');
 
 
@@ -3964,42 +3964,42 @@ INSERT INTO author_book_template (author_id, book_template_id) VALUES
 
 -- 10.Table Translator:
 INSERT INTO translator (avatar, introduction, join_at, name) VALUES
-('/assets/owner/img/translator_book/image1.jpg', 
- 'Ngô Tự Lập là nhà văn, dịch giả và người sáng tác ca khúc, Ngô Tự Lập đồng thời cũng là một nhà nghiên cứu với các công trình trải rông nhiều lĩnh vực như lý luận văn học, triết học kinh tế, ngôn ngữ. Kỹ sư Hàng hải (Baku, Liên Xô, 1986), Cử nhân Luật (Việt Nam, 1993), Thạc sĩ Văn chương (ENS de Fontenay/Saint Cloud, Pháp, 1996), Tiến sĩ Ngôn ngữ và văn học Anh (Illinois State University, Hoa Kỳ, 2006).
-Ông là một trong những trí thức khởi xướng phong trào dịch thuật và truyền bá tinh hoa trí tuệ nhân loại vào Việt Nam đầu thế kỷ 21. Tác phẩm của ông được dịch và xuất bản tại Hoa Kỳ, Bỉ, Pháp, Ấn Độ, Thụy Điển, Canada, Thái Lan, Cộng hòa Séc.', 
- '2019-01-15 10:00:00', 
- 'Ngô Tự Lập'),
+('/assets/owner/img/translator_book/image1.jpg',
+'Ngô Tự Lập là nhà văn, dịch giả và người sáng tác ca khúc, Ngô Tự Lập đồng thời cũng là một nhà nghiên cứu với các công trình trải rông nhiều lĩnh vực như lý luận văn học, triết học kinh tế, ngôn ngữ. Kỹ sư Hàng hải (Baku, Liên Xô, 1986), Cử nhân Luật (Việt Nam, 1993), Thạc sĩ Văn chương (ENS de Fontenay/Saint Cloud, Pháp, 1996), Tiến sĩ Ngôn ngữ và văn học Anh (Illinois State University, Hoa Kỳ, 2006).
+Ông là một trong những trí thức khởi xướng phong trào dịch thuật và truyền bá tinh hoa trí tuệ nhân loại vào Việt Nam đầu thế kỷ 21. Tác phẩm của ông được dịch và xuất bản tại Hoa Kỳ, Bỉ, Pháp, Ấn Độ, Thụy Điển, Canada, Thái Lan, Cộng hòa Séc.',
+'2019-01-15 10:00:00',
+'Ngô Tự Lập'),
 
-('/assets/owner/img/translator_book/image2.jpg', 
- 'Tốt nghiệp Đại học Ngoại Giao năm 1983 tại Việt Nam; Thạc sỹ Quan hệ Quốc tế, Đại học Quốc tế Nhật Bản năm 1991; Tiến sỹ Triết học, Đại học Cambridge, Vương Quốc Anh năm 1997.
-Ông làm việc nhiều năm cho Bộ Ngoại giao, Đại sứ quán của Việt Nam tại London, Vương Quốc Anh. Hiện nay ông tham gia biên tập, biên dịch, hiệu đính cho một số báo và tạp chí.', 
- '2020-06-20 11:30:00', 
- 'Bùi Minh Dũng'),
+('/assets/owner/img/translator_book/image2.jpg',
+'Tốt nghiệp Đại học Ngoại Giao năm 1983 tại Việt Nam; Thạc sỹ Quan hệ Quốc tế, Đại học Quốc tế Nhật Bản năm 1991; Tiến sỹ Triết học, Đại học Cambridge, Vương Quốc Anh năm 1997.
+Ông làm việc nhiều năm cho Bộ Ngoại giao, Đại sứ quán của Việt Nam tại London, Vương Quốc Anh. Hiện nay ông tham gia biên tập, biên dịch, hiệu đính cho một số báo và tạp chí.',
+'2020-06-20 11:30:00',
+'Bùi Minh Dũng'),
 
-('/assets/owner/img/translator_book/image3.jpg', 
- 'Hiện tại anh làm việc điện tử hóa tài liệu chính phủ về mối quan hệ công dân tại Leon County Government, Florida, Mỹ. Anh tốt nghiệp Đại học Tổng hợp năm 1990 tại Việt Nam; Thạc sỹ Quan hệ Công nghệ thông tin , Đại học Bang Florida, The Diocese of Pensacola-Tallahassee năm 1999.', 
- '2018-09-10 09:45:00', 
- 'Đinh Công Bằng'),
+('/assets/owner/img/translator_book/image3.jpg',
+'Hiện tại anh làm việc điện tử hóa tài liệu chính phủ về mối quan hệ công dân tại Leon County Government, Florida, Mỹ. Anh tốt nghiệp Đại học Tổng hợp năm 1990 tại Việt Nam; Thạc sỹ Quan hệ Công nghệ thông tin , Đại học Bang Florida, The Diocese of Pensacola-Tallahassee năm 1999.',
+'2018-09-10 09:45:00',
+'Đinh Công Bằng'),
 
-('/assets/owner/img/translator_book/image4.jpg', 
- 'Anh Tuấn Anh là cựu quản trị(Administrator) của diễn đàn Talawas và người phụ trách từ những ngày đầu trang Evan trang báo VnExpress.
-Anh có nhiều năm sống, học tập và làm việc tại Đức và Việt Nam trong các lĩnh vực báo chí, xuất bản, dịch thuật và tổ chức các sự kiện văn hóa. Hiện anh phụ trách dự án Sách dịch Đức-Việt của Viện Goethe Hà Nội.', 
- '2017-03-25 15:00:00', 
- 'Đinh Tuấn Anh'),
+('/assets/owner/img/translator_book/image4.jpg',
+'Anh Tuấn Anh là cựu quản trị(Administrator) của diễn đàn Talawas và người phụ trách từ những ngày đầu trang Evan trang báo VnExpress.
+Anh có nhiều năm sống, học tập và làm việc tại Đức và Việt Nam trong các lĩnh vực báo chí, xuất bản, dịch thuật và tổ chức các sự kiện văn hóa. Hiện anh phụ trách dự án Sách dịch Đức-Việt của Viện Goethe Hà Nội.',
+'2017-03-25 15:00:00',
+'Đinh Tuấn Anh'),
 
-('/assets/owner/img/translator_book/image5.jpg', 
- 'Lê Xuân Giang, một dịch giả kỳ cựu của văn học Hungary tại Việt Nam, đã được nhận Huân chương Chữ thập Vàng của Cộng hòa Hungary, một trong những phần thưởng cao quý nhất của Nhà nước Hungary.
-Là người đầu tiên chuyển ngữ các tác phẩm văn học Hungary từ nguyên bản, Lê Xuân Giang là dịch giả cuốn tiểu thuyết lịch sử nổi tiếng “Những ngôi sao Eghe” (Egri csillagok), ấn hành năm 1972 và lập tức, đã trở thành một “sự kiện xuất bản” với lượng ấn bản lớn được bán hết trong thời gian rất ngắn. Trong những năm sau, ông đã chuyển ngữ thành công các tác phẩm văn học cổ điển và hiện đại Hungary từ nhiều tác gia lớn của nền văn học nước này.', 
- '2021-12-01 13:20:00', 
- 'Lê Xuân Giang');
+('/assets/owner/img/translator_book/image5.jpg',
+'Lê Xuân Giang, một dịch giả kỳ cựu của văn học Hungary tại Việt Nam, đã được nhận Huân chương Chữ thập Vàng của Cộng hòa Hungary, một trong những phần thưởng cao quý nhất của Nhà nước Hungary.
+Là người đầu tiên chuyển ngữ các tác phẩm văn học Hungary từ nguyên bản, Lê Xuân Giang là dịch giả cuốn tiểu thuyết lịch sử nổi tiếng “Những ngôi sao Eghe” (Egri csillagok), ấn hành năm 1972 và lập tức, đã trở thành một “sự kiện xuất bản” với lượng ấn bản lớn được bán hết trong thời gian rất ngắn. Trong những năm sau, ông đã chuyển ngữ thành công các tác phẩm văn học cổ điển và hiện đại Hungary từ nhiều tác gia lớn của nền văn học nước này.',
+'2021-12-01 13:20:00',
+'Lê Xuân Giang');
 
 -- 11. Translator_book:
 INSERT INTO translator_book_template (translator_id, book_template_id) VALUES
-(1, 3), 
-(2, 6),  
-(3, 8),  
-(4, 9),  
-(5, 10); 
+(1, 3),
+(2, 6),
+(3, 8),
+(4, 9),
+(5, 10);
 
 -- 12. Table Review
 INSERT INTO review (content, created_at, is_hidden, rate, ready_to_introduce, book_template_id, customer_id) VALUES
@@ -4038,12 +4038,12 @@ INSERT INTO review (content, created_at, is_hidden, rate, ready_to_introduce, bo
 INSERT INTO address (detail, district, nation, province, village, owner_id) VALUES
 ('123 Lê Lợi', 'Quận 1', 'Việt Nam', 'TP HCM', 'Phường Bến Nghé', 1);
 
--- Địa chỉ cho staff 
+-- Địa chỉ cho staff
 INSERT INTO address (detail, district, nation, province, village, staff_id) VALUES
 ('456 Nguyễn Huệ', 'Quận 1', 'Việt Nam', 'TP HCM', 'Phường Bến Thành', 1),
 ('789 Trần Hưng Đạo', 'Quận 5', 'Việt Nam', 'TP HCM', 'Phường 7', 2);
 
--- Địa chỉ cho customer 
+-- Địa chỉ cho customer
 INSERT INTO address (detail, district, nation, province, village, customer_id) VALUES
 ('101 Nguyễn Đình Chiểu', 'Quận 3', 'Việt Nam', 'TP HCM', 'Phường 6', 1),
 ('102 Hai Bà Trưng', 'Quận 3', 'Việt Nam', 'TP HCM', 'Phường 8', 2),
@@ -4169,54 +4169,54 @@ INSERT INTO `order` (note, order_date, payment_type, status, vat, customer_id, s
 INSERT INTO `order` (note, order_date, payment_type, status, vat, customer_id, shipping_id) VALUES
 ('Order note 9', '2024-11-06 12:48:23', 'BANKING', 'REFUNDED', 0.1, 1, 9),
 ('Order note 10', '2024-10-20 16:25:58', 'BANKING', 'REFUNDED', 0.1, 2, 10),
-('Order note 11', '2024-10-27 10:45:29', 'BANKING', 'COMPLETE_DELIVERY', 0.1, 3, 11),
-('Order note 12', '2024-10-18 08:55:06', 'BANKING', 'COMPLETE_DELIVERY', 0.1, 4, 12),
-('Order note 13', '2024-10-04 12:34:04', 'BANKING', 'COMPLETE_DELIVERY', 0.1, 5, 13),
-('Order note 14', '2024-10-31 08:07:12', 'BANKING', 'COMPLETE_DELIVERY', 0.1, 6, 14),
-('Order note 15', '2024-10-13 14:25:44', 'BANKING', 'COMPLETE_DELIVERY', 0.1, 7, 15),
-('Order note 16', '2024-10-04 12:09:04', 'BANKING', 'COMPLETE_DELIVERY', 0.1, 8, 16),
-('Order note 17', '2024-10-31 17:20:39', 'BANKING', 'COMPLETE_DELIVERY', 0.1, 9, 17),
-('Order note 18', '2024-10-26 10:31:38', 'BANKING', 'COMPLETE_DELIVERY', 0.1, 10, 18),
-('Order note 19', '2024-10-10 18:37:45', 'BANKING', 'COMPLETE_DELIVERY', 0.1, 11, 19),
-('Order note 20', '2024-10-27 17:28:49', 'BANKING', 'COMPLETE_DELIVERY', 0.1, 12, 20),
-('Order note 21', '2024-10-27 12:24:16', 'BANKING', 'COMPLETE_DELIVERY', 0.1, 13, 21),
-('Order note 22', '2024-10-13 12:28:22', 'BANKING', 'COMPLETE_DELIVERY', 0.1, 14, 22),
-('Order note 23', '2024-10-12 09:38:13', 'BANKING', 'COMPLETE_DELIVERY', 0.1, 15, 23),
-('Order note 24', '2024-10-28 11:16:31', 'BANKING', 'COMPLETE_DELIVERY', 0.1, 1, 24),
-('Order note 25', '2024-10-02 16:42:24', 'BANKING', 'COMPLETE_DELIVERY', 0.1, 2, 25),
-('Order note 26', '2024-10-14 09:08:41', 'BANKING', 'COMPLETE_DELIVERY', 0.1, 3, 26),
-('Order note 27', '2024-10-09 17:01:29', 'BANKING', 'COMPLETE_DELIVERY', 0.1, 4, 27),
-('Order note 28', '2024-10-14 18:08:54', 'BANKING', 'COMPLETE_DELIVERY', 0.1, 5, 28),
-('Order note 29', '2024-10-05 14:22:47', 'BANKING', 'COMPLETE_DELIVERY', 0.1, 6, 29),
-('Order note 30', '2024-10-14 12:38:58', 'BANKING', 'COMPLETE_DELIVERY', 0.1, 7, 30),
-('Order note 31', '2024-10-19 14:12:24', 'BANKING', 'COMPLETE_DELIVERY', 0.1, 8, 31),
-('Order note 32', '2024-11-04 10:52:43', 'BANKING', 'COMPLETE_DELIVERY', 0.1, 9, 32),
-('Order note 33', '2024-11-01 12:24:44', 'BANKING', 'COMPLETE_DELIVERY', 0.1, 10, 33),
-('Order note 34', '2024-10-21 15:23:48', 'BANKING', 'COMPLETE_DELIVERY', 0.1, 11, 34),
-('Order note 35', '2024-11-16 10:00:10', 'BANKING', 'COMPLETE_DELIVERY', 0.1, 12, 35),
-('Order note 36', '2024-11-05 18:09:27', 'BANKING', 'COMPLETE_DELIVERY', 0.1, 13, 36),
-('Order note 37', '2024-10-24 18:51:02', 'BANKING', 'COMPLETE_DELIVERY', 0.1, 14, 37),
-('Order note 38', '2024-10-08 14:34:23', 'BANKING', 'COMPLETE_DELIVERY', 0.1, 15, 38),
-('Order note 39', '2024-11-12 08:13:49', 'BANKING', 'COMPLETE_DELIVERY', 0.1, 1, 39),
-('Order note 40', '2024-10-03 13:31:13', 'BANKING', 'COMPLETE_DELIVERY', 0.1, 2, 40),
-('Order note 41', '2024-10-22 16:11:05', 'BANKING', 'COMPLETE_DELIVERY', 0.1, 3, 41),
-('Order note 42', '2024-11-10 08:05:14', 'BANKING', 'COMPLETE_DELIVERY', 0.1, 4, 42),
-('Order note 43', '2024-11-17 11:41:02', 'BANKING', 'COMPLETE_DELIVERY', 0.1, 5, 43),
-('Order note 44', '2024-11-02 17:56:10', 'BANKING', 'COMPLETE_DELIVERY', 0.1, 6, 44),
-('Order note 45', '2024-11-13 11:48:28', 'BANKING', 'COMPLETE_DELIVERY', 0.1, 7, 45),
-('Order note 46', '2024-10-26 09:47:40', 'BANKING', 'COMPLETE_DELIVERY', 0.1, 8, 46),
-('Order note 47', '2024-10-23 09:20:02', 'BANKING', 'COMPLETE_DELIVERY', 0.1, 9, 47),
-('Order note 48', '2024-11-14 09:39:27', 'BANKING', 'COMPLETE_DELIVERY', 0.1, 10, 48),
-('Order note 49', '2024-11-04 08:25:09', 'BANKING', 'COMPLETE_DELIVERY', 0.1, 11, 49),
-('Order note 50', '2024-11-13 18:34:57', 'BANKING', 'COMPLETE_DELIVERY', 0.1, 12, 50),
-('Order note 51', '2024-10-28 17:20:32', 'BANKING', 'COMPLETE_DELIVERY', 0.1, 13, 51),
-('Order note 52', '2024-10-16 13:30:42', 'BANKING', 'COMPLETE_DELIVERY', 0.1, 14, 52),
-('Order note 53', '2024-10-28 18:10:14', 'BANKING', 'COMPLETE_DELIVERY', 0.1, 15, 53),
-('Order note 54', '2024-10-24 09:36:30', 'BANKING', 'COMPLETE_DELIVERY', 0.1, 1, 54),
-('Order note 55', '2024-10-14 11:55:49', 'BANKING', 'COMPLETE_DELIVERY', 0.1, 2, 55),
-('Order note 56', '2024-10-29 08:20:01', 'BANKING', 'COMPLETE_DELIVERY', 0.1, 3, 56),
-('Order note 57', '2024-10-10 17:02:23', 'BANKING', 'COMPLETE_DELIVERY', 0.1, 4, 57),
-('Order note 58', '2024-11-03 11:19:54', 'BANKING', 'COMPLETE_DELIVERY', 0.1, 5, 58);
+('Order note 11', '2024-10-20 16:25:00', 'BANKING', 'COMPLETE_DELIVERY', 0.1, 3, 11),
+('Order note 12', '2024-10-20 16:25:00', 'BANKING', 'COMPLETE_DELIVERY', 0.1, 4, 12),
+('Order note 13', '2024-10-20 16:25:00', 'BANKING', 'COMPLETE_DELIVERY', 0.1, 5, 13),
+('Order note 14', '2024-10-20 16:25:00', 'BANKING', 'COMPLETE_DELIVERY', 0.1, 6, 14),
+('Order note 15', '2024-10-20 16:25:00', 'BANKING', 'COMPLETE_DELIVERY', 0.1, 7, 15),
+('Order note 16', '2024-10-20 16:25:00', 'BANKING', 'COMPLETE_DELIVERY', 0.1, 8, 16),
+('Order note 17', '2024-10-20 16:25:00', 'BANKING', 'COMPLETE_DELIVERY', 0.1, 9, 17),
+('Order note 18', '2024-10-20 16:25:00', 'BANKING', 'COMPLETE_DELIVERY', 0.1, 10, 18),
+('Order note 19', '2024-10-20 16:25:00', 'BANKING', 'COMPLETE_DELIVERY', 0.1, 11, 19),
+('Order note 20', '2024-10-20 16:25:00', 'BANKING', 'COMPLETE_DELIVERY', 0.1, 12, 20),
+('Order note 21', '2024-10-20 16:25:00', 'BANKING', 'COMPLETE_DELIVERY', 0.1, 13, 21),
+('Order note 22', '2024-10-20 16:25:00', 'BANKING', 'COMPLETE_DELIVERY', 0.1, 14, 22),
+('Order note 23', '2024-10-20 16:25:00', 'BANKING', 'COMPLETE_DELIVERY', 0.1, 15, 23),
+('Order note 24', '2024-10-20 16:25:00', 'BANKING', 'COMPLETE_DELIVERY', 0.1, 1, 24),
+('Order note 25', '2024-10-20 16:25:00', 'BANKING', 'COMPLETE_DELIVERY', 0.1, 2, 25),
+('Order note 26', '2024-10-20 16:25:00', 'BANKING', 'COMPLETE_DELIVERY', 0.1, 3, 26),
+('Order note 27', '2024-10-20 16:25:00', 'BANKING', 'COMPLETE_DELIVERY', 0.1, 4, 27),
+('Order note 28', '2024-10-20 16:25:00', 'BANKING', 'COMPLETE_DELIVERY', 0.1, 5, 28),
+('Order note 29', '2024-10-20 16:25:00', 'BANKING', 'COMPLETE_DELIVERY', 0.1, 6, 29),
+('Order note 30', '2024-10-20 16:25:00', 'BANKING', 'COMPLETE_DELIVERY', 0.1, 7, 30),
+('Order note 31', '2024-10-20 16:25:00', 'BANKING', 'COMPLETE_DELIVERY', 0.1, 8, 31),
+('Order note 32', '2024-10-20 16:25:00', 'BANKING', 'COMPLETE_DELIVERY', 0.1, 9, 32),
+('Order note 33', '2024-10-20 16:25:00', 'BANKING', 'COMPLETE_DELIVERY', 0.1, 10, 33),
+('Order note 34', '2024-10-20 16:25:00', 'BANKING', 'COMPLETE_DELIVERY', 0.1, 11, 34),
+('Order note 35', '2024-10-20 16:25:00', 'BANKING', 'COMPLETE_DELIVERY', 0.1, 12, 35),
+('Order note 36', '2024-10-20 16:25:00', 'BANKING', 'COMPLETE_DELIVERY', 0.1, 13, 36),
+('Order note 37', '2024-10-20 16:25:00', 'BANKING', 'COMPLETE_DELIVERY', 0.1, 14, 37),
+('Order note 38', '2024-10-20 16:25:00', 'BANKING', 'COMPLETE_DELIVERY', 0.1, 15, 38),
+('Order note 39', '2024-10-20 16:25:00', 'BANKING', 'COMPLETE_DELIVERY', 0.1, 1, 39),
+('Order note 40', '2024-10-20 16:25:00', 'BANKING', 'COMPLETE_DELIVERY', 0.1, 2, 40),
+('Order note 41', '2024-10-20 16:25:00', 'BANKING', 'COMPLETE_DELIVERY', 0.1, 3, 41),
+('Order note 42', '2024-10-20 16:25:00', 'BANKING', 'COMPLETE_DELIVERY', 0.1, 4, 42),
+('Order note 43', '2024-10-20 16:25:00', 'BANKING', 'COMPLETE_DELIVERY', 0.1, 5, 43),
+('Order note 44', '2024-10-20 16:25:00', 'BANKING', 'COMPLETE_DELIVERY', 0.1, 6, 44),
+('Order note 45', '2024-10-20 16:25:00', 'BANKING', 'COMPLETE_DELIVERY', 0.1, 7, 45),
+('Order note 46', '2024-10-20 16:25:00', 'BANKING', 'COMPLETE_DELIVERY', 0.1, 8, 46),
+('Order note 47', '2024-10-20 16:25:00', 'BANKING', 'COMPLETE_DELIVERY', 0.1, 9, 47),
+('Order note 48', '2024-10-20 16:25:00', 'BANKING', 'COMPLETE_DELIVERY', 0.1, 10, 48),
+('Order note 49', '2024-10-20 16:25:00', 'BANKING', 'COMPLETE_DELIVERY', 0.1, 11, 49),
+('Order note 50', '2024-10-20 16:25:00', 'BANKING', 'COMPLETE_DELIVERY', 0.1, 12, 50),
+('Order note 51', '2024-10-20 16:25:00', 'BANKING', 'COMPLETE_DELIVERY', 0.1, 13, 51),
+('Order note 52', '2024-10-20 16:25:00', 'BANKING', 'COMPLETE_DELIVERY', 0.1, 14, 52),
+('Order note 53', '2024-10-20 16:25:00', 'BANKING', 'COMPLETE_DELIVERY', 0.1, 15, 53),
+('Order note 54', '2024-10-20 16:25:00', 'BANKING', 'COMPLETE_DELIVERY', 0.1, 1, 54),
+('Order note 55', '2024-10-20 16:25:00', 'BANKING', 'COMPLETE_DELIVERY', 0.1, 2, 55),
+('Order note 56', '2024-10-20 16:25:00', 'BANKING', 'COMPLETE_DELIVERY', 0.1, 3, 56),
+('Order note 57', '2024-10-20 16:25:00', 'BANKING', 'COMPLETE_DELIVERY', 0.1, 4, 57),
+('Order note 58', '2024-10-20 16:25:00', 'BANKING', 'COMPLETE_DELIVERY', 0.1, 5, 58);
 
 INSERT INTO order_item (order_id) VALUES
 (1),
@@ -4284,8 +4284,8 @@ INSERT INTO order_item_books (order_item_id, book_id) VALUES
 (1, 2),
 (1, 3),
 (1, 4),
-(1, 5),
-(2, 6),
+(2, 5),
+(7, 6),
 (2, 7),
 (2, 8),
 (2, 9),
@@ -4310,7 +4310,7 @@ INSERT INTO order_item_books (order_item_id, book_id) VALUES
 (6, 28),
 (6, 29),
 (6, 30),
-(7, 31),
+(2, 31),
 (7, 32),
 (7, 33),
 (7, 34),
@@ -4374,65 +4374,66 @@ INSERT INTO order_item_books (order_item_id, book_id) VALUES
 (58, 100);
 
 
-INSERT INTO ewallet (amount, created_at, currency, status, provider, transaction_id, wallet_id, order_id) VALUES
-(650000, '2024-11-03 10:30:00', 'VND', 'COMPLETED', 'MOMO', 'TXN1234567', 'WALLET001', 1),
-(635000, '2024-11-11 14:00:00', 'VND', 'COMPLETED', 'MOMO', 'TXN1234568', 'WALLET002', 2),
-(775000, '2024-11-20 09:15:00', 'VND', 'COMPLETED', 'MOMO', 'TXN1234569', 'WALLET003', 3),
-(770000, '2024-11-04 16:45:00', 'VND', 'COMPLETED', 'MOMO', 'TXN1234570', 'WALLET004', 4),
-(715000, '2024-11-05 11:20:00', 'VND', 'COMPLETED', 'MOMO', 'TXN1234571', 'WALLET005', 5),
-(725000, '2024-11-06 15:30:00', 'VND', 'COMPLETED', 'MOMO', 'TXN1234572', 'WALLET006', 6),
-(845000, '2024-11-07 08:00:00', 'VND', 'COMPLETED', 'MOMO', 'TXN1234573', 'WALLET007', 7),
-(860000, '2024-11-08 13:55:00', 'VND', 'COMPLETED', 'MOMO', 'TXN1234574', 'WALLET008', 8),
-(300000, '2024-11-06 12:48:23', 'VND', 'COMPLETED', 'MOMO', 'TXN1234575', 'WALLET009', 9),
-(400000, '2024-10-20 16:25:58', 'VND', 'COMPLETED', 'MOMO', 'TXN1234576', 'WALLET010', 10),
-(350000, '2024-10-27 10:45:29', 'VND', 'COMPLETED', 'MOMO', 'TXN1234577', 'WALLET011', 11),
-(250000, '2024-10-18 08:55:06', 'VND', 'COMPLETED', 'MOMO', 'TXN1234578', 'WALLET012', 12),
-(300000, '2024-10-04 12:34:04', 'VND', 'COMPLETED', 'MOMO', 'TXN1234579', 'WALLET013', 13),
-(400000, '2024-10-31 08:07:12', 'VND', 'COMPLETED', 'MOMO', 'TXN1234580', 'WALLET014', 14),
-(350000, '2024-10-13 14:25:44', 'VND', 'COMPLETED', 'MOMO', 'TXN1234581', 'WALLET015', 15),
-(250000, '2024-10-04 12:09:04', 'VND', 'COMPLETED', 'MOMO', 'TXN1234582', 'WALLET016', 16),
-(300000, '2024-10-31 17:20:39', 'VND', 'COMPLETED', 'MOMO', 'TXN1234583', 'WALLET017', 17),
-(400000, '2024-10-26 10:31:38', 'VND', 'COMPLETED', 'MOMO', 'TXN1234584', 'WALLET018', 18),
-(350000, '2024-10-10 18:37:45', 'VND', 'COMPLETED', 'MOMO', 'TXN1234585', 'WALLET019', 19),
-(250000, '2024-10-27 17:28:49', 'VND', 'COMPLETED', 'MOMO', 'TXN1234586', 'WALLET020', 20),
-(300000, '2024-10-27 12:24:16', 'VND', 'COMPLETED', 'MOMO', 'TXN1234587', 'WALLET021', 21),
-(400000, '2024-10-13 12:28:22', 'VND', 'COMPLETED', 'MOMO', 'TXN1234588', 'WALLET022', 22),
-(350000, '2024-10-12 09:38:13', 'VND', 'COMPLETED', 'MOMO', 'TXN1234589', 'WALLET023', 23),
-(250000, '2024-10-28 11:16:31', 'VND', 'COMPLETED', 'MOMO', 'TXN1234590', 'WALLET024', 24),
-(300000, '2024-10-02 16:42:24', 'VND', 'COMPLETED', 'MOMO', 'TXN1234591', 'WALLET025', 25),
-(400000, '2024-10-14 09:08:41', 'VND', 'COMPLETED', 'MOMO', 'TXN1234592', 'WALLET026', 26),
-(350000, '2024-10-09 17:01:29', 'VND', 'COMPLETED', 'MOMO', 'TXN1234593', 'WALLET027', 27),
-(250000, '2024-10-14 18:08:54', 'VND', 'COMPLETED', 'MOMO', 'TXN1234594', 'WALLET028', 28),
-(300000, '2024-10-05 14:22:47', 'VND', 'COMPLETED', 'MOMO', 'TXN1234595', 'WALLET029', 29),
-(400000, '2024-10-14 12:38:58', 'VND', 'COMPLETED', 'MOMO', 'TXN1234596', 'WALLET030', 30),
-(350000, '2024-10-19 14:12:24', 'VND', 'COMPLETED', 'MOMO', 'TXN1234597', 'WALLET031', 31),
-(250000, '2024-11-04 10:52:43', 'VND', 'COMPLETED', 'MOMO', 'TXN1234598', 'WALLET032', 32),
-(300000, '2024-11-01 12:24:44', 'VND', 'COMPLETED', 'MOMO', 'TXN1234599', 'WALLET033', 33),
-(400000, '2024-10-21 15:23:48', 'VND', 'COMPLETED', 'MOMO', 'TXN1234600', 'WALLET034', 34),
-(350000, '2024-11-16 10:00:10', 'VND', 'COMPLETED', 'MOMO', 'TXN1234601', 'WALLET035', 35),
-(250000, '2024-11-05 18:09:27', 'VND', 'COMPLETED', 'MOMO', 'TXN1234602', 'WALLET036', 36),
-(300000, '2024-10-24 18:51:02', 'VND', 'COMPLETED', 'MOMO', 'TXN1234603', 'WALLET037', 37),
-(400000, '2024-10-08 14:34:23', 'VND', 'COMPLETED', 'MOMO', 'TXN1234604', 'WALLET038', 38),
-(350000, '2024-11-12 08:13:49', 'VND', 'COMPLETED', 'MOMO', 'TXN1234605', 'WALLET039', 39),
-(250000, '2024-10-03 13:31:13', 'VND', 'COMPLETED', 'MOMO', 'TXN1234606', 'WALLET040', 40),
-(300000, '2024-10-22 16:11:05', 'VND', 'COMPLETED', 'MOMO', 'TXN1234607', 'WALLET041', 41),
-(400000, '2024-11-10 08:05:14', 'VND', 'COMPLETED', 'MOMO', 'TXN1234608', 'WALLET042', 42),
-(350000, '2024-11-17 11:41:02', 'VND', 'COMPLETED', 'MOMO', 'TXN1234609', 'WALLET043', 43),
-(250000, '2024-11-02 17:56:10', 'VND', 'COMPLETED', 'MOMO', 'TXN1234610', 'WALLET044', 44),
-(300000, '2024-11-13 11:48:28', 'VND', 'COMPLETED', 'MOMO', 'TXN1234611', 'WALLET045', 45),
-(400000, '2024-10-26 09:47:40', 'VND', 'COMPLETED', 'MOMO', 'TXN1234612', 'WALLET046', 46),
-(350000, '2024-10-23 09:20:02', 'VND', 'COMPLETED', 'MOMO', 'TXN1234613', 'WALLET047', 47),
-(250000, '2024-11-14 09:39:27', 'VND', 'COMPLETED', 'MOMO', 'TXN1234614', 'WALLET048', 48),
-(300000, '2024-11-04 08:25:09', 'VND', 'COMPLETED', 'MOMO', 'TXN1234615', 'WALLET049', 49),
-(400000, '2024-11-13 18:34:57', 'VND', 'COMPLETED', 'MOMO', 'TXN1234616', 'WALLET050', 50),
-(350000, '2024-10-28 17:20:32', 'VND', 'COMPLETED', 'MOMO', 'TXN1234617', 'WALLET051', 51),
-(250000, '2024-10-16 13:30:42', 'VND', 'COMPLETED', 'MOMO', 'TXN1234618', 'WALLET052', 52),
-(300000, '2024-10-28 18:10:14', 'VND', 'COMPLETED', 'MOMO', 'TXN1234619', 'WALLET053', 53),
-(400000, '2024-10-24 09:36:30', 'VND', 'COMPLETED', 'MOMO', 'TXN1234620', 'WALLET054', 54),
-(350000, '2024-10-14 11:55:49', 'VND', 'COMPLETED', 'MOMO', 'TXN1234621', 'WALLET055', 55),
-(250000, '2024-10-29 08:20:01', 'VND', 'COMPLETED', 'MOMO', 'TXN1234622', 'WALLET056', 56),
-(300000, '2024-10-10 17:02:23', 'VND', 'COMPLETED', 'MOMO', 'TXN1234623', 'WALLET057', 57),
-(400000, '2024-11-03 11:19:54', 'VND', 'COMPLETED', 'MOMO', 'TXN1234624', 'WALLET058', 58);
+INSERT INTO `bank_transfer` (amount, created_at, currency, status, bank_account_number, bank_name, transaction_id, order_id) VALUES
+                     (515000, '2024-11-03 10:30:00', 'VND', 'COMPLETED', '1234567890', 'Vietcombank', 'TXN001', 1),
+                     (815000, '2024-11-11 14:00:00', 'VND', 'COMPLETED', '1234567891', 'Vietcombank', 'TXN002', 2),
+                     (775000, '2024-11-20 09:15:00', 'VND', 'COMPLETED', '1234567892', 'Vietcombank', 'TXN003', 3),
+                     (770000, '2024-11-04 16:45:00', 'VND', 'COMPLETED', '1234567893', 'Vietcombank', 'TXN004', 4),
+                     (715000, '2024-11-05 11:20:00', 'VND', 'COMPLETED', '1234567894', 'Vietcombank', 'TXN005', 5),
+                     (725000, '2024-11-06 15:30:00', 'VND', 'COMPLETED', '1234567895', 'Vietcombank', 'TXN006', 6),
+                     (800000, '2024-11-07 08:00:00', 'VND', 'COMPLETED', '1234567896', 'Vietcombank', 'TXN007', 7),
+                     (860000, '2024-11-08 13:55:00', 'VND', 'COMPLETED', '1234567897', 'Vietcombank', 'TXN008', 8),
+                     (255000, '2024-11-06 12:48:23', 'VND', 'COMPLETED', '1234567898', 'Vietcombank', 'TXN009', 9),
+                     (255000, '2024-10-20 16:25:58', 'VND', 'COMPLETED', '1234567899', 'Vietcombank', 'TXN010', 10),
+                     (250000, '2024-10-27 10:45:29', 'VND', 'COMPLETED', '1234567900', 'Vietcombank', 'TXN011', 11),
+                     (255000, '2024-10-18 08:55:06', 'VND', 'COMPLETED', '1234567901', 'Vietcombank', 'TXN012', 12),
+                     (250000, '2024-10-04 12:34:04', 'VND', 'COMPLETED', '1234567902', 'Vietcombank', 'TXN013', 13),
+                     (255000, '2024-10-31 08:07:12', 'VND', 'COMPLETED', '1234567903', 'Vietcombank', 'TXN014', 14),
+                     (255000, '2024-10-13 14:25:44', 'VND', 'COMPLETED', '1234567904', 'Vietcombank', 'TXN015', 15),
+                     (255000, '2024-10-04 12:09:04', 'VND', 'COMPLETED', '1234567905', 'Vietcombank', 'TXN016', 16),
+                     (250000, '2024-10-31 17:20:39', 'VND', 'COMPLETED', '1234567906', 'Vietcombank', 'TXN017', 17),
+                     (250000, '2024-10-26 10:31:38', 'VND', 'COMPLETED', '1234567907', 'Vietcombank', 'TXN018', 18),
+                     (151000, '2024-10-10 18:37:45', 'VND', 'COMPLETED', '1234567908', 'Vietcombank', 'TXN019', 19),
+                     (156000, '2024-10-27 17:28:49', 'VND', 'COMPLETED', '1234567909', 'Vietcombank', 'TXN020', 20),
+                     (151000, '2024-10-27 12:24:16', 'VND', 'COMPLETED', '1234567910', 'Vietcombank', 'TXN021', 21),
+                     (151000, '2024-10-13 12:28:22', 'VND', 'COMPLETED', '1234567911', 'Vietcombank', 'TXN022', 22),
+                     (151000, '2024-10-12 09:38:13', 'VND', 'COMPLETED', '1234567912', 'Vietcombank', 'TXN023', 23),
+                     (151000, '2024-10-28 11:16:31', 'VND', 'COMPLETED', '1234567913', 'Vietcombank', 'TXN024', 24),
+                     (156000, '2024-10-02 16:42:24', 'VND', 'COMPLETED', '1234567914', 'Vietcombank', 'TXN025', 25),
+                     (156000, '2024-10-14 09:08:41', 'VND', 'COMPLETED', '1234567915', 'Vietcombank', 'TXN026', 26),
+                     (151000, '2024-10-09 17:01:29', 'VND', 'COMPLETED', '1234567916', 'Vietcombank', 'TXN027', 27),
+                     (151000, '2024-10-14 18:08:54', 'VND', 'COMPLETED', '1234567917', 'Vietcombank', 'TXN028', 28),
+                     (196000, '2024-10-05 14:22:47', 'VND', 'COMPLETED', '1234567918', 'Vietcombank', 'TXN029', 29),
+                     (201000, '2024-10-14 12:38:58', 'VND', 'COMPLETED', '1234567919', 'Vietcombank', 'TXN030', 30),
+                     (201000, '2024-10-19 14:12:24', 'VND', 'COMPLETED', '1234567920', 'Vietcombank', 'TXN031', 31),
+                     (201000, '2024-11-04 10:52:43', 'VND', 'COMPLETED', '1234567921', 'Vietcombank', 'TXN032', 32),
+                     (196000, '2024-11-01 12:24:44', 'VND', 'COMPLETED', '1234567922', 'Vietcombank', 'TXN033', 33),
+                     (196000, '2024-10-21 15:23:48', 'VND', 'COMPLETED', '1234567923', 'Vietcombank', 'TXN034', 34),
+                     (201000, '2024-11-16 10:00:10', 'VND', 'COMPLETED', '1234567924', 'Vietcombank', 'TXN035', 35),
+                     (196000, '2024-11-05 18:09:27', 'VND', 'COMPLETED', '1234567925', 'Vietcombank', 'TXN036', 36),
+                     (196000, '2024-10-24 18:51:02', 'VND', 'COMPLETED', '1234567926', 'Vietcombank', 'TXN037', 37),
+                     (196000, '2024-10-08 14:34:23', 'VND', 'COMPLETED', '1234567927', 'Vietcombank', 'TXN038', 38),
+                     (138000, '2024-11-12 08:13:49', 'VND', 'COMPLETED', '1234567928', 'Vietcombank', 'TXN039', 39),
+                     (133000, '2024-10-03 13:31:13', 'VND', 'COMPLETED', '1234567929', 'Vietcombank', 'TXN040', 40),
+                     (138000, '2024-10-22 16:11:05', 'VND', 'COMPLETED', '1234567930', 'Vietcombank', 'TXN041', 41),
+                     (138000, '2024-11-10 08:05:14', 'VND', 'COMPLETED', '1234567931', 'Vietcombank', 'TXN042', 42),
+                     (133000, '2024-11-17 11:41:02', 'VND', 'COMPLETED', '1234567932', 'Vietcombank', 'TXN043', 43),
+                     (133000, '2024-11-02 17:56:10', 'VND', 'COMPLETED', '1234567933', 'Vietcombank', 'TXN044', 44),
+                     (133000, '2024-11-13 11:48:28', 'VND', 'COMPLETED', '1234567934', 'Vietcombank', 'TXN045', 45),
+                     (133000, '2024-10-26 09:47:40', 'VND', 'COMPLETED', '1234567935', 'Vietcombank', 'TXN046', 46),
+                     (133000, '2024-10-23 09:20:02', 'VND', 'COMPLETED', '1234567936', 'Vietcombank', 'TXN047', 47),
+                     (138000, '2024-11-14 09:39:27', 'VND', 'COMPLETED', '1234567937', 'Vietcombank', 'TXN048', 48),
+                     (187000, '2024-11-04 08:25:09', 'VND', 'COMPLETED', '1234567938', 'Vietcombank', 'TXN049', 49),
+                     (187000, '2024-11-13 18:34:57', 'VND', 'COMPLETED', '1234567939', 'Vietcombank', 'TXN050', 50),
+                     (192000, '2024-10-28 17:20:32', 'VND', 'COMPLETED', '1234567940', 'Vietcombank', 'TXN051', 51),
+                     (187000, '2024-10-16 13:30:42', 'VND', 'COMPLETED', '1234567941', 'Vietcombank', 'TXN052', 52),
+                     (187000, '2024-10-28 18:10:14', 'VND', 'COMPLETED', '1234567942', 'Vietcombank', 'TXN053', 53),
+                     (187000, '2024-10-24 09:36:30', 'VND', 'COMPLETED', '1234567943', 'Vietcombank', 'TXN054', 54),
+                     (187000, '2024-10-14 11:55:49', 'VND', 'COMPLETED', '1234567944', 'Vietcombank', 'TXN055', 55),
+                     (192000, '2024-10-29 08:20:01', 'VND', 'COMPLETED', '1234567945', 'Vietcombank', 'TXN056', 56),
+                     (192000, '2024-10-10 17:02:23', 'VND', 'COMPLETED', '1234567946', 'Vietcombank', 'TXN057', 57),
+                     (187000, '2024-11-03 11:19:54', 'VND', 'COMPLETED', '1234567947', 'Vietcombank', 'TXN058', 58);
+
 
 
 -- Book Languages
@@ -4479,7 +4480,7 @@ INSERT INTO book_template_languages (book_template_id, language) VALUES
 (10, 'FRENCH'),
 (10, 'ARABIC');
 
-INSERT INTO book_template_languages (book_template_id, language) 
+INSERT INTO book_template_languages (book_template_id, language)
 VALUES
 (11, 'VIETNAMESE'),
 (12, 'VIETNAMESE'),
@@ -4558,7 +4559,7 @@ INSERT INTO promotion_template (code, created_at, is_infinite, status, type) VAL
 ('FREESHIP_10', '2024-11-02 17:00:00', 0, 'EFFECTIVE', 'FREESHIP');
 
 INSERT INTO promotion_template (
-    code, created_at, is_infinite, status, type
+code, created_at, is_infinite, status, type
 ) VALUES
 ('DISCOUNT_1', '2024-11-01 08:00:00', 1, 'EFFECTIVE', 'DISCOUNT'),
 ('DISCOUNT_2', '2024-11-01 08:00:00', 1, 'EFFECTIVE', 'DISCOUNT'),
@@ -4572,134 +4573,134 @@ INSERT INTO promotion_template (
 ('DISCOUNT_10', '2024-11-01 08:00:00', 1, 'EFFECTIVE', 'DISCOUNT');
 
 INSERT INTO promotion (
-description, discount_limit, effective_date, expiration_date, 
-    min_value_to_be_applied, percent_discount, status, title, promotion_template_id
+description, discount_limit, effective_date, expiration_date,
+min_value_to_be_applied, percent_discount, status, title, promotion_template_id
 ) VALUES
-('VOUCHER 1', 50000.0, '2024-11-02 08:00:00', '2024-11-30 23:59:59', 100000.0, 100.0, 'USED', 'Voucher_1_1', 1),
-('VOUCHER 1', 50000.0, '2024-11-02 08:00:00', '2024-11-30 23:59:59', 100000.0, 100.0, 'USED', 'Voucher_2_1', 1),
-('VOUCHER 1', 50000.0, '2024-11-02 08:00:00', '2024-11-30 23:59:59', 100000.0, 100.0, 'USED', 'Voucher_3_1', 1),
-('VOUCHER 1', 50000.0, '2024-11-02 08:00:00', '2024-11-30 23:59:59', 100000.0, 100.0, 'USED', 'Voucher_4_1', 1),
-('VOUCHER 1', 50000.0, '2024-11-02 08:00:00', '2024-11-30 23:59:59', 100000.0, 100.0, 'USED', 'Voucher_5_1', 1),
-('VOUCHER 2', 50000.0, '2024-11-02 09:00:00', '2024-11-30 23:59:59', 100000.0, 100.0, 'USED', 'Voucher_6_2', 2),
-('VOUCHER 2', 50000.0, '2024-11-02 09:00:00', '2024-11-30 23:59:59', 100000.0, 100.0, 'USED', 'Voucher_7_2', 2),
-('VOUCHER 2', 50000.0, '2024-11-02 09:00:00', '2024-11-30 23:59:59', 100000.0, 100.0, 'USED', 'Voucher_8_2', 2),
-('VOUCHER 2', 50000.0, '2024-11-02 09:00:00', '2024-11-30 23:59:59', 100000.0, 100.0, 'NOT_USE', 'Voucher_9_2', 2),
-('VOUCHER 2', 50000.0, '2024-11-02 09:00:00', '2024-11-30 23:59:59', 100000.0, 100.0, 'NOT_USE', 'Voucher_10_2', 2),
-('VOUCHER 3', 50000.0, '2024-11-02 10:00:00', '2024-11-30 23:59:59', 100000.0, 100.0, 'NOT_USE', 'Voucher_11_3', 3),
-('VOUCHER 3', 50000.0, '2024-11-02 10:00:00', '2024-11-30 23:59:59', 100000.0, 100.0, 'NOT_USE', 'Voucher_12_3', 3),
-('VOUCHER 3', 50000.0, '2024-11-02 10:00:00', '2024-11-30 23:59:59', 100000.0, 100.0, 'NOT_USE', 'Voucher_13_3', 3),
-('VOUCHER 3', 50000.0, '2024-11-02 10:00:00', '2024-11-30 23:59:59', 100000.0, 100.0, 'NOT_USE', 'Voucher_14_3', 3),
-('VOUCHER 3', 50000.0, '2024-11-02 10:00:00', '2024-11-30 23:59:59', 100000.0, 100.0, 'NOT_USE', 'Voucher_15_3', 3),
-('VOUCHER 4', 50000.0, '2024-11-02 11:00:00', '2024-11-30 23:59:59', 100000.0, 100.0, 'NOT_USE', 'Voucher_16_4', 4),
-('VOUCHER 4', 50000.0, '2024-11-02 11:00:00', '2024-11-30 23:59:59', 100000.0, 100.0, 'NOT_USE', 'Voucher_17_4', 4),
-('VOUCHER 4', 50000.0, '2024-11-02 11:00:00', '2024-11-30 23:59:59', 100000.0, 100.0, 'NOT_USE', 'Voucher_18_4', 4),
-('VOUCHER 4', 50000.0, '2024-11-02 11:00:00', '2024-11-30 23:59:59', 100000.0, 100.0, 'NOT_USE', 'Voucher_19_4', 4),
-('VOUCHER 4', 50000.0, '2024-11-02 11:00:00', '2024-11-30 23:59:59', 100000.0, 100.0, 'NOT_USE', 'Voucher_20_4', 4),
-('VOUCHER 5', 50000.0, '2024-11-02 12:00:00', '2024-11-30 23:59:59', 100000.0, 100.0, 'NOT_USE', 'Voucher_21_5', 5),
-('VOUCHER 5', 50000.0, '2024-11-02 12:00:00', '2024-11-30 23:59:59', 100000.0, 100.0, 'NOT_USE', 'Voucher_22_5', 5),
-('VOUCHER 5', 50000.0, '2024-11-02 12:00:00', '2024-11-30 23:59:59', 100000.0, 100.0, 'NOT_USE', 'Voucher_23_5', 5),
-('VOUCHER 5', 50000.0, '2024-11-02 12:00:00', '2024-11-30 23:59:59', 100000.0, 100.0, 'NOT_USE', 'Voucher_24_5', 5),
-('VOUCHER 5', 50000.0, '2024-11-02 12:00:00', '2024-11-30 23:59:59', 100000.0, 100.0, 'NOT_USE', 'Voucher_25_5', 5),
-('VOUCHER 6', 50000.0, '2024-11-02 13:00:00', '2024-11-30 23:59:59', 100000.0, 100.0, 'NOT_USE', 'Voucher_26_6', 6),
-('VOUCHER 6', 50000.0, '2024-11-02 13:00:00', '2024-11-30 23:59:59', 100000.0, 100.0, 'NOT_USE', 'Voucher_27_6', 6),
-('VOUCHER 6', 50000.0, '2024-11-02 13:00:00', '2024-11-30 23:59:59', 100000.0, 100.0, 'NOT_USE', 'Voucher_28_6', 6),
-('VOUCHER 6', 50000.0, '2024-11-02 13:00:00', '2024-11-30 23:59:59', 100000.0, 100.0, 'NOT_USE', 'Voucher_29_6', 6),
-('VOUCHER 6', 50000.0, '2024-11-02 13:00:00', '2024-11-30 23:59:59', 100000.0, 100.0, 'NOT_USE', 'Voucher_30_6', 6),
-('VOUCHER 7', 50000.0, '2024-11-02 14:00:00', '2024-11-30 23:59:59', 100000.0, 100.0, 'NOT_USE', 'Voucher_31_7', 7),
-('VOUCHER 7', 50000.0, '2024-11-02 14:00:00', '2024-11-30 23:59:59', 100000.0, 100.0, 'NOT_USE', 'Voucher_32_7', 7),
-('VOUCHER 7', 50000.0, '2024-11-02 14:00:00', '2024-11-30 23:59:59', 100000.0, 100.0, 'NOT_USE', 'Voucher_33_7', 7),
-('VOUCHER 7', 50000.0, '2024-11-02 14:00:00', '2024-11-30 23:59:59', 100000.0, 100.0, 'NOT_USE', 'Voucher_34_7', 7),
-('VOUCHER 7', 50000.0, '2024-11-02 14:00:00', '2024-11-30 23:59:59', 100000.0, 100.0, 'NOT_USE', 'Voucher_35_7', 7),
-('VOUCHER 8', 50000.0, '2024-11-02 15:00:00', '2024-11-30 23:59:59', 100000.0, 100.0, 'NOT_USE', 'Voucher_36_8', 8),
-('VOUCHER 8', 50000.0, '2024-11-02 15:00:00', '2024-11-30 23:59:59', 100000.0, 100.0, 'NOT_USE', 'Voucher_37_8', 8),
-('VOUCHER 8', 50000.0, '2024-11-02 15:00:00', '2024-11-30 23:59:59', 100000.0, 100.0, 'NOT_USE', 'Voucher_38_8', 8),
-('VOUCHER 8', 50000.0, '2024-11-02 15:00:00', '2024-11-30 23:59:59', 100000.0, 100.0, 'NOT_USE', 'Voucher_39_8', 8),
-('VOUCHER 8', 50000.0, '2024-11-02 15:00:00', '2024-11-30 23:59:59', 100000.0, 100.0, 'NOT_USE', 'Voucher_40_8', 8),
-('VOUCHER 9', 50000.0, '2024-11-02 16:00:00', '2024-11-30 23:59:59', 100000.0, 100.0, 'NOT_USE', 'Voucher_41_9', 9),
-('VOUCHER 9', 50000.0, '2024-11-02 16:00:00', '2024-11-30 23:59:59', 100000.0, 100.0, 'NOT_USE', 'Voucher_42_9', 9),
-('VOUCHER 9', 50000.0, '2024-11-02 16:00:00', '2024-11-30 23:59:59', 100000.0, 100.0, 'NOT_USE', 'Voucher_43_9', 9),
-('VOUCHER 9', 50000.0, '2024-11-02 16:00:00', '2024-11-30 23:59:59', 100000.0, 100.0, 'NOT_USE', 'Voucher_44_9', 9),
-('VOUCHER 9', 50000.0, '2024-11-02 16:00:00', '2024-11-30 23:59:59', 100000.0, 100.0, 'NOT_USE', 'Voucher_45_9', 9),
-('VOUCHER 10', 50000.0, '2024-11-02 17:00:00', '2024-11-30 23:59:59', 100000.0, 100.0, 'NOT_USE', 'Voucher_46_10', 10),
-('VOUCHER 10', 50000.0, '2024-11-02 17:00:00', '2024-11-30 23:59:59', 100000.0, 100.0, 'NOT_USE', 'Voucher_47_10', 10),
-('VOUCHER 10', 50000.0, '2024-11-02 17:00:00', '2024-11-30 23:59:59', 100000.0, 100.0, 'NOT_USE', 'Voucher_48_10', 10),
-('VOUCHER 10', 50000.0, '2024-11-02 17:00:00', '2024-11-30 23:59:59', 100000.0, 100.0, 'NOT_USE', 'Voucher_49_10', 10),
-('VOUCHER 10', 50000.0, '2024-11-02 17:00:00', '2024-11-30 23:59:59', 100000.0, 100.0, 'NOT_USE', 'Voucher_50_10', 10);
+('VOUCHER 1', 50000.0, '2024-11-02 08:00:00', '2024-12-30 23:59:59', 100000.0, 100.0, 'USED', 'Voucher_1_1', 1),
+('VOUCHER 1', 50000.0, '2024-11-02 08:00:00', '2024-12-30 23:59:59', 100000.0, 100.0, 'USED', 'Voucher_2_1', 1),
+('VOUCHER 1', 50000.0, '2024-11-02 08:00:00', '2024-12-30 23:59:59', 100000.0, 100.0, 'USED', 'Voucher_3_1', 1),
+('VOUCHER 1', 50000.0, '2024-11-02 08:00:00', '2024-12-30 23:59:59', 100000.0, 100.0, 'USED', 'Voucher_4_1', 1),
+('VOUCHER 1', 50000.0, '2024-11-02 08:00:00', '2024-12-30 23:59:59', 100000.0, 100.0, 'USED', 'Voucher_5_1', 1),
+('VOUCHER 2', 50000.0, '2024-11-02 09:00:00', '2024-12-30 23:59:59', 100000.0, 100.0, 'USED', 'Voucher_6_2', 2),
+('VOUCHER 2', 50000.0, '2024-11-02 09:00:00', '2024-12-30 23:59:59', 100000.0, 100.0, 'USED', 'Voucher_7_2', 2),
+('VOUCHER 2', 50000.0, '2024-11-02 09:00:00', '2024-12-30 23:59:59', 100000.0, 100.0, 'USED', 'Voucher_8_2', 2),
+('VOUCHER 2', 50000.0, '2024-11-02 09:00:00', '2024-12-30 23:59:59', 100000.0, 100.0, 'NOT_USE', 'Voucher_9_2', 2),
+('VOUCHER 2', 50000.0, '2024-11-02 09:00:00', '2024-12-30 23:59:59', 100000.0, 100.0, 'NOT_USE', 'Voucher_10_2', 2),
+('VOUCHER 3', 50000.0, '2024-11-02 10:00:00', '2024-12-30 23:59:59', 100000.0, 100.0, 'NOT_USE', 'Voucher_11_3', 3),
+('VOUCHER 3', 50000.0, '2024-11-02 10:00:00', '2024-12-30 23:59:59', 100000.0, 100.0, 'NOT_USE', 'Voucher_12_3', 3),
+('VOUCHER 3', 50000.0, '2024-11-02 10:00:00', '2024-12-30 23:59:59', 100000.0, 100.0, 'NOT_USE', 'Voucher_13_3', 3),
+('VOUCHER 3', 50000.0, '2024-11-02 10:00:00', '2024-12-30 23:59:59', 100000.0, 100.0, 'NOT_USE', 'Voucher_14_3', 3),
+('VOUCHER 3', 50000.0, '2024-11-02 10:00:00', '2024-12-30 23:59:59', 100000.0, 100.0, 'NOT_USE', 'Voucher_15_3', 3),
+('VOUCHER 4', 50000.0, '2024-11-02 11:00:00', '2024-12-30 23:59:59', 100000.0, 100.0, 'NOT_USE', 'Voucher_16_4', 4),
+('VOUCHER 4', 50000.0, '2024-11-02 11:00:00', '2024-12-30 23:59:59', 100000.0, 100.0, 'NOT_USE', 'Voucher_17_4', 4),
+('VOUCHER 4', 50000.0, '2024-11-02 11:00:00', '2024-12-30 23:59:59', 100000.0, 100.0, 'NOT_USE', 'Voucher_18_4', 4),
+('VOUCHER 4', 50000.0, '2024-11-02 11:00:00', '2024-12-30 23:59:59', 100000.0, 100.0, 'NOT_USE', 'Voucher_19_4', 4),
+('VOUCHER 4', 50000.0, '2024-11-02 11:00:00', '2024-12-30 23:59:59', 100000.0, 100.0, 'NOT_USE', 'Voucher_20_4', 4),
+('VOUCHER 5', 50000.0, '2024-11-02 12:00:00', '2024-12-30 23:59:59', 100000.0, 100.0, 'NOT_USE', 'Voucher_21_5', 5),
+('VOUCHER 5', 50000.0, '2024-11-02 12:00:00', '2024-12-30 23:59:59', 100000.0, 100.0, 'NOT_USE', 'Voucher_22_5', 5),
+('VOUCHER 5', 50000.0, '2024-11-02 12:00:00', '2024-12-30 23:59:59', 100000.0, 100.0, 'NOT_USE', 'Voucher_23_5', 5),
+('VOUCHER 5', 50000.0, '2024-11-02 12:00:00', '2024-12-30 23:59:59', 100000.0, 100.0, 'NOT_USE', 'Voucher_24_5', 5),
+('VOUCHER 5', 50000.0, '2024-11-02 12:00:00', '2024-12-30 23:59:59', 100000.0, 100.0, 'NOT_USE', 'Voucher_25_5', 5),
+('VOUCHER 6', 50000.0, '2024-11-02 13:00:00', '2024-12-30 23:59:59', 100000.0, 100.0, 'NOT_USE', 'Voucher_26_6', 6),
+('VOUCHER 6', 50000.0, '2024-11-02 13:00:00', '2024-12-30 23:59:59', 100000.0, 100.0, 'NOT_USE', 'Voucher_27_6', 6),
+('VOUCHER 6', 50000.0, '2024-11-02 13:00:00', '2024-12-30 23:59:59', 100000.0, 100.0, 'NOT_USE', 'Voucher_28_6', 6),
+('VOUCHER 6', 50000.0, '2024-11-02 13:00:00', '2024-12-30 23:59:59', 100000.0, 100.0, 'NOT_USE', 'Voucher_29_6', 6),
+('VOUCHER 6', 50000.0, '2024-11-02 13:00:00', '2024-12-30 23:59:59', 100000.0, 100.0, 'NOT_USE', 'Voucher_30_6', 6),
+('VOUCHER 7', 50000.0, '2024-11-02 14:00:00', '2024-12-30 23:59:59', 100000.0, 100.0, 'NOT_USE', 'Voucher_31_7', 7),
+('VOUCHER 7', 50000.0, '2024-11-02 14:00:00', '2024-12-30 23:59:59', 100000.0, 100.0, 'NOT_USE', 'Voucher_32_7', 7),
+('VOUCHER 7', 50000.0, '2024-11-02 14:00:00', '2024-12-30 23:59:59', 100000.0, 100.0, 'NOT_USE', 'Voucher_33_7', 7),
+('VOUCHER 7', 50000.0, '2024-11-02 14:00:00', '2024-12-30 23:59:59', 100000.0, 100.0, 'NOT_USE', 'Voucher_34_7', 7),
+('VOUCHER 7', 50000.0, '2024-11-02 14:00:00', '2024-12-30 23:59:59', 100000.0, 100.0, 'NOT_USE', 'Voucher_35_7', 7),
+('VOUCHER 8', 50000.0, '2024-11-02 15:00:00', '2024-12-30 23:59:59', 100000.0, 100.0, 'NOT_USE', 'Voucher_36_8', 8),
+('VOUCHER 8', 50000.0, '2024-11-02 15:00:00', '2024-12-30 23:59:59', 100000.0, 100.0, 'NOT_USE', 'Voucher_37_8', 8),
+('VOUCHER 8', 50000.0, '2024-11-02 15:00:00', '2024-12-30 23:59:59', 100000.0, 100.0, 'NOT_USE', 'Voucher_38_8', 8),
+('VOUCHER 8', 50000.0, '2024-11-02 15:00:00', '2024-12-30 23:59:59', 100000.0, 100.0, 'NOT_USE', 'Voucher_39_8', 8),
+('VOUCHER 8', 50000.0, '2024-11-02 15:00:00', '2024-12-30 23:59:59', 100000.0, 100.0, 'NOT_USE', 'Voucher_40_8', 8),
+('VOUCHER 9', 50000.0, '2024-11-02 16:00:00', '2024-12-30 23:59:59', 100000.0, 100.0, 'NOT_USE', 'Voucher_41_9', 9),
+('VOUCHER 9', 50000.0, '2024-11-02 16:00:00', '2024-12-30 23:59:59', 100000.0, 100.0, 'NOT_USE', 'Voucher_42_9', 9),
+('VOUCHER 9', 50000.0, '2024-11-02 16:00:00', '2024-12-30 23:59:59', 100000.0, 100.0, 'NOT_USE', 'Voucher_43_9', 9),
+('VOUCHER 9', 50000.0, '2024-11-02 16:00:00', '2024-12-30 23:59:59', 100000.0, 100.0, 'NOT_USE', 'Voucher_44_9', 9),
+('VOUCHER 9', 50000.0, '2024-11-02 16:00:00', '2024-12-30 23:59:59', 100000.0, 100.0, 'NOT_USE', 'Voucher_45_9', 9),
+('VOUCHER 10', 50000.0, '2024-11-02 17:00:00', '2024-12-30 23:59:59', 100000.0, 100.0, 'NOT_USE', 'Voucher_46_10', 10),
+('VOUCHER 10', 50000.0, '2024-11-02 17:00:00', '2024-12-30 23:59:59', 100000.0, 100.0, 'NOT_USE', 'Voucher_47_10', 10),
+('VOUCHER 10', 50000.0, '2024-11-02 17:00:00', '2024-12-30 23:59:59', 100000.0, 100.0, 'NOT_USE', 'Voucher_48_10', 10),
+('VOUCHER 10', 50000.0, '2024-11-02 17:00:00', '2024-12-30 23:59:59', 100000.0, 100.0, 'NOT_USE', 'Voucher_49_10', 10),
+('VOUCHER 10', 50000.0, '2024-11-02 17:00:00', '2024-12-30 23:59:59', 100000.0, 100.0, 'NOT_USE', 'Voucher_50_10', 10);
 
 
 INSERT INTO promotion (
-description, discount_limit, effective_date, expiration_date, 
-    min_value_to_be_applied, percent_discount, status, title, promotion_template_id
+description, discount_limit, effective_date, expiration_date,
+min_value_to_be_applied, percent_discount, status, title, promotion_template_id
 ) VALUES
-('Ưu đãi FREESHIP 11', 15000, '2024-11-04 00:00:00', '2024-11-30 23:59:59', 0.0, 100.0, 'USED', 'FREESHIP_1_11', 11),
-('Ưu đãi FREESHIP 11', 30000, '2024-11-04 00:00:00', '2024-11-30 23:59:59', 0.0, 100.0, 'USED', 'FREESHIP_2_11', 11),
-('Ưu đãi FREESHIP 11', 15000, '2024-11-04 00:00:00', '2024-11-30 23:59:59', 0.0, 100.0, 'USED', 'FREESHIP_3_11', 11),
-('Ưu đãi FREESHIP 11', 30000, '2024-11-04 00:00:00', '2024-11-30 23:59:59', 0.0, 100.0, 'USED', 'FREESHIP_4_11', 11),
-('Ưu đãi FREESHIP 11', 15000, '2024-11-04 00:00:00', '2024-11-30 23:59:59', 0.0, 100.0, 'USED', 'FREESHIP_5_11', 11),
-('Ưu đãi FREESHIP 12', 30000, '2024-11-05 00:00:00', '2024-11-30 23:59:59', 0.0, 100.0, 'USED', 'FREESHIP_6_12', 12),
-('Ưu đãi FREESHIP 12', 15000, '2024-11-05 00:00:00', '2024-11-30 23:59:59', 0.0, 100.0, 'USED', 'FREESHIP_7_12', 12),
-('Ưu đãi FREESHIP 12', 30000, '2024-11-05 00:00:00', '2024-11-30 23:59:59', 0.0, 100.0, 'NOT_USE', 'FREESHIP_8_12', 12),
-('Ưu đãi FREESHIP 12', 15000, '2024-11-05 00:00:00', '2024-11-30 23:59:59', 0.0, 100.0, 'NOT_USE', 'FREESHIP_9_12', 12),
-('Ưu đãi FREESHIP 12', 30000, '2024-11-05 00:00:00', '2024-11-30 23:59:59', 0.0, 100.0, 'NOT_USE', 'FREESHIP_10_12', 12),
-('Ưu đãi FREESHIP 13', 15000, '2024-11-06 00:00:00', '2024-11-30 23:59:59', 0.0, 100.0, 'NOT_USE', 'FREESHIP_11_13', 13),
-('Ưu đãi FREESHIP 13', 30000, '2024-11-06 00:00:00', '2024-11-30 23:59:59', 0.0, 100.0, 'NOT_USE', 'FREESHIP_12_13', 13),
-('Ưu đãi FREESHIP 13', 15000, '2024-11-06 00:00:00', '2024-11-30 23:59:59', 0.0, 100.0, 'NOT_USE', 'FREESHIP_13_13', 13),
-('Ưu đãi FREESHIP 13', 30000, '2024-11-06 00:00:00', '2024-11-30 23:59:59', 0.0, 100.0, 'NOT_USE', 'FREESHIP_14_13', 13),
-('Ưu đãi FREESHIP 13', 15000, '2024-11-06 00:00:00', '2024-11-30 23:59:59', 0.0, 100.0, 'NOT_USE', 'FREESHIP_15_13', 13),
-('Ưu đãi FREESHIP 14', 30000, '2024-11-07 00:00:00', '2024-11-30 23:59:59', 0.0, 100.0, 'NOT_USE', 'FREESHIP_16_14', 14),
-('Ưu đãi FREESHIP 14', 15000, '2024-11-07 00:00:00', '2024-11-30 23:59:59', 0.0, 100.0, 'NOT_USE', 'FREESHIP_17_14', 14),
-('Ưu đãi FREESHIP 14', 30000, '2024-11-07 00:00:00', '2024-11-30 23:59:59', 0.0, 100.0, 'NOT_USE', 'FREESHIP_18_14', 14),
-('Ưu đãi FREESHIP 14', 15000, '2024-11-07 00:00:00', '2024-11-30 23:59:59', 0.0, 100.0, 'NOT_USE', 'FREESHIP_19_14', 14),
-('Ưu đãi FREESHIP 14', 30000, '2024-11-07 00:00:00', '2024-11-30 23:59:59', 0.0, 100.0, 'NOT_USE', 'FREESHIP_20_14', 14),
-('Ưu đãi FREESHIP 15', 15000, '2024-11-08 00:00:00', '2024-11-30 23:59:59', 0.0, 100.0, 'NOT_USE', 'FREESHIP_21_15', 15),
-('Ưu đãi FREESHIP 15', 30000, '2024-11-08 00:00:00', '2024-11-30 23:59:59', 0.0, 100.0, 'NOT_USE', 'FREESHIP_22_15', 15),
-('Ưu đãi FREESHIP 15', 15000, '2024-11-08 00:00:00', '2024-11-30 23:59:59', 0.0, 100.0, 'NOT_USE', 'FREESHIP_23_15', 15),
-('Ưu đãi FREESHIP 15', 30000, '2024-11-08 00:00:00', '2024-11-30 23:59:59', 0.0, 100.0, 'NOT_USE', 'FREESHIP_24_15', 15),
-('Ưu đãi FREESHIP 15', 15000, '2024-11-08 00:00:00', '2024-11-30 23:59:59', 0.0, 100.0, 'NOT_USE', 'FREESHIP_25_15', 15),
-('Ưu đãi FREESHIP 16', 30000, '2024-11-09 00:00:00', '2024-11-30 23:59:59', 0.0, 100.0, 'NOT_USE', 'FREESHIP_26_16', 16),
-('Ưu đãi FREESHIP 16', 15000, '2024-11-09 00:00:00', '2024-11-30 23:59:59', 0.0, 100.0, 'NOT_USE', 'FREESHIP_27_16', 16),
-('Ưu đãi FREESHIP 16', 30000, '2024-11-09 00:00:00', '2024-11-30 23:59:59', 0.0, 100.0, 'NOT_USE', 'FREESHIP_28_16', 16),
-('Ưu đãi FREESHIP 16', 15000, '2024-11-09 00:00:00', '2024-11-30 23:59:59', 0.0, 100.0, 'NOT_USE', 'FREESHIP_29_16', 16),
-('Ưu đãi FREESHIP 16', 30000, '2024-11-09 00:00:00', '2024-11-30 23:59:59', 0.0, 100.0, 'NOT_USE', 'FREESHIP_30_16', 16),
-('Ưu đãi FREESHIP 17', 15000, '2024-11-10 00:00:00', '2024-11-30 23:59:59', 0.0, 100.0, 'NOT_USE', 'FREESHIP_31_17', 17),
-('Ưu đãi FREESHIP 17', 30000, '2024-11-10 00:00:00', '2024-11-30 23:59:59', 0.0, 100.0, 'NOT_USE', 'FREESHIP_32_17', 17),
-('Ưu đãi FREESHIP 17', 15000, '2024-11-10 00:00:00', '2024-11-30 23:59:59', 0.0, 100.0, 'NOT_USE', 'FREESHIP_33_17', 17),
-('Ưu đãi FREESHIP 17', 30000, '2024-11-10 00:00:00', '2024-11-30 23:59:59', 0.0, 100.0, 'NOT_USE', 'FREESHIP_34_17', 17),
-('Ưu đãi FREESHIP 17', 15000, '2024-11-10 00:00:00', '2024-11-30 23:59:59', 0.0, 100.0, 'NOT_USE', 'FREESHIP_35_17', 17),
-('Ưu đãi FREESHIP 18', 30000, '2024-11-11 00:00:00', '2024-11-30 23:59:59', 0.0, 100.0, 'NOT_USE', 'FREESHIP_36_18', 18),
-('Ưu đãi FREESHIP 18', 15000, '2024-11-11 00:00:00', '2024-11-30 23:59:59', 0.0, 100.0, 'NOT_USE', 'FREESHIP_37_18', 18),
-('Ưu đãi FREESHIP 18', 30000, '2024-11-11 00:00:00', '2024-11-30 23:59:59', 0.0, 100.0, 'NOT_USE', 'FREESHIP_38_18', 18),
-('Ưu đãi FREESHIP 18', 15000, '2024-11-11 00:00:00', '2024-11-30 23:59:59', 0.0, 100.0, 'NOT_USE', 'FREESHIP_39_18', 18),
-('Ưu đãi FREESHIP 18', 30000, '2024-11-11 00:00:00', '2024-11-30 23:59:59', 0.0, 100.0, 'NOT_USE', 'FREESHIP_40_18', 18),
-('Ưu đãi FREESHIP 19', 15000, '2024-11-12 00:00:00', '2024-11-30 23:59:59', 0.0, 100.0, 'NOT_USE', 'FREESHIP_41_19', 19),
-('Ưu đãi FREESHIP 19', 30000, '2024-11-12 00:00:00', '2024-11-30 23:59:59', 0.0, 100.0, 'NOT_USE', 'FREESHIP_42_19', 19),
-('Ưu đãi FREESHIP 19', 15000, '2024-11-12 00:00:00', '2024-11-30 23:59:59', 0.0, 100.0, 'NOT_USE', 'FREESHIP_43_19', 19),
-('Ưu đãi FREESHIP 19', 30000, '2024-11-12 00:00:00', '2024-11-30 23:59:59', 0.0, 100.0, 'NOT_USE', 'FREESHIP_44_19', 19),
-('Ưu đãi FREESHIP 19', 15000, '2024-11-12 00:00:00', '2024-11-30 23:59:59', 0.0, 100.0, 'NOT_USE', 'FREESHIP_45_19', 19),
-('Ưu đãi FREESHIP 20', 30000, '2024-11-13 00:00:00', '2024-11-30 23:59:59', 0.0, 100.0, 'NOT_USE', 'FREESHIP_46_20', 20),
-('Ưu đãi FREESHIP 20', 15000, '2024-11-13 00:00:00', '2024-11-30 23:59:59', 0.0, 100.0, 'NOT_USE', 'FREESHIP_47_20', 20),
-('Ưu đãi FREESHIP 20', 30000, '2024-11-13 00:00:00', '2024-11-30 23:59:59', 0.0, 100.0, 'NOT_USE', 'FREESHIP_48_20', 20),
-('Ưu đãi FREESHIP 20', 15000, '2024-11-13 00:00:00', '2024-11-30 23:59:59', 0.0, 100.0, 'NOT_USE', 'FREESHIP_49_20', 20),
-('Ưu đãi FREESHIP 20', 30000, '2024-11-13 00:00:00', '2024-11-30 23:59:59', 0.0, 100.0, 'NOT_USE', 'FREESHIP_50_20', 20);
+('Ưu đãi FREESHIP 11', 15000, '2024-11-04 00:00:00', '2024-12-30 23:59:59', 0.0, 100.0, 'USED', 'FREESHIP_1_11', 11),
+('Ưu đãi FREESHIP 11', 30000, '2024-11-04 00:00:00', '2024-12-30 23:59:59', 0.0, 100.0, 'USED', 'FREESHIP_2_11', 11),
+('Ưu đãi FREESHIP 11', 15000, '2024-11-04 00:00:00', '2024-12-30 23:59:59', 0.0, 100.0, 'USED', 'FREESHIP_3_11', 11),
+('Ưu đãi FREESHIP 11', 30000, '2024-11-04 00:00:00', '2024-12-30 23:59:59', 0.0, 100.0, 'USED', 'FREESHIP_4_11', 11),
+('Ưu đãi FREESHIP 11', 15000, '2024-11-04 00:00:00', '2024-12-30 23:59:59', 0.0, 100.0, 'USED', 'FREESHIP_5_11', 11),
+('Ưu đãi FREESHIP 12', 30000, '2024-11-05 00:00:00', '2024-12-30 23:59:59', 0.0, 100.0, 'USED', 'FREESHIP_6_12', 12),
+('Ưu đãi FREESHIP 12', 15000, '2024-11-05 00:00:00', '2024-12-30 23:59:59', 0.0, 100.0, 'USED', 'FREESHIP_7_12', 12),
+('Ưu đãi FREESHIP 12', 30000, '2024-11-05 00:00:00', '2024-12-30 23:59:59', 0.0, 100.0, 'NOT_USE', 'FREESHIP_8_12', 12),
+('Ưu đãi FREESHIP 12', 15000, '2024-11-05 00:00:00', '2024-12-30 23:59:59', 0.0, 100.0, 'NOT_USE', 'FREESHIP_9_12', 12),
+('Ưu đãi FREESHIP 12', 30000, '2024-11-05 00:00:00', '2024-12-30 23:59:59', 0.0, 100.0, 'NOT_USE', 'FREESHIP_10_12', 12),
+('Ưu đãi FREESHIP 13', 15000, '2024-11-06 00:00:00', '2024-12-30 23:59:59', 0.0, 100.0, 'NOT_USE', 'FREESHIP_11_13', 13),
+('Ưu đãi FREESHIP 13', 30000, '2024-11-06 00:00:00', '2024-12-30 23:59:59', 0.0, 100.0, 'NOT_USE', 'FREESHIP_12_13', 13),
+('Ưu đãi FREESHIP 13', 15000, '2024-11-06 00:00:00', '2024-12-30 23:59:59', 0.0, 100.0, 'NOT_USE', 'FREESHIP_13_13', 13),
+('Ưu đãi FREESHIP 13', 30000, '2024-11-06 00:00:00', '2024-12-30 23:59:59', 0.0, 100.0, 'NOT_USE', 'FREESHIP_14_13', 13),
+('Ưu đãi FREESHIP 13', 15000, '2024-11-06 00:00:00', '2024-12-30 23:59:59', 0.0, 100.0, 'NOT_USE', 'FREESHIP_15_13', 13),
+('Ưu đãi FREESHIP 14', 30000, '2024-11-07 00:00:00', '2024-12-30 23:59:59', 0.0, 100.0, 'NOT_USE', 'FREESHIP_16_14', 14),
+('Ưu đãi FREESHIP 14', 15000, '2024-11-07 00:00:00', '2024-12-30 23:59:59', 0.0, 100.0, 'NOT_USE', 'FREESHIP_17_14', 14),
+('Ưu đãi FREESHIP 14', 30000, '2024-11-07 00:00:00', '2024-12-30 23:59:59', 0.0, 100.0, 'NOT_USE', 'FREESHIP_18_14', 14),
+('Ưu đãi FREESHIP 14', 15000, '2024-11-07 00:00:00', '2024-12-30 23:59:59', 0.0, 100.0, 'NOT_USE', 'FREESHIP_19_14', 14),
+('Ưu đãi FREESHIP 14', 30000, '2024-11-07 00:00:00', '2024-12-30 23:59:59', 0.0, 100.0, 'NOT_USE', 'FREESHIP_20_14', 14),
+('Ưu đãi FREESHIP 15', 15000, '2024-11-08 00:00:00', '2024-12-30 23:59:59', 0.0, 100.0, 'NOT_USE', 'FREESHIP_21_15', 15),
+('Ưu đãi FREESHIP 15', 30000, '2024-11-08 00:00:00', '2024-12-30 23:59:59', 0.0, 100.0, 'NOT_USE', 'FREESHIP_22_15', 15),
+('Ưu đãi FREESHIP 15', 15000, '2024-11-08 00:00:00', '2024-12-30 23:59:59', 0.0, 100.0, 'NOT_USE', 'FREESHIP_23_15', 15),
+('Ưu đãi FREESHIP 15', 30000, '2024-11-08 00:00:00', '2024-12-30 23:59:59', 0.0, 100.0, 'NOT_USE', 'FREESHIP_24_15', 15),
+('Ưu đãi FREESHIP 15', 15000, '2024-11-08 00:00:00', '2024-12-30 23:59:59', 0.0, 100.0, 'NOT_USE', 'FREESHIP_25_15', 15),
+('Ưu đãi FREESHIP 16', 30000, '2024-11-09 00:00:00', '2024-12-30 23:59:59', 0.0, 100.0, 'NOT_USE', 'FREESHIP_26_16', 16),
+('Ưu đãi FREESHIP 16', 15000, '2024-11-09 00:00:00', '2024-12-30 23:59:59', 0.0, 100.0, 'NOT_USE', 'FREESHIP_27_16', 16),
+('Ưu đãi FREESHIP 16', 30000, '2024-11-09 00:00:00', '2024-12-30 23:59:59', 0.0, 100.0, 'NOT_USE', 'FREESHIP_28_16', 16),
+('Ưu đãi FREESHIP 16', 15000, '2024-11-09 00:00:00', '2024-12-30 23:59:59', 0.0, 100.0, 'NOT_USE', 'FREESHIP_29_16', 16),
+('Ưu đãi FREESHIP 16', 30000, '2024-11-09 00:00:00', '2024-12-30 23:59:59', 0.0, 100.0, 'NOT_USE', 'FREESHIP_30_16', 16),
+('Ưu đãi FREESHIP 17', 15000, '2024-11-10 00:00:00', '2024-12-30 23:59:59', 0.0, 100.0, 'NOT_USE', 'FREESHIP_31_17', 17),
+('Ưu đãi FREESHIP 17', 30000, '2024-11-10 00:00:00', '2024-12-30 23:59:59', 0.0, 100.0, 'NOT_USE', 'FREESHIP_32_17', 17),
+('Ưu đãi FREESHIP 17', 15000, '2024-11-10 00:00:00', '2024-12-30 23:59:59', 0.0, 100.0, 'NOT_USE', 'FREESHIP_33_17', 17),
+('Ưu đãi FREESHIP 17', 30000, '2024-11-10 00:00:00', '2024-12-30 23:59:59', 0.0, 100.0, 'NOT_USE', 'FREESHIP_34_17', 17),
+('Ưu đãi FREESHIP 17', 15000, '2024-11-10 00:00:00', '2024-12-30 23:59:59', 0.0, 100.0, 'NOT_USE', 'FREESHIP_35_17', 17),
+('Ưu đãi FREESHIP 18', 30000, '2024-11-11 00:00:00', '2024-12-30 23:59:59', 0.0, 100.0, 'NOT_USE', 'FREESHIP_36_18', 18),
+('Ưu đãi FREESHIP 18', 15000, '2024-11-11 00:00:00', '2024-12-30 23:59:59', 0.0, 100.0, 'NOT_USE', 'FREESHIP_37_18', 18),
+('Ưu đãi FREESHIP 18', 30000, '2024-11-11 00:00:00', '2024-12-30 23:59:59', 0.0, 100.0, 'NOT_USE', 'FREESHIP_38_18', 18),
+('Ưu đãi FREESHIP 18', 15000, '2024-11-11 00:00:00', '2024-12-30 23:59:59', 0.0, 100.0, 'NOT_USE', 'FREESHIP_39_18', 18),
+('Ưu đãi FREESHIP 18', 30000, '2024-11-11 00:00:00', '2024-12-30 23:59:59', 0.0, 100.0, 'NOT_USE', 'FREESHIP_40_18', 18),
+('Ưu đãi FREESHIP 19', 15000, '2024-11-12 00:00:00', '2024-12-30 23:59:59', 0.0, 100.0, 'NOT_USE', 'FREESHIP_41_19', 19),
+('Ưu đãi FREESHIP 19', 30000, '2024-11-12 00:00:00', '2024-12-30 23:59:59', 0.0, 100.0, 'NOT_USE', 'FREESHIP_42_19', 19),
+('Ưu đãi FREESHIP 19', 15000, '2024-11-12 00:00:00', '2024-12-30 23:59:59', 0.0, 100.0, 'NOT_USE', 'FREESHIP_43_19', 19),
+('Ưu đãi FREESHIP 19', 30000, '2024-11-12 00:00:00', '2024-12-30 23:59:59', 0.0, 100.0, 'NOT_USE', 'FREESHIP_44_19', 19),
+('Ưu đãi FREESHIP 19', 15000, '2024-11-12 00:00:00', '2024-12-30 23:59:59', 0.0, 100.0, 'NOT_USE', 'FREESHIP_45_19', 19),
+('Ưu đãi FREESHIP 20', 30000, '2024-11-13 00:00:00', '2024-12-30 23:59:59', 0.0, 100.0, 'NOT_USE', 'FREESHIP_46_20', 20),
+('Ưu đãi FREESHIP 20', 15000, '2024-11-13 00:00:00', '2024-12-30 23:59:59', 0.0, 100.0, 'NOT_USE', 'FREESHIP_47_20', 20),
+('Ưu đãi FREESHIP 20', 30000, '2024-11-13 00:00:00', '2024-12-30 23:59:59', 0.0, 100.0, 'NOT_USE', 'FREESHIP_48_20', 20),
+('Ưu đãi FREESHIP 20', 15000, '2024-11-13 00:00:00', '2024-12-30 23:59:59', 0.0, 100.0, 'NOT_USE', 'FREESHIP_49_20', 20),
+('Ưu đãi FREESHIP 20', 30000, '2024-11-13 00:00:00', '2024-12-30 23:59:59', 0.0, 100.0, 'NOT_USE', 'FREESHIP_50_20', 20);
 
 INSERT INTO promotion (
-description, discount_limit, effective_date, expiration_date, 
-    min_value_to_be_applied, percent_discount, status, title, promotion_template_id
+description, discount_limit, effective_date, expiration_date,
+min_value_to_be_applied, percent_discount, status, title, promotion_template_id
 ) VALUES
-('Discount 21', -1.0, '2024-11-05 00:00:00', '2024-11-30 23:59:59', -1.0, 10.0, 'NOT_USE', 'DISCOUNT_21', 21),
-('Discount 22', -1.0, '2024-11-05 00:00:00', '2024-11-30 23:59:59', -1.0, 10.0, 'NOT_USE', 'DISCOUNT_22', 22),
-('Discount 23', -1.0, '2024-11-05 00:00:00', '2024-11-30 23:59:59', -1.0, 10.0, 'NOT_USE', 'DISCOUNT_23', 23),
-('Discount 24', -1.0, '2024-11-05 00:00:00', '2024-11-30 23:59:59', -1.0, 10.0, 'NOT_USE', 'DISCOUNT_24', 24),
-('Discount 25', -1.0, '2024-11-05 00:00:00', '2024-11-30 23:59:59', -1.0, 10.0, 'NOT_USE', 'DISCOUNT_25', 25),
-('Discount 26', -1.0, '2024-11-05 00:00:00', '2024-11-30 23:59:59', -1.0, 10.0, 'NOT_USE', 'DISCOUNT_26', 26),
-('Discount 27', -1.0, '2024-11-05 00:00:00', '2024-11-30 23:59:59', -1.0, 10.0, 'NOT_USE', 'DISCOUNT_27', 27),
-('Discount 28', -1.0, '2024-11-05 00:00:00', '2024-11-30 23:59:59', -1.0, 10.0, 'NOT_USE', 'DISCOUNT_28', 28),
-('Discount 29', -1.0, '2024-11-05 00:00:00', '2024-11-30 23:59:59', -1.0, 10.0, 'NOT_USE', 'DISCOUNT_29', 29),
-('Discount 30', -1.0, '2024-11-05 00:00:00', '2024-11-30 23:59:59', -1.0, 10.0, 'NOT_USE', 'DISCOUNT_30', 30);
+('Discount 21', -1.0, '2024-11-05 00:00:00', '2024-12-30 23:59:59', -1.0, 10.0, 'NOT_USE', 'DISCOUNT_21', 21),
+('Discount 22', -1.0, '2024-11-05 00:00:00', '2024-12-30 23:59:59', -1.0, 10.0, 'NOT_USE', 'DISCOUNT_22', 22),
+('Discount 23', -1.0, '2024-11-05 00:00:00', '2024-12-30 23:59:59', -1.0, 10.0, 'NOT_USE', 'DISCOUNT_23', 23),
+('Discount 24', -1.0, '2024-11-05 00:00:00', '2024-12-30 23:59:59', -1.0, 10.0, 'NOT_USE', 'DISCOUNT_24', 24),
+('Discount 25', -1.0, '2024-11-05 00:00:00', '2024-12-30 23:59:59', -1.0, 10.0, 'NOT_USE', 'DISCOUNT_25', 25),
+('Discount 26', -1.0, '2024-11-05 00:00:00', '2024-12-30 23:59:59', -1.0, 10.0, 'NOT_USE', 'DISCOUNT_26', 26),
+('Discount 27', -1.0, '2024-11-05 00:00:00', '2024-12-30 23:59:59', -1.0, 10.0, 'NOT_USE', 'DISCOUNT_27', 27),
+('Discount 28', -1.0, '2024-11-05 00:00:00', '2024-12-30 23:59:59', -1.0, 10.0, 'NOT_USE', 'DISCOUNT_28', 28),
+('Discount 29', -1.0, '2024-11-05 00:00:00', '2024-12-30 23:59:59', -1.0, 10.0, 'NOT_USE', 'DISCOUNT_29', 29),
+('Discount 30', -1.0, '2024-11-05 00:00:00', '2024-12-30 23:59:59', -1.0, 10.0, 'NOT_USE', 'DISCOUNT_30', 30);
 
 
 INSERT INTO promotion_target (
-    applicable_object_id, type, promotion_id
+applicable_object_id, type, promotion_id
 ) VALUES
 (-1, 'WHOLE', 1),
 (-1, 'WHOLE', 2),
@@ -4803,7 +4804,7 @@ INSERT INTO promotion_target (
 (-1, 'WHOLE', 100);
 
 INSERT INTO promotion_target (
-    applicable_object_id, type, promotion_id
+applicable_object_id, type, promotion_id
 ) VALUES
 (-1, 'WHOLE', 101),
 (-1, 'WHOLE', 102),
@@ -4844,7 +4845,7 @@ INSERT INTO order_promotion values
 (8, 8),
 (8, 57);
 
--- Order 2 request return 
+-- Order 2 request return
 INSERT INTO return_book(created_at, description, reason, order_id) values
 ('2024-11-14 08:00:00', 'Sách bị gấp, bìa bị rách', 'DAMAGED', 2);
 
@@ -4857,7 +4858,7 @@ INSERT INTO return_item_books(return_book_item_id, book_id) values
 INSERT INTO return_book_media_file(return_book_id, media_file_id) values
 (1, 1), (1, 2), (1, 3), (1, 4), (1, 5);
 
--- Order 9 return 
+-- Order 9 return
 INSERT INTO return_book(created_at, description, reason, order_id) values
 ('2024-11-10 08:00:00', 'Sách bị gấp, bìa bị rách', 'DAMAGED', 9);
 
@@ -4870,7 +4871,7 @@ INSERT INTO return_item_books(return_book_item_id, book_id) values
 INSERT INTO return_book_media_file(return_book_id, media_file_id) values
 (2, 6), (2, 7), (2, 8), (2, 9), (2, 10);
 
--- Order 10 return 
+-- Order 10 return
 INSERT INTO return_book(created_at, description, reason, order_id) values
 ('2024-11-10 08:00:00', 'Sách bị gấp, bìa bị rách', 'DAMAGED', 10);
 
@@ -4917,8 +4918,7 @@ INSERT INTO order_status_history(status, status_change_date, order_id) values
 
 INSERT INTO order_status_history(status, status_change_date, order_id) values
 ('PLACED', '2024-11-06 15:30:00', 6),
-('CONFIRMED', '2024-11-06 16:00:00', 6),
-('WAITING_FOR_SHIPPING', '2024-11-06 16:30:00', 6);
+('CONFIRMED', '2024-11-06 16:00:00', 6);
 
 INSERT INTO order_status_history(status, status_change_date, order_id) values
 ('PLACED', '2024-11-07 8:00:00', 7),
@@ -4929,8 +4929,7 @@ INSERT INTO order_status_history(status, status_change_date, order_id) values
 
 INSERT INTO order_status_history(status, status_change_date, order_id) values
 ('PLACED', '2024-11-08 13:55:00', 8),
-('CONFIRMED', '2024-11-08 14:00:00', 8),
-('WAITING_FOR_SHIPPING', '2024-11-08 15:00:00', 8);
+('CONFIRMED', '2024-11-08 14:00:00', 8);
 
 INSERT INTO order_status_history(status, status_change_date, order_id) values
 ('PLACED', '2024-11-06 12:48:00', 9),
@@ -4947,7 +4946,254 @@ INSERT INTO order_status_history(status, status_change_date, order_id) values
 ('REVIEWED', '2024-10-21 16:15:00', 10);
 
 INSERT INTO order_status_history(status, status_change_date, order_id) values
-('PLACED', '2024-10-28 11:16:00', 24),
-('CONFIRMED', '2024-10-28 11:30:00', 24),
-('WAITING_FOR_SHIPPING', '2024-10-28 12:00:00', 24),
-('COMPLETED', '2024-10-29 13:22:00', 24);
+('PLACED', '2024-10-20 16:25:00', 11),
+('CONFIRMED', '2024-10-20 16:30:00', 11),
+('WAITING_FOR_SHIPPING', '2024-10-20 17:00:00', 11),
+('COMPLETED', '2024-10-21 13:22:00', 11);
+
+INSERT INTO order_status_history(status, status_change_date, order_id) values
+('PLACED', '2024-10-20 16:25:00', 12),
+('CONFIRMED', '2024-10-20 16:30:00', 12),
+('WAITING_FOR_SHIPPING', '2024-10-20 17:00:00', 12),
+('COMPLETED', '2024-10-21 13:22:00', 12);
+
+INSERT INTO order_status_history(status, status_change_date, order_id) values
+('PLACED', '2024-10-20 16:25:00', 13),
+('CONFIRMED', '2024-10-20 16:30:00', 13),
+('WAITING_FOR_SHIPPING', '2024-10-20 17:00:00', 13),
+('COMPLETED', '2024-10-21 13:22:00', 13);
+
+INSERT INTO order_status_history(status, status_change_date, order_id) values
+('PLACED', '2024-10-20 16:25:00', 14),
+('CONFIRMED', '2024-10-20 16:30:00', 14),
+('WAITING_FOR_SHIPPING', '2024-10-20 17:00:00', 14),
+('COMPLETED', '2024-10-21 13:22:00', 14);
+
+INSERT INTO order_status_history(status, status_change_date, order_id) values
+('PLACED', '2024-10-20 16:25:00', 15),
+('CONFIRMED', '2024-10-20 16:30:00', 15),
+('WAITING_FOR_SHIPPING', '2024-10-20 17:00:00', 15),
+('COMPLETED', '2024-10-21 13:22:00', 15);
+
+INSERT INTO order_status_history(status, status_change_date, order_id) VALUES
+('PLACED', '2024-10-20 16:25:00', 16),
+('CONFIRMED', '2024-10-20 16:30:00', 16),
+('WAITING_FOR_SHIPPING', '2024-10-20 17:00:00', 16),
+('COMPLETED', '2024-10-21 13:22:00', 16),
+
+('PLACED', '2024-10-20 16:25:00', 17),
+('CONFIRMED', '2024-10-20 16:30:00', 17),
+('WAITING_FOR_SHIPPING', '2024-10-20 17:00:00', 17),
+('COMPLETED', '2024-10-21 13:22:00', 17),
+
+('PLACED', '2024-10-20 16:25:00', 18),
+('CONFIRMED', '2024-10-20 16:30:00', 18),
+('WAITING_FOR_SHIPPING', '2024-10-20 17:00:00', 18),
+('COMPLETED', '2024-10-21 13:22:00', 18),
+
+('PLACED', '2024-10-20 16:25:00', 19),
+('CONFIRMED', '2024-10-20 16:30:00', 19),
+('WAITING_FOR_SHIPPING', '2024-10-20 17:00:00', 19),
+('COMPLETED', '2024-10-21 13:22:00', 19),
+
+('PLACED', '2024-10-20 16:25:00', 20),
+('CONFIRMED', '2024-10-20 16:30:00', 20),
+('WAITING_FOR_SHIPPING', '2024-10-20 17:00:00', 20),
+('COMPLETED', '2024-10-21 13:22:00', 20),
+
+('PLACED', '2024-10-20 16:25:00', 21),
+('CONFIRMED', '2024-10-20 16:30:00', 21),
+('WAITING_FOR_SHIPPING', '2024-10-20 17:00:00', 21),
+('COMPLETED', '2024-10-21 13:22:00', 21),
+
+('PLACED', '2024-10-20 16:25:00', 22),
+('CONFIRMED', '2024-10-20 16:30:00', 22),
+('WAITING_FOR_SHIPPING', '2024-10-20 17:00:00', 22),
+('COMPLETED', '2024-10-21 13:22:00', 22),
+
+('PLACED', '2024-10-20 16:25:00', 23),
+('CONFIRMED', '2024-10-20 16:30:00', 23),
+('WAITING_FOR_SHIPPING', '2024-10-20 17:00:00', 23),
+('COMPLETED', '2024-10-21 13:22:00', 23),
+
+('PLACED', '2024-10-20 16:25:00', 24),
+('CONFIRMED', '2024-10-20 16:30:00', 24),
+('WAITING_FOR_SHIPPING', '2024-10-20 17:00:00', 24),
+('COMPLETED', '2024-10-21 13:22:00', 24),
+
+('PLACED', '2024-10-20 16:25:00', 25),
+('CONFIRMED', '2024-10-20 16:30:00', 25),
+('WAITING_FOR_SHIPPING', '2024-10-20 17:00:00', 25),
+('COMPLETED', '2024-10-21 13:22:00', 25),
+
+('PLACED', '2024-10-20 16:25:00', 26),
+('CONFIRMED', '2024-10-20 16:30:00', 26),
+('WAITING_FOR_SHIPPING', '2024-10-20 17:00:00', 26),
+('COMPLETED', '2024-10-21 13:22:00', 26),
+
+('PLACED', '2024-10-20 16:25:00', 27),
+('CONFIRMED', '2024-10-20 16:30:00', 27),
+('WAITING_FOR_SHIPPING', '2024-10-20 17:00:00', 27),
+('COMPLETED', '2024-10-21 13:22:00', 27),
+
+('PLACED', '2024-10-20 16:25:00', 28),
+('CONFIRMED', '2024-10-20 16:30:00', 28),
+('WAITING_FOR_SHIPPING', '2024-10-20 17:00:00', 28),
+('COMPLETED', '2024-10-21 13:22:00', 28),
+
+('PLACED', '2024-10-20 16:25:00', 29),
+('CONFIRMED', '2024-10-20 16:30:00', 29),
+('WAITING_FOR_SHIPPING', '2024-10-20 17:00:00', 29),
+('COMPLETED', '2024-10-21 13:22:00', 29),
+
+('PLACED', '2024-10-20 16:25:00', 30),
+('CONFIRMED', '2024-10-20 16:30:00', 30),
+('WAITING_FOR_SHIPPING', '2024-10-20 17:00:00', 30),
+('COMPLETED', '2024-10-21 13:22:00', 30);
+
+
+INSERT INTO order_status_history(status, status_change_date, order_id) VALUES
+('PLACED', '2024-10-20 16:25:00', 31),
+('CONFIRMED', '2024-10-20 16:30:00', 31),
+('WAITING_FOR_SHIPPING', '2024-10-20 17:00:00', 31),
+('COMPLETED', '2024-10-21 13:22:00', 31),
+
+('PLACED', '2024-10-20 16:25:00', 32),
+('CONFIRMED', '2024-10-20 16:30:00', 32),
+('WAITING_FOR_SHIPPING', '2024-10-20 17:00:00', 32),
+('COMPLETED', '2024-10-21 13:22:00', 32),
+
+('PLACED', '2024-10-20 16:25:00', 33),
+('CONFIRMED', '2024-10-20 16:30:00', 33),
+('WAITING_FOR_SHIPPING', '2024-10-20 17:00:00', 33),
+('COMPLETED', '2024-10-21 13:22:00', 33),
+
+('PLACED', '2024-10-20 16:25:00', 34),
+('CONFIRMED', '2024-10-20 16:30:00', 34),
+('WAITING_FOR_SHIPPING', '2024-10-20 17:00:00', 34),
+('COMPLETED', '2024-10-21 13:22:00', 34),
+
+('PLACED', '2024-10-20 16:25:00', 35),
+('CONFIRMED', '2024-10-20 16:30:00', 35),
+('WAITING_FOR_SHIPPING', '2024-10-20 17:00:00', 35),
+('COMPLETED', '2024-10-21 13:22:00', 35),
+
+('PLACED', '2024-10-20 16:25:00', 36),
+('CONFIRMED', '2024-10-20 16:30:00', 36),
+('WAITING_FOR_SHIPPING', '2024-10-20 17:00:00', 36),
+('COMPLETED', '2024-10-21 13:22:00', 36),
+
+('PLACED', '2024-10-20 16:25:00', 37),
+('CONFIRMED', '2024-10-20 16:30:00', 37),
+('WAITING_FOR_SHIPPING', '2024-10-20 17:00:00', 37),
+('COMPLETED', '2024-10-21 13:22:00', 37),
+
+('PLACED', '2024-10-20 16:25:00', 38),
+('CONFIRMED', '2024-10-20 16:30:00', 38),
+('WAITING_FOR_SHIPPING', '2024-10-20 17:00:00', 38),
+('COMPLETED', '2024-10-21 13:22:00', 38),
+
+('PLACED', '2024-10-20 16:25:00', 39),
+('CONFIRMED', '2024-10-20 16:30:00', 39),
+('WAITING_FOR_SHIPPING', '2024-10-20 17:00:00', 39),
+('COMPLETED', '2024-10-21 13:22:00', 39),
+
+('PLACED', '2024-10-20 16:25:00', 40),
+('CONFIRMED', '2024-10-20 16:30:00', 40),
+('WAITING_FOR_SHIPPING', '2024-10-20 17:00:00', 40),
+('COMPLETED', '2024-10-21 13:22:00', 40),
+
+('PLACED', '2024-10-20 16:25:00', 41),
+('CONFIRMED', '2024-10-20 16:30:00', 41),
+('WAITING_FOR_SHIPPING', '2024-10-20 17:00:00', 41),
+('COMPLETED', '2024-10-21 13:22:00', 41),
+
+('PLACED', '2024-10-20 16:25:00', 42),
+('CONFIRMED', '2024-10-20 16:30:00', 42),
+('WAITING_FOR_SHIPPING', '2024-10-20 17:00:00', 42),
+('COMPLETED', '2024-10-21 13:22:00', 42),
+
+('PLACED', '2024-10-20 16:25:00', 43),
+('CONFIRMED', '2024-10-20 16:30:00', 43),
+('WAITING_FOR_SHIPPING', '2024-10-20 17:00:00', 43),
+('COMPLETED', '2024-10-21 13:22:00', 43),
+
+('PLACED', '2024-10-20 16:25:00', 44),
+('CONFIRMED', '2024-10-20 16:30:00', 44),
+('WAITING_FOR_SHIPPING', '2024-10-20 17:00:00', 44),
+('COMPLETED', '2024-10-21 13:22:00', 44),
+
+('PLACED', '2024-10-20 16:25:00', 45),
+('CONFIRMED', '2024-10-20 16:30:00', 45),
+('WAITING_FOR_SHIPPING', '2024-10-20 17:00:00', 45),
+('COMPLETED', '2024-10-21 13:22:00', 45),
+
+('PLACED', '2024-10-20 16:25:00', 46),
+('CONFIRMED', '2024-10-20 16:30:00', 46),
+('WAITING_FOR_SHIPPING', '2024-10-20 17:00:00', 46),
+('COMPLETED', '2024-10-21 13:22:00', 46),
+
+('PLACED', '2024-10-20 16:25:00', 47),
+('CONFIRMED', '2024-10-20 16:30:00', 47),
+('WAITING_FOR_SHIPPING', '2024-10-20 17:00:00', 47),
+('COMPLETED', '2024-10-21 13:22:00', 47),
+
+('PLACED', '2024-10-20 16:25:00', 48),
+('CONFIRMED', '2024-10-20 16:30:00', 48),
+('WAITING_FOR_SHIPPING', '2024-10-20 17:00:00', 48),
+('COMPLETED', '2024-10-21 13:22:00', 48),
+
+('PLACED', '2024-10-20 16:25:00', 49),
+('CONFIRMED', '2024-10-20 16:30:00', 49),
+('WAITING_FOR_SHIPPING', '2024-10-20 17:00:00', 49),
+('COMPLETED', '2024-10-21 13:22:00', 49),
+
+('PLACED', '2024-10-20 16:25:00', 50),
+('CONFIRMED', '2024-10-20 16:30:00', 50),
+('WAITING_FOR_SHIPPING', '2024-10-20 17:00:00', 50),
+('COMPLETED', '2024-10-21 13:22:00', 50),
+
+('PLACED', '2024-10-20 16:25:00', 51),
+('CONFIRMED', '2024-10-20 16:30:00', 51),
+('WAITING_FOR_SHIPPING', '2024-10-20 17:00:00', 51),
+('COMPLETED', '2024-10-21 13:22:00', 51),
+
+('PLACED', '2024-10-20 16:25:00', 52),
+('CONFIRMED', '2024-10-20 16:30:00', 52),
+('WAITING_FOR_SHIPPING', '2024-10-20 17:00:00', 52),
+('COMPLETED', '2024-10-21 13:22:00', 52),
+
+('PLACED', '2024-10-20 16:25:00', 53),
+('CONFIRMED', '2024-10-20 16:30:00', 53),
+('WAITING_FOR_SHIPPING', '2024-10-20 17:00:00', 53),
+('COMPLETED', '2024-10-21 13:22:00', 53),
+
+('PLACED', '2024-10-20 16:25:00', 54),
+('CONFIRMED', '2024-10-20 16:30:00', 54),
+('WAITING_FOR_SHIPPING', '2024-10-20 17:00:00', 54),
+('COMPLETED', '2024-10-21 13:22:00', 54),
+
+('PLACED', '2024-10-20 16:25:00', 55),
+('CONFIRMED', '2024-10-20 16:30:00', 55),
+('WAITING_FOR_SHIPPING', '2024-10-20 17:00:00', 55),
+('COMPLETED', '2024-10-21 13:22:00', 55),
+
+('PLACED', '2024-10-20 16:25:00', 56),
+('CONFIRMED', '2024-10-20 16:30:00', 56),
+('WAITING_FOR_SHIPPING', '2024-10-20 17:00:00', 56),
+('COMPLETED', '2024-10-21 13:22:00', 56),
+
+('PLACED', '2024-10-20 16:25:00', 57),
+('CONFIRMED', '2024-10-20 16:30:00', 57),
+('WAITING_FOR_SHIPPING', '2024-10-20 17:00:00', 57),
+('COMPLETED', '2024-10-21 13:22:00', 57),
+
+('PLACED', '2024-10-20 16:25:00', 58),
+('CONFIRMED', '2024-10-20 16:30:00', 58),
+('WAITING_FOR_SHIPPING', '2024-10-20 17:00:00', 58),
+('COMPLETED', '2024-10-21 13:22:00', 58);
+
+INSERT INTO notification (content, created_at, hyper_link, sent_time, status, title, type, customer_id, owner_id, staff_id)
+VALUES
+('Đơn hàng 1 đã được giao đến bạn', '2024-11-01 12:00:00', '/order-detail?orderId=64', '2024-11-01 12:00:00', 'NOT_SEEN', 'Giao hàng thành công đơn hàng 1', 'ORDER', 2, NULL, NULL),
+('Đơn hàng 2 đã được giao đến bạn', '2024-11-05 08:30:00', '/order-detail?orderId=64', '2024-11-05 08:30:00', 'NOT_SEEN', 'Giao hàng thành công đơn hàng 2', 'ORDER', 2, NULL, NULL);

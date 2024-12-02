@@ -290,11 +290,23 @@ $(document).ready(function () {
 function stopPromotion() {
     // Lấy giá trị mã khuyến mãi từ input có name="code"
     var code = document.querySelector('input[name="code"]').value;
-    console.log(code)
+    console.log(code);
     if (!code) {
         alert('Mã khuyến mãi không hợp lệ.');
         return;
     }
+
+    // Mở modal xác nhận
+    var myModal = new bootstrap.Modal(document.getElementById('hideReviewModal'));
+    myModal.show();
+
+    // Lưu giá trị mã khuyến mãi vào modal (nếu cần thiết)
+    document.querySelector('.review-id').value = code;
+}
+
+function confirmStopPromotion() {
+    // Lấy mã khuyến mãi đã lưu trong modal
+    var code = document.querySelector('.review-id').value;
 
     // Gửi yêu cầu AJAX đến API
     $.ajax({
@@ -312,7 +324,6 @@ function stopPromotion() {
             if (response.message.includes("thành công")) {
                 $('.stop-promotion-btn').hide();
                 $('.cr-btn-primary').hide();
-
             }
         },
         error: function(xhr, status, error) {
@@ -326,7 +337,12 @@ function stopPromotion() {
             });
         }
     });
+
+    // Đóng modal sau khi gửi yêu cầu
+    var myModal = bootstrap.Modal.getInstance(document.getElementById('hideReviewModal'));
+    myModal.hide();
 }
+
 
 
 

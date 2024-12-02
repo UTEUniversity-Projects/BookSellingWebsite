@@ -1,8 +1,11 @@
 package com.biblio.apis.staff;
 
 
+import com.biblio.dto.request.NotificationInsertRequest;
 import com.biblio.dto.response.OrderStatusHistoryResponse;
+import com.biblio.enumeration.ENotificationType;
 import com.biblio.enumeration.EOrderStatus;
+import com.biblio.service.ICustomerService;
 import com.biblio.service.IOrderService;
 import com.biblio.service.IOrderStatusHistoryService;
 import com.biblio.service.IReturnBookService;
@@ -37,6 +40,9 @@ public class OrderAPI extends HttpServlet {
 
     @Inject
     IReturnBookService returnBookService;
+
+    @Inject
+    ICustomerService customerService;
 
     @Serial
     private static final long serialVersionUID = 1L;
@@ -106,6 +112,10 @@ public class OrderAPI extends HttpServlet {
                     handleCancelRefundOrder(request, response, result, mapper);
                     break;
 
+                case "/received-order":
+                    handleReceivedOrder(request, response, result, mapper);
+                    break;
+
                 default:
                     result.put("message", "Không tìm thấy hành động phù hợp!");
                     result.put("type", "error");
@@ -127,6 +137,15 @@ public class OrderAPI extends HttpServlet {
         boolean success = orderService.updateStatus(orderId, EOrderStatus.PACKING);
 
         if (success) {
+
+            NotificationInsertRequest notificationInsertRequest = new NotificationInsertRequest();
+            notificationInsertRequest.setContent("Đơn hàng " + orderId + " đã được xác nhận, sản phẩm sẽ được gửi đến bạn.");
+            notificationInsertRequest.setTitle("Đơn hàng đã được xác nhận");
+            notificationInsertRequest.setType(ENotificationType.ORDER);
+            notificationInsertRequest.setHyperLink("/order-detail?orderId=" + orderId);
+
+            customerService.addNewNotification(notificationInsertRequest, orderId);
+
             result.put("message", "Đơn hàng được xác nhận thành công!");
             result.put("type", "success");
             result.put("statusType", EOrderStatus.PACKING.name());
@@ -157,6 +176,14 @@ public class OrderAPI extends HttpServlet {
 
         boolean success = orderService.updateStatus(orderId, EOrderStatus.CANCELED);
         if (success) {
+            NotificationInsertRequest notificationInsertRequest = new NotificationInsertRequest();
+            notificationInsertRequest.setContent("Đơn hàng " + orderId + " của bạn đã bị hủy, shop sẽ hoàn tiền lại nhanh nhất đến bạn.");
+            notificationInsertRequest.setTitle("Đơn hàng bị hủy");
+            notificationInsertRequest.setType(ENotificationType.ORDER);
+            notificationInsertRequest.setHyperLink("/order-detail?orderId=" + orderId);
+
+            customerService.addNewNotification(notificationInsertRequest, orderId);
+
             result.put("message", "Đơn hàng được hủy thành công!");
             result.put("type", "success");
             result.put("statusType", EOrderStatus.CANCELED.name());
@@ -181,6 +208,15 @@ public class OrderAPI extends HttpServlet {
         long orderId = Long.parseLong(jsonMap.get("orderId").toString());
         boolean success = orderService.updateStatus(orderId, EOrderStatus.SHIPPING);
         if (success) {
+
+            NotificationInsertRequest notificationInsertRequest = new NotificationInsertRequest();
+            notificationInsertRequest.setContent("Đơn hàng " + orderId + " đã giao đến bạn");
+            notificationInsertRequest.setTitle("Giao hàng thành công");
+            notificationInsertRequest.setType(ENotificationType.ORDER);
+            notificationInsertRequest.setHyperLink("/order-detail?orderId=" + orderId);
+
+            customerService.addNewNotification(notificationInsertRequest, orderId);
+
             result.put("message", "Đơn hàng được chuyển đến đơn vị vận chuyển thành công!");
             result.put("type", "success");
             result.put("statusType", EOrderStatus.SHIPPING.name());
@@ -200,6 +236,15 @@ public class OrderAPI extends HttpServlet {
         boolean success = orderService.updateStatus(orderId, EOrderStatus.REFUNDED) &&
                 returnBookService.update(returnBookId);
         if (success) {
+
+            NotificationInsertRequest notificationInsertRequest = new NotificationInsertRequest();
+            notificationInsertRequest.setContent("Đơn hàng " + orderId + " đủ điều kiện để hoàn trả");
+            notificationInsertRequest.setTitle("Hoàn trả đơn hàng thành công");
+            notificationInsertRequest.setType(ENotificationType.ORDER);
+            notificationInsertRequest.setHyperLink("/order-detail?orderId=" + orderId);
+
+            customerService.addNewNotification(notificationInsertRequest, orderId);
+
             result.put("message", "Đơn hàng được xác nhận thành công!");
             result.put("type", "success");
             result.put("statusType", EOrderStatus.REFUNDED.name());
@@ -227,6 +272,14 @@ public class OrderAPI extends HttpServlet {
         String content = jsonMap.get("content").toString();
         boolean success = orderService.updateStatus(orderId, EOrderStatus.COMPLETE_DELIVERY);
         if (success) {
+            NotificationInsertRequest notificationInsertRequest = new NotificationInsertRequest();
+            notificationInsertRequest.setContent("Đơn hàng " + orderId + " không đủ điều kiện hoàn trả.");
+            notificationInsertRequest.setTitle("Từ chối hoàn trả");
+            notificationInsertRequest.setType(ENotificationType.ORDER);
+            notificationInsertRequest.setHyperLink("/order-detail?orderId=" + orderId);
+
+            customerService.addNewNotification(notificationInsertRequest, orderId);
+
             result.put("message", "Từ chối hoàn trả thành công!");
             result.put("type", "success");
             result.put("statusType", EOrderStatus.COMPLETE_DELIVERY.name());
@@ -247,11 +300,63 @@ public class OrderAPI extends HttpServlet {
         }
         response.getWriter().write(mapper.writeValueAsString(result));
     }
+
+    private void handleReceivedOrder(HttpServletRequest request, HttpServletResponse response, Map<String, String> result, ObjectMapper mapper) throws IOException {
+        Map<String, Object> jsonMap = mapper.readValue(request.getReader(), Map.class);
+        long orderId = Long.parseLong(jsonMap.get("orderId").toString());
+        boolean success = orderService.updateStatus(orderId, EOrderStatus.COMPLETE_DELIVERY);
+        if (success) {
+            result.put("message", "Đơn hàng được nhận thành công!");
+            result.put("type", "success");
+            result.put("statusType", EOrderStatus.COMPLETE_DELIVERY.name());
+            result.put("status", EOrderStatus.COMPLETE_DELIVERY.getDescription());
+            result.put("statusStyle", EOrderStatus.COMPLETE_DELIVERY.getStatusStyle());
+        } else {
+            result.put("message", "Không thể xác nhận đơn hàng. Vui lòng thử lại!");
+            result.put("type", "info");
+        }
+
+        response.getWriter().write(mapper.writeValueAsString(result));
+    }
+
+    private void handleGetOrderHistory(HttpServletRequest request, HttpServletResponse response, ObjectMapper mapper) throws IOException {
+        String orderIdStr = request.getParameter("orderId");
+
+        if (orderIdStr == null || orderIdStr.isEmpty()) {
+            response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
+            response.getWriter().write("{\"error\": \"Missing orderId parameter\"}");
+            return;
+        }
+
+        Long orderId = null;
+        try {
+            orderId = Long.parseLong(orderIdStr);
+        } catch (NumberFormatException e) {
+            response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
+            response.getWriter().write("{\"error\": \"Invalid orderId format\"}");
+            return;
+        }
+
+        List<OrderStatusHistoryResponse> orderHistories = orderStatusHistoryService.getByOrderId(orderId);
+
+        List<Map<String, Object>> steps = new ArrayList<>();
+        for (OrderStatusHistoryResponse history : orderHistories) {
+            Map<String, Object> step = new HashMap<>();
+            step.put("status", history.getStatus());
+            step.put("date", history.getDate());
+            steps.add(step);
+        }
+
+        Map<String, Object> responseMap = new HashMap<>();
+        responseMap.put("steps", steps);
+        response.getWriter().write(mapper.writeValueAsString(responseMap));
+    }
+
     // endregion
 
     // region Email
 
-    private void sendOrderConfirmationEmail(HttpServletRequest request ,Long orderId/*, Double finalPrice*/) throws IOException {
+    private void sendOrderConfirmationEmail(HttpServletRequest request, Long orderId) throws IOException {
         String scheme = request.getScheme();
         String serverName = request.getServerName();
         int serverPort = request.getServerPort();
@@ -290,7 +395,7 @@ public class OrderAPI extends HttpServlet {
         }
     }
 
-    private void sendCancelOrderEmail(HttpServletRequest request,Long orderId, String cancelContent) throws IOException {
+    private void sendCancelOrderEmail(HttpServletRequest request, Long orderId, String cancelContent) throws IOException {
         String scheme = request.getScheme();
         String serverName = request.getServerName();
         int serverPort = request.getServerPort();
@@ -329,40 +434,6 @@ public class OrderAPI extends HttpServlet {
         }
     }
 
-    // endregion
-
-    private void handleGetOrderHistory(HttpServletRequest request, HttpServletResponse response, ObjectMapper mapper) throws IOException {
-        String orderIdStr = request.getParameter("orderId");
-
-        if (orderIdStr == null || orderIdStr.isEmpty()) {
-            response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
-            response.getWriter().write("{\"error\": \"Missing orderId parameter\"}");
-            return;
-        }
-
-        Long orderId = null;
-        try {
-            orderId = Long.parseLong(orderIdStr);
-        } catch (NumberFormatException e) {
-            response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
-            response.getWriter().write("{\"error\": \"Invalid orderId format\"}");
-            return;
-        }
-
-        List<OrderStatusHistoryResponse> orderHistories = orderStatusHistoryService.getByOrderId(orderId);
-
-        List<Map<String, Object>> steps = new ArrayList<>();
-        for (OrderStatusHistoryResponse history : orderHistories) {
-            Map<String, Object> step = new HashMap<>();
-            step.put("status", history.getStatus());
-            step.put("date", history.getDate());
-            steps.add(step);
-        }
-
-        Map<String, Object> responseMap = new HashMap<>();
-        responseMap.put("steps", steps);
-        response.getWriter().write(mapper.writeValueAsString(responseMap));
-    }
     private void sendConfirmRefundOrderEmail(HttpServletRequest request, Long orderId) throws IOException {
         String scheme = request.getScheme();
         String serverName = request.getServerName();
@@ -440,7 +511,8 @@ public class OrderAPI extends HttpServlet {
             }
         }
     }
-
+    
+    // endregion
 
 }
 

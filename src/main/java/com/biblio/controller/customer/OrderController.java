@@ -1,11 +1,10 @@
 package com.biblio.controller.customer;
 
-import com.biblio.dto.response.AccountGetResponse;
-import com.biblio.dto.response.CustomerDetailResponse;
-import com.biblio.dto.response.OrderCustomerResponse;
+import com.biblio.dto.response.*;
 import com.biblio.enumeration.EOrderStatus;
 import com.biblio.service.ICustomerService;
 import com.biblio.service.IOrderService;
+import com.biblio.service.IPromotionTemplateService;
 
 import java.io.IOException;
 import java.io.Serial;
@@ -29,6 +28,8 @@ public class OrderController extends HttpServlet {
     private IOrderService orderService;
     @Inject
     private ICustomerService customerService;
+    @Inject
+    IPromotionTemplateService promotionTemplateService;
 
     /**
      * @see HttpServlet#HttpServlet()
@@ -70,7 +71,7 @@ public class OrderController extends HttpServlet {
         }
 
         // Lọc đơn hàng dựa trên trạng thái (status)
-        List<OrderCustomerResponse> orderList;
+        List<OrderDetailsManagementResponse> orderList;
         if ("all".equalsIgnoreCase(statusParam)) {
             // Nếu trạng thái là "all", lấy tất cả đơn hàng
             orderList = orderService.getAllOrderCustomerResponse(customerId);

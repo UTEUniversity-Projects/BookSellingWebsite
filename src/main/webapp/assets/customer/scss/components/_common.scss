@@ -137,7 +137,6 @@ a {
 }
 
 .cr-button {
-  height: 40px;
   transition: all 0.3s ease-in-out;
   padding: 8px 22px;
   font-size: 14px;
@@ -722,4 +721,21 @@ ul {
 
 .btn--error {
   --bg-color: #f14668;
+}
+
+.d-none {
+  display: none;
+}
+
+.d-flex {
+  display: inline-flex;
+}
+
+.error-message {
+  color: #f14668;
+  font-size: 12px;
+  font-weight: 400;
+  font-style: italic;
+  display: none;
+  margin-top: 5px;
 }

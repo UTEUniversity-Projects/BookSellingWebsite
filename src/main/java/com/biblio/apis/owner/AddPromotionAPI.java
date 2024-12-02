@@ -70,7 +70,7 @@ public class AddPromotionAPI extends HttpServlet {
                 map.put("message", "Promotion added successfully");
 
                 // Gửi email bất đồng bộ cho từng khách hàng
-                for (Long i = 1L; i <= 5; i++) {
+                for (Long i = 1L; i <= 7; i++) {
                     final Long customerId = i; // Lưu giá trị customerId để sử dụng trong lambda expression
                     executorService.submit(() -> {
                         try {

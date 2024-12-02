@@ -32,11 +32,10 @@ $(document).ready(function () {
 					});
 					addTooCartAnimation();
 					countCartItem();
-				}
-				else {
+				} else {
 					setTimeout(() => {
 						window.location.href = `${contextPath}/login`;
-					})
+					});
 				}
 			},
 			error: function (xhr, status, error) {
@@ -145,11 +144,11 @@ $(document).ready(function () {
 		});
 	}, 500));
 	// Delete
-	$(document).on('click',  '.remove-item',function () {
-		const cartItemId = $(this).closest("li, tr").data('cart-item-id');
-		const item = $(this).closest("li, tr");
-		const container = $(this).closest(".crcart-pro-items, .row");
-		const parent = item.closest("tbody, ul");
+	$(document).on('click', '.remove-item', function () {
+		const cartItemId = $(this).closest('li, tr').data('cart-item-id');
+		const item = $(this).closest('li, tr');
+		const container = $(this).closest('.crcart-pro-items, .row');
+		const parent = item.closest('tbody, ul');
 		console.log(cartItemId);
 		$.ajax({
 			url: `${contextPath}/api/customer/delete-cart-item`,
@@ -188,21 +187,21 @@ $(document).ready(function () {
 	countCartItem();
 });
 
-function countCartItem() {
+function countCartItem () {
 	$.ajax({
 		url: `${contextPath}/api/customer/count-cart-item`,
 		type: 'GET',
 		success: function (response) {
-			const $cart = $(".cart");
-			$cart.find(".cart-item-count").text(response.count);
+			const $cart = $('.cart');
+			$cart.find('.cart-item-count').text(response.count);
 		},
 		error: function (xhr, status, error) {
 			console.error('Error: ', xhr.responseText);
 		}
-	})
+	});
 }
 
-function addTooCartAnimation() {
+function addTooCartAnimation () {
 	const cart = $('.cart i');
 	setTimeout(() => {
 		cart.addClass('shake');
@@ -260,5 +259,37 @@ $(document).ready(function() {
             alert("Vui lòng chọn ít nhất một sản phẩm để thanh toán!");
         }
     });
+
+$(document).ready(function () {
+	$('#btn-checkout').click(function () {
+		const selectedItems = [];
+		$('.product-checkbox:checked').each(function () {
+			const productId = $(this).closest('tr').data('product-id');
+			const quantity = $(this).closest('tr').find('.quantity').val();
+
+			selectedItems.push({
+				productId: productId,
+				quantity: quantity
+			});
+		});
+
+		if (selectedItems.length > 0) {
+			console.log(selectedItems);
+			$.ajax({
+				url: `${contextPath}/api/customer/checkout`,
+				type: 'POST',
+				contentType: 'application/json',
+				data: JSON.stringify({ items: selectedItems }),
+				success: function (response) {
+					window.location.href = `${contextPath}/checkout`;
+				},
+				error: function (xhr, status, error) {
+					alert('Có lỗi xảy ra. Vui lòng thử lại!');
+				}
+			});
+		} else {
+			alert('Vui lòng chọn ít nhất một sản phẩm để thanh toán!');
+		}
+	});
 });
 

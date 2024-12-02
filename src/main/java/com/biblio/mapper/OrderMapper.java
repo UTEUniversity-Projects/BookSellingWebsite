@@ -1,5 +1,6 @@
 package com.biblio.mapper;
 
+import com.biblio.dao.impl.BankTransferDAOImpl;
 import com.biblio.dao.impl.EWalletDAOImpl;
 import com.biblio.dto.response.*;
 import com.biblio.entity.Order;
@@ -22,7 +23,7 @@ public class OrderMapper {
                 .id(order.getId())
                 .customerName(order.getCustomer().getFullName())
                 .orderDate(formatDateTime(order.getOrderDate(), "HH:mm dd-MM-yyyy"))
-                .totalPrice(order.calTotalPrice())
+                .totalPrice(order.getBankTransfer().getAmount())
                 .paymentMethod(order.getPaymentType().getValue())
                 .status(order.getStatus())
                 .statusStyle(order.getStatus().getStatusStyle())
@@ -31,7 +32,7 @@ public class OrderMapper {
 
     public static OrderDetailsManagementResponse mapToOrderDetailsManagementResponse(Order order) {
         List<OrderProductResponse> products = order.getOrderItems().stream()
-                .map(OrderItemMapper::mapToOrderProductResponse)
+                .flatMap(orderItem -> OrderItemMapper.toOrderProductCustomerResponse(orderItem).stream())
                 .collect(Collectors.toList());
 
         CustomerResponse customer = CustomerMapper.toCustomerResponse(order.getCustomer());
@@ -117,10 +118,10 @@ public class OrderMapper {
     }
 
     public static RevenueResponse toRevenueResponse(Order order) {
-        EWalletDAOImpl walletDao = new EWalletDAOImpl();
+        BankTransferDAOImpl bankTransferDAO = new BankTransferDAOImpl();
         return RevenueResponse.builder()
                 .date(order.getOrderDate())
-                .revenue(walletDao.findByOrderId(order.getId()).getAmount())
+                .revenue(bankTransferDAO.findByOrderId(order.getId()).getAmount())
                 .build();
     }
 
