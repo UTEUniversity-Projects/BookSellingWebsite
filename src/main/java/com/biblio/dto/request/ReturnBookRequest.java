@@ -11,6 +11,6 @@ import java.time.LocalDate;
 @Setter
 @Builder
 public class ReturnBookRequest {
-    private Long idTemplate;
-    private Integer returnQuantity;
+    private Long bookTemplateId;
+    private int quantity;
 }

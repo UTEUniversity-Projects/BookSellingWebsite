@@ -730,3 +730,12 @@ ul {
 .d-flex {
   display: inline-flex;
 }
+
+.error-message {
+  color: #f14668;
+  font-size: 12px;
+  font-weight: 400;
+  font-style: italic;
+  display: none;
+  margin-top: 5px;
+}

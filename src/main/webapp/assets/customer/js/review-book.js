@@ -51,16 +51,16 @@ document.getElementById("btn-submit-review").addEventListener("click", function 
                 title: "Thành công", message: data.message, type: 'success', duration: 3000
             });
             console.log(data);
-            $('.product-item').each(function() {
-                const itemProductId = $(this).data('product-id');
-                if (String(itemProductId) === String(productId)) {
-                    $(this).find('.btn-review')
-                        .removeClass('d-flex')
-                        .addClass('d-none');
-                } else {
-                    console.log("no");
-                }
-            });
+            // $('.product-item').each(function() {
+            //     const itemProductId = $(this).data('product-id');
+            //     if (String(itemProductId) === String(productId)) {
+            //         $(this).find('.btn-review')
+            //             .removeClass('d-flex')
+            //             .addClass('d-none');
+            //     } else {
+            //         console.log("no");
+            //     }
+            // });
             $('#reviewModal').modal('hide');
             reloadStepper(orderId);
         },

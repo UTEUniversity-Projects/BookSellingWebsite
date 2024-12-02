@@ -124,7 +124,10 @@
                                 <div class="book-info flex justify-between items-center w-full pl-4">
                                     <!-- Tên sản phẩm -->
                                     <div>
-                                        <h4 style="margin-bottom: 20px; font-size: 24px;">${orderProduct.title}</h4>
+                                        <h4 class="product-title"
+                                            data-href="${pageContext.request.contextPath}/book?id=${orderProduct.bookTemplateId}">
+                                                ${orderProduct.title}
+                                        </h4>
                                         <span class="discount-percent status status__complete_delivery">
                                                 ${orderProduct.discountPercent}
                                         </span>
