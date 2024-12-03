@@ -1,13 +1,11 @@
 package com.biblio.controller.staff;
 
-import com.biblio.dto.response.DiscountResponse;
-import com.biblio.dto.response.OrderDetailsManagementResponse;
-import com.biblio.dto.response.OrderProductResponse;
-import com.biblio.dto.response.ReturnBookManagementResponse;
+import com.biblio.dto.response.*;
 import com.biblio.enumeration.EOrderStatus;
 import com.biblio.service.IOrderService;
 import com.biblio.service.IPromotionTemplateService;
 import com.biblio.service.IReturnBookService;
+import com.biblio.utils.OrderUtil;
 
 import javax.inject.Inject;
 import javax.servlet.ServletException;
@@ -33,6 +31,9 @@ public class OrderDetailsController extends HttpServlet {
     @Inject
     IPromotionTemplateService promotionTemplateService;
 
+    @Inject
+    OrderUtil orderUtil;
+
     /**
      * @see HttpServlet#HttpServlet()
      */
@@ -46,18 +47,19 @@ public class OrderDetailsController extends HttpServlet {
      */
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         // TODO Auto-generated method stub
-        Long orderId = Long.parseLong(request.getParameter("id"));
-        OrderDetailsManagementResponse orderDetailsResponse = orderService.getOrderDetailsManagementResponse(orderId);
 
-        List<DiscountResponse> discounts = promotionTemplateService.getAllDiscounts();
-        for (OrderProductResponse product : orderDetailsResponse.getProducts()) {
-            double discount = promotionTemplateService.percentDiscount(product.getBookTemplateId(), discounts);
-            product.setDiscountPercent(discount);
-            product.calTotalPrice();
+        AccountGetResponse account = (AccountGetResponse) request.getSession().getAttribute("account");
+        if (account == null) {
+            response.sendRedirect(request.getContextPath() + "/login");
+            return;
         }
 
-        orderDetailsResponse.updateTotalPrice();
-        orderDetailsResponse.updateFinalPrice();
+        Long orderId = Long.parseLong(request.getParameter("id"));
+        OrderDetailsManagementResponse orderDetailsResponse = orderUtil.getOrderDetails(orderId);
+        if (orderDetailsResponse == null) {
+            response.sendRedirect(request.getContextPath() + "/staff/order-dashboard");
+            return;
+        }
 
         if (orderDetailsResponse.getStatus() == EOrderStatus.REQUEST_REFUND || orderDetailsResponse.getStatus() == EOrderStatus.REFUNDED) {
             ReturnBookManagementResponse returnBook = returnBookService.findReturnBookByOrderId(orderId);

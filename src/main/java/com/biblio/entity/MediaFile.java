@@ -33,7 +33,6 @@ public class MediaFile implements Serializable {
 
     // endregion
 
-
     public String getImagePath() {
         return storedCode.replace("\\", "/");
     }

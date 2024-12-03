@@ -1,5 +1,6 @@
 package com.biblio.apis.staff;
 
+import com.biblio.controller.staff.OrderDetailsController;
 import com.biblio.dto.response.BookCardResponse;
 import com.biblio.dto.response.DiscountResponse;
 import com.biblio.dto.response.OrderDetailsManagementResponse;
@@ -7,6 +8,7 @@ import com.biblio.dto.response.OrderProductResponse;
 import com.biblio.service.IEmailService;
 import com.biblio.service.IOrderService;
 import com.biblio.service.IPromotionTemplateService;
+import com.biblio.utils.OrderUtil;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import javax.inject.Inject;
@@ -28,10 +30,7 @@ public class SendEmailAPI extends HttpServlet {
     private static final long serialVersionUID = 1L;
 
     @Inject
-    private IOrderService orderService;
-
-    @Inject
-    private IPromotionTemplateService promotionTemplateService;
+    private OrderUtil orderUtil;
 
     @Inject
     private IEmailService emailService;
@@ -89,30 +88,13 @@ public class SendEmailAPI extends HttpServlet {
             if (orderIdParam == null || orderIdParam.isEmpty()) {
                 throw new IllegalArgumentException("Order ID không được để trống.");
             }
-            System.out.println(orderIdParam);
             Long orderId = Long.parseLong(orderIdParam);
-            System.out.println(orderId);
-            // Lấy thông tin đơn hàng
-            OrderDetailsManagementResponse order = orderService.getOrderDetailsManagementResponse(orderId);
+            OrderDetailsManagementResponse order = orderUtil.getOrderDetails(orderId);
             if (order == null) {
                 response.setStatus(HttpServletResponse.SC_NOT_FOUND);
                 response.getWriter().write("{\"message\": \"Không tìm thấy đơn hàng với ID: " + orderId + "\"}");
                 return;
             }
-            List<DiscountResponse> discounts = promotionTemplateService.getAllDiscounts();
-            for (OrderProductResponse product : order.getProducts()) {
-                double discount = promotionTemplateService.percentDiscount(product.getBookTemplateId(), discounts);
-                product.setDiscountPercent(discount);
-                product.calTotalPrice();
-            }
-
-//            for (OrderProductResponse product : order.getProducts()) {
-//                double discount = promotionTemplateService.percentDiscountOfBook(product.getBookTemplateId());
-//                product.setDiscountPercent(discount);
-//                product.calTotalPrice();
-//            }
-            order.updateTotalPrice();
-            order.updateFinalPrice();
 
             // Gửi email
             String emailContent = generateOrderEmail(request, order);
@@ -209,26 +191,12 @@ public class SendEmailAPI extends HttpServlet {
             long orderId = Long.parseLong(orderIdParam);
 
             // Lấy thông tin đơn hàng
-            OrderDetailsManagementResponse order = orderService.getOrderDetailsManagementResponse(orderId);
+            OrderDetailsManagementResponse order = orderUtil.getOrderDetails(orderId);
             if (order == null) {
                 response.setStatus(HttpServletResponse.SC_NOT_FOUND);
                 response.getWriter().write("{\"message\": \"Không tìm thấy đơn hàng với ID: " + orderId + "\"}");
                 return;
             }
-            List<DiscountResponse> discounts = promotionTemplateService.getAllDiscounts();
-
-            for (OrderProductResponse product : order.getProducts()) {
-                double discount = promotionTemplateService.percentDiscount(product.getBookTemplateId(), discounts);
-                product.setDiscountPercent(discount);
-                product.calTotalPrice();
-            }
-//            for (OrderProductResponse product : order.getProducts()) {
-//                double discount = promotionTemplateService.percentDiscountOfBook(product.getBookTemplateId());
-//                product.setDiscountPercent(discount);
-//                product.calTotalPrice();
-//            }
-            order.updateTotalPrice();
-            order.updateFinalPrice();
 
             // Gửi email thông báo
             String emailContent = generateCancelOrderEmail(order, cancelContent);
@@ -304,30 +272,15 @@ public class SendEmailAPI extends HttpServlet {
                 throw new IllegalArgumentException("Order ID không được để trống.");
             }
 
-            long orderId = Long.parseLong(orderIdParam);
+            Long orderId = Long.parseLong(orderIdParam);
 
             // Lấy thông tin đơn hàng
-            OrderDetailsManagementResponse order = orderService.getOrderDetailsManagementResponse(orderId);
+            OrderDetailsManagementResponse order = orderUtil.getOrderDetails(orderId);
             if (order == null) {
                 response.setStatus(HttpServletResponse.SC_NOT_FOUND);
                 response.getWriter().write("{\"message\": \"Không tìm thấy đơn hàng với ID: " + orderId + "\"}");
                 return;
             }
-
-            List<DiscountResponse> discounts = promotionTemplateService.getAllDiscounts();
-
-            for (OrderProductResponse product : order.getProducts()) {
-                double discount = promotionTemplateService.percentDiscount(product.getBookTemplateId(), discounts);
-                product.setDiscountPercent(discount);
-                product.calTotalPrice();
-            }
-//            for (OrderProductResponse product : order.getProducts()) {
-//                double discount = promotionTemplateService.percentDiscountOfBook(product.getBookTemplateId());
-//                product.setDiscountPercent(discount);
-//                product.calTotalPrice();
-//            }
-            order.updateTotalPrice();
-            order.updateFinalPrice();
 
             // Gửi email thông báo hủy yêu cầu hoàn tiền
             String emailContent = generateCancelRefundOrderEmail(order, cancelContent);
@@ -392,26 +345,12 @@ public class SendEmailAPI extends HttpServlet {
             long orderId = Long.parseLong(orderIdParam);
 
             // Lấy thông tin đơn hàng
-            OrderDetailsManagementResponse order = orderService.getOrderDetailsManagementResponse(orderId);
+            OrderDetailsManagementResponse order = orderUtil.getOrderDetails(orderId);
             if (order == null) {
                 response.setStatus(HttpServletResponse.SC_NOT_FOUND);
                 response.getWriter().write("{\"message\": \"Không tìm thấy đơn hàng với ID: " + orderId + "\"}");
                 return;
             }
-            List<DiscountResponse> discounts = promotionTemplateService.getAllDiscounts();
-
-            for (OrderProductResponse product : order.getProducts()) {
-                double discount = promotionTemplateService.percentDiscount(product.getBookTemplateId(), discounts);
-                product.setDiscountPercent(discount);
-                product.calTotalPrice();
-            }
-//            for (OrderProductResponse product : order.getProducts()) {
-//                double discount = promotionTemplateService.percentDiscountOfBook(product.getBookTemplateId());
-//                product.setDiscountPercent(discount);
-//                product.calTotalPrice();
-//            }
-            order.updateTotalPrice();
-            order.updateFinalPrice();
 
             // Gửi email xác nhận hoàn tiền
             String emailContent = generateConfirmRefundOrderEmail(order);
@@ -429,7 +368,6 @@ public class SendEmailAPI extends HttpServlet {
             response.getWriter().write("{\"message\": \"Đã xảy ra lỗi: " + e.getMessage() + "\"}");
         }
     }
-
 
     private String generateConfirmRefundOrderEmail(OrderDetailsManagementResponse order) {
         StringBuilder emailContent = new StringBuilder();
