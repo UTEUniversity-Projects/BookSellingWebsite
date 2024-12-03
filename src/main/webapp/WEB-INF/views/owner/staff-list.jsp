@@ -10,7 +10,7 @@
       <div class="cr-breadcrumb">
         <h5>Danh sách nhân viên</h5>
         <ul>
-          <li><a href="index.html">Carrot</a></li>
+          <li><a href="${pageContext.request.contextPath}/owner/ecommerce">Biblio</a></li>
           <li>Danh sách nhân viên</li>
         </ul>
       </div>
@@ -20,7 +20,7 @@
         <div class="cr-card card-default product-list">
           <div class="cr-card-content">
             <div class="table-responsive">
-              <table id="staff-data-table" class="table table-hover">
+              <table id="customer-data-table" class="item-data-table table table-hover">
                 <thead>
                 <tr>
                   <th>Mã</th>

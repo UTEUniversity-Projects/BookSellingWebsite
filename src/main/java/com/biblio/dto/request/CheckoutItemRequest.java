@@ -8,6 +8,6 @@ import lombok.*;
 @Setter
 @Builder
 public class CheckoutItemRequest {
-    private Long productId;
-    private int quantity;
+    Long productId;
+    int quantity;
 }

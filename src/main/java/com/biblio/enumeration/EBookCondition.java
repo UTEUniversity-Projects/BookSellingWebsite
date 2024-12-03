@@ -13,4 +13,8 @@ public enum EBookCondition {
         this.bookCondition = bookCondition;
     }
 
+    public String getDescription() {
+        return bookCondition;
+    }
+
 }

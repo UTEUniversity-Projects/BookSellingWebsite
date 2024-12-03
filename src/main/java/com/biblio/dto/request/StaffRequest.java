@@ -14,7 +14,6 @@ public class StaffRequest {
     String emailAddress;
     String phoneNumber;
     String dateOfBirth;
-    String gender;
     String avatar;
     String username;
     String password;

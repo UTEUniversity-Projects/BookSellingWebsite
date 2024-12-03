@@ -217,8 +217,8 @@ $(document).ready(() => {
 			return;
 		}
 
-		const text = `TEST 232`;
-		const amount = 117000;
+		const text = `CHUYEN KHOAN DON HANG`;
+		const amount = $("#price-total")[0].dataset.price;
 
 		checkout.classList.add('active');
 		checkoutQR.src = '';

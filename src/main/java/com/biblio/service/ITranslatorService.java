@@ -1,14 +1,27 @@
 package com.biblio.service;
 
-import com.biblio.dto.request.TranslatorRequest;
-import com.biblio.dto.response.TranslatorResponse;
+import com.biblio.dto.request.TranslatorCreateRequest;
+import com.biblio.dto.request.TranslatorDeleteRequest;
+import com.biblio.dto.request.TranslatorUpdateRequest;
+import com.biblio.dto.response.TranslatorAnalysisResponse;
+import com.biblio.dto.response.TranslatorLineResponse;
+import com.biblio.dto.response.TranslatorProfileResponse;
+import com.biblio.entity.Translator;
 
 import java.util.List;
 
 public interface ITranslatorService {
-    List<TranslatorResponse> findAll();
-    TranslatorResponse findById(Long id);
-    void addTranslator(TranslatorRequest translatorRequest);
-    void updateTranslator(TranslatorRequest translatorRequest);
-    void deleteTranslator(Long id);
+    List<TranslatorLineResponse> getAll();
+
+    TranslatorProfileResponse getProfileById(Long id);
+
+    TranslatorAnalysisResponse getAnalysisById(Long id);
+
+    Translator createTranslator(TranslatorCreateRequest translatorRequest);
+
+    void updateTranslator(TranslatorUpdateRequest translatorRequest);
+
+    void deleteTranslator(TranslatorDeleteRequest translatorDeleteRequest);
+
+    Integer countBookTemplate(TranslatorDeleteRequest id);
 }

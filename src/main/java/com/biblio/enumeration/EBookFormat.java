@@ -13,4 +13,8 @@ public enum EBookFormat {
         this.bookFormat = bookFormat;
     }
 
+    public String getDescription() {
+        return bookFormat;
+    }
+
 }
