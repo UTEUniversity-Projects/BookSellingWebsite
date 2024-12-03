@@ -60,7 +60,7 @@ public class CartController extends HttpServlet {
             cartItem.setSalePrice(cartItem.getSellingPrice() - (promotionTemplateService.percentDiscount(cartItem.getBookId(), discounts) / 100) * cartItem.getSellingPrice());
             cartItem.setSubTotal(cartItem.getSalePrice() * cartItem.getQuantity());
         }
-
+      
         request.setAttribute("breadcrumb", "Giỏ hàng");
         request.setAttribute("cart", cart);
         request.getRequestDispatcher("/views/customer/cart.jsp").forward(request, response);

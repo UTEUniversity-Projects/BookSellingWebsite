@@ -108,8 +108,8 @@ public class BookTemplateServiceImpl implements IBookTemplateService {
     }
 
     @Override
-    public Long getTotalBookTemplateQuantity() {
-        return bookTemplateDAO.countAll();
+    public Long getTotalBookTemplateQuantity(SearchBookRequest request) {
+        return bookTemplateDAO.countAll(request);
     }
 
     @Override

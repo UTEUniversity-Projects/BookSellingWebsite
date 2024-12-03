@@ -142,9 +142,6 @@ public class BookTemplateDAOImpl extends GenericDAOImpl<BookTemplate> implements
                 case "5":
                     orderByClause = " ORDER BY b.publicationDate DESC";
                     break;
-                case "bestseller":
-                    orderByClause = " ORDER BY b.sales DESC";
-                    break;
                 default:
                     break;
             }
@@ -231,8 +228,42 @@ public class BookTemplateDAOImpl extends GenericDAOImpl<BookTemplate> implements
     }
 
     @Override
-    public Long countAll() {
-        return super.countByJPQL("SELECT count(DISTINCT bt.id) FROM BookTemplate bt WHERE bt.status != 'OUT_OF_STOCK'");
+    public Long countAll(SearchBookRequest request) {
+        StringBuilder jpql = new StringBuilder("SELECT count(DISTINCT bt.id) FROM BookTemplate bt "
+                + "JOIN bt.books b "
+                + "WHERE b.id = (SELECT MIN(b2.id) FROM Book b2 WHERE b2.bookTemplate.id = bt.id) AND bt.status = 'ON_SALE' "
+                + "AND b.sellingPrice >= :minPrice AND b.sellingPrice <= :maxPrice "
+                + "AND (SELECT COALESCE(AVG(r2.rate), 0) FROM bt.reviews r2 WHERE r2.bookTemplate.id = bt.id) >= :reviewRate ");
+
+        Map<String, Object> params = new HashMap<>();
+        params.put("minPrice", Double.valueOf(request.getMinPrice()));
+        params.put("maxPrice", Double.valueOf(request.getMaxPrice()));
+        params.put("reviewRate", Double.valueOf(request.getReviewRate()));
+
+        if (request.getTitle() != null) {
+            String[] searchTerms = request.getTitle().split("\\s+");
+            jpql.append(" AND (");
+            for (int i = 0; i < searchTerms.length; i++) {
+                jpql.append("b.title LIKE :title").append(i);
+                params.put("title" + i, "%" + searchTerms[i] + "%");
+                if (i < searchTerms.length - 1) {
+                    jpql.append(" OR ");
+                }
+            }
+            jpql.append(")");
+        }
+
+        if (request.getCondition() != null) {
+            jpql.append(" AND b.condition = :condition");
+            params.put("condition", EBookCondition.valueOf(request.getCondition()));
+        }
+
+        if (request.getFormat() != null) {
+            jpql.append(" AND b.format = :format");
+            params.put("format", EBookFormat.valueOf(request.getFormat()));
+        }
+
+        return super.countByJPQL(jpql.toString(), params);
     }
 
     @Override
