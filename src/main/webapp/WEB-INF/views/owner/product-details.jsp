@@ -25,7 +25,7 @@
                 data-aos-duration="2000"
                 data-aos-delay="600"
         >
-            <div class="col-xxl-4 col-xl-5 col-md-6 col-12 mb-24">
+            <div class="col-xxl-4 col-xl-4 col-md-4 col-12 mb-24">
                 <div class="vehicle-detail-banner banner-content clearfix">
                     <div class="banner-slider">
                         <div class="slider slider-for">
@@ -54,7 +54,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-xxl-8 col-xl-7 col-md-6 col-12 mb-24">
+            <div class="col-xxl-8 col-xl-8 col-md-6 col-12 mb-24">
                 <h2 class="product-title">
                     ${book.title}
                 </h2>
@@ -101,7 +101,8 @@
                                 </c:forEach>
                             </div>
                             <p>(${book.reviewCount} đánh giá)</p>
-                            <p class="ms-2 me-2">|</p>
+                        </div>
+                        <div>
                             <p class="book-sold-count">${book.booksCount} lượt bán</p>
                         </div>
                         <div class="cr-card-customer mini-card-3d-deep" style="margin-top: 20px;">
@@ -127,7 +128,7 @@
                         </div>
                         <div class="cr-size-and-weight">
                             <div class="row cr-size-weight">
-                                <div class="d-flex col-8">
+                                <div class="d-flex col-7">
                                     <h5><span>Tình trạng</span> :</h5>
                                     <div class="cr-kg">
                                         <ul>
@@ -135,7 +136,7 @@
                                         </ul>
                                     </div>
                                 </div>
-                                <div class="col-4 cr-settings">
+                                <div class="col-5 cr-settings">
                                     <a onclick="rowAction(${book.id}, 'update'); return false;"
                                        class="cr-btn-primary m-r-10 rounded">Cập nhật</a>
                                 </div>

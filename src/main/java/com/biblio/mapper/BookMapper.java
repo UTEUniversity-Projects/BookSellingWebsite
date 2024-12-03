@@ -24,7 +24,7 @@ import java.util.stream.Collectors;
 
 public class BookMapper {
 
-    public static Book toBookEntity(
+    public static Book toBookEntityCreate(
             BookCreateGlobalRequest bookCreateRequest,
             BookTemplate bookTemplate,
             SubCategory subCategory,
@@ -52,34 +52,33 @@ public class BookMapper {
                 .build();
     }
 
-    public static Book toBookEntity(
+    public static Book toBookEntityUpdate(
             BookUpdateGlobalRequest bookUpdateRequest,
             BookTemplate bookTemplate,
             SubCategory subCategory,
             BookMetadata bookMetadata,
             Book book
     ) {
-        return Book.builder()
-                .id(book.getId())
-                .title(bookUpdateRequest.getTitle())
-                .description(bookUpdateRequest.getDescription())
-                .sellingPrice(Double.parseDouble(bookUpdateRequest.getSellingPrice()))
-                .publicationDate(LocalDateTime.parse(bookUpdateRequest.getPublicationDate() + "T00:00:00"))
-                .edition(Integer.parseInt(bookUpdateRequest.getEdition()))
-                .codeISBN10(bookUpdateRequest.getCodeISBN10())
-                .codeISBN13(bookUpdateRequest.getCodeISBN13())
-                .format(EBookFormat.valueOf(bookUpdateRequest.getFormatCode()))
-                .handcover(Integer.parseInt(bookUpdateRequest.getHardcover()))
-                .length(Double.parseDouble(bookUpdateRequest.getLength()))
-                .width(Double.parseDouble(bookUpdateRequest.getWidth()))
-                .height(Double.parseDouble(bookUpdateRequest.getHeight()))
-                .weight(Double.parseDouble(bookUpdateRequest.getWeight()))
-                .condition(EBookCondition.valueOf(bookUpdateRequest.getConditionCode()))
-                .recommendedAge(EBookAgeRecommend.valueOf(bookUpdateRequest.getAgeRecommendCode()))
-                .bookMetadata(bookMetadata)
-                .bookTemplate(bookTemplate)
-                .subCategory(subCategory)
-                .build();
+        book.setTitle(bookUpdateRequest.getTitle());
+        book.setDescription(bookUpdateRequest.getDescription());
+        book.setSellingPrice(Double.parseDouble(bookUpdateRequest.getSellingPrice()));
+        book.setPublicationDate(LocalDateTime.parse(bookUpdateRequest.getPublicationDate() + "T00:00:00"));
+        book.setEdition(Integer.parseInt(bookUpdateRequest.getEdition()));
+        book.setCodeISBN10(bookUpdateRequest.getCodeISBN10());
+        book.setCodeISBN13(bookUpdateRequest.getCodeISBN13());
+        book.setFormat(EBookFormat.valueOf(bookUpdateRequest.getFormatCode()));
+        book.setHandcover(Integer.parseInt(bookUpdateRequest.getHardcover()));
+        book.setLength(Double.parseDouble(bookUpdateRequest.getLength()));
+        book.setWidth(Double.parseDouble(bookUpdateRequest.getWidth()));
+        book.setHeight(Double.parseDouble(bookUpdateRequest.getHeight()));
+        book.setWeight(Double.parseDouble(bookUpdateRequest.getWeight()));
+        book.setCondition(EBookCondition.valueOf(bookUpdateRequest.getConditionCode()));
+        book.setRecommendedAge(EBookAgeRecommend.valueOf(bookUpdateRequest.getAgeRecommendCode()));
+        book.setBookMetadata(bookMetadata);
+        book.setBookTemplate(bookTemplate);
+        book.setSubCategory(subCategory);
+
+        return book;
     }
 
     public static Book toBookEntity(
@@ -229,5 +228,6 @@ public class BookMapper {
                 })
                 .collect(Collectors.toList());
     }
+
     // endregion
 }

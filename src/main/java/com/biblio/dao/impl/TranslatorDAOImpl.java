@@ -91,6 +91,31 @@ public class TranslatorDAOImpl extends GenericDAOImpl<Translator> implements ITr
     }
 
     @Override
+    public void removeBookTemplate(Long translatorId, Long bookTemplateId) {
+        String sql = "DELETE FROM translator_book_template " +
+                "WHERE translator_id = :translatorId AND book_template_id = :bookTemplateId";
+
+        Map<String, Object> params = new HashMap<>();
+        params.put("translatorId", translatorId);
+        params.put("bookTemplateId", bookTemplateId);
+
+        super.executeNativeQuery(sql, params);
+    }
+
+    @Override
+    public void addBookTemplateToTranslator(Long translatorId, Long bookTemplateId) {
+        String sql = "INSERT INTO translator_book_template (translator_id, book_template_id) " +
+                "VALUES (:translatorId, :bookTemplateId)";
+
+        Map<String, Object> params = new HashMap<>();
+        params.put("translatorId", translatorId);
+        params.put("bookTemplateId", bookTemplateId);
+
+        super.executeNativeQuery(sql, params);
+
+    }
+
+    @Override
     public Integer countBooksTemplateAll(Long translatorId) {
         String sql = "SELECT COUNT(*) translator_works " +
                 "FROM translator_book_template abt " +

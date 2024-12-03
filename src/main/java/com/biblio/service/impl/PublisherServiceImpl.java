@@ -13,11 +13,14 @@ import com.biblio.enumeration.EBookTemplateStatus;
 import com.biblio.enumeration.EOrderStatus;
 import com.biblio.mapper.PublisherMapper;
 import com.biblio.service.IPublisherService;
+import com.biblio.utils.ManageFileUtil;
 
 import javax.inject.Inject;
+import javax.transaction.Transactional;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public class PublisherServiceImpl implements IPublisherService {
     @Inject
@@ -79,7 +82,11 @@ public class PublisherServiceImpl implements IPublisherService {
 
         List<String> topSubCategory = findTopSubCategory(id, 3);
 
-        return PublisherMapper.toPublisherAnalysisResponse(publisher, works, avgRate, sales, perSales, booksSold, perBooksSold, valueBooksSold, perValueBooksSold, booksInStock, booksCancelled, booksReturned, salesThisMonth, booksThisMonth, revenueThisMonth, ordersCompleted, valueOrdersCompleted, ordersWaiting, valueOrdersWaiting, ordersPacking, valueOrderPacking, ordersShipping, valueOrderShipping, ordersCancelled, valueOrdersCancelled, ordersRequestRefund, valueOrdersRequestRefund, ordersRefunded, valueOrdersRefunded, topSubCategory);
+        return PublisherMapper.toPublisherAnalysisResponse(publisher, works, avgRate, sales, perSales, booksSold, perBooksSold,
+                valueBooksSold, perValueBooksSold, booksInStock, booksCancelled, booksReturned, salesThisMonth, booksThisMonth, revenueThisMonth,
+                ordersCompleted, valueOrdersCompleted, ordersWaiting, valueOrdersWaiting, ordersPacking, valueOrderPacking,
+                ordersShipping, valueOrderShipping, ordersCancelled, valueOrdersCancelled, ordersRequestRefund, valueOrdersRequestRefund,
+                ordersRefunded, valueOrdersRefunded, topSubCategory);
     }
 
     @Override
@@ -88,19 +95,46 @@ public class PublisherServiceImpl implements IPublisherService {
     }
 
     @Override
-    public void updatePublisher(PublisherUpdateRequest publisherUpdateRequest) {
-        Publisher publisher = publisherDAO.getEntityById(Long.valueOf(publisherUpdateRequest.getId()));
-        publisherDAO.updatePublisher(PublisherMapper.toPublisherUpdate(publisherUpdateRequest, publisher));
+    @Transactional
+    public Boolean updatePublisher(PublisherUpdateRequest publisherUpdateRequest) {
+        try {
+            Publisher publisher = publisherDAO.getEntityById(Long.valueOf(publisherUpdateRequest.getId()));
+            if (publisher == null) {
+                throw new Exception("Publisher not found with ID: " + publisherUpdateRequest.getId());
+            }
+
+            publisherDAO.updatePublisher(PublisherMapper.toPublisherUpdate(publisherUpdateRequest, publisher));
+
+            return true;
+        } catch (Exception e) {
+            System.err.println("Transaction failed: " + e.getMessage());
+            return false;
+        }
     }
 
     @Override
-    public void deletePublisher(PublisherDeleteRequest publisherDeleteRequest) {
-        publisherDAO.deletePublisher(Long.valueOf(publisherDeleteRequest.getId()));
+    @Transactional
+    public Boolean deletePublisher(PublisherDeleteRequest publisherDeleteRequest) {
+        try {
+            Publisher publisher = publisherDAO.getEntityById(Long.valueOf(publisherDeleteRequest.getId()));
+            if (publisher == null) {
+                throw new Exception("Publisher not found with ID: " + publisherDeleteRequest.getId());
+            }
+
+            publisherDAO.deletePublisher(Long.valueOf(publisherDeleteRequest.getId()));
+
+            return true;
+        } catch (Exception e) {
+            System.err.println("Transaction failed: " + e.getMessage());
+            return false;
+        }
     }
 
     @Override
     public Integer countBookTemplate(PublisherDeleteRequest publisherDeleteRequest) {
-        return publisherDAO.countBooksTemplateByStatus(Long.valueOf(publisherDeleteRequest.getId()), EBookTemplateStatus.COMING_SOON) + publisherDAO.countBooksTemplateByStatus(Long.valueOf(publisherDeleteRequest.getId()), EBookTemplateStatus.ON_SALE) + publisherDAO.countBooksTemplateByStatus(Long.valueOf(publisherDeleteRequest.getId()), EBookTemplateStatus.OUT_OF_STOCK);
+        return publisherDAO.countBooksTemplateByStatus(Long.valueOf(publisherDeleteRequest.getId()), EBookTemplateStatus.COMING_SOON)
+                + publisherDAO.countBooksTemplateByStatus(Long.valueOf(publisherDeleteRequest.getId()), EBookTemplateStatus.ON_SALE)
+                + publisherDAO.countBooksTemplateByStatus(Long.valueOf(publisherDeleteRequest.getId()), EBookTemplateStatus.OUT_OF_STOCK);
     }
 
     private Double calculateSaleGrowth(Long id) {
@@ -121,7 +155,6 @@ public class PublisherServiceImpl implements IPublisherService {
             else return 0.0D;
         }
     }
-
     private Integer countSaleThisMonth(Long id) {
         LocalDateTime now = LocalDateTime.now();
         LocalDateTime startOfThisMonth = now.withDayOfMonth(1).toLocalDate().atStartOfDay();
@@ -148,7 +181,6 @@ public class PublisherServiceImpl implements IPublisherService {
             else return 0.0D;
         }
     }
-
     private Integer countBooksSoldThisMonth(Long id) {
         LocalDateTime now = LocalDateTime.now();
         LocalDateTime startOfThisMonth = now.withDayOfMonth(1).toLocalDate().atStartOfDay();
@@ -175,7 +207,6 @@ public class PublisherServiceImpl implements IPublisherService {
             else return 0.0D;
         }
     }
-
     private Long calculateRevenueThisMonth(Long id) {
         LocalDateTime now = LocalDateTime.now();
         LocalDateTime startOfThisMonth = now.withDayOfMonth(1).toLocalDate().atStartOfDay();

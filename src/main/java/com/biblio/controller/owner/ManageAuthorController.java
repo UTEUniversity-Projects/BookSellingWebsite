@@ -19,6 +19,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import javax.transaction.Transactional;
 import java.io.IOException;
 import java.io.Serial;
 import java.time.LocalDateTime;
@@ -94,16 +95,14 @@ public class ManageAuthorController extends HttpServlet {
     /**
      * @see HttpServlet#doDelete(HttpServletRequest request, HttpServletResponse response)
      */
+    @Transactional
     protected void doDelete(HttpServletRequest request, HttpServletResponse response) throws IOException {
         try {
             AuthorDeleteRequest authorDeleteRequest = HttpUtil.of(request.getReader()).toModel(AuthorDeleteRequest.class);
-            AuthorProfileResponse authorProfileResponse = authorService.getProfileById(Long.valueOf(authorDeleteRequest.getId()));
 
-            authorService.deleteAuthor(authorDeleteRequest);
+            Boolean isDeleted = authorService.deleteAuthor(authorDeleteRequest);
 
-            Boolean isImageDeleted = ManageFileUtil.deleteFileAvatar(authorProfileResponse.getAvatar(), "author");
-
-            if (isImageDeleted) {
+            if (isDeleted) {
                 response.getWriter().write("{\"status\": \"success\", \"message\": \"Deleted successfully.\"}");
             } else {
                 response.getWriter().write("{\"status\": \"fail\", \"message\": \"Failed to delete.\"}");
@@ -170,14 +169,18 @@ public class ManageAuthorController extends HttpServlet {
         request.getRequestDispatcher("/views/owner/author-update.jsp").forward(request, response);
     }
 
+    @Transactional
     private void updateHandlerPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
         try {
             AuthorUpdateRequest authorUpdateRequest = HttpUtil.of(request.getReader()).toModel(AuthorUpdateRequest.class);
 
-            authorService.updateAuthor(authorUpdateRequest);
+            Boolean isUpdated = authorService.updateAuthor(authorUpdateRequest);
 
-            response.setStatus(HttpServletResponse.SC_OK);  // 200 OK
-            response.getWriter().write("{\"status\": \"success\", \"message\": \"Updated successfully.\"}");
+            if (isUpdated) {
+                response.getWriter().write("{\"status\": \"success\", \"message\": \"Deleted successfully.\"}");
+            } else {
+                response.getWriter().write("{\"status\": \"fail\", \"message\": \"Failed to delete.\"}");
+            }
         } catch (Exception e) {
             response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);  // 500 Internal Server Error
             response.getWriter().write("{\"status\": \"fail\", \"message\": \"Error updating: " + e.getMessage() + "\"}");

@@ -111,7 +111,6 @@
                                                     <div class="dropdown-menu">
                                                         <a class="dropdown-item" href="#" onclick="rowAction(${product.id}, 'view'); return false;" data-value="view">Chi tiết</a>
                                                         <a class="dropdown-item" href="#" onclick="rowAction(${product.id}, 'update'); return false;" data-value="update">Cập nhật</a>
-                                                        <a class="dropdown-item" href="#" onclick="rowAction(${product.id}, 'delete'); return false;" data-value="delete">Ngừng bán</a>
                                                     </div>
                                                 </div>
                                             </td>

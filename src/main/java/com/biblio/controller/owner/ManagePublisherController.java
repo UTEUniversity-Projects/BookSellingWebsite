@@ -19,6 +19,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import javax.transaction.Transactional;
 import java.io.IOException;
 import java.io.Serial;
 import java.time.LocalDateTime;
@@ -94,18 +95,14 @@ public class ManagePublisherController extends HttpServlet {
     /**
      * @see HttpServlet#doDelete(HttpServletRequest request, HttpServletResponse response)
      */
+    @Transactional
     protected void doDelete(HttpServletRequest request, HttpServletResponse response) throws IOException {
         try {
             PublisherDeleteRequest publisherDeleteRequest = HttpUtil.of(request.getReader()).toModel(PublisherDeleteRequest.class);
-            PublisherProfileResponse publisherProfileResponse = publisherService.getProfileById(Long.valueOf(publisherDeleteRequest.getId()));
 
-            String filePath = publisherProfileResponse.getAvatar();
+            Boolean isDeleted = publisherService.deletePublisher(publisherDeleteRequest);
 
-            publisherService.deletePublisher(publisherDeleteRequest);
-
-            Boolean isImageDeleted = ManageFileUtil.deleteFileAvatar(filePath, "publisher");
-
-            if (isImageDeleted) {
+            if (isDeleted) {
                 response.getWriter().write("{\"status\": \"success\", \"message\": \"Deleted successfully.\"}");
             } else {
                 response.getWriter().write("{\"status\": \"fail\", \"message\": \"Failed to delete.\"}");
@@ -172,14 +169,18 @@ public class ManagePublisherController extends HttpServlet {
         request.getRequestDispatcher("/views/owner/publisher-update.jsp").forward(request, response);
     }
 
+    @Transactional
     private void updateHandlerPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
         try {
             PublisherUpdateRequest publisherUpdateRequest = HttpUtil.of(request.getReader()).toModel(PublisherUpdateRequest.class);
 
-            publisherService.updatePublisher(publisherUpdateRequest);
+            Boolean isUpdated = publisherService.updatePublisher(publisherUpdateRequest);
 
-            response.setStatus(HttpServletResponse.SC_OK);  // 200 OK
-            response.getWriter().write("{\"status\": \"success\", \"message\": \"Updated successfully.\"}");
+            if (isUpdated) {
+                response.getWriter().write("{\"status\": \"success\", \"message\": \"Deleted successfully.\"}");
+            } else {
+                response.getWriter().write("{\"status\": \"fail\", \"message\": \"Failed to delete.\"}");
+            }
         } catch (Exception e) {
             response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);  // 500 Internal Server Error
             response.getWriter().write("{\"status\": \"fail\", \"message\": \"Error updating: " + e.getMessage() + "\"}");

@@ -1,23 +1,26 @@
 package com.biblio.service.impl;
 
 import com.biblio.dao.ITranslatorDAO;
-import com.biblio.dto.request.TranslatorCreateRequest;
-import com.biblio.dto.request.TranslatorDeleteRequest;
-import com.biblio.dto.request.TranslatorUpdateRequest;
+import com.biblio.dto.request.*;
 import com.biblio.dto.response.TranslatorAnalysisResponse;
 import com.biblio.dto.response.TranslatorLineResponse;
 import com.biblio.dto.response.TranslatorProfileResponse;
+import com.biblio.entity.Publisher;
 import com.biblio.entity.Translator;
 import com.biblio.enumeration.EBookMetadataStatus;
 import com.biblio.enumeration.EBookTemplateStatus;
 import com.biblio.enumeration.EOrderStatus;
+import com.biblio.mapper.PublisherMapper;
 import com.biblio.mapper.TranslatorMapper;
 import com.biblio.service.ITranslatorService;
+import com.biblio.utils.ManageFileUtil;
 
 import javax.inject.Inject;
+import javax.transaction.Transactional;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public class TranslatorServiceImpl implements ITranslatorService {
     @Inject
@@ -88,14 +91,39 @@ public class TranslatorServiceImpl implements ITranslatorService {
     }
 
     @Override
-    public void updateTranslator(TranslatorUpdateRequest translatorUpdateRequest) {
-        Translator translator = translatorDAO.getEntityById(Long.valueOf((translatorUpdateRequest.getId())));
-        translatorDAO.updateTranslator(TranslatorMapper.toTranslatorUpdate(translatorUpdateRequest, translator));
+    @Transactional
+    public Boolean updateTranslator(TranslatorUpdateRequest translatorUpdateRequest) {
+        try {
+            Translator translator = translatorDAO.getEntityById(Long.valueOf(translatorUpdateRequest.getId()));
+            if (translator == null) {
+                throw new Exception("Translator not found with ID: " + translatorUpdateRequest.getId());
+            }
+
+            translatorDAO.updateTranslator(TranslatorMapper.toTranslatorUpdate(translatorUpdateRequest, translator));
+
+            return true;
+        } catch (Exception e) {
+            System.err.println("Transaction failed: " + e.getMessage());
+            return false;
+        }
     }
 
     @Override
-    public void deleteTranslator(TranslatorDeleteRequest translatorDeleteRequest) {
-        translatorDAO.deleteTranslator(Long.valueOf(translatorDeleteRequest.getId()));
+    @Transactional
+    public Boolean deleteTranslator(TranslatorDeleteRequest translatorDeleteRequest) {
+        try {
+            Translator translator = translatorDAO.getEntityById(Long.valueOf(translatorDeleteRequest.getId()));
+            if (translator == null) {
+                throw new Exception("Translator not found with ID: " + translatorDeleteRequest.getId());
+            }
+
+            translatorDAO.deleteTranslator(Long.valueOf(translatorDeleteRequest.getId()));
+
+            return true;
+        } catch (Exception e) {
+            System.err.println("Transaction failed: " + e.getMessage());
+            return false;
+        }
     }
 
     @Override

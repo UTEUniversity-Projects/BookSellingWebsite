@@ -14,12 +14,6 @@ public interface IBookService {
     BookTemplate createBookSeries(BookCreateGlobalRequest bookCreateGlobalRequest);
     BookTemplate updateBookSeries(BookUpdateGlobalRequest bookUpdateGlobalRequest);
 
-    void addBook(BookRequest bookRequest);
-
-    void updateBook(BookRequest bookRequest);
-
-    void deleteBook(Long id);
-
     Long getMinBookPrice();
 
     Long getMaxBookPrice();

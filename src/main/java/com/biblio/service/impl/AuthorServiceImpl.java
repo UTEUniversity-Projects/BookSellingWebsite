@@ -1,23 +1,26 @@
 package com.biblio.service.impl;
 
 import com.biblio.dao.IAuthorDAO;
-import com.biblio.dto.request.AuthorCreateRequest;
-import com.biblio.dto.request.AuthorDeleteRequest;
-import com.biblio.dto.request.AuthorUpdateRequest;
+import com.biblio.dto.request.*;
 import com.biblio.dto.response.AuthorAnalysisResponse;
 import com.biblio.dto.response.AuthorLineResponse;
 import com.biblio.dto.response.AuthorProfileResponse;
 import com.biblio.entity.Author;
+import com.biblio.entity.Publisher;
 import com.biblio.enumeration.EBookMetadataStatus;
 import com.biblio.enumeration.EBookTemplateStatus;
 import com.biblio.enumeration.EOrderStatus;
 import com.biblio.mapper.AuthorMapper;
+import com.biblio.mapper.PublisherMapper;
 import com.biblio.service.IAuthorService;
+import com.biblio.utils.ManageFileUtil;
 
 import javax.inject.Inject;
+import javax.transaction.Transactional;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public class AuthorServiceImpl implements IAuthorService {
     @Inject
@@ -92,14 +95,39 @@ public class AuthorServiceImpl implements IAuthorService {
     }
 
     @Override
-    public void updateAuthor(AuthorUpdateRequest authorUpdateRequest) {
-        Author author = authorDAO.getEntityById(Long.valueOf(authorUpdateRequest.getId()));
-        authorDAO.updateAuthor(AuthorMapper.toAuthorUpdate(authorUpdateRequest, author));
+    @Transactional
+    public Boolean updateAuthor(AuthorUpdateRequest authorUpdateRequest) {
+        try {
+            Author author = authorDAO.getEntityById(Long.valueOf(authorUpdateRequest.getId()));
+            if (author == null) {
+                throw new Exception("Author not found with ID: " + authorUpdateRequest.getId());
+            }
+
+            authorDAO.updateAuthor(AuthorMapper.toAuthorUpdate(authorUpdateRequest, author));
+
+            return true;
+        } catch (Exception e) {
+            System.err.println("Transaction failed: " + e.getMessage());
+            return false;
+        }
     }
 
     @Override
-    public void deleteAuthor(AuthorDeleteRequest authorDeleteRequest) {
-        authorDAO.deleteAuthor(Long.valueOf(authorDeleteRequest.getId()));
+    @Transactional
+    public Boolean deleteAuthor(AuthorDeleteRequest authorDeleteRequest) {
+        try {
+            Author author = authorDAO.getEntityById(Long.valueOf(authorDeleteRequest.getId()));
+            if (author == null) {
+                throw new Exception("Author not found with ID: " + authorDeleteRequest.getId());
+            }
+
+            authorDAO.deleteAuthor(Long.valueOf(authorDeleteRequest.getId()));
+
+            return true;
+        } catch (Exception e) {
+            System.err.println("Transaction failed: " + e.getMessage());
+            return false;
+        }
     }
 
     @Override
