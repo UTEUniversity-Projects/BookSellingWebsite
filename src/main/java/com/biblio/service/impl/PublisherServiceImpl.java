@@ -95,18 +95,12 @@ public class PublisherServiceImpl implements IPublisherService {
     }
 
     @Override
+    @Transactional
     public Boolean updatePublisher(PublisherUpdateRequest publisherUpdateRequest) {
         try {
             Publisher publisher = publisherDAO.getEntityById(Long.valueOf(publisherUpdateRequest.getId()));
             if (publisher == null) {
                 throw new Exception("Publisher not found with ID: " + publisherUpdateRequest.getId());
-            }
-
-            if (!Objects.equals(publisher.getAvatar(), publisherUpdateRequest.getAvatar())) {
-                Boolean isAvatarDeleted = ManageFileUtil.deleteFileAvatar(publisher.getAvatar(), "publisher");
-                if (!isAvatarDeleted) {
-                    throw new Exception("Failed to delete avatar for publisher: " + publisherUpdateRequest.getId());
-                }
             }
 
             publisherDAO.updatePublisher(PublisherMapper.toPublisherUpdate(publisherUpdateRequest, publisher));
@@ -125,11 +119,6 @@ public class PublisherServiceImpl implements IPublisherService {
             Publisher publisher = publisherDAO.getEntityById(Long.valueOf(publisherDeleteRequest.getId()));
             if (publisher == null) {
                 throw new Exception("Publisher not found with ID: " + publisherDeleteRequest.getId());
-            }
-
-            Boolean isAvatarDeleted = ManageFileUtil.deleteFileAvatar(publisher.getAvatar(), "publisher");
-            if (!isAvatarDeleted) {
-                throw new Exception("Failed to delete avatar for publisher: " + publisherDeleteRequest.getId());
             }
 
             publisherDAO.deletePublisher(Long.valueOf(publisherDeleteRequest.getId()));

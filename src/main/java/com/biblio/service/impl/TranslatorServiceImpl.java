@@ -91,18 +91,12 @@ public class TranslatorServiceImpl implements ITranslatorService {
     }
 
     @Override
+    @Transactional
     public Boolean updateTranslator(TranslatorUpdateRequest translatorUpdateRequest) {
         try {
             Translator translator = translatorDAO.getEntityById(Long.valueOf(translatorUpdateRequest.getId()));
             if (translator == null) {
                 throw new Exception("Translator not found with ID: " + translatorUpdateRequest.getId());
-            }
-
-            if (!Objects.equals(translator.getAvatar(), translatorUpdateRequest.getAvatar())) {
-                Boolean isAvatarDeleted = ManageFileUtil.deleteFileAvatar(translator.getAvatar(), "translator");
-                if (!isAvatarDeleted) {
-                    throw new Exception("Failed to delete avatar for translator: " + translatorUpdateRequest.getId());
-                }
             }
 
             translatorDAO.updateTranslator(TranslatorMapper.toTranslatorUpdate(translatorUpdateRequest, translator));
@@ -121,11 +115,6 @@ public class TranslatorServiceImpl implements ITranslatorService {
             Translator translator = translatorDAO.getEntityById(Long.valueOf(translatorDeleteRequest.getId()));
             if (translator == null) {
                 throw new Exception("Translator not found with ID: " + translatorDeleteRequest.getId());
-            }
-
-            Boolean isAvatarDeleted = ManageFileUtil.deleteFileAvatar(translator.getAvatar(), "translator");
-            if (!isAvatarDeleted) {
-                throw new Exception("Failed to delete avatar for translator: " + translatorDeleteRequest.getId());
             }
 
             translatorDAO.deleteTranslator(Long.valueOf(translatorDeleteRequest.getId()));

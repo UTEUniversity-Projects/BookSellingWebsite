@@ -95,18 +95,12 @@ public class AuthorServiceImpl implements IAuthorService {
     }
 
     @Override
+    @Transactional
     public Boolean updateAuthor(AuthorUpdateRequest authorUpdateRequest) {
         try {
             Author author = authorDAO.getEntityById(Long.valueOf(authorUpdateRequest.getId()));
             if (author == null) {
                 throw new Exception("Author not found with ID: " + authorUpdateRequest.getId());
-            }
-
-            if (!Objects.equals(author.getAvatar(), authorUpdateRequest.getAvatar())) {
-                Boolean isAvatarDeleted = ManageFileUtil.deleteFileAvatar(author.getAvatar(), "author");
-                if (!isAvatarDeleted) {
-                    throw new Exception("Failed to delete avatar for author: " + authorUpdateRequest.getId());
-                }
             }
 
             authorDAO.updateAuthor(AuthorMapper.toAuthorUpdate(authorUpdateRequest, author));
@@ -125,11 +119,6 @@ public class AuthorServiceImpl implements IAuthorService {
             Author author = authorDAO.getEntityById(Long.valueOf(authorDeleteRequest.getId()));
             if (author == null) {
                 throw new Exception("Author not found with ID: " + authorDeleteRequest.getId());
-            }
-
-            Boolean isAvatarDeleted = ManageFileUtil.deleteFileAvatar(author.getAvatar(), "author");
-            if (!isAvatarDeleted) {
-                throw new Exception("Failed to delete avatar for author: " + authorDeleteRequest.getId());
             }
 
             authorDAO.deleteAuthor(Long.valueOf(authorDeleteRequest.getId()));

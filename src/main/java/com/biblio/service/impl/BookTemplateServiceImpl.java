@@ -249,7 +249,6 @@ public class BookTemplateServiceImpl implements IBookTemplateService {
         // delete media file
         for (MediaFile mediaFile : oldMediaFiles) {
             mediaFileDAO.deleteMediaFile(mediaFile.getId());
-            ManageFileUtil.deleteFileAvatar(mediaFile.getStoredCode(), "product");
         }
 
         return bookTemplate;
