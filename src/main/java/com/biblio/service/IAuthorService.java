@@ -19,9 +19,9 @@ public interface IAuthorService {
 
     Author createAuthor(AuthorCreateRequest authorRequest);
 
-    void updateAuthor(AuthorUpdateRequest authorRequest);
+    Boolean updateAuthor(AuthorUpdateRequest authorRequest);
 
-    void deleteAuthor(AuthorDeleteRequest authorDeleteRequest);
+    Boolean deleteAuthor(AuthorDeleteRequest authorDeleteRequest);
 
     Integer countBookTemplate(AuthorDeleteRequest id);
 }

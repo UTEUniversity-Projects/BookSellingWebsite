@@ -8,6 +8,8 @@ import com.biblio.mapper.BookMetadataMapper;
 import com.biblio.service.IBookMetadataService;
 
 import javax.inject.Inject;
+import java.util.HashMap;
+import java.util.Map;
 
 public class BookMetadataServiceImpl implements IBookMetadataService {
 
@@ -22,5 +24,10 @@ public class BookMetadataServiceImpl implements IBookMetadataService {
     @Override
     public BookMetadata createBookMetadata(BookUpdateGlobalRequest request) {
         return bookMetadataDAO.createBookMetadata(BookMetadataMapper.toBookMetadata(request));
+    }
+
+    @Override
+    public void deleteBookMetadata(Long id) {
+        bookMetadataDAO.deleteBookMetadata(id);
     }
 }

@@ -15,19 +15,19 @@
                     <div class="cr-shop-categories">
                         <h4 class="cr-shop-sub-title">Danh mục</h4>
                         <div class="cr-checkbox category">
-                            <div class="checkbox-group">
-                                <input type="checkbox" id="all-categories" class="category-item" checked/>
-                                <label for="all-categories">Tất cả</label>
-                                <span>(${totalBook})</span>
-                            </div>
-                            <c:forEach var="category" items="${categories}">
-                                <div class="checkbox-group gap-x-2">
-                                    <input type="checkbox" id="${category.id}" value="${category.id}"
-                                           class="category-item"/>
-                                    <label for="${category.id}" class="pr-2">${category.categoryName}</label>
-                                    <span>(${category.bookCount})</span>
-                                </div>
-                            </c:forEach>
+<%--                            <div class="checkbox-group">--%>
+<%--                                <input type="checkbox" id="all-categories" class="category-item" checked/>--%>
+<%--                                <label for="all-categories">Tất cả</label>--%>
+<%--                                <span>(${totalBook})</span>--%>
+<%--                            </div>--%>
+<%--                            <c:forEach var="category" items="${categories}">--%>
+<%--                                <div class="checkbox-group gap-x-2">--%>
+<%--                                    <input type="checkbox" id="${category.id}" value="${category.id}" ${categoryId == category.id ? "checked" : ""}--%>
+<%--                                           class="category-item"/>--%>
+<%--                                    <label for="${category.id}" class="pr-2">${category.categoryName}</label>--%>
+<%--                                    <span>(${category.bookCount})</span>--%>
+<%--                                </div>--%>
+<%--                            </c:forEach>--%>
                         </div>
                     </div>
                     <div class="cr-shop-price">
@@ -293,18 +293,15 @@
                                 <c:set var="beforePage" value="${page - 2}"/>
                                 <c:set var="afterPage" value="${page + 2}"/>
 
-                                <!-- Previous button -->
                                 <c:if test="${page > 1}">
                                     <li class="btn prev"><span><i class="fas fa-angle-left"></i></span></li>
                                 </c:if>
 
-                                <!-- First page and dots before the current range -->
                                 <c:if test="${page > 3}">
                                     <li class="first numb"><span>1</span></li>
                                     <li class="dots"><span>...</span></li>
                                 </c:if>
 
-                                <!-- Page number buttons -->
                                 <c:forEach var="plength" begin="1" end="${totalPages}">
                                     <c:choose>
                                         <c:when test="${plength >= beforePage && plength <= afterPage}">
@@ -316,7 +313,6 @@
                                     </c:choose>
                                 </c:forEach>
 
-                                <!-- Dots and last page after the current range -->
                                 <c:if test="${page < totalPages - 2}">
                                     <c:if test="${page < totalPages - 3}">
                                         <li class="dots"><span>...</span></li>
@@ -324,11 +320,9 @@
                                     <li class="last numb" data-page="${totalPages}"><span>${totalPages}</span></li>
                                 </c:if>
 
-                                <!-- Next button -->
                                 <c:if test="${page < totalPages}">
                                     <li class="btn next"><span><i class="fas fa-angle-right"></i></span></li>
                                 </c:if>
-
 
                             </ul>
                         </nav>

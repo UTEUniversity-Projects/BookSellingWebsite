@@ -1,4 +1,5 @@
 import {toast} from "./toast.js";
+import {uploadImage} from "../../commons/js/upload-image.js";
 
 document.addEventListener("DOMContentLoaded", () => {
     const selectAllCheckbox = document.getElementById("select-all");
@@ -18,7 +19,7 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 });
 
-$('#btn-confirm').on('click', function () {
+$('#btn-confirm').on('click', async function () {
     const orderId = $('#order-id').data('order-id');
 
     let returnBookItems = [];
@@ -29,8 +30,7 @@ $('#btn-confirm').on('click', function () {
         let returnQuantity = $(this).val();
 
         returnBookItems.push({
-            bookTemplateId: bookTemplateId,
-            quantity: parseInt(returnQuantity)
+            bookTemplateId: bookTemplateId, quantity: parseInt(returnQuantity)
         });
     });
 
@@ -43,24 +43,46 @@ $('#btn-confirm').on('click', function () {
     } else {
         $('#reason-error').hide();
     }
-    const description = $('#description').val();
-    if (!description) {
-        $('#description-error').show();
-        return;
-    } else {
-        $('#description-error').hide();
-    }
+
+    let description = $('#description').val();
+    $('#description').on('blur', function () {
+        if (!description || description.trim().length === 0) {
+            $('#description-error').show();
+        } else {
+            $('#description-error').hide();
+        }
+    });
+
     const files = $('#uploadImage')[0].files;
+    let mediaFiles = []
     if (files.length === 0) {
         $('#file-error').show();
         return;
     } else {
         $('#file-error').hide();
+        await uploadImage('return_book', '#uploadImage').then(response => {
+            console.log('Tải lên thành công:', response);
+            for (let i = 0; i < response.imageLinks.length; i++) {
+                mediaFiles.push({
+                    fileName: response.fileName, storedCode: response.imageLinks[i]
+                });
+            }
+            console.log(mediaFiles);
+        })
+            .catch(error => {
+                console.error('Lỗi tải lên:', error);
+            });
     }
-
+    console.log("----")
     let data = {
-        orderId: orderId, reason: reason, description: description, returnBookItems: returnBookItems
+        orderId: orderId,
+        reason: reason,
+        description: description,
+        returnBookItems: returnBookItems,
+        mediaFiles: mediaFiles
     };
+
+    console.log(data);
 
     $.ajax({
         url: `${contextPath}/return-order`,
@@ -72,6 +94,9 @@ $('#btn-confirm').on('click', function () {
                 title: data.type, message: data.message, type: data.type, duration: 3000
             });
             console.log(data);
+            if (data.type === "success") {
+                window.location.href = `${contextPath}/order-detail?orderId=${orderId}`;
+            }
         },
         error: function (xhr, status, error) {
             toast({

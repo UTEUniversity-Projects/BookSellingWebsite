@@ -152,12 +152,11 @@ public class OrderAPI extends HttpServlet {
             result.put("status", EOrderStatus.PACKING.getDescription());
             result.put("statusStyle", EOrderStatus.PACKING.getStatusStyle());
 
-            // Gửi email trong luồng riêng biệt
             executorService.submit(() -> {
                 try {
-                    sendOrderConfirmationEmail(request, orderId); // Gọi phương thức gửi email
+                    sendOrderConfirmationEmail(request, orderId);
                 } catch (IOException e) {
-                    e.printStackTrace(); // Log lỗi khi gửi email
+                    e.printStackTrace();
                 }
             });
 

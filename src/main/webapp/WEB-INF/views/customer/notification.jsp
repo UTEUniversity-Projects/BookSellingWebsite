@@ -16,9 +16,33 @@
           <p class="text-[16px]">${notification.content}</p>
           <p class="text-sm">${notification.sentTime}</p>
         </div>
-        <a href="${notification.hyperLink}" class="px-4 py-2 bg-gray-200">Xem chi tiết</a>
+
+        <a href="${pageContext.request.contextPath}${notification.hyperLink}"
+           class="px-4 py-2 bg-gray-200 notification-detail-link"
+           data-id="${notification.id}">
+          Xem chi tiết
+        </a>
       </div>
     </c:forEach>
   </div>
-
 </section>
+
+
+<script>
+  $(document).ready(function() {
+    // Lắng nghe sự kiện click vào nút "Xem chi tiết"
+    $(".notification-detail-link").click(function() {
+      const notificationId = $(this).data("id");
+
+      $.ajax({
+        url: `${pageContext.request.contextPath}/api/customer/notification/update`,
+        type: 'POST',
+        data: { notificationId: notificationId },
+        success: function(response) {
+        },
+        error: function(error) {
+        }
+      });
+    });
+  });
+</script>

@@ -95,6 +95,30 @@ public class AuthorDAOImpl extends GenericDAOImpl<Author> implements IAuthorDAO 
     }
 
     @Override
+    public void removeBookTemplate(Long authorId, Long bookTemplateId) {
+        String sql = "DELETE FROM author_book_template " +
+                "WHERE author_id = :authorId AND book_template_id = :bookTemplateId";
+
+        Map<String, Object> params = new HashMap<>();
+        params.put("authorId", authorId);
+        params.put("bookTemplateId", bookTemplateId);
+
+        super.executeNativeQuery(sql, params);
+    }
+
+    @Override
+    public void addBookTemplateToAuthor(Long authorId, Long bookTemplateId) {
+        String sql = "INSERT INTO author_book_template (author_id, book_template_id) " +
+                "VALUES (:authorId, :bookTemplateId)";
+
+        Map<String, Object> params = new HashMap<>();
+        params.put("authorId", authorId);
+        params.put("bookTemplateId", bookTemplateId);
+
+        super.executeNativeQuery(sql, params);
+    }
+
+    @Override
     public Integer countBooksTemplateAll(Long authorId) {
         String sql = "SELECT COUNT(*) author_works " +
                 "FROM author_book_template abt " +

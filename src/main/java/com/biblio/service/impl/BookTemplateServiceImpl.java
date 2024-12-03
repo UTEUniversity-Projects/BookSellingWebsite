@@ -24,6 +24,7 @@ import com.biblio.service.IMediaFileService;
 import com.biblio.utils.ManageFileUtil;
 
 import javax.inject.Inject;
+import javax.transaction.Transactional;
 import java.time.LocalDateTime;
 import java.util.*;
 
@@ -42,6 +43,8 @@ public class BookTemplateServiceImpl implements IBookTemplateService {
     IPublisherDAO publisherDAO;
     @Inject
     IMediaFileService mediaFileService;
+    @Inject
+    IMediaFileDAO mediaFileDAO;
 
     @Override
     public List<BookManagementResponse> getAllBookManagementResponse() {
@@ -179,6 +182,7 @@ public class BookTemplateServiceImpl implements IBookTemplateService {
     }
 
     @Override
+    @Transactional
     public BookTemplate updateBookTemplate(BookUpdateGlobalRequest request) {
         BookTemplate bookTemplate = bookTemplateDAO.findOneForDetails(Long.valueOf(request.getId()));
 
@@ -189,7 +193,7 @@ public class BookTemplateServiceImpl implements IBookTemplateService {
         // old media file
         List<MediaFile> oldMediaFiles = bookTemplate.getMediaFiles();
 
-        // add media file
+        // list new media file
         List<MediaFile> mediaFiles = new ArrayList<>();
         MediaFile mainImage = mediaFileService.createMediaFile(
                 MediaFileCreateRequest.builder()
@@ -211,60 +215,40 @@ public class BookTemplateServiceImpl implements IBookTemplateService {
         }
         bookTemplate.setMediaFiles(mediaFiles);
 
-        // UPDATE
-        bookTemplateDAO.updateBookTemplate(bookTemplate);
-
         // update for Author
         Set<Author> currentAuthors = bookTemplate.getAuthors();
 
         for (Author author : currentAuthors) {
-            author.getBookTemplates().remove(bookTemplate);
-            authorDAO.updateAuthor(author);
+            authorDAO.removeBookTemplate(author.getId(), bookTemplate.getId());
         }
         bookTemplate.setAuthors(new HashSet<>());
 
         for (String authorId : request.getAuthorIds()) {
             Author author = authorDAO.getEntityById(Long.valueOf(authorId));
-            if (author.getBookTemplates() == null) {
-                author.setBookTemplates(new HashSet<>());
-            }
-            author.getBookTemplates().add(bookTemplate);
-
-            if (bookTemplate.getAuthors() == null) {
-                bookTemplate.setAuthors(new HashSet<>());
-            }
+            authorDAO.addBookTemplateToAuthor(author.getId(), bookTemplate.getId());
             bookTemplate.getAuthors().add(author);
-
-            authorDAO.updateAuthor(author);
         }
 
         // update for Translator
         Set<Translator> currentTranslators = bookTemplate.getTranslators();
 
         for (Translator translator : currentTranslators) {
-            translator.getBookTemplates().remove(bookTemplate);
-            translatorDAO.updateTranslator(translator);
+            translatorDAO.removeBookTemplate(translator.getId(), bookTemplate.getId());
         }
         bookTemplate.setTranslators(new HashSet<>());
 
         for (String translatorId : request.getTranslatorIds()) {
             Translator translator = translatorDAO.getEntityById(Long.valueOf(translatorId));
-            if (translator.getBookTemplates() == null) {
-                translator.setBookTemplates(new HashSet<>());
-            }
-            translator.getBookTemplates().add(bookTemplate);
-
-            if (bookTemplate.getTranslators() == null) {
-                bookTemplate.setTranslators(new HashSet<>());
-            }
+            translatorDAO.addBookTemplateToTranslator(translator.getId(), bookTemplate.getId());
             bookTemplate.getTranslators().add(translator);
-
-            translatorDAO.updateTranslator(translator);
         }
+
+        // UPDATE BOOK TEMPLATE
+        bookTemplateDAO.updateBookTemplate(bookTemplate);
 
         // delete media file
         for (MediaFile mediaFile : oldMediaFiles) {
-            ManageFileUtil.deleteFileAvatar(mediaFile.getStoredCode(), "product");
+            mediaFileDAO.deleteMediaFile(mediaFile.getId());
         }
 
         return bookTemplate;

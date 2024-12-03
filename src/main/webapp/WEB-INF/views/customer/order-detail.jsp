@@ -138,7 +138,9 @@
                                         <p class="price-value">${orderProduct.sellingPrice}</p>
                                         <p>x${orderProduct.quantity}</p>
                                         <button class="cr-btn-secondary btn-review
-                                                <c:if test="${orderDetail.status != 'COMPLETE_DELIVERY'}">
+                                                <c:if test="${orderDetail.status != 'COMPLETE_DELIVERY'
+                                                            && orderDetail.status != 'REQUEST_REFUND'
+                                                            && orderDetail.status != 'REFUNDED'}">
                                                     d-none
                                                 </c:if>">
                                             Đánh giá
@@ -379,7 +381,7 @@
                             value="true"
                     />
                 </div>
-                <div class="submit-review d-flex justify-content-center align-content-center">
+                <div class="submit-review d-flex justify-content-center align-content-center w-100">
                     <button id="btn-submit-review" type="submit" class="cr-button">Gửi Đánh Giá</button>
                 </div>
             </div>

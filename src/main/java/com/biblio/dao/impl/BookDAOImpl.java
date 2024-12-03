@@ -58,18 +58,19 @@ public class BookDAOImpl extends GenericDAOImpl<Book> implements IBookDAO {
     }
 
     @Override
-    public void addBook(Book book) {
-        super.save(book);
-    }
-
-    @Override
     public void updateBook(Book book) {
         super.update(book);
     }
 
     @Override
     public void deleteBook(Long id) {
-        super.delete(id);
+        String sql = "DELETE FROM book " +
+                "WHERE id = :bookId";
+
+        Map<String, Object> params = new HashMap<>();
+        params.put("bookId", id);
+
+        super.executeNativeQuery(sql, params);
     }
 
     @Override
@@ -95,6 +96,12 @@ public class BookDAOImpl extends GenericDAOImpl<Book> implements IBookDAO {
         Map<String, Object> params = new HashMap<>();
         params.put("bookTemplateId", request.getProductId());
         return super.findByJPQLPaginated(jpql, 1, request.getQuantity(), params);
+    }
+
+    public static void main(String[] args) {
+        BookDAOImpl dao = new BookDAOImpl();
+        System.out.println(dao.findMaxBookPrice());
+
     }
 
 }

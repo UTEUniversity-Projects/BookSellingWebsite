@@ -16,4 +16,15 @@ public class MediaFileDAOImpl extends GenericDAOImpl<MediaFile> implements IMedi
     public MediaFile createMediaFile(MediaFile mediaFile) {
         return super.insert(mediaFile);
     }
+
+    @Override
+    public void deleteMediaFile(Long id) {
+        String sql = "DELETE FROM media_file " +
+                "WHERE id = :mediaFileId";
+
+        Map<String, Object> params = new HashMap<>();
+        params.put("mediaFileId", id);
+
+//        super.delete(id);
+    }
 }

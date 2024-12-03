@@ -19,21 +19,11 @@ import static com.biblio.utils.DateTimeUtil.formatDateTime;
 
 public class OrderMapper {
     public static OrderManagementResponse mapToOrderManagementResponse(Order order) {
-        return OrderManagementResponse.builder()
-                .id(order.getId())
-                .customerName(order.getCustomer().getFullName())
-                .orderDate(formatDateTime(order.getOrderDate(), "HH:mm dd-MM-yyyy"))
-                .totalPrice(order.getBankTransfer().getAmount())
-                .paymentMethod(order.getPaymentType().getValue())
-                .status(order.getStatus())
-                .statusStyle(order.getStatus().getStatusStyle())
-                .build();
+        return OrderManagementResponse.builder().id(order.getId()).customerName(order.getCustomer().getFullName()).orderDate(formatDateTime(order.getOrderDate(), "HH:mm dd-MM-yyyy")).totalPrice(order.getBankTransfer().getAmount()).paymentMethod(order.getPaymentType().getValue()).status(order.getStatus()).statusStyle(order.getStatus().getStatusStyle()).build();
     }
 
     public static OrderDetailsManagementResponse mapToOrderDetailsManagementResponse(Order order) {
-        List<OrderProductResponse> products = order.getOrderItems().stream()
-                .flatMap(orderItem -> OrderItemMapper.toOrderProductCustomerResponse(orderItem).stream())
-                .collect(Collectors.toList());
+        List<OrderProductResponse> products = order.getOrderItems().stream().flatMap(orderItem -> OrderItemMapper.toOrderProductCustomerResponse(orderItem).stream()).collect(Collectors.toList());
 
         CustomerResponse customer = CustomerMapper.toCustomerResponse(order.getCustomer());
 
@@ -43,34 +33,25 @@ public class OrderMapper {
 
         for (Promotion promotion : order.getPromotions()) {
             if (promotion.getPromotionTemplate().getType() != EPromotionTemplateType.DISCOUNT) {
-                promotions.add(PromotionOrderResponse.builder()
-                        .id(promotion.getId())
-                        .promotionType(promotion.getPromotionTemplate().getType())
-                        .discountAmount(promotion.getDiscountLimit())
-                        .build());
+                PromotionOrderResponse promotionOrderResponse = new PromotionOrderResponse();
+                promotionOrderResponse.setId(promotion.getId());
+                promotionOrderResponse.setPromotionType(promotion.getPromotionTemplate().getType());
+                if (promotion.getPromotionTemplate().getType() == EPromotionTemplateType.FREESHIP) {
+                    double discountAmount = Math.min(promotion.getDiscountLimit(), shipping.getShippingFee());
+                    promotionOrderResponse.setDiscountAmount(discountAmount);
+                }
+
+                promotions.add(promotionOrderResponse);
             }
         }
 
-        return OrderDetailsManagementResponse.builder()
-                .id(order.getId())
-                .customer(customer)
-                .shipping(shipping)
-                .orderDate(formatDateTime(order.getOrderDate(), "HH:mm dd-MM-yyyy"))
-                .note(order.getNote())
-                .products(products)
-                .status(order.getStatus())
-                .statusStyle(order.getStatus().getStatusStyle())
-                .paymentMethod(order.getPaymentType().getValue())
-                .promotions(promotions)
-                .build();
+        return OrderDetailsManagementResponse.builder().id(order.getId()).customer(customer).shipping(shipping).orderDate(formatDateTime(order.getOrderDate(), "HH:mm dd-MM-yyyy")).note(order.getNote()).products(products).status(order.getStatus()).statusStyle(order.getStatus().getStatusStyle()).paymentMethod(order.getPaymentType().getValue()).promotions(promotions).build();
     }
 
     public static OrderCustomerResponse toOrderCustomerResponse(Order order) {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm dd-MM-yyyy");
 
-        List<OrderProductResponse> products = order.getOrderItems().stream()
-                .flatMap(orderItem -> OrderItemMapper.toOrderProductCustomerResponse(orderItem).stream())
-                .collect(Collectors.toList());
+        List<OrderProductResponse> products = order.getOrderItems().stream().flatMap(orderItem -> OrderItemMapper.toOrderProductCustomerResponse(orderItem).stream()).collect(Collectors.toList());
 
         CustomerResponse customer = CustomerMapper.toCustomerResponse(order.getCustomer());
 
@@ -86,51 +67,28 @@ public class OrderMapper {
         for (Promotion promotion : order.getPromotions()) {
             if (promotion.getPromotionTemplate().getType() != EPromotionTemplateType.DISCOUNT) {
                 double discount = promotion.calculateDiscount(finalPrice);
-                promotions.add(PromotionOrderResponse.builder()
-                        .id(promotion.getId())
-                        .code(promotion.getPromotionTemplate().getCode())
-                        .promotionType(promotion.getPromotionTemplate().getType())
-                        .discountAmount(discount)
-                        .build());
+                promotions.add(PromotionOrderResponse.builder().id(promotion.getId()).code(promotion.getPromotionTemplate().getCode()).promotionType(promotion.getPromotionTemplate().getType()).discountAmount(discount).build());
                 finalPrice -= discount;
             }
         }
         finalPrice = Math.max(finalPrice, 0);
 
 
-        return OrderCustomerResponse.builder()
-                .id(order.getId())
-                .orderDate(order.getOrderDate().format(formatter))
-                .note(order.getNote())
-                .products(products)
-                .status(order.getStatus())
+        return OrderCustomerResponse.builder().id(order.getId()).orderDate(order.getOrderDate().format(formatter)).note(order.getNote()).products(products).status(order.getStatus())
                 //.statusDisplay(order.getStatus().getDescription())
                 //.statusStyle(order.getStatus().getStatusStyle())
                 .totalPrice(totalPrice)
                 //.paymentMethod(order.getPaymentType().getValue())
-                .promotions(listPromotion)
-                .lineItems(lineItems)
-                .finalPrice(finalPrice)
-                .totalDiscount(totalDiscount)
-                .order(order)
-                .shipping(shipping)
-                .build();
+                .promotions(listPromotion).lineItems(lineItems).finalPrice(finalPrice).totalDiscount(totalDiscount).order(order).shipping(shipping).build();
     }
 
     public static RevenueResponse toRevenueResponse(Order order) {
         BankTransferDAOImpl bankTransferDAO = new BankTransferDAOImpl();
-        return RevenueResponse.builder()
-                .date(order.getOrderDate())
-                .revenue(bankTransferDAO.findByOrderId(order.getId()).getAmount())
-                .build();
+        return RevenueResponse.builder().date(order.getOrderDate()).revenue(bankTransferDAO.findByOrderId(order.getId()).getAmount()).build();
     }
 
     public static OrderOfCustomerResponse toOrderOfCustomerResponse(Order order) {
-        return OrderOfCustomerResponse.builder()
-                .orderId(order.getId())
-                .customerId(order.getCustomer().getId())
-                .customerName(order.getCustomer().getFullName())
-                .build();
+        return OrderOfCustomerResponse.builder().orderId(order.getId()).customerId(order.getCustomer().getId()).customerName(order.getCustomer().getFullName()).build();
     }
 
 }

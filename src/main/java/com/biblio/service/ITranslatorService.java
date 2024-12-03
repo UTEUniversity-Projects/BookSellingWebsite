@@ -19,9 +19,9 @@ public interface ITranslatorService {
 
     Translator createTranslator(TranslatorCreateRequest translatorRequest);
 
-    void updateTranslator(TranslatorUpdateRequest translatorRequest);
+    Boolean updateTranslator(TranslatorUpdateRequest translatorRequest);
 
-    void deleteTranslator(TranslatorDeleteRequest translatorDeleteRequest);
+    Boolean deleteTranslator(TranslatorDeleteRequest translatorDeleteRequest);
 
     Integer countBookTemplate(TranslatorDeleteRequest id);
 }

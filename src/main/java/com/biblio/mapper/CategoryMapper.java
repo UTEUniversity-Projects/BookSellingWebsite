@@ -22,14 +22,13 @@ public class CategoryMapper {
                 .build();
     }
 
-    public static Category toCategory(CategoryUpdateRequest categoryUpdateRequest) {
-        return Category.builder()
-                .id(Long.valueOf(categoryUpdateRequest.getId()))
-                .name(categoryUpdateRequest.getName())
-                .shortScript(categoryUpdateRequest.getShortScript())
-                .fullScript(categoryUpdateRequest.getFullScript())
-                .status(categoryUpdateRequest.getStatus())
-                .build();
+    public static Category toCategory(CategoryUpdateRequest categoryUpdateRequest, Category category) {
+        category.setName(categoryUpdateRequest.getName());
+        category.setShortScript(categoryUpdateRequest.getShortScript());
+        category.setFullScript(categoryUpdateRequest.getFullScript());
+        category.setStatus(categoryUpdateRequest.getStatus());
+
+        return category;
     }
 
     // End DTO Request to Entity

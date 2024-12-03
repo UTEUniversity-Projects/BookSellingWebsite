@@ -107,7 +107,8 @@ public class SubCategoryServiceImpl implements ISubCategoryService {
 
     @Override
     public void update(SubCategoryUpdateRequest subCategoryUpdateRequest) {
-        subCategoryDAO.updateSubCategory(subCategoryMapper.toSubCategory(subCategoryUpdateRequest));
+        SubCategory subCategory = getEntityById(Long.valueOf(subCategoryUpdateRequest.getId()));
+        subCategoryDAO.updateSubCategory(subCategoryMapper.toSubCategory(subCategoryUpdateRequest, subCategory));
     }
 
     @Override

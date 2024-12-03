@@ -20,6 +20,7 @@ import com.biblio.service.IBookTemplateService;
 import com.biblio.service.ISubCategoryService;
 
 import javax.inject.Inject;
+import javax.transaction.Transactional;
 import java.util.List;
 
 public class BookServiceImpl implements IBookService {
@@ -47,15 +48,16 @@ public class BookServiceImpl implements IBookService {
     }
 
     @Override
+    @Transactional
     public BookTemplate createBookSeries(BookCreateGlobalRequest bookCreateRequest) {
-        long quantity = Long.parseLong(bookCreateRequest.getQuantity());
-
-        SubCategory subCategory = subCategoryService.getEntityById(Long.valueOf(bookCreateRequest.getSubCategoryId()));
         BookTemplate bookTemplate = bookTemplateService.createBookTemplate(bookCreateRequest);
+
+        long quantity = Long.parseLong(bookCreateRequest.getQuantity());
+        SubCategory subCategory = subCategoryService.getEntityById(Long.valueOf(bookCreateRequest.getSubCategoryId()));
 
         for (int i = 0; i < quantity; i++) {
             BookMetadata bookMetadata = bookMetadataService.createBookMetadata(bookCreateRequest);
-            bookDAO.createBook(BookMapper.toBookEntity(bookCreateRequest,
+            bookDAO.createBook(BookMapper.toBookEntityCreate(bookCreateRequest,
                     bookTemplate, subCategory, bookMetadata));
         }
 
@@ -63,13 +65,14 @@ public class BookServiceImpl implements IBookService {
     }
 
     @Override
+    @Transactional
     public BookTemplate updateBookSeries(BookUpdateGlobalRequest bookUpdateRequest) {
         BookTemplate oldBookTemplate = bookTemplateDAO.findOneForDetails(Long.valueOf(bookUpdateRequest.getId()));
         BookTemplate newBookTemplate = bookTemplateService.updateBookTemplate(bookUpdateRequest);
         SubCategory subCategory = subCategoryService.getEntityById(Long.valueOf(bookUpdateRequest.getSubCategoryId()));
 
-        long oldQuantity = bookTemplateDAO.countInstockById(oldBookTemplate.getId());
-        long newQuantity = Long.parseLong(bookUpdateRequest.getQuantity());
+        int oldQuantity = Math.toIntExact(bookTemplateDAO.countInstockById(oldBookTemplate.getId()));
+        int newQuantity = (int) Long.parseLong(bookUpdateRequest.getQuantity());
 
         List<Book> books = oldBookTemplate.getBooks().stream()
                 .filter(book -> book.getBookMetadata().getStatus() == EBookMetadataStatus.IN_STOCK).toList();
@@ -77,7 +80,7 @@ public class BookServiceImpl implements IBookService {
         if (oldQuantity < newQuantity) {
             for (Book book : books) {
                 BookMetadata bookMetadata = book.getBookMetadata();
-                bookDAO.updateBook(BookMapper.toBookEntity(bookUpdateRequest,
+                bookDAO.updateBook(BookMapper.toBookEntityUpdate(bookUpdateRequest,
                         newBookTemplate, subCategory, bookMetadata, book));
             }
 
@@ -89,35 +92,19 @@ public class BookServiceImpl implements IBookService {
                         newBookTemplate, subCategory, bookMetadata));
             }
         } else {
-            long quantity = oldQuantity - newQuantity;
-
-            for (int i = 0; i < quantity; i++) {
-                bookDAO.deleteBook(books.get(i).getId());
+            for (int i = 0; i < newQuantity; i++) {
+                BookMetadata bookMetadata = books.get(i).getBookMetadata();
+                bookDAO.updateBook(BookMapper.toBookEntityUpdate(bookUpdateRequest,
+                        newBookTemplate, subCategory, bookMetadata, books.get(i)));
             }
 
-            for (Book book : books) {
-                BookMetadata bookMetadata = book.getBookMetadata();
-                bookDAO.updateBook(BookMapper.toBookEntity(bookUpdateRequest,
-                        newBookTemplate, subCategory, bookMetadata, book));
+            for (int i = newQuantity; i < oldQuantity; i++) {
+                bookMetadataService.deleteBookMetadata(books.get(i).getBookMetadata().getId());
+                bookDAO.deleteBook(books.get(i).getId());
             }
         }
 
         return newBookTemplate;
-    }
-
-    @Override
-    public void addBook(BookRequest bookRequest) {
-
-    }
-
-    @Override
-    public void updateBook(BookRequest bookRequest) {
-
-    }
-
-    @Override
-    public void deleteBook(Long id) {
-
     }
 
     @Override
