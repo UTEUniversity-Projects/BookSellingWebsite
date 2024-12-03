@@ -157,10 +157,10 @@ public class BookTemplateDAOImpl extends GenericDAOImpl<BookTemplate> implements
 
     @Override
     public Long countByCriteria(SearchBookRequest request) {
+
         StringBuilder jpql = new StringBuilder("SELECT count(DISTINCT bt.id) FROM BookTemplate bt "
                 + "JOIN bt.books b "
-                + "WHERE b.id = (SELECT MIN(b2.id) FROM Book b2 WHERE b2.bookTemplate.id = bt.id) "
-                + "AND bt.status = 'ON_SALE' "
+                + "WHERE b.id = (SELECT MIN(b2.id) FROM Book b2 WHERE b2.bookTemplate.id = bt.id) AND bt.status = 'ON_SALE' "
                 + "AND b.sellingPrice >= :minPrice AND b.sellingPrice <= :maxPrice "
                 + "AND (SELECT COALESCE(AVG(r2.rate), 0) FROM bt.reviews r2 WHERE r2.bookTemplate.id = bt.id) >= :reviewRate ");
 
@@ -169,7 +169,7 @@ public class BookTemplateDAOImpl extends GenericDAOImpl<BookTemplate> implements
         params.put("maxPrice", Double.valueOf(request.getMaxPrice()));
         params.put("reviewRate", Double.valueOf(request.getReviewRate()));
 
-        if (request.getTitle() != null && !request.getTitle().isEmpty()) {
+        if (request.getTitle() != null) {
             String[] searchTerms = request.getTitle().split("\\s+");
             jpql.append(" AND (");
             for (int i = 0; i < searchTerms.length; i++) {
@@ -282,11 +282,6 @@ public class BookTemplateDAOImpl extends GenericDAOImpl<BookTemplate> implements
     @Override
     public BookTemplate update(BookTemplate bookTemplate) {
         return super.update(bookTemplate);
-    }
-
-    public static void main(String[] args) {
-        BookTemplateDAOImpl dao = new BookTemplateDAOImpl();
-        System.out.println(dao.findTop20());
     }
 
 }

@@ -100,25 +100,7 @@ public class BookDAOImpl extends GenericDAOImpl<Book> implements IBookDAO {
 
     public static void main(String[] args) {
         BookDAOImpl dao = new BookDAOImpl();
-//        List<Book> books = dao.findAll();
-//        System.out.println(books);
-//
-//        Map<BookTemplate, Long> countByTemplate = books.stream()
-//                .collect(Collectors.groupingBy(Book::getBookTemplate, Collectors.counting()));
-//
-//        countByTemplate.forEach((template, count) -> {
-//            System.out.println("BookTemplate Name: " + template.getBooks().);
-//            System.out.println("Book Count: " + count);
-//        });
-        CheckoutItemRequest checkoutItemRequest = CheckoutItemRequest.builder()
-                .productId(2L)
-                .quantity(50)
-                .build();
-        List<Book> list = dao.findByBookTemplateIdAndQuantity(checkoutItemRequest);
-
-        for (Book book : list) {
-            System.out.println(book.toString());
-        }
+        System.out.println(dao.findMaxBookPrice());
 
     }
 

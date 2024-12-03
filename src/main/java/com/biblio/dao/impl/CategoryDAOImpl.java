@@ -3,6 +3,7 @@ package com.biblio.dao.impl;
 import com.biblio.dao.ICategoryDAO;
 import com.biblio.dto.request.SearchBookRequest;
 import com.biblio.dto.response.CategoryBookCountResponse;
+import com.biblio.dto.response.CategoryTotalBookResponse;
 import com.biblio.entity.Category;
 import com.biblio.enumeration.EBookCondition;
 import com.biblio.enumeration.EBookFormat;
@@ -61,7 +62,7 @@ public class CategoryDAOImpl extends GenericDAOImpl<Category> implements ICatego
                 + "LEFT JOIN b.bookTemplate bt "
                 + "ON b.id = (SELECT MIN(b2.id) FROM Book b2 WHERE b2.bookTemplate.id = bt.id AND bt.status = 'ON_SALE' "
                 + "AND (b2.sellingPrice >= :minPrice AND b2.sellingPrice <= :maxPrice)) "
-                + "WHERE (b.id IS NULL OR (b.sellingPrice >= :minPrice AND b.sellingPrice <= :maxPrice)) "
+                + "WHERE (b.sellingPrice >= :minPrice AND b.sellingPrice <= :maxPrice) "
                 + "AND (SELECT COALESCE(AVG(r2.rate), 0) FROM bt.reviews r2 WHERE r2.bookTemplate.id = bt.id) >= :reviewRate ");
 
         Map<String, Object> params = new HashMap<>();
@@ -102,5 +103,13 @@ public class CategoryDAOImpl extends GenericDAOImpl<Category> implements ICatego
         return query.getResultList();
     }
 
+    public static void main(String[] args) {
+        CategoryDAOImpl dao = new CategoryDAOImpl();
+        SearchBookRequest request = new SearchBookRequest();
+
+        for (CategoryBookCountResponse r : dao.countBookPerCategory(request)) {
+            System.out.println(r);
+        }
+    }
 
 }

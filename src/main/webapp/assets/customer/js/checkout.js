@@ -171,7 +171,7 @@ $(document).ready(() => {
 		ACCOUNT_NAME: 'TRANG KIM LOI'
 	};
 
-	const text = `TEST ${Math.floor(Math.random() * 1000)}`;
+	const text = `TEST 495`;
 	let timeOut;
 	let interval;
 	let isSuccess = false;
@@ -218,7 +218,7 @@ $(document).ready(() => {
 			return;
 		}
 
-		const amount = document.querySelector('#price-total').dataset.price;
+		const amount = 30000;
 
 		checkout.classList.add('active');
 		checkoutQR.src = '';
@@ -328,7 +328,3 @@ $(document).ready(() => {
 		}
 	}
 });
-
-/*
-*
-* */

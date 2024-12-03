@@ -10,14 +10,14 @@ import lombok.experimental.FieldDefaults;
 @Builder
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class SearchBookRequest {
-    String title;
-    Long categoryId;
-    String sortBy;
+    String title = "";
+    Long categoryId = null;
+    String sortBy = null;
     int perPage;
     int pageNumber = 1;
-    long minPrice;
-    long maxPrice;
-    String condition;
-    String format;
+    long minPrice = 0;
+    long maxPrice = Long.MAX_VALUE;
+    String condition = null;
+    String format = null;
     double reviewRate = 0;
 }
