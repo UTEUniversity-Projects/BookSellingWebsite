@@ -1,11 +1,13 @@
 package com.biblio.service.impl;
 
+import com.biblio.dao.IBookTemplateDAO;
 import com.biblio.dao.ICartItemDAO;
 import com.biblio.dto.request.DeleteCartItemRequest;
 import com.biblio.dto.request.UpdateCartItemRequest;
 import com.biblio.dto.response.CartItemResponse;
 import com.biblio.entity.CartItem;
 import com.biblio.mapper.CartItemMapper;
+import com.biblio.service.IBookTemplateService;
 import com.biblio.service.ICartItemService;
 
 import javax.inject.Inject;
@@ -14,8 +16,17 @@ public class CartItemServiceImpl implements ICartItemService {
     @Inject
     private ICartItemDAO cartItemDAO;
 
+    @Inject
+    private IBookTemplateDAO bookTemplateDAO;
+
     @Override
     public CartItemResponse updateCartItem(UpdateCartItemRequest updateCartItemRequest) {
+        Long countInStockBooks = bookTemplateDAO.countInstockById(updateCartItemRequest.getBookTemplateId());
+
+        if (countInStockBooks < updateCartItemRequest.getQuantity()) {
+            throw new IllegalArgumentException("Số lượng không đủ trong kho!");
+        }
+
         CartItem cartItem = cartItemDAO.getCartItemById(updateCartItemRequest.getCartItemId());
         cartItem.setQuantity(updateCartItemRequest.getQuantity());
         return CartItemMapper.toCartItemResponse(cartItemDAO.updateCartItem(cartItem));
