@@ -9,5 +9,6 @@ import lombok.*;
 @Builder
 public class UpdateCartItemRequest {
     private Long cartItemId;
+    private Long bookTemplateId;
     private Long quantity;
 }

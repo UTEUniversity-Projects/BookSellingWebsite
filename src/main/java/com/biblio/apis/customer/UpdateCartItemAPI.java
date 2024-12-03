@@ -4,6 +4,7 @@ import com.biblio.dto.request.AddToCartRequest;
 import com.biblio.dto.request.UpdateCartItemRequest;
 import com.biblio.dto.response.AccountGetResponse;
 import com.biblio.dto.response.CartItemResponse;
+import com.biblio.service.IBookTemplateService;
 import com.biblio.service.ICartItemService;
 import com.biblio.service.ICartService;
 import com.biblio.utils.HttpUtil;
@@ -28,6 +29,9 @@ public class UpdateCartItemAPI extends HttpServlet {
 
     @Inject
     private ICartItemService cartItemService;
+
+    @Inject
+    private IBookTemplateService bookTemplateService;
     /**
      * @see HttpServlet#HttpServlet()
      */
@@ -51,11 +55,18 @@ public class UpdateCartItemAPI extends HttpServlet {
 
         UpdateCartItemRequest updateCartItemRequest = HttpUtil.of(request.getReader()).toModel(UpdateCartItemRequest.class);
 
+
         Map<String, Object> result = new HashMap<>();
         ObjectMapper mapper = new ObjectMapper();
 
-        CartItemResponse cartItem = cartItemService.updateCartItem(updateCartItemRequest);
-        result.put("cartItem", cartItem);
+        try {
+            CartItemResponse cartItem = cartItemService.updateCartItem(updateCartItemRequest);
+            result.put("cartItem", cartItem);
+            result.put("code", 200);
+        } catch (IllegalArgumentException e) {
+            result.put("code", 400);
+            result.put("message", e.getMessage());
+        }
 
         response.setContentType("application/json");
         response.setCharacterEncoding("UTF-8");

@@ -35,6 +35,12 @@ public class CartServiceImpl implements ICartService {
 
     @Override
     public CartItemResponse addToCart(AddToCartRequest request) {
+        Long countInStockBooks = bookTemplateDAO.countInstockById(request.getBookTemplateId());
+
+        if (countInStockBooks < request.getQuantity()) {
+            throw new IllegalArgumentException("Số lượng không đủ trong kho!");
+        }
+
         Cart cart = cartDAO.findByAccountId(request.getAccountId());
 
         BookTemplate bookTemplate = bookTemplateDAO.findById(request.getBookTemplateId());

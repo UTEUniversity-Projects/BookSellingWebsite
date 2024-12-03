@@ -1,10 +1,11 @@
 package com.biblio.apis.customer;
 
+import com.biblio.dto.request.CheckoutItemRequest;
 import com.biblio.dto.request.CreateOrderRequest;
-import com.biblio.dto.response.AccountGetResponse;
-import com.biblio.dto.response.CheckOutResponse;
-import com.biblio.dto.response.CustomerDetailResponse;
-import com.biblio.dto.response.PromotionOrderResponse;
+import com.biblio.dto.request.DeleteCartItemRequest;
+import com.biblio.dto.response.*;
+import com.biblio.service.ICartItemService;
+import com.biblio.service.ICartService;
 import com.biblio.service.ICustomerService;
 import com.biblio.service.IOrderService;
 import com.biblio.utils.HttpUtil;
@@ -39,6 +40,12 @@ public class CreateOrderAPI extends HttpServlet {
 
     @Inject
     IOrderService orderService;
+
+    @Inject
+    private ICartItemService cartItemService;
+
+    @Inject
+    private ICartService cartService;
 
     /**
      * @see HttpServlet#HttpServlet()
@@ -79,6 +86,16 @@ public class CreateOrderAPI extends HttpServlet {
         if (account == null) {
             response.sendRedirect(request.getContextPath() + "/login");
             return;
+        }
+
+        CartResponse cartResponse = cartService.getCartResponseByAccountId(account.getId());
+        for (CheckoutItemRequest checkoutItemRequest : createOrderRequest.getItems()) {
+            for (CartItemResponse cartItemResponse : cartResponse.getCartItems()) {
+                if (checkoutItemRequest.getProductId().equals(cartItemResponse.getBookId())) {
+                    cartItemService.deleteCartItem(new DeleteCartItemRequest(cartItemResponse.getBookId()));
+                    break;
+                }
+            }
         }
 
         CustomerDetailResponse customer = customerService.getCustomerDetailByUsername(account.getUsername().trim());
