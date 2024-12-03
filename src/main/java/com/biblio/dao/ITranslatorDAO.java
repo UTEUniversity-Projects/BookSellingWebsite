@@ -20,6 +20,8 @@ public interface ITranslatorDAO {
     Translator createTranslator(Translator translator);
     void updateTranslator(Translator translator);
     void deleteTranslator(Long id);
+    void removeBookTemplate(Long translatorId, Long bookTemplateId);
+    void addBookTemplateToTranslator(Long translatorId, Long bookTemplateId);
     Integer countBooksTemplateAll(Long translatorId);
     Integer countBooksTemplateByStatus(Long translatorId, EBookTemplateStatus status);
     Integer countBooksByStatus(Long translatorId, EBookMetadataStatus status);

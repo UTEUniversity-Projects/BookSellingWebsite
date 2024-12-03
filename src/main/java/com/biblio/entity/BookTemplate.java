@@ -41,17 +41,17 @@ public class BookTemplate implements Serializable {
 
     // region Relationships
 
-    @ManyToMany(mappedBy = "bookTemplates", fetch = FetchType.EAGER)
+    @ManyToMany(fetch = FetchType.EAGER, mappedBy = "bookTemplates")
     private Set<Author> authors = new HashSet<>();
 
-    @ManyToMany(mappedBy = "bookTemplates", fetch = FetchType.EAGER)
+    @ManyToMany(fetch = FetchType.EAGER, mappedBy = "bookTemplates")
     private Set<Translator> translators = new HashSet<>();
 
     @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinColumn(name = "publisher_id", nullable = false)
     private Publisher publisher;
 
-    @OneToMany(fetch = FetchType.EAGER)
+    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinTable(
             name = "book_template_media_file",
             joinColumns = @JoinColumn(name = "book_template_id"),

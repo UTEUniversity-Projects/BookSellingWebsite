@@ -20,6 +20,8 @@ public interface IAuthorDAO {
     Author createAuthor(Author author);
     void updateAuthor(Author author);
     void deleteAuthor(Long id);
+    void removeBookTemplate(Long authorId, Long bookTemplateId);
+    void addBookTemplateToAuthor(Long authorId, Long bookTemplateId);
     Integer countBooksTemplateAll(Long authorId);
     Integer countBooksTemplateByStatus(Long authorId, EBookTemplateStatus status);
     Integer countBooksByStatus(Long authorId, EBookMetadataStatus status);

@@ -16,11 +16,16 @@ public class BookMetadataServiceImpl implements IBookMetadataService {
 
     @Override
     public BookMetadata createBookMetadata(BookCreateGlobalRequest request) {
-        return bookMetadataDAO.createBookMetadata(BookMetadataMapper.toBookMetadata(request));
+        return bookMetadataDAO.createBookMetadata(BookMetadataMapper.toBookMetadataCreate(request));
     }
 
     @Override
     public BookMetadata createBookMetadata(BookUpdateGlobalRequest request) {
         return bookMetadataDAO.createBookMetadata(BookMetadataMapper.toBookMetadata(request));
+    }
+
+    @Override
+    public void deleteBookMetadata(Long id) {
+        bookMetadataDAO.deleteBookMetadata(id);
     }
 }

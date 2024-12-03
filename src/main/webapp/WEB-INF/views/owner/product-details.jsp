@@ -25,9 +25,9 @@
                 data-aos-duration="2000"
                 data-aos-delay="600"
         >
-            <div class="col-xxl-4 col-xl-5 col-md-6 col-12 mb-24">
+            <div class="col-xxl-4 col-xl-5 col-md-6 col-12 mb-24 ps-10">
                 <div class="vehicle-detail-banner banner-content clearfix">
-                    <div class="banner-slider">
+                    <div class="banner-slider pe-10">
                         <div class="slider slider-for">
                             <c:forEach var="imageUrl" items="${book.imageUrls}">
                                 <div class="slider-banner-image">
@@ -703,7 +703,7 @@
     .product-title {
         font-family: 'Nunito Sans', sans-serif;
         font-weight: bold;
-        font-size: 200%;
+        font-size: 30px;
         color: #2b3647;
     }
 

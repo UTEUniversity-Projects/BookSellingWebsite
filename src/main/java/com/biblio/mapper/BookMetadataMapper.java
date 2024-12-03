@@ -10,7 +10,7 @@ import java.time.LocalDateTime;
 
 public class BookMetadataMapper {
 
-    public static BookMetadata toBookMetadata(BookCreateGlobalRequest request) {
+    public static BookMetadata toBookMetadataCreate(BookCreateGlobalRequest request) {
         return BookMetadata.builder()
                 .createdAt(LocalDateTime.now())
                 .openingDate(LocalDateTime.now())

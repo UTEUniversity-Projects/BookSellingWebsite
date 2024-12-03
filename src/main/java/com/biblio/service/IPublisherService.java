@@ -15,7 +15,7 @@ public interface IPublisherService {
     PublisherProfileResponse getProfileById(Long id);
     PublisherAnalysisResponse getAnalysisById(Long id);
     Publisher createPublisher(PublisherCreateRequest publisherRequest);
-    void updatePublisher(PublisherUpdateRequest publisherRequest);
-    void deletePublisher(PublisherDeleteRequest publisherDeleteRequest);
+    Boolean updatePublisher(PublisherUpdateRequest publisherRequest);
+    Boolean deletePublisher(PublisherDeleteRequest publisherDeleteRequest);
     Integer countBookTemplate(PublisherDeleteRequest id);
 }

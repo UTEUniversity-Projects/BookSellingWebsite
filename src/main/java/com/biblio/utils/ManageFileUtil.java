@@ -19,8 +19,6 @@ public class ManageFileUtil {
             filePath = filePath.replace("/", "\\");
             filePath = StoredFileConstants.LOCAL_STORED + filePath;
 
-            System.out.println(filePath);
-
             Path path = Paths.get(filePath);
             return Files.deleteIfExists(path);
         } catch (Exception e) {

@@ -69,7 +69,13 @@ public class BookDAOImpl extends GenericDAOImpl<Book> implements IBookDAO {
 
     @Override
     public void deleteBook(Long id) {
-        super.delete(id);
+        String sql = "DELETE FROM book " +
+                "WHERE id = :bookId";
+
+        Map<String, Object> params = new HashMap<>();
+        params.put("bookId", id);
+
+        super.executeNativeQuery(sql, params);
     }
 
     @Override

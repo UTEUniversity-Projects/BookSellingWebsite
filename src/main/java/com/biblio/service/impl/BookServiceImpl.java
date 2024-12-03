@@ -48,10 +48,10 @@ public class BookServiceImpl implements IBookService {
 
     @Override
     public BookTemplate createBookSeries(BookCreateGlobalRequest bookCreateRequest) {
-        long quantity = Long.parseLong(bookCreateRequest.getQuantity());
-
-        SubCategory subCategory = subCategoryService.getEntityById(Long.valueOf(bookCreateRequest.getSubCategoryId()));
         BookTemplate bookTemplate = bookTemplateService.createBookTemplate(bookCreateRequest);
+
+        long quantity = Long.parseLong(bookCreateRequest.getQuantity());
+        SubCategory subCategory = subCategoryService.getEntityById(Long.valueOf(bookCreateRequest.getSubCategoryId()));
 
         for (int i = 0; i < quantity; i++) {
             BookMetadata bookMetadata = bookMetadataService.createBookMetadata(bookCreateRequest);
@@ -68,8 +68,8 @@ public class BookServiceImpl implements IBookService {
         BookTemplate newBookTemplate = bookTemplateService.updateBookTemplate(bookUpdateRequest);
         SubCategory subCategory = subCategoryService.getEntityById(Long.valueOf(bookUpdateRequest.getSubCategoryId()));
 
-        long oldQuantity = bookTemplateDAO.countInstockById(oldBookTemplate.getId());
-        long newQuantity = Long.parseLong(bookUpdateRequest.getQuantity());
+        int oldQuantity = Math.toIntExact(bookTemplateDAO.countInstockById(oldBookTemplate.getId()));
+        int newQuantity = (int) Long.parseLong(bookUpdateRequest.getQuantity());
 
         List<Book> books = oldBookTemplate.getBooks().stream()
                 .filter(book -> book.getBookMetadata().getStatus() == EBookMetadataStatus.IN_STOCK).toList();
@@ -89,35 +89,19 @@ public class BookServiceImpl implements IBookService {
                         newBookTemplate, subCategory, bookMetadata));
             }
         } else {
-            long quantity = oldQuantity - newQuantity;
-
-            for (int i = 0; i < quantity; i++) {
-                bookDAO.deleteBook(books.get(i).getId());
+            for (int i = 0; i < newQuantity; i++) {
+                BookMetadata bookMetadata = books.get(i).getBookMetadata();
+                bookDAO.updateBook(BookMapper.toBookEntity(bookUpdateRequest,
+                        newBookTemplate, subCategory, bookMetadata, books.get(i)));
             }
 
-            for (Book book : books) {
-                BookMetadata bookMetadata = book.getBookMetadata();
-                bookDAO.updateBook(BookMapper.toBookEntity(bookUpdateRequest,
-                        newBookTemplate, subCategory, bookMetadata, book));
+            for (int i = newQuantity; i < oldQuantity; i++) {
+                bookMetadataService.deleteBookMetadata(books.get(i).getBookMetadata().getId());
+                bookDAO.deleteBook(books.get(i).getId());
             }
         }
 
         return newBookTemplate;
-    }
-
-    @Override
-    public void addBook(BookRequest bookRequest) {
-
-    }
-
-    @Override
-    public void updateBook(BookRequest bookRequest) {
-
-    }
-
-    @Override
-    public void deleteBook(Long id) {
-
     }
 
     @Override
