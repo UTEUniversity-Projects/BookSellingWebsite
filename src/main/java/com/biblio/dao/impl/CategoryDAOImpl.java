@@ -69,7 +69,8 @@ public class CategoryDAOImpl extends GenericDAOImpl<Category> implements ICatego
 
     @Override
     public void update(CategoryUpdateRequest categoryUpdateRequest) {
-        super.update(CategoryMapper.toCategory(categoryUpdateRequest));
+        Category category = getEntityById(Long.valueOf(categoryUpdateRequest.getId()));
+        super.update(CategoryMapper.toCategory(categoryUpdateRequest, category));
     }
 
     @Override

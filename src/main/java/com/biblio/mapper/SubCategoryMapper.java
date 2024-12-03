@@ -33,15 +33,14 @@ public class SubCategoryMapper {
                 .build();
     }
 
-    public SubCategory toSubCategory(SubCategoryUpdateRequest subCategoryUpdateRequest) {
-        return SubCategory.builder()
-                .id(Long.valueOf(subCategoryUpdateRequest.getId()))
-                .name(subCategoryUpdateRequest.getName())
-                .shortScript(subCategoryUpdateRequest.getShortScript())
-                .fullScript(subCategoryUpdateRequest.getFullScript())
-                .status(subCategoryUpdateRequest.getStatus())
-                .category(categoryService.getEntityById(Long.valueOf(subCategoryUpdateRequest.getCategoryId())))
-                .build();
+    public SubCategory toSubCategory(SubCategoryUpdateRequest subCategoryUpdateRequest, SubCategory subCategory) {
+        subCategory.setName(subCategoryUpdateRequest.getName());
+        subCategory.setShortScript(subCategoryUpdateRequest.getShortScript());
+        subCategory.setFullScript(subCategoryUpdateRequest.getFullScript());
+        subCategory.setStatus(subCategoryUpdateRequest.getStatus());
+        subCategory.setCategory(categoryService.getEntityById(Long.valueOf(subCategoryUpdateRequest.getCategoryId())));
+
+        return subCategory;
     }
 
     // End DTO Request to Entity
