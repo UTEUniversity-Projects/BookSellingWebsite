@@ -16,7 +16,7 @@ public class PublisherMapper {
 
     // Before DTO Request to Entity
 
-    public static Publisher toPublisher(PublisherCreateRequest publisherCreateRequest) {
+    public static Publisher toPublisherCreate(PublisherCreateRequest publisherCreateRequest) {
         return Publisher.builder()
                 .name(publisherCreateRequest.getName())
                 .avatar(publisherCreateRequest.getAvatar())
@@ -25,14 +25,13 @@ public class PublisherMapper {
                 .build();
     }
 
-    public static Publisher toPublisher(PublisherUpdateRequest publisherUpdateRequest) {
-        return Publisher.builder()
-                .id(Long.valueOf(publisherUpdateRequest.getId()))
-                .name(publisherUpdateRequest.getName())
-                .avatar(publisherUpdateRequest.getAvatar())
-                .introduction(publisherUpdateRequest.getIntroduction())
-                .joinAt(FormatterUtil.toLocalDateTime(publisherUpdateRequest.getJoinAt()))
-                .build();
+    public static Publisher toPublisherUpdate(PublisherUpdateRequest publisherUpdateRequest, Publisher publisher) {
+        publisher.setName(publisherUpdateRequest.getName());
+        publisher.setAvatar(publisherUpdateRequest.getAvatar());
+        publisher.setIntroduction(publisherUpdateRequest.getIntroduction());
+        publisher.setJoinAt(publisher.getJoinAt());
+
+        return publisher;
     }
 
     // End DTO Request to Entity

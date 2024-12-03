@@ -15,7 +15,7 @@ public class AuthorMapper {
 
     // Before DTO Request to Entity
 
-    public static Author toAuthor(AuthorCreateRequest authorCreateRequest) {
+    public static Author toAuthorCreate(AuthorCreateRequest authorCreateRequest) {
         return Author.builder()
                 .name(authorCreateRequest.getName())
                 .avatar(authorCreateRequest.getAvatar())
@@ -24,14 +24,13 @@ public class AuthorMapper {
                 .build();
     }
 
-    public static Author toAuthor(AuthorUpdateRequest authorUpdateRequest) {
-        return Author.builder()
-                .id(Long.valueOf(authorUpdateRequest.getId()))
-                .name(authorUpdateRequest.getName())
-                .avatar(authorUpdateRequest.getAvatar())
-                .introduction(authorUpdateRequest.getIntroduction())
-                .joinAt(FormatterUtil.toLocalDateTime(authorUpdateRequest.getJoinAt()))
-                .build();
+    public static Author toAuthorUpdate(AuthorUpdateRequest authorUpdateRequest, Author author) {
+        author.setName(authorUpdateRequest.getName());
+        author.setAvatar(authorUpdateRequest.getAvatar());
+        author.setIntroduction(authorUpdateRequest.getIntroduction());
+        author.setJoinAt(author.getJoinAt());
+
+        return author;
     }
 
     // End DTO Request to Entity

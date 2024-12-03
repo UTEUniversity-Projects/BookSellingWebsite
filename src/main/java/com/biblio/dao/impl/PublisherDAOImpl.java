@@ -1,15 +1,10 @@
 package com.biblio.dao.impl;
 
 import com.biblio.dao.IPublisherDAO;
-import com.biblio.dto.request.PublisherCreateRequest;
-import com.biblio.dto.request.PublisherDeleteRequest;
-import com.biblio.dto.request.PublisherUpdateRequest;
 import com.biblio.entity.Publisher;
-import com.biblio.entity.BookTemplate;
 import com.biblio.enumeration.EBookMetadataStatus;
 import com.biblio.enumeration.EBookTemplateStatus;
 import com.biblio.enumeration.EOrderStatus;
-import com.biblio.mapper.PublisherMapper;
 import lombok.extern.slf4j.Slf4j;
 
 import java.time.LocalDateTime;
@@ -61,23 +56,18 @@ public class PublisherDAOImpl extends GenericDAOImpl<Publisher> implements IPubl
     }
 
     @Override
-    public Publisher create(PublisherCreateRequest publisherCreateRequest) {
-        return super.insert(PublisherMapper.toPublisher(publisherCreateRequest));
+    public Publisher createPublisher(Publisher publisher) {
+        return super.save(publisher);
     }
 
     @Override
-    public void update(PublisherUpdateRequest publisherUpdateRequest) {
-        super.update(PublisherMapper.toPublisher(publisherUpdateRequest));
+    public void updatePublisher(Publisher publisher) {
+        super.update(publisher);
     }
 
     @Override
-    public void delete(PublisherDeleteRequest publisherDeleteRequest) {
-        String sql = "DELETE FROM publisher WHERE id = :publisherId";
-
-        Map<String, Object> params = new HashMap<>();
-        params.put("publisherId", publisherDeleteRequest.getId());
-
-        super.executeNativeQuery(sql, params);
+    public void deletePublisher(Long id) {
+        super.delete(id);
     }
 
     @Override

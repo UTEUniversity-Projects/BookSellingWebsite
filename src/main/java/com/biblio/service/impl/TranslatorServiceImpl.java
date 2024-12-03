@@ -79,33 +79,28 @@ public class TranslatorServiceImpl implements ITranslatorService {
 
         List<String> topSubCategory = findTopSubCategory(id, 3);
 
-        return TranslatorMapper.toTranslatorAnalysisResponse(translator, works, avgRate, sales, perSales, booksSold, perBooksSold,
-                valueBooksSold, perValueBooksSold, booksInStock, booksCancelled, booksReturned, salesThisMonth, booksThisMonth, revenueThisMonth,
-                ordersCompleted, valueOrdersCompleted, ordersWaiting, valueOrdersWaiting, ordersPacking, valueOrderPacking,
-                ordersShipping, valueOrderShipping, ordersCancelled, valueOrdersCancelled, ordersRequestRefund, valueOrdersRequestRefund,
-                ordersRefunded, valueOrdersRefunded, topSubCategory);
+        return TranslatorMapper.toTranslatorAnalysisResponse(translator, works, avgRate, sales, perSales, booksSold, perBooksSold, valueBooksSold, perValueBooksSold, booksInStock, booksCancelled, booksReturned, salesThisMonth, booksThisMonth, revenueThisMonth, ordersCompleted, valueOrdersCompleted, ordersWaiting, valueOrdersWaiting, ordersPacking, valueOrderPacking, ordersShipping, valueOrderShipping, ordersCancelled, valueOrdersCancelled, ordersRequestRefund, valueOrdersRequestRefund, ordersRefunded, valueOrdersRefunded, topSubCategory);
     }
 
     @Override
-    public Translator create(TranslatorCreateRequest translatorCreateRequest) {
-        return translatorDAO.create(translatorCreateRequest);
+    public Translator createTranslator(TranslatorCreateRequest translatorCreateRequest) {
+        return translatorDAO.createTranslator(TranslatorMapper.toTranslatorCreate(translatorCreateRequest));
     }
 
     @Override
-    public void update(TranslatorUpdateRequest translatorUpdateRequest) {
-        translatorDAO.update(translatorUpdateRequest);
+    public void updateTranslator(TranslatorUpdateRequest translatorUpdateRequest) {
+        Translator translator = translatorDAO.getEntityById(Long.valueOf((translatorUpdateRequest.getId())));
+        translatorDAO.updateTranslator(TranslatorMapper.toTranslatorUpdate(translatorUpdateRequest, translator));
     }
 
     @Override
-    public void delete(TranslatorDeleteRequest translatorDeleteRequest) {
-        translatorDAO.delete(translatorDeleteRequest);
+    public void deleteTranslator(TranslatorDeleteRequest translatorDeleteRequest) {
+        translatorDAO.deleteTranslator(Long.valueOf(translatorDeleteRequest.getId()));
     }
 
     @Override
     public Integer countBookTemplate(TranslatorDeleteRequest translatorDeleteRequest) {
-        return translatorDAO.countBooksTemplateByStatus(Long.valueOf(translatorDeleteRequest.getId()), EBookTemplateStatus.COMING_SOON)
-                + translatorDAO.countBooksTemplateByStatus(Long.valueOf(translatorDeleteRequest.getId()), EBookTemplateStatus.ON_SALE)
-                + translatorDAO.countBooksTemplateByStatus(Long.valueOf(translatorDeleteRequest.getId()), EBookTemplateStatus.OUT_OF_STOCK);
+        return translatorDAO.countBooksTemplateByStatus(Long.valueOf(translatorDeleteRequest.getId()), EBookTemplateStatus.COMING_SOON) + translatorDAO.countBooksTemplateByStatus(Long.valueOf(translatorDeleteRequest.getId()), EBookTemplateStatus.ON_SALE) + translatorDAO.countBooksTemplateByStatus(Long.valueOf(translatorDeleteRequest.getId()), EBookTemplateStatus.OUT_OF_STOCK);
     }
 
     private Double calculateSaleGrowth(Long id) {
@@ -126,6 +121,7 @@ public class TranslatorServiceImpl implements ITranslatorService {
             else return 0.0D;
         }
     }
+
     private Integer countSaleThisMonth(Long id) {
         LocalDateTime now = LocalDateTime.now();
         LocalDateTime startOfThisMonth = now.withDayOfMonth(1).toLocalDate().atStartOfDay();
@@ -152,6 +148,7 @@ public class TranslatorServiceImpl implements ITranslatorService {
             else return 0.0D;
         }
     }
+
     private Integer countBooksSoldThisMonth(Long id) {
         LocalDateTime now = LocalDateTime.now();
         LocalDateTime startOfThisMonth = now.withDayOfMonth(1).toLocalDate().atStartOfDay();
@@ -178,6 +175,7 @@ public class TranslatorServiceImpl implements ITranslatorService {
             else return 0.0D;
         }
     }
+
     private Long calculateRevenueThisMonth(Long id) {
         LocalDateTime now = LocalDateTime.now();
         LocalDateTime startOfThisMonth = now.withDayOfMonth(1).toLocalDate().atStartOfDay();

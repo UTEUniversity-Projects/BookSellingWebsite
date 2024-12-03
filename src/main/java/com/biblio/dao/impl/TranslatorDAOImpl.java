@@ -1,15 +1,11 @@
 package com.biblio.dao.impl;
 
 import com.biblio.dao.ITranslatorDAO;
-import com.biblio.dto.request.TranslatorCreateRequest;
-import com.biblio.dto.request.TranslatorDeleteRequest;
-import com.biblio.dto.request.TranslatorUpdateRequest;
 import com.biblio.entity.Translator;
 import com.biblio.entity.BookTemplate;
 import com.biblio.enumeration.EBookMetadataStatus;
 import com.biblio.enumeration.EBookTemplateStatus;
 import com.biblio.enumeration.EOrderStatus;
-import com.biblio.mapper.TranslatorMapper;
 import lombok.extern.slf4j.Slf4j;
 
 import java.time.LocalDateTime;
@@ -80,13 +76,8 @@ public class TranslatorDAOImpl extends GenericDAOImpl<Translator> implements ITr
     }
 
     @Override
-    public Translator create(TranslatorCreateRequest translatorCreateRequest) {
-        return super.insert(TranslatorMapper.toTranslator(translatorCreateRequest));
-    }
-
-    @Override
-    public void update(TranslatorUpdateRequest translatorUpdateRequest) {
-        super.update(TranslatorMapper.toTranslator(translatorUpdateRequest));
+    public Translator createTranslator(Translator translator) {
+        return super.save(translator);
     }
 
     @Override
@@ -95,13 +86,8 @@ public class TranslatorDAOImpl extends GenericDAOImpl<Translator> implements ITr
     }
 
     @Override
-    public void delete(TranslatorDeleteRequest translatorDeleteRequest) {
-        String sql = "DELETE FROM translator WHERE id = :translatorId";
-
-        Map<String, Object> params = new HashMap<>();
-        params.put("translatorId", translatorDeleteRequest.getId());
-
-        super.executeNativeQuery(sql, params);
+    public void deleteTranslator(Long id) {
+        super.delete(id);
     }
 
     @Override

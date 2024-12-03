@@ -12,10 +12,16 @@ import java.util.List;
 
 public interface IPublisherService {
     List<PublisherLineResponse> getAll();
+
     PublisherProfileResponse getProfileById(Long id);
+
     PublisherAnalysisResponse getAnalysisById(Long id);
-    Publisher create(PublisherCreateRequest publisherRequest);
-    void update(PublisherUpdateRequest publisherRequest);
-    void delete(PublisherDeleteRequest publisherDeleteRequest);
+
+    Publisher createPublisher(PublisherCreateRequest publisherRequest);
+
+    void updatePublisher(PublisherUpdateRequest publisherRequest);
+
+    void deletePublisher(PublisherDeleteRequest publisherDeleteRequest);
+
     Integer countBookTemplate(PublisherDeleteRequest id);
 }

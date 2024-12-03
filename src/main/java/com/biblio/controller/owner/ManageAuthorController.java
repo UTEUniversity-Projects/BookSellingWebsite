@@ -99,7 +99,8 @@ public class ManageAuthorController extends HttpServlet {
             AuthorDeleteRequest authorDeleteRequest = HttpUtil.of(request.getReader()).toModel(AuthorDeleteRequest.class);
             AuthorProfileResponse authorProfileResponse = authorService.getProfileById(Long.valueOf(authorDeleteRequest.getId()));
 
-            authorService.delete(authorDeleteRequest);
+            authorService.deleteAuthor(authorDeleteRequest);
+
             Boolean isImageDeleted = ManageFileUtil.deleteFileAvatar(authorProfileResponse.getAvatar(), "author");
 
             if (isImageDeleted) {
@@ -149,7 +150,7 @@ public class ManageAuthorController extends HttpServlet {
             AuthorCreateRequest authorCreateRequest = HttpUtil.of(request.getReader()).toModel(AuthorCreateRequest.class);
             authorCreateRequest.setJoinAt(LocalDateTime.now().toString());
 
-            Author author = authorService.create(authorCreateRequest);
+            Author author = authorService.createAuthor(authorCreateRequest);
 
             response.setStatus(HttpServletResponse.SC_OK);  // 200 OK
             response.getWriter().write("{\"status\": \"success\", \"id\": " + author.getId() + ", \"message\": \"Created successfully.\"}");
@@ -173,7 +174,7 @@ public class ManageAuthorController extends HttpServlet {
         try {
             AuthorUpdateRequest authorUpdateRequest = HttpUtil.of(request.getReader()).toModel(AuthorUpdateRequest.class);
 
-            authorService.update(authorUpdateRequest);
+            authorService.updateAuthor(authorUpdateRequest);
 
             response.setStatus(HttpServletResponse.SC_OK);  // 200 OK
             response.getWriter().write("{\"status\": \"success\", \"message\": \"Updated successfully.\"}");

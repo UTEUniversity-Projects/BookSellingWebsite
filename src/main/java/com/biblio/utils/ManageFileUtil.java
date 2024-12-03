@@ -12,12 +12,14 @@ public class ManageFileUtil {
 
     public static Boolean deleteFileAvatar(String filePath, String type) {
         try {
-            if (Objects.equals(filePath, getDefaultAvatar(type))) {
+            if (filePath.equals(getDefaultAvatar(type))) {
                 return true;
             }
 
             filePath = filePath.replace("/", "\\");
             filePath = StoredFileConstants.LOCAL_STORED + filePath;
+
+            System.out.println(filePath);
 
             Path path = Paths.get(filePath);
             return Files.deleteIfExists(path);
