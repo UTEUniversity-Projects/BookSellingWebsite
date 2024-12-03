@@ -1,5 +1,7 @@
 package com.biblio.dao;
 
+import com.biblio.dto.request.LoadRelatedBooksRequest;
+import com.biblio.dto.request.SearchBookRequest;
 import com.biblio.entity.BookTemplate;
 import com.biblio.enumeration.EBookMetadataStatus;
 import com.biblio.enumeration.EOrderStatus;
@@ -19,9 +21,9 @@ public interface IBookTemplateDAO {
 
     BookTemplate findOneForDetails(Long id);
 
-    List<BookTemplate> findByCriteria(String title, Long categoryId, String sortBy, int pageNumber);
+    List<BookTemplate> findByCriteria(SearchBookRequest request);
 
-    Long countByCriteria(String title, Long categoryId, String sortBy);
+    Long countByCriteria(SearchBookRequest request);
 
     Long countSoldById(Long id);
 
@@ -45,4 +47,9 @@ public interface IBookTemplateDAO {
 
     void updateBookTemplate(BookTemplate bookTemplate);
 
+    List<BookTemplate> findTop20();
+
+    BookTemplate update(BookTemplate bookTemplate);
+
+    List<BookTemplate> findRelatedBooks(LoadRelatedBooksRequest request);
 }

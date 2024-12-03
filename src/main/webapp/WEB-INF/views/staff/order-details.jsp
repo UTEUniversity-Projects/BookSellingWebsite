@@ -30,11 +30,7 @@
                             </p>
                             <p class="cr-card-location">
                                 <i class="ri-map-pin-line"></i>
-                                ${order.shipping.address}
-                            </p>
-                            <p class="cr-card-date">
-                                <i class="ri-calendar-2-line"></i>
-                                ${order.orderDate}
+                                ${order.shipping.address.fullAddress}
                             </p>
                             <p class="cr-card-note">
                                 <i class="ri-sticky-note-line"></i>
@@ -46,9 +42,80 @@
                             </p>
                         </div>
                         <div>
-                            <p id="order-status" class="cr-card-status cr-card-status--${order.statusStyle}">
-                                ${order.statusDisplay}
+                            <p id="order-status"
+                               class="cr-card-status cr-card-status--${order.statusStyle}"
+                               data-status="${order.status}">
+                                ${order.status.description}
                             </p>
+                        </div>
+                    </div>
+
+                    <div class="cr-card-content">
+                        <div class="stepper">
+                            <div class="stepper__step">
+                                <div class="stepper__step-icon">
+                                    <i class="ri-survey-line"></i>
+                                </div>
+                                <div class="stepper__step-text">
+                                    Đơn hàng đã đặt
+                                </div>
+                                <div class="stepper__step-date">
+                                </div>
+                            </div>
+
+                            <div class="stepper__step">
+                                <div class="stepper__step-icon">
+                                    <i class="ri-pencil-line"></i>
+                                </div>
+                                <div class="stepper__step-text">
+                                    Xác nhận đơn hàng
+                                </div>
+                                <div class="stepper__step-date">
+                                </div>
+                            </div>
+
+                            <div class="stepper__step">
+                                <div class="stepper__step-icon">
+                                    <i class="ri-truck-line"></i>
+                                </div>
+                                <div class="stepper__step-text">
+                                    Chờ giao hàng
+                                </div>
+                                <div class="stepper__step-date">
+                                </div>
+                            </div>
+
+                            <div class="stepper__step">
+                                <div class="stepper__step-icon">
+                                    <i class="ri-check-line"></i>
+                                </div>
+                                <div class="stepper__step-text">
+                                    Hoàn tất đơn hàng
+                                </div>
+                                <div class="stepper__step-date">
+                                </div>
+                            </div>
+
+                            <div class="stepper__step">
+                                <div class="stepper__step-icon">
+                                    <i class="ri-star-line"></i>
+                                </div>
+                                <div class="stepper__step-text">
+                                    Đánh giá
+                                </div>
+                                <div class="stepper__step-date">
+
+                                </div>
+                            </div>
+
+                            <div class="stepper__line">
+                                <div class="stepper__line-background">
+
+                                </div>
+                                <div class="stepper__line-foreground">
+
+                                </div>
+                            </div>
                         </div>
                     </div>
 
@@ -77,7 +144,7 @@
                                     </thead>
                                     <tbody>
                                     <c:forEach var="product" items="${order.products}">
-                                        <tr>
+                                        <tr class="product-row" data-href="${pageContext.request.contextPath}/staff/product-details?id=${product.bookTemplateId}">
                                             <td>
                                                 <img
                                                         class="tbl-thumb"
@@ -87,8 +154,8 @@
                                             </td>
                                             <td>${product.title}</td>
                                             <td>
-                                                <span class="status status__pending">
-                                                    -20%
+                                                <span class="discount-percent status status__complete_delivery">
+                                                    ${product.discountPercent}
                                                 </span>
                                             </td>
                                             <td>${product.quantity}</td>
@@ -112,6 +179,7 @@
                     </div>
                     <c:if test="${order.status == 'REQUEST_REFUND' || order.status == 'REFUNDED'}">
                         <div class="cr-card-content row">
+                            <input id="return-book-id" value="${returnBook.id}" hidden>
                             <div class="col-xxl-4 col-xl-5 col-md-6 col-12 mb-24">
                                 <div class="vehicle-detail-banner banner-content clearfix">
                                     <div class="banner-slider">
@@ -191,11 +259,10 @@
                         </div>
                     </div>
 
-
                     <div class="btn-container cr-card-content d-grid gap-3 d-md-flex justify-content-md-end
-                                <c:if
-                                    test="${order.status != 'REQUEST_REFUND' && order.status != 'WAITING_CONFIRMATION'}">d-none
-                                </c:if>"
+                        <c:if
+                            test="${order.status != 'REQUEST_REFUND' && order.status != 'WAITING_CONFIRMATION'}">d-none
+                        </c:if>"
                     >
                         <button id="btn-cancel" class="btn btn-outline-danger">Từ chối</button>
                         <button id="btn-confirm" class="cr-btn-primary">Xác nhận</button>
@@ -214,7 +281,7 @@
 </div>
 
 <!-- region Modal -->
-<%--FeedbackModal--%>
+<%--CancelOrderModal--%>
 <div class="modal fade" id="cancelOrderModal" tabindex="-1" aria-labelledby="cancelOrderModalLabel" aria-hidden="true">
     <input class="order-id" value="" hidden>
     <div class="modal-dialog">
@@ -247,7 +314,6 @@
 <div class="modal fade" id="confirmOrderModal" tabindex="-1" aria-labelledby="confirmOrderModalLabel"
      aria-hidden="true">
     <input class="order-id" value="" hidden>
-    <%--<input class="finalPrice" value="${order.finalPrice}" hidden>--%>
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
@@ -296,5 +362,5 @@
 <script src="${pageContext.request.contextPath}/assets/owner/js/vendor/swiper-bundle.min.js" defer></script>
 <script src="${pageContext.request.contextPath}/assets/owner/js/vendor/slick.min.js" defer></script>
 <!-- endregion -->
-
+<script src="${pageContext.request.contextPath}/assets/commons/js/format-discount-percent.js"></script>
 <script src="${pageContext.request.contextPath}/assets/staff/js/order-details.js" defer></script>

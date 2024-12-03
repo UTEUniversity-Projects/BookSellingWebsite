@@ -15,6 +15,5 @@ public class OrderManagementResponse {
     private double totalPrice;
     private String paymentMethod;
     private EOrderStatus status;
-    private String statusDisplay;
     private String statusStyle;
 }

@@ -9,8 +9,18 @@ import com.biblio.entity.BookTemplate;
 import java.util.List;
 
 public interface IBookService {
+
     List<BookResponse> findAll();
     BookTemplate createBookSeries(BookCreateGlobalRequest bookCreateGlobalRequest);
     BookTemplate updateBookSeries(BookUpdateGlobalRequest bookUpdateGlobalRequest);
+
+    void addBook(BookRequest bookRequest);
+
+    void updateBook(BookRequest bookRequest);
+
     void deleteBook(Long id);
+
+    Long getMinBookPrice();
+
+    Long getMaxBookPrice();
 }

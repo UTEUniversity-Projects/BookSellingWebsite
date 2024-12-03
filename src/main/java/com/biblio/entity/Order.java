@@ -1,5 +1,6 @@
 package com.biblio.entity;
 
+import com.biblio.enumeration.EOrderHistory;
 import com.biblio.enumeration.EOrderStatus;
 import com.biblio.enumeration.EPaymentType;
 import lombok.*;
@@ -48,19 +49,16 @@ public class Order implements Serializable {
 
     // region Relationships
 
-    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @ManyToOne(cascade = {CascadeType.MERGE}, fetch = FetchType.EAGER)
     @JoinColumn(name = "customer_id", nullable = false, referencedColumnName = "id")
     private Customer customer;
 
-    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinColumn(name = "shipping_id", referencedColumnName = "id")
     private Shipping shipping;
 
-//    @OneToOne(mappedBy = "order")
-//    private BankTransfer bankTransfer;
-//
-//    @OneToOne(mappedBy = "order")
-//    private CreditCard creditCard;
+    @OneToOne(mappedBy = "order", cascade = CascadeType.ALL)
+    private BankTransfer bankTransfer;
 //
 //    @OneToOne(mappedBy = "order")
 //    private Cash cash;
@@ -71,14 +69,17 @@ public class Order implements Serializable {
     @OneToOne(mappedBy = "order")
     private ReturnBook returnBook;
 
-    @OneToMany(mappedBy = "order", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "order", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private Set<OrderItem> orderItems = new HashSet<>();
 
-    @ManyToMany(cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH}, fetch = FetchType.LAZY)
+    @ManyToMany(cascade = {CascadeType.MERGE, CascadeType.REFRESH}, fetch = FetchType.EAGER)
     @JoinTable(name = "order_promotion",
             joinColumns = @JoinColumn(name = "order_id", nullable = false),
             inverseJoinColumns = @JoinColumn(name = "promotion_id", nullable = false))
     private Set<Promotion> promotions = new HashSet<>();
+
+    @OneToMany(mappedBy = "order", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
+    private Set<OrderStatusHistory> statusHistory = new HashSet<>();
 
     // endregion
 
@@ -111,6 +112,11 @@ public class Order implements Serializable {
         double totalDiscount = calculateTotalDiscount();
 
         return Math.max(0, totalPrice - totalDiscount);
+    }
+
+    public boolean isStatusHistoryExist(EOrderHistory status) {
+        return statusHistory.stream()
+                .anyMatch(statusHistoryItem -> statusHistoryItem.getStatus() == status);
     }
 
     // endregion

@@ -43,7 +43,7 @@ public class LogOutController extends HttpServlet {
             }
         }
 
-        response.sendRedirect("home");
+        response.sendRedirect(request.getContextPath() + "/login");
     }
 
     /**

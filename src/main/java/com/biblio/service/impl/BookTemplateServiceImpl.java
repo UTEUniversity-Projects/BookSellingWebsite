@@ -12,13 +12,18 @@ import com.biblio.entity.*;
 import com.biblio.enumeration.EBookMetadataStatus;
 import com.biblio.enumeration.EOrderStatus;
 import com.biblio.mapper.BookMapper;
+import com.biblio.dto.request.CheckoutItemRequest;
+import com.biblio.dto.request.LoadRelatedBooksRequest;
+
+import com.biblio.entity.Book;
+import com.biblio.entity.BookTemplate;
+import com.biblio.enumeration.EBookTemplateStatus;
 import com.biblio.mapper.BookTemplateMapper;
 import com.biblio.service.IBookTemplateService;
 import com.biblio.service.IMediaFileService;
 import com.biblio.utils.ManageFileUtil;
 
 import javax.inject.Inject;
-import javax.servlet.http.HttpServlet;
 import java.time.LocalDateTime;
 import java.util.*;
 
@@ -77,7 +82,7 @@ public class BookTemplateServiceImpl implements IBookTemplateService {
     @Override
     public List<BookCardResponse> getBookTemplateByCriteria(SearchBookRequest request) {
 
-        List<BookTemplate> bookTemplates = bookTemplateDAO.findByCriteria(request.getTitle().trim(), request.getCategoryId(), request.getSortBy(), 1);
+        List<BookTemplate> bookTemplates = bookTemplateDAO.findByCriteria(request);
         List<BookCardResponse> bookCardResponseList = new ArrayList<>();
         for (BookTemplate bt : bookTemplates) {
             bookCardResponseList.add(BookTemplateMapper.toBookCardResponse(bt));
@@ -85,6 +90,7 @@ public class BookTemplateServiceImpl implements IBookTemplateService {
         return bookCardResponseList;
 
     }
+
     @Override
     public List<BookSoldAllTimeResponse> getListCountBookSoldAllTime() {
         List<BookSoldAllTimeResponse> listBookSold = new ArrayList<>();
@@ -272,7 +278,7 @@ public class BookTemplateServiceImpl implements IBookTemplateService {
 
     @Override
     public Long getBookTemplateQuantityByCriteria(SearchBookRequest request) {
-        return bookTemplateDAO.countByCriteria(request.getTitle(), request.getCategoryId(), request.getSortBy());
+        return bookTemplateDAO.countByCriteria(request);
     }
 
     @Override
@@ -384,5 +390,50 @@ public class BookTemplateServiceImpl implements IBookTemplateService {
         LocalDateTime endOfThisMonth = now.withDayOfMonth(now.toLocalDate().lengthOfMonth()).toLocalDate().atTime(23, 59, 59);
 
         return bookTemplateDAO.calculateValueBooksSoldInRange(id, startOfThisMonth, endOfThisMonth, EOrderStatus.COMPLETE_DELIVERY);
+    }
+
+    public CheckoutItemResponse getCheckoutItemResponse(CheckoutItemRequest request) {
+        BookTemplate bookTemplate = bookTemplateDAO.findOneForDetails(request.getProductId());
+        Book book = bookTemplate.getBooks().iterator().next();
+        return CheckoutItemResponse.builder().bookTemplateId(bookTemplate.getId()).title(book.getTitle()).imagePath(bookTemplate.getMediaFiles().get(0).getStoredCode()).quantity(request.getQuantity()).sellingPrice(book.getSellingPrice()).build();
+    }
+
+    @Override
+    public boolean verifyBookTemplateQuantity(Long bookTemplateId) {
+        Long quantity = bookTemplateDAO.countInstockById(bookTemplateId);
+        BookTemplate bookTemplate = bookTemplateDAO.findById(bookTemplateId);
+        if (bookTemplate == null) {
+            return false;
+        }
+        if (quantity > 0 && bookTemplate.getStatus().equals(EBookTemplateStatus.OUT_OF_STOCK)) {
+            bookTemplate.setStatus(EBookTemplateStatus.ON_SALE);
+            return bookTemplateDAO.update(bookTemplate) != null;
+        }
+        if (quantity == 0 && bookTemplate.getStatus().equals(EBookTemplateStatus.ON_SALE)) {
+            bookTemplate.setStatus(EBookTemplateStatus.OUT_OF_STOCK);
+            return bookTemplateDAO.update(bookTemplate) != null;
+        }
+        return true;
+
+    }
+
+    @Override
+    public List<BookCardResponse> getPopularBookCard() {
+        List<BookTemplate> bookTemplates = bookTemplateDAO.findTop20();
+        List<BookCardResponse> bookCardResponseList = new ArrayList<>();
+        for (BookTemplate bookTemplate : bookTemplates) {
+            bookCardResponseList.add(BookTemplateMapper.toBookCardResponse(bookTemplate));
+        }
+        return bookCardResponseList;
+    }
+
+    @Override
+    public List<BookCardResponse> getRelatedBooks(LoadRelatedBooksRequest request) {
+        List<BookTemplate> bookTemplates = bookTemplateDAO.findRelatedBooks(request);
+        List<BookCardResponse> bookCardResponseList = new ArrayList<>();
+        for (BookTemplate bookTemplate : bookTemplates) {
+            bookCardResponseList.add(BookTemplateMapper.toBookCardResponse(bookTemplate));
+        }
+        return bookCardResponseList;
     }
 }

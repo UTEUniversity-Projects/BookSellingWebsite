@@ -3,9 +3,9 @@ package com.biblio.dao;
 import com.biblio.dto.request.CategoryCreateRequest;
 import com.biblio.dto.request.CategoryDeleteRequest;
 import com.biblio.dto.request.CategoryUpdateRequest;
+import com.biblio.dto.request.SearchBookRequest;
 import com.biblio.dto.response.CategoryBookCountResponse;
 import com.biblio.entity.Category;
-import com.biblio.entity.BookTemplate;
 import com.biblio.enumeration.EBookMetadataStatus;
 import com.biblio.enumeration.EBookTemplateStatus;
 import com.biblio.enumeration.EOrderStatus;
@@ -33,6 +33,6 @@ public interface ICategoryDAO {
     Long calculateValueOrdersSoldByStatus(Long categoryId, EOrderStatus status);
     Double calculateAverageRating(Long categoryId);
 
-    List<CategoryBookCountResponse> countBookPerCategory();
+    List<CategoryBookCountResponse> countBookPerCategory(SearchBookRequest request);
 
 }

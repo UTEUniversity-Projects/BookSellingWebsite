@@ -12,7 +12,7 @@
         <title>Owner</title>
 
         <!-- App favicon -->
-        <link rel="shortcut icon" href="${pageContext.request.contextPath}/assets/owner/img/logo/collapse-logo.png"/>
+        <link rel="shortcut icon" href="${pageContext.request.contextPath}/assets/commons/img/logo/collapse-logo.png"/>
 
         <!-- Icon CSS -->
         <link href="${pageContext.request.contextPath}/assets/owner/css/vendor/materialdesignicons.min.css" rel="stylesheet"/>
@@ -71,6 +71,7 @@
     <decorator:body/>
     <%@include file="/commons/owner/footer.jsp" %>
 </main>
+        <script> const contextPath = "<%=request.getContextPath() %>";</script>
 
         <!-- region Vendor Custom JS -->
         <script src="${pageContext.request.contextPath}/assets/owner/js/vendor/jquery-3.6.4.min.js"></script>
@@ -99,7 +100,7 @@
         <!-- endregion -->
 
         <!-- region Main Custom -->
-        <script src="${pageContext.request.contextPath}/assets/owner/js/main.js"></script>
+        <script src="${pageContext.request.contextPath}/assets/owner/js/main.js" type="module" defer></script>
         <script src="${pageContext.request.contextPath}/assets/owner/js/data/ecommerce-chart-data.js"></script>
         <script src="${pageContext.request.contextPath}/assets/owner/js/toast.js"></script>
 </body>

@@ -1,6 +1,8 @@
 package com.biblio.service;
 
+import com.biblio.dto.request.CustomerInformationRequest;
 import com.biblio.dto.request.CustomerRegisterRequest;
+import com.biblio.dto.request.NotificationInsertRequest;
 import com.biblio.dto.response.*;
 import com.biblio.entity.Customer;
 
@@ -29,4 +31,10 @@ public interface ICustomerService {
 
     List<Customer> findAllCustomers();
     List<CountCustomerJoinResponse>countNewCustomersAtTime(LocalDateTime start, LocalDateTime end);
+
+    Customer updateCustomer(CustomerInformationRequest customer);
+
+    List<NotificationGetResponse> getAllNotificationByCustomerId(Long id);
+
+    void addNewNotification(NotificationInsertRequest notificationInsertRequest, Long orderId);
 }

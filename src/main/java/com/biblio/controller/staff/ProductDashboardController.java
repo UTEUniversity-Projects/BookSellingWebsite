@@ -1,8 +1,10 @@
 package com.biblio.controller.staff;
 
+import com.biblio.dto.response.AccountGetResponse;
 import com.biblio.dto.response.BookManagementResponse;
-import com.biblio.service.IBookService;
+import com.biblio.dto.response.StaffResponse;
 import com.biblio.service.IBookTemplateService;
+import com.biblio.service.IStaffService;
 
 import javax.inject.Inject;
 import javax.servlet.ServletException;
@@ -19,6 +21,10 @@ import java.util.List;
 public class ProductDashboardController extends HttpServlet {
     @Inject
     IBookTemplateService bookTemplateService;
+
+    @Inject
+    IStaffService staffService;
+
     @Serial
     private static final long serialVersionUID = 1L;
 
@@ -37,12 +43,18 @@ public class ProductDashboardController extends HttpServlet {
         // TODO Auto-generated method stub
 
         HttpSession session = request.getSession();
-        System.out.println(session.getAttribute("account"));
+
+        AccountGetResponse account = (AccountGetResponse) session.getAttribute("account");
+
+        StaffResponse staff = staffService.getStaffByUsername(account.getUsername().trim());
 
         List<BookManagementResponse> books = bookTemplateService.getAllBookManagementResponse();
+
         request.setAttribute("books", books);
+        request.setAttribute("staff", staff);
 
         request.getRequestDispatcher("/views/staff/product-dashboard.jsp").forward(request, response);
+
     }
 
     /**

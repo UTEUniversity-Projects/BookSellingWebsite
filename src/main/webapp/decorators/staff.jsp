@@ -14,7 +14,7 @@
     <title>Staff</title>
 
     <!-- Logo -->
-    <link rel="shortcut icon" href="${pageContext.request.contextPath}/assets/staff/img/logo/collapse-logo.png"/>
+    <link rel="shortcut icon" href="${pageContext.request.contextPath}/assets/commons/img/logo/collapse-logo.png"/>
 
     <!-- region Icon CSS -->
     <link
@@ -76,6 +76,8 @@
     <decorator:body/>
     <%@include file="/commons/staff/footer.jsp" %>
 </main>
+
+<script> const contextPath = "<%=request.getContextPath() %>";</script>
 
 <!-- region Vendor Custom JS -->
 <script src="${pageContext.request.contextPath}/assets/staff/js/vendor/jquery-3.6.4.min.js"></script>

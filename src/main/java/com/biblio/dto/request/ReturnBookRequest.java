@@ -1,5 +1,6 @@
 package com.biblio.dto.request;
 
+import com.biblio.enumeration.EReasonReturn;
 import lombok.*;
 
 import java.time.LocalDate;
@@ -10,6 +11,6 @@ import java.time.LocalDate;
 @Setter
 @Builder
 public class ReturnBookRequest {
-    private String reason;
-    private String description;
+    private Long bookTemplateId;
+    private int quantity;
 }

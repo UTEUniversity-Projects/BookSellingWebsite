@@ -26,6 +26,7 @@ public class ReviewMapper {
                 .responseContent(Optional.ofNullable(review.getResponseReview())
                         .map(ResponseReview::getContent)
                         .orElse(""))
+                .isHidden(review.isHidden())
                 .build();
     }
     public static Review toEntity(ReviewRequest reviewRequest, Customer customer, BookTemplate bookTemplate) {
@@ -36,7 +37,7 @@ public class ReviewMapper {
         review.setBookTemplate(bookTemplate);
         review.setHidden(false);
         review.setRate(reviewRequest.getRate());
-        review.setReadyToIntroduce(reviewRequest.isReady_to_introduce());
+        review.setReadyToIntroduce(reviewRequest.isReadyToIntroduce());
         return review;
     }
 }

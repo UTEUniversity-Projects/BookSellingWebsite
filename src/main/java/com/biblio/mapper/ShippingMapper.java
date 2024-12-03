@@ -6,7 +6,8 @@ import com.biblio.entity.Shipping;
 public class ShippingMapper {
     public static ShippingResponse toShippingResponse(Shipping shipping) {
         return ShippingResponse.builder()
-                .address(shipping.getAddress().getFullAddress())
+                .id(shipping.getId())
+                .address(AddressMapper.toAddressResponse(shipping.getAddress()))
                 .shippingFee(shipping.getShippingFee())
                 .shippingUnit(shipping.getShippingUnit())
                 .build();

@@ -5,6 +5,10 @@ import com.biblio.dto.request.CategoryDeleteRequest;
 import com.biblio.dto.request.CategoryCreateRequest;
 import com.biblio.dto.request.CategoryUpdateRequest;
 import com.biblio.dto.response.*;
+import com.biblio.dto.request.SearchBookRequest;
+import com.biblio.dto.response.CategoryBookCountResponse;
+import com.biblio.dto.response.CategoryResponse;
+import com.biblio.dto.response.CategorySidebarResponse;
 import com.biblio.entity.Category;
 import com.biblio.enumeration.EBookMetadataStatus;
 import com.biblio.enumeration.EBookTemplateStatus;
@@ -224,8 +228,13 @@ public class CategoryServiceImpl implements ICategoryService {
     }
 
     @Override
-    public List<CategoryBookCountResponse> getBookQuantityPerCategory() {
-        return categoryDAO.countBookPerCategory();
+    public CategoryResponse findById(Long id) {
+        return CategoryMapper.toCategoryResponse(categoryDAO.getEntityById(id));
+    }
+
+    @Override
+    public List<CategoryBookCountResponse> getBookQuantityPerCategory(SearchBookRequest request) {
+        return categoryDAO.countBookPerCategory(request);
     }
 
 }

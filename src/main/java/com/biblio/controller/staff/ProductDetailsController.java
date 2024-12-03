@@ -1,7 +1,9 @@
 package com.biblio.controller.staff;
 
 import com.biblio.dto.response.BookDetailsResponse;
+import com.biblio.dto.response.DiscountResponse;
 import com.biblio.service.IBookTemplateService;
+import com.biblio.service.IPromotionTemplateService;
 
 import javax.inject.Inject;
 import javax.servlet.ServletException;
@@ -11,11 +13,16 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.Serial;
+import java.util.List;
 
 @WebServlet("/staff/product-details")
 public class ProductDetailsController extends HttpServlet {
     @Inject
     IBookTemplateService bookTemplateService;
+
+    @Inject
+    IPromotionTemplateService promotionTemplateService;
+
     @Serial
     private static final long serialVersionUID = 1L;
 
@@ -34,6 +41,11 @@ public class ProductDetailsController extends HttpServlet {
         // TODO Auto-generated method stub
         Long bookId = Long.parseLong(request.getParameter("id"));
         BookDetailsResponse book = bookTemplateService.getBookDetailsResponse(bookId);
+
+        List<DiscountResponse> discounts = promotionTemplateService.getAllDiscounts();
+        book.setDiscount(promotionTemplateService.percentDiscount(book.getId(), discounts));
+
+//        book.setDiscount(promotionTemplateService.percentDiscountOfBook(book.getId()));
         request.setAttribute("book", book);
         request.getRequestDispatcher("/views/staff/product-details.jsp").forward(request, response);
     }

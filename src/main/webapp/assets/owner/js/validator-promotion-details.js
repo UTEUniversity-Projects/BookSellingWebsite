@@ -147,10 +147,13 @@ document.querySelectorAll('.promotionForm').forEach(form => {
 // Hàm toggleForm để xử lý chuyển trạng thái nút và form
 function toggleForm(editButton) {
     const form = editButton.closest("form");
+
+    const cancelButton = form.querySelector(".cancel-btn");
+
     const isEditing = editButton.dataset.editing === "true";
 
     const inputs = form.querySelectorAll("input, textarea, select");
-    const cancelButton = form.querySelector(".cancel-btn");
+    const table = form.querySelector(".table_item_to_discount"); // Tìm table trong form (nếu có)
 
     if (isEditing) {
         // Khóa form
@@ -160,11 +163,13 @@ function toggleForm(editButton) {
             }
         });
 
-        editButton.innerText = "Chỉnh sửa";
-        editButton.dataset.editing = "false";
+        // Vô hiệu hóa bảng nếu có
+        if (table) {
+            table.classList.add("table-disabled");
+        }
 
-        // Ẩn nút "Hủy"
-        cancelButton.style.display = "none";
+        editButton.innerText = "Chỉnh sửa";
+        // editButton.dataset.editing = "false";
     } else {
         // Mở khóa form
         inputs.forEach(input => {
@@ -176,13 +181,17 @@ function toggleForm(editButton) {
             }
         });
 
+        // Mở khóa bảng nếu có
+        if (table) {
+            table.classList.remove("table-disabled");
+        }
+
         editButton.innerText = "Lưu";
         editButton.dataset.editing = "true";
-
-        // Hiển thị nút "Hủy"
         cancelButton.style.display = "inline-block";
     }
 }
+
 
 function cancelEdit(cancelButton) {
     // Reload lại trang
@@ -226,19 +235,19 @@ $(document).ready(function () {
     }
 
     function handleCase1() {
-        fetchData('/owner/promotion/get-book', {}, books => {
+        fetchData(`${contextPath}/owner/promotion/get-book`, {}, books => {
             populateTable(books, 'Không có sách nào!');
         }, 'Không thể tải danh sách sách!');
     }
 
     function handleCase2() {
-        fetchData('/owner/promotion/get-categories', {}, categories => {
+        fetchData(`${contextPath}/owner/promotion/get-categories`, {}, categories => {
             populateTable(categories, 'Không có danh mục nào!');
         }, 'Không thể tải danh sách danh mục!');
     }
 
     function handleCase3() {
-        fetchData('/owner/promotion/get-subcategories', {}, subcategories => {
+        fetchData(`${contextPath}/owner/promotion/get-subcategories`, {}, subcategories => {
             populateTable(subcategories, 'Không có danh mục con nào!');
         }, 'Không thể tải danh mục con!');
     }
@@ -250,7 +259,7 @@ $(document).ready(function () {
             data.forEach(item => {
                 const isChecked = selectedIds.includes(parseInt(item.id)) ? 'checked' : '';
                 table.row.add([
-                    `<input type="checkbox" class="row-checkbox" name="selectedItems_${item.id}" value="${item.id}" ${isChecked} />`,
+                    `<input type="checkbox" class="row-checkbox" name="selectedItems" value="${item.id}" ${isChecked} />`,
                     `#${item.id}`,
                     `${item.name || item.title}`
                 ]);
@@ -276,6 +285,64 @@ $(document).ready(function () {
     else if (defaultValue === "2") handleCase2();
     else if (defaultValue === "3") handleCase3();
 });
+
+
+function stopPromotion() {
+    // Lấy giá trị mã khuyến mãi từ input có name="code"
+    var code = document.querySelector('input[name="code"]').value;
+    console.log(code);
+    if (!code) {
+        alert('Mã khuyến mãi không hợp lệ.');
+        return;
+    }
+
+    // Mở modal xác nhận
+    var myModal = new bootstrap.Modal(document.getElementById('hideReviewModal'));
+    myModal.show();
+
+    // Lưu giá trị mã khuyến mãi vào modal (nếu cần thiết)
+    document.querySelector('.review-id').value = code;
+}
+
+function confirmStopPromotion() {
+    // Lấy mã khuyến mãi đã lưu trong modal
+    var code = document.querySelector('.review-id').value;
+
+    // Gửi yêu cầu AJAX đến API
+    $.ajax({
+        url: `${contextPath}/api/owner/promotion/stop-promotion`,
+        type: 'POST',
+        contentType: 'application/json',
+        data: JSON.stringify({ code: code }),  // Dữ liệu gửi đi là mã khuyến mãi
+        success: function(response) {
+            toast({
+                title: "Thành Công!",
+                message: 'Dừng khuyến mãi thành công',
+                type: "success",
+                duration: 3000,
+            });
+            if (response.message.includes("thành công")) {
+                $('.stop-promotion-btn').hide();
+                $('.cr-btn-primary').hide();
+            }
+        },
+        error: function(xhr, status, error) {
+            var errMsg = xhr.responseJSON ? xhr.responseJSON.message : "Đã có lỗi xảy ra, vui lòng thử lại.";
+            alert(errMsg);
+            toast({
+                title: "Thất bại",
+                message: 'Đã có lỗi xảy ra, vui lòng thử lại.',
+                type: "warning",
+                duration: 3000,
+            });
+        }
+    });
+
+    // Đóng modal sau khi gửi yêu cầu
+    var myModal = bootstrap.Modal.getInstance(document.getElementById('hideReviewModal'));
+    myModal.hide();
+}
+
 
 
 

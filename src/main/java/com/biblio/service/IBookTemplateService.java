@@ -5,6 +5,9 @@ import com.biblio.dto.request.BookUpdateGlobalRequest;
 import com.biblio.dto.request.SearchBookRequest;
 import com.biblio.dto.response.*;
 import com.biblio.entity.BookTemplate;
+import com.biblio.dto.request.CheckoutItemRequest;
+import com.biblio.dto.request.LoadRelatedBooksRequest;
+import com.biblio.dto.response.*;
 
 import java.util.List;
 
@@ -13,6 +16,8 @@ public interface IBookTemplateService {
     List<BookManagementResponse> getAllBookManagementResponse();
 
     List<BookCardResponse> getAllBookCardResponse();
+
+    List<BookCardResponse> getPopularBookCard();
 
     BookDetailsResponse getBookDetailsResponse(Long bookTemplateId);
 
@@ -39,5 +44,11 @@ public interface IBookTemplateService {
     BookTemplate updateBookTemplate(BookUpdateGlobalRequest request);
 
     BookProfileResponse getBookProfileResponse(Long bookTemplateId);
+
+    CheckoutItemResponse getCheckoutItemResponse(CheckoutItemRequest request);
+
+    boolean verifyBookTemplateQuantity(Long bookTemplateId);
+
+    List<BookCardResponse> getRelatedBooks(LoadRelatedBooksRequest request);
 
 }

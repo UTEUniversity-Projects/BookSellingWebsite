@@ -35,6 +35,6 @@ public class MediaFile implements Serializable {
 
 
     public String getImagePath() {
-        return "http://localhost:8080/BookSellingWebsite" + storedCode.replace("\\", "/");
+        return storedCode.replace("\\", "/");
     }
 }

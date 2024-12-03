@@ -1,25 +1,40 @@
 package com.biblio.service.impl;
 
 import com.biblio.dao.IOrderDAO;
+import com.biblio.dao.IReturnBookDAO;
+import com.biblio.dao.impl.BankTransferDAOImpl;
+import com.biblio.dao.impl.EWalletDAOImpl;
+import com.biblio.dto.request.CreateOrderRequest;
 import com.biblio.dto.response.*;
-import com.biblio.entity.Book;
-import com.biblio.entity.Order;
-import com.biblio.entity.OrderItem;
+import com.biblio.entity.*;
+import com.biblio.enumeration.EBookMetadataStatus;
+import com.biblio.enumeration.EOrderHistory;
 import com.biblio.enumeration.EOrderStatus;
 import com.biblio.mapper.BookMapper;
 import com.biblio.mapper.OrderMapper;
+import com.biblio.service.IBookTemplateService;
 import com.biblio.service.IOrderService;
 
 import javax.inject.Inject;
-import javax.transaction.Transactional;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.*;
-import java.util.stream.Collectors;
 
 public class OrderServiceImpl implements IOrderService {
     @Inject
     IOrderDAO orderDAO;
+
+    @Inject
+    IBookTemplateService bookTemplateService;
+
+    @Inject
+    EWalletDAOImpl walletDAO;
+
+    @Inject
+    BankTransferDAOImpl bankTransferDAO;
+
+    @Inject
+    IReturnBookDAO returnBookDAO;
 
     @Override
     public OrderDetailsManagementResponse getOrderDetailsManagementResponse(Long id) {
@@ -30,6 +45,7 @@ public class OrderServiceImpl implements IOrderService {
     @Override
     public List<OrderManagementResponse> getAllOrderManagementResponse() {
         List<Order> orders = orderDAO.findAllForManagement();
+        orders.sort(Comparator.comparing((Order o) -> o.getStatus().getPriority()).reversed().thenComparing(Order::getOrderDate, Comparator.reverseOrder()));
         List<OrderManagementResponse> orderManagementResponse = new ArrayList<>();
         for (Order order : orders) {
             orderManagementResponse.add(OrderMapper.mapToOrderManagementResponse(order));
@@ -39,7 +55,45 @@ public class OrderServiceImpl implements IOrderService {
 
     @Override
     public boolean updateStatus(Long id, EOrderStatus status) {
-        return orderDAO.updateStatus(id, status);
+        Order order = orderDAO.findOne(id);
+        if (order == null || order.getStatus().equals(status)) {
+            return false;
+        }
+        if (status == EOrderStatus.CANCELED) {
+            for (OrderItem orderItem : order.getOrderItems()) {
+                for (Book book : orderItem.getBooks()) {
+                    book.getBookMetadata().setStatus(EBookMetadataStatus.IN_STOCK);
+                }
+                Book book = orderItem.getBooks().iterator().next();
+                boolean success = bookTemplateService.verifyBookTemplateQuantity(book.getBookTemplate().getId());
+                if (!success) {
+                    return false;
+                }
+            }
+        } else if (order.getStatus() == EOrderStatus.WAITING_CONFIRMATION ||
+                order.getStatus() == EOrderStatus.PACKING ||
+                order.getStatus() == EOrderStatus.SHIPPING) {
+            order.getStatusHistory().add(updateOrderHistory(order, status));
+        }
+        order.setStatus(status);
+
+        return orderDAO.update(order) != null;
+    }
+
+    public OrderStatusHistory updateOrderHistory(Order order, EOrderStatus status) {
+        OrderStatusHistory orderStatusHistory = new OrderStatusHistory();
+        orderStatusHistory.setOrder(order);
+        orderStatusHistory.setStatusChangeDate(LocalDateTime.now());
+
+        if (status == EOrderStatus.PACKING) {
+            orderStatusHistory.setStatus(EOrderHistory.CONFIRMED);
+        } else if (status == EOrderStatus.SHIPPING) {
+            orderStatusHistory.setStatus(EOrderHistory.WAITING_FOR_SHIPPING);
+        } else if (status == EOrderStatus.COMPLETE_DELIVERY) {
+            orderStatusHistory.setStatus(EOrderHistory.COMPLETED);
+        }
+
+        return orderStatusHistory;
     }
 
     @Override
@@ -49,9 +103,7 @@ public class OrderServiceImpl implements IOrderService {
 
         for (Order order : list) {
             LocalDateTime orderDate = order.getOrderDate();
-            if ((orderDate.isEqual(start) || orderDate.isAfter(start)) &&
-                    (orderDate.isEqual(end) || orderDate.isBefore(end)) &&
-                    EOrderStatus.COMPLETE_DELIVERY.equals(order.getStatus())) {
+            if ((orderDate.isEqual(start) || orderDate.isAfter(start)) && (orderDate.isEqual(end) || orderDate.isBefore(end)) && EOrderStatus.COMPLETE_DELIVERY.equals(order.getStatus())) {
                 count++;
             }
         }
@@ -67,73 +119,23 @@ public class OrderServiceImpl implements IOrderService {
             if ((orderDate.isEqual(start) || orderDate.isAfter(start)) &&
                     (orderDate.isEqual(end) || orderDate.isBefore(end)) &&
                     EOrderStatus.COMPLETE_DELIVERY.equals(order.getStatus())) {
-//                for (OrderItem orderItem : order.getOrderItems()) {
-//                    for (Book book : orderItem.getBooks()) {
-//                        venue += book.getSellingPrice();
-//                    }
-//                }
-                venue += order.calTotalPrice();
+
+                BankTransfer bankTransfer = bankTransferDAO.findByOrderId(order.getId());
+
+                venue += bankTransfer.getAmount();
             }
         }
         return venue;
     }
 
     @Override
-    public List<OrderCustomerResponse> findOrdersByCustomerId(Long customerId) {
-        // Fetch data from DAO
-        List<Order> orders = orderDAO.findByJPQL(customerId);
-
-        // Convert Order entities to OrderCustomerResponse DTOs
-        return orders.stream()
-                .map(order -> {
-                    // Initialize a set for books in the response
-                    Set<BookResponse> bookResponses = new HashSet<>();
-
-                    // Loop through each LineItem and its associated books
-                    for (OrderItem lineItem : order.getOrderItems()) {
-                        for (Book book : lineItem.getBooks()) {
-                            // Add the book to the set of bookResponses
-                            BookResponse bookResponse = BookResponse.builder()
-                                    .id(String.valueOf(book.getId()))
-                                    .title(book.getTitle())
-                                    .description(book.getDescription())
-                                    .sellingPrice(String.valueOf(book.getSellingPrice()))
-                                    .build();
-                            bookResponses.add(bookResponse);
-                        }
-                    }
-
-                    // Calculate the total price if necessary (sum of line items or other logic)
-                    Double totalPrice = order.getOrderItems().stream()
-                            .mapToDouble(OrderItem::calPriceItem)
-                            .sum();
-
-                    // Return the mapped OrderCustomerResponse with the list of books
-                    return new OrderCustomerResponse(
-                            order.getId() ,
-                            order.getNote(),
-                            order.getOrderDate() != null ? order.getOrderDate().toString() : null,  // Convert LocalDateTime to String
-                            order.getPaymentType() != null ? order.getPaymentType().name() : null,
-                            order.getStatus() != null ? order.getStatus().name() : null,
-                            order.getVat(),
-                            order.getCustomer() != null ? order.getCustomer().getId() : null,
-                            order.getShipping() != null ? order.getShipping().getId() : null,
-                            totalPrice,
-                            bookResponses  // Add the set of BookResponse objects
-                    );
-                })
-                .collect(Collectors.toList());
-    }
-
     public List<RevenueResponse> getListRevenueAtTime(LocalDateTime start, LocalDateTime end) {
         List<RevenueResponse> revenueResponse = new ArrayList<>();
         List<Order> orders = orderDAO.findAllForManagement();
 
         for (Order order : orders) {
             LocalDateTime orderDate = order.getOrderDate();
-            if ((orderDate.isEqual(start) || orderDate.isAfter(start)) &&
-                    (orderDate.isEqual(end) || orderDate.isBefore(end)) &&
-                    EOrderStatus.COMPLETE_DELIVERY.equals(order.getStatus())) {
+            if ((orderDate.isEqual(start) || orderDate.isAfter(start)) && (orderDate.isEqual(end) || orderDate.isBefore(end)) && EOrderStatus.COMPLETE_DELIVERY.equals(order.getStatus())) {
                 revenueResponse.add(OrderMapper.toRevenueResponse(order));
             }
         }
@@ -160,7 +162,6 @@ public class OrderServiceImpl implements IOrderService {
             }
         }
 
-
         // Sắp xếp danh sách theo ngày (nếu cần, nhưng thực tế danh sách đã theo thứ tự ngày ban đầu)
         consolidatedRevenue.sort(Comparator.comparing(RevenueResponse::getDate));
 
@@ -172,15 +173,108 @@ public class OrderServiceImpl implements IOrderService {
         return orderDAO.findById(orderId);
     }
 
+    @Override
+    public OrderCustomerResponse findOrderByIdCustomer(Long orderId) {
+        Order order = orderDAO.findByIdCustomer(orderId);
+        return OrderMapper.toOrderCustomerResponse(order);
+    }
+
+    @Override
+    public List<OrderDetailsManagementResponse> getAllOrderCustomerResponse(Long customerId) {
+        List<Order> orders = orderDAO.findAllOrderForCustomer(customerId);
+        orders.sort(Comparator.comparing(Order::getOrderDate).reversed());
+        List<OrderDetailsManagementResponse> orderCustomerResponse = new ArrayList<>();
+        for (Order order : orders) {
+            if (order == null) {
+                System.out.println("Null order found in orders list");
+                continue;
+            }
+            System.out.println("Mapping order with ID: " + order.getId());
+
+            OrderDetailsManagementResponse response = OrderMapper.mapToOrderDetailsManagementResponse(order);
+
+            if (response == null) {
+                System.out.println("Mapper returned null for order ID: " + order.getId());
+            } else {
+                System.out.println("Mapped response: " + response);
+                response.setFinalPrice(order.getBankTransfer().getAmount());
+                orderCustomerResponse.add(response);
+            }
+        }
+
+        return orderCustomerResponse;
+    }
+
+    @Override
+    public List<OrderDetailsManagementResponse> getOrderCustomerByStatus(Long customerId, String status) {
+        List<Order> orders = orderDAO.findAllOrderForCustomer(customerId);
+        orders.sort(Comparator.comparing(Order::getOrderDate).reversed());
+        if (orders.isEmpty()) {
+            System.out.println("Null order found in orders list");
+            return null;
+        }
+        List<OrderDetailsManagementResponse> filteredOrderResponses = new ArrayList<>();
+
+        if ("all".equalsIgnoreCase(status)) {
+            for (Order order : orders) {
+                if (order == null) {
+                    System.out.println("Null order found in orders list");
+                    continue;
+                }
+
+                OrderDetailsManagementResponse response = OrderMapper.mapToOrderDetailsManagementResponse(order);
+                response.setFinalPrice(order.getBankTransfer().getAmount());
+                if (response == null) {
+                    System.out.println("Mapper returned null for order ID: " + order.getId());
+                } else {
+                    filteredOrderResponses.add(response);
+                }
+            }
+        } else {
+            try {
+                EOrderStatus orderStatus = EOrderStatus.valueOf(status);
+                Set<EOrderStatus> statusesToFilter = new HashSet<>();
+                if (orderStatus == EOrderStatus.WAITING_CONFIRMATION) {
+                    statusesToFilter.add(EOrderStatus.WAITING_CONFIRMATION);
+                    statusesToFilter.add(EOrderStatus.REQUEST_REFUND);
+                    statusesToFilter.add(EOrderStatus.PACKING);
+                } else if (orderStatus == EOrderStatus.CANCELED) {
+                    statusesToFilter.add(EOrderStatus.CANCELED);
+                    statusesToFilter.add(EOrderStatus.REFUNDED);
+                } else {
+                    statusesToFilter.add(orderStatus);
+                }
+                for (Order order : orders) {
+                    if (order == null) {
+                        System.out.println("Null order found in orders list");
+                        continue;
+                    }
+
+                    if (order.getStatus() != null && statusesToFilter.contains(order.getStatus())) {
+                        OrderDetailsManagementResponse response = OrderMapper.mapToOrderDetailsManagementResponse(order);
+                        response.setFinalPrice(order.getBankTransfer().getAmount());
+                        if (response == null) {
+                            System.out.println("Mapper returned null for order ID: " + order.getId());
+                        } else {
+                            filteredOrderResponses.add(response);
+                        }
+                    }
+                }
+            } catch (IllegalArgumentException e) {
+                System.out.println("Invalid status: " + status);
+            }
+        }
+
+        return filteredOrderResponses;
+    }
+
     public List<CountBookSoldResponse> getListCountBookSoldAtTime(LocalDateTime start, LocalDateTime end) {
         List<BookSoldResponse> ListBookSold = new ArrayList<>();
         List<Order> list = orderDAO.findAllForManagement();
         for (Order order : list) {
             Order orderTmp = orderDAO.findOneForDetailsManagement(order.getId());
             LocalDateTime orderDate = orderTmp.getOrderDate();
-            if ((orderDate.isEqual(start) || orderDate.isAfter(start)) &&
-                    (orderDate.isEqual(end) || orderDate.isBefore(end)) &&
-                    EOrderStatus.COMPLETE_DELIVERY.equals(orderTmp.getStatus())) {
+            if ((orderDate.isEqual(start) || orderDate.isAfter(start)) && (orderDate.isEqual(end) || orderDate.isBefore(end)) && EOrderStatus.COMPLETE_DELIVERY.equals(orderTmp.getStatus())) {
                 for (OrderItem orderItem : orderTmp.getOrderItems()) {
                     for (Book book : orderItem.getBooks()) {
                         ListBookSold.add(BookMapper.toBookSoldResponse(book));
@@ -203,9 +297,7 @@ public class OrderServiceImpl implements IOrderService {
         for (Order order : list) {
             Order orderTmp = orderDAO.findOneForDetailsManagement(order.getId());
             LocalDateTime orderDate = orderTmp.getOrderDate();
-            if ((orderDate.isEqual(start) || orderDate.isAfter(start)) &&
-                    (orderDate.isEqual(end) || orderDate.isBefore(end)) &&
-                    EOrderStatus.COMPLETE_DELIVERY.equals(orderTmp.getStatus())) {
+            if ((orderDate.isEqual(start) || orderDate.isAfter(start)) && (orderDate.isEqual(end) || orderDate.isBefore(end)) && EOrderStatus.COMPLETE_DELIVERY.equals(orderTmp.getStatus())) {
                 orderOfCustomerResponse.add(OrderMapper.toOrderOfCustomerResponse(orderTmp));
             }
         }
@@ -219,11 +311,7 @@ public class OrderServiceImpl implements IOrderService {
                 CountOrderOfCustomerResponse response = customerOrderCountMap.get(customerId);
                 response.setCountOrders(response.getCountOrders() + 1);
             } else {
-                customerOrderCountMap.put(customerId, CountOrderOfCustomerResponse.builder()
-                        .customerId(customerId)
-                        .customerName(customerName)
-                        .countOrders(1L)
-                        .build());
+                customerOrderCountMap.put(customerId, CountOrderOfCustomerResponse.builder().customerId(customerId).customerName(customerName).countOrders(1L).build());
             }
         }
 
@@ -231,23 +319,39 @@ public class OrderServiceImpl implements IOrderService {
         return countOrderOfCustomerResponses;
     }
 
-
-
-    @Transactional
     @Override
-    public void confirmOrder(Long orderId) {
-        Order order = orderDAO.findOne(orderId);
-        order.setStatus(EOrderStatus.PACKING);
-        orderDAO.updateOrder(order);
+    public Long createOrder(CreateOrderRequest request) {
+        return orderDAO.save(request).getId();
+    }
+  
+    @Override
+    public List<OrderReturnAtTimeResponse> getListOrderReturnAtTime(LocalDateTime start, LocalDateTime end) {
+        List<OrderReturnAtTimeResponse> orderReturnAtTimeResponses = new ArrayList<>();
+        List<Order> list = orderDAO.findAllForManagement();
+
+        for (Order order : list) {
+            Order orderTmp = orderDAO.findOneForDetailsManagement(order.getId());
+            LocalDateTime orderDate = orderTmp.getOrderDate();
+
+            if ((orderDate.isEqual(start) || orderDate.isAfter(start)) && (orderDate.isEqual(end) || orderDate.isBefore(end)) && (EOrderStatus.COMPLETE_DELIVERY.equals(orderTmp.getStatus()) || EOrderStatus.REQUEST_REFUND.equals(orderTmp.getStatus()) || EOrderStatus.REFUNDED.equals(orderTmp.getStatus()))) {
+                OrderReturnAtTimeResponse orderReturnAtTimeResponse = new OrderReturnAtTimeResponse();
+                orderReturnAtTimeResponse.setOrderId(order.getId());
+                ReturnBook returnBook = returnBookDAO.findByOrderId(order.getId());
+                if (returnBook != null) {
+                    orderReturnAtTimeResponse.setIsReturned(true);
+                    orderReturnAtTimeResponse.setReturnReason(returnBook.getReason());
+                }
+                orderReturnAtTimeResponses.add(orderReturnAtTimeResponse);
+            }
+        }
+        return orderReturnAtTimeResponses;
     }
 
-    @Transactional
-    @Override
-    public void rejectOrder(Long orderId, String reason) {
-        Order order = orderDAO.findOne(orderId);
-        order.setStatus(EOrderStatus.CANCELED);
-        orderDAO.updateOrder(order);
-    }
+    public static void main(String[] args) {
+//        OrderServiceImpl orderService = new OrderServiceImpl();
+//        boolean res = orderService.updateStatus(3L, EOrderStatus.PACKING);
+//        System.out.println(res);
 
+    }
 
 }

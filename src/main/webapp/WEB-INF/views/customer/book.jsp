@@ -2,7 +2,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
 <!-- Product -->
-<section class="section-product padding-t-100">
+<section class="section-product padding-t-100" data-book-id="${book.id}">
   <div class="container-xl">
     <div
             class="row mb-minus-24"
@@ -82,8 +82,16 @@
             </ul>
           </div>
           <div class="cr-product-price">
-            <span class="new-price price-value">${book.sellingPrice}</span>
-            <span class="old-price price-value">${book.sellingPrice}</span>
+            <c:choose>
+              <c:when test="${book.discount == 0}">
+                <span class="new-price price-value">${book.sellingPrice}</span>
+              </c:when>
+              <c:otherwise>
+                <span class="new-price price-value">${(1 - book.discount / 100) * book.sellingPrice}</span>
+                <span class="old-price price-value">${book.sellingPrice}</span>
+                <span class="discount-percent">${book.discount}</span>
+              </c:otherwise>
+            </c:choose>
           </div>
           <div class="cr-size-weight">
             <h5><span>Tình trạng</span> :</h5>
@@ -106,7 +114,7 @@
               <button type="button" class="minus">-</button>
             </div>
             <div class="cr-add-button">
-              <button type="button" class="cr-button cr-btn-secondary cr-shopping-bag add-to-cart-btn" data-cart-id="${cart.id}" data-book-id="${book.id}">
+              <button type="button" class="cr-button cr-btn-secondary cr-shopping-bag add-to-cart-btn" data-book-id="${book.id}">
                 Thêm vào giỏ hàng
               </button>
             </div>
@@ -276,42 +284,44 @@
               <div class="cr-tab-content-from">
                 <ul class="review-list">
                   <c:forEach var="review" items="${book.reviews}">
-                    <li class="review-item">
-                      <div class="review-item__image">
-                        <img src="${pageContext.request.contextPath}${review.imageUrl}"
-                             alt="review"/>
-                      </div>
-                      <div class="review-item__content">
-                        <div class="header">
-                          <div class="header__left">
-                            <span>${review.customerName}</span>
-                            <div class="rating">
-                              <c:forEach var="i" begin="1" end="5" step="1">
-                                <c:choose>
-                                  <c:when test="${i <= review.rating}">
-                                    <i class="ri-star-fill"></i>
-                                  </c:when>
-                                  <c:otherwise>
-                                    <i class="ri-star-line"></i>
-                                  </c:otherwise>
-                                </c:choose>
-                              </c:forEach>
+                    <c:if test="${not review.isHidden}">
+                      <li class="review-item">
+                        <div class="review-item__image">
+                          <img src="${pageContext.request.contextPath}${review.imageUrl}"
+                               alt="review"/>
+                        </div>
+                        <div class="review-item__content">
+                          <div class="header">
+                            <div class="header__left">
+                              <span>${review.customerName}</span>
+                              <div class="rating">
+                                <c:forEach var="i" begin="1" end="5" step="1">
+                                  <c:choose>
+                                    <c:when test="${i <= review.rating}">
+                                      <i class="ri-star-fill"></i>
+                                    </c:when>
+                                    <c:otherwise>
+                                      <i class="ri-star-line"></i>
+                                    </c:otherwise>
+                                  </c:choose>
+                                </c:forEach>
+                              </div>
                             </div>
                           </div>
-                        </div>
-                        <span class="date">${review.createdAt}</span>
+                          <span class="date">${review.createdAt}</span>
 
-                        <div class="review-content">
-                          ${review.content}
-                        </div>
-                        <c:if test="${not empty review.responseContent}">
-                          <div class="response-review">
-                            <div class="response-title">Phản Hồi Của Người Bán</div>
-                            <div class="response-text">${review.responseContent}</div>
+                          <div class="review-content">
+                              ${review.content}
                           </div>
-                        </c:if>
-                      </div>
-                    </li>
+                          <c:if test="${not empty review.responseContent}">
+                            <div class="response-review">
+                              <div class="response-title">Phản Hồi Của Người Bán</div>
+                              <div class="response-text">${review.responseContent}</div>
+                            </div>
+                          </c:if>
+                        </div>
+                      </li>
+                    </c:if>
                   </c:forEach>
                 </ul>
               </div>
@@ -370,246 +380,24 @@
           <div class="cr-banner">
             <h2>Các sản phẩm liên quan</h2>
           </div>
-          <div class="cr-banner-sub-title">
-            <p>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
-              do eiusmod tempor incididunt ut labore et viverra maecenas
-              accumsan lacus vel facilisis.
-            </p>
-          </div>
+<%--          <div class="cr-banner-sub-title">--%>
+<%--            <p>--%>
+<%--              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed--%>
+<%--              do eiusmod tempor incididunt ut labore et viverra maecenas--%>
+<%--              accumsan lacus vel facilisis.--%>
+<%--            </p>--%>
+<%--          </div>--%>
         </div>
       </div>
     </div>
     <div class="row">
       <div class="col-lg-12">
-        <div class="cr-popular-product">
-          <div class="slick-slide">
-            <div class="cr-product-card">
-              <div class="cr-product-image">
-                <div class="cr-image-inner zoom-image-hover">
-                  <img src="${pageContext.request.contextPath}/assets/customer/img/product/9.jpg" alt="product-1" />
-                </div>
-                <div class="cr-side-view">
-                  <a href="javascript:void(0)" class="wishlist">
-                    <i class="ri-heart-line"></i>
-                  </a>
-                  <a
-                          class="model-oraganic-product"
-                          data-bs-toggle="modal"
-                          href="#quickview"
-                          role="button"
-                  >
-                    <i class="ri-eye-line"></i>
-                  </a>
-                </div>
-                <a class="cr-shopping-bag" href="javascript:void(0)">
-                  <i class="ri-shopping-bag-line"></i>
-                </a>
-              </div>
-              <div class="cr-product-details">
-                <div class="cr-brand">
-                  <a href="shop-left-sidebar.html">Snacks</a>
-                  <div class="cr-star">
-                    <i class="ri-star-fill"></i>
-                    <i class="ri-star-fill"></i>
-                    <i class="ri-star-fill"></i>
-                    <i class="ri-star-fill"></i>
-                    <i class="ri-star-line"></i>
-                    <p>(4.5)</p>
-                  </div>
-                </div>
-                <a href="product" class="title"
-                >Getting Work Done (HBR 20-Minute Manager Series)</a
-                >
-                <p class="cr-price">
-                  <span class="new-price">$120.25</span>
-                  <span class="old-price">$123.25</span>
-                </p>
-              </div>
-            </div>
-          </div>
-          <div class="slick-slide">
-            <div class="cr-product-card">
-              <div class="cr-product-image">
-                <div class="cr-image-inner zoom-image-hover">
-                  <img src="${pageContext.request.contextPath}/assets/customer/img/product/10.jpg" alt="product-1" />
-                </div>
-                <div class="cr-side-view">
-                  <a href="javascript:void(0)" class="wishlist">
-                    <i class="ri-heart-line"></i>
-                  </a>
-                  <a
-                          class="model-oraganic-product"
-                          data-bs-toggle="modal"
-                          href="#quickview"
-                          role="button"
-                  >
-                    <i class="ri-eye-line"></i>
-                  </a>
-                </div>
-                <a class="cr-shopping-bag" href="javascript:void(0)">
-                  <i class="ri-shopping-bag-line"></i>
-                </a>
-              </div>
-              <div class="cr-product-details">
-                <div class="cr-brand">
-                  <a href="shop-left-sidebar.html">Snacks</a>
-                  <div class="cr-star">
-                    <i class="ri-star-fill"></i>
-                    <i class="ri-star-fill"></i>
-                    <i class="ri-star-fill"></i>
-                    <i class="ri-star-fill"></i>
-                    <i class="ri-star-fill"></i>
-                    <p>(5.0)</p>
-                  </div>
-                </div>
-                <a href="product" class="title"
-                >Work Rules: Insights From Inside Google</a
-                >
-                <p class="cr-price">
-                  <span class="new-price">$100.00</span>
-                  <span class="old-price">$110.00</span>
-                </p>
-              </div>
-            </div>
-          </div>
-          <div class="slick-slide">
-            <div class="cr-product-card">
-              <div class="cr-product-image">
-                <div class="cr-image-inner zoom-image-hover">
-                  <img src="${pageContext.request.contextPath}/assets/customer/img/product/1.jpg" alt="product-1" />
-                </div>
-                <div class="cr-side-view">
-                  <a href="javascript:void(0)" class="wishlist">
-                    <i class="ri-heart-line"></i>
-                  </a>
-                  <a
-                          class="model-oraganic-product"
-                          data-bs-toggle="modal"
-                          href="#quickview"
-                          role="button"
-                  >
-                    <i class="ri-eye-line"></i>
-                  </a>
-                </div>
-                <a class="cr-shopping-bag" href="javascript:void(0)">
-                  <i class="ri-shopping-bag-line"></i>
-                </a>
-              </div>
-              <div class="cr-product-details">
-                <div class="cr-brand">
-                  <a href="shop-left-sidebar.html">Snacks</a>
-                  <div class="cr-star">
-                    <i class="ri-star-fill"></i>
-                    <i class="ri-star-fill"></i>
-                    <i class="ri-star-fill"></i>
-                    <i class="ri-star-fill"></i>
-                    <i class="ri-star-line"></i>
-                    <p>(4.5)</p>
-                  </div>
-                </div>
-                <a href="product" class="title">
-                  Essentialism - The Disciplined Pursuit Of Less</a
-                >
-                <p class="cr-price">
-                  <span class="new-price">$120.25</span>
-                  <span class="old-price">$123.25</span>
-                </p>
-              </div>
-            </div>
-          </div>
-          <div class="slick-slide">
-            <div class="cr-product-card">
-              <div class="cr-product-image">
-                <div class="cr-image-inner zoom-image-hover">
-                  <img src="${pageContext.request.contextPath}/assets/customer/img/product/2.jpg" alt="product-1" />
-                </div>
-                <div class="cr-side-view">
-                  <a href="javascript:void(0)" class="wishlist">
-                    <i class="ri-heart-line"></i>
-                  </a>
-                  <a
-                          class="model-oraganic-product"
-                          data-bs-toggle="modal"
-                          href="#quickview"
-                          role="button"
-                  >
-                    <i class="ri-eye-line"></i>
-                  </a>
-                </div>
-                <a class="cr-shopping-bag" href="javascript:void(0)">
-                  <i class="ri-shopping-bag-line"></i>
-                </a>
-              </div>
-              <div class="cr-product-details">
-                <div class="cr-brand">
-                  <a href="shop-left-sidebar.html">Snacks</a>
-                  <div class="cr-star">
-                    <i class="ri-star-fill"></i>
-                    <i class="ri-star-fill"></i>
-                    <i class="ri-star-fill"></i>
-                    <i class="ri-star-fill"></i>
-                    <i class="ri-star-fill"></i>
-                    <p>(5.0)</p>
-                  </div>
-                </div>
-                <a href="product" class="title"
-                >Sweet snakes crunchy nut mix 250gm pack</a
-                >
-                <p class="cr-price">
-                  <span class="new-price">$100.00</span>
-                  <span class="old-price">$110.00</span>
-                </p>
-              </div>
-            </div>
-          </div>
-          <div class="slick-slide">
-            <div class="cr-product-card">
-              <div class="cr-product-image">
-                <div class="cr-image-inner zoom-image-hover">
-                  <img src="${pageContext.request.contextPath}/assets/customer/img/product/3.jpg" alt="product-1" />
-                </div>
-                <div class="cr-side-view">
-                  <a href="javascript:void(0)" class="wishlist">
-                    <i class="ri-heart-line"></i>
-                  </a>
-                  <a
-                          class="model-oraganic-product"
-                          data-bs-toggle="modal"
-                          href="#quickview"
-                          role="button"
-                  >
-                    <i class="ri-eye-line"></i>
-                  </a>
-                </div>
-                <a class="cr-shopping-bag" href="javascript:void(0)">
-                  <i class="ri-shopping-bag-line"></i>
-                </a>
-              </div>
-              <div class="cr-product-details">
-                <div class="cr-brand">
-                  <a href="shop-left-sidebar.html">Snacks</a>
-                  <div class="cr-star">
-                    <i class="ri-star-fill"></i>
-                    <i class="ri-star-fill"></i>
-                    <i class="ri-star-fill"></i>
-                    <i class="ri-star-fill"></i>
-                    <i class="ri-star-fill"></i>
-                    <p>(5.0)</p>
-                  </div>
-                </div>
-                <a href="product" class="title"
-                >Sweet snakes crunchy nut mix 250gm pack</a
-                >
-                <p class="cr-price">
-                  <span class="new-price">$100.00</span>
-                  <span class="old-price">$110.00</span>
-                </p>
-              </div>
-            </div>
-          </div>
+        <div class="cr-popular-product row">
         </div>
       </div>
     </div>
   </div>
 </section>
+
+<script src="${pageContext.request.contextPath}/assets/commons/js/format-discount-percent.js"></script>
+<script src="${pageContext.request.contextPath}/assets/customer/js/book-details.js" type="module"></script>

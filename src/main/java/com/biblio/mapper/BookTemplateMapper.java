@@ -8,6 +8,8 @@ import com.biblio.entity.*;
 import com.biblio.enumeration.*;
 import com.biblio.utils.EnumUtil;
 import com.biblio.utils.FormatterUtil;
+import com.biblio.enumeration.EBookLanguage;
+import com.biblio.enumeration.EBookMetadataStatus;
 
 import java.text.DecimalFormat;
 import java.time.format.DateTimeFormatter;
@@ -216,7 +218,7 @@ public class BookTemplateMapper {
                 .soldCount(bookTemplate.getBooks().stream().
                         filter(book -> book.getBookMetadata().getStatus() == EBookMetadataStatus.SOLD).count())
                 .publicationDate(singlebook.getPublicationDate().format(formatter))
-                .statusDisplay(bookTemplate.getStatus().getDescription())
+                .status(bookTemplate.getStatus())
                 .statusStyle(bookTemplate.getStatus().getStatusStyle())
                 .build();
     }
@@ -229,7 +231,7 @@ public class BookTemplateMapper {
         return BookCardResponse.builder()
                 .id(bookTemplate.getId())
                 .title(singlebook.getTitle())
-                .sellingPrice(formatter.format((int) singlebook.getSellingPrice()))
+                .sellingPrice(singlebook.getSellingPrice())
                 .condition(singlebook.getCondition().getBookCondition())
                 .categoryName(singlebook.getSubCategory().getCategory().getName())
                 .imageUrl(bookTemplate
@@ -265,8 +267,8 @@ public class BookTemplateMapper {
         }
 
         List<ReviewResponse> reviews = bookTemplate.getReviews().stream()
-                .filter(review -> !review.isHidden())
-                .sorted(Comparator.comparingInt(Review::getRate).reversed()
+                .sorted(Comparator.comparingInt((Review review) -> review.isHidden() ? 1 : 0)
+                        .thenComparing(Comparator.comparingInt(Review::getRate).reversed())
                         .thenComparing(Review::getCreatedAt, Comparator.reverseOrder()))
                 .map(ReviewMapper::toReviewResponse)
                 .toList();

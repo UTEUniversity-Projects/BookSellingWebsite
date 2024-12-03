@@ -2,7 +2,10 @@ package com.biblio.apis.customer;
 
 import com.biblio.dto.request.SearchBookRequest;
 import com.biblio.dto.response.BookCardResponse;
+import com.biblio.dto.response.CategoryBookCountResponse;
+import com.biblio.service.IBookService;
 import com.biblio.service.IBookTemplateService;
+import com.biblio.service.ICategoryService;
 import com.biblio.utils.HttpUtil;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
@@ -29,6 +32,12 @@ public class SearchBookAPI extends HttpServlet {
     @Inject
     private IBookTemplateService bookTemplateService;
 
+    @Inject
+    private ICategoryService categoryService;
+
+    @Inject
+    private IBookService bookService;
+
     /**
      * @see HttpServlet#HttpServlet()
      */
@@ -53,16 +62,23 @@ public class SearchBookAPI extends HttpServlet {
         request.setCharacterEncoding("UTF-8");
         response.setCharacterEncoding("UTF-8");
         response.setContentType("application/json");
+
         SearchBookRequest req = HttpUtil.of(request.getReader()).toModel(SearchBookRequest.class);
+        List<CategoryBookCountResponse> categories = categoryService.getBookQuantityPerCategory(req);
 
         List<BookCardResponse> book = bookTemplateService.getBookTemplateByCriteria(req);
         Long bookCount = bookTemplateService.getBookTemplateQuantityByCriteria(req);
+        Long minPrice = bookService.getMinBookPrice();
+        Long maxPrice = bookService.getMaxBookPrice();
 
         ObjectMapper mapper = new ObjectMapper();
         Map<String, Object> map = new HashMap<>();
 
-        map.put("response", book);
+        map.put("books", book);
         map.put("quantity", bookCount);
+        map.put("category", categories);
+        map.put("minPrice", minPrice);
+        map.put("maxPrice", maxPrice);
         response.getWriter().append(mapper.writeValueAsString(map));
     }
 

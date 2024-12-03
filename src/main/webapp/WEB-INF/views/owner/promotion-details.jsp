@@ -25,8 +25,30 @@
         //background: rgba(255, 255, 255, 0.6); /* Lớp phủ trắng */
         z-index: 1;
     }
+    .cr-btn-stop {
+        /*@include ease3;*/
+        height: 35px;
+        padding: 6px 12px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background-color: #f90c4c;
+        color: #ffffff;
+        font-size: 16px;
+        border: 1px solid #64b496;
+        cursor: pointer;
 
+        &:hover {
+            background-color: #ffffff;
+            color: #25a984;
+            border: 1px solid #25a984;
+        }
 
+        &:focus {
+            outline: none;
+            box-shadow: none;
+        }
+    }
 
 </style>
 <div class="cr-main-content">
@@ -42,7 +64,7 @@
             </div>
         </div>
         <c:if test="${promotion.type == 'DISCOUNT'}">
-            <form class="promotionForm">
+            <form action="${pageContext.request.contextPath}/owner/promotion-details" method="POST" class="promotionForm">
                 <input type="hidden" name="formType" value="editDiscount"/>
 
                 <div class="form-content d-flex">
@@ -53,14 +75,10 @@
                                 <div class="cr-cat-list cr-card card-default mb-24px">
                                     <div class="cr-card-content">
                                         <div class="cr-cat-form">
-                                            <img
-                                                    class="img-promotion"
-                                                    src="assets/img/product/1.jpg"
-                                            />
                                             <h3>Thêm Discount</h3>
 
                                             <!-- Mã -->
-                                            <div class="form-group">
+                                            <div class="form-group ip-padding">
                                                 <label>Mã</label>
                                                 <div class="col-12">
                                                     <input name="code" value="${promotion.code}" style="background-color: #f5f5f5;" class="form-control here slug-title" type="text" onblur="validateInput(this)" readonly />
@@ -69,21 +87,21 @@
                                             </div>
 
                                             <!-- Tiêu đề -->
-                                            <div class="form-group">
+                                            <div class="form-group ip-padding">
                                                 <label>Tiêu đề</label>
                                                 <div class="col-12">
                                                     <input name="title" value="${promotion.title}"  disabled class="form-control here slug-title" type="text" onblur="validateInput(this)" />
                                                     <span class="error-message titleError"></span>
                                                 </div>
                                             </div>
-                                            <div class="form-group">
+                                            <div class="form-group ip-padding">
                                                 <label>Phần trăm giảm (%)</label>
                                                 <div class="col-12">
                                                     <input name="percentDiscount" value="${promotion.percentDiscount}" disabled class="form-control here slug-title" type="number" onblur="validateInput(this)" />
                                                     <span class="error-message percentDiscountError"></span>
                                                 </div>
                                             </div>
-                                            <div class="form-group">
+                                            <div class="form-group ip-padding">
                                                 <label>Đối tượng áp dụng</label>
                                                 <div class="select-oject-use-voucher">
                                                     <select class="select-item" disabled name="selectOject" id="select-object-discount" onblur="validateInput(this)">
@@ -97,7 +115,7 @@
                                             </div>
 
                                             <!-- Mô tả -->
-                                            <div class="form-group">
+                                            <div class="form-group ip-padding">
                                                 <label>Mô tả</label>
                                                 <div class="col-12">
                                                     <textarea name="description" class="form-control" rows="4" disabled onblur="validateInput(this)">${promotion.description}</textarea>
@@ -106,7 +124,7 @@
                                             </div>
 
                                             <!-- Thời gian áp dụng -->
-                                            <div class="form-group row">
+                                            <div class="form-group row ip-padding">
                                                 <label>Thời gian áp dụng</label>
                                                 <div class="col-12">
                                                     <input type="text" name="dateeffective" disabled style="width: 100%;" onblur="validateInput(this)" />
@@ -145,9 +163,12 @@
                 <!-- Nút Thêm -->
                 <div class="row mt-4">
                     <div class="col-12 d-flex justify-content-center" style="padding-bottom: 20px">
-                        <button type="submit" class="btn-voucher cr-btn-primary" data-editing="false">Chỉnh sửa</button>
-                        <button type="button" class="btn-voucher cr-btn-secondary cancel-btn" style="display: none; margin-left: 10px;" onclick="cancelEdit(this)">Hủy</button>
-                    </div>
+                        <c:if test="${isBeforeExpiration}">
+                            <button type="submit" class="btn-voucher cr-btn-primary" data-editing="false">Chỉnh sửa</button>
+                            <button type="button" class="btn-voucher cr-btn-secondary cancel-btn" style="display: none; margin-left: 10px;" onclick="cancelEdit(this)">Hủy</button>
+                            <button type="button" class="btn-voucher cr-btn-stop stop-promotion-btn" style="margin-left: 10px;" onclick="stopPromotion()">Ngừng khuyến mãi</button>
+
+                        </c:if>
                     </div>
                 </div>
 
@@ -161,9 +182,8 @@
                         <div class="cr-cat-list cr-card card-default mb-24px">
                             <div class="cr-card-content">
                                 <div class="cr-cat-form">
-                                    <img class="img-promotion" src="assets/img/product/1.jpg">
                                     <h5>Thông tin Voucher</h5>
-                                    <form action="/owner/promotion-details" method="POST" class="promotionForm">
+                                    <form action="${pageContext.request.contextPath}/owner/promotion-details" method="POST" class="promotionForm">
                                         <input type="hidden" name="formType" value="editVoucher"/>
 
                                         <!-- Mã -->
@@ -249,8 +269,12 @@
 
                                         <div class="row ip-padding">
                                             <div class="col-12 d-flex">
-                                                <button type="submit" class="btn-voucher cr-btn-primary" data-editing="false">Chỉnh sửa</button>
-                                                <button type="button" class="btn-voucher cr-btn-secondary cancel-btn" style="display: none; margin-left: 10px;" onclick="cancelEdit(this)">Hủy</button>
+                                               <c:if test="${isBeforeExpiration}">
+                                                   <button type="submit" class="btn-voucher cr-btn-primary" data-editing="false">Chỉnh sửa</button>
+                                                   <button type="button" class="btn-voucher cr-btn-secondary cancel-btn" style="display: none; margin-left: 10px;" onclick="cancelEdit(this)">Hủy</button>
+                                                   <button type="button" class="btn-voucher cr-btn-stop stop-promotion-btn" style="margin-left: 10px;" onclick="stopPromotion()">Ngừng khuyến mãi</button>
+
+                                               </c:if>
                                             </div>
                                         </div>
                                     </form>
@@ -270,9 +294,8 @@
                             <div class="cr-cat-list cr-card card-default mb-24px">
                                 <div class="cr-card-content">
                                     <div class="cr-cat-form">
-                                        <img class="img-promotion" src="assets/img/product/1.jpg">
                                         <h3>Thông tin Freeship</h3>
-                                        <form action="/owner/promotion-details" method="POST" class="promotionForm">
+                                        <form action="${pageContext.request.contextPath}/owner/promotion-details" method="POST" class="promotionForm">
                                             <input type="hidden" name="formType" value="editFreeShip" />
                                             <div class="form-group ip-padding">
                                                 <label>Mã</label>
@@ -335,8 +358,12 @@
 
                                                 <div class="row ip-padding">
                                                     <div class="col-12 d-flex">
-                                                        <button type="button" class="btn-voucher cr-btn-primary" data-editing="false" onclick="toggleForm(this)">Chỉnh sửa</button>
-                                                        <button type="button" class="btn-voucher cr-btn-secondary cancel-btn" style="display: none; margin-left: 10px;" onclick="cancelEdit(this)">Hủy</button>
+                                                        <c:if test="${isBeforeExpiration}">
+                                                            <button type="submit" class="btn-voucher cr-btn-primary" data-editing="false">Chỉnh sửa</button>
+                                                            <button type="button" class="btn-voucher cr-btn-secondary cancel-btn" style="display: none; margin-left: 10px;" onclick="cancelEdit(this)">Hủy</button>
+                                                            <button type="button" class="btn-voucher cr-btn-stop stop-promotion-btn" style="margin-left: 10px;" onclick="stopPromotion()">Ngừng khuyến mãi</button>
+                                                        </c:if>
+
                                                     </div>
                                                 </div>
 
@@ -350,6 +377,22 @@
                 </div>
             </div>
         </c:if>
+    </div>
+</div>
+
+<div class="modal fade" id="hideReviewModal" tabindex="-1" aria-labelledby="hideReviewModalLabel" aria-hidden="true">
+    <input class="review-id" value="" hidden>
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="hideReviewModalLabel-promotion">Bạn có chắc muốn dừng chương trình này không?</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Không</button>
+                <button type="button" class="btn btn-primary" id="confirmHideReview-promotion" onclick="confirmStopPromotion()">Có</button>
+            </div>
+        </div>
     </div>
 </div>
 
@@ -398,8 +441,6 @@
     const selectedIds = ${selectedIds != null ? selectedIds : '[]'};
 </script>
 
-
-<script>const contextPath = "<%= request.getContextPath()%>";</script>
 <script src="${pageContext.request.contextPath}/assets/owner/js/validator-promotion-details.js" defer></script>
 
 <script src="${pageContext.request.contextPath}/assets/owner/js/add-promotion.js" defer></script>

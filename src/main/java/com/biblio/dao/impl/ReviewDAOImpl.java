@@ -14,8 +14,16 @@ public class ReviewDAOImpl extends GenericDAOImpl<Review> implements IReviewDAO 
     }
 
     @Override
-    public Review findById(long id) {
-        return super.findById(id);
+    public Review findById(Long id) {
+        StringBuilder jpql = new StringBuilder();
+        jpql.append("SELECT DISTINCT r ")
+                .append("FROM Review r ")
+                .append("JOIN FETCH r.customer c ")
+                .append("WHERE r.id = :id");
+
+        Map<String, Object> params = new HashMap<>();
+        params.put("id", id);
+        return super.findSingleByJPQL(jpql.toString(), params);
     }
 
     @Override

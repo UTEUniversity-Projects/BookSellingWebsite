@@ -1,6 +1,7 @@
 package com.biblio.controller;
 
 import com.biblio.dto.response.AccountGetResponse;
+import com.biblio.enumeration.EUserRole;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -38,9 +39,9 @@ public class WaitingController extends HttpServlet {
         AccountGetResponse account = (AccountGetResponse) session.getAttribute("account");
         String role = account.getRole();
 
-        if ("owner".equals(role)) {
+        if (EUserRole.OWNER.toString().equals(role)) {
             response.sendRedirect(request.getContextPath() + "/owner/ecommerce");
-        } else if ("staff".equals(role)) {
+        } else if (EUserRole.STAFF.toString().equals(role)) {
             response.sendRedirect(request.getContextPath() + "/staff/product-dashboard");
         } else {
             response.sendRedirect(request.getContextPath() + "/home");

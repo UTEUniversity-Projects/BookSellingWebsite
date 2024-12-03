@@ -12,4 +12,6 @@ public class BookMetadataDAOImpl extends GenericDAOImpl<BookMetadata> implements
     public BookMetadata createBookMetadata(BookMetadata bookMetadata) {
         return super.insert(bookMetadata);
     }
+
+    
 }

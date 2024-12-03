@@ -45,7 +45,8 @@
                             <c:forEach var="imageUrl" items="${book.imageUrls}">
                                 <div class="thumbnail-image thumbnail-sub-image">
                                     <div class="thumbImg">
-                                        <img src="${pageContext.request.contextPath}${imageUrl}" class="mini-image-shadow" alt="product-thumbnail"/>
+                                        <img src="${pageContext.request.contextPath}${imageUrl}"
+                                             class="mini-image-shadow" alt="product-thumbnail"/>
                                     </div>
                                 </div>
                             </c:forEach>
@@ -135,7 +136,8 @@
                                     </div>
                                 </div>
                                 <div class="col-4 cr-settings">
-                                    <a onclick="rowAction(${book.id}, 'update'); return false;" class="cr-btn-primary m-r-10 rounded">Cập nhật</a>
+                                    <a onclick="rowAction(${book.id}, 'update'); return false;"
+                                       class="cr-btn-primary m-r-10 rounded">Cập nhật</a>
                                 </div>
                             </div>
                         </div>
@@ -281,6 +283,11 @@
                         <div class="slider-info-value text-center">
                             ${book.hardcover} trang
                         </div>
+                        <%--                    <div class="cr-product-price">--%>
+                        <%--                        <span class="new-price price-value">${(1 - book.discount / 100) * book.sellingPrice}</span>--%>
+                        <%--                        <span class="old-price price-value">${book.sellingPrice}</span>--%>
+                        <%--                        <span class="discount-percent">${book.discount}</span>--%>
+                        <%--                    </div>--%>
                     </div>
                     <div>
                         <div class="slider-info-title text-center">
@@ -647,24 +654,31 @@
 <script src="${pageContext.request.contextPath}/assets/owner/js/vendor/slick.min.js" defer></script>
 <!-- endregion -->
 
+<script src="${pageContext.request.contextPath}/assets/commons/js/format-discount-percent.js"></script>
+
 <script src="${pageContext.request.contextPath}/assets/owner/js/product-details.js" defer></script>
 
 <style>
     .non-growth {
         color: slategray;
     }
+
     .up-growth {
         color: #2bbb93;
     }
+
     .down-growth {
         color: #f90c4c;
     }
+
     .icon-growth {
         font-size: 120%;
     }
+
     .icon-large {
         font-size: 20px;
     }
+
     .value-books-sold-this-month {
         background-color: #ffedde;
         color: #ffa04f;
@@ -672,25 +686,31 @@
         border-radius: 7px;
         padding: 2px;
     }
+
     .book-format {
         font-size: 14px;
         font-weight: bold;
     }
+
     .thumbnail-sub-image {
         margin: 10px 5px 20px 0;
     }
+
     .author-translator-line {
         font-size: 80%;
     }
+
     .product-title {
-        font-family:  'Nunito Sans', sans-serif;
+        font-family: 'Nunito Sans', sans-serif;
         font-weight: bold;
         font-size: 200%;
         color: #2b3647;
     }
+
     .page-title {
         margin-right: 20px;
     }
+
     .book-avg-rate {
         margin-right: 5px;
         font-size: 130%;
@@ -698,9 +718,11 @@
         color: #2b3647;
         font-family: Nunito, sans-serif
     }
+
     .book-review-star {
         margin-right: 10px;
     }
+
     .book-sold-count {
         background-color: #dcfcee;
         color: #30cb83;
@@ -709,24 +731,29 @@
         padding: 3px 5px 3px 5px;
         font-family: Nunito, sans-serif;
     }
+
     .customer-name {
         color: #484d54;
     }
+
     .slider-info-title {
         font-size: 12px;
         color: #485568;
     }
+
     .slider-info-value {
         font-size: 12px;
         font-weight: bold;
         color: #485568;
     }
+
     .slider-icon {
         font-size: 24px;
         margin-top: 10px;
         margin-bottom: 10px;
         color: #485568;
     }
+
     .name-inline {
         color: #64b496;
         font-style: italic;
@@ -734,20 +761,24 @@
         font-weight: 600;
         font-family: Nunito, sans-serif;
     }
+
     .current-price {
         font-family: "Be Vietnam Pro", sans-serif;
         font-size: 32px;
         font-weight: 600;
         color: #64b496;
     }
+
     .old-price {
         text-decoration: line-through;
         font-size: 14px;
         color: #7a7a7a;
     }
+
     .introduction-area {
         margin-top: 20px;
     }
+
     .introduction-content, .introduction-content p {
         width: 100%;
         padding: 10px;
@@ -756,6 +787,7 @@
         text-align: justify;
         box-sizing: border-box;
     }
+
     .description-content {
         width: 100%;
         padding: 30px;
@@ -764,22 +796,27 @@
         font-size: 15px;
         color: slategray;
     }
+
     .info-details {
         margin: 0 0 30px 30px;
     }
+
     .custom-char-list {
         list-style: none;
         margin-left: 10px;
     }
+
     .custom-char-list li::before {
         content: "●";
         color: slategray;
         font-size: 16px;
         margin-right: 10px;
     }
-    ul.custom-char-list li label{
+
+    ul.custom-char-list li label {
         font-size: 14px;
     }
+
     .card-3d-deep {
         background: #fff;
         border-radius: 10px;
@@ -791,11 +828,13 @@
         0 16px 24px rgba(0, 0, 0, 0.1);
         transition: transform 0.3s ease, box-shadow 0.3s ease;
     }
+
     .card-3d-deep:hover {
         box-shadow: 0 6px 8px rgba(0, 0, 0, 0.1),
         0 12px 20px rgba(0, 0, 0, 0.15),
         0 24px 32px rgba(0, 0, 0, 0.2);
     }
+
     .mini-card-3d-deep {
         background: #fff;
         border-radius: 10px;
@@ -807,26 +846,31 @@
         0 8px 12px rgba(0, 0, 0, 0.1);
         transition: transform 0.3s ease, box-shadow 0.3s ease;
     }
+
     .mini-card-3d-deep:hover {
         box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1),
         0 6px 10px rgba(0, 0, 0, 0.15),
         0 12px 16px rgba(0, 0, 0, 0.2);
     }
+
     .image-shadow {
         transition: transform 0.3s ease, box-shadow 0.3s ease;
         box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
         object-fit: cover;
     }
+
     .image-shadow:hover {
         transform: translateY(-5px);
         box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
         object-fit: cover;
     }
+
     .mini-image-shadow {
         transition: transform 0.3s ease, box-shadow 0.3s ease;
         box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
         object-fit: cover;
     }
+
     .mini-image-shadow:hover {
         transform: translateY(-5px);
         box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);

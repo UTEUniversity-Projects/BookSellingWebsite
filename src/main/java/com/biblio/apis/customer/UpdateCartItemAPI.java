@@ -3,6 +3,8 @@ package com.biblio.apis.customer;
 import com.biblio.dto.request.AddToCartRequest;
 import com.biblio.dto.request.UpdateCartItemRequest;
 import com.biblio.dto.response.AccountGetResponse;
+import com.biblio.dto.response.CartItemResponse;
+import com.biblio.service.ICartItemService;
 import com.biblio.service.ICartService;
 import com.biblio.utils.HttpUtil;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -25,7 +27,7 @@ public class UpdateCartItemAPI extends HttpServlet {
     private static final long serialVersionUID = 1L;
 
     @Inject
-    private ICartService cartService;
+    private ICartItemService cartItemService;
     /**
      * @see HttpServlet#HttpServlet()
      */
@@ -47,23 +49,13 @@ public class UpdateCartItemAPI extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         request.setCharacterEncoding("UTF-8");
 
-        HttpSession session = request.getSession();
-        AccountGetResponse account = (AccountGetResponse) session.getAttribute("account");
-
         UpdateCartItemRequest updateCartItemRequest = HttpUtil.of(request.getReader()).toModel(UpdateCartItemRequest.class);
-        updateCartItemRequest.setAccountId(account.getId());
 
         Map<String, Object> result = new HashMap<>();
         ObjectMapper mapper = new ObjectMapper();
 
-        try {
-            cartService.updateCart(updateCartItemRequest);
-            result.put("status", "success");
-            result.put("message", "Cập nhật số lượng sản phẩm thành công!");
-        } catch (Exception e) {
-            result.put("status", "error");
-            result.put("message", e.getMessage());
-        }
+        CartItemResponse cartItem = cartItemService.updateCartItem(updateCartItemRequest);
+        result.put("cartItem", cartItem);
 
         response.setContentType("application/json");
         response.setCharacterEncoding("UTF-8");

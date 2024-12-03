@@ -77,7 +77,7 @@ public class Book implements Serializable {
 
     // region Relationships
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "book_template_id", nullable = false)
     private BookTemplate bookTemplate;
 
@@ -88,6 +88,9 @@ public class Book implements Serializable {
     @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinColumn(name = "sub_category_id", nullable = false)
     private SubCategory subCategory;
+
+//    @ManyToMany(cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH}, fetch = FetchType.EAGER)
+//    private Set<OrderItem> orderItems = new HashSet<>();
 
     // endregion
 

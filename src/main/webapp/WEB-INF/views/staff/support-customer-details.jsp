@@ -53,7 +53,7 @@
                                     </div>
                                     <div class="mb-3">
                                         <label for="responseText" class="form-label">Phản hồi</label>
-                                        <textarea class="form-control" id="responseText" name="feedbackContent" rows="5"></textarea>
+                                        <textarea class="form-control" id="responseText" name="feedbackContent" rows="5" required></textarea>
                                     </div>
                                     <div class="mb-3">
                                         <button type="submit" class="btn btn-success">Gửi phản hồi</button>

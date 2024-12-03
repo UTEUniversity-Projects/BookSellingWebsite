@@ -3,10 +3,7 @@ package com.biblio.mapper;
 import com.biblio.constants.StoredFileConstants;
 import com.biblio.dto.request.CategoryCreateRequest;
 import com.biblio.dto.request.CategoryUpdateRequest;
-import com.biblio.dto.response.CategoryAnalysisResponse;
-import com.biblio.dto.response.CategoryLineResponse;
-import com.biblio.dto.response.CategoryProfileResponse;
-import com.biblio.dto.response.CategorySidebarResponse;
+import com.biblio.dto.response.*;
 import com.biblio.entity.Category;
 import com.biblio.utils.FormatterUtil;
 
@@ -38,6 +35,16 @@ public class CategoryMapper {
     // End DTO Request to Entity
 
     // Before Entity to DTO Response
+
+    public static CategoryResponse toCategoryResponse(Category category) {
+        return CategoryResponse.builder()
+                .id(category.getId().toString())
+                .name(category.getName())
+                .shortScript(category.getShortScript())
+                .fullScript(category.getFullScript())
+                .status(category.getStatus().toString())
+                .build();
+    }
 
     public static CategoryProfileResponse toCategoryProfileResponse(Category category) {
         return CategoryProfileResponse.builder()

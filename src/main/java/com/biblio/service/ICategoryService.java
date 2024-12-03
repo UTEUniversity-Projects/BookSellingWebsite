@@ -5,6 +5,10 @@ import com.biblio.dto.request.CategoryDeleteRequest;
 import com.biblio.dto.request.CategoryUpdateRequest;
 import com.biblio.dto.response.*;
 import com.biblio.entity.Category;
+import com.biblio.dto.request.SearchBookRequest;
+import com.biblio.dto.response.CategoryBookCountResponse;
+import com.biblio.dto.response.CategoryResponse;
+import com.biblio.dto.response.CategorySidebarResponse;
 
 import java.util.List;
 
@@ -21,5 +25,6 @@ public interface ICategoryService {
 
     List<CategorySidebarResponse> getAllCategorySidebarResponse();
     List<CategoryProfileResponse> getAllCategories();
-    List<CategoryBookCountResponse> getBookQuantityPerCategory();
+    CategoryResponse findById(Long id);
+    List<CategoryBookCountResponse> getBookQuantityPerCategory(SearchBookRequest request);
 }

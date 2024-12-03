@@ -28,37 +28,44 @@
     });
 
     /* Minus and Plus Quantity */
-    $('.minus').on('click', function () {
-      var $input = $(this).parent().find('input');
+    $(document).on("click", ".minus", function () {
+      var $input = $(this).siblings("input.quantity");
       var count = parseInt($input.val()) - 1;
       count = count < 1 ? 1 : count;
-      $input.val(count);
-
-      $input.change();
+      $input.val(count).change();
       return false;
     });
 
-
-    $('.plus').on('click', function () {
-      var $input = $(this).parent().find('input');
-      $input.val(parseInt($input.val()) + 1);
-      $input.change();
+    $(document).on("click", ".plus", function () {
+      var $input = $(this).siblings("input.quantity");
+      $input.val(parseInt($input.val()) + 1).change();
       return false;
     });
 
-    $(".quantity").on("keydown change", function (e) {
+    $(document).on("keydown change", "input.quantity", function (e) {
       const key = e.key;
       let currentValue = $(this).val();
 
-      if (!/^[0-9]$/.test(key) && key !== "Backspace" && key !== "Delete" && key !== "Tab" && key !== "ArrowLeft" && key !== "ArrowRight") {
+      // Prevent invalid key inputs
+      if (
+          e.type === "keydown" &&
+          !/^[0-9]$/.test(key) &&
+          key !== "Backspace" &&
+          key !== "Delete" &&
+          key !== "Tab" &&
+          key !== "ArrowLeft" &&
+          key !== "ArrowRight"
+      ) {
         e.preventDefault();
       }
 
-      if (currentValue === "" && key === "0") {
+      // Prevent initial "0" input
+      if (e.type === "keydown" && currentValue === "" && key === "0") {
         e.preventDefault();
       }
 
-      if (e.type === "blur" && currentValue === "") {
+      // Ensure valid value on "change" event
+      if (e.type === "change" && (currentValue === "" || parseInt(currentValue) < 1)) {
         $(this).val(1);
       }
     });
@@ -348,27 +355,27 @@
   });
 
   /*--------------------- Add to cart button notify js ---------------------- */
-  $('.cr-shopping-bag').on('click', function () {
-    $('.cr-wish-notify').remove();
-    $('.cr-compare-notify').remove();
-    $('.cr-cart-notify').remove();
-
-    var isAddtocart = $(this).hasClass('active');
-    if (isAddtocart) {
-      $(this).removeClass('active');
-      $('footer').after(
-        '<div class="cr-cart-notify"><p class="compare-note">Remove product in <a href="cart.html"> Cart</a> Successfully!</p></div>'
-      );
-    } else {
-      $(this).addClass('active');
-      $('footer').after(
-        '<div class="cr-cart-notify"><p class="compare-note">Add product in <a href="cart.html"> Cart</a> Successfully!</p></div>'
-      );
-    }
-    setTimeout(function () {
-      $('.cr-cart-notify').fadeOut();
-    }, 2000);
-  });
+  // $('.cr-shopping-bag').on('click', function () {
+  //   $('.cr-wish-notify').remove();
+  //   $('.cr-compare-notify').remove();
+  //   $('.cr-cart-notify').remove();
+  //
+  //   var isAddtocart = $(this).hasClass('active');
+  //   if (isAddtocart) {
+  //     $(this).removeClass('active');
+  //     $('footer').after(
+  //       '<div class="cr-cart-notify"><p class="compare-note">Remove product in <a href="cart.html"> Cart</a> Successfully!</p></div>'
+  //     );
+  //   } else {
+  //     $(this).addClass('active');
+  //     $('footer').after(
+  //       '<div class="cr-cart-notify"><p class="compare-note">Add product in <a href="cart.html"> Cart</a> Successfully!</p></div>'
+  //     );
+  //   }
+  //   setTimeout(function () {
+  //     $('.cr-cart-notify').fadeOut();
+  //   }, 2000);
+  // });
 
   /* Slider room details */
   $('.slider-for').slick({
@@ -825,18 +832,3 @@
   }
 
 })(jQuery);
-
-document.querySelectorAll('.price-value').forEach(el => {
-  const rawValue = el.textContent.trim();
-
-  const value = parseFloat(rawValue);
-
-  if (!isNaN(value)) {
-    const formattedValue = value.toLocaleString('vi-VN');
-    if (el.classList.contains('minus-value')) {
-      el.innerHTML = `-${formattedValue}<span class="currency-symbol">₫</span>`;
-    } else {
-      el.innerHTML = `${formattedValue}<span class="currency-symbol">₫</span>`;
-    }
-  }
-});

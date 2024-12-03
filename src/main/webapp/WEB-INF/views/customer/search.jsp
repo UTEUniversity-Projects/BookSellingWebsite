@@ -2,39 +2,19 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
 <!-- Shop -->
-<section class="section-shop padding-tb-100">
+<section class="section-shop py-[50px]">
     <div class="container-xl">
-        <div class="row d-none">
-            <div class="col-lg-12">
-                <div
-                        class="mb-30"
-                        data-aos="fade-up"
-                        data-aos-duration="2000"
-                        data-aos-delay="400"
-                >
-                    <div class="cr-banner">
-                        <h2>Danh mục</h2>
-                    </div>
-                    <div class="cr-banner-sub-title">
-                        <p>
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
-                            do eiusmod tempor incididunt ut labore lacus vel facilisis.
-                        </p>
-                    </div>
-                </div>
-            </div>
-        </div>
         <div class="row">
             <div
                     class="col-lg-3 col-12 md-30"
-                    data-aos="fade-up"
+                    data-aos="fade-down"
                     data-aos-duration="2000"
                     data-aos-delay="400"
             >
                 <div class="cr-shop-sideview">
                     <div class="cr-shop-categories">
                         <h4 class="cr-shop-sub-title">Danh mục</h4>
-                        <div class="cr-checkbox">
+                        <div class="cr-checkbox category">
                             <div class="checkbox-group">
                                 <input type="checkbox" id="all-categories" class="category-item" checked/>
                                 <label for="all-categories">Tất cả</label>
@@ -42,7 +22,8 @@
                             </div>
                             <c:forEach var="category" items="${categories}">
                                 <div class="checkbox-group gap-x-2">
-                                    <input type="checkbox" id="${category.id}" value="${category.id}" class="category-item"/>
+                                    <input type="checkbox" id="${category.id}" value="${category.id}"
+                                           class="category-item"/>
                                     <label for="${category.id}" class="pr-2">${category.categoryName}</label>
                                     <span>(${category.bookCount})</span>
                                 </div>
@@ -51,13 +32,17 @@
                     </div>
                     <div class="cr-shop-price">
                         <h4 class="cr-shop-sub-title">Khoảng giá</h4>
-                        <div class="price-range-slider">
-                            <div id="slider-range" class="range-bar"></div>
-                            <p class="range-value">
-                                <label>Giá :</label>
-                                <input type="text" id="amount" placeholder="'" readonly/>
-                            </p>
-                            <button type="button" class="cr-button">Lọc</button>
+                        <div class="mt-5">
+                            <div class="range-slider">
+                                <input type="range" min="0" max="${maxPrice}" step="10000" value="0"
+                                       class="range-slider__input"/>
+                                <input type="range" min="0" max="${maxPrice}" step="10000" value="${maxPrice}"
+                                       class="range-slider__input"/>
+                                <div class="range-slider__display flex items-center justify-between mt-5">
+                                    <p class="min-price text-[16px] font-bold mt-2"></p>
+                                    <p class="max-price text-[16px] font-bold mt-2"></p>
+                                </div>
+                            </div>
                         </div>
                     </div>
                     <div class="cr-shop-color">
@@ -96,16 +81,16 @@
                     <div class="cr-shop-condition">
                         <h4 class="cr-shop-sub-title">Tình trạng</h4>
                         <div class="cr-checkbox">
-                            <div class="checkbox-group">
-                                <input type="checkbox" id="all-condition"/>
+                            <div class="checkbox-group select-none pointer-events-none">
+                                <input type="checkbox" checked id="all-condition" class="condition-item"/>
                                 <label for="all-condition">Tất cả</label>
                             </div>
                             <div class="checkbox-group">
-                                <input type="checkbox" id="new"/>
+                                <input type="checkbox" id="new" value="NEW" class="condition-item"/>
                                 <label for="new">Mới</label>
                             </div>
                             <div class="checkbox-group">
-                                <input type="checkbox" id="old"/>
+                                <input type="checkbox" id="old" value="USED" class="condition-item"/>
                                 <label for="old">Cũ</label>
                             </div>
                         </div>
@@ -114,15 +99,15 @@
                         <h4 class="cr-shop-sub-title">Định dạng</h4>
                         <div class="cr-checkbox">
                             <div class="checkbox-group">
-                                <input type="checkbox" id="all-binding"/>
+                                <input type="checkbox" id="all-binding" checked class="format-item"/>
                                 <label for="all-binding">Tất cả</label>
                             </div>
                             <div class="checkbox-group">
-                                <input type="checkbox" id="hard"/>
+                                <input type="checkbox" id="hard" VALUE="HARDCOVER" class="format-item"/>
                                 <label for="hard">Bìa cứng</label>
                             </div>
                             <div class="checkbox-group">
-                                <input type="checkbox" id="soft"/>
+                                <input type="checkbox" id="soft" value="PAPERBACK" class="format-item"/>
                                 <label for="soft">Bìa mềm</label>
                             </div>
                         </div>
@@ -131,11 +116,11 @@
                         <h4 class="cr-shop-sub-title">Đánh giá</h4>
                         <div class="cr-checkbox">
                             <div class="checkbox-group">
-                                <input type="checkbox" id="all-star"/>
+                                <input type="checkbox" id="all-star" class="review-item" checked/>
                                 <label for="all-star">Tất cả</label>
                             </div>
                             <div class="checkbox-group">
-                                <input type="checkbox" id="2-star"/>
+                                <input type="checkbox" id="2-star" value="2" class="review-item"/>
                                 <label for="2-star">2+ sao</label>
                                 <span
                                 ><div class="cr-star">
@@ -147,7 +132,7 @@
                                 ></span>
                             </div>
                             <div class="checkbox-group">
-                                <input type="checkbox" id="3-star"/>
+                                <input type="checkbox" id="3-star" value="3" class="review-item"/>
                                 <label for="3-star">3+ sao</label>
                                 <span>
                       <div class="cr-star">
@@ -160,7 +145,7 @@
                     </span>
                             </div>
                             <div class="checkbox-group">
-                                <input type="checkbox" id="4-star"/>
+                                <input type="checkbox" id="4-star" value="4" class="review-item"/>
                                 <label for="4-star">4+ sao</label>
                                 <span>
                       <div class="cr-star">
@@ -173,7 +158,7 @@
                     </span>
                             </div>
                             <div class="checkbox-group">
-                                <input type="checkbox" id="5-star"/>
+                                <input type="checkbox" id="5-star" value="5" class="review-item"/>
                                 <label for="5-star">5 sao</label>
                                 <span>
                       <div class="cr-star">
@@ -227,10 +212,10 @@
                             <div class="cr-select">
                                 <label>Sắp xếp theo :</label>
                                 <select
-                                        class="form-select"
+                                        class="form-select sort-by"
                                         aria-label="Default select example"
                                 >
-                                    <option selected>Bán chạy</option>
+                                    <option value="0" selected>Bán chạy</option>
                                     <option value="1">Nổi bật</option>
                                     <option value="2">Khuyến mãi</option>
                                     <option value="3">Giá tăng dần</option>
@@ -304,16 +289,47 @@
                     <c:otherwise>
                         <nav aria-label="..." class="cr-pagination">
                             <ul class="pagination">
-                                <li class="page-item disabled">
-                                    <span class="page-link">Trang trước</span>
-                                </li>
-                                <c:forEach begin="1" end="${endPage}" var="i">
-                                    <li class="page-item ${index == i ? "active" : "" }" data-index="${i}" style="cursor: pointer; user-select: none;"><span
-                                            class="page-link">${i}</span></li>
+
+                                <c:set var="beforePage" value="${page - 2}"/>
+                                <c:set var="afterPage" value="${page + 2}"/>
+
+                                <!-- Previous button -->
+                                <c:if test="${page > 1}">
+                                    <li class="btn prev"><span><i class="fas fa-angle-left"></i></span></li>
+                                </c:if>
+
+                                <!-- First page and dots before the current range -->
+                                <c:if test="${page > 3}">
+                                    <li class="first numb"><span>1</span></li>
+                                    <li class="dots"><span>...</span></li>
+                                </c:if>
+
+                                <!-- Page number buttons -->
+                                <c:forEach var="plength" begin="1" end="${totalPages}">
+                                    <c:choose>
+                                        <c:when test="${plength >= beforePage && plength <= afterPage}">
+                                            <c:set var="active"
+                                                   value="${page == plength ? 'active select-none pointer-events-none' : ''}"/>
+                                            <li class="numb ${active}" data-page="${plength}"><span>${plength}</span>
+                                            </li>
+                                        </c:when>
+                                    </c:choose>
                                 </c:forEach>
-                                <li class="page-item">
-                                    <span class="page-link">Trang sau</span>
-                                </li>
+
+                                <!-- Dots and last page after the current range -->
+                                <c:if test="${page < totalPages - 2}">
+                                    <c:if test="${page < totalPages - 3}">
+                                        <li class="dots"><span>...</span></li>
+                                    </c:if>
+                                    <li class="last numb" data-page="${totalPages}"><span>${totalPages}</span></li>
+                                </c:if>
+
+                                <!-- Next button -->
+                                <c:if test="${page < totalPages}">
+                                    <li class="btn next"><span><i class="fas fa-angle-right"></i></span></li>
+                                </c:if>
+
+
                             </ul>
                         </nav>
                     </c:otherwise>
@@ -322,3 +338,4 @@
         </div>
     </div>
 </section>
+

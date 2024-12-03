@@ -25,7 +25,7 @@
     </title>
 
     <!-- App favicon -->
-    <link rel="shortcut icon" href="${pageContext.request.contextPath}/assets/customer/img/logo/collapse-logo.png"/>
+    <link rel="shortcut icon" href="${pageContext.request.contextPath}/assets/commons/img/logo/collapse-logo.png"/>
 
     <!-- Icon CSS -->
     <link
@@ -59,80 +59,45 @@
 <body>
 
 <div id="cr-overlay">
-    <span class="loader"></span>
-</div>
-
-<div class="cr-sidebar-overlay"></div>
-<div id="cr_mobile_menu" class="cr-side-cart cr-mobile-menu">
-    <div class="cr-menu-title">
-        <span class="menu-title">My Menu</span>
-        <button type="button" class="cr-close">×</button>
-    </div>
-    <div class="cr-menu-inner">
-        <div class="cr-menu-content">
+    <div class="page-loading">
+        <div>
             <ul>
-                <li class="dropdown drop-list">
-                    <a href="index.html">Home</a>
+                <li>
+                    <svg fill="currentColor" viewBox="0 0 90 120">
+                        <path d="M90,0 L90,120 L11,120 C4.92486775,120 0,115.075132 0,109 L0,11 C0,4.92486775 4.92486775,0 11,0 L90,0 Z M71.5,81 L18.5,81 C17.1192881,81 16,82.1192881 16,83.5 C16,84.8254834 17.0315359,85.9100387 18.3356243,85.9946823 L18.5,86 L71.5,86 C72.8807119,86 74,84.8807119 74,83.5 C74,82.1745166 72.9684641,81.0899613 71.6643757,81.0053177 L71.5,81 Z M71.5,57 L18.5,57 C17.1192881,57 16,58.1192881 16,59.5 C16,60.8254834 17.0315359,61.9100387 18.3356243,61.9946823 L18.5,62 L71.5,62 C72.8807119,62 74,60.8807119 74,59.5 C74,58.1192881 72.8807119,57 71.5,57 Z M71.5,33 L18.5,33 C17.1192881,33 16,34.1192881 16,35.5 C16,36.8254834 17.0315359,37.9100387 18.3356243,37.9946823 L18.5,38 L71.5,38 C72.8807119,38 74,36.8807119 74,35.5 C74,34.1192881 72.8807119,33 71.5,33 Z"></path>
+                    </svg>
                 </li>
-                <li class="dropdown drop-list">
-                    <span class="menu-toggle"></span>
-                    <a href="javascript:void(0)" class="dropdown-list">Category</a>
-                    <ul class="sub-menu">
-                        <li><a href="shop-left-sidebar.html">Shop Left sidebar</a></li>
-                        <li><a href="shop-right-sidebar.html">Shop Right sidebar</a></li>
-                        <li><a href="shop-full-width.html">Full Width</a></li>
-                    </ul>
+                <li>
+                    <svg fill="currentColor" viewBox="0 0 90 120">
+                        <path d="M90,0 L90,120 L11,120 C4.92486775,120 0,115.075132 0,109 L0,11 C0,4.92486775 4.92486775,0 11,0 L90,0 Z M71.5,81 L18.5,81 C17.1192881,81 16,82.1192881 16,83.5 C16,84.8254834 17.0315359,85.9100387 18.3356243,85.9946823 L18.5,86 L71.5,86 C72.8807119,86 74,84.8807119 74,83.5 C74,82.1745166 72.9684641,81.0899613 71.6643757,81.0053177 L71.5,81 Z M71.5,57 L18.5,57 C17.1192881,57 16,58.1192881 16,59.5 C16,60.8254834 17.0315359,61.9100387 18.3356243,61.9946823 L18.5,62 L71.5,62 C72.8807119,62 74,60.8807119 74,59.5 C74,58.1192881 72.8807119,57 71.5,57 Z M71.5,33 L18.5,33 C17.1192881,33 16,34.1192881 16,35.5 C16,36.8254834 17.0315359,37.9100387 18.3356243,37.9946823 L18.5,38 L71.5,38 C72.8807119,38 74,36.8807119 74,35.5 C74,34.1192881 72.8807119,33 71.5,33 Z"></path>
+                    </svg>
                 </li>
-                <li class="dropdown drop-list">
-                    <span class="menu-toggle"></span>
-                    <a href="javascript:void(0)" class="dropdown-list">product</a>
-                    <ul class="sub-menu">
-                        <li><a href="product-left-sidebar.html">product Left sidebar</a></li>
-                        <li><a href="product-right-sidebar.html">product Right sidebar</a></li>
-                        <li><a href="product-full-width.html">Product Full Width </a></li>
-                    </ul>
+                <li>
+                    <svg fill="currentColor" viewBox="0 0 90 120">
+                        <path d="M90,0 L90,120 L11,120 C4.92486775,120 0,115.075132 0,109 L0,11 C0,4.92486775 4.92486775,0 11,0 L90,0 Z M71.5,81 L18.5,81 C17.1192881,81 16,82.1192881 16,83.5 C16,84.8254834 17.0315359,85.9100387 18.3356243,85.9946823 L18.5,86 L71.5,86 C72.8807119,86 74,84.8807119 74,83.5 C74,82.1745166 72.9684641,81.0899613 71.6643757,81.0053177 L71.5,81 Z M71.5,57 L18.5,57 C17.1192881,57 16,58.1192881 16,59.5 C16,60.8254834 17.0315359,61.9100387 18.3356243,61.9946823 L18.5,62 L71.5,62 C72.8807119,62 74,60.8807119 74,59.5 C74,58.1192881 72.8807119,57 71.5,57 Z M71.5,33 L18.5,33 C17.1192881,33 16,34.1192881 16,35.5 C16,36.8254834 17.0315359,37.9100387 18.3356243,37.9946823 L18.5,38 L71.5,38 C72.8807119,38 74,36.8807119 74,35.5 C74,34.1192881 72.8807119,33 71.5,33 Z"></path>
+                    </svg>
                 </li>
-                <li class="dropdown drop-list">
-                    <span class="menu-toggle"></span>
-                    <a href="javascript:void(0)" class="dropdown-list">Pages</a>
-                    <ul class="sub-menu">
-                        <li><a href="about.html">About Us</a></li>
-                        <li><a href="contact-us.html">Contact Us</a></li>
-                        <li><a href="cart.html">Cart</a></li>
-                        <li><a href="checkout.html">Checkout</a></li>
-                        <li><a href="track-order.html">Track Order</a></li>
-                        <li><a href="wishlist.html">Wishlist</a></li>
-                        <li><a href="faq.html">Faq</a></li>
-                        <li><a href="login.html">Login</a></li>
-                        <li><a href="register.html">Register</a></li>
-                        <li><a href="policy.html">Policy</a></li>
-                    </ul>
+                <li>
+                    <svg fill="currentColor" viewBox="0 0 90 120">
+                        <path d="M90,0 L90,120 L11,120 C4.92486775,120 0,115.075132 0,109 L0,11 C0,4.92486775 4.92486775,0 11,0 L90,0 Z M71.5,81 L18.5,81 C17.1192881,81 16,82.1192881 16,83.5 C16,84.8254834 17.0315359,85.9100387 18.3356243,85.9946823 L18.5,86 L71.5,86 C72.8807119,86 74,84.8807119 74,83.5 C74,82.1745166 72.9684641,81.0899613 71.6643757,81.0053177 L71.5,81 Z M71.5,57 L18.5,57 C17.1192881,57 16,58.1192881 16,59.5 C16,60.8254834 17.0315359,61.9100387 18.3356243,61.9946823 L18.5,62 L71.5,62 C72.8807119,62 74,60.8807119 74,59.5 C74,58.1192881 72.8807119,57 71.5,57 Z M71.5,33 L18.5,33 C17.1192881,33 16,34.1192881 16,35.5 C16,36.8254834 17.0315359,37.9100387 18.3356243,37.9946823 L18.5,38 L71.5,38 C72.8807119,38 74,36.8807119 74,35.5 C74,34.1192881 72.8807119,33 71.5,33 Z"></path>
+                    </svg>
                 </li>
-                <li class="dropdown drop-list">
-                    <span class="menu-toggle"></span>
-                    <a href="javascript:void(0)" class="dropdown-list">Blog</a>
-                    <ul class="sub-menu">
-                        <li><a href="blog-left-sidebar.html">Left Sidebar</a></li>
-                        <li><a href="blog-right-sidebar.html">Right Sidebar</a></li>
-                        <li><a href="blog-full-width.html">Full Width</a></li>
-                        <li><a href="blog-detail-left-sidebar.html">Detail Left Sidebar</a></li>
-                        <li><a href="blog-detail-right-sidebar.html">Detail Right Sidebar</a></li>
-                        <li><a href="blog-detail-full-width.html">Detail Full Width</a></li>
-                    </ul>
+                <li>
+                    <svg fill="currentColor" viewBox="0 0 90 120">
+                        <path d="M90,0 L90,120 L11,120 C4.92486775,120 0,115.075132 0,109 L0,11 C0,4.92486775 4.92486775,0 11,0 L90,0 Z M71.5,81 L18.5,81 C17.1192881,81 16,82.1192881 16,83.5 C16,84.8254834 17.0315359,85.9100387 18.3356243,85.9946823 L18.5,86 L71.5,86 C72.8807119,86 74,84.8807119 74,83.5 C74,82.1745166 72.9684641,81.0899613 71.6643757,81.0053177 L71.5,81 Z M71.5,57 L18.5,57 C17.1192881,57 16,58.1192881 16,59.5 C16,60.8254834 17.0315359,61.9100387 18.3356243,61.9946823 L18.5,62 L71.5,62 C72.8807119,62 74,60.8807119 74,59.5 C74,58.1192881 72.8807119,57 71.5,57 Z M71.5,33 L18.5,33 C17.1192881,33 16,34.1192881 16,35.5 C16,36.8254834 17.0315359,37.9100387 18.3356243,37.9946823 L18.5,38 L71.5,38 C72.8807119,38 74,36.8807119 74,35.5 C74,34.1192881 72.8807119,33 71.5,33 Z"></path>
+                    </svg>
                 </li>
-                <li class="dropdown drop-list">
-                    <span class="menu-toggle"></span>
-                    <a href="javascript:void(0)">Element</a>
-                    <ul class="sub-menu">
-                        <li><a href="elements-products.html">Products</a></li>
-                        <li><a href="elements-typography.html">Typography</a></li>
-                        <li><a href="elements-buttons.html">Buttons</a></li>
-                    </ul>
+                <li>
+                    <svg fill="currentColor" viewBox="0 0 90 120">
+                        <path d="M90,0 L90,120 L11,120 C4.92486775,120 0,115.075132 0,109 L0,11 C0,4.92486775 4.92486775,0 11,0 L90,0 Z M71.5,81 L18.5,81 C17.1192881,81 16,82.1192881 16,83.5 C16,84.8254834 17.0315359,85.9100387 18.3356243,85.9946823 L18.5,86 L71.5,86 C72.8807119,86 74,84.8807119 74,83.5 C74,82.1745166 72.9684641,81.0899613 71.6643757,81.0053177 L71.5,81 Z M71.5,57 L18.5,57 C17.1192881,57 16,58.1192881 16,59.5 C16,60.8254834 17.0315359,61.9100387 18.3356243,61.9946823 L18.5,62 L71.5,62 C72.8807119,62 74,60.8807119 74,59.5 C74,58.1192881 72.8807119,57 71.5,57 Z M71.5,33 L18.5,33 C17.1192881,33 16,34.1192881 16,35.5 C16,36.8254834 17.0315359,37.9100387 18.3356243,37.9946823 L18.5,38 L71.5,38 C72.8807119,38 74,36.8807119 74,35.5 C74,34.1192881 72.8807119,33 71.5,33 Z"></path>
+                    </svg>
                 </li>
             </ul>
         </div>
     </div>
 </div>
+
+<div class="cr-sidebar-overlay"></div>
 
 <%@include file="/commons/customer/header.jsp" %>
 
@@ -269,7 +234,27 @@
 <!-- Cart -->
 <div class="cr-cart-overlay"></div>
 <div class="cr-cart-view">
+
     <div class="cr-cart-inner">
+        <div class="cart-loading mx-auto my-auto hidden">
+            <div aria-label="Orange and tan hamster running in a metal wheel" role="img" class="wheel-and-hamster">
+                <div class="hamster">
+                    <div class="hamster__body">
+                        <div class="hamster__head">
+                            <div class="hamster__ear"></div>
+                            <div class="hamster__eye"></div>
+                            <div class="hamster__nose"></div>
+                        </div>
+                        <div class="hamster__limb hamster__limb--fr"></div>
+                        <div class="hamster__limb hamster__limb--fl"></div>
+                        <div class="hamster__limb hamster__limb--br"></div>
+                        <div class="hamster__limb hamster__limb--bl"></div>
+                        <div class="hamster__tail"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
         <div class="cr-cart-top">
             <div class="cr-cart-title">
                 <h6>Giỏ hàng của tôi</h6>
@@ -391,94 +376,75 @@
             </c:when>
             <c:otherwise>
             <ul class="crcart-pro-items">
-                <c:forEach var="cartItem" items="${cart.cartItems}">
-                    <li>
-                        <a href="${pageContext.request.contextPath}/book?id=${cartItem.bookId}"
-                           class="crside_pro_img"
-                        ><img src="${pageContext.request.contextPath}${cartItem.imageUrl}"
-                              alt="${cartItem.title}"
-                        /></a>
-                        <div class="cr-pro-content">
-                            <a href="${pageContext.request.contextPath}/book?id=${cartItem.bookId}"
-                               class="cart_pro_title"
-                            >${cartItem.title}</a
-                            >
-                            <span class="cart-price">
-                                <span class="new-price price-value">${cartItem.sellingPrice}</span>
-                                <span class="old-price price-value">${cartItem.sellingPrice}</span>
-                            </span>
+<%--                <c:forEach var="cartItem" items="${cart.cartItems}">--%>
+<%--                    <li>--%>
+<%--                        <a href="${pageContext.request.contextPath}/book?id=${cartItem.bookId}"--%>
+<%--                           class="crside_pro_img"--%>
+<%--                        ><img src="${pageContext.request.contextPath}${cartItem.imageUrl}"--%>
+<%--                              alt="${cartItem.title}"--%>
+<%--                        /></a>--%>
+<%--                        <div class="cr-pro-content">--%>
+<%--                            <a href="${pageContext.request.contextPath}/book?id=${cartItem.bookId}"--%>
+<%--                               class="cart_pro_title"--%>
+<%--                            >${cartItem.title}</a--%>
+<%--                            >--%>
+<%--                            <span class="cart-price">--%>
+<%--                                <span class="new-price price-value">${cartItem.sellingPrice}</span>--%>
+<%--                                <span class="old-price price-value">${cartItem.sellingPrice}</span>--%>
+<%--                            </span>--%>
 
-                            <div class="cr-cart-qty">
-                                <div class="cart-qty-plus-minus">
-                                    <button type="button" class="minus">-</button>
-                                    <input
-                                            type="text"
-                                            value="${cartItem.quantity}"
-                                            minlength="1"
-                                            maxlength="20"
-                                            class="quantity"
-                                            data-book-id="${cartItem.bookId}"
-                                    />
-                                    <button type="button" class="plus">+</button>
-                                </div>
-                            </div>
-                            <a href="javascript:void(0)" class="remove">×</a>
-                        </div>
-                    </li>
-                </c:forEach>
+<%--                            <div class="cr-cart-qty">--%>
+<%--                                <div class="cart-qty-plus-minus">--%>
+<%--                                    <button type="button" class="minus">-</button>--%>
+<%--                                    <input--%>
+<%--                                            type="text"--%>
+<%--                                            value="${cartItem.quantity}"--%>
+<%--                                            minlength="1"--%>
+<%--                                            maxlength="20"--%>
+<%--                                            class="quantity"--%>
+<%--                                            data-book-id="${cartItem.bookId}"--%>
+<%--                                    />--%>
+<%--                                    <button type="button" class="plus">+</button>--%>
+<%--                                </div>--%>
+<%--                            </div>--%>
+<%--                            <a href="javascript:void(0)" class="remove-item">×</a>--%>
+<%--                        </div>--%>
+<%--                    </li>--%>
+<%--                </c:forEach>--%>
             </ul>
-            <div class="cr-cart-bottom">
-                <div class="cart-sub-total">
-                        <%--                <table class="table cart-table">--%>
-                        <%--                    <tbody>--%>
-                        <%--                    <tr>--%>
-                        <%--                        <td class="text-left">Tiền sách:</td>--%>
-                        <%--                        <td class="text-right total-book-price price-value">${cart.totalBookPrice}</td>--%>
-                        <%--                    </tr>--%>
-                        <%--                    <tr>--%>
-                        <%--                        <td class="text-left">Thành tiền:</td>--%>
-                        <%--                        <td class="text-right primary-color">$360.00</td>--%>
-                        <%--                    </tr>--%>
-                        <%--                    </tbody>--%>
-                        <%--                </table>--%>
-                </div>
-                <div class="cart_btn flex items-center justify-center">
-                    <a href="${pageContext.request.contextPath}/cart" class="cr-button">Xem giỏ hàng</a>
-                        <%--                <a href="${pageContext.request.contextPath}checkout" class="cr-button">Thanh toán</a>--%>
-                </div>
-                </c:otherwise>
-                </c:choose>
-            </div>
 
         </div>
 
+        <div class="view-cart mt-auto mb-5 flex items-center justify-center">
+
+            <div class="cart_btn flex items-center justify-center">
+                <a href="${pageContext.request.contextPath}/cart" class="cr-button">Xem giỏ hàng</a>
+            </div>
+        </div>
+        </c:otherwise>
+        </c:choose>
     </div>
 </div>
 
-    <script> const contextPath = "<%=request.getContextPath() %>";</script>
-    <!-- Vendor Custom -->
-    <script src="${pageContext.request.contextPath}/assets/customer/js/vendor/jquery-3.6.4.min.js"></script>
-    <script src="${pageContext.request.contextPath}/assets/customer/js/vendor/jquery.zoom.min.js"></script>
-    <script src="${pageContext.request.contextPath}/assets/customer/js/vendor/bootstrap.bundle.min.js"></script>
-    <script src="${pageContext.request.contextPath}/assets/customer/js/vendor/mixitup.min.js"></script>
+<script> const contextPath = "<%=request.getContextPath() %>";</script>
+<!-- Vendor Custom -->
+<script src="${pageContext.request.contextPath}/assets/customer/js/vendor/jquery-3.6.4.min.js"></script>
+<script src="${pageContext.request.contextPath}/assets/customer/js/vendor/jquery.zoom.min.js"></script>
+<script src="${pageContext.request.contextPath}/assets/customer/js/vendor/bootstrap.bundle.min.js"></script>
+<script src="${pageContext.request.contextPath}/assets/customer/js/vendor/mixitup.min.js"></script>
 
-    <script src="${pageContext.request.contextPath}/assets/customer/js/vendor/range-slider.js"></script>
-    <script src="${pageContext.request.contextPath}/assets/customer/js/vendor/aos.min.js"></script>
-    <script src="${pageContext.request.contextPath}/assets/customer/js/vendor/swiper-bundle.min.js"></script>
-    <script src="${pageContext.request.contextPath}/assets/customer/js/vendor/slick.min.js"></script>
-    <script src="${pageContext.request.contextPath}/assets/customer/js/vendor/tailwind.min.js"></script>
+<script src="${pageContext.request.contextPath}/assets/customer/js/vendor/range-slider.js"></script>
+<script src="${pageContext.request.contextPath}/assets/customer/js/vendor/aos.min.js"></script>
+<script src="${pageContext.request.contextPath}/assets/customer/js/vendor/swiper-bundle.min.js"></script>
+<script src="${pageContext.request.contextPath}/assets/customer/js/vendor/slick.min.js"></script>
+<script src="${pageContext.request.contextPath}/assets/customer/js/vendor/tailwind.min.js"></script>
 
-    <!-- Main Custom -->
-    <script src="${pageContext.request.contextPath}/assets/customer/js/main.js"></script>
-    <script src="${pageContext.request.contextPath}/assets/customer/js/manage-cart.js" type="module"></script>
-    <script src="${pageContext.request.contextPath}/assets/commons/js/remember-me.js"></script>
+<!-- Main Custom -->
+<script src="${pageContext.request.contextPath}/assets/customer/js/main.js"></script>
+<script src="${pageContext.request.contextPath}/assets/customer/js/manage-cart.js" type="module"></script>
+<script src="${pageContext.request.contextPath}/assets/commons/js/remember-me.js"></script>
 
 </body>
 <div id="toast"></div>
-<div class="checkout">
-    <div class="checkout-overlay bg-black/20"></div>
-    <div class="checkout-qr h-[400px] rounded-lg overflow-hidden transition-all ease-linear duration-300">
-        <img class="w-full h-full object-cover" src="" alt="vietqr">
-    </div>
-</div>
+
 </html>

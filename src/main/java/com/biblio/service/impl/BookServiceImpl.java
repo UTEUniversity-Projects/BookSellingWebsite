@@ -106,7 +106,28 @@ public class BookServiceImpl implements IBookService {
     }
 
     @Override
+    public void addBook(BookRequest bookRequest) {
+
+    }
+
+    @Override
+    public void updateBook(BookRequest bookRequest) {
+
+    }
+
+    @Override
     public void deleteBook(Long id) {
 
     }
+
+    @Override
+    public Long getMinBookPrice() {
+        return bookDAO.findMinBookPrice();
+    }
+
+    @Override
+    public Long getMaxBookPrice() {
+        return bookDAO.findMaxBookPrice();
+    }
+
 }

@@ -4,9 +4,8 @@ import com.biblio.dto.request.PromotionInsertRequest;
 import com.biblio.dto.request.PromotionTargetInsertRequest;
 import com.biblio.dto.request.PromotionTargetUpdateRequest;
 import com.biblio.dto.request.PromotionUpdateRequest;
-import com.biblio.dto.response.PromotionOrderResponse;
-import com.biblio.dto.response.PromotionResponse;
 import com.biblio.dto.response.PromotionGetResponse;
+import com.biblio.dto.response.PromotionResponse;
 import com.biblio.dto.response.PromotionTargetResponse;
 import com.biblio.entity.Promotion;
 import com.biblio.entity.PromotionTarget;
@@ -41,8 +40,8 @@ public class PromotionMapper {
         promotionRespone.setDescription(promotion.getDescription());
 
         promotionRespone.setPercentDiscount(promotion.getPercentDiscount());
-        promotionRespone.setMinValueApplied(promotionRespone.getMinValueApplied());
-        promotionRespone.setDiscountLimit(promotionRespone.getDiscountLimit());
+        promotionRespone.setMinValueApplied(promotion.getMinValueToBeApplied());
+        promotionRespone.setDiscountLimit(promotion.getDiscountLimit());
 
         promotionRespone.setEffectiveDate(promotion.getEffectiveDate().toString());
         promotionRespone.setExpirationDate(promotion.getExpirationDate().toString());
@@ -87,6 +86,7 @@ public class PromotionMapper {
     }
 
     public static Promotion toPromotion(PromotionUpdateRequest promotionUpdateRequest) {
+
         Promotion promotion = new Promotion();
 
         promotion.setId(promotionUpdateRequest.getId());

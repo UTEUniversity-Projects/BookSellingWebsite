@@ -1,7 +1,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<link rel="stylesheet" href="${pageContext.request.contextPath}/assets/customer/scss/style.css">
-
+<script defer src="${pageContext.request.contextPath}/assets/customer/js/update-information.js"></script>
 
 <section class="section-profile padding-tb-100">
     <div class="container-md">
@@ -10,7 +9,7 @@
                 <div class="profile-card" data-aos="fade-up" data-aos-duration="2000" data-aos-delay="400">
                     <!-- Logo ở trên -->
                     <div class="logo-container">
-                        <img src="${pageContext.request.contextPath}/assets/customer/img/logo/biblio.png" alt="logo"
+                        <img src="${pageContext.request.contextPath}/assets/commons/img/logo/biblio.png" alt="logo"
                              class="logo"/>
                     </div>
 
@@ -30,20 +29,43 @@
                         </div>
 
                         <div class="col-md-8">
-                            <form action="#" class="profile-form">
+                            <form action="${pageContext.request.contextPath}/update-information" method="post" class="profile-form">
+
+                                <div class="row">
+                                    <div class="form-group hidden col-sm-12 col-md-6 mb-2">
+                                        <label class="label">Tên:</label>
+                                        <input type="text" name ="fullName" value="${customer.fullName}" class="form-control pointer-events-none" readonly />
+                                    </div>
+                                    <div class="form-group hidden gender-options col-sm-12 col-md-6 mb-2">
+                                        <label class="label">Giới tính:</label>
+                                        <ul>
+                                            <li>
+                                                <input type="radio" name="gender" value="MALE"
+                                                       <c:if test="${customer.gender == 'Nam'}">checked</c:if> /> Nam
+                                            </li>
+                                            <li>
+                                                <input type="radio" name="gender" value="FEMALE"
+                                                       <c:if test="${customer.gender == 'Nữ'}">checked</c:if> /> Nữ
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+
+
                                 <div class="row">
                                     <div class="col-sm-12 col-md-6">
                                         <div class="form-group mb-2">
                                             <label class="label">Email*</label>
                                             <input type="email" value="${customer.email}" readonly
-                                                   class="form-control pointer-events-none"/>
+                                                   class="form-control pointer-events-none" id="readonlyEmail" />
                                         </div>
                                     </div>
+
                                     <div class="col-sm-12 col-md-6">
                                         <div class="form-group mb-2">
                                             <label class="label">Tên đăng nhập*</label>
                                             <input type="text" value="${customer.username}" readonly
-                                                   class="form-control pointer-events-none"/>
+                                                   class="form-control pointer-events-none" id="readonlyUsername"/>
                                         </div>
                                     </div>
 
@@ -52,13 +74,14 @@
                                         <div class="form-group mb-2">
                                             <label class="label">Số điện thoại*</label>
                                             <input type="tel" value="${customer.phoneNumber}" readonly
-                                                   class="form-control pointer-events-none"/>
+                                                   class="form-control pointer-events-none" id="readonlyPhoneNumber"/>
                                         </div>
                                     </div>
+
                                     <div class="col-sm-12 col-md-6">
                                         <div class="form-group mb-2">
                                             <label class="label">Ngày sinh</label>
-                                            <input type="date" value="${customer.dateOfBirth}" readonly
+                                            <input type="date" name="dateOfBirth" value="${customer.dateOfBirth}" readonly
                                                    class="form-control pointer-events-none"/>
                                         </div>
                                     </div>
@@ -77,31 +100,14 @@
                                             </ul>
                                         </div>
                                     </div>
-                                    <%--                                    <div class="col-sm-12 col-md-6">--%>
-                                    <%--                                        <div class="form-group mb-2">--%>
-                                    <%--                                            <label class="label">Quận Huyện</label>--%>
-                                    <%--                                            <input type="text" value="Ba Đình" readonly class="form-control"/>--%>
-                                    <%--                                        </div>--%>
-                                    <%--                                    </div>--%>
-                                    <%--                                    <div class="col-sm-12 col-md-6">--%>
-                                    <%--                                        <div class="form-group mb-2">--%>
-                                    <%--                                            <label class="label">Phường Xã</label>--%>
-                                    <%--                                            <input type="text" value="Phường Kim Mã" readonly class="form-control"/>--%>
-                                    <%--                                        </div>--%>
-                                    <%--                                    </div>--%>
-                                    <%--                                    <div class="col-sm-12 col-md-6">--%>
-                                    <%--                                        <div class="form-group mb-2">--%>
-                                    <%--                                            <label class="label">Số nhà | Ấp | Tổ</label>--%>
-                                    <%--                                            <input type="text" value="Số 10, Ngõ 123" readonly class="form-control"/>--%>
-                                    <%--                                        </div>--%>
-                                    <%--                                    </div>--%>
+
                                 </div>
 
                                 <div class="button-container mt-3">
                                     <div class="button-group">
                                         <a href="#" class="change-password-button">Đổi mật khẩu</a>
-                                        <a href="${pageContext.request.contextPath}/update-information"
-                                           class="update-button">Cập nhật thông tin</a>
+                                        <button type="button" id="edit-button" class="update-button">Chỉnh sửa</button>
+                                        <button type="submit" id="save-button" class="update-button hidden" onclick="window.location.href='${pageContext.request.contextPath}/update-information?customerId=${customer.id}'">Lưu</button>
                                     </div>
                                 </div>
                             </form>

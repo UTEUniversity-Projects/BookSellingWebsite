@@ -380,113 +380,6 @@
             $(".cr-search").fadeIn();
         });
 
-        /*========== Vector map ===========*/
-        /* Basic styling for the map */
-        // var regionStyling = { initial: { fill: 'rgba(72, 85, 104, 0.2)' }, hover: { fill: '#ccc' }, selected: { fill: 'rgba(72, 85, 104, 0.1)' } };
-        // /* Data that is passed to the map */
-        // var gbData = {
-        //     "IN": 6.0,
-        //     "BR": 5.0,
-        //     "CA": 4.0,
-        //     "MA": 3.0,
-        //     "TZ": 2.0,
-        //     "AU": 1.0,
-        // };
-        // var wrld = {
-        //     map: 'world_mill_en',
-        //     normalizeFunction: 'polynomial',
-        //     regionStyle: regionStyling,
-        //     backgroundColor: '#fff',
-        //     markers: [
-        //         {
-        //             latLng: [23.7041, 77.96],
-        //             name: "India",
-        //         }, {
-        //             latLng: [31.7917, -7.41],
-        //             name: 'Morocco'
-        //         }, {
-        //             latLng: [-14.2350, -51.9253],
-        //             name: "Brazil",
-        //         }, {
-        //             latLng: [-25.2744, 133.7751],
-        //             name: "Australia "
-        //         }, {
-        //             latLng: [56.1304, -106.3468],
-        //             name: "Canada"
-        //         }, {
-        //             latLng: [-6.3690, 34.8888],
-        //             name: 'Tanzania'
-        //         },
-        //     ],
-        //     markerStyle: {
-        //         initial: {
-        //             r: 1,
-        //             fill: "transparent",
-        //             "fill-opacity": .3,
-        //             stroke: "transparent",
-        //             "stroke-width": 0,
-        //             "stroke-opacity": .6
-        //         },
-        //         hover: {
-        //             stroke: "transparent",
-        //             "fill-opacity": .6,
-        //             "stroke-width": 0
-        //         }
-        //     },
-        //     series: {
-        //         regions: [{
-        //             values: gbData,
-        //             attribute: 'fill',
-        //             scale: ['#d5d8ff', '#858eff']
-        //         }
-        //         ]
-        //     },
-        //     onRegionTipShow: function (e, el, code) {
-        //         el.html('In ' + el.html() + ', GB proposes ' + gbData[code] + ' products : <ul>' + getProducts(gbData[code]) + '</ul>  Click to know more');
-        //         $(".lbl-hover").html('Hovered country value: ' + gbData[code]);
-        //     }
-        // };
-
-        // /* Setting up of the map */
-        // if ($('#world-map').length > 0) {
-        //     $('#world-map').vectorMap(wrld);
-        // }
-
-        /*========== Event calendar ===========*/
-        /* https://github.com/brospars/simple-calendar */
-        // var $calendar;
-        // let eventCalendar = $("#eventCalendar").simpleCalendar({
-        //     fixedStartDay: 0, // begin weeks by sunday
-        //     disableEmptyDetails: true,
-        //     events: [
-        //         // generate new event after tomorrow for one hour
-        //         {
-        //             startDate: new Date(new Date().setHours(new Date().getHours() + 24)).toDateString(),
-        //             endDate: new Date(new Date().setHours(new Date().getHours() + 25)).toISOString(),
-        //             summary: 'Visit Google Headquarters'
-        //         },
-        //         // generate new event for yesterday at noon
-        //         {
-        //             startDate: new Date(new Date().setHours(new Date().getHours() - new Date().getHours() - 12, 0)).toISOString(),
-        //             endDate: new Date(new Date().setHours(new Date().getHours() - new Date().getHours() - 11)).getTime(),
-        //             summary: 'John doe Birthday '
-        //         },
-        //         // generate new event for the last two days
-        //         {
-        //             startDate: new Date(new Date().setHours(new Date().getHours() - 48)).toISOString(),
-        //             endDate: new Date(new Date().setHours(new Date().getHours() - 24)).getTime(),
-        //             summary: 'Deal with mr.morgus dronald'
-        //         },
-        //         {
-        //             startDate: new Date(new Date().setHours(new Date().getHours() - 72)).toISOString(),
-        //             endDate: new Date(new Date().setHours(new Date().getHours() - 24)).getTime(),
-        //             summary: 'Visit lorence infra llp.'
-        //         }
-        //     ],
-
-        // });
-        // $calendar = eventCalendar.data('plugin_simpleCalendar')
-
         /* Footer year */
         var date = new Date().getFullYear();
 
@@ -529,91 +422,22 @@
         });
     });
 
-    /*========== BASIC DATA TABLE ===========*/
-    var basicDataTable = $("#basic-data-table");
-    if (basicDataTable.length !== 0) {
-        basicDataTable.DataTable({
-            dom: '<"row justify-content-between top-information"lf>rt<"row justify-content-between bottom-information"ip><"clear">',
-        });
-    }
-    /*========== RESPONSIVE DATA TABLE ===========*/
-    var responsiveDataTable = $("#lead-data-table");
-    if (responsiveDataTable.length !== 0) {
-        responsiveDataTable.DataTable({
-            aLengthMenu: [[5, 20, 30, 50, 75, -1], [5, 20, 30, 50, 75, "All"],],
-            pageLength: 5,
-            dom: '<"row justify-content-between top-information"lf>rt<"row justify-content-between bottom-information"ip><"clear">',
-        });
-    }
-
-    /*========== Recent order DATA TABLE(ecommerce.html) ===========*/
-    var responsiveDataTable = $("#recent_order_data_table");
-    if (responsiveDataTable.length !== 0) {
-        responsiveDataTable.DataTable({
-            aLengthMenu: [[5, 20, 30, 50, 75, -1], [5, 20, 30, 50, 75, "All"],],
-            pageLength: 5,
-            dom: '<"row justify-content-between top-information"lf>rt<"row justify-content-between bottom-information"ip><"clear">',
-        });
-    }
-    /*========== Recent order DATA TABLE(add-category.html.html) ===========*/
-    var responsiveDataTable = $("#cat_data_table");
-    if (responsiveDataTable.length !== 0) {
-        responsiveDataTable.DataTable({
-            aLengthMenu: [[10, 20, 30, 50, 75, -1], [10, 20, 30, 50, 75, "All"],],
-            pageLength: 10,
-            dom: '<"row justify-content-between top-information"lf>rt<"row justify-content-between bottom-information"ip><"clear">',
-        });
-    }
-    /*========== Top product DATA TABLE ===========*/
-    var responsiveDataTable = $("#top_product_data_table");
-    if (responsiveDataTable.length !== 0) {
-        responsiveDataTable.DataTable({
-            aLengthMenu: [[5, 20, 30, 50, 75, -1], [5, 20, 30, 50, 75, "All"],],
-            pageLength: 5,
-            dom: '<"row justify-content-between top-information"lf>rt<"row justify-content-between bottom-information"ip><"clear">',
-        });
-    }
-    /*========== Best seller DATA TABLE ===========*/
-    var responsiveDataTable = $("#best_seller_data_table");
-    if (responsiveDataTable.length !== 0) {
-        responsiveDataTable.DataTable({
-            aLengthMenu: [[5, 20, 30, 50, 75, -1], [5, 20, 30, 50, 75, "All"],],
-            pageLength: 5,
-            dom: '<"row justify-content-between top-information"lf>rt<"row justify-content-between bottom-information"ip><"clear">',
-        });
-    }
-    /*========== Todo DATA TABLE ===========*/
-    var responsiveDataTable = $("#todo-data-table");
-    if (responsiveDataTable.length !== 0) {
-        responsiveDataTable.DataTable({
-            aLengthMenu: [[8, 20, 30, -1], [8, 20, 30, "All"],],
-            pageLength: 8,
-            dom: '<"row justify-content-between top-information"lf>rt<"row justify-content-between bottom-information"ip><"clear">',
-        });
-    }
-
-    /*======== Vendor list DATA TABLE ========*/
-    var responsiveDataTable = $("#vendor-list");
-    if (responsiveDataTable.length !== 0) {
-        responsiveDataTable.DataTable({
-            aLengthMenu: [[10, 20, 30, -1], [10, 20, 30, "All"],],
-            pageLength: 10,
-            dom: '<"row justify-content-between top-information"lf>rt<"row justify-content-between bottom-information"ip><"clear">',
-        });
-    }
-
     $(document).ready(function () {
         function initializeDataTable(selector, lengthMenu, nonOrderableCols = [], dom) {
-            var responsiveDataTable = $(selector);
+            const responsiveDataTable = $(selector);
+
+            if (!responsiveDataTable.find('thead').length || !responsiveDataTable.find('tbody').length) {
+                return null;
+            }
 
             if (responsiveDataTable.length !== 0) {
-                return responsiveDataTable.DataTable({
-                    aLengthMenu: lengthMenu,
-                    pageLength: 5,
-                    columnDefs: nonOrderableCols.length ? [{orderable: false, targets: nonOrderableCols}] : [],
-                    order: [],
-                    dom: dom,
-                });
+                    return responsiveDataTable.DataTable({
+                        aLengthMenu: lengthMenu,
+                        pageLength: 5,
+                        columnDefs: nonOrderableCols.length ? [{orderable: false, targets: nonOrderableCols}] : [],
+                        order: [],
+                        dom: dom,
+                    });
             }
             return null;
         }
@@ -653,27 +477,47 @@
         });
 
         // Product table
-        var productTable = initializeDataTable("#product-data-table", [[5, 10, 30, 50, 75, -1], [5, 10, 30, 50, 75, "All"],], [0, 7], '<"row justify-content-between top-information"l>rt<"row justify-content-between bottom-information"ip><"clear">');
+        var productTable = initializeDataTable(
+            "#product-data-table",
+            [[5, 10, 20, 50, -1], [5, 10, 20, 50, "All"],],
+            [0, 6],
+            '<"row justify-content-between top-information"lf>rt<"row justify-content-between bottom-information"ip><"clear">');
         if (productTable) setupFilter(productTable);
 
         // Order table
-        var orderTable = initializeDataTable("#order-data-table", [[5, 20, 30, 50, 75, -1], [5, 20, 30, 50, 75, "All"],], [], '<"row justify-content-between top-information"l>rt<"row justify-content-between bottom-information"ip><"clear">');
+        var orderTable = initializeDataTable(
+            "#order-data-table",
+            [[5, 10, 20, 50, -1], [5, 10, 20, 50, "All"],],
+            [],
+            '<"row justify-content-between top-information"lf>rt<"row justify-content-between bottom-information"ip><"clear">');
         if (orderTable) setupFilter(orderTable);
 
         // Order products table
-        var orderProductTable = initializeDataTable("#order-product-data-table", [[5, 20, 30, 50, 75, -1], [5, 20, 30, 50, 75, "All"],], [0], 'rt<"clear">');
+        var orderProductTable = initializeDataTable(
+            "#order-product-data-table",
+            [[5, 10, 20, 50, -1], [5, 10, 20, 50, "All"],],
+            [0],
+            'rt<"clear">');
         // if (orderProductTable) setupFilter(orderProductTable);
 
         // Order return products table
-        var orderReturnProductTable = initializeDataTable("#order-product-return-data-table", [[5, 20, 30, 50, 75, -1], [5, 20, 30, 50, 75, "All"],], [0], 'rt<"clear">');
+        var orderReturnProductTable = initializeDataTable(
+            "#order-product-return-data-table",
+            [[5, 10, 20, 50, -1], [5, 10, 20, 50, "All"],],
+            [0],
+            'rt<"clear">');
         // if (orderReturnProductTable) setupFilter(orderReturnProductTable);
 
         // Support customer table
-        var supportCusTable = initializeDataTable("#support-cus-list", [[5, 20, 30, 50, 75, -1], [5, 20, 30, 50, 75, "All"],], [4], '<"row justify-content-between top-information"l>rt<"row justify-content-between bottom-information"ip><"clear">');
+        var supportCusTable = initializeDataTable(
+            "#support-cus-list",
+            [[5, 10, 20, 50, -1], [5, 10, 20, 50, "All"],],
+            [4],
+            '<"row justify-content-between top-information"l>rt<"row justify-content-between bottom-information"ip><"clear">');
         if (supportCusTable) setupFilter(supportCusTable);
     });
 
-    /*========== On ckick card zoom (full screen) ===========*/
+    /*========== On click card zoom (full screen) ===========*/
     $(".cr-full-card").on("click", function () {
         $(this).hide();
         $(this)

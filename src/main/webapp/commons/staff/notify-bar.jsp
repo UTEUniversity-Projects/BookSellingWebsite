@@ -3,56 +3,28 @@
 <div class="cr-notify-bar-overlay"></div>
 <div class="cr-notify-bar">
     <div class="cr-bar-title">
-        <h6>Notifications<span class="label">12</span></h6>
+        <h6>Notifications<span class="label" id="notification-count">0</span></h6>
         <a href="javascript:void(0)" class="close-notify">
             <i class="ri-close-line"></i>
         </a>
     </div>
     <div class="cr-bar-content">
-        <ul class="nav nav-tabs" id="myTab" role="tablist">
-            <li class="nav-item" role="presentation">
-                <button
-                        class="nav-link active"
-                        id="alert-tab"
-                        data-bs-toggle="tab"
-                        data-bs-target="#alert"
-                        type="button"
-                        role="tab"
-                        aria-controls="alert"
-                        aria-selected="true"
-                >
-                    Alert
-                </button>
-            </li>
-            <li class="nav-item" role="presentation">
-                <button
-                        class="nav-link"
-                        id="messages-tab"
-                        data-bs-toggle="tab"
-                        data-bs-target="#messages"
-                        type="button"
-                        role="tab"
-                        aria-controls="messages"
-                        aria-selected="false"
-                >
-                    Messages
-                </button>
-            </li>
-            <li class="nav-item" role="presentation">
-                <button
-                        class="nav-link"
-                        id="log-tab"
-                        data-bs-toggle="tab"
-                        data-bs-target="#log"
-                        type="button"
-                        role="tab"
-                        aria-controls="log"
-                        aria-selected="false"
-                >
-                    Log
-                </button>
-            </li>
-        </ul>
+<%--        <ul class="nav nav-tabs" id="myTab" role="tablist">--%>
+<%--            <li class="nav-item" role="presentation">--%>
+<%--                <button--%>
+<%--                        class="nav-link active"--%>
+<%--                        id="alert-tab"--%>
+<%--                        data-bs-toggle="tab"--%>
+<%--                        data-bs-target="#alert"--%>
+<%--                        type="button"--%>
+<%--                        role="tab"--%>
+<%--                        aria-controls="alert"--%>
+<%--                        aria-selected="true"--%>
+<%--                >--%>
+<%--                    Alert--%>
+<%--                </button>--%>
+<%--            </li>--%>
+<%--        </ul>--%>
         <div class="tab-content" id="myTabContent">
             <div
                     class="tab-pane fade show active"
@@ -61,348 +33,131 @@
                     aria-labelledby="alert-tab"
             >
                 <div class="cr-alert-list">
-                    <ul>
-                        <li>
-                            <div class="icon cr-alert">
-                                <i class="ri-alarm-warning-line"></i>
-                            </div>
-                            <div class="detail">
-                                <div class="title">Your final report is overdue</div>
-                                <p class="time">Just now</p>
-                                <p class="message">
-                                    Please submit your quarterly report before - June 15.
-                                </p>
-                            </div>
-                        </li>
-                        <li>
-                            <div class="icon cr-warn">
-                                <i class="ri-error-warning-line"></i>
-                            </div>
-                            <div class="detail">
-                                <div class="title">Your product campaign is stop!</div>
-                                <p class="time">5:45AM - 25/05/2023</p>
-                                <p class="message">
-                                    Please submit your quarterly report before Jun 15.
-                                </p>
-                            </div>
-                        </li>
-                        <li>
-                            <div class="icon cr-success">
-                                <i class="ri-check-double-line"></i>
-                            </div>
-                            <div class="detail">
-                                <div class="title">
-                                    Your payment is successfully processed
-                                </div>
-                                <p class="time">9:20PM - 19/06/2023</p>
-                                <p class="message">
-                                    Check your account wallet. if there is any issue, create
-                                    support ticket.
-                                </p>
-                            </div>
-                        </li>
-                        <li>
-                            <div class="icon cr-warn">
-                                <i class="ri-error-warning-line"></i>
-                            </div>
-                            <div class="detail">
-                                <div class="title">Budget threshold exceeded!</div>
-                                <p class="time">4:15AM - 01/04/2023</p>
-                                <p class="message">
-                                    Budget threshold was exceeded for project "Biblio" B612
-                                    elements.
-                                </p>
-                            </div>
-                        </li>
-                        <li>
-                            <div class="icon cr-warn">
-                                <i class="ri-close-line"></i>
-                            </div>
-                            <div class="detail">
-                                <div class="title">Project submission was decline!</div>
-                                <p class="time">4:15AM - 01/04/2023</p>
-                                <p class="message">
-                                    Your project "B126" is declined by Theresa Mayeras.
-                                </p>
-                            </div>
-                        </li>
-                        <li>
-                            <div class="icon cr-success">
-                                <i class="ri-check-double-line"></i>
-                            </div>
-                            <div class="detail">
-                                <div class="title">
-                                    Your payment is successfully processed
-                                </div>
-                                <p class="time">9:20PM - 19/06/2023</p>
-                                <p class="message">
-                                    Check your account wallet. if there is any issue, create
-                                    support ticket.
-                                </p>
-                            </div>
-                        </li>
-                        <li class="check">
-                            <a class="cr-primary-btn" href="chatapp.html">View all</a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-            <div
-                    class="tab-pane fade"
-                    id="messages"
-                    role="tabpanel"
-                    aria-labelledby="messages-tab"
-            >
-                <div class="cr-message-list">
-                    <ul>
-                        <li>
-                            <a href="chatapp.html" class="reply">Reply</a>
-                            <div class="user">
-                                <img src="${pageContext.request.contextPath}/assets/staff/img/user/9.jpg" alt="user"/>
-                                <span class="label online"></span>
-                            </div>
-                            <div class="detail">
-                                <a href="chatapp.html" class="name">Boris Whisli</a>
-                                <p class="time">5:30AM, Today</p>
-                                <p class="message">
-                                    Hello, I am sending some file. Please use this in
-                                    landing page. And make sure this all files are
-                                    comppress.
-                                </p>
-                                <span class="download-files">
-												<span class="download">
-													<img src="${pageContext.request.contextPath}/assets/staff/img/other/1.jpg" alt="image"/>
-													<a href="javascript:void(0)"
-                                                    ><i class="ri-download-2-line"></i
-                                                    ></a>
-												</span>
-												<span class="download">
-													<img src="${pageContext.request.contextPath}/assets/staff/img/other/2.jpg" alt="image"/>
-													<a href="javascript:void(0)"
-                                                    ><i class="ri-download-2-line"></i
-                                                    ></a>
-												</span>
-												<span class="download">
-													<span class="file">
-														<i class="ri-file-ppt-line"></i>
-													</span>
-													<a href="javascript:void(0)"
-                                                    ><i class="ri-download-2-line"></i
-                                                    ></a>
-												</span>
-											</span>
-                            </div>
-                        </li>
-                        <li>
-                            <a href="chatapp.html" class="reply">Reply</a>
-                            <div class="user">
-                                <img src="/assets/staff/img/user/8.jpg" alt="user"/>
-                                <span class="label offline"></span>
-                            </div>
-                            <div class="detail">
-                                <a href="chatapp.html" class="name">Frank N. Stein</a>
-                                <p class="time">8:30PM, 05/12/2023</p>
-                                <p class="message">
-                                    Please take a look on landing page. There is some bus to
-                                    open popup model. and save form data.
-                                </p>
-                            </div>
-                        </li>
-                        <li>
-                            <a href="chatapp.html" class="reply">Reply</a>
-                            <div class="user">
-                                <img src="/assets/staff/img/user/7.jpg" alt="user"/>
-                                <span class="label busy"></span>
-                            </div>
-                            <div class="detail">
-                                <a href="chatapp.html" class="name">Frank N. Stein</a>
-                                <p class="time">8:30PM, 05/12/2023</p>
-                                <p class="message">
-                                    Please take a look on landing page. There is some bus to
-                                    open popup model. and save form data.
-                                </p>
-                                <span class="download-files">
-												<span class="download">
-													<span class="file">
-														<i class="ri-file-zip-line"></i>
-													</span>
-													<a href="javascript:void(0)"
-                                                    ><i class="ri-download-2-line"></i
-                                                    ></a>
-												</span>
-												<span class="download">
-													<span class="file">
-														<i class="ri-file-text-line"></i>
-													</span>
-													<a href="javascript:void(0)"
-                                                    ><i class="ri-download-2-line"></i
-                                                    ></a>
-												</span>
-												<span class="download">
-													<span class="file">
-														<i class="ri-file-ppt-line"></i>
-													</span>
-													<a href="javascript:void(0)"
-                                                    ><i class="ri-download-2-line"></i
-                                                    ></a>
-												</span>
-											</span>
-                            </div>
-                        </li>
-                        <li>
-                            <a href="chatapp.html" class="reply">Reply</a>
-                            <div class="user">
-                                <img src="/assets/staff/img/user/6.jpg" alt="user"/>
-                                <span class="label busy"></span>
-                            </div>
-                            <div class="detail">
-                                <a href="chatapp.html" class="name">Paige Turner</a>
-                                <p class="time">4:30PM, 12/12/2023</p>
-                                <p class="message">
-                                    Landing page issues are done. and now i am working on
-                                    admin user module.
-                                </p>
-                            </div>
-                        </li>
-                        <li>
-                            <a href="chatapp.html" class="reply">Reply</a>
-                            <div class="user">
-                                <img src="${pageContext.request.contextPath}/assets/staff/img/user/5.jpg" alt="user"/>
-                                <span class="label busy"></span>
-                            </div>
-                            <div class="detail">
-                                <a href="chatapp.html" class="name">Allie Grater</a>
-                                <p class="time">8:30PM, 05/12/2023</p>
-                                <p class="message">Take marketing module task.</p>
-                            </div>
-                        </li>
-                        <li class="check">
-                            <a class="cr-primary-btn" href="chatapp.html">View all</a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-            <div
-                    class="tab-pane fade"
-                    id="log"
-                    role="tabpanel"
-                    aria-labelledby="log-tab"
-            >
-                <div class="cr-activity-list activity-list">
-                    <ul>
-                        <li>
-										<span class="date-time"
-                                        >8 Thu<span class="time">11:30 AM - 05:10 PM </span></span
-                                        >
-                            <p class="title">Project Submitted from Smith</p>
-                            <p class="detail">
-                                Lorem Ipsum is simply dummy text of the printing and lorem
-                                is typesetting industry.
-                            </p>
-                            <span class="download-files">
-											<span class="download">
-												<img src="${pageContext.request.contextPath}/assets/staff/img/other/1.jpg" alt="image"/>
-												<a href="javascript:void(0)"
-                                                ><i class="ri-download-2-line"></i
-                                                ></a>
-											</span>
-											<span class="download">
-												<img src="${pageContext.request.contextPath}/assets/staff/img/other/2.jpg" alt="image"/>
-												<a href="javascript:void(0)"
-                                                ><i class="ri-download-2-line"></i
-                                                ></a>
-											</span>
-											<span class="download">
-												<span class="file">
-													<i class="ri-file-ppt-line"></i>
-												</span>
-												<a href="javascript:void(0)"
-                                                ><i class="ri-download-2-line"></i
-                                                ></a>
-											</span>
-										</span>
-                        </li>
-                        <li>
-										<span class="date-time warn"
-                                        >7 Wed<span class="time">1:30 PM - 02:30 PM </span></span
-                                        >
-                            <p class="title">Morgus pvt - project due</p>
-                            <p class="detail">Project modul delay for some bugs.</p>
-                            <span class="download-files">
-											<span class="download">
-												<span class="file">
-													<i class="ri-file-zip-line"></i>
-												</span>
-												<a href="javascript:void(0)"
-                                                ><i class="ri-download-2-line"></i
-                                                ></a>
-											</span>
-											<span class="download">
-												<span class="file">
-													<i class="ri-file-text-line"></i>
-												</span>
-												<a href="javascript:void(0)"
-                                                ><i class="ri-download-2-line"></i
-                                                ></a>
-											</span>
-											<span class="download">
-												<img src="${pageContext.request.contextPath}/assets/staff/img/other/3.jpg" alt="image"/>
-												<a href="javascript:void(0)"
-                                                ><i class="ri-download-2-line"></i
-                                                ></a>
-											</span>
-										</span>
-                        </li>
-                        <li>
-										<span class="date-time"
-                                        >6 Tue<span class="time">9:30 AM - 11:00 AM </span></span
-                                        >
-                            <p class="title">Interview for management dept.</p>
-                            <p class="detail">
-                                There are many variations of passages of Lorem Ipsum
-                                available, but the majority have suffered alteration in
-                                some form, by injected humour.
-                            </p>
-                            <span class="download-files">
-											<span class="download">
-												<span class="file">
-													<i class="ri-file-zip-line"></i>
-												</span>
-												<a href="javascript:void(0)"
-                                                ><i class="ri-download-2-line"></i
-                                                ></a>
-											</span>
-											<span class="download">
-												<span class="file">
-													<i class="ri-file-text-line"></i>
-												</span>
-												<a href="javascript:void(0)"
-                                                ><i class="ri-download-2-line"></i
-                                                ></a>
-											</span>
-											<span class="download">
-												<span class="file">
-													<i class="ri-file-ppt-line"></i>
-												</span>
-												<a href="javascript:void(0)"
-                                                ><i class="ri-download-2-line"></i
-                                                ></a>
-											</span>
-										</span>
-                        </li>
-                        <li>
-										<span class="date-time"
-                                        >5 Mon<span class="time">3:30 AM - 4:00 PM </span></span
-                                        >
-                            <p class="title">Meeting with mr. Ken doe</p>
-                            <p class="detail">
-                                The majority have suffered alteration in some form, by
-                                injected humour.
-                            </p>
-                        </li>
+                    <ul id="notification-list">
+                        <!-- Các thông báo sẽ được thêm vào đây -->
                     </ul>
                 </div>
             </div>
         </div>
     </div>
 </div>
+
+<!-- Thêm thư viện jQuery 3.6.4 từ CDN -->
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+
+<script>
+    // Hàm gọi API và hiển thị thông báo bằng AJAX
+    function fetchNotifications() {
+        console.log("Fetching notifications...");
+
+        $.ajax({
+            url: `${contextPath}/api/staff/notification/get`,  // URL đến API
+            method: "GET",                       // Phương thức HTTP
+            dataType: "json",                    // Định dạng dữ liệu trả về (JSON)
+            success: function (notifications) {
+                console.log("Notifications received:", notifications);
+
+                // Kiểm tra nếu không có dữ liệu trả về từ API
+                if (!notifications || notifications.length === 0) {
+                    console.log("No notifications available.");
+                    $("#notification-list").empty().append("<li>No notifications available</li>");
+                    $("#notification-count").text(0);
+                    return;
+                }
+
+                const notificationList = $("#notification-list");
+                const notificationCount = $("#notification-count");
+
+                // Xóa danh sách thông báo cũ
+                notificationList.empty();
+
+                // Cập nhật số lượng thông báo
+                notificationCount.text(notifications.length);
+
+                // Duyệt qua các thông báo và thêm vào UI
+                notifications.forEach(notification => {
+                    console.log("Processing notification:", notification);
+
+                    // Kiểm tra và thay thế các giá trị null/undefined với giá trị mặc định
+                    const title = notification.title || "No title";
+                    const content = notification.content || "No content";
+                    const sentTime = notification.sentTime || "N/A"; // Kiểm tra sentTime
+                    const hyperlink = "${pageContext.request.contextPath}" + notification.hyperLink || "#"; // Đảm bảo rằng có link
+                    const isRead = notification.status === "VIEWED";
+
+                    console.log("Title:", title);
+                    console.log("Content:", content);
+                    console.log("SentTime:", sentTime);
+
+                    const li = $("<li>").attr("data-id", notification.id);
+                    li.html(`
+                    <a href="#" class="notification-link">
+                        <div class="icon cr-alert">
+                            <i class="ri-alarm-warning-line"></i>
+                        </div>
+                        <div class="detail">
+                            <div class="title"></div> <!-- Gắn text sau -->
+                            <p class="time"></p> <!-- Gắn text sau -->
+                            <p class="message"></p> <!-- Gắn text sau -->
+                        </div>
+                    </a>
+                `);
+
+                    // Gán giá trị vào các thẻ cụ thể
+                    li.find(".title").text(title);
+                    li.find(".time").text(content);
+                    li.find(".message").text(sentTime);
+
+                    if (!isRead) {
+                        li.css("background-color", "#f0f8ff");
+                        li.css("font-weight", "bold");
+                    }
+
+                    // Gán giá trị vào các thẻ cụ thể
+                    li.find(".notification-link").attr("href", hyperlink);
+
+                    notificationList.append(li);
+                });
+
+                // Thêm sự kiện click cho từng thông báo
+                $("li[data-id]").click(function(e) {
+                    e.preventDefault();
+
+                    const notificationId = $(this).attr("data-id");
+                    const link = $(this).find(".notification-link").attr("href");
+
+                    $.ajax({
+                        url: `${contextPath}/api/staff/notification/update`,
+                        method: "POST",
+                        data: { notificationId: notificationId },
+                        success: function(response) {
+                            console.log("Notification status updated successfully.");
+                            window.location.href = link;
+                        },
+                        error: function(xhr, status, error) {
+                            console.error("Error updating notification status: ", error);
+                            alert("Lỗi khi cập nhật trạng thái thông báo!");
+                        }
+                    });
+                });
+            },
+            error: function (xhr, status, error) {
+                console.error("Error fetching notifications: ", error);
+                alert("Lỗi khi tải thông báo!");
+            }
+        });
+    }
+
+    $(document).ready(function () {
+        console.log("Page loaded. Calling fetchNotifications()");
+        fetchNotifications();
+    });
+
+</script>
+
+
+
+
+
+
+

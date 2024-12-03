@@ -174,7 +174,6 @@
   padding: 10px 20px;
   font-size: 14px;  /* Giảm kích thước font để thu nhỏ lại */
   border-radius: 5px;
-  width: 22%;  /* Chiếm 48% chiều rộng của container */
   text-align: center;
   transition: background-color 0.3s;
 }
@@ -196,3 +195,17 @@
 .change-password-button:hover {
   background-color: #e65c00;
 }
+
+.gender-options {
+  display: flex; /* Đặt các phần tử bên trong thành hàng ngang */
+  align-items: center; /* Căn giữa theo chiều dọc */
+}
+
+.gender-options label {
+  margin-right: 200px; /* Khoảng cách giữa 2 label */
+  display: flex; /* Đảm bảo các phần tử trong label nằm ngang */
+  align-items: center; /* Căn chỉnh radio button và text theo chiều dọc */
+  gap: 5px; /* Khoảng cách giữa radio button và text */
+}
+
+

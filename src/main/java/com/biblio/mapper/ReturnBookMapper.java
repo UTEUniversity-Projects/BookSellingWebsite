@@ -1,14 +1,19 @@
 package com.biblio.mapper;
 
+import com.biblio.dto.request.ReturnBookRequest;
+import com.biblio.dto.request.ReturnOrderRequest;
 import com.biblio.dto.response.ReturnBookItemResponse;
 import com.biblio.dto.response.ReturnBookManagementResponse;
-import com.biblio.entity.MediaFile;
-import com.biblio.entity.ReturnBook;
-import com.biblio.entity.ReturnBookItem;
+import com.biblio.entity.*;
 
+import java.time.LocalDateTime;
+import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
+import java.util.Set;
+import java.util.HashSet;
+
 
 import static com.biblio.utils.DateTimeUtil.formatDateTime;
 
@@ -34,4 +39,14 @@ public class ReturnBookMapper {
                 .proof(fileNames)
                 .build();
     }
+
+    public static ReturnBook toEntity(ReturnOrderRequest request) {
+        ReturnBook returnBook = new ReturnBook();
+        returnBook.setDescription(request.getDescription());
+        returnBook.setReason(request.getReason());
+        returnBook.setCreatedAt(LocalDateTime.now());
+
+        return returnBook;
+    }
+
 }

@@ -1,9 +1,12 @@
 package com.biblio.controller.staff;
 
+import com.biblio.dto.response.DiscountResponse;
 import com.biblio.dto.response.OrderDetailsManagementResponse;
+import com.biblio.dto.response.OrderProductResponse;
 import com.biblio.dto.response.ReturnBookManagementResponse;
 import com.biblio.enumeration.EOrderStatus;
 import com.biblio.service.IOrderService;
+import com.biblio.service.IPromotionTemplateService;
 import com.biblio.service.IReturnBookService;
 
 import javax.inject.Inject;
@@ -14,15 +17,21 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.Serial;
+import java.util.List;
 
 @WebServlet("/staff/order-details")
 public class OrderDetailsController extends HttpServlet {
     @Serial
     private static final long serialVersionUID = 1L;
+
     @Inject
     IOrderService orderService;
+
     @Inject
     IReturnBookService returnBookService;
+
+    @Inject
+    IPromotionTemplateService promotionTemplateService;
 
     /**
      * @see HttpServlet#HttpServlet()
@@ -39,6 +48,22 @@ public class OrderDetailsController extends HttpServlet {
         // TODO Auto-generated method stub
         Long orderId = Long.parseLong(request.getParameter("id"));
         OrderDetailsManagementResponse orderDetailsResponse = orderService.getOrderDetailsManagementResponse(orderId);
+
+        List<DiscountResponse> discounts = promotionTemplateService.getAllDiscounts();
+        for (OrderProductResponse product : orderDetailsResponse.getProducts()) {
+            double discount = promotionTemplateService.percentDiscount(product.getBookTemplateId(), discounts);
+            product.setDiscountPercent(discount);
+            product.calTotalPrice();
+        }
+
+//        for (OrderProductResponse product : orderDetailsResponse.getProducts()) {
+//            double discount = promotionTemplateService.percentDiscountOfBook(product.getBookTemplateId());
+//            product.setDiscountPercent(discount);
+//            product.calTotalPrice();
+//        }
+        orderDetailsResponse.updateTotalPrice();
+        orderDetailsResponse.updateFinalPrice();
+
         if (orderDetailsResponse.getStatus() == EOrderStatus.REQUEST_REFUND || orderDetailsResponse.getStatus() == EOrderStatus.REFUNDED) {
             ReturnBookManagementResponse returnBook = returnBookService.findReturnBookByOrderId(orderId);
             request.setAttribute("returnBook", returnBook);

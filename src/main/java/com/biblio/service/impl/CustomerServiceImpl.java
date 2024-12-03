@@ -1,23 +1,36 @@
 package com.biblio.service.impl;
 
+import com.biblio.dao.ICartDAO;
 import com.biblio.dao.ICustomerDAO;
+import com.biblio.dao.IOrderDAO;
+import com.biblio.dto.request.CustomerInformationRequest;
 import com.biblio.dto.request.CustomerRegisterRequest;
+import com.biblio.dto.request.NotificationInsertRequest;
 import com.biblio.dto.response.*;
-import com.biblio.entity.Customer;
+import com.biblio.entity.*;
 import com.biblio.enumeration.EAccountStatus;
 import com.biblio.mapper.CustomerMapper;
+import com.biblio.mapper.NotificationMapper;
+import com.biblio.service.ICartService;
 import com.biblio.service.ICustomerService;
 
 import javax.inject.Inject;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class CustomerServiceImpl implements ICustomerService {
 
     @Inject
     private ICustomerDAO customerDAO;
+
+    @Inject
+    private ICartDAO cartDAO;
+
+    @Inject
+    private IOrderDAO orderDAO;
 
     @Override
     public List<CustomerGetListResponse> findAll() {
@@ -50,6 +63,11 @@ public class CustomerServiceImpl implements ICustomerService {
     @Override
     public CustomerRegisterResponse addCustomer(CustomerRegisterRequest request) {
         Customer customer = CustomerMapper.toCustomer(request);
+
+        Cart cart = new Cart();
+        cart.setCustomer(customer);
+        customer.setCart(cart);
+
         return CustomerMapper.toCustomerRegisterResponse(customerDAO.addCustomer(customer));
     }
 
@@ -112,6 +130,32 @@ public class CustomerServiceImpl implements ICustomerService {
             }
         }
         return countCustomerJoins;
+    }
+    public Customer updateCustomer(CustomerInformationRequest request) {
+        Customer customer = CustomerMapper.toCustomerInformationRequest(request);
+        return customerDAO.updateCustomer(customer);
+    }
+
+    @Override
+    public List<NotificationGetResponse> getAllNotificationByCustomerId(Long id) {
+        Customer customer = customerDAO.findByIdForNotification(id);
+        List<NotificationGetResponse> notifications = new ArrayList<>();
+
+        for (Notification notification : customer.getNotifications()) {
+            notifications.add(NotificationMapper.toNotificationGetResponse(notification));
+        }
+        Collections.reverse(notifications);
+        return notifications;
+    }
+
+    @Override
+    public void addNewNotification(NotificationInsertRequest notificationInsertRequest, Long orderId) {
+        Order order = orderDAO.findOneForDetailsManagement(orderId);
+        Customer customer = customerDAO.findById(order.getCustomer().getId());
+        Notification notification = NotificationMapper.toNotification(notificationInsertRequest);
+        notification.setCustomer(customer);
+        customer.getNotifications().add(notification);
+        customerDAO.updateCustomer(customer);
     }
 
 }

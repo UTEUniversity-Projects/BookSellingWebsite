@@ -15,4 +15,5 @@ public class CartItemResponse {
     private double sellingPrice;
     private long quantity;
     private double subTotal;
+    private double salePrice;
 }

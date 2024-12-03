@@ -12,7 +12,7 @@
                         data-aos-delay="400"
                 >
                     <div class="form-logo">
-                        <img src="${pageContext.request.contextPath}/assets/customer/img/logo/logo.png" alt="logo"/>
+                        <img src="${pageContext.request.contextPath}/assets/commons/img/logo/logo.png" alt="logo"/>
                     </div>
                     <form class="cr-content-form" action="login" method="POST" id="loginForm">
                         <div class="form-group mb-2">
@@ -43,6 +43,7 @@
                                             id="check-with-link"
                                             name="rememberMe"
                                             value="1"
+                                            checked
                                     />
                                     <span
                                             class="absolute text-white opacity-0 peer-checked:opacity-100 top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 flex items-center justify-center w-[12px] h-[12px]"
@@ -125,14 +126,14 @@
                                 </label>
                             </div>
                             <div>
-                                <a href="forgot"
+                                <a href="${pageContext.request.contextPath}/forgot"
                                    class="text-md text-[#26a397] hover:opacity-80 transition-all duration-300">Quên mật
-                                    khẩu</a>
+                                    khẩu?</a>
                             </div>
                         </div>
                         <div class="login-buttons">
                             <a
-                                    href="register"
+                                    href=${pageContext.request.contextPath}/ "verify-email"
                                     class="py-2 border border-solid px-4 inline-block rounded-md hover:bg-gray-100 transition-all duration-300"
                             >
                                 Đăng ký

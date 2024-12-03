@@ -6,9 +6,10 @@ import com.biblio.dao.impl.CustomerDAOImpl;
 import com.biblio.dao.impl.NotificationDAOImpl;
 import com.biblio.dao.impl.ReviewDAOImpl;
 import com.biblio.dto.request.ReviewRequest;
-import com.biblio.entity.BookTemplate;
-import com.biblio.entity.Customer;
-import com.biblio.entity.Review;
+import com.biblio.dto.response.ReviewResponse;
+import com.biblio.entity.*;
+import com.biblio.enumeration.EOrderHistory;
+import com.biblio.mapper.ResponseReviewMapper;
 import com.biblio.mapper.ReviewMapper;
 import com.biblio.service.IReviewService;
 
@@ -16,18 +17,22 @@ import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.transaction.Transactional;
+import java.time.LocalDateTime;
 
 
 public class ReviewServiceImpl implements IReviewService {
-
-    @PersistenceContext
-    private EntityManager entityManager; // EntityManager sẽ được tiêm tự động bởi Spring hoặc Java EE
-
+    @Inject
     private IReviewDAO reviewDAO;
+
+    @Inject
     private ICustomerDAO customerDAO;
 
+    @Inject
     private IBookTemplateDAO bookTemplateDAO;
-    private INotificationDAO notificationDAO;
+
+    @Inject IOrderDAO orderDAO;
+
+    @Inject INotificationDAO notificationDAO;
 
     // Constructor tiêm phụ thuộc
     public ReviewServiceImpl(IReviewDAO reviewDAO,
@@ -42,24 +47,25 @@ public class ReviewServiceImpl implements IReviewService {
         this.bookTemplateDAO = new BookTemplateDAOImpl();
     }
     @Override
-    public boolean updateReviewHidden(long reviewId, boolean isHidden) {
+    public ReviewResponse updateReviewHidden(long reviewId, boolean isHidden) {
         Review review = reviewDAO.findById(reviewId);
         if (review != null) {
             review.setHidden(isHidden);
-            reviewDAO.update(review);
-            return true;
+            review = reviewDAO.update(review);
+            ReviewResponse reviewResponse = ReviewMapper.toReviewResponse(review);
+            return reviewResponse;
         }
-        return false;
+        return null;
     }
 
     @Transactional
     @Override
-    public void createReview(ReviewRequest reviewRequest) {
+    public boolean createReview(ReviewRequest reviewRequest, Long customerId) {
         if (reviewRequest == null || reviewRequest.getContent() == null) {
             throw new IllegalArgumentException("Review không hợp lệ: Tiêu đề hoặc nội dung không được để trống.");
         }
 
-        Customer customer = customerDAO.findById(reviewRequest.getCustomerId());
+        Customer customer = customerDAO.findById(customerId);
         if (customer == null) {
             throw new IllegalArgumentException("Customer không tồn tại.");
         }
@@ -71,7 +77,23 @@ public class ReviewServiceImpl implements IReviewService {
         }
 
         // Tạo Review từ request và lưu vào cơ sở dữ liệu
+        Order order = orderDAO.findOne(reviewRequest.getOrderId());
+        if (order == null) {
+            return false;
+        }
+
+        if (!order.isStatusHistoryExist(EOrderHistory.REVIEWED)) {
+            OrderStatusHistory orderStatusHistory = new OrderStatusHistory();
+            orderStatusHistory.setStatus(EOrderHistory.REVIEWED);
+            orderStatusHistory.setStatusChangeDate(LocalDateTime.now());
+            orderStatusHistory.setOrder(order);
+            order.getStatusHistory().add(orderStatusHistory);
+            order = orderDAO.update(order);
+            if (order == null) {
+                return false;
+            }
+        }
         Review review = ReviewMapper.toEntity(reviewRequest, customer, bookTemplate);
-            reviewDAO.save(review);
+        return reviewDAO.save(review) != null;
     }
 }

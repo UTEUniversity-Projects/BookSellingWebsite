@@ -6,7 +6,11 @@ import com.biblio.jpaconfig.JpaConfig;
 
 import javax.persistence.EntityManager;
 
-public class NotificationDAOImpl implements INotificationDAO {
+public class NotificationDAOImpl extends GenericDAOImpl<Notification> implements INotificationDAO {
+
+    public NotificationDAOImpl() {
+        super(Notification.class);
+    }
 
     @Override
     public void saveSupport_Notification(Notification notification) {
@@ -25,4 +29,24 @@ public class NotificationDAOImpl implements INotificationDAO {
         }
     }
 
+    @Override
+    public Notification update(Notification notification) {
+        return super.update(notification);
+    }
+
+    @Override
+    public Notification findNotificationById(Long id) {
+        return super.findById(id);
+    }
+
+    @Override
+    public Notification insert(Notification notification) {
+       return super.save(notification);
+    }
+
+    public static void main(String[] args) {
+        NotificationDAOImpl dao = new NotificationDAOImpl();
+        Notification notification = dao.findNotificationById(1L);
+        System.out.println(notification);
+    }
 }
