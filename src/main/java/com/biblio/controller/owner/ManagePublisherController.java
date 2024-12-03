@@ -98,6 +98,7 @@ public class ManagePublisherController extends HttpServlet {
         try {
             PublisherDeleteRequest publisherDeleteRequest = HttpUtil.of(request.getReader()).toModel(PublisherDeleteRequest.class);
             PublisherProfileResponse publisherProfileResponse = publisherService.getProfileById(Long.valueOf(publisherDeleteRequest.getId()));
+
             String filePath = publisherProfileResponse.getAvatar();
 
             publisherService.deletePublisher(publisherDeleteRequest);

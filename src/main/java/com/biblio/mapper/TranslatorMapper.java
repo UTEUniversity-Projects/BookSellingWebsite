@@ -1,12 +1,10 @@
 package com.biblio.mapper;
 
-import com.biblio.dto.request.AuthorUpdateRequest;
 import com.biblio.dto.request.TranslatorCreateRequest;
 import com.biblio.dto.request.TranslatorUpdateRequest;
 import com.biblio.dto.response.TranslatorAnalysisResponse;
 import com.biblio.dto.response.TranslatorLineResponse;
 import com.biblio.dto.response.TranslatorProfileResponse;
-import com.biblio.entity.Author;
 import com.biblio.entity.Translator;
 import com.biblio.utils.FormatterUtil;
 

@@ -12,10 +12,16 @@ import java.util.List;
 
 public interface IAuthorService {
     List<AuthorLineResponse> getAll();
+
     AuthorProfileResponse getProfileById(Long id);
+
     AuthorAnalysisResponse getAnalysisById(Long id);
+
     Author createAuthor(AuthorCreateRequest authorRequest);
+
     void updateAuthor(AuthorUpdateRequest authorRequest);
+
     void deleteAuthor(AuthorDeleteRequest authorDeleteRequest);
+
     Integer countBookTemplate(AuthorDeleteRequest id);
 }

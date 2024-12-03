@@ -1,15 +1,11 @@
 package com.biblio.dao.impl;
 
 import com.biblio.dao.ITranslatorDAO;
-import com.biblio.dto.request.TranslatorCreateRequest;
-import com.biblio.dto.request.TranslatorDeleteRequest;
-import com.biblio.dto.request.TranslatorUpdateRequest;
 import com.biblio.entity.Translator;
 import com.biblio.entity.BookTemplate;
 import com.biblio.enumeration.EBookMetadataStatus;
 import com.biblio.enumeration.EBookTemplateStatus;
 import com.biblio.enumeration.EOrderStatus;
-import com.biblio.mapper.TranslatorMapper;
 import lombok.extern.slf4j.Slf4j;
 
 import java.time.LocalDateTime;

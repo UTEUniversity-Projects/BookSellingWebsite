@@ -3,12 +3,10 @@ package com.biblio.mapper;
 import com.biblio.constants.StoredFileConstants;
 import com.biblio.dto.request.PublisherCreateRequest;
 import com.biblio.dto.request.PublisherUpdateRequest;
-import com.biblio.dto.request.TranslatorUpdateRequest;
 import com.biblio.dto.response.PublisherAnalysisResponse;
 import com.biblio.dto.response.PublisherLineResponse;
 import com.biblio.dto.response.PublisherProfileResponse;
 import com.biblio.entity.Publisher;
-import com.biblio.entity.Translator;
 import com.biblio.utils.FormatterUtil;
 
 import java.time.LocalDateTime;

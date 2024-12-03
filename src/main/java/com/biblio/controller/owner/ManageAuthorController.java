@@ -100,6 +100,7 @@ public class ManageAuthorController extends HttpServlet {
             AuthorProfileResponse authorProfileResponse = authorService.getProfileById(Long.valueOf(authorDeleteRequest.getId()));
 
             authorService.deleteAuthor(authorDeleteRequest);
+
             Boolean isImageDeleted = ManageFileUtil.deleteFileAvatar(authorProfileResponse.getAvatar(), "author");
 
             if (isImageDeleted) {

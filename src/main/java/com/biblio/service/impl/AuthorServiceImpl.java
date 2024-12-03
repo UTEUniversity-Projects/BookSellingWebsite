@@ -8,7 +8,6 @@ import com.biblio.dto.response.AuthorAnalysisResponse;
 import com.biblio.dto.response.AuthorLineResponse;
 import com.biblio.dto.response.AuthorProfileResponse;
 import com.biblio.entity.Author;
-import com.biblio.entity.BookTemplate;
 import com.biblio.enumeration.EBookMetadataStatus;
 import com.biblio.enumeration.EBookTemplateStatus;
 import com.biblio.enumeration.EOrderStatus;

@@ -100,6 +100,7 @@ public class ManageTranslatorController extends HttpServlet {
             TranslatorProfileResponse translatorProfileResponse = translatorService.getProfileById(Long.valueOf(translatorDeleteRequest.getId()));
 
             translatorService.deleteTranslator(translatorDeleteRequest);
+
             Boolean isImageDeleted = ManageFileUtil.deleteFileAvatar(translatorProfileResponse.getAvatar(), "translator");
 
             if (isImageDeleted) {

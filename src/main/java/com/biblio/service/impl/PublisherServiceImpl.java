@@ -79,11 +79,7 @@ public class PublisherServiceImpl implements IPublisherService {
 
         List<String> topSubCategory = findTopSubCategory(id, 3);
 
-        return PublisherMapper.toPublisherAnalysisResponse(publisher, works, avgRate, sales, perSales, booksSold, perBooksSold,
-                valueBooksSold, perValueBooksSold, booksInStock, booksCancelled, booksReturned, salesThisMonth, booksThisMonth, revenueThisMonth,
-                ordersCompleted, valueOrdersCompleted, ordersWaiting, valueOrdersWaiting, ordersPacking, valueOrderPacking,
-                ordersShipping, valueOrderShipping, ordersCancelled, valueOrdersCancelled, ordersRequestRefund, valueOrdersRequestRefund,
-                ordersRefunded, valueOrdersRefunded, topSubCategory);
+        return PublisherMapper.toPublisherAnalysisResponse(publisher, works, avgRate, sales, perSales, booksSold, perBooksSold, valueBooksSold, perValueBooksSold, booksInStock, booksCancelled, booksReturned, salesThisMonth, booksThisMonth, revenueThisMonth, ordersCompleted, valueOrdersCompleted, ordersWaiting, valueOrdersWaiting, ordersPacking, valueOrderPacking, ordersShipping, valueOrderShipping, ordersCancelled, valueOrdersCancelled, ordersRequestRefund, valueOrdersRequestRefund, ordersRefunded, valueOrdersRefunded, topSubCategory);
     }
 
     @Override
@@ -104,9 +100,7 @@ public class PublisherServiceImpl implements IPublisherService {
 
     @Override
     public Integer countBookTemplate(PublisherDeleteRequest publisherDeleteRequest) {
-        return publisherDAO.countBooksTemplateByStatus(Long.valueOf(publisherDeleteRequest.getId()), EBookTemplateStatus.COMING_SOON)
-                + publisherDAO.countBooksTemplateByStatus(Long.valueOf(publisherDeleteRequest.getId()), EBookTemplateStatus.ON_SALE)
-                + publisherDAO.countBooksTemplateByStatus(Long.valueOf(publisherDeleteRequest.getId()), EBookTemplateStatus.OUT_OF_STOCK);
+        return publisherDAO.countBooksTemplateByStatus(Long.valueOf(publisherDeleteRequest.getId()), EBookTemplateStatus.COMING_SOON) + publisherDAO.countBooksTemplateByStatus(Long.valueOf(publisherDeleteRequest.getId()), EBookTemplateStatus.ON_SALE) + publisherDAO.countBooksTemplateByStatus(Long.valueOf(publisherDeleteRequest.getId()), EBookTemplateStatus.OUT_OF_STOCK);
     }
 
     private Double calculateSaleGrowth(Long id) {
@@ -127,6 +121,7 @@ public class PublisherServiceImpl implements IPublisherService {
             else return 0.0D;
         }
     }
+
     private Integer countSaleThisMonth(Long id) {
         LocalDateTime now = LocalDateTime.now();
         LocalDateTime startOfThisMonth = now.withDayOfMonth(1).toLocalDate().atStartOfDay();
@@ -153,6 +148,7 @@ public class PublisherServiceImpl implements IPublisherService {
             else return 0.0D;
         }
     }
+
     private Integer countBooksSoldThisMonth(Long id) {
         LocalDateTime now = LocalDateTime.now();
         LocalDateTime startOfThisMonth = now.withDayOfMonth(1).toLocalDate().atStartOfDay();
@@ -179,6 +175,7 @@ public class PublisherServiceImpl implements IPublisherService {
             else return 0.0D;
         }
     }
+
     private Long calculateRevenueThisMonth(Long id) {
         LocalDateTime now = LocalDateTime.now();
         LocalDateTime startOfThisMonth = now.withDayOfMonth(1).toLocalDate().atStartOfDay();

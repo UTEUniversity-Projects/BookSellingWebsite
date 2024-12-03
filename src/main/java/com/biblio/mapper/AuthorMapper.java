@@ -6,12 +6,10 @@ import com.biblio.dto.response.AuthorAnalysisResponse;
 import com.biblio.dto.response.AuthorLineResponse;
 import com.biblio.dto.response.AuthorProfileResponse;
 import com.biblio.entity.Author;
-import com.biblio.entity.BookTemplate;
 import com.biblio.utils.FormatterUtil;
 
 import java.time.LocalDateTime;
 import java.util.List;
-import java.util.Set;
 
 public class AuthorMapper {
 
