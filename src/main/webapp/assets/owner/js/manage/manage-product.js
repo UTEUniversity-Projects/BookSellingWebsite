@@ -330,14 +330,14 @@ document.addEventListener("DOMContentLoaded", () => {
             const form = document.getElementById("productUpdateForm");
             const formData = new FormData(form);
 
-            let mainImage = formData.get("mainImage") || "/images/anonymous/product.jpg";
+            let mainImage = formData.get("mainImage");
 
             const mainImageUploads = await uploadImages("product", ["#imgMain"]);
             if (mainImageUploads?.[0]) {
                 mainImage = mainImageUploads[0];
             }
 
-            if (!mainImage || mainImage === "/images/anonymous/product.jpg") {
+            if (!mainImage) {
                 showToast("Ảnh chính là bắt buộc!", "Lỗi", "error");
                 return; 
             }

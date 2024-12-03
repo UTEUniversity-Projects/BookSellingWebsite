@@ -30,6 +30,12 @@
                             <div class="row cr-product-uploads">
                                 <div class="col-lg-4 mb-991">
                                     <div class="cr-vendor-img-upload">
+                                        <input type="hidden" id="mainImage" name="mainImage"
+                                               value="${book.imgUrls[0] ? book.imgUrls[0] : ''}">
+                                        <input type="hidden" id="thumb1" name="thumb1"
+                                               value="${book.imgUrls[1] ? book.imgUrls[1] : ''}">
+                                        <input type="hidden" id="thumb2" name="thumb2"
+                                               value="${book.imgUrls[2] ? book.imgUrls[2] : ''}">
                                         <div class="cr-vendor-main-img">
                                             <div class="avatar-upload">
                                                 <div class="avatar-edit">
@@ -388,7 +394,7 @@
                                         <div class="col-md-12">
                                             <div class="row ps-3">
                                                 <div class="d-flex col-sm-12 editor-area justify-content-end">
-                                                    <button id="updateButton" type="button" class="cr-btn default-btn color-primary">Cập nhật</button>
+                                                    <button id="updateButton" type="submit" class="cr-btn default-btn color-primary">Cập nhật</button>
                                                 </div>
                                             </div>
                                         </div>
