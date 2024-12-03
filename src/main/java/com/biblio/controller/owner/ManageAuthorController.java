@@ -149,7 +149,7 @@ public class ManageAuthorController extends HttpServlet {
             AuthorCreateRequest authorCreateRequest = HttpUtil.of(request.getReader()).toModel(AuthorCreateRequest.class);
             authorCreateRequest.setJoinAt(LocalDateTime.now().toString());
 
-            Author author = authorService.create(authorCreateRequest);
+            Author author = authorService.createAuthor(authorCreateRequest);
 
             response.setStatus(HttpServletResponse.SC_OK);  // 200 OK
             response.getWriter().write("{\"status\": \"success\", \"id\": " + author.getId() + ", \"message\": \"Created successfully.\"}");

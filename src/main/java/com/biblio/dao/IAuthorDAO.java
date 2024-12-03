@@ -17,8 +17,7 @@ public interface IAuthorDAO {
     List<Author> getEntityAll();
     List<Author> findByBookTemplate(BookTemplate bookTemplate);
     List<String> getTopSubCategory(Long authorId);
-    Author create(AuthorCreateRequest authorCreateRequest);
-    void update(AuthorUpdateRequest authorUpdateRequest);
+    Author createAuthor(Author author);
     void updateAuthor(Author author);
     void delete(AuthorDeleteRequest authorDeleteRequest);
     Integer countBooksTemplateAll(Long authorId);

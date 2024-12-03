@@ -80,13 +80,8 @@ public class AuthorDAOImpl extends GenericDAOImpl<Author> implements IAuthorDAO 
     }
 
     @Override
-    public Author create(AuthorCreateRequest authorCreateRequest) {
-        return super.insert(AuthorMapper.toAuthor(authorCreateRequest));
-    }
-
-    @Override
-    public void update(AuthorUpdateRequest authorUpdateRequest) {
-        super.update(AuthorMapper.toAuthor(authorUpdateRequest));
+    public Author createAuthor(Author author) {
+        return super.save(author);
     }
 
     @Override
