@@ -27,6 +27,10 @@ public interface ITranslatorDAO {
 
     void deleteTranslator(Long id);
 
+    void removeBookTemplate(Long translatorId, Long bookTemplateId);
+
+    void addBookTemplateToTranslator(Long translatorId, Long bookTemplateId);
+
     Integer countBooksTemplateAll(Long translatorId);
 
     Integer countBooksTemplateByStatus(Long translatorId, EBookTemplateStatus status);

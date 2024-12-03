@@ -16,5 +16,5 @@ public class ReturnOrderRequest {
     private EReasonReturn reason;
     private String description;
     private List<ReturnBookRequest> returnBookItems;
-
+    private List<MediaFileRequest> mediaFiles;
 }

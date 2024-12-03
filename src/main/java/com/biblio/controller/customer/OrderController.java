@@ -53,38 +53,29 @@ public class OrderController extends HttpServlet {
 
         CustomerDetailResponse customer = customerService.getCustomerDetailByUsername(account.getUsername());
 
-        // Lấy customerId từ account
         Long customerId = customer.getId();
 
-        // Check if the customer is authenticated
         if (customerId == null) {
             response.sendRedirect(request.getContextPath() + "/login");
             return;
         }
 
-        // Lấy giá trị của tham số "status" từ URL
         String statusParam = request.getParameter("status");
 
-        // Nếu không có tham số status, gán giá trị mặc định là "all"
         if (statusParam == null || statusParam.isEmpty()) {
             statusParam = "all";
         }
 
-        // Lọc đơn hàng dựa trên trạng thái (status)
         List<OrderDetailsManagementResponse> orderList;
         if ("all".equalsIgnoreCase(statusParam)) {
-            // Nếu trạng thái là "all", lấy tất cả đơn hàng
             orderList = orderService.getAllOrderCustomerResponse(customerId);
         } else {
-            // Lọc theo trạng thái cụ thể
             orderList = orderService.getOrderCustomerByStatus(customerId, statusParam);
         }
 
-        // Truyền danh sách đơn hàng và trạng thái vào JSP
         request.setAttribute("orders", orderList);
-        request.setAttribute("status", statusParam); // Truyền trạng thái vào JSP
+        request.setAttribute("status", statusParam);
 
-        // Forward request to JSP view
         request.getRequestDispatcher("/views/customer/order.jsp").forward(request, response);
     }
 

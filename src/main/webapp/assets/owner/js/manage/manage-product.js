@@ -193,7 +193,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
     const uploadImages = async (dir, inputSelectors) => {
         try {
-            const formData = new FormData();
             const imageLinks = [];
 
             for (let selector of inputSelectors) {
@@ -201,6 +200,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 const files = fileInput?.files;
 
                 if (files && files.length > 0) {
+                    const formData = new FormData();
                     const fileName = `${Date.now()}-${files[0].name}`;
                     formData.append("files", files[0]);
                     formData.append("dir", dir);
@@ -209,7 +209,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
                     const response = await fetch(`${contextPath}/upload`, {
                         method: "POST",
-                        body: formData
+                        body: formData,
                     });
 
                     if (response.ok) {
@@ -219,6 +219,8 @@ document.addEventListener("DOMContentLoaded", () => {
                         console.error("Upload failed for", fileName, response.statusText);
                         imageLinks.push(null);
                     }
+                } else {
+                    imageLinks.push(null);
                 }
             }
 

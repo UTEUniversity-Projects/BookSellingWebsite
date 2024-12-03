@@ -19,6 +19,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import javax.transaction.Transactional;
 import java.io.IOException;
 import java.io.Serial;
 import java.time.LocalDateTime;
@@ -94,16 +95,14 @@ public class ManageTranslatorController extends HttpServlet {
     /**
      * @see HttpServlet#doDelete(HttpServletRequest request, HttpServletResponse response)
      */
+    @Transactional
     protected void doDelete(HttpServletRequest request, HttpServletResponse response) throws IOException {
         try {
             TranslatorDeleteRequest translatorDeleteRequest = HttpUtil.of(request.getReader()).toModel(TranslatorDeleteRequest.class);
-            TranslatorProfileResponse translatorProfileResponse = translatorService.getProfileById(Long.valueOf(translatorDeleteRequest.getId()));
 
-            translatorService.deleteTranslator(translatorDeleteRequest);
+            Boolean isDeleted = translatorService.deleteTranslator(translatorDeleteRequest);
 
-            Boolean isImageDeleted = ManageFileUtil.deleteFileAvatar(translatorProfileResponse.getAvatar(), "translator");
-
-            if (isImageDeleted) {
+            if (isDeleted) {
                 response.getWriter().write("{\"status\": \"success\", \"message\": \"Deleted successfully.\"}");
             } else {
                 response.getWriter().write("{\"status\": \"fail\", \"message\": \"Failed to delete.\"}");
@@ -170,14 +169,18 @@ public class ManageTranslatorController extends HttpServlet {
         request.getRequestDispatcher("/views/owner/translator-update.jsp").forward(request, response);
     }
 
+    @Transactional
     private void updateHandlerPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
         try {
             TranslatorUpdateRequest translatorUpdateRequest = HttpUtil.of(request.getReader()).toModel(TranslatorUpdateRequest.class);
 
-            translatorService.updateTranslator(translatorUpdateRequest);
+            Boolean isUpdated = translatorService.updateTranslator(translatorUpdateRequest);
 
-            response.setStatus(HttpServletResponse.SC_OK);  // 200 OK
-            response.getWriter().write("{\"status\": \"success\", \"message\": \"Updated successfully.\"}");
+            if (isUpdated) {
+                response.getWriter().write("{\"status\": \"success\", \"message\": \"Deleted successfully.\"}");
+            } else {
+                response.getWriter().write("{\"status\": \"fail\", \"message\": \"Failed to delete.\"}");
+            }
         } catch (Exception e) {
             response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);  // 500 Internal Server Error
             response.getWriter().write("{\"status\": \"fail\", \"message\": \"Error updating: " + e.getMessage() + "\"}");

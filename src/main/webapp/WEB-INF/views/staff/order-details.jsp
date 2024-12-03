@@ -188,7 +188,7 @@
                                                 <div class="slider-banner-image">
                                                     <div class="zoom-image-hover">
                                                         <img
-                                                                src="${imageUrl}"
+                                                                src="${pageContext.request.contextPath}${imageUrl}"
                                                                 alt="product-image"
                                                                 class="product-image"
                                                         />
@@ -197,7 +197,7 @@
                                             </c:forEach>
                                         </div>
                                         <div class="slider slider-nav thumb-image">
-                                            <c:forEach var="imageUrl" items="${returnBook.proof}">
+                                            <c:forEach var="imageUrl" items="${pageContext.request.contextPath}${returnBook.proof}">
                                                 <div class="thumbnail-image">
                                                     <div class="thumbImg">
                                                         <img src="${imageUrl}" alt="product-thumbnail"/>

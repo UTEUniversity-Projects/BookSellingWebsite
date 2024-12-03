@@ -22,12 +22,11 @@
                         <div class="tab-item-promotion" data-tab="3">Freeship</div>
                     </div>
                 </div>
-                <div class="cr-card card-default ">
+                <div class="cr-card card-default rounded-3">
                     <div class="cr-card-content promotion-list" data-tab="1" style="width: 100%;">
                         <table class="table table-hover promotion-data-table">
                             <thead>
                             <tr>
-                                <th>#</th>
                                 <th>Mã</th>
                                 <th>Tiêu Đề</th>
                                 <th>%</th>
@@ -36,17 +35,15 @@
                             </thead>
 
                             <tbody>
-                            <c:forEach var="promotion" items="${promotions}">
+                            <c:forEach var="promotion" items="${promotions}" varStatus="status">
                                 <c:if test="${promotion.type == 'DISCOUNT'}">
-                                    <tr class="promotion-row" data-href="${pageContext.request.contextPath}/owner/promotion-details?id=${promotion.id}">
-                                    <td>
-                                        <img class="tbl-thumb" src="/assets/owner/img/product/1.jpg" alt="Product Image">
-                                    </td>
-                                    <td>${promotion.code}</td>
-                                    <td>${promotion.title}</td>
-                                    <td>${promotion.percentDiscount} %</td>
-                                    <td class="cod" id="status-${promotion.id}">${promotion.status}</td>
-                                </tr>
+                                    <tr class="promotion-row"
+                                        data-href="${pageContext.request.contextPath}/owner/promotion-details?id=${promotion.id}">
+                                        <td>${promotion.code}</td>
+                                        <td>${promotion.title}</td>
+                                        <td>${promotion.percentDiscount} %</td>
+                                        <td class="cod" id="status-${promotion.id}">${promotion.status}</td>
+                                    </tr>
                                 </c:if>
                             </c:forEach>
                             </tbody>
@@ -56,7 +53,6 @@
                         <table class="table table-hover promotion-data-table">
                             <thead>
                             <tr>
-                                <th>#</th>
                                 <th>Mã</th>
                                 <th>Tiêu Đề</th>
                                 <th>Số tiền giảm</th>
@@ -68,13 +64,11 @@
                             <tbody>
                             <c:forEach var="promotion" items="${promotions}">
                                 <c:if test="${promotion.type == 'VOUCHER'}">
-                                    <tr class="promotion-row" data-href="${pageContext.request.contextPath}/owner/promotion-details?id=${promotion.id}">
-                                        <td>
-                                            <img class="tbl-thumb" src="/assets/owner/img/product/1.jpg" alt="Product Image">
-                                        </td>
+                                    <tr class="promotion-row"
+                                        data-href="${pageContext.request.contextPath}/owner/promotion-details?id=${promotion.id}">
                                         <td>${promotion.code}</td>
                                         <td>${promotion.title}</td>
-                                        <td>${promotion.discountLimit} đ</td>
+                                        <td class="price-value">${promotion.discountLimit}</td>
                                         <td>
                                             <c:choose>
                                                 <c:when test="${promotion.quantity == -1}">
@@ -109,13 +103,15 @@
                             <tbody>
                             <c:forEach var="promotion" items="${promotions}">
                                 <c:if test="${promotion.type == 'FREESHIP'}">
-                                    <tr class="promotion-row" data-href="${pageContext.request.contextPath}/owner/promotion-details?id=${promotion.id}">
+                                    <tr class="promotion-row"
+                                        data-href="${pageContext.request.contextPath}/owner/promotion-details?id=${promotion.id}">
                                         <td>
-                                            <img class="tbl-thumb" src="/assets/owner/img/product/1.jpg" alt="Product Image">
+                                            <img class="tbl-thumb" src="/assets/owner/img/product/1.jpg"
+                                                 alt="Product Image">
                                         </td>
                                         <td>${promotion.code}</td>
                                         <td>${promotion.title}</td>
-                                        <td>${promotion.discountLimit} đ</td>
+                                        <td class="price-value">${promotion.discountLimit}</td>
                                         <td>
                                             <c:choose>
                                                 <c:when test="${promotion.quantity == -1}">
@@ -141,4 +137,27 @@
 </div>
 
 <script src="${pageContext.request.contextPath}/assets/owner/js/manage-promotion.js" defer></script>
+<script>
+    function formatCurrencyVND(value) {
+        return new Intl.NumberFormat('vi-VN', {
+            style: 'currency',
+            currency: 'VND',
+            minimumFractionDigits: 0,
+            maximumFractionDigits: 0
+        }).format(value);
+    }
 
+    [...document.querySelectorAll('.price-value')].forEach(el => {
+        console.log(el);
+        el.innerHTML = formatCurrencyVND(el.textContent.trim());
+
+        function formatCurrencyVND(value) {
+            return new Intl.NumberFormat('vi-VN', {
+                style: 'currency',
+                currency: 'VND',
+                minimumFractionDigits: 0,
+                maximumFractionDigits: 0
+            }).format(value);
+        }
+    });
+</script>

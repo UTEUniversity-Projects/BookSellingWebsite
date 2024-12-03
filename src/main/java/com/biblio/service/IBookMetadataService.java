@@ -7,4 +7,5 @@ import com.biblio.entity.BookMetadata;
 public interface IBookMetadataService {
     BookMetadata createBookMetadata(BookCreateGlobalRequest request);
     BookMetadata createBookMetadata(BookUpdateGlobalRequest request);
+    void deleteBookMetadata(Long id);
 }

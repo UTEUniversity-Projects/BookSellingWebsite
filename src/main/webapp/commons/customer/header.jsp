@@ -144,26 +144,28 @@
             success: function(response) {
                 if (response && response.length > 0) {
                     let notificationList = '';
+                    let countRead = 0;
 
-                    $.each(response, function(index, notification) {
+                    $.each(response.slice(0, 5), function(index, notification) {
                         const title = notification.title || "No title";
                         const content = notification.content || "No content";
                         const sentTime = notification.sentTime || "N/A";
                         const hyperlink = "${pageContext.request.contextPath}" + notification.hyperLink || "#";
                         const isRead = notification.status === "VIEWED";
+                        if (isRead === true) countRead++;
 
                         const li = $("<li>").attr("data-id", notification.id).addClass("px-4 py-2 notification-item");
                         li.html(`
-                            <a href="#" class="notification-link">
-                                <div class="flex gap-2 items-center">
-                                    <div class="flex-1">
-                                        <h4 class="w-full mb-1 font-medium title"></h4>
-                                        <p class="time"></p>
-                                        <p class="message"></p>
-                                    </div>
+                        <a href="#" class="notification-link">
+                            <div class="flex gap-2 items-center">
+                                <div class="flex-1">
+                                    <h4 class="w-full mb-1 font-medium title"></h4>
+                                    <p class="time"></p>
+                                    <p class="message"></p>
                                 </div>
-                            </a>
-                        `);
+                            </div>
+                        </a>
+                    `);
 
                         li.find(".title").text(title);
                         li.find(".time").text(sentTime);
@@ -179,7 +181,8 @@
                         $('.notification-body').append(li);
                     });
 
-                    $('.notification-count').text(response.length);
+
+                    $('.notification-count').text(response.length - countRead);
                 } else {
                     $('.notification-body').html('<li>Không có thông báo nào.</li>');
                 }

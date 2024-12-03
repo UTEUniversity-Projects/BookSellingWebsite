@@ -22,6 +22,7 @@ export async function uploadImage (dir, inputSelector, fileName = '') {
 		}
 		formData.append('dir', dir);
 		formData.append('fileName', fileName);
+		formData.append("typeAction", "nonContextPath");
 
 		return await $.ajax({
 			url: `${contextPath}/upload`,

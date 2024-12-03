@@ -1,14 +1,14 @@
-import { debounce } from '../../commons/js/debounce.js';
-import { toast } from './toast.js';
-import { formatCurrencyVND } from '../../commons/js/format-currency.js';
+import {debounce} from '../../commons/js/debounce.js';
+import {toast} from './toast.js';
+import {formatCurrencyVND} from '../../commons/js/format-currency.js';
 
 $(document).ready(function () {
-	// Add
-	$(document).on('click', '.add-to-cart-btn', function () {
-		var $this = $(this);
-		$this.prop('disabled', true);
-		const bookId = $(this).closest('.cr-product-card, .modal, .section-product').data("book-id");
-		const quantity = $(this).data("quantity") || $(this).closest(".cr-add-card").find(".cr-qty-main .quantity").val();
+    // Add
+    $(document).on('click', '.add-to-cart-btn', function () {
+        var $this = $(this);
+        $this.prop('disabled', true);
+        const bookId = $(this).closest('.cr-product-card, .modal, .section-product').data("book-id");
+        const quantity = $(this).data("quantity") || $(this).closest(".cr-add-card").find(".cr-qty-main .quantity").val();
 
 		console.log({
 			bookId: bookId,
@@ -55,22 +55,21 @@ $(document).ready(function () {
 	});
 	// Load
 	$('#view-cart-btn').on('click', function () {
+        const cartItemsContainer = $('.crcart-pro-items');
+        $('.cart-loading').removeClass('hidden');
+        $('.cr-cart-top').addClass('hidden');
+        $('.view-cart').addClass('hidden');
 
-		const cartItemsContainer = $('.crcart-pro-items');
-		$('.cart-loading').removeClass('hidden');
-		$('.cr-cart-top').addClass('hidden');
-		$('.view-cart').addClass('hidden');
+        $.ajax({
+            url: `${contextPath}/api/customer/load-cart-sidebar`,
+            type: 'GET',
+            success: function (response) {
 
-		$.ajax({
-			url: `${contextPath}/api/customer/load-cart-sidebar`,
-			type: 'GET',
-			success: function (response) {
+                cartItemsContainer.empty();
 
-				cartItemsContainer.empty();
-
-				if (response.cart && response.cart.cartItems && response.cart.cartItems.length > 0) {
-					response.cart.cartItems.forEach(cartItem => {
-						const itemHTML = `
+                if (response.cart && response.cart.cartItems && response.cart.cartItems.length > 0) {
+                    response.cart.cartItems.forEach(cartItem => {
+                        const itemHTML = `
                          <li data-cart-item-id="${cartItem.id}">
                              <a href="${contextPath}/book?id=${cartItem.bookId}" class="crside_pro_img">
                                  <img src="${contextPath}${cartItem.imageUrl}" alt="${cartItem.title}" />
@@ -81,8 +80,8 @@ $(document).ready(function () {
                                  </a>
                                  <span class="cart-price">
                                		${cartItem.salePrice === cartItem.sellingPrice
-									? `<span class="new-price price-value">${formatCurrencyVND(cartItem.sellingPrice)}</span>`
-									: `<span class="new-price price-value">${formatCurrencyVND(cartItem.salePrice)}</span>
+                            ? `<span class="new-price price-value">${formatCurrencyVND(cartItem.sellingPrice)}</span>`
+                            : `<span class="new-price price-value">${formatCurrencyVND(cartItem.salePrice)}</span>
 			   						<span class="old-price price-value">${formatCurrencyVND(cartItem.sellingPrice)}</span>`}
                                  </span>
                                  <div class="cr-cart-qty">
@@ -102,20 +101,20 @@ $(document).ready(function () {
                              </div>
                          </li>
                      `;
-						cartItemsContainer.append(itemHTML);
-					});
-					$('.view-cart').removeClass('hidden');
-				} else {
-					cartItemsContainer.append(`<div class="message-container mt-[50%]">
+                        cartItemsContainer.append(itemHTML);
+                    });
+                    $('.view-cart').removeClass('hidden');
+                } else {
+                    cartItemsContainer.append(`<div class="message-container mt-[50%]">
                                     <img src="https://cdn-icons-png.flaticon.com/512/2762/2762885.png" alt="">
                                     <p>Giỏ hàng của bạn đang trống</p>
                                     <a href="home">
                                         <button class="cr-button">Mua ngay</button>
                                     </a>
                                 </div>`);
-				}
-			},
-			error: function (xhr, status, error) {
+                }
+            },
+            error: function (xhr, status, error) {
 
 			},
 			complete: function () {
@@ -208,28 +207,28 @@ $(document).ready(function () {
 	countCartItem();
 });
 
-function countCartItem () {
-	$.ajax({
-		url: `${contextPath}/api/customer/count-cart-item`,
-		type: 'GET',
-		success: function (response) {
-			const $cart = $('.cart');
-			$cart.find('.cart-item-count').text(response.count);
-		},
-		error: function (xhr, status, error) {
-			console.error('Error: ', xhr.responseText);
-		}
-	});
+function countCartItem() {
+    $.ajax({
+        url: `${contextPath}/api/customer/count-cart-item`,
+        type: 'GET',
+        success: function (response) {
+            const $cart = $('.cart');
+            $cart.find('.cart-item-count').text(response.count);
+        },
+        error: function (xhr, status, error) {
+            console.error('Error: ', xhr.responseText);
+        }
+    });
 }
 
-function addTooCartAnimation () {
-	const cart = $('.cart i');
-	setTimeout(() => {
-		cart.addClass('shake');
-		setTimeout(() => {
-			cart.removeClass('shake');
-		}, 1000);
-	}, 1000);
+function addTooCartAnimation() {
+    const cart = $('.cart i');
+    setTimeout(() => {
+        cart.addClass('shake');
+        setTimeout(() => {
+            cart.removeClass('shake');
+        }, 1000);
+    }, 1000);
 }
 
 function calculateTotal() {
