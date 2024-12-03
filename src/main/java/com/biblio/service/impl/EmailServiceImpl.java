@@ -10,8 +10,8 @@ import java.util.Properties;
 public class EmailServiceImpl implements IEmailService {
     private static final String SMTP_HOST = "smtp.gmail.com";
     private static final String SMTP_PORT = "587";
-    private static final String USERNAME = "vubaolong1484@gmail.com";
-    private static final String PASSWORD = "cezztfksvcvwnibn";
+    private static final String USERNAME = "biblio.store.vn@gmail.com";
+    private static final String PASSWORD = "llgybrhsavjdhqlo";
 
     private Session createEmailSession() {
         Properties properties = new Properties();

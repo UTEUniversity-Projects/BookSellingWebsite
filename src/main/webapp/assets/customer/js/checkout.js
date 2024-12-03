@@ -217,7 +217,7 @@ $(document).ready(() => {
 			return;
 		}
 
-		const text = `CHUYEN KHOAN DON HANG`;
+		const text = `CHUYEN KHOAN DON HANG ${Math.floor(Math.random() * 1000)}`;
 		const amount = $("#price-total")[0].dataset.price;
 
 		checkout.classList.add('active');

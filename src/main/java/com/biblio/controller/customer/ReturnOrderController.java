@@ -1,15 +1,20 @@
 package com.biblio.controller.customer;
 
+import com.biblio.dto.request.NotificationInsertRequest;
 import com.biblio.dto.request.ReturnBookRequest;
 import com.biblio.dto.request.ReturnOrderRequest;
 import com.biblio.dto.request.ReviewRequest;
 import com.biblio.dto.response.AccountGetResponse;
+import com.biblio.dto.response.NotificationGetResponse;
 import com.biblio.dto.response.OrderCustomerResponse;
 import com.biblio.entity.ReturnBook;
+import com.biblio.enumeration.ENotificationType;
 import com.biblio.enumeration.EOrderStatus;
 import com.biblio.enumeration.EReasonReturn;
+import com.biblio.service.IAccountService;
 import com.biblio.service.IOrderService;
 import com.biblio.service.IReturnBookService;
+import com.biblio.service.IStaffService;
 import com.biblio.utils.HttpUtil;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
@@ -43,6 +48,9 @@ public class ReturnOrderController extends HttpServlet {
     private IReturnBookService returnBookService;
     @Inject
     private IOrderService orderService;
+    @Inject
+    private IStaffService staffService;
+
 
     /**
      * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
@@ -104,6 +112,13 @@ public class ReturnOrderController extends HttpServlet {
         boolean success = returnBookService.saveReturnOrder(returnOrderRequest);
 
         if (success) {
+            NotificationInsertRequest notificationInsertRequest = new NotificationInsertRequest();
+            notificationInsertRequest.setTitle("Yêu cầu hoàn trả đơn hàng");
+            notificationInsertRequest.setType(ENotificationType.ORDER);
+            notificationInsertRequest.setContent("Bạn có một yêu cầu hoàn trả lại đơn hàng. Mã đơn hàng là " + returnOrderRequest.getOrderId());
+            notificationInsertRequest.setHyperLink("/staff/order-details?id=" + returnOrderRequest.getOrderId());
+
+            staffService.addNewNotification(notificationInsertRequest);
             message = "Yêu cầu của bạn đã được gửi thành công!";
             type = "success";
         } else {
