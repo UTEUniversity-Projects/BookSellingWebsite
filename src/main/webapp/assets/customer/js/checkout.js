@@ -171,7 +171,6 @@ $(document).ready(() => {
 		ACCOUNT_NAME: 'TRANG KIM LOI'
 	};
 
-	const text = `TEST ${Math.floor(Math.random() * 1000)}`;
 	let timeOut;
 	let interval;
 	let isSuccess = false;
@@ -218,7 +217,8 @@ $(document).ready(() => {
 			return;
 		}
 
-		const amount = document.querySelector('#price-total').dataset.price;
+		const text = `CHUYEN KHOAN DON HANG`;
+		const amount = $("#price-total")[0].dataset.price;
 
 		checkout.classList.add('active');
 		checkoutQR.src = '';
