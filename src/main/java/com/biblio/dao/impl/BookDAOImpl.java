@@ -41,6 +41,10 @@ public class BookDAOImpl extends GenericDAOImpl<Book> implements IBookDAO {
     }
 
     @Override
+    public void createBook(Book book) {
+        super.insert(book);
+    }
+
     public List<Book> findBooksByTemplateId(Long bookTemplateId) {
         // Truy vấn JPQL với tham số bookTemplateId
         String jpql = "SELECT b FROM Book b WHERE b.bookTemplate.id = :bookTemplateId";
@@ -52,10 +56,6 @@ public class BookDAOImpl extends GenericDAOImpl<Book> implements IBookDAO {
         // Trả về kết quả dưới dạng danh sách Book
         return super.findByJPQL(jpql, params);
     }
-
-
-
-
 
     @Override
     public void addBook(Book book) {
@@ -95,31 +95,6 @@ public class BookDAOImpl extends GenericDAOImpl<Book> implements IBookDAO {
         Map<String, Object> params = new HashMap<>();
         params.put("bookTemplateId", request.getProductId());
         return super.findByJPQLPaginated(jpql, 1, request.getQuantity(), params);
-    }
-
-
-    public static void main(String[] args) {
-        BookDAOImpl dao = new BookDAOImpl();
-//        List<Book> books = dao.findAll();
-//        System.out.println(books);
-//
-//        Map<BookTemplate, Long> countByTemplate = books.stream()
-//                .collect(Collectors.groupingBy(Book::getBookTemplate, Collectors.counting()));
-//
-//        countByTemplate.forEach((template, count) -> {
-//            System.out.println("BookTemplate Name: " + template.getBooks().);
-//            System.out.println("Book Count: " + count);
-//        });
-        CheckoutItemRequest checkoutItemRequest = CheckoutItemRequest.builder()
-                .productId(2L)
-                .quantity(50)
-                .build();
-        List<Book> list = dao.findByBookTemplateIdAndQuantity(checkoutItemRequest);
-
-        for (Book book : list) {
-            System.out.println(book.toString());
-        }
-
     }
 
 }

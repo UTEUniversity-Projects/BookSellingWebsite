@@ -1,91 +1,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
-<link href='https://fonts.googleapis.com/css?family=Nunito' rel='stylesheet'>
-<style>
-    .page-title {
-        margin-right: 20px;
-    }
-    table.rounded-table {
-        border-radius: 1.5%;
-        overflow: hidden;
-    }
-    table td span.row-book-sold {
-        background-color: #d3f4e5;
-        color: #30cb83;
-        font-weight: bold;
-        border-radius: 10px;
-        padding: 5px;
-    }
-    table td div span.row-highlight {
-        font-family: 'Nunito', sans-serif;
-        font-size: 120%;
-        font-weight: bold;
-        color: #2b3647;
-    }
-    table td div span.row-sub-content {
-        font-family: "Be Vietnam Pro", sans-serif;
-        font-size: 90%;
-    }
-    .card-3d-deep {
-        background: #fff;
-        border-radius: 10px;
-        padding: 20px;
-        position: relative;
-        overflow: visible;
-        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1),
-        0 8px 10px rgba(0, 0, 0, 0.1),
-        0 16px 24px rgba(0, 0, 0, 0.1);
-        transition: transform 0.3s ease, box-shadow 0.3s ease;
-    }
-    .card-3d-deep:hover {
-        box-shadow: 0 6px 8px rgba(0, 0, 0, 0.1),
-        0 12px 20px rgba(0, 0, 0, 0.15),
-        0 24px 32px rgba(0, 0, 0, 0.2);
-    }
-    .image-shadow {
-         transition: transform 0.3s ease, box-shadow 0.3s ease;
-         box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-         object-fit: cover;
-    }
-    .image-shadow:hover {
-        transform: translateY(-5px);
-        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
-        object-fit: cover;
-    }
-    table thead {
-        pointer-events: none;
-    }
-    .responsive-table {
-        width: 100%;
-        border-collapse: separate;
-        border-spacing: 0;
-
-        td {
-            padding: 10px;
-            text-align: left;
-            position: relative;
-            background-color: #fff;
-            border: none;
-        }
-
-        tr {
-            position: relative;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-        }
-    }
-    .dropdown-menu {
-        position: absolute;
-        z-index: 1050;
-        display: none;
-        transform: translate3d(0, 0, 0);
-        background-color: #fff;
-        box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
-    }
-    .dropdown-menu.show {
-        display: block;
-    }
-</style>
 <!-- main content -->
 <div class="cr-main-content">
     <div class="container-fluid">
@@ -96,7 +11,7 @@
                     <div class="page-title">
                         <h5><b>Danh sách tác giả</b></h5>
                     </div>
-                    <a href="${pageContext.request.contextPath}/owner/author-create" class="cr-btn default-btn color-primary">
+                    <a href="${pageContext.request.contextPath}/owner/author/create" class="cr-btn default-btn color-primary">
                         Thêm tác giả
                     </a>
                 </div>
@@ -111,38 +26,68 @@
                 <div class="cr-card card-default product-list card-3d-deep">
                     <div class="cr-card-content">
                         <div class="table-responsive">
-
                             <table id="customer-data-table" class="item-data-table table table-hover rounded-table responsive-table">
                                 <thead class="table-secondary">
                                     <tr>
                                         <th style="width: 7%">#</th>
                                         <th style="width: 20%;">Họ và tên</th>
-                                        <th style="width: 8%;">Tác phẩm</th>
-                                        <th style="width: 12%;">Sách đã bán</th>
-                                        <th style="width: 43%;">Giới thiệu</th>
+                                        <th style="width: 8%;">Sản phẩm</th>
+                                        <th style="width: 8%;">Đánh giá</th>
+                                        <th style="width: 10%;">Doanh thu</th>
+                                        <th style="width: 37%;">Giới thiệu</th>
                                         <th style="width: 10%;">Thao tác</th>
                                     </tr>
                                 </thead>
-
                                 <tbody>
-                                    <c:forEach var="item" items="${authors}">
-                                        <tr class="item-row" data-id="${item.id}">
+                                    <c:forEach var="author" items="${authors}">
+                                        <tr class="item-row" id="row-${author.id}" data-id="${author.id}">
                                             <td>
                                                 <img
                                                         class="tbl-thumb image-shadow rounded-3"
-                                                        src="${pageContext.request.contextPath}${item.avatar}"
+                                                        src="${pageContext.request.contextPath}${author.avatar}"
                                                         alt="Author Image"
                                                 />
                                             </td>
                                             <td>
                                                 <div>
-                                                    <span class="row-highlight">${item.name}</span><br>
-                                                    <span class="row-sub-content">Tham gia: ${item.joinAt}</span>
+                                                    <span class="row-highlight">${author.name}</span><br>
+                                                    <span class="row-sub-content">Tham gia: ${author.joinAt}</span>
                                                 </div>
                                             </td>
-                                            <td><span class="badge bg-primary">999</span></td>
-                                            <td><span class="row-book-sold">10.000.000</span></td>
-                                            <td class="row-introduction" data-max-length="150">${item.introduction}</td>
+                                            <td><span class="badge bg-primary">${author.works}</span></td>
+                                            <td>
+                                                <div class="d-flex align-items-center">
+                                                    <h6 class="avg-rate">${author.avgRate}</h6>
+                                                    <i class="ri-star-fill ps-2 start-rate"></i>
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <div class="label-card d-flex align-items-center">
+                                                    <c:choose>
+                                                        <c:when test="${author.perValueBooksSold == 0}">
+                                                            <div class="up mt-0 d-flex">
+                                                                <i class="ri-arrow-up-line me-1 icon-growth non-growth"></i>
+                                                                <p class="non-growth">${author.perValueBooksSold}%</p>
+                                                            </div>
+                                                        </c:when>
+                                                        <c:when test="${author.perValueBooksSold > 0}">
+                                                            <div class="up mt-0 d-flex">
+                                                                <i class="ri-arrow-up-line me-1 icon-growth"></i>
+                                                                <p class="up-growth">${author.perValueBooksSold}%</p>
+                                                            </div>
+                                                        </c:when>
+                                                        <c:otherwise>
+                                                            <div class="down mt-0 d-flex">
+                                                                <i class="ri-arrow-down-line me-1 icon-growth"></i>
+                                                                <p class="down-growth">${-author.perValueBooksSold}%</p>
+                                                            </div>
+                                                        </c:otherwise>
+                                                    </c:choose>
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <span class="row-introduction">${author.introduction}</span>
+                                            </td>
                                             <td>
                                                 <div class="d-flex justify-content-center">
                                                     <button type="button"
@@ -152,9 +97,9 @@
                                                         <span class="sr-only"><i class="ri-settings-3-line"></i></span>
                                                     </button>
                                                     <div class="dropdown-menu">
-                                                        <a class="dropdown-item" href="#" onclick="rowAction(${item.id}, 'view'); return false;" data-value="view">Chi tiết</a>
-                                                        <a class="dropdown-item" href="#" onclick="rowAction(${item.id}, 'update'); return false;" data-value="update">Chỉnh sửa</a>
-                                                        <a class="dropdown-item" href="#" onclick="rowAction(${item.id}, 'delete'); return false;" data-value="delete">Xóa</a>
+                                                        <a class="dropdown-item" href="#" onclick="rowAction(${author.id}, 'view'); return false;" data-value="view">Chi tiết</a>
+                                                        <a class="dropdown-item" href="#" onclick="rowAction(${author.id}, 'update'); return false;" data-value="update">Cập nhật</a>
+                                                        <a class="dropdown-item" href="#" onclick="rowAction(${author.id}, 'delete'); return false;" data-value="delete">Xóa</a>
                                                     </div>
                                                 </div>
                                             </td>
@@ -204,3 +149,108 @@
 <script src="${pageContext.request.contextPath}/assets/owner/js/event-handler/table-event.js" defer></script>
 <script src="${pageContext.request.contextPath}/assets/owner/js/makeup-data/format-data.js" defer></script>
 <script src="${pageContext.request.contextPath}/assets/owner/js/manage/manage-author.js" defer></script>
+
+<style>
+    .page-title {
+        margin-right: 20px;
+    }
+    .avg-rate {
+        margin: 0;
+        font-size: 110%;
+        font-weight: bold;
+        color: #2b3647;
+        font-family: Nunito, sans-serif
+    }
+    .start-rate {
+        color: #FFD43B;
+        font-size: 20px;
+    }
+    .non-growth {
+        color: slategray;
+    }
+    .up-growth {
+        color: #2bbb93;
+    }
+    .down-growth {
+        color: #f90c4c;
+    }
+    .icon-growth {
+        font-size: 120%;
+    }
+    .row-introduction {
+        font-size: 14px;
+        color: #7a7a7a;
+    }
+    table.rounded-table {
+        border-radius: 1.5%;
+        overflow: hidden;
+    }
+    table td div span.row-highlight {
+        font-family: 'Nunito', sans-serif;
+        font-size: 120%;
+        font-weight: bold;
+        color: #2b3647;
+    }
+    table td div span.row-sub-content {
+        font-family: "Be Vietnam Pro", sans-serif;
+        font-size: 90%;
+    }
+    .card-3d-deep {
+        background: #fff;
+        border-radius: 10px;
+        padding: 20px;
+        position: relative;
+        overflow: visible;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1),
+        0 8px 10px rgba(0, 0, 0, 0.1),
+        0 16px 24px rgba(0, 0, 0, 0.1);
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    .card-3d-deep:hover {
+        box-shadow: 0 6px 8px rgba(0, 0, 0, 0.1),
+        0 12px 20px rgba(0, 0, 0, 0.15),
+        0 24px 32px rgba(0, 0, 0, 0.2);
+    }
+    .image-shadow {
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        object-fit: cover;
+    }
+    .image-shadow:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+        object-fit: cover;
+    }
+    table thead {
+        pointer-events: none;
+    }
+    .responsive-table {
+        width: 100%;
+        border-collapse: separate;
+        border-spacing: 0;
+
+        td {
+            padding: 10px;
+            text-align: left;
+            position: relative;
+            background-color: #fff;
+            border: none;
+        }
+
+        tr {
+            position: relative;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+    }
+    .dropdown-menu {
+        position: absolute;
+        z-index: 1050;
+        display: none;
+        transform: translate3d(0, 0, 0);
+        background-color: #fff;
+        box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    }
+    .dropdown-menu.show {
+        display: block;
+    }
+</style>

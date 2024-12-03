@@ -13,4 +13,8 @@ public enum EGender {
         this.displayName = displayName;
     }
 
+    public String getDescription() {
+        return displayName;
+    }
+
 }

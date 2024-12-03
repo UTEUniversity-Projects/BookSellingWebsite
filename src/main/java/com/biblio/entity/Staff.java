@@ -31,7 +31,7 @@ public class Staff extends User implements Serializable {
     @OneToMany(mappedBy = "staff")
     private Set<ResponseSupport> responseSupports = new HashSet<>();
 
-    @OneToMany(mappedBy = "staff", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "staff", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private Set<Address> addresses;
 
     // endregion

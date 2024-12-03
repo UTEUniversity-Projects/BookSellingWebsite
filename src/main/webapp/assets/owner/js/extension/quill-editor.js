@@ -1,18 +1,14 @@
 document.addEventListener("DOMContentLoaded", function() {
-    const quill = new Quill('#editor', {
-        theme: 'snow'
-    });
 
     document.getElementById('review-btn').addEventListener('click', function(event) {
         event.preventDefault();
-        document.getElementById('review-content').innerHTML = quill.root.innerHTML;
+        document.getElementById('review-content').innerHTML = editor.root.innerHTML;
         document.getElementById('review-container').style.display = 'block';
     });
 
     document.getElementById('save-btn').addEventListener('click', function() {
-        const editorContent = quill.root.innerHTML;
+        const editorContent = editor.root.innerHTML;
 
-        // Gửi nội dung qua Fetch API (AJAX) mà không reload trang
         fetch('/save-content', {
             method: 'POST',
             headers: {

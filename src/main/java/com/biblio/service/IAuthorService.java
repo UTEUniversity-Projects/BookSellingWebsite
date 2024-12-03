@@ -1,14 +1,21 @@
 package com.biblio.service;
 
-import com.biblio.dto.request.AuthorRequest;
-import com.biblio.dto.response.AuthorResponse;
+import com.biblio.dto.request.AuthorCreateRequest;
+import com.biblio.dto.request.AuthorDeleteRequest;
+import com.biblio.dto.request.AuthorUpdateRequest;
+import com.biblio.dto.response.AuthorAnalysisResponse;
+import com.biblio.dto.response.AuthorLineResponse;
+import com.biblio.dto.response.AuthorProfileResponse;
+import com.biblio.entity.Author;
 
 import java.util.List;
 
 public interface IAuthorService {
-    List<AuthorResponse> findAll();
-    AuthorResponse findById(Long id);
-    void addAuthor(AuthorRequest authorRequest);
-    void updateAuthor(AuthorRequest authorRequest);
-    void deleteAuthor(Long id);
+    List<AuthorLineResponse> getAll();
+    AuthorProfileResponse getProfileById(Long id);
+    AuthorAnalysisResponse getAnalysisById(Long id);
+    Author create(AuthorCreateRequest authorRequest);
+    void update(AuthorUpdateRequest authorRequest);
+    void delete(AuthorDeleteRequest authorDeleteRequest);
+    Integer countBookTemplate(AuthorDeleteRequest id);
 }

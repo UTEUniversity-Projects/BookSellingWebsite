@@ -4,12 +4,16 @@ import com.biblio.dao.IGenericDAO;
 import com.biblio.jpaconfig.JpaConfig;
 
 import javax.persistence.EntityManager;
+import javax.persistence.EntityTransaction;
+import javax.persistence.Query;
 import javax.persistence.TypedQuery;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 public class GenericDAOImpl<T> implements IGenericDAO<T> {
 
@@ -240,6 +244,125 @@ public class GenericDAOImpl<T> implements IGenericDAO<T> {
             return query.getSingleResult();
         } catch (Exception e) {
             throw new RuntimeException("Error while counting entities by JPQL", e);
+        } finally {
+            closeEntityManager(em);
+        }
+    }
+
+    @Override
+    public void executeNativeQuery(String sql, Map<String, Object> params) {
+        EntityManager em = JpaConfig.getEntityManager();
+        EntityTransaction transaction = em.getTransaction();
+        try {
+            transaction.begin();
+
+            Query query = em.createNativeQuery(sql);
+
+            if (params != null) {
+                for (Map.Entry<String, Object> entry : params.entrySet()) {
+                    query.setParameter(entry.getKey(), entry.getValue());
+                }
+            }
+
+            int rowsAffected = query.executeUpdate();
+            System.out.println("Rows affected: " + rowsAffected);
+
+            transaction.commit();
+        } catch (Exception e) {
+            if (transaction.isActive()) {
+                transaction.rollback();
+            }
+            throw new RuntimeException("Error while execute Native SQL (INSERT, UPDATE, DELETE)", e);
+        } finally {
+            closeEntityManager(em);
+        }
+    }
+
+    @Override
+    public long countByNativeQuery(String sql) {
+        EntityManager em = JpaConfig.getEntityManager();
+        try {
+            // Create a native query
+            Query query = em.createNativeQuery(sql);
+
+            // Execute the query and return the result as a long value
+            Object result = query.getSingleResult();
+            return result != null ? ((Number) result).longValue() : 0;
+        } catch (Exception e) {
+            throw new RuntimeException("Error while counting entities by Native SQL", e);
+        } finally {
+            closeEntityManager(em);
+        }
+    }
+
+    @Override
+    public long countByNativeQuery(String sql, Map<String, Object> params) {
+        EntityManager em = JpaConfig.getEntityManager();
+        try {
+            // Create a native query
+            Query query = em.createNativeQuery(sql);
+
+            // Set parameters using the Map to avoid SQL Injection
+            if (params != null) {
+                for (Map.Entry<String, Object> entry : params.entrySet()) {
+                    query.setParameter(entry.getKey(), entry.getValue());
+                }
+            }
+
+            // Execute the query and return the result as a long value
+            Object result = query.getSingleResult();
+            return result != null ? ((Number) result).longValue() : 0;
+        } catch (Exception e) {
+            throw new RuntimeException("Error while counting entities by Native SQL with parameters", e);
+        } finally {
+            closeEntityManager(em);
+        }
+    }
+
+    @Override
+    public <T> List<T> findByNativeQuery(String sql, Map<String, Object> params, Class<T> resultType) {
+        EntityManager em = JpaConfig.getEntityManager();
+        try {
+            // Create a native query
+            Query query = em.createNativeQuery(sql);
+
+            // Set parameters using the Map to avoid SQL Injection
+            if (params != null) {
+                for (Map.Entry<String, Object> entry : params.entrySet()) {
+                    query.setParameter(entry.getKey(), entry.getValue());
+                }
+            }
+
+            // Execute the query and return the result as a list
+            List<?> result = query.getResultList();
+
+            // If no result, return an empty list instead of null
+            if (result == null || result.isEmpty()) {
+                return new ArrayList<>(); // Return empty list if no results
+            }
+
+            // Convert the result to the expected type
+            return result.stream()
+                    .map(resultType::cast)
+                    .collect(Collectors.toList()); // Collect to List
+        } catch (Exception e) {
+            throw new RuntimeException("Error while fetching entities by Native SQL with parameters", e);
+        } finally {
+            closeEntityManager(em);
+        }
+    }
+
+    @Override
+    public T insert(T entity) {
+        EntityManager em = JpaConfig.getEntityManager();
+        try {
+            em.getTransaction().begin();
+            T managedEntity = em.merge(entity);
+            em.getTransaction().commit();
+            return managedEntity;
+        } catch (Exception e) {
+            em.getTransaction().rollback();
+            throw new RuntimeException("Error while inserting entity", e);
         } finally {
             closeEntityManager(em);
         }

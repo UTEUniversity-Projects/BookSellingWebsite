@@ -8,13 +8,13 @@ import lombok.*;
 @Setter
 @Builder
 public class CheckoutItemResponse {
-    private Long bookTemplateId;
-    private String title;
-    private String imagePath;
-    private int quantity;
-    private double sellingPrice;
-    private double totalPrice;
-    private double discountPercent;
+    Long bookTemplateId;
+    String title;
+    String imagePath;
+    int quantity;
+    double sellingPrice;
+    double totalPrice;
+    double discountPercent;
 
     public void calTotalPrice() {
         this.totalPrice = sellingPrice * quantity * (1 - discountPercent / 100);

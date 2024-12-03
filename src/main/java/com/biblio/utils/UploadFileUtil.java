@@ -111,5 +111,40 @@ public class UploadFileUtil {
         return servletContext.getContextPath() + "/" + UPLOAD_DIR + "/" + dir + "/" + finalFileName;
     }
 
+    public static String UploadImageNonContextPath(Part filePart, ServletContext servletContext, String dir, String fileName) {
+        if (filePart == null || filePart.getSize() == 0) {
+            throw new IllegalArgumentException("File is not allowed to be empty!");
+        }
+
+        // Get the original file name and its extension
+        String originalFileName = Paths.get(filePart.getSubmittedFileName()).getFileName().toString();
+
+        // If fileName is provided, use it, otherwise keep the original file name without extension
+        String finalFileName = (fileName != null && !fileName.isEmpty()) ? fileName : originalFileName;
+
+        String absolutePath = servletContext.getRealPath("") + UPLOAD_DIR + "/" + dir;
+        Path uploadPath = Paths.get(absolutePath);
+
+        // Create the directory if it doesn't exist
+        if (!Files.exists(uploadPath)) {
+            try {
+                Files.createDirectories(uploadPath);
+            } catch (IOException e) {
+                throw new RuntimeException("Error while creating upload directory!\n" + e.getMessage());
+            }
+        }
+
+        // Use finalFileName for the uploaded file
+        Path filePath = uploadPath.resolve(finalFileName);
+
+        try (InputStream inputStream = filePart.getInputStream()) {
+            Files.copy(inputStream, filePath, java.nio.file.StandardCopyOption.REPLACE_EXISTING);
+        } catch (IOException e) {
+            throw new RuntimeException("Error while uploading image!\n" + e.getMessage());
+        }
+
+        // Return the path with the final file name
+        return "/" + UPLOAD_DIR + "/" + dir + "/" + finalFileName;
+    }
 }
 
