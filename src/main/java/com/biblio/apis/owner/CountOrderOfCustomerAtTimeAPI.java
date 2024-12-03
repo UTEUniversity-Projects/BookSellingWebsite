@@ -70,7 +70,7 @@ public class CountOrderOfCustomerAtTimeAPI extends HttpServlet {
                 return;
             }
 
-            List<CountOrderOfCustomerResponse> countOrderOfCustomer = orderService.getCountOrderOfCustomerAtTime(startTime, endTime);
+            List<CountOrderOfCustomerResponse> countOrderOfCustomer = orderService.rateReturnPurchase(startTime, endTime);
 
             List<Map<String, Object>> countOrderOfCustomerJsonList = countOrderOfCustomer.stream()
                     .map(item -> {

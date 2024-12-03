@@ -129,7 +129,7 @@ public class OrderServiceImpl implements IOrderService {
     }
 
     @Override
-    public List<RevenueResponse> getListRevenueAtTime(LocalDateTime start, LocalDateTime end) {
+    public List<RevenueResponse> revenueStatistics(LocalDateTime start, LocalDateTime end) {
         List<RevenueResponse> revenueResponse = new ArrayList<>();
         List<Order> orders = orderDAO.findAllForManagement();
 
@@ -268,7 +268,7 @@ public class OrderServiceImpl implements IOrderService {
         return filteredOrderResponses;
     }
 
-    public List<CountBookSoldResponse> getListCountBookSoldAtTime(LocalDateTime start, LocalDateTime end) {
+    public List<CountBookSoldResponse> topBookSelling(LocalDateTime start, LocalDateTime end) {
         List<BookSoldResponse> ListBookSold = new ArrayList<>();
         List<Order> list = orderDAO.findAllForManagement();
         for (Order order : list) {
@@ -289,7 +289,7 @@ public class OrderServiceImpl implements IOrderService {
     }
 
     @Override
-    public List<CountOrderOfCustomerResponse> getCountOrderOfCustomerAtTime(LocalDateTime start, LocalDateTime end) {
+    public List<CountOrderOfCustomerResponse> rateReturnPurchase(LocalDateTime start, LocalDateTime end) {
         List<OrderOfCustomerResponse> orderOfCustomerResponse = new ArrayList<>();
         List<CountOrderOfCustomerResponse> countOrderOfCustomerResponses = new ArrayList<>();
         List<Order> list = orderDAO.findAllForManagement();
@@ -325,7 +325,7 @@ public class OrderServiceImpl implements IOrderService {
     }
   
     @Override
-    public List<OrderReturnAtTimeResponse> getListOrderReturnAtTime(LocalDateTime start, LocalDateTime end) {
+    public List<OrderReturnAtTimeResponse> rateReturn(LocalDateTime start, LocalDateTime end) {
         List<OrderReturnAtTimeResponse> orderReturnAtTimeResponses = new ArrayList<>();
         List<Order> list = orderDAO.findAllForManagement();
 

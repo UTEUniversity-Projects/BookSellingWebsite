@@ -72,7 +72,7 @@ public class GetListRevenueAPI extends HttpServlet {
                 return;
             }
 
-            List<RevenueResponse> revenueList = orderService.getListRevenueAtTime(startTime, endTime);
+            List<RevenueResponse> revenueList = orderService.revenueStatistics(startTime, endTime);
 
             List<Map<String, Object>> revenueJsonList = revenueList.stream()
                     .map(item -> {
