@@ -6,6 +6,7 @@ import com.biblio.service.ICustomerService;
 import com.biblio.service.IOrderService;
 import com.biblio.service.IPromotionTemplateService;
 import com.biblio.service.IReturnBookService;
+import com.biblio.utils.OrderUtil;
 
 import javax.inject.Inject;
 import javax.servlet.ServletException;
@@ -24,17 +25,12 @@ import java.util.List;
 public class OrderDetailController extends HttpServlet {
     @Serial
     private static final long serialVersionUID = 1L;
-    @Inject
-    IOrderService orderService;
 
     @Inject
     IReturnBookService returnBookService;
 
     @Inject
-    IPromotionTemplateService promotionTemplateService;
-
-    @Inject
-    private ICustomerService customerService;
+    private OrderUtil orderUtil;
 
     /**
      * @see HttpServlet#HttpServlet()
@@ -50,7 +46,7 @@ public class OrderDetailController extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         AccountGetResponse account = (AccountGetResponse) request.getSession().getAttribute("account");
         if (account == null) {
-            response.sendRedirect("/login");
+            response.sendRedirect(request.getContextPath() + "/login");
             return;
         }
 
@@ -61,27 +57,11 @@ public class OrderDetailController extends HttpServlet {
         }
 
         Long orderId = Long.parseLong(orderIdParam);
-        OrderDetailsManagementResponse orderDetail = orderService.getOrderDetailsManagementResponse(orderId);
+        OrderDetailsManagementResponse orderDetail = orderUtil.getOrderDetails(orderId);
         if (orderDetail == null) {
-            System.out.println("Order not found for ID: " + orderId);
             response.sendRedirect(request.getContextPath() + "/order");
             return;
         }
-
-        List<DiscountResponse> discounts = promotionTemplateService.getAllDiscounts();
-        for (OrderProductResponse product : orderDetail.getProducts()) {
-            double discount = promotionTemplateService.percentDiscount(product.getBookTemplateId(), discounts);
-            product.setDiscountPercent(discount);
-            product.calTotalPrice();
-        }
-
-//        for (OrderProductResponse product : orderDetail.getProducts()) {
-//            double discount = promotionTemplateService.percentDiscountOfBook(product.getBookTemplateId());
-//            product.setDiscountPercent(discount);
-//            product.calTotalPrice();
-//        }
-        orderDetail.updateTotalPrice();
-        orderDetail.updateFinalPrice();
 
         if (orderDetail.getStatus() == EOrderStatus.REQUEST_REFUND || orderDetail.getStatus() == EOrderStatus.REFUNDED) {
             ReturnBookManagementResponse returnBook = returnBookService.findReturnBookByOrderId(orderId);
@@ -90,20 +70,6 @@ public class OrderDetailController extends HttpServlet {
         request.setAttribute("orderDetail", orderDetail);
         request.getRequestDispatcher("/views/customer/order-detail.jsp").forward(request, response);
 
-//        OrderCustomerResponse orderDetail = orderService.findOrderByIdCustomer(orderId);
-//
-//        if (orderDetail == null) {
-//            System.out.println("Order not found for ID: " + orderId);
-//            response.sendRedirect(request.getContextPath() + "/order");
-//            return;
-//        }
-//
-//
-//        // Truyền thông tin đơn hàng vào JSP
-//        request.setAttribute("orderDetail", orderDetail);
-//
-//        // Forward request to JSP view
-//        request.getRequestDispatcher("/views/customer/order-detail.jsp").forward(request, response);
     }
 
     /**

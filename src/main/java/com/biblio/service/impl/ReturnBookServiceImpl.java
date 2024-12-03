@@ -1,9 +1,7 @@
 package com.biblio.service.impl;
 
-import com.biblio.dao.IBookDAO;
-import com.biblio.dao.IOrderDAO;
-import com.biblio.dao.IReturnBookDAO;
-import com.biblio.dao.IReturnBookItemDAO;
+import com.biblio.dao.*;
+import com.biblio.dto.request.MediaFileRequest;
 import com.biblio.dto.request.ReturnBookRequest;
 import com.biblio.dto.request.ReturnOrderRequest;
 import com.biblio.dto.response.ReturnBookManagementResponse;
@@ -20,10 +18,7 @@ import com.biblio.service.IReturnBookService;
 import javax.inject.Inject;
 import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
-import java.util.HashSet;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 import java.sql.Timestamp; // Import thêm nếu chưa có
 import java.util.stream.Collectors;
 
@@ -34,10 +29,7 @@ public class ReturnBookServiceImpl implements IReturnBookService {
     IReturnBookDAO returnBookDAO;
 
     @Inject
-    IReturnBookItemDAO returnBookItemDAO;
-
-    @Inject
-    IBookDAO bookDAO;
+    IMediaFileDAO mediaFileDAO;
 
     @Inject
     IOrderDAO orderDAO;
@@ -83,6 +75,16 @@ public class ReturnBookServiceImpl implements IReturnBookService {
     public boolean saveReturnOrder(ReturnOrderRequest returnOrderRequest) {
         ReturnBook returnBook = ReturnBookMapper.toEntity(returnOrderRequest);
         Order order = orderDAO.findOne(returnOrderRequest.getOrderId());
+
+        List<MediaFile> mediaFiles = new ArrayList<>();
+        for (MediaFileRequest mediaFileRequest : returnOrderRequest.getMediaFiles()) {
+            mediaFiles.add(mediaFileDAO.save(MediaFile.builder()
+                    .fileName(mediaFileRequest.getFileName())
+                    .storedCode(mediaFileRequest.getStoredCode())
+                    .build()));
+        }
+
+        returnBook.setProof(mediaFiles);
 
         OrderStatusHistory completedStatusHistory = order.getStatusHistory().stream()
                 .filter(statusHistory -> statusHistory.getStatus() == EOrderHistory.COMPLETED)

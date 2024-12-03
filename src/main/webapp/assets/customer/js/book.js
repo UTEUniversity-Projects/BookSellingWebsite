@@ -1,43 +1,38 @@
-import { toast } from './toast.js';
-import { formatCurrencyVND } from '../../commons/js/format-currency.js';
+import {toast} from './toast.js';
+import {formatCurrencyVND} from '../../commons/js/format-currency.js';
 import {zoomImage} from "../../commons/js/zoom-image.js";
 
-export function addToCart () {
-	toast({
-		title: '', message: 'Đã thêm vào giỏ hàng'
-	});
+export function addToCart() {
+    toast({
+        title: '', message: 'Đã thêm vào giỏ hàng'
+    });
 }
 
 $(document).ready(() => {
-	const isElementInViewport = (el) => {
-		const rect = el.getBoundingClientRect();
-		const windowHeight = (window.innerHeight || document.documentElement.clientHeight);
-		return (
-			rect.top <= (windowHeight + 120) &&
-			rect.bottom >= 0 &&
-			rect.left <= (window.innerWidth || document.documentElement.clientWidth) &&
-			rect.right >= 0
-		);
-	};
+    const isElementInViewport = (el) => {
+        const rect = el.getBoundingClientRect();
+        const windowHeight = (window.innerHeight || document.documentElement.clientHeight);
+        return (rect.top <= (windowHeight + 120) && rect.bottom >= 0 && rect.left <= (window.innerWidth || document.documentElement.clientWidth) && rect.right >= 0);
+    };
 
-	const lazyLoadElements = document.querySelectorAll('.product-content');
+    const lazyLoadElements = document.querySelectorAll('.product-content');
 
-	const generateStars = (reviewRate) => {
-		let stars = '';
-		for (let i = 1; i <= 5; i++) {
-			if (reviewRate >= i) {
-				stars += '<i class="ri-star-fill"></i>';
-			} else if (reviewRate > i - 1 && reviewRate < i) {
-				stars += '<i class="ri-star-half-line"></i>';
-			} else {
-				stars += '<i class="ri-star-line"></i>';
-			}
-		}
-		return stars;
-	};
+    const generateStars = (reviewRate) => {
+        let stars = '';
+        for (let i = 1; i <= 5; i++) {
+            if (reviewRate >= i) {
+                stars += '<i class="ri-star-fill"></i>';
+            } else if (reviewRate > i - 1 && reviewRate < i) {
+                stars += '<i class="ri-star-half-line"></i>';
+            } else {
+                stars += '<i class="ri-star-line"></i>';
+            }
+        }
+        return stars;
+    };
 
-	const generateBook = (book) => {
-		return `
+    const generateBook = (book) => {
+        return `
 							<div class="mix col-xxl-2 col-xl-3 col-4 cr-product-box mb-5">
                             <div class="cr-product-card" data-book-id="${book.id}" >
                                 <div class="cr-product-image h-[auto]">
@@ -67,19 +62,17 @@ $(document).ready(() => {
                                     </div>
                                     <a href="${contextPath}/book?id=${book.id}" class="title">${book.title}</a>
                                     <p class="cr-price">
-                                        ${book.salePrice === book.sellingPrice
-										? `<span class="new-price price-value">${formatCurrencyVND(book.sellingPrice)}</span>`
-										: `<span class="new-price price-value">${formatCurrencyVND(book.salePrice)}</span>
+                                        ${book.salePrice === book.sellingPrice ? `<span class="new-price price-value">${formatCurrencyVND(book.sellingPrice)}</span>` : `<span class="new-price price-value">${formatCurrencyVND(book.salePrice)}</span>
 			   							<span class="old-price price-value">${formatCurrencyVND(book.sellingPrice)}</span>`}
                                     </p>
                                 </div>
                             </div>
                         </div>
 						`;
-	};
+    };
 
-	const generateModal = (book) => {
-		return `
+    const generateModal = (book) => {
+        return `
 				<div class="modal fade quickview-modal" id="quickview-${book.id}" aria-hidden="true" tabindex="-1" data-book-id="${book.id}">
 			        <div class="modal-dialog modal-dialog-centered cr-modal-dialog">
 			            <div class="modal-content">
@@ -128,7 +121,7 @@ $(document).ready(() => {
 			                                        </button>
 			                                    </div>
 			                                    <div class="cr-buy-button">
-			                                        <button type="button" class="cr-button">
+			                                        <button type="button" class="cr-button btn-checkout" data-book-id="${book.id}">
 			                                            Mua ngay
 			                                        </button>
 			                                    </div>
@@ -141,42 +134,75 @@ $(document).ready(() => {
 			        </div>
 			    </div>
 				`;
-	};
+    };
 
-	const getBooks = async () => {
-		const bookList = document.querySelector('.home-book-list');
+    const getBooks = async () => {
+        const bookList = document.querySelector('.home-book-list');
 
-		await $.ajax({
-			url: `${contextPath}/api/customer/load-book-home`, type: 'GET', success: function (result) {
-				const books = result.books;
+        await $.ajax({
+            url: `${contextPath}/api/customer/load-book-home`, type: 'GET', success: function (result) {
+                const books = result.books;
 
-				if (bookList) bookList.innerHTML = books?.map(generateBook).join('');
+                if (bookList) bookList.innerHTML = books?.map(generateBook).join('');
 
-				$('.modal.fade.quickview-modal').remove();
-				zoomImage('.image-zoom')
-				document.querySelector('body').insertAdjacentHTML('beforeend', books.map(generateModal).join(''));
-			}, error: function (xhr, error) {
-				console.log(error);
-			}
-		});
-	};
+                $('.modal.fade.quickview-modal').remove();
+                zoomImage('.image-zoom')
+                document.querySelector('body').insertAdjacentHTML('beforeend', books.map(generateModal).join(''));
+            }, error: function (xhr, error) {
+                console.log(error);
+            }
+        });
+    };
 
+    const lazyLoad = () => {
+        lazyLoadElements.forEach(element => {
+            if (isElementInViewport(element)) {
+                getBooks();
 
-	const lazyLoad = () => {
-		lazyLoadElements.forEach(element => {
-			if (isElementInViewport(element)) {
-				getBooks();
+                window.removeEventListener('scroll', onScroll);
+                window.removeEventListener('resize', onScroll);
+            }
+        });
+    };
 
-				window.removeEventListener('scroll', onScroll);
-				window.removeEventListener('resize', onScroll);
-			}
-		});
-	};
+    const onScroll = () => {
+        lazyLoad();
+    };
 
-	const onScroll = () => {
-		lazyLoad();
-	};
+    $(document).on('click', '.btn-checkout', function () {
+        const bookId = $(this).data('book-id');
+        const quantity = $(this).closest('.modal-body').find('.quantity').val();
+        checkout(bookId, quantity);
+    });
 
-	window.addEventListener('scroll', onScroll);
-	window.addEventListener('resize', onScroll);
+    const checkout = (bookId, quantity) => {
+        console.log('Proceed to checkout for book with ID:', bookId, quantity);
+        const selectedItems = [];
+        selectedItems.push({
+            productId: bookId, quantity: quantity
+        });
+        if (selectedItems.length > 0) {
+            console.log(selectedItems);
+            $.ajax({
+                url: `${contextPath}/api/customer/checkout`,
+                type: "POST",
+                contentType: "application/json",
+                data: JSON.stringify({items: selectedItems}),
+                success: function (response) {
+                    window.location.href = `${contextPath}/checkout`;
+                },
+                error: function (xhr, status, error) {
+                    toast("Thất bại", "Có lỗi xảy ra. Vui lòng thử lại!", "error", 3000);
+                }
+            });
+        } else {
+            toast("Thông tin", "Vui lòng chọn ít nhất một sản phẩm để thanh toán!", "info", 3000);
+        }
+    };
+
+    window.addEventListener('scroll', onScroll);
+    window.addEventListener('resize', onScroll);
 });
+
+
+
