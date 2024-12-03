@@ -19,7 +19,7 @@ public class Translator extends ContributorProfile implements Serializable {
 
     // region Relationships
 
-    @ManyToMany(fetch = FetchType.LAZY)
+    @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "translator_book_template",
                 joinColumns = @JoinColumn(name = "translator_id", nullable = false),
     inverseJoinColumns = @JoinColumn(name = "book_template_id", nullable = false))

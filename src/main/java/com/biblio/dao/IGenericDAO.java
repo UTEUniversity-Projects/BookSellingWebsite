@@ -35,4 +35,14 @@ public interface IGenericDAO<T> {
 
     long countByJPQL(String jpql, Map<String, Object> params);
 
+    void executeNativeQuery(String sql, Map<String, Object> params);
+
+    long countByNativeQuery(String nativeQuery);
+
+    long countByNativeQuery(String nativeQuery, Map<String, Object> params);
+
+    <T> List<T> findByNativeQuery(String sql, Map<String, Object> params, Class<T> resultType);
+
+    T insert(T entity);
+
 }

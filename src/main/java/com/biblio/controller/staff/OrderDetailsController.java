@@ -56,11 +56,6 @@ public class OrderDetailsController extends HttpServlet {
             product.calTotalPrice();
         }
 
-//        for (OrderProductResponse product : orderDetailsResponse.getProducts()) {
-//            double discount = promotionTemplateService.percentDiscountOfBook(product.getBookTemplateId());
-//            product.setDiscountPercent(discount);
-//            product.calTotalPrice();
-//        }
         orderDetailsResponse.updateTotalPrice();
         orderDetailsResponse.updateFinalPrice();
 

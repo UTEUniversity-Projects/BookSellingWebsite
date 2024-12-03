@@ -67,4 +67,4 @@
         </div>
     </div>
 </div>
-<script src="${pageContext.request.contextPath}/assets/owner/js/extension/quill-editor.js" defer></script
+<script src="${pageContext.request.contextPath}/assets/owner/js/extension/quill-editor.js" defer></script>

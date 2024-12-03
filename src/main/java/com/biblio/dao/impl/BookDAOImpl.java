@@ -41,6 +41,10 @@ public class BookDAOImpl extends GenericDAOImpl<Book> implements IBookDAO {
     }
 
     @Override
+    public void createBook(Book book) {
+        super.insert(book);
+    }
+
     public List<Book> findBooksByTemplateId(Long bookTemplateId) {
         // Truy vấn JPQL với tham số bookTemplateId
         String jpql = "SELECT b FROM Book b WHERE b.bookTemplate.id = :bookTemplateId";
@@ -52,10 +56,6 @@ public class BookDAOImpl extends GenericDAOImpl<Book> implements IBookDAO {
         // Trả về kết quả dưới dạng danh sách Book
         return super.findByJPQL(jpql, params);
     }
-
-
-
-
 
     @Override
     public void addBook(Book book) {
@@ -96,7 +96,6 @@ public class BookDAOImpl extends GenericDAOImpl<Book> implements IBookDAO {
         params.put("bookTemplateId", request.getProductId());
         return super.findByJPQLPaginated(jpql, 1, request.getQuantity(), params);
     }
-
 
     public static void main(String[] args) {
         BookDAOImpl dao = new BookDAOImpl();
