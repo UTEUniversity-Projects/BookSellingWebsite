@@ -29,7 +29,7 @@ public interface IBookTemplateDAO {
 
     Long countInstockById(Long id);
 
-    Long countAll();
+    Long countAll(SearchBookRequest request);
 
     Integer countOrdersByStatus(Long id, EOrderStatus status);
 
