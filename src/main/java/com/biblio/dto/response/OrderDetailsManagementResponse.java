@@ -39,10 +39,15 @@ public class OrderDetailsManagementResponse {
     }
 
     public void updateFinalPrice() {
-        this.finalPrice = this.totalPrice + shipping.getShippingFee();
+        this.finalPrice = this.totalPrice + this.shipping.getShippingFee();
         for (PromotionOrderResponse promotion : this.promotions) {
-            this.finalPrice -= promotion.getDiscountAmount();
+            if (promotion.getPromotionType().equals(EPromotionTemplateType.FREESHIP)) {
+                double shippingAmount = Math.min(promotion.getDiscountAmount(), shipping.getShippingFee());
+                this.finalPrice -= shippingAmount;
+            } else if (promotion.getPromotionType().equals(EPromotionTemplateType.VOUCHER)) {
+                this.finalPrice -= Math.min(promotion.getDiscountAmount(), this.finalPrice);
+            }
         }
-        this.finalPrice = Math.max(this.finalPrice, 0);
+        this.finalPrice = Math.max(10000, this.finalPrice);
     }
 }

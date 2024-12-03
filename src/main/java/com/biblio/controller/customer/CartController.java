@@ -58,11 +58,8 @@ public class CartController extends HttpServlet {
         List<DiscountResponse> discounts = promotionTemplateService.getAllDiscounts();
         for (CartItemResponse cartItem : cart.getCartItems()) {
             cartItem.setSalePrice(cartItem.getSellingPrice() - (promotionTemplateService.percentDiscount(cartItem.getBookId(), discounts) / 100) * cartItem.getSellingPrice());
+            cartItem.setSubTotal(cartItem.getSalePrice() * cartItem.getQuantity());
         }
-
-//        for (CartItemResponse cartItem : cart.getCartItems()) {
-//            cartItem.setSalePrice(cartItem.getSellingPrice() - (promotionTemplateService.percentDiscountOfBook(cartItem.getBookId()) / 100) * cartItem.getSellingPrice());
-//        }
 
         request.setAttribute("breadcrumb", "Giỏ hàng");
         request.setAttribute("cart", cart);

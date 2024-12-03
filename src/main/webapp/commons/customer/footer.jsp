@@ -23,10 +23,10 @@
                             City.
                         </li>
                         <li class="mail-icon">
-                            <a href="javascript:void(0)">example@email.com</a>
+                            <a href="javascript:void(0)">biblio.store.vn@gmail.com</a>
                         </li>
                         <li class="phone-icon">
-                            <a href="javascript:void(0)"> +91 123 4567890</a>
+                            <a href="javascript:void(0)"> 0327450089</a>
                         </li>
                     </ul>
                 </div>
