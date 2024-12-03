@@ -38,7 +38,7 @@ $(document).ready(() => {
 								            --zoom-y: 0%;
 								            --display: none;">
                                     <img src="${book.imageUrl}" alt="${book.title}">
-                                    <img role="presentation" alt="" src="http://localhost:8080/assets/owner/img/book/TrenDuongBang/image1.jpg" class="zoomImg" style="position: absolute; top: -2141.2px; left: -1465.35px; opacity: 0; width: 2560px; height: 2560px; border: none; max-width: none; max-height: none;"></div>
+                                    <img role="presentation" alt="" src="" class="zoomImg" style="position: absolute; top: -2141.2px; left: -1465.35px; opacity: 0; width: 2560px; height: 2560px; border: none; max-width: none; max-height: none;"></div>
                                     <div class="cr-side-view">
                                         <a class="model-oraganic-product" data-bs-toggle="modal" href="#quickview-${book.id}" role="button">
                                             <i class="ri-eye-line"></i>
@@ -134,7 +134,7 @@ $(document).ready(() => {
 
 			const generateCategory = (category) => {
 				return `<div class="checkbox-group gap-x-2">
-                                    <input type="checkbox" id="${category.id}" value="${category.id}" ${getUrlParam("categoryId") === category.id.toString() ? "checked" : ""} class="category-item">
+                                    <input type="checkbox" id="${category.id}" value="${category.id}" ${getUrlParam('categoryId') === category.id.toString() ? 'checked' : ''} class="category-item">
                                     <label for="${category.id}" class="pr-2">${category.categoryName}</label>
                                     <span>(${category.bookCount})</span>
                                 </div>`;
@@ -150,14 +150,11 @@ $(document).ready(() => {
 				const { books, quantity, category } = result;
 
 				if (categoryList) {
-					if (isCategoryClicked === false) {
-						categoryList.innerHTML = `<div class="checkbox-group gap-x-2">
-                                <input type="checkbox" id="all-categories" class="category-item" ${getUrlParam("categoryId") === null ? "checked" : ""}/>
+					categoryList.innerHTML = `<div class="checkbox-group gap-x-2">
+                                <input type="checkbox" id="all-categories" class="category-item" ${getUrlParam('categoryId') === null ? 'checked' : ''}/>
                                 <label for="all-categories">Tất cả</label>
                                 <span>(${quantity})</span>
                             </div>` + category?.map(generateCategory).join('');
-						isCategoryClicked = false;
-					}
 				}
 
 				if (books.length === 0) {
@@ -171,10 +168,10 @@ $(document).ready(() => {
 
 					$('.cr-pagination').show();
 					zoomImage('.image-zoom');
-					generatePagination(document.querySelector('.pagination'), Math.floor(quantity / searchData.perPage) + (quantity % searchData.perPage !== 0 ? 1 : 0), parseInt(getUrlParam('page')));
+					generatePagination(document.querySelector('.pagination'), Math.floor(result.searchResult / searchData.perPage) + (result.searchResult % searchData.perPage !== 0 ? 1 : 0), parseInt(getUrlParam('page')));
 				}
 
-				$('.search-result-label').text(` ${searchData.title?.trim()} (${result.quantity} kết quả)`);
+				$('.search-result-label').text(` ${searchData.title?.trim()} (${result.searchResult} kết quả)`);
 
 			};
 
@@ -185,7 +182,6 @@ $(document).ready(() => {
 				data: JSON.stringify(searchData),
 				contentType: 'application/json',
 				success: async function (result) {
-					console.log({ result });
 					handleSuccess(result);
 				},
 				error: function (xhr, error) {
@@ -203,7 +199,6 @@ $(document).ready(() => {
 	const searchBook = new SearchBook();
 	const searchInput = $('.search-input');
 	const urlParams = new URLSearchParams(window.location.search);
-	var isCategoryClicked = false;
 
 	const searchData = {
 		title: urlParams.get('title') || '',
@@ -264,10 +259,9 @@ $(document).ready(() => {
 		$(this)[0].checked = true;
 		$(this).parent().addClass('select-none pointer-events-none');
 		const categoryId = $(this).val() !== 'on' ? $(this).val() : null;
-		updateUrlParam('categoryId', categoryId);
 		updateUrlParam('page', 1);
+		updateObjectValue(searchData, 'pageNumber', 1);
 		updateObjectValue(searchData, 'categoryId', categoryId);
-		isCategoryClicked = true;
 		if (categoryId) {
 			updateUrlParam('categoryId', categoryId);
 		} else {
@@ -301,6 +295,13 @@ $(document).ready(() => {
 			window.history.pushState({ path: newUrl }, '', newUrl);
 		}
 
+		const urlParams = new URLSearchParams(window.location.search);
+		urlParams.delete('categoryId');
+		const newUrl = `${window.location.pathname}?${urlParams.toString()}`;
+		window.history.pushState({ path: newUrl }, '', newUrl);
+
+		updateObjectValue(searchData, "categoryId", null);
+
 		searchBook.search(searchData);
 
 	});
@@ -318,7 +319,6 @@ $(document).ready(() => {
 		updateUrlParam('format', format);
 		updateUrlParam('page', 1);
 		updateObjectValue(searchData, 'format', format);
-
 		if (format) {
 			updateUrlParam('format', format);
 		} else {
@@ -327,6 +327,13 @@ $(document).ready(() => {
 			const newUrl = `${window.location.pathname}?${urlParams.toString()}`;
 			window.history.pushState({ path: newUrl }, '', newUrl);
 		}
+
+		const urlParams = new URLSearchParams(window.location.search);
+		urlParams.delete('categoryId');
+		const newUrl = `${window.location.pathname}?${urlParams.toString()}`;
+		window.history.pushState({ path: newUrl }, '', newUrl);
+
+		updateObjectValue(searchData, "categoryId", null);
 
 		searchBook.search(searchData);
 
@@ -341,7 +348,6 @@ $(document).ready(() => {
 		$(this).parent().addClass('select-none pointer-events-none');
 
 		updateObjectValue(searchData, 'reviewRate', $(this).val() == 'on' ? null : $(this).val());
-
 		const reviewRate = $(this).val() !== 'on' ? $(this).val() : null;
 		updateUrlParam('reviewRate', reviewRate);
 		updateUrlParam('page', 1);
@@ -355,6 +361,13 @@ $(document).ready(() => {
 			const newUrl = `${window.location.pathname}?${urlParams.toString()}`;
 			window.history.pushState({ path: newUrl }, '', newUrl);
 		}
+
+		const urlParams = new URLSearchParams(window.location.search);
+		urlParams.delete('categoryId');
+		const newUrl = `${window.location.pathname}?${urlParams.toString()}`;
+		window.history.pushState({ path: newUrl }, '', newUrl);
+
+		updateObjectValue(searchData, "categoryId", null);
 
 		searchBook.search(searchData);
 
@@ -387,7 +400,7 @@ $(document).ready(() => {
 
 		if (getUrlParam('condition')) {
 			$('.condition-item').each(function () {
-				$(this)[0].checked = $(this).val() === getUrlParam('condition');
+				$(this).attr("checked", $(this).val() === getUrlParam("condition"));
 			});
 		}
 
@@ -402,6 +415,11 @@ $(document).ready(() => {
 				$(this)[0].checked = $(this).val() === getUrlParam('reviewRate');
 			});
 		}
+
+		updateObjectValue(searchData, 'condition', getUrlParam('condition'));
+		updateObjectValue(searchData, 'format', getUrlParam('format'));
+		updateObjectValue(searchData, 'categoryId', getUrlParam('categoryId'));
+		updateObjectValue(searchData, 'reviewRate', getUrlParam('reviewRate'));
 
 		searchBook.search(searchData);
 

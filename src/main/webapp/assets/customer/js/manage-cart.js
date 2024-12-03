@@ -10,45 +10,51 @@ $(document).ready(function () {
         const bookId = $(this).closest('.cr-product-card, .modal, .section-product').data("book-id");
         const quantity = $(this).data("quantity") || $(this).closest(".cr-add-card").find(".cr-qty-main .quantity").val();
 
-        console.log({
-            bookId: bookId,
-            quantity: quantity
-        });
-        $.ajax({
-            url: `${contextPath}/api/customer/add-cart-item`,
-            type: 'POST',
-            contentType: 'application/json',
-            data: JSON.stringify({
-                bookTemplateId: bookId,
-                quantity: quantity
-            }),
-            success: function (response) {
-                if (response.code === 200) {
-                    toast({
-                        title: 'Thông báo',
-                        message: `Thêm ${quantity} sản phẩm thành công !`,
-                        type: 'success',
-                        duration: 1000
-                    });
-                    addTooCartAnimation();
-                    countCartItem();
-                } else {
-                    setTimeout(() => {
-                        window.location.href = `${contextPath}/login`;
-                    });
-                }
-            },
-            error: function (xhr, status, error) {
-                console.error('Error: ', xhr.responseText);
-            },
-            complete: function () {
-                $this.prop('disabled', false);
-            }
-        });
-    });
-    // Load
-    $('#view-cart-btn').on('click', function () {
-
+		console.log({
+			bookId: bookId,
+			quantity: quantity
+		});
+		$.ajax({
+			url: `${contextPath}/api/customer/add-cart-item`,
+			type: 'POST',
+			contentType: 'application/json',
+			data: JSON.stringify({
+				bookTemplateId: bookId,
+				quantity: quantity
+			}),
+			success: function (response) {
+				if (response.code === 200) {
+					toast({
+						title: 'Thông báo',
+						message: response.message,
+						type: 'success',
+						duration: 1000
+					});
+					addTooCartAnimation();
+					countCartItem();
+				} else {
+					toast({
+						title: 'Thông báo',
+						message: response.message,
+						type: 'error',
+						duration: 1000
+					});
+				}
+			},
+			error: function (xhr, status, error) {
+				if (xhr.status === 401) {
+					window.location.href = `${contextPath}/login`;
+				} else {
+					console.error('Error: ', xhr.responseText);
+				}
+			},
+			complete: function () {
+				$this.prop('disabled', false);
+			}
+		});
+	});
+	// Load
+	$('#view-cart-btn').on('click', function () {
         const cartItemsContainer = $('.crcart-pro-items');
         $('.cart-loading').removeClass('hidden');
         $('.cr-cart-top').addClass('hidden');
@@ -110,81 +116,95 @@ $(document).ready(function () {
             },
             error: function (xhr, status, error) {
 
-            },
-            complete: function () {
-                $('.cart-loading').addClass('hidden');
-                $('.cr-cart-top').removeClass('hidden');
-            }
-        });
-    });
-    // Update
-    $(document).on('change', '.cr-cart-qty .quantity', debounce(function () {
-        const $input = $(this);
-        const newQuantity = $input.val();
-        const $row = $input.closest('tr, li');
-        const cartItemId = $row.data('cart-item-id');
-        console.log(cartItemId);
-        console.log(newQuantity);
+			},
+			complete: function () {
+				$('.cart-loading').addClass('hidden');
+				$('.cr-cart-top').removeClass('hidden');
+			}
+		});
+	});
+	// Update
+	$(document).on('change', '.cr-cart-qty .quantity', debounce(function () {
+		const $input = $(this);
+		const newQuantity = $input.val();
+		const $row = $input.closest('tr, li');
+		const price = parseFloat($row.find('.new-price').text().replace(/[^\d]/g, ''));
+		const cartItemId = $row.data('cart-item-id');
+		const bookTemplateId = $row.data('product-id');
+		console.log(cartItemId);
+		console.log(newQuantity);
 
-        $.ajax({
-            url: `${contextPath}/api/customer/update-cart-item`,
-            type: 'POST',
-            contentType: 'application/json',
-            data: JSON.stringify({
-                cartItemId: cartItemId,
-                quantity: newQuantity
-            }),
-            success: function (response) {
-                $row.find('.cr-cart-subtotal').text(formatCurrencyVND(response.cartItem.subTotal));
-                calTotal();
-            },
-            error: function (xhr, status, error) {
-                console.error('Error: ', xhr.responseText);
-            }
-        });
-    }, 500));
-    // Delete
-    $(document).on('click', '.remove-item', function () {
-        const cartItemId = $(this).closest('li, tr').data('cart-item-id');
-        const item = $(this).closest('li, tr');
-        const container = $(this).closest('.crcart-pro-items, .row');
-        const parent = item.closest('tbody, ul');
-        console.log(cartItemId);
-        $.ajax({
-            url: `${contextPath}/api/customer/delete-cart-item`,
-            type: 'POST',
-            contentType: 'application/json',
-            data: JSON.stringify({
-                cartItemId: cartItemId
-            }),
-            success: function (response) {
-                if (parent.children().length === 1) {
-                    container.empty();
-                    container.append('<div class="message-container mt-[50%]">\n' +
-                        '                                    <img src="https://cdn-icons-png.flaticon.com/512/2762/2762885.png" alt="">\n' +
-                        '                                    <p>Giỏ hàng của bạn đang trống</p>\n' +
-                        '                                    <a href="home">\n' +
-                        '                                        <button class="cr-button">Mua ngay</button>\n' +
-                        '                                    </a>\n' +
-                        '                                </div>');
-                    $('.view-cart').addClass('hidden');
-                } else {
-                    item.remove();
-                }
-                toast({
-                    title: 'Thông báo',
-                    message: 'Xoá sản phẩm thành công !',
-                    type: 'success',
-                    duration: 1000
-                });
-                countCartItem();
-            },
-            error: function (xhr, status, error) {
-                console.error('Error: ', xhr.responseText);
-            }
-        });
-    });
-    countCartItem();
+		$.ajax({
+			url: `${contextPath}/api/customer/update-cart-item`,
+			type: 'POST',
+			contentType: 'application/json',
+			data: JSON.stringify({
+				cartItemId: cartItemId,
+				bookTemplateId: bookTemplateId,
+				quantity: newQuantity
+			}),
+			success: function (response) {
+				if (response.code === 400) {
+					toast({
+						title: 'Thông báo',
+						message: response.message,
+						type: 'error',
+						duration: 1000
+					});
+				}
+				else {
+					$row.find('.cr-cart-subtotal').text(formatCurrencyVND(newQuantity * price));
+					calculateTotal();
+				}
+			},
+			error: function (xhr, status, error) {
+				console.error('Error: ', xhr.responseText);
+			}
+		});
+	}, 500));
+	// Delete
+	$(document).on('click', '.remove-item', function () {
+		const cartItemId = $(this).closest('li, tr').data('cart-item-id');
+		const item = $(this).closest('li, tr');
+		const container = $(this).closest('.crcart-pro-items, .row');
+		const parent = item.closest('tbody, ul');
+		console.log(cartItemId);
+		$.ajax({
+			url: `${contextPath}/api/customer/delete-cart-item`,
+			type: 'POST',
+			contentType: 'application/json',
+			data: JSON.stringify({
+				cartItemId: cartItemId
+			}),
+			success: function (response) {
+				if (parent.children().length === 1) {
+					container.empty();
+					container.append('<div class="message-container">\n' +
+						'                                    <img src="https://cdn-icons-png.flaticon.com/512/2762/2762885.png" alt="">\n' +
+						'                                    <p>Giỏ hàng của bạn đang trống</p>\n' +
+						'                                    <a href="home">\n' +
+						'                                        <button class="cr-button">Mua ngay</button>\n' +
+						'                                    </a>\n' +
+						'                                </div>');
+					$('.view-cart').addClass('hidden');
+				} else {
+					item.remove();
+				}
+				toast({
+					title: 'Thông báo',
+					message: 'Xoá sản phẩm thành công !',
+					type: 'success',
+					duration: 1000
+				});
+				countCartItem();
+				calculateTotal();
+			},
+			error: function (xhr, status, error) {
+				console.error('Error: ', xhr.responseText);
+			}
+		});
+	});
+	countCartItem();
 });
 
 function countCartItem() {
@@ -211,59 +231,55 @@ function addTooCartAnimation() {
     }, 1000);
 }
 
-$(document).on('change', '.cr-table-content .cr-cart-checkbox, .cr-table-content .quantity', function () {
-    let total = 0;
-    $('.cr-table-content tbody tr').each(function () {
-        const $checkBox = $(this).find('.cr-cart-checkbox input[type="checkbox"]');
-        const $priceElement = $(this).find('.new-price');
-        const price = parseFloat($priceElement.text().replace(/[^\d]/g, ''));
-        const $quantityElement = $(this).find('.quantity');
-        const quantity = parseInt($quantityElement.val(), 10);
-        const subTotal = price * quantity;
-        if ($checkBox.is(':checked')) {
-            total += subTotal;
-        }
-    });
+function calculateTotal() {
+	let total = 0;
+	$('.cr-table-content tbody tr').each(function () {
+		const $checkBox = $(this).find('.cr-cart-checkbox input[type="checkbox"]');
+		const $subTotalElement = $(this).find('.cr-cart-subtotal');
+		const subTotal = parseFloat($subTotalElement.text().replace(/[^\d]/g, ''));
+		if ($checkBox.is(':checked')) {
+			total += subTotal;
+		}
+	});
+	$('.cr-cart-summary .total').text(formatCurrencyVND(total));
+}
 
-    $('.cr-cart-summary .total').text(formatCurrencyVND(total));
+$(document).on('change', '.cr-table-content .cr-cart-checkbox, .cr-cart-qty .quantity', function () {
+	calculateTotal();
 });
 
-$(document).ready(function () {
-    $('#btn-checkout').click(function () {
-        const selectedItems = [];
-        $('.product-checkbox:checked').each(function () {
-            const productId = $(this).closest('tr').data('product-id');
-            const quantity = $(this).closest('tr').find('.quantity').val();
+$(document).ready(function() {
+	$("#btn-checkout").click(function () {
+		const selectedItems = [];
+		$(".product-checkbox:checked").each(function () {
+			const productId = $(this).closest("tr").data("product-id");
+			const quantity = $(this).closest("tr").find(".quantity").val();
 
-            selectedItems.push({
-                productId: productId,
-                quantity: quantity
-            });
-        });
+			selectedItems.push({
+				productId: productId,
+				quantity: quantity
+			});
+		});
 
-        if (selectedItems.length > 0) {
-            console.log(selectedItems);
-            $.ajax({
-                url: `${contextPath}/api/customer/checkout`,
-                type: 'POST',
-                contentType: 'application/json',
-                data: JSON.stringify({items: selectedItems}),
-                success: function (response) {
-                    window.location.href = `${contextPath}/checkout`;
-                },
-                error: function (xhr, status, error) {
-                    toast("Thông tin", "Có lỗi xảy ra. Vui lòng thử lại!", "error", 3000);
-                }
-            });
-        } else {
-            console.log("yes");
-            toast({
-                title: 'Thông báo',
-                message: 'Vui lòng chọn ít nhất một sản phẩm để thanh toán!',
-                type: 'warning',
-                duration: 1000
-            });
-        }
-    });
+		if (selectedItems.length > 0) {
+			console.log(selectedItems);
+			$.ajax({
+				url: `${contextPath}/api/customer/checkout`,
+				type: "POST",
+				contentType: "application/json",
+				data: JSON.stringify({ items: selectedItems }),
+				success: function (response) {
+					window.location.href = `${contextPath}/checkout`;
+				},
+				error: function (xhr, status, error) {
+					alert("Có lỗi xảy ra. Vui lòng thử lại!");
+				}
+			});
+		} else {
+			toast({
+				title: 'Thông báo',
+				message: 'Vui lòng chọn ít nhất một sản phẩm để thanh toán !'
+			});
+		}
+	});
 });
-

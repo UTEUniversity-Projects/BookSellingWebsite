@@ -33,7 +33,7 @@ public interface IBookTemplateService {
 
     BookAnalysisResponse getBookAnalysisResponse(Long bookTemplateId);
 
-    Long getTotalBookTemplateQuantity();
+    Long getTotalBookTemplateQuantity(SearchBookRequest request);
 
     BookCreateResponse initCreateBook();
 

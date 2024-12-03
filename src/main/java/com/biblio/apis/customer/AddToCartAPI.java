@@ -57,13 +57,24 @@ public class AddToCartAPI extends HttpServlet {
         ObjectMapper mapper = new ObjectMapper();
 
         if (account == null) {
-            result.put("code", 400);
+            response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
+            return;
         } else {
-            AddToCartRequest addToCartRequest = HttpUtil.of(request.getReader()).toModel(AddToCartRequest.class);
-            addToCartRequest.setAccountId(account.getId());
-            CartItemResponse cartItem = cartService.addToCart(addToCartRequest);
-            result.put("code", 200);
-            result.put("cartItem", cartItem);
+            try {
+                AddToCartRequest addToCartRequest = HttpUtil.of(request.getReader()).toModel(AddToCartRequest.class);
+                addToCartRequest.setAccountId(account.getId());
+
+                CartItemResponse cartItem = cartService.addToCart(addToCartRequest);
+                result.put("code", 200);
+                result.put("cartItem", cartItem);
+                result.put("message", "Thêm " + addToCartRequest.getQuantity() + " sản phẩm thành công !");
+            } catch (IllegalArgumentException e) {
+                result.put("code", 400);
+                result.put("message", e.getMessage());
+            } catch (Exception e) {
+                result.put("code", 500);
+                result.put("message", "Đã xảy ra lỗi khi thêm sản phẩm vào giỏ.");
+            }
         }
 
         response.setContentType("application/json");
