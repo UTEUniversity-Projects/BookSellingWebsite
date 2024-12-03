@@ -1,6 +1,7 @@
 package com.biblio.service;
 
 import com.biblio.dto.request.CheckoutItemRequest;
+import com.biblio.dto.request.LoadRelatedBooksRequest;
 import com.biblio.dto.request.SearchBookRequest;
 import com.biblio.dto.response.*;
 import com.biblio.enumeration.EBookTemplateStatus;
@@ -30,5 +31,7 @@ public interface IBookTemplateService {
     CheckoutItemResponse getCheckoutItemResponse(CheckoutItemRequest request);
 
     boolean verifyBookTemplateQuantity(Long bookTemplateId);
+
+    List<BookCardResponse> getRelatedBooks(LoadRelatedBooksRequest request);
 
 }

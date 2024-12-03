@@ -66,10 +66,14 @@ public class ForgotController extends HttpServlet {
         request.setCharacterEncoding("UTF-8");
 
         ForgotPasswordRequest forgotPasswordRequest = HttpUtil.of(request.getReader()).toModel(ForgotPasswordRequest.class);
+        String username = forgotPasswordRequest.getUsername();
+        if (username == null) {
+            username = (String) request.getSession().getAttribute("username");
+        }
 
         Map<String, Object> map = new HashMap<>();
 
-        boolean isUsernameExisted = accountService.isUsernameExisted(forgotPasswordRequest.getUsername());
+        boolean isUsernameExisted = accountService.isUsernameExisted(username);
         if (!isUsernameExisted) {
             map.put("code", 400);
             map.put("message", "Username không tồn tại !");
@@ -78,9 +82,9 @@ public class ForgotController extends HttpServlet {
             long otpTimestamp = System.currentTimeMillis();
             request.getSession().setAttribute("otpCode", optCode);
             request.getSession().setAttribute("otpTimestamp", otpTimestamp);
-            request.getSession().setAttribute("username", forgotPasswordRequest.getUsername());
-            CustomerDetailResponse customerDetailResponse = customerService.getCustomerDetailByUsername(forgotPasswordRequest.getUsername());
-            String emailContent = generateOtpVerificationEmail(optCode);
+            request.getSession().setAttribute("username", username);
+            CustomerDetailResponse customerDetailResponse = customerService.getCustomerDetailByUsername(username);
+            String emailContent = SendMailUtil.generateOtpVerificationEmail(optCode, "Chúng tôi đã nhận được yêu cầu đặt lại mật khẩu cho tài khoản của bạn tại Biblio Bookshop.");
             try {
                 emailService.sendEmail(customerDetailResponse.getEmail(), "Xác thực email của bạn", emailContent);
             } catch (MessagingException e) {
@@ -93,22 +97,5 @@ public class ForgotController extends HttpServlet {
         response.setContentType("application/json");
         response.setCharacterEncoding("UTF-8");
         response.getWriter().write(mapper.writeValueAsString(map));
-    }
-
-    private String generateOtpVerificationEmail(String otpCode) {
-        StringBuilder emailContent = new StringBuilder();
-
-        emailContent.append("<html><body>");
-        emailContent.append("<p>Chào bạn,</p>");
-        emailContent.append("<p>Chúng tôi đã nhận được yêu cầu đặt lại mật khẩu cho tài khoản của bạn tại <strong>Biblio Bookshop</strong>.</p>");
-        emailContent.append("<p><strong>Mã OTP của bạn là:</strong> <span style=\"font-size: 18px; font-weight: bold; color: #4CAF50;\">")
-                .append(otpCode).append("</span></p>");
-        emailContent.append("<p>Mã này có hiệu lực trong <strong>2 phút</strong>. Vui lòng không chia sẻ mã này với bất kỳ ai.</p>");
-        emailContent.append("<hr>");
-        emailContent.append("<p>Nếu cần hỗ trợ thêm, vui lòng liên hệ với chúng tôi qua email <a href=\"mailto:support@biblio.com\">support@biblio.com</a>.</p>");
-        emailContent.append("<p>Trân trọng,<br>Biblio Bookshop</p>");
-        emailContent.append("</body></html>");
-
-        return emailContent.toString();
     }
 }

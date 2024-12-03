@@ -1,5 +1,6 @@
 package com.biblio.controller.staff;
 
+import com.biblio.dto.response.DiscountResponse;
 import com.biblio.dto.response.OrderDetailsManagementResponse;
 import com.biblio.dto.response.OrderProductResponse;
 import com.biblio.dto.response.ReturnBookManagementResponse;
@@ -16,6 +17,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.Serial;
+import java.util.List;
 
 @WebServlet("/staff/order-details")
 public class OrderDetailsController extends HttpServlet {
@@ -46,11 +48,19 @@ public class OrderDetailsController extends HttpServlet {
         // TODO Auto-generated method stub
         Long orderId = Long.parseLong(request.getParameter("id"));
         OrderDetailsManagementResponse orderDetailsResponse = orderService.getOrderDetailsManagementResponse(orderId);
+
+        List<DiscountResponse> discounts = promotionTemplateService.getAllDiscounts();
         for (OrderProductResponse product : orderDetailsResponse.getProducts()) {
-            double discount = promotionTemplateService.percentDiscountOfBook(product.getBookTemplateId());
+            double discount = promotionTemplateService.percentDiscount(product.getBookTemplateId(), discounts);
             product.setDiscountPercent(discount);
             product.calTotalPrice();
         }
+
+//        for (OrderProductResponse product : orderDetailsResponse.getProducts()) {
+//            double discount = promotionTemplateService.percentDiscountOfBook(product.getBookTemplateId());
+//            product.setDiscountPercent(discount);
+//            product.calTotalPrice();
+//        }
         orderDetailsResponse.updateTotalPrice();
         orderDetailsResponse.updateFinalPrice();
 

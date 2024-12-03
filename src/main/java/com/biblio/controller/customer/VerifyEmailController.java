@@ -70,7 +70,7 @@ public class VerifyEmailController extends HttpServlet {
             request.getSession().setAttribute("otpCode", optCode);
             request.getSession().setAttribute("otpTimestamp", otpTimestamp);
             request.getSession().setAttribute("otpEmail", verifyEmailRequest.getEmail());
-            String emailContent = generateOtpVerificationEmail(optCode);
+            String emailContent = SendMailUtil.generateOtpVerificationEmail(optCode, "Cảm ơn bạn đã đăng ký tài khoản tại Biblio !");
             try {
                 emailService.sendEmail(verifyEmailRequest.getEmail(), "Xác thực email của bạn", emailContent);
             } catch (MessagingException e) {
@@ -83,22 +83,5 @@ public class VerifyEmailController extends HttpServlet {
         response.setContentType("application/json");
         response.setCharacterEncoding("UTF-8");
         response.getWriter().write(mapper.writeValueAsString(map));
-    }
-
-    private String generateOtpVerificationEmail(String otpCode) {
-        StringBuilder emailContent = new StringBuilder();
-
-        emailContent.append("<html><body>");
-        emailContent.append("<p>Chào bạn,</p>");
-        emailContent.append("<p>Cảm ơn bạn đã đăng ký tài khoản tại Biblio Bookshop!</p>");
-        emailContent.append("<p><strong>Mã OTP của bạn là:</strong> <span style=\"font-size: 18px; font-weight: bold; color: #4CAF50;\">")
-                .append(otpCode).append("</span></p>");
-        emailContent.append("<p>Mã này có hiệu lực trong <strong>2 phút</strong>. Vui lòng không chia sẻ mã này với bất kỳ ai.</p>");
-        emailContent.append("<hr>");
-        emailContent.append("<p>Nếu cần hỗ trợ thêm, vui lòng liên hệ với chúng tôi qua email <a href=\"mailto:support@biblio.com\">support@biblio.com</a>.</p>");
-        emailContent.append("<p>Trân trọng,<br>Biblio Bookshop</p>");
-        emailContent.append("</body></html>");
-
-        return emailContent.toString();
     }
 }

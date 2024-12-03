@@ -82,9 +82,16 @@
             </ul>
           </div>
           <div class="cr-product-price">
-            <span class="new-price price-value">${(1 - book.discount / 100) * book.sellingPrice}</span>
-            <span class="old-price price-value">${book.sellingPrice}</span>
-            <span class="discount-percent">${book.discount}</span>
+            <c:choose>
+              <c:when test="${book.discount == 0}">
+                <span class="new-price price-value">${book.sellingPrice}</span>
+              </c:when>
+              <c:otherwise>
+                <span class="new-price price-value">${(1 - book.discount / 100) * book.sellingPrice}</span>
+                <span class="old-price price-value">${book.sellingPrice}</span>
+                <span class="discount-percent">${book.discount}</span>
+              </c:otherwise>
+            </c:choose>
           </div>
           <div class="cr-size-weight">
             <h5><span>Tình trạng</span> :</h5>
@@ -385,232 +392,7 @@
     </div>
     <div class="row">
       <div class="col-lg-12">
-        <div class="cr-popular-product">
-          <div class="slick-slide">
-            <div class="cr-product-card">
-              <div class="cr-product-image">
-                <div class="cr-image-inner zoom-image-hover">
-                  <img src="${pageContext.request.contextPath}/assets/customer/img/product/9.jpg" alt="product-1" />
-                </div>
-                <div class="cr-side-view">
-                  <a href="javascript:void(0)" class="wishlist">
-                    <i class="ri-heart-line"></i>
-                  </a>
-                  <a
-                          class="model-oraganic-product"
-                          data-bs-toggle="modal"
-                          href="#quickview"
-                          role="button"
-                  >
-                    <i class="ri-eye-line"></i>
-                  </a>
-                </div>
-                <a class="cr-shopping-bag" href="javascript:void(0)">
-                  <i class="ri-shopping-bag-line"></i>
-                </a>
-              </div>
-              <div class="cr-product-details">
-                <div class="cr-brand">
-                  <a href="shop-left-sidebar.html">Snacks</a>
-                  <div class="cr-star">
-                    <i class="ri-star-fill"></i>
-                    <i class="ri-star-fill"></i>
-                    <i class="ri-star-fill"></i>
-                    <i class="ri-star-fill"></i>
-                    <i class="ri-star-line"></i>
-                    <p>(4.5)</p>
-                  </div>
-                </div>
-                <a href="product" class="title"
-                >Getting Work Done (HBR 20-Minute Manager Series)</a
-                >
-                <p class="cr-price">
-                  <span class="new-price">$120.25</span>
-                  <span class="old-price">$123.25</span>
-                </p>
-              </div>
-            </div>
-          </div>
-          <div class="slick-slide">
-            <div class="cr-product-card">
-              <div class="cr-product-image">
-                <div class="cr-image-inner zoom-image-hover">
-                  <img src="${pageContext.request.contextPath}/assets/customer/img/product/10.jpg" alt="product-1" />
-                </div>
-                <div class="cr-side-view">
-                  <a href="javascript:void(0)" class="wishlist">
-                    <i class="ri-heart-line"></i>
-                  </a>
-                  <a
-                          class="model-oraganic-product"
-                          data-bs-toggle="modal"
-                          href="#quickview"
-                          role="button"
-                  >
-                    <i class="ri-eye-line"></i>
-                  </a>
-                </div>
-                <a class="cr-shopping-bag" href="javascript:void(0)">
-                  <i class="ri-shopping-bag-line"></i>
-                </a>
-              </div>
-              <div class="cr-product-details">
-                <div class="cr-brand">
-                  <a href="shop-left-sidebar.html">Snacks</a>
-                  <div class="cr-star">
-                    <i class="ri-star-fill"></i>
-                    <i class="ri-star-fill"></i>
-                    <i class="ri-star-fill"></i>
-                    <i class="ri-star-fill"></i>
-                    <i class="ri-star-fill"></i>
-                    <p>(5.0)</p>
-                  </div>
-                </div>
-                <a href="product" class="title"
-                >Work Rules: Insights From Inside Google</a
-                >
-                <p class="cr-price">
-                  <span class="new-price">$100.00</span>
-                  <span class="old-price">$110.00</span>
-                </p>
-              </div>
-            </div>
-          </div>
-          <div class="slick-slide">
-            <div class="cr-product-card">
-              <div class="cr-product-image">
-                <div class="cr-image-inner zoom-image-hover">
-                  <img src="${pageContext.request.contextPath}/assets/customer/img/product/1.jpg" alt="product-1" />
-                </div>
-                <div class="cr-side-view">
-                  <a href="javascript:void(0)" class="wishlist">
-                    <i class="ri-heart-line"></i>
-                  </a>
-                  <a
-                          class="model-oraganic-product"
-                          data-bs-toggle="modal"
-                          href="#quickview"
-                          role="button"
-                  >
-                    <i class="ri-eye-line"></i>
-                  </a>
-                </div>
-                <a class="cr-shopping-bag" href="javascript:void(0)">
-                  <i class="ri-shopping-bag-line"></i>
-                </a>
-              </div>
-              <div class="cr-product-details">
-                <div class="cr-brand">
-                  <a href="shop-left-sidebar.html">Snacks</a>
-                  <div class="cr-star">
-                    <i class="ri-star-fill"></i>
-                    <i class="ri-star-fill"></i>
-                    <i class="ri-star-fill"></i>
-                    <i class="ri-star-fill"></i>
-                    <i class="ri-star-line"></i>
-                    <p>(4.5)</p>
-                  </div>
-                </div>
-                <a href="product" class="title">
-                  Essentialism - The Disciplined Pursuit Of Less</a
-                >
-                <p class="cr-price">
-                  <span class="new-price">$120.25</span>
-                  <span class="old-price">$123.25</span>
-                </p>
-              </div>
-            </div>
-          </div>
-          <div class="slick-slide">
-            <div class="cr-product-card">
-              <div class="cr-product-image">
-                <div class="cr-image-inner zoom-image-hover">
-                  <img src="${pageContext.request.contextPath}/assets/customer/img/product/2.jpg" alt="product-1" />
-                </div>
-                <div class="cr-side-view">
-                  <a href="javascript:void(0)" class="wishlist">
-                    <i class="ri-heart-line"></i>
-                  </a>
-                  <a
-                          class="model-oraganic-product"
-                          data-bs-toggle="modal"
-                          href="#quickview"
-                          role="button"
-                  >
-                    <i class="ri-eye-line"></i>
-                  </a>
-                </div>
-                <a class="cr-shopping-bag" href="javascript:void(0)">
-                  <i class="ri-shopping-bag-line"></i>
-                </a>
-              </div>
-              <div class="cr-product-details">
-                <div class="cr-brand">
-                  <a href="shop-left-sidebar.html">Snacks</a>
-                  <div class="cr-star">
-                    <i class="ri-star-fill"></i>
-                    <i class="ri-star-fill"></i>
-                    <i class="ri-star-fill"></i>
-                    <i class="ri-star-fill"></i>
-                    <i class="ri-star-fill"></i>
-                    <p>(5.0)</p>
-                  </div>
-                </div>
-                <a href="product" class="title"
-                >Sweet snakes crunchy nut mix 250gm pack</a
-                >
-                <p class="cr-price">
-                  <span class="new-price">$100.00</span>
-                  <span class="old-price">$110.00</span>
-                </p>
-              </div>
-            </div>
-          </div>
-          <div class="slick-slide">
-            <div class="cr-product-card">
-              <div class="cr-product-image">
-                <div class="cr-image-inner zoom-image-hover">
-                  <img src="${pageContext.request.contextPath}/assets/customer/img/product/3.jpg" alt="product-1" />
-                </div>
-                <div class="cr-side-view">
-                  <a href="javascript:void(0)" class="wishlist">
-                    <i class="ri-heart-line"></i>
-                  </a>
-                  <a
-                          class="model-oraganic-product"
-                          data-bs-toggle="modal"
-                          href="#quickview"
-                          role="button"
-                  >
-                    <i class="ri-eye-line"></i>
-                  </a>
-                </div>
-                <a class="cr-shopping-bag" href="javascript:void(0)">
-                  <i class="ri-shopping-bag-line"></i>
-                </a>
-              </div>
-              <div class="cr-product-details">
-                <div class="cr-brand">
-                  <a href="shop-left-sidebar.html">Snacks</a>
-                  <div class="cr-star">
-                    <i class="ri-star-fill"></i>
-                    <i class="ri-star-fill"></i>
-                    <i class="ri-star-fill"></i>
-                    <i class="ri-star-fill"></i>
-                    <i class="ri-star-fill"></i>
-                    <p>(5.0)</p>
-                  </div>
-                </div>
-                <a href="product" class="title"
-                >Sweet snakes crunchy nut mix 250gm pack</a
-                >
-                <p class="cr-price">
-                  <span class="new-price">$100.00</span>
-                  <span class="old-price">$110.00</span>
-                </p>
-              </div>
-            </div>
-          </div>
+        <div class="cr-popular-product row">
         </div>
       </div>
     </div>
@@ -618,3 +400,4 @@
 </section>
 
 <script src="${pageContext.request.contextPath}/assets/commons/js/format-discount-percent.js"></script>
+<script src="${pageContext.request.contextPath}/assets/customer/js/book-details.js" type="module"></script>

@@ -3617,6 +3617,10 @@ ul.navbar-nav .dropdown:hover .dropdown-menu {
   color: #7a7a7a;
 }
 
+.cr-popular-product {
+  display: flex;
+}
+
 .cr-popular-product,
 .cr-twocolumns-product {
   margin: 0 -12px;

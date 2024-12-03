@@ -41,27 +41,36 @@ class ForgotPassword {
 							title: 'Thông báo',
 							message: response.message,
 							type: 'success',
-							duration: 1000
+							duration: 3000
 						});
 						setTimeout(() => {
 							formContainer.empty();
-							formContainer.append('<div class="form-group mb-2">\n' +
-								'                            <label for="otp" class="text-md mb-1 ml-2">Mã OTP:</label>\n' +
-								'                            <input id="otp" type="text" autocomplete="on" placeholder="Nhập mã OTP..." maxlength="6"\n' +
-								'                                   class="block w-full py-2 px-4 text-gray-900 border-1 border-gray-300 rounded-lg text-[16px] focus:ring-blue-500 focus:border-blue-500 transition-all ease-linear bg-white focus:shadow-lg focus:shadow-[rgba(3,_102,_214,_0.3)_0px_0px_0px_3px]" />\n' +
-								'                        </div>\n' +
-								'                        <span id="countdown" class="countdown"></span>\n' +
-								'                        <button type="button"\n' +
-								'                                class="btn-verify-otp px-8 py-2 rounded text-white bg-[#64b595] hover:bg-[#64b595]/90 transition-all duration-300">\n' +
-								'                            Gửi\n' +
-								'                        </button>');
-						}, 2000)
+							formContainer.append(`
+								<div class="form-group mb-2">
+									<label for="otp" class="text-md mb-1 ml-2">Mã OTP:</label>
+									<input id="otp" type="text" autocomplete="off" placeholder="Nhập mã OTP..." maxlength="6"
+										   class="block w-full py-2 px-4 text-gray-900 border-1 border-gray-300 rounded-lg text-[16px] 
+												  focus:ring-blue-500 focus:border-blue-500 transition-all ease-linear bg-white 
+												  focus:shadow-lg focus:shadow-[rgba(3,_102,_214,_0.3)_0px_0px_0px_3px]" />
+								</div>
+								<div class="flex justify-between items-center">
+									<button type="button" class="btn-resend-otp inline-block px-4 py-2 border border-solid rounded hover:bg-gray-100 transition-all duration-300">
+										<span class="button-text">Gửi lại</span>
+										<div class="spinner hidden w-[20px] h-[20px] border-[4px] border-solid border-[#fff] rounded-full border-t-transparent animate-spin"></div>
+									</button>
+									<button type="button" class="btn-verify-otp px-8 py-2 rounded text-white bg-[#64b595] hover:bg-[#64b595]/90 transition-all duration-300">
+										Xác minh
+									</button>
+								</div>
+							`);
+							startResendOtpCountdown();
+						}, 3000)
 					} else {
 						toast({
 							title: 'Thông báo',
 							message: response.message,
 							type: 'error',
-							duration: 1000
+							duration: 3000
 						});
 					}
 				},
@@ -111,29 +120,32 @@ class ForgotPassword {
 							title: "Thông báo",
 							message: response.message,
 							type: "success",
-							duration: 1000,
+							duration: 2000
 						});
 						setTimeout(() => {
 							formContainer.empty();
-							formContainer.append('<div class="form-group mb-2">\n' +
-								'                            <label for="password" class="text-md mb-1 ml-2">Mật khẩu mới:</label>\n' +
-								'                            <input id="password" type="text" autocomplete="on" placeholder="Nhập mật khẩu mới..." minlength="8"\n' +
-								'                                   class="block w-full py-2 px-4 text-gray-900 border-1 border-gray-300 rounded-lg text-[16px] focus:ring-blue-500 focus:border-blue-500 transition-all ease-linear bg-white focus:shadow-lg focus:shadow-[rgba(3,_102,_214,_0.3)_0px_0px_0px_3px]" />\n' +
-								'                            <label for="confirm-password" class="text-md mb-1 ml-2">Mã OTP:</label>\n' +
-								'                            <input id="confirm-password" type="text" autocomplete="on" placeholder="Nhập lại mật khẩu..." minlength="8"\n' +
-								'                                   class="block w-full py-2 px-4 text-gray-900 border-1 border-gray-300 rounded-lg text-[16px] focus:ring-blue-500 focus:border-blue-500 transition-all ease-linear bg-white focus:shadow-lg focus:shadow-[rgba(3,_102,_214,_0.3)_0px_0px_0px_3px]" />\n' +
-								'                        </div>\n' +
-								'                        <button type="button"\n' +
-								'                                class="btn-reset-password px-8 py-2 rounded text-white bg-[#64b595] hover:bg-[#64b595]/90 transition-all duration-300">\n' +
-								'                            Gửi\n' +
-								'                        </button>')
-						}, 2000)
+							formContainer.append(`
+								<div class="form-group mb-2">
+									<label for="password" class="text-md mb-1 ml-2">Mật khẩu mới:</label>
+									<input id="password" type="password" autocomplete="on" placeholder="Nhập mật khẩu mới..." minlength="8"
+										   class="block w-full py-2 px-4 text-gray-900 border-1 border-gray-300 rounded-lg text-[16px] focus:ring-blue-500 focus:border-blue-500 transition-all ease-linear bg-white focus:shadow-lg focus:shadow-[rgba(3,_102,_214,_0.3)_0px_0px_0px_3px]" />
+									
+									<label for="confirm-password" class="text-md mb-1 ml-2">Xác nhận mật khẩu:</label>
+									<input id="confirm-password" type="password" autocomplete="on" placeholder="Nhập lại mật khẩu..." minlength="8"
+										   class="block w-full py-2 px-4 text-gray-900 border-1 border-gray-300 rounded-lg text-[16px] focus:ring-blue-500 focus:border-blue-500 transition-all ease-linear bg-white focus:shadow-lg focus:shadow-[rgba(3,_102,_214,_0.3)_0px_0px_0px_3px]" />
+								</div>
+								<button type="button"
+										class="btn-reset-password px-8 py-2 rounded text-white bg-[#64b595] hover:bg-[#64b595]/90 transition-all duration-300">
+									Đặt lại
+								</button>
+							`);
+						}, 3000)
 					} else {
 						toast({
 							title: "Thông báo",
 							message: response.message,
 							type: "error",
-							duration: 1000,
+							duration: 2000,
 						});
 					}
 				},
@@ -142,6 +154,37 @@ class ForgotPassword {
 				}
 			});
 		});
+
+		$(document).on("click", ".btn-resend-otp", function () {
+			$.ajax({
+				url: `${contextPath}/forgot`,
+				type: 'POST',
+				contentType: 'application/json',
+				data: JSON.stringify({}),
+				success: function (response) {
+					if (response.code === 200) {
+						toast({
+							title: 'Thông báo',
+							message: response.message,
+							type: 'success',
+							duration: 3000
+						});
+						startResendOtpCountdown();
+					} else {
+						toast({
+							title: 'Thông báo',
+							message: response.message,
+							type: 'error',
+							duration: 3000
+						});
+					}
+				},
+				error: function (xhr, status, error) {
+					console.error('Error: ', xhr.responseText);
+				},
+			});
+		});
+
 		$(document).on("click", ".btn-reset-password",function (e) {
 			e.preventDefault();
 
@@ -181,7 +224,7 @@ class ForgotPassword {
 							title: "Thông báo",
 							message: response.message,
 							type: "success",
-							duration: 1000,
+							duration: 2000
 						});
 						setTimeout(() => {
 							window.location.href = `${contextPath}/login`;
@@ -194,6 +237,23 @@ class ForgotPassword {
 			});
 		});
 	}
+}
+
+function startResendOtpCountdown() {
+	let countdown = 2 * 60;
+	const resendButton = $('.btn-resend-otp');
+	resendButton.prop('disabled', true);
+
+	const interval = setInterval(function () {
+		if (countdown <= 0) {
+			clearInterval(interval);
+			resendButton.prop('disabled', false);
+			resendButton.text('Gửi lại');
+		} else {
+			resendButton.text(`Gửi lại sau ${countdown}s`);
+			countdown--;
+		}
+	}, 1000);
 }
 
 const forgotPassword = new ForgotPassword();

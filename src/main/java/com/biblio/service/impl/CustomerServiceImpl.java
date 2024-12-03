@@ -138,7 +138,7 @@ public class CustomerServiceImpl implements ICustomerService {
 
     @Override
     public List<NotificationGetResponse> getAllNotificationByCustomerId(Long id) {
-        Customer customer = customerDAO.findById(id);
+        Customer customer = customerDAO.findByIdForNotification(id);
         List<NotificationGetResponse> notifications = new ArrayList<>();
 
         for (Notification notification : customer.getNotifications()) {
