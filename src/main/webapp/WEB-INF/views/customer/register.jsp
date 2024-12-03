@@ -9,7 +9,7 @@
                      data-aos-delay="400">
                     <div class="form-logo w-[80%] mx-auto">
                         <img
-                                src="${pageContext.request.contextPath}/assets/customer/img/logo/biblio.png"
+                                src="${pageContext.request.contextPath}/assets/commons/img/logo/biblio.png"
                                 alt="logo"
                                 class="w-full h-full object-cover"/>
                     </div>

@@ -67,7 +67,8 @@ public class SearchBookAPI extends HttpServlet {
         List<CategoryBookCountResponse> categories = categoryService.getBookQuantityPerCategory(req);
 
         List<BookCardResponse> book = bookTemplateService.getBookTemplateByCriteria(req);
-        Long bookCount = bookTemplateService.getBookTemplateQuantityByCriteria(req);
+        Long bookCount = bookTemplateService.getTotalBookTemplateQuantity(req);
+        Long searchResult = bookTemplateService.getBookTemplateQuantityByCriteria(req);
         Long minPrice = bookService.getMinBookPrice();
         Long maxPrice = bookService.getMaxBookPrice();
 
@@ -76,6 +77,7 @@ public class SearchBookAPI extends HttpServlet {
 
         map.put("books", book);
         map.put("quantity", bookCount);
+        map.put("searchResult", searchResult);
         map.put("category", categories);
         map.put("minPrice", minPrice);
         map.put("maxPrice", maxPrice);

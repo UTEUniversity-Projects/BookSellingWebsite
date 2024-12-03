@@ -45,39 +45,39 @@
                             </div>
                         </div>
                     </div>
-                    <div class="cr-shop-color">
-                        <h4 class="cr-shop-sub-title">Hạng mục</h4>
-                        <div class="cr-checkbox">
-                            <div class="checkbox-group">
-                                <input type="checkbox" id="blue"/>
-                                <label for="blue">Best-Seller</label>
-                            </div>
-                            <div class="checkbox-group">
-                                <input type="checkbox" id="yellow"/>
-                                <label for="yellow">Top 50</label>
-                            </div>
-                            <div class="checkbox-group">
-                                <input type="checkbox" id="red"/>
-                                <label for="red">Combo sách</label>
-                            </div>
-                            <div class="checkbox-group">
-                                <input type="checkbox" id="red"/>
-                                <label for="red">Sách đang khuyến mãi</label>
-                            </div>
-                            <div class="checkbox-group">
-                                <input type="checkbox" id="red"/>
-                                <label for="red">Sách mới xuất bản</label>
-                            </div>
-                            <div class="checkbox-group">
-                                <input type="checkbox" id="red"/>
-                                <label for="red">Sách trong nước</label>
-                            </div>
-                            <div class="checkbox-group">
-                                <input type="checkbox" id="red"/>
-                                <label for="red">Sách nước ngoài</label>
-                            </div>
-                        </div>
-                    </div>
+<%--                    <div class="cr-shop-color">--%>
+<%--                        <h4 class="cr-shop-sub-title">Hạng mục</h4>--%>
+<%--                        <div class="cr-checkbox">--%>
+<%--                            <div class="checkbox-group">--%>
+<%--                                <input type="checkbox" id="blue"/>--%>
+<%--                                <label for="blue">Best-Seller</label>--%>
+<%--                            </div>--%>
+<%--                            <div class="checkbox-group">--%>
+<%--                                <input type="checkbox" id="yellow"/>--%>
+<%--                                <label for="yellow">Top 50</label>--%>
+<%--                            </div>--%>
+<%--                            <div class="checkbox-group">--%>
+<%--                                <input type="checkbox" id="red"/>--%>
+<%--                                <label for="red">Combo sách</label>--%>
+<%--                            </div>--%>
+<%--                            <div class="checkbox-group">--%>
+<%--                                <input type="checkbox" id="red"/>--%>
+<%--                                <label for="red">Sách đang khuyến mãi</label>--%>
+<%--                            </div>--%>
+<%--                            <div class="checkbox-group">--%>
+<%--                                <input type="checkbox" id="red"/>--%>
+<%--                                <label for="red">Sách mới xuất bản</label>--%>
+<%--                            </div>--%>
+<%--                            <div class="checkbox-group">--%>
+<%--                                <input type="checkbox" id="red"/>--%>
+<%--                                <label for="red">Sách trong nước</label>--%>
+<%--                            </div>--%>
+<%--                            <div class="checkbox-group">--%>
+<%--                                <input type="checkbox" id="red"/>--%>
+<%--                                <label for="red">Sách nước ngoài</label>--%>
+<%--                            </div>--%>
+<%--                        </div>--%>
+<%--                    </div>--%>
                     <div class="cr-shop-condition">
                         <h4 class="cr-shop-sub-title">Tình trạng</h4>
                         <div class="cr-checkbox">
@@ -172,19 +172,19 @@
                             </div>
                         </div>
                     </div>
-                    <div class="cr-shop-tags">
-                        <h4 class="cr-shop-sub-title">Thẻ</h4>
-                        <div class="cr-shop-tags-inner">
-                            <ul class="cr-tags">
-                                <li><a href="javascript:void(0)">Thiếu nhi</a></li>
-                                <li><a href="javascript:void(0)">Kỹ năng sống</a></li>
-                                <li><a href="javascript:void(0)">Kinh tế</a></li>
-                                <li><a href="javascript:void(0)">Giáo trình</a></li>
-                                <li><a href="javascript:void(0)">Từ điển</a></li>
-                                <li><a href="javascript:void(0)">Tâm lý</a></li>
-                            </ul>
-                        </div>
-                    </div>
+<%--                    <div class="cr-shop-tags">--%>
+<%--                        <h4 class="cr-shop-sub-title">Thẻ</h4>--%>
+<%--                        <div class="cr-shop-tags-inner">--%>
+<%--                            <ul class="cr-tags">--%>
+<%--                                <li><a href="javascript:void(0)">Thiếu nhi</a></li>--%>
+<%--                                <li><a href="javascript:void(0)">Kỹ năng sống</a></li>--%>
+<%--                                <li><a href="javascript:void(0)">Kinh tế</a></li>--%>
+<%--                                <li><a href="javascript:void(0)">Giáo trình</a></li>--%>
+<%--                                <li><a href="javascript:void(0)">Từ điển</a></li>--%>
+<%--                                <li><a href="javascript:void(0)">Tâm lý</a></li>--%>
+<%--                            </ul>--%>
+<%--                        </div>--%>
+<%--                    </div>--%>
                 </div>
             </div>
             <div
@@ -215,10 +215,7 @@
                                         class="form-select sort-by"
                                         aria-label="Default select example"
                                 >
-                                    <option value="0" selected>Bán chạy</option>
-                                    <option value="1">Nổi bật</option>
-                                    <option value="2">Khuyến mãi</option>
-                                    <option value="3">Giá tăng dần</option>
+                                    <option value="3" selected>Giá tăng dần</option>
                                     <option value="4">Giá giảm dần</option>
                                     <option value="5">Mới nhất</option>
                                 </select>
