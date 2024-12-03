@@ -1,5 +1,6 @@
-import { formatCurrencyVND } from '../../commons/js/format-currency.js';
+import {formatCurrencyVND} from '../../commons/js/format-currency.js';
 import {zoomImage} from "../../commons/js/zoom-image.js";
+import {toast} from "./toast";
 
 $(document).ready(() => {
     const isElementInViewport = (el) => {
@@ -61,8 +62,8 @@ $(document).ready(() => {
                                     <a href="${contextPath}/book?id=${book.id}" class="title">${book.title}</a>
                                     <p class="cr-price">
                                         ${book.salePrice === book.sellingPrice
-                                        ? `<span class="new-price price-value">${formatCurrencyVND(book.sellingPrice)}</span>`
-                                        : `<span class="new-price price-value">${formatCurrencyVND(book.salePrice)}</span>
+            ? `<span class="new-price price-value">${formatCurrencyVND(book.sellingPrice)}</span>`
+            : `<span class="new-price price-value">${formatCurrencyVND(book.salePrice)}</span>
 			   							<span class="old-price price-value">${formatCurrencyVND(book.sellingPrice)}</span>`}
                                     </p>
                                 </div>
@@ -161,6 +162,36 @@ $(document).ready(() => {
         });
     };
 
+    $(document).on('click', '.btn-checkout', function () {
+        const bookId = $(this).data('book-id');
+        const quantity = $(this).closest('.modal-body').find('.quantity').val();
+        checkout(bookId, quantity);
+    });
+
+    const checkout = (bookId, quantity) => {
+        console.log('Proceed to checkout for book with ID:', bookId, quantity);
+        const selectedItems = [];
+        selectedItems.push({
+            productId: bookId, quantity: quantity
+        });
+        if (selectedItems.length > 0) {
+            console.log(selectedItems);
+            $.ajax({
+                url: `${contextPath}/api/customer/checkout`,
+                type: "POST",
+                contentType: "application/json",
+                data: JSON.stringify({items: selectedItems}),
+                success: function (response) {
+                    window.location.href = `${contextPath}/checkout`;
+                },
+                error: function (xhr, status, error) {
+                    toast("Thất bại", "Có lỗi xảy ra. Vui lòng thử lại!", "error", 3000);
+                }
+            });
+        } else {
+            toast("Thông tin", "Vui lòng chọn ít nhất một sản phẩm để thanh toán!", "info", 3000);
+        }
+    };
 
     const lazyLoad = () => {
         lazyLoadElements.forEach(element => {

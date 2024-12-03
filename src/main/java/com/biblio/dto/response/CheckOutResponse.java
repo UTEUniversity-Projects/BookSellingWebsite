@@ -1,6 +1,7 @@
 package com.biblio.dto.response;
 
 import com.biblio.entity.Address;
+import com.biblio.enumeration.EPromotionTemplateType;
 import lombok.*;
 
 import java.util.ArrayList;
@@ -28,8 +29,14 @@ public class CheckOutResponse {
     public void updateFinalPrice() {
         this.finalPrice = this.totalPrice + this.shipping.getShippingFee();
         for (PromotionOrderResponse promotion : this.promotions) {
-            this.finalPrice -= promotion.getDiscountAmount();
+            if (promotion.getPromotionType().equals(EPromotionTemplateType.FREESHIP)) {
+                double shippingAmount = Math.min(promotion.getDiscountAmount(), shipping.getShippingFee());
+                this.finalPrice -= shippingAmount;
+            } else if (promotion.getPromotionType().equals(EPromotionTemplateType.VOUCHER)) {
+                this.finalPrice -= Math.min(promotion.getDiscountAmount(), this.finalPrice);
+            }
         }
+        this.finalPrice = Math.max(10000, this.finalPrice);
     }
 
     public void updateShipping() {

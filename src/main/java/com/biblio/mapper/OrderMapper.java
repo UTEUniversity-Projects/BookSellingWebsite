@@ -33,19 +33,27 @@ public class OrderMapper {
 
         for (Promotion promotion : order.getPromotions()) {
             if (promotion.getPromotionTemplate().getType() != EPromotionTemplateType.DISCOUNT) {
-                PromotionOrderResponse promotionOrderResponse = new PromotionOrderResponse();
-                promotionOrderResponse.setId(promotion.getId());
-                promotionOrderResponse.setPromotionType(promotion.getPromotionTemplate().getType());
-                if (promotion.getPromotionTemplate().getType() == EPromotionTemplateType.FREESHIP) {
-                    double discountAmount = Math.min(promotion.getDiscountLimit(), shipping.getShippingFee());
-                    promotionOrderResponse.setDiscountAmount(discountAmount);
-                }
-
-                promotions.add(promotionOrderResponse);
+                promotions.add(PromotionOrderResponse.builder()
+                        .id(promotion.getId())
+                        .code(promotion.getPromotionTemplate().getCode())
+                        .promotionType(promotion.getPromotionTemplate().getType())
+                        .discountAmount(promotion.getDiscountLimit())
+                        .build());
             }
         }
 
-        return OrderDetailsManagementResponse.builder().id(order.getId()).customer(customer).shipping(shipping).orderDate(formatDateTime(order.getOrderDate(), "HH:mm dd-MM-yyyy")).note(order.getNote()).products(products).status(order.getStatus()).statusStyle(order.getStatus().getStatusStyle()).paymentMethod(order.getPaymentType().getValue()).promotions(promotions).build();
+        return OrderDetailsManagementResponse.builder()
+                .id(order.getId())
+                .customer(customer)
+                .shipping(shipping)
+                .orderDate(formatDateTime(order.getOrderDate(), "HH:mm dd-MM-yyyy"))
+                .note(order.getNote())
+                .products(products)
+                .status(order.getStatus())
+                .statusStyle(order.getStatus().getStatusStyle())
+                .paymentMethod(order.getPaymentType().getValue())
+                .promotions(promotions)
+                .build();
     }
 
     public static OrderCustomerResponse toOrderCustomerResponse(Order order) {
