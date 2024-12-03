@@ -17,9 +17,6 @@ import java.io.IOException;
 import java.io.Serial;
 import java.util.List;
 
-/**
- * Servlet implementation class SearchController
- */
 @WebServlet(urlPatterns = {"/search", "/book-list"})
 public class SearchController extends HttpServlet {
     @Serial
@@ -34,72 +31,92 @@ public class SearchController extends HttpServlet {
     @Inject
     private ICategoryService categoryService;
 
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
     public SearchController() {
         super();
-        // TODO Auto-generated constructor stub
     }
 
-    /**
-     * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
-     */
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        // TODO Auto-generated method stub
         String title = request.getParameter("title");
+        Long categoryId = parseLongParameter(request.getParameter("categoryId"));
+        String sortBy = request.getParameter("sortBy");
+        Integer perPage = parseIntParameter(request.getParameter("perPage"), 6); // Default to 6 if not provided
+        Integer pageNumber = parseIntParameter(request.getParameter("pageNumber"), 1); // Default to 1 if not provided
+        Long minPrice = parseLongParameter(request.getParameter("minPrice"), 0L); // Default to 0 if not provided
+        Long maxPrice = parseLongParameter(request.getParameter("maxPrice"), Long.MAX_VALUE); // Default to Long.MAX_VALUE if not provided
+        String condition = request.getParameter("condition");
+        String format = request.getParameter("format");
+        Double reviewRate = parseDoubleParameter(request.getParameter("reviewRate"), 0.0); // Default to 0.0 if not provided
 
         SearchBookRequest searchBookRequest = SearchBookRequest.builder()
                 .title(title)
-                .categoryId(null)
-                .sortBy(null)
-                .perPage(6)
-                .minPrice(0)
-                .maxPrice(10000000000L)
-                .categoryId(null)
-                .condition(null)
-                .format(null)
-                .reviewRate(0)
-                .pageNumber(1)
-                .sortBy(null)
+                .categoryId(categoryId)
+                .sortBy(sortBy)
+                .perPage(perPage)
+                .pageNumber(pageNumber)
+                .minPrice(minPrice)
+                .maxPrice(maxPrice)
+                .condition(condition)
+                .format(format)
+                .reviewRate(reviewRate)
                 .build();
 
         List<CategoryBookCountResponse> categories = categoryService.getBookQuantityPerCategory(searchBookRequest);
-        System.out.println(categories);
         List<BookCardResponse> books = bookTemplateService.getBookTemplateByCriteria(searchBookRequest);
         Long bookCount = bookTemplateService.getBookTemplateQuantityByCriteria(searchBookRequest);
         Long totalBook = bookTemplateService.getTotalBookTemplateQuantity();
-        Long minPrice = bookService.getMinBookPrice();
-        Long maxPrice = bookService.getMaxBookPrice();
+        Long minBookPrice = bookService.getMinBookPrice();
+        Long maxBookPrice = bookService.getMaxBookPrice();
 
-        int page = 1;
-        int perPage = 6;
         int totalPages = (int) (bookCount / perPage);
         int leftPage = (int) (bookCount % perPage);
 
-        if (leftPage > 0)
+        if (leftPage > 0) {
             totalPages++;
+        }
 
-        request.setAttribute("page", page);
+        request.setAttribute("page", pageNumber);
         request.setAttribute("totalPages", totalPages);
 
-        request.setAttribute("categories", categories);
         request.setAttribute("books", books);
         request.setAttribute("breadcrumb", "Tìm kiếm sách");
         request.setAttribute("title", title);
         request.setAttribute("bookCount", bookCount);
         request.setAttribute("totalBook", totalBook);
-        request.setAttribute("minPrice", minPrice);
-        request.setAttribute("maxPrice", maxPrice);
+        request.setAttribute("minPrice", minBookPrice);
+        request.setAttribute("maxPrice", maxBookPrice);
 
         request.getRequestDispatcher("/views/customer/search.jsp").forward(request, response);
     }
 
-    /**
-     * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-     */
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        // TODO Auto-generated method stub
+    private Long parseLongParameter(String param) {
+        try {
+            return param != null ? Long.parseLong(param) : null;
+        } catch (NumberFormatException e) {
+            return null;
+        }
     }
 
+    private Long parseLongParameter(String param, Long defaultValue) {
+        try {
+            return param != null ? Long.parseLong(param) : defaultValue;
+        } catch (NumberFormatException e) {
+            return defaultValue;
+        }
+    }
+
+    private Integer parseIntParameter(String param, Integer defaultValue) {
+        try {
+            return param != null ? Integer.parseInt(param) : defaultValue;
+        } catch (NumberFormatException e) {
+            return defaultValue;
+        }
+    }
+
+    private Double parseDoubleParameter(String param, Double defaultValue) {
+        try {
+            return param != null ? Double.parseDouble(param) : defaultValue;
+        } catch (NumberFormatException e) {
+            return defaultValue;
+        }
+    }
 }

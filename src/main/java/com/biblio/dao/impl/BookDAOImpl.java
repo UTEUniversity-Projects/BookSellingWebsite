@@ -97,4 +97,10 @@ public class BookDAOImpl extends GenericDAOImpl<Book> implements IBookDAO {
         return super.findByJPQLPaginated(jpql, 1, request.getQuantity(), params);
     }
 
+    public static void main(String[] args) {
+        BookDAOImpl dao = new BookDAOImpl();
+        System.out.println(dao.findMaxBookPrice());
+
+    }
+
 }

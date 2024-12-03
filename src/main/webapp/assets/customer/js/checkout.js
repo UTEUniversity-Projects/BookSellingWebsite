@@ -171,6 +171,7 @@ $(document).ready(() => {
 		ACCOUNT_NAME: 'TRANG KIM LOI'
 	};
 
+
 	let timeOut;
 	let interval;
 	let isSuccess = false;
@@ -328,7 +329,3 @@ $(document).ready(() => {
 		}
 	}
 });
-
-/*
-*
-* */

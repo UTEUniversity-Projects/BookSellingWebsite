@@ -76,11 +76,6 @@ public class CreateOrderAPI extends HttpServlet {
 
         createOrderRequest.setPromotions(promotions);
 
-        if (account == null) {
-            response.sendRedirect(request.getContextPath() + "/login");
-            return;
-        }
-
         CustomerDetailResponse customer = customerService.getCustomerDetailByUsername(account.getUsername().trim());
         createOrderRequest.setCustomer(customer);
         Long orderId = orderService.createOrder(createOrderRequest);
