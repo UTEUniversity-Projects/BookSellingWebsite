@@ -11,6 +11,8 @@ $(document).ready(() => {
 
 		async search (searchData) {
 
+			console.log(searchData);
+
 			const generateStars = (reviewRate) => {
 				let stars = '';
 				for (let i = 1; i <= 5; i++) {
@@ -132,7 +134,7 @@ $(document).ready(() => {
 
 			const generateCategory = (category) => {
 				return `<div class="checkbox-group gap-x-2">
-                                    <input type="checkbox" id="${category.id}" value="${category.id}" class="category-item">
+                                    <input type="checkbox" id="${category.id}" value="${category.id}" ${getUrlParam("categoryId") === category.id.toString() ? "checked" : ""} class="category-item">
                                     <label for="${category.id}" class="pr-2">${category.categoryName}</label>
                                     <span>(${category.bookCount})</span>
                                 </div>`;
@@ -142,21 +144,20 @@ $(document).ready(() => {
 			$('.cr-pagination').hide();
 
 			const handleSuccess = (result) => {
+
 				const bookList = document.querySelector('.book-list');
 				const categoryList = document.querySelector('.category');
 				const { books, quantity, category } = result;
 
-				console.log({ quantity });
-
 				if (categoryList) {
 					if (isCategoryClicked === false) {
-						categoryList.innerHTML = `<div class="checkbox-group gap-x-2 select-none pointer-events-none">
-                                <input type="checkbox" id="all-categories" class="category-item" checked/>
+						categoryList.innerHTML = `<div class="checkbox-group gap-x-2">
+                                <input type="checkbox" id="all-categories" class="category-item" ${getUrlParam("categoryId") === null ? "checked" : ""}/>
                                 <label for="all-categories">Tất cả</label>
                                 <span>(${quantity})</span>
                             </div>` + category?.map(generateCategory).join('');
+						isCategoryClicked = false;
 					}
-					isCategoryClicked = false;
 				}
 
 				if (books.length === 0) {
@@ -184,6 +185,7 @@ $(document).ready(() => {
 				data: JSON.stringify(searchData),
 				contentType: 'application/json',
 				success: async function (result) {
+					console.log({ result });
 					handleSuccess(result);
 				},
 				error: function (xhr, error) {
@@ -239,10 +241,16 @@ $(document).ready(() => {
 		}
 
 		searchInput.on('input', debounce(function () {
-			const titleValue = searchInput.val();
+			const titleValue = searchInput.val().toLowerCase();
 
 			updateUrlParam('title', titleValue);
 			updateObjectValue(searchData, 'title', titleValue);
+
+			if (titleValue.trim() === '') {
+				const urlParams = new URLSearchParams(window.location.search);
+				const newUrl = `${window.location.pathname}?${urlParams.toString()}`;
+				window.history.pushState({ path: newUrl }, '', newUrl);
+			}
 			searchBook.search(searchData);
 
 		}, 500));
@@ -365,8 +373,7 @@ $(document).ready(() => {
 	setValueFromParameter();
 
 	function setValueFromParameter () {
-		if (!window.location.href.includes("/search"))
-			return;
+		if (!window.location.href.includes('/search')) return;
 
 		if (getUrlParam('title')) {
 			searchInput.val(getUrlParam('title'));
@@ -553,7 +560,7 @@ $(document).ready(() => {
 		parent.querySelector('.range-slider__display').setAttribute('data-high', slide2);
 		parent.querySelector('.min-price').innerText = slide1;
 		parent.querySelector('.max-price').innerText = slide2;
-	};
+	}
 
 });
 

@@ -171,6 +171,7 @@ $(document).ready(() => {
 		ACCOUNT_NAME: 'TRANG KIM LOI'
 	};
 
+
 	let timeOut;
 	let interval;
 	let isSuccess = false;
@@ -216,6 +217,7 @@ $(document).ready(() => {
 			});
 			return;
 		}
+
 
 		const text = `CHUYEN KHOAN DON HANG`;
 		const amount = $("#price-total")[0].dataset.price;
@@ -328,7 +330,3 @@ $(document).ready(() => {
 		}
 	}
 });
-
-/*
-*
-* */

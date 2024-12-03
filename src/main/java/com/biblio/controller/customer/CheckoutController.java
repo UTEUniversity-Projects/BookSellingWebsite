@@ -83,14 +83,6 @@ public class CheckoutController extends HttpServlet {
                 items.add(itemResponse);
             }
 
-//            for (CheckoutItemRequest item : checkoutRequest.getItems()) {
-//                CheckoutItemResponse itemResponse = bookTemplateService.getCheckoutItemResponse(item);
-//                double discount = promotionTemplateService.percentDiscountOfBook(item.getProductId());
-//                itemResponse.setDiscountPercent(discount);
-//                itemResponse.calTotalPrice();
-//                items.add(itemResponse);
-//            }
-
             checkOutResponse.setItems(items);
             checkOutResponse.setPromotions(new ArrayList<>());
             checkOutResponse.updateTotalPrice();
