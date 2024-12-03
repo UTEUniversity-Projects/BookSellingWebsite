@@ -31,6 +31,7 @@ public class UploadImageController extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String dir = request.getParameter("dir");
         String fileName = request.getParameter("fileName");
+        String typeAction = request.getParameter("typeAction");
 
         System.out.println(fileName);
         List<String> imageLinks = new ArrayList<String>();
@@ -39,9 +40,14 @@ public class UploadImageController extends HttpServlet {
 
         for (Part part : parts) {
             if (part.getName().equals("files")) {
-                imageLinks.add(UploadFileUtil.UploadImage(part, request.getServletContext(), dir, fileName));
+                if (typeAction.equals("nonContextPath")) {
+                    imageLinks.add(UploadFileUtil.UploadImageNonContextPath(part, request.getServletContext(), dir, fileName));
+                } else {
+                    imageLinks.add(UploadFileUtil.UploadImage(part, request.getServletContext(), dir, fileName));
+                }
             }
         }
+
 //        String fileName = request.getParameter("fileName");
 //        String avatar = UploadFileUtil.UploadImage(part, request.getServletContext(), fileName);
 

@@ -14,6 +14,8 @@ public interface IBookDAO {
 
     List<Book> findByBookTemplate(BookTemplate bookTemplate);
 
+    void createBook(Book book);
+
     List<Book> findBooksByTemplateId(Long bookTemplateId);
 
     void addBook(Book book);

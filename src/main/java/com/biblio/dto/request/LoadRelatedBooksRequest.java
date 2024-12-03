@@ -8,5 +8,5 @@ import lombok.*;
 @Setter
 @Builder
 public class LoadRelatedBooksRequest {
-    private Long bookTemplateId;
+    Long bookTemplateId;
 }

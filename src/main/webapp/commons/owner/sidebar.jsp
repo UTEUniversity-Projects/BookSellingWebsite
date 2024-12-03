@@ -34,7 +34,7 @@
                             ></a>
                             <ul class="cr-sb-subdrop condense">
                                 <li>
-                                    <a href="/owner/ecommerce" class="cr-page-link drop"
+                                    <a href="${pageContext.request.contextPath}/owner/ecommerce" class="cr-page-link drop"
                                     ><i class="ri-checkbox-blank-circle-line"></i>Báo cáo
                                         tài chính</a
                                     >
@@ -51,31 +51,21 @@
                             ></a>
                             <ul class="cr-sb-subdrop condense">
                                 <li>
-                                    <a href="${pageContext.request.contextPath}/owner/product-list" class="cr-page-link drop"
-                                    ><i class="ri-checkbox-blank-circle-line"></i>Danh
-                                        sách sản phẩm</a
+                                    <a href="${pageContext.request.contextPath}/owner/product/list" class="cr-page-link drop"
+                                    ><i class="ri-checkbox-blank-circle-line"></i>Sản phẩm</a
                                     >
                                 </li>
                                 <li>
-                                    <a href="${pageContext.request.contextPath}/owner/add-product" class="cr-page-link drop"
-                                    ><i class="ri-checkbox-blank-circle-line"></i>Thêm sản
-                                        phẩm</a>
-                                </li>
-                                <li>
-                                    <a href="${pageContext.request.contextPath}/owner/tag-list" class="cr-page-link drop"
-                                    ><i class="ri-checkbox-blank-circle-line"></i>Danh sách nhãn</a>
+                                    <a
+                                            href="${pageContext.request.contextPath}/owner/category/list"
+                                            class="cr-page-link drop"
+                                    ><i class="ri-checkbox-blank-circle-line"></i>Danh mục</a>
                                 </li>
                                 <li>
                                     <a
-                                            href="${pageContext.request.contextPath}/owner/category-list"
+                                            href="${pageContext.request.contextPath}/owner/sub-category/list"
                                             class="cr-page-link drop"
-                                    ><i class="ri-checkbox-blank-circle-line"></i>Danh sách phân loại</a>
-                                </li>
-                                <li>
-                                    <a
-                                            href="${pageContext.request.contextPath}/owner/sub-category-list"
-                                            class="cr-page-link drop"
-                                    ><i class="ri-checkbox-blank-circle-line"></i>Danh sách phân loại con</a>
+                                    ><i class="ri-checkbox-blank-circle-line"></i>Thể loại</a>
                                 </li>
                             </ul>
                         </li>
@@ -89,13 +79,13 @@
                             ></a>
                             <ul class="cr-sb-subdrop condense">
                                 <li>
-                                    <a href="/owner/promotion-list" class="cr-page-link drop"
+                                    <a href="${pageContext.request.contextPath}/owner/promotion-list" class="cr-page-link drop"
                                     ><i class="ri-checkbox-blank-circle-line"></i>Danh
                                         sách khuyến mãi</a
                                     >
                                 </li>
                                 <li>
-                                    <a href="/owner/add-promotion" class="cr-page-link drop"
+                                    <a href="${pageContext.request.contextPath}/owner/add-promotion" class="cr-page-link drop"
                                     ><i class="ri-checkbox-blank-circle-line"></i>Thêm
                                         khuyến mãi</a
                                     >
@@ -131,25 +121,10 @@
                             </a>
                             <ul class="cr-sb-subdrop condense">
                                 <li>
-                                    <a href="${pageContext.request.contextPath}/owner/staff-list" class="cr-page-link subdrop">
+                                    <a href="${pageContext.request.contextPath}/owner/staff/list" class="cr-page-link subdrop">
                                         <i class="ri-checkbox-blank-circle-line"></i>
                                         Danh sách nhân viên
                                     </a>
-                                </li>
-                            </ul>
-                        </li>
-                        <li class="cr-sb-item sb-subdrop-item">
-                            <a href="javascript:void(0)" class="cr-sub-drop-toggle">
-                                <i class="ri-file-list-2-line"></i
-                                ><span class="condense"
-                            >Nội dung trang<i
-                                    class="drop-arrow ri-arrow-down-s-line"
-                            ></i></span
-                            ></a>
-                            <ul class="cr-sb-subdrop condense">
-                                <li>
-                                    <a href="${pageContext.request.contextPath}/owner/content-list" class="cr-page-link subdrop"
-                                    ><i class="ri-checkbox-blank-circle-line"></i>Danh sách nội dung</a>
                                 </li>
                             </ul>
                         </li>
@@ -163,20 +138,20 @@
                             ></a>
                             <ul class="cr-sb-subdrop condense">
                                 <li>
-                                    <a href="${pageContext.request.contextPath}/owner/author-list" class="cr-page-link subdrop"
+                                    <a href="${pageContext.request.contextPath}/owner/author/list" class="cr-page-link subdrop"
                                     ><i class="ri-checkbox-blank-circle-line"></i>Tác
                                         giả</a
                                     >
                                 </li>
                                 <li>
-                                    <a href="${pageContext.request.contextPath}/owner/translator-list" class="cr-page-link drop"
+                                    <a href="${pageContext.request.contextPath}/owner/translator/list" class="cr-page-link drop"
                                     ><i class="ri-checkbox-blank-circle-line"></i>Dịch
                                         giả</a
                                     >
                                 </li>
                                 <li>
                                     <a
-                                            href="${pageContext.request.contextPath}/owner/publisher-list"
+                                            href="${pageContext.request.contextPath}/owner/publisher/list"
                                             class="cr-page-link subdrop"
                                     ><i class="ri-checkbox-blank-circle-line"></i>Nhà xuất
                                         bản</a

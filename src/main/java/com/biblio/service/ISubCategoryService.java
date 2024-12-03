@@ -1,15 +1,27 @@
 package com.biblio.service;
 
-import com.biblio.dto.request.SubCategoryRequest;
-import com.biblio.dto.response.SubCategoryResponse;
+import com.biblio.dto.request.SubCategoryCreateRequest;
+import com.biblio.dto.request.SubCategoryDeleteRequest;
+import com.biblio.dto.request.SubCategoryUpdateRequest;
+import com.biblio.dto.response.SubCategoryAnalysisResponse;
+import com.biblio.dto.response.SubCategoryCreateResponse;
+import com.biblio.dto.response.SubCategoryLineResponse;
+import com.biblio.dto.response.SubCategoryProfileResponse;
+import com.biblio.entity.SubCategory;
 
 import java.util.List;
 
 public interface ISubCategoryService {
-    List<SubCategoryResponse> findAll();
-    SubCategoryResponse findById(Long id);
-    void addSubCategory(SubCategoryRequest subCategoryRequest);
-    void updateSubCategory(SubCategoryRequest subCategoryRequest);
-    void deleteSubCategory(Long id);
-    List<SubCategoryResponse> getAllSubCategoriesById(Long id);
+    SubCategory getEntityById(Long id);
+    List<SubCategoryLineResponse> getAll();
+    SubCategoryProfileResponse getProfileById(Long id);
+    SubCategoryAnalysisResponse getAnalysisById(Long id);
+    SubCategory create(SubCategoryCreateRequest categoryRequest);
+    void update(SubCategoryUpdateRequest categoryRequest);
+    void delete(SubCategoryDeleteRequest categoryDeleteRequest);
+    Integer countBookTemplate(Long id);
+    SubCategoryCreateResponse initCreateSubCategory();
+
+    List<SubCategoryProfileResponse> findAll();
+    List<SubCategoryProfileResponse> getAllSubCategoriesById(Long id);
 }

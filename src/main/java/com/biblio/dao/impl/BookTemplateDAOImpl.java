@@ -8,7 +8,9 @@ import com.biblio.entity.BookTemplate;
 import com.biblio.enumeration.EBookCondition;
 import com.biblio.enumeration.EBookFormat;
 import com.biblio.enumeration.EBookMetadataStatus;
+import com.biblio.enumeration.EOrderStatus;
 
+import java.time.LocalDateTime;
 import java.util.*;
 
 public class BookTemplateDAOImpl extends GenericDAOImpl<BookTemplate> implements IBookTemplateDAO {
@@ -282,6 +284,244 @@ public class BookTemplateDAOImpl extends GenericDAOImpl<BookTemplate> implements
     @Override
     public BookTemplate update(BookTemplate bookTemplate) {
         return super.update(bookTemplate);
+    }
+
+    @Override
+    public Integer countOrdersByStatus(Long id, EOrderStatus status) {
+        String sql = """
+                    SELECT SUM(oi_books) amount
+                    FROM (
+                        SELECT oi.order_id, SUM(i_books) oi_books
+                        FROM (
+                            SELECT oib.order_item_id, COUNT(book_id) i_books
+                            FROM (
+                                SELECT b.id
+                                FROM book_template bt
+                                LEFT JOIN book b
+                                ON bt.id = b.book_template_id
+                                WHERE bt.id = :bookTemplateId
+                            ) books
+                            JOIN order_item_books oib
+                            ON books.id = oib.book_id
+                            GROUP BY oib.order_item_id
+                        ) order_bi
+                        JOIN order_item oi
+                        ON order_bi.order_item_id = oi.id
+                        GROUP BY oi.order_id
+                    ) orders
+                    JOIN `order` o
+                    ON orders.order_id = o.id
+                    WHERE o.status = :orderStatus
+                 """;
+
+        Map<String, Object> params = new HashMap<>();
+        params.put("bookTemplateId", id);
+        params.put("orderStatus", status.name());
+
+        return Math.toIntExact(super.countByNativeQuery(sql, params));
+    }
+
+    @Override
+    public Integer countOrdersInRangeByStatus(Long id, LocalDateTime from, LocalDateTime to, EOrderStatus status) {
+        String sql = """
+                    SELECT SUM(oi_books) amount
+                    FROM (
+                        SELECT oi.order_id, SUM(i_books) oi_books
+                        FROM (
+                            SELECT oib.order_item_id, COUNT(book_id) i_books
+                            FROM (
+                                SELECT b.id
+                                FROM book_template bt
+                                LEFT JOIN book b
+                                ON bt.id = b.book_template_id
+                                WHERE bt.id = :bookTemplateId
+                            ) books
+                            JOIN order_item_books oib
+                            ON books.id = oib.book_id
+                            GROUP BY oib.order_item_id
+                        ) order_bi
+                        JOIN order_item oi
+                        ON order_bi.order_item_id = oi.id
+                        GROUP BY oi.order_id
+                    ) orders
+                    JOIN `order` o
+                    ON orders.order_id = o.id
+                    WHERE o.status = :orderStatus AND (o.order_date BETWEEN :startDate AND :endDate)
+                 """;
+
+        Map<String, Object> params = new HashMap<>();
+        params.put("bookTemplateId", id);
+        params.put("orderStatus", status.name());
+        params.put("startDate", from.toString());
+        params.put("endDate", to.toString());
+
+        return Math.toIntExact(super.countByNativeQuery(sql, params));
+    }
+
+    @Override
+    public Integer countBooksInOrderByStatus(Long id, EBookMetadataStatus bookStatus, EOrderStatus orderStatus) {
+        String sql = """
+                    SELECT SUM(oi_books) amount
+                    FROM (
+                        SELECT oi.order_id, SUM(i_books) oi_books
+                        FROM (
+                            SELECT oib.order_item_id, COUNT(book_id) i_books
+                            FROM (
+                                SELECT b.id
+                                FROM (
+                                    SELECT b.id
+                                    FROM book_template bt
+                                    LEFT JOIN book b
+                                    ON bt.id = b.book_template_id
+                                    WHERE bt.id = :bookTemplateId
+                                ) b
+                                JOIN book_metadata bm
+                                ON b.id = bm.id AND bm.status = :bookStatus
+                            ) books
+                            JOIN order_item_books oib
+                            ON books.id = oib.book_id
+                            GROUP BY oib.order_item_id
+                        ) order_bi
+                        JOIN order_item oi
+                        ON order_bi.order_item_id = oi.id
+                        GROUP BY oi.order_id
+                    ) orders
+                    JOIN `order` o
+                    ON orders.order_id = o.id
+                    WHERE o.status = :orderStatus
+                 """;
+
+        Map<String, Object> params = new HashMap<>();
+        params.put("bookTemplateId", id);
+        params.put("bookStatus", bookStatus.name());
+        params.put("orderStatus", orderStatus.name());
+
+        return Math.toIntExact(super.countByNativeQuery(sql, params));
+    }
+
+    @Override
+    public Integer countBooksInRangeByStatus(Long id, LocalDateTime from, LocalDateTime to, EBookMetadataStatus bookStatus, EOrderStatus orderStatus) {
+        String sql = """
+                    SELECT SUM(oi_books) amount
+                    FROM (
+                        SELECT oi.order_id, SUM(i_books) oi_books
+                        FROM (
+                            SELECT oib.order_item_id, COUNT(book_id) i_books
+                            FROM (
+                                SELECT b.id
+                                FROM (
+                                    SELECT b.id
+                                    FROM book_template bt
+                                    LEFT JOIN book b
+                                    ON bt.id = b.book_template_id
+                                    WHERE bt.id = :bookTemplateId
+                                ) b
+                                JOIN book_metadata bm
+                                ON b.id = bm.id AND bm.status = :bookStatus
+                            ) books
+                            JOIN order_item_books oib
+                            ON books.id = oib.book_id
+                            GROUP BY oib.order_item_id
+                        ) order_bi
+                        JOIN order_item oi
+                        ON order_bi.order_item_id = oi.id
+                        GROUP BY oi.order_id
+                    ) orders
+                    JOIN `order` o
+                    ON orders.order_id = o.id
+                    WHERE o.status = :orderStatus AND (o.order_date BETWEEN :startDate AND :endDate)
+                 """;
+
+        Map<String, Object> params = new HashMap<>();
+        params.put("bookTemplateId", id);
+        params.put("bookStatus", bookStatus.name());
+        params.put("orderStatus", orderStatus.name());
+        params.put("startDate", from.toString());
+        params.put("endDate", to.toString());
+
+        return Math.toIntExact(super.countByNativeQuery(sql, params));
+    }
+
+    @Override
+    public Long calculateValueBooksSoldInRange(Long id, LocalDateTime from, LocalDateTime to, EOrderStatus status) {
+        String sql = """
+                    SELECT SUM(value_books) revenue
+                    FROM (
+                        SELECT oi.order_id, SUM(value_order_item) value_books
+                        FROM (
+                            SELECT oib.order_item_id, SUM(books.selling_price) value_order_item
+                            FROM (
+                                SELECT b.id, b.selling_price
+                                FROM book_template bt
+                                LEFT JOIN book b
+                                ON bt.id = b.book_template_id
+                                WHERE bt.id = :bookTemplateId
+                            ) books
+                            JOIN order_item_books oib
+                            ON books.id = oib.book_id
+                            GROUP BY oib.order_item_id
+                        ) order_bi
+                        JOIN order_item oi
+                        ON order_bi.order_item_id = oi.id
+                        GROUP BY oi.order_id
+                    ) orders
+                    JOIN `order` o
+                    ON orders.order_id = o.id
+                    WHERE o.status = :orderStatus AND (o.order_date BETWEEN :startDate AND :endDate)
+                 """;
+
+        Map<String, Object> params = new HashMap<>();
+        params.put("bookTemplateId", id);
+        params.put("orderStatus", status.name());
+        params.put("startDate", from.toString());
+        params.put("endDate", to.toString());
+
+        return (long) Math.toIntExact(super.countByNativeQuery(sql, params));
+    }
+
+    @Override
+    public Long calculateValueBooksSold(Long id, EOrderStatus status) {
+        String sql = """
+                    SELECT SUM(value_books) revenue
+                    FROM (
+                        SELECT oi.order_id, SUM(value_order_item) value_books
+                        FROM (
+                            SELECT oib.order_item_id, SUM(books.selling_price) value_order_item
+                            FROM (
+                                SELECT b.id, b.selling_price
+                                FROM book_template bt
+                                LEFT JOIN book b
+                                ON bt.id = b.book_template_id
+                                WHERE bt.id = :bookTemplateId
+                            ) books
+                            JOIN order_item_books oib
+                            ON books.id = oib.book_id
+                            GROUP BY oib.order_item_id
+                        ) order_bi
+                        JOIN order_item oi
+                        ON order_bi.order_item_id = oi.id
+                        GROUP BY oi.order_id
+                    ) orders
+                    JOIN `order` o
+                    ON orders.order_id = o.id
+                    WHERE o.status = :orderStatus
+                 """;
+
+        Map<String, Object> params = new HashMap<>();
+        params.put("bookTemplateId", id);
+        params.put("orderStatus", status.name());
+
+        return (long) Math.toIntExact(super.countByNativeQuery(sql, params));
+    }
+
+    @Override
+    public BookTemplate createBookTemplate(BookTemplate bookTemplate) {
+        return super.insert(bookTemplate);
+    }
+
+    @Override
+    public void updateBookTemplate(BookTemplate bookTemplate) {
+        super.update(bookTemplate);
     }
 
     public static void main(String[] args) {
