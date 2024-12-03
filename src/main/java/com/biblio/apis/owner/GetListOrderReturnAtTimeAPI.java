@@ -65,7 +65,7 @@ public class GetListOrderReturnAtTimeAPI extends HttpServlet {
                 return;
             }
 
-            List<OrderReturnAtTimeResponse> orderReturnAtTimeResponses = orderService.getListOrderReturnAtTime(startTime, endTime);
+            List<OrderReturnAtTimeResponse> orderReturnAtTimeResponses = orderService.rateReturn(startTime, endTime);
 
             Map<EReasonReturn, Integer> reasonCounts = new HashMap<>();
             for (EReasonReturn reason : EReasonReturn.values()) {

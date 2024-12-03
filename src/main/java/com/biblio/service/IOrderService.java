@@ -19,11 +19,11 @@ public interface IOrderService {
 
     Double revenueOrderAtTime(LocalDateTime start, LocalDateTime end);
   
-    List<RevenueResponse> getListRevenueAtTime(LocalDateTime start, LocalDateTime end);
+    List<RevenueResponse> revenueStatistics(LocalDateTime start, LocalDateTime end);
 
     List<OrderDetailsManagementResponse> getOrderCustomerByStatus(Long customerId, String status);
 
-    List<CountBookSoldResponse> getListCountBookSoldAtTime(LocalDateTime start, LocalDateTime end);
+    List<CountBookSoldResponse> topBookSelling(LocalDateTime start, LocalDateTime end);
   
     List<OrderDetailsManagementResponse> getAllOrderCustomerResponse(Long customerId);
 
@@ -31,10 +31,10 @@ public interface IOrderService {
   
     OrderCustomerResponse findOrderByIdCustomer(Long orderId);
 
-    List<CountOrderOfCustomerResponse> getCountOrderOfCustomerAtTime(LocalDateTime start, LocalDateTime end);
+    List<CountOrderOfCustomerResponse> rateReturnPurchase(LocalDateTime start, LocalDateTime end);
 
     Long createOrder(CreateOrderRequest request);
 
-    List<OrderReturnAtTimeResponse> getListOrderReturnAtTime(LocalDateTime start, LocalDateTime end);
+    List<OrderReturnAtTimeResponse> rateReturn(LocalDateTime start, LocalDateTime end);
 
 }

@@ -70,7 +70,7 @@ public class CountBookSoldAtTimeAPI extends HttpServlet {
                 return;
             }
 
-            List<CountBookSoldResponse> listCountBookSold = orderService.getListCountBookSoldAtTime(startTime, endTime);
+            List<CountBookSoldResponse> listCountBookSold = orderService.topBookSelling(startTime, endTime);
 
             List<Map<String, Object>> countBookSoldJsonList = listCountBookSold.stream()
                     .map(item -> {
