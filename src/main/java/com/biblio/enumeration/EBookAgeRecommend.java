@@ -17,4 +17,8 @@ public enum EBookAgeRecommend {
         this.bookAgeRecommend = bookAgeRecommend;
     }
 
+    public String getDescription() {
+        return bookAgeRecommend;
+    }
+
 }

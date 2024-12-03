@@ -31,8 +31,8 @@ public class BookDetailsResponse {
     private String category;
     private List<String> imageUrls;
     private String publisher;
-    private List<AuthorResponse> authors;
-    private List<TranslatorResponse> translators;
+    private List<AuthorProfileResponse> authors;
+    private List<TranslatorProfileResponse> translators;
     private List<ReviewResponse> reviews;
     private int reviewCount;
 

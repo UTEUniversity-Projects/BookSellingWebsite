@@ -27,7 +27,7 @@ function changeStatus(staffId, action) {
         });
 }
 document.addEventListener("DOMContentLoaded", function () {
-    const tableBody = document.querySelector("#staff-data-table tbody");
+    const tableBody = document.querySelector(".virtual-data-table tbody");
 
     if (tableBody) {
         tableBody.addEventListener("click", function (event) {
