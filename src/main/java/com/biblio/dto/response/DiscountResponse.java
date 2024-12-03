@@ -12,7 +12,7 @@ import lombok.*;
 @Builder
 @ToString
 public class DiscountResponse {
-    Long idApplied;
-    Double percentDiscount;
-    EPromotionTargetType promotionTargetType;
+    private Long idApplied;
+    private Double percentDiscount;
+    private EPromotionTargetType promotionTargetType;
 }
