@@ -8,6 +8,7 @@ import com.biblio.dto.response.AuthorAnalysisResponse;
 import com.biblio.dto.response.AuthorLineResponse;
 import com.biblio.dto.response.AuthorProfileResponse;
 import com.biblio.entity.Author;
+import com.biblio.entity.BookTemplate;
 import com.biblio.enumeration.EBookMetadataStatus;
 import com.biblio.enumeration.EBookTemplateStatus;
 import com.biblio.enumeration.EOrderStatus;
@@ -88,17 +89,18 @@ public class AuthorServiceImpl implements IAuthorService {
 
     @Override
     public Author createAuthor(AuthorCreateRequest authorCreateRequest) {
-        return authorDAO.createAuthor(AuthorMapper.toAuthor(authorCreateRequest));
+        return authorDAO.createAuthor(AuthorMapper.toAuthorCreate(authorCreateRequest));
     }
 
     @Override
-    public void update(AuthorUpdateRequest authorUpdateRequest) {
-        authorDAO.updateAuthor(AuthorMapper.toAuthor(authorUpdateRequest));
+    public void updateAuthor(AuthorUpdateRequest authorUpdateRequest) {
+        Author author = authorDAO.getEntityById(Long.valueOf(authorUpdateRequest.getId()));
+        authorDAO.updateAuthor(AuthorMapper.toAuthorUpdate(authorUpdateRequest, author));
     }
 
     @Override
-    public void delete(AuthorDeleteRequest authorDeleteRequest) {
-        authorDAO.delete(authorDeleteRequest);
+    public void deleteAuthor(AuthorDeleteRequest authorDeleteRequest) {
+        authorDAO.deleteAuthor(Long.valueOf(authorDeleteRequest.getId()));
     }
 
     @Override

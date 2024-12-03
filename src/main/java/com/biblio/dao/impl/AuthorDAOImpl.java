@@ -90,13 +90,8 @@ public class AuthorDAOImpl extends GenericDAOImpl<Author> implements IAuthorDAO 
     }
 
     @Override
-    public void delete(AuthorDeleteRequest authorDeleteRequest) {
-        String sql = "DELETE FROM author WHERE id = :authorId";
-
-        Map<String, Object> params = new HashMap<>();
-        params.put("authorId", authorDeleteRequest.getId());
-
-        super.executeNativeQuery(sql, params);
+    public void deleteAuthor(Long id) {
+        super.delete(id);
     }
 
     @Override

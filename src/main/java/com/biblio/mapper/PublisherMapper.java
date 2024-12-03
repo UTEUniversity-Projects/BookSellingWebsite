@@ -3,10 +3,12 @@ package com.biblio.mapper;
 import com.biblio.constants.StoredFileConstants;
 import com.biblio.dto.request.PublisherCreateRequest;
 import com.biblio.dto.request.PublisherUpdateRequest;
+import com.biblio.dto.request.TranslatorUpdateRequest;
 import com.biblio.dto.response.PublisherAnalysisResponse;
 import com.biblio.dto.response.PublisherLineResponse;
 import com.biblio.dto.response.PublisherProfileResponse;
 import com.biblio.entity.Publisher;
+import com.biblio.entity.Translator;
 import com.biblio.utils.FormatterUtil;
 
 import java.time.LocalDateTime;
@@ -16,7 +18,7 @@ public class PublisherMapper {
 
     // Before DTO Request to Entity
 
-    public static Publisher toPublisher(PublisherCreateRequest publisherCreateRequest) {
+    public static Publisher toPublisherCreate(PublisherCreateRequest publisherCreateRequest) {
         return Publisher.builder()
                 .name(publisherCreateRequest.getName())
                 .avatar(publisherCreateRequest.getAvatar())
@@ -25,14 +27,13 @@ public class PublisherMapper {
                 .build();
     }
 
-    public static Publisher toPublisher(PublisherUpdateRequest publisherUpdateRequest) {
-        return Publisher.builder()
-                .id(Long.valueOf(publisherUpdateRequest.getId()))
-                .name(publisherUpdateRequest.getName())
-                .avatar(publisherUpdateRequest.getAvatar())
-                .introduction(publisherUpdateRequest.getIntroduction())
-                .joinAt(FormatterUtil.toLocalDateTime(publisherUpdateRequest.getJoinAt()))
-                .build();
+    public static Publisher toPublisherUpdate(PublisherUpdateRequest publisherUpdateRequest, Publisher publisher) {
+        publisher.setName(publisherUpdateRequest.getName());
+        publisher.setAvatar(publisherUpdateRequest.getAvatar());
+        publisher.setIntroduction(publisherUpdateRequest.getIntroduction());
+        publisher.setJoinAt(publisher.getJoinAt());
+
+        return publisher;
     }
 
     // End DTO Request to Entity

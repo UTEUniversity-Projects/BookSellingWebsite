@@ -15,7 +15,7 @@ public interface IAuthorService {
     AuthorProfileResponse getProfileById(Long id);
     AuthorAnalysisResponse getAnalysisById(Long id);
     Author createAuthor(AuthorCreateRequest authorRequest);
-    void update(AuthorUpdateRequest authorRequest);
-    void delete(AuthorDeleteRequest authorDeleteRequest);
+    void updateAuthor(AuthorUpdateRequest authorRequest);
+    void deleteAuthor(AuthorDeleteRequest authorDeleteRequest);
     Integer countBookTemplate(AuthorDeleteRequest id);
 }

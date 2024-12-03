@@ -87,18 +87,19 @@ public class TranslatorServiceImpl implements ITranslatorService {
     }
 
     @Override
-    public Translator create(TranslatorCreateRequest translatorCreateRequest) {
-        return translatorDAO.create(translatorCreateRequest);
+    public Translator createTranslator(TranslatorCreateRequest translatorCreateRequest) {
+        return translatorDAO.createTranslator(TranslatorMapper.toTranslatorCreate(translatorCreateRequest));
     }
 
     @Override
-    public void update(TranslatorUpdateRequest translatorUpdateRequest) {
-        translatorDAO.update(translatorUpdateRequest);
+    public void updateTranslator(TranslatorUpdateRequest translatorUpdateRequest) {
+        Translator translator = translatorDAO.getEntityById(Long.valueOf((translatorUpdateRequest.getId())));
+        translatorDAO.updateTranslator(TranslatorMapper.toTranslatorUpdate(translatorUpdateRequest, translator));
     }
 
     @Override
-    public void delete(TranslatorDeleteRequest translatorDeleteRequest) {
-        translatorDAO.delete(translatorDeleteRequest);
+    public void deleteTranslator(TranslatorDeleteRequest translatorDeleteRequest) {
+        translatorDAO.deleteTranslator(Long.valueOf(translatorDeleteRequest.getId()));
     }
 
     @Override

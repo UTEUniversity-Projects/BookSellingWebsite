@@ -99,7 +99,7 @@ public class ManageTranslatorController extends HttpServlet {
             TranslatorDeleteRequest translatorDeleteRequest = HttpUtil.of(request.getReader()).toModel(TranslatorDeleteRequest.class);
             TranslatorProfileResponse translatorProfileResponse = translatorService.getProfileById(Long.valueOf(translatorDeleteRequest.getId()));
 
-            translatorService.delete(translatorDeleteRequest);
+            translatorService.deleteTranslator(translatorDeleteRequest);
             Boolean isImageDeleted = ManageFileUtil.deleteFileAvatar(translatorProfileResponse.getAvatar(), "translator");
 
             if (isImageDeleted) {
@@ -149,7 +149,7 @@ public class ManageTranslatorController extends HttpServlet {
             TranslatorCreateRequest translatorCreateRequest = HttpUtil.of(request.getReader()).toModel(TranslatorCreateRequest.class);
             translatorCreateRequest.setJoinAt(LocalDateTime.now().toString());
 
-            Translator translator = translatorService.create(translatorCreateRequest);
+            Translator translator = translatorService.createTranslator(translatorCreateRequest);
 
             response.setStatus(HttpServletResponse.SC_OK);  // 200 OK
             response.getWriter().write("{\"status\": \"success\", \"id\": " + translator.getId() + ", \"message\": \"Created successfully.\"}");
@@ -173,7 +173,7 @@ public class ManageTranslatorController extends HttpServlet {
         try {
             TranslatorUpdateRequest translatorUpdateRequest = HttpUtil.of(request.getReader()).toModel(TranslatorUpdateRequest.class);
 
-            translatorService.update(translatorUpdateRequest);
+            translatorService.updateTranslator(translatorUpdateRequest);
 
             response.setStatus(HttpServletResponse.SC_OK);  // 200 OK
             response.getWriter().write("{\"status\": \"success\", \"message\": \"Updated successfully.\"}");

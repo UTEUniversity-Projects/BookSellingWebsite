@@ -6,16 +6,18 @@ import com.biblio.dto.response.AuthorAnalysisResponse;
 import com.biblio.dto.response.AuthorLineResponse;
 import com.biblio.dto.response.AuthorProfileResponse;
 import com.biblio.entity.Author;
+import com.biblio.entity.BookTemplate;
 import com.biblio.utils.FormatterUtil;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Set;
 
 public class AuthorMapper {
 
     // Before DTO Request to Entity
 
-    public static Author toAuthor(AuthorCreateRequest authorCreateRequest) {
+    public static Author toAuthorCreate(AuthorCreateRequest authorCreateRequest) {
         return Author.builder()
                 .name(authorCreateRequest.getName())
                 .avatar(authorCreateRequest.getAvatar())
@@ -24,14 +26,13 @@ public class AuthorMapper {
                 .build();
     }
 
-    public static Author toAuthor(AuthorUpdateRequest authorUpdateRequest) {
-        return Author.builder()
-                .id(Long.valueOf(authorUpdateRequest.getId()))
-                .name(authorUpdateRequest.getName())
-                .avatar(authorUpdateRequest.getAvatar())
-                .introduction(authorUpdateRequest.getIntroduction())
-                .joinAt(FormatterUtil.toLocalDateTime(authorUpdateRequest.getJoinAt()))
-                .build();
+    public static Author toAuthorUpdate(AuthorUpdateRequest authorUpdateRequest, Author author) {
+        author.setName(authorUpdateRequest.getName());
+        author.setAvatar(authorUpdateRequest.getAvatar());
+        author.setIntroduction(authorUpdateRequest.getIntroduction());
+        author.setJoinAt(author.getJoinAt());
+
+        return author;
     }
 
     // End DTO Request to Entity

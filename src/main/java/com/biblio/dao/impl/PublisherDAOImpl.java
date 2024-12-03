@@ -61,23 +61,18 @@ public class PublisherDAOImpl extends GenericDAOImpl<Publisher> implements IPubl
     }
 
     @Override
-    public Publisher create(PublisherCreateRequest publisherCreateRequest) {
-        return super.insert(PublisherMapper.toPublisher(publisherCreateRequest));
+    public Publisher createPublisher(Publisher publisher) {
+        return super.save(publisher);
     }
 
     @Override
-    public void update(PublisherUpdateRequest publisherUpdateRequest) {
-        super.update(PublisherMapper.toPublisher(publisherUpdateRequest));
+    public void updatePublisher(Publisher publisher) {
+        super.update(publisher);
     }
 
     @Override
-    public void delete(PublisherDeleteRequest publisherDeleteRequest) {
-        String sql = "DELETE FROM publisher WHERE id = :publisherId";
-
-        Map<String, Object> params = new HashMap<>();
-        params.put("publisherId", publisherDeleteRequest.getId());
-
-        super.executeNativeQuery(sql, params);
+    public void deletePublisher(Long id) {
+        super.delete(id);
     }
 
     @Override

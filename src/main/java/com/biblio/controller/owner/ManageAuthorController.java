@@ -99,7 +99,7 @@ public class ManageAuthorController extends HttpServlet {
             AuthorDeleteRequest authorDeleteRequest = HttpUtil.of(request.getReader()).toModel(AuthorDeleteRequest.class);
             AuthorProfileResponse authorProfileResponse = authorService.getProfileById(Long.valueOf(authorDeleteRequest.getId()));
 
-            authorService.delete(authorDeleteRequest);
+            authorService.deleteAuthor(authorDeleteRequest);
             Boolean isImageDeleted = ManageFileUtil.deleteFileAvatar(authorProfileResponse.getAvatar(), "author");
 
             if (isImageDeleted) {
@@ -173,7 +173,7 @@ public class ManageAuthorController extends HttpServlet {
         try {
             AuthorUpdateRequest authorUpdateRequest = HttpUtil.of(request.getReader()).toModel(AuthorUpdateRequest.class);
 
-            authorService.update(authorUpdateRequest);
+            authorService.updateAuthor(authorUpdateRequest);
 
             response.setStatus(HttpServletResponse.SC_OK);  // 200 OK
             response.getWriter().write("{\"status\": \"success\", \"message\": \"Updated successfully.\"}");

@@ -98,9 +98,11 @@ public class ManagePublisherController extends HttpServlet {
         try {
             PublisherDeleteRequest publisherDeleteRequest = HttpUtil.of(request.getReader()).toModel(PublisherDeleteRequest.class);
             PublisherProfileResponse publisherProfileResponse = publisherService.getProfileById(Long.valueOf(publisherDeleteRequest.getId()));
+            String filePath = publisherProfileResponse.getAvatar();
 
-            publisherService.delete(publisherDeleteRequest);
-            Boolean isImageDeleted = ManageFileUtil.deleteFileAvatar(publisherProfileResponse.getAvatar(), "publisher");
+            publisherService.deletePublisher(publisherDeleteRequest);
+
+            Boolean isImageDeleted = ManageFileUtil.deleteFileAvatar(filePath, "publisher");
 
             if (isImageDeleted) {
                 response.getWriter().write("{\"status\": \"success\", \"message\": \"Deleted successfully.\"}");
@@ -149,7 +151,7 @@ public class ManagePublisherController extends HttpServlet {
             PublisherCreateRequest publisherCreateRequest = HttpUtil.of(request.getReader()).toModel(PublisherCreateRequest.class);
             publisherCreateRequest.setJoinAt(LocalDateTime.now().toString());
 
-            Publisher publisher = publisherService.create(publisherCreateRequest);
+            Publisher publisher = publisherService.createPublisher(publisherCreateRequest);
 
             response.setStatus(HttpServletResponse.SC_OK);  // 200 OK
             response.getWriter().write("{\"status\": \"success\", \"id\": " + publisher.getId() + ", \"message\": \"Created successfully.\"}");
@@ -173,7 +175,7 @@ public class ManagePublisherController extends HttpServlet {
         try {
             PublisherUpdateRequest publisherUpdateRequest = HttpUtil.of(request.getReader()).toModel(PublisherUpdateRequest.class);
 
-            publisherService.update(publisherUpdateRequest);
+            publisherService.updatePublisher(publisherUpdateRequest);
 
             response.setStatus(HttpServletResponse.SC_OK);  // 200 OK
             response.getWriter().write("{\"status\": \"success\", \"message\": \"Updated successfully.\"}");

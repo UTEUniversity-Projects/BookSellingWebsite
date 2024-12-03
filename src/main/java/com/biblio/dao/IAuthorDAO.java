@@ -19,7 +19,7 @@ public interface IAuthorDAO {
     List<String> getTopSubCategory(Long authorId);
     Author createAuthor(Author author);
     void updateAuthor(Author author);
-    void delete(AuthorDeleteRequest authorDeleteRequest);
+    void deleteAuthor(Long id);
     Integer countBooksTemplateAll(Long authorId);
     Integer countBooksTemplateByStatus(Long authorId, EBookTemplateStatus status);
     Integer countBooksByStatus(Long authorId, EBookMetadataStatus status);

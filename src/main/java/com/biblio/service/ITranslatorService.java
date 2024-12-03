@@ -14,8 +14,8 @@ public interface ITranslatorService {
     List<TranslatorLineResponse> getAll();
     TranslatorProfileResponse getProfileById(Long id);
     TranslatorAnalysisResponse getAnalysisById(Long id);
-    Translator create(TranslatorCreateRequest translatorRequest);
-    void update(TranslatorUpdateRequest translatorRequest);
-    void delete(TranslatorDeleteRequest translatorDeleteRequest);
+    Translator createTranslator(TranslatorCreateRequest translatorRequest);
+    void updateTranslator(TranslatorUpdateRequest translatorRequest);
+    void deleteTranslator(TranslatorDeleteRequest translatorDeleteRequest);
     Integer countBookTemplate(TranslatorDeleteRequest id);
 }

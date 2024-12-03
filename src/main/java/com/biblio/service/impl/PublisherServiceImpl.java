@@ -87,18 +87,19 @@ public class PublisherServiceImpl implements IPublisherService {
     }
 
     @Override
-    public Publisher create(PublisherCreateRequest publisherCreateRequest) {
-        return publisherDAO.create(publisherCreateRequest);
+    public Publisher createPublisher(PublisherCreateRequest publisherCreateRequest) {
+        return publisherDAO.createPublisher(PublisherMapper.toPublisherCreate(publisherCreateRequest));
     }
 
     @Override
-    public void update(PublisherUpdateRequest publisherUpdateRequest) {
-        publisherDAO.update(publisherUpdateRequest);
+    public void updatePublisher(PublisherUpdateRequest publisherUpdateRequest) {
+        Publisher publisher = publisherDAO.getEntityById(Long.valueOf(publisherUpdateRequest.getId()));
+        publisherDAO.updatePublisher(PublisherMapper.toPublisherUpdate(publisherUpdateRequest, publisher));
     }
 
     @Override
-    public void delete(PublisherDeleteRequest publisherDeleteRequest) {
-        publisherDAO.delete(publisherDeleteRequest);
+    public void deletePublisher(PublisherDeleteRequest publisherDeleteRequest) {
+        publisherDAO.deletePublisher(Long.valueOf(publisherDeleteRequest.getId()));
     }
 
     @Override

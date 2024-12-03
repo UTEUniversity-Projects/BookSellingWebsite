@@ -1,10 +1,12 @@
 package com.biblio.mapper;
 
+import com.biblio.dto.request.AuthorUpdateRequest;
 import com.biblio.dto.request.TranslatorCreateRequest;
 import com.biblio.dto.request.TranslatorUpdateRequest;
 import com.biblio.dto.response.TranslatorAnalysisResponse;
 import com.biblio.dto.response.TranslatorLineResponse;
 import com.biblio.dto.response.TranslatorProfileResponse;
+import com.biblio.entity.Author;
 import com.biblio.entity.Translator;
 import com.biblio.utils.FormatterUtil;
 
@@ -15,7 +17,7 @@ public class TranslatorMapper {
 
     // Before DTO Request to Entity
 
-    public static Translator toTranslator(TranslatorCreateRequest translatorCreateRequest) {
+    public static Translator toTranslatorCreate(TranslatorCreateRequest translatorCreateRequest) {
         return Translator.builder()
                 .name(translatorCreateRequest.getName())
                 .avatar(translatorCreateRequest.getAvatar())
@@ -24,14 +26,13 @@ public class TranslatorMapper {
                 .build();
     }
 
-    public static Translator toTranslator(TranslatorUpdateRequest translatorUpdateRequest) {
-        return Translator.builder()
-                .id(Long.valueOf(translatorUpdateRequest.getId()))
-                .name(translatorUpdateRequest.getName())
-                .avatar(translatorUpdateRequest.getAvatar())
-                .introduction(translatorUpdateRequest.getIntroduction())
-                .joinAt(FormatterUtil.toLocalDateTime(translatorUpdateRequest.getJoinAt()))
-                .build();
+    public static Translator toTranslatorUpdate(TranslatorUpdateRequest translatorUpdateRequest, Translator translator) {
+        translator.setName(translatorUpdateRequest.getName());
+        translator.setAvatar(translatorUpdateRequest.getAvatar());
+        translator.setIntroduction(translatorUpdateRequest.getIntroduction());
+        translator.setJoinAt(translator.getJoinAt());
+
+        return translator;
     }
 
     // End DTO Request to Entity
