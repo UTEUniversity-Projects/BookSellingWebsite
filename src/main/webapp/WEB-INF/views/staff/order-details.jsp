@@ -197,10 +197,10 @@
                                             </c:forEach>
                                         </div>
                                         <div class="slider slider-nav thumb-image">
-                                            <c:forEach var="imageUrl" items="${pageContext.request.contextPath}${returnBook.proof}">
+                                            <c:forEach var="imageUrl" items="${returnBook.proof}">
                                                 <div class="thumbnail-image">
                                                     <div class="thumbImg">
-                                                        <img src="${imageUrl}" alt="product-thumbnail"/>
+                                                        <img src="${pageContext.request.contextPath}${imageUrl}" alt="product-thumbnail"/>
                                                     </div>
                                                 </div>
                                             </c:forEach>

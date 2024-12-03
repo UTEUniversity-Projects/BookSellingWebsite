@@ -3,6 +3,8 @@ package com.biblio.utils;
 import com.biblio.dto.response.DiscountResponse;
 import com.biblio.dto.response.OrderDetailsManagementResponse;
 import com.biblio.dto.response.OrderProductResponse;
+import com.biblio.dto.response.PromotionOrderResponse;
+import com.biblio.enumeration.EPromotionTemplateType;
 import com.biblio.service.IOrderService;
 import com.biblio.service.IPromotionTemplateService;
 
