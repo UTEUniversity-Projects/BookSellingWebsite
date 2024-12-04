@@ -1,58 +1,57 @@
 package com.biblio.entity;
 
+import com.biblio.enumeration.EMembership;
+import lombok.*;
+import lombok.experimental.SuperBuilder;
+
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 @Entity
 @Table(name = "customer")
-public class Customer implements Serializable {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+@NoArgsConstructor
+@AllArgsConstructor
+@Getter
+@Setter
+@SuperBuilder
+public class Customer extends User implements Serializable {
 
-    private String name;
+    // region Attributes
 
-    private String address;
+    @Enumerated(EnumType.STRING)
+    @Column(name = "membership", nullable = false)
+    private EMembership membership;
 
-    public Customer() {
-    }
+    // endregion
 
-    public Customer(String address, String name, Long id) {
-        this.address = address;
-        this.name = name;
-        this.id = id;
-    }
+    // region Relationships
 
-    public Long getId() {
-        return id;
-    }
+    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @JoinColumn(name = "account_id")
+    private Account account;
 
-    public void setId(Long id) {
-        this.id = id;
-    }
+    @OneToMany(mappedBy = "customer", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    private List<Notification> notifications = new ArrayList<>();
 
-    public String getName() {
-        return name;
-    }
+    @OneToMany(mappedBy = "customer", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @Singular
+    private Set<Address> addresses = new HashSet<>();
 
-    public void setName(String name) {
-        this.name = name;
-    }
+    @OneToMany(mappedBy = "customer", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    private Set<Order> orders = new HashSet<>();
 
-    public String getAddress() {
-        return address;
-    }
+    @OneToOne(mappedBy = "customer", cascade = CascadeType.ALL)
+    private Cart cart;
 
-    public void setAddress(String address) {
-        this.address = address;
-    }
+    @OneToMany(mappedBy = "customer", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    private Set<Support> supports = new HashSet<>();
 
-    @Override
-    public String toString() {
-        return "Customer{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", address='" + address + '\'' +
-                '}';
-    }
+    @OneToMany(mappedBy = "customer", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private Set<Review> reviews = new HashSet<>();
+
+    // endregion
 }

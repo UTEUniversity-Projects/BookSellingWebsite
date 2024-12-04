@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <decorators defaultdir="/decorators">
     <decorator name="owner" page="owner.jsp">
-        <pattern>/admin*</pattern>
+        <pattern>/owner*</pattern>
     </decorator>
     <decorator name="staff" page="staff.jsp">
         <pattern>/staff*</pattern>

@@ -1,12 +1,16 @@
 package com.biblio.controller;
 
-import java.io.IOException;
-import java.io.Serial;
+import com.biblio.dto.response.AccountGetResponse;
+import com.biblio.enumeration.EUserRole;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+import java.io.IOException;
+import java.io.Serial;
 
 /**
  * Servlet implementation class WaitingController
@@ -29,7 +33,19 @@ public class WaitingController extends HttpServlet {
      */
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         // TODO Auto-generated method stub
-        response.getWriter().append("Served at: ").append(request.getContextPath());
+
+        HttpSession session = request.getSession();
+
+        AccountGetResponse account = (AccountGetResponse) session.getAttribute("account");
+        String role = account.getRole();
+
+        if (EUserRole.OWNER.toString().equals(role)) {
+            response.sendRedirect(request.getContextPath() + "/owner/ecommerce");
+        } else if (EUserRole.STAFF.toString().equals(role)) {
+            response.sendRedirect(request.getContextPath() + "/staff/product-dashboard");
+        } else {
+            response.sendRedirect(request.getContextPath() + "/home");
+        }
     }
 
     /**
