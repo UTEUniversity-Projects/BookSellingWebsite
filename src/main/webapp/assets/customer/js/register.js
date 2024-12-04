@@ -91,6 +91,11 @@ $(document).ready(() => {
 						type: 'error',
 						duration: 3000
 					});
+				},
+				complete: function () {
+					registerButton.prop('disabled', false);
+					buttonText.removeClass  ('hidden');
+					spinner.addClass('hidden');
 				}
 			})
 
