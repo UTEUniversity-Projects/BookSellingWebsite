@@ -40,6 +40,10 @@ public class DBConnection implements PersistenceUnitInfo {
         dataSource.setJdbcUrl(Constant.DB_URL);
         dataSource.setUsername(Constant.USERNAME);
         dataSource.setPassword(Constant.PASSWORD);
+        dataSource.setPoolName("MyHikariCP");
+        dataSource.setConnectionTimeout(20000);
+        dataSource.setMaxLifetime(1800000);
+        dataSource.setConnectionTestQuery("SELECT 1");
 
         return dataSource;
     }
@@ -73,11 +77,9 @@ public class DBConnection implements PersistenceUnitInfo {
         Reflections reflections = new Reflections("com.biblio.entity"); // Specify your package here
         Set<Class<?>> entities = reflections.getTypesAnnotatedWith(Entity.class);
 
-        System.out.println(entities);
         return entities.stream()
                 .map(Class::getName)
                 .toList();
-//        return List.of("com.biblio.entity.Cash");
     }
 
     @Override

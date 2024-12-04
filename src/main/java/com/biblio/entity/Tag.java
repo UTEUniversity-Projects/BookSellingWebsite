@@ -1,43 +1,32 @@
 package com.biblio.entity;
 
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.experimental.SuperBuilder;
+
 import javax.persistence.Entity;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 import java.io.Serializable;
+import java.util.HashSet;
 import java.util.Set;
 
 @Entity
 @Table(name = "tag")
+@Getter
+@Setter
+@SuperBuilder
+@NoArgsConstructor
+@AllArgsConstructor
 public class Tag extends Classification implements Serializable {
 
     // region Relationships
 
     @ManyToMany(mappedBy = "tags")
-    private Set<BookMetadata> metadatas;
+    private Set<BookMetadata> metadatas = new HashSet<BookMetadata>();
 
     // endregion
 
-    // region Constructors
-
-    public Tag() {
-        super();
-    }
-
-    public Tag(Long id, String code, String name) {
-        super(id, code, name);
-    }
-
-    // endregion Constructors
-
-    // region Getters & Setters
-
-    public Set<BookMetadata> getMetadatas() {
-        return metadatas;
-    }
-
-    public void setMetadatas(Set<BookMetadata> metadatas) {
-        this.metadatas = metadatas;
-    }
-
-    // endregion Getters & Setters
 }

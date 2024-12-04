@@ -1,38 +1,30 @@
 package com.biblio.entity;
 
+import lombok.*;
+import lombok.experimental.SuperBuilder;
+
 import javax.persistence.*;
 import java.io.Serializable;
-import java.sql.Timestamp;
+import java.util.HashSet;
 import java.util.Set;
 
 @Entity
 @Table(name = "author")
+@Getter
+@Setter
+@SuperBuilder
+@NoArgsConstructor
+@AllArgsConstructor
 public class Author extends ContributorProfile implements Serializable {
-
-    // region Constructors
 
     // region Relationships
 
-    @OneToMany(mappedBy = "author")
-    private Set<Book> books;
-
-    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    @JoinColumn(name = "avatar_id", nullable = false, referencedColumnName = "id")
-    private MediaFile avatar;
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(name = "author_book_template",
+            joinColumns = @JoinColumn(name = "author_id", nullable = false),
+            inverseJoinColumns = @JoinColumn(name = "book_template_id", nullable = false))
+    private Set<BookTemplate> bookTemplates = new HashSet<>();
 
     // endregion
 
-    // region Constructors
-
-    public Author() {
-        super();
-    }
-
-    public Author(Long id, String name, String introduction, Timestamp joinAt) {
-        super(id, name, introduction, joinAt);
-    }
-
-    // endregion Constructors
-
-    // endregion Constructors
 }

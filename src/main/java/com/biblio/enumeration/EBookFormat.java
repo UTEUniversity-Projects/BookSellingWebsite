@@ -1,5 +1,8 @@
 package com.biblio.enumeration;
 
+import lombok.Getter;
+
+@Getter
 public enum EBookFormat {
     PAPERBACK("Bìa mềm"),
     HARDCOVER("Bìa cứng");
@@ -10,7 +13,8 @@ public enum EBookFormat {
         this.bookFormat = bookFormat;
     }
 
-    public String getBookFormat() {
+    public String getDescription() {
         return bookFormat;
     }
+
 }

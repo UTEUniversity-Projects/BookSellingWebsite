@@ -1,11 +1,19 @@
 package com.biblio.entity;
 
+import com.biblio.enumeration.ESupportStatus;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
 import javax.persistence.*;
 import java.io.Serializable;
-import java.sql.Timestamp;
+import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "support")
+@NoArgsConstructor
+@Getter
+@Setter
 public class Support implements Serializable {
 
     // region Attributes
@@ -14,112 +22,26 @@ public class Support implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "title", nullable = false, columnDefinition = "nvarchar(255)")
+    @Column(name = "title", nullable = false)
     private String title;
 
-    @Column(name = "request_content", nullable = false, columnDefinition = "nvarchar(255)")
-    private String requestContent;
+    @Column(name = "content", nullable = false)
+    private String content;
 
-    @Column(name = "feed_back_content", nullable = false, columnDefinition = "nvarchar(255)")
-    private String feedbackContent;
-
-    @Column(name = "rate", nullable = false)
-    private int rate;
-
-    @Column(name = "status", nullable = false, columnDefinition = "nvarchar(255)")
-    private String status;
-
-    @Column(name = "created_at", nullable = false, columnDefinition = "datetime")
-    private Timestamp createdAt;
+    @Column(name = "created_at", nullable = false)
+    private LocalDateTime createdAt;
 
     // endregion
 
     // region Relationships
 
-    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    @JoinColumn(name = "staff_id", nullable = false, referencedColumnName = "id")
-    private Staff staff;
-
-    @ManyToOne(cascade = CascadeType.ALL, fetch =  FetchType.LAZY)
-    @JoinColumn(name = "customer_id", nullable = false, referencedColumnName = "id")
+    @ManyToOne(cascade = CascadeType.ALL, fetch =  FetchType.EAGER)
+    @JoinColumn(name = "customer_id", nullable = false)
     private Customer customer;
 
-    // endregion
-
-    // region Constructors
-
-    public Support() {
-    }
-
-    public Support(Long id, String title, String requestContent, String feedbackContent, int rate, String status, Timestamp createdAt) {
-        this.id = id;
-        this.title = title;
-        this.requestContent = requestContent;
-        this.feedbackContent = feedbackContent;
-        this.rate = rate;
-        this.status = status;
-        this.createdAt = createdAt;
-    }
+    @OneToOne(mappedBy = "support")
+    private ResponseSupport responseSupport;
 
     // endregion
 
-    // region Getters & Setters
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getTitle() {
-        return title;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
-    public String getRequestContent() {
-        return requestContent;
-    }
-
-    public void setRequestContent(String requestContent) {
-        this.requestContent = requestContent;
-    }
-
-    public String getFeedbackContent() {
-        return feedbackContent;
-    }
-
-    public void setFeedbackContent(String feedbackContent) {
-        this.feedbackContent = feedbackContent;
-    }
-
-    public int getRate() {
-        return rate;
-    }
-
-    public void setRate(int rate) {
-        this.rate = rate;
-    }
-
-    public String getStatus() {
-        return status;
-    }
-
-    public void setStatus(String status) {
-        this.status = status;
-    }
-
-    public Timestamp getCreatedAt() {
-        return createdAt;
-    }
-
-    public void setCreatedAt(Timestamp createdAt) {
-        this.createdAt = createdAt;
-    }
-
-    // endregion
 }

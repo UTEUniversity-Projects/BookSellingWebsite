@@ -1,11 +1,18 @@
 package com.biblio.entity;
 
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
 import javax.persistence.*;
 import java.io.Serializable;
-import java.sql.Timestamp;
+import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "review")
+@NoArgsConstructor
+@Getter
+@Setter
 public class Review implements Serializable {
 
     // region Attributes
@@ -17,87 +24,32 @@ public class Review implements Serializable {
     @Column(name = "rate", nullable = false)
     private int rate;
 
-    @Column(name = "content", nullable = false, columnDefinition = "nvarchar(255)")
+    @Column(name = "content", nullable = false)
     private String content;
 
     @Column(name = "ready_to_introduce", nullable = false, columnDefinition = "bit")
     private boolean readyToIntroduce;
 
-    @Column(name = "created_at", nullable = false, columnDefinition = "datetime")
-    private Timestamp createdAt;
+    @Column(name = "is_hidden", nullable = false)
+    private boolean isHidden;
+
+    @Column(name = "created_at", nullable = false)
+    private LocalDateTime createdAt;
 
     // endregion
 
     // region Relationships
 
-    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    @JoinColumn(name = "book_id", nullable = false, referencedColumnName = "id")
-    private Book book;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "book_template_id", nullable = false)
+    private BookTemplate bookTemplate;
 
-    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    @JoinColumn(name = "customer_id", nullable = false, referencedColumnName = "id")
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "customer_id", nullable = false)
     private Customer customer;
 
-    // endregion
-
-    //region Constructors
-
-    //region Constructors
-    public Review() {
-    }
-
-    public Review(Long id, int rate, String content, boolean readyToIntroduce, Timestamp createdAt) {
-        this.id = id;
-        this.rate = rate;
-        this.content = content;
-        this.readyToIntroduce = readyToIntroduce;
-        this.createdAt = createdAt;
-    }
-
-    // endregion
-
-    // region Getters & Setters
-
-    //region Getters & Setters
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public int getRate() {
-        return rate;
-    }
-
-    public void setRate(int rate) {
-        this.rate = rate;
-    }
-
-    public String getContent() {
-        return content;
-    }
-
-    public void setContent(String content) {
-        this.content = content;
-    }
-
-    public boolean isReadyToIntroduce() {
-        return readyToIntroduce;
-    }
-
-    public void setReadyToIntroduce(boolean readyToIntroduce) {
-        this.readyToIntroduce = readyToIntroduce;
-    }
-
-    public Timestamp getCreatedAt() {
-        return createdAt;
-    }
-
-    public void setCreatedAt(Timestamp createdAt) {
-        this.createdAt = createdAt;
-    }
+    @OneToOne(mappedBy = "review")
+    private ResponseReview responseReview;
 
     // endregion
 }

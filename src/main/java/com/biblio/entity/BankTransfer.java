@@ -1,83 +1,48 @@
 package com.biblio.entity;
 
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.experimental.SuperBuilder;
+
 import javax.persistence.*;
 import java.io.Serializable;
-import java.sql.Timestamp;
 
 @Entity
 @Table(name = "bank_transfer")
+@NoArgsConstructor
+@Getter
+@Setter
+@SuperBuilder
 public class BankTransfer extends Payment implements Serializable {
 
-    //region Attributes
+    // region Attributes
 
-    @Column(name = "bank_account_number", nullable = false, columnDefinition = "nvarchar(255)")
+    @Column(name = "bank_account_number", nullable = false)
     private String bankAccountNumber;
 
-    @Column(name = "bank_name", nullable = false, columnDefinition = "nvarchar(255)")
+    @Column(name = "bank_name", nullable = false)
     private String bankName;
 
-    @Column(name = "transaction_id", nullable = false, columnDefinition = "nvarchar(255)")
+    @Column(name = "transaction_id", nullable = false)
     private String transactionId;
 
-    //endregion
+    // endregion
+
+    // region Relationships
 
     @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    @JoinColumn(name = "order_id", nullable = false, referencedColumnName = "id")
+    @JoinColumn(name = "order_id")
     private Order order;
 
-    //region Constructors
-
-    public BankTransfer() {
-        super();
-    }
-
-    public BankTransfer(String bankAccountNumber, String bankName, String transactionId) {
-        this.bankAccountNumber = bankAccountNumber;
-        this.bankName = bankName;
-        this.transactionId = transactionId;
-    }
-
-    public BankTransfer(Long id, Timestamp createdAt, double amount, String status, String currency, String bankAccountNumber, String bankName, String transactionId) {
-        super(id, createdAt, amount, status, currency);
-        this.bankAccountNumber = bankAccountNumber;
-        this.bankName = bankName;
-        this.transactionId = transactionId;
-    }
-
-    //endregion
-
-    //region Getters & Setters
-
-    public String getBankAccountNumber() {
-        return bankAccountNumber;
-    }
-
-    public void setBankAccountNumber(String bankAccountNumber) {
-        this.bankAccountNumber = bankAccountNumber;
-    }
-
-    public String getBankName() {
-        return bankName;
-    }
-
-    public void setBankName(String bankName) {
-        this.bankName = bankName;
-    }
-
-    public String getTransactionId() {
-        return transactionId;
-    }
-
-    public void setTransactionId(String transactionId) {
-        this.transactionId = transactionId;
-    }
-
-    //endregion
+    // endregion
 
     // region Methods
+
     @Override
     public void processPayment() {
 
     }
+
     // endregion Methods
 }

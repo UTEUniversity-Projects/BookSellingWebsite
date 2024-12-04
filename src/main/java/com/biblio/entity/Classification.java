@@ -1,62 +1,42 @@
 package com.biblio.entity;
 
+import com.biblio.enumeration.EClassificationStatus;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.experimental.SuperBuilder;
+
 import javax.persistence.*;
 import java.io.Serializable;
 
 @MappedSuperclass
+@Getter
+@Setter
+@SuperBuilder
+@NoArgsConstructor
+@AllArgsConstructor
 public abstract class Classification implements Serializable {
 
-    //region Attributes
+    // region Attributes
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "code", nullable = false, columnDefinition = "nvarchar(255)")
-    private String code;
+    @Column(name = "name", nullable = false)
+    protected String name;
 
-    @Column(name = "name", nullable = false, columnDefinition = "nvarchar(255)")
-    private String name;
-    //endregion
+    @Column(name = "short_script", nullable = false)
+    protected String shortScript;
 
-    //endregion
+    @Column(name = "full_script", nullable = false)
+    protected String fullScript;
 
-    //region Constructors
-    public Classification() {}
+    @Enumerated(EnumType.STRING)
+    @Column(name = "status", nullable = false)
+    protected EClassificationStatus status;
 
-    public Classification(Long id, String code, String name) {
-        this.id = id;
-        this.code = code;
-        this.name = name;
-    }
-    //endregion
+    // endregion
 
-    //region Getters & Setters
-
-    //region Getters & Setters
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getCode() {
-        return code;
-    }
-
-    public void setCode(String code) {
-        this.code = code;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    //endregion
 }

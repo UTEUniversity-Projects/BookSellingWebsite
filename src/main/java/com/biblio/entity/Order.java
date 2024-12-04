@@ -1,97 +1,122 @@
 package com.biblio.entity;
 
+import com.biblio.enumeration.EOrderHistory;
+import com.biblio.enumeration.EOrderStatus;
+import com.biblio.enumeration.EPaymentType;
+import lombok.*;
+
 import javax.persistence.*;
 import java.io.Serializable;
+import java.math.BigDecimal;
+import java.math.RoundingMode;
+import java.time.LocalDateTime;
+import java.util.HashSet;
 import java.util.Set;
 
 @Entity
 @Table(name = "[order]")
+@NoArgsConstructor
+@AllArgsConstructor
+@Getter
+@Setter
+@Builder
 public class Order implements Serializable {
 
     // region Attributes
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
     private Long id;
 
-    @Column(name = "note", nullable = false, columnDefinition = "nvarchar(255)")
+    @Column(name = "note", nullable = false)
     private String note;
 
-    @Column(name = "status", nullable = false, columnDefinition = "nvarchar(255)")
-    private String status;
+    @Column(name = "vat", nullable = false)
+    private double vat;
+
+    @Column(name = "order_date", nullable = false)
+    private LocalDateTime orderDate;
+
+    @Enumerated(EnumType.STRING)
+    @Column(name = "status", nullable = false)
+    private EOrderStatus status;
+
+    @Enumerated(EnumType.STRING)
+    @Column(name = "payment_type", nullable = false)
+    private EPaymentType paymentType;
 
     // endregion
 
     // region Relationships
 
-    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    @JoinColumn(name = "address_id", nullable = false, referencedColumnName = "id")
-    private Address address;
-
-    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @ManyToOne(cascade = {CascadeType.MERGE}, fetch = FetchType.EAGER)
     @JoinColumn(name = "customer_id", nullable = false, referencedColumnName = "id")
     private Customer customer;
 
-    @OneToOne(mappedBy = "order")
+    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @JoinColumn(name = "shipping_id", referencedColumnName = "id")
+    private Shipping shipping;
+
+    @OneToOne(mappedBy = "order", cascade = CascadeType.ALL)
     private BankTransfer bankTransfer;
+//
+//    @OneToOne(mappedBy = "order")
+//    private Cash cash;
+//
+//    @OneToOne(mappedBy = "order")
+//    private EWallet wallet;
 
     @OneToOne(mappedBy = "order")
-    private Cash cash;
+    private ReturnBook returnBook;
 
-    @OneToOne(mappedBy = "order")
-    private CreditCard creditCard;
+    @OneToMany(mappedBy = "order", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    private Set<OrderItem> orderItems = new HashSet<>();
 
-    @OneToOne(mappedBy = "order")
-    private EWallet ewallet;
+    @ManyToMany(cascade = {CascadeType.MERGE, CascadeType.REFRESH}, fetch = FetchType.EAGER)
+    @JoinTable(name = "order_promotion",
+            joinColumns = @JoinColumn(name = "order_id", nullable = false),
+            inverseJoinColumns = @JoinColumn(name = "promotion_id", nullable = false))
+    private Set<Promotion> promotions = new HashSet<>();
 
-    @OneToMany(mappedBy = "order")
-    private Set<OrderItem> orderItems;
-
-    @OneToMany(mappedBy = "order")
-    private Set<Promotion> promotions;
+    @OneToMany(mappedBy = "order", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
+    private Set<OrderStatusHistory> statusHistory = new HashSet<>();
 
     // endregion
 
-    // region Constructors
+    // region Methods
 
-    //region Constructors
-    public Order() {
+    public double calTotalPrice() {
+        double totalPrice = 0.0;
+        for (OrderItem item : orderItems) {
+            totalPrice += item.calPriceItem();
+        }
+        BigDecimal roundedTotal = new BigDecimal(totalPrice).setScale(2, RoundingMode.HALF_UP);
+        return roundedTotal.doubleValue();
     }
 
-    public Order(Long id, String note, String status) {
-        this.id = id;
-        this.note = note;
-        this.status = status;
+    public double calculateTotalDiscount() {
+        double remainingPrice = calTotalPrice();
+        double totalDiscount = 0;
+
+        for (Promotion promotion : promotions) {
+            double discount = promotion.calculateDiscount(remainingPrice);
+            totalDiscount += discount;
+            remainingPrice -= discount;
+        }
+
+        return totalDiscount;
     }
 
-    // endregion
+    public double getFinalPrice() {
+        double totalPrice = calTotalPrice() + shipping.getShippingFee();
+        double totalDiscount = calculateTotalDiscount();
 
-    // region Getters & Setters
-
-    //region Getters & Setters
-    public Long getId() {
-        return id;
+        return Math.max(0, totalPrice - totalDiscount);
     }
 
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getNote() {
-        return note;
-    }
-
-    public void setNote(String note) {
-        this.note = note;
-    }
-
-    public String getStatus() {
-        return status;
-    }
-
-    public void setStatus(String status) {
-        this.status = status;
+    public boolean isStatusHistoryExist(EOrderHistory status) {
+        return statusHistory.stream()
+                .anyMatch(statusHistoryItem -> statusHistoryItem.getStatus() == status);
     }
 
     // endregion

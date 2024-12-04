@@ -1,12 +1,25 @@
 package com.biblio.entity;
 
+import com.biblio.enumeration.EPromotionStatus;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.experimental.SuperBuilder;
+
 import javax.persistence.*;
 import java.io.Serializable;
-import java.sql.Timestamp;
+import java.time.LocalDateTime;
+import java.util.HashSet;
 import java.util.Set;
 
 @Entity
 @Table(name = "promotion")
+@NoArgsConstructor
+@AllArgsConstructor
+@Getter
+@Setter
+@SuperBuilder
 public class Promotion implements Serializable {
 
     // region Attributes
@@ -15,23 +28,17 @@ public class Promotion implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "created_at", nullable = false, columnDefinition = "datetime")
-    private Timestamp createdAt;
+    @Column(name = "effective_date", nullable = false)
+    private LocalDateTime effectiveDate;
 
-    @Column(name = "code", nullable = false, columnDefinition = "nvarchar(255)")
-    private String code;
+    @Column(name = "expiration_date", nullable = false)
+    private LocalDateTime expirationDate;
 
-    @Column(name = "effective_date", nullable = false, columnDefinition = "datetime")
-    private Timestamp effectiveDate;
-
-    @Column(name = "expiration_date", nullable = false, columnDefinition = "datetime")
-    private Timestamp expirationDate;
-
-    @Column(name = "title", nullable = false, columnDefinition = "nvarchar(255)")
-    private String title;
-
-    @Column(name = "description", nullable = false, columnDefinition = "nvarchar(255)")
+    @Column(name = "description", nullable = false)
     private String description;
+
+    @Column(name = "title", nullable = false)
+    private String title;
 
     @Column(name = "percent_discount", nullable = false)
     private double percentDiscount;
@@ -42,146 +49,44 @@ public class Promotion implements Serializable {
     @Column(name = "min_value_to_be_applied", nullable = false)
     private double minValueToBeApplied;
 
-    @Column(name = "type", nullable = false, columnDefinition = "nvarchar(255)")
-    private String type;
-
-    @Column(name = "status", nullable = false, columnDefinition = "nvarchar(255)")
-    private String status;
+    @Enumerated(EnumType.STRING)
+    @Column(name = "status", nullable = false)
+    private EPromotionStatus status;
 
     // endregion
 
     // region Relationships
 
-    @OneToMany(mappedBy = "promotion")
-    private Set<PromotionTarget> promotionTargets;
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "promotion_template_id", nullable = false)
+    private PromotionTemplate promotionTemplate;
 
-    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    @JoinColumn(name = "order_id", nullable = false, referencedColumnName = "id")
-    private Order order;
+    @OneToMany(mappedBy = "promotion", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    private Set<PromotionTarget> promotionTargets = new HashSet<>();
 
-    // endregion
-
-    // region Constructors
-
-    //region Constructors
-    public Promotion() {
-    }
-
-    public Promotion(Long id, Timestamp createdAt, String code, Timestamp effectiveDate, Timestamp expirationDate, String title, String description, double percentDiscount, double discountLimit, double minValueToBeApplied, String type, String status) {
-        this.id = id;
-        this.createdAt = createdAt;
-        this.code = code;
-        this.effectiveDate = effectiveDate;
-        this.expirationDate = expirationDate;
-        this.title = title;
-        this.description = description;
-        this.percentDiscount = percentDiscount;
-        this.discountLimit = discountLimit;
-        this.minValueToBeApplied = minValueToBeApplied;
-        this.type = type;
-        this.status = status;
-    }
+    @ManyToMany(mappedBy = "promotions", fetch = FetchType.EAGER)
+    private Set<Order> orders;
 
     // endregion
 
-    // region Getters & Setters
+    // region Functions
 
-    //region Getters & Setters
-    public Long getId() {
-        return id;
+    public double calculateDiscount(double totalPrice) {
+        LocalDateTime now = LocalDateTime.now();
+        if (now.isBefore(effectiveDate) || now.isAfter(expirationDate)) {
+            return 0;
+        }
+
+        if (totalPrice < minValueToBeApplied) {
+            return 0;
+        }
+
+        double discount = totalPrice * (percentDiscount / 100);
+
+        return Math.min(discount, discountLimit);
     }
 
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public Timestamp getCreatedAt() {
-        return createdAt;
-    }
-
-    public void setCreatedAt(Timestamp createdAt) {
-        this.createdAt = createdAt;
-    }
-
-    public String getCode() {
-        return code;
-    }
-
-    public void setCode(String code) {
-        this.code = code;
-    }
-
-    public Timestamp getEffectiveDate() {
-        return effectiveDate;
-    }
-
-    public void setEffectiveDate(Timestamp effectiveDate) {
-        this.effectiveDate = effectiveDate;
-    }
-
-    public Timestamp getExpirationDate() {
-        return expirationDate;
-    }
-
-    public void setExpirationDate(Timestamp expirationDate) {
-        this.expirationDate = expirationDate;
-    }
-
-    public String getTitle() {
-        return title;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    public double getPercentDiscount() {
-        return percentDiscount;
-    }
-
-    public void setPercentDiscount(double percentDiscount) {
-        this.percentDiscount = percentDiscount;
-    }
-
-    public double getDiscountLimit() {
-        return discountLimit;
-    }
-
-    public void setDiscountLimit(double discountLimit) {
-        this.discountLimit = discountLimit;
-    }
-
-    public double getMinValueToBeApplied() {
-        return minValueToBeApplied;
-    }
-
-    public void setMinValueToBeApplied(double minValueToBeApplied) {
-        this.minValueToBeApplied = minValueToBeApplied;
-    }
-
-    public String getType() {
-        return type;
-    }
-
-    public void setType(String type) {
-        this.type = type;
-    }
-
-    public String getStatus() {
-        return status;
-    }
-
-    public void setStatus(String status) {
-        this.status = status;
-    }
 
     // endregion
+
 }

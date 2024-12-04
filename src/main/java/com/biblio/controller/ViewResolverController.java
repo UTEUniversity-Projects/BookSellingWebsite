@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 /**
  * Servlet implementation class ViewResolverController
  */
-@WebServlet(urlPatterns = {"/views/*", "/css/*", "/js/*"})
+@WebServlet(urlPatterns = {"/views/*"})
 public class ViewResolverController extends HttpServlet {
 
     @Override
@@ -23,11 +23,7 @@ public class ViewResolverController extends HttpServlet {
         if (resourcePath.startsWith("/views/")) {
             RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF" + resourcePath);
             dispatcher.forward(request, response);
-        } else if (resourcePath.startsWith("/css/") || resourcePath.startsWith("/js/")) {
-            RequestDispatcher dispatcher = request.getRequestDispatcher("/resources" + resourcePath);
-            dispatcher.forward(request, response);
-        } else {
-            response.sendError(HttpServletResponse.SC_NOT_FOUND);
         }
+
     }
 }

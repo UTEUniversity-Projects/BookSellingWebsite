@@ -1,12 +1,20 @@
 package com.biblio.entity;
 
-import org.hibernate.annotations.Fetch;
+import com.biblio.enumeration.EPromotionTargetType;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import javax.persistence.*;
 import java.io.Serializable;
 
 @Entity
 @Table(name = "promotion_target")
+@NoArgsConstructor
+@AllArgsConstructor
+@Getter
+@Setter
 public class PromotionTarget implements Serializable {
 
     // region Attributes
@@ -15,61 +23,21 @@ public class PromotionTarget implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "applicable_object_id", nullable = false, columnDefinition = "nvarchar(255)")
-    private String applicableObjectId;
+    @Column(name = "applicable_object_id", nullable = false)
+    private Long applicableObjectId;
 
-    @Column(name = "type", nullable = false, columnDefinition = "nvarchar(255)")
-    private String type;
+    @Enumerated(EnumType.STRING)
+    @Column(name = "type", nullable = false)
+    private EPromotionTargetType type;
 
     // endregion
 
     // region Relationships
 
-    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    @JoinColumn(name = "promotion_id", nullable = false, referencedColumnName = "id")
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "promotion_id", nullable = false)
     private Promotion promotion;
 
     // endregion
 
-    // region Constructors
-
-    public PromotionTarget() {
-    }
-
-    public PromotionTarget(Long id, String applicableObjectId, String type) {
-        this.id = id;
-        this.applicableObjectId = applicableObjectId;
-        this.type = type;
-    }
-
-    // endregion
-
-    // region Getters & Setters
-
-    //region Getters & Setters
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getApplicableObjectId() {
-        return applicableObjectId;
-    }
-
-    public void setApplicableObjectId(String applicableObjectId) {
-        this.applicableObjectId = applicableObjectId;
-    }
-
-    public String getType() {
-        return type;
-    }
-
-    public void setType(String type) {
-        this.type = type;
-    }
-
-    // endregion
 }

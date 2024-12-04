@@ -1,24 +1,48 @@
 package com.biblio.dao;
 
 import java.util.List;
+import java.util.Map;
 
-public interface IGenericDAO<T, ID> {
+public interface IGenericDAO<T> {
 
-    void delete(Object id);
+    List<T> findByJPQLPaginated(String jpql, int pageNumber, int pageSize, Map<String, Object> params);
 
-    void update(T entity);
+    List<T> findAllPaginated(int pageNumber, int pageSize);
 
-    void save(T entity);
+    T delete(Object id);
 
-    List<T> findByJPQL(String jpql, Object... params);
+    T update(T entity);
 
-    T findSingleByJPQL(String jpql, Object... params);
+    T save(T entity);
+
+    List<T> findByJPQL(String jpql, Map<String, Object> params);
+
+    T findSingleByJPQL(String jpql);
+
+    T findSingleByJPQL(String jpql, Map<String, Object> params);
 
     List<T> findAll();
 
     T findById(Object id);
 
-    List<T> findAllPaginated(int pageNumber, int pageSize);
+    List<T> findAll(String jpql);
 
-    List<T> findByJPQLPaginated(String jpql, int pageNumber, int pageSize, Object... params);
+    List<T> findAll(String jpql, int limit);
+
+    long count();
+
+    long countByJPQL(String jpql);
+
+    long countByJPQL(String jpql, Map<String, Object> params);
+
+    void executeNativeQuery(String sql, Map<String, Object> params);
+
+    long countByNativeQuery(String nativeQuery);
+
+    long countByNativeQuery(String nativeQuery, Map<String, Object> params);
+
+    <T> List<T> findByNativeQuery(String sql, Map<String, Object> params, Class<T> resultType);
+
+    T insert(T entity);
+
 }

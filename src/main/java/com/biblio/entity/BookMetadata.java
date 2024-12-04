@@ -1,12 +1,21 @@
 package com.biblio.entity;
 
+import com.biblio.enumeration.EBookMetadataStatus;
+import lombok.*;
+
 import javax.persistence.*;
 import java.io.Serializable;
-import java.sql.Timestamp;
+import java.time.LocalDateTime;
+import java.util.HashSet;
 import java.util.Set;
 
 @Entity
 @Table(name = "book_metadata")
+@Getter
+@Setter
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 public class BookMetadata implements Serializable {
 
     // region Attributes
@@ -15,103 +24,34 @@ public class BookMetadata implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "created_at", nullable = false, columnDefinition = "datetime")
-    private Timestamp createdAt;
+    @Column(name = "created_at", nullable = false)
+    private LocalDateTime createdAt;
 
-    @Column(name = "opening_date", nullable = false, columnDefinition = "datetime")
-    private Timestamp openingDate;
+    @Column(name = "opening_date", nullable = false)
+    private LocalDateTime openingDate;
 
-    @Column(name = "import_price", nullable = false, columnDefinition = "double")
+    @Column(name = "import_price", nullable = false)
     private double importPrice;
 
-    @Column(name = "status", nullable = false, columnDefinition = "nvarchar(255)")
-    private String status;
+    @Enumerated(EnumType.STRING)
+    @Column(name = "status", nullable = false)
+    private EBookMetadataStatus status;
 
     // endregion Attributes
 
     // region Relationships
 
-    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    @JoinTable(
-            name = "book_metadata_tag",
-            joinColumns = @JoinColumn(name = "book_metadata_id", referencedColumnName = "id", nullable = false),
-            inverseJoinColumns = @JoinColumn(name = "tag_id", referencedColumnName = "id", nullable = false)
-    )
-    private Set<Tag> tags;
-
-    @OneToOne(mappedBy = "metadata")
+    @OneToOne(mappedBy = "bookMetadata", cascade = CascadeType.ALL)
     private Book book;
 
-    @OneToMany(mappedBy = "bookMetadata")
-    private Set<MediaFile> mediaFiles;
+    @ManyToMany(cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
+    @JoinTable(
+            name = "book_metadata_tag",
+            joinColumns = @JoinColumn(name = "book_metadata_id", nullable = false),
+            inverseJoinColumns = @JoinColumn(name = "tag_id", nullable = false)
+    )
+    private Set<Tag> tags = new HashSet<>();
 
     // endregion
 
-    // region Constructors
-
-    public BookMetadata() {
-    }
-
-    public BookMetadata(Long id, Timestamp createdAt, Timestamp openingDate, double importPrice, String status) {
-        this.id = id;
-        this.createdAt = createdAt;
-        this.openingDate = openingDate;
-        this.importPrice = importPrice;
-        this.status = status;
-    }
-
-    // endregion Constructors
-
-    // region Getters & Setters
-
-    // region Getters & Setters
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public Timestamp getCreatedAt() {
-        return createdAt;
-    }
-
-    public void setCreatedAt(Timestamp createdAt) {
-        this.createdAt = createdAt;
-    }
-
-    public Timestamp getOpeningDate() {
-        return openingDate;
-    }
-
-    public void setOpeningDate(Timestamp openingDate) {
-        this.openingDate = openingDate;
-    }
-
-    public double getImportPrice() {
-        return importPrice;
-    }
-
-    public void setImportPrice(double importPrice) {
-        this.importPrice = importPrice;
-    }
-
-    public String getStatus() {
-        return status;
-    }
-
-    public void setStatus(String status) {
-        this.status = status;
-    }
-
-    public Set<Tag> getTags() {
-        return tags;
-    }
-
-    public void setTags(Set<Tag> tags) {
-        this.tags = tags;
-    }
-
-    // endregion Getters & Setters
 }

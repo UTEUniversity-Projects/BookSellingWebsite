@@ -1,10 +1,23 @@
 package com.biblio.entity;
 
+import com.biblio.enumeration.EPaymentCurrency;
+import com.biblio.enumeration.EPaymentStatus;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.experimental.SuperBuilder;
+
 import javax.persistence.*;
 import java.io.Serializable;
-import java.sql.Timestamp;
+import java.time.LocalDateTime;
 
 @MappedSuperclass
+@NoArgsConstructor
+@AllArgsConstructor
+@Getter
+@Setter
+@SuperBuilder
 public abstract class Payment implements Serializable {
 
     // region Attributes
@@ -13,76 +26,19 @@ public abstract class Payment implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "created_at", nullable = false, columnDefinition = "datetime")
-    private Timestamp createdAt;
+    @Column(name = "created_at", nullable = false)
+    protected LocalDateTime createdAt;
 
     @Column(name = "amount", nullable = false)
-    private double amount;
+    protected double amount;
 
-    @Column(name = "status", nullable = false, columnDefinition = "nvarchar(255)")
-    private String status;
+    @Enumerated(EnumType.STRING)
+    @Column(name = "status", nullable = false)
+    protected EPaymentStatus status;
 
-    @Column(name = "currency", nullable = false, columnDefinition = "nvarchar(255)")
-    private String currency;
-
-    // endregion
-
-    // region Constructors
-
-    public Payment() {
-    }
-
-    public Payment(Long id, Timestamp createdAt, double amount, String status, String currency) {
-        this.id = id;
-        this.createdAt = createdAt;
-        this.amount = amount;
-        this.status = status;
-        this.currency = currency;
-    }
-
-    // endregion
-
-    // region Getters & Setters
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public Timestamp getCreatedAt() {
-        return createdAt;
-    }
-
-    public void setCreatedAt(Timestamp createdAt) {
-        this.createdAt = createdAt;
-    }
-
-    public double getAmount() {
-        return amount;
-    }
-
-    public void setAmount(double amount) {
-        this.amount = amount;
-    }
-
-    public String getStatus() {
-        return status;
-    }
-
-    public void setStatus(String status) {
-        this.status = status;
-    }
-
-    public String getCurrency() {
-        return currency;
-    }
-
-    public void setCurrency(String currency) {
-        this.currency = currency;
-    }
+    @Enumerated(EnumType.STRING)
+    @Column(name = "currency", nullable = false)
+    protected EPaymentCurrency currency;
 
     // endregion
 

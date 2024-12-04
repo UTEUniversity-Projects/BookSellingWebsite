@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE log4j:configuration SYSTEM "D:\CODE\Java\JavaWeb\BookSellingWebsite\src\main\resources\log4j.dtd" >
+<!DOCTYPE log4j:configuration SYSTEM "/resources/log4j.dtd">
 <log4j:configuration debug="false">
-    <!--Console appender -->
+    <!-- Console appender -->
     <appender name="stdout" class="org.apache.log4j.ConsoleAppender">
         <layout class="org.apache.log4j.PatternLayout">
             <param name="ConversionPattern" value="%d{yyyy-MM-dd HH:mm:ss} %p %m%n"/>

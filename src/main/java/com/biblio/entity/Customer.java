@@ -1,82 +1,57 @@
 package com.biblio.entity;
 
+import com.biblio.enumeration.EMembership;
+import lombok.*;
+import lombok.experimental.SuperBuilder;
+
 import javax.persistence.*;
 import java.io.Serializable;
-import java.sql.Timestamp;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 @Entity
 @Table(name = "customer")
+@NoArgsConstructor
+@AllArgsConstructor
+@Getter
+@Setter
+@SuperBuilder
 public class Customer extends User implements Serializable {
 
     // region Attributes
 
-    @Column(name = "membership", nullable = false, columnDefinition = "nvarchar(255)")
-    private String membership;
+    @Enumerated(EnumType.STRING)
+    @Column(name = "membership", nullable = false)
+    private EMembership membership;
 
     // endregion
 
     // region Relationships
 
-    @OneToMany(mappedBy = "customer")
-    private Set<Address> addresses;
+    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @JoinColumn(name = "account_id")
+    private Account account;
 
-    @OneToMany(mappedBy = "customer")
-    private Set<Order> orders;
+    @OneToMany(mappedBy = "customer", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    private List<Notification> notifications = new ArrayList<>();
 
-    @OneToOne(mappedBy = "customer")
+    @OneToMany(mappedBy = "customer", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @Singular
+    private Set<Address> addresses = new HashSet<>();
+
+    @OneToMany(mappedBy = "customer", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    private Set<Order> orders = new HashSet<>();
+
+    @OneToOne(mappedBy = "customer", cascade = CascadeType.ALL)
     private Cart cart;
 
-    @OneToMany(mappedBy = "customer")
-    private Set<Support> supports;
+    @OneToMany(mappedBy = "customer", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    private Set<Support> supports = new HashSet<>();
 
-    @ManyToMany(mappedBy = "customers")
-    private Set<Notification> notifications;
-
-    @OneToMany(mappedBy = "customer")
-    private Set<Review> reviews;
-
-    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    @JoinColumn(name = "media_file_id")
-    private MediaFile avatar;
-
-    // endregion
-
-    // region Constructors
-
-    public Customer() {
-        super();
-    }
-
-    public Customer(String membership) {
-        this.membership = membership;
-    }
-    //endregion
-
-    public Customer(Long id, String username, String fullName, String password, String emailAddress, String dateOfBirth, String gender, String phoneNumber, Timestamp joinAt, String membership) {
-        super(id, username, fullName, password, emailAddress, dateOfBirth, gender, phoneNumber, joinAt);
-        this.membership = membership;
-    }
-
-    // endregion
-
-    // region Getters & Setters
-
-    public String getMembership() {
-        return membership;
-    }
-
-    public void setMembership(String membership) {
-        this.membership = membership;
-    }
-
-    public Set<Address> getAddresses() {
-        return addresses;
-    }
-
-    public void setAddresses(Set<Address> addresses) {
-        this.addresses = addresses;
-    }
+    @OneToMany(mappedBy = "customer", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private Set<Review> reviews = new HashSet<>();
 
     // endregion
 }

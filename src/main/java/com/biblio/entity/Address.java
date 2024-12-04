@@ -1,112 +1,87 @@
 package com.biblio.entity;
 
+import lombok.*;
+
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Table(name = "address")
-public class Address implements Serializable {
-
-    private static final long serialVersionUID = 1L;
+@NoArgsConstructor
+@AllArgsConstructor
+@Getter
+@Setter
+@Builder
+public class
+Address implements Serializable {
 
     // region Attributes
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
     private Long id;
 
-    @Column(name = "nation", nullable = false, columnDefinition = "nvarchar(255)")
+    @Column(name = "nation", nullable = false)
     private String nation;
 
-    @Column(name = "province", nullable = false, columnDefinition = "nvarchar(255)")
+    @Column(name = "province", nullable = false)
     private String province;
 
-    @Column(name = "district", nullable = false, columnDefinition = "nvarchar(255)")
+    @Column(name = "district", nullable = false)
     private String district;
 
-    @Column(name = "village", nullable = false, columnDefinition = "nvarchar(255)")
+    @Column(name = "village", nullable = false)
     private String village;
 
-    @Column(name = "detail", nullable = false, columnDefinition = "nvarchar(255)")
+    @Column(name = "detail", nullable = false)
     private String detail;
+
     // endregion
 
     // region Relationships
-    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    @JoinColumn(name = "customer_id", nullable = false, referencedColumnName = "id")
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "customer_id")
     private Customer customer;
 
-    @OneToOne(mappedBy = "address")
-    private Order order;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "staff_id")
+    private Staff staff;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "owner_id")
+    private Owner owner;
+
+    @OneToMany(mappedBy = "address", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
+    private Set<Shipping> shippings = new HashSet<>();
+
     // endregion
 
-    // region Constructors
-    public Address() {}
+    public String getFullAddress() {
+        StringBuilder fullAddress = new StringBuilder();
 
-    public Address(String nation, String province, String district, String village, String detail) {
-        this.nation = nation;
-        this.province = province;
-        this.district = district;
-        this.village = village;
-        this.detail = detail;
-    }
-    // endregion
+        if (detail != null && !detail.isEmpty()) {
+            fullAddress.append(detail).append(", ");
+        }
+        if (village != null && !village.isEmpty()) {
+            fullAddress.append(village).append(", ");
+        }
+        if (district != null && !district.isEmpty()) {
+            fullAddress.append(district).append(", ");
+        }
+        if (province != null && !province.isEmpty()) {
+            fullAddress.append(province).append(", ");
+        }
+        if (nation != null && !nation.isEmpty()) {
+            fullAddress.append(nation);
+        }
 
-    // region Getters & Setters
-    public Long getId() {
-        return id;
-    }
+        if (!fullAddress.isEmpty() && fullAddress.charAt(fullAddress.length() - 2) == ',') {
+            fullAddress.setLength(fullAddress.length() - 2);
+        }
 
-    public void setId(Long id) {
-        this.id = id;
+        return fullAddress.toString();
     }
-
-    public String getNation() {
-        return nation;
-    }
-
-    public void setNation(String nation) {
-        this.nation = nation;
-    }
-
-    public String getProvince() {
-        return province;
-    }
-
-    public void setProvince(String province) {
-        this.province = province;
-    }
-
-    public String getDistrict() {
-        return district;
-    }
-
-    public void setDistrict(String district) {
-        this.district = district;
-    }
-
-    public String getVillage() {
-        return village;
-    }
-
-    public void setVillage(String village) {
-        this.village = village;
-    }
-
-    public String getDetail() {
-        return detail;
-    }
-
-    public void setDetail(String detail) {
-        this.detail = detail;
-    }
-
-    public Order getOrder() {
-        return order;
-    }
-
-    public void setOrder(Order order) {
-        this.order = order;
-    }
-    // endregion
 }

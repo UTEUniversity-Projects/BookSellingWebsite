@@ -1,52 +1,46 @@
 package com.biblio.entity;
 
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
 import javax.persistence.*;
 import java.io.Serializable;
-import java.util.List;
+import java.util.HashSet;
 import java.util.Set;
 
 @Entity
 @Table(name = "cart")
+@NoArgsConstructor
+@Getter
+@Setter
 public class Cart implements Serializable {
 
     //region Attributes
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
     //endregion
 
     // region Relationships
 
-    @OneToMany(mappedBy = "cart")
-    private Set<OrderItem> orderItems;
+    @OneToMany(mappedBy = "cart", cascade = CascadeType.ALL)
+    private Set<CartItem> cartItems = new HashSet<>();
 
-    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "customer_id")
     private Customer customer;
 
     // endregion
 
-    //region Constructors
-    //region Constructors
-    public Cart() {
+    // region Methods
+    public double getTotalBookPrice() {
+        return cartItems.stream()
+                .mapToDouble(item -> item.getQuantity() * item.getBookTemplate().getBooks().iterator().next().getSellingPrice())
+                .sum();
     }
+    // endregion
 
-    public Cart(Long id) {
-        this.id = id;
-    }
-
-    //endregion
-
-    //region Getters & Setters
-
-    //region Getters & Setters
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    //endregion
 }

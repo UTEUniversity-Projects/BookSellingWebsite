@@ -1,5 +1,8 @@
 package com.biblio.enumeration;
 
+import lombok.Getter;
+
+@Getter
 public enum EBookAgeRecommend {
     ALL_AGES("Mọi lứa tuổi"),
     UNDER_3_YEARS_OLD("Dưới 3 tuổi"),
@@ -14,7 +17,8 @@ public enum EBookAgeRecommend {
         this.bookAgeRecommend = bookAgeRecommend;
     }
 
-    public String getBookAgeRecommend() {
+    public String getDescription() {
         return bookAgeRecommend;
     }
+
 }

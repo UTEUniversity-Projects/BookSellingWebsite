@@ -1,69 +1,39 @@
 package com.biblio.entity;
 
+import lombok.*;
 import javax.persistence.*;
-import java.io.Serializable;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Table(name = "order_item")
-public class OrderItem implements Serializable {
-
-    // region Attributes
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
+public class OrderItem {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private Long id;
 
-    @Column(name = "quantity", nullable = false)
-    private int quantity;
-
-    // endregion
-
-    // region Relationships
-
-    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    @JoinColumn(name = "book_id", nullable = false, referencedColumnName = "id")
-    private Book book;
-
-    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    @JoinColumn(name = "order_id", nullable = false, referencedColumnName = "id")
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JoinColumn(name = "order_id", nullable = false)
     private Order order;
 
-    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    @JoinColumn(name = "cart_id", nullable = false, referencedColumnName = "id")
-    private Cart cart;
+    @ManyToMany(fetch = FetchType.EAGER, cascade = {CascadeType.MERGE, CascadeType.REFRESH})
+    @JoinTable(
+            name = "order_item_books",
+            joinColumns = @JoinColumn(name = "order_item_id"),
+            inverseJoinColumns = @JoinColumn(name = "book_id")
+    )
+    private Set<Book> books = new HashSet<>();
 
-    // region
-
-    // region Constructors
-
-    public OrderItem() {
+    public double calPriceItem() {
+        return books.stream()
+                .mapToDouble(Book::getSellingPrice)
+                .sum();
     }
 
-    public OrderItem(int id, int quantity) {
-        this.id = id;
-        this.quantity = quantity;
-    }
-
-    // endregion
-
-    // region Getters & Setters
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public int getQuantity() {
-        return quantity;
-    }
-
-    public void setQuantity(int quantity) {
-        this.quantity = quantity;
-    }
-
-
-    // endregion
 }

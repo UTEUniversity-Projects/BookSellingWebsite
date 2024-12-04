@@ -1,39 +1,39 @@
 package com.biblio.entity;
 
-import com.biblio.enumeration.EGender;
+import lombok.*;
+import lombok.experimental.SuperBuilder;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.sql.Timestamp;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 @Entity
 @Table(name = "staff")
+@NoArgsConstructor
+@AllArgsConstructor
+@Getter
+@Setter
+@SuperBuilder
 public class Staff extends User implements Serializable {
 
     // region Relationships
 
+    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @JoinColumn(name = "account_id")
+    private Account account;
+
+    @OneToMany(mappedBy = "staff", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    private List<Notification> notifications = new ArrayList<>();
+
     @OneToMany(mappedBy = "staff")
-    private Set<Support> supports;
+    private Set<ResponseSupport> responseSupports = new HashSet<>();
 
-    @ManyToMany(mappedBy = "staffs")
-    private Set<Notification> notifications;
-
-    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    @JoinColumn(name = "media_file_id")
-    private MediaFile avatar;
+    @OneToMany(mappedBy = "staff", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    private Set<Address> addresses;
 
     // endregion
 
-    // region Constructors
-
-    public Staff() {
-        super();
-    }
-
-    public Staff(Long id, String username, String fullName, String password, String emailAddress, String dateOfBirth, String gender, String phoneNumber, Timestamp joinAt) {
-        super(id, username, fullName, password, emailAddress, dateOfBirth, gender, phoneNumber, joinAt);
-    }
-
-    // endregion
 }
